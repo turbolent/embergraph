@@ -314,7 +314,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
     </dependency>
     <dependency>
       <groupId>com.blazegraph</groupId>
-      <artifactId>bigdata-gas</artifactId>
+      <artifactId>embergraph-gas</artifactId>
       <version>${project.version}</version>
       <type>test-jar</type>
     </dependency>
@@ -387,7 +387,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
     </dependency>
     <dependency>
       <groupId>com.blazegraph</groupId>
-      <artifactId>bigdata-gas</artifactId>
+      <artifactId>embergraph-gas</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>

@@ -448,7 +448,7 @@ See https://maven.apache.org/plugins/maven-jar-plugin/examples/create-test-jar.h
     </dependency>
     <dependency>
       <groupId>com.blazegraph</groupId>
-      <artifactId>bigdata-gas</artifactId>
+      <artifactId>embergraph-gas</artifactId>
       <version>${project.version}</version>
       <type>test-jar</type>
     </dependency>
@@ -511,7 +511,7 @@ See https://maven.apache.org/plugins/maven-jar-plugin/examples/create-test-jar.h
     </dependency>
     <dependency>
       <groupId>com.blazegraph</groupId>
-      <artifactId>bigdata-gas</artifactId>
+      <artifactId>embergraph-gas</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>

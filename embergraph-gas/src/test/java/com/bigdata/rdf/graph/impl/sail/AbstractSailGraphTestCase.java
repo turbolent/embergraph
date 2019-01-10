@@ -76,7 +76,7 @@ public class AbstractSailGraphTestCase extends AbstractGraphTestCase {
         /**
          * The data file.
          */
-        static private final String smallGraph1 = "bigdata-gas/src/test/resources/com/bigdata/rdf/graph/data/smallGraph.ttl";
+        static private final String smallGraph1 = "embergraph-gas/src/test/resources/com/bigdata/rdf/graph/data/smallGraph.ttl";
         static private final String smallGraph2 = "src/test/resources/com/bigdata/rdf/graph/data/smallGraph.ttl";
         
         private final URI rdfType, foafKnows, foafPerson, mike, bryan, martyn, dc;
@@ -99,7 +99,7 @@ public class AbstractSailGraphTestCase extends AbstractGraphTestCase {
                 // in eclipse with bigdata as the root dir.
                 graphFixture.loadGraph(smallGraph1);
             } catch (FileNotFoundException ex) {
-                // from the ant build file with bigdata-gas as the root dir.
+                // from the ant build file with embergraph-gas as the root dir.
                 graphFixture.loadGraph(smallGraph2);
             }
 
@@ -226,7 +226,7 @@ public class AbstractSailGraphTestCase extends AbstractGraphTestCase {
                 // in eclipse with bigdata as the root dir.
                 graphFixture.loadGraph(ssspGraph1);
             } catch (FileNotFoundException ex) {
-                // from the ant build file with bigdata-gas as the root dir.
+                // from the ant build file with embergraph-gas as the root dir.
                 graphFixture.loadGraph(ssspGraph2);
             }
 

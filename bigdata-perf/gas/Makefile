@@ -17,11 +17,11 @@ all: test
 test: $(TEST_FILES)
 
 %.BFS.test:  
-	ant -Danalytic=BFS -Dnsamples=$(NSAMPLES) -Dseed=$(SEED) -DprofilerAgent=$(PROFILER) '-Dload=-load $(GRAPH_DIR)/$*' '-DjournalFile=bigdata-gas-$*.jnl' run-gas-engine  > $*.BFS.out
+	ant -Danalytic=BFS -Dnsamples=$(NSAMPLES) -Dseed=$(SEED) -DprofilerAgent=$(PROFILER) '-Dload=-load $(GRAPH_DIR)/$*' '-DjournalFile=embergraph-gas-$*.jnl' run-gas-engine  > $*.BFS.out
 	grep "TOTAL: " $*.BFS.out > $@
 
 %.SSSP.test:  
-	ant -Danalytic=SSSP -Dnsamples=$(NSAMPLES) -Dseed=$(SEED) -DprofilerAgent=$(PROFILER) '-Dload=-load $(GRAPH_DIR)/$*' '-DjournalFile=bigdata-gas-$*.jnl' run-gas-engine  > $*.SSSP.out
+	ant -Danalytic=SSSP -Dnsamples=$(NSAMPLES) -Dseed=$(SEED) -DprofilerAgent=$(PROFILER) '-Dload=-load $(GRAPH_DIR)/$*' '-DjournalFile=embergraph-gas-$*.jnl' run-gas-engine  > $*.SSSP.out
 	grep "TOTAL: " $*.SSSP.out > $@
 
 clean:
