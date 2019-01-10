@@ -368,7 +368,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
         <module>embergraph-blueprints</module>
         <module>bigdata-runtime</module>
         <module>embergraph-core-test/</module>
-        <module>bigdata-rdf-test/</module>
+        <module>embergraph-rdf-test/</module>
         <module>bigdata-sails-test/</module>
       </modules>
     </profile>
@@ -400,7 +400,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
         <module>embergraph-blueprints</module>
         <module>bigdata-runtime</module>
         <module>embergraph-core-test/</module>
-        <module>bigdata-rdf-test/</module>
+        <module>embergraph-rdf-test/</module>
         <module>bigdata-sails-test/</module>
         <module>blazegraph-artifacts/</module>
         <!-- Moved to blazegraph-artifacts

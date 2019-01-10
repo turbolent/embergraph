@@ -31,11 +31,11 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
     <version>2.1.5-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>bigdata-rdf-test</artifactId>
+  <artifactId>embergraph-rdf-test</artifactId>
   <version>2.1.5-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>Blazegraph RDF Tests</name>
-  <description>Blazegraph(TM) RDF Test Suites</description>
+  <name>Embergraph RDF Tests</name>
+  <description>Embergraph RDF Test Suites</description>
   <!-- properties are now in the parent POM. -->
   <build>
     <plugins>

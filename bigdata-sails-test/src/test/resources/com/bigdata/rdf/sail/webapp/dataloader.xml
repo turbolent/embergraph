@@ -33,5 +33,5 @@
       delimited list. The files must be readable by the web application. -->
       <!-- --> 
       <!-- <entry key="fileOrDirs">file1,dir1,file2,dir2</entry> -->
-      <entry key="fileOrDirs">/Users/beebs/Documents/systap/github/bigdata/bigdata-rdf-test/src/test/resources/data/lehigh/U1,/Users/beebs/Documents/systap/github/bigdata/bigdata-rdf-test/src/test/resources/data/lehigh/U1</entry>
+      <entry key="fileOrDirs">/Users/beebs/Documents/systap/github/bigdata/embergraph-rdf-test/src/test/resources/data/lehigh/U1,/Users/beebs/Documents/systap/github/bigdata/embergraph-rdf-test/src/test/resources/data/lehigh/U1</entry>
 </properties>

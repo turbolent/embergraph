@@ -117,7 +117,7 @@ See https://maven.apache.org/plugins/maven-jar-plugin/examples/create-test-jar.h
             <!-- not suppported yet/
             <include>com/bigdata/bfs/TestAll.java</include>
             -->
-            <!-- Moved into bigdata-rdf-test
+            <!-- Moved into embergraph-rdf-test
             <include>com/bigdata/rdf/TestAll.java</include>
             <include>com/bigdata/rdf/internal/gis/TestAll.java</include>
 -->
