@@ -23,7 +23,7 @@ done
 mvn -f "${BASE_DIR}"/../blazegraph-rpm/pom.xml clean package -P \!code-signing -DskipTests=true
 
 #Assembly artifacts must uses the assembly:single lifecycle
-mvn -f "${BASE_DIR}"/../blazegraph-tgz/pom.xml clean package assembly:single -DskipTests=true
+mvn -f "${BASE_DIR}"/../embergraph-tgz/pom.xml clean package assembly:single -DskipTests=true
 
 
 ARTIFACT_DIR="$BASE_DIR/../artifacts"

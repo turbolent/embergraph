@@ -408,7 +408,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
     <module>embergraph-jar</module>
     <module>embergraph-deb/</module>
     <module>blazegraph-rpm/</module>
-    <module>blazegraph-tgz/</module>
+    <module>embergraph-tgz/</module>
     -->
       </modules>
     </profile>

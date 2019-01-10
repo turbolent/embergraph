@@ -10,12 +10,12 @@ mvn package assembly:single
 ```
 
 ## Running ##
-Unpack the distribution to your location of choice.  It will typically unpack into a directory such as `blazegraph-tgz-2.0.0`.
+Unpack the distribution to your location of choice.  It will typically unpack into a directory such as `embergraph-tgz-2.0.0`.
 
 You can then:
 
 ```
-cd blazegraph-tgz-2.0.0
+cd embergraph-tgz-2.0.0
 ./bin/blazegraph.sh start # also supports start|stop|restart|status
 ```
 

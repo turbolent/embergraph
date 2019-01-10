@@ -91,6 +91,6 @@ ga('send', 'pageview');
     <module>../embergraph-jar</module>
     <module>../embergraph-deb</module>
     <module>../blazegraph-rpm</module>
-    <module>../blazegraph-tgz</module>
+    <module>../embergraph-tgz</module>
   </modules>
 </project>
