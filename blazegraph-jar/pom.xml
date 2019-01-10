@@ -113,7 +113,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
             <configuration>
               <filters>
                 <filter>
-                  <artifact>com.blazegraph:rdf-properties</artifact>
+                  <artifact>com.blazegraph:embergraph-rdf-properties</artifact>
                   <includes>
                     <include>**/*</include>
                   </includes>
@@ -194,7 +194,7 @@ ga('send', 'pageview');
   <dependencies>
     <dependency>
       <groupId>com.blazegraph</groupId>
-      <artifactId>rdf-properties</artifactId>
+      <artifactId>embergraph-rdf-properties</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>

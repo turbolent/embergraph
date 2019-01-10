@@ -353,7 +353,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
         <module>lgpl-utils</module>
         <module>dsi-utils</module>
         <module>system-utils</module>
-        <module>rdf-properties</module>
+        <module>embergraph-rdf-properties</module>
         <module>sparql-grammar</module>
         <module>embergraph-util</module>
         <module>embergraph-common-util</module>
@@ -385,7 +385,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
         <module>lgpl-utils</module>
         <module>dsi-utils</module>
         <module>system-utils</module>
-        <module>rdf-properties</module>
+        <module>embergraph-rdf-properties</module>
         <module>sparql-grammar</module>
         <module>embergraph-util</module>
         <module>embergraph-common-util</module>

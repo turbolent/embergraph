@@ -31,7 +31,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
     <version>2.1.5-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>rdf-properties</artifactId>
+  <artifactId>embergraph-rdf-properties</artifactId>
   <version>2.1.5-SNAPSHOT</version>
   <name>Blazegraph RDF Properties</name>
   <description>RDF Property configurations</description>
