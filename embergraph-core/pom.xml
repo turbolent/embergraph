@@ -27,7 +27,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.blazegraph</groupId>
+    <groupId>com.turbolent</groupId>
     <artifactId>blazegraph-parent</artifactId>
     <version>2.1.5-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
@@ -187,7 +187,7 @@ public class BuildInfo {
       <version>${highscalelib.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>colt</artifactId>
       <version>${colt.version}</version>
     </dependency>
@@ -327,52 +327,52 @@ public class BuildInfo {
       <version>${zookeeper.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>embergraph-ganglia</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>ctc-striterators</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>dsi-utils</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>embergraph-sparql-grammar</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>lgpl-utils</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>embergraph-rdf-properties</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>embergraph-util</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>embergraph-cache</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>embergraph-client</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>embergraph-gas</artifactId>
       <version>${project.version}</version>
     </dependency>

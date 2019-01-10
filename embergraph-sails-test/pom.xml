@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.blazegraph</groupId>
+    <groupId>com.turbolent</groupId>
     <artifactId>blazegraph-parent</artifactId>
     <version>2.1.5-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
@@ -85,7 +85,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
             <configuration>
               <artifactItems>
                 <artifactItem>
-                  <groupId>com.blazegraph</groupId>
+                  <groupId>com.turbolent</groupId>
                   <artifactId>embergraph-war-html</artifactId>
                   <version>${project.version}</version>
                   <type>war</type>
@@ -153,7 +153,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
       <version>${highscalelib.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>colt</artifactId>
       <version>${colt.version}</version>
     </dependency>
@@ -308,17 +308,17 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
       <version>3.4.5</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>embergraph-ganglia</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>ctc-striterators</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>dsi-utils</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -328,77 +328,77 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
       <version>${junit4.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>junit-ext</artifactId>
       <version>${junit-ext.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>lgpl-utils</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>embergraph-rdf-properties</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>embergraph-util</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>embergraph-common-util</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>system-utils</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>embergraph-statics</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>embergraph-client</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>embergraph-core</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>embergraph-core-test</artifactId>
       <version>${project.version}</version>
       <type>test-jar</type>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>embergraph-rdf-test</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>embergraph-rdf-test</artifactId>
       <version>${project.version}</version>
       <type>test-jar</type>
     </dependency>
     <!-- TODO:  Factor our main classes.
     <dependency>
-       <groupId>com.blazegraph</groupId>
+       <groupId>com.turbolent</groupId>
        <artifactId>embergraph-sails</artifactId>
        <version>${project.version}</version>
     </dependency>
 -->
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>embergraph-gas</artifactId>
       <version>${project.version}</version>
     </dependency>

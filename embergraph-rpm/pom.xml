@@ -26,14 +26,14 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.blazegraph</groupId>
+    <groupId>com.turbolent</groupId>
     <artifactId>embergraph-artifacts</artifactId>
     <version>2.1.5-SNAPSHOT</version>
     <relativePath>../embergraph-artifacts/pom.xml</relativePath>
   </parent>
   <artifactId>embergraph-rpm</artifactId>
   <version>2.1.5-SNAPSHOT</version>
-  <name>Blazegraph RPM Package</name>
+  <name>Embergraph RPM Package</name>
   <description>Blazegraph RPM deployer for the RHEL and CentOS package management systems</description>
   <packaging>rpm</packaging>
   <!--
@@ -212,7 +212,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
             <configuration>
               <artifactItems>
                 <artifactItem>
-                  <groupId>com.blazegraph</groupId>
+                  <groupId>com.turbolent</groupId>
                   <artifactId>embergraph-war-html</artifactId>
                   <version>${project.version}</version>
                   <type>war</type>
@@ -221,7 +221,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
                   <destFileName>blazegraph.war</destFileName>
                 </artifactItem>
                 <artifactItem>
-                  <groupId>com.blazegraph</groupId>
+                  <groupId>com.turbolent</groupId>
                   <artifactId>embergraph-jar</artifactId>
                   <version>${project.version}</version>
                   <type>jar</type>
@@ -319,7 +319,7 @@ ga('send', 'pageview');
   <dependencies>
     <!-- only use the runtime jar here to make it straightforward to upgrade in place -->
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>embergraph-runtime</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -405,7 +405,7 @@ ga('send', 'pageview');
       <version>${highscalelib.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>colt</artifactId>
       <version>${colt.version}</version>
     </dependency>

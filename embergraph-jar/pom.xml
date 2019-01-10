@@ -26,14 +26,14 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.blazegraph</groupId>
+    <groupId>com.turbolent</groupId>
     <artifactId>embergraph-artifacts</artifactId>
     <version>2.1.5-SNAPSHOT</version>
     <relativePath>../embergraph-artifacts/pom.xml</relativePath>
   </parent>
   <artifactId>embergraph-jar</artifactId>
   <version>2.1.5-SNAPSHOT</version>
-  <name>Blazegraph Executable Jar</name>
+  <name>Embergraph Executable Jar</name>
   <description>Blazegraph Executable Jar file.  All files required to run Blazegraph DB in a single jar.</description>
   <packaging>jar</packaging>
   <build>
@@ -63,7 +63,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
             <configuration>
               <artifactItems>
                 <artifactItem>
-                  <groupId>com.blazegraph</groupId>
+                  <groupId>com.turbolent</groupId>
                   <artifactId>embergraph-war-html</artifactId>
                   <version>${project.version}</version>
                   <type>war</type>
@@ -113,13 +113,13 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
             <configuration>
               <filters>
                 <filter>
-                  <artifact>com.blazegraph:embergraph-rdf-properties</artifact>
+                  <artifact>com.turbolent:embergraph-rdf-properties</artifact>
                   <includes>
                     <include>**/*</include>
                   </includes>
                 </filter>
                 <filter>
-                  <artifact>com.blazegraph:embergraph-jar</artifact>
+                  <artifact>com.turbolent:embergraph-jar</artifact>
                   <includes>
                     <include>**/*</include>
                   </includes>
@@ -193,12 +193,12 @@ ga('send', 'pageview');
   </reporting>
   <dependencies>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>embergraph-rdf-properties</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>embergraph-core</artifactId>
       <version>${project.version}</version>
       <exclusions>
@@ -221,7 +221,7 @@ ga('send', 'pageview');
       </exclusions>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>embergraph-blueprints</artifactId>
       <version>${project.version}</version>
       <exclusions>
@@ -230,22 +230,22 @@ ga('send', 'pageview');
           <artifactId>junit</artifactId>
         </exclusion>
         <exclusion>
-          <groupId>com.blazegraph</groupId>
+          <groupId>com.turbolent</groupId>
           <artifactId>junit-ext</artifactId>
         </exclusion>
         <exclusion>
-          <groupId>com.blazegraph</groupId>
+          <groupId>com.turbolent</groupId>
           <artifactId>embergraph-war-html</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>embergraph-client</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>embergraph-vocabularies</artifactId>
       <version>${project.version}</version>
     </dependency>

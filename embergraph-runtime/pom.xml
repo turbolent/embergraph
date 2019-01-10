@@ -26,7 +26,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.blazegraph</groupId>
+    <groupId>com.turbolent</groupId>
     <artifactId>blazegraph-parent</artifactId>
     <version>2.1.5-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
@@ -52,7 +52,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
             <configuration>
               <artifactItems>
                 <artifactItem>
-                  <groupId>com.blazegraph</groupId>
+                  <groupId>com.turbolent</groupId>
                   <artifactId>embergraph-war-html</artifactId>
                   <version>${project.version}</version>
                   <type>war</type>
@@ -121,7 +121,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
             <configuration>
               <artifactSet>
                 <includes>
-                  <include>com.blazegraph:*</include>
+                  <include>com.turbolent:*</include>
                 </includes>
                 <excludes>
                   <exclude>commons-io:*</exclude>
@@ -192,12 +192,12 @@ ga('send', 'pageview');
   </reporting>
   <dependencies>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>embergraph-rdf-properties</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>embergraph-core</artifactId>
       <version>${project.version}</version>
       <exclusions>
@@ -220,7 +220,7 @@ ga('send', 'pageview');
       </exclusions>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>embergraph-blueprints</artifactId>
       <version>${project.version}</version>
       <exclusions>
@@ -229,22 +229,22 @@ ga('send', 'pageview');
           <artifactId>junit</artifactId>
         </exclusion>
         <exclusion>
-          <groupId>com.blazegraph</groupId>
+          <groupId>com.turbolent</groupId>
           <artifactId>junit-ext</artifactId>
         </exclusion>
         <exclusion>
-          <groupId>com.blazegraph</groupId>
+          <groupId>com.turbolent</groupId>
           <artifactId>embergraph-war-html</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>embergraph-client</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>embergraph-vocabularies</artifactId>
       <version>${project.version}</version>
     </dependency>

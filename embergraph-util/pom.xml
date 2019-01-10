@@ -26,12 +26,12 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.blazegraph</groupId>
+    <groupId>com.turbolent</groupId>
     <artifactId>blazegraph-parent</artifactId>
     <version>2.1.5-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <groupId>com.blazegraph</groupId>
+  <groupId>com.turbolent</groupId>
   <artifactId>embergraph-util</artifactId>
   <version>2.1.5-SNAPSHOT</version>
   <name>Embergraph Utilities</name>
@@ -92,22 +92,22 @@ ga('send', 'pageview');
       <version>${log4j.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>ctc-striterators</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>embergraph-ganglia</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>embergraph-common-util</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>embergraph-statics</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -117,7 +117,7 @@ ga('send', 'pageview');
       <version>${servlet.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>colt</artifactId>
       <version>${colt.version}</version>
     </dependency>
@@ -127,12 +127,12 @@ ga('send', 'pageview');
       <version>${sesame.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>dsi-utils</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>lgpl-utils</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -148,7 +148,7 @@ ga('send', 'pageview');
       <type>jar</type>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>junit-ext</artifactId>
       <version>${junit-ext.version}</version>
       <scope>test</scope>

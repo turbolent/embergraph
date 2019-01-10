@@ -26,14 +26,14 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.blazegraph</groupId>
+    <groupId>com.turbolent</groupId>
     <artifactId>embergraph-artifacts</artifactId>
     <version>2.1.5-SNAPSHOT</version>
     <relativePath>../embergraph-artifacts/pom.xml</relativePath>
   </parent>
   <artifactId>embergraph-war</artifactId>
   <version>2.1.5-SNAPSHOT</version>
-  <name>Blazegraph WAR</name>
+  <name>Embergraph WAR</name>
   <description>Blazegraph Web Application Archive</description>
   <packaging>war</packaging>
   <build>
@@ -47,7 +47,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
           <failOnMissingWebXml>false</failOnMissingWebXml>
           <overlays>
             <overlay>
-              <groupId>com.blazegraph</groupId>
+              <groupId>com.turbolent</groupId>
               <artifactId>embergraph-war-html</artifactId>
               <includes>
                 <include>WEB-INF/web.xml</include>
@@ -94,14 +94,14 @@ ga('send', 'pageview');
   </reporting>
   <dependencies>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>embergraph-war-html</artifactId>
       <version>${project.version}</version>
       <type>war</type>
     </dependency>
     <!-- only use the runtime jar here to make it straightforward to upgrade in place -->
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>embergraph-runtime</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -193,7 +193,7 @@ ga('send', 'pageview');
       <version>${highscalelib.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.blazegraph</groupId>
+      <groupId>com.turbolent</groupId>
       <artifactId>colt</artifactId>
       <version>${colt.version}</version>
     </dependency>
