@@ -3,7 +3,7 @@ Blazegraph™ DB is a ultra high-performance graph database supporting Blueprint
 
 ![image](http://blog.blazegraph.com/wp-content/uploads/2015/07/blazegraph_by_systap_favicon.png)
 
-Please see the release notes in [releases](bigdata/src/releases) for version changes.
+Please see the release notes in [releases](embergraph/src/releases) for version changes.
 
 [Sign up](http://eepurl.com/VLpUj) to get the latest news on Blazegraph.
 
