@@ -358,7 +358,7 @@ public class BuildInfo {
     </dependency>
     <dependency>
       <groupId>com.blazegraph</groupId>
-      <artifactId>bigdata-util</artifactId>
+      <artifactId>embergraph-util</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>

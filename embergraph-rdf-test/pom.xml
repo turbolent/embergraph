@@ -350,12 +350,12 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
     </dependency>
     <dependency>
       <groupId>com.blazegraph</groupId>
-      <artifactId>bigdata-util</artifactId>
+      <artifactId>embergraph-util</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>com.blazegraph</groupId>
-      <artifactId>bigdata-util</artifactId>
+      <artifactId>embergraph-util</artifactId>
       <version>${project.version}</version>
       <type>test-jar</type>
     </dependency>
