@@ -356,7 +356,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
         <module>rdf-properties</module>
         <module>sparql-grammar</module>
         <module>bigdata-util</module>
-        <module>bigdata-common-util</module>
+        <module>embergraph-common-util</module>
         <module>bigdata-statics</module>
         <module>embergraph-cache</module>
         <module>embergraph-client</module>
@@ -388,7 +388,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
         <module>rdf-properties</module>
         <module>sparql-grammar</module>
         <module>bigdata-util</module>
-        <module>bigdata-common-util</module>
+        <module>embergraph-common-util</module>
         <module>bigdata-statics</module>
         <module>embergraph-cache</module>
         <module>embergraph-client</module>

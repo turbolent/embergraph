@@ -34,7 +34,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
   <groupId>com.blazegraph</groupId>
   <artifactId>bigdata-util</artifactId>
   <version>2.1.5-SNAPSHOT</version>
-  <name>Blazegraph Utilities</name>
+  <name>Embergraph Utilities</name>
   <description>Utility classes used by multiple artifacts</description>
   <build>
     <plugins>
@@ -63,7 +63,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
           <maxmemory>1000m</maxmemory>
           <author>true</author>
           <version>true</version>
-          <doctitle><![CDATA[<h1>Blazegraph Utilities</h1>]]></doctitle>
+          <doctitle><![CDATA[<h1>Embergraph Utilities</h1>]]></doctitle>
           <bottom><![CDATA[<i>Copyright &#169; 2006-2016 SYSTAP, LLC DBA Blazegraph. All Rights Reserved.</i>
 <script>
 jQuery(document).ready(function(){
@@ -103,7 +103,7 @@ ga('send', 'pageview');
     </dependency>
     <dependency>
       <groupId>com.blazegraph</groupId>
-      <artifactId>bigdata-common-util</artifactId>
+      <artifactId>embergraph-common-util</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
