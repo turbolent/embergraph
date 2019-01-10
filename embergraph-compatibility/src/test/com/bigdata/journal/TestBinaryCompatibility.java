@@ -99,7 +99,7 @@ public class TestBinaryCompatibility extends TestCase2 {
 	 *       introduced?
 	 */
 	static protected final File artifactDir = new File(
-			"bigdata-compatibility/src/resources/artifacts");
+			"embergraph-compatibility/src/resources/artifacts");
 	
 	protected static class Version  {
 		private final String version;
