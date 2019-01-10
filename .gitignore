@@ -98,22 +98,22 @@ embergraph-core/bigdata/src/java/com/bigdata/BuildInfo.java
 /bigdata/src/test/com/bigdata/util/concurrent/TestCompletionService.java
 /bigdata/src/test/com/bigdata/util/concurrent/CompletionServiceImpl.java
 
-# /bigdata-gom/
-/bigdata-gom/bin
-/bigdata-gom/lib
-/bigdata-gom/*.db
-/bigdata-gom/*.lg
-/bigdata-gom/TestNG
-/bigdata-gom/context
-/bigdata-gom/suite.launch
-/bigdata-gom/GOM-suite.xml
-/bigdata-gom/.gom-for-jdbm.GOM-suite.xml.launch
-/bigdata-gom/.project
-/bigdata-gom/.classpath
-/bigdata-gom/target
-/bigdata-gom/TODO
-/bigdata-gom/*.jnl
-/bigdata-gom/*.mdmp
+# /embergraph-gom/
+/embergraph-gom/bin
+/embergraph-gom/lib
+/embergraph-gom/*.db
+/embergraph-gom/*.lg
+/embergraph-gom/TestNG
+/embergraph-gom/context
+/embergraph-gom/suite.launch
+/embergraph-gom/GOM-suite.xml
+/embergraph-gom/.gom-for-jdbm.GOM-suite.xml.launch
+/embergraph-gom/.project
+/embergraph-gom/.classpath
+/embergraph-gom/target
+/embergraph-gom/TODO
+/embergraph-gom/*.jnl
+/embergraph-gom/*.mdmp
 
 # /bigdata-jini/
 /bigdata-jini/bin

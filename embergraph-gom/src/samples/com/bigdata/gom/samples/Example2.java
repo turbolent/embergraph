@@ -39,7 +39,7 @@ import cutthecrap.utils.striterators.ICloseableIterator;
  * local machine).
  * 
  * <pre>
- * LOAD  <file:///Users/bryan/Documents/workspace/BIGDATA_RELEASE_1_2_0/bigdata-gom/src/samples/com/bigdata/gom/samples/example2.trig>
+ * LOAD  <file:///Users/bryan/Documents/workspace/BIGDATA_RELEASE_1_2_0/embergraph-gom/src/samples/com/bigdata/gom/samples/example2.trig>
  * </pre>
  * 
  * You can then run this example, and it will construct the graph. You can load
