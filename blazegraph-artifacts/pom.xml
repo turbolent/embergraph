@@ -87,9 +87,6 @@ ga('send', 'pageview');
     </plugins>
   </reporting>
   <modules>
-    <!-- Legacy artifacts for /bigdata context path -->
-    <module>../bigdata-war</module>
-    <module>../bigdata-jar</module>
     <!-- Blazegraph artifacts -->
     <module>../blazegraph-war</module>
     <module>../blazegraph-jar</module>

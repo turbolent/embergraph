@@ -10,11 +10,10 @@ mvn -f "${BASE_DIR}"/../blazegraph-artifacts/pom.xml clean
 mvn -f "${BASE_DIR}"/../blazegraph-artifacts/pom.xml install -N -DskipTests=true
 #jar artifacts need to be installed for the war files to build.
 mvn -f "${BASE_DIR}"/../blazegraph-jar/pom.xml clean install package -DskipTests=true
-mvn -f "${BASE_DIR}"/../bigdata-jar/pom.xml clean install package -DskipTests=true
 
 #Due to BLZG-1725, we need to build these separately.
 #mvn -f "${BASE_DIR}"/../blazegraph-artifacts/pom.xml clean package -DskipTests=true
-ARTIFACTS="blazegraph-deb blazegraph-war bigdata-war"
+ARTIFACTS="blazegraph-deb blazegraph-war"
 
 for artifact in $ARTIFACTS; do
 	mvn -f "${BASE_DIR}"/../${artifact}/pom.xml clean package -DskipTests=true
