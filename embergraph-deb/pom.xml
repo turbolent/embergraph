@@ -133,7 +133,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
                   <group>root</group>
                 </mapper>
               </data>
-              <!-- Jetty.xml from the blazegraph-jar -->
+              <!-- Jetty.xml from the embergraph-jar -->
               <data>
                 <src>${project.build.directory}/classes/jetty.xml</src>
                 <dst>jetty.xml</dst>
@@ -220,7 +220,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
                 </artifactItem>
                 <artifactItem>
                   <groupId>com.blazegraph</groupId>
-                  <artifactId>blazegraph-jar</artifactId>
+                  <artifactId>embergraph-jar</artifactId>
                   <version>${project.version}</version>
                   <type>jar</type>
                   <overWrite>true</overWrite>

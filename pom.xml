@@ -405,7 +405,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
         <module>embergraph-artifacts/</module>
         <!-- Moved to embergraph-artifacts
     <module>embergraph-war</module>
-    <module>blazegraph-jar</module>
+    <module>embergraph-jar</module>
     <module>embergraph-deb/</module>
     <module>blazegraph-rpm/</module>
     <module>blazegraph-tgz/</module>

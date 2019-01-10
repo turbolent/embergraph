@@ -8,4 +8,4 @@ mvn -f "${BASE_DIR}"/../pom.xml clean install -DskipTests=true -N
 mvn -f "${BASE_DIR}"/../pom.xml clean install -DskipTests=true 
 
 #Also package the executable jars as they are used by some external script dependencies
-mvn -f "${BASE_DIR}"/../pom.xml clean install -P Deployment -U -DskipTests=true --projects blazegraph-jar
+mvn -f "${BASE_DIR}"/../pom.xml clean install -P Deployment -U -DskipTests=true --projects embergraph-jar

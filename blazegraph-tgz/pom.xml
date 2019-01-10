@@ -85,7 +85,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
                 </artifactItem>
                 <artifactItem>
                   <groupId>com.blazegraph</groupId>
-                  <artifactId>blazegraph-jar</artifactId>
+                  <artifactId>embergraph-jar</artifactId>
                   <version>${project.version}</version>
                   <type>jar</type>
                   <overWrite>true</overWrite>
