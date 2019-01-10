@@ -43,12 +43,12 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
         <artifactId>maven-war-plugin</artifactId>
         <version>2.6</version>
         <configuration>
-          <webXml>../bigdata-war-html/src/main/webapp/WEB-INF/web.xml</webXml>
+          <webXml>../embergraph-war-html/src/main/webapp/WEB-INF/web.xml</webXml>
           <failOnMissingWebXml>false</failOnMissingWebXml>
           <overlays>
             <overlay>
               <groupId>com.blazegraph</groupId>
-              <artifactId>bigdata-war-html</artifactId>
+              <artifactId>embergraph-war-html</artifactId>
               <includes>
                 <include>WEB-INF/web.xml</include>
                 <include>**/*</include>
@@ -95,7 +95,7 @@ ga('send', 'pageview');
   <dependencies>
     <dependency>
       <groupId>com.blazegraph</groupId>
-      <artifactId>bigdata-war-html</artifactId>
+      <artifactId>embergraph-war-html</artifactId>
       <version>${project.version}</version>
       <type>war</type>
     </dependency>

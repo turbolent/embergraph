@@ -905,7 +905,7 @@ public class NanoSparqlServer {
              */
 
             // The default location to check in the file system.
-            final File file = new File("bigdata-war-html/src/main/webapp/");
+            final File file = new File("embergraph-war-html/src/main/webapp/");
 
             final URL resourceBaseURL;
             if (file.exists()) {
@@ -939,7 +939,7 @@ public class NanoSparqlServer {
                      * </pre>
                      */
                     tmp = ClassLoader.getSystemClassLoader().getResource(
-                            src = "bigdata-war-html/src/main/webapp/WEB-INF/web.xml");
+                            src = "embergraph-war-html/src/main/webapp/WEB-INF/web.xml");
                 }
                 
 //                if (tmp == null)// Eclipse IDE class path (system class loader).

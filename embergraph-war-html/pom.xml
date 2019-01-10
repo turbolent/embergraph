@@ -31,10 +31,10 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
     <version>2.1.5-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>bigdata-war-html</artifactId>
+  <artifactId>embergraph-war-html</artifactId>
   <version>2.1.5-SNAPSHOT</version>
-  <name>Blazegraph WAR HTML</name>
-  <description>Blazegraph Web Application Archive</description>
+  <name>Embergraph WAR HTML</name>
+  <description>Embergraph Web Application Archive</description>
   <packaging>war</packaging>
   <reporting>
     <plugins>
@@ -52,7 +52,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
           <maxmemory>1000m</maxmemory>
           <author>true</author>
           <version>true</version>
-          <doctitle><![CDATA[<h1>Blazegraph WAR</h1>]]></doctitle>
+          <doctitle><![CDATA[<h1>Embergraph WAR</h1>]]></doctitle>
           <bottom><![CDATA[<i>Copyright &#169; 2006-2016 SYSTAP, LLC DBA Blazegraph. All Rights Reserved.</i>
 <script>
 jQuery(document).ready(function(){

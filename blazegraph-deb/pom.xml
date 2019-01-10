@@ -211,7 +211,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
               <artifactItems>
                 <artifactItem>
                   <groupId>com.blazegraph</groupId>
-                  <artifactId>bigdata-war-html</artifactId>
+                  <artifactId>embergraph-war-html</artifactId>
                   <version>${project.version}</version>
                   <type>war</type>
                   <overWrite>true</overWrite>

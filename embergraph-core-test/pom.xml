@@ -243,7 +243,7 @@ See https://maven.apache.org/plugins/maven-jar-plugin/examples/create-test-jar.h
               <artifactItems>
                 <artifactItem>
                   <groupId>com.blazegraph</groupId>
-                  <artifactId>bigdata-war-html</artifactId>
+                  <artifactId>embergraph-war-html</artifactId>
                   <version>${project.version}</version>
                   <type>war</type>
                   <overWrite>true</overWrite>
@@ -479,7 +479,7 @@ See https://maven.apache.org/plugins/maven-jar-plugin/examples/create-test-jar.h
     </dependency>
     <dependency>
       <groupId>com.blazegraph</groupId>
-      <artifactId>bigdata-war-html</artifactId>
+      <artifactId>embergraph-war-html</artifactId>
       <version>${project.version}</version>
       <type>war</type>
     </dependency>

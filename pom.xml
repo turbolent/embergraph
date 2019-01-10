@@ -364,7 +364,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
         <module>embergraph-gas</module>
         <module>embergraph-core/</module>
         <module>vocabularies</module>
-        <module>bigdata-war-html</module>
+        <module>embergraph-war-html</module>
         <module>embergraph-blueprints</module>
         <module>embergraph-runtime</module>
         <module>embergraph-core-test/</module>
@@ -396,7 +396,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
         <module>embergraph-gas</module>
         <module>embergraph-core/</module>
         <module>vocabularies</module>
-        <module>bigdata-war-html</module>
+        <module>embergraph-war-html</module>
         <module>embergraph-blueprints</module>
         <module>embergraph-runtime</module>
         <module>embergraph-core-test/</module>
