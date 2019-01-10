@@ -3,13 +3,9 @@
  *
  * Licensed under the Aduna BSD-style license.
  */
-package com.bigdata.rdf.sail.sparql.ast;
+package org.embergraph.rdf.sail.sparql.ast;
 
 import java.util.List;
-
-import org.embergraph.rdf.sail.sparql.ast.ASTDatasetClause;
-import org.embergraph.rdf.sail.sparql.ast.SimpleNode;
-import org.embergraph.rdf.sail.sparql.ast.SyntaxTreeBuilder;
 
 /**
  * @author jeen

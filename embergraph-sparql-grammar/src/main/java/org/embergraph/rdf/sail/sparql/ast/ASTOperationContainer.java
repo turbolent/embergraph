@@ -3,7 +3,7 @@
  *
  * Licensed under the Aduna BSD-style license.
  */
-package com.bigdata.rdf.sail.sparql.ast;
+package org.embergraph.rdf.sail.sparql.ast;
 
 import java.util.List;
 

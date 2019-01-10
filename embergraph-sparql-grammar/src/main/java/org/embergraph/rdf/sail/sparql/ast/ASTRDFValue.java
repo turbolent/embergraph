@@ -25,11 +25,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * Created on Aug 24, 2011
  */
 
-package com.bigdata.rdf.sail.sparql.ast;
+package org.embergraph.rdf.sail.sparql.ast;
 
 import org.openrdf.model.Value;
-import org.embergraph.rdf.sail.sparql.ast.SimpleNode;
-import org.embergraph.rdf.sail.sparql.ast.SyntaxTreeBuilder;
 
 /**
  * An abstract base class for AST objects modeling RDF Values.

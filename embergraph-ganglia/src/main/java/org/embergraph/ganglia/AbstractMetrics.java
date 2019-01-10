@@ -1,4 +1,4 @@
-package com.bigdata.ganglia;
+package org.embergraph.ganglia;
 
 import java.util.Collections;
 import java.util.HashMap;

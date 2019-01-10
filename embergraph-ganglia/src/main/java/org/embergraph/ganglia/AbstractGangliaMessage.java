@@ -13,7 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-package com.bigdata.ganglia;
+package org.embergraph.ganglia;
 /**
  * Base class for ganglia 3.1 wire format messages.
  */

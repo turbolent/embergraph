@@ -14,7 +14,7 @@
    limitations under the License.
 */
 
-package com.bigdata.ganglia;
+package org.embergraph.ganglia;
 
 /**
  * A read-only interface for a reported or observed metric value with a

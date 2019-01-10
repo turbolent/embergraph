@@ -17,7 +17,7 @@
  * Created on Oct 14, 2006
  */
 
-package com.bigdata.ganglia;
+package org.embergraph.ganglia;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

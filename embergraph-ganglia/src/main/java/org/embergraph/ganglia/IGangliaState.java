@@ -14,7 +14,7 @@
    limitations under the License.
 */
 
-package com.bigdata.ganglia;
+package org.embergraph.ganglia;
 
 import java.util.Iterator;
 

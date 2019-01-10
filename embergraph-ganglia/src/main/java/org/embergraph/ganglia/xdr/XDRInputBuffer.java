@@ -13,7 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-package com.bigdata.ganglia.xdr;
+package org.embergraph.ganglia.xdr;
 
 /**
  * A class for reading XDR data from an internal buffer.

@@ -33,6 +33,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.Map;
 import java.util.TreeMap;
+import org.embergraph.ganglia.GangliaService;
 
 /**
  * A class for those few statics that it makes sense to reference from other
@@ -58,7 +59,7 @@ public class BigdataStatics {
      * 
      * @see com.bigdata.counters.AbstractStatisticsCollector
      * @see com.bigdata.Banner
-     * @see com.bigdata.ganglia.GangliaService#HOSTNAME
+     * @see GangliaService#HOSTNAME
      * @see <a href="http://trac.blazegraph.com/ticket/886" >Provide workaround for
      *      bad reverse DNS setups</a>
      */

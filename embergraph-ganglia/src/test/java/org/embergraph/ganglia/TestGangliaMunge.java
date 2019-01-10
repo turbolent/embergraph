@@ -13,9 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-package com.bigdata.ganglia;
-
-import org.embergraph.ganglia.GangliaMunge;
+package org.embergraph.ganglia;
 
 import junit.framework.TestCase;
 

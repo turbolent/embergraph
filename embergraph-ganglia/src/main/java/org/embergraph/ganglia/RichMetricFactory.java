@@ -13,7 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-package com.bigdata.ganglia;
+package org.embergraph.ganglia;
 
 /**
  * Factory associates the {@link IGangliaMetadataMessage} with the
