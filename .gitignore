@@ -377,3 +377,6 @@ embergraph-rdf-test/test_small.out
 **/bigdata.jnl
 
 build
+.gradle
+.idea
+*.iml
