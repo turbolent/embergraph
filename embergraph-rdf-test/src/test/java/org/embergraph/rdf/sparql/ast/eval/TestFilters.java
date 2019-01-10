@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * Created on Oct 31, 2011
  */
 
-package com.bigdata.rdf.sparql.ast.eval;
+package org.embergraph.rdf.sparql.ast.eval;
 
 /**
  * Test suite for FILTER evaluation.

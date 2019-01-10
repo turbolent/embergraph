@@ -56,7 +56,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * Created Nov 2013
  */
 
-package com.bigdata.rdf.sparql.ast.eval;
+package org.embergraph.rdf.sparql.ast.eval;
 
 import info.aduna.iteration.Iterations;
 
