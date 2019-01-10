@@ -31,7 +31,6 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
     <version>2.1.5-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <groupId>com.blazegraph</groupId>
   <artifactId>vocabularies</artifactId>
   <version>2.1.5-SNAPSHOT</version>
   <name>Blazegraph Vocabularies</name>
