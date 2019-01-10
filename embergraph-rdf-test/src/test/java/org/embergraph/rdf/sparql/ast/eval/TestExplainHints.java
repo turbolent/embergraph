@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * Created on August 31, 2015
  */
 
-package com.bigdata.rdf.sparql.ast.eval;
+package org.embergraph.rdf.sparql.ast.eval;
 
 import java.util.Iterator;
 
