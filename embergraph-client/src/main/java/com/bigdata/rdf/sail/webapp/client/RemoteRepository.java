@@ -61,7 +61,7 @@ import com.bigdata.rdf.sail.remote.BigdataSailRemoteRepository;
  *      > NanoSparqlServer REST API </a>
  * 
  * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/628" > Create
- *      a bigdata-client jar for the NSS REST API </a>
+ *      a embergraph-client jar for the NSS REST API </a>
  */
 public class RemoteRepository extends RemoteRepositoryBase {
 

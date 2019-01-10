@@ -369,7 +369,7 @@ public class BuildInfo {
     </dependency>
     <dependency>
       <groupId>com.blazegraph</groupId>
-      <artifactId>bigdata-client</artifactId>
+      <artifactId>embergraph-client</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>

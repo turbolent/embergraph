@@ -476,7 +476,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
 
         setQueryMethod(System.getProperty(QUERY_METHOD, DEFAULT_QUERY_METHOD));
 
-        // See #1235 bigdata-client does not invoke
+        // See #1235 embergraph-client does not invoke
         // ServiceProviderHook.forceLoad()
         try {
             ServiceProviderHook.forceLoad();

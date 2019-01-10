@@ -25,7 +25,7 @@ package com.bigdata.rdf.sail.webapp.client;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-//Note: Do not import. Not part of the bigdata-client.jar
+//Note: Do not import. Not part of the embergraph-client.jar
 //
 //import com.bigdata.rdf.sparql.ast.service.RemoteServiceOptions;
 

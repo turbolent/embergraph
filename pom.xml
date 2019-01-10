@@ -359,7 +359,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
         <module>bigdata-common-util</module>
         <module>bigdata-statics</module>
         <module>embergraph-cache</module>
-        <module>bigdata-client</module>
+        <module>embergraph-client</module>
         <module>bigdata-ganglia</module>
         <module>bigdata-gas</module>
         <module>bigdata-core/</module>
@@ -391,7 +391,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
         <module>bigdata-common-util</module>
         <module>bigdata-statics</module>
         <module>embergraph-cache</module>
-        <module>bigdata-client</module>
+        <module>embergraph-client</module>
         <module>bigdata-ganglia</module>
         <module>bigdata-gas</module>
         <module>bigdata-core/</module>
