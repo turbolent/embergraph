@@ -4,7 +4,7 @@ BASE_DIR=`dirname $0`
 echo "Building dependencies..."
 "$BASE_DIR"/mavenInstall.sh
 echo "Building artifacts..."
-mvn -f "${BASE_DIR}"/../blazegraph-war/pom.xml -U clean package -DskipTests=true
+mvn -f "${BASE_DIR}"/../embergraph-war/pom.xml -U clean package -DskipTests=true
 
 
 ARTIFACT_DIR="$BASE_DIR/../artifacts"

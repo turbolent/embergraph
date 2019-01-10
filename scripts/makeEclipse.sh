@@ -13,13 +13,13 @@ if [ -z "${ECLIPSE_WORKSPACE}" ] ; then
     #Development projects
  	mvn -f "${BASE_DIR}"/../pom.xml eclipse:eclipse  $*
     #Deployment artifacts used in Eclipse
- 	mvn -f "${BASE_DIR}"/../pom.xml eclipse:eclipse -P Deployment --projects blazegraph-war,blazegraph-jar $*
+ 	mvn -f "${BASE_DIR}"/../pom.xml eclipse:eclipse -P Deployment --projects embergraph-war,blazegraph-jar $*
 
 else 
 
     #Development projects
 	mvn -f "${BASE_DIR}"/../pom.xml eclipse:eclipse -Declipse.workspace="${ECLIPSE_WORKSPACE}" 
     #Deployment artifacts used in Eclipse
- 	mvn -f "${BASE_DIR}"/../pom.xml eclipse:eclipse -Declipse.workspace="${ECLIPSE_WORKSPACE}" -P Deployment --projects blazegraph-war,blazegraph-jar $*
+ 	mvn -f "${BASE_DIR}"/../pom.xml eclipse:eclipse -Declipse.workspace="${ECLIPSE_WORKSPACE}" -P Deployment --projects embergraph-war,blazegraph-jar $*
 
 fi

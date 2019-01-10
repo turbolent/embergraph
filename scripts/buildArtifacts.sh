@@ -13,7 +13,7 @@ mvn -f "${BASE_DIR}"/../blazegraph-jar/pom.xml clean install package -DskipTests
 
 #Due to BLZG-1725, we need to build these separately.
 #mvn -f "${BASE_DIR}"/../embergraph-artifacts/pom.xml clean package -DskipTests=true
-ARTIFACTS="blazegraph-deb blazegraph-war"
+ARTIFACTS="embergraph-deb embergraph-war"
 
 for artifact in $ARTIFACTS; do
 	mvn -f "${BASE_DIR}"/../${artifact}/pom.xml clean package -DskipTests=true

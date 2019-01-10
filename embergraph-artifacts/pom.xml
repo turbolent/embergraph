@@ -87,9 +87,9 @@ ga('send', 'pageview');
   </reporting>
   <modules>
     <!-- Blazegraph artifacts -->
-    <module>../blazegraph-war</module>
+    <module>../embergraph-war</module>
     <module>../blazegraph-jar</module>
-    <module>../blazegraph-deb</module>
+    <module>../embergraph-deb</module>
     <module>../blazegraph-rpm</module>
     <module>../blazegraph-tgz</module>
   </modules>

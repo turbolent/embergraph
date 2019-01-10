@@ -31,31 +31,253 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
     <version>2.1.5-SNAPSHOT</version>
     <relativePath>../embergraph-artifacts/pom.xml</relativePath>
   </parent>
-  <artifactId>blazegraph-war</artifactId>
+  <artifactId>embergraph-deb</artifactId>
   <version>2.1.5-SNAPSHOT</version>
-  <name>Blazegraph WAR</name>
-  <description>Blazegraph Web Application Archive</description>
-  <packaging>war</packaging>
+  <name>Blazegraph Debian Package</name>
+  <description>Debian Deployer for Blazegraph DB</description>
+  <packaging>deb</packaging>
+  <properties>
+    <!-- Pass -PsignDebian=true to mvn to sign the package. -->
+    <signDebian>false</signDebian>
+  </properties>
   <build>
+    <extensions>
+      <!-- Add support for the "deb" packaging -->
+      <extension>
+        <groupId>org.vafer</groupId>
+        <artifactId>jdeb</artifactId>
+        <version>1.5</version>
+      </extension>
+    </extensions>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>jdeb</artifactId>
+          <groupId>org.vafer</groupId>
+          <version>1.5</version>
+          <!-- Customize deb package  -->
+          <configuration>
+            <deb>${project.build.directory}/${project.artifactId}-${project.version}.deb</deb>
+            <signPackage>${signDebian}</signPackage>
+            <keyring>${gpg.keyring}</keyring>
+            <key>${gpg.keysig}</key>
+            <passphrase>${gpg.passphrase}</passphrase>
+            <dataSet>
+              <!-- dependencies go in /usr/share/blazegraph-[version]/lib -->
+              <data>
+                <src>${project.build.directory}/dependency</src>
+                <type>directory</type>
+                <includes>*.jar</includes>
+                <mapper>
+                  <type>perm</type>
+                  <prefix>/usr/share/blazegraph-${project.version}/lib</prefix>
+                  <user>root</user>
+                  <group>root</group>
+                </mapper>
+              </data>
+              <!-- copy the war files to the install war sub directory -->
+              <data>
+                <src>${project.build.directory}/classes/war</src>
+                <type>directory</type>
+                <includes>**/*</includes>
+                <mapper>
+                  <type>perm</type>
+                  <prefix>/usr/share/blazegraph-${project.version}/war/</prefix>
+                  <user>root</user>
+                  <group>root</group>
+                </mapper>
+              </data>
+              <!-- create the data directories, log directories in preinst script -->
+              <data>
+                <src>${project.basedir}/src/deb/logrotate.d/blazegraph</src>
+                <type>file</type>
+                <mapper>
+                  <type>perm</type>
+                  <prefix>/etc/logrotate.d</prefix>
+                  <filemode>755</filemode>
+                  <user>root</user>
+                  <group>root</group>
+                </mapper>
+              </data>
+              <data>
+                <src>${project.basedir}/src/deb/init.d</src>
+                <type>directory</type>
+                <mapper>
+                  <type>perm</type>
+                  <prefix>/etc/init.d</prefix>
+                  <filemode>755</filemode>
+                  <user>root</user>
+                  <group>root</group>
+                </mapper>
+              </data>
+              <data>
+                <src>${project.basedir}/src/deb/bin</src>
+                <type>directory</type>
+                <mapper>
+                  <type>perm</type>
+                  <prefix>/usr/bin/</prefix>
+                  <filemode>755</filemode>
+                  <user>root</user>
+                  <group>root</group>
+                </mapper>
+              </data>
+              <data>
+                <src>${project.basedir}/src/deb/conf/blazegraph</src>
+                <type>file</type>
+                <conffile>true</conffile>
+                <mapper>
+                  <type>perm</type>
+                  <prefix>/etc/default/</prefix>
+                  <filemode>644</filemode>
+                  <user>root</user>
+                  <group>root</group>
+                </mapper>
+              </data>
+              <!-- Jetty.xml from the blazegraph-jar -->
+              <data>
+                <src>${project.build.directory}/classes/jetty.xml</src>
+                <dst>jetty.xml</dst>
+                <type>file</type>
+                <conffile>true</conffile>
+                <mapper>
+                  <type>perm</type>
+                  <prefix>/etc/blazegraph/</prefix>
+                  <user>root</user>
+                  <group>root</group>
+                </mapper>
+              </data>
+              <!-- Baseline RWStore.properties -->
+              <data>
+                <src>${project.build.directory}/classes/RWStore.properties</src>
+                <dst>RWStore.properties</dst>
+                <type>file</type>
+                <conffile>true</conffile>
+                <mapper>
+                  <type>perm</type>
+                  <prefix>/etc/blazegraph/</prefix>
+                  <user>root</user>
+                  <group>root</group>
+                </mapper>
+              </data>
+              <!-- logging properties files -->
+              <data>
+                <src>${project.build.directory}/classes/war/WEB-INF/classes/log4j.properties</src>
+                <dst>log4j.properties</dst>
+                <type>file</type>
+                <conffile>true</conffile>
+                <mapper>
+                  <type>perm</type>
+                  <prefix>/etc/blazegraph/</prefix>
+                  <user>root</user>
+                  <group>root</group>
+                </mapper>
+              </data>
+              <!-- soft link to versioned software -->
+              <data>
+                <type>link</type>
+                <symlink>true</symlink>
+                <linkName>/usr/share/blazegraph</linkName>
+                <linkTarget>/usr/share/blazegraph-${project.version}</linkTarget>
+              </data>
+              <!-- upstart script
+                <data>
+                  <src>${basedir}/src/deb/init/blazegraph.conf</src>
+                  <type>file</type>
+                  <mapper>
+                    <type>perm</type>
+                    <prefix>/etc/init</prefix>
+                    <user>root</user>
+                    <group>root</group>
+                  </mapper>
+                </data> -->
+            </dataSet>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>2.6</version>
-        <configuration>
-          <webXml>../embergraph-war-html/src/main/webapp/WEB-INF/web.xml</webXml>
-          <failOnMissingWebXml>false</failOnMissingWebXml>
-          <overlays>
-            <overlay>
-              <groupId>com.blazegraph</groupId>
-              <artifactId>embergraph-war-html</artifactId>
-              <includes>
-                <include>WEB-INF/web.xml</include>
-                <include>**/*</include>
-              </includes>
-            </overlay>
-          </overlays>
-        </configuration>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>2.10</version>
+        <executions>
+          <execution>
+            <id>copy</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>com.blazegraph</groupId>
+                  <artifactId>embergraph-war-html</artifactId>
+                  <version>${project.version}</version>
+                  <type>war</type>
+                  <overWrite>true</overWrite>
+                  <outputDirectory>target/classes/</outputDirectory>
+                  <destFileName>blazegraph.war</destFileName>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>com.blazegraph</groupId>
+                  <artifactId>blazegraph-jar</artifactId>
+                  <version>${project.version}</version>
+                  <type>jar</type>
+                  <overWrite>true</overWrite>
+                  <outputDirectory>target/classes/</outputDirectory>
+                  <destFileName>blazegraph.jar</destFileName>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+          <execution>
+            <id>copy-dependencies</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <overWriteReleases>false</overWriteReleases>
+              <overWriteSnapshots>false</overWriteSnapshots>
+              <overWriteIfNewer>true</overWriteIfNewer>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.6</version>
+        <executions>
+          <execution>
+            <id>unpack-war</id>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <phase>compile</phase>
+            <configuration>
+              <target>
+                <unzip dest="target/classes/war">
+                  <patternset>
+                    <include name="**/*"/>
+                  </patternset>
+                  <fileset dir="target/classes/">
+                    <include name="blazegraph.war"/>
+                  </fileset>
+                </unzip>
+                <copy file="target/classes/war/WEB-INF/RWStore.properties" todir="target/classes"/>
+                <unzip dest="target/classes/jar">
+                  <patternset>
+                    <include name="jetty.xml"/>
+                  </patternset>
+                  <fileset dir="target/classes/">
+                    <include name="blazegraph.jar"/>
+                  </fileset>
+                </unzip>
+                <copy file="target/classes/jar/jetty.xml" todir="target/classes"/>
+              </target>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
@@ -70,7 +292,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
           <maxmemory>1000m</maxmemory>
           <author>true</author>
           <version>true</version>
-          <doctitle><![CDATA[<h1>Blazegraph WAR</h1>]]></doctitle>
+          <doctitle><![CDATA[<h1>Blazegraph Debian Deployer</h1>]]></doctitle>
           <bottom><![CDATA[<i>Copyright &#169; 2006-2016 SYSTAP, LLC DBA Blazegraph. All Rights Reserved.</i>
 <script>
 jQuery(document).ready(function(){
@@ -93,12 +315,6 @@ ga('send', 'pageview');
     </plugins>
   </reporting>
   <dependencies>
-    <dependency>
-      <groupId>com.blazegraph</groupId>
-      <artifactId>embergraph-war-html</artifactId>
-      <version>${project.version}</version>
-      <type>war</type>
-    </dependency>
     <!-- only use the runtime jar here to make it straightforward to upgrade in place -->
     <dependency>
       <groupId>com.blazegraph</groupId>
@@ -133,6 +349,11 @@ ga('send', 'pageview');
     </dependency>
     <dependency>
       <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-server</artifactId>
+      <version>${jetty.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
       <artifactId>jetty-util</artifactId>
       <version>${jetty.version}</version>
     </dependency>
@@ -150,16 +371,6 @@ ga('send', 'pageview');
       <groupId>org.eclipse.jetty</groupId>
       <artifactId>jetty-security</artifactId>
       <version>${jetty.version}</version>
-      <exclusions>
-        <exclusion>
-          <groupId>org.eclipse.jetty</groupId>
-          <artifactId>jetty-server</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>javax.servlet</groupId>
-          <artifactId>javax.servlet-api</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.eclipse.jetty</groupId>
@@ -170,12 +381,6 @@ ga('send', 'pageview');
       <groupId>org.eclipse.jetty</groupId>
       <artifactId>jetty-rewrite</artifactId>
       <version>${jetty.version}</version>
-      <exclusions>
-        <exclusion>
-          <groupId>javax.servlet</groupId>
-          <artifactId>javax.servlet-api</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.eclipse.jetty</groupId>
@@ -186,6 +391,11 @@ ga('send', 'pageview');
       <groupId>org.eclipse.jetty</groupId>
       <artifactId>jetty-proxy</artifactId>
       <version>${jetty.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>${servlet.version}</version>
     </dependency>
     <dependency>
       <groupId>com.github.stephenc.high-scale-lib</groupId>
@@ -225,7 +435,7 @@ ga('send', 'pageview');
       <!-- There is a bug with log4j 1.2.15 where it has a lot  -->
       <!-- of dependencies that we do not need in its POM. The  -->
       <!-- exclusions are only necessary with that version.     -->
-      <!-- 
+      <!--
            <exclusions>
              <exclusion>
                <groupId>javax.jms</groupId>
@@ -308,6 +518,11 @@ ga('send', 'pageview');
       <version>${jackson.version}</version>
     </dependency>
     <dependency>
+      <groupId>org.codehaus.jettison</groupId>
+      <artifactId>jettison</artifactId>
+      <version>${jettison.version}</version>
+    </dependency>
+    <dependency>
       <groupId>org.openrdf.sesame</groupId>
       <artifactId>sesame-runtime</artifactId>
       <version>${sesame.version}</version>
@@ -331,17 +546,6 @@ ga('send', 'pageview');
       <groupId>com.tinkerpop.rexster</groupId>
       <artifactId>rexster-core</artifactId>
       <version>${rexster.version}</version>
-      <exclusions>
-        <exclusion>
-          <groupId>javax.servlet</groupId>
-          <artifactId>javax.servlet-api</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.codehaus.jettison</groupId>
-      <artifactId>jettison</artifactId>
-      <version>${jettison.version}</version>
     </dependency>
     <dependency>
       <groupId>commons-configuration</groupId>
