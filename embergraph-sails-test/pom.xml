@@ -359,7 +359,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
     </dependency>
     <dependency>
       <groupId>com.blazegraph</groupId>
-      <artifactId>bigdata-statics</artifactId>
+      <artifactId>embergraph-statics</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>

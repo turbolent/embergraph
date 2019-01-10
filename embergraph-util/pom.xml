@@ -108,7 +108,7 @@ ga('send', 'pageview');
     </dependency>
     <dependency>
       <groupId>com.blazegraph</groupId>
-      <artifactId>bigdata-statics</artifactId>
+      <artifactId>embergraph-statics</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
