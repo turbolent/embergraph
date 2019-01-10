@@ -32,10 +32,10 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
     <version>2.1.5-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>bigdata-core</artifactId>
+  <artifactId>embergraph-core</artifactId>
   <version>2.1.5-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>Blazegraph Core</name>
+  <name>Embergraph Core</name>
   <description>Blazegraph(TM) DB Core Platform.  It contains all Blazegraph DB dependencies other than Blueprints.</description>
   <!-- properties are now in the parent POM. -->
   <build>

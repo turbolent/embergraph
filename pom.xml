@@ -362,7 +362,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
         <module>embergraph-client</module>
         <module>bigdata-ganglia</module>
         <module>bigdata-gas</module>
-        <module>bigdata-core/</module>
+        <module>embergraph-core/</module>
         <module>vocabularies</module>
         <module>bigdata-war-html</module>
         <module>embergraph-blueprints</module>
@@ -394,7 +394,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
         <module>embergraph-client</module>
         <module>bigdata-ganglia</module>
         <module>bigdata-gas</module>
-        <module>bigdata-core/</module>
+        <module>embergraph-core/</module>
         <module>vocabularies</module>
         <module>bigdata-war-html</module>
         <module>embergraph-blueprints</module>

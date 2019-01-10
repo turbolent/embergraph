@@ -25,7 +25,7 @@ package com.bigdata.rdf.sparql.ast.eval;
 
 /**
  * Annotations for communication with the GPU acceleration module. This should only
- * include those annotations that need to be declared in the blazegraph core in order
+ * include those annotations that need to be declared in the embergraph core in order
  * to support the GPU acceleration module.
  * 
  * @author bryan

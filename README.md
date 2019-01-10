@@ -33,7 +33,7 @@ Starting with the 2.0.0 release, the Blazegraph Database is available on Maven C
 ```
     <dependency>
         <groupId>com.blazegraph</groupId>
-        <artifactId>bigdata-core</artifactId>
+        <artifactId>embergraph-core</artifactId>
         <version>2.0.0</version>
     </dependency>
     <!-- Use if Tinkerpop 2.5 support is needed ; See also Tinkerpop3 below. -->

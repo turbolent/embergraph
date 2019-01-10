@@ -147,7 +147,7 @@ ga('send', 'pageview');
     </dependency>
     <dependency>
       <groupId>com.blazegraph</groupId>
-      <artifactId>bigdata-core</artifactId>
+      <artifactId>embergraph-core</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
