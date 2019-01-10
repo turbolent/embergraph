@@ -31,9 +31,9 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
     <version>2.1.5-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>bigdata-runtime</artifactId>
+  <artifactId>embergraph-runtime</artifactId>
   <version>2.1.5-SNAPSHOT</version>
-  <name>Blazegraph Runtime</name>
+  <name>Embergraph Runtime</name>
   <description>This file contains all of the Blazegraph DB artifacts without any external artifacts.</description>
   <packaging>jar</packaging>
   <build>
@@ -168,7 +168,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
           <maxmemory>1000m</maxmemory>
           <author>true</author>
           <version>true</version>
-          <doctitle><![CDATA[<h1>Blazegraph Runtime</h1>]]></doctitle>
+          <doctitle><![CDATA[<h1>Embergraph Runtime</h1>]]></doctitle>
           <bottom><![CDATA[<i>Copyright &#169; 2006-2016 SYSTAP, LLC DBA Blazegraph. All Rights Reserved.</i>
 <script>
 jQuery(document).ready(function(){

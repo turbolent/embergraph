@@ -2286,7 +2286,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
      * Unit test for
      * {@link StaticAnalysis#getProjectedVars(IGroupMemberNode, GraphPatternGroup, QueryBase, Set, Set)}
      * . This unit test is a based on
-     * <code>bigdata-perf/CI/govtrack/queries/query10.rq</code>
+     * <code>embergraph-perf/CI/govtrack/queries/query10.rq</code>
      * <p>
      * Given:
      * 

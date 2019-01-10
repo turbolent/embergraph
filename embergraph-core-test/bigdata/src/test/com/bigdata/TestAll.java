@@ -127,11 +127,11 @@ public class TestAll extends TestCase {
         // RDF
         //Moved into embergraph-rdf-test
         //suite.addTest(com.bigdata.rdf.TestAll.suite());
-        //Moved into bigdata-sails-test
+        //Moved into embergraph-sails-test
  //       suite.addTest(com.bigdata.rdf.sail.TestAll.suite());
 
         // The REST API test suite.
-        //Moved into bigdata-sails-test
+        //Moved into embergraph-sails-test
   //      suite.addTest(com.bigdata.rdf.sail.webapp.TestAll.suite());
 
 		/*

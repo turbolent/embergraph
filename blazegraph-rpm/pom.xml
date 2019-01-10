@@ -320,7 +320,7 @@ ga('send', 'pageview');
     <!-- only use the runtime jar here to make it straightforward to upgrade in place -->
     <dependency>
       <groupId>com.blazegraph</groupId>
-      <artifactId>bigdata-runtime</artifactId>
+      <artifactId>embergraph-runtime</artifactId>
       <version>${project.version}</version>
     </dependency>
     <!-- External and third party dependencies -->

@@ -366,10 +366,10 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
         <module>vocabularies</module>
         <module>bigdata-war-html</module>
         <module>embergraph-blueprints</module>
-        <module>bigdata-runtime</module>
+        <module>embergraph-runtime</module>
         <module>embergraph-core-test/</module>
         <module>embergraph-rdf-test/</module>
-        <module>bigdata-sails-test/</module>
+        <module>embergraph-sails-test/</module>
       </modules>
     </profile>
     <profile>
@@ -398,10 +398,10 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
         <module>vocabularies</module>
         <module>bigdata-war-html</module>
         <module>embergraph-blueprints</module>
-        <module>bigdata-runtime</module>
+        <module>embergraph-runtime</module>
         <module>embergraph-core-test/</module>
         <module>embergraph-rdf-test/</module>
-        <module>bigdata-sails-test/</module>
+        <module>embergraph-sails-test/</module>
         <module>blazegraph-artifacts/</module>
         <!-- Moved to blazegraph-artifacts
     <module>blazegraph-war</module>

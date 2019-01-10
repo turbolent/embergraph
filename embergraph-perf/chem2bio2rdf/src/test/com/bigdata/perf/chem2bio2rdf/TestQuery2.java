@@ -62,7 +62,7 @@ public class TestQuery2 {
 	 */
 	public static void main(String[] args) throws Exception {
 		
-		final String journalProps = "/Users/mikepersonick/Documents/workspace/bigdata-release-1.2/bigdata-perf/chem2bio2rdf/RWStore.properties";
+		final String journalProps = "/Users/mikepersonick/Documents/workspace/bigdata-release-1.2/embergraph-perf/chem2bio2rdf/RWStore.properties";
 		
 		final String journal = "/Users/mikepersonick/Documents/nobackup/chem2bio2rdf/bigdata.RW.journal";
 		

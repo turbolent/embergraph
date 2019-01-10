@@ -449,7 +449,7 @@ public class TestASTNamedSubqueryOptimizer extends
 
     /**
      * This unit test is a based on
-     * <code>bigdata-perf/CI/govtrack/queries/query10.rq</code>
+     * <code>embergraph-perf/CI/govtrack/queries/query10.rq</code>
      * 
      * <pre>
      * SELECT  ?_var1

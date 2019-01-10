@@ -44,12 +44,12 @@ Starting with the 2.0.0 release, the Blazegraph Database is available on Maven C
     </dependency>
 ```
 
-If you'd just link the Blazegraph Database dependencies without any of the external libraries, use the bigdata-runtime artifact.
+If you'd just link the Blazegraph Database dependencies without any of the external libraries, use the embergraph-runtime artifact.
 
 ```
     <dependency>
         <groupId>com.blazegraph</groupId>
-        <artifactId>bigdata-runtime</artifactId>
+        <artifactId>embergraph-runtime</artifactId>
         <version>2.0.0</version>
     </dependency>
 ```

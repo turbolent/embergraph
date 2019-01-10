@@ -161,21 +161,21 @@ embergraph-core/bigdata/src/java/com/bigdata/BuildInfo.java
 /bigdata-jini/src/test/com/bigdata/service/jini/TestPageServer.java
 /bigdata-jini/src/test/com/bigdata/service/jini/IteratorService.java
 
-# /bigdata-perf/bsbm/
-/bigdata-perf/bsbm/ant-build
+# /embergraph-perf/bsbm/
+/embergraph-perf/bsbm/ant-build
 
-# /bigdata-perf/lubm/
-/bigdata-perf/lubm/ant-build
-/bigdata-perf/lubm/*result.txt
-/bigdata-perf/lubm/sample.query.sparql
+# /embergraph-perf/lubm/
+/embergraph-perf/lubm/ant-build
+/embergraph-perf/lubm/*result.txt
+/embergraph-perf/lubm/sample.query.sparql
 
-# /bigdata-perf/lubm/src/java/edu/lehigh/swat/bench/ubt/
-/bigdata-perf/lubm/src/java/edu/lehigh/swat/bench/ubt/answers (U1)
+# /embergraph-perf/lubm/src/java/edu/lehigh/swat/bench/ubt/
+/embergraph-perf/lubm/src/java/edu/lehigh/swat/bench/ubt/answers (U1)
 
-# /bigdata-perf/lubm/src/java/edu/lehigh/swat/bench/ubt/bigdata/
-/bigdata-perf/lubm/src/java/edu/lehigh/swat/bench/ubt/bigdata/*eossys*
-/bigdata-perf/lubm/src/java/edu/lehigh/swat/bench/ubt/bigdata/notes.txt
-/bigdata-perf/lubm/src/java/edu/lehigh/swat/bench/ubt/bigdata/JDSTest.java
+# /embergraph-perf/lubm/src/java/edu/lehigh/swat/bench/ubt/bigdata/
+/embergraph-perf/lubm/src/java/edu/lehigh/swat/bench/ubt/bigdata/*eossys*
+/embergraph-perf/lubm/src/java/edu/lehigh/swat/bench/ubt/bigdata/notes.txt
+/embergraph-perf/lubm/src/java/edu/lehigh/swat/bench/ubt/bigdata/JDSTest.java
 
 # /bigdata-rdf/
 /bigdata-rdf/*.jnl
@@ -338,9 +338,9 @@ embergraph-core/bigdata/src/java/com/bigdata/BuildInfo.java
 # ignore all HA CI benchmark files.
 benchmark
 
-/bigdata-perf/gas/*.out
-/bigdata-perf/gas/*.test
-/bigdata-perf/gas/*.jnl
+/embergraph-perf/gas/*.out
+/embergraph-perf/gas/*.test
+/embergraph-perf/gas/*.jnl
 
 #Journal files
 *.jnl

@@ -30,11 +30,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
     <version>2.1.5-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>bigdata-sails-test</artifactId>
+  <artifactId>embergraph-sails-test</artifactId>
   <version>2.1.5-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>Blazegraph Sail Tests</name>
-  <description>Blazegraph(TM) SAIL Test Suites</description>
+  <name>Embergraph Sail Tests</name>
+  <description>Embergraph SAIL Test Suites</description>
   <!-- properties are now in the parent POM. -->
   <build>
     <plugins>
