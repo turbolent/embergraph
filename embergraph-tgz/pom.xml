@@ -53,7 +53,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
           <version>2.5.3</version>
           <configuration>
             <descriptors>
-              <descriptor>src/main/assembly/blazegraph.xml</descriptor>
+              <descriptor>src/main/assembly/embergraph.xml</descriptor>
             </descriptors>
             <tarLongFileMode>posix</tarLongFileMode>
           </configuration>
