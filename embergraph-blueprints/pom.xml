@@ -32,10 +32,10 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
     <relativePath>../pom.xml</relativePath>
   </parent>
   <groupId>com.blazegraph</groupId>
-  <artifactId>bigdata-blueprints</artifactId>
+  <artifactId>embergraph-blueprints</artifactId>
   <version>2.1.5-SNAPSHOT</version>
-  <name>Blazegraph Blueprints API</name>
-  <description>Blazegraph support for Tinkerpop 2.5</description>
+  <name>Embergraph Blueprints API</name>
+  <description>Embergraph support for Tinkerpop 2.5</description>
   <packaging>jar</packaging>
   <build>
     <plugins>
@@ -80,7 +80,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
           <maxmemory>1000m</maxmemory>
           <author>true</author>
           <version>true</version>
-          <doctitle><![CDATA[<h1>Blazegraph Blueprints API</h1>]]></doctitle>
+          <doctitle><![CDATA[<h1>Embergraph Blueprints API</h1>]]></doctitle>
           <bottom><![CDATA[<i>Copyright &#169; 2006-2016 SYSTAP, LLC DBA Blazegraph. All Rights Reserved.</i>
 <script>
 jQuery(document).ready(function(){

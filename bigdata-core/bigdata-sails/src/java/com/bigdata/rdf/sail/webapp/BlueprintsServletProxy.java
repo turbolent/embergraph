@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 /**
  * 
  * This servlet implements a proxy pattern to allow for separation of the 
- * bigdata-blueprints package.
+ * embergraph-blueprints package.
  * 
  */
 package com.bigdata.rdf.sail.webapp;

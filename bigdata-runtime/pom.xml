@@ -222,7 +222,7 @@ ga('send', 'pageview');
     </dependency>
     <dependency>
       <groupId>com.blazegraph</groupId>
-      <artifactId>bigdata-blueprints</artifactId>
+      <artifactId>embergraph-blueprints</artifactId>
       <version>${project.version}</version>
       <exclusions>
         <exclusion>
