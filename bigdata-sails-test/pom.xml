@@ -309,7 +309,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
     </dependency>
     <dependency>
       <groupId>com.blazegraph</groupId>
-      <artifactId>bigdata-ganglia</artifactId>
+      <artifactId>embergraph-ganglia</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>

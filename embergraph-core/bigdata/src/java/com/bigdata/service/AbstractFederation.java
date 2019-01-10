@@ -1581,11 +1581,11 @@ abstract public class AbstractFederation<T> implements IBigdataFederation<T> {
                  * We should be able to separate out the collection of host
                  * metrics from whether or not we are collecting metrics from
                  * the bigdata service. Do this when moving the host and process
-                 * (pidstat) collectors into the bigdata-ganglia module.
+                 * (pidstat) collectors into the embergraph-ganglia module.
                  * 
                  * TODO The LBS currently does not collect platform statistics.
                  * Once we move the platform statistics collection into the
-                 * bigdata-ganglia module we can change that. However, the LBS
+                 * embergraph-ganglia module we can change that. However, the LBS
                  * will be going aware entirely once we (a) change over the
                  * ganglia state for host reports; and (b) 
                  */

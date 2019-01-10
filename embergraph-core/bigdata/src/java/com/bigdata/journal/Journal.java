@@ -160,7 +160,7 @@ public class Journal extends AbstractJournal implements IConcurrencyManager,
             com.bigdata.journal.QueueStatsPlugIn.Options,
             com.bigdata.journal.PlatformStatsPlugIn.Options,
             com.bigdata.journal.HttpPlugin.Options
-            // Note: Do not import. Forces bigdata-ganglia dependency.
+            // Note: Do not import. Forces embergraph-ganglia dependency.
             // com.bigdata.journal.GangliaPlugIn.Options
             {
 
@@ -3931,7 +3931,7 @@ public class Journal extends AbstractJournal implements IConcurrencyManager,
      * would make the ganglia code a required dependency!
      * 
      * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/609">
-     *      bigdata-ganglia is required dependency for Journal </a>
+     *      embergraph-ganglia is required dependency for Journal </a>
      */
     private final AtomicReference<IPlugIn<Journal, ?>> pluginGanglia = new AtomicReference<IPlugIn<Journal, ?>>();
 
@@ -4116,14 +4116,14 @@ public class Journal extends AbstractJournal implements IConcurrencyManager,
              * hierarchy to the ganglia network.
              * 
              * Note: Do NOT invoke this plug in unless it will start and run to
-             * avoid a CLASSPATH dependency on bigdata-ganglia when it is not
+             * avoid a CLASSPATH dependency on embergraph-ganglia when it is not
              * used. The plugin requires platform statistics collection to run,
              * so if you do not want to have a CLASSPATH dependency on ganglia,
              * you need to disable the PlatformStatsPlugIn.
              * 
              * @see <a
              *      href="https://sourceforge.net/apps/trac/bigdata/ticket/609">
-             *      bigdata-ganglia is required dependency for Journal </a>
+             *      embergraph-ganglia is required dependency for Journal </a>
              */
             if (getPlatformStatisticsCollector() != null) {
 

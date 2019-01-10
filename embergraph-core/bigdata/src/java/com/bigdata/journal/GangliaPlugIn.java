@@ -55,7 +55,7 @@ import com.bigdata.ganglia.util.GangliaUtil;
  * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/441"> Ganglia
  *      Integration</a>
  * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/609">
- *      bigdata-ganglia is required dependency for Journal </a>
+ *      embergraph-ganglia is required dependency for Journal </a>
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -201,7 +201,7 @@ public class GangliaPlugIn implements IPlugIn<Journal, GangliaService> {
              * We should be able to separate out the collection of host
              * metrics from whether or not we are collecting metrics from
              * the bigdata service. Do this when moving the host and process
-             * (pidstat) collectors into the bigdata-ganglia module.
+             * (pidstat) collectors into the embergraph-ganglia module.
              */
             final String serviceName = statisticsCollector.getProcessName();
 

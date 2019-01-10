@@ -309,7 +309,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
     </dependency>
     <dependency>
       <groupId>com.blazegraph</groupId>
-      <artifactId>bigdata-ganglia</artifactId>
+      <artifactId>embergraph-ganglia</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>

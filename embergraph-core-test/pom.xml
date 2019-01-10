@@ -432,7 +432,7 @@ See https://maven.apache.org/plugins/maven-jar-plugin/examples/create-test-jar.h
     </dependency>
     <dependency>
       <groupId>com.blazegraph</groupId>
-      <artifactId>bigdata-ganglia</artifactId>
+      <artifactId>embergraph-ganglia</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>

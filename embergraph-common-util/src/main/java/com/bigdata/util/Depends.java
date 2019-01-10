@@ -191,7 +191,7 @@ public class Depends {
      * Note: This bigdata module is under a different license (Apache 2.0) than
      * the other bigdata modules.
      */
-    private final static Dep bigdataGanglia = new ApacheDep("bigdata-ganglia",
+    private final static Dep bigdataGanglia = new ApacheDep("embergraph-ganglia",
             "https://sourceforge.net/projects/bigdata/");
 
     private final static Dep colt = new Dep("colt",
