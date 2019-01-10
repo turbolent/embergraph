@@ -31,7 +31,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
     <version>2.1.5-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>vocabularies</artifactId>
+  <artifactId>embergraph-vocabularies</artifactId>
   <version>2.1.5-SNAPSHOT</version>
   <name>Blazegraph Vocabularies</name>
   <description>Blazegraph Custom Vocabularies and Inline URI Handlers for commonly used data sets.</description>

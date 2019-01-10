@@ -363,7 +363,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
         <module>embergraph-ganglia</module>
         <module>embergraph-gas</module>
         <module>embergraph-core/</module>
-        <module>vocabularies</module>
+        <module>embergraph-vocabularies</module>
         <module>embergraph-war-html</module>
         <module>embergraph-blueprints</module>
         <module>embergraph-runtime</module>
@@ -395,7 +395,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
         <module>embergraph-ganglia</module>
         <module>embergraph-gas</module>
         <module>embergraph-core/</module>
-        <module>vocabularies</module>
+        <module>embergraph-vocabularies</module>
         <module>embergraph-war-html</module>
         <module>embergraph-blueprints</module>
         <module>embergraph-runtime</module>
