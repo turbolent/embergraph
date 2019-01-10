@@ -33,15 +33,15 @@ import java.util.Properties;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
-import com.bigdata.bfs.BigdataFileSystem.Options;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.keys.TestKeyBuilder;
-import com.bigdata.btree.proc.BatchInsert.BatchInsertConstructor;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.ITx;
+import org.embergraph.bfs.BigdataFileSystem.Options;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.keys.TestKeyBuilder;
+import org.embergraph.btree.proc.BatchInsert.BatchInsertConstructor;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.ITx;
 
 /**
  * Test suite for the ability to re-open an {@link EmbeddedFederation}.

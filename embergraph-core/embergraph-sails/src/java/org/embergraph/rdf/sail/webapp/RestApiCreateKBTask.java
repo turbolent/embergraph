@@ -27,9 +27,9 @@ import java.util.Properties;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bigdata.journal.ITx;
-import com.bigdata.rdf.sail.CreateKBTask;
-import com.bigdata.util.NV;
+import org.embergraph.journal.ITx;
+import org.embergraph.rdf.sail.CreateKBTask;
+import org.embergraph.util.NV;
 
 /**
  * Extended to report the correct HTTP response to the client.

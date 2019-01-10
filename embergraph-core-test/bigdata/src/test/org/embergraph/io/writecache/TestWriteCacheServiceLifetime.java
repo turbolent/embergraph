@@ -15,19 +15,19 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.bigdata.ha.HAPipelineGlue;
-import com.bigdata.io.ChecksumUtility;
-import com.bigdata.io.FileChannelUtility;
-import com.bigdata.io.IBufferAccess;
-import com.bigdata.io.IReopenChannel;
-import com.bigdata.io.TestCase3;
-import com.bigdata.io.writecache.TestWORMWriteCacheService.MyMockQuorumMember;
-import com.bigdata.io.writecache.WriteCache.FileChannelScatteredWriteCache;
-import com.bigdata.io.writecache.WriteCache.FileChannelWriteCache;
-import com.bigdata.quorum.MockQuorumFixture;
-import com.bigdata.quorum.MockQuorumFixture.MockQuorum;
-import com.bigdata.quorum.QuorumActor;
-import com.bigdata.util.DaemonThreadFactory;
+import org.embergraph.ha.HAPipelineGlue;
+import org.embergraph.io.ChecksumUtility;
+import org.embergraph.io.FileChannelUtility;
+import org.embergraph.io.IBufferAccess;
+import org.embergraph.io.IReopenChannel;
+import org.embergraph.io.TestCase3;
+import org.embergraph.io.writecache.TestWORMWriteCacheService.MyMockQuorumMember;
+import org.embergraph.io.writecache.WriteCache.FileChannelScatteredWriteCache;
+import org.embergraph.io.writecache.WriteCache.FileChannelWriteCache;
+import org.embergraph.quorum.MockQuorumFixture;
+import org.embergraph.quorum.MockQuorumFixture.MockQuorum;
+import org.embergraph.quorum.QuorumActor;
+import org.embergraph.util.DaemonThreadFactory;
 
 /**
  * These tests exercise the lifetime semantics of a WriteCacheService.

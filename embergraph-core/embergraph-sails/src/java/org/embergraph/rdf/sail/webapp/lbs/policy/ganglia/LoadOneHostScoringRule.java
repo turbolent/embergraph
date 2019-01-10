@@ -22,8 +22,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.sail.webapp.lbs.policy.ganglia;
 
-import com.bigdata.rdf.sail.webapp.lbs.IHostMetrics;
-import com.bigdata.rdf.sail.webapp.lbs.IHostScoringRule;
+import org.embergraph.rdf.sail.webapp.lbs.IHostMetrics;
+import org.embergraph.rdf.sail.webapp.lbs.IHostScoringRule;
 
 /**
  * This {@link IHostScoringRule} uses <code>load_one</code> to score and rank

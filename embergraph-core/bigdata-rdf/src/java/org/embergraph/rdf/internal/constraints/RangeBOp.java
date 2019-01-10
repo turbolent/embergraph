@@ -26,16 +26,16 @@ package org.embergraph.rdf.internal.constraints;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.bop.ImmutableBOp;
-import com.bigdata.bop.ModifiableBOpBase;
-import com.bigdata.bop.NV;
-import com.bigdata.rdf.error.SparqlTypeErrorException;
-import com.bigdata.rdf.internal.IV;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.bop.ImmutableBOp;
+import org.embergraph.bop.ModifiableBOpBase;
+import org.embergraph.bop.NV;
+import org.embergraph.rdf.error.SparqlTypeErrorException;
+import org.embergraph.rdf.internal.IV;
 
 /**
  * Operator used to impose a key-range constraint on a variable on access path.

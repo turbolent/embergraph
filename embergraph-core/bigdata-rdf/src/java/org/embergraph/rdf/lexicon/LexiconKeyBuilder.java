@@ -6,9 +6,9 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.vocabulary.XMLSchema;
 
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.IKeyBuilderFactory;
-import com.bigdata.btree.keys.StrengthEnum;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.IKeyBuilderFactory;
+import org.embergraph.btree.keys.StrengthEnum;
 
 /**
  * Flyweight helper class for building (and decoding to the extent possible)

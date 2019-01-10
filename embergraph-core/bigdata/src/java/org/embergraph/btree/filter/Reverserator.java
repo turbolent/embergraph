@@ -1,8 +1,8 @@
 package org.embergraph.btree.filter;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleCursor;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleCursor;
 
 /**
  * Return an iterator that traverses the tuples in the reverse of the natural

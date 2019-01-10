@@ -31,14 +31,14 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.impl.URIImpl;
 
-import com.bigdata.rdf.internal.IDatatypeURIResolver;
-import com.bigdata.rdf.internal.IExtension;
-import com.bigdata.rdf.internal.impl.literal.AbstractLiteralIV;
-import com.bigdata.rdf.internal.impl.literal.LiteralExtensionIV;
-import com.bigdata.rdf.internal.impl.literal.PackedLongIV;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.internal.IDatatypeURIResolver;
+import org.embergraph.rdf.internal.IExtension;
+import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
+import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
+import org.embergraph.rdf.internal.impl.literal.PackedLongIV;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
 
 /**
  * Effective, packed representation of timestamps typed as

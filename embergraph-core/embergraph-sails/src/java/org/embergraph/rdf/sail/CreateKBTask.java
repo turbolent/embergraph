@@ -33,20 +33,20 @@ import java.util.concurrent.TimeoutException;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.ha.HAGlue;
-import com.bigdata.ha.QuorumService;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.IJournal;
-import com.bigdata.journal.ITransactionService;
-import com.bigdata.journal.ITx;
-import com.bigdata.quorum.AsynchronousQuorumCloseException;
-import com.bigdata.quorum.Quorum;
-import com.bigdata.rdf.sail.BigdataSail.UnisolatedCallable;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.LocalTripleStore;
-import com.bigdata.rdf.store.ScaleOutTripleStore;
-import com.bigdata.rdf.task.AbstractApiTask;
-import com.bigdata.util.InnerCause;
+import org.embergraph.ha.HAGlue;
+import org.embergraph.ha.QuorumService;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.IJournal;
+import org.embergraph.journal.ITransactionService;
+import org.embergraph.journal.ITx;
+import org.embergraph.quorum.AsynchronousQuorumCloseException;
+import org.embergraph.quorum.Quorum;
+import org.embergraph.rdf.sail.BigdataSail.UnisolatedCallable;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.LocalTripleStore;
+import org.embergraph.rdf.store.ScaleOutTripleStore;
+import org.embergraph.rdf.task.AbstractApiTask;
+import org.embergraph.util.InnerCause;
 
 /**
  * Task creates a KB for the given namespace iff no such KB exists. The correct

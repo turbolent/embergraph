@@ -26,9 +26,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.sparql.ast.hints;
 
-import com.bigdata.bop.engine.IChunkHandler;
-import com.bigdata.bop.engine.ManagedHeapStandloneChunkHandler;
-import com.bigdata.bop.engine.NativeHeapStandloneChunkHandler;
+import org.embergraph.bop.engine.IChunkHandler;
+import org.embergraph.bop.engine.ManagedHeapStandloneChunkHandler;
+import org.embergraph.bop.engine.NativeHeapStandloneChunkHandler;
 
 /**
  * Type safe enumeration of known {@link IChunkHandler} implementations in 

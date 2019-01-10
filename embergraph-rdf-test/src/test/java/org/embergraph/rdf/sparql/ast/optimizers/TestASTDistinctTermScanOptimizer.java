@@ -32,12 +32,12 @@ import org.junit.Ignore;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import com.bigdata.bop.IPredicate;
-import com.bigdata.rdf.sparql.ast.ProjectionNode;
-import com.bigdata.rdf.sparql.ast.QueryRoot;
-import com.bigdata.rdf.sparql.ast.StatementPatternNode;
-import com.bigdata.rdf.sparql.ast.VarNode;
-import com.bigdata.rdf.spo.DistinctTermAdvancer;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.rdf.sparql.ast.ProjectionNode;
+import org.embergraph.rdf.sparql.ast.QueryRoot;
+import org.embergraph.rdf.sparql.ast.StatementPatternNode;
+import org.embergraph.rdf.sparql.ast.VarNode;
+import org.embergraph.rdf.spo.DistinctTermAdvancer;
 
 import static com.bigdata.rdf.sparql.ast.optimizers.AbstractOptimizerTestCase.HelperFlag.*;
 

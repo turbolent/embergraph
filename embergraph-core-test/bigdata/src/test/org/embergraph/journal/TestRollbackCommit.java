@@ -29,7 +29,7 @@ package org.embergraph.journal;
 
 import java.nio.ByteBuffer;
 
-import com.bigdata.io.ChecksumUtility;
+import org.embergraph.io.ChecksumUtility;
 
 /**
  * Test the ability to rollback a commit.

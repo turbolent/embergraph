@@ -31,17 +31,17 @@ import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpContext;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstraint;
-import com.bigdata.bop.IQueryAttributes;
-import com.bigdata.bop.NV;
-import com.bigdata.bop.controller.INamedSolutionSetRef;
-import com.bigdata.bop.controller.NamedSetAnnotations;
-import com.bigdata.htree.HTree;
-import com.bigdata.relation.accesspath.IBlockingBuffer;
-import com.bigdata.relation.accesspath.UnsyncLocalOutputBuffer;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpContext;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstraint;
+import org.embergraph.bop.IQueryAttributes;
+import org.embergraph.bop.NV;
+import org.embergraph.bop.controller.INamedSolutionSetRef;
+import org.embergraph.bop.controller.NamedSetAnnotations;
+import org.embergraph.htree.HTree;
+import org.embergraph.relation.accesspath.IBlockingBuffer;
+import org.embergraph.relation.accesspath.UnsyncLocalOutputBuffer;
 
 /**
  * An N-way merge join based on the {@link HTree}.

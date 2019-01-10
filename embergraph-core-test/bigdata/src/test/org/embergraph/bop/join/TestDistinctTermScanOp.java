@@ -31,16 +31,16 @@ import java.util.Properties;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.ap.E;
-import com.bigdata.bop.ap.R;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.Journal;
-import com.bigdata.rdf.spo.DistinctTermAdvancer;
-import com.bigdata.relation.accesspath.IAsynchronousIterator;
-import com.bigdata.relation.accesspath.ThickAsynchronousIterator;
-import com.bigdata.striterator.ChunkedArrayIterator;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.ap.E;
+import org.embergraph.bop.ap.R;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Journal;
+import org.embergraph.rdf.spo.DistinctTermAdvancer;
+import org.embergraph.relation.accesspath.IAsynchronousIterator;
+import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
+import org.embergraph.striterator.ChunkedArrayIterator;
 
 /**
  * Unit tests for the {@link DistinctTermScanOp} operator.

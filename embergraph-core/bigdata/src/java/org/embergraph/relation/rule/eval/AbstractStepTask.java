@@ -44,23 +44,23 @@ import java.util.concurrent.Future;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.IPredicate;
-import com.bigdata.journal.AbstractTask;
-import com.bigdata.journal.ConcurrencyManager;
-import com.bigdata.journal.IConcurrencyManager;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.ITx;
-import com.bigdata.relation.IMutableRelation;
-import com.bigdata.relation.IRelation;
-import com.bigdata.relation.accesspath.IBuffer;
-import com.bigdata.relation.rule.IProgram;
-import com.bigdata.relation.rule.IRule;
-import com.bigdata.relation.rule.IStep;
-import com.bigdata.service.DataService;
-import com.bigdata.service.DataServiceCallable;
-import com.bigdata.service.IDataServiceCallable;
-import com.bigdata.service.ndx.ClientIndexView;
-import com.bigdata.service.ndx.IClientIndex;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.journal.AbstractTask;
+import org.embergraph.journal.ConcurrencyManager;
+import org.embergraph.journal.IConcurrencyManager;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.ITx;
+import org.embergraph.relation.IMutableRelation;
+import org.embergraph.relation.IRelation;
+import org.embergraph.relation.accesspath.IBuffer;
+import org.embergraph.relation.rule.IProgram;
+import org.embergraph.relation.rule.IRule;
+import org.embergraph.relation.rule.IStep;
+import org.embergraph.service.DataService;
+import org.embergraph.service.DataServiceCallable;
+import org.embergraph.service.IDataServiceCallable;
+import org.embergraph.service.ndx.ClientIndexView;
+import org.embergraph.service.ndx.IClientIndex;
 
 /**
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

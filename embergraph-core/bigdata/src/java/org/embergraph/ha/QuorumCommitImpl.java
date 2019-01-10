@@ -37,19 +37,19 @@ import java.util.concurrent.TimeoutException;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.ha.msg.HA2PhaseAbortMessage;
-import com.bigdata.ha.msg.HA2PhaseCommitMessage;
-import com.bigdata.ha.msg.HA2PhasePrepareMessage;
-import com.bigdata.ha.msg.IHA2PhaseAbortMessage;
-import com.bigdata.ha.msg.IHA2PhaseCommitMessage;
-import com.bigdata.ha.msg.IHA2PhasePrepareMessage;
-import com.bigdata.journal.IRootBlockView;
-import com.bigdata.quorum.Quorum;
-import com.bigdata.quorum.QuorumMember;
-import com.bigdata.quorum.QuorumStateChangeListener;
-import com.bigdata.quorum.QuorumStateChangeListenerBase;
-import com.bigdata.quorum.ServiceLookup;
-import com.bigdata.util.concurrent.ExecutionExceptions;
+import org.embergraph.ha.msg.HA2PhaseAbortMessage;
+import org.embergraph.ha.msg.HA2PhaseCommitMessage;
+import org.embergraph.ha.msg.HA2PhasePrepareMessage;
+import org.embergraph.ha.msg.IHA2PhaseAbortMessage;
+import org.embergraph.ha.msg.IHA2PhaseCommitMessage;
+import org.embergraph.ha.msg.IHA2PhasePrepareMessage;
+import org.embergraph.journal.IRootBlockView;
+import org.embergraph.quorum.Quorum;
+import org.embergraph.quorum.QuorumMember;
+import org.embergraph.quorum.QuorumStateChangeListener;
+import org.embergraph.quorum.QuorumStateChangeListenerBase;
+import org.embergraph.quorum.ServiceLookup;
+import org.embergraph.util.concurrent.ExecutionExceptions;
 
 /**
  * {@link QuorumCommit} implementation.

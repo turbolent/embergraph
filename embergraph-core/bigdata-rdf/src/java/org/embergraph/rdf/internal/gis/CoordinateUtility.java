@@ -23,7 +23,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.internal.gis;
 
-import com.bigdata.rdf.internal.gis.ICoordinate.UNITS;
+import org.embergraph.rdf.internal.gis.ICoordinate.UNITS;
 
 /**
  * Utility class for operations on {@link ICoordinate}s.

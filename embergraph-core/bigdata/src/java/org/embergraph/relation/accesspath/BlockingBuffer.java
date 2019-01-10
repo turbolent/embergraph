@@ -46,12 +46,12 @@ import org.apache.log4j.Logger;
 
 import cern.colt.Arrays;
 
-import com.bigdata.bop.engine.QueryTimeoutException;
-import com.bigdata.rdf.store.BigdataSolutionResolverator;
-import com.bigdata.rdf.store.BigdataStatementIteratorImpl;
-import com.bigdata.relation.rule.IQueryOptions;
-import com.bigdata.relation.rule.IRule;
-import com.bigdata.util.InnerCause;
+import org.embergraph.bop.engine.QueryTimeoutException;
+import org.embergraph.rdf.store.BigdataSolutionResolverator;
+import org.embergraph.rdf.store.BigdataStatementIteratorImpl;
+import org.embergraph.relation.rule.IQueryOptions;
+import org.embergraph.relation.rule.IRule;
+import org.embergraph.util.InnerCause;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

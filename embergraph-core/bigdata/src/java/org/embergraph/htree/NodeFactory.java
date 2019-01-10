@@ -1,8 +1,8 @@
 package org.embergraph.htree;
 
-import com.bigdata.btree.NodeSerializer;
-import com.bigdata.btree.data.ILeafData;
-import com.bigdata.htree.data.IDirectoryData;
+import org.embergraph.btree.NodeSerializer;
+import org.embergraph.btree.data.ILeafData;
+import org.embergraph.htree.data.IDirectoryData;
 
 /**
  * Factory for mutable nodes and leaves used by the {@link NodeSerializer}.

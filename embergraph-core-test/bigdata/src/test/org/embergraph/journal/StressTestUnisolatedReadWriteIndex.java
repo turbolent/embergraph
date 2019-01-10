@@ -44,11 +44,11 @@ import java.util.concurrent.TimeUnit;
 
 import org.eclipse.jetty.util.ConcurrentHashSet;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.UnisolatedReadWriteIndex;
-import com.bigdata.testutil.ExperimentDriver.Result;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.UnisolatedReadWriteIndex;
+import org.embergraph.testutil.ExperimentDriver.Result;
 
 /**
  * Stress tests for concurrent processing of operations on named unisolated

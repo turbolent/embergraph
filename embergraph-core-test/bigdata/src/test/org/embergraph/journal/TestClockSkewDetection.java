@@ -27,7 +27,7 @@ import java.util.UUID;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.util.ClocksNotSynchronizedException;
+import org.embergraph.util.ClocksNotSynchronizedException;
 
 /**
  * Test suite for {@link ClocksNotSynchronizedException}. The basic pattern of

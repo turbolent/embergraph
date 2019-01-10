@@ -33,7 +33,7 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Set;
 
-import com.bigdata.service.ndx.PartitionedTupleIterator;
+import org.embergraph.service.ndx.PartitionedTupleIterator;
 
 import cutthecrap.utils.striterators.ICloseable;
 

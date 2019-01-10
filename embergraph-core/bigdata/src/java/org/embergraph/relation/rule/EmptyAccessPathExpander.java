@@ -27,8 +27,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation.rule;
 
-import com.bigdata.relation.accesspath.EmptyAccessPath;
-import com.bigdata.relation.accesspath.IAccessPath;
+import org.embergraph.relation.accesspath.EmptyAccessPath;
+import org.embergraph.relation.accesspath.IAccessPath;
 
 /**
  * An "expander" which replaces the access path with an {@link EmptyAccessPath}.

@@ -28,13 +28,13 @@ import java.util.Properties;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.sail.SailRepository;
 
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.BigdataSailRepository;
-import com.bigdata.rdf.sail.remote.BigdataSailFactory;
-import com.bigdata.rdf.sail.remote.BigdataSailFactory.Option;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.vocab.NoVocabulary;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.BigdataSailRepository;
+import org.embergraph.rdf.sail.remote.BigdataSailFactory;
+import org.embergraph.rdf.sail.remote.BigdataSailFactory.Option;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.vocab.NoVocabulary;
 
 /**
  * Class to test BigdataGraphEmbedded creation using a SailRepository for client

@@ -36,11 +36,11 @@ import junit.framework.TestCase2;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import com.bigdata.io.ChecksumUtility;
-import com.bigdata.quorum.Quorum;
-import com.bigdata.rawstore.TestWormAddressManager;
-import com.bigdata.rawstore.WormAddressManager;
-import com.bigdata.util.MillisecondTimestampFactory;
+import org.embergraph.io.ChecksumUtility;
+import org.embergraph.quorum.Quorum;
+import org.embergraph.rawstore.TestWormAddressManager;
+import org.embergraph.rawstore.WormAddressManager;
+import org.embergraph.util.MillisecondTimestampFactory;
 
 /**
  * Test suite for {@link RootBlockView}.

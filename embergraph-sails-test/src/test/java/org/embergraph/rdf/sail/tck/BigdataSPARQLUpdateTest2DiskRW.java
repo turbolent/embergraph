@@ -30,9 +30,9 @@ package org.embergraph.rdf.sail.tck;
 import java.io.File;
 import java.util.Properties;
 
-import com.bigdata.journal.BufferMode;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.BigdataSail.Options;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.BigdataSail.Options;
 
 /**
  * A variant of the test suite using {@link BufferMode#DiskRW}.

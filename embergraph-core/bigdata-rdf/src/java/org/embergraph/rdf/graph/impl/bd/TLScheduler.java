@@ -26,15 +26,15 @@ import java.util.concurrent.Future;
 
 import org.openrdf.model.Value;
 
-import com.bigdata.rdf.graph.IGASScheduler;
-import com.bigdata.rdf.graph.IGASSchedulerImpl;
-import com.bigdata.rdf.graph.IStaticFrontier;
-import com.bigdata.rdf.graph.impl.GASEngine;
-import com.bigdata.rdf.graph.impl.scheduler.STScheduler;
-import com.bigdata.rdf.graph.impl.util.GASImplUtil;
-import com.bigdata.rdf.graph.impl.util.IArraySlice;
-import com.bigdata.rdf.graph.impl.util.ManagedArray;
-import com.bigdata.rdf.graph.util.GASUtil;
+import org.embergraph.rdf.graph.IGASScheduler;
+import org.embergraph.rdf.graph.IGASSchedulerImpl;
+import org.embergraph.rdf.graph.IStaticFrontier;
+import org.embergraph.rdf.graph.impl.GASEngine;
+import org.embergraph.rdf.graph.impl.scheduler.STScheduler;
+import org.embergraph.rdf.graph.impl.util.GASImplUtil;
+import org.embergraph.rdf.graph.impl.util.IArraySlice;
+import org.embergraph.rdf.graph.impl.util.ManagedArray;
+import org.embergraph.rdf.graph.util.GASUtil;
 
 /**
  * This scheduler uses thread-local buffers ({@link LinkedHashSet}) to track the

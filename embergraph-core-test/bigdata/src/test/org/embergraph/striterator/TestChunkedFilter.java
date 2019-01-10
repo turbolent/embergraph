@@ -32,9 +32,9 @@ import java.util.Arrays;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.striterator.ChunkedFilter;
-import com.bigdata.striterator.ChunkedStriterator;
-import com.bigdata.striterator.IChunkedIterator;
+import org.embergraph.striterator.ChunkedFilter;
+import org.embergraph.striterator.ChunkedStriterator;
+import org.embergraph.striterator.IChunkedIterator;
 
 /**
  * Unit tests for {@link ChunkedFilter}.

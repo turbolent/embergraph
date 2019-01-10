@@ -31,9 +31,9 @@ import java.util.Collection;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-import com.bigdata.rdf.model.BigdataStatement;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.model.StatementEnum;
+import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.StatementEnum;
 
 /**
  * The axioms for RDF Schema.

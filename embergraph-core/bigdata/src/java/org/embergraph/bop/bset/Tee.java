@@ -29,14 +29,14 @@ package org.embergraph.bop.bset;
 
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpEvaluationContext;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.controller.Union;
-import com.bigdata.bop.join.PipelineJoin;
-import com.bigdata.rdf.rules.TMUtility;
-import com.bigdata.relation.RelationFusedView;
-import com.bigdata.relation.rule.Slice;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpEvaluationContext;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.controller.Union;
+import org.embergraph.bop.join.PipelineJoin;
+import org.embergraph.rdf.rules.TMUtility;
+import org.embergraph.relation.RelationFusedView;
+import org.embergraph.relation.rule.Slice;
 
 /**
  * TEE(op):[sinkRef=X; altSinkRef=Y]

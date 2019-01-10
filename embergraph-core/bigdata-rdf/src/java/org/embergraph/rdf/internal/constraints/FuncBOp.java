@@ -32,15 +32,15 @@ import org.openrdf.query.algebra.evaluation.ValueExprEvaluationException;
 import org.openrdf.query.algebra.evaluation.function.Function;
 import org.openrdf.query.algebra.evaluation.function.FunctionRegistry;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.bop.NV;
-import com.bigdata.rdf.error.SparqlTypeErrorException;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.NotMaterializedException;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.sparql.ast.GlobalAnnotations;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.bop.NV;
+import org.embergraph.rdf.error.SparqlTypeErrorException;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.NotMaterializedException;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 
 /**
  * Call one of the Sesame casting functions.

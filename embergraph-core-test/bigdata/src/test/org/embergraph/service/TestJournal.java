@@ -30,12 +30,12 @@ package org.embergraph.service;
 
 import java.util.Properties;
 
-import com.bigdata.journal.AbstractJournalTestCase;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.Options;
-import com.bigdata.journal.ProxyTestCase;
+import org.embergraph.journal.AbstractJournalTestCase;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.Options;
+import org.embergraph.journal.ProxyTestCase;
 
 /**
  * Delegate for {@link ProxyTestCase}s for services running against a

@@ -6,9 +6,9 @@ import junit.framework.TestCase2;
 
 import org.junit.Test;
 
-import com.bigdata.rdf.internal.impl.literal.UUIDLiteralIV;
-import com.bigdata.rdf.internal.impl.literal.XSDNumericIV;
-import com.bigdata.rdf.internal.impl.uri.URIExtensionIV;
+import org.embergraph.rdf.internal.impl.literal.UUIDLiteralIV;
+import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
+import org.embergraph.rdf.internal.impl.uri.URIExtensionIV;
 
 /**
  * Test suite for {@link URIExtensionIV}.

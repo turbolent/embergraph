@@ -9,18 +9,18 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.joinGraph.fast.DefaultEvaluationPlan2;
-import com.bigdata.journal.ITx;
-import com.bigdata.rdf.sparql.ast.IBindingProducerNode;
-import com.bigdata.rdf.sparql.ast.IReorderableNode;
-import com.bigdata.rdf.sparql.ast.QueryHints;
-import com.bigdata.rdf.sparql.ast.QueryRoot;
-import com.bigdata.rdf.sparql.ast.StatementPatternNode;
-import com.bigdata.rdf.sparql.ast.StaticAnalysis;
-import com.bigdata.rdf.sparql.ast.VarNode;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpContext;
-import com.bigdata.rdf.sparql.ast.optimizers.ASTStaticJoinOptimizer.Annotations;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.joinGraph.fast.DefaultEvaluationPlan2;
+import org.embergraph.journal.ITx;
+import org.embergraph.rdf.sparql.ast.IBindingProducerNode;
+import org.embergraph.rdf.sparql.ast.IReorderableNode;
+import org.embergraph.rdf.sparql.ast.QueryHints;
+import org.embergraph.rdf.sparql.ast.QueryRoot;
+import org.embergraph.rdf.sparql.ast.StatementPatternNode;
+import org.embergraph.rdf.sparql.ast.StaticAnalysis;
+import org.embergraph.rdf.sparql.ast.VarNode;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTStaticJoinOptimizer.Annotations;
 
 /**
  * This is the old static optimizer code, taken directly from

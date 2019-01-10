@@ -27,16 +27,16 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.ap;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.Var;
-import com.bigdata.btree.keys.ISortKeyBuilder;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.relation.rule.IRule;
-import com.bigdata.relation.rule.eval.AbstractJoinNexus;
-import com.bigdata.relation.rule.eval.IJoinNexus;
-import com.bigdata.relation.rule.eval.IJoinNexusFactory;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.Var;
+import org.embergraph.btree.keys.ISortKeyBuilder;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.relation.rule.IRule;
+import org.embergraph.relation.rule.eval.AbstractJoinNexus;
+import org.embergraph.relation.rule.eval.IJoinNexus;
+import org.embergraph.relation.rule.eval.IJoinNexusFactory;
 
 /**
  * Mock object.

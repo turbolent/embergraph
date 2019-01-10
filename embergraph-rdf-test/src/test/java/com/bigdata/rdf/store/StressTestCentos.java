@@ -2,14 +2,14 @@ package com.bigdata.rdf.store;
 
 import java.util.Properties;
 
-import com.bigdata.journal.TimestampUtility;
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.model.BigdataStatement;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.StatementEnum;
-import com.bigdata.rdf.rio.StatementBuffer;
-import com.bigdata.rdf.vocab.NoVocabulary;
-import com.bigdata.relation.accesspath.BlockingBuffer;
+import org.embergraph.journal.TimestampUtility;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.rdf.rio.StatementBuffer;
+import org.embergraph.rdf.vocab.NoVocabulary;
+import org.embergraph.relation.accesspath.BlockingBuffer;
 
 /**
  * This is a test class that fails on centos 64bit. On working machines, it runs

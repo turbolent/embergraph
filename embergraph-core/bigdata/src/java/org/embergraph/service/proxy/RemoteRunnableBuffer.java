@@ -32,7 +32,7 @@ import java.io.IOException;
 import java.rmi.Remote;
 import java.util.concurrent.Future;
 
-import com.bigdata.relation.accesspath.IRunnableBuffer;
+import org.embergraph.relation.accesspath.IRunnableBuffer;
 
 /**
  * {@link Remote} interface declaring the API of {@link IRunnableBuffer} but

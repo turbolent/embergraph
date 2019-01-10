@@ -9,32 +9,32 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bfs.BigdataFileSystem;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IVariable;
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.IIndexStore;
-import com.bigdata.journal.IResourceLockService;
-import com.bigdata.journal.TemporaryStore;
-import com.bigdata.relation.accesspath.IAsynchronousIterator;
-import com.bigdata.relation.locator.IResourceLocator;
-import com.bigdata.relation.rule.IRule;
-import com.bigdata.relation.rule.eval.IJoinNexusFactory;
-import com.bigdata.resources.IndexManager;
-import com.bigdata.resources.StoreManager.ManagedJournal;
-import com.bigdata.service.AbstractDistributedFederation;
-import com.bigdata.service.AbstractScaleOutFederation;
-import com.bigdata.service.DataService;
-import com.bigdata.service.DataServiceCallable;
-import com.bigdata.service.IBigdataFederation;
-import com.bigdata.service.Session;
-import com.bigdata.service.proxy.ClientAsynchronousIterator;
-import com.bigdata.sparse.SparseRowStore;
-import com.bigdata.striterator.IKeyOrder;
+import org.embergraph.bfs.BigdataFileSystem;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IVariable;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.IIndexStore;
+import org.embergraph.journal.IResourceLockService;
+import org.embergraph.journal.TemporaryStore;
+import org.embergraph.relation.accesspath.IAsynchronousIterator;
+import org.embergraph.relation.locator.IResourceLocator;
+import org.embergraph.relation.rule.IRule;
+import org.embergraph.relation.rule.eval.IJoinNexusFactory;
+import org.embergraph.resources.IndexManager;
+import org.embergraph.resources.StoreManager.ManagedJournal;
+import org.embergraph.service.AbstractDistributedFederation;
+import org.embergraph.service.AbstractScaleOutFederation;
+import org.embergraph.service.DataService;
+import org.embergraph.service.DataServiceCallable;
+import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.Session;
+import org.embergraph.service.proxy.ClientAsynchronousIterator;
+import org.embergraph.sparse.SparseRowStore;
+import org.embergraph.striterator.IKeyOrder;
 
 /**
  * A factory for {@link DistributedJoinTask}s. The factory either creates a new

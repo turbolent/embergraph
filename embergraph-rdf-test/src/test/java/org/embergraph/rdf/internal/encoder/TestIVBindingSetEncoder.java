@@ -29,11 +29,11 @@ package org.embergraph.rdf.internal.encoder;
 
 import java.util.Arrays;
 
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.Var;
-import com.bigdata.bop.bindingSet.ListBindingSet;
-import com.bigdata.rdf.internal.IV;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.Var;
+import org.embergraph.bop.bindingSet.ListBindingSet;
+import org.embergraph.rdf.internal.IV;
 
 /**
  * Test suite for {@link IVBindingSetEncoder}.

@@ -27,9 +27,9 @@ package org.embergraph.relation.rule;
 
 import java.util.Iterator;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.IVariable;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.IVariable;
 
 /**
  * Interface for a special type of {@link IPredicate} - the star join predicate.

@@ -31,14 +31,14 @@ package org.embergraph.btree;
 import java.util.Properties;
 import java.util.UUID;
 
-import com.bigdata.btree.filter.TupleFilter;
-import com.bigdata.btree.keys.DefaultKeyBuilderFactory;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.btree.keys.TestKeyBuilder;
-import com.bigdata.io.SerializerUtil;
-import com.bigdata.rawstore.IBlock;
-import com.bigdata.rawstore.SimpleMemoryRawStore;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.filter.TupleFilter;
+import org.embergraph.btree.keys.DefaultKeyBuilderFactory;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.btree.keys.TestKeyBuilder;
+import org.embergraph.io.SerializerUtil;
+import org.embergraph.rawstore.IBlock;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
+import org.embergraph.util.BytesUtil;
 
 import cutthecrap.utils.striterators.IFilter;
 

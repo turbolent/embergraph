@@ -1,6 +1,6 @@
 package org.embergraph.service;
 
-import com.bigdata.service.LoadBalancerService.UpdateTask;
+import org.embergraph.service.LoadBalancerService.UpdateTask;
 
 /**
  * Per-host metadata and a score for that host which gets updated

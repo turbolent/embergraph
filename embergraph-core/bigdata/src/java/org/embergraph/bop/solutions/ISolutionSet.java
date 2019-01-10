@@ -26,15 +26,15 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.bop.solutions;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.controller.INamedSolutionSetRef;
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.ICheckpointProtocol;
-import com.bigdata.htree.HTree;
-import com.bigdata.rdf.sparql.ast.ISolutionSetStats;
-import com.bigdata.relation.accesspath.AccessPath;
-import com.bigdata.relation.accesspath.IAccessPath;
-import com.bigdata.stream.Stream;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.controller.INamedSolutionSetRef;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.ICheckpointProtocol;
+import org.embergraph.htree.HTree;
+import org.embergraph.rdf.sparql.ast.ISolutionSetStats;
+import org.embergraph.relation.accesspath.AccessPath;
+import org.embergraph.relation.accesspath.IAccessPath;
+import org.embergraph.stream.Stream;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

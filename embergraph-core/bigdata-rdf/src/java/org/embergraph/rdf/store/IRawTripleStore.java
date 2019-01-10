@@ -29,18 +29,18 @@ package org.embergraph.rdf.store;
 
 import org.openrdf.model.Value;
 
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.lexicon.LexiconRelation;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.StatementEnum;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.rdf.spo.SPO;
-import com.bigdata.rdf.spo.SPOKeyOrder;
-import com.bigdata.rdf.spo.SPORelation;
-import com.bigdata.relation.accesspath.IAccessPath;
-import com.bigdata.relation.accesspath.IElementFilter;
-import com.bigdata.striterator.IChunkedOrderedIterator;
-import com.bigdata.striterator.IKeyOrder;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.lexicon.LexiconRelation;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.rdf.spo.SPO;
+import org.embergraph.rdf.spo.SPOKeyOrder;
+import org.embergraph.rdf.spo.SPORelation;
+import org.embergraph.relation.accesspath.IAccessPath;
+import org.embergraph.relation.accesspath.IElementFilter;
+import org.embergraph.striterator.IChunkedOrderedIterator;
+import org.embergraph.striterator.IKeyOrder;
 
 /**
  * Low-level API directly using long term identifiers rather than an RDF Value

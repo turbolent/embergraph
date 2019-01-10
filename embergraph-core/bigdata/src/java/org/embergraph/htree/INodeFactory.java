@@ -23,8 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.htree;
 
-import com.bigdata.btree.data.ILeafData;
-import com.bigdata.htree.data.IDirectoryData;
+import org.embergraph.btree.data.ILeafData;
+import org.embergraph.htree.data.IDirectoryData;
 
 /**
  * Interface for creating nodes or leaves.

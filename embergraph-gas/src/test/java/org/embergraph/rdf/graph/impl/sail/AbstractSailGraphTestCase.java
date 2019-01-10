@@ -26,9 +26,9 @@ import org.openrdf.model.Value;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.sail.Sail;
 
-import com.bigdata.rdf.graph.AbstractGraphTestCase;
-import com.bigdata.rdf.graph.util.IGraphFixture;
-import com.bigdata.rdf.graph.util.IGraphFixtureFactory;
+import org.embergraph.rdf.graph.AbstractGraphTestCase;
+import org.embergraph.rdf.graph.util.IGraphFixture;
+import org.embergraph.rdf.graph.util.IGraphFixtureFactory;
 
 public class AbstractSailGraphTestCase extends AbstractGraphTestCase {
 

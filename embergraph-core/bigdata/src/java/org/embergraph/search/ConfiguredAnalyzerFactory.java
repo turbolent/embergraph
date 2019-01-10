@@ -31,7 +31,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.lucene.analysis.Analyzer;
 
-import com.bigdata.search.ConfigurableAnalyzerFactory.AnalyzerOptions;
+import org.embergraph.search.ConfigurableAnalyzerFactory.AnalyzerOptions;
 /**
  * This comment describes the implementation of {@link ConfiguredAnalyzerFactory}.
  * The only method in the interface is {@link ConfiguredAnalyzerFactory#getAnalyzer(String, boolean)},

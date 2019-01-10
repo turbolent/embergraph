@@ -20,7 +20,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import junit.framework.TestCase;
 
-import com.bigdata.ganglia.xdr.XDROutputBuffer;
+import org.embergraph.ganglia.xdr.XDROutputBuffer;
 
 /**
  * Test suite for encode/decode of the Ganglia 3.1 wire format messages. The

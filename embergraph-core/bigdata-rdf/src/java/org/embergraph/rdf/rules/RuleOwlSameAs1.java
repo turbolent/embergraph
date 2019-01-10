@@ -29,12 +29,12 @@ package org.embergraph.rdf.rules;
 
 import org.openrdf.model.vocabulary.OWL;
 
-import com.bigdata.bop.IConstraint;
-import com.bigdata.bop.constraint.Constraint;
-import com.bigdata.bop.constraint.NE;
-import com.bigdata.rdf.spo.SPOPredicate;
-import com.bigdata.rdf.vocab.Vocabulary;
-import com.bigdata.relation.rule.Rule;
+import org.embergraph.bop.IConstraint;
+import org.embergraph.bop.constraint.Constraint;
+import org.embergraph.bop.constraint.NE;
+import org.embergraph.rdf.spo.SPOPredicate;
+import org.embergraph.rdf.vocab.Vocabulary;
+import org.embergraph.relation.rule.Rule;
 
 /**
  * owl:sameAs1

@@ -5,15 +5,15 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.proc.AbstractKeyArrayIndexProcedure.ResultBuffer;
-import com.bigdata.btree.proc.AbstractKeyArrayIndexProcedure.ResultBufferHandler;
-import com.bigdata.btree.proc.BatchLookup.BatchLookupConstructor;
-import com.bigdata.btree.raba.IRaba;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.impl.BlobIV;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure.ResultBuffer;
+import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure.ResultBufferHandler;
+import org.embergraph.btree.proc.BatchLookup.BatchLookupConstructor;
+import org.embergraph.btree.raba.IRaba;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.impl.BlobIV;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
 
 /**
  * Task resolves a chunk of {@link BlobIV}s against the

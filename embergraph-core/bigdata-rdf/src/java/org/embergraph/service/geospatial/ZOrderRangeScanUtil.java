@@ -26,8 +26,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.service.geospatial;
 
-import com.bigdata.rdf.internal.impl.extensions.GeoSpatialLiteralExtension;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.rdf.internal.impl.extensions.GeoSpatialLiteralExtension;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Class providing utility functions for efficient zOrder-based multi-dimensional

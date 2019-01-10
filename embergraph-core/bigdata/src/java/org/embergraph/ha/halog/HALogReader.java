@@ -37,18 +37,18 @@ import java.util.Arrays;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.ha.msg.IHAMessage;
-import com.bigdata.ha.msg.IHAWriteMessage;
-import com.bigdata.io.ChecksumUtility;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.io.FileChannelUtility;
-import com.bigdata.io.IBufferAccess;
-import com.bigdata.io.IReopenChannel;
-import com.bigdata.journal.IRootBlockView;
-import com.bigdata.journal.RootBlockUtility;
-import com.bigdata.journal.StoreTypeEnum;
-import com.bigdata.util.ChecksumError;
-import com.bigdata.util.InnerCause;
+import org.embergraph.ha.msg.IHAMessage;
+import org.embergraph.ha.msg.IHAWriteMessage;
+import org.embergraph.io.ChecksumUtility;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.io.FileChannelUtility;
+import org.embergraph.io.IBufferAccess;
+import org.embergraph.io.IReopenChannel;
+import org.embergraph.journal.IRootBlockView;
+import org.embergraph.journal.RootBlockUtility;
+import org.embergraph.journal.StoreTypeEnum;
+import org.embergraph.util.ChecksumError;
+import org.embergraph.util.InnerCause;
 
 /**
  * Given an HALog file can be used to replay the file and can provide a readable

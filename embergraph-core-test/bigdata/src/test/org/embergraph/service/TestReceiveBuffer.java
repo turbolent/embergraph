@@ -45,11 +45,11 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.io.IBufferAccess;
-import com.bigdata.service.ResourceService.ReadBufferTask;
-import com.bigdata.util.DaemonThreadFactory;
-import com.bigdata.util.config.NicUtil;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.io.IBufferAccess;
+import org.embergraph.service.ResourceService.ReadBufferTask;
+import org.embergraph.util.DaemonThreadFactory;
+import org.embergraph.util.config.NicUtil;
 
 /**
  * Test verifies the ability to transmit a file using the

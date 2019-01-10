@@ -28,8 +28,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bigdata.rdf.sail.webapp.HALoadBalancerServlet;
-import com.bigdata.rdf.sail.webapp.lbs.AbstractLBSPolicy;
+import org.embergraph.rdf.sail.webapp.HALoadBalancerServlet;
+import org.embergraph.rdf.sail.webapp.lbs.AbstractLBSPolicy;
 
 /**
  * This policy proxies all requests for update operations to the leader but

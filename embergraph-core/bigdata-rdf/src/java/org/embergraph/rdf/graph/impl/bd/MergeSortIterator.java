@@ -5,8 +5,8 @@ import java.util.NoSuchElementException;
 
 import org.openrdf.model.Value;
 
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.IVUtility;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.IVUtility;
 
 /**
  * An N-way merge sort of N source iterators visiting {@link Value}s (which are

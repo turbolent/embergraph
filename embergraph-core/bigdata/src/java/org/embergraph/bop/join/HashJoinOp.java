@@ -33,24 +33,24 @@ import java.util.concurrent.FutureTask;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpContext;
-import com.bigdata.bop.BOpEvaluationContext;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.IQueryAttributes;
-import com.bigdata.bop.IShardwisePipelineOp;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.NV;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.controller.INamedSolutionSetRef;
-import com.bigdata.bop.controller.NamedSetAnnotations;
-import com.bigdata.relation.IRelation;
-import com.bigdata.relation.accesspath.AbstractUnsynchronizedArrayBuffer;
-import com.bigdata.relation.accesspath.IAccessPath;
-import com.bigdata.relation.accesspath.IBindingSetAccessPath;
-import com.bigdata.relation.accesspath.IBlockingBuffer;
-import com.bigdata.relation.accesspath.UnsyncLocalOutputBuffer;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpContext;
+import org.embergraph.bop.BOpEvaluationContext;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.IQueryAttributes;
+import org.embergraph.bop.IShardwisePipelineOp;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.NV;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.controller.INamedSolutionSetRef;
+import org.embergraph.bop.controller.NamedSetAnnotations;
+import org.embergraph.relation.IRelation;
+import org.embergraph.relation.accesspath.AbstractUnsynchronizedArrayBuffer;
+import org.embergraph.relation.accesspath.IAccessPath;
+import org.embergraph.relation.accesspath.IBindingSetAccessPath;
+import org.embergraph.relation.accesspath.IBlockingBuffer;
+import org.embergraph.relation.accesspath.UnsyncLocalOutputBuffer;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

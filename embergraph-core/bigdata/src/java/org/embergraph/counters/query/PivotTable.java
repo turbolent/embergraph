@@ -9,9 +9,9 @@ import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.counters.ICounter;
-import com.bigdata.counters.ICounterNode;
-import com.bigdata.counters.IHistoryEntry;
+import org.embergraph.counters.ICounter;
+import org.embergraph.counters.ICounterNode;
+import org.embergraph.counters.IHistoryEntry;
 
 /**
  * Aggregates data from a table by grouping the cells in the table into sets ({@link CSet}s)

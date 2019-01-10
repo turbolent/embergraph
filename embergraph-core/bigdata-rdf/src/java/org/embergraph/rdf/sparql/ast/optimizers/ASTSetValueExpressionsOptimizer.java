@@ -27,26 +27,26 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.optimizers;
 
-import com.bigdata.bop.BOpContextBase;
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.rdf.sparql.ast.AssignmentNode;
-import com.bigdata.rdf.sparql.ast.ConstantNode;
-import com.bigdata.rdf.sparql.ast.FilterNode;
-import com.bigdata.rdf.sparql.ast.FunctionNode;
-import com.bigdata.rdf.sparql.ast.GlobalAnnotations;
-import com.bigdata.rdf.sparql.ast.HavingNode;
-import com.bigdata.rdf.sparql.ast.IQueryNode;
-import com.bigdata.rdf.sparql.ast.IValueExpressionNode;
-import com.bigdata.rdf.sparql.ast.IValueExpressionNodeContainer;
-import com.bigdata.rdf.sparql.ast.OrderByExpr;
-import com.bigdata.rdf.sparql.ast.QueryNodeWithBindingSet;
-import com.bigdata.rdf.sparql.ast.QueryRoot;
-import com.bigdata.rdf.sparql.ast.RangeNode;
-import com.bigdata.rdf.sparql.ast.StatementPatternNode;
-import com.bigdata.rdf.sparql.ast.VarNode;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpContext;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpUtility;
+import org.embergraph.bop.BOpContextBase;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.rdf.sparql.ast.AssignmentNode;
+import org.embergraph.rdf.sparql.ast.ConstantNode;
+import org.embergraph.rdf.sparql.ast.FilterNode;
+import org.embergraph.rdf.sparql.ast.FunctionNode;
+import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
+import org.embergraph.rdf.sparql.ast.HavingNode;
+import org.embergraph.rdf.sparql.ast.IQueryNode;
+import org.embergraph.rdf.sparql.ast.IValueExpressionNode;
+import org.embergraph.rdf.sparql.ast.IValueExpressionNodeContainer;
+import org.embergraph.rdf.sparql.ast.OrderByExpr;
+import org.embergraph.rdf.sparql.ast.QueryNodeWithBindingSet;
+import org.embergraph.rdf.sparql.ast.QueryRoot;
+import org.embergraph.rdf.sparql.ast.RangeNode;
+import org.embergraph.rdf.sparql.ast.StatementPatternNode;
+import org.embergraph.rdf.sparql.ast.VarNode;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpUtility;
 
 import cutthecrap.utils.striterators.Filter;
 import cutthecrap.utils.striterators.IStriterator;

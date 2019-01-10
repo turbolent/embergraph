@@ -23,8 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.service.fts;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.service.fts.FTS.SearchResultType;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.service.fts.FTS.SearchResultType;
 
 
 /**

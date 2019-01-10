@@ -14,19 +14,19 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.log4j.Logger;
 import org.openrdf.sail.SailConnection;
 
-import com.bigdata.Banner;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.Journal;
-import com.bigdata.rdf.graph.IGASProgram;
-import com.bigdata.rdf.graph.IGraphAccessor;
-import com.bigdata.rdf.graph.impl.bd.BigdataGASEngine.BigdataGraphAccessor;
-import com.bigdata.rdf.graph.impl.bd.BigdataGraphFixture.BigdataSailGraphLoader;
-import com.bigdata.rdf.graph.impl.util.GASRunnerBase;
-import com.bigdata.rdf.graph.util.GraphLoader;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.BigdataSail.BigdataSailConnection;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.Banner;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Journal;
+import org.embergraph.rdf.graph.IGASProgram;
+import org.embergraph.rdf.graph.IGraphAccessor;
+import org.embergraph.rdf.graph.impl.bd.BigdataGASEngine.BigdataGraphAccessor;
+import org.embergraph.rdf.graph.impl.bd.BigdataGraphFixture.BigdataSailGraphLoader;
+import org.embergraph.rdf.graph.impl.util.GASRunnerBase;
+import org.embergraph.rdf.graph.util.GraphLoader;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * Base class for running performance tests against the bigdata backend.

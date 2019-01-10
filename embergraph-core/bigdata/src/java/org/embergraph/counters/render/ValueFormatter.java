@@ -8,9 +8,9 @@ import java.text.NumberFormat;
 import java.util.Date;
 import java.util.regex.Pattern;
 
-import com.bigdata.counters.History;
-import com.bigdata.counters.ICounter;
-import com.bigdata.counters.query.URLQueryModel;
+import org.embergraph.counters.History;
+import org.embergraph.counters.ICounter;
+import org.embergraph.counters.query.URLQueryModel;
 
 /**
  * Datum specific formatting of {@link ICounter} values (not thread-safe since

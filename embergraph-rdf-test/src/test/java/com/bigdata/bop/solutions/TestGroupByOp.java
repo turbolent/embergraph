@@ -24,8 +24,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package com.bigdata.bop.solutions;
 
-import com.bigdata.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
-import com.bigdata.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase.TestHelper;
+import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
+import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase.TestHelper;
 
 /** A collection of tests for various implementations of GroupByOp.
  *  Unlike the unit tests in {@link AbstractAggregationTestCase }, this test 

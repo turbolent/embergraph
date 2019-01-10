@@ -37,20 +37,20 @@ import java.util.concurrent.Exchanger;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import com.bigdata.BigdataStatics;
-import com.bigdata.btree.BTree.Counter;
-import com.bigdata.counters.AbstractStatisticsCollector;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.Instrument;
-import com.bigdata.counters.OneShotInstrument;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.io.FileChannelUtility;
-import com.bigdata.io.IBufferAccess;
-import com.bigdata.io.IReopenChannel;
-import com.bigdata.journal.WORMStrategy.StoreCounters;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.resources.StoreManager.ManagedJournal;
-import com.bigdata.util.Bytes;
+import org.embergraph.BigdataStatics;
+import org.embergraph.btree.BTree.Counter;
+import org.embergraph.counters.AbstractStatisticsCollector;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.Instrument;
+import org.embergraph.counters.OneShotInstrument;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.io.FileChannelUtility;
+import org.embergraph.io.IBufferAccess;
+import org.embergraph.io.IReopenChannel;
+import org.embergraph.journal.WORMStrategy.StoreCounters;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.resources.StoreManager.ManagedJournal;
+import org.embergraph.util.Bytes;
 
 /**
  * Disk-based journal strategy.

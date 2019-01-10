@@ -33,9 +33,9 @@ import org.openrdf.query.TupleQuery;
 import org.openrdf.query.TupleQueryResult;
 import org.openrdf.query.Update;
 
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.sparql.ast.QuadsOperationInTriplesModeException;
-import com.bigdata.rdf.vocab.NoVocabulary;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.sparql.ast.QuadsOperationInTriplesModeException;
+import org.embergraph.rdf.vocab.NoVocabulary;
 import com.ibm.icu.impl.Assert;
 
 /**

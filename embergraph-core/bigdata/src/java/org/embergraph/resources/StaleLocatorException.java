@@ -28,8 +28,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.resources;
 
-import com.bigdata.mdi.PartitionLocator;
-import com.bigdata.service.DataService;
+import org.embergraph.mdi.PartitionLocator;
+import org.embergraph.service.DataService;
 
 /**
  * An instance of this class is thrown when an index partition has been split,

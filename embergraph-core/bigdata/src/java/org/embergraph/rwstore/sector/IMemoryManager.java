@@ -26,12 +26,12 @@ package org.embergraph.rwstore.sector;
 
 import java.nio.ByteBuffer;
 
-import com.bigdata.counters.ICounterSetAccess;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.rawstore.IAllocationContext;
-import com.bigdata.rawstore.IAllocationManagerStore;
-import com.bigdata.rwstore.IAllocationManager;
-import com.bigdata.rwstore.IStore;
+import org.embergraph.counters.ICounterSetAccess;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.rawstore.IAllocationContext;
+import org.embergraph.rawstore.IAllocationManagerStore;
+import org.embergraph.rwstore.IAllocationManager;
+import org.embergraph.rwstore.IStore;
 
 /**
  * Abstraction for managing data in {@link ByteBuffer}s. Typically those buffers

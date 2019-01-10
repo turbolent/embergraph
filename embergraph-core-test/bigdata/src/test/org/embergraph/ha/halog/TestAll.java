@@ -31,7 +31,7 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import com.bigdata.ha.althalog.TestAltHALogWriter;
+import org.embergraph.ha.althalog.TestAltHALogWriter;
 
 /**
  * Runs all tests for all journal implementations.

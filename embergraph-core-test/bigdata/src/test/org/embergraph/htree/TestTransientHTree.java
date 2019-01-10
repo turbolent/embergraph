@@ -30,11 +30,11 @@ package org.embergraph.htree;
 
 import java.util.UUID;
 
-import com.bigdata.btree.HTreeIndexMetadata;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.htree.AbstractHTree.HardReference;
-import com.bigdata.util.Bytes;
+import org.embergraph.btree.HTreeIndexMetadata;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.htree.AbstractHTree.HardReference;
+import org.embergraph.util.Bytes;
 
 /**
  * Unit tests for transient {@link HTree}s (no backing store).

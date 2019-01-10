@@ -12,22 +12,22 @@ import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 import org.openrdf.model.Value;
 
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.engine.SolutionsLog;
-import com.bigdata.bop.rdf.join.ChunkedMaterializationOp;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.impl.BlobIV;
-import com.bigdata.rdf.internal.impl.TermId;
-import com.bigdata.rdf.internal.impl.bnode.SidIV;
-import com.bigdata.rdf.lexicon.LexiconRelation;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.relation.accesspath.BlockingBuffer;
-import com.bigdata.striterator.AbstractChunkedResolverator;
-import com.bigdata.striterator.IChunkedOrderedIterator;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.engine.SolutionsLog;
+import org.embergraph.bop.rdf.join.ChunkedMaterializationOp;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.impl.BlobIV;
+import org.embergraph.rdf.internal.impl.TermId;
+import org.embergraph.rdf.internal.impl.bnode.SidIV;
+import org.embergraph.rdf.lexicon.LexiconRelation;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.relation.accesspath.BlockingBuffer;
+import org.embergraph.striterator.AbstractChunkedResolverator;
+import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /**
  * Efficiently resolve term identifiers in Bigdata {@link IBindingSet}s to RDF

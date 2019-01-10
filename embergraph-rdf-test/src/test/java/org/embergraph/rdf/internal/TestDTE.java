@@ -33,7 +33,7 @@ import java.util.UUID;
 
 import junit.framework.TestCase;
 
-import com.bigdata.util.Bytes;
+import org.embergraph.util.Bytes;
 
 /**
  * Test suite for {@link DTE}

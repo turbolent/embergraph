@@ -29,9 +29,9 @@ package org.embergraph.relation.accesspath;
 
 import java.io.Serializable;
 
-import com.bigdata.bop.ap.filter.SameVariableConstraint;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.filter.TupleFilter;
+import org.embergraph.bop.ap.filter.SameVariableConstraint;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.filter.TupleFilter;
 
 /**
  * {@link TupleFilter} class wrapping the {@link SameVariableConstraint}.

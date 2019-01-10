@@ -50,26 +50,26 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.apache.log4j.Logger;
 import org.xml.sax.SAXException;
 
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.DefaultInstrumentFactory;
-import com.bigdata.counters.History;
-import com.bigdata.counters.HistoryInstrument;
-import com.bigdata.counters.ICounter;
-import com.bigdata.counters.ICounterNode;
-import com.bigdata.counters.ICounterSet;
-import com.bigdata.counters.IHostCounters;
-import com.bigdata.counters.IRequiredHostCounters;
-import com.bigdata.counters.PeriodEnum;
-import com.bigdata.counters.History.SampleIterator;
-import com.bigdata.counters.ICounterSet.IInstrumentFactory;
-import com.bigdata.counters.httpd.DummyEventReportingService;
-import com.bigdata.journal.ConcurrencyManager.IConcurrencyManagerCounters;
-import com.bigdata.resources.ResourceManager.IResourceManagerCounters;
-import com.bigdata.resources.StoreManager.IStoreManagerCounters;
-import com.bigdata.service.Event;
-import com.bigdata.service.DataService.IDataServiceCounters;
-import com.bigdata.util.Bytes;
-import com.bigdata.util.concurrent.IQueueCounters.IThreadPoolExecutorTaskCounters;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.DefaultInstrumentFactory;
+import org.embergraph.counters.History;
+import org.embergraph.counters.HistoryInstrument;
+import org.embergraph.counters.ICounter;
+import org.embergraph.counters.ICounterNode;
+import org.embergraph.counters.ICounterSet;
+import org.embergraph.counters.IHostCounters;
+import org.embergraph.counters.IRequiredHostCounters;
+import org.embergraph.counters.PeriodEnum;
+import org.embergraph.counters.History.SampleIterator;
+import org.embergraph.counters.ICounterSet.IInstrumentFactory;
+import org.embergraph.counters.httpd.DummyEventReportingService;
+import org.embergraph.journal.ConcurrencyManager.IConcurrencyManagerCounters;
+import org.embergraph.resources.ResourceManager.IResourceManagerCounters;
+import org.embergraph.resources.StoreManager.IStoreManagerCounters;
+import org.embergraph.service.Event;
+import org.embergraph.service.DataService.IDataServiceCounters;
+import org.embergraph.util.Bytes;
+import org.embergraph.util.concurrent.IQueueCounters.IThreadPoolExecutorTaskCounters;
 
 /**
  * Some static utility methods.

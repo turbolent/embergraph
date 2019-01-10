@@ -35,14 +35,14 @@ import java.util.concurrent.TimeoutException;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IQueryAttributes;
-import com.bigdata.bop.IQueryContext;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.relation.accesspath.IAsynchronousIterator;
-import com.bigdata.rwstore.sector.IMemoryManager;
-import com.bigdata.service.IBigdataFederation;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IQueryAttributes;
+import org.embergraph.bop.IQueryContext;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.relation.accesspath.IAsynchronousIterator;
+import org.embergraph.rwstore.sector.IMemoryManager;
+import org.embergraph.service.IBigdataFederation;
 
 /**
  * Mock object.

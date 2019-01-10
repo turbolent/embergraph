@@ -20,10 +20,10 @@ import java.util.Iterator;
 
 import org.openrdf.model.Value;
 
-import com.bigdata.rdf.graph.IStaticFrontier;
-import com.bigdata.rdf.graph.impl.util.IArraySlice;
-import com.bigdata.rdf.graph.impl.util.IManagedArray;
-import com.bigdata.rdf.graph.impl.util.ManagedArray;
+import org.embergraph.rdf.graph.IStaticFrontier;
+import org.embergraph.rdf.graph.impl.util.IArraySlice;
+import org.embergraph.rdf.graph.impl.util.IManagedArray;
+import org.embergraph.rdf.graph.impl.util.ManagedArray;
 
 /**
  * An implementation of a "static" frontier that grows and reuses the backing

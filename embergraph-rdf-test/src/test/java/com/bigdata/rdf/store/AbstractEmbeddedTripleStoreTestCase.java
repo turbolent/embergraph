@@ -29,7 +29,7 @@ package com.bigdata.rdf.store;
 
 import java.util.Properties;
 
-import com.bigdata.journal.ITx;
+import org.embergraph.journal.ITx;
 
 /**
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -43,18 +43,18 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.datatypes.XMLDatatypeUtil;
 
-import com.bigdata.rdf.internal.IDatatypeURIResolver;
-import com.bigdata.rdf.internal.IExtension;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.XSD;
-import com.bigdata.rdf.internal.impl.literal.AbstractLiteralIV;
-import com.bigdata.rdf.internal.impl.literal.LiteralExtensionIV;
-import com.bigdata.rdf.internal.impl.literal.XSDNumericIV;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.util.InnerCause;
+import org.embergraph.rdf.internal.IDatatypeURIResolver;
+import org.embergraph.rdf.internal.IExtension;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.XSD;
+import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
+import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
+import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.util.InnerCause;
 
 /**
  * This implementation of {@link IExtension} implements inlining for literals

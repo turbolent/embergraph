@@ -28,11 +28,11 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.BigdataSailRepository;
-import com.bigdata.rdf.sail.BigdataSailRepositoryConnection;
-import com.bigdata.rdf.sail.ProxyBigdataSailTestCase;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.BigdataSailRepository;
+import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.rdf.sail.ProxyBigdataSailTestCase;
 
 /**
  * Unit test template for use in submission of bugs.

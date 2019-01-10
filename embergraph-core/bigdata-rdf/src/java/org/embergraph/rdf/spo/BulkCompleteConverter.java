@@ -49,13 +49,13 @@ package org.embergraph.rdf.spo;
 
 import java.util.Arrays;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.proc.AbstractKeyArrayIndexProcedure.ResultBufferHandler;
-import com.bigdata.btree.proc.BatchLookup.BatchLookupConstructor;
-import com.bigdata.btree.raba.IRaba;
-import com.bigdata.rdf.model.StatementEnum;
-import com.bigdata.striterator.IChunkConverter;
-import com.bigdata.striterator.IChunkedOrderedIterator;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure.ResultBufferHandler;
+import org.embergraph.btree.proc.BatchLookup.BatchLookupConstructor;
+import org.embergraph.btree.raba.IRaba;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.striterator.IChunkConverter;
+import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /**
  * Bulk completes the {@link StatementEnum} and/or statement identifier (SID)

@@ -31,9 +31,9 @@ import java.io.IOException;
 import java.rmi.Remote;
 import java.util.concurrent.ExecutionException;
 
-import com.bigdata.btree.ITuple;
-import com.bigdata.journal.ITransactionService;
-import com.bigdata.journal.ValidationError;
+import org.embergraph.btree.ITuple;
+import org.embergraph.journal.ITransactionService;
+import org.embergraph.journal.ValidationError;
 
 /**
  * Remote interface by which the {@link ITransactionService} manages the state

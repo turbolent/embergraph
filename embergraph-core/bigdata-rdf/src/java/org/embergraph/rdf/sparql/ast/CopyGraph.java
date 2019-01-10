@@ -29,7 +29,7 @@ package org.embergraph.rdf.sparql.ast;
 
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
+import org.embergraph.bop.BOp;
 
 /**
  * The COPY operation is a shortcut for inserting all data from an input graph

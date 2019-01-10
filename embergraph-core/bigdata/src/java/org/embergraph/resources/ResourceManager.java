@@ -35,17 +35,17 @@ import java.util.TreeMap;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.IndexSegmentBuilder;
-import com.bigdata.cache.ICacheEntry;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.Instrument;
-import com.bigdata.counters.OneShotInstrument;
-import com.bigdata.journal.IConcurrencyManager;
-import com.bigdata.mdi.LocalPartitionMetadata;
-import com.bigdata.service.DataService;
-import com.bigdata.service.IMetadataService;
-import com.bigdata.service.MetadataService;
-import com.bigdata.util.ReverseLongComparator;
+import org.embergraph.btree.IndexSegmentBuilder;
+import org.embergraph.cache.ICacheEntry;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.Instrument;
+import org.embergraph.counters.OneShotInstrument;
+import org.embergraph.journal.IConcurrencyManager;
+import org.embergraph.mdi.LocalPartitionMetadata;
+import org.embergraph.service.DataService;
+import org.embergraph.service.IMetadataService;
+import org.embergraph.service.MetadataService;
+import org.embergraph.util.ReverseLongComparator;
 
 /**
  * The {@link ResourceManager} has broad responsibility for journal files, index

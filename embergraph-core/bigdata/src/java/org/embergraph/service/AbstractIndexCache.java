@@ -8,14 +8,14 @@ import java.util.concurrent.locks.Lock;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.IRangeQuery;
-import com.bigdata.cache.ConcurrentWeakValueCache;
-import com.bigdata.cache.ConcurrentWeakValueCacheWithTimeout;
-import com.bigdata.concurrent.NamedLock;
-import com.bigdata.journal.ITx;
-import com.bigdata.service.ndx.IClientIndex;
-import com.bigdata.util.NT;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.IRangeQuery;
+import org.embergraph.cache.ConcurrentWeakValueCache;
+import org.embergraph.cache.ConcurrentWeakValueCacheWithTimeout;
+import org.embergraph.concurrent.NamedLock;
+import org.embergraph.journal.ITx;
+import org.embergraph.service.ndx.IClientIndex;
+import org.embergraph.util.NT;
 
 /**
  * Abstract base class providing caching for {@link IIndex} like objects. A

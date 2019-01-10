@@ -30,8 +30,8 @@ package org.embergraph.relation.rule.eval;
 
 import java.io.Serializable;
 
-import com.bigdata.relation.accesspath.IBuffer;
-import com.bigdata.relation.rule.IRule;
+import org.embergraph.relation.accesspath.IBuffer;
+import org.embergraph.relation.rule.IRule;
 
 /**
  * A factory for objects that handle the execution of an {@link IRule}. This

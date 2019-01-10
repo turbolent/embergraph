@@ -2,8 +2,8 @@ package org.embergraph.rdf.load;
 
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.bigdata.rdf.rio.StatementBuffer;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.rio.StatementBuffer;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * 

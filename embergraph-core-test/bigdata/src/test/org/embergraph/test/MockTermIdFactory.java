@@ -29,9 +29,9 @@ package org.embergraph.test;
 
 import java.util.Random;
 
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.VTE;
-import com.bigdata.rdf.internal.impl.TermId;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.VTE;
+import org.embergraph.rdf.internal.impl.TermId;
 
 /**
  * A factory for mock {@link IV}s.

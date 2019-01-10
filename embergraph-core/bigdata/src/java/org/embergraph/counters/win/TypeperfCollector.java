@@ -44,17 +44,17 @@ import java.util.concurrent.CancellationException;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.counters.AbstractProcessCollector;
-import com.bigdata.counters.AbstractProcessReader;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.ICounter;
-import com.bigdata.counters.ICounterSet;
-import com.bigdata.counters.IHostCounters;
-import com.bigdata.counters.IInstrument;
-import com.bigdata.counters.IRequiredHostCounters;
-import com.bigdata.util.CSVReader;
-import com.bigdata.util.CSVReader.Header;
-import com.bigdata.util.InnerCause;
+import org.embergraph.counters.AbstractProcessCollector;
+import org.embergraph.counters.AbstractProcessReader;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.ICounter;
+import org.embergraph.counters.ICounterSet;
+import org.embergraph.counters.IHostCounters;
+import org.embergraph.counters.IInstrument;
+import org.embergraph.counters.IRequiredHostCounters;
+import org.embergraph.util.CSVReader;
+import org.embergraph.util.CSVReader.Header;
+import org.embergraph.util.InnerCause;
 
 /**
  * Collects per-host performance counters on a Windows platform using

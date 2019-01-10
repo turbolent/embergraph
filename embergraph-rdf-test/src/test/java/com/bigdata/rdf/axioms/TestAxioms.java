@@ -33,15 +33,15 @@ import java.util.Properties;
 import org.openrdf.model.vocabulary.OWL;
 import org.openrdf.model.vocabulary.RDF;
 
-import com.bigdata.io.SerializerUtil;
-import com.bigdata.rdf.model.BigdataStatement;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.spo.SPO;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.AbstractTripleStoreTestCase;
-import com.bigdata.rdf.store.AbstractTripleStore.Options;
+import org.embergraph.io.SerializerUtil;
+import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.spo.SPO;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.AbstractTripleStoreTestCase;
+import org.embergraph.rdf.store.AbstractTripleStore.Options;
 
 /**
  * Test suite for the {@link Axioms}.

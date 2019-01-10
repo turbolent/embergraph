@@ -32,16 +32,16 @@ import java.util.Comparator;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.rdf.internal.TermIVComparator;
-import com.bigdata.rdf.internal.VTE;
-import com.bigdata.rdf.internal.impl.TermId;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.model.BigdataValueFactoryImpl;
-import com.bigdata.util.BytesUtil;
-import com.bigdata.util.BytesUtil.UnsignedByteArrayComparator;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.rdf.internal.TermIVComparator;
+import org.embergraph.rdf.internal.VTE;
+import org.embergraph.rdf.internal.impl.TermId;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.util.BytesUtil;
+import org.embergraph.util.BytesUtil.UnsignedByteArrayComparator;
 
 /**
  * Test suite for {@link TermIVComparator}.

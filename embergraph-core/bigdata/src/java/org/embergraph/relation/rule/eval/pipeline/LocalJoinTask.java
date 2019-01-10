@@ -5,16 +5,16 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IVariable;
-import com.bigdata.journal.Journal;
-import com.bigdata.relation.accesspath.AbstractUnsynchronizedArrayBuffer;
-import com.bigdata.relation.accesspath.BlockingBuffer;
-import com.bigdata.relation.accesspath.IAsynchronousIterator;
-import com.bigdata.relation.accesspath.IBuffer;
-import com.bigdata.relation.rule.IRule;
-import com.bigdata.relation.rule.eval.IJoinNexus;
-import com.bigdata.relation.rule.eval.ISolution;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IVariable;
+import org.embergraph.journal.Journal;
+import org.embergraph.relation.accesspath.AbstractUnsynchronizedArrayBuffer;
+import org.embergraph.relation.accesspath.BlockingBuffer;
+import org.embergraph.relation.accesspath.IAsynchronousIterator;
+import org.embergraph.relation.accesspath.IBuffer;
+import org.embergraph.relation.rule.IRule;
+import org.embergraph.relation.rule.eval.IJoinNexus;
+import org.embergraph.relation.rule.eval.ISolution;
 
 /**
  * {@link JoinTask} implementation for a {@link Journal}.

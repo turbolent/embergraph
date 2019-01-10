@@ -27,11 +27,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.internal;
 
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.rdf.internal.impl.uri.VocabURIByteIV;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.vocab.Vocabulary;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.rdf.internal.impl.uri.VocabURIByteIV;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.vocab.Vocabulary;
+import org.embergraph.util.BytesUtil;
 
 /**
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

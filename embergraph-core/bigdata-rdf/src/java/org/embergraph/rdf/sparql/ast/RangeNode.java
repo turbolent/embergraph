@@ -26,10 +26,10 @@ package org.embergraph.rdf.sparql.ast;
 
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.NV;
-import com.bigdata.rdf.internal.constraints.Range;
-import com.bigdata.rdf.internal.constraints.RangeBOp;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.NV;
+import org.embergraph.rdf.internal.constraints.Range;
+import org.embergraph.rdf.internal.constraints.RangeBOp;
 
 /**
  * It's a value expression because it does eventually evaluate to a value -

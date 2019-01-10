@@ -30,15 +30,15 @@ package org.embergraph.mdi;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.AbstractBTree;
-import com.bigdata.btree.DelegateIndex;
-import com.bigdata.btree.ILinearList;
-import com.bigdata.btree.IRangeQuery;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.cache.LRUCache;
-import com.bigdata.mdi.MetadataIndex.MetadataIndexMetadata;
+import org.embergraph.btree.AbstractBTree;
+import org.embergraph.btree.DelegateIndex;
+import org.embergraph.btree.ILinearList;
+import org.embergraph.btree.IRangeQuery;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.cache.LRUCache;
+import org.embergraph.mdi.MetadataIndex.MetadataIndexMetadata;
 
 /**
  * The extension semantics for the {@link IMetadataIndex} are implemented by

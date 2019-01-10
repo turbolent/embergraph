@@ -27,12 +27,12 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-import com.bigdata.bfs.BigdataFileSystem;
-import com.bigdata.btree.AbstractBTree;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.relation.locator.IResourceLocator;
-import com.bigdata.sparse.GlobalRowStoreSchema;
-import com.bigdata.sparse.SparseRowStore;
+import org.embergraph.bfs.BigdataFileSystem;
+import org.embergraph.btree.AbstractBTree;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.relation.locator.IResourceLocator;
+import org.embergraph.sparse.GlobalRowStoreSchema;
+import org.embergraph.sparse.SparseRowStore;
 
 /**
  * Collection of methods that are shared by both local and distributed stores.

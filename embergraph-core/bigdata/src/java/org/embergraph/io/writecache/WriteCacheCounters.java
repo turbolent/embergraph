@@ -23,9 +23,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.io.writecache;
 
-import com.bigdata.counters.CAT;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.Instrument;
+import org.embergraph.counters.CAT;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.Instrument;
 
 /**
  * Performance counters for the {@link WriteCache}.

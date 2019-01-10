@@ -37,18 +37,18 @@ import junit.framework.TestResult;
 import junit.framework.TestSuite;
 import junit.textui.ResultPrinter;
 
-import com.bigdata.BigdataStatics;
-import com.bigdata.journal.AbstractJournal;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.RWStrategy;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.service.AbstractDistributedFederation;
-import com.bigdata.service.AbstractScaleOutClient;
-import com.bigdata.service.IBigdataFederation;
-import com.bigdata.service.ScaleOutClientFactory;
-import com.bigdata.util.Bytes;
+import org.embergraph.BigdataStatics;
+import org.embergraph.journal.AbstractJournal;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.RWStrategy;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.service.AbstractDistributedFederation;
+import org.embergraph.service.AbstractScaleOutClient;
+import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.ScaleOutClientFactory;
+import org.embergraph.util.Bytes;
 
 /**
  * Test suite for {@link RESTServlet} (SPARQL end point and REST API for RDF

@@ -32,11 +32,11 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
-import com.bigdata.btree.data.AbstractReadOnlyNodeData;
-import com.bigdata.btree.data.IAbstractNodeDataCoder;
-import com.bigdata.io.AbstractFixedByteArrayBuffer;
-import com.bigdata.io.DataOutputBuffer;
-import com.bigdata.util.Bytes;
+import org.embergraph.btree.data.AbstractReadOnlyNodeData;
+import org.embergraph.btree.data.IAbstractNodeDataCoder;
+import org.embergraph.io.AbstractFixedByteArrayBuffer;
+import org.embergraph.io.DataOutputBuffer;
+import org.embergraph.util.Bytes;
 
 /**
  * Default implementation for immutable {@link IDirectoryData} records.

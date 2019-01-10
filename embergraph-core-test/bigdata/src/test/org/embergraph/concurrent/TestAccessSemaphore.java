@@ -36,8 +36,8 @@ import java.util.concurrent.TimeoutException;
 
 import org.junit.Test;
 
-import com.bigdata.concurrent.AccessSemaphore.Access;
-import com.bigdata.util.DaemonThreadFactory;
+import org.embergraph.concurrent.AccessSemaphore.Access;
+import org.embergraph.util.DaemonThreadFactory;
 
 public class TestAccessSemaphore {
 

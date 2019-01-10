@@ -1,8 +1,8 @@
 package org.embergraph.htree.data;
 
-import com.bigdata.btree.data.AbstractLeafDataRecordTestCase;
-import com.bigdata.btree.data.ILeafData;
-import com.bigdata.btree.raba.IRaba;
+import org.embergraph.btree.data.AbstractLeafDataRecordTestCase;
+import org.embergraph.btree.data.ILeafData;
+import org.embergraph.btree.raba.IRaba;
 
 /**
  * Abstract class for tests of {@link ILeafData} implementations for a hash

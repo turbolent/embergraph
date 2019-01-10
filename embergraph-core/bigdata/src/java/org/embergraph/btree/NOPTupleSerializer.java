@@ -33,11 +33,11 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.Properties;
 
-import com.bigdata.btree.keys.ASCIIKeyBuilderFactory;
-import com.bigdata.btree.keys.DefaultKeyBuilderFactory;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.IKeyBuilderFactory;
-import com.bigdata.btree.keys.KeyBuilder;
+import org.embergraph.btree.keys.ASCIIKeyBuilderFactory;
+import org.embergraph.btree.keys.DefaultKeyBuilderFactory;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.IKeyBuilderFactory;
+import org.embergraph.btree.keys.KeyBuilder;
 
 /**
  * Default implementation uses the {@link KeyBuilder} to format the object as a

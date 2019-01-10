@@ -28,10 +28,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.counters.render;
 
-import com.bigdata.counters.query.ICounterSelector;
-import com.bigdata.counters.query.ReportEnum;
-import com.bigdata.counters.query.URLQueryModel;
-import com.bigdata.util.httpd.NanoHTTPD;
+import org.embergraph.counters.query.ICounterSelector;
+import org.embergraph.counters.query.ReportEnum;
+import org.embergraph.counters.query.URLQueryModel;
+import org.embergraph.util.httpd.NanoHTTPD;
 
 /**
  * Factory for {@link IRenderer} objects based on a MIME type. For known MIME

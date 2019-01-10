@@ -29,31 +29,31 @@ package org.embergraph.rdf.sparql.ast.optimizers;
 
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.sparql.ast.QueryNodeWithBindingSet;
-import com.bigdata.rdf.sparql.ast.DatasetNode;
-import com.bigdata.rdf.sparql.ast.FilterNode;
-import com.bigdata.rdf.sparql.ast.FunctionNode;
-import com.bigdata.rdf.sparql.ast.GlobalAnnotations;
-import com.bigdata.rdf.sparql.ast.IGroupMemberNode;
-import com.bigdata.rdf.sparql.ast.IGroupNode;
-import com.bigdata.rdf.sparql.ast.IQueryNode;
-import com.bigdata.rdf.sparql.ast.JoinGroupNode;
-import com.bigdata.rdf.sparql.ast.NamedSubqueryRoot;
-import com.bigdata.rdf.sparql.ast.ProjectionNode;
-import com.bigdata.rdf.sparql.ast.QueryRoot;
-import com.bigdata.rdf.sparql.ast.QueryType;
-import com.bigdata.rdf.sparql.ast.StatementPatternNode;
-import com.bigdata.rdf.sparql.ast.SubqueryRoot;
-import com.bigdata.rdf.sparql.ast.TermNode;
-import com.bigdata.rdf.sparql.ast.VarNode;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpContext;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpJoins;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpUtility;
-import com.bigdata.rdf.sparql.ast.eval.DataSetSummary;
-import com.bigdata.rdf.sparql.ast.eval.IEvaluationContext;
-import com.bigdata.rdf.sparql.ast.service.ServiceNode;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.sparql.ast.QueryNodeWithBindingSet;
+import org.embergraph.rdf.sparql.ast.DatasetNode;
+import org.embergraph.rdf.sparql.ast.FilterNode;
+import org.embergraph.rdf.sparql.ast.FunctionNode;
+import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
+import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
+import org.embergraph.rdf.sparql.ast.IGroupNode;
+import org.embergraph.rdf.sparql.ast.IQueryNode;
+import org.embergraph.rdf.sparql.ast.JoinGroupNode;
+import org.embergraph.rdf.sparql.ast.NamedSubqueryRoot;
+import org.embergraph.rdf.sparql.ast.ProjectionNode;
+import org.embergraph.rdf.sparql.ast.QueryRoot;
+import org.embergraph.rdf.sparql.ast.QueryType;
+import org.embergraph.rdf.sparql.ast.StatementPatternNode;
+import org.embergraph.rdf.sparql.ast.SubqueryRoot;
+import org.embergraph.rdf.sparql.ast.TermNode;
+import org.embergraph.rdf.sparql.ast.VarNode;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpJoins;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpUtility;
+import org.embergraph.rdf.sparql.ast.eval.DataSetSummary;
+import org.embergraph.rdf.sparql.ast.eval.IEvaluationContext;
+import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 
 /**
  * Handles a variety of special constructions related to graph graph groups.

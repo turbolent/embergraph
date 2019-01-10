@@ -34,7 +34,7 @@ import java.io.StringWriter;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.util.httpd.NanoHTTPD.Response;
+import org.embergraph.util.httpd.NanoHTTPD.Response;
 
 /**
  * Overrides some methods on {@link NanoHTTPD} to (a) prevent serving files from

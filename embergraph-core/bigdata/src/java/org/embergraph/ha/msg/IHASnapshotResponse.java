@@ -23,7 +23,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.ha.msg;
 
-import com.bigdata.journal.IRootBlockView;
+import org.embergraph.journal.IRootBlockView;
 
 /**
  * The message when a snapshot has been taken.

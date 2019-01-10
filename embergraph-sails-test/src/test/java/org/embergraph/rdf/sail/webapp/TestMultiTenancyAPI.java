@@ -52,15 +52,15 @@ import org.openrdf.model.impl.LiteralImpl;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.query.TupleQueryResult;
 
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.Journal;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.webapp.client.HttpException;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepository;
-import com.bigdata.rdf.vocab.decls.DCTermsVocabularyDecl;
-import com.bigdata.rdf.vocab.decls.VoidVocabularyDecl;
-import com.bigdata.relation.RelationSchema;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.Journal;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.webapp.client.HttpException;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository;
+import org.embergraph.rdf.vocab.decls.DCTermsVocabularyDecl;
+import org.embergraph.rdf.vocab.decls.VoidVocabularyDecl;
+import org.embergraph.relation.RelationSchema;
 
 /**
  * Proxied test suite for the Multi-Tenancy API.

@@ -31,17 +31,17 @@ import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
-import com.bigdata.rdf.graph.EdgesEnum;
-import com.bigdata.rdf.graph.IGASContext;
-import com.bigdata.rdf.graph.IGASProgram;
-import com.bigdata.rdf.graph.IGASScheduler;
-import com.bigdata.rdf.graph.IGASState;
-import com.bigdata.rdf.graph.IGASStats;
-import com.bigdata.rdf.graph.IGraphAccessor;
-import com.bigdata.rdf.graph.IReducer;
-import com.bigdata.rdf.graph.IStaticFrontier;
-import com.bigdata.rdf.graph.TraversalDirectionEnum;
-import com.bigdata.rdf.graph.util.GASUtil;
+import org.embergraph.rdf.graph.EdgesEnum;
+import org.embergraph.rdf.graph.IGASContext;
+import org.embergraph.rdf.graph.IGASProgram;
+import org.embergraph.rdf.graph.IGASScheduler;
+import org.embergraph.rdf.graph.IGASState;
+import org.embergraph.rdf.graph.IGASStats;
+import org.embergraph.rdf.graph.IGraphAccessor;
+import org.embergraph.rdf.graph.IReducer;
+import org.embergraph.rdf.graph.IStaticFrontier;
+import org.embergraph.rdf.graph.TraversalDirectionEnum;
+import org.embergraph.rdf.graph.util.GASUtil;
 
 import cutthecrap.utils.striterators.Filter;
 import cutthecrap.utils.striterators.IFilter;

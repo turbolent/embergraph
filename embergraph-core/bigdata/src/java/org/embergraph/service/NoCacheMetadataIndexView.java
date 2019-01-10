@@ -1,16 +1,16 @@
 package org.embergraph.service;
 
-import com.bigdata.btree.IRangeQuery;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.proc.IIndexProcedure;
-import com.bigdata.btree.proc.RangeCountProcedure;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.WriteExecutorService;
-import com.bigdata.mdi.IMetadataIndex;
-import com.bigdata.mdi.PartitionLocator;
-import com.bigdata.mdi.MetadataIndex.MetadataIndexMetadata;
-import com.bigdata.service.ndx.RawDataServiceTupleIterator;
+import org.embergraph.btree.IRangeQuery;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.proc.IIndexProcedure;
+import org.embergraph.btree.proc.RangeCountProcedure;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.WriteExecutorService;
+import org.embergraph.mdi.IMetadataIndex;
+import org.embergraph.mdi.PartitionLocator;
+import org.embergraph.mdi.MetadataIndex.MetadataIndexMetadata;
+import org.embergraph.service.ndx.RawDataServiceTupleIterator;
 
 import cutthecrap.utils.striterators.IFilter;
 

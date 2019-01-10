@@ -31,7 +31,7 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.UUID;
 
-import com.bigdata.quorum.MockQuorumFixture.MockQuorumMember;
+import org.embergraph.quorum.MockQuorumFixture.MockQuorumMember;
 
 /**
  * Test the quorum semantics for a highly available quorum of 3 services. The

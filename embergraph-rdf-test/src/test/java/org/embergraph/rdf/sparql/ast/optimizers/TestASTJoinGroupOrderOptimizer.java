@@ -26,8 +26,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.sparql.ast.optimizers;
 
-import com.bigdata.rdf.sparql.ast.JoinGroupNode;
-import com.bigdata.rdf.sparql.ast.UnionNode;
+import org.embergraph.rdf.sparql.ast.JoinGroupNode;
+import org.embergraph.rdf.sparql.ast.UnionNode;
 
 
 

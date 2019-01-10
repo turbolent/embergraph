@@ -24,7 +24,7 @@ package org.embergraph.rdf.sail;
 
 import java.util.Properties;
 
-import com.bigdata.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.BigdataSail;
 
 /**
  * Concrete instance of {@link TestRollbacks} which overrides the properties to

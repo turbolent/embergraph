@@ -5,12 +5,12 @@ import java.util.Iterator;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.mdi.IMetadataIndex;
-import com.bigdata.mdi.PartitionLocator;
-import com.bigdata.relation.accesspath.IBuffer;
-import com.bigdata.striterator.IKeyOrder;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.mdi.IMetadataIndex;
+import org.embergraph.mdi.PartitionLocator;
+import org.embergraph.relation.accesspath.IBuffer;
+import org.embergraph.striterator.IKeyOrder;
+import org.embergraph.util.BytesUtil;
 
 /**
  * This does a locatorScan for each binding set. This is a general purpose

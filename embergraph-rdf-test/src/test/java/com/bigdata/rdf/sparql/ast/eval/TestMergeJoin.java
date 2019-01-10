@@ -27,11 +27,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package com.bigdata.rdf.sparql.ast.eval;
 
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.join.AbstractHashJoinUtilityTestCase;
-import com.bigdata.bop.join.AbstractMergeJoin;
-import com.bigdata.rdf.sparql.ast.ASTContainer;
-import com.bigdata.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase.TestHelper;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.join.AbstractHashJoinUtilityTestCase;
+import org.embergraph.bop.join.AbstractMergeJoin;
+import org.embergraph.rdf.sparql.ast.ASTContainer;
+import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase.TestHelper;
 
 /**
  * Data driven test suite.

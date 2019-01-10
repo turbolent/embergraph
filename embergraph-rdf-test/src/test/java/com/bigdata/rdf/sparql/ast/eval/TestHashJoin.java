@@ -32,16 +32,16 @@ import java.util.Iterator;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.ap.Predicate;
-import com.bigdata.bop.join.HTreeHashJoinOp;
-import com.bigdata.bop.join.JVMHashJoinOp;
-import com.bigdata.htree.HTree;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.sparql.ast.ASTContainer;
-import com.bigdata.rdf.spo.SPOKeyOrder;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.ap.Predicate;
+import org.embergraph.bop.join.HTreeHashJoinOp;
+import org.embergraph.bop.join.JVMHashJoinOp;
+import org.embergraph.htree.HTree;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.sparql.ast.ASTContainer;
+import org.embergraph.rdf.spo.SPOKeyOrder;
 
 /**
  * Test suite for queries designed to exercise a hash join against an access

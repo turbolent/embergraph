@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop;
 
-import com.bigdata.bop.Constant;
+import org.embergraph.bop.Constant;
 
 import junit.framework.TestCase2;
 

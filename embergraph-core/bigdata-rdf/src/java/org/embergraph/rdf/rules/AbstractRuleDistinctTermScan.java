@@ -29,24 +29,24 @@ package org.embergraph.rdf.rules;
 
 import java.io.Serializable;
 
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstraint;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.bindingSet.ListBindingSet;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.spo.SPOKeyOrder;
-import com.bigdata.rdf.spo.SPOPredicate;
-import com.bigdata.rdf.spo.SPORelation;
-import com.bigdata.relation.accesspath.IBuffer;
-import com.bigdata.relation.rule.IRule;
-import com.bigdata.relation.rule.Rule;
-import com.bigdata.relation.rule.eval.IJoinNexus;
-import com.bigdata.relation.rule.eval.IRuleTaskFactory;
-import com.bigdata.relation.rule.eval.ISolution;
-import com.bigdata.relation.rule.eval.IStepTask;
-import com.bigdata.relation.rule.eval.RuleStats;
-import com.bigdata.striterator.IChunkedIterator;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstraint;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.bindingSet.ListBindingSet;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.spo.SPOKeyOrder;
+import org.embergraph.rdf.spo.SPOPredicate;
+import org.embergraph.rdf.spo.SPORelation;
+import org.embergraph.relation.accesspath.IBuffer;
+import org.embergraph.relation.rule.IRule;
+import org.embergraph.relation.rule.Rule;
+import org.embergraph.relation.rule.eval.IJoinNexus;
+import org.embergraph.relation.rule.eval.IRuleTaskFactory;
+import org.embergraph.relation.rule.eval.ISolution;
+import org.embergraph.relation.rule.eval.IStepTask;
+import org.embergraph.relation.rule.eval.RuleStats;
+import org.embergraph.striterator.IChunkedIterator;
 
 /**
  * Base class for rules having a single predicate that is none bound in the tail

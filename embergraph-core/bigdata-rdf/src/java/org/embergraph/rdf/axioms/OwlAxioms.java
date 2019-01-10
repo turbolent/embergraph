@@ -30,9 +30,9 @@ import org.openrdf.model.vocabulary.OWL;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-import com.bigdata.rdf.model.BigdataStatement;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.model.StatementEnum;
+import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.StatementEnum;
 
 /**
  * The axioms for RDF Schema plus a few axioms to support owl:sameAs,

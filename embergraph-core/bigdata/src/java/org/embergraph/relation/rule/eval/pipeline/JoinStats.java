@@ -7,14 +7,14 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.relation.accesspath.IAccessPath;
-import com.bigdata.relation.accesspath.IBuffer;
-import com.bigdata.relation.rule.IRule;
-import com.bigdata.relation.rule.eval.IRuleState;
-import com.bigdata.relation.rule.eval.RuleStats;
-import com.bigdata.relation.rule.eval.pipeline.JoinTask.AccessPathTask;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.relation.accesspath.IAccessPath;
+import org.embergraph.relation.accesspath.IBuffer;
+import org.embergraph.relation.rule.IRule;
+import org.embergraph.relation.rule.eval.IRuleState;
+import org.embergraph.relation.rule.eval.RuleStats;
+import org.embergraph.relation.rule.eval.pipeline.JoinTask.AccessPathTask;
 
 /**
  * Statistics about processing for a single join dimension as reported by a

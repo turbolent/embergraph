@@ -27,17 +27,17 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree.data;
 
-import com.bigdata.btree.AbstractBTree;
-import com.bigdata.btree.AbstractBTreeTestCase;
-import com.bigdata.btree.raba.IRaba;
-import com.bigdata.btree.raba.ReadOnlyKeysRaba;
-import com.bigdata.btree.raba.ReadOnlyValuesRaba;
-import com.bigdata.io.AbstractFixedByteArrayBuffer;
-import com.bigdata.io.ByteArrayBuffer;
-import com.bigdata.io.DataOutputBuffer;
-import com.bigdata.io.FixedByteArrayBuffer;
-import com.bigdata.util.Bytes;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.AbstractBTree;
+import org.embergraph.btree.AbstractBTreeTestCase;
+import org.embergraph.btree.raba.IRaba;
+import org.embergraph.btree.raba.ReadOnlyKeysRaba;
+import org.embergraph.btree.raba.ReadOnlyValuesRaba;
+import org.embergraph.io.AbstractFixedByteArrayBuffer;
+import org.embergraph.io.ByteArrayBuffer;
+import org.embergraph.io.DataOutputBuffer;
+import org.embergraph.io.FixedByteArrayBuffer;
+import org.embergraph.util.Bytes;
+import org.embergraph.util.BytesUtil;
 
 /**
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

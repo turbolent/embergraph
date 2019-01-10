@@ -39,17 +39,17 @@ import java.util.concurrent.TimeoutException;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.ha.msg.HAWriteMessage;
-import com.bigdata.ha.msg.IHAMessage;
-import com.bigdata.ha.msg.IHAWriteMessage;
-import com.bigdata.io.ChecksumUtility;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.journal.CommitCounterUtility;
-import com.bigdata.journal.IRootBlockView;
-import com.bigdata.journal.RootBlockView;
-import com.bigdata.journal.StoreTypeEnum;
-import com.bigdata.util.Bytes;
-import com.bigdata.util.DaemonThreadFactory;
+import org.embergraph.ha.msg.HAWriteMessage;
+import org.embergraph.ha.msg.IHAMessage;
+import org.embergraph.ha.msg.IHAWriteMessage;
+import org.embergraph.io.ChecksumUtility;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.journal.CommitCounterUtility;
+import org.embergraph.journal.IRootBlockView;
+import org.embergraph.journal.RootBlockView;
+import org.embergraph.journal.StoreTypeEnum;
+import org.embergraph.util.Bytes;
+import org.embergraph.util.DaemonThreadFactory;
 
 /**
  * Test suite for {@link HALogWriter} and {@link HALogReader}.

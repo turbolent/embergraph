@@ -26,10 +26,10 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.ICounter;
-import com.bigdata.counters.ICounterNode;
-import com.bigdata.rdf.sail.webapp.lbs.AbstractHostMetrics;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.ICounter;
+import org.embergraph.counters.ICounterNode;
+import org.embergraph.rdf.sail.webapp.lbs.AbstractHostMetrics;
 
 public class CounterSetHostMetricsWrapper extends AbstractHostMetrics {
 

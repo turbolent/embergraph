@@ -29,8 +29,8 @@ package org.embergraph.btree.data;
 
 import java.io.Serializable;
 
-import com.bigdata.io.AbstractFixedByteArrayBuffer;
-import com.bigdata.io.DataOutputBuffer;
+import org.embergraph.io.AbstractFixedByteArrayBuffer;
+import org.embergraph.io.DataOutputBuffer;
 
 /**
  * Interface for coding (compressing) an {@link INodeData} or {@link ILeafData}

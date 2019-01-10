@@ -3,9 +3,9 @@ package org.embergraph.htree;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.raba.IRaba;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.raba.IRaba;
 
 /**
  * Visits the non-empty tuples in each {@link BucketPage} visited by the

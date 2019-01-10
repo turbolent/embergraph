@@ -36,13 +36,13 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.rules.InferenceEngine.Options;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.vocab.Vocabulary;
-import com.bigdata.relation.accesspath.IElementFilter;
-import com.bigdata.relation.rule.Rule;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.rules.InferenceEngine.Options;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.vocab.Vocabulary;
+import org.embergraph.relation.accesspath.IElementFilter;
+import org.embergraph.relation.rule.Rule;
 
 /**
  * Test suite for {@link RuleRdfs04a} and {@link RuleRdfs04b}

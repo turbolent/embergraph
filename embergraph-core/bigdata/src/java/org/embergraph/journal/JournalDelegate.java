@@ -35,20 +35,20 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import com.bigdata.bfs.BigdataFileSystem;
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.ICheckpointProtocol;
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.ha.HAGlue;
-import com.bigdata.ha.QuorumService;
-import com.bigdata.mdi.IResourceMetadata;
-import com.bigdata.quorum.AsynchronousQuorumCloseException;
-import com.bigdata.quorum.Quorum;
-import com.bigdata.rawstore.IPSOutputStream;
-import com.bigdata.relation.locator.IResourceLocator;
-import com.bigdata.sparse.SparseRowStore;
+import org.embergraph.bfs.BigdataFileSystem;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.ICheckpointProtocol;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.ha.HAGlue;
+import org.embergraph.ha.QuorumService;
+import org.embergraph.mdi.IResourceMetadata;
+import org.embergraph.quorum.AsynchronousQuorumCloseException;
+import org.embergraph.quorum.Quorum;
+import org.embergraph.rawstore.IPSOutputStream;
+import org.embergraph.relation.locator.IResourceLocator;
+import org.embergraph.sparse.SparseRowStore;
 
 /**
  * {@link IJournal} delegation pattern.

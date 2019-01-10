@@ -2,10 +2,10 @@ package org.embergraph.resources;
 
 import java.util.Arrays;
 
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.IndexSegment;
-import com.bigdata.mdi.LocalPartitionMetadata;
-import com.bigdata.service.Split;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.IndexSegment;
+import org.embergraph.mdi.LocalPartitionMetadata;
+import org.embergraph.service.Split;
 
 /**
  * The result of a {@link SplitIndexPartitionTask} including enough metadata

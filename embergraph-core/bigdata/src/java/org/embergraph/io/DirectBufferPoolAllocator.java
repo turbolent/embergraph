@@ -36,8 +36,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
 
-import com.bigdata.service.ResourceService;
-import com.bigdata.util.concurrent.Haltable;
+import org.embergraph.service.ResourceService;
+import org.embergraph.util.concurrent.Haltable;
 
 /**
  * An allocator for {@link ByteBuffer} slices backed by direct

@@ -44,9 +44,9 @@ import org.openrdf.query.impl.MapBindingSet;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.sail.SailException;
 
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.vocab.NoVocabulary;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.vocab.NoVocabulary;
 
 /**
  * Test suite for the logic which rewrites a query, replacing {@link Value}

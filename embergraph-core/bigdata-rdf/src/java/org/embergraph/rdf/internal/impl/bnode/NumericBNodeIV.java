@@ -25,11 +25,11 @@ package org.embergraph.rdf.internal.impl.bnode;
 
 import org.openrdf.model.BNode;
 
-import com.bigdata.rdf.internal.DTE;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.BigdataBNode;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.util.Bytes;
+import org.embergraph.rdf.internal.DTE;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.BigdataBNode;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.util.Bytes;
 
 /**
  * Class for inline RDF blank nodes. Blank nodes MUST be based on a numeric

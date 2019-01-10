@@ -27,9 +27,9 @@ import java.util.UUID;
 
 import org.apache.log4j.Level;
 
-import com.bigdata.btree.keys.TestKeyBuilder;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rawstore.SimpleMemoryRawStore;
+import org.embergraph.btree.keys.TestKeyBuilder;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /**
  * Unit tests for the close/checkpoint/reopen protocol designed to manage the

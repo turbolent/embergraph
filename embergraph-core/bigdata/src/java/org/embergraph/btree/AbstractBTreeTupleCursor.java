@@ -32,12 +32,12 @@ import java.util.NoSuchElementException;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.Leaf.ILeafListener;
-import com.bigdata.btree.isolation.IsolatedFusedView;
-import com.bigdata.btree.view.FusedView;
-import com.bigdata.io.DataOutputBuffer;
-import com.bigdata.mdi.LocalPartitionMetadata;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.Leaf.ILeafListener;
+import org.embergraph.btree.isolation.IsolatedFusedView;
+import org.embergraph.btree.view.FusedView;
+import org.embergraph.io.DataOutputBuffer;
+import org.embergraph.mdi.LocalPartitionMetadata;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Class supporting random access to tuples and sequential tuple-based cursor

@@ -29,7 +29,7 @@ package org.embergraph.btree;
 
 import org.apache.log4j.Level;
 
-import com.bigdata.btree.keys.TestKeyBuilder;
+import org.embergraph.btree.keys.TestKeyBuilder;
 
 /**
  * Test suite for copy-on-write semantics. Among other things the tests in this

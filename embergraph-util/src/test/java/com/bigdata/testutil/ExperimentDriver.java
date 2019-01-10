@@ -63,9 +63,9 @@ import org.xml.sax.SAXParseException;
 import org.xml.sax.ext.DefaultHandler2;
 import org.xml.sax.ext.EntityResolver2;
 
-import com.bigdata.util.NV;
-import com.bigdata.util.PropertyUtil;
-import com.bigdata.util.config.NicUtil;
+import org.embergraph.util.NV;
+import org.embergraph.util.PropertyUtil;
+import org.embergraph.util.config.NicUtil;
 
 /**
  * A harness for running comparison of different configurations.

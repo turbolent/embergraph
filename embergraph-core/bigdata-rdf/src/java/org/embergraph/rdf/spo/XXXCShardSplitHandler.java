@@ -31,14 +31,14 @@ import java.io.Serializable;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.ILinearList;
-import com.bigdata.btree.ISimpleSplitHandler;
-import com.bigdata.btree.IndexSegment;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.btree.keys.SuccessorUtil;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.IVUtility;
+import org.embergraph.btree.ILinearList;
+import org.embergraph.btree.ISimpleSplitHandler;
+import org.embergraph.btree.IndexSegment;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.btree.keys.SuccessorUtil;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.IVUtility;
 
 /**
  * A split handler for the xxxC quads indices which ensures that all quads for

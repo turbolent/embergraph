@@ -32,24 +32,24 @@ import java.util.Set;
 
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.NV;
-import com.bigdata.htree.HTree;
-import com.bigdata.rdf.internal.constraints.RangeBOp;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpBase;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpJoins;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpUtility;
-import com.bigdata.rdf.sparql.ast.optimizers.ASTGraphGroupOptimizer;
-import com.bigdata.rdf.sparql.ast.optimizers.ASTRangeConstraintOptimizer;
-import com.bigdata.rdf.sparql.ast.optimizers.ASTSimpleOptionalOptimizer;
-import com.bigdata.rdf.sparql.ast.optimizers.StaticOptimizer;
-import com.bigdata.rdf.spo.DistinctTermAdvancer;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.rdf.spo.SPOAccessPath;
-import com.bigdata.relation.rule.eval.ISolution;
-import com.bigdata.striterator.IKeyOrder;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.NV;
+import org.embergraph.htree.HTree;
+import org.embergraph.rdf.internal.constraints.RangeBOp;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpBase;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpJoins;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpUtility;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTGraphGroupOptimizer;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTRangeConstraintOptimizer;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTSimpleOptionalOptimizer;
+import org.embergraph.rdf.sparql.ast.optimizers.StaticOptimizer;
+import org.embergraph.rdf.spo.DistinctTermAdvancer;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.rdf.spo.SPOAccessPath;
+import org.embergraph.relation.rule.eval.ISolution;
+import org.embergraph.striterator.IKeyOrder;
 
 /**
  * A node in the AST representing a statement pattern.

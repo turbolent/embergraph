@@ -26,9 +26,9 @@ package org.embergraph.mdi;
 import java.io.File;
 import java.util.UUID;
 
-import com.bigdata.journal.AbstractJournal;
-import com.bigdata.journal.IJournal;
-import com.bigdata.journal.Journal;
+import org.embergraph.journal.AbstractJournal;
+import org.embergraph.journal.IJournal;
+import org.embergraph.journal.Journal;
 
 /**
  * Metadata required to locate a {@link Journal} resource.

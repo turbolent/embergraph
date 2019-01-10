@@ -26,18 +26,18 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.sparql.ast.optimizers;
 
-import com.bigdata.rdf.sparql.ast.ASTContainer;
-import com.bigdata.rdf.sparql.ast.FilterNode;
-import com.bigdata.rdf.sparql.ast.FunctionNode;
-import com.bigdata.rdf.sparql.ast.GlobalAnnotations;
-import com.bigdata.rdf.sparql.ast.GroupNodeVarBindingInfo;
-import com.bigdata.rdf.sparql.ast.JoinGroupNode;
-import com.bigdata.rdf.sparql.ast.QueryRoot;
-import com.bigdata.rdf.sparql.ast.StatementPatternNode;
-import com.bigdata.rdf.sparql.ast.StaticAnalysis;
-import com.bigdata.rdf.sparql.ast.UnionNode;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpContext;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpUtility;
+import org.embergraph.rdf.sparql.ast.ASTContainer;
+import org.embergraph.rdf.sparql.ast.FilterNode;
+import org.embergraph.rdf.sparql.ast.FunctionNode;
+import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
+import org.embergraph.rdf.sparql.ast.GroupNodeVarBindingInfo;
+import org.embergraph.rdf.sparql.ast.JoinGroupNode;
+import org.embergraph.rdf.sparql.ast.QueryRoot;
+import org.embergraph.rdf.sparql.ast.StatementPatternNode;
+import org.embergraph.rdf.sparql.ast.StaticAnalysis;
+import org.embergraph.rdf.sparql.ast.UnionNode;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpUtility;
 
 
 

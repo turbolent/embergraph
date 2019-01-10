@@ -31,14 +31,14 @@ package org.embergraph.relation.rule;
 import java.util.Iterator;
 import java.util.Set;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstraint;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.IVariable;
-import com.bigdata.relation.IRelation;
-import com.bigdata.relation.rule.eval.ActionEnum;
-import com.bigdata.relation.rule.eval.IJoinNexus;
-import com.bigdata.relation.rule.eval.IRuleTaskFactory;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstraint;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.IVariable;
+import org.embergraph.relation.IRelation;
+import org.embergraph.relation.rule.eval.ActionEnum;
+import org.embergraph.relation.rule.eval.IJoinNexus;
+import org.embergraph.relation.rule.eval.IRuleTaskFactory;
 
 /**
  * Conjunctive query of N {@link IPredicate}s with optional {@link IConstraint}s.

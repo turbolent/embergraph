@@ -61,15 +61,15 @@ import java.util.zip.CheckedInputStream;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.IndexSegmentStore;
-import com.bigdata.counters.CAT;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.Instrument;
-import com.bigdata.io.ByteBufferInputStream;
-import com.bigdata.io.ByteBufferOutputStream;
-import com.bigdata.util.Bytes;
-import com.bigdata.util.DaemonThreadFactory;
-import com.bigdata.util.concurrent.ShutdownHelper;
+import org.embergraph.btree.IndexSegmentStore;
+import org.embergraph.counters.CAT;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.Instrument;
+import org.embergraph.io.ByteBufferInputStream;
+import org.embergraph.io.ByteBufferOutputStream;
+import org.embergraph.util.Bytes;
+import org.embergraph.util.DaemonThreadFactory;
+import org.embergraph.util.concurrent.ShutdownHelper;
 
 /**
  * A service which permits resources (managed files or buffers) identified by a

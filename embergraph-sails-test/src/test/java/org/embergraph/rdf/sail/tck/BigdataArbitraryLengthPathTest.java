@@ -17,10 +17,10 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.sail.SailRepository;
 import org.openrdf.sail.memory.MemoryStore;
 
-import com.bigdata.journal.BufferMode;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.BigdataSail.Options;
-import com.bigdata.rdf.sail.BigdataSailRepository;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.BigdataSail.Options;
+import org.embergraph.rdf.sail.BigdataSailRepository;
 
 /**
  * Extreme test for problem with arbitrary length paths. This test is apparently

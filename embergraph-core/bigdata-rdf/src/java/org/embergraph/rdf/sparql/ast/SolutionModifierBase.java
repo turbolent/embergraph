@@ -29,7 +29,7 @@ package org.embergraph.rdf.sparql.ast;
 
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
+import org.embergraph.bop.BOp;
 
 /**
  * AST node for solution modifiers (SLICE, ORDER BY, GROUP BY)

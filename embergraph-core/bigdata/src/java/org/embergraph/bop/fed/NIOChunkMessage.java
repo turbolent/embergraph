@@ -39,16 +39,16 @@ import java.util.NoSuchElementException;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.bigdata.bop.engine.IChunkAccessor;
-import com.bigdata.bop.engine.IChunkMessage;
-import com.bigdata.bop.engine.IQueryClient;
-import com.bigdata.io.DirectBufferPoolAllocator;
-import com.bigdata.io.DirectBufferPoolAllocator.IAllocation;
-import com.bigdata.io.DirectBufferPoolAllocator.IAllocationContext;
-import com.bigdata.io.SerializerUtil;
-import com.bigdata.rdf.internal.encoder.IVSolutionSetEncoder;
-import com.bigdata.service.ManagedResourceService;
-import com.bigdata.service.ResourceService;
+import org.embergraph.bop.engine.IChunkAccessor;
+import org.embergraph.bop.engine.IChunkMessage;
+import org.embergraph.bop.engine.IQueryClient;
+import org.embergraph.io.DirectBufferPoolAllocator;
+import org.embergraph.io.DirectBufferPoolAllocator.IAllocation;
+import org.embergraph.io.DirectBufferPoolAllocator.IAllocationContext;
+import org.embergraph.io.SerializerUtil;
+import org.embergraph.rdf.internal.encoder.IVSolutionSetEncoder;
+import org.embergraph.service.ManagedResourceService;
+import org.embergraph.service.ResourceService;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

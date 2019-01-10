@@ -29,8 +29,8 @@ package org.embergraph.rdf.sparql.ast;
 
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.rdf.spo.ISPO;
+import org.embergraph.bop.BOp;
+import org.embergraph.rdf.spo.ISPO;
 
 /**
  * Any of the operations which acts on a single target graph.

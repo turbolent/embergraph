@@ -35,7 +35,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import com.bigdata.util.BytesUtil;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Abstract base class implements mutation operators and search. A concrete

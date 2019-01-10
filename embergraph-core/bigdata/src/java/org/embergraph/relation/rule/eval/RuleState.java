@@ -7,19 +7,19 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstraint;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.IVariableOrConstant;
-import com.bigdata.bop.Var;
-import com.bigdata.bop.joinGraph.IEvaluationPlan;
-import com.bigdata.relation.IRelation;
-import com.bigdata.relation.rule.IRule;
-import com.bigdata.relation.rule.IStarJoin;
-import com.bigdata.relation.rule.Rule;
-import com.bigdata.striterator.IKeyOrder;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstraint;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.IVariableOrConstant;
+import org.embergraph.bop.Var;
+import org.embergraph.bop.joinGraph.IEvaluationPlan;
+import org.embergraph.relation.IRelation;
+import org.embergraph.relation.rule.IRule;
+import org.embergraph.relation.rule.IStarJoin;
+import org.embergraph.relation.rule.Rule;
+import org.embergraph.striterator.IKeyOrder;
 
 /**
  * State for a rule execution.

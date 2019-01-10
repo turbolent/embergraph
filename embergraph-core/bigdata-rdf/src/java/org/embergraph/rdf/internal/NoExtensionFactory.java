@@ -30,7 +30,7 @@ package org.embergraph.rdf.internal;
 import java.util.Collections;
 import java.util.Iterator;
 
-import com.bigdata.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValue;
 
 
 /**

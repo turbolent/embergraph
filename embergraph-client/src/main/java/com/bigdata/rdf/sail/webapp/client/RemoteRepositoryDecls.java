@@ -27,7 +27,7 @@ import org.openrdf.model.impl.URIImpl;
 
 //Note: Do not import. Not part of the embergraph-client.jar
 //
-//import com.bigdata.rdf.sparql.ast.service.RemoteServiceOptions;
+//import org.embergraph.rdf.sparql.ast.service.RemoteServiceOptions;
 
 /**
  * Various declarations used by the client API.

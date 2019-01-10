@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.bset;
 
 
-import com.bigdata.bop.controller.TestUnion;
+import org.embergraph.bop.controller.TestUnion;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

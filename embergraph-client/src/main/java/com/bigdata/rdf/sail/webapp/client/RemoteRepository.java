@@ -48,7 +48,7 @@ import org.openrdf.query.GraphQueryResult;
 import org.openrdf.query.TupleQueryResult;
 import org.openrdf.rio.RDFFormat;
 
-import com.bigdata.rdf.sail.remote.BigdataSailRemoteRepository;
+import org.embergraph.rdf.sail.remote.BigdataSailRemoteRepository;
 
 /**
  * Java API to the Nano Sparql Server.

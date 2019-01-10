@@ -36,21 +36,21 @@ import java.util.Set;
 import org.openrdf.model.Literal;
 import org.openrdf.model.Value;
 
-import com.bigdata.btree.keys.DefaultKeyBuilderFactory;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.IKeyBuilderFactory;
-import com.bigdata.rdf.internal.IDatatypeURIResolver;
-import com.bigdata.rdf.internal.IExtension;
-import com.bigdata.rdf.internal.impl.literal.AbstractLiteralIV;
-import com.bigdata.rdf.internal.impl.literal.LiteralExtensionIV;
-import com.bigdata.rdf.internal.impl.literal.XSDIntegerIV;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.service.geospatial.GeoSpatialDatatypeConfiguration;
-import com.bigdata.service.geospatial.GeoSpatialDatatypeFieldConfiguration;
-import com.bigdata.service.geospatial.IGeoSpatialLiteralSerializer;
+import org.embergraph.btree.keys.DefaultKeyBuilderFactory;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.IKeyBuilderFactory;
+import org.embergraph.rdf.internal.IDatatypeURIResolver;
+import org.embergraph.rdf.internal.IExtension;
+import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
+import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
+import org.embergraph.rdf.internal.impl.literal.XSDIntegerIV;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.service.geospatial.GeoSpatialDatatypeConfiguration;
+import org.embergraph.service.geospatial.GeoSpatialDatatypeFieldConfiguration;
+import org.embergraph.service.geospatial.IGeoSpatialLiteralSerializer;
 
 /**
  * Special encoding for GeoSpatial datatypes. We encode literals of the form

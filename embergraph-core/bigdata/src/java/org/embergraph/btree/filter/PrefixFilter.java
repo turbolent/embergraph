@@ -5,13 +5,13 @@ import java.util.NoSuchElementException;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleCursor;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.StrengthEnum;
-import com.bigdata.btree.keys.SuccessorUtil;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleCursor;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.StrengthEnum;
+import org.embergraph.btree.keys.SuccessorUtil;
+import org.embergraph.util.BytesUtil;
 
 import cutthecrap.utils.striterators.FilterBase;
 

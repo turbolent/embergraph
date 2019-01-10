@@ -37,18 +37,18 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.openrdf.rio.RDFFormat;
 
-import com.bigdata.journal.ITx;
-import com.bigdata.rdf.inf.ClosureStats;
-import com.bigdata.rdf.properties.PropertiesFormat;
-import com.bigdata.rdf.properties.PropertiesParser;
-import com.bigdata.rdf.properties.PropertiesParserFactory;
-import com.bigdata.rdf.properties.PropertiesParserRegistry;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.BigdataSailRepositoryConnection;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.DataLoader;
-import com.bigdata.rdf.store.DataLoader.ClosureEnum;
-import com.bigdata.rdf.store.DataLoader.MyLoadStats;
+import org.embergraph.journal.ITx;
+import org.embergraph.rdf.inf.ClosureStats;
+import org.embergraph.rdf.properties.PropertiesFormat;
+import org.embergraph.rdf.properties.PropertiesParser;
+import org.embergraph.rdf.properties.PropertiesParserFactory;
+import org.embergraph.rdf.properties.PropertiesParserRegistry;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.DataLoader;
+import org.embergraph.rdf.store.DataLoader.ClosureEnum;
+import org.embergraph.rdf.store.DataLoader.MyLoadStats;
 
 /**
  * 

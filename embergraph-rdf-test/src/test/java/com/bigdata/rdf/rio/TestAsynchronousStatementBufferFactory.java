@@ -35,22 +35,22 @@ import java.util.concurrent.TimeUnit;
 
 import org.openrdf.rio.RDFFormat;
 
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.journal.ConcurrencyManager;
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.lexicon.BigdataValueCentricFullTextIndex;
-import com.bigdata.rdf.lexicon.LexiconKeyOrder;
-import com.bigdata.rdf.lexicon.LexiconRelation;
-import com.bigdata.rdf.model.BigdataStatement;
-import com.bigdata.rdf.spo.SPOKeyOrder;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.ScaleOutTripleStore;
-import com.bigdata.rdf.store.TestScaleOutTripleStoreWithEmbeddedFederation;
-import com.bigdata.rdf.util.DumpLexicon;
-import com.bigdata.service.AbstractScaleOutFederation;
-import com.bigdata.service.EmbeddedClient;
-import com.bigdata.service.IBigdataClient;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.journal.ConcurrencyManager;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.lexicon.BigdataValueCentricFullTextIndex;
+import org.embergraph.rdf.lexicon.LexiconKeyOrder;
+import org.embergraph.rdf.lexicon.LexiconRelation;
+import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.spo.SPOKeyOrder;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.ScaleOutTripleStore;
+import org.embergraph.rdf.store.TestScaleOutTripleStoreWithEmbeddedFederation;
+import org.embergraph.rdf.util.DumpLexicon;
+import org.embergraph.service.AbstractScaleOutFederation;
+import org.embergraph.service.EmbeddedClient;
+import org.embergraph.service.IBigdataClient;
 
 /**
  * Test suite for {@link AsynchronousStatementBufferFactory}. To run this test

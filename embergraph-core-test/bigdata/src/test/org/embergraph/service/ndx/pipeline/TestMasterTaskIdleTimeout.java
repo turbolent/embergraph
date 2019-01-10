@@ -39,9 +39,9 @@ import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.bigdata.btree.keys.KVO;
-import com.bigdata.relation.accesspath.BlockingBuffer;
-import com.bigdata.util.DaemonThreadFactory;
+import org.embergraph.btree.keys.KVO;
+import org.embergraph.relation.accesspath.BlockingBuffer;
+import org.embergraph.util.DaemonThreadFactory;
 
 /**
  * Unit tests of the idle timeout behavior for {@link AbstractMasterTask} and

@@ -32,8 +32,8 @@ import java.io.IOException;
 import java.util.Formatter;
 import java.util.Random;
 
-import com.bigdata.util.Bytes;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.util.Bytes;
+import org.embergraph.util.BytesUtil;
 
 import junit.framework.TestCase2;
 

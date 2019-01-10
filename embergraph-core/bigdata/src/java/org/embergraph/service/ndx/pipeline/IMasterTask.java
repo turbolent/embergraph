@@ -30,7 +30,7 @@ package org.embergraph.service.ndx.pipeline;
 
 import java.util.concurrent.Callable;
 
-import com.bigdata.relation.accesspath.BlockingBuffer;
+import org.embergraph.relation.accesspath.BlockingBuffer;
 
 /**
  * Interface for task consuming data written on an application on an

@@ -31,23 +31,23 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.sail.SailException;
 
-import com.bigdata.counters.CAT;
-import com.bigdata.journal.IConcurrencyManager;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.IReadOnly;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.TimestampUtility;
-import com.bigdata.rdf.changesets.IChangeLog;
-import com.bigdata.rdf.changesets.IChangeRecord;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.BigdataSail.BigdataSailConnection;
-import com.bigdata.rdf.sail.BigdataSailRepository;
-import com.bigdata.rdf.sail.BigdataSailRepositoryConnection;
-import com.bigdata.rdf.sail.webapp.DatasetNotFoundException;
-import com.bigdata.resources.IndexManager;
-import com.bigdata.service.IBigdataFederation;
-import com.bigdata.sparse.GlobalRowStoreHelper;
+import org.embergraph.counters.CAT;
+import org.embergraph.journal.IConcurrencyManager;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.IReadOnly;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.TimestampUtility;
+import org.embergraph.rdf.changesets.IChangeLog;
+import org.embergraph.rdf.changesets.IChangeRecord;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
+import org.embergraph.rdf.sail.BigdataSailRepository;
+import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.rdf.sail.webapp.DatasetNotFoundException;
+import org.embergraph.resources.IndexManager;
+import org.embergraph.service.IBigdataFederation;
+import org.embergraph.sparse.GlobalRowStoreHelper;
 
 /**
  * Base class for task-oriented concurrency. Directly derived classes are

@@ -33,7 +33,7 @@ import java.util.Properties;
 import junit.framework.TestCase;
 import junit.framework.TestCase2;
 
-import com.bigdata.journal.IIndexManager;
+import org.embergraph.journal.IIndexManager;
 
 /**
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

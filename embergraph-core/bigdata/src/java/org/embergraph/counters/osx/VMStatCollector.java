@@ -35,7 +35,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.bigdata.counters.*;
+import org.embergraph.counters.*;
 
 /**
  * Collects some counters using <code>vmstat</code>.

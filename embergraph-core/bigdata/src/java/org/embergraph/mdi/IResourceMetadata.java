@@ -26,11 +26,11 @@ package org.embergraph.mdi;
 import java.io.Serializable;
 import java.util.UUID;
 
-import com.bigdata.btree.ILocalBTreeView;
-import com.bigdata.btree.IndexSegment;
-import com.bigdata.journal.AbstractJournal;
-import com.bigdata.journal.Journal;
-import com.bigdata.resources.ResourceManager;
+import org.embergraph.btree.ILocalBTreeView;
+import org.embergraph.btree.IndexSegment;
+import org.embergraph.journal.AbstractJournal;
+import org.embergraph.journal.Journal;
+import org.embergraph.resources.ResourceManager;
 
 /**
  * Interface for metadata about a {@link Journal} or {@link IndexSegment}.

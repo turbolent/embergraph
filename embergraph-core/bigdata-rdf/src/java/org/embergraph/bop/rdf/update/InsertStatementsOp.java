@@ -33,13 +33,13 @@ import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpContext;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.IVCache;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpContext;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.IVCache;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * Vectored insert operator for RDF Statements. The solutions flowing through

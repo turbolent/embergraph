@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.sparql.ast.explainhints;
 
-import com.bigdata.bop.BOp;
+import org.embergraph.bop.BOp;
 
 /**
  * Abstract base class for explain hints, providing a common base

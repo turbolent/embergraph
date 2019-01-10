@@ -3,7 +3,7 @@ package org.embergraph.service;
 import java.util.Properties;
 import java.util.UUID;
 
-import com.bigdata.journal.IResourceManager;
+import org.embergraph.journal.IResourceManager;
 
 /**
  * A local (in process) data service.

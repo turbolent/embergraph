@@ -37,8 +37,8 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.repository.RepositoryConnection;
 
-import com.bigdata.rdf.axioms.OwlAxioms;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.axioms.OwlAxioms;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * To run this test case, specify the following JVM property:

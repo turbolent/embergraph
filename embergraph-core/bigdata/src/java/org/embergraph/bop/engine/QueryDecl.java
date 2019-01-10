@@ -30,7 +30,7 @@ package org.embergraph.bop.engine;
 import java.io.Serializable;
 import java.util.UUID;
 
-import com.bigdata.bop.PipelineOp;
+import org.embergraph.bop.PipelineOp;
 
 /**
  * Default implementation.

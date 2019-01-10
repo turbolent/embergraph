@@ -14,9 +14,9 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
-import com.bigdata.gom.gpo.IGPO;
-import com.bigdata.gom.om.IObjectManager;
-import com.bigdata.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.gom.gpo.IGPO;
+import org.embergraph.gom.om.IObjectManager;
+import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
 
 import junit.extensions.proxy.IProxyTest;
 import junit.framework.Test;

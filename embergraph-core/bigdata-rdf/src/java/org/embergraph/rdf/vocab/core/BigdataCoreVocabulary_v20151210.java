@@ -26,11 +26,11 @@ package org.embergraph.rdf.vocab.core;
 
 import org.openrdf.model.impl.URIImpl;
 
-import com.bigdata.rdf.sail.RDRHistory;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.BD;
-import com.bigdata.rdf.vocab.BaseVocabularyDecl;
-import com.bigdata.rdf.vocab.decls.GeoSpatialVocabularyDecl;
+import org.embergraph.rdf.sail.RDRHistory;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.BD;
+import org.embergraph.rdf.vocab.BaseVocabularyDecl;
+import org.embergraph.rdf.vocab.decls.GeoSpatialVocabularyDecl;
 
 /**
  * Core Bigdata vocabulary.

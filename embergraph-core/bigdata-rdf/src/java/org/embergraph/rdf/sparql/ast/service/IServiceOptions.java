@@ -30,8 +30,8 @@ package org.embergraph.rdf.sparql.ast.service;
 import org.openrdf.model.Value;
 import org.openrdf.query.BindingSet;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.rdf.internal.IV;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.rdf.internal.IV;
 
 /**
  * Options and metadata for service end points.

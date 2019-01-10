@@ -35,21 +35,21 @@ import java.lang.reflect.Method;
 
 import org.openrdf.model.Value;
 
-import com.bigdata.btree.DefaultTupleSerializer;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.keys.ASCIIKeyBuilderFactory;
-import com.bigdata.btree.raba.codec.SimpleRabaCoder;
-import com.bigdata.io.ByteArrayBuffer;
-import com.bigdata.io.DataOutputBuffer;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.IVUtility;
-import com.bigdata.rdf.internal.impl.BlobIV;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.model.BigdataValueFactoryImpl;
-import com.bigdata.rdf.model.BigdataValueSerializer;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.util.Bytes;
+import org.embergraph.btree.DefaultTupleSerializer;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.keys.ASCIIKeyBuilderFactory;
+import org.embergraph.btree.raba.codec.SimpleRabaCoder;
+import org.embergraph.io.ByteArrayBuffer;
+import org.embergraph.io.DataOutputBuffer;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.IVUtility;
+import org.embergraph.rdf.internal.impl.BlobIV;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.model.BigdataValueSerializer;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.util.Bytes;
 
 /**
  * Encapsulates key and value formation for the TERMS index.  The keys are

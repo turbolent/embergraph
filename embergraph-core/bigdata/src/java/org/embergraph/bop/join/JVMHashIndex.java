@@ -31,11 +31,11 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.solutions.JVMDistinctBindingSetsOp;
-import com.bigdata.counters.CAT;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.solutions.JVMDistinctBindingSetsOp;
+import org.embergraph.counters.CAT;
 
 /**
  * A hash index for {@link IBindingSet}s that supports duplicate solutions and

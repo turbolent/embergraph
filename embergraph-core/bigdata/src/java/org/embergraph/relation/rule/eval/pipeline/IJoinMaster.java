@@ -32,8 +32,8 @@ import java.io.IOException;
 import java.rmi.Remote;
 import java.util.UUID;
 
-import com.bigdata.relation.accesspath.IBuffer;
-import com.bigdata.relation.rule.eval.ISolution;
+import org.embergraph.relation.accesspath.IBuffer;
+import org.embergraph.relation.rule.eval.ISolution;
 
 /**
  * Interface exported by the {@link JoinMasterTask}.

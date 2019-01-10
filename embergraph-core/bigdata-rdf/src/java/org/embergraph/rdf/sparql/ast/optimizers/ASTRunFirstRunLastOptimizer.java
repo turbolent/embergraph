@@ -27,24 +27,24 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.optimizers;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.rdf.sparql.ast.ASTBase;
-import com.bigdata.rdf.sparql.ast.GraphPatternGroup;
-import com.bigdata.rdf.sparql.ast.IBindingProducerNode;
-import com.bigdata.rdf.sparql.ast.IGroupMemberNode;
-import com.bigdata.rdf.sparql.ast.IJoinNode;
-import com.bigdata.rdf.sparql.ast.IQueryNode;
-import com.bigdata.rdf.sparql.ast.JoinGroupNode;
-import com.bigdata.rdf.sparql.ast.NamedSubqueriesNode;
-import com.bigdata.rdf.sparql.ast.NamedSubqueryRoot;
-import com.bigdata.rdf.sparql.ast.QueryBase;
-import com.bigdata.rdf.sparql.ast.QueryHints;
-import com.bigdata.rdf.sparql.ast.QueryNodeWithBindingSet;
-import com.bigdata.rdf.sparql.ast.QueryRoot;
-import com.bigdata.rdf.sparql.ast.StaticAnalysis;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpContext;
-import com.bigdata.rdf.sparql.ast.eval.IEvaluationContext;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.rdf.sparql.ast.ASTBase;
+import org.embergraph.rdf.sparql.ast.GraphPatternGroup;
+import org.embergraph.rdf.sparql.ast.IBindingProducerNode;
+import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
+import org.embergraph.rdf.sparql.ast.IJoinNode;
+import org.embergraph.rdf.sparql.ast.IQueryNode;
+import org.embergraph.rdf.sparql.ast.JoinGroupNode;
+import org.embergraph.rdf.sparql.ast.NamedSubqueriesNode;
+import org.embergraph.rdf.sparql.ast.NamedSubqueryRoot;
+import org.embergraph.rdf.sparql.ast.QueryBase;
+import org.embergraph.rdf.sparql.ast.QueryHints;
+import org.embergraph.rdf.sparql.ast.QueryNodeWithBindingSet;
+import org.embergraph.rdf.sparql.ast.QueryRoot;
+import org.embergraph.rdf.sparql.ast.StaticAnalysis;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
+import org.embergraph.rdf.sparql.ast.eval.IEvaluationContext;
 
 /**
  * This optimizer simply puts each type of {@link IGroupMemberNode} within a

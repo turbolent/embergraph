@@ -29,9 +29,9 @@ package org.embergraph.bop.controller;
 
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.NV;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.NV;
 
 /**
  * UNION()[maxParallel(default all); subqueries=ops]

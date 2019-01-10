@@ -33,22 +33,22 @@ import java.util.Arrays;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.AbstractBTree;
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.ILinearList;
-import com.bigdata.btree.IRangeQuery;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.btree.proc.IResultHandler;
-import com.bigdata.btree.proc.ISimpleIndexProcedure;
-import com.bigdata.btree.view.FusedView;
-import com.bigdata.io.DataOutputBuffer;
-import com.bigdata.journal.AbstractJournal;
-import com.bigdata.journal.Journal;
-import com.bigdata.util.Bytes;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.AbstractBTree;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.ILinearList;
+import org.embergraph.btree.IRangeQuery;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.btree.proc.IResultHandler;
+import org.embergraph.btree.proc.ISimpleIndexProcedure;
+import org.embergraph.btree.view.FusedView;
+import org.embergraph.io.DataOutputBuffer;
+import org.embergraph.journal.AbstractJournal;
+import org.embergraph.journal.Journal;
+import org.embergraph.util.Bytes;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Atomic append of a single block to a file version.

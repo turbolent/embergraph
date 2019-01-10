@@ -36,22 +36,22 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.Var;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.XSD;
-import com.bigdata.rdf.sail.sparql.Bigdata2ASTSPARQLParser;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpContext;
-import com.bigdata.rdf.sparql.ast.eval.ASTSearchOptimizer;
-import com.bigdata.rdf.sparql.ast.optimizers.ASTBottomUpOptimizer;
-import com.bigdata.rdf.sparql.ast.optimizers.ASTSetValueExpressionsOptimizer;
-import com.bigdata.rdf.sparql.ast.optimizers.ASTSubGroupJoinVarOptimizer;
-import com.bigdata.rdf.sparql.ast.optimizers.ASTWildcardProjectionOptimizer;
-import com.bigdata.rdf.sparql.ast.optimizers.IASTOptimizer;
-import com.bigdata.rdf.sparql.ast.service.ServiceNode;
-import com.bigdata.rdf.vocab.decls.FOAFVocabularyDecl;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.Var;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.XSD;
+import org.embergraph.rdf.sail.sparql.Bigdata2ASTSPARQLParser;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
+import org.embergraph.rdf.sparql.ast.eval.ASTSearchOptimizer;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTBottomUpOptimizer;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTSetValueExpressionsOptimizer;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTSubGroupJoinVarOptimizer;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTWildcardProjectionOptimizer;
+import org.embergraph.rdf.sparql.ast.optimizers.IASTOptimizer;
+import org.embergraph.rdf.sparql.ast.service.ServiceNode;
+import org.embergraph.rdf.vocab.decls.FOAFVocabularyDecl;
 
 /**
  * Test suite for methods supporting static analysis of the variables, including

@@ -34,10 +34,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
-import com.bigdata.btree.AbstractBTree.HardReference;
-import com.bigdata.btree.keys.TestKeyBuilder;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rawstore.SimpleMemoryRawStore;
+import org.embergraph.btree.AbstractBTree.HardReference;
+import org.embergraph.btree.keys.TestKeyBuilder;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /**
  * Unit tests for transient {@link BTree}s (no backing store).

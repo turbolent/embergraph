@@ -33,19 +33,19 @@ import junit.extensions.proxy.ProxyTestSuite;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.ITx;
-import com.bigdata.rdf.sail.BigdataSail.Options;
-import com.bigdata.rdf.sail.tck.BigdataEmbeddedFederationSparqlTest;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.ScaleOutTripleStore;
-import com.bigdata.resources.ResourceManager;
-import com.bigdata.service.AbstractClient;
-import com.bigdata.service.DistributedTransactionService;
-import com.bigdata.service.EmbeddedClient;
-import com.bigdata.service.EmbeddedFederation;
-import com.bigdata.service.IBigdataClient;
-import com.bigdata.service.IBigdataFederation;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.ITx;
+import org.embergraph.rdf.sail.BigdataSail.Options;
+import org.embergraph.rdf.sail.tck.BigdataEmbeddedFederationSparqlTest;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.ScaleOutTripleStore;
+import org.embergraph.resources.ResourceManager;
+import org.embergraph.service.AbstractClient;
+import org.embergraph.service.DistributedTransactionService;
+import org.embergraph.service.EmbeddedClient;
+import org.embergraph.service.EmbeddedFederation;
+import org.embergraph.service.IBigdataClient;
+import org.embergraph.service.IBigdataFederation;
 
 /**
  * Test suite for the {@link BigdataSail} with quads enabled running against an

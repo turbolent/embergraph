@@ -29,7 +29,7 @@ package org.embergraph.rdf.sail.tck;
 
 import java.util.Properties;
 
-import com.bigdata.rdf.sail.BigdataSail.Options;
+import org.embergraph.rdf.sail.BigdataSail.Options;
 
 /**
  * A variant of the test suite using full read/write transactions.

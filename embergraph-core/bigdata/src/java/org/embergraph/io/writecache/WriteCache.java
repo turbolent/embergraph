@@ -53,24 +53,24 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.IndexSegmentBuilder;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.ha.msg.HAWriteMessage;
-import com.bigdata.ha.msg.IHAWriteMessage;
-import com.bigdata.io.ChecksumUtility;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.io.FileChannelUtility;
-import com.bigdata.io.IBufferAccess;
-import com.bigdata.io.IReopenChannel;
-import com.bigdata.io.compression.CompressorRegistry;
-import com.bigdata.io.compression.IRecordCompressor;
-import com.bigdata.journal.AbstractBufferStrategy;
-import com.bigdata.journal.StoreTypeEnum;
-import com.bigdata.journal.WORMStrategy;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rwstore.RWStore;
-import com.bigdata.util.Bytes;
-import com.bigdata.util.ChecksumError;
+import org.embergraph.btree.IndexSegmentBuilder;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.ha.msg.HAWriteMessage;
+import org.embergraph.ha.msg.IHAWriteMessage;
+import org.embergraph.io.ChecksumUtility;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.io.FileChannelUtility;
+import org.embergraph.io.IBufferAccess;
+import org.embergraph.io.IReopenChannel;
+import org.embergraph.io.compression.CompressorRegistry;
+import org.embergraph.io.compression.IRecordCompressor;
+import org.embergraph.journal.AbstractBufferStrategy;
+import org.embergraph.journal.StoreTypeEnum;
+import org.embergraph.journal.WORMStrategy;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rwstore.RWStore;
+import org.embergraph.util.Bytes;
+import org.embergraph.util.ChecksumError;
 
 /**
  * This class provides a write cache with read-through for NIO writes on a

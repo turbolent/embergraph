@@ -30,9 +30,9 @@ package org.embergraph.rdf.sparql.ast;
 import java.util.Iterator;
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.rdf.spo.ISPO;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.rdf.spo.ISPO;
 
 /**
  * Recursive container for ground {@link StatementPatternNode}s. This is used

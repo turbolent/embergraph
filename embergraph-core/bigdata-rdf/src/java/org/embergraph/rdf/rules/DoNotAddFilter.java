@@ -27,14 +27,14 @@ package org.embergraph.rdf.rules;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-import com.bigdata.rdf.axioms.Axioms;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.IVUtility;
-import com.bigdata.rdf.model.StatementEnum;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.rdf.spo.SPOFilter;
-import com.bigdata.rdf.vocab.Vocabulary;
-import com.bigdata.relation.rule.eval.ISolution;
+import org.embergraph.rdf.axioms.Axioms;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.IVUtility;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.rdf.spo.SPOFilter;
+import org.embergraph.rdf.vocab.Vocabulary;
+import org.embergraph.relation.rule.eval.ISolution;
 
 /**
  * Filter keeps matched triple patterns generated OUT of the database.

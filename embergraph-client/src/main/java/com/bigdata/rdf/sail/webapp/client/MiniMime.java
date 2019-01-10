@@ -32,7 +32,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.util.NV;
+import org.embergraph.util.NV;
 
 /**
  * Extract and return the quality score for the mime type (defaults to

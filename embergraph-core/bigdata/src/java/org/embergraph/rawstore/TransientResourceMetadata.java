@@ -3,7 +3,7 @@ package org.embergraph.rawstore;
 import java.io.Serializable;
 import java.util.UUID;
 
-import com.bigdata.mdi.IResourceMetadata;
+import org.embergraph.mdi.IResourceMetadata;
 
 /**
  * Static class since must be {@link Serializable}.

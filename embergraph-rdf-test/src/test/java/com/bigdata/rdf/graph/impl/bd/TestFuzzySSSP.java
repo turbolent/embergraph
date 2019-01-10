@@ -27,10 +27,10 @@ import java.util.Properties;
 
 import org.openrdf.model.Value;
 
-import com.bigdata.rdf.graph.IGASEngine;
-import com.bigdata.rdf.graph.IGraphAccessor;
-import com.bigdata.rdf.graph.analytics.FuzzySSSP;
-import com.bigdata.rdf.graph.analytics.FuzzySSSP.FuzzySSSPResult;
+import org.embergraph.rdf.graph.IGASEngine;
+import org.embergraph.rdf.graph.IGraphAccessor;
+import org.embergraph.rdf.graph.analytics.FuzzySSSP;
+import org.embergraph.rdf.graph.analytics.FuzzySSSP.FuzzySSSPResult;
 
 
 /**

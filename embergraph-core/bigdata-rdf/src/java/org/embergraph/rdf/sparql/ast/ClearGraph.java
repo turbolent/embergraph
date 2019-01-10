@@ -29,7 +29,7 @@ package org.embergraph.rdf.sparql.ast;
 
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
+import org.embergraph.bop.BOp;
 
 /**
  * The CLEAR operation removes all the triples in the specified graph(s) in the

@@ -29,9 +29,9 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.bigdata.io.DataInputBuffer;
-import com.bigdata.io.DataOutputBuffer;
-import com.bigdata.io.SerializerUtil;
+import org.embergraph.io.DataInputBuffer;
+import org.embergraph.io.DataOutputBuffer;
+import org.embergraph.io.SerializerUtil;
 
 /**
  * A type safe enumeration of value types. This class also supports encoding

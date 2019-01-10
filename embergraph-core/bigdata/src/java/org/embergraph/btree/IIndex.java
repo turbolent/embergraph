@@ -25,16 +25,16 @@ package org.embergraph.btree;
 
 import java.io.Serializable;
 
-import com.bigdata.btree.proc.AbstractKeyArrayIndexProcedureConstructor;
-import com.bigdata.btree.proc.IIndexProcedure;
-import com.bigdata.btree.proc.IKeyRangeIndexProcedure;
-import com.bigdata.btree.proc.IParallelizableIndexProcedure;
-import com.bigdata.btree.proc.IResultHandler;
-import com.bigdata.btree.proc.ISimpleIndexProcedure;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.ICounterSetAccess;
-import com.bigdata.mdi.IResourceMetadata;
-import com.bigdata.service.Split;
+import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedureConstructor;
+import org.embergraph.btree.proc.IIndexProcedure;
+import org.embergraph.btree.proc.IKeyRangeIndexProcedure;
+import org.embergraph.btree.proc.IParallelizableIndexProcedure;
+import org.embergraph.btree.proc.IResultHandler;
+import org.embergraph.btree.proc.ISimpleIndexProcedure;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.ICounterSetAccess;
+import org.embergraph.mdi.IResourceMetadata;
+import org.embergraph.service.Split;
 
 /**
  * <p>

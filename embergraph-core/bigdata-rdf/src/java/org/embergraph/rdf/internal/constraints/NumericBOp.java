@@ -30,13 +30,13 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.vocabulary.XMLSchema;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.bop.ImmutableBOp;
-import com.bigdata.bop.NV;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.sparql.ast.FilterNode;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.bop.ImmutableBOp;
+import org.embergraph.bop.NV;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.sparql.ast.FilterNode;
 
 /**
  * A math expression involving a left and right IValueExpression operand. The 

@@ -39,17 +39,17 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.openrdf.model.Resource;
 
-import com.bigdata.ha.HAStatusEnum;
-import com.bigdata.journal.AbstractJournal;
-import com.bigdata.journal.AbstractTask;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.quorum.AbstractQuorum;
-import com.bigdata.rdf.sail.webapp.BigdataRDFContext.TaskAndFutureTask;
-import com.bigdata.rdf.sail.webapp.client.EncodeDecodeValue;
-import com.bigdata.rdf.sail.webapp.client.IMimeTypes;
-import com.bigdata.rdf.store.BD;
-import com.bigdata.rdf.task.AbstractApiTask;
-import com.bigdata.util.NV;
+import org.embergraph.ha.HAStatusEnum;
+import org.embergraph.journal.AbstractJournal;
+import org.embergraph.journal.AbstractTask;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.quorum.AbstractQuorum;
+import org.embergraph.rdf.sail.webapp.BigdataRDFContext.TaskAndFutureTask;
+import org.embergraph.rdf.sail.webapp.client.EncodeDecodeValue;
+import org.embergraph.rdf.sail.webapp.client.IMimeTypes;
+import org.embergraph.rdf.store.BD;
+import org.embergraph.rdf.task.AbstractApiTask;
+import org.embergraph.util.NV;
 
 /**
  * Useful glue for implementing service actions, but does not directly implement

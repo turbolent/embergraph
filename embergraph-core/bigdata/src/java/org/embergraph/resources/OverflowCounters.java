@@ -30,12 +30,12 @@ package org.embergraph.resources;
 import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.Instrument;
-import com.bigdata.resources.OverflowManager.IIndexPartitionTaskCounters;
-import com.bigdata.resources.OverflowManager.IOverflowManagerCounters;
-import com.bigdata.resources.OverflowManager.Options;
-import com.bigdata.resources.ResourceManager.IResourceManagerCounters;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.Instrument;
+import org.embergraph.resources.OverflowManager.IIndexPartitionTaskCounters;
+import org.embergraph.resources.OverflowManager.IOverflowManagerCounters;
+import org.embergraph.resources.OverflowManager.Options;
+import org.embergraph.resources.ResourceManager.IResourceManagerCounters;
 
 /**
  * Utility class exposes some counter values while protecting the actual

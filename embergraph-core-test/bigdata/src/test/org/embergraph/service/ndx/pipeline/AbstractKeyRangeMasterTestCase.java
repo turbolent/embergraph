@@ -44,18 +44,18 @@ import java.util.concurrent.locks.ReentrantLock;
 import junit.framework.AssertionFailedError;
 import junit.framework.TestCase2;
 
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.keys.KVO;
-import com.bigdata.mdi.IMetadataIndex;
-import com.bigdata.mdi.IPartitionMetadata;
-import com.bigdata.mdi.MetadataIndex;
-import com.bigdata.mdi.PartitionLocator;
-import com.bigdata.rawstore.SimpleMemoryRawStore;
-import com.bigdata.relation.accesspath.BlockingBuffer;
-import com.bigdata.service.Split;
-import com.bigdata.service.ndx.AbstractSplitter;
-import com.bigdata.service.ndx.ISplitter;
-import com.bigdata.util.DaemonThreadFactory;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.keys.KVO;
+import org.embergraph.mdi.IMetadataIndex;
+import org.embergraph.mdi.IPartitionMetadata;
+import org.embergraph.mdi.MetadataIndex;
+import org.embergraph.mdi.PartitionLocator;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
+import org.embergraph.relation.accesspath.BlockingBuffer;
+import org.embergraph.service.Split;
+import org.embergraph.service.ndx.AbstractSplitter;
+import org.embergraph.service.ndx.ISplitter;
+import org.embergraph.util.DaemonThreadFactory;
 
 /**
  * Abstract base class for test suites for the {@link AbstractMasterTask} and

@@ -31,7 +31,7 @@ import java.util.Iterator;
 
 import org.openrdf.model.URI;
 
-import com.bigdata.rdf.vocab.VocabularyDecl;
+import org.embergraph.rdf.vocab.VocabularyDecl;
 
 import cutthecrap.utils.striterators.EmptyIterator;
 import cutthecrap.utils.striterators.Striterator;

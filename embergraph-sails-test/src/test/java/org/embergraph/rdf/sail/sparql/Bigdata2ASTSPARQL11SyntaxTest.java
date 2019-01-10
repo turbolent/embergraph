@@ -42,12 +42,12 @@ import org.openrdf.query.parser.QueryParserUtil;
 import org.openrdf.query.parser.sparql.manifest.SPARQL11SyntaxTest;
 import org.openrdf.query.parser.sparql.manifest.SPARQLSyntaxTest;
 
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.Journal;
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.LocalTripleStore;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Journal;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.LocalTripleStore;
 
 /**
  * Bigdata integration for the {@link SPARQLSyntaxTest}. This appears to be a

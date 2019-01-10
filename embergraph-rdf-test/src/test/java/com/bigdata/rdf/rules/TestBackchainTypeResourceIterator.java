@@ -30,21 +30,21 @@ package com.bigdata.rdf.rules;
 import java.util.Properties;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.inf.BackchainTypeResourceIterator;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.model.StatementEnum;
-import com.bigdata.rdf.rio.IStatementBuffer;
-import com.bigdata.rdf.rio.StatementBuffer;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.rdf.spo.SPO;
-import com.bigdata.rdf.store.AbstractTestCase;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.vocab.Vocabulary;
-import com.bigdata.relation.accesspath.IAccessPath;
-import com.bigdata.striterator.IChunkedOrderedIterator;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.inf.BackchainTypeResourceIterator;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.rdf.rio.IStatementBuffer;
+import org.embergraph.rdf.rio.StatementBuffer;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.rdf.spo.SPO;
+import org.embergraph.rdf.store.AbstractTestCase;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.vocab.Vocabulary;
+import org.embergraph.relation.accesspath.IAccessPath;
+import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /**
  * Test suite for {@link BackchainTypeResourceIterator}.

@@ -25,8 +25,8 @@ import java.util.concurrent.Executors;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.ganglia.util.BytesUtil;
-import com.bigdata.ganglia.util.DaemonThreadFactory;
+import org.embergraph.ganglia.util.BytesUtil;
+import org.embergraph.ganglia.util.DaemonThreadFactory;
 
 /**
  * Class listens in to the Ganglia UDP protocol, decodes received messages, and

@@ -38,26 +38,26 @@ import java.util.concurrent.FutureTask;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpContext;
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.ContextBindingSet;
-import com.bigdata.bop.HashMapAnnotations;
-import com.bigdata.bop.IBind;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IConstraint;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.aggregate.IAggregate;
-import com.bigdata.bop.bindingSet.ListBindingSet;
-import com.bigdata.bop.engine.BOpStats;
-import com.bigdata.htree.HTree;
-import com.bigdata.rdf.error.SparqlTypeErrorException;
-import com.bigdata.rdf.sparql.ast.FilterNode;
-import com.bigdata.relation.accesspath.IBlockingBuffer;
-import com.bigdata.util.InnerCause;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpContext;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.ContextBindingSet;
+import org.embergraph.bop.HashMapAnnotations;
+import org.embergraph.bop.IBind;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IConstraint;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.aggregate.IAggregate;
+import org.embergraph.bop.bindingSet.ListBindingSet;
+import org.embergraph.bop.engine.BOpStats;
+import org.embergraph.htree.HTree;
+import org.embergraph.rdf.error.SparqlTypeErrorException;
+import org.embergraph.rdf.sparql.ast.FilterNode;
+import org.embergraph.relation.accesspath.IBlockingBuffer;
+import org.embergraph.util.InnerCause;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

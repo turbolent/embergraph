@@ -2,10 +2,10 @@ package org.embergraph.btree.filter;
 
 import java.util.Iterator;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleCursor;
-import com.bigdata.btree.ITupleIterator;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleCursor;
+import org.embergraph.btree.ITupleIterator;
 
 
 /**

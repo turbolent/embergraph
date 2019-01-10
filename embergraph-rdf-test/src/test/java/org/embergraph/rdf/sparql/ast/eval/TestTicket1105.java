@@ -28,8 +28,8 @@ import java.util.Properties;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import com.bigdata.rdf.sparql.ast.QuadsOperationInTriplesModeException;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.sparql.ast.QuadsOperationInTriplesModeException;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * Test suite asserting that queries containint quads constructs (named graphs)

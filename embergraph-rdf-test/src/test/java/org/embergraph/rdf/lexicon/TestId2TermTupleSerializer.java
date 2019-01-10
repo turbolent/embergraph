@@ -34,13 +34,13 @@ import java.io.ObjectOutput;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.io.SerializerUtil;
-import com.bigdata.rdf.internal.IVUtility;
-import com.bigdata.rdf.internal.VTE;
-import com.bigdata.rdf.internal.impl.TermId;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValueFactoryImpl;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.io.SerializerUtil;
+import org.embergraph.rdf.internal.IVUtility;
+import org.embergraph.rdf.internal.VTE;
+import org.embergraph.rdf.internal.impl.TermId;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Test suite for {@link Id2TermTupleSerializer}.

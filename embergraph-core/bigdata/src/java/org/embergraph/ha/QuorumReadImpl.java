@@ -31,12 +31,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.ha.msg.HAReadRequest;
-import com.bigdata.ha.msg.IHAReadRequest;
-import com.bigdata.ha.msg.IHAReadResponse;
-import com.bigdata.quorum.QuorumMember;
-import com.bigdata.quorum.QuorumStateChangeListenerBase;
-import com.bigdata.rawstore.IRawStore;
+import org.embergraph.ha.msg.HAReadRequest;
+import org.embergraph.ha.msg.IHAReadRequest;
+import org.embergraph.ha.msg.IHAReadResponse;
+import org.embergraph.quorum.QuorumMember;
+import org.embergraph.quorum.QuorumStateChangeListenerBase;
+import org.embergraph.rawstore.IRawStore;
 
 /**
  * {@link QuorumRead} implementation.

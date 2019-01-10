@@ -1,8 +1,8 @@
 package org.embergraph.resources;
 
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.IndexSegment;
-import com.bigdata.service.DataService;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.IndexSegment;
+import org.embergraph.service.DataService;
 
 /**
  * Abstract base class for results when post-processing a named index

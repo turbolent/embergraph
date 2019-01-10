@@ -43,13 +43,13 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Random;
 
-import com.bigdata.btree.raba.IRaba;
-import com.bigdata.btree.raba.ReadOnlyKeysRaba;
-import com.bigdata.btree.raba.ReadOnlyValuesRaba;
-import com.bigdata.btree.raba.codec.CanonicalHuffmanRabaCoder.AbstractCodingSetup;
-import com.bigdata.btree.raba.codec.CanonicalHuffmanRabaCoder.RabaCodingSetup;
-import com.bigdata.util.Bytes;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.raba.IRaba;
+import org.embergraph.btree.raba.ReadOnlyKeysRaba;
+import org.embergraph.btree.raba.ReadOnlyValuesRaba;
+import org.embergraph.btree.raba.codec.CanonicalHuffmanRabaCoder.AbstractCodingSetup;
+import org.embergraph.btree.raba.codec.CanonicalHuffmanRabaCoder.RabaCodingSetup;
+import org.embergraph.util.Bytes;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Test suite for the {@link CanonicalHuffmanRabaCoder}.

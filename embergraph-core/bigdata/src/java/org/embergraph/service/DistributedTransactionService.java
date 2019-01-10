@@ -52,21 +52,21 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.zip.Adler32;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.IRangeQuery;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.concurrent.LockManager;
-import com.bigdata.concurrent.LockManagerTask;
-import com.bigdata.config.LongValidator;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.Instrument;
-import com.bigdata.journal.IDistributedTransactionService;
-import com.bigdata.journal.ITransactionService;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.Name2Addr;
-import com.bigdata.journal.RunState;
-import com.bigdata.util.concurrent.ExecutionExceptions;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.IRangeQuery;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.concurrent.LockManager;
+import org.embergraph.concurrent.LockManagerTask;
+import org.embergraph.config.LongValidator;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.Instrument;
+import org.embergraph.journal.IDistributedTransactionService;
+import org.embergraph.journal.ITransactionService;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Name2Addr;
+import org.embergraph.journal.RunState;
+import org.embergraph.util.concurrent.ExecutionExceptions;
 
 /**
  * Implementation for an {@link IBigdataFederation} supporting both single-phase

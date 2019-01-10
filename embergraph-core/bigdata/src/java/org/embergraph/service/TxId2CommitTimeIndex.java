@@ -28,18 +28,18 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.UUID;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.Checkpoint;
-import com.bigdata.btree.DefaultTupleSerializer;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.keys.ASCIIKeyBuilderFactory;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.IKeyBuilderFactory;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.service.AbstractTransactionService.TxState;
-import com.bigdata.util.Bytes;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.Checkpoint;
+import org.embergraph.btree.DefaultTupleSerializer;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.keys.ASCIIKeyBuilderFactory;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.IKeyBuilderFactory;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.service.AbstractTransactionService.TxState;
+import org.embergraph.util.Bytes;
 
 /**
  * {@link BTree} whose keys are the absolute value of the txIds and whose values

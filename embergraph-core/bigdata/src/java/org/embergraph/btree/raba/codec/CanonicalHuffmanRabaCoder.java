@@ -50,12 +50,12 @@ import java.util.NoSuchElementException;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.btree.raba.IRaba;
-import com.bigdata.io.AbstractFixedByteArrayBuffer;
-import com.bigdata.io.ByteArrayBuffer;
-import com.bigdata.io.DataOutputBuffer;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.btree.raba.IRaba;
+import org.embergraph.io.AbstractFixedByteArrayBuffer;
+import org.embergraph.io.ByteArrayBuffer;
+import org.embergraph.io.DataOutputBuffer;
+import org.embergraph.util.BytesUtil;
 
 /**
  * This class provides (de-)compression for logical byte[][]s based on canonical

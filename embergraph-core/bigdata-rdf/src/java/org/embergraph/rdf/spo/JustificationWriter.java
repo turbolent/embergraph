@@ -3,9 +3,9 @@ package org.embergraph.rdf.spo;
 import java.util.concurrent.Callable;
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.bigdata.rdf.inf.Justification;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.striterator.IChunkedIterator;
+import org.embergraph.rdf.inf.Justification;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.striterator.IChunkedIterator;
 
 /**
  * Writes {@link Justification}s on the justification index.

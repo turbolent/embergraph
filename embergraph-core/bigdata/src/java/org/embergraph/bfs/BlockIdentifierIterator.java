@@ -2,10 +2,10 @@ package org.embergraph.bfs;
 
 import java.util.Iterator;
 
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.util.Bytes;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.util.Bytes;
 
 /**
  * Extracts the block identifier from the key.

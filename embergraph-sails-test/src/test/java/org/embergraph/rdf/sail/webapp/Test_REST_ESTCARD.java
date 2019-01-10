@@ -35,9 +35,9 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.repository.RepositoryConnection;
 
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepository.RemoveOp;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository.RemoveOp;
 
 /**
  * Proxied test suite for the ESTCARD method (estimated cardinality aka fast

@@ -35,15 +35,15 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
-import com.bigdata.btree.MutableNodeData;
-import com.bigdata.btree.raba.IRaba;
-import com.bigdata.btree.raba.codec.ICodedRaba;
-import com.bigdata.btree.raba.codec.IRabaCoder;
-import com.bigdata.io.AbstractFixedByteArrayBuffer;
-import com.bigdata.io.DataOutputBuffer;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.util.Bytes;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.MutableNodeData;
+import org.embergraph.btree.raba.IRaba;
+import org.embergraph.btree.raba.codec.ICodedRaba;
+import org.embergraph.btree.raba.codec.IRabaCoder;
+import org.embergraph.io.AbstractFixedByteArrayBuffer;
+import org.embergraph.io.DataOutputBuffer;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.util.Bytes;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Default implementation for immutable {@link INodeData} records.

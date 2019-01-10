@@ -37,7 +37,7 @@ import org.openrdf.rio.RDFParserFactory;
 import org.openrdf.rio.RDFParserRegistry;
 import org.openrdf.rio.helpers.StatementCollector;
 
-import com.bigdata.rdf.sail.webapp.client.MiniMime;
+import org.embergraph.rdf.sail.webapp.client.MiniMime;
 
 /**
  * Helper servlet for workbench requests.

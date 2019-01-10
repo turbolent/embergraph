@@ -33,22 +33,22 @@ import java.util.Properties;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.IRangeQuery;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.keys.TestKeyBuilder;
-import com.bigdata.btree.proc.BatchInsert.BatchInsertConstructor;
-import com.bigdata.btree.proc.BatchRemove.BatchRemoveConstructor;
-import com.bigdata.io.SerializerUtil;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.TemporaryRawStore;
-import com.bigdata.mdi.IMetadataIndex;
-import com.bigdata.mdi.PartitionLocator;
-import com.bigdata.resources.ResourceManager.Options;
-import com.bigdata.service.ndx.ClientIndexView;
-import com.bigdata.util.Bytes;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.IRangeQuery;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.keys.TestKeyBuilder;
+import org.embergraph.btree.proc.BatchInsert.BatchInsertConstructor;
+import org.embergraph.btree.proc.BatchRemove.BatchRemoveConstructor;
+import org.embergraph.io.SerializerUtil;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.TemporaryRawStore;
+import org.embergraph.mdi.IMetadataIndex;
+import org.embergraph.mdi.PartitionLocator;
+import org.embergraph.resources.ResourceManager.Options;
+import org.embergraph.service.ndx.ClientIndexView;
+import org.embergraph.util.Bytes;
 
 /**
  * Test suite verifies that inserts eventually split an index and that deletes

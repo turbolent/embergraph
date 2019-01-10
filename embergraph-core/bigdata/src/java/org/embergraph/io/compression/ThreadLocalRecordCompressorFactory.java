@@ -30,7 +30,7 @@ package org.embergraph.io.compression;
 
 import java.util.concurrent.TimeUnit;
 
-import com.bigdata.cache.ConcurrentWeakValueCacheWithTimeout;
+import org.embergraph.cache.ConcurrentWeakValueCacheWithTimeout;
 
 /**
  * An {@link IRecordCompressorFactory} with thread-local semantics based on an

@@ -29,11 +29,11 @@ package org.embergraph.bop.join;
 
 import java.io.Serializable;
 
-import com.bigdata.bop.BOpContext;
-import com.bigdata.bop.BOpEvaluationContext;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.controller.INamedSolutionSetRef;
+import org.embergraph.bop.BOpContext;
+import org.embergraph.bop.BOpEvaluationContext;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.controller.INamedSolutionSetRef;
 
 /**
  * Interface for the factory pattern to create a {@link IHashJoinUtility}.

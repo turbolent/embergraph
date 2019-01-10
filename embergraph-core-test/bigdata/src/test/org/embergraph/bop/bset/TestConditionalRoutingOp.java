@@ -34,26 +34,26 @@ import java.util.concurrent.FutureTask;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpContext;
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.NV;
-import com.bigdata.bop.Var;
-import com.bigdata.bop.bindingSet.HashBindingSet;
-import com.bigdata.bop.bindingSet.ListBindingSet;
-import com.bigdata.bop.constraint.Constraint;
-import com.bigdata.bop.constraint.EQConstant;
-import com.bigdata.bop.engine.AbstractQueryEngineTestCase;
-import com.bigdata.bop.engine.BOpStats;
-import com.bigdata.bop.engine.BlockingBufferWithStats;
-import com.bigdata.bop.engine.MockRunningQuery;
-import com.bigdata.bop.solutions.JVMDistinctBindingSetsOp;
-import com.bigdata.relation.accesspath.IAsynchronousIterator;
-import com.bigdata.relation.accesspath.IBlockingBuffer;
-import com.bigdata.relation.accesspath.ThickAsynchronousIterator;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpContext;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.NV;
+import org.embergraph.bop.Var;
+import org.embergraph.bop.bindingSet.HashBindingSet;
+import org.embergraph.bop.bindingSet.ListBindingSet;
+import org.embergraph.bop.constraint.Constraint;
+import org.embergraph.bop.constraint.EQConstant;
+import org.embergraph.bop.engine.AbstractQueryEngineTestCase;
+import org.embergraph.bop.engine.BOpStats;
+import org.embergraph.bop.engine.BlockingBufferWithStats;
+import org.embergraph.bop.engine.MockRunningQuery;
+import org.embergraph.bop.solutions.JVMDistinctBindingSetsOp;
+import org.embergraph.relation.accesspath.IAsynchronousIterator;
+import org.embergraph.relation.accesspath.IBlockingBuffer;
+import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

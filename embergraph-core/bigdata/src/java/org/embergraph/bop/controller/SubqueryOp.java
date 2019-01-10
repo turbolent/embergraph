@@ -34,25 +34,25 @@ import java.util.concurrent.FutureTask;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpContext;
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstraint;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.NV;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.aggregate.IAggregate;
-import com.bigdata.bop.engine.AbstractRunningQuery;
-import com.bigdata.bop.engine.IRunningQuery;
-import com.bigdata.bop.engine.QueryEngine;
-import com.bigdata.bop.join.JoinAnnotations;
-import com.bigdata.bop.join.JoinTypeEnum;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.impl.literal.XSDBooleanIV;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.relation.accesspath.IBlockingBuffer;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpContext;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstraint;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.NV;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.aggregate.IAggregate;
+import org.embergraph.bop.engine.AbstractRunningQuery;
+import org.embergraph.bop.engine.IRunningQuery;
+import org.embergraph.bop.engine.QueryEngine;
+import org.embergraph.bop.join.JoinAnnotations;
+import org.embergraph.bop.join.JoinTypeEnum;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.impl.literal.XSDBooleanIV;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.relation.accesspath.IBlockingBuffer;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

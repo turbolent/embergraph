@@ -112,16 +112,16 @@ SELECT ( VarNode(p) AS VarNode(p) )
 package org.embergraph.rdf.sparql.ast.optimizers;
 
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.bindingSet.ListBindingSet;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.sparql.ast.ASTContainer;
-import com.bigdata.rdf.sparql.ast.ConstantNode;
-import com.bigdata.rdf.sparql.ast.ISolutionSetStats;
-import com.bigdata.rdf.sparql.ast.QueryRoot;
-import com.bigdata.rdf.sparql.ast.SolutionSetStats;
-import com.bigdata.rdf.sparql.ast.TermNode;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpContext;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.bindingSet.ListBindingSet;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.sparql.ast.ASTContainer;
+import org.embergraph.rdf.sparql.ast.ConstantNode;
+import org.embergraph.rdf.sparql.ast.ISolutionSetStats;
+import org.embergraph.rdf.sparql.ast.QueryRoot;
+import org.embergraph.rdf.sparql.ast.SolutionSetStats;
+import org.embergraph.rdf.sparql.ast.TermNode;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 public class TestASTNamedSubqueryOptimizer2 extends AbstractOptimizerTestCaseWithUtilityMethods {
 

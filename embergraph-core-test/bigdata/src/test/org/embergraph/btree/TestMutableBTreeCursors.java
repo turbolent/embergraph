@@ -31,9 +31,9 @@ package org.embergraph.btree;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
-import com.bigdata.btree.AbstractBTreeTupleCursor.MutableBTreeTupleCursor;
-import com.bigdata.btree.keys.TestKeyBuilder;
-import com.bigdata.rawstore.SimpleMemoryRawStore;
+import org.embergraph.btree.AbstractBTreeTupleCursor.MutableBTreeTupleCursor;
+import org.embergraph.btree.keys.TestKeyBuilder;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /**
  * Test ability to traverse tuples using an {@link ITupleCursor} while the SAME

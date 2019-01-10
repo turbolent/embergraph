@@ -30,7 +30,7 @@ package org.embergraph.relation.rule;
 
 import java.io.Serializable;
 
-import com.bigdata.relation.accesspath.IAccessPath;
+import org.embergraph.relation.accesspath.IAccessPath;
 
 /**
  * Indicates the first solution to be returned to the caller (offset) and the

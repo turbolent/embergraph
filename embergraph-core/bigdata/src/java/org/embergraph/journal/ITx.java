@@ -23,9 +23,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.journal;
 
-import com.bigdata.btree.ILocalBTreeView;
-import com.bigdata.btree.isolation.IsolatedFusedView;
-import com.bigdata.service.ITxState;
+import org.embergraph.btree.ILocalBTreeView;
+import org.embergraph.btree.isolation.IsolatedFusedView;
+import org.embergraph.service.ITxState;
 
 /**
  * <p>

@@ -27,11 +27,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.lexicon;
 
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.IKeyBuilderExtension;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.IVUtility;
-import com.bigdata.search.FullTextIndex;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.IKeyBuilderExtension;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.IVUtility;
+import org.embergraph.search.FullTextIndex;
 
 /**
  * Implementation provides for the use of {@link IV}s in the

@@ -33,8 +33,8 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Map;
 
-import com.bigdata.btree.Tuple;
-import com.bigdata.rdf.sparql.ast.IValueExpressionNode;
+import org.embergraph.btree.Tuple;
+import org.embergraph.rdf.sparql.ast.IValueExpressionNode;
 
 /**
  * Base class with some common methods for mutable and copy-on-write {@link BOp}

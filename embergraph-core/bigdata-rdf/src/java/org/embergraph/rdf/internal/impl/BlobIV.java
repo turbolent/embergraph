@@ -28,13 +28,13 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.rdf.internal.DTE;
-import com.bigdata.rdf.internal.INonInlineExtensionCodes;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.VTE;
-import com.bigdata.rdf.lexicon.BlobsIndexHelper;
-import com.bigdata.rdf.model.BigdataValue;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.rdf.internal.DTE;
+import org.embergraph.rdf.internal.INonInlineExtensionCodes;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.VTE;
+import org.embergraph.rdf.lexicon.BlobsIndexHelper;
+import org.embergraph.rdf.model.BigdataValue;
 
 /**
  * Implementation for any kind of RDF {@link Value} when the value is not being

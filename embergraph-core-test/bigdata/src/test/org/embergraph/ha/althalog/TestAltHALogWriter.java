@@ -34,12 +34,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.ha.msg.HAWriteMessage;
-import com.bigdata.ha.msg.IHAWriteMessage;
-import com.bigdata.io.ChecksumUtility;
-import com.bigdata.journal.IRootBlockView;
-import com.bigdata.journal.RootBlockView;
-import com.bigdata.journal.StoreTypeEnum;
+import org.embergraph.ha.msg.HAWriteMessage;
+import org.embergraph.ha.msg.IHAWriteMessage;
+import org.embergraph.io.ChecksumUtility;
+import org.embergraph.journal.IRootBlockView;
+import org.embergraph.journal.RootBlockView;
+import org.embergraph.journal.StoreTypeEnum;
 
 import junit.framework.TestCase;
 

@@ -29,8 +29,8 @@ package org.embergraph.counters.striped;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.Instrument;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.Instrument;
 
 /**
  * Unit tests for {@link StripedCounters}.

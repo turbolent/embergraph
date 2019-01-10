@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
-import com.bigdata.io.IStreamSerializer;
-import com.bigdata.striterator.IKeyOrder;
+import org.embergraph.io.IStreamSerializer;
+import org.embergraph.striterator.IKeyOrder;
 
 /**
  * A chunk of elements materialized from a remote iterator together with some

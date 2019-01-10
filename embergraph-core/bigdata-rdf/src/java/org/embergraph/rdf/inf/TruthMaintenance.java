@@ -53,25 +53,25 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 import org.apache.log4j.MDC;
 
-import com.bigdata.journal.TemporaryStore;
-import com.bigdata.rdf.changesets.IChangeLog;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.BigdataBNode;
-import com.bigdata.rdf.model.BigdataStatement;
-import com.bigdata.rdf.model.StatementEnum;
-import com.bigdata.rdf.rio.IStatementBuffer;
-import com.bigdata.rdf.rules.InferenceEngine;
-import com.bigdata.rdf.spo.ExplicitSPOFilter;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.rdf.spo.SPO;
-import com.bigdata.rdf.spo.SPOArrayIterator;
-import com.bigdata.rdf.spo.SPOKeyOrder;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.BigdataStatementIterator;
-import com.bigdata.rdf.store.IRawTripleStore;
-import com.bigdata.rdf.store.TempTripleStore;
-import com.bigdata.relation.accesspath.IElementFilter;
-import com.bigdata.striterator.IChunkedOrderedIterator;
+import org.embergraph.journal.TemporaryStore;
+import org.embergraph.rdf.changesets.IChangeLog;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.BigdataBNode;
+import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.rdf.rio.IStatementBuffer;
+import org.embergraph.rdf.rules.InferenceEngine;
+import org.embergraph.rdf.spo.ExplicitSPOFilter;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.rdf.spo.SPO;
+import org.embergraph.rdf.spo.SPOArrayIterator;
+import org.embergraph.rdf.spo.SPOKeyOrder;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.BigdataStatementIterator;
+import org.embergraph.rdf.store.IRawTripleStore;
+import org.embergraph.rdf.store.TempTripleStore;
+import org.embergraph.relation.accesspath.IElementFilter;
+import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /**
  * The {@link TruthMaintenance} class facilitates maintaining the RDF(S)+

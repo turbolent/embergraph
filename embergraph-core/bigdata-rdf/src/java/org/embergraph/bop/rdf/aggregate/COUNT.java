@@ -26,16 +26,16 @@ package org.embergraph.bop.rdf.aggregate;
 import java.math.BigInteger;
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.aggregate.AggregateBase;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.constraints.INeedsMaterialization;
-import com.bigdata.rdf.internal.constraints.INeedsMaterialization.Requirement;
-import com.bigdata.rdf.internal.impl.literal.XSDIntegerIV;
-import com.bigdata.rdf.model.BigdataLiteral;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.aggregate.AggregateBase;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.constraints.INeedsMaterialization;
+import org.embergraph.rdf.internal.constraints.INeedsMaterialization.Requirement;
+import org.embergraph.rdf.internal.impl.literal.XSDIntegerIV;
+import org.embergraph.rdf.model.BigdataLiteral;
 
 /**
  * Operator computes the number of non-null values over the presented binding

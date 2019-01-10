@@ -32,10 +32,10 @@ import java.io.IOException;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.proc.IIndexProcedure;
-import com.bigdata.journal.ITx;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.proc.IIndexProcedure;
+import org.embergraph.journal.ITx;
 
 /**
  * Unit tests of local (all writes are on a single data service) and distributed

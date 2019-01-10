@@ -29,26 +29,26 @@ package org.embergraph.rdf.sparql.ast.optimizers;
 
 import java.util.Iterator;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.bindingSet.ListBindingSet;
-import com.bigdata.rdf.sparql.ast.ArbitraryLengthPathNode;
-import com.bigdata.rdf.sparql.ast.ConstantNode;
-import com.bigdata.rdf.sparql.ast.FilterNode;
-import com.bigdata.rdf.sparql.ast.GraphPatternGroup;
-import com.bigdata.rdf.sparql.ast.IGroupMemberNode;
-import com.bigdata.rdf.sparql.ast.IQueryNode;
-import com.bigdata.rdf.sparql.ast.IValueExpressionNode;
-import com.bigdata.rdf.sparql.ast.JoinGroupNode;
-import com.bigdata.rdf.sparql.ast.NamedSubqueriesNode;
-import com.bigdata.rdf.sparql.ast.NamedSubqueryRoot;
-import com.bigdata.rdf.sparql.ast.QueryBase;
-import com.bigdata.rdf.sparql.ast.QueryNodeWithBindingSet;
-import com.bigdata.rdf.sparql.ast.QueryRoot;
-import com.bigdata.rdf.sparql.ast.StaticAnalysis;
-import com.bigdata.rdf.sparql.ast.SubqueryFunctionNodeBase;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpContext;
-import com.bigdata.rdf.sparql.ast.service.ServiceNode;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.bindingSet.ListBindingSet;
+import org.embergraph.rdf.sparql.ast.ArbitraryLengthPathNode;
+import org.embergraph.rdf.sparql.ast.ConstantNode;
+import org.embergraph.rdf.sparql.ast.FilterNode;
+import org.embergraph.rdf.sparql.ast.GraphPatternGroup;
+import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
+import org.embergraph.rdf.sparql.ast.IQueryNode;
+import org.embergraph.rdf.sparql.ast.IValueExpressionNode;
+import org.embergraph.rdf.sparql.ast.JoinGroupNode;
+import org.embergraph.rdf.sparql.ast.NamedSubqueriesNode;
+import org.embergraph.rdf.sparql.ast.NamedSubqueryRoot;
+import org.embergraph.rdf.sparql.ast.QueryBase;
+import org.embergraph.rdf.sparql.ast.QueryNodeWithBindingSet;
+import org.embergraph.rdf.sparql.ast.QueryRoot;
+import org.embergraph.rdf.sparql.ast.StaticAnalysis;
+import org.embergraph.rdf.sparql.ast.SubqueryFunctionNodeBase;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
+import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 
 /**
  * This makes it easier to sit down and write an optimizer that operates on

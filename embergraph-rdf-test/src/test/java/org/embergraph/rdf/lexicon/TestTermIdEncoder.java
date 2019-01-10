@@ -31,7 +31,7 @@ import java.util.Random;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.btree.ICounter;
+import org.embergraph.btree.ICounter;
 
 /**
  * Unit test for unified encoding / decoding for partitioned and unpartitioned

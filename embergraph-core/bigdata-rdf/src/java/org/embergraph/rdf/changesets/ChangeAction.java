@@ -1,6 +1,6 @@
 package org.embergraph.rdf.changesets;
 
-import com.bigdata.rdf.model.StatementEnum;
+import org.embergraph.rdf.model.StatementEnum;
 
 /**
      * Attempting to add or remove statements can have a number of different 

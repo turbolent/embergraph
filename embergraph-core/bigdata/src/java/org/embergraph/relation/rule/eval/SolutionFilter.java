@@ -1,6 +1,6 @@
 package org.embergraph.relation.rule.eval;
 
-import com.bigdata.relation.accesspath.IElementFilter;
+import org.embergraph.relation.accesspath.IElementFilter;
 
 /**
  * Resolves an {@link ISolution} to its element and delegates the filter

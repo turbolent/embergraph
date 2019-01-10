@@ -31,17 +31,17 @@ import java.util.Properties;
 
 import org.openrdf.model.vocabulary.RDF;
 
-import com.bigdata.io.SerializerUtil;
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.AbstractTripleStoreTestCase;
-import com.bigdata.rdf.store.AbstractTripleStore.Options;
-import com.bigdata.rdf.vocab.NoVocabulary;
-import com.bigdata.rdf.vocab.RDFSVocabulary;
-import com.bigdata.rdf.vocab.Vocabulary;
+import org.embergraph.io.SerializerUtil;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.AbstractTripleStoreTestCase;
+import org.embergraph.rdf.store.AbstractTripleStore.Options;
+import org.embergraph.rdf.vocab.NoVocabulary;
+import org.embergraph.rdf.vocab.RDFSVocabulary;
+import org.embergraph.rdf.vocab.Vocabulary;
 
 /**
  * Test suite for the {@link Vocabulary} implementations in the context of

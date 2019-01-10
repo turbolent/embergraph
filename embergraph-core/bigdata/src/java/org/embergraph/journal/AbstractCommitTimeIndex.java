@@ -27,14 +27,14 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.DelegateBTree;
-import com.bigdata.btree.ILinearList;
-import com.bigdata.btree.IRangeQuery;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.Tuple;
-import com.bigdata.btree.UnisolatedReadWriteIndex;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.DelegateBTree;
+import org.embergraph.btree.ILinearList;
+import org.embergraph.btree.IRangeQuery;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.Tuple;
+import org.embergraph.btree.UnisolatedReadWriteIndex;
 
 /**
  * Abstract {@link BTree} mapping <em>commitTime</em> (long integers) to

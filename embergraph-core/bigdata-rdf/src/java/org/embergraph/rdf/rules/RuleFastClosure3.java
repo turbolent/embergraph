@@ -31,15 +31,15 @@ import java.util.Set;
 
 import org.openrdf.model.vocabulary.RDFS;
 
-import com.bigdata.bop.IConstant;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.vocab.Vocabulary;
-import com.bigdata.relation.accesspath.IBuffer;
-import com.bigdata.relation.rule.IRule;
-import com.bigdata.relation.rule.eval.IJoinNexus;
-import com.bigdata.relation.rule.eval.IRuleTaskFactory;
-import com.bigdata.relation.rule.eval.ISolution;
-import com.bigdata.relation.rule.eval.IStepTask;
+import org.embergraph.bop.IConstant;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.vocab.Vocabulary;
+import org.embergraph.relation.accesspath.IBuffer;
+import org.embergraph.relation.rule.IRule;
+import org.embergraph.relation.rule.eval.IJoinNexus;
+import org.embergraph.relation.rule.eval.IRuleTaskFactory;
+import org.embergraph.relation.rule.eval.ISolution;
+import org.embergraph.relation.rule.eval.IStepTask;
 
 public class RuleFastClosure3 extends AbstractRuleFastClosure_3_5_6_7_9 {
 

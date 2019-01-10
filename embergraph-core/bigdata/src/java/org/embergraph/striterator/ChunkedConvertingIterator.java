@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.IIndex;
+import org.embergraph.btree.IIndex;
 
 /**
  * Supports the chunk-at-a-time filter and conversion operations.

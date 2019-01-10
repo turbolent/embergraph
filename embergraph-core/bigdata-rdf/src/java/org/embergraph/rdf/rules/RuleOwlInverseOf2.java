@@ -28,9 +28,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.rules;
 
 import org.openrdf.model.vocabulary.OWL;
-import com.bigdata.rdf.spo.SPOPredicate;
-import com.bigdata.rdf.vocab.Vocabulary;
-import com.bigdata.relation.rule.Rule;
+import org.embergraph.rdf.spo.SPOPredicate;
+import org.embergraph.rdf.vocab.Vocabulary;
+import org.embergraph.relation.rule.Rule;
 
 /**
  * owl:inverseOf2

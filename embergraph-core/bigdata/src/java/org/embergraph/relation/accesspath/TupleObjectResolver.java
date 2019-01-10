@@ -1,7 +1,7 @@
 package org.embergraph.relation.accesspath;
 
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.Tuple;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.Tuple;
 
 import cutthecrap.utils.striterators.Resolver;
 

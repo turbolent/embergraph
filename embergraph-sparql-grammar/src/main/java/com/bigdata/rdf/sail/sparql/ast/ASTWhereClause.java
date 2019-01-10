@@ -2,11 +2,11 @@
 
 package com.bigdata.rdf.sail.sparql.ast;
 
-import com.bigdata.rdf.sail.sparql.ast.ASTGraphPatternGroup;
-import com.bigdata.rdf.sail.sparql.ast.SimpleNode;
-import com.bigdata.rdf.sail.sparql.ast.SyntaxTreeBuilder;
-import com.bigdata.rdf.sail.sparql.ast.SyntaxTreeBuilderVisitor;
-import com.bigdata.rdf.sail.sparql.ast.VisitorException;
+import org.embergraph.rdf.sail.sparql.ast.ASTGraphPatternGroup;
+import org.embergraph.rdf.sail.sparql.ast.SimpleNode;
+import org.embergraph.rdf.sail.sparql.ast.SyntaxTreeBuilder;
+import org.embergraph.rdf.sail.sparql.ast.SyntaxTreeBuilderVisitor;
+import org.embergraph.rdf.sail.sparql.ast.VisitorException;
 
 public class ASTWhereClause extends SimpleNode {
 

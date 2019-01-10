@@ -36,18 +36,18 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpEvaluationContext;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.engine.ChunkedRunningQuery;
-import com.bigdata.bop.engine.IChunkHandler;
-import com.bigdata.bop.engine.IChunkMessage;
-import com.bigdata.bop.engine.IQueryClient;
-import com.bigdata.bop.engine.IQueryPeer;
-import com.bigdata.bop.engine.QueryEngine;
-import com.bigdata.io.DirectBufferPoolAllocator.IAllocationContext;
-import com.bigdata.service.IBigdataFederation;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpEvaluationContext;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.engine.ChunkedRunningQuery;
+import org.embergraph.bop.engine.IChunkHandler;
+import org.embergraph.bop.engine.IChunkMessage;
+import org.embergraph.bop.engine.IQueryClient;
+import org.embergraph.bop.engine.IQueryPeer;
+import org.embergraph.bop.engine.QueryEngine;
+import org.embergraph.io.DirectBufferPoolAllocator.IAllocationContext;
+import org.embergraph.service.IBigdataFederation;
 
 /**
  * Extends {@link ChunkedRunningQuery} to provide additional state and logic

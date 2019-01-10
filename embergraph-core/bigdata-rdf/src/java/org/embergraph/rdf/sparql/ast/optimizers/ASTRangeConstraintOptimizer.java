@@ -27,18 +27,18 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.optimizers;
 
-import com.bigdata.bop.IPredicate;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.rdf.internal.DTE;
-import com.bigdata.rdf.internal.ILexiconConfiguration;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.VTE;
-import com.bigdata.rdf.internal.impl.AbstractIV;
-import com.bigdata.rdf.sparql.ast.FunctionRegistry;
-import com.bigdata.rdf.sparql.ast.QueryNodeWithBindingSet;
-import com.bigdata.rdf.sparql.ast.StatementPatternNode;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpContext;
-import com.bigdata.rdf.spo.SPOKeyOrder;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.rdf.internal.DTE;
+import org.embergraph.rdf.internal.ILexiconConfiguration;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.VTE;
+import org.embergraph.rdf.internal.impl.AbstractIV;
+import org.embergraph.rdf.sparql.ast.FunctionRegistry;
+import org.embergraph.rdf.sparql.ast.QueryNodeWithBindingSet;
+import org.embergraph.rdf.sparql.ast.StatementPatternNode;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
+import org.embergraph.rdf.spo.SPOKeyOrder;
 
 /**
  * AST optimizer recognizes datatype and/or value range constraints and applies

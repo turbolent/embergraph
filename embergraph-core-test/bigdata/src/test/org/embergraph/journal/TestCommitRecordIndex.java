@@ -29,9 +29,9 @@ package org.embergraph.journal;
 
 import java.nio.ByteBuffer;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rawstore.SimpleMemoryRawStore;
+import org.embergraph.btree.BTree;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /**
  * Test suite for {@link CommitRecordIndex}. Tests focus on get (exact match)

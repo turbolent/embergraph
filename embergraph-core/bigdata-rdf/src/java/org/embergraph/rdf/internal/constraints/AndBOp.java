@@ -26,14 +26,14 @@ package org.embergraph.rdf.internal.constraints;
 
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.bop.NV;
-import com.bigdata.rdf.error.SparqlTypeErrorException;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.impl.literal.XSDBooleanIV;
-import com.bigdata.rdf.sparql.ast.GlobalAnnotations;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.bop.NV;
+import org.embergraph.rdf.error.SparqlTypeErrorException;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.impl.literal.XSDBooleanIV;
+import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 
 /**
  * Imposes the constraint <code>x AND y</code>. Each operand of this operator

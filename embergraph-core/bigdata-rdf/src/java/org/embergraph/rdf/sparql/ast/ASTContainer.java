@@ -31,13 +31,13 @@ import java.util.Map;
 
 import org.openrdf.model.Value;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.rdf.lexicon.BigdataValueCentricFullTextIndex;
-import com.bigdata.rdf.sail.sparql.ast.SimpleNode;
-import com.bigdata.rdf.sparql.ast.optimizers.IASTOptimizer;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.rdf.lexicon.BigdataValueCentricFullTextIndex;
+import org.embergraph.rdf.sail.sparql.ast.SimpleNode;
+import org.embergraph.rdf.sparql.ast.optimizers.IASTOptimizer;
 
 /**
  * A super container for the AST.

@@ -29,29 +29,29 @@ package org.embergraph.rdf.sparql.ast;
 
 import java.util.UUID;
 
-import com.bigdata.bop.BufferAnnotations;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.ap.SampleIndex.SampleType;
-import com.bigdata.bop.engine.IChunkHandler;
-import com.bigdata.bop.engine.IRunningQuery;
-import com.bigdata.bop.engine.QueryEngine;
-import com.bigdata.bop.fed.QueryEngineFactory;
-import com.bigdata.bop.join.HashJoinAnnotations;
-import com.bigdata.bop.join.JoinAnnotations;
-import com.bigdata.htree.HTree;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.rdf.sparql.ast.cache.CacheConnectionFactory;
-import com.bigdata.rdf.sparql.ast.hints.QueryHintRegistry;
-import com.bigdata.rdf.sparql.ast.hints.QueryHintScope;
-import com.bigdata.rdf.sparql.ast.optimizers.ASTDistinctTermScanOptimizer;
-import com.bigdata.rdf.sparql.ast.optimizers.ASTFastRangeCountOptimizer;
-import com.bigdata.rdf.sparql.ast.optimizers.ASTJoinGroupOrderOptimizer;
-import com.bigdata.rdf.sparql.ast.optimizers.ASTJoinOrderByTypeOptimizer;
-import com.bigdata.rdf.sparql.ast.optimizers.ASTOptimizerList;
-import com.bigdata.rdf.sparql.ast.optimizers.ASTStaticJoinOptimizer;
-import com.bigdata.rdf.sparql.ast.optimizers.DefaultOptimizerList;
-import com.bigdata.util.Bytes;
-import com.bigdata.util.ClassPathUtil;
+import org.embergraph.bop.BufferAnnotations;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.ap.SampleIndex.SampleType;
+import org.embergraph.bop.engine.IChunkHandler;
+import org.embergraph.bop.engine.IRunningQuery;
+import org.embergraph.bop.engine.QueryEngine;
+import org.embergraph.bop.fed.QueryEngineFactory;
+import org.embergraph.bop.join.HashJoinAnnotations;
+import org.embergraph.bop.join.JoinAnnotations;
+import org.embergraph.htree.HTree;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.rdf.sparql.ast.cache.CacheConnectionFactory;
+import org.embergraph.rdf.sparql.ast.hints.QueryHintRegistry;
+import org.embergraph.rdf.sparql.ast.hints.QueryHintScope;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTDistinctTermScanOptimizer;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTFastRangeCountOptimizer;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTJoinGroupOrderOptimizer;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTJoinOrderByTypeOptimizer;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTOptimizerList;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTStaticJoinOptimizer;
+import org.embergraph.rdf.sparql.ast.optimizers.DefaultOptimizerList;
+import org.embergraph.util.Bytes;
+import org.embergraph.util.ClassPathUtil;
 
 /**
  * Query hints are directives understood by the SPARQL end point. A query hint

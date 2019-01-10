@@ -44,17 +44,17 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.IConstraint;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.ap.SampleIndex.SampleType;
-import com.bigdata.bop.engine.QueryEngine;
-import com.bigdata.bop.joinGraph.NoSolutionsException;
-import com.bigdata.bop.joinGraph.PartitionedJoinGroup;
-import com.bigdata.bop.rdf.join.DataSetJoin;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpRTO;
-import com.bigdata.util.concurrent.ExecutionExceptions;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.IConstraint;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.ap.SampleIndex.SampleType;
+import org.embergraph.bop.engine.QueryEngine;
+import org.embergraph.bop.joinGraph.NoSolutionsException;
+import org.embergraph.bop.joinGraph.PartitionedJoinGroup;
+import org.embergraph.bop.rdf.join.DataSetJoin;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpRTO;
+import org.embergraph.util.concurrent.ExecutionExceptions;
 
 /**
  * A runtime optimizer for a join graph. The {@link JoinGraph} bears some

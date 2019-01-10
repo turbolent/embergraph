@@ -34,10 +34,10 @@ import java.util.UUID;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
-import com.bigdata.rdf.internal.impl.BlobIV;
-import com.bigdata.rdf.lexicon.LexiconRelation;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.util.Bytes;
+import org.embergraph.rdf.internal.impl.BlobIV;
+import org.embergraph.rdf.lexicon.LexiconRelation;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.util.Bytes;
 
 /**
  * Data Type Enumeration (DTE) is a class which declares the known intrinsic

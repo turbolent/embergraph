@@ -32,19 +32,19 @@ import java.util.Random;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.btree.AbstractBTreeTestCase;
-import com.bigdata.btree.raba.IRaba;
-import com.bigdata.btree.raba.ReadOnlyValuesRaba;
-import com.bigdata.btree.raba.codec.ICodedRaba;
-import com.bigdata.btree.raba.codec.IRabaCoder;
-import com.bigdata.btree.raba.codec.SimpleRabaCoder;
-import com.bigdata.io.AbstractFixedByteArrayBuffer;
-import com.bigdata.io.DataOutputBuffer;
-import com.bigdata.io.FixedByteArrayBuffer;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.VTE;
-import com.bigdata.rdf.model.StatementEnum;
-import com.bigdata.test.MockTermIdFactory;
+import org.embergraph.btree.AbstractBTreeTestCase;
+import org.embergraph.btree.raba.IRaba;
+import org.embergraph.btree.raba.ReadOnlyValuesRaba;
+import org.embergraph.btree.raba.codec.ICodedRaba;
+import org.embergraph.btree.raba.codec.IRabaCoder;
+import org.embergraph.btree.raba.codec.SimpleRabaCoder;
+import org.embergraph.io.AbstractFixedByteArrayBuffer;
+import org.embergraph.io.DataOutputBuffer;
+import org.embergraph.io.FixedByteArrayBuffer;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.VTE;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.test.MockTermIdFactory;
 
 /**
  * Test suite for approaches to value compression for statement indices. The

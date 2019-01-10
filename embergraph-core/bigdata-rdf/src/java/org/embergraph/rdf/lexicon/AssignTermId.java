@@ -27,12 +27,12 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.lexicon;
 
-import com.bigdata.btree.keys.KVO;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.service.ndx.pipeline.IDuplicateRemover;
-import com.bigdata.service.ndx.pipeline.KVOC;
-import com.bigdata.service.ndx.pipeline.KVOList;
+import org.embergraph.btree.keys.KVO;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.service.ndx.pipeline.IDuplicateRemover;
+import org.embergraph.service.ndx.pipeline.KVOC;
+import org.embergraph.service.ndx.pipeline.KVOList;
 
 /**
  * Assigns the term identifier to duplicate {@link BigdataValue} for a single

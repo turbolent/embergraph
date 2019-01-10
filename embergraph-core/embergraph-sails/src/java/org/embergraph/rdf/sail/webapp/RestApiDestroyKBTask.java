@@ -25,8 +25,8 @@ package org.embergraph.rdf.sail.webapp;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bigdata.journal.ITx;
-import com.bigdata.rdf.sail.DestroyKBTask;
+import org.embergraph.journal.ITx;
+import org.embergraph.rdf.sail.DestroyKBTask;
 
 /**
  * Destroy a namespace (REST API).

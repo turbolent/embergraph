@@ -32,11 +32,11 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.bop.IVariable;
-import com.bigdata.rdf.internal.IV;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.bop.IVariable;
+import org.embergraph.rdf.internal.IV;
 
 /**
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

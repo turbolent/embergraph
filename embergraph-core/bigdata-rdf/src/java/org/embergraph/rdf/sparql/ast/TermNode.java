@@ -2,12 +2,12 @@ package org.embergraph.rdf.sparql.ast;
 
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.bop.IVariableOrConstant;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.BigdataValue;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.bop.IVariableOrConstant;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.BigdataValue;
 
 /**
  * Used to represent a variable or constant in the AST (a term in a statement

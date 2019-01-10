@@ -29,8 +29,8 @@ package org.embergraph.rdf.sparql.ast.eval.rto;
 
 import java.util.Properties;
 
-import com.bigdata.bop.rdf.joinGraph.GenerateBarData;
-import com.bigdata.rdf.sail.BigdataSail;
+import org.embergraph.bop.rdf.joinGraph.GenerateBarData;
+import org.embergraph.rdf.sail.BigdataSail;
 
 /**
  * Data driven test suite for the Runtime Query Optimizer (RTO) using BAR data

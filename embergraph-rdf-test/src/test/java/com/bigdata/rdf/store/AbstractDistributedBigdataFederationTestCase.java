@@ -29,7 +29,7 @@ package com.bigdata.rdf.store;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.service.AbstractScaleOutClient;
+import org.embergraph.service.AbstractScaleOutClient;
 
 /**
  * An abstract test harness that sets up (and tears down) the metadata and data

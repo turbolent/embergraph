@@ -26,9 +26,9 @@ package org.embergraph.rdf.rules;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-import com.bigdata.rdf.spo.SPOPredicate;
-import com.bigdata.rdf.vocab.Vocabulary;
-import com.bigdata.relation.rule.Rule;
+import org.embergraph.rdf.spo.SPOPredicate;
+import org.embergraph.rdf.vocab.Vocabulary;
+import org.embergraph.relation.rule.Rule;
 
 /**
  * rdfs12:

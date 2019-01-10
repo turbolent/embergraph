@@ -28,9 +28,9 @@ package org.embergraph.rdf.sparql.ast.optimizers;
 
 import java.util.List;
 
-import com.bigdata.rdf.sparql.ast.FilterNode;
-import com.bigdata.rdf.sparql.ast.IGroupMemberNode;
-import com.bigdata.rdf.sparql.ast.SubqueryRoot;
+import org.embergraph.rdf.sparql.ast.FilterNode;
+import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
+import org.embergraph.rdf.sparql.ast.SubqueryRoot;
 
 /**
  * Class allowing for precise placement of FILTER expressions within

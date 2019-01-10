@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.io;
 
-import com.bigdata.btree.keys.KeyBuilder;
+import org.embergraph.btree.keys.KeyBuilder;
 
 /**
  * Interface for a slice of a backing byte[].

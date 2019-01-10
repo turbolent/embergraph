@@ -22,8 +22,8 @@ import java.util.List;
 import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IVariable;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IVariable;
 
 /**
  * A base class for IBinders.

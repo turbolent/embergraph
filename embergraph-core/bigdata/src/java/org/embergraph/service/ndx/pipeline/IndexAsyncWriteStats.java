@@ -1,6 +1,6 @@
 package org.embergraph.service.ndx.pipeline;
 
-import com.bigdata.service.AbstractFederation;
+import org.embergraph.service.AbstractFederation;
 
 /**
  * Statistics for asynchronous index writes.

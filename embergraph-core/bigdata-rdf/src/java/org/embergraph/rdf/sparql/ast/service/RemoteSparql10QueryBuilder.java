@@ -39,8 +39,8 @@ import org.openrdf.query.Binding;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.impl.EmptyBindingSet;
 
-import com.bigdata.bop.IVariable;
-import com.bigdata.rdf.sail.webapp.client.AST2SPARQLUtil;
+import org.embergraph.bop.IVariable;
+import org.embergraph.rdf.sail.webapp.client.AST2SPARQLUtil;
 
 /**
  * Utility class constructs a valid SPARQL query for a remote

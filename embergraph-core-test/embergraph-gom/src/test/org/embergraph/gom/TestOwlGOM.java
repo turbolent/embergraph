@@ -43,7 +43,7 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
-import com.bigdata.gom.gpo.IGPO;
+import org.embergraph.gom.gpo.IGPO;
 
 /**
  * This tests a skin to help process an OWL specification.

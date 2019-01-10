@@ -30,23 +30,23 @@ import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 import java.util.Properties;
 
-import com.bigdata.btree.Checkpoint;
-import com.bigdata.btree.IndexSegment;
-import com.bigdata.btree.keys.ICUVersionRecord;
-import com.bigdata.cache.HardReferenceQueue;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.io.FileLockUtility;
-import com.bigdata.io.compression.CompressorRegistry;
-import com.bigdata.io.compression.IRecordCompressor;
-import com.bigdata.io.writecache.WriteCache;
-import com.bigdata.io.writecache.WriteCache.ReadCache;
-import com.bigdata.io.writecache.WriteCacheService;
-import com.bigdata.rawstore.WormAddressManager;
-import com.bigdata.resources.ResourceManager;
-import com.bigdata.resources.StoreManager.ManagedJournal;
-import com.bigdata.rwstore.RWStore;
-import com.bigdata.rwstore.sector.MemStore;
-import com.bigdata.util.Bytes;
+import org.embergraph.btree.Checkpoint;
+import org.embergraph.btree.IndexSegment;
+import org.embergraph.btree.keys.ICUVersionRecord;
+import org.embergraph.cache.HardReferenceQueue;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.io.FileLockUtility;
+import org.embergraph.io.compression.CompressorRegistry;
+import org.embergraph.io.compression.IRecordCompressor;
+import org.embergraph.io.writecache.WriteCache;
+import org.embergraph.io.writecache.WriteCache.ReadCache;
+import org.embergraph.io.writecache.WriteCacheService;
+import org.embergraph.rawstore.WormAddressManager;
+import org.embergraph.resources.ResourceManager;
+import org.embergraph.resources.StoreManager.ManagedJournal;
+import org.embergraph.rwstore.RWStore;
+import org.embergraph.rwstore.sector.MemStore;
+import org.embergraph.util.Bytes;
 
 /**
  * Options for the {@link Journal}. Options are specified as property values to

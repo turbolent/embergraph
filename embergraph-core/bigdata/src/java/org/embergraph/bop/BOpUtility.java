@@ -40,17 +40,17 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.BOp.Annotations;
-import com.bigdata.bop.aggregate.IAggregate;
-import com.bigdata.bop.engine.BOpStats;
-import com.bigdata.bop.solutions.GroupByOp;
-import com.bigdata.bop.solutions.GroupByRewriter;
-import com.bigdata.bop.solutions.IGroupByRewriteState;
-import com.bigdata.rdf.sparql.ast.GroupNodeBase;
-import com.bigdata.rdf.sparql.ast.IGroupMemberNode;
-import com.bigdata.rdf.sparql.ast.ProjectionNode;
-import com.bigdata.relation.accesspath.IBlockingBuffer;
-import com.bigdata.striterator.CloseableIteratorWrapper;
+import org.embergraph.bop.BOp.Annotations;
+import org.embergraph.bop.aggregate.IAggregate;
+import org.embergraph.bop.engine.BOpStats;
+import org.embergraph.bop.solutions.GroupByOp;
+import org.embergraph.bop.solutions.GroupByRewriter;
+import org.embergraph.bop.solutions.IGroupByRewriteState;
+import org.embergraph.rdf.sparql.ast.GroupNodeBase;
+import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
+import org.embergraph.rdf.sparql.ast.ProjectionNode;
+import org.embergraph.relation.accesspath.IBlockingBuffer;
+import org.embergraph.striterator.CloseableIteratorWrapper;
 
 import cutthecrap.utils.striterators.EmptyIterator;
 import cutthecrap.utils.striterators.Expander;

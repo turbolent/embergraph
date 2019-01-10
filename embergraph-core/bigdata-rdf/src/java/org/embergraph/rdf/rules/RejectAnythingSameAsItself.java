@@ -26,12 +26,12 @@ package org.embergraph.rdf.rules;
 
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpBase;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.constraint.BooleanValueExpression;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpBase;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.constraint.BooleanValueExpression;
 
 /**
  * Rejects (x y z) iff x==z and y==owl:sameAs, where x, y, and z are variables.

@@ -41,13 +41,13 @@ import org.openrdf.query.TupleQueryResult;
 import org.openrdf.query.Update;
 import org.openrdf.repository.RepositoryResult;
 
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.model.BigdataBNode;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.model.BigdataStatement;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.model.BigdataBNode;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
 
 /**
  * Test suite for SPARQL* features

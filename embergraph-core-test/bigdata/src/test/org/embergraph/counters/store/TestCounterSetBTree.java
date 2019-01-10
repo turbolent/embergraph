@@ -40,15 +40,15 @@ import junit.framework.TestCase2;
 
 import org.xml.sax.SAXException;
 
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.DefaultInstrumentFactory;
-import com.bigdata.counters.History;
-import com.bigdata.counters.HistoryInstrument;
-import com.bigdata.counters.ICounter;
-import com.bigdata.counters.IHistoryEntry;
-import com.bigdata.counters.Instrument;
-import com.bigdata.counters.PeriodEnum;
-import com.bigdata.counters.History.SampleIterator;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.DefaultInstrumentFactory;
+import org.embergraph.counters.History;
+import org.embergraph.counters.HistoryInstrument;
+import org.embergraph.counters.ICounter;
+import org.embergraph.counters.IHistoryEntry;
+import org.embergraph.counters.Instrument;
+import org.embergraph.counters.PeriodEnum;
+import org.embergraph.counters.History.SampleIterator;
 
 /**
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

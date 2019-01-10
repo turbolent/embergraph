@@ -31,9 +31,9 @@ import java.util.WeakHashMap;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.engine.QueryEngine;
-import com.bigdata.journal.AbstractJournal;
-import com.bigdata.rdf.sparql.ast.QueryHints;
+import org.embergraph.bop.engine.QueryEngine;
+import org.embergraph.journal.AbstractJournal;
+import org.embergraph.rdf.sparql.ast.QueryHints;
 
 /**
  * A factory pattern for the {@link ICacheConnection}.

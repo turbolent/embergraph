@@ -29,20 +29,20 @@ import java.util.concurrent.TimeUnit;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpEvaluationContext;
-import com.bigdata.bop.NV;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.ap.E;
-import com.bigdata.bop.ap.Predicate;
-import com.bigdata.bop.ap.R;
-import com.bigdata.bop.bindingSet.ListBindingSet;
-import com.bigdata.bop.bset.StartOp;
-import com.bigdata.bop.solutions.SliceOp;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.Journal;
-import com.bigdata.striterator.ChunkedArrayIterator;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpEvaluationContext;
+import org.embergraph.bop.NV;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.ap.E;
+import org.embergraph.bop.ap.Predicate;
+import org.embergraph.bop.ap.R;
+import org.embergraph.bop.bindingSet.ListBindingSet;
+import org.embergraph.bop.bset.StartOp;
+import org.embergraph.bop.solutions.SliceOp;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Journal;
+import org.embergraph.striterator.ChunkedArrayIterator;
 
 /**
  * Test suite for {@link QueryDeadline} ordering.

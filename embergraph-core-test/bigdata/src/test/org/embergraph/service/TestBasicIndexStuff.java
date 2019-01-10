@@ -30,11 +30,11 @@ package org.embergraph.service;
 
 import java.util.UUID;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.proc.AbstractKeyArrayIndexProcedure.ResultBuffer;
-import com.bigdata.btree.proc.BatchLookup.BatchLookupConstructor;
-import com.bigdata.journal.ITx;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure.ResultBuffer;
+import org.embergraph.btree.proc.BatchLookup.BatchLookupConstructor;
+import org.embergraph.journal.ITx;
 
 /**
  * Test of basic index operations.

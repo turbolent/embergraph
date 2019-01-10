@@ -29,18 +29,18 @@ import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.util.UUID;
 
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.OneShotInstrument;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.journal.AbstractBufferStrategy;
-import com.bigdata.mdi.IResourceMetadata;
-import com.bigdata.rawstore.AbstractRawStore;
-import com.bigdata.rawstore.IAddressManager;
-import com.bigdata.rawstore.IAllocationContext;
-import com.bigdata.rawstore.IAllocationManagerStore;
-import com.bigdata.rawstore.IPSOutputStream;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rawstore.TransientResourceMetadata;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.OneShotInstrument;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.journal.AbstractBufferStrategy;
+import org.embergraph.mdi.IResourceMetadata;
+import org.embergraph.rawstore.AbstractRawStore;
+import org.embergraph.rawstore.IAddressManager;
+import org.embergraph.rawstore.IAllocationContext;
+import org.embergraph.rawstore.IAllocationManagerStore;
+import org.embergraph.rawstore.IPSOutputStream;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rawstore.TransientResourceMetadata;
 
 /**
  * An {@link IRawStore} backed by an {@link IMemoryManager}.

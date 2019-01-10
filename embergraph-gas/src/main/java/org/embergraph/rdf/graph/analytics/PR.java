@@ -25,17 +25,17 @@ import org.openrdf.model.Statement;
 import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 
-import com.bigdata.rdf.graph.BinderBase;
-import com.bigdata.rdf.graph.EdgesEnum;
-import com.bigdata.rdf.graph.Factory;
-import com.bigdata.rdf.graph.FrontierEnum;
-import com.bigdata.rdf.graph.IBinder;
-import com.bigdata.rdf.graph.IBindingExtractor;
-import com.bigdata.rdf.graph.IGASContext;
-import com.bigdata.rdf.graph.IGASScheduler;
-import com.bigdata.rdf.graph.IGASState;
-import com.bigdata.rdf.graph.IReducer;
-import com.bigdata.rdf.graph.impl.BaseGASProgram;
+import org.embergraph.rdf.graph.BinderBase;
+import org.embergraph.rdf.graph.EdgesEnum;
+import org.embergraph.rdf.graph.Factory;
+import org.embergraph.rdf.graph.FrontierEnum;
+import org.embergraph.rdf.graph.IBinder;
+import org.embergraph.rdf.graph.IBindingExtractor;
+import org.embergraph.rdf.graph.IGASContext;
+import org.embergraph.rdf.graph.IGASScheduler;
+import org.embergraph.rdf.graph.IGASState;
+import org.embergraph.rdf.graph.IReducer;
+import org.embergraph.rdf.graph.impl.BaseGASProgram;
 
 /**
  * Page rank assigns weights to the vertices in a graph based by on the relative

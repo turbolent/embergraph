@@ -5,17 +5,17 @@ import java.util.List;
 
 import org.openrdf.model.vocabulary.OWL;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IConstraint;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.bindingSet.EmptyBindingSet;
-import com.bigdata.bop.constraint.Constraint;
-import com.bigdata.bop.constraint.NEConstant;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.relation.rule.IRule;
-import com.bigdata.relation.rule.Rule;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IConstraint;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.bindingSet.EmptyBindingSet;
+import org.embergraph.bop.constraint.Constraint;
+import org.embergraph.bop.constraint.NEConstant;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.relation.rule.IRule;
+import org.embergraph.relation.rule.Rule;
 
 /**
  * Fast forward closure of the store based on <a

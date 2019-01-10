@@ -8,8 +8,8 @@ import java.io.Serializable;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.util.Bytes;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.util.Bytes;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Imposes constraint that the key before the separatorKey must differ in

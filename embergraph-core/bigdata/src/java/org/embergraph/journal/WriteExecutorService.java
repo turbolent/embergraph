@@ -52,15 +52,15 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.apache.log4j.Logger;
 import org.apache.log4j.MDC;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.concurrent.NonBlockingLockManagerWithNewDesign;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.resources.OverflowManager;
-import com.bigdata.resources.ResourceManager;
-import com.bigdata.resources.StaleLocatorException;
-import com.bigdata.service.DataService;
-import com.bigdata.util.InnerCause;
-import com.bigdata.util.concurrent.WriteTaskCounters;
+import org.embergraph.btree.BTree;
+import org.embergraph.concurrent.NonBlockingLockManagerWithNewDesign;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.resources.OverflowManager;
+import org.embergraph.resources.ResourceManager;
+import org.embergraph.resources.StaleLocatorException;
+import org.embergraph.service.DataService;
+import org.embergraph.util.InnerCause;
+import org.embergraph.util.concurrent.WriteTaskCounters;
 
 /**
  * A custom {@link ThreadPoolExecutor} used by the {@link ConcurrencyManager} to

@@ -1,7 +1,7 @@
 package org.embergraph.btree.data;
 
-import com.bigdata.btree.raba.IRaba;
-import com.bigdata.io.AbstractFixedByteArrayBuffer;
+import org.embergraph.btree.raba.IRaba;
+import org.embergraph.io.AbstractFixedByteArrayBuffer;
 
 /**
  * Mock object for {@link INodeData}.

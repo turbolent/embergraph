@@ -2,7 +2,7 @@ package org.embergraph.rdf.sail;
 
 import java.util.NoSuchElementException;
 
-import com.bigdata.bop.engine.IRunningQuery;
+import org.embergraph.bop.engine.IRunningQuery;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

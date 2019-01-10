@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree.keys;
 
-import com.bigdata.btree.IIndex;
+import org.embergraph.btree.IIndex;
 
 /**
  * A thread-local implementation.

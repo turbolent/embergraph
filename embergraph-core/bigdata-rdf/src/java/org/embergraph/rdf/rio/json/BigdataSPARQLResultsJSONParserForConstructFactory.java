@@ -21,8 +21,8 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParser;
 import org.openrdf.rio.RDFParserFactory;
 
-import com.bigdata.rdf.ServiceProviderHook;
-import com.bigdata.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.ServiceProviderHook;
+import org.embergraph.rdf.model.BigdataValueFactoryImpl;
 
 /**
  * A {@link TupleQueryResultParserFactory} for parsers of SPARQL-1.1 JSON Tuple

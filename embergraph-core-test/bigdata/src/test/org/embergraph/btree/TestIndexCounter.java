@@ -27,8 +27,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree;
 
-import com.bigdata.btree.BTree.PartitionedCounter;
-import com.bigdata.rdf.lexicon.TermIdEncoder;
+import org.embergraph.btree.BTree.PartitionedCounter;
+import org.embergraph.rdf.lexicon.TermIdEncoder;
 
 /**
  * Test suite for the {@link IIndex#getCounter()} interface.

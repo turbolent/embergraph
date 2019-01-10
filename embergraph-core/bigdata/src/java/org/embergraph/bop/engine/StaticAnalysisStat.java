@@ -29,7 +29,7 @@ package org.embergraph.bop.engine;
 
 import java.io.Serializable;
 
-import com.bigdata.counters.CAT;
+import org.embergraph.counters.CAT;
 
 /**
  * Statistics associated with the Static Analysis phase, such as runtime for

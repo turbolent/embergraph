@@ -32,7 +32,7 @@ import org.apache.log4j.Logger;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
-import com.bigdata.rdf.internal.impl.extensions.InvalidGeoSpatialDatatypeConfigurationError;
+import org.embergraph.rdf.internal.impl.extensions.InvalidGeoSpatialDatatypeConfigurationError;
 
 /**
  * Configuration of a single field/component in a given geospatial (multi-dimensional)

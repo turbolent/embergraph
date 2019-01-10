@@ -28,7 +28,7 @@ package org.embergraph.btree;
 
 import java.io.Serializable;
 
-import com.bigdata.io.SerializerUtil;
+import org.embergraph.io.SerializerUtil;
 
 
 /**

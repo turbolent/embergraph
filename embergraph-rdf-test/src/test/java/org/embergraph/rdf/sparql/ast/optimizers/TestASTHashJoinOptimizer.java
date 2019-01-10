@@ -29,32 +29,32 @@ package org.embergraph.rdf.sparql.ast.optimizers;
 
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-import com.bigdata.BigdataStatics;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.rdf.internal.XSD;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.sparql.ast.ASTContainer;
-import com.bigdata.rdf.sparql.ast.AbstractASTEvaluationTestCase;
-import com.bigdata.rdf.sparql.ast.ConstantNode;
-import com.bigdata.rdf.sparql.ast.FilterNode;
-import com.bigdata.rdf.sparql.ast.FunctionNode;
-import com.bigdata.rdf.sparql.ast.FunctionRegistry;
-import com.bigdata.rdf.sparql.ast.IQueryNode;
-import com.bigdata.rdf.sparql.ast.JoinGroupNode;
-import com.bigdata.rdf.sparql.ast.OrderByExpr;
-import com.bigdata.rdf.sparql.ast.OrderByNode;
-import com.bigdata.rdf.sparql.ast.ProjectionNode;
-import com.bigdata.rdf.sparql.ast.QueryNodeWithBindingSet;
-import com.bigdata.rdf.sparql.ast.QueryRoot;
-import com.bigdata.rdf.sparql.ast.QueryType;
-import com.bigdata.rdf.sparql.ast.SliceNode;
-import com.bigdata.rdf.sparql.ast.StatementPatternNode;
-import com.bigdata.rdf.sparql.ast.ValueExpressionNode;
-import com.bigdata.rdf.sparql.ast.VarNode;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpContext;
+import org.embergraph.BigdataStatics;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.rdf.internal.XSD;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.sparql.ast.ASTContainer;
+import org.embergraph.rdf.sparql.ast.AbstractASTEvaluationTestCase;
+import org.embergraph.rdf.sparql.ast.ConstantNode;
+import org.embergraph.rdf.sparql.ast.FilterNode;
+import org.embergraph.rdf.sparql.ast.FunctionNode;
+import org.embergraph.rdf.sparql.ast.FunctionRegistry;
+import org.embergraph.rdf.sparql.ast.IQueryNode;
+import org.embergraph.rdf.sparql.ast.JoinGroupNode;
+import org.embergraph.rdf.sparql.ast.OrderByExpr;
+import org.embergraph.rdf.sparql.ast.OrderByNode;
+import org.embergraph.rdf.sparql.ast.ProjectionNode;
+import org.embergraph.rdf.sparql.ast.QueryNodeWithBindingSet;
+import org.embergraph.rdf.sparql.ast.QueryRoot;
+import org.embergraph.rdf.sparql.ast.QueryType;
+import org.embergraph.rdf.sparql.ast.SliceNode;
+import org.embergraph.rdf.sparql.ast.StatementPatternNode;
+import org.embergraph.rdf.sparql.ast.ValueExpressionNode;
+import org.embergraph.rdf.sparql.ast.VarNode;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /**
  * Test suite for {@link ASTHashJoinOptimizer}.

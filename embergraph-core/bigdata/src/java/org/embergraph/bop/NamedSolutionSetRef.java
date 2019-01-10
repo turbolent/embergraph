@@ -30,9 +30,9 @@ package org.embergraph.bop;
 import java.util.Arrays;
 import java.util.UUID;
 
-import com.bigdata.bop.controller.INamedSolutionSetRef;
-import com.bigdata.bop.engine.IRunningQuery;
-import com.bigdata.journal.ITx;
+import org.embergraph.bop.controller.INamedSolutionSetRef;
+import org.embergraph.bop.engine.IRunningQuery;
+import org.embergraph.journal.ITx;
 
 /**
  * Class models the information which uniquely describes a named solution set.

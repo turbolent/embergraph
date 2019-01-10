@@ -1,7 +1,7 @@
 package org.embergraph.htree;
 
-import com.bigdata.btree.AbstractTuple;
-import com.bigdata.btree.ITupleSerializer;
+import org.embergraph.btree.AbstractTuple;
+import org.embergraph.btree.ITupleSerializer;
 
 /**
  * A key-value pair used to facilitate some iterator constructs.

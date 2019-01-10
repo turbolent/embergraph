@@ -28,9 +28,9 @@ import java.util.Properties;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.join.FastRangeCountOp;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.join.FastRangeCountOp;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * 

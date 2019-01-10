@@ -46,26 +46,26 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpContext;
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.NoSuchBOpException;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.fed.FederatedRunningQuery;
-import com.bigdata.concurrent.FutureTaskMon;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.Journal;
-import com.bigdata.rdf.sparql.ast.QueryHints;
-import com.bigdata.relation.accesspath.BufferClosedException;
-import com.bigdata.relation.accesspath.DelegateBuffer;
-import com.bigdata.relation.accesspath.IAsynchronousIterator;
-import com.bigdata.relation.accesspath.IBlockingBuffer;
-import com.bigdata.relation.accesspath.IMultiSourceCloseableIterator;
-import com.bigdata.relation.accesspath.MultiSourceSequentialCloseableIterator;
-import com.bigdata.rwstore.sector.IMemoryManager;
-import com.bigdata.service.IBigdataFederation;
-import com.bigdata.util.concurrent.Memoizer;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpContext;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.NoSuchBOpException;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.fed.FederatedRunningQuery;
+import org.embergraph.concurrent.FutureTaskMon;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Journal;
+import org.embergraph.rdf.sparql.ast.QueryHints;
+import org.embergraph.relation.accesspath.BufferClosedException;
+import org.embergraph.relation.accesspath.DelegateBuffer;
+import org.embergraph.relation.accesspath.IAsynchronousIterator;
+import org.embergraph.relation.accesspath.IBlockingBuffer;
+import org.embergraph.relation.accesspath.IMultiSourceCloseableIterator;
+import org.embergraph.relation.accesspath.MultiSourceSequentialCloseableIterator;
+import org.embergraph.rwstore.sector.IMemoryManager;
+import org.embergraph.service.IBigdataFederation;
+import org.embergraph.util.concurrent.Memoizer;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

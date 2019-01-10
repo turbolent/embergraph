@@ -41,31 +41,31 @@ import java.util.concurrent.TimeoutException;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpContext;
-import com.bigdata.bop.BOpEvaluationContext;
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.NV;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.Var;
-import com.bigdata.bop.bindingSet.EmptyBindingSet;
-import com.bigdata.bop.bindingSet.HashBindingSet;
-import com.bigdata.bop.bindingSet.ListBindingSet;
-import com.bigdata.bop.engine.AbstractQueryEngineTestCase;
-import com.bigdata.bop.engine.BOpStats;
-import com.bigdata.bop.engine.BlockingBufferWithStats;
-import com.bigdata.bop.engine.IRunningQuery;
-import com.bigdata.bop.solutions.SliceOp.SliceStats;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.relation.accesspath.BlockingBuffer;
-import com.bigdata.relation.accesspath.IAsynchronousIterator;
-import com.bigdata.relation.accesspath.IBlockingBuffer;
-import com.bigdata.relation.accesspath.ThickAsynchronousIterator;
-import com.bigdata.service.IBigdataFederation;
-import com.bigdata.util.InnerCause;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpContext;
+import org.embergraph.bop.BOpEvaluationContext;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.NV;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.Var;
+import org.embergraph.bop.bindingSet.EmptyBindingSet;
+import org.embergraph.bop.bindingSet.HashBindingSet;
+import org.embergraph.bop.bindingSet.ListBindingSet;
+import org.embergraph.bop.engine.AbstractQueryEngineTestCase;
+import org.embergraph.bop.engine.BOpStats;
+import org.embergraph.bop.engine.BlockingBufferWithStats;
+import org.embergraph.bop.engine.IRunningQuery;
+import org.embergraph.bop.solutions.SliceOp.SliceStats;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.relation.accesspath.BlockingBuffer;
+import org.embergraph.relation.accesspath.IAsynchronousIterator;
+import org.embergraph.relation.accesspath.IBlockingBuffer;
+import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
+import org.embergraph.service.IBigdataFederation;
+import org.embergraph.util.InnerCause;
 
 /**
  * Unit tests for {@link SliceOp}.

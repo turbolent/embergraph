@@ -32,17 +32,17 @@ import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
-import com.bigdata.rdf.model.BigdataStatement;
-import com.bigdata.rdf.model.BigdataStatementImpl;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.StatementEnum;
-import com.bigdata.rdf.rules.InferenceEngine;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.rdf.spo.SPO;
-import com.bigdata.rdf.store.DataLoader.Options;
-import com.bigdata.relation.accesspath.EmptyAccessPath;
-import com.bigdata.relation.accesspath.IAccessPath;
-import com.bigdata.striterator.IChunkedOrderedIterator;
+import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.model.BigdataStatementImpl;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.rdf.rules.InferenceEngine;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.rdf.spo.SPO;
+import org.embergraph.rdf.store.DataLoader.Options;
+import org.embergraph.relation.accesspath.EmptyAccessPath;
+import org.embergraph.relation.accesspath.IAccessPath;
+import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /**
  * Interface for a triple -or- quad store.

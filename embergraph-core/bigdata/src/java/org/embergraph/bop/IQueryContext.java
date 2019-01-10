@@ -29,8 +29,8 @@ package org.embergraph.bop;
 
 import java.util.UUID;
 
-import com.bigdata.htree.HTree;
-import com.bigdata.rwstore.sector.IMemoryManager;
+import org.embergraph.htree.HTree;
+import org.embergraph.rwstore.sector.IMemoryManager;
 
 /**
  * Context for the evaluation of a query pipeline.

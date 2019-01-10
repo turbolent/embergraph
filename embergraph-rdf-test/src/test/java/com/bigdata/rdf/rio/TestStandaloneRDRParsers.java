@@ -13,8 +13,8 @@ import org.openrdf.rio.RDFParseException;
 import org.openrdf.rio.RDFParser;
 import org.openrdf.rio.helpers.RDFHandlerBase;
 
-import com.bigdata.rdf.rio.ntriples.BigdataNTriplesParser;
-import com.bigdata.rdf.rio.turtle.BigdataTurtleParser;
+import org.embergraph.rdf.rio.ntriples.BigdataNTriplesParser;
+import org.embergraph.rdf.rio.turtle.BigdataTurtleParser;
 
 /**
  * Test suite for standalone usage of Bigdata RDF Parsers.

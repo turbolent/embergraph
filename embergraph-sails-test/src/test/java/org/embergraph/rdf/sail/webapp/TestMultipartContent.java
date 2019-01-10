@@ -20,7 +20,7 @@ import org.apache.http.entity.mime.content.ByteArrayBody;
 import org.apache.http.message.BasicNameValuePair;
 import org.eclipse.jetty.client.api.ContentProvider;
 
-import com.bigdata.rdf.sail.webapp.client.EntityContentProvider;
+import org.embergraph.rdf.sail.webapp.client.EntityContentProvider;
 
 /**
  * The Jetty HttpClient does not provide "out of the box" support for multipart

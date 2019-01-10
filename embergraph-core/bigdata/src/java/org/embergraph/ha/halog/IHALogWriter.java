@@ -26,8 +26,8 @@ package org.embergraph.ha.halog;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-import com.bigdata.ha.msg.IHAWriteMessage;
-import com.bigdata.journal.IRootBlockView;
+import org.embergraph.ha.msg.IHAWriteMessage;
+import org.embergraph.journal.IRootBlockView;
 
 /**
  * A constrained interface providing access to limited operations on the

@@ -62,8 +62,8 @@ import java.io.InputStream;
 import java.io.Reader;
 import java.util.Properties;
 
-import com.bigdata.rdf.properties.PropertiesFormat;
-import com.bigdata.rdf.properties.PropertiesParser;
+import org.embergraph.rdf.properties.PropertiesFormat;
+import org.embergraph.rdf.properties.PropertiesParser;
 
 /**
  * An {@link PropertiesParser} for {@link Properties} objects in the text

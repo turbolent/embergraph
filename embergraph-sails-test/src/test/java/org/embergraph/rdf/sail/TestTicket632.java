@@ -44,9 +44,9 @@ import org.openrdf.repository.sail.SailRepository;
 import org.openrdf.rio.RDFHandlerException;
 import org.openrdf.rio.RDFParseException;
 
-import com.bigdata.rdf.sail.BigdataSail.Options;
-import com.bigdata.rdf.sparql.ast.eval.service.OpenrdfNativeMockServiceFactory;
-import com.bigdata.rdf.sparql.ast.service.ServiceRegistry;
+import org.embergraph.rdf.sail.BigdataSail.Options;
+import org.embergraph.rdf.sparql.ast.eval.service.OpenrdfNativeMockServiceFactory;
+import org.embergraph.rdf.sparql.ast.service.ServiceRegistry;
 
 /**
  * Test for an error that occurs when a SERVICE (OpenRdf Service) call uses

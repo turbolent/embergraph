@@ -29,11 +29,11 @@ package org.embergraph.rdf.sparql.ast;
 
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.BigdataStatement;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.spo.ISPO;
+import org.embergraph.bop.BOp;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.spo.ISPO;
 
 /**
  * Abstract base class for the <code>INSERT DATA</code> and

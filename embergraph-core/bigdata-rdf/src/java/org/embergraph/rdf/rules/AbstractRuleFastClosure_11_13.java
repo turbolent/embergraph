@@ -24,12 +24,12 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.rules;
 
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IConstraint;
-import com.bigdata.bop.IVariable;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.spo.SPOPredicate;
-import com.bigdata.relation.rule.Rule;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IConstraint;
+import org.embergraph.bop.IVariable;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.spo.SPOPredicate;
+import org.embergraph.relation.rule.Rule;
 
 /**
  * Rule for steps 11 and 13 of the "fast closure" method.

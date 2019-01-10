@@ -27,7 +27,7 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import com.bigdata.bop.util.TestBOpUtility;
+import org.embergraph.bop.util.TestBOpUtility;
 
 /**
  * Aggregates test suites into increasing dependency order.

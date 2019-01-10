@@ -29,8 +29,8 @@ package org.embergraph.rdf.sparql.ast.eval;
 
 import java.util.Properties;
 
-import com.bigdata.rdf.internal.impl.extensions.CompressedTimestampExtension;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.internal.impl.extensions.CompressedTimestampExtension;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 
 /**

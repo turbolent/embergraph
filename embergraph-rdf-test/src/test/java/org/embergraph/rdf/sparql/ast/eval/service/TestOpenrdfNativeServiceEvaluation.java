@@ -35,8 +35,8 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.impl.MapBindingSet;
 
-import com.bigdata.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
-import com.bigdata.rdf.sparql.ast.service.ServiceRegistry;
+import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
+import org.embergraph.rdf.sparql.ast.service.ServiceRegistry;
 
 /**
  * Data driven test suite for SPARQL 1.1 Federated Query against an openrdf

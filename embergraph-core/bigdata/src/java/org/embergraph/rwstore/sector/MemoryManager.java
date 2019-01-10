@@ -44,25 +44,25 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.cache.ConcurrentWeakValueCache;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.OneShotInstrument;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.io.IBufferAccess;
-import com.bigdata.journal.AbstractJournal;
-import com.bigdata.journal.CommitRecordIndex;
-import com.bigdata.journal.CommitRecordSerializer;
-import com.bigdata.journal.ICommitRecord;
-import com.bigdata.journal.ICommitter;
-import com.bigdata.rawstore.IAllocationContext;
-import com.bigdata.rawstore.IPSOutputStream;
-import com.bigdata.rwstore.IRawTx;
-import com.bigdata.rwstore.PSOutputStream;
-import com.bigdata.service.AbstractTransactionService;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.cache.ConcurrentWeakValueCache;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.OneShotInstrument;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.io.IBufferAccess;
+import org.embergraph.journal.AbstractJournal;
+import org.embergraph.journal.CommitRecordIndex;
+import org.embergraph.journal.CommitRecordSerializer;
+import org.embergraph.journal.ICommitRecord;
+import org.embergraph.journal.ICommitter;
+import org.embergraph.rawstore.IAllocationContext;
+import org.embergraph.rawstore.IPSOutputStream;
+import org.embergraph.rwstore.IRawTx;
+import org.embergraph.rwstore.PSOutputStream;
+import org.embergraph.service.AbstractTransactionService;
 
 /**
  * The MemoryManager manages an off-heap Direct {@link ByteBuffer}. It uses the

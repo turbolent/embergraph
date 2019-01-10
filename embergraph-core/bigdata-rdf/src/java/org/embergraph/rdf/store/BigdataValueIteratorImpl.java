@@ -55,9 +55,9 @@ import java.util.NoSuchElementException;
 import org.apache.log4j.Logger;
 import org.openrdf.model.Value;
 
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.striterator.IChunkedIterator;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.striterator.IChunkedIterator;
 
 /**
  * Wraps an iterator that visits term identifiers and exposes each visited term

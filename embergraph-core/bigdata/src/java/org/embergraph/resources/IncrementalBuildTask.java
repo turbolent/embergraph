@@ -6,19 +6,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.ILocalBTreeView;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.IndexSegment;
-import com.bigdata.btree.IndexSegmentStore;
-import com.bigdata.journal.IConcurrencyManager;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.TimestampUtility;
-import com.bigdata.mdi.IResourceMetadata;
-import com.bigdata.mdi.LocalPartitionMetadata;
-import com.bigdata.mdi.SegmentMetadata;
-import com.bigdata.service.Event;
-import com.bigdata.service.EventResource;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.ILocalBTreeView;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.IndexSegment;
+import org.embergraph.btree.IndexSegmentStore;
+import org.embergraph.journal.IConcurrencyManager;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.TimestampUtility;
+import org.embergraph.mdi.IResourceMetadata;
+import org.embergraph.mdi.LocalPartitionMetadata;
+import org.embergraph.mdi.SegmentMetadata;
+import org.embergraph.service.Event;
+import org.embergraph.service.EventResource;
 
 /**
  * Task builds an {@link IndexSegment} from the mutable {@link BTree} and zero

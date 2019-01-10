@@ -31,10 +31,10 @@ import java.nio.ByteBuffer;
 import java.util.Properties;
 import java.util.Random;
 
-import com.bigdata.btree.IndexSegmentBuilder;
-import com.bigdata.rawstore.AbstractRawStoreTestCase;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.util.Bytes;
+import org.embergraph.btree.IndexSegmentBuilder;
+import org.embergraph.rawstore.AbstractRawStoreTestCase;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.util.Bytes;
 
 /**
  * Base class for writing test cases for the different {@link IBufferStrategy}

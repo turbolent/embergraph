@@ -29,9 +29,9 @@ package org.embergraph.rdf.sparql.ast.service;
 
 import java.util.Set;
 
-import com.bigdata.bop.IVariable;
-import com.bigdata.rdf.sparql.ast.IVariableBindingRequirements;
-import com.bigdata.rdf.sparql.ast.StaticAnalysis;
+import org.embergraph.bop.IVariable;
+import org.embergraph.rdf.sparql.ast.IVariableBindingRequirements;
+import org.embergraph.rdf.sparql.ast.StaticAnalysis;
 
 
 /**

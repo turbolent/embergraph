@@ -47,9 +47,9 @@ import org.openrdf.repository.sail.SailRepositoryConnection;
 import org.openrdf.sail.Sail;
 import org.openrdf.sail.memory.MemoryStore;
 
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.store.BD;
-import com.bigdata.rdf.vocab.NoVocabulary;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.store.BD;
+import org.embergraph.rdf.vocab.NoVocabulary;
 
 /**
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>

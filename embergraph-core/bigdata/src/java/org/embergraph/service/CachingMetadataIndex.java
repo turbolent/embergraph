@@ -32,13 +32,13 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import com.bigdata.btree.IRangeQuery;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.UnisolatedReadWriteIndex;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.TimestampUtility;
-import com.bigdata.mdi.MetadataIndex.MetadataIndexMetadata;
-import com.bigdata.mdi.PartitionLocator;
+import org.embergraph.btree.IRangeQuery;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.UnisolatedReadWriteIndex;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.TimestampUtility;
+import org.embergraph.mdi.MetadataIndex.MetadataIndexMetadata;
+import org.embergraph.mdi.PartitionLocator;
 
 import cutthecrap.utils.striterators.IFilter;
 

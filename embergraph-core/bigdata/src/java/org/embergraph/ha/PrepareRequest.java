@@ -28,8 +28,8 @@ package org.embergraph.ha;
 
 import java.util.concurrent.TimeUnit;
 
-import com.bigdata.ha.msg.IHANotifyReleaseTimeResponse;
-import com.bigdata.journal.IRootBlockView;
+import org.embergraph.ha.msg.IHANotifyReleaseTimeResponse;
+import org.embergraph.journal.IRootBlockView;
 
 /**
  * A 2-phase request as coordinated by the leader (local object).

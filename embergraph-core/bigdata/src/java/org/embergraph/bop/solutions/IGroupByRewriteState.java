@@ -29,10 +29,10 @@ package org.embergraph.bop.solutions;
 
 import java.util.LinkedHashMap;
 
-import com.bigdata.bop.IConstraint;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.aggregate.IAggregate;
+import org.embergraph.bop.IConstraint;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.aggregate.IAggregate;
 
 /**
  * A rewrite of a {@link GroupByState} in which all {@link IAggregate}

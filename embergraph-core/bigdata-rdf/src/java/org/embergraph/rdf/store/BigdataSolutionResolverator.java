@@ -10,16 +10,16 @@ import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 import org.openrdf.model.Value;
 
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IVariable;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.relation.accesspath.BlockingBuffer;
-import com.bigdata.relation.rule.eval.ISolution;
-import com.bigdata.striterator.AbstractChunkedResolverator;
-import com.bigdata.striterator.IChunkedOrderedIterator;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IVariable;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.relation.accesspath.BlockingBuffer;
+import org.embergraph.relation.rule.eval.ISolution;
+import org.embergraph.striterator.AbstractChunkedResolverator;
+import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /**
  * Efficiently resolve term identifiers in Bigdata {@link ISolution}s to RDF

@@ -3,9 +3,9 @@ package org.embergraph.resources;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.mdi.PartitionLocator;
-import com.bigdata.service.DataService;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.mdi.PartitionLocator;
+import org.embergraph.service.DataService;
 
 /**
  * The object returned by {@link MoveIndexPartitionTask}.

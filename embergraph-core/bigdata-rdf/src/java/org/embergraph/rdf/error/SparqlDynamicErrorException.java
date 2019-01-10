@@ -29,7 +29,7 @@ package org.embergraph.rdf.error;
 
 import org.openrdf.model.URI;
 
-import com.bigdata.util.NV;
+import org.embergraph.util.NV;
 
 /**
  * A SPARQL dynamic (runtime) error.

@@ -7,15 +7,15 @@ import java.io.ObjectOutput;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.relation.accesspath.IBuffer;
-import com.bigdata.relation.rule.IRule;
-import com.bigdata.relation.rule.eval.pipeline.DistributedJoinMasterTask;
-import com.bigdata.relation.rule.eval.pipeline.JoinMasterTask;
-import com.bigdata.relation.rule.eval.pipeline.JoinTask;
-import com.bigdata.relation.rule.eval.pipeline.LocalJoinMasterTask;
-import com.bigdata.service.IBigdataFederation;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.relation.accesspath.IBuffer;
+import org.embergraph.relation.rule.IRule;
+import org.embergraph.relation.rule.eval.pipeline.DistributedJoinMasterTask;
+import org.embergraph.relation.rule.eval.pipeline.JoinMasterTask;
+import org.embergraph.relation.rule.eval.pipeline.JoinTask;
+import org.embergraph.relation.rule.eval.pipeline.LocalJoinMasterTask;
+import org.embergraph.service.IBigdataFederation;
 
 /**
  * Default factory for tasks to execute {@link IRule}s.

@@ -31,7 +31,7 @@ package org.embergraph.relation.accesspath;
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
-import com.bigdata.striterator.IChunkedIterator;
+import org.embergraph.striterator.IChunkedIterator;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

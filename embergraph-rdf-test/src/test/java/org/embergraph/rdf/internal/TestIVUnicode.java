@@ -34,9 +34,9 @@ import java.util.Random;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.io.DataInputBuffer;
-import com.bigdata.io.DataOutputBuffer;
-import com.bigdata.util.BytesUtil.UnsignedByteArrayComparator;
+import org.embergraph.io.DataInputBuffer;
+import org.embergraph.io.DataOutputBuffer;
+import org.embergraph.util.BytesUtil.UnsignedByteArrayComparator;
 
 /**
  * Test suite for {@link IVUnicode}.

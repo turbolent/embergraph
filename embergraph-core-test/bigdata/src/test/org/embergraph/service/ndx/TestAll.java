@@ -27,9 +27,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.service.ndx;
 
-import com.bigdata.service.TestBasicIndexStuff;
-import com.bigdata.service.TestEmbeddedClient;
-import com.bigdata.service.TestRangeQuery;
+import org.embergraph.service.TestBasicIndexStuff;
+import org.embergraph.service.TestEmbeddedClient;
+import org.embergraph.service.TestRangeQuery;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

@@ -40,21 +40,21 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.model.vocabulary.XMLSchema;
 
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.lexicon.ITextIndexer.FullTextQuery;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.spo.TestSPOKeyOrder;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.AbstractTripleStoreTestCase;
-import com.bigdata.rdf.store.BD;
-import com.bigdata.rdf.store.BigdataValueIteratorImpl;
-import com.bigdata.search.Hit;
-import com.bigdata.search.Hiterator;
-import com.bigdata.striterator.ChunkedWrappedIterator;
-import com.bigdata.striterator.Resolver;
-import com.bigdata.striterator.Striterator;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.lexicon.ITextIndexer.FullTextQuery;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.spo.TestSPOKeyOrder;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.AbstractTripleStoreTestCase;
+import org.embergraph.rdf.store.BD;
+import org.embergraph.rdf.store.BigdataValueIteratorImpl;
+import org.embergraph.search.Hit;
+import org.embergraph.search.Hiterator;
+import org.embergraph.striterator.ChunkedWrappedIterator;
+import org.embergraph.striterator.Resolver;
+import org.embergraph.striterator.Striterator;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

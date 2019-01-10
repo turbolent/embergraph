@@ -31,15 +31,15 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstraint;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.IVariableOrConstant;
-import com.bigdata.bop.Var;
-import com.bigdata.bop.bindingSet.EmptyBindingSet;
-import com.bigdata.relation.rule.eval.ActionEnum;
-import com.bigdata.relation.rule.eval.IRuleTaskFactory;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstraint;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.IVariableOrConstant;
+import org.embergraph.bop.Var;
+import org.embergraph.bop.bindingSet.EmptyBindingSet;
+import org.embergraph.relation.rule.eval.ActionEnum;
+import org.embergraph.relation.rule.eval.IRuleTaskFactory;
 
 /**
  * Default impl.

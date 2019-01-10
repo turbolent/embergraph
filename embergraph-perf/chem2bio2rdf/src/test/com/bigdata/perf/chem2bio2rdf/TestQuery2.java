@@ -9,11 +9,11 @@ import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQuery;
 import org.openrdf.query.TupleQueryResult;
 
-import com.bigdata.journal.Journal;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.BigdataSailRepository;
-import com.bigdata.rdf.sail.BigdataSailRepositoryConnection;
-import com.bigdata.rdf.sail.webapp.client.IPreparedGraphQuery;
+import org.embergraph.journal.Journal;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.BigdataSailRepository;
+import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.rdf.sail.webapp.client.IPreparedGraphQuery;
 
 public class TestQuery2 {
 

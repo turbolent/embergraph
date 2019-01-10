@@ -31,15 +31,15 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.IVariableOrConstant;
-import com.bigdata.bop.Var;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.IVUtility;
-import com.bigdata.relation.rule.IStarJoin;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.IVariableOrConstant;
+import org.embergraph.bop.Var;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.IVUtility;
+import org.embergraph.relation.rule.IStarJoin;
 
 /**
  * Implementation of a star join for SPOs.  See {@link IStarJoin}.

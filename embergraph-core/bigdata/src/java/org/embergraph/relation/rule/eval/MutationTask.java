@@ -36,15 +36,15 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.relation.IMutableRelation;
-import com.bigdata.relation.IRelation;
-import com.bigdata.relation.accesspath.FlushBufferTask;
-import com.bigdata.relation.accesspath.IBuffer;
-import com.bigdata.relation.rule.IProgram;
-import com.bigdata.relation.rule.IRule;
-import com.bigdata.relation.rule.IStep;
-import com.bigdata.service.DataService;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.relation.IMutableRelation;
+import org.embergraph.relation.IRelation;
+import org.embergraph.relation.accesspath.FlushBufferTask;
+import org.embergraph.relation.accesspath.IBuffer;
+import org.embergraph.relation.rule.IProgram;
+import org.embergraph.relation.rule.IRule;
+import org.embergraph.relation.rule.IStep;
+import org.embergraph.service.DataService;
 
 /**
  * A task that executes a mutation operation.

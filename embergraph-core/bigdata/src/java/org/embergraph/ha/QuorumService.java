@@ -29,9 +29,9 @@ package org.embergraph.ha;
 
 import java.io.File;
 
-import com.bigdata.journal.IRootBlockView;
-import com.bigdata.quorum.Quorum;
-import com.bigdata.quorum.QuorumMember;
+import org.embergraph.journal.IRootBlockView;
+import org.embergraph.quorum.Quorum;
+import org.embergraph.quorum.QuorumMember;
 
 /**
  * A non-remote interface for a member service in a {@link Quorum} defining

@@ -29,8 +29,8 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
-import com.bigdata.ha.pipeline.HAReceiveService;
-import com.bigdata.ha.pipeline.HASendService;
+import org.embergraph.ha.pipeline.HAReceiveService;
+import org.embergraph.ha.pipeline.HASendService;
 
 /**
  * Base class for RMI messages used to communicate metadata about a raw data

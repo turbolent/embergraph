@@ -27,9 +27,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.solutions;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.NV;
-import com.bigdata.bop.PipelineOp;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.NV;
+import org.embergraph.bop.PipelineOp;
 
 /**
  * Unit tests for {@link JVMDistinctBindingSetsOp}.

@@ -34,9 +34,9 @@ import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.ProxyTestCase;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.ProxyTestCase;
 
 public abstract class AbstractSearchTest  extends ProxyTestCase<IIndexManager>  {
     private String namespace;  

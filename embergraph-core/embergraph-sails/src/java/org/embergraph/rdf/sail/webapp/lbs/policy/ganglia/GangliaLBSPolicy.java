@@ -33,17 +33,17 @@ import javax.servlet.ServletException;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.ganglia.GangliaListener;
-import com.bigdata.ganglia.GangliaService;
-import com.bigdata.ganglia.IHostReport;
-import com.bigdata.journal.GangliaPlugIn;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.Journal;
-import com.bigdata.rdf.sail.webapp.lbs.AbstractHostLBSPolicy;
-import com.bigdata.rdf.sail.webapp.lbs.IHALoadBalancerPolicy;
-import com.bigdata.rdf.sail.webapp.lbs.IHostMetrics;
-import com.bigdata.rdf.sail.webapp.lbs.IHostScoringRule;
-import com.bigdata.rdf.sail.webapp.lbs.ServiceScore;
+import org.embergraph.ganglia.GangliaListener;
+import org.embergraph.ganglia.GangliaService;
+import org.embergraph.ganglia.IHostReport;
+import org.embergraph.journal.GangliaPlugIn;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.Journal;
+import org.embergraph.rdf.sail.webapp.lbs.AbstractHostLBSPolicy;
+import org.embergraph.rdf.sail.webapp.lbs.IHALoadBalancerPolicy;
+import org.embergraph.rdf.sail.webapp.lbs.IHostMetrics;
+import org.embergraph.rdf.sail.webapp.lbs.IHostScoringRule;
+import org.embergraph.rdf.sail.webapp.lbs.ServiceScore;
 
 /**
  * Stochastically proxy the request to the services based on their load.

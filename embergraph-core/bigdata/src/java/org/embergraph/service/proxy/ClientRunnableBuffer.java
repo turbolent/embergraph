@@ -32,7 +32,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.concurrent.Future;
 
-import com.bigdata.relation.accesspath.IRunnableBuffer;
+import org.embergraph.relation.accesspath.IRunnableBuffer;
 
 /**
  * {@link Serializable} class wraps a {@link RemoteRunnableBuffer} delegating

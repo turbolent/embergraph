@@ -29,14 +29,14 @@ package org.embergraph.rdf.internal.impl.uri;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
-import com.bigdata.rdf.internal.DTE;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.VTE;
-import com.bigdata.rdf.internal.impl.AbstractInlineIV;
-import com.bigdata.rdf.lexicon.LexiconRelation;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.vocab.Vocabulary;
+import org.embergraph.rdf.internal.DTE;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.VTE;
+import org.embergraph.rdf.internal.impl.AbstractInlineIV;
+import org.embergraph.rdf.lexicon.LexiconRelation;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.vocab.Vocabulary;
 
 /**
  * A fully inlined representation of a URI based on a <code>short</code> code.

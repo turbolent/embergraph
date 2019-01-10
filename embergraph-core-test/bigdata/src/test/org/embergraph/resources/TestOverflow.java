@@ -32,19 +32,19 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.UUID;
 
-import com.bigdata.btree.AbstractBTree;
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.keys.TestKeyBuilder;
-import com.bigdata.io.DataOutputBuffer;
-import com.bigdata.journal.AbstractJournal;
-import com.bigdata.journal.IJournal;
-import com.bigdata.journal.Journal;
-import com.bigdata.mdi.IResourceMetadata;
-import com.bigdata.mdi.IndexPartitionCause;
-import com.bigdata.mdi.LocalPartitionMetadata;
-import com.bigdata.util.Bytes;
+import org.embergraph.btree.AbstractBTree;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.keys.TestKeyBuilder;
+import org.embergraph.io.DataOutputBuffer;
+import org.embergraph.journal.AbstractJournal;
+import org.embergraph.journal.IJournal;
+import org.embergraph.journal.Journal;
+import org.embergraph.mdi.IResourceMetadata;
+import org.embergraph.mdi.IndexPartitionCause;
+import org.embergraph.mdi.LocalPartitionMetadata;
+import org.embergraph.util.Bytes;
 
 /**
  * Basic tests for {@link ResourceManager#overflow(boolean, boolean)}

@@ -27,7 +27,7 @@ package org.embergraph.rdf.internal;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.bigdata.rdf.internal.impl.literal.AbstractLiteralIV;
+import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 
 /**
  * 

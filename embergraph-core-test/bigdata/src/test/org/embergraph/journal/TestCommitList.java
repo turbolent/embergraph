@@ -29,9 +29,9 @@ package org.embergraph.journal;
 
 import java.util.UUID;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.IIndex;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.IIndex;
 
 /**
  * Test suite for restart-safety of {@link BTree}s backed by an

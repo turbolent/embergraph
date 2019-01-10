@@ -40,11 +40,11 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.BaseIndexStats;
-import com.bigdata.btree.ICheckpointProtocol;
-import com.bigdata.util.Bytes;
-import com.bigdata.util.InnerCause;
-import com.bigdata.util.concurrent.LatchedExecutor;
+import org.embergraph.btree.BaseIndexStats;
+import org.embergraph.btree.ICheckpointProtocol;
+import org.embergraph.util.Bytes;
+import org.embergraph.util.InnerCause;
+import org.embergraph.util.concurrent.LatchedExecutor;
 
 /**
  * Helper class to warm up the indices associated with various namespaces on the

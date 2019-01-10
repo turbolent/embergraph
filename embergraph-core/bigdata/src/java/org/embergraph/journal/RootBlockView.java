@@ -34,15 +34,15 @@ import java.util.UUID;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.io.ChecksumUtility;
-import com.bigdata.io.writecache.WriteCache;
-import com.bigdata.quorum.Quorum;
-import com.bigdata.rawstore.IAddressManager;
-import com.bigdata.rawstore.WormAddressManager;
-import com.bigdata.resources.ResourceManager;
-import com.bigdata.rwstore.RWStore;
-import com.bigdata.util.Bytes;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.io.ChecksumUtility;
+import org.embergraph.io.writecache.WriteCache;
+import org.embergraph.quorum.Quorum;
+import org.embergraph.rawstore.IAddressManager;
+import org.embergraph.rawstore.WormAddressManager;
+import org.embergraph.resources.ResourceManager;
+import org.embergraph.rwstore.RWStore;
+import org.embergraph.util.Bytes;
 
 /**
  * A view onto a root block of the {@link Journal}.

@@ -38,12 +38,12 @@ import java.util.Map;
 import org.openrdf.model.Value;
 import org.openrdf.model.vocabulary.RDF;
 
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.model.BigdataValueFactoryImpl;
-import com.bigdata.rdf.sail.sparql.ast.VisitorException;
-import com.bigdata.rdf.sparql.ast.ConstantNode;
-import com.bigdata.rdf.sparql.ast.VarNode;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.sail.sparql.ast.VisitorException;
+import org.embergraph.rdf.sparql.ast.ConstantNode;
+import org.embergraph.rdf.sparql.ast.VarNode;
 
 /**
  * Object provides context required in various stages of parsing queries or

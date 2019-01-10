@@ -34,9 +34,9 @@ import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.util.UUID;
 
-import com.bigdata.counters.CounterSet;
-import com.bigdata.journal.TemporaryRawStore;
-import com.bigdata.mdi.IResourceMetadata;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.journal.TemporaryRawStore;
+import org.embergraph.mdi.IResourceMetadata;
 
 
 /**

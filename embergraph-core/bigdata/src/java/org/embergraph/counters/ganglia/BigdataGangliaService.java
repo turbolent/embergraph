@@ -4,14 +4,14 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.util.Properties;
 
-import com.bigdata.counters.AbstractStatisticsCollector;
-import com.bigdata.counters.AbstractStatisticsCollector.Options;
-import com.bigdata.ganglia.DefaultMetadataFactory;
-import com.bigdata.ganglia.GangliaMetadataFactory;
-import com.bigdata.ganglia.GangliaService;
-import com.bigdata.ganglia.GangliaSlopeEnum;
-import com.bigdata.ganglia.IGangliaDefaults;
-import com.bigdata.ganglia.IGangliaMetadataFactory;
+import org.embergraph.counters.AbstractStatisticsCollector;
+import org.embergraph.counters.AbstractStatisticsCollector.Options;
+import org.embergraph.ganglia.DefaultMetadataFactory;
+import org.embergraph.ganglia.GangliaMetadataFactory;
+import org.embergraph.ganglia.GangliaService;
+import org.embergraph.ganglia.GangliaSlopeEnum;
+import org.embergraph.ganglia.IGangliaDefaults;
+import org.embergraph.ganglia.IGangliaMetadataFactory;
 
 /**
  * A utility class which may be used to run the bigdata performance counter

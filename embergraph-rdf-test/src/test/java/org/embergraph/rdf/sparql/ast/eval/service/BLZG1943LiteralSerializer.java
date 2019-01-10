@@ -1,6 +1,6 @@
 package org.embergraph.rdf.sparql.ast.eval.service;
 
-import com.bigdata.service.geospatial.GeoSpatialDefaultLiteralSerializer;
+import org.embergraph.service.geospatial.GeoSpatialDefaultLiteralSerializer;
 
 
 /**

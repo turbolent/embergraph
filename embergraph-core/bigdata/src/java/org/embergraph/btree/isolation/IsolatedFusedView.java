@@ -29,21 +29,21 @@ package org.embergraph.btree.isolation;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.bigdata.btree.AbstractBTree;
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.Checkpoint;
-import com.bigdata.btree.ICounter;
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.ILocalBTreeView;
-import com.bigdata.btree.IRangeQuery;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.Tuple;
-import com.bigdata.btree.view.FusedView;
-import com.bigdata.journal.AbstractTask;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.TimestampUtility;
-import com.bigdata.service.IBigdataFederation;
+import org.embergraph.btree.AbstractBTree;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.Checkpoint;
+import org.embergraph.btree.ICounter;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.ILocalBTreeView;
+import org.embergraph.btree.IRangeQuery;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.Tuple;
+import org.embergraph.btree.view.FusedView;
+import org.embergraph.journal.AbstractTask;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.TimestampUtility;
+import org.embergraph.service.IBigdataFederation;
 
 /**
  * <p>

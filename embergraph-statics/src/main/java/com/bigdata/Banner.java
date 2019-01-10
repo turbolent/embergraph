@@ -45,11 +45,11 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.system.SystemUtil;
 
-import com.bigdata.util.Depends;
-import com.bigdata.util.InnerCause;
-import com.bigdata.util.Depends.Dependency;
-import com.bigdata.util.config.LogUtil;
-import com.bigdata.util.config.NicUtil;
+import org.embergraph.util.Depends;
+import org.embergraph.util.InnerCause;
+import org.embergraph.util.Depends.Dependency;
+import org.embergraph.util.config.LogUtil;
+import org.embergraph.util.config.NicUtil;
 
 /**
  * Class has a static method which writes a copyright banner on stdout once per

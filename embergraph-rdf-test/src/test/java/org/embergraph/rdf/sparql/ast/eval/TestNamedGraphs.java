@@ -29,7 +29,7 @@ package org.embergraph.rdf.sparql.ast.eval;
 
 import org.openrdf.query.Dataset;
 
-import com.bigdata.rdf.internal.IV;
+import org.embergraph.rdf.internal.IV;
 
 /**
  * Test suite for named and default graph stuff.

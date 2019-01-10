@@ -27,12 +27,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.IConstraint;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.engine.QueryEngine;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpRTO;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.IConstraint;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.engine.QueryEngine;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpRTO;
 
 /**
  * A join path is an ordered sequence of N {@link Vertex vertices} and

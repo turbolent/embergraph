@@ -27,10 +27,10 @@ import org.apache.log4j.Logger;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-import com.bigdata.rdf.internal.impl.literal.AbstractLiteralIV;
-import com.bigdata.rdf.internal.impl.uri.URIExtensionIV;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.vocab.Vocabulary;
+import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
+import org.embergraph.rdf.internal.impl.uri.URIExtensionIV;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.vocab.Vocabulary;
 
 /**
  * Handler is mapped to a namespace prefix. When a URI is presented that matches

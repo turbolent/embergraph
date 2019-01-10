@@ -40,26 +40,26 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.Instrument;
-import com.bigdata.counters.OneShotInstrument;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.io.FileChannelUtility;
-import com.bigdata.io.IBufferAccess;
-import com.bigdata.io.IReopenChannel;
-import com.bigdata.io.SerializerUtil;
-import com.bigdata.journal.AbstractJournal;
-import com.bigdata.journal.RootBlockException;
-import com.bigdata.mdi.IResourceMetadata;
-import com.bigdata.mdi.LocalPartitionMetadata;
-import com.bigdata.mdi.SegmentMetadata;
-import com.bigdata.rawstore.AbstractRawStore;
-import com.bigdata.resources.StoreManager;
-import com.bigdata.service.Event;
-import com.bigdata.service.EventResource;
-import com.bigdata.service.EventType;
-import com.bigdata.service.IBigdataFederation;
-import com.bigdata.service.ResourceService;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.Instrument;
+import org.embergraph.counters.OneShotInstrument;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.io.FileChannelUtility;
+import org.embergraph.io.IBufferAccess;
+import org.embergraph.io.IReopenChannel;
+import org.embergraph.io.SerializerUtil;
+import org.embergraph.journal.AbstractJournal;
+import org.embergraph.journal.RootBlockException;
+import org.embergraph.mdi.IResourceMetadata;
+import org.embergraph.mdi.LocalPartitionMetadata;
+import org.embergraph.mdi.SegmentMetadata;
+import org.embergraph.rawstore.AbstractRawStore;
+import org.embergraph.resources.StoreManager;
+import org.embergraph.service.Event;
+import org.embergraph.service.EventResource;
+import org.embergraph.service.EventType;
+import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.ResourceService;
 
 /**
  * A read-only store backed by a file containing a single {@link IndexSegment}.

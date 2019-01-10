@@ -29,17 +29,17 @@ package com.bigdata.rdf.sparql.ast.eval;
 
 import java.util.List;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.Var;
-import com.bigdata.rdf.internal.NotMaterializedException;
-import com.bigdata.rdf.sparql.ast.ASTContainer;
-import com.bigdata.rdf.sparql.ast.ConstantNode;
-import com.bigdata.rdf.sparql.ast.GraphPatternGroup;
-import com.bigdata.rdf.sparql.ast.IGroupMemberNode;
-import com.bigdata.rdf.sparql.ast.StatementPatternNode;
-import com.bigdata.rdf.sparql.ast.TermNode;
-import com.bigdata.rdf.sparql.ast.VarNode;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.Var;
+import org.embergraph.rdf.internal.NotMaterializedException;
+import org.embergraph.rdf.sparql.ast.ASTContainer;
+import org.embergraph.rdf.sparql.ast.ConstantNode;
+import org.embergraph.rdf.sparql.ast.GraphPatternGroup;
+import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
+import org.embergraph.rdf.sparql.ast.StatementPatternNode;
+import org.embergraph.rdf.sparql.ast.TermNode;
+import org.embergraph.rdf.sparql.ast.VarNode;
 
 /**
  * Test suite for tickets at <href a="http://sourceforge.net/apps/trac/bigdata">

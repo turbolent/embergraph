@@ -28,9 +28,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation.rule.eval;
 
-import com.bigdata.bop.joinGraph.IEvaluationPlan;
-import com.bigdata.relation.rule.IRule;
-import com.bigdata.relation.rule.IStep;
+import org.embergraph.bop.joinGraph.IEvaluationPlan;
+import org.embergraph.relation.rule.IRule;
+import org.embergraph.relation.rule.IStep;
 
 /**
  * A factory for rule statistics objects.

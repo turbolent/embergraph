@@ -27,11 +27,11 @@ package org.embergraph.rdf.internal.constraints;
 import java.util.Map;
 import java.util.Random;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.impl.literal.XSDNumericIV;
-import com.bigdata.rdf.sparql.ast.GlobalAnnotations;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
+import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 
 public class RandBOp extends IVValueExpression<IV> {
 

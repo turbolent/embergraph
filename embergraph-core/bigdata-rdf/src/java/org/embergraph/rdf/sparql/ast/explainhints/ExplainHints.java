@@ -32,10 +32,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.rdf.sparql.ast.ASTBase;
-import com.bigdata.rdf.sparql.ast.ASTBase.Annotations;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.rdf.sparql.ast.ASTBase;
+import org.embergraph.rdf.sparql.ast.ASTBase.Annotations;
 
 import cutthecrap.utils.striterators.Expander;
 import cutthecrap.utils.striterators.Filter;

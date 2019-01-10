@@ -32,8 +32,8 @@ import java.util.Properties;
 
 import junit.framework.TestCase;
 
-import com.bigdata.service.EmbeddedClient;
-import com.bigdata.service.IBigdataClient;
+import org.embergraph.service.EmbeddedClient;
+import org.embergraph.service.IBigdataClient;
 
 /**
  * An abstract test harness that sets up (and tears down) the metadata and data

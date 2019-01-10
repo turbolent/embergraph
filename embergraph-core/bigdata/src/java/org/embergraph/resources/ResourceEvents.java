@@ -33,14 +33,14 @@ import java.text.NumberFormat;
 import org.apache.log4j.Logger;
 import org.apache.log4j.MDC;
 
-import com.bigdata.btree.AbstractBTree;
-import com.bigdata.btree.IndexSegment;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.IJournal;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.TemporaryRawStore;
-import com.bigdata.journal.TimestampUtility;
+import org.embergraph.btree.AbstractBTree;
+import org.embergraph.btree.IndexSegment;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.IJournal;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.TemporaryRawStore;
+import org.embergraph.journal.TimestampUtility;
 
 /**
  * Class encapsulates reporting API for resource (index and store files) events.

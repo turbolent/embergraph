@@ -29,15 +29,15 @@ package org.embergraph.rdf.sparql.ast.eval;
 
 import java.util.Iterator;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.rdf.sparql.ast.ASTBase;
-import com.bigdata.rdf.sparql.ast.ASTContainer;
-import com.bigdata.rdf.sparql.ast.QueryRoot;
-import com.bigdata.rdf.sparql.ast.explainhints.BottomUpSemanticsExplainHint;
-import com.bigdata.rdf.sparql.ast.explainhints.ExplainHints;
-import com.bigdata.rdf.sparql.ast.explainhints.IExplainHint;
-import com.bigdata.rdf.sparql.ast.explainhints.JoinOrderExplainHint;
-import com.bigdata.rdf.sparql.ast.explainhints.UnsatisfiableMinusExplainHint;
+import org.embergraph.bop.BOp;
+import org.embergraph.rdf.sparql.ast.ASTBase;
+import org.embergraph.rdf.sparql.ast.ASTContainer;
+import org.embergraph.rdf.sparql.ast.QueryRoot;
+import org.embergraph.rdf.sparql.ast.explainhints.BottomUpSemanticsExplainHint;
+import org.embergraph.rdf.sparql.ast.explainhints.ExplainHints;
+import org.embergraph.rdf.sparql.ast.explainhints.IExplainHint;
+import org.embergraph.rdf.sparql.ast.explainhints.JoinOrderExplainHint;
+import org.embergraph.rdf.sparql.ast.explainhints.UnsatisfiableMinusExplainHint;
 
 /**
  * Test suite for EXPLAIN hints.

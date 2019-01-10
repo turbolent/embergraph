@@ -27,8 +27,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package com.bigdata.rdf.vocab;
 
-import com.bigdata.rdf.internal.InlineURIFactory;
-import com.bigdata.rdf.internal.InlineUnsignedIntegerURIHandler;
+import org.embergraph.rdf.internal.InlineURIFactory;
+import org.embergraph.rdf.internal.InlineUnsignedIntegerURIHandler;
 
 
 public class TestUriInlineFactory_BLZG1591 extends InlineURIFactory {

@@ -29,11 +29,11 @@ import java.io.ObjectOutput;
 import java.util.Properties;
 import java.util.UUID;
 
-import com.bigdata.btree.raba.codec.IRabaCoder;
-import com.bigdata.htree.HTree;
-import com.bigdata.io.LongPacker;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.service.IBigdataFederation;
+import org.embergraph.btree.raba.codec.IRabaCoder;
+import org.embergraph.htree.HTree;
+import org.embergraph.io.LongPacker;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.service.IBigdataFederation;
 
 /**
  * HTree specific implementation.

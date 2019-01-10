@@ -28,8 +28,8 @@ import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.io.writecache.WriteCacheService;
-import com.bigdata.rwstore.RWStore.AllocationStats;
+import org.embergraph.io.writecache.WriteCacheService;
+import org.embergraph.rwstore.RWStore.AllocationStats;
 
 /**
  * Bit maps for an allocator. The allocator is a bit map managed as int[]s.

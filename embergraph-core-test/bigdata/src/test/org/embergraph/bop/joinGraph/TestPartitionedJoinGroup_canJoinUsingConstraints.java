@@ -36,23 +36,23 @@ import java.util.Set;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpBase;
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IConstraint;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.ImmutableBOp;
-import com.bigdata.bop.NV;
-import com.bigdata.bop.Var;
-import com.bigdata.bop.ap.Predicate;
-import com.bigdata.bop.constraint.AND;
-import com.bigdata.bop.constraint.BooleanValueExpression;
-import com.bigdata.bop.constraint.Constraint;
-import com.bigdata.bop.joinGraph.rto.JGraph;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpBase;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IConstraint;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.ImmutableBOp;
+import org.embergraph.bop.NV;
+import org.embergraph.bop.Var;
+import org.embergraph.bop.ap.Predicate;
+import org.embergraph.bop.constraint.AND;
+import org.embergraph.bop.constraint.BooleanValueExpression;
+import org.embergraph.bop.constraint.Constraint;
+import org.embergraph.bop.joinGraph.rto.JGraph;
 
 /**
  * 

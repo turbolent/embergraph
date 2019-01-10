@@ -30,10 +30,10 @@ import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
-import com.bigdata.io.FileChannelUtility;
-import com.bigdata.io.IReopenChannel;
-import com.bigdata.rawstore.IAllocationContext;
-import com.bigdata.rawstore.IPSOutputStream;
+import org.embergraph.io.FileChannelUtility;
+import org.embergraph.io.IReopenChannel;
+import org.embergraph.rawstore.IAllocationContext;
+import org.embergraph.rawstore.IPSOutputStream;
 
 /**
  * Abstract base class for implementations that use a direct buffer as a write

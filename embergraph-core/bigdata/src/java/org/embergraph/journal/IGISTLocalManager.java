@@ -26,12 +26,12 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.journal;
 
-import com.bigdata.btree.Checkpoint;
-import com.bigdata.btree.ICheckpointProtocol;
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.ILocalBTreeView;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.rawstore.IRawStore;
+import org.embergraph.btree.Checkpoint;
+import org.embergraph.btree.ICheckpointProtocol;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.ILocalBTreeView;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.rawstore.IRawStore;
 
 /**
  * Interface for managing local (non-distributed) generalized search trees

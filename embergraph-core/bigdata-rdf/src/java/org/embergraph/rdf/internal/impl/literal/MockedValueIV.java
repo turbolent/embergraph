@@ -27,13 +27,13 @@ package org.embergraph.rdf.internal.impl.literal;
 
 import org.openrdf.model.Literal;
 
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.rdf.internal.DTE;
-import com.bigdata.rdf.internal.DTEExtension;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.lexicon.LexiconRelation;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.rdf.internal.DTE;
+import org.embergraph.rdf.internal.DTEExtension;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.lexicon.LexiconRelation;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Internally used IV representing a mocked value. The IV contains a delegate,

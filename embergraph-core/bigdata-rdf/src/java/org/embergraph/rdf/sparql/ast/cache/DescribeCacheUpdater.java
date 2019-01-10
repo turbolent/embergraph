@@ -14,12 +14,12 @@ import org.openrdf.model.impl.GraphImpl;
 import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.rio.RDFWriter;
 
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.BigdataStatement;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.sparql.ast.ProjectionNode;
-import com.bigdata.rdf.sparql.ast.eval.ASTConstructIterator;
-import com.bigdata.rdf.store.TempTripleStore;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.sparql.ast.ProjectionNode;
+import org.embergraph.rdf.sparql.ast.eval.ASTConstructIterator;
+import org.embergraph.rdf.store.TempTripleStore;
 
 /**
  * Collects statements written onto the {@link RDFWriter} interface and

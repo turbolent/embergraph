@@ -29,7 +29,7 @@ package org.embergraph.rdf.rules;
 
 import org.openrdf.model.vocabulary.RDFS;
 
-import com.bigdata.rdf.vocab.Vocabulary;
+import org.embergraph.rdf.vocab.Vocabulary;
 
 public class RuleFastClosure5 extends AbstractRuleFastClosure_5_6_7_9 {
 

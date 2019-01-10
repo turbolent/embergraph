@@ -25,22 +25,22 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.sail.inferencer.fc.ForwardChainingRDFSInferencer;
 import org.openrdf.sail.memory.MemoryStore;
 
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.axioms.RdfsAxioms;
-import com.bigdata.rdf.inf.ClosureStats;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.rio.StatementBuffer;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.DataLoader;
-import com.bigdata.rdf.store.TempTripleStore;
-import com.bigdata.rdf.store.TripleStoreUtility;
-import com.bigdata.rdf.store.DataLoader.ClosureEnum;
-import com.bigdata.rdf.vocab.Vocabulary;
-import com.bigdata.relation.rule.Program;
-import com.bigdata.relation.rule.eval.ActionEnum;
-import com.bigdata.relation.rule.eval.IJoinNexus;
-import com.bigdata.relation.rule.eval.IJoinNexusFactory;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.axioms.RdfsAxioms;
+import org.embergraph.rdf.inf.ClosureStats;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.rio.StatementBuffer;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.DataLoader;
+import org.embergraph.rdf.store.TempTripleStore;
+import org.embergraph.rdf.store.TripleStoreUtility;
+import org.embergraph.rdf.store.DataLoader.ClosureEnum;
+import org.embergraph.rdf.vocab.Vocabulary;
+import org.embergraph.relation.rule.Program;
+import org.embergraph.relation.rule.eval.ActionEnum;
+import org.embergraph.relation.rule.eval.IJoinNexus;
+import org.embergraph.relation.rule.eval.IJoinNexusFactory;
 
 /**
  * Unit tests for database at once closure, fix point of a rule set (does not

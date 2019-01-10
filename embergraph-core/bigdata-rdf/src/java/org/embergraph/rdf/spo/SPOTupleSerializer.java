@@ -32,17 +32,17 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
-import com.bigdata.btree.DefaultTupleSerializer;
-import com.bigdata.btree.IRangeQuery;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleSerializer;
-import com.bigdata.btree.keys.ASCIIKeyBuilderFactory;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.raba.codec.IRabaCoder;
-import com.bigdata.io.ByteArrayBuffer;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.impl.literal.XSDBooleanIV;
-import com.bigdata.rdf.model.StatementEnum;
+import org.embergraph.btree.DefaultTupleSerializer;
+import org.embergraph.btree.IRangeQuery;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleSerializer;
+import org.embergraph.btree.keys.ASCIIKeyBuilderFactory;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.raba.codec.IRabaCoder;
+import org.embergraph.io.ByteArrayBuffer;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.impl.literal.XSDBooleanIV;
+import org.embergraph.rdf.model.StatementEnum;
 
 /**
  * (De-)serializes {@link SPO}s for statement indices.

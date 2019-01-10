@@ -25,7 +25,7 @@ package org.embergraph.rdf.internal.gis;
 
 import java.text.ParseException;
 import java.util.regex.Matcher;
-import com.bigdata.rdf.internal.gis.ICoordinate.UNITS;
+import org.embergraph.rdf.internal.gis.ICoordinate.UNITS;
 
 /**
  * Test suite for {@link CoordinateDDM}.

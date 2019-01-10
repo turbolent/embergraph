@@ -58,17 +58,17 @@ import org.openrdf.query.impl.BindingImpl;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.rio.helpers.StatementCollector;
 
-import com.bigdata.journal.BufferMode;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.lexicon.ITextIndexer;
-import com.bigdata.rdf.lexicon.ITextIndexer.FullTextQuery;
-import com.bigdata.rdf.lexicon.IValueCentricTextIndexer;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.sail.BigdataSail.Options;
-import com.bigdata.rdf.store.BDS;
-import com.bigdata.search.Hiterator;
-import com.bigdata.search.IHit;
-import com.bigdata.search.TestSearch;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.lexicon.ITextIndexer;
+import org.embergraph.rdf.lexicon.ITextIndexer.FullTextQuery;
+import org.embergraph.rdf.lexicon.IValueCentricTextIndexer;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.sail.BigdataSail.Options;
+import org.embergraph.rdf.store.BDS;
+import org.embergraph.search.Hiterator;
+import org.embergraph.search.IHit;
+import org.embergraph.search.TestSearch;
 
 /**
  * Test suite for high-level query against a graph containing statements about

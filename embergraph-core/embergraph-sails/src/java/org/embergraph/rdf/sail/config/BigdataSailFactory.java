@@ -7,7 +7,7 @@ import org.openrdf.sail.config.SailConfigException;
 import org.openrdf.sail.config.SailFactory;
 import org.openrdf.sail.config.SailImplConfig;
 
-import com.bigdata.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.BigdataSail;
 
 /**
  * A {@link SailFactory} that creates {@link BigdataSail}s based on RDF

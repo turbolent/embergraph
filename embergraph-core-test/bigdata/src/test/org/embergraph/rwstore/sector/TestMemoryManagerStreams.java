@@ -15,10 +15,10 @@ import java.util.zip.GZIPOutputStream;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.rawstore.IPSOutputStream;
-import com.bigdata.rwstore.PSInputStream;
-import com.bigdata.rwstore.PSOutputStream;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.rawstore.IPSOutputStream;
+import org.embergraph.rwstore.PSInputStream;
+import org.embergraph.rwstore.PSOutputStream;
 
 import junit.framework.TestCase;
 

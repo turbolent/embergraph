@@ -2,8 +2,8 @@ package org.embergraph.rdf.load;
 
 import org.openrdf.model.Statement;
 
-import com.bigdata.rdf.rio.IStatementBuffer;
-import com.bigdata.rdf.rio.StatementBuffer;
+import org.embergraph.rdf.rio.IStatementBuffer;
+import org.embergraph.rdf.rio.StatementBuffer;
 
 /**
  * A factory for {@link StatementBuffer}s.

@@ -27,7 +27,7 @@ package org.embergraph.service.fts;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-import com.bigdata.rdf.store.BDS;
+import org.embergraph.rdf.store.BDS;
 
 
 /**

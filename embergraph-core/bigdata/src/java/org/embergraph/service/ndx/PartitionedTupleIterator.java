@@ -29,20 +29,20 @@ import java.util.NoSuchElementException;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.DelegateTuple;
-import com.bigdata.btree.IRangeQuery;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.ResultSet;
-import com.bigdata.btree.Tuple;
-import com.bigdata.btree.proc.AbstractKeyRangeIndexProcedure;
-import com.bigdata.journal.ITx;
-import com.bigdata.mdi.PartitionLocator;
-import com.bigdata.resources.StaleLocatorException;
-import com.bigdata.service.DataService;
-import com.bigdata.service.IDataService;
-import com.bigdata.util.BytesUtil;
-import com.bigdata.util.InnerCause;
+import org.embergraph.btree.DelegateTuple;
+import org.embergraph.btree.IRangeQuery;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.ResultSet;
+import org.embergraph.btree.Tuple;
+import org.embergraph.btree.proc.AbstractKeyRangeIndexProcedure;
+import org.embergraph.journal.ITx;
+import org.embergraph.mdi.PartitionLocator;
+import org.embergraph.resources.StaleLocatorException;
+import org.embergraph.service.DataService;
+import org.embergraph.service.IDataService;
+import org.embergraph.util.BytesUtil;
+import org.embergraph.util.InnerCause;
 
 import cutthecrap.utils.striterators.IFilter;
 

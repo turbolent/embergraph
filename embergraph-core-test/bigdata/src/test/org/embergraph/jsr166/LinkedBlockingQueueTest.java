@@ -23,7 +23,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import com.bigdata.jsr166.JSR166TestCase.CheckedRunnable;
+import org.embergraph.jsr166.JSR166TestCase.CheckedRunnable;
 
 import junit.framework.Test;
 

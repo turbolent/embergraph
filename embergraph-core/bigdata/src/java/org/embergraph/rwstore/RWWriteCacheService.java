@@ -30,13 +30,13 @@ import java.nio.channels.FileChannel;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.io.IBufferAccess;
-import com.bigdata.io.IReopenChannel;
-import com.bigdata.io.writecache.IBackingReader;
-import com.bigdata.io.writecache.WriteCache;
-import com.bigdata.io.writecache.WriteCache.FileChannelScatteredWriteCache;
-import com.bigdata.io.writecache.WriteCacheService;
-import com.bigdata.quorum.Quorum;
+import org.embergraph.io.IBufferAccess;
+import org.embergraph.io.IReopenChannel;
+import org.embergraph.io.writecache.IBackingReader;
+import org.embergraph.io.writecache.WriteCache;
+import org.embergraph.io.writecache.WriteCache.FileChannelScatteredWriteCache;
+import org.embergraph.io.writecache.WriteCacheService;
+import org.embergraph.quorum.Quorum;
 
 /**
  * Defines the WriteCacheService to be used by the RWStore.

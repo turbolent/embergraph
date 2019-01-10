@@ -37,20 +37,20 @@ import java.util.UUID;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.Var;
-import com.bigdata.bop.bindingSet.HashBindingSet;
-import com.bigdata.bop.engine.IChunkMessage;
-import com.bigdata.bop.engine.IHaltOpMessage;
-import com.bigdata.bop.engine.IQueryClient;
-import com.bigdata.bop.engine.IQueryDecl;
-import com.bigdata.bop.engine.IStartOpMessage;
-import com.bigdata.io.DirectBufferPoolAllocator.IAllocationContext;
-import com.bigdata.service.ManagedResourceService;
-import com.bigdata.striterator.Dechunkerator;
-import com.bigdata.util.config.NicUtil;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.Var;
+import org.embergraph.bop.bindingSet.HashBindingSet;
+import org.embergraph.bop.engine.IChunkMessage;
+import org.embergraph.bop.engine.IHaltOpMessage;
+import org.embergraph.bop.engine.IQueryClient;
+import org.embergraph.bop.engine.IQueryDecl;
+import org.embergraph.bop.engine.IStartOpMessage;
+import org.embergraph.io.DirectBufferPoolAllocator.IAllocationContext;
+import org.embergraph.service.ManagedResourceService;
+import org.embergraph.striterator.Dechunkerator;
+import org.embergraph.util.config.NicUtil;
 
 /**
  * Unit tests for {@link NIOChunkMessage}.

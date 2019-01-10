@@ -24,11 +24,11 @@ package org.embergraph.rdf.sail;
 
 import java.util.Properties;
 
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.axioms.RdfsAxioms;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.vocab.NoVocabulary;
-import com.bigdata.rdf.vocab.RDFSVocabulary;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.axioms.RdfsAxioms;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.vocab.NoVocabulary;
+import org.embergraph.rdf.vocab.RDFSVocabulary;
 
 /**
  * Concrete instance of {@link TestRollbacks} which overrides the properties to

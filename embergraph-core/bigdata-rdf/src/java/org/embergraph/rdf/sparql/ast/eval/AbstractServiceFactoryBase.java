@@ -29,9 +29,9 @@ package org.embergraph.rdf.sparql.ast.eval;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.bigdata.bop.IVariable;
-import com.bigdata.rdf.sparql.ast.service.ServiceFactory;
-import com.bigdata.rdf.sparql.ast.service.ServiceNode;
+import org.embergraph.bop.IVariable;
+import org.embergraph.rdf.sparql.ast.service.ServiceFactory;
+import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 
 /**
  * Base class for abstract services, providing base implementation for

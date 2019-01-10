@@ -30,14 +30,14 @@ package org.embergraph.bop.util;
 import java.util.Map;
 import java.util.Set;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpBase;
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.NV;
-import com.bigdata.bop.Var;
-import com.bigdata.bop.ap.Predicate;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpBase;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.NV;
+import org.embergraph.bop.Var;
+import org.embergraph.bop.ap.Predicate;
 
 import junit.framework.TestCase2;
 

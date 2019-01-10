@@ -46,12 +46,12 @@ import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.rio.RDFFormat;
 
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.RWStrategy;
-import com.bigdata.rdf.load.RDFFilenameFilter;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.BigdataSailRepository;
-import com.bigdata.rdf.store.DataLoader;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.RWStrategy;
+import org.embergraph.rdf.load.RDFFilenameFilter;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.BigdataSailRepository;
+import org.embergraph.rdf.store.DataLoader;
 
 /**
  * Sample code for loading RDF data using the {@link BigdataSail} and the

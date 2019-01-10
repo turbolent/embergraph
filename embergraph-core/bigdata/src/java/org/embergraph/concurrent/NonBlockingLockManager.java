@@ -53,13 +53,13 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.cache.ConcurrentWeakValueCacheWithTimeout;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.Instrument;
-import com.bigdata.journal.AbstractTask;
-import com.bigdata.util.DaemonThreadFactory;
-import com.bigdata.util.concurrent.ThreadPoolExecutorStatisticsTask;
-import com.bigdata.util.concurrent.WriteTaskCounters;
+import org.embergraph.cache.ConcurrentWeakValueCacheWithTimeout;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.Instrument;
+import org.embergraph.journal.AbstractTask;
+import org.embergraph.util.DaemonThreadFactory;
+import org.embergraph.util.concurrent.ThreadPoolExecutorStatisticsTask;
+import org.embergraph.util.concurrent.WriteTaskCounters;
 
 /**
  * This class coordinates a schedule among concurrent operations requiring

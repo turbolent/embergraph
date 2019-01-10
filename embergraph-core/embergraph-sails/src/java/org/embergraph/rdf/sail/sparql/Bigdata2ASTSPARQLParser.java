@@ -47,27 +47,27 @@ import org.openrdf.query.parser.QueryParser;
 import org.openrdf.query.parser.QueryParserUtil;
 import org.openrdf.query.parser.sparql.SPARQLParser;
 
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.sail.sparql.ast.ASTPrefixDecl;
-import com.bigdata.rdf.sail.sparql.ast.ASTQueryContainer;
-import com.bigdata.rdf.sail.sparql.ast.ASTUpdate;
-import com.bigdata.rdf.sail.sparql.ast.ASTUpdateContainer;
-import com.bigdata.rdf.sail.sparql.ast.ASTUpdateSequence;
-import com.bigdata.rdf.sail.sparql.ast.ParseException;
-import com.bigdata.rdf.sail.sparql.ast.SyntaxTreeBuilder;
-import com.bigdata.rdf.sail.sparql.ast.TokenMgrError;
-import com.bigdata.rdf.sail.sparql.ast.VisitorException;
-import com.bigdata.rdf.sparql.ast.ASTBase;
-import com.bigdata.rdf.sparql.ast.ASTContainer;
-import com.bigdata.rdf.sparql.ast.QueryHints;
-import com.bigdata.rdf.sparql.ast.QueryRoot;
-import com.bigdata.rdf.sparql.ast.StatementPatternNode;
-import com.bigdata.rdf.sparql.ast.Update;
-import com.bigdata.rdf.sparql.ast.UpdateRoot;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpUtility;
-import com.bigdata.rdf.sparql.ast.hints.QueryHintScope;
-import com.bigdata.rdf.sparql.ast.optimizers.ASTQueryHintOptimizer;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.sail.sparql.ast.ASTPrefixDecl;
+import org.embergraph.rdf.sail.sparql.ast.ASTQueryContainer;
+import org.embergraph.rdf.sail.sparql.ast.ASTUpdate;
+import org.embergraph.rdf.sail.sparql.ast.ASTUpdateContainer;
+import org.embergraph.rdf.sail.sparql.ast.ASTUpdateSequence;
+import org.embergraph.rdf.sail.sparql.ast.ParseException;
+import org.embergraph.rdf.sail.sparql.ast.SyntaxTreeBuilder;
+import org.embergraph.rdf.sail.sparql.ast.TokenMgrError;
+import org.embergraph.rdf.sail.sparql.ast.VisitorException;
+import org.embergraph.rdf.sparql.ast.ASTBase;
+import org.embergraph.rdf.sparql.ast.ASTContainer;
+import org.embergraph.rdf.sparql.ast.QueryHints;
+import org.embergraph.rdf.sparql.ast.QueryRoot;
+import org.embergraph.rdf.sparql.ast.StatementPatternNode;
+import org.embergraph.rdf.sparql.ast.Update;
+import org.embergraph.rdf.sparql.ast.UpdateRoot;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpUtility;
+import org.embergraph.rdf.sparql.ast.hints.QueryHintScope;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTQueryHintOptimizer;
 
 /**
  * Overridden version of the openrdf {@link SPARQLParser} class which extracts

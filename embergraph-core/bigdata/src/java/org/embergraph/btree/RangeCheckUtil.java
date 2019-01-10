@@ -27,8 +27,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree;
 
-import com.bigdata.mdi.ISeparatorKeys;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.mdi.ISeparatorKeys;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Utility class to verify that a key lies within a key range.

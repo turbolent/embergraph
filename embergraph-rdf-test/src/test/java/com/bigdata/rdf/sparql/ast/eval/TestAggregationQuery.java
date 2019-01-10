@@ -27,9 +27,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package com.bigdata.rdf.sparql.ast.eval;
 
-import com.bigdata.bop.solutions.AbstractAggregationTestCase;
-import com.bigdata.bop.solutions.GroupByRewriter;
-import com.bigdata.bop.solutions.GroupByState;
+import org.embergraph.bop.solutions.AbstractAggregationTestCase;
+import org.embergraph.bop.solutions.GroupByRewriter;
+import org.embergraph.bop.solutions.GroupByState;
 
 /**
  * Data driven test suite for aggregation queries.

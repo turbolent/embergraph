@@ -37,19 +37,19 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.internal.XSD;
-import com.bigdata.rdf.internal.impl.bnode.SidIV;
-import com.bigdata.rdf.load.IStatementBufferFactory;
-import com.bigdata.rdf.model.BigdataBNode;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.model.BigdataStatement;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.model.StatementEnum;
-import com.bigdata.rdf.sparql.ast.QueryHints;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.AbstractTripleStoreTestCase;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.internal.XSD;
+import org.embergraph.rdf.internal.impl.bnode.SidIV;
+import org.embergraph.rdf.load.IStatementBufferFactory;
+import org.embergraph.rdf.model.BigdataBNode;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.rdf.sparql.ast.QueryHints;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.AbstractTripleStoreTestCase;
 
 /**
  * Test suite for {@link StatementBuffer}.

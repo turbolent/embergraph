@@ -32,9 +32,9 @@ import java.rmi.Remote;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.mdi.MetadataIndex;
-import com.bigdata.mdi.PartitionLocator;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.mdi.MetadataIndex;
+import org.embergraph.mdi.PartitionLocator;
 
 /**
  * A metadata service for a named index.

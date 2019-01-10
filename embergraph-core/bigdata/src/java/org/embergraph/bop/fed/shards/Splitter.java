@@ -1,7 +1,7 @@
 package org.embergraph.bop.fed.shards;
 
-import com.bigdata.mdi.IMetadataIndex;
-import com.bigdata.service.ndx.AbstractSplitter;
+import org.embergraph.mdi.IMetadataIndex;
+import org.embergraph.service.ndx.AbstractSplitter;
 
 /**
  * Helper class efficiently splits an array of sorted keys into groups

@@ -36,26 +36,26 @@ import java.util.UUID;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpEvaluationContext;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.IShardwisePipelineOp;
-import com.bigdata.bop.engine.IChunkHandler;
-import com.bigdata.bop.engine.IChunkMessage;
-import com.bigdata.bop.engine.IQueryPeer;
-import com.bigdata.bop.engine.IRunningQuery;
-import com.bigdata.bop.engine.LocalChunkMessage;
-import com.bigdata.bop.engine.StandaloneChunkHandler;
-import com.bigdata.bop.fed.shards.MapBindingSetsOverShardsBuffer;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.io.DirectBufferPoolAllocator.IAllocationContext;
-import com.bigdata.mdi.PartitionLocator;
-import com.bigdata.relation.accesspath.BlockingBuffer;
-import com.bigdata.relation.accesspath.IAsynchronousIterator;
-import com.bigdata.relation.accesspath.IBlockingBuffer;
-import com.bigdata.relation.accesspath.IBuffer;
-import com.bigdata.relation.rule.eval.pipeline.DistributedJoinTask;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpEvaluationContext;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.IShardwisePipelineOp;
+import org.embergraph.bop.engine.IChunkHandler;
+import org.embergraph.bop.engine.IChunkMessage;
+import org.embergraph.bop.engine.IQueryPeer;
+import org.embergraph.bop.engine.IRunningQuery;
+import org.embergraph.bop.engine.LocalChunkMessage;
+import org.embergraph.bop.engine.StandaloneChunkHandler;
+import org.embergraph.bop.fed.shards.MapBindingSetsOverShardsBuffer;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.io.DirectBufferPoolAllocator.IAllocationContext;
+import org.embergraph.mdi.PartitionLocator;
+import org.embergraph.relation.accesspath.BlockingBuffer;
+import org.embergraph.relation.accesspath.IAsynchronousIterator;
+import org.embergraph.relation.accesspath.IBlockingBuffer;
+import org.embergraph.relation.accesspath.IBuffer;
+import org.embergraph.relation.rule.eval.pipeline.DistributedJoinTask;
 
 /**
  * The base class is extended to organize the output from one operator so in

@@ -27,10 +27,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.fed;
 
-import com.bigdata.bop.engine.QueryEngineCounters;
-import com.bigdata.counters.CAT;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.Instrument;
+import org.embergraph.bop.engine.QueryEngineCounters;
+import org.embergraph.counters.CAT;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.Instrument;
 
 /**
  * Extended performance counters for the {@link FederatedQueryEngine}.

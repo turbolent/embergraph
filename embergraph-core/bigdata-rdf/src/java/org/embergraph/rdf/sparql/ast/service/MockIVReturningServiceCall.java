@@ -29,9 +29,9 @@ package org.embergraph.rdf.sparql.ast.service;
 
 import java.util.List;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IVariable;
-import com.bigdata.rdf.internal.IV;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IVariable;
+import org.embergraph.rdf.internal.IV;
 
 /**
  * <p>

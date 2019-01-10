@@ -27,10 +27,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.join;
 
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rwstore.sector.MemoryManager;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rwstore.sector.MemoryManager;
 
 /**
  * Test suite for the {@link HTreeHashJoinUtility}.

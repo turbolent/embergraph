@@ -38,22 +38,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IVariable;
-import com.bigdata.rdf.sparql.ast.ASTUtil;
-import com.bigdata.rdf.sparql.ast.IQueryNode;
-import com.bigdata.rdf.sparql.ast.NamedSubqueriesNode;
-import com.bigdata.rdf.sparql.ast.NamedSubqueryInclude;
-import com.bigdata.rdf.sparql.ast.NamedSubqueryRoot;
-import com.bigdata.rdf.sparql.ast.QueryNodeWithBindingSet;
-import com.bigdata.rdf.sparql.ast.QueryRoot;
-import com.bigdata.rdf.sparql.ast.StaticAnalysis;
-import com.bigdata.rdf.sparql.ast.SubqueryBase;
-import com.bigdata.rdf.sparql.ast.SubqueryRoot;
-import com.bigdata.rdf.sparql.ast.VarNode;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpContext;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IVariable;
+import org.embergraph.rdf.sparql.ast.ASTUtil;
+import org.embergraph.rdf.sparql.ast.IQueryNode;
+import org.embergraph.rdf.sparql.ast.NamedSubqueriesNode;
+import org.embergraph.rdf.sparql.ast.NamedSubqueryInclude;
+import org.embergraph.rdf.sparql.ast.NamedSubqueryRoot;
+import org.embergraph.rdf.sparql.ast.QueryNodeWithBindingSet;
+import org.embergraph.rdf.sparql.ast.QueryRoot;
+import org.embergraph.rdf.sparql.ast.StaticAnalysis;
+import org.embergraph.rdf.sparql.ast.SubqueryBase;
+import org.embergraph.rdf.sparql.ast.SubqueryRoot;
+import org.embergraph.rdf.sparql.ast.VarNode;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 import cutthecrap.utils.striterators.Striterator;
 

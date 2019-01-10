@@ -30,18 +30,18 @@ package org.embergraph.rdf.spo;
 
 import org.openrdf.model.Statement;
 
-import com.bigdata.bop.IElement;
-import com.bigdata.rdf.inf.Justification;
-import com.bigdata.rdf.inf.TruthMaintenance;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.BigdataStatement;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.StatementEnum;
-import com.bigdata.rdf.rio.StatementBuffer;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.IRawTripleStore;
-import com.bigdata.relation.accesspath.IElementFilter;
-import com.bigdata.striterator.IChunkedOrderedIterator;
+import org.embergraph.bop.IElement;
+import org.embergraph.rdf.inf.Justification;
+import org.embergraph.rdf.inf.TruthMaintenance;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.rdf.rio.StatementBuffer;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.IRawTripleStore;
+import org.embergraph.relation.accesspath.IElementFilter;
+import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /**
  * A interface representing an RDF triple, an RDF triple with a statement

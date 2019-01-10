@@ -2,11 +2,11 @@ package org.embergraph.relation.accesspath;
 
 import java.util.Collections;
 
-import com.bigdata.bop.IPredicate;
-import com.bigdata.btree.IIndex;
-import com.bigdata.striterator.ChunkedWrappedIterator;
-import com.bigdata.striterator.IChunkedOrderedIterator;
-import com.bigdata.striterator.IKeyOrder;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.btree.IIndex;
+import org.embergraph.striterator.ChunkedWrappedIterator;
+import org.embergraph.striterator.IChunkedOrderedIterator;
+import org.embergraph.striterator.IKeyOrder;
 
 /**
  * An access path that is known to be empty.

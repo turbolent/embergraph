@@ -38,10 +38,10 @@ import org.openrdf.model.Value;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDF;
 
-import com.bigdata.io.SerializerUtil;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.io.SerializerUtil;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * Test suite for {@link BaseVocabulary}.

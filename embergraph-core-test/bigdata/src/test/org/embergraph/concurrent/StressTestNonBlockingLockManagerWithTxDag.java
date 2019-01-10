@@ -29,7 +29,7 @@ package org.embergraph.concurrent;
 
 import java.util.Properties;
 
-import com.bigdata.testutil.ExperimentDriver.Result;
+import org.embergraph.testutil.ExperimentDriver.Result;
 
 /**
  * Stress tests where a {@link TxDag} is used to detect deadlock.

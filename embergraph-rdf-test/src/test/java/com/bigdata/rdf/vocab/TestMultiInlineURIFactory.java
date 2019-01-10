@@ -1,8 +1,8 @@
 package com.bigdata.rdf.vocab;
 
-import com.bigdata.rdf.internal.InlineHexUUIDURIHandler;
-import com.bigdata.rdf.internal.InlineSuffixedHexUUIDURIHandler;
-import com.bigdata.rdf.internal.InlineURIFactory;
+import org.embergraph.rdf.internal.InlineHexUUIDURIHandler;
+import org.embergraph.rdf.internal.InlineSuffixedHexUUIDURIHandler;
+import org.embergraph.rdf.internal.InlineURIFactory;
 
 public class TestMultiInlineURIFactory extends InlineURIFactory {
 

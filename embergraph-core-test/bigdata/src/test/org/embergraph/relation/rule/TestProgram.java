@@ -30,10 +30,10 @@ package org.embergraph.relation.rule;
 
 import java.util.Iterator;
 
-import com.bigdata.relation.rule.IProgram;
-import com.bigdata.relation.rule.IRule;
-import com.bigdata.relation.rule.IStep;
-import com.bigdata.relation.rule.Program;
+import org.embergraph.relation.rule.IProgram;
+import org.embergraph.relation.rule.IRule;
+import org.embergraph.relation.rule.IStep;
+import org.embergraph.relation.rule.Program;
 
 /**
  * Test suite for {@link Program} and common rule/program re-writes.

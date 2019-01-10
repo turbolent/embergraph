@@ -23,11 +23,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rwstore;
 
-import com.bigdata.cache.ConcurrentWeakValueCache;
-import com.bigdata.journal.AbstractJournal;
-import com.bigdata.journal.DeleteBlockCommitter;
-import com.bigdata.journal.ICommitter;
-import com.bigdata.journal.Journal;
+import org.embergraph.cache.ConcurrentWeakValueCache;
+import org.embergraph.journal.AbstractJournal;
+import org.embergraph.journal.DeleteBlockCommitter;
+import org.embergraph.journal.ICommitter;
+import org.embergraph.journal.Journal;
 
 /**
  * Interface for glue methods which permit the coordination of the hisory

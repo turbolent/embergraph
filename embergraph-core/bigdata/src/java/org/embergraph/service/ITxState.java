@@ -23,7 +23,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.service;
 
-import com.bigdata.journal.ITransactionService;
+import org.embergraph.journal.ITransactionService;
 
 /**
  * Interface for the state associated with a transaction in an

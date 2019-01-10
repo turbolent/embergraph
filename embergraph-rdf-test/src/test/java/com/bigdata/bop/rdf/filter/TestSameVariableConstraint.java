@@ -49,14 +49,14 @@ package com.bigdata.bop.rdf.filter;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.Var;
-import com.bigdata.bop.ap.filter.SameVariableConstraint;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.VTE;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.rdf.spo.SPOPredicate;
-import com.bigdata.test.MockTermIdFactory;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.Var;
+import org.embergraph.bop.ap.filter.SameVariableConstraint;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.VTE;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.rdf.spo.SPOPredicate;
+import org.embergraph.test.MockTermIdFactory;
 
 /**
  * Test suite for {@link SameVariableConstraint}.

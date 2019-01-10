@@ -37,16 +37,16 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.ILocalBTreeView;
-import com.bigdata.btree.IRangeQuery;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.Tuple;
-import com.bigdata.btree.isolation.IsolatedFusedView;
-import com.bigdata.util.InnerCause;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.ILocalBTreeView;
+import org.embergraph.btree.IRangeQuery;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.Tuple;
+import org.embergraph.btree.isolation.IsolatedFusedView;
+import org.embergraph.util.InnerCause;
 
 /**
  * Test suite for fully-isolated read-write transactions.

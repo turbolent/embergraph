@@ -31,9 +31,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.journal.BasicSnapshotFactory;
-import com.bigdata.journal.ISnapshotResult;
-import com.bigdata.journal.Journal;
+import org.embergraph.journal.BasicSnapshotFactory;
+import org.embergraph.journal.ISnapshotResult;
+import org.embergraph.journal.Journal;
 
 /**
  * Request an online backup of the journal (non-HA Mode). The backup will be

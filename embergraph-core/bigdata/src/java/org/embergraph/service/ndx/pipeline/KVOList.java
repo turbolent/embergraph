@@ -3,7 +3,7 @@ package org.embergraph.service.ndx.pipeline;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicReference;
 
-import com.bigdata.btree.keys.KVO;
+import org.embergraph.btree.keys.KVO;
 
 /**
  * Extends {@link KVO} to allow duplicates to be gathered together in a

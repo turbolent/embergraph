@@ -27,8 +27,8 @@ package org.embergraph.rdf.sail.webapp;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.rdf.task.IApiTask;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.task.IApiTask;
 
 /**
  * Base class for delegation patterns where the delegate is an {@link IApiTask}.

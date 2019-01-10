@@ -35,10 +35,10 @@ import java.io.ObjectOutput;
 import java.io.OutputStream;
 import java.util.Iterator;
 
-import com.bigdata.btree.raba.AbstractRaba;
-import com.bigdata.btree.raba.IRaba;
-import com.bigdata.io.AbstractFixedByteArrayBuffer;
-import com.bigdata.io.DataOutputBuffer;
+import org.embergraph.btree.raba.AbstractRaba;
+import org.embergraph.btree.raba.IRaba;
+import org.embergraph.io.AbstractFixedByteArrayBuffer;
+import org.embergraph.io.DataOutputBuffer;
 
 /**
  * Useful when a B+Tree uses keys but not values. The coder maintains the

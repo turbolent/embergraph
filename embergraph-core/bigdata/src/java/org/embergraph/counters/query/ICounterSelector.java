@@ -30,9 +30,9 @@ package org.embergraph.counters.query;
 
 import java.util.regex.Pattern;
 
-import com.bigdata.counters.HistoryInstrument;
-import com.bigdata.counters.ICounter;
-import com.bigdata.counters.PeriodEnum;
+import org.embergraph.counters.HistoryInstrument;
+import org.embergraph.counters.ICounter;
+import org.embergraph.counters.PeriodEnum;
 
 /**
  * Interface for selecting counters.

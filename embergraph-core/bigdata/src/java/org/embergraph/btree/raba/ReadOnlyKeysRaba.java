@@ -27,8 +27,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree.raba;
 
-import com.bigdata.btree.proc.IKeyArrayIndexProcedure;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.proc.IKeyArrayIndexProcedure;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Immutable implementation does not allow <code>null</code>s but supports

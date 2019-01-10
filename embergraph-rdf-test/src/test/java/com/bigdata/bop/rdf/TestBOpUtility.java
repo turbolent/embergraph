@@ -48,16 +48,16 @@ import org.openrdf.repository.sail.SailRepository;
 import org.openrdf.sail.Sail;
 import org.openrdf.sail.memory.MemoryStore;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.bop.Var;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.constraints.IVValueExpression;
-import com.bigdata.rdf.internal.constraints.OrBOp;
-import com.bigdata.rdf.store.BD;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.bop.Var;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.constraints.IVValueExpression;
+import org.embergraph.rdf.internal.constraints.OrBOp;
+import org.embergraph.rdf.store.BD;
 
 /**
  * Unit tests for {@link BOpUtility}.

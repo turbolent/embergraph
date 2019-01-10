@@ -31,9 +31,9 @@ package org.embergraph.journal;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 
-import com.bigdata.service.AbstractFederation;
-import com.bigdata.service.AbstractHATransactionService;
-import com.bigdata.service.DataService;
+import org.embergraph.service.AbstractFederation;
+import org.embergraph.service.AbstractHATransactionService;
+import org.embergraph.service.DataService;
 
 /**
  * Implementation for a standalone journal using single-phase commits.

@@ -34,16 +34,16 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.bigdata.counters.AbstractProcessCollector;
-import com.bigdata.counters.AbstractProcessReader;
-import com.bigdata.counters.ActiveProcess;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.ICounterHierarchy;
-import com.bigdata.counters.ICounterSet;
-import com.bigdata.counters.IHostCounters;
-import com.bigdata.counters.IInstrument;
-import com.bigdata.counters.IRequiredHostCounters;
-import com.bigdata.counters.ProcessReaderHelper;
+import org.embergraph.counters.AbstractProcessCollector;
+import org.embergraph.counters.AbstractProcessReader;
+import org.embergraph.counters.ActiveProcess;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.ICounterHierarchy;
+import org.embergraph.counters.ICounterSet;
+import org.embergraph.counters.IHostCounters;
+import org.embergraph.counters.IInstrument;
+import org.embergraph.counters.IRequiredHostCounters;
+import org.embergraph.counters.ProcessReaderHelper;
 
 /**
  * Collects statistics on the CPU utilization for the entire host using

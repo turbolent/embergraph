@@ -31,9 +31,9 @@ import java.io.File;
 import java.util.Random;
 import java.util.UUID;
 
-import com.bigdata.btree.IndexSegmentBuilder.BuildEnum;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.IndexSegmentBuilder.BuildEnum;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Test suite for {@link IndexSegmentMultiBlockIterator}.

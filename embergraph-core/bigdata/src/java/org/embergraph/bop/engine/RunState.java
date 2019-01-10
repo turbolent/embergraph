@@ -43,13 +43,13 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpEvaluationContext;
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.NoBOpIdException;
-import com.bigdata.bop.NoSuchBOpException;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.join.PipelineJoinStats;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpEvaluationContext;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.NoBOpIdException;
+import org.embergraph.bop.NoSuchBOpException;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.join.PipelineJoinStats;
 
 /**
  * The run state for an {@link IRunningQuery}. This class is thread-safe.

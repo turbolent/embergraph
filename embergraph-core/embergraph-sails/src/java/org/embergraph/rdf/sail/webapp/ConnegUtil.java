@@ -37,10 +37,10 @@ import org.openrdf.query.resultio.BooleanQueryResultFormat;
 import org.openrdf.query.resultio.TupleQueryResultFormat;
 import org.openrdf.rio.RDFFormat;
 
-import com.bigdata.counters.format.CounterSetFormat;
-import com.bigdata.rdf.properties.PropertiesFormat;
-import com.bigdata.rdf.sail.webapp.client.IMimeTypes;
-import com.bigdata.rdf.sail.webapp.client.MiniMime;
+import org.embergraph.counters.format.CounterSetFormat;
+import org.embergraph.rdf.properties.PropertiesFormat;
+import org.embergraph.rdf.sail.webapp.client.IMimeTypes;
+import org.embergraph.rdf.sail.webapp.client.MiniMime;
 
 /**
  * Helper class for content negotiation.

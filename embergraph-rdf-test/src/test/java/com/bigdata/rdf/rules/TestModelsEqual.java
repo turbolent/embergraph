@@ -29,12 +29,12 @@ package com.bigdata.rdf.rules;
 
 import org.openrdf.model.vocabulary.RDFS;
 
-import com.bigdata.rdf.model.BigdataStatement;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.rio.StatementBuffer;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.TripleStoreUtility;
+import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.rio.StatementBuffer;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.TripleStoreUtility;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

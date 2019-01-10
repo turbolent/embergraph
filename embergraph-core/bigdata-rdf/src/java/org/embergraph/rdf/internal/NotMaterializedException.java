@@ -1,6 +1,6 @@
 package org.embergraph.rdf.internal;
 
-import com.bigdata.rdf.lexicon.LexiconRelation;
+import org.embergraph.rdf.lexicon.LexiconRelation;
 
 /**
  * Exception thrown by {@link IV#getValue()} if the {@link IV} has not first

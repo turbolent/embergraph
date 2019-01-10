@@ -49,8 +49,8 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import com.bigdata.util.httpd.MIMEType;
-import com.bigdata.util.httpd.NVPair;
+import org.embergraph.util.httpd.MIMEType;
+import org.embergraph.util.httpd.NVPair;
 
 /**
  * Test suite for {@link MIMEType}.

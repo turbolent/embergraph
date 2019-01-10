@@ -25,18 +25,18 @@ package org.embergraph.bop.rdf.aggregate;
 
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.bop.NV;
-import com.bigdata.bop.aggregate.AggregateBase;
-import com.bigdata.bop.solutions.PipelinedAggregationOp;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.constraints.INeedsMaterialization;
-import com.bigdata.rdf.internal.constraints.IVValueExpression;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.model.BigdataValueFactoryImpl;
-import com.bigdata.rdf.sparql.ast.DummyConstantNode;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.bop.NV;
+import org.embergraph.bop.aggregate.AggregateBase;
+import org.embergraph.bop.solutions.PipelinedAggregationOp;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.constraints.INeedsMaterialization;
+import org.embergraph.rdf.internal.constraints.IVValueExpression;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.sparql.ast.DummyConstantNode;
 
 /**
  * Operator combines the string values over the presented binding sets for the

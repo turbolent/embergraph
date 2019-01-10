@@ -37,17 +37,17 @@ import java.util.NoSuchElementException;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.IVariableOrConstant;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.SuccessorUtil;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.IVUtility;
-import com.bigdata.rdf.internal.constraints.RangeBOp;
-import com.bigdata.rdf.model.StatementEnum;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpBase;
-import com.bigdata.striterator.AbstractKeyOrder;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.IVariableOrConstant;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.SuccessorUtil;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.IVUtility;
+import org.embergraph.rdf.internal.constraints.RangeBOp;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpBase;
+import org.embergraph.striterator.AbstractKeyOrder;
 
 /**
  * Represents the key order used by an index for a triple relation.

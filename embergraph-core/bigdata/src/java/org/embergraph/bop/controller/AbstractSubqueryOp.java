@@ -36,15 +36,15 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.FutureTask;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpContext;
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.bset.Tee;
-import com.bigdata.bop.engine.IRunningQuery;
-import com.bigdata.bop.engine.QueryEngine;
-import com.bigdata.util.concurrent.LatchedExecutor;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpContext;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.bset.Tee;
+import org.embergraph.bop.engine.IRunningQuery;
+import org.embergraph.bop.engine.QueryEngine;
+import org.embergraph.util.concurrent.LatchedExecutor;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

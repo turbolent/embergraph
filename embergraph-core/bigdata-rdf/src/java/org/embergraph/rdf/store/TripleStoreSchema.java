@@ -1,8 +1,8 @@
 package org.embergraph.rdf.store;
 
-import com.bigdata.rdf.axioms.Axioms;
-import com.bigdata.rdf.vocab.RDFSVocabulary;
-import com.bigdata.relation.RelationSchema;
+import org.embergraph.rdf.axioms.Axioms;
+import org.embergraph.rdf.vocab.RDFSVocabulary;
+import org.embergraph.relation.RelationSchema;
 
 /**
  * Extensions for additional state maintained by the

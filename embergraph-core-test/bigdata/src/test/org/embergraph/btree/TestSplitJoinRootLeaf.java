@@ -29,8 +29,8 @@ package org.embergraph.btree;
 
 import org.apache.log4j.Level;
 
-import com.bigdata.btree.keys.TestKeyBuilder;
-import com.bigdata.io.SerializerUtil;
+import org.embergraph.btree.keys.TestKeyBuilder;
+import org.embergraph.io.SerializerUtil;
 
 /**
  * Test split and join of the root leaf (the tree never has more than two

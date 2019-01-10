@@ -4,11 +4,11 @@ package com.bigdata.rdf.sail.sparql.ast;
 
 import java.util.List;
 
-import com.bigdata.rdf.sail.sparql.ast.ASTProjectionElem;
-import com.bigdata.rdf.sail.sparql.ast.SimpleNode;
-import com.bigdata.rdf.sail.sparql.ast.SyntaxTreeBuilder;
-import com.bigdata.rdf.sail.sparql.ast.SyntaxTreeBuilderVisitor;
-import com.bigdata.rdf.sail.sparql.ast.VisitorException;
+import org.embergraph.rdf.sail.sparql.ast.ASTProjectionElem;
+import org.embergraph.rdf.sail.sparql.ast.SimpleNode;
+import org.embergraph.rdf.sail.sparql.ast.SyntaxTreeBuilder;
+import org.embergraph.rdf.sail.sparql.ast.SyntaxTreeBuilderVisitor;
+import org.embergraph.rdf.sail.sparql.ast.VisitorException;
 
 public class ASTSelect extends SimpleNode {
 

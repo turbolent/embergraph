@@ -2,7 +2,7 @@ package org.embergraph.counters.render;
 
 import java.util.regex.Pattern;
 
-import com.bigdata.counters.query.HistoryTable;
+import org.embergraph.counters.query.HistoryTable;
 
 /**
  * 

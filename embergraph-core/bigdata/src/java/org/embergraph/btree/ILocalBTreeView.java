@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree;
 
-import com.bigdata.btree.view.FusedView;
+import org.embergraph.btree.view.FusedView;
 
 /**
  * Interface indicates that the index is local rather than remote. A local index

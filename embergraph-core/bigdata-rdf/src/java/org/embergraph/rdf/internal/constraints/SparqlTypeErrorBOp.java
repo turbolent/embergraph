@@ -26,11 +26,11 @@ package org.embergraph.rdf.internal.constraints;
 
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.rdf.error.SparqlTypeErrorException;
-import com.bigdata.rdf.internal.IV;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.rdf.error.SparqlTypeErrorException;
+import org.embergraph.rdf.internal.IV;
 
 /**
  * Always throws a SparqlTypeError.

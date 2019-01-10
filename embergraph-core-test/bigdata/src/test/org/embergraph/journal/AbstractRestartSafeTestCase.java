@@ -32,9 +32,9 @@ import java.nio.ByteBuffer;
 import java.util.Properties;
 import java.util.Random;
 
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rwstore.IRWStrategy;
-import com.bigdata.util.InnerCause;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rwstore.IRWStrategy;
+import org.embergraph.util.InnerCause;
 
 /**
  * Test suite for restart-safe (data survives commit and reopen of the store).

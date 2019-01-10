@@ -1,6 +1,6 @@
 package org.embergraph.btree;
 
-import com.bigdata.util.BytesUtil;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Utility class to dump an index in a variety of ways.

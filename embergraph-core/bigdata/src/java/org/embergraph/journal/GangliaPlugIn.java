@@ -33,17 +33,17 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.counters.AbstractStatisticsCollector;
-import com.bigdata.counters.ganglia.BigdataGangliaService;
-import com.bigdata.counters.ganglia.BigdataMetadataFactory;
-import com.bigdata.counters.ganglia.HostMetricsCollector;
-import com.bigdata.counters.ganglia.QueryEngineMetricsCollector;
-import com.bigdata.ganglia.DefaultMetadataFactory;
-import com.bigdata.ganglia.GangliaMetadataFactory;
-import com.bigdata.ganglia.GangliaService;
-import com.bigdata.ganglia.GangliaSlopeEnum;
-import com.bigdata.ganglia.IGangliaDefaults;
-import com.bigdata.ganglia.util.GangliaUtil;
+import org.embergraph.counters.AbstractStatisticsCollector;
+import org.embergraph.counters.ganglia.BigdataGangliaService;
+import org.embergraph.counters.ganglia.BigdataMetadataFactory;
+import org.embergraph.counters.ganglia.HostMetricsCollector;
+import org.embergraph.counters.ganglia.QueryEngineMetricsCollector;
+import org.embergraph.ganglia.DefaultMetadataFactory;
+import org.embergraph.ganglia.GangliaMetadataFactory;
+import org.embergraph.ganglia.GangliaService;
+import org.embergraph.ganglia.GangliaSlopeEnum;
+import org.embergraph.ganglia.IGangliaDefaults;
+import org.embergraph.ganglia.util.GangliaUtil;
 
 /**
  * A plugin for ganglia.

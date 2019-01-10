@@ -42,12 +42,12 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
-import com.bigdata.gom.gpo.BasicSkin;
-import com.bigdata.gom.gpo.GPO;
-import com.bigdata.gom.gpo.IGPO;
-import com.bigdata.gom.gpo.ILinkSet;
-import com.bigdata.gom.om.ObjectMgrModel;
-import com.bigdata.gom.skin.GenericSkinRegistry;
+import org.embergraph.gom.gpo.BasicSkin;
+import org.embergraph.gom.gpo.GPO;
+import org.embergraph.gom.gpo.IGPO;
+import org.embergraph.gom.gpo.ILinkSet;
+import org.embergraph.gom.om.ObjectMgrModel;
+import org.embergraph.gom.skin.GenericSkinRegistry;
 
 /**
  * Base test suite for the embedded (local) GOM.

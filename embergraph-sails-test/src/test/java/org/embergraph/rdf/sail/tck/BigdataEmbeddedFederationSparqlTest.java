@@ -41,22 +41,22 @@ import org.openrdf.query.parser.sparql.manifest.SPARQLQueryTest;
 import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryException;
 
-import com.bigdata.btree.keys.CollatorEnum;
-import com.bigdata.btree.keys.StrengthEnum;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.ITx;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.BigdataSail.Options;
-import com.bigdata.rdf.sail.BigdataSailRepository;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.ScaleOutTripleStore;
-import com.bigdata.resources.ResourceManager;
-import com.bigdata.service.AbstractClient;
-import com.bigdata.service.DistributedTransactionService;
-import com.bigdata.service.EmbeddedClient;
-import com.bigdata.service.EmbeddedFederation;
-import com.bigdata.service.IBigdataClient;
-import com.bigdata.service.IBigdataFederation;
+import org.embergraph.btree.keys.CollatorEnum;
+import org.embergraph.btree.keys.StrengthEnum;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.ITx;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.BigdataSail.Options;
+import org.embergraph.rdf.sail.BigdataSailRepository;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.ScaleOutTripleStore;
+import org.embergraph.resources.ResourceManager;
+import org.embergraph.service.AbstractClient;
+import org.embergraph.service.DistributedTransactionService;
+import org.embergraph.service.EmbeddedClient;
+import org.embergraph.service.EmbeddedFederation;
+import org.embergraph.service.IBigdataClient;
+import org.embergraph.service.IBigdataFederation;
 
 /**
  * Test harness for running the SPARQL test suites against an

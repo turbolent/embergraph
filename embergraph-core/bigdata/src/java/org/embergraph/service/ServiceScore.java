@@ -2,7 +2,7 @@ package org.embergraph.service;
 
 import java.util.UUID;
 
-import com.bigdata.service.LoadBalancerService.UpdateTask;
+import org.embergraph.service.LoadBalancerService.UpdateTask;
 
 /**
  * Per-service metadata and a score for that service which gets updated

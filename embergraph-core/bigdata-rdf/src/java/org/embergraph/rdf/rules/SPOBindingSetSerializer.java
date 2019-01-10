@@ -31,11 +31,11 @@ package org.embergraph.rdf.rules;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.io.IStreamSerializer;
-import com.bigdata.io.SerializerUtil;
-import com.bigdata.rdf.spo.SPO;
-import com.bigdata.relation.rule.eval.ISolution;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.io.IStreamSerializer;
+import org.embergraph.io.SerializerUtil;
+import org.embergraph.rdf.spo.SPO;
+import org.embergraph.relation.rule.eval.ISolution;
 
 /**
  * A class that provides (relatively) compact serialization for a chunk of

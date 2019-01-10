@@ -28,8 +28,8 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import com.bigdata.rdf.lexicon.TestTermIVComparator;
-import com.bigdata.rdf.store.TestLocalTripleStore;
+import org.embergraph.rdf.lexicon.TestTermIVComparator;
+import org.embergraph.rdf.store.TestLocalTripleStore;
 
 /**
  * Aggregates test suites into increasing dependency order.

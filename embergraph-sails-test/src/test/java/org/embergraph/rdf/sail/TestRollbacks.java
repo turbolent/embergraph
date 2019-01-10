@@ -46,11 +46,11 @@ import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.sail.SailRepository;
 
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.BigdataSailRepository;
-import com.bigdata.rdf.vocab.NoVocabulary;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.BigdataSailRepository;
+import org.embergraph.rdf.vocab.NoVocabulary;
 
 /**
  * This is a stress test for abort/rollback semantics.

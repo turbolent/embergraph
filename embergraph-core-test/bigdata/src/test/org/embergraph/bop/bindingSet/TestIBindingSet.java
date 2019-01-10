@@ -33,12 +33,12 @@ import java.util.Map;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.Var;
-import com.bigdata.io.SerializerUtil;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.Var;
+import org.embergraph.io.SerializerUtil;
 
 /**
  * Unit tests for {@link IBindingSet}.

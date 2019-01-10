@@ -29,9 +29,9 @@ package org.embergraph.bop.engine;
 
 import java.util.concurrent.TimeUnit;
 
-import com.bigdata.bop.BufferAnnotations;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.relation.accesspath.BlockingBuffer;
+import org.embergraph.bop.BufferAnnotations;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.relation.accesspath.BlockingBuffer;
 
 /**
  * Extended to use the {@link BufferAnnotations} to provision the

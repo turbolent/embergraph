@@ -59,18 +59,18 @@ import org.openrdf.sail.Sail;
 import org.openrdf.sail.SailConnection;
 import org.openrdf.sail.SailException;
 
-import com.bigdata.btree.keys.CollatorEnum;
-import com.bigdata.btree.keys.StrengthEnum;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.BigdataSail.BigdataSailConnection;
-import com.bigdata.rdf.sail.BigdataSail.Options;
-import com.bigdata.rdf.sail.sparql.Bigdata2ASTSPARQLParser;
-import com.bigdata.rdf.sparql.ast.ASTContainer;
-import com.bigdata.rdf.sparql.ast.QueryRoot;
-import com.bigdata.rdf.sparql.ast.eval.ASTEvalHelper;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.btree.keys.CollatorEnum;
+import org.embergraph.btree.keys.StrengthEnum;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
+import org.embergraph.rdf.sail.BigdataSail.Options;
+import org.embergraph.rdf.sail.sparql.Bigdata2ASTSPARQLParser;
+import org.embergraph.rdf.sparql.ast.ASTContainer;
+import org.embergraph.rdf.sparql.ast.QueryRoot;
+import org.embergraph.rdf.sparql.ast.eval.ASTEvalHelper;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * @openrdf test suite extenstion/override.

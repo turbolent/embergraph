@@ -29,9 +29,9 @@ package org.embergraph.bop.fed;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpContext;
-import com.bigdata.rdf.sparql.ast.eval.IExternalAST2BOp;
-import com.bigdata.util.ClassPathUtil;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
+import org.embergraph.rdf.sparql.ast.eval.IExternalAST2BOp;
+import org.embergraph.util.ClassPathUtil;
 
 /**
  * Singleton factory for a query controller.

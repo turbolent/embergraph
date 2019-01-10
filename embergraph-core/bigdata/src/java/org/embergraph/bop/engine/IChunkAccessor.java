@@ -30,9 +30,9 @@ package org.embergraph.bop.engine;
 import java.nio.ByteBuffer;
 import java.util.concurrent.BlockingQueue;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.relation.accesspath.BlockingBuffer;
-import com.bigdata.striterator.IChunkedIterator;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.relation.accesspath.BlockingBuffer;
+import org.embergraph.striterator.IChunkedIterator;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

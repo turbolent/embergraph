@@ -29,7 +29,7 @@ package org.embergraph.btree.proc;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.bigdata.service.Split;
+import org.embergraph.service.Split;
 
 /**
  * Aggregates result into a list of results.

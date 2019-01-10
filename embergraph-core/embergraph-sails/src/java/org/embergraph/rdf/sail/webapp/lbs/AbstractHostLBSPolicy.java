@@ -43,12 +43,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.PlatformStatsPlugIn;
-import com.bigdata.quorum.Quorum;
-import com.bigdata.rdf.sail.webapp.HALoadBalancerServlet;
-import com.bigdata.util.InnerCause;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.PlatformStatsPlugIn;
+import org.embergraph.quorum.Quorum;
+import org.embergraph.rdf.sail.webapp.HALoadBalancerServlet;
+import org.embergraph.util.InnerCause;
 
 /**
  * Abstract base class for an LBS policy that uses per-host load metrics.

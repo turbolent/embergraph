@@ -30,8 +30,8 @@ package org.embergraph.relation.rule.eval;
 
 import java.util.Iterator;
 
-import com.bigdata.relation.rule.IProgram;
-import com.bigdata.relation.rule.IStep;
+import org.embergraph.relation.rule.IProgram;
+import org.embergraph.relation.rule.IStep;
 
 /**
  * Support for determining how and where a program should be executed.

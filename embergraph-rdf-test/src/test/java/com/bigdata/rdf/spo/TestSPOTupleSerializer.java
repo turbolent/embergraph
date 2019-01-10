@@ -49,14 +49,14 @@ package com.bigdata.rdf.spo;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.btree.AbstractTuple;
-import com.bigdata.btree.IRangeQuery;
-import com.bigdata.btree.ITupleSerializer;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.VTE;
-import com.bigdata.rdf.model.StatementEnum;
-import com.bigdata.test.MockTermIdFactory;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.AbstractTuple;
+import org.embergraph.btree.IRangeQuery;
+import org.embergraph.btree.ITupleSerializer;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.VTE;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.test.MockTermIdFactory;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Test suite for {@link SPOTupleSerializer}.

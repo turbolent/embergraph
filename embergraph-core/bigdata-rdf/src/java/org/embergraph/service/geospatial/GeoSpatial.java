@@ -29,7 +29,7 @@ package org.embergraph.service.geospatial;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-import com.bigdata.rdf.internal.gis.ICoordinate.UNITS;
+import org.embergraph.rdf.internal.gis.ICoordinate.UNITS;
 
 
 /**

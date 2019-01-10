@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree.proc;
 
-import com.bigdata.service.Split;
+import org.embergraph.service.Split;
 
 /**
  * Combines together boolean values using a logical <code>OR</code>. The

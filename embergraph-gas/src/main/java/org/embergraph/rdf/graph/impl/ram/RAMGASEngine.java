@@ -30,12 +30,12 @@ import org.openrdf.model.ValueFactory;
 import org.openrdf.model.impl.ValueFactoryImpl;
 import org.openrdf.sail.SailException;
 
-import com.bigdata.rdf.graph.EdgesEnum;
-import com.bigdata.rdf.graph.IGASContext;
-import com.bigdata.rdf.graph.IGraphAccessor;
-import com.bigdata.rdf.graph.impl.EdgeOnlyFilter;
-import com.bigdata.rdf.graph.impl.GASEngine;
-import com.bigdata.rdf.graph.impl.util.VertexDistribution;
+import org.embergraph.rdf.graph.EdgesEnum;
+import org.embergraph.rdf.graph.IGASContext;
+import org.embergraph.rdf.graph.IGraphAccessor;
+import org.embergraph.rdf.graph.impl.EdgeOnlyFilter;
+import org.embergraph.rdf.graph.impl.GASEngine;
+import org.embergraph.rdf.graph.impl.util.VertexDistribution;
 
 import cutthecrap.utils.striterators.EmptyIterator;
 import cutthecrap.utils.striterators.IStriterator;

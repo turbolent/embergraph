@@ -15,7 +15,7 @@
 */
 package org.embergraph.rdf.spo;
 
-import com.bigdata.relation.accesspath.IElementFilter;
+import org.embergraph.relation.accesspath.IElementFilter;
 
 public abstract class SPOFilter<E extends ISPO> implements IElementFilter<E> {
         

@@ -32,19 +32,19 @@ import org.openrdf.query.algebra.Compare.CompareOp;
 import org.openrdf.query.algebra.evaluation.ValueExprEvaluationException;
 import org.openrdf.query.algebra.evaluation.util.QueryEvaluationUtil;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.bop.NV;
-import com.bigdata.bop.solutions.IVComparator;
-import com.bigdata.rdf.error.SparqlTypeErrorException;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.impl.literal.AbstractLiteralIV;
-import com.bigdata.rdf.internal.impl.literal.LiteralExtensionIV;
-import com.bigdata.rdf.internal.impl.literal.PackedLongIV;
-import com.bigdata.rdf.internal.impl.literal.XSDIntegerIV;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.sparql.ast.FilterNode;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.bop.NV;
+import org.embergraph.bop.solutions.IVComparator;
+import org.embergraph.rdf.error.SparqlTypeErrorException;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
+import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
+import org.embergraph.rdf.internal.impl.literal.PackedLongIV;
+import org.embergraph.rdf.internal.impl.literal.XSDIntegerIV;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.sparql.ast.FilterNode;
 
 /**
  * Perform open-world value comparison operations per the SPARQL spec (the LT

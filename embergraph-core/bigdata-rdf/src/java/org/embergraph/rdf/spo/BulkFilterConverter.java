@@ -49,11 +49,11 @@ package org.embergraph.rdf.spo;
 
 import java.util.Arrays;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.proc.AbstractKeyArrayIndexProcedure.ResultBitBufferHandler;
-import com.bigdata.btree.proc.BatchContains.BatchContainsConstructor;
-import com.bigdata.striterator.IChunkConverter;
-import com.bigdata.striterator.IChunkedOrderedIterator;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure.ResultBitBufferHandler;
+import org.embergraph.btree.proc.BatchContains.BatchContainsConstructor;
+import org.embergraph.striterator.IChunkConverter;
+import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /**
  * Bulk filters for {@link ISPO}s either present or NOT present in the target

@@ -15,7 +15,7 @@
 */
 package com.bigdata.ganglia;
 
-import com.bigdata.ganglia.xdr.XDROutputBuffer;
+import org.embergraph.ganglia.xdr.XDROutputBuffer;
 
 /**
  * Interface for generating Ganglia message according to some version of the

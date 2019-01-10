@@ -27,7 +27,7 @@ import java.lang.ref.WeakReference;
 import java.util.Iterator;
 import java.util.Map;
 
-import com.bigdata.cache.ConcurrentWeakValueCache;
+import org.embergraph.cache.ConcurrentWeakValueCache;
 
 /**
  * A pattern for a canonicalizing factory based on a map with weak values.

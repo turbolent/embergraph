@@ -6,27 +6,27 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.IRangeQuery;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.KVO;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.rdf.changesets.ChangeAction;
-import com.bigdata.rdf.changesets.IChangeLog;
-import com.bigdata.rdf.changesets.IChangeRecord;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.BigdataSail.BigdataSailConnection;
-import com.bigdata.rdf.sparql.ast.eval.CustomServiceFactoryBase;
-import com.bigdata.rdf.sparql.ast.service.BigdataNativeServiceOptions;
-import com.bigdata.rdf.sparql.ast.service.IServiceOptions;
-import com.bigdata.rdf.sparql.ast.service.ServiceCall;
-import com.bigdata.rdf.sparql.ast.service.ServiceCallCreateParams;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.rdf.spo.SPORelation;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.relation.AbstractRelation;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.IRangeQuery;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.KVO;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.changesets.ChangeAction;
+import org.embergraph.rdf.changesets.IChangeLog;
+import org.embergraph.rdf.changesets.IChangeRecord;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
+import org.embergraph.rdf.sparql.ast.eval.CustomServiceFactoryBase;
+import org.embergraph.rdf.sparql.ast.service.BigdataNativeServiceOptions;
+import org.embergraph.rdf.sparql.ast.service.IServiceOptions;
+import org.embergraph.rdf.sparql.ast.service.ServiceCall;
+import org.embergraph.rdf.sparql.ast.service.ServiceCallCreateParams;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.rdf.spo.SPORelation;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.relation.AbstractRelation;
 
 /**
  * This service tracks KB updates via an {@link IChangeLog} and is responsible

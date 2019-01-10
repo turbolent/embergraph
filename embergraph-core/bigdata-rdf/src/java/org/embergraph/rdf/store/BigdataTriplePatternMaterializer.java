@@ -38,12 +38,12 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.system.SystemUtil;
 
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.relation.accesspath.BlockingBuffer;
-import com.bigdata.relation.accesspath.IAccessPath;
-import com.bigdata.striterator.AbstractChunkedResolverator;
-import com.bigdata.striterator.IChunkedOrderedIterator;
-import com.bigdata.util.concurrent.LatchedExecutor;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.relation.accesspath.BlockingBuffer;
+import org.embergraph.relation.accesspath.IAccessPath;
+import org.embergraph.striterator.AbstractChunkedResolverator;
+import org.embergraph.striterator.IChunkedOrderedIterator;
+import org.embergraph.util.concurrent.LatchedExecutor;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

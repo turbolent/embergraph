@@ -35,17 +35,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.ICounterSetAccess;
-import com.bigdata.counters.format.CounterSetFormat;
-import com.bigdata.counters.query.CounterSetSelector;
-import com.bigdata.counters.query.URLQueryModel;
-import com.bigdata.counters.render.IRenderer;
-import com.bigdata.counters.render.RendererFactory;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.service.IBigdataFederation;
-import com.bigdata.service.IEventReceivingService;
-import com.bigdata.service.IService;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.ICounterSetAccess;
+import org.embergraph.counters.format.CounterSetFormat;
+import org.embergraph.counters.query.CounterSetSelector;
+import org.embergraph.counters.query.URLQueryModel;
+import org.embergraph.counters.render.IRenderer;
+import org.embergraph.counters.render.RendererFactory;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEventReceivingService;
+import org.embergraph.service.IService;
 
 /**
  * Servlet for exposing performance counters.

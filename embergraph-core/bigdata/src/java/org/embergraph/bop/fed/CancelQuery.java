@@ -1,6 +1,6 @@
 package org.embergraph.bop.fed;
 
-import com.bigdata.bop.engine.AbstractRunningQuery;
+import org.embergraph.bop.engine.AbstractRunningQuery;
 
 /**
  * {@link Runnable} will halt the query, interrupting any operators which are

@@ -26,7 +26,7 @@ package org.embergraph.mdi;
 import java.io.File;
 import java.util.UUID;
 
-import com.bigdata.btree.IndexSegment;
+import org.embergraph.btree.IndexSegment;
 
 /**
  * Metadata for a single {@link IndexSegment}.

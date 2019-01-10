@@ -27,18 +27,18 @@ package org.embergraph.service;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.ICounterSet;
-import com.bigdata.counters.ICounterSetAccess;
-import com.bigdata.journal.AbstractJournal;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.ITransactionService;
-import com.bigdata.journal.ITx;
-import com.bigdata.mdi.IMetadataIndex;
-import com.bigdata.service.ndx.ClientIndexView;
-import com.bigdata.service.ndx.IClientIndex;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.ICounterSet;
+import org.embergraph.counters.ICounterSetAccess;
+import org.embergraph.journal.AbstractJournal;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.ITransactionService;
+import org.embergraph.journal.ITx;
+import org.embergraph.mdi.IMetadataIndex;
+import org.embergraph.service.ndx.ClientIndexView;
+import org.embergraph.service.ndx.IClientIndex;
 
 /**
  * The client-facing interface to a bigdata federation. Note that each bigdata

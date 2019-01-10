@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation;
 
-import com.bigdata.relation.locator.ILocatableResource;
+import org.embergraph.relation.locator.ILocatableResource;
 
 /**
  * Mutation interface 

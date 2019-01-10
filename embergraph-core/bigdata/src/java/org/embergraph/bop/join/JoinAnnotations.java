@@ -27,11 +27,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.join;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstraint;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.joinGraph.rto.JoinGraph;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstraint;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.joinGraph.rto.JoinGraph;
 
 /**
  * Common annotations for various join operators.

@@ -44,9 +44,9 @@ import org.openrdf.model.impl.GraphImpl;
 import org.openrdf.query.GraphQueryResult;
 import org.openrdf.repository.RepositoryResult;
 
-import com.bigdata.journal.AbstractJournalTestCase;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.rdf.sail.webapp.client.IPreparedGraphQuery;
+import org.embergraph.journal.AbstractJournalTestCase;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.sail.webapp.client.IPreparedGraphQuery;
 
 /**
  * <p>

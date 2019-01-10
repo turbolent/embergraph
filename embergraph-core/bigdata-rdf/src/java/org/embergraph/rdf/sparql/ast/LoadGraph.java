@@ -33,9 +33,9 @@ import org.openrdf.model.URI;
 import org.openrdf.rio.RDFParser;
 import org.openrdf.rio.helpers.RDFParserBase;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.rdf.rio.IRDFParserOptions;
-import com.bigdata.rdf.rio.RDFParserOptions;
+import org.embergraph.bop.BOp;
+import org.embergraph.rdf.rio.IRDFParserOptions;
+import org.embergraph.rdf.rio.RDFParserOptions;
 
 /**
  * The LOAD operation reads an RDF document from a IRI and inserts its triples

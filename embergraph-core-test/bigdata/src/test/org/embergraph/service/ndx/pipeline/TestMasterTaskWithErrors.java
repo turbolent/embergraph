@@ -31,9 +31,9 @@ package org.embergraph.service.ndx.pipeline;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
-import com.bigdata.btree.keys.KVO;
-import com.bigdata.relation.accesspath.BlockingBuffer;
-import com.bigdata.util.InnerCause;
+import org.embergraph.btree.keys.KVO;
+import org.embergraph.relation.accesspath.BlockingBuffer;
+import org.embergraph.util.InnerCause;
 
 /**
  * Unit tests for error handling in the control logic used by

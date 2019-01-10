@@ -41,9 +41,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-import com.bigdata.service.ResourceService.ReadResourceTask;
-import com.bigdata.util.DaemonThreadFactory;
-import com.bigdata.util.config.NicUtil;
+import org.embergraph.service.ResourceService.ReadResourceTask;
+import org.embergraph.util.DaemonThreadFactory;
+import org.embergraph.util.config.NicUtil;
 
 /**
  * Test verifies the ability to transmit a file using the

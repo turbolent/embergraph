@@ -2,10 +2,10 @@ package org.embergraph.rdf.load;
 
 import java.util.UUID;
 
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.service.IBigdataFederation;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.service.IBigdataFederation;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Class permits specification of a pre-assigned index partition splits onto

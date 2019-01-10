@@ -40,21 +40,21 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.ha.althalog.HALogManager.IHALogManagerCallback;
-import com.bigdata.ha.msg.IHAWriteMessage;
-import com.bigdata.io.ChecksumUtility;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.io.FileChannelUtility;
-import com.bigdata.io.IBufferAccess;
-import com.bigdata.io.IReopenChannel;
-import com.bigdata.io.SerializerUtil;
-import com.bigdata.journal.CommitCounterUtility;
-import com.bigdata.journal.IRootBlockView;
-import com.bigdata.journal.RootBlockUtility;
-import com.bigdata.journal.RootBlockView;
-import com.bigdata.journal.StoreTypeEnum;
-import com.bigdata.util.Bytes;
-import com.bigdata.util.ChecksumError;
+import org.embergraph.ha.althalog.HALogManager.IHALogManagerCallback;
+import org.embergraph.ha.msg.IHAWriteMessage;
+import org.embergraph.io.ChecksumUtility;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.io.FileChannelUtility;
+import org.embergraph.io.IBufferAccess;
+import org.embergraph.io.IReopenChannel;
+import org.embergraph.io.SerializerUtil;
+import org.embergraph.journal.CommitCounterUtility;
+import org.embergraph.journal.IRootBlockView;
+import org.embergraph.journal.RootBlockUtility;
+import org.embergraph.journal.RootBlockView;
+import org.embergraph.journal.StoreTypeEnum;
+import org.embergraph.util.Bytes;
+import org.embergraph.util.ChecksumError;
 
 /**
  * 

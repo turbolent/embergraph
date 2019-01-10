@@ -25,8 +25,8 @@ import org.openrdf.query.QueryResultHandlerException;
 import org.openrdf.query.resultio.TupleQueryResultFormat;
 import org.openrdf.query.resultio.TupleQueryResultWriter;
 
-import com.bigdata.rdf.model.BigdataBNode;
-import com.bigdata.rdf.model.BigdataStatement;
+import org.embergraph.rdf.model.BigdataBNode;
+import org.embergraph.rdf.model.BigdataStatement;
 
 /**
  * A TupleQueryResultWriter that writes query results in the <a

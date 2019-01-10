@@ -1,7 +1,7 @@
 package org.embergraph.relation.accesspath;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.engine.BOpStats;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.engine.BOpStats;
 
 /**
  * Wraps the base class to update the caller's {@link BOpStats}.

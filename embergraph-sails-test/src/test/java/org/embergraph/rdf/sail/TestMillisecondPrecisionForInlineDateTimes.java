@@ -41,11 +41,11 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.sail.Sail;
 import org.openrdf.sail.memory.MemoryStore;
 
-import com.bigdata.journal.BufferMode;
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.BigdataSailRepository;
-import com.bigdata.rdf.vocab.NoVocabulary;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.BigdataSailRepository;
+import org.embergraph.rdf.vocab.NoVocabulary;
 
 /**
  * Unit test template for use in submission of bugs.

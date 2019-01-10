@@ -7,11 +7,11 @@ import java.util.Set;
 
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.NV;
-import com.bigdata.rdf.sparql.ast.optimizers.ASTGraphGroupOptimizer;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.NV;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTGraphGroupOptimizer;
 
 /**
  * A node in the AST representing a triple pattern with a property path.  The

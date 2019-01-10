@@ -30,9 +30,9 @@ package org.embergraph.journal;
 import java.nio.ByteBuffer;
 import java.util.UUID;
 
-import com.bigdata.io.writecache.WriteCache;
-import com.bigdata.quorum.Quorum;
-import com.bigdata.rawstore.WormAddressManager;
+import org.embergraph.io.writecache.WriteCache;
+import org.embergraph.quorum.Quorum;
+import org.embergraph.rawstore.WormAddressManager;
 
 /**
  * Interface for a root block on the journal. The root block provides metadata

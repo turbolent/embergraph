@@ -31,11 +31,11 @@ import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.OWL;
 
-import com.bigdata.rdf.rio.IStatementBuffer;
-import com.bigdata.rdf.rio.StatementBuffer;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.vocab.Vocabulary;
-import com.bigdata.relation.rule.Rule;
+import org.embergraph.rdf.rio.IStatementBuffer;
+import org.embergraph.rdf.rio.StatementBuffer;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.vocab.Vocabulary;
+import org.embergraph.relation.rule.Rule;
 
 /**
  * Test suite for {@link RuleOwlEquivalentProperty}

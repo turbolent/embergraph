@@ -34,27 +34,27 @@ import java.math.BigInteger;
 import org.openrdf.model.BNode;
 import org.openrdf.model.Value;
 
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.io.LongPacker;
-import com.bigdata.rdf.internal.DTE;
-import com.bigdata.rdf.internal.ILexiconConfiguration;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.IVUtility;
-import com.bigdata.rdf.internal.VTE;
-import com.bigdata.rdf.internal.impl.AbstractIV;
-import com.bigdata.rdf.internal.impl.AbstractInlineIV;
-import com.bigdata.rdf.lexicon.LexiconRelation;
-import com.bigdata.rdf.model.BigdataBNode;
-import com.bigdata.rdf.model.BigdataResource;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.model.StatementEnum;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.rdf.spo.SPO;
-import com.bigdata.rdf.spo.SPOComparator;
-import com.bigdata.rdf.spo.SPOKeyOrder;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.io.LongPacker;
+import org.embergraph.rdf.internal.DTE;
+import org.embergraph.rdf.internal.ILexiconConfiguration;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.IVUtility;
+import org.embergraph.rdf.internal.VTE;
+import org.embergraph.rdf.internal.impl.AbstractIV;
+import org.embergraph.rdf.internal.impl.AbstractInlineIV;
+import org.embergraph.rdf.lexicon.LexiconRelation;
+import org.embergraph.rdf.model.BigdataBNode;
+import org.embergraph.rdf.model.BigdataResource;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.rdf.spo.SPO;
+import org.embergraph.rdf.spo.SPOComparator;
+import org.embergraph.rdf.spo.SPOKeyOrder;
 
 /**
  * Internal value representing an inline statement identifier. Uses the

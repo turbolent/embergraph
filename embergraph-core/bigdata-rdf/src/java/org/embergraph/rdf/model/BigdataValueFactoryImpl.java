@@ -44,15 +44,15 @@ import org.openrdf.model.Value;
 import org.openrdf.model.datatypes.XMLDatatypeUtil;
 import org.openrdf.model.impl.BooleanLiteralImpl;
 
-import com.bigdata.cache.WeakValueCache;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.impl.extensions.DateTimeExtension;
-import com.bigdata.rdf.internal.impl.literal.XSDUnsignedByteIV;
-import com.bigdata.rdf.internal.impl.literal.XSDUnsignedIntIV;
-import com.bigdata.rdf.internal.impl.literal.XSDUnsignedLongIV;
-import com.bigdata.rdf.internal.impl.literal.XSDUnsignedShortIV;
-import com.bigdata.rdf.lexicon.LexiconRelation;
-import com.bigdata.util.concurrent.CanonicalFactory;
+import org.embergraph.cache.WeakValueCache;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.impl.extensions.DateTimeExtension;
+import org.embergraph.rdf.internal.impl.literal.XSDUnsignedByteIV;
+import org.embergraph.rdf.internal.impl.literal.XSDUnsignedIntIV;
+import org.embergraph.rdf.internal.impl.literal.XSDUnsignedLongIV;
+import org.embergraph.rdf.internal.impl.literal.XSDUnsignedShortIV;
+import org.embergraph.rdf.lexicon.LexiconRelation;
+import org.embergraph.util.concurrent.CanonicalFactory;
 
 /**
  * An implementation using {@link BigdataValue}s and {@link BigdataStatement}s.

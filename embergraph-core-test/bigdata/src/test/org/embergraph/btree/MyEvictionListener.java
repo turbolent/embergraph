@@ -27,7 +27,7 @@ import java.util.Stack;
 
 import junit.framework.AssertionFailedError;
 
-import com.bigdata.cache.HardReferenceQueue;
+import org.embergraph.cache.HardReferenceQueue;
 
 /**
  * Extends {@link DefaultEvictionListener} to explicitly control when an

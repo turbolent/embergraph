@@ -33,9 +33,9 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IVariable;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IVariable;
 
 import cutthecrap.utils.striterators.EmptyIterator;
 

@@ -31,13 +31,13 @@ import java.util.UUID;
 
 import org.apache.log4j.Level;
 
-import com.bigdata.btree.data.ILeafData;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.journal.TestRestartSafe;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rawstore.RawStoreDelegate;
-import com.bigdata.rawstore.SimpleMemoryRawStore;
-import com.bigdata.util.Bytes;
+import org.embergraph.btree.data.ILeafData;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.journal.TestRestartSafe;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rawstore.RawStoreDelegate;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
+import org.embergraph.util.Bytes;
 
 /**
  * Test suite for {@link BTree#removeAll()}.

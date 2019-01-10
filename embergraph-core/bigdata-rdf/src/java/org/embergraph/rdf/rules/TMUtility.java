@@ -32,17 +32,17 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.bigdata.bop.IConstraint;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.ap.Predicate;
-import com.bigdata.rdf.spo.SPOPredicate;
-import com.bigdata.rdf.spo.SPORelation;
-import com.bigdata.relation.IRelation;
-import com.bigdata.relation.rule.IProgram;
-import com.bigdata.relation.rule.IRule;
-import com.bigdata.relation.rule.IStep;
-import com.bigdata.relation.rule.Program;
-import com.bigdata.relation.rule.Rule;
+import org.embergraph.bop.IConstraint;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.ap.Predicate;
+import org.embergraph.rdf.spo.SPOPredicate;
+import org.embergraph.rdf.spo.SPORelation;
+import org.embergraph.relation.IRelation;
+import org.embergraph.relation.rule.IProgram;
+import org.embergraph.relation.rule.IRule;
+import org.embergraph.relation.rule.IStep;
+import org.embergraph.relation.rule.Program;
+import org.embergraph.relation.rule.Rule;
 
 /**
  * A utility class for performing rule re-writes for RDF truth maintenance using

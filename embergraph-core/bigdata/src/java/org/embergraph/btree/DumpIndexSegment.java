@@ -35,10 +35,10 @@ import java.nio.ByteBuffer;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.IndexSegment.ImmutableNodeFactory.ImmutableLeaf;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.util.InnerCause;
+import org.embergraph.btree.IndexSegment.ImmutableNodeFactory.ImmutableLeaf;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.util.InnerCause;
 
 /**
  * Utility to examine the context of an {@link IndexSegmentStore}.

@@ -27,15 +27,15 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.spo;
 
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.filter.Advancer;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.btree.keys.SuccessorUtil;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.IVUtility;
-import com.bigdata.relation.accesspath.IAccessPath;
-import com.bigdata.striterator.IKeyOrder;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.filter.Advancer;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.btree.keys.SuccessorUtil;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.IVUtility;
+import org.embergraph.relation.accesspath.IAccessPath;
+import org.embergraph.striterator.IKeyOrder;
 
 /**
  * This was cloned from the {@link DistinctTermAdvancer}. It supports an

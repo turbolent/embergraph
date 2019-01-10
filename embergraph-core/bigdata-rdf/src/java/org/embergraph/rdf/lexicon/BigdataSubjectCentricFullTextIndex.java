@@ -35,21 +35,21 @@ import java.util.UUID;
 import org.apache.log4j.Logger;
 import org.openrdf.model.Literal;
 
-import com.bigdata.btree.DefaultTupleSerializer;
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.IndexTypeEnum;
-import com.bigdata.btree.keys.DefaultKeyBuilderFactory;
-import com.bigdata.btree.keys.IKeyBuilderFactory;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.btree.raba.codec.SimpleRabaCoder;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.search.FullTextIndex;
-import com.bigdata.search.Hit;
-import com.bigdata.search.TokenBuffer;
+import org.embergraph.btree.DefaultTupleSerializer;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.IndexTypeEnum;
+import org.embergraph.btree.keys.DefaultKeyBuilderFactory;
+import org.embergraph.btree.keys.IKeyBuilderFactory;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.btree.raba.codec.SimpleRabaCoder;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.search.FullTextIndex;
+import org.embergraph.search.Hit;
+import org.embergraph.search.TokenBuffer;
 
 /**
  * Implementation based on the built-in keyword search capabilities for bigdata.

@@ -3,12 +3,12 @@ package org.embergraph.util.concurrent;
 import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadPoolExecutor;
 
-import com.bigdata.btree.Checkpoint;
-import com.bigdata.counters.ICounterHierarchy;
-import com.bigdata.journal.AbstractTask;
-import com.bigdata.journal.ConcurrencyManager;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.WriteExecutorService;
+import org.embergraph.btree.Checkpoint;
+import org.embergraph.counters.ICounterHierarchy;
+import org.embergraph.journal.AbstractTask;
+import org.embergraph.journal.ConcurrencyManager;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.WriteExecutorService;
 
 /**
  * Interface defines and documents the names and meanings of counters pertaining

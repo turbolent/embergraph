@@ -1,7 +1,7 @@
 package org.embergraph.bop.aggregate;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IValueExpression;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IValueExpression;
 
 /**
  * An aggregate operator, such as SUM, COUNT, MIN, MAX, etc.

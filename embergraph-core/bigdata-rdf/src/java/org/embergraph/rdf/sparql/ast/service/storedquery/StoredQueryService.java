@@ -31,21 +31,21 @@ import org.openrdf.query.BindingSet;
 import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.query.TupleQueryResult;
 
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.sail.BigdataSailRepositoryConnection;
-import com.bigdata.rdf.sail.BigdataSailTupleQuery;
-import com.bigdata.rdf.sail.Sesame2BigdataIterator;
-import com.bigdata.rdf.sparql.ast.eval.ASTEvalHelper;
-import com.bigdata.rdf.sparql.ast.eval.AbstractServiceFactoryBase;
-import com.bigdata.rdf.sparql.ast.eval.ServiceParams;
-import com.bigdata.rdf.sparql.ast.service.ExternalServiceCall;
-import com.bigdata.rdf.sparql.ast.service.IServiceOptions;
-import com.bigdata.rdf.sparql.ast.service.OpenrdfNativeServiceOptions;
-import com.bigdata.rdf.sparql.ast.service.ServiceCallCreateParams;
-import com.bigdata.rdf.sparql.ast.service.ServiceNode;
-import com.bigdata.rdf.sparql.ast.service.ServiceRegistry;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.task.AbstractApiTask;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.rdf.sail.BigdataSailTupleQuery;
+import org.embergraph.rdf.sail.Sesame2BigdataIterator;
+import org.embergraph.rdf.sparql.ast.eval.ASTEvalHelper;
+import org.embergraph.rdf.sparql.ast.eval.AbstractServiceFactoryBase;
+import org.embergraph.rdf.sparql.ast.eval.ServiceParams;
+import org.embergraph.rdf.sparql.ast.service.ExternalServiceCall;
+import org.embergraph.rdf.sparql.ast.service.IServiceOptions;
+import org.embergraph.rdf.sparql.ast.service.OpenrdfNativeServiceOptions;
+import org.embergraph.rdf.sparql.ast.service.ServiceCallCreateParams;
+import org.embergraph.rdf.sparql.ast.service.ServiceNode;
+import org.embergraph.rdf.sparql.ast.service.ServiceRegistry;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.task.AbstractApiTask;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

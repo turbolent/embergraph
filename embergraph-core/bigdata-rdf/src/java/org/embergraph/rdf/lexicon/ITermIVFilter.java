@@ -2,7 +2,7 @@ package org.embergraph.rdf.lexicon;
 
 import java.io.Serializable;
 
-import com.bigdata.rdf.internal.IV;
+import org.embergraph.rdf.internal.IV;
 
 /**
  * Interface for filtering internal values.

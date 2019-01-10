@@ -17,27 +17,27 @@ import java.util.TreeMap;
 
 import org.openrdf.sail.SailException;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.config.ConfigurationException;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.IJournal;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.Journal;
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.lexicon.LexiconRelation;
-import com.bigdata.rdf.sail.BigdataSail.BigdataSailConnection;
-import com.bigdata.rdf.sail.BigdataSail.Options;
-import com.bigdata.rdf.spo.SPORelation;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.DataLoader;
-import com.bigdata.rdf.store.LocalTripleStore;
-import com.bigdata.rdf.store.ScaleOutTripleStore;
-import com.bigdata.relation.RelationSchema;
-import com.bigdata.service.AbstractFederation;
-import com.bigdata.service.IBigdataFederation;
-import com.bigdata.service.ScaleOutClientFactory;
-import com.bigdata.util.Bytes;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.config.ConfigurationException;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.IJournal;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Journal;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.lexicon.LexiconRelation;
+import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
+import org.embergraph.rdf.sail.BigdataSail.Options;
+import org.embergraph.rdf.spo.SPORelation;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.DataLoader;
+import org.embergraph.rdf.store.LocalTripleStore;
+import org.embergraph.rdf.store.ScaleOutTripleStore;
+import org.embergraph.relation.RelationSchema;
+import org.embergraph.service.AbstractFederation;
+import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.ScaleOutClientFactory;
+import org.embergraph.util.Bytes;
 
 /**
  * Class provides guidance on parameter setup a data set and queries.

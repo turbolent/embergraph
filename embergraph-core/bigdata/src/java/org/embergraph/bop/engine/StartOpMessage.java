@@ -6,7 +6,7 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.UUID;
 
-import com.bigdata.io.LongPacker;
+import org.embergraph.io.LongPacker;
 
 /**
  * A message sent to the {@link IQueryClient} when an operator begins executing

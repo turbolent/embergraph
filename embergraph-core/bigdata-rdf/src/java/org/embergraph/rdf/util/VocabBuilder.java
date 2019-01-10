@@ -52,10 +52,10 @@ import org.openrdf.rio.RDFParserFactory;
 import org.openrdf.rio.RDFParserRegistry;
 import org.openrdf.rio.helpers.RDFHandlerBase;
 
-import com.bigdata.rdf.ServiceProviderHook;
-import com.bigdata.rdf.rio.IRDFParserOptions;
-import com.bigdata.rdf.rio.RDFParserOptions;
-import com.bigdata.rdf.vocab.VocabularyDecl;
+import org.embergraph.rdf.ServiceProviderHook;
+import org.embergraph.rdf.rio.IRDFParserOptions;
+import org.embergraph.rdf.rio.RDFParserOptions;
+import org.embergraph.rdf.vocab.VocabularyDecl;
 
 /**
  * Utility class scans some RDF data, builds up a distribution over the distinct
@@ -344,7 +344,7 @@ public class VocabBuilder {
 			System.out.println("import java.util.Iterator;");
 			System.out.println("import org.openrdf.model.URI;");
 			System.out.println("import org.openrdf.model.impl.URIImpl;");
-			System.out.println("import com.bigdata.rdf.vocab.VocabularyDecl;");
+			System.out.println("import org.embergraph.rdf.vocab.VocabularyDecl;");
 
 			System.out.println("public class "+className+" implements VocabularyDecl {");
 			

@@ -30,11 +30,11 @@ package com.bigdata.rdf.rules;
 
 import java.util.Iterator;
 
-import com.bigdata.relation.rule.AbstractRuleTestCase;
-import com.bigdata.relation.rule.IRule;
-import com.bigdata.relation.rule.IStep;
-import com.bigdata.relation.rule.Program;
-import com.bigdata.relation.rule.Rule;
+import org.embergraph.relation.rule.AbstractRuleTestCase;
+import org.embergraph.relation.rule.IRule;
+import org.embergraph.relation.rule.IStep;
+import org.embergraph.relation.rule.Program;
+import org.embergraph.relation.rule.Rule;
 
 /**
  * Test suite for rule re-writes supporting truth maintenance for the RDF DB.

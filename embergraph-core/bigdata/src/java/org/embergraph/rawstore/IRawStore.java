@@ -31,11 +31,11 @@ import java.io.File;
 import java.nio.ByteBuffer;
 import java.util.UUID;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.counters.ICounterSetAccess;
-import com.bigdata.io.IByteArrayBuffer;
-import com.bigdata.journal.AbstractJournal;
-import com.bigdata.mdi.IResourceMetadata;
+import org.embergraph.btree.BTree;
+import org.embergraph.counters.ICounterSetAccess;
+import org.embergraph.io.IByteArrayBuffer;
+import org.embergraph.journal.AbstractJournal;
+import org.embergraph.mdi.IResourceMetadata;
 
 /**
  * <p>

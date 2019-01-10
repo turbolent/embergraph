@@ -33,7 +33,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.system.SystemUtil;
 
-import com.bigdata.counters.CounterSet;
+import org.embergraph.counters.CounterSet;
 
 /**
  * Abstract base class and template for striped counters designed for high

@@ -34,9 +34,9 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
-import com.bigdata.journal.AbstractJournal;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.service.AbstractTransactionService;
+import org.embergraph.journal.AbstractJournal;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.service.AbstractTransactionService;
 
 /**
  * Test release (aka purge) of old resources.

@@ -25,7 +25,7 @@ package org.embergraph.ha.msg;
 
 import java.io.Serializable;
 
-import com.bigdata.util.BytesUtil;
+import org.embergraph.util.BytesUtil;
 
 public class HASnapshotDigestResponse implements IHASnapshotDigestResponse, Serializable {
 

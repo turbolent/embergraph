@@ -30,8 +30,8 @@ package org.embergraph.rdf.rules;
 
 import java.util.Iterator;
 
-import com.bigdata.relation.rule.IStep;
-import com.bigdata.relation.rule.Program;
+import org.embergraph.relation.rule.IStep;
+import org.embergraph.relation.rule.Program;
 
 /**
  * Program automatically maps the rules added across the combination of the

@@ -47,11 +47,11 @@ import org.openrdf.rio.RDFParserRegistry;
 import org.openrdf.rio.helpers.RDFHandlerBase;
 import org.openrdf.sail.SailException;
 
-import com.bigdata.journal.ITx;
-import com.bigdata.rdf.sail.BigdataSail.BigdataSailConnection;
-import com.bigdata.rdf.sail.BigdataSailRepositoryConnection;
-import com.bigdata.rdf.sail.webapp.client.MiniMime;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpUpdate;
+import org.embergraph.journal.ITx;
+import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
+import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.rdf.sail.webapp.client.MiniMime;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpUpdate;
 
 /**
  * Handler for INSERT operations.

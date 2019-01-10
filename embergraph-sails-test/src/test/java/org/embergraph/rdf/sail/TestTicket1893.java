@@ -35,14 +35,14 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
-import com.bigdata.journal.IJournal;
-import com.bigdata.rdf.internal.XSD;
-import com.bigdata.rdf.lexicon.ITextIndexer.FullTextQuery;
-import com.bigdata.rdf.lexicon.IValueCentricTextIndexer;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.store.AbstractTripleStore.Options;
-import com.bigdata.rdf.store.LocalTripleStore;
+import org.embergraph.journal.IJournal;
+import org.embergraph.rdf.internal.XSD;
+import org.embergraph.rdf.lexicon.ITextIndexer.FullTextQuery;
+import org.embergraph.rdf.lexicon.IValueCentricTextIndexer;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.store.AbstractTripleStore.Options;
+import org.embergraph.rdf.store.LocalTripleStore;
 
 /**
  * 

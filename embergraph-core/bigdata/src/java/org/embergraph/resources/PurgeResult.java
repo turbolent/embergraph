@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.bigdata.journal.CommitRecordIndex;
-import com.bigdata.journal.ITransactionService;
-import com.bigdata.service.Params;
+import org.embergraph.journal.CommitRecordIndex;
+import org.embergraph.journal.ITransactionService;
+import org.embergraph.service.Params;
 
 /**
  * A class that captures the results of

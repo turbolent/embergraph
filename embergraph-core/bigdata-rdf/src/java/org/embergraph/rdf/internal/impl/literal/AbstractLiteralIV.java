@@ -33,12 +33,12 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.datatypes.XMLDatatypeUtil;
 
-import com.bigdata.rdf.internal.DTE;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.InlineLiteralIV;
-import com.bigdata.rdf.internal.VTE;
-import com.bigdata.rdf.internal.impl.AbstractInlineIV;
-import com.bigdata.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.internal.DTE;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.InlineLiteralIV;
+import org.embergraph.rdf.internal.VTE;
+import org.embergraph.rdf.internal.impl.AbstractInlineIV;
+import org.embergraph.rdf.model.BigdataLiteral;
 
 /**
  * Abstract base class for RDF datatype literals adds primitive data type

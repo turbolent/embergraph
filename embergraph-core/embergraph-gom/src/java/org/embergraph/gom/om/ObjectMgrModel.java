@@ -46,13 +46,13 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.query.BindingSet;
 
-import com.bigdata.cache.ConcurrentWeakValueCache;
-import com.bigdata.gom.gpo.GPO;
-import com.bigdata.gom.gpo.IGPO;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.BigdataBNode;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValueFactory;
+import org.embergraph.cache.ConcurrentWeakValueCache;
+import org.embergraph.gom.gpo.GPO;
+import org.embergraph.gom.gpo.IGPO;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.BigdataBNode;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValueFactory;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

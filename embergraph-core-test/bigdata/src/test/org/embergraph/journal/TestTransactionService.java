@@ -34,11 +34,11 @@ import java.util.concurrent.TimeUnit;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.service.AbstractFederation;
-import com.bigdata.service.AbstractTransactionService;
-import com.bigdata.service.AbstractTransactionService.TxState;
-import com.bigdata.service.CommitTimeIndex;
-import com.bigdata.service.TxServiceRunState;
+import org.embergraph.service.AbstractFederation;
+import org.embergraph.service.AbstractTransactionService;
+import org.embergraph.service.AbstractTransactionService.TxState;
+import org.embergraph.service.CommitTimeIndex;
+import org.embergraph.service.TxServiceRunState;
 
 /**
  * Unit tests of the {@link AbstractTransactionService} using a mock client.

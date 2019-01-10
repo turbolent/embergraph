@@ -27,9 +27,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.internal;
 
-import com.bigdata.rdf.internal.impl.BlobIV;
-import com.bigdata.rdf.internal.impl.literal.PartlyInlineTypedLiteralIV;
-import com.bigdata.rdf.internal.impl.uri.PartlyInlineURIIV;
+import org.embergraph.rdf.internal.impl.BlobIV;
+import org.embergraph.rdf.internal.impl.literal.PartlyInlineTypedLiteralIV;
+import org.embergraph.rdf.internal.impl.uri.PartlyInlineURIIV;
 
 /**
  * An interface declaring the one byte extension code for non-inline {@link IV}

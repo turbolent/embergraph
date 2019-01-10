@@ -32,20 +32,20 @@ import java.util.Map;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.bop.aggregate.AggregateBase.Annotations;
-import com.bigdata.bop.aggregate.IAggregate;
-import com.bigdata.journal.ITx;
-import com.bigdata.rdf.internal.impl.literal.XSDNumericIV;
-import com.bigdata.rdf.sparql.ast.AssignmentNode;
-import com.bigdata.rdf.sparql.ast.ConstantNode;
-import com.bigdata.rdf.sparql.ast.FunctionNode;
-import com.bigdata.rdf.sparql.ast.FunctionRegistry;
-import com.bigdata.rdf.sparql.ast.GlobalAnnotations;
-import com.bigdata.rdf.sparql.ast.GroupByNode;
-import com.bigdata.rdf.sparql.ast.HavingNode;
-import com.bigdata.rdf.sparql.ast.IValueExpressionNode;
-import com.bigdata.rdf.sparql.ast.ProjectionNode;
-import com.bigdata.rdf.sparql.ast.VarNode;
+import org.embergraph.bop.aggregate.AggregateBase.Annotations;
+import org.embergraph.bop.aggregate.IAggregate;
+import org.embergraph.journal.ITx;
+import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
+import org.embergraph.rdf.sparql.ast.AssignmentNode;
+import org.embergraph.rdf.sparql.ast.ConstantNode;
+import org.embergraph.rdf.sparql.ast.FunctionNode;
+import org.embergraph.rdf.sparql.ast.FunctionRegistry;
+import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
+import org.embergraph.rdf.sparql.ast.GroupByNode;
+import org.embergraph.rdf.sparql.ast.HavingNode;
+import org.embergraph.rdf.sparql.ast.IValueExpressionNode;
+import org.embergraph.rdf.sparql.ast.ProjectionNode;
+import org.embergraph.rdf.sparql.ast.VarNode;
 
 /**
  * Test suite for {@link VerifyAggregates}.

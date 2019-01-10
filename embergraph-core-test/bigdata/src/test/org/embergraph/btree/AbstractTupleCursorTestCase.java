@@ -33,9 +33,9 @@ import java.util.UUID;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.btree.keys.TestKeyBuilder;
-import com.bigdata.btree.raba.ReadOnlyKeysRaba;
-import com.bigdata.rawstore.SimpleMemoryRawStore;
+import org.embergraph.btree.keys.TestKeyBuilder;
+import org.embergraph.btree.raba.ReadOnlyKeysRaba;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /**
  * Abstract base class for {@link ITupleCursor} test suites.

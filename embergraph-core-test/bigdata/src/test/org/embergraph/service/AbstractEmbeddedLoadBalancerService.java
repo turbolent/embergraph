@@ -5,7 +5,7 @@ import java.net.UnknownHostException;
 import java.util.Properties;
 import java.util.UUID;
 
-import com.bigdata.util.config.NicUtil;
+import org.embergraph.util.config.NicUtil;
 
 /**
  * Embedded {@link LoadBalancerService}.

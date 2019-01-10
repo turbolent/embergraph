@@ -2,8 +2,8 @@ package org.embergraph.search;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.SuccessorUtil;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.SuccessorUtil;
 
 /**
  * Set up the from and to keys for the {@link ReadIndexTask} and 

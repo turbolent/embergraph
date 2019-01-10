@@ -29,12 +29,12 @@ import java.math.BigInteger;
 
 import org.openrdf.model.Literal;
 
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.rdf.internal.DTE;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.lexicon.LexiconRelation;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.model.BigdataValueFactory;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.rdf.internal.DTE;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.lexicon.LexiconRelation;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.BigdataValueFactory;
 
 /** Implementation for inline <code>xsd:decimal</code>. */
 public class XSDDecimalIV<V extends BigdataLiteral> extends

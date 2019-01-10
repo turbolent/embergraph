@@ -30,9 +30,9 @@ package org.embergraph.bop.solutions;
 import java.util.Comparator;
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.bop.PipelineOp;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.bop.PipelineOp;
 
 /**
  * Base class for operators which sort binding sets.

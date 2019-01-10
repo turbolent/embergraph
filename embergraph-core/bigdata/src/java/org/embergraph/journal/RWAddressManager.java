@@ -1,7 +1,7 @@
 package org.embergraph.journal;
 
-import com.bigdata.rawstore.IAddressManager;
-import com.bigdata.rwstore.RWStore;
+import org.embergraph.rawstore.IAddressManager;
+import org.embergraph.rwstore.RWStore;
 
 /**
  * 

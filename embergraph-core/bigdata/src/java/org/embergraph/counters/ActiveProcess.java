@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.counters;
 
-import com.bigdata.util.DaemonThreadFactory;
+import org.embergraph.util.DaemonThreadFactory;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;

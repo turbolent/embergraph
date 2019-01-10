@@ -32,17 +32,17 @@ import java.io.ObjectOutput;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.proc.AbstractKeyArrayIndexProcedure;
-import com.bigdata.btree.proc.AbstractKeyArrayIndexProcedureConstructor;
-import com.bigdata.btree.proc.IParallelizableIndexProcedure;
-import com.bigdata.btree.proc.IResultHandler;
-import com.bigdata.btree.proc.LongAggregator;
-import com.bigdata.btree.raba.IRaba;
-import com.bigdata.btree.raba.codec.IRabaCoder;
-import com.bigdata.rdf.model.StatementEnum;
-import com.bigdata.relation.IMutableRelationIndexWriteProcedure;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure;
+import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedureConstructor;
+import org.embergraph.btree.proc.IParallelizableIndexProcedure;
+import org.embergraph.btree.proc.IResultHandler;
+import org.embergraph.btree.proc.LongAggregator;
+import org.embergraph.btree.raba.IRaba;
+import org.embergraph.btree.raba.codec.IRabaCoder;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.relation.IMutableRelationIndexWriteProcedure;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Procedure for batch insert on a single statement index (or index partition).

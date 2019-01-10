@@ -30,9 +30,9 @@ package org.embergraph.relation.rule;
 
 import java.io.Serializable;
 
-import com.bigdata.bop.solutions.ISortOrder;
-import com.bigdata.relation.rule.eval.IStepTask;
-import com.bigdata.striterator.DistinctFilter;
+import org.embergraph.bop.solutions.ISortOrder;
+import org.embergraph.relation.rule.eval.IStepTask;
+import org.embergraph.striterator.DistinctFilter;
 
 /**
  * A collection of constraints that may be imposed on an {@link IStep} when

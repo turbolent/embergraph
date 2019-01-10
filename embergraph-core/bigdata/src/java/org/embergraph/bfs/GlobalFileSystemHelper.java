@@ -32,8 +32,8 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.ITx;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.ITx;
 
 /**
  * Helper class.

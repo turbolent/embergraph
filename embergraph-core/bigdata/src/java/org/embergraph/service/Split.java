@@ -23,7 +23,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.service;
 
-import com.bigdata.mdi.IPartitionMetadata;
+import org.embergraph.mdi.IPartitionMetadata;
 
 /**
  * Describes a "split" of keys for a batch operation. This is used in scale-out

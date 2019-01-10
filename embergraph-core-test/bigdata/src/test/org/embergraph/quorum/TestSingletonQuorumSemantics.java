@@ -35,7 +35,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import junit.framework.AssertionFailedError;
 
-import com.bigdata.quorum.MockQuorumFixture.MockQuorumMember;
+import org.embergraph.quorum.MockQuorumFixture.MockQuorumMember;
 
 /**
  * Test the quorum semantics for a singleton quorum. This test suite allows us

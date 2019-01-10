@@ -31,9 +31,9 @@ import java.io.IOException;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.io.ByteArrayBuffer;
-import com.bigdata.io.DataInputBuffer;
-import com.bigdata.io.DataOutputBuffer;
+import org.embergraph.io.ByteArrayBuffer;
+import org.embergraph.io.DataInputBuffer;
+import org.embergraph.io.DataOutputBuffer;
 
 /**
  * Test suite for {@link UnicodeHelper}.

@@ -34,26 +34,26 @@ import java.util.UUID;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpEvaluationContext;
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.NV;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.Var;
-import com.bigdata.bop.bindingSet.ListBindingSet;
-import com.bigdata.bop.bset.StartOp;
-import com.bigdata.bop.solutions.BindingSetComparator;
-import com.bigdata.bop.solutions.ISortOrder;
-import com.bigdata.bop.solutions.IVComparator;
-import com.bigdata.bop.solutions.MemorySortOp;
-import com.bigdata.bop.solutions.SliceOp;
-import com.bigdata.bop.solutions.SortOrder;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.Journal;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.impl.literal.XSDNumericIV;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpEvaluationContext;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.NV;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.Var;
+import org.embergraph.bop.bindingSet.ListBindingSet;
+import org.embergraph.bop.bset.StartOp;
+import org.embergraph.bop.solutions.BindingSetComparator;
+import org.embergraph.bop.solutions.ISortOrder;
+import org.embergraph.bop.solutions.IVComparator;
+import org.embergraph.bop.solutions.MemorySortOp;
+import org.embergraph.bop.solutions.SliceOp;
+import org.embergraph.bop.solutions.SortOrder;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.Journal;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

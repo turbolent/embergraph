@@ -29,9 +29,9 @@ package com.bigdata.rdf.spo;
 
 import junit.framework.TestCase;
 
-import com.bigdata.io.ByteArrayBuffer;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rdf.model.StatementEnum;
+import org.embergraph.io.ByteArrayBuffer;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rdf.model.StatementEnum;
 
 /**
  * Test suite for {@link StatementEnum}.

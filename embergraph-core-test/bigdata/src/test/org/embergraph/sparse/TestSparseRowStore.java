@@ -37,16 +37,16 @@ import java.util.UUID;
 import java.util.Vector;
 import java.util.concurrent.Callable;
 
-import com.bigdata.bfs.BigdataFileSystem;
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.ProxyTestCase;
-import com.bigdata.sparse.TPS.TPV;
-import com.bigdata.util.CSVReader;
+import org.embergraph.bfs.BigdataFileSystem;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.ProxyTestCase;
+import org.embergraph.sparse.TPS.TPV;
+import org.embergraph.util.CSVReader;
 
 /**
  * Test suite for {@link SparseRowStore}.

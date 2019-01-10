@@ -27,8 +27,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package com.bigdata.rdf.rules;
 
-import com.bigdata.relation.rule.IProgram;
-import com.bigdata.relation.rule.IRule;
+import org.embergraph.relation.rule.IProgram;
+import org.embergraph.relation.rule.IRule;
 
 /**
  * Unit test for processing of queries consisting of {@link IProgram}s

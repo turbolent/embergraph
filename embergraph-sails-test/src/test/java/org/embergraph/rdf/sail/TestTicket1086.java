@@ -33,10 +33,10 @@ import org.openrdf.model.URI;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.RepositoryResult;
 
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.model.BigdataStatement;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.vocab.NoVocabulary;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.vocab.NoVocabulary;
 
 /**
  * Test suite for ticket #1086: when loading quads data into a triples store,

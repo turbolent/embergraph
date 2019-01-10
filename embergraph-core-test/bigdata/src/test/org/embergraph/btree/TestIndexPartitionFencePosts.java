@@ -30,8 +30,8 @@ package org.embergraph.btree;
 
 import java.util.UUID;
 
-import com.bigdata.mdi.LocalPartitionMetadata;
-import com.bigdata.rawstore.SimpleMemoryRawStore;
+import org.embergraph.mdi.LocalPartitionMetadata;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /**
  * Tests for some fence posts for an index supporting delete markers and having

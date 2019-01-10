@@ -34,7 +34,7 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.keys.KeyBuilder.Options;
+import org.embergraph.btree.keys.KeyBuilder.Options;
 
 
 /**

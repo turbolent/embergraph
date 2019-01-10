@@ -28,7 +28,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 
-import com.bigdata.util.StackInfoReport;
+import org.embergraph.util.StackInfoReport;
 
 /**
  * A {@link HttpClient} that supports the {@link AutoCloseable} protocol and

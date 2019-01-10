@@ -30,7 +30,7 @@ package org.embergraph.rdf.sparql.ast.service;
 import org.openrdf.model.Value;
 import org.openrdf.query.BindingSet;
 
-import com.bigdata.rdf.internal.IV;
+import org.embergraph.rdf.internal.IV;
 
 /**
  * Service invocation interface for an external (non-bigdata, but same JVM)

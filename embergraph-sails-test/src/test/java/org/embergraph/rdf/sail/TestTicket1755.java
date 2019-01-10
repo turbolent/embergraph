@@ -42,21 +42,21 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 import org.openrdf.sail.memory.MemoryStore;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.Constant;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.impl.literal.LiteralExtensionIV;
-import com.bigdata.rdf.internal.impl.literal.XSDBooleanIV;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.sail.sparql.Bigdata2ASTSPARQLParser;
-import com.bigdata.rdf.sparql.ast.ASTContainer;
-import com.bigdata.rdf.sparql.ast.ConstantNode;
-import com.bigdata.rdf.sparql.ast.FilterNode;
-import com.bigdata.rdf.sparql.ast.GraphPatternGroup;
-import com.bigdata.rdf.sparql.ast.QueryRoot;
-import com.bigdata.rdf.sparql.ast.ValueExpressionNode;
-import com.bigdata.rdf.sparql.ast.eval.ASTDeferredIVResolution;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.Constant;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
+import org.embergraph.rdf.internal.impl.literal.XSDBooleanIV;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.sail.sparql.Bigdata2ASTSPARQLParser;
+import org.embergraph.rdf.sparql.ast.ASTContainer;
+import org.embergraph.rdf.sparql.ast.ConstantNode;
+import org.embergraph.rdf.sparql.ast.FilterNode;
+import org.embergraph.rdf.sparql.ast.GraphPatternGroup;
+import org.embergraph.rdf.sparql.ast.QueryRoot;
+import org.embergraph.rdf.sparql.ast.ValueExpressionNode;
+import org.embergraph.rdf.sparql.ast.eval.ASTDeferredIVResolution;
 
 /**
  * Unit test template for use in submission of bugs.

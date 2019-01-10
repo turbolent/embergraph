@@ -9,8 +9,8 @@ import java.util.HashSet;
 
 import org.openrdf.model.URI;
 
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.BigdataURI;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.BigdataURI;
 
 /**
  * "IN" filter for the context position based on a sorted long[] of the

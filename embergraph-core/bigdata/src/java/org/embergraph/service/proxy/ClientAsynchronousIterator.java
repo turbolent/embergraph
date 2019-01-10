@@ -41,13 +41,13 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.relation.accesspath.BlockingBuffer;
-import com.bigdata.relation.accesspath.BufferClosedException;
-import com.bigdata.relation.accesspath.IAsynchronousIterator;
-import com.bigdata.relation.accesspath.IBlockingBuffer;
-import com.bigdata.service.DataService;
-import com.bigdata.service.IBigdataFederation;
-import com.bigdata.util.DaemonThreadFactory;
+import org.embergraph.relation.accesspath.BlockingBuffer;
+import org.embergraph.relation.accesspath.BufferClosedException;
+import org.embergraph.relation.accesspath.IAsynchronousIterator;
+import org.embergraph.relation.accesspath.IBlockingBuffer;
+import org.embergraph.service.DataService;
+import org.embergraph.service.IBigdataFederation;
+import org.embergraph.util.DaemonThreadFactory;
 
 /**
  * Wraps an {@link RemoteAsynchronousIterator} so that it looks like an

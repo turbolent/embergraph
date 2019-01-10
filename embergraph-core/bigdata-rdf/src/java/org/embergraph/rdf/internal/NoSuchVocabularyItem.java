@@ -29,7 +29,7 @@ package org.embergraph.rdf.internal;
 
 import org.openrdf.model.URI;
 
-import com.bigdata.rdf.vocab.Vocabulary;
+import org.embergraph.rdf.vocab.Vocabulary;
 
 /**
  * An exception thrown when a request is made for a {@link URI} which was not

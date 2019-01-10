@@ -23,7 +23,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.ha.msg;
 
-import com.bigdata.journal.IRootBlockView;
+import org.embergraph.journal.IRootBlockView;
 
 /**
  * Interface for a response requesting a root block from a remote service.

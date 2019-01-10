@@ -37,7 +37,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.util.DaemonThreadFactory;
+import org.embergraph.util.DaemonThreadFactory;
 
 /**
  * <p>

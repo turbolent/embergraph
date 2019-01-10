@@ -36,7 +36,7 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
-import com.bigdata.rdf.sail.BigdataSail.Options;
+import org.embergraph.rdf.sail.BigdataSail.Options;
 
 /**
  * Unit test template for use in submission of bugs.

@@ -53,15 +53,15 @@ import org.openrdf.rio.RDFWriter;
 import org.openrdf.rio.RDFWriterRegistry;
 import org.openrdf.sail.SailException;
 
-import com.bigdata.Banner;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.Journal;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rdf.sail.BigdataSail.BigdataSailConnection;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.relation.RelationSchema;
-import com.bigdata.relation.locator.ILocatableResource;
-import com.bigdata.sparse.ITPS;
+import org.embergraph.Banner;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.Journal;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.relation.RelationSchema;
+import org.embergraph.relation.locator.ILocatableResource;
+import org.embergraph.sparse.ITPS;
 
 import info.aduna.iteration.CloseableIteration;
 

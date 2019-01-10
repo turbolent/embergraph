@@ -1,6 +1,6 @@
 package org.embergraph.btree;
 
-import com.bigdata.rawstore.WormAddressManager;
+import org.embergraph.rawstore.WormAddressManager;
 
 /**
  * <p>

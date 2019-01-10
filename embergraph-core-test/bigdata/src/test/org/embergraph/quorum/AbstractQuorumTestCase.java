@@ -35,10 +35,10 @@ import java.util.concurrent.TimeUnit;
 
 import junit.framework.AssertionFailedError;
 
-import com.bigdata.io.TestCase3;
-import com.bigdata.quorum.MockQuorumFixture.MockQuorum;
-import com.bigdata.quorum.MockQuorumFixture.MockQuorum.MockQuorumActor;
-import com.bigdata.quorum.MockQuorumFixture.MockQuorumMember;
+import org.embergraph.io.TestCase3;
+import org.embergraph.quorum.MockQuorumFixture.MockQuorum;
+import org.embergraph.quorum.MockQuorumFixture.MockQuorum.MockQuorumActor;
+import org.embergraph.quorum.MockQuorumFixture.MockQuorumMember;
 
 /**
  * Abstract base class for testing using a {@link MockQuorumFixture}.

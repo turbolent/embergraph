@@ -31,14 +31,14 @@ import java.util.TimeZone;
 
 import org.openrdf.model.URI;
 
-import com.bigdata.rdf.internal.impl.extensions.DateTimeExtension;
-import com.bigdata.rdf.internal.impl.literal.LiteralExtensionIV;
-import com.bigdata.rdf.internal.impl.literal.XSDIntegerIV;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.internal.impl.extensions.DateTimeExtension;
+import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
+import org.embergraph.rdf.internal.impl.literal.XSDIntegerIV;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.BigdataValueFactoryImpl;
 
 /**
  * Unit tests for {@link XSDIntegerIV}.

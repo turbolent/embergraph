@@ -30,9 +30,9 @@ package com.bigdata.rdf.store;
 import java.util.Properties;
 import java.util.Set;
 
-import com.bigdata.rdf.lexicon.LexiconRelation;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.lexicon.LexiconRelation;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValueFactory;
 
 /**
  * Test suite for {@link TempTripleStore}s sharing the same

@@ -30,7 +30,7 @@ package org.embergraph.util.concurrent;
 
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.bigdata.journal.WriteExecutorService;
+import org.embergraph.journal.WriteExecutorService;
 
 /**
  * Extended for the {@link WriteExecutorService}.

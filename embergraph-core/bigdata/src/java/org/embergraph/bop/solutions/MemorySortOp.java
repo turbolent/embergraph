@@ -9,19 +9,19 @@ import java.util.concurrent.FutureTask;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpContext;
-import com.bigdata.bop.IBind;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IQueryAttributes;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.bop.IVariableOrConstant;
-import com.bigdata.bop.engine.BOpStats;
-import com.bigdata.bop.engine.IRunningQuery;
-import com.bigdata.bop.solutions.SliceOp.Annotations;
-import com.bigdata.rdf.error.SparqlTypeErrorException;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.relation.accesspath.IBlockingBuffer;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpContext;
+import org.embergraph.bop.IBind;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IQueryAttributes;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.bop.IVariableOrConstant;
+import org.embergraph.bop.engine.BOpStats;
+import org.embergraph.bop.engine.IRunningQuery;
+import org.embergraph.bop.solutions.SliceOp.Annotations;
+import org.embergraph.rdf.error.SparqlTypeErrorException;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.relation.accesspath.IBlockingBuffer;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

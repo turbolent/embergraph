@@ -26,10 +26,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.htree;
 
-import com.bigdata.btree.EvictionError;
-import com.bigdata.btree.IEvictionListener;
-import com.bigdata.btree.PO;
-import com.bigdata.cache.IHardReferenceQueue;
+import org.embergraph.btree.EvictionError;
+import org.embergraph.btree.IEvictionListener;
+import org.embergraph.btree.PO;
+import org.embergraph.cache.IHardReferenceQueue;
 
 /**
  * Hard reference cache eviction listener writes a dirty node or leaf onto the

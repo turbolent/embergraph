@@ -27,11 +27,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation.accesspath;
 
-import com.bigdata.bop.BOpContext;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IElement;
-import com.bigdata.bop.join.BaseJoinStats;
-import com.bigdata.relation.IRelation;
+import org.embergraph.bop.BOpContext;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IElement;
+import org.embergraph.bop.join.BaseJoinStats;
+import org.embergraph.relation.IRelation;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

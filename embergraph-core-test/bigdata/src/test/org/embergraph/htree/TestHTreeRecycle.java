@@ -4,11 +4,11 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-import com.bigdata.btree.Checkpoint;
-import com.bigdata.btree.HTreeIndexMetadata;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rwstore.sector.MemStore;
+import org.embergraph.btree.Checkpoint;
+import org.embergraph.btree.HTreeIndexMetadata;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rwstore.sector.MemStore;
 
 /**
  * Tests recycling of HTree storage.

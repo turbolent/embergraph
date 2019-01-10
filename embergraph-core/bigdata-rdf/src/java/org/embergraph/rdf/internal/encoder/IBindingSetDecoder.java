@@ -27,10 +27,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.internal.encoder;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.IVCache;
-import com.bigdata.rdf.model.BigdataValue;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.IVCache;
+import org.embergraph.rdf.model.BigdataValue;
 
 /**
  * Interface for decoding {@link IBindingSet}s comprised of {@link IV}s.

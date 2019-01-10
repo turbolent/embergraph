@@ -4,13 +4,13 @@ package com.bigdata.rdf.sail.sparql.ast;
 
 import javax.swing.text.DefaultEditorKit.PasteAction;
 
-import com.bigdata.rdf.sail.sparql.ast.ASTPathAlternative;
-import com.bigdata.rdf.sail.sparql.ast.ASTPathMod;
-import com.bigdata.rdf.sail.sparql.ast.ASTPathOneInPropertySet;
-import com.bigdata.rdf.sail.sparql.ast.SimpleNode;
-import com.bigdata.rdf.sail.sparql.ast.SyntaxTreeBuilder;
-import com.bigdata.rdf.sail.sparql.ast.SyntaxTreeBuilderVisitor;
-import com.bigdata.rdf.sail.sparql.ast.VisitorException;
+import org.embergraph.rdf.sail.sparql.ast.ASTPathAlternative;
+import org.embergraph.rdf.sail.sparql.ast.ASTPathMod;
+import org.embergraph.rdf.sail.sparql.ast.ASTPathOneInPropertySet;
+import org.embergraph.rdf.sail.sparql.ast.SimpleNode;
+import org.embergraph.rdf.sail.sparql.ast.SyntaxTreeBuilder;
+import org.embergraph.rdf.sail.sparql.ast.SyntaxTreeBuilderVisitor;
+import org.embergraph.rdf.sail.sparql.ast.VisitorException;
 
 public
 class ASTPathElt extends SimpleNode {

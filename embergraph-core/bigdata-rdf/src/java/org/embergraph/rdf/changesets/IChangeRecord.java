@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.changesets;
 
-import com.bigdata.rdf.spo.ISPO;
+import org.embergraph.rdf.spo.ISPO;
 
 /**
  * Provides detailed information on changes made to statements in the database.

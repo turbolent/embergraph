@@ -30,7 +30,7 @@ package org.embergraph.service;
 
 import java.util.Arrays;
 
-import com.bigdata.service.ndx.ClientException;
+import org.embergraph.service.ndx.ClientException;
 
 import junit.framework.TestCase;
 

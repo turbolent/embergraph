@@ -32,10 +32,10 @@ import java.util.Iterator;
 import java.util.Vector;
 import java.util.regex.Pattern;
 
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.ICounter;
-import com.bigdata.counters.PeriodEnum;
-import com.bigdata.counters.store.CounterSetBTree;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.ICounter;
+import org.embergraph.counters.PeriodEnum;
+import org.embergraph.counters.store.CounterSetBTree;
 
 /**
  * Reads the relevant performance counter data from the store.

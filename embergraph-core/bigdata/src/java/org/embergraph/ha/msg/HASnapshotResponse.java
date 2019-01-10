@@ -26,10 +26,10 @@ package org.embergraph.ha.msg;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 
-import com.bigdata.io.ChecksumUtility;
-import com.bigdata.journal.IRootBlockView;
-import com.bigdata.journal.RootBlockView;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.io.ChecksumUtility;
+import org.embergraph.journal.IRootBlockView;
+import org.embergraph.journal.RootBlockView;
+import org.embergraph.util.BytesUtil;
 
 public class HASnapshotResponse implements IHASnapshotResponse, Serializable {
 

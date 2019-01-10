@@ -35,8 +35,8 @@ import org.openrdf.query.Binding;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.QueryEvaluationException;
 
-import com.bigdata.bop.IVariable;
-import com.bigdata.rdf.model.BigdataValue;
+import org.embergraph.bop.IVariable;
+import org.embergraph.rdf.model.BigdataValue;
 
 /**
  * Collects and reports the distinct bindings observed on some set of variables.

@@ -29,13 +29,13 @@ package org.embergraph.bop.ap;
 
 import java.util.Properties;
 
-import com.bigdata.bop.joinGraph.IEvaluationPlanFactory;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.relation.accesspath.IElementFilter;
-import com.bigdata.relation.rule.eval.AbstractJoinNexusFactory;
-import com.bigdata.relation.rule.eval.ActionEnum;
-import com.bigdata.relation.rule.eval.IJoinNexus;
-import com.bigdata.relation.rule.eval.IRuleTaskFactory;
+import org.embergraph.bop.joinGraph.IEvaluationPlanFactory;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.relation.accesspath.IElementFilter;
+import org.embergraph.relation.rule.eval.AbstractJoinNexusFactory;
+import org.embergraph.relation.rule.eval.ActionEnum;
+import org.embergraph.relation.rule.eval.IJoinNexus;
+import org.embergraph.relation.rule.eval.IRuleTaskFactory;
 
 /**
  * Mock object.

@@ -35,9 +35,9 @@ import java.util.Set;
 
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IVariable;
-import com.bigdata.rdf.sail.sparql.ast.ASTDatasetClause;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IVariable;
+import org.embergraph.rdf.sail.sparql.ast.ASTDatasetClause;
 
 /**
  * A SPARQL Update operation.

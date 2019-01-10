@@ -34,9 +34,9 @@ import org.openrdf.model.Value;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.SESAME;
 
-import com.bigdata.rdf.sparql.ast.cache.DescribeServiceFactory;
-import com.bigdata.rdf.sparql.ast.eval.ServiceParams;
-import com.bigdata.rdf.sparql.ast.optimizers.ASTALPServiceOptimizer;
+import org.embergraph.rdf.sparql.ast.cache.DescribeServiceFactory;
+import org.embergraph.rdf.sparql.ast.eval.ServiceParams;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTALPServiceOptimizer;
 
 
 /**

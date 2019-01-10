@@ -33,9 +33,9 @@ import java.util.Set;
 
 import org.openrdf.model.URI;
 
-import com.bigdata.rdf.sparql.ast.service.ServiceNode;
-import com.bigdata.service.fts.FTS;
-import com.bigdata.service.geospatial.GeoSpatial;
+import org.embergraph.rdf.sparql.ast.service.ServiceNode;
+import org.embergraph.service.fts.FTS;
+import org.embergraph.service.geospatial.GeoSpatial;
 
 /**
  * Translate {@link FTS#GEOSPATIAL} and related magic predicates into a

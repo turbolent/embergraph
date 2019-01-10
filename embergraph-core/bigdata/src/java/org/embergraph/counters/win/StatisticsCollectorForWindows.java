@@ -1,7 +1,7 @@
 package org.embergraph.counters.win;
 
-import com.bigdata.counters.AbstractStatisticsCollector;
-import com.bigdata.counters.CounterSet;
+import org.embergraph.counters.AbstractStatisticsCollector;
+import org.embergraph.counters.CounterSet;
 
 /**
  * Collects per-host performance counters on a Windows platform.

@@ -1,10 +1,10 @@
 package org.embergraph.service.ndx;
 
-import com.bigdata.btree.proc.IResultHandler;
-import com.bigdata.btree.proc.ISimpleIndexProcedure;
-import com.bigdata.mdi.PartitionLocator;
-import com.bigdata.service.IDataService;
-import com.bigdata.service.Split;
+import org.embergraph.btree.proc.IResultHandler;
+import org.embergraph.btree.proc.ISimpleIndexProcedure;
+import org.embergraph.mdi.PartitionLocator;
+import org.embergraph.service.IDataService;
+import org.embergraph.service.Split;
 
 /**
  * Class handles stale locators by finding the current locator for the

@@ -33,8 +33,8 @@ import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import com.bigdata.btree.keys.KVO;
-import com.bigdata.relation.accesspath.BlockingBuffer;
+import org.embergraph.btree.keys.KVO;
+import org.embergraph.relation.accesspath.BlockingBuffer;
 
 /**
  * Unit tests for the control logic used by {@link AbstractMasterTask} and

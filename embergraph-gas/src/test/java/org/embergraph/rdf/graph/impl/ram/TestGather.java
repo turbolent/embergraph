@@ -23,18 +23,18 @@ import org.openrdf.model.Statement;
 import org.openrdf.model.Value;
 import org.openrdf.model.impl.StatementImpl;
 
-import com.bigdata.rdf.graph.EdgesEnum;
-import com.bigdata.rdf.graph.Factory;
-import com.bigdata.rdf.graph.FrontierEnum;
-import com.bigdata.rdf.graph.IGASContext;
-import com.bigdata.rdf.graph.IGASEngine;
-import com.bigdata.rdf.graph.IGASScheduler;
-import com.bigdata.rdf.graph.IGASState;
-import com.bigdata.rdf.graph.IGraphAccessor;
-import com.bigdata.rdf.graph.impl.BaseGASProgram;
-import com.bigdata.rdf.graph.impl.GASStats;
-import com.bigdata.rdf.graph.impl.ram.RAMGASEngine.RAMGraph;
-import com.bigdata.rdf.graph.impl.ram.RAMGASEngine.RAMGraphAccessor;
+import org.embergraph.rdf.graph.EdgesEnum;
+import org.embergraph.rdf.graph.Factory;
+import org.embergraph.rdf.graph.FrontierEnum;
+import org.embergraph.rdf.graph.IGASContext;
+import org.embergraph.rdf.graph.IGASEngine;
+import org.embergraph.rdf.graph.IGASScheduler;
+import org.embergraph.rdf.graph.IGASState;
+import org.embergraph.rdf.graph.IGraphAccessor;
+import org.embergraph.rdf.graph.impl.BaseGASProgram;
+import org.embergraph.rdf.graph.impl.GASStats;
+import org.embergraph.rdf.graph.impl.ram.RAMGASEngine.RAMGraph;
+import org.embergraph.rdf.graph.impl.ram.RAMGASEngine.RAMGraphAccessor;
 
 /**
  * Test class for GATHER.

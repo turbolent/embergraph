@@ -41,15 +41,15 @@ import org.openrdf.model.impl.ValueFactoryImpl;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.XMLSchema;
 
-import com.bigdata.btree.keys.DefaultKeyBuilderFactory;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.IKeyBuilderFactory;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.btree.keys.StrengthEnum;
-import com.bigdata.rdf.internal.XSD;
-import com.bigdata.rdf.model.BigdataValueSerializer;
-import com.bigdata.util.BytesUtil;
-import com.bigdata.util.BytesUtil.UnsignedByteArrayComparator;
+import org.embergraph.btree.keys.DefaultKeyBuilderFactory;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.IKeyBuilderFactory;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.btree.keys.StrengthEnum;
+import org.embergraph.rdf.internal.XSD;
+import org.embergraph.rdf.model.BigdataValueSerializer;
+import org.embergraph.util.BytesUtil;
+import org.embergraph.util.BytesUtil.UnsignedByteArrayComparator;
 
 /**
  * Test suite for {@link LexiconKeyBuilder}.

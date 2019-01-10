@@ -28,12 +28,12 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpBase;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstraint;
-import com.bigdata.rdf.internal.NotMaterializedException;
-import com.bigdata.util.InnerCause;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpBase;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstraint;
+import org.embergraph.rdf.internal.NotMaterializedException;
+import org.embergraph.util.InnerCause;
 
 /**
  * This is useful when a solution can be filtered out before it goes through the

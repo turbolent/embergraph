@@ -32,14 +32,14 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.NV;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.ap.Predicate;
-import com.bigdata.bop.join.FastRangeCountOp;
-import com.bigdata.rdf.sparql.ast.DatasetNode;
-import com.bigdata.rdf.sparql.ast.JoinGroupNode;
-import com.bigdata.rdf.sparql.ast.VarNode;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.NV;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.ap.Predicate;
+import org.embergraph.bop.join.FastRangeCountOp;
+import org.embergraph.rdf.sparql.ast.DatasetNode;
+import org.embergraph.rdf.sparql.ast.JoinGroupNode;
+import org.embergraph.rdf.sparql.ast.VarNode;
 
 /**
  * Interface for an external evaluation of {@link JoinGroupNode}s.

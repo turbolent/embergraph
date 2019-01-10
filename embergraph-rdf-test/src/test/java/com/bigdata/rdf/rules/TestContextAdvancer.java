@@ -33,29 +33,29 @@ import junit.framework.TestCase2;
 
 import org.openrdf.model.vocabulary.RDF;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.NV;
-import com.bigdata.bop.Var;
-import com.bigdata.bop.IPredicate.Annotations;
-import com.bigdata.bop.ap.Predicate;
-import com.bigdata.bop.rdf.filter.StripContextFilter;
-import com.bigdata.btree.IRangeQuery;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.Journal;
-import com.bigdata.rdf.model.BigdataStatement;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.model.StatementEnum;
-import com.bigdata.rdf.spo.ContextAdvancer;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.rdf.spo.SPOKeyOrder;
-import com.bigdata.rdf.spo.SPOPredicate;
-import com.bigdata.rdf.store.AbstractTestCase;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.LocalTripleStore;
-import com.bigdata.relation.accesspath.IAccessPath;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.NV;
+import org.embergraph.bop.Var;
+import org.embergraph.bop.IPredicate.Annotations;
+import org.embergraph.bop.ap.Predicate;
+import org.embergraph.bop.rdf.filter.StripContextFilter;
+import org.embergraph.btree.IRangeQuery;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Journal;
+import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.rdf.spo.ContextAdvancer;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.rdf.spo.SPOKeyOrder;
+import org.embergraph.rdf.spo.SPOPredicate;
+import org.embergraph.rdf.store.AbstractTestCase;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.LocalTripleStore;
+import org.embergraph.relation.accesspath.IAccessPath;
 
 /**
  * Test suite for the {@link ContextAdvancer}.

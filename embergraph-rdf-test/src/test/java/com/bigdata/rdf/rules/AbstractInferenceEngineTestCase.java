@@ -27,11 +27,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package com.bigdata.rdf.rules;
 
-import com.bigdata.bop.IVariableOrConstant;
-import com.bigdata.bop.ap.Predicate;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.store.AbstractTripleStoreTestCase;
-import com.bigdata.relation.accesspath.IAccessPath;
+import org.embergraph.bop.IVariableOrConstant;
+import org.embergraph.bop.ap.Predicate;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.store.AbstractTripleStoreTestCase;
+import org.embergraph.relation.accesspath.IAccessPath;
 
 /**
  * Base class for test suites for inference engine and the magic sets

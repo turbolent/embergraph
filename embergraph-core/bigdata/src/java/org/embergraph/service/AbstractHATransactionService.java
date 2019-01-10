@@ -34,12 +34,12 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import com.bigdata.ha.HAGlue;
-import com.bigdata.ha.HATXSGlue;
-import com.bigdata.ha.msg.IHAGatherReleaseTimeRequest;
-import com.bigdata.ha.msg.IHANotifyReleaseTimeResponse;
-import com.bigdata.journal.AbstractJournal;
-import com.bigdata.journal.ITransactionService;
+import org.embergraph.ha.HAGlue;
+import org.embergraph.ha.HATXSGlue;
+import org.embergraph.ha.msg.IHAGatherReleaseTimeRequest;
+import org.embergraph.ha.msg.IHANotifyReleaseTimeResponse;
+import org.embergraph.journal.AbstractJournal;
+import org.embergraph.journal.ITransactionService;
 
 /**
  * Adds local methods to support an HA aware {@link ITransactionService}.

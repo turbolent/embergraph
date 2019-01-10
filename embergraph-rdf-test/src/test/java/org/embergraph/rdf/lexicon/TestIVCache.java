@@ -4,25 +4,25 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.UUID;
 
-import com.bigdata.io.SerializerUtil;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.NotMaterializedException;
-import com.bigdata.rdf.internal.impl.AbstractIV;
-import com.bigdata.rdf.internal.impl.BlobIV;
-import com.bigdata.rdf.internal.impl.bnode.NumericBNodeIV;
-import com.bigdata.rdf.internal.impl.bnode.UUIDBNodeIV;
-import com.bigdata.rdf.internal.impl.literal.UUIDLiteralIV;
-import com.bigdata.rdf.internal.impl.literal.XSDBooleanIV;
-import com.bigdata.rdf.internal.impl.literal.XSDDecimalIV;
-import com.bigdata.rdf.internal.impl.literal.XSDIntegerIV;
-import com.bigdata.rdf.internal.impl.literal.XSDNumericIV;
-import com.bigdata.rdf.model.BigdataBNode;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.AbstractTripleStoreTestCase;
+import org.embergraph.io.SerializerUtil;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.NotMaterializedException;
+import org.embergraph.rdf.internal.impl.AbstractIV;
+import org.embergraph.rdf.internal.impl.BlobIV;
+import org.embergraph.rdf.internal.impl.bnode.NumericBNodeIV;
+import org.embergraph.rdf.internal.impl.bnode.UUIDBNodeIV;
+import org.embergraph.rdf.internal.impl.literal.UUIDLiteralIV;
+import org.embergraph.rdf.internal.impl.literal.XSDBooleanIV;
+import org.embergraph.rdf.internal.impl.literal.XSDDecimalIV;
+import org.embergraph.rdf.internal.impl.literal.XSDIntegerIV;
+import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
+import org.embergraph.rdf.model.BigdataBNode;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.AbstractTripleStoreTestCase;
 
 /**
  * Test suite for {@link IV#getValue()}, which provides a cache on the

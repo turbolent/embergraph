@@ -31,8 +31,8 @@ package org.embergraph.search;
 import java.io.StringReader;
 import java.util.concurrent.TimeUnit;
 
-import com.bigdata.journal.ITx;
-import com.bigdata.rdf.lexicon.ITextIndexer.FullTextQuery;
+import org.embergraph.journal.ITx;
+import org.embergraph.rdf.lexicon.ITextIndexer.FullTextQuery;
 
 /**
  * Simple test verifies that the {@link FullTextIndex} data are restart safe.

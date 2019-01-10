@@ -37,16 +37,16 @@ import org.openrdf.repository.sail.SailRepositoryConnection;
 import org.openrdf.sail.SailConnection;
 import org.openrdf.sail.SailException;
 
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.TimestampUtility;
-import com.bigdata.rdf.changesets.IChangeLog;
-import com.bigdata.rdf.changesets.IChangeRecord;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.sail.BigdataSail.BigdataSailConnection;
-import com.bigdata.rdf.sail.sparql.Bigdata2ASTSPARQLParser;
-import com.bigdata.rdf.sparql.ast.ASTContainer;
-import com.bigdata.rdf.sparql.ast.QueryType;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.TimestampUtility;
+import org.embergraph.rdf.changesets.IChangeLog;
+import org.embergraph.rdf.changesets.IChangeRecord;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
+import org.embergraph.rdf.sail.sparql.Bigdata2ASTSPARQLParser;
+import org.embergraph.rdf.sparql.ast.ASTContainer;
+import org.embergraph.rdf.sparql.ast.QueryType;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * Class with support for a variety of bigdata specific extensions,

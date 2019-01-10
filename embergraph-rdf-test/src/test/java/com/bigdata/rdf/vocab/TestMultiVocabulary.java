@@ -7,8 +7,8 @@ import java.util.Iterator;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.vocab.core.BigdataCoreVocabulary_v20151210;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.vocab.core.BigdataCoreVocabulary_v20151210;
 
 public class TestMultiVocabulary extends BigdataCoreVocabulary_v20151210 {
 

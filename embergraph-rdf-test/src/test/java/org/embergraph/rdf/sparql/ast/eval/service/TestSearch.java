@@ -27,9 +27,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.eval.service;
 
-import com.bigdata.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
-import com.bigdata.rdf.sparql.ast.service.ServiceNode;
-import com.bigdata.rdf.store.BD;
+import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
+import org.embergraph.rdf.sparql.ast.service.ServiceNode;
+import org.embergraph.rdf.store.BD;
 
 /**
  * Data driven test suite for full text search.

@@ -1,16 +1,16 @@
 package org.embergraph.bfs;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.filter.Advancer;
-import com.bigdata.btree.filter.TupleUpdater;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.sparse.IRowStoreConstants;
-import com.bigdata.sparse.KeyDecoder;
-import com.bigdata.sparse.TimestampChooser;
-import com.bigdata.sparse.ValueType;
-import com.bigdata.sparse.TPS.TPV;
-import com.bigdata.util.Bytes;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.filter.Advancer;
+import org.embergraph.btree.filter.TupleUpdater;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.sparse.IRowStoreConstants;
+import org.embergraph.sparse.KeyDecoder;
+import org.embergraph.sparse.TimestampChooser;
+import org.embergraph.sparse.ValueType;
+import org.embergraph.sparse.TPS.TPV;
+import org.embergraph.util.Bytes;
 
 /**
  * A procedure that performs a key range scan, marking all non-deleted

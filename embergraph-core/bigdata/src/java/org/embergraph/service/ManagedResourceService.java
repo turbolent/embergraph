@@ -32,10 +32,10 @@ import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.util.UUID;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.io.DirectBufferPoolAllocator;
-import com.bigdata.io.DirectBufferPoolAllocator.IAllocation;
+import org.embergraph.bop.BOp;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.io.DirectBufferPoolAllocator;
+import org.embergraph.io.DirectBufferPoolAllocator.IAllocation;
 
 /**
  * This class manages a pool of direct {@link ByteBuffer}s. The application can

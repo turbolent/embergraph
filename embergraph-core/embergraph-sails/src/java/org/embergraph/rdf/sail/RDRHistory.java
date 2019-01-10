@@ -28,26 +28,26 @@ import org.apache.log4j.Logger;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-import com.bigdata.rdf.changesets.ChangeAction;
-import com.bigdata.rdf.changesets.IChangeLog;
-import com.bigdata.rdf.changesets.IChangeRecord;
-import com.bigdata.rdf.inf.TruthMaintenance;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.impl.bnode.SidIV;
-import com.bigdata.rdf.internal.impl.literal.XSDNumericIV;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.model.StatementEnum;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.rdf.spo.SPO;
-import com.bigdata.rdf.spo.SPOKeyOrder;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.BD;
-import com.bigdata.rdf.store.TempTripleStore;
-import com.bigdata.relation.accesspath.AbstractArrayBuffer;
-import com.bigdata.striterator.ChunkedArrayIterator;
-import com.bigdata.striterator.ChunkedResolvingIterator;
-import com.bigdata.striterator.IChunkedOrderedIterator;
+import org.embergraph.rdf.changesets.ChangeAction;
+import org.embergraph.rdf.changesets.IChangeLog;
+import org.embergraph.rdf.changesets.IChangeRecord;
+import org.embergraph.rdf.inf.TruthMaintenance;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.impl.bnode.SidIV;
+import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.rdf.spo.SPO;
+import org.embergraph.rdf.spo.SPOKeyOrder;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.BD;
+import org.embergraph.rdf.store.TempTripleStore;
+import org.embergraph.relation.accesspath.AbstractArrayBuffer;
+import org.embergraph.striterator.ChunkedArrayIterator;
+import org.embergraph.striterator.ChunkedResolvingIterator;
+import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /**
  * This is an experimental feature that captures history using the change log

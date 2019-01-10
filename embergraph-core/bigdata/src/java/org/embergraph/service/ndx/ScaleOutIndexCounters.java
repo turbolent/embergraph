@@ -28,9 +28,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.service.ndx;
 
-import com.bigdata.counters.CounterSet;
-import com.bigdata.service.AbstractFederation;
-import com.bigdata.service.ndx.pipeline.IndexAsyncWriteStats;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.service.AbstractFederation;
+import org.embergraph.service.ndx.pipeline.IndexAsyncWriteStats;
 
 /**
  * Counters pertaining to a scale-out index. The {@link IScaleOutClientIndex}

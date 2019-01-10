@@ -30,11 +30,11 @@ package org.embergraph.bop.rdf.update;
 import java.util.Map;
 import java.util.concurrent.FutureTask;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpContext;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.rdf.spo.ISPO;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpContext;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.rdf.spo.ISPO;
 
 /**
  * Operator to insert {@link ISPO}s into bigdata.

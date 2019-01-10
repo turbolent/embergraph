@@ -33,23 +33,23 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.engine.StaticAnalysisStats;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.constraints.RangeBOp;
-import com.bigdata.rdf.sparql.ast.JoinGroupNode;
-import com.bigdata.rdf.sparql.ast.RangeNode;
-import com.bigdata.rdf.sparql.ast.StatementPatternNode;
-import com.bigdata.rdf.sparql.ast.StaticAnalysis;
-import com.bigdata.rdf.sparql.ast.TermNode;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpContext;
-import com.bigdata.rdf.sparql.ast.optimizers.ASTStaticJoinOptimizer.Annotations;
-import com.bigdata.rdf.spo.SPORelation;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.relation.accesspath.IAccessPath;
-import com.bigdata.util.concurrent.ExecutionExceptions;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.engine.StaticAnalysisStats;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.constraints.RangeBOp;
+import org.embergraph.rdf.sparql.ast.JoinGroupNode;
+import org.embergraph.rdf.sparql.ast.RangeNode;
+import org.embergraph.rdf.sparql.ast.StatementPatternNode;
+import org.embergraph.rdf.sparql.ast.StaticAnalysis;
+import org.embergraph.rdf.sparql.ast.TermNode;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTStaticJoinOptimizer.Annotations;
+import org.embergraph.rdf.spo.SPORelation;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.relation.accesspath.IAccessPath;
+import org.embergraph.util.concurrent.ExecutionExceptions;
 
 /**
  * Attach range counts to all statement patterns in the query.

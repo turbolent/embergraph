@@ -2,13 +2,13 @@ package org.embergraph.rdf.internal.impl.uri;
 
 import org.openrdf.model.URI;
 
-import com.bigdata.rdf.internal.INonInlineExtensionCodes;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.VTE;
-import com.bigdata.rdf.internal.impl.AbstractNonInlineExtensionIVWithDelegateIV;
-import com.bigdata.rdf.internal.impl.literal.AbstractLiteralIV;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.model.BigdataURI;
+import org.embergraph.rdf.internal.INonInlineExtensionCodes;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.VTE;
+import org.embergraph.rdf.internal.impl.AbstractNonInlineExtensionIVWithDelegateIV;
+import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.BigdataURI;
 
 /**
  * A {@link URI} modeled as a namespace {@link IV} plus an inline Unicode

@@ -29,7 +29,7 @@ package org.embergraph.service.master;
 
 import java.io.Serializable;
 
-import com.bigdata.relation.accesspath.BlockingBuffer;
+import org.embergraph.relation.accesspath.BlockingBuffer;
 
 /**
  * Factory for AbstractResourceScanner implementations.

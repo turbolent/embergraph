@@ -27,11 +27,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.mdi;
 
-import com.bigdata.btree.ICounter;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.service.DataService;
-import com.bigdata.service.IDataService;
-import com.bigdata.service.IMetadataService;
+import org.embergraph.btree.ICounter;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.service.DataService;
+import org.embergraph.service.IDataService;
+import org.embergraph.service.IMetadataService;
 
 /**
  * A description of the metadata state for a partition of a scale-out index.

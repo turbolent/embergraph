@@ -32,11 +32,11 @@ import java.util.Properties;
 import org.openrdf.model.URI;
 import org.openrdf.model.vocabulary.RDFS;
 
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.rules.InferenceEngine.Options;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.relation.rule.Rule;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.rules.InferenceEngine.Options;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.relation.rule.Rule;
 
 /**
  * Note: rdfs 2, 3, 7, and 9 use the same base class.

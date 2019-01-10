@@ -29,23 +29,23 @@ package com.bigdata.rdf.spo;
 
 import org.openrdf.model.Statement;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.NV;
-import com.bigdata.bop.Var;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.VTE;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.model.StatementEnum;
-import com.bigdata.rdf.rio.StatementBuffer;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.AbstractTripleStoreTestCase;
-import com.bigdata.rdf.store.TestTripleStore;
-import com.bigdata.relation.accesspath.AccessPath;
-import com.bigdata.relation.accesspath.IAccessPath;
-import com.bigdata.test.MockTermIdFactory;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.NV;
+import org.embergraph.bop.Var;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.VTE;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.rdf.rio.StatementBuffer;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.AbstractTripleStoreTestCase;
+import org.embergraph.rdf.store.TestTripleStore;
+import org.embergraph.relation.accesspath.AccessPath;
+import org.embergraph.relation.accesspath.IAccessPath;
+import org.embergraph.test.MockTermIdFactory;
 
 /**
  * Test suite for {@link SPOAccessPath}.

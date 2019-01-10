@@ -30,7 +30,7 @@ package org.embergraph.btree;
 
 import java.io.Serializable;
 
-import com.bigdata.relation.accesspath.IAccessPath;
+import org.embergraph.relation.accesspath.IAccessPath;
 
 /**
  * An interface that is used to generate a bloom filter for an

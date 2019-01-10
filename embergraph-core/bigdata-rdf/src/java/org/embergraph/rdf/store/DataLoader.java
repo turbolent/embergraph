@@ -53,26 +53,26 @@ import org.apache.log4j.Logger;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
-import com.bigdata.Banner;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.journal.DumpJournal;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.RWStrategy;
-import com.bigdata.rdf.ServiceProviderHook;
-import com.bigdata.rdf.inf.ClosureStats;
-import com.bigdata.rdf.inf.TruthMaintenance;
-import com.bigdata.rdf.lexicon.LexiconRelation;
-import com.bigdata.rdf.load.IStatementBufferFactory;
-import com.bigdata.rdf.rio.LoadStats;
-import com.bigdata.rdf.rio.PresortRioLoader;
-import com.bigdata.rdf.rio.RDFParserOptions;
-import com.bigdata.rdf.rio.RioLoaderEvent;
-import com.bigdata.rdf.rio.RioLoaderListener;
-import com.bigdata.rdf.rio.StatementBuffer;
-import com.bigdata.rdf.rules.InferenceEngine;
-import com.bigdata.rdf.spo.SPO;
+import org.embergraph.Banner;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.journal.DumpJournal;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.RWStrategy;
+import org.embergraph.rdf.ServiceProviderHook;
+import org.embergraph.rdf.inf.ClosureStats;
+import org.embergraph.rdf.inf.TruthMaintenance;
+import org.embergraph.rdf.lexicon.LexiconRelation;
+import org.embergraph.rdf.load.IStatementBufferFactory;
+import org.embergraph.rdf.rio.LoadStats;
+import org.embergraph.rdf.rio.PresortRioLoader;
+import org.embergraph.rdf.rio.RDFParserOptions;
+import org.embergraph.rdf.rio.RioLoaderEvent;
+import org.embergraph.rdf.rio.RioLoaderListener;
+import org.embergraph.rdf.rio.StatementBuffer;
+import org.embergraph.rdf.rules.InferenceEngine;
+import org.embergraph.rdf.spo.SPO;
 
 /**
  * A utility class to load RDF data into an {@link AbstractTripleStore}. This

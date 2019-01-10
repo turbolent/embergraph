@@ -30,9 +30,9 @@ package org.embergraph.relation.rule;
 
 import java.util.Iterator;
 
-import com.bigdata.bop.IPredicate;
-import com.bigdata.relation.IMutableRelation;
-import com.bigdata.relation.rule.eval.ISolution;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.relation.IMutableRelation;
+import org.embergraph.relation.rule.eval.ISolution;
 
 /**
  * A program consists of a set of rules and/or programs. Some programs are

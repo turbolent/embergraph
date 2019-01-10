@@ -27,10 +27,10 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 
-import com.bigdata.counters.CounterSet;
-import com.bigdata.rawstore.IAddressManager;
-import com.bigdata.rawstore.IMRMW;
-import com.bigdata.rawstore.IRawStore;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.rawstore.IAddressManager;
+import org.embergraph.rawstore.IMRMW;
+import org.embergraph.rawstore.IRawStore;
 
 /**
  * <p>

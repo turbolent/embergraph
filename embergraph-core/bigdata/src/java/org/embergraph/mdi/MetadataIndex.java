@@ -30,17 +30,17 @@ import java.io.ObjectOutput;
 import java.util.UUID;
 
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.Checkpoint;
-import com.bigdata.btree.DefaultTupleSerializer;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.keys.IKeyBuilderFactory;
-import com.bigdata.btree.view.FusedView;
-import com.bigdata.io.LongPacker;
-import com.bigdata.journal.ICommitter;
-import com.bigdata.journal.IResourceManager;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.service.MetadataService;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.Checkpoint;
+import org.embergraph.btree.DefaultTupleSerializer;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.keys.IKeyBuilderFactory;
+import org.embergraph.btree.view.FusedView;
+import org.embergraph.io.LongPacker;
+import org.embergraph.journal.ICommitter;
+import org.embergraph.journal.IResourceManager;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.service.MetadataService;
 
 /**
  * A metadata index for the partitions of a distributed index. There is one

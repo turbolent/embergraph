@@ -32,9 +32,9 @@ import java.rmi.Remote;
 import java.util.UUID;
 import java.util.concurrent.Future;
 
-import com.bigdata.ha.msg.IHAReadRequest;
-import com.bigdata.ha.msg.IHAReadResponse;
-import com.bigdata.rawstore.IRawStore;
+import org.embergraph.ha.msg.IHAReadRequest;
+import org.embergraph.ha.msg.IHAReadResponse;
+import org.embergraph.rawstore.IRawStore;
 
 /**
  * A {@link Remote} interface supporting low-level reads against persistent data

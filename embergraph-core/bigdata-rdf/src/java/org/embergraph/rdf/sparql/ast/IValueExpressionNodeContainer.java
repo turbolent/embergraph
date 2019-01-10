@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast;
 
-import com.bigdata.rdf.sparql.ast.optimizers.ASTSetValueExpressionsOptimizer;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTSetValueExpressionsOptimizer;
 
 /**
  * A node which is a container for a {@link IValueExpressionNode}.

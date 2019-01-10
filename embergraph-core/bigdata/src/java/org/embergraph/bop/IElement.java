@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop;
 
-import com.bigdata.relation.rule.eval.IJoinNexus;
+import org.embergraph.relation.rule.eval.IJoinNexus;
 
 /**
  * An interface for exposing the data in an object view of a tuple by index

@@ -31,24 +31,24 @@ import java.nio.ByteBuffer;
 import java.util.UUID;
 import java.util.concurrent.locks.Lock;
 
-import com.bigdata.cache.ConcurrentWeakValueCache;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.io.ChecksumUtility;
-import com.bigdata.journal.AbstractJournal;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.ForceEnum;
-import com.bigdata.journal.IBufferStrategy;
-import com.bigdata.journal.ICommitter;
-import com.bigdata.journal.IRootBlockView;
-import com.bigdata.journal.RootBlockView;
-import com.bigdata.journal.StoreTypeEnum;
-import com.bigdata.mdi.IResourceMetadata;
-import com.bigdata.rawstore.IAddressManager;
-import com.bigdata.rawstore.IAllocationContext;
-import com.bigdata.rawstore.IAllocationManagerStore;
-import com.bigdata.rawstore.IPSOutputStream;
-import com.bigdata.rwstore.IRWStrategy;
-import com.bigdata.rwstore.IRawTx;
+import org.embergraph.cache.ConcurrentWeakValueCache;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.io.ChecksumUtility;
+import org.embergraph.journal.AbstractJournal;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.ForceEnum;
+import org.embergraph.journal.IBufferStrategy;
+import org.embergraph.journal.ICommitter;
+import org.embergraph.journal.IRootBlockView;
+import org.embergraph.journal.RootBlockView;
+import org.embergraph.journal.StoreTypeEnum;
+import org.embergraph.mdi.IResourceMetadata;
+import org.embergraph.rawstore.IAddressManager;
+import org.embergraph.rawstore.IAllocationContext;
+import org.embergraph.rawstore.IAllocationManagerStore;
+import org.embergraph.rawstore.IPSOutputStream;
+import org.embergraph.rwstore.IRWStrategy;
+import org.embergraph.rwstore.IRawTx;
 
 /**
  * A buffer implementation backed by an {@link IMemoryManager}.

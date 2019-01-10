@@ -27,8 +27,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.htree;
 
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rawstore.SimpleMemoryRawStore;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /**
  * Unit tests for commit functionality that do not trigger copy-on-write.

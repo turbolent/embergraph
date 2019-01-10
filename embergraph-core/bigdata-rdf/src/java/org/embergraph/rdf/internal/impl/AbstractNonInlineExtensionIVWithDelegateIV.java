@@ -1,11 +1,11 @@
 package org.embergraph.rdf.internal.impl;
 
-import com.bigdata.rdf.internal.DTE;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.VTE;
-import com.bigdata.rdf.internal.impl.literal.AbstractLiteralIV;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.model.BigdataValue;
+import org.embergraph.rdf.internal.DTE;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.VTE;
+import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.BigdataValue;
 
 /**
  * Class <strong>always</strong> has the <em>extension</em> bit set but is NOT

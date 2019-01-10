@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.btree.proc;
 
-import com.bigdata.service.Split;
+import org.embergraph.service.Split;
 
 /**
  * An interface for handling results obtained when an {@link IIndexProcedure} is

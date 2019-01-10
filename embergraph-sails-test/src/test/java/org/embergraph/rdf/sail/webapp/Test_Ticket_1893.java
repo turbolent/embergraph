@@ -34,7 +34,7 @@ import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQueryResult;
 import org.openrdf.repository.RepositoryException;
 
-import com.bigdata.rdf.sail.remote.BigdataSailRemoteRepositoryConnection;
+import org.embergraph.rdf.sail.remote.BigdataSailRemoteRepositoryConnection;
 
 import junit.framework.Test;
 

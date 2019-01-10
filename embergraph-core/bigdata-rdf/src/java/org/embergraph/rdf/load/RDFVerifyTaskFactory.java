@@ -3,8 +3,8 @@ package org.embergraph.rdf.load;
 import org.openrdf.model.Statement;
 import org.openrdf.rio.RDFFormat;
 
-import com.bigdata.rdf.rio.RDFParserOptions;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.rio.RDFParserOptions;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * Factory for tasks for verifying a database against RDF resources.

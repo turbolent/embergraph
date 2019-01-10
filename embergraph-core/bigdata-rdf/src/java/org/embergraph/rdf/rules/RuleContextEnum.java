@@ -23,18 +23,18 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.rules;
 
-import com.bigdata.bop.IPredicate;
-import com.bigdata.btree.BTree;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.TemporaryStore;
-import com.bigdata.rdf.inf.TruthMaintenance;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.LocalTripleStore;
-import com.bigdata.rdf.store.TempTripleStore;
-import com.bigdata.relation.accesspath.IBuffer;
-import com.bigdata.relation.rule.IProgram;
-import com.bigdata.relation.rule.IRule;
-import com.bigdata.service.IBigdataFederation;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.btree.BTree;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.TemporaryStore;
+import org.embergraph.rdf.inf.TruthMaintenance;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.LocalTripleStore;
+import org.embergraph.rdf.store.TempTripleStore;
+import org.embergraph.relation.accesspath.IBuffer;
+import org.embergraph.relation.rule.IProgram;
+import org.embergraph.relation.rule.IRule;
+import org.embergraph.service.IBigdataFederation;
 
 /**
  * <p>

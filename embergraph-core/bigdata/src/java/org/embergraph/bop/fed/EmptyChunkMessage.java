@@ -31,10 +31,10 @@ import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.UUID;
 
-import com.bigdata.bop.engine.IChunkAccessor;
-import com.bigdata.bop.engine.IChunkMessage;
-import com.bigdata.bop.engine.IQueryClient;
-import com.bigdata.relation.accesspath.EmptyCloseableIterator;
+import org.embergraph.bop.engine.IChunkAccessor;
+import org.embergraph.bop.engine.IChunkMessage;
+import org.embergraph.bop.engine.IQueryClient;
+import org.embergraph.relation.accesspath.EmptyCloseableIterator;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

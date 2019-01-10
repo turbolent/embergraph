@@ -84,13 +84,13 @@ import org.openrdf.query.QueryResultUtil;
 import org.openrdf.query.TupleQueryResult;
 import org.openrdf.query.impl.MutableTupleQueryResult;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IVariableOrConstant;
-import com.bigdata.rdf.sparql.ast.ASTContainer;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.relation.accesspath.IAsynchronousIterator;
-import com.bigdata.striterator.Dechunkerator;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IVariableOrConstant;
+import org.embergraph.rdf.sparql.ast.ASTContainer;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.relation.accesspath.IAsynchronousIterator;
+import org.embergraph.striterator.Dechunkerator;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

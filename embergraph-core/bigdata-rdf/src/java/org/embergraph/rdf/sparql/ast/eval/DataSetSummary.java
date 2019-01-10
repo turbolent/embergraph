@@ -9,19 +9,19 @@ import java.util.Set;
 import org.openrdf.model.URI;
 import org.openrdf.query.Dataset;
 
-import com.bigdata.bop.BOpContextBase;
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.ap.Predicate;
-import com.bigdata.bop.cost.SubqueryCostReport;
-import com.bigdata.bop.fed.FederatedQueryEngine;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.lexicon.LexiconRelation;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.store.IRawTripleStore;
-import com.bigdata.relation.IRelation;
-import com.bigdata.relation.accesspath.AccessPath;
-import com.bigdata.service.ResourceService;
+import org.embergraph.bop.BOpContextBase;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.ap.Predicate;
+import org.embergraph.bop.cost.SubqueryCostReport;
+import org.embergraph.bop.fed.FederatedQueryEngine;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.lexicon.LexiconRelation;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.store.IRawTripleStore;
+import org.embergraph.relation.IRelation;
+import org.embergraph.relation.accesspath.AccessPath;
+import org.embergraph.service.ResourceService;
 
 /**
  * Helper class summarizes the named graphs or default graph mode for a quads

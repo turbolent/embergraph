@@ -34,14 +34,14 @@ import java.util.UUID;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.relation.RelationSchema;
-import com.bigdata.service.DataService;
-import com.bigdata.service.IBigdataFederation;
-import com.bigdata.service.IDataService;
-import com.bigdata.util.NV;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.relation.RelationSchema;
+import org.embergraph.service.DataService;
+import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IDataService;
+import org.embergraph.util.NV;
 
 /**
  * Base class for managing the initial configuration metadata for indices and

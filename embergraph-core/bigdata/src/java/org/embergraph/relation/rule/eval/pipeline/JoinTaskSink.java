@@ -4,12 +4,12 @@ import java.util.concurrent.Future;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.mdi.PartitionLocator;
-import com.bigdata.relation.accesspath.BlockingBuffer;
-import com.bigdata.relation.accesspath.UnsynchronizedArrayBuffer;
-import com.bigdata.relation.rule.eval.IJoinNexus;
-import com.bigdata.service.IBigdataFederation;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.mdi.PartitionLocator;
+import org.embergraph.relation.accesspath.BlockingBuffer;
+import org.embergraph.relation.accesspath.UnsynchronizedArrayBuffer;
+import org.embergraph.relation.rule.eval.IJoinNexus;
+import org.embergraph.service.IBigdataFederation;
 
 /**
  * An object used by a {@link JoinTask} to write on another {@link JoinTask}

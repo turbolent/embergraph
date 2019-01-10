@@ -30,8 +30,8 @@ package org.embergraph.ha;
 import java.io.IOException;
 import java.util.UUID;
 
-import com.bigdata.quorum.Quorum;
-import com.bigdata.rawstore.IRawStore;
+import org.embergraph.quorum.Quorum;
+import org.embergraph.rawstore.IRawStore;
 
 /**
  * A non-remote interface for a member service in a {@link Quorum} defining

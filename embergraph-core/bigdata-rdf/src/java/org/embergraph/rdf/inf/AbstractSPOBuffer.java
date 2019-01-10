@@ -29,12 +29,12 @@ package org.embergraph.rdf.inf;
 
 import org.openrdf.model.Value;
 
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.rdf.spo.ISPOBuffer;
-import com.bigdata.rdf.spo.SPO;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.relation.accesspath.AbstractArrayBuffer;
-import com.bigdata.relation.accesspath.IElementFilter;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.rdf.spo.ISPOBuffer;
+import org.embergraph.rdf.spo.SPO;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.relation.accesspath.AbstractArrayBuffer;
+import org.embergraph.relation.accesspath.IElementFilter;
 
 /**
  * Abtract base class for buffering {@link SPO}s for some batch api operation.

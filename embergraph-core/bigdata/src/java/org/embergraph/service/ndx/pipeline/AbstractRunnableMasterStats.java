@@ -12,10 +12,10 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.Instrument;
-import com.bigdata.service.AbstractFederation;
-import com.bigdata.util.concurrent.MovingAverageTask;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.Instrument;
+import org.embergraph.service.AbstractFederation;
+import org.embergraph.util.concurrent.MovingAverageTask;
 
 /**
  * Statistics for the consumer, including several moving averages based on

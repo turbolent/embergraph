@@ -1,7 +1,7 @@
 package org.embergraph.service.ndx;
 
-import com.bigdata.btree.proc.IResultHandler;
-import com.bigdata.service.Split;
+import org.embergraph.btree.proc.IResultHandler;
+import org.embergraph.service.Split;
 
 /**
  * Hands back the object visited for a single index partition.

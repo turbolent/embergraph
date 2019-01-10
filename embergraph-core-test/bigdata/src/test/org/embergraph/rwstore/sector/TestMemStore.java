@@ -8,21 +8,21 @@ import java.util.Properties;
 import junit.extensions.proxy.ProxyTestSuite;
 import junit.framework.Test;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.journal.AbstractJournalTestCase;
-import com.bigdata.journal.AbstractMRMWTestCase;
-import com.bigdata.journal.AbstractMROWTestCase;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.Journal.Options;
-import com.bigdata.journal.TestJournalBasics;
-import com.bigdata.rawstore.AbstractRawStoreTestCase;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rwstore.IRWStrategy;
-import com.bigdata.rwstore.IRawTx;
-import com.bigdata.service.AbstractTransactionService;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.journal.AbstractJournalTestCase;
+import org.embergraph.journal.AbstractMRMWTestCase;
+import org.embergraph.journal.AbstractMROWTestCase;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.Journal.Options;
+import org.embergraph.journal.TestJournalBasics;
+import org.embergraph.rawstore.AbstractRawStoreTestCase;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rwstore.IRWStrategy;
+import org.embergraph.rwstore.IRawTx;
+import org.embergraph.service.AbstractTransactionService;
 
 /**
  * Test suite for {@link MemStore}.

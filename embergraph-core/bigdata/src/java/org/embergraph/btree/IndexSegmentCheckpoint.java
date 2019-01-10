@@ -31,13 +31,13 @@ import java.util.UUID;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.io.ChecksumUtility;
-import com.bigdata.io.FileChannelUtility;
-import com.bigdata.io.NOPReopener;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.RootBlockException;
-import com.bigdata.rawstore.IAddressManager;
-import com.bigdata.util.Bytes;
+import org.embergraph.io.ChecksumUtility;
+import org.embergraph.io.FileChannelUtility;
+import org.embergraph.io.NOPReopener;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.RootBlockException;
+import org.embergraph.rawstore.IAddressManager;
+import org.embergraph.util.Bytes;
 
 /**
  * The checkpoint record for an {@link IndexSegment}.

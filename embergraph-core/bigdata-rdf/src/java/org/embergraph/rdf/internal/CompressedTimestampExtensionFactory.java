@@ -24,9 +24,9 @@ package org.embergraph.rdf.internal;
 
 import java.util.Collection;
 
-import com.bigdata.rdf.internal.impl.extensions.CompressedTimestampExtension;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.model.BigdataValue;
+import org.embergraph.rdf.internal.impl.extensions.CompressedTimestampExtension;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.BigdataValue;
 
 /**
  * Extension factory that adds a compressed timestamp literal datatype, namely

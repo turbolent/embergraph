@@ -33,10 +33,10 @@ import java.util.Set;
 
 import cern.colt.Arrays;
 
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.bop.IVariable;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.constraints.INeedsMaterialization;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.bop.IVariable;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.constraints.INeedsMaterialization;
 
 /**
  * Computed {@link INeedsMaterialization} metadata for an

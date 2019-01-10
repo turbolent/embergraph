@@ -31,7 +31,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import com.bigdata.rdf.sparql.ast.IGroupMemberNode;
+import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
 
 /**
  * Classification of {@link IGroupMemberNode}s along a set of specified

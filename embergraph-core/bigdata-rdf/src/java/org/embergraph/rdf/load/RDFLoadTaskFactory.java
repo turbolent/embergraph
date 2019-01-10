@@ -3,12 +3,12 @@ package org.embergraph.rdf.load;
 import org.openrdf.model.Statement;
 import org.openrdf.rio.RDFFormat;
 
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.Instrument;
-import com.bigdata.rdf.rio.IAsynchronousWriteStatementBufferFactory;
-import com.bigdata.rdf.rio.RDFParserOptions;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.service.ILoadBalancerService;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.Instrument;
+import org.embergraph.rdf.rio.IAsynchronousWriteStatementBufferFactory;
+import org.embergraph.rdf.rio.RDFParserOptions;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.service.ILoadBalancerService;
 
 /**
  * Factory for tasks for loading RDF resources into a database.

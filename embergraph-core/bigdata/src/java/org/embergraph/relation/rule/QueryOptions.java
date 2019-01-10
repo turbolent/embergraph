@@ -30,7 +30,7 @@ package org.embergraph.relation.rule;
 
 import java.util.Arrays;
 
-import com.bigdata.bop.solutions.ISortOrder;
+import org.embergraph.bop.solutions.ISortOrder;
 
 /**
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

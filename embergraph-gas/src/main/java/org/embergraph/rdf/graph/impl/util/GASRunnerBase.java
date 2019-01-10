@@ -9,18 +9,18 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.log4j.Logger;
 import org.openrdf.model.Value;
 
-import com.bigdata.rdf.graph.FrontierEnum;
-import com.bigdata.rdf.graph.IGASContext;
-import com.bigdata.rdf.graph.IGASEngine;
-import com.bigdata.rdf.graph.IGASProgram;
-import com.bigdata.rdf.graph.IGASScheduler;
-import com.bigdata.rdf.graph.IGASSchedulerImpl;
-import com.bigdata.rdf.graph.IGASState;
-import com.bigdata.rdf.graph.IGASStats;
-import com.bigdata.rdf.graph.IGraphAccessor;
-import com.bigdata.rdf.graph.impl.GASEngine;
-import com.bigdata.rdf.graph.impl.GASState;
-import com.bigdata.rdf.graph.impl.GASStats;
+import org.embergraph.rdf.graph.FrontierEnum;
+import org.embergraph.rdf.graph.IGASContext;
+import org.embergraph.rdf.graph.IGASEngine;
+import org.embergraph.rdf.graph.IGASProgram;
+import org.embergraph.rdf.graph.IGASScheduler;
+import org.embergraph.rdf.graph.IGASSchedulerImpl;
+import org.embergraph.rdf.graph.IGASState;
+import org.embergraph.rdf.graph.IGASStats;
+import org.embergraph.rdf.graph.IGraphAccessor;
+import org.embergraph.rdf.graph.impl.GASEngine;
+import org.embergraph.rdf.graph.impl.GASState;
+import org.embergraph.rdf.graph.impl.GASStats;
 
 /**
  * Base class for running performance tests.

@@ -30,11 +30,11 @@ package org.embergraph.btree.raba.codec;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.btree.AbstractBTreeTestCase;
-import com.bigdata.btree.raba.EmptyRaba;
-import com.bigdata.btree.raba.IRaba;
-import com.bigdata.btree.raba.ReadOnlyValuesRaba;
-import com.bigdata.io.DataOutputBuffer;
+import org.embergraph.btree.AbstractBTreeTestCase;
+import org.embergraph.btree.raba.EmptyRaba;
+import org.embergraph.btree.raba.IRaba;
+import org.embergraph.btree.raba.ReadOnlyValuesRaba;
+import org.embergraph.io.DataOutputBuffer;
 
 
 /**

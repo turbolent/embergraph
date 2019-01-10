@@ -31,13 +31,13 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.IJournal;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.TimestampUtility;
-import com.bigdata.relation.locator.DefaultResourceLocator;
+import org.embergraph.btree.BTree;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.IJournal;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.TimestampUtility;
+import org.embergraph.relation.locator.DefaultResourceLocator;
 
 /**
  * A triple store based on the <em>bigdata</em> architecture. This class

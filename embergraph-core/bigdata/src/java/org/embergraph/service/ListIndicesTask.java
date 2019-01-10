@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.journal.AbstractJournal;
+import org.embergraph.journal.AbstractJournal;
 
 /**
  * Task returns an array of the named indices on the {@link DataService} to

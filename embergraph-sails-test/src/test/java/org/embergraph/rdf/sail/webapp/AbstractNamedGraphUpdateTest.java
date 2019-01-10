@@ -25,7 +25,7 @@ package org.embergraph.rdf.sail.webapp;
 
 import java.io.IOException;
 
-import com.bigdata.rdf.sparql.ast.eval.ASTConstructIterator;
+import org.embergraph.rdf.sparql.ast.eval.ASTConstructIterator;
 
 /**
  * This class is concerning the issues raised in trac 804

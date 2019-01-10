@@ -29,17 +29,17 @@ package org.embergraph.relation.accesspath;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.view.FusedTupleIterator;
-import com.bigdata.btree.view.FusedView;
-import com.bigdata.striterator.ChunkedWrappedIterator;
-import com.bigdata.striterator.IChunkedIterator;
-import com.bigdata.striterator.IChunkedOrderedIterator;
-import com.bigdata.striterator.IKeyOrder;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.view.FusedTupleIterator;
+import org.embergraph.btree.view.FusedView;
+import org.embergraph.striterator.ChunkedWrappedIterator;
+import org.embergraph.striterator.IChunkedIterator;
+import org.embergraph.striterator.IChunkedOrderedIterator;
+import org.embergraph.striterator.IKeyOrder;
 
 import cutthecrap.utils.striterators.Resolver;
 import cutthecrap.utils.striterators.Striterator;

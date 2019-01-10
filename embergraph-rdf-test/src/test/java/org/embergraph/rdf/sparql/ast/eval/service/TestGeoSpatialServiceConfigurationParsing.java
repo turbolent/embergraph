@@ -29,13 +29,13 @@ package org.embergraph.rdf.sparql.ast.eval.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bigdata.rdf.internal.impl.extensions.InvalidGeoSpatialDatatypeConfigurationError;
-import com.bigdata.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
-import com.bigdata.service.geospatial.GeoSpatialConfig;
-import com.bigdata.service.geospatial.GeoSpatialDatatypeConfiguration;
-import com.bigdata.service.geospatial.GeoSpatialDatatypeFieldConfiguration;
-import com.bigdata.service.geospatial.GeoSpatialDatatypeFieldConfiguration.ServiceMapping;
-import com.bigdata.service.geospatial.GeoSpatialDatatypeFieldConfiguration.ValueType;
+import org.embergraph.rdf.internal.impl.extensions.InvalidGeoSpatialDatatypeConfigurationError;
+import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
+import org.embergraph.service.geospatial.GeoSpatialConfig;
+import org.embergraph.service.geospatial.GeoSpatialDatatypeConfiguration;
+import org.embergraph.service.geospatial.GeoSpatialDatatypeFieldConfiguration;
+import org.embergraph.service.geospatial.GeoSpatialDatatypeFieldConfiguration.ServiceMapping;
+import org.embergraph.service.geospatial.GeoSpatialDatatypeFieldConfiguration.ValueType;
 
 /**
  * Test suite testing the form-JSON parsing facilities for the GeoSpatial service configuration.

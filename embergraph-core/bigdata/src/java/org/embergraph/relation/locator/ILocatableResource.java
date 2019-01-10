@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation.locator;
 
-import com.bigdata.btree.IIndex;
+import org.embergraph.btree.IIndex;
 
 /**
  * A locatable resource. Resources have a unique namespace and can be resolved

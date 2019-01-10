@@ -35,13 +35,13 @@ import org.openrdf.query.GraphQueryResult;
 import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.query.TupleQueryResult;
 
-import com.bigdata.rdf.model.BigdataValueFactoryImpl;
-import com.bigdata.rdf.sail.Sesame2BigdataIterator;
-import com.bigdata.rdf.sail.webapp.client.IPreparedGraphQuery;
-import com.bigdata.rdf.sail.webapp.client.IPreparedTupleQuery;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepository;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepository.AddOp;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepository.RemoveOp;
+import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.sail.Sesame2BigdataIterator;
+import org.embergraph.rdf.sail.webapp.client.IPreparedGraphQuery;
+import org.embergraph.rdf.sail.webapp.client.IPreparedTupleQuery;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository.AddOp;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository.RemoveOp;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

@@ -34,15 +34,15 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.Properties;
 
-import com.bigdata.btree.keys.DefaultKeyBuilderFactory;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.IKeyBuilderFactory;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.btree.keys.ThreadLocalKeyBuilderFactory;
-import com.bigdata.btree.raba.codec.CanonicalHuffmanRabaCoder;
-import com.bigdata.btree.raba.codec.IRabaCoder;
-import com.bigdata.btree.raba.codec.FrontCodedRabaCoder.DefaultFrontCodedRabaCoder;
-import com.bigdata.io.SerializerUtil;
+import org.embergraph.btree.keys.DefaultKeyBuilderFactory;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.IKeyBuilderFactory;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.btree.keys.ThreadLocalKeyBuilderFactory;
+import org.embergraph.btree.raba.codec.CanonicalHuffmanRabaCoder;
+import org.embergraph.btree.raba.codec.IRabaCoder;
+import org.embergraph.btree.raba.codec.FrontCodedRabaCoder.DefaultFrontCodedRabaCoder;
+import org.embergraph.io.SerializerUtil;
 
 /**
  * Default implementation uses the {@link KeyBuilder} to format the object as a

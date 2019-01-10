@@ -32,8 +32,8 @@ import it.unimi.dsi.fastutil.bytes.custom.CustomByteArrayFrontCodedList;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
-import com.bigdata.btree.raba.IRaba;
-import com.bigdata.btree.raba.ReadOnlyKeysRaba;
+import org.embergraph.btree.raba.IRaba;
+import org.embergraph.btree.raba.ReadOnlyKeysRaba;
 
 /**
  * Test suite for the {@link FrontCodedRabaCoder}.

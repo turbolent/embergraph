@@ -27,9 +27,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.join;
 
-import com.bigdata.bop.engine.BOpStats;
-import com.bigdata.counters.CAT;
-import com.bigdata.relation.accesspath.IAccessPath;
+import org.embergraph.bop.engine.BOpStats;
+import org.embergraph.counters.CAT;
+import org.embergraph.relation.accesspath.IAccessPath;
 
 /**
  * Extended to expose counters shared by various join operators (some join

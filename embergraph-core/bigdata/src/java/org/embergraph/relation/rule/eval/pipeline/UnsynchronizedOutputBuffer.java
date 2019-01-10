@@ -1,7 +1,7 @@
 package org.embergraph.relation.rule.eval.pipeline;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.relation.accesspath.AbstractUnsynchronizedArrayBuffer;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.relation.accesspath.AbstractUnsynchronizedArrayBuffer;
 
 /**
  * Abstract base class that keeps track of the chunks of binding sets that are

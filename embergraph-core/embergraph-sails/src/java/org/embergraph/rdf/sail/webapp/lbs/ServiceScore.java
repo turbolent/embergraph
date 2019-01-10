@@ -25,12 +25,12 @@ package org.embergraph.rdf.sail.webapp.lbs;
 import java.io.IOException;
 import java.util.UUID;
 
-import com.bigdata.counters.CAT;
-import com.bigdata.ha.HAGlue;
-import com.bigdata.ha.IHAJournal;
-import com.bigdata.ha.QuorumService;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.quorum.Quorum;
+import org.embergraph.counters.CAT;
+import org.embergraph.ha.HAGlue;
+import org.embergraph.ha.IHAJournal;
+import org.embergraph.ha.QuorumService;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.quorum.Quorum;
 
 /**
  * Helper class caches metadata about an {@link HAGlue} service.

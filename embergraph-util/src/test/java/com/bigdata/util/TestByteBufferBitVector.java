@@ -31,7 +31,7 @@ import it.unimi.dsi.bits.BitVector;
 
 import java.nio.ByteBuffer;
 
-import com.bigdata.util.ByteBufferBitVector;
+import org.embergraph.util.ByteBufferBitVector;
 
 import junit.framework.TestCase2;
 

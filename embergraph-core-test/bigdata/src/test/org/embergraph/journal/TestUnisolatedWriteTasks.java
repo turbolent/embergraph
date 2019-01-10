@@ -32,10 +32,10 @@ import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.util.BytesUtil.UnsignedByteArrayComparator;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.util.BytesUtil.UnsignedByteArrayComparator;
 
 /**
  * Correctness test suite for unisolated writes on one or more indices. The

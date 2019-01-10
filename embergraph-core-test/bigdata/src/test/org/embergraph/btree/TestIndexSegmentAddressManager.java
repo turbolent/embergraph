@@ -29,8 +29,8 @@ package org.embergraph.btree;
 
 import java.util.UUID;
 
-import com.bigdata.rawstore.WormAddressManager;
-import com.bigdata.util.Bytes;
+import org.embergraph.rawstore.WormAddressManager;
+import org.embergraph.util.Bytes;
 
 /**
  * Tests logic to encode and decode the offsets within regions in an

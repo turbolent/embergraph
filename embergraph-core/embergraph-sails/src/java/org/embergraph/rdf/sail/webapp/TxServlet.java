@@ -32,15 +32,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.ValidationError;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.webapp.XMLBuilder.Node;
-import com.bigdata.service.IBigdataFederation;
-import com.bigdata.service.ITxState;
-import com.bigdata.util.InnerCause;
-import com.bigdata.util.NV;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.ValidationError;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.webapp.XMLBuilder.Node;
+import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.ITxState;
+import org.embergraph.util.InnerCause;
+import org.embergraph.util.NV;
 
 /**
  * Servlet provides a REST interface for managing stand-off read/write

@@ -33,14 +33,14 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IVariable;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.IVCache;
-import com.bigdata.rdf.internal.VTE;
-import com.bigdata.rdf.internal.impl.TermId;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IVariable;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.IVCache;
+import org.embergraph.rdf.internal.VTE;
+import org.embergraph.rdf.internal.impl.TermId;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

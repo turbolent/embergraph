@@ -38,9 +38,9 @@ import java.util.Random;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
-import com.bigdata.io.TestCase3;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.WORMStrategy;
+import org.embergraph.io.TestCase3;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.WORMStrategy;
 
 /**
  * Base class for writing tests of the {@link IRawStore} interface.

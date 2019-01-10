@@ -2,10 +2,10 @@ package org.embergraph.rdf.load;
 
 import org.openrdf.model.Statement;
 
-import com.bigdata.rdf.rio.StatementBuffer;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.relation.accesspath.BlockingBuffer;
+import org.embergraph.rdf.rio.StatementBuffer;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.relation.accesspath.BlockingBuffer;
 
 /**
  * 

@@ -37,31 +37,31 @@ import java.util.concurrent.locks.Lock;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.BigdataStatics;
-import com.bigdata.btree.AbstractBTree;
-import com.bigdata.btree.AbstractNode;
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.BTreeCounters;
-import com.bigdata.btree.BaseIndexStats;
-import com.bigdata.btree.Checkpoint;
-import com.bigdata.btree.HTreeIndexMetadata;
-import com.bigdata.btree.ICounter;
-import com.bigdata.btree.IDirtyListener;
-import com.bigdata.btree.IIndexLocalCounter;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.IndexTypeEnum;
-import com.bigdata.btree.Leaf;
-import com.bigdata.btree.Node;
-import com.bigdata.btree.ReadOnlyCounter;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.io.ByteArrayBuffer;
-import com.bigdata.io.SerializerUtil;
-import com.bigdata.mdi.LocalPartitionMetadata;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.util.Bytes;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.BigdataStatics;
+import org.embergraph.btree.AbstractBTree;
+import org.embergraph.btree.AbstractNode;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.BTreeCounters;
+import org.embergraph.btree.BaseIndexStats;
+import org.embergraph.btree.Checkpoint;
+import org.embergraph.btree.HTreeIndexMetadata;
+import org.embergraph.btree.ICounter;
+import org.embergraph.btree.IDirtyListener;
+import org.embergraph.btree.IIndexLocalCounter;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.IndexTypeEnum;
+import org.embergraph.btree.Leaf;
+import org.embergraph.btree.Node;
+import org.embergraph.btree.ReadOnlyCounter;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.io.ByteArrayBuffer;
+import org.embergraph.io.SerializerUtil;
+import org.embergraph.mdi.LocalPartitionMetadata;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.util.Bytes;
+import org.embergraph.util.BytesUtil;
 
 /**
  * An mutable persistence capable extensible hash tree.

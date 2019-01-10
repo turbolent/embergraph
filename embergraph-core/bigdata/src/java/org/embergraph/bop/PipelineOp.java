@@ -31,9 +31,9 @@ import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 
-import com.bigdata.bop.engine.BOpStats;
-import com.bigdata.bop.engine.IChunkMessage;
-import com.bigdata.bop.engine.QueryEngine;
+import org.embergraph.bop.engine.BOpStats;
+import org.embergraph.bop.engine.IChunkMessage;
+import org.embergraph.bop.engine.QueryEngine;
 
 /**
  * Abstract base class for pipeline operators where the data moving along the

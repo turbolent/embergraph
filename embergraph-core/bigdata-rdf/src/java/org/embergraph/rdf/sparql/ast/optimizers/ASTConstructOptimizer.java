@@ -29,22 +29,22 @@ package org.embergraph.rdf.sparql.ast.optimizers;
 
 import java.util.Iterator;
 
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IVariable;
-import com.bigdata.rdf.sparql.ast.ConstructNode;
-import com.bigdata.rdf.sparql.ast.ConstructNode.Annotations;
-import com.bigdata.rdf.sparql.ast.IQueryNode;
-import com.bigdata.rdf.sparql.ast.JoinGroupNode;
-import com.bigdata.rdf.sparql.ast.OrderByNode;
-import com.bigdata.rdf.sparql.ast.ProjectionNode;
-import com.bigdata.rdf.sparql.ast.QueryNodeWithBindingSet;
-import com.bigdata.rdf.sparql.ast.QueryRoot;
-import com.bigdata.rdf.sparql.ast.QueryType;
-import com.bigdata.rdf.sparql.ast.SliceNode;
-import com.bigdata.rdf.sparql.ast.SubqueryRoot;
-import com.bigdata.rdf.sparql.ast.VarNode;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpContext;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IVariable;
+import org.embergraph.rdf.sparql.ast.ConstructNode;
+import org.embergraph.rdf.sparql.ast.ConstructNode.Annotations;
+import org.embergraph.rdf.sparql.ast.IQueryNode;
+import org.embergraph.rdf.sparql.ast.JoinGroupNode;
+import org.embergraph.rdf.sparql.ast.OrderByNode;
+import org.embergraph.rdf.sparql.ast.ProjectionNode;
+import org.embergraph.rdf.sparql.ast.QueryNodeWithBindingSet;
+import org.embergraph.rdf.sparql.ast.QueryRoot;
+import org.embergraph.rdf.sparql.ast.QueryType;
+import org.embergraph.rdf.sparql.ast.SliceNode;
+import org.embergraph.rdf.sparql.ast.SubqueryRoot;
+import org.embergraph.rdf.sparql.ast.VarNode;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /**
  * Generates the {@link ProjectionNode} for a CONSTRUCT or DESCRIBE query. It is

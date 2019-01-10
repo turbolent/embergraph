@@ -32,11 +32,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Comparator;
 
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.io.compression.IUnicodeCompressor;
-import com.bigdata.io.compression.NoCompressor;
-import com.bigdata.util.Bytes;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.io.compression.IUnicodeCompressor;
+import org.embergraph.io.compression.NoCompressor;
+import org.embergraph.util.Bytes;
 
 /**
  * Utility class supporting {@link IV}s having inline Unicode data.

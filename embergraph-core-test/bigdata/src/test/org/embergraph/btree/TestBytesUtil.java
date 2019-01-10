@@ -29,9 +29,9 @@ package org.embergraph.btree;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Test suite for low-level operations on variable length byte[]s.

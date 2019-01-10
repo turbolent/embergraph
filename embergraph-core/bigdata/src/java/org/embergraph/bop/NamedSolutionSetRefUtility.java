@@ -29,19 +29,19 @@ package org.embergraph.bop;
 import java.util.Arrays;
 import java.util.UUID;
 
-import com.bigdata.bop.controller.INamedSolutionSetRef;
-import com.bigdata.bop.engine.IRunningQuery;
-import com.bigdata.bop.solutions.ISolutionSet;
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.ISimpleIndexAccess;
-import com.bigdata.journal.AbstractJournal;
-import com.bigdata.journal.IBTreeManager;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.TimestampUtility;
-import com.bigdata.rdf.sparql.ast.ISolutionSetStats;
-import com.bigdata.rdf.sparql.ast.ssets.ISolutionSetManager;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.striterator.Chunkerator;
+import org.embergraph.bop.controller.INamedSolutionSetRef;
+import org.embergraph.bop.engine.IRunningQuery;
+import org.embergraph.bop.solutions.ISolutionSet;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.ISimpleIndexAccess;
+import org.embergraph.journal.AbstractJournal;
+import org.embergraph.journal.IBTreeManager;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.TimestampUtility;
+import org.embergraph.rdf.sparql.ast.ISolutionSetStats;
+import org.embergraph.rdf.sparql.ast.ssets.ISolutionSetManager;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.striterator.Chunkerator;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

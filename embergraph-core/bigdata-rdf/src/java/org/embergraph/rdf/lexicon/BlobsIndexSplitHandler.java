@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.lexicon;
 
-import com.bigdata.btree.FixedLengthPrefixSplits;
+import org.embergraph.btree.FixedLengthPrefixSplits;
 
 /**
  * Split handler enforces the constraint that a collision bucket is never split

@@ -38,8 +38,8 @@ import junit.framework.AssertionFailedError;
 import junit.framework.TestCase;
 import junit.framework.TestCase2;
 
-import com.bigdata.journal.TestHelper;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.journal.TestHelper;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Base class for some <code>assertEquals</code> methods not covered by

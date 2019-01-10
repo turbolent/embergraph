@@ -34,15 +34,15 @@ import java.util.NoSuchElementException;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.keys.SuccessorUtil;
-import com.bigdata.io.ByteArrayBuffer;
-import com.bigdata.io.DataInputBuffer;
-import com.bigdata.io.DataOutputBuffer;
-import com.bigdata.journal.IIndexStore;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.TimestampUtility;
-import com.bigdata.rawstore.IBlock;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.keys.SuccessorUtil;
+import org.embergraph.io.ByteArrayBuffer;
+import org.embergraph.io.DataInputBuffer;
+import org.embergraph.io.DataOutputBuffer;
+import org.embergraph.journal.IIndexStore;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.TimestampUtility;
+import org.embergraph.rawstore.IBlock;
+import org.embergraph.util.BytesUtil;
 
 import cutthecrap.utils.striterators.IFilter;
 

@@ -29,14 +29,14 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.nio.ByteBuffer;
 
-import com.bigdata.bop.solutions.SolutionSetStream;
-import com.bigdata.htree.HTree;
-import com.bigdata.io.SerializerUtil;
-import com.bigdata.journal.AbstractJournal;
-import com.bigdata.journal.Name2Addr;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.stream.Stream;
-import com.bigdata.stream.Stream.StreamIndexMetadata;
+import org.embergraph.bop.solutions.SolutionSetStream;
+import org.embergraph.htree.HTree;
+import org.embergraph.io.SerializerUtil;
+import org.embergraph.journal.AbstractJournal;
+import org.embergraph.journal.Name2Addr;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.stream.Stream;
+import org.embergraph.stream.Stream.StreamIndexMetadata;
 
 /**
  * A checkpoint record is written each time the btree is flushed to the

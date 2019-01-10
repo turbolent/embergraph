@@ -33,13 +33,13 @@ import java.util.List;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.Var;
-import com.bigdata.bop.bindingSet.ListBindingSet;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
-import com.bigdata.rdf.sparql.ast.service.ServiceRegistry;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.Var;
+import org.embergraph.bop.bindingSet.ListBindingSet;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
+import org.embergraph.rdf.sparql.ast.service.ServiceRegistry;
 
 /**
  * Data driven test suite for SPARQL 1.1 Federated Query against an internal,

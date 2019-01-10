@@ -31,12 +31,12 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.IIndex;
-import com.bigdata.journal.ITx;
-import com.bigdata.mdi.MetadataIndex;
-import com.bigdata.mdi.PartitionLocator;
-import com.bigdata.service.ndx.ClientIndexView;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.IIndex;
+import org.embergraph.journal.ITx;
+import org.embergraph.mdi.MetadataIndex;
+import org.embergraph.mdi.PartitionLocator;
+import org.embergraph.service.ndx.ClientIndexView;
 
 /**
  * Test suite for the {@link EmbeddedClient}.

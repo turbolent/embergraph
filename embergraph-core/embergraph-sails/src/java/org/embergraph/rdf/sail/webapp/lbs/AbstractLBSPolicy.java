@@ -37,17 +37,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.ha.HAGlue;
-import com.bigdata.ha.IHAJournal;
-import com.bigdata.ha.QuorumService;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.quorum.AbstractQuorum;
-import com.bigdata.quorum.Quorum;
-import com.bigdata.quorum.QuorumEvent;
-import com.bigdata.quorum.QuorumListener;
-import com.bigdata.rdf.sail.webapp.BigdataServlet;
-import com.bigdata.rdf.sail.webapp.HALoadBalancerServlet;
-import com.bigdata.concurrent.FutureTaskMon;
+import org.embergraph.ha.HAGlue;
+import org.embergraph.ha.IHAJournal;
+import org.embergraph.ha.QuorumService;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.quorum.AbstractQuorum;
+import org.embergraph.quorum.Quorum;
+import org.embergraph.quorum.QuorumEvent;
+import org.embergraph.quorum.QuorumListener;
+import org.embergraph.rdf.sail.webapp.BigdataServlet;
+import org.embergraph.rdf.sail.webapp.HALoadBalancerServlet;
+import org.embergraph.concurrent.FutureTaskMon;
 
 /**
  * Abstract base class establishes a listener for quorum events, tracks the

@@ -34,9 +34,9 @@ import java.util.NoSuchElementException;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import com.bigdata.striterator.EmptyChunkedIterator;
-import com.bigdata.striterator.IChunkedOrderedIterator;
-import com.bigdata.striterator.IKeyOrder;
+import org.embergraph.striterator.EmptyChunkedIterator;
+import org.embergraph.striterator.IChunkedOrderedIterator;
+import org.embergraph.striterator.IKeyOrder;
 
 /**
  * An unsynchronized buffer backed by a fixed capacity array that migrates

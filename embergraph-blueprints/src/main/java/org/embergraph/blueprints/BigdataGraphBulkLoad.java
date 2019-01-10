@@ -31,12 +31,12 @@ import org.openrdf.model.impl.StatementImpl;
 import org.openrdf.query.impl.AbstractQuery;
 import org.openrdf.repository.RepositoryConnection;
 
-import com.bigdata.rdf.changesets.IChangeLog;
-import com.bigdata.rdf.changesets.IChangeRecord;
-import com.bigdata.rdf.sail.BigdataSailRepositoryConnection;
-import com.bigdata.rdf.sail.model.RunningQuery;
-import com.bigdata.rdf.sparql.ast.ASTContainer;
-import com.bigdata.rdf.sparql.ast.QueryType;
+import org.embergraph.rdf.changesets.IChangeLog;
+import org.embergraph.rdf.changesets.IChangeRecord;
+import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.rdf.sail.model.RunningQuery;
+import org.embergraph.rdf.sparql.ast.ASTContainer;
+import org.embergraph.rdf.sparql.ast.QueryType;
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.GraphQuery;
 import com.tinkerpop.blueprints.TransactionalGraph;

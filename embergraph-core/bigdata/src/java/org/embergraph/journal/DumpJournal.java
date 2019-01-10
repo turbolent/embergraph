@@ -43,27 +43,27 @@ import java.util.TreeMap;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.AbstractBTree;
-import com.bigdata.btree.BaseIndexStats;
-import com.bigdata.btree.DumpIndex;
-import com.bigdata.btree.ICheckpointProtocol;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.IndexTypeEnum;
-import com.bigdata.htree.AbstractHTree;
-import com.bigdata.io.ChecksumUtility;
-import com.bigdata.io.SerializerUtil;
-import com.bigdata.relation.RelationSchema;
-import com.bigdata.rwstore.IRWStrategy;
-import com.bigdata.rwstore.IStore;
-import com.bigdata.rwstore.RWStore;
-import com.bigdata.rwstore.RWStore.DeleteBlockStats;
-import com.bigdata.sparse.GlobalRowStoreSchema;
-import com.bigdata.sparse.ITPS;
-import com.bigdata.sparse.SparseRowStore;
-import com.bigdata.stream.Stream;
-import com.bigdata.util.Bytes;
-import com.bigdata.util.BytesUtil;
-import com.bigdata.util.InnerCause;
+import org.embergraph.btree.AbstractBTree;
+import org.embergraph.btree.BaseIndexStats;
+import org.embergraph.btree.DumpIndex;
+import org.embergraph.btree.ICheckpointProtocol;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.IndexTypeEnum;
+import org.embergraph.htree.AbstractHTree;
+import org.embergraph.io.ChecksumUtility;
+import org.embergraph.io.SerializerUtil;
+import org.embergraph.relation.RelationSchema;
+import org.embergraph.rwstore.IRWStrategy;
+import org.embergraph.rwstore.IStore;
+import org.embergraph.rwstore.RWStore;
+import org.embergraph.rwstore.RWStore.DeleteBlockStats;
+import org.embergraph.sparse.GlobalRowStoreSchema;
+import org.embergraph.sparse.ITPS;
+import org.embergraph.sparse.SparseRowStore;
+import org.embergraph.stream.Stream;
+import org.embergraph.util.Bytes;
+import org.embergraph.util.BytesUtil;
+import org.embergraph.util.InnerCause;
 
 /**
  * A utility class that opens the journal in a read-only mode and dumps the root

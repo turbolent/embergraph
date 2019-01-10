@@ -34,14 +34,14 @@ import java.util.WeakHashMap;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.joinGraph.IEvaluationPlan;
-import com.bigdata.bop.joinGraph.IEvaluationPlanFactory;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.relation.IMutableRelation;
-import com.bigdata.relation.accesspath.IBuffer;
-import com.bigdata.relation.accesspath.IElementFilter;
-import com.bigdata.relation.rule.IRule;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.joinGraph.IEvaluationPlan;
+import org.embergraph.bop.joinGraph.IEvaluationPlanFactory;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.relation.IMutableRelation;
+import org.embergraph.relation.accesspath.IBuffer;
+import org.embergraph.relation.accesspath.IElementFilter;
+import org.embergraph.relation.rule.IRule;
 
 /**
  * Base implementation for {@link IJoinNexusFactory}.

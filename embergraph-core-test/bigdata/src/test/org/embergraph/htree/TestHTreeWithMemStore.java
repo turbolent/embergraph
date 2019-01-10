@@ -33,24 +33,24 @@ import junit.framework.TestCase;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.BTreeCounters;
-import com.bigdata.btree.BaseIndexStats;
-import com.bigdata.btree.DefaultTupleSerializer;
-import com.bigdata.btree.HTreeIndexMetadata;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.ITupleSerializer;
-import com.bigdata.btree.keys.ASCIIKeyBuilderFactory;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.btree.raba.codec.FrontCodedRabaCoderDupKeys;
-import com.bigdata.btree.raba.codec.SimpleRabaCoder;
-import com.bigdata.htree.AbstractHTree.HTreePageStateException;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rwstore.sector.MemStore;
-import com.bigdata.util.Bytes;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.BTreeCounters;
+import org.embergraph.btree.BaseIndexStats;
+import org.embergraph.btree.DefaultTupleSerializer;
+import org.embergraph.btree.HTreeIndexMetadata;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.ITupleSerializer;
+import org.embergraph.btree.keys.ASCIIKeyBuilderFactory;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.btree.raba.codec.FrontCodedRabaCoderDupKeys;
+import org.embergraph.btree.raba.codec.SimpleRabaCoder;
+import org.embergraph.htree.AbstractHTree.HTreePageStateException;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rwstore.sector.MemStore;
+import org.embergraph.util.Bytes;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Integration test with a persistence store.

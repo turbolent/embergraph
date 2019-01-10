@@ -5,19 +5,19 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.rdf.changesets.ChangeAction;
-import com.bigdata.rdf.changesets.IChangeLog;
-import com.bigdata.rdf.changesets.IChangeRecord;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.sail.BigdataSail.BigdataSailConnection;
-import com.bigdata.rdf.sparql.ast.eval.CustomServiceFactoryBase;
-import com.bigdata.rdf.sparql.ast.service.BigdataNativeServiceOptions;
-import com.bigdata.rdf.sparql.ast.service.IServiceOptions;
-import com.bigdata.rdf.sparql.ast.service.ServiceCall;
-import com.bigdata.rdf.sparql.ast.service.ServiceCallCreateParams;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.BD;
+import org.embergraph.rdf.changesets.ChangeAction;
+import org.embergraph.rdf.changesets.IChangeLog;
+import org.embergraph.rdf.changesets.IChangeRecord;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
+import org.embergraph.rdf.sparql.ast.eval.CustomServiceFactoryBase;
+import org.embergraph.rdf.sparql.ast.service.BigdataNativeServiceOptions;
+import org.embergraph.rdf.sparql.ast.service.IServiceOptions;
+import org.embergraph.rdf.sparql.ast.service.ServiceCall;
+import org.embergraph.rdf.sparql.ast.service.ServiceCallCreateParams;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.BD;
 
 /**
  * This service tracks KB updates via an {@link IChangeLog} and is responsible

@@ -30,8 +30,8 @@ package org.embergraph.bfs;
 
 import java.io.IOException;
 
-import com.bigdata.bfs.BigdataFileSystem;
-import com.bigdata.bfs.FileVersionOutputStream;
+import org.embergraph.bfs.BigdataFileSystem;
+import org.embergraph.bfs.FileVersionOutputStream;
 
 
 /**

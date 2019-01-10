@@ -31,9 +31,9 @@ import java.io.IOException;
 import java.io.ObjectStreamException;
 import java.io.Serializable;
 
-import com.bigdata.rdf.model.StatementEnum;
-import com.bigdata.relation.accesspath.IElementFilter;
-import com.bigdata.relation.rule.eval.ISolution;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.relation.accesspath.IElementFilter;
+import org.embergraph.relation.rule.eval.ISolution;
 
 /**
  * Filter matches only {@link StatementEnum#Inferred} statements.

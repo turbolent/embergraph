@@ -5,17 +5,17 @@ import java.util.concurrent.Callable;
 import org.openrdf.model.BNode;
 import org.openrdf.model.Value;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.KVO;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.io.ByteArrayBuffer;
-import com.bigdata.io.DataOutputBuffer;
-import com.bigdata.rdf.lexicon.Id2TermWriteProc.Id2TermWriteProcConstructor;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.model.BigdataValueSerializer;
-import com.bigdata.rdf.spo.ISPO;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.KVO;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.io.ByteArrayBuffer;
+import org.embergraph.io.DataOutputBuffer;
+import org.embergraph.rdf.lexicon.Id2TermWriteProc.Id2TermWriteProcConstructor;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.BigdataValueSerializer;
+import org.embergraph.rdf.spo.ISPO;
 
 /**
  * Add terms to the reverse index, which is the index that we use to lookup the

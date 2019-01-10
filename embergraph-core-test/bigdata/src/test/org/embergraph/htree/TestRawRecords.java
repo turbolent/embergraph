@@ -4,10 +4,10 @@ import java.nio.ByteBuffer;
 import java.util.Random;
 import java.util.UUID;
 
-import com.bigdata.btree.HTreeIndexMetadata;
-import com.bigdata.io.TestCase3;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rawstore.SimpleMemoryRawStore;
+import org.embergraph.btree.HTreeIndexMetadata;
+import org.embergraph.io.TestCase3;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /**
  * Unit tests for a {@link HTree} with raw record support enabled (this is where

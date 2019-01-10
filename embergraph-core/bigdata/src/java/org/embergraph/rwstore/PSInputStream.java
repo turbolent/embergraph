@@ -27,9 +27,9 @@ package org.embergraph.rwstore;
 import java.io.*;
 import java.nio.ByteBuffer;
 
-import com.bigdata.rwstore.sector.IMemoryManager;
-import com.bigdata.rwstore.sector.MemoryManager;
-import com.bigdata.rwstore.sector.SectorAllocator;
+import org.embergraph.rwstore.sector.IMemoryManager;
+import org.embergraph.rwstore.sector.MemoryManager;
+import org.embergraph.rwstore.sector.SectorAllocator;
 
 /************************************************************************
  * PSInputStream

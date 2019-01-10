@@ -28,10 +28,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.service;
 
-import com.bigdata.btree.IndexSegment;
-import com.bigdata.journal.Journal;
-import com.bigdata.resources.OverflowActionEnum;
-import com.bigdata.resources.OverflowManager;
+import org.embergraph.btree.IndexSegment;
+import org.embergraph.journal.Journal;
+import org.embergraph.resources.OverflowActionEnum;
+import org.embergraph.resources.OverflowManager;
 
 /**
  * Type safe enum for {@link Event}s.

@@ -43,9 +43,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
-import com.bigdata.btree.keys.KVO;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.relation.accesspath.BlockingBuffer;
+import org.embergraph.btree.keys.KVO;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.relation.accesspath.BlockingBuffer;
 
 /**
  * Test ability to handle a redirect (subtask learns that the target service no

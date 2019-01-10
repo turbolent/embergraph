@@ -45,14 +45,14 @@ import org.openrdf.rio.RDFParserRegistry;
 import org.openrdf.rio.helpers.RDFHandlerBase;
 import org.openrdf.sail.SailException;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.lexicon.Id2TermWriteProc;
-import com.bigdata.rdf.sail.BigdataSail.BigdataSailConnection;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.service.AbstractTransactionService;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.lexicon.Id2TermWriteProc;
+import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.service.AbstractTransactionService;
 
 /**
  * Test suite for <a

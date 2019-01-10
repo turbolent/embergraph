@@ -29,10 +29,10 @@ package com.bigdata.rdf.sparql.ast.eval;
 
 import java.util.List;
 
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.paths.ArbitraryLengthPathOp;
-import com.bigdata.rdf.sparql.ast.QueryHints;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.paths.ArbitraryLengthPathOp;
+import org.embergraph.rdf.sparql.ast.QueryHints;
 
 /**
  * Test suite for https://jira.blazegraph.com/browse/BLZG-2089, which

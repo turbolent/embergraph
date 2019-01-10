@@ -30,8 +30,8 @@ package org.embergraph.btree;
 
 import java.util.UUID;
 
-import com.bigdata.btree.AbstractBTreeTupleCursor.ReadOnlyBTreeTupleCursor;
-import com.bigdata.rawstore.SimpleMemoryRawStore;
+import org.embergraph.btree.AbstractBTreeTupleCursor.ReadOnlyBTreeTupleCursor;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /**
  * Unit tests for {@link ITupleCursor} for a read-only {@link BTree}.

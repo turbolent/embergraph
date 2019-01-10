@@ -24,12 +24,12 @@ package org.embergraph.blueprints;
 
 import java.util.Properties;
 
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.Journal;
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.BigdataSail.Options;
-import com.bigdata.rdf.vocab.NoVocabulary;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.Journal;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.BigdataSail.Options;
+import org.embergraph.rdf.vocab.NoVocabulary;
 import com.tinkerpop.blueprints.EdgeTestSuite;
 import com.tinkerpop.blueprints.GraphQueryTestSuite;
 import com.tinkerpop.blueprints.GraphTestSuite;

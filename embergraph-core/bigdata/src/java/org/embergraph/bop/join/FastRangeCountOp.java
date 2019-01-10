@@ -32,23 +32,23 @@ import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpContext;
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstraint;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.NV;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.bindingSet.ListBindingSet;
-import com.bigdata.bop.engine.BOpStats;
-import com.bigdata.rdf.internal.impl.literal.XSDIntegerIV;
-import com.bigdata.relation.IRelation;
-import com.bigdata.relation.accesspath.IAccessPath;
-import com.bigdata.relation.accesspath.IBlockingBuffer;
-import com.bigdata.relation.accesspath.UnsyncLocalOutputBuffer;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpContext;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstraint;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.NV;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.bindingSet.ListBindingSet;
+import org.embergraph.bop.engine.BOpStats;
+import org.embergraph.rdf.internal.impl.literal.XSDIntegerIV;
+import org.embergraph.relation.IRelation;
+import org.embergraph.relation.accesspath.IAccessPath;
+import org.embergraph.relation.accesspath.IBlockingBuffer;
+import org.embergraph.relation.accesspath.UnsyncLocalOutputBuffer;
 
 /**
  * This operator reports the fast-range count for an as-bound {@link IPredicate}

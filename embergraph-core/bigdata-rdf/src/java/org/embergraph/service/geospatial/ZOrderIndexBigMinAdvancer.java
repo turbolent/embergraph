@@ -31,18 +31,18 @@ import java.util.NoSuchElementException;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.KeyOutOfRangeException;
-import com.bigdata.btree.filter.Advancer;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.IVUtility;
-import com.bigdata.rdf.internal.impl.extensions.GeoSpatialLiteralExtension;
-import com.bigdata.rdf.internal.impl.literal.LiteralExtensionIV;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.spo.SPO;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.KeyOutOfRangeException;
+import org.embergraph.btree.filter.Advancer;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.IVUtility;
+import org.embergraph.rdf.internal.impl.extensions.GeoSpatialLiteralExtension;
+import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.spo.SPO;
 
 /**
  * Advances the cursor to the next zOrderKey that is greater or equal than the

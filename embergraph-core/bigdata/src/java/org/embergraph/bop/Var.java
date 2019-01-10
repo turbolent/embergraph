@@ -2,8 +2,8 @@ package org.embergraph.bop;
 
 import java.io.ObjectStreamException;
 import java.util.UUID;
-import com.bigdata.cache.ConcurrentWeakValueCache;
-import com.bigdata.relation.rule.Rule;
+import org.embergraph.cache.ConcurrentWeakValueCache;
+import org.embergraph.relation.rule.Rule;
 
 /**
  * A variable.

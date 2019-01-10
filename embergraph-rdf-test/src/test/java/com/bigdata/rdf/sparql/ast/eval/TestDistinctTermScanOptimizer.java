@@ -28,12 +28,12 @@ import java.util.Properties;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.join.DistinctTermScanOp;
-import com.bigdata.rdf.sparql.ast.NamedSubqueryInclude;
-import com.bigdata.rdf.sparql.ast.optimizers.ASTDistinctTermScanOptimizer;
-import com.bigdata.rdf.spo.SPOKeyOrder;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.join.DistinctTermScanOp;
+import org.embergraph.rdf.sparql.ast.NamedSubqueryInclude;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTDistinctTermScanOptimizer;
+import org.embergraph.rdf.spo.SPOKeyOrder;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * SPARQL level test suite for the {@link ASTDistinctTermScanOptimizer} and its

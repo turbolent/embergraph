@@ -40,22 +40,22 @@ import org.openrdf.query.TupleQuery;
 import org.openrdf.query.TupleQueryResult;
 import org.openrdf.repository.RepositoryException;
 
-import com.bigdata.bop.engine.QueryEngine;
-import com.bigdata.bop.fed.QueryEngineFactory;
-import com.bigdata.gom.gpo.GPO;
-import com.bigdata.gom.gpo.IGPO;
-import com.bigdata.journal.Journal;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.BigdataResource;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.sail.BigdataSailRepository;
-import com.bigdata.rdf.sail.BigdataSailRepositoryConnection;
-import com.bigdata.rdf.sail.Sesame2BigdataIterator;
-import com.bigdata.rdf.sparql.ast.cache.CacheConnectionFactory;
-import com.bigdata.rdf.sparql.ast.cache.ICacheConnection;
-import com.bigdata.rdf.sparql.ast.cache.IDescribeCache;
-import com.bigdata.striterator.CloseableIteratorWrapper;
+import org.embergraph.bop.engine.QueryEngine;
+import org.embergraph.bop.fed.QueryEngineFactory;
+import org.embergraph.gom.gpo.GPO;
+import org.embergraph.gom.gpo.IGPO;
+import org.embergraph.journal.Journal;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.BigdataResource;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.sail.BigdataSailRepository;
+import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.rdf.sail.Sesame2BigdataIterator;
+import org.embergraph.rdf.sparql.ast.cache.CacheConnectionFactory;
+import org.embergraph.rdf.sparql.ast.cache.ICacheConnection;
+import org.embergraph.rdf.sparql.ast.cache.IDescribeCache;
+import org.embergraph.striterator.CloseableIteratorWrapper;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

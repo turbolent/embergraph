@@ -53,9 +53,9 @@ import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.sail.SailConnection;
 import org.openrdf.sail.SailException;
 
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.store.BD;
-import com.bigdata.rdf.vocab.NoVocabulary;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.store.BD;
+import org.embergraph.rdf.vocab.NoVocabulary;
 
 import info.aduna.iteration.CloseableIteration;
 

@@ -42,18 +42,18 @@ import junit.framework.AssertionFailedError;
 import junit.framework.TestCase;
 import junit.framework.TestCase2;
 
-import com.bigdata.btree.AbstractBTreeTestCase;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.btree.keys.TestKeyBuilder;
-import com.bigdata.btree.raba.IRaba;
-import com.bigdata.btree.raba.ReadOnlyKeysRaba;
-import com.bigdata.btree.raba.ReadOnlyValuesRaba;
-import com.bigdata.io.AbstractFixedByteArrayBuffer;
-import com.bigdata.io.DataOutputBuffer;
-import com.bigdata.io.FixedByteArrayBuffer;
-import com.bigdata.io.SerializerUtil;
-import com.bigdata.util.BytesUtil;
-import com.bigdata.util.BytesUtil.UnsignedByteArrayComparator;
+import org.embergraph.btree.AbstractBTreeTestCase;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.btree.keys.TestKeyBuilder;
+import org.embergraph.btree.raba.IRaba;
+import org.embergraph.btree.raba.ReadOnlyKeysRaba;
+import org.embergraph.btree.raba.ReadOnlyValuesRaba;
+import org.embergraph.io.AbstractFixedByteArrayBuffer;
+import org.embergraph.io.DataOutputBuffer;
+import org.embergraph.io.FixedByteArrayBuffer;
+import org.embergraph.io.SerializerUtil;
+import org.embergraph.util.BytesUtil;
+import org.embergraph.util.BytesUtil.UnsignedByteArrayComparator;
 
 /**
  * Abstract test suite for {@link IRabaCoder} implementations.

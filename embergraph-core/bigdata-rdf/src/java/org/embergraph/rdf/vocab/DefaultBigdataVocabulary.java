@@ -24,11 +24,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.vocab;
 
-import com.bigdata.rdf.internal.InlineIPv4URIHandler;
-import com.bigdata.rdf.internal.InlineUUIDURIHandler;
-import com.bigdata.rdf.internal.XSD;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.vocab.decls.VoidVocabularyDecl;
+import org.embergraph.rdf.internal.InlineIPv4URIHandler;
+import org.embergraph.rdf.internal.InlineUUIDURIHandler;
+import org.embergraph.rdf.internal.XSD;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.vocab.decls.VoidVocabularyDecl;
 
 /**
  * Extended vocabulary to include some new declarations. 

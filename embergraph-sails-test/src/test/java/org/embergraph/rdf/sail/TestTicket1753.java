@@ -29,8 +29,8 @@ import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.Update;
 import org.openrdf.query.UpdateExecutionException;
 import org.openrdf.repository.RepositoryException;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.BigdataValueFactory;
 
 /**
  * Test suite for an issue where IV resolution of having clause fails

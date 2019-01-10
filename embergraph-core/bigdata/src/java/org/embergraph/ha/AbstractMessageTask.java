@@ -6,8 +6,8 @@ import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 
-import com.bigdata.ha.msg.IHAMessage;
-import com.bigdata.quorum.ServiceLookup;
+import org.embergraph.ha.msg.IHAMessage;
+import org.embergraph.quorum.ServiceLookup;
 
 /**
  * Helper class submits the RMI for a PREPARE, COMMIT, or ABORT message. This is

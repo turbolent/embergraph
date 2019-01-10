@@ -49,7 +49,7 @@ package org.embergraph.rdf.model;
 
 import org.openrdf.model.Statement;
 
-import com.bigdata.rdf.spo.ISPO;
+import org.embergraph.rdf.spo.ISPO;
 
 /**
  * Also reports whether the statement is explicit, inferred or an axiom.

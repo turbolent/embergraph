@@ -26,8 +26,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.sparql.ast.explainhints;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IVariable;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IVariable;
 
 /**
  * Explain hint indicating potential problems caused by the bottom-up evaluation

@@ -30,10 +30,10 @@ package org.embergraph.journal;
 import java.nio.ByteBuffer;
 import java.util.UUID;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.io.ChecksumUtility;
-import com.bigdata.io.DirectBufferPool;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.io.ChecksumUtility;
+import org.embergraph.io.DirectBufferPool;
 
 /**
  * Test the ability to abort (discard an uncommitted write set). This is a test

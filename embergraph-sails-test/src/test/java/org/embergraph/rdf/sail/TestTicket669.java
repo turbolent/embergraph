@@ -43,8 +43,8 @@ import org.openrdf.repository.sail.SailTupleQuery;
 import org.openrdf.sail.Sail;
 import org.openrdf.sail.memory.MemoryStore;
 
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.vocab.NoVocabulary;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.vocab.NoVocabulary;
 
 /**
  * Unit test template for use in submission of bugs.

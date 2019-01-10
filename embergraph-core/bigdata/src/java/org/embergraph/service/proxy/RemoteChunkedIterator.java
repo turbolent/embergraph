@@ -4,9 +4,9 @@ import java.io.IOException;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.io.IStreamSerializer;
-import com.bigdata.relation.accesspath.IAsynchronousIterator;
-import com.bigdata.striterator.IKeyOrder;
+import org.embergraph.io.IStreamSerializer;
+import org.embergraph.relation.accesspath.IAsynchronousIterator;
+import org.embergraph.striterator.IKeyOrder;
 
 /**
  * Wrapper for an {@link IAsynchronousIterator} exposing an interface suitable

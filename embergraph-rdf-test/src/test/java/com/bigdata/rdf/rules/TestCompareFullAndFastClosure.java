@@ -52,11 +52,11 @@ import java.util.Properties;
 
 import org.openrdf.rio.RDFFormat;
 
-import com.bigdata.rdf.rio.LoadStats;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.DataLoader;
-import com.bigdata.rdf.store.TripleStoreUtility;
-import com.bigdata.rdf.store.AbstractTripleStore.Options;
+import org.embergraph.rdf.rio.LoadStats;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.DataLoader;
+import org.embergraph.rdf.store.TripleStoreUtility;
+import org.embergraph.rdf.store.AbstractTripleStore.Options;
 
 /**
  * Test suite comparing full fix point closure of RDFS entailments against the

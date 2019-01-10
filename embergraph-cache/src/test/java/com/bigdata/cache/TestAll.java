@@ -31,7 +31,7 @@ import java.io.File;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import com.bigdata.testutil.ExperimentDriver;
+import org.embergraph.testutil.ExperimentDriver;
 
 /**
  * Aggregates unit tests into dependency order.

@@ -28,8 +28,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.joinGraph;
 
-import com.bigdata.relation.rule.IRule;
-import com.bigdata.relation.rule.eval.IJoinNexus;
+import org.embergraph.relation.rule.IRule;
+import org.embergraph.relation.rule.eval.IJoinNexus;
 
 /**
  * A factory for {@link IEvaluationPlan}s that do not reorder the predicates in

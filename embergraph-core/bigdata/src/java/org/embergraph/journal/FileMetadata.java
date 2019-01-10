@@ -35,18 +35,18 @@ import java.util.UUID;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.Banner;
-import com.bigdata.config.Configuration;
-import com.bigdata.config.IValidator;
-import com.bigdata.config.IntegerRangeValidator;
-import com.bigdata.config.LongRangeValidator;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.io.FileChannelUtility;
-import com.bigdata.io.IReopenChannel;
-import com.bigdata.io.writecache.WriteCacheService;
-import com.bigdata.quorum.Quorum;
-import com.bigdata.rawstore.WormAddressManager;
-import com.bigdata.util.Bytes;
+import org.embergraph.Banner;
+import org.embergraph.config.Configuration;
+import org.embergraph.config.IValidator;
+import org.embergraph.config.IntegerRangeValidator;
+import org.embergraph.config.LongRangeValidator;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.io.FileChannelUtility;
+import org.embergraph.io.IReopenChannel;
+import org.embergraph.io.writecache.WriteCacheService;
+import org.embergraph.quorum.Quorum;
+import org.embergraph.rawstore.WormAddressManager;
+import org.embergraph.util.Bytes;
 
 /**
  * Helper object used when opening or creating journal file in any of the

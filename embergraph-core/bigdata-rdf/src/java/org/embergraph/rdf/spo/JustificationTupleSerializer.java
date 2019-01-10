@@ -32,18 +32,18 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
-import com.bigdata.btree.DefaultTupleSerializer;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.keys.ASCIIKeyBuilderFactory;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.btree.raba.codec.EmptyRabaValueCoder;
-import com.bigdata.io.ByteArrayBuffer;
-import com.bigdata.rdf.inf.Justification;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.IVUtility;
-import com.bigdata.rdf.internal.impl.BlobIV;
-import com.bigdata.util.Bytes;
+import org.embergraph.btree.DefaultTupleSerializer;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.keys.ASCIIKeyBuilderFactory;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.btree.raba.codec.EmptyRabaValueCoder;
+import org.embergraph.io.ByteArrayBuffer;
+import org.embergraph.rdf.inf.Justification;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.IVUtility;
+import org.embergraph.rdf.internal.impl.BlobIV;
+import org.embergraph.util.Bytes;
 
 /**
  * (De-)serializes {@link Justification}s.

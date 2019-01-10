@@ -34,8 +34,8 @@ import java.io.ObjectOutput;
 import java.rmi.Remote;
 import java.util.concurrent.TimeUnit;
 
-import com.bigdata.io.IStreamSerializer;
-import com.bigdata.relation.accesspath.IAsynchronousIterator;
+import org.embergraph.io.IStreamSerializer;
+import org.embergraph.relation.accesspath.IAsynchronousIterator;
 
 /**
  * A helper object that provides the API of {@link IAsynchronousIterator} but

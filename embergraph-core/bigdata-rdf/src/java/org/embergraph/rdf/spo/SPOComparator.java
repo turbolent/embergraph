@@ -25,7 +25,7 @@ package org.embergraph.rdf.spo;
 
 import java.util.Comparator;
 
-import com.bigdata.rdf.model.StatementEnum;
+import org.embergraph.rdf.model.StatementEnum;
 
 /**
  * Imposes s:p:o ordering based on termIds only (ignores {@link StatementEnum}).

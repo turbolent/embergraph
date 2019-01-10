@@ -31,11 +31,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import com.bigdata.io.ByteArrayBuffer;
-import com.bigdata.io.DataInputBuffer;
-import com.bigdata.io.DataOutputBuffer;
-import com.bigdata.io.LongPacker;
-import com.bigdata.io.SliceInputStream;
+import org.embergraph.io.ByteArrayBuffer;
+import org.embergraph.io.DataInputBuffer;
+import org.embergraph.io.DataOutputBuffer;
+import org.embergraph.io.LongPacker;
+import org.embergraph.io.SliceInputStream;
 
 /**
  * Utility class for compressed unicode encode/decode.

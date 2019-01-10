@@ -1,9 +1,9 @@
 package org.embergraph.service;
 
-import com.bigdata.mdi.IMetadataIndex;
-import com.bigdata.service.ndx.ClientIndexView;
-import com.bigdata.service.ndx.IClientIndex;
-import com.bigdata.service.ndx.IScaleOutClientIndex;
+import org.embergraph.mdi.IMetadataIndex;
+import org.embergraph.service.ndx.ClientIndexView;
+import org.embergraph.service.ndx.IClientIndex;
+import org.embergraph.service.ndx.IScaleOutClientIndex;
 
 /**
  * Concrete implementation for {@link IClientIndex} views.

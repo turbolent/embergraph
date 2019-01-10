@@ -34,9 +34,9 @@ import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
 
-import com.bigdata.rdf.sail.model.RunningQuery;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepository;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepositoryManager;
+import org.embergraph.rdf.sail.model.RunningQuery;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepositoryManager;
 
 /**
  * An fully compliant implementation of Sesame's {@link Repository} that wraps

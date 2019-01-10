@@ -4,11 +4,11 @@ import java.io.DataInput;
 import java.io.IOException;
 import java.io.InputStream;
 
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.rawstore.IBlock;
-import com.bigdata.util.Bytes;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.rawstore.IBlock;
+import org.embergraph.util.Bytes;
 
 /**
  * Reads from blocks visited by a range scan for a file and version.

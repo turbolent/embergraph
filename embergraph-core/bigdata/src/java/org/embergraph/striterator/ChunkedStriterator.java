@@ -30,8 +30,8 @@ package org.embergraph.striterator;
 
 import java.util.Iterator;
 
-import com.bigdata.btree.ITupleIterator;
-//import com.bigdata.btree.filter.IFilter;
+import org.embergraph.btree.ITupleIterator;
+//import org.embergraph.btree.filter.IFilter;
 
 /**
  * Chunked streaming iterator.

@@ -22,8 +22,8 @@ import junit.framework.TestCase;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.rdf.graph.util.IGraphFixture;
-import com.bigdata.rdf.graph.util.IGraphFixtureFactory;
+import org.embergraph.rdf.graph.util.IGraphFixture;
+import org.embergraph.rdf.graph.util.IGraphFixtureFactory;
 
 /**
  * Abstract base class for graph mining tests.

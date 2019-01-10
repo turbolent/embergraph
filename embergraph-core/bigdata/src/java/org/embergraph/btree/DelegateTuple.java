@@ -28,9 +28,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree;
 
-import com.bigdata.io.ByteArrayBuffer;
-import com.bigdata.io.DataInputBuffer;
-import com.bigdata.rawstore.IBlock;
+import org.embergraph.io.ByteArrayBuffer;
+import org.embergraph.io.DataInputBuffer;
+import org.embergraph.rawstore.IBlock;
 
 /**
  * An {@link ITuple} wrapping a delegate that may be used to override some of

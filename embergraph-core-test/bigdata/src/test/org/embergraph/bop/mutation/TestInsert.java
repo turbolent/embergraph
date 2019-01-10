@@ -29,9 +29,9 @@ package org.embergraph.bop.mutation;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.btree.UnisolatedReadWriteIndex;
-import com.bigdata.concurrent.LockManager;
-import com.bigdata.journal.ConcurrencyManager;
+import org.embergraph.btree.UnisolatedReadWriteIndex;
+import org.embergraph.concurrent.LockManager;
+import org.embergraph.journal.ConcurrencyManager;
 
 /**
  * Test suite for {@link InsertOp}.

@@ -7,17 +7,17 @@ import java.util.concurrent.Callable;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.proc.IIndexProcedure;
-import com.bigdata.btree.proc.IKeyArrayIndexProcedure;
-import com.bigdata.btree.proc.IResultHandler;
-import com.bigdata.btree.proc.ISimpleIndexProcedure;
-import com.bigdata.mdi.PartitionLocator;
-import com.bigdata.resources.StaleLocatorException;
-import com.bigdata.service.DataService;
-import com.bigdata.service.IDataService;
-import com.bigdata.service.Split;
-import com.bigdata.util.InnerCause;
-import com.bigdata.util.concurrent.TaskCounters;
+import org.embergraph.btree.proc.IIndexProcedure;
+import org.embergraph.btree.proc.IKeyArrayIndexProcedure;
+import org.embergraph.btree.proc.IResultHandler;
+import org.embergraph.btree.proc.ISimpleIndexProcedure;
+import org.embergraph.mdi.PartitionLocator;
+import org.embergraph.resources.StaleLocatorException;
+import org.embergraph.service.DataService;
+import org.embergraph.service.IDataService;
+import org.embergraph.service.Split;
+import org.embergraph.util.InnerCause;
+import org.embergraph.util.concurrent.TaskCounters;
 
 /**
  * Helper class for submitting an {@link IIndexProcedure} to run on an

@@ -34,24 +34,24 @@ import java.util.Set;
 
 import org.openrdf.model.URI;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.IVariableOrConstant;
-import com.bigdata.rdf.internal.impl.TermId;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.sparql.ast.FilterNode;
-import com.bigdata.rdf.sparql.ast.GraphPatternGroup;
-import com.bigdata.rdf.sparql.ast.GroupMemberNodeBase;
-import com.bigdata.rdf.sparql.ast.IGraphPatternContainer;
-import com.bigdata.rdf.sparql.ast.IGroupMemberNode;
-import com.bigdata.rdf.sparql.ast.IJoinNode;
-import com.bigdata.rdf.sparql.ast.JoinGroupNode;
-import com.bigdata.rdf.sparql.ast.QueryBase;
-import com.bigdata.rdf.sparql.ast.StaticAnalysis;
-import com.bigdata.rdf.sparql.ast.TermNode;
-import com.bigdata.rdf.sparql.ast.UnionNode;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.IVariableOrConstant;
+import org.embergraph.rdf.internal.impl.TermId;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.sparql.ast.FilterNode;
+import org.embergraph.rdf.sparql.ast.GraphPatternGroup;
+import org.embergraph.rdf.sparql.ast.GroupMemberNodeBase;
+import org.embergraph.rdf.sparql.ast.IGraphPatternContainer;
+import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
+import org.embergraph.rdf.sparql.ast.IJoinNode;
+import org.embergraph.rdf.sparql.ast.JoinGroupNode;
+import org.embergraph.rdf.sparql.ast.QueryBase;
+import org.embergraph.rdf.sparql.ast.StaticAnalysis;
+import org.embergraph.rdf.sparql.ast.TermNode;
+import org.embergraph.rdf.sparql.ast.UnionNode;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * An extension point for external service calls which produce solution

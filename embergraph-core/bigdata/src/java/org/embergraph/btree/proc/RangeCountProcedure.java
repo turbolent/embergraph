@@ -27,9 +27,9 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.mdi.LocalPartitionMetadata;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.mdi.LocalPartitionMetadata;
 
 /**
  * This procedure computes a range count on an index.

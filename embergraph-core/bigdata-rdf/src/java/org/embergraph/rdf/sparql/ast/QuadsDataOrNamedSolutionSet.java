@@ -30,9 +30,9 @@ package org.embergraph.rdf.sparql.ast;
 import java.util.Map;
 import java.util.Set;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.NV;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.NV;
 
 /**
  * An AST node which models either {@link QuadData} or a named solution set in

@@ -27,8 +27,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.constraint;
 
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IVariable;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IVariable;
 
 /**
  * Unit tests for {@link INHashMap}.

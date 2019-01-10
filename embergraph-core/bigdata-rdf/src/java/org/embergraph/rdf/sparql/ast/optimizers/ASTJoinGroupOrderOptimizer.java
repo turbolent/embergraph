@@ -32,21 +32,21 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IVariable;
-import com.bigdata.rdf.sparql.ast.AssignmentNode;
-import com.bigdata.rdf.sparql.ast.BindingsClause;
-import com.bigdata.rdf.sparql.ast.GroupNodeVarBindingInfo;
-import com.bigdata.rdf.sparql.ast.GroupNodeVarBindingInfoMap;
-import com.bigdata.rdf.sparql.ast.IGroupMemberNode;
-import com.bigdata.rdf.sparql.ast.JoinGroupNode;
-import com.bigdata.rdf.sparql.ast.StaticAnalysis;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpContext;
-import com.bigdata.rdf.sparql.ast.explainhints.ExplainHint;
-import com.bigdata.rdf.sparql.ast.explainhints.JoinOrderExplainHint;
-import com.bigdata.rdf.sparql.ast.service.ServiceNode;
-import com.bigdata.rdf.sparql.ast.service.ServiceRegistry;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IVariable;
+import org.embergraph.rdf.sparql.ast.AssignmentNode;
+import org.embergraph.rdf.sparql.ast.BindingsClause;
+import org.embergraph.rdf.sparql.ast.GroupNodeVarBindingInfo;
+import org.embergraph.rdf.sparql.ast.GroupNodeVarBindingInfoMap;
+import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
+import org.embergraph.rdf.sparql.ast.JoinGroupNode;
+import org.embergraph.rdf.sparql.ast.StaticAnalysis;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
+import org.embergraph.rdf.sparql.ast.explainhints.ExplainHint;
+import org.embergraph.rdf.sparql.ast.explainhints.JoinOrderExplainHint;
+import org.embergraph.rdf.sparql.ast.service.ServiceNode;
+import org.embergraph.rdf.sparql.ast.service.ServiceRegistry;
 
 
 /**

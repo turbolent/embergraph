@@ -30,7 +30,7 @@ package org.embergraph.btree;
 
 import java.util.UUID;
 
-import com.bigdata.rawstore.SimpleMemoryRawStore;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /**
  * Abstract base class for some unit tests that can only be run against a

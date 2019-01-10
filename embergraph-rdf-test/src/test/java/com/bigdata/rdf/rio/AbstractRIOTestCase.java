@@ -48,11 +48,11 @@ import junit.framework.AssertionFailedError;
 
 import org.openrdf.rio.RDFFormat;
 
-import com.bigdata.rdf.load.IStatementBufferFactory;
-import com.bigdata.rdf.model.BigdataStatement;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.AbstractTripleStoreTestCase;
-import com.bigdata.service.IBigdataFederation;
+import org.embergraph.rdf.load.IStatementBufferFactory;
+import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.AbstractTripleStoreTestCase;
+import org.embergraph.service.IBigdataFederation;
 
 /**
  * Abstract base class for unit tests involving the RIO integration.

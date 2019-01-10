@@ -39,19 +39,19 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bfs.BigdataFileSystem;
-import com.bigdata.bfs.GlobalFileSystemHelper;
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.Checkpoint;
-import com.bigdata.btree.ICheckpointProtocol;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.journal.Name2Addr.Entry;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rawstore.WormAddressManager;
-import com.bigdata.relation.locator.DefaultResourceLocator;
-import com.bigdata.sparse.GlobalRowStoreHelper;
-import com.bigdata.sparse.SparseRowStore;
-import com.bigdata.util.DaemonThreadFactory;
+import org.embergraph.bfs.BigdataFileSystem;
+import org.embergraph.bfs.GlobalFileSystemHelper;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.Checkpoint;
+import org.embergraph.btree.ICheckpointProtocol;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.journal.Name2Addr.Entry;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rawstore.WormAddressManager;
+import org.embergraph.relation.locator.DefaultResourceLocator;
+import org.embergraph.sparse.GlobalRowStoreHelper;
+import org.embergraph.sparse.SparseRowStore;
+import org.embergraph.util.DaemonThreadFactory;
 
 /**
  * A temporary store that supports named indices but no concurrency controls.

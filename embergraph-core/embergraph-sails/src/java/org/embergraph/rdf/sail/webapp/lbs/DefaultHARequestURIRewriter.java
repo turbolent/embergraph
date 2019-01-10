@@ -26,7 +26,7 @@ import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
-import com.bigdata.journal.IIndexManager;
+import org.embergraph.journal.IIndexManager;
 
 /**
  * Default implementation.

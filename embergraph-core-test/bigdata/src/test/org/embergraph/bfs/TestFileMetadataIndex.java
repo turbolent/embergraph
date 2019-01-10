@@ -33,14 +33,14 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.bigdata.bfs.BigdataFileSystem;
-import com.bigdata.bfs.Document;
-import com.bigdata.bfs.DocumentImpl;
-import com.bigdata.bfs.FileMetadataSchema;
-import com.bigdata.bfs.RepositoryDocumentImpl;
-import com.bigdata.journal.TimestampUtility;
-import com.bigdata.sparse.ITPS;
-import com.bigdata.sparse.ITPV;
+import org.embergraph.bfs.BigdataFileSystem;
+import org.embergraph.bfs.Document;
+import org.embergraph.bfs.DocumentImpl;
+import org.embergraph.bfs.FileMetadataSchema;
+import org.embergraph.bfs.RepositoryDocumentImpl;
+import org.embergraph.journal.TimestampUtility;
+import org.embergraph.sparse.ITPS;
+import org.embergraph.sparse.ITPV;
 
 /**
  * Test operations on the file metadata index for the {@link BigdataFileSystem}.

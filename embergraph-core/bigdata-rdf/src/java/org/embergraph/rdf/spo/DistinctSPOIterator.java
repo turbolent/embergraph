@@ -4,12 +4,12 @@ import java.util.LinkedHashSet;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-import com.bigdata.BigdataStatics;
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.store.IRawTripleStore;
-import com.bigdata.util.Bytes;
+import org.embergraph.BigdataStatics;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.store.IRawTripleStore;
+import org.embergraph.util.Bytes;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

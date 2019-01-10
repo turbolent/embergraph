@@ -28,9 +28,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.service.ndx.pipeline;
 
-import com.bigdata.btree.keys.KVO;
-import com.bigdata.relation.accesspath.BlockingBuffer;
-import com.bigdata.service.ndx.pipeline.AbstractKeyRangeMasterTestCase.L;
+import org.embergraph.btree.keys.KVO;
+import org.embergraph.relation.accesspath.BlockingBuffer;
+import org.embergraph.service.ndx.pipeline.AbstractKeyRangeMasterTestCase.L;
 
 /**
  * Class exists solely to make it easier to write the unit tests by aligning the

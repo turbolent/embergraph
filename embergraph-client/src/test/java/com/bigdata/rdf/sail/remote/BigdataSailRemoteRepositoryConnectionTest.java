@@ -49,9 +49,9 @@ import org.openrdf.rio.RDFHandler;
 import org.openrdf.rio.RDFHandlerException;
 import org.openrdf.rio.helpers.RDFHandlerBase;
 
-import com.bigdata.rdf.sail.webapp.client.EncodeDecodeValue;
-import com.bigdata.rdf.sail.webapp.client.MockRemoteRepository;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepositoryDecls;
+import org.embergraph.rdf.sail.webapp.client.EncodeDecodeValue;
+import org.embergraph.rdf.sail.webapp.client.MockRemoteRepository;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepositoryDecls;
 
 /**
  * Test of the Java client for the REST API using mock objects to verify that

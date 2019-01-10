@@ -35,23 +35,23 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-import com.bigdata.btree.IRangeQuery;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.io.SerializerUtil;
-import com.bigdata.journal.AbstractTask;
-import com.bigdata.journal.ConcurrencyManager;
-import com.bigdata.journal.IConcurrencyManager;
-import com.bigdata.journal.IResourceManager;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.IndexExistsException;
-import com.bigdata.journal.NoSuchIndexException;
-import com.bigdata.mdi.LocalPartitionMetadata;
-import com.bigdata.mdi.MetadataIndex;
-import com.bigdata.mdi.PartitionLocator;
-import com.bigdata.resources.ResourceManager;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.IRangeQuery;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.io.SerializerUtil;
+import org.embergraph.journal.AbstractTask;
+import org.embergraph.journal.ConcurrencyManager;
+import org.embergraph.journal.IConcurrencyManager;
+import org.embergraph.journal.IResourceManager;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.IndexExistsException;
+import org.embergraph.journal.NoSuchIndexException;
+import org.embergraph.mdi.LocalPartitionMetadata;
+import org.embergraph.mdi.MetadataIndex;
+import org.embergraph.mdi.PartitionLocator;
+import org.embergraph.resources.ResourceManager;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Implementation of a metadata service for a named scale-out index.

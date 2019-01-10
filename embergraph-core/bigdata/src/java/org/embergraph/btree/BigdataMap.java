@@ -37,10 +37,10 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.SortedMap;
 
-import com.bigdata.btree.filter.TupleFilter;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.journal.ConcurrencyManager;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.filter.TupleFilter;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.journal.ConcurrencyManager;
+import org.embergraph.util.BytesUtil;
 
 /**
  * A flyweight {@link SortedMap} wrapping an {@link IIndex}.

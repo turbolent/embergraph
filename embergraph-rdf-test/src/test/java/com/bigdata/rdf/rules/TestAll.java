@@ -27,9 +27,9 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import com.bigdata.rdf.spo.TestSPORelation;
-import com.bigdata.relation.rule.TestProgram;
-import com.bigdata.relation.rule.TestRule;
+import org.embergraph.rdf.spo.TestSPORelation;
+import org.embergraph.relation.rule.TestProgram;
+import org.embergraph.relation.rule.TestRule;
 
 /**
  * Aggregates test suites into increasing dependency order.

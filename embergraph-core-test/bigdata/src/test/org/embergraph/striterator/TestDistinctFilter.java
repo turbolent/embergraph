@@ -30,12 +30,12 @@ package org.embergraph.striterator;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.TemporaryStore;
-import com.bigdata.util.Bytes;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.TemporaryStore;
+import org.embergraph.util.Bytes;
 
 /**
  * Unit tests for {@link DistinctFilter}.

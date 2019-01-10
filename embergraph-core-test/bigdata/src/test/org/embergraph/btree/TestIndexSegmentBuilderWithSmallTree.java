@@ -28,9 +28,9 @@ import java.io.IOException;
 
 import org.apache.log4j.Level;
 
-import com.bigdata.btree.IndexSegment.ImmutableLeafCursor;
-import com.bigdata.btree.IndexSegment.ImmutableNodeFactory.ImmutableLeaf;
-import com.bigdata.btree.keys.TestKeyBuilder;
+import org.embergraph.btree.IndexSegment.ImmutableLeafCursor;
+import org.embergraph.btree.IndexSegment.ImmutableNodeFactory.ImmutableLeaf;
+import org.embergraph.btree.keys.TestKeyBuilder;
 
 /**
  * Test suite based on a small btree with known keys and values.

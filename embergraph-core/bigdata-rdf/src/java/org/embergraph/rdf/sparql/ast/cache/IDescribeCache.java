@@ -5,7 +5,7 @@ import java.util.Set;
 import org.openrdf.model.Graph;
 import org.openrdf.query.GraphQueryResult;
 
-import com.bigdata.rdf.internal.IV;
+import org.embergraph.rdf.internal.IV;
 
 /**
  * A maintained cache for the DESCRIBE of RDF resources.

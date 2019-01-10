@@ -7,9 +7,9 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
 
-import com.bigdata.sparse.IRowStoreConstants;
-import com.bigdata.sparse.ITPS;
-import com.bigdata.sparse.ITPV;
+import org.embergraph.sparse.IRowStoreConstants;
+import org.embergraph.sparse.ITPS;
+import org.embergraph.sparse.ITPV;
 
 /**
  * A read-only view of a {@link Document} that has been read from a

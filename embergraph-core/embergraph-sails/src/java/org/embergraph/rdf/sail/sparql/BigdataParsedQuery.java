@@ -32,7 +32,7 @@ import org.openrdf.query.algebra.TupleExpr;
 import org.openrdf.query.parser.ParsedQuery;
 import org.openrdf.query.parser.QueryParser;
 
-import com.bigdata.rdf.sparql.ast.ASTContainer;
+import org.embergraph.rdf.sparql.ast.ASTContainer;
 
 /**
  * Class extends {@link ParsedQuery} for API compliance with {@link QueryParser}

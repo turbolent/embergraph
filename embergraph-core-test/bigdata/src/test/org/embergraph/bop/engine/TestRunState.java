@@ -42,21 +42,21 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpContext;
-import com.bigdata.bop.BOpEvaluationContext;
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.NV;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.ap.Predicate;
-import com.bigdata.bop.bindingSet.HashBindingSet;
-import com.bigdata.bop.bset.StartOp;
-import com.bigdata.bop.engine.RunState.InnerState;
-import com.bigdata.bop.engine.RunState.RunStateEnum;
-import com.bigdata.bop.solutions.SliceOp;
-import com.bigdata.relation.accesspath.IAsynchronousIterator;
-import com.bigdata.relation.accesspath.ThickAsynchronousIterator;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpContext;
+import org.embergraph.bop.BOpEvaluationContext;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.NV;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.ap.Predicate;
+import org.embergraph.bop.bindingSet.HashBindingSet;
+import org.embergraph.bop.bset.StartOp;
+import org.embergraph.bop.engine.RunState.InnerState;
+import org.embergraph.bop.engine.RunState.RunStateEnum;
+import org.embergraph.bop.solutions.SliceOp;
+import org.embergraph.relation.accesspath.IAsynchronousIterator;
+import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
 
 /**
  * Test suite for {@link RunState}.

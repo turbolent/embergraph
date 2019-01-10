@@ -27,12 +27,12 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.internal.impl;
 
-import com.bigdata.rdf.internal.DTE;
-import com.bigdata.rdf.internal.IExtensionIV;
-import com.bigdata.rdf.internal.INonInlineExtensionCodes;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.VTE;
-import com.bigdata.rdf.model.BigdataValue;
+import org.embergraph.rdf.internal.DTE;
+import org.embergraph.rdf.internal.IExtensionIV;
+import org.embergraph.rdf.internal.INonInlineExtensionCodes;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.VTE;
+import org.embergraph.rdf.model.BigdataValue;
 
 /**
  * Abstract base class for non-inline {@link IV}s which use the extension bit

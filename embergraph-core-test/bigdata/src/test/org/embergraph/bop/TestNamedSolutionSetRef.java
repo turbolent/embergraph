@@ -32,12 +32,12 @@ import java.util.UUID;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.NamedSolutionSetRef;
-import com.bigdata.bop.NamedSolutionSetRefUtility;
-import com.bigdata.bop.Var;
-import com.bigdata.bop.controller.INamedSolutionSetRef;
-import com.bigdata.journal.ITx;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.NamedSolutionSetRef;
+import org.embergraph.bop.NamedSolutionSetRefUtility;
+import org.embergraph.bop.Var;
+import org.embergraph.bop.controller.INamedSolutionSetRef;
+import org.embergraph.journal.ITx;
 
 /**
  * Test suite for {@link NamedSolutionSetRef}.

@@ -29,8 +29,8 @@ package org.embergraph.rdf.sparql.ast;
 
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.rdf.model.BigdataStatement;
+import org.embergraph.bop.BOp;
+import org.embergraph.rdf.model.BigdataStatement;
 
 /**
  * The DELETE DATA operation removes some triples, given inline in the request,

@@ -28,7 +28,7 @@ import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.rwstore.IWriteCacheManager;
+import org.embergraph.rwstore.IWriteCacheManager;
 
 /**
  * The SectorAllocator is designed as an alternative the the standard RWStore

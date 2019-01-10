@@ -31,7 +31,7 @@ import java.util.Arrays;
 
 import org.apache.log4j.Level;
 
-import com.bigdata.btree.keys.TestKeyBuilder;
+import org.embergraph.btree.keys.TestKeyBuilder;
 
 /**
  * Test suite using {@link BTree#insert(Object, Object)} to split a tree to

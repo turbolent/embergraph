@@ -29,8 +29,8 @@ package org.embergraph.rdf.sparql.ast;
 
 import java.util.List;
 
-import com.bigdata.rdf.sparql.ast.optimizers.ASTAttachJoinFiltersOptimizer;
-import com.bigdata.rdf.sparql.ast.optimizers.ASTSimpleOptionalOptimizer;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTAttachJoinFiltersOptimizer;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTSimpleOptionalOptimizer;
 
 /**
  * A marker interface for any kind of AST Node which joins stuff.

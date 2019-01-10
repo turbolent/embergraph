@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree.raba;
 
-import com.bigdata.btree.proc.IKeyArrayIndexProcedure;
+import org.embergraph.btree.proc.IKeyArrayIndexProcedure;
 
 /**
  * Flyweight implementation for wrapping a <code>byte[][]</code> with fromIndex

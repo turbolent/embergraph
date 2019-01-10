@@ -37,14 +37,14 @@ import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQueryResult;
 import org.openrdf.repository.RepositoryResult;
 
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.changesets.IChangeRecord;
-import com.bigdata.rdf.internal.XSD;
-import com.bigdata.rdf.model.BigdataBNode;
-import com.bigdata.rdf.model.BigdataStatement;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.model.StatementEnum;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.changesets.IChangeRecord;
+import org.embergraph.rdf.internal.XSD;
+import org.embergraph.rdf.model.BigdataBNode;
+import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * Test suite {@link RDRHistory}.

@@ -29,11 +29,11 @@ package org.embergraph.btree;
 
 import java.util.Iterator;
 
-import com.bigdata.btree.proc.AbstractKeyArrayIndexProcedureConstructor;
-import com.bigdata.btree.proc.IResultHandler;
-import com.bigdata.journal.IResourceManager;
-import com.bigdata.mdi.IResourceMetadata;
-import com.bigdata.service.Split;
+import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedureConstructor;
+import org.embergraph.btree.proc.IResultHandler;
+import org.embergraph.journal.IResourceManager;
+import org.embergraph.mdi.IResourceMetadata;
+import org.embergraph.service.Split;
 
 import cutthecrap.utils.striterators.IFilter;
 

@@ -28,10 +28,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.mdi;
 
-import com.bigdata.btree.IRangeQuery;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.mdi.MetadataIndex.MetadataIndexMetadata;
-import com.bigdata.service.IDataService;
+import org.embergraph.btree.IRangeQuery;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.mdi.MetadataIndex.MetadataIndexMetadata;
+import org.embergraph.service.IDataService;
 
 /**
  * Interface for a metadata index. The metadata index stores the

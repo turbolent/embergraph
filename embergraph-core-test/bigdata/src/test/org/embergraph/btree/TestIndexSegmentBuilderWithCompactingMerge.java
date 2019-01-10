@@ -31,8 +31,8 @@ package org.embergraph.btree;
 import java.io.File;
 import java.util.UUID;
 
-import com.bigdata.btree.keys.TestKeyBuilder;
-import com.bigdata.rawstore.SimpleMemoryRawStore;
+import org.embergraph.btree.keys.TestKeyBuilder;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /**
  * A test of the {@link IndexSegmentBuilder} in which there are some deleted

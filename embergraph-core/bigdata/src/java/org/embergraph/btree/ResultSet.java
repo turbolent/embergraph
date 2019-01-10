@@ -39,25 +39,25 @@ import java.util.Iterator;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.data.DefaultLeafCoder;
-import com.bigdata.btree.data.ILeafData;
-import com.bigdata.btree.filter.ITupleFilter;
-import com.bigdata.btree.raba.AbstractRaba;
-import com.bigdata.btree.raba.IRaba;
-import com.bigdata.btree.raba.MutableKeysRaba;
-import com.bigdata.btree.raba.MutableValuesRaba;
-import com.bigdata.btree.raba.ReadOnlyKeysRaba;
-import com.bigdata.btree.raba.ReadOnlyValuesRaba;
-import com.bigdata.io.AbstractFixedByteArrayBuffer;
-import com.bigdata.io.DataOutputBuffer;
-import com.bigdata.io.FixedByteArrayBuffer;
-import com.bigdata.io.LongPacker;
-import com.bigdata.io.ShortPacker;
-import com.bigdata.journal.ITx;
-import com.bigdata.mdi.IResourceMetadata;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.service.IDataService;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.data.DefaultLeafCoder;
+import org.embergraph.btree.data.ILeafData;
+import org.embergraph.btree.filter.ITupleFilter;
+import org.embergraph.btree.raba.AbstractRaba;
+import org.embergraph.btree.raba.IRaba;
+import org.embergraph.btree.raba.MutableKeysRaba;
+import org.embergraph.btree.raba.MutableValuesRaba;
+import org.embergraph.btree.raba.ReadOnlyKeysRaba;
+import org.embergraph.btree.raba.ReadOnlyValuesRaba;
+import org.embergraph.io.AbstractFixedByteArrayBuffer;
+import org.embergraph.io.DataOutputBuffer;
+import org.embergraph.io.FixedByteArrayBuffer;
+import org.embergraph.io.LongPacker;
+import org.embergraph.io.ShortPacker;
+import org.embergraph.journal.ITx;
+import org.embergraph.mdi.IResourceMetadata;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.service.IDataService;
+import org.embergraph.util.BytesUtil;
 
 /**
  * An object used to stream key scan results back to the client.

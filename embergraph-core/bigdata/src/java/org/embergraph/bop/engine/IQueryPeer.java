@@ -4,10 +4,10 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.UUID;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.fed.FederatedQueryEngine;
-import com.bigdata.service.IService;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.fed.FederatedQueryEngine;
+import org.embergraph.service.IService;
 
 /**
  * Interface for a node participating in the exchange of NIO buffers to

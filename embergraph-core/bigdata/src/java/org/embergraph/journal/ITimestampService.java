@@ -29,7 +29,7 @@ package org.embergraph.journal;
 
 import java.io.IOException;
 
-import com.bigdata.service.IService;
+import org.embergraph.service.IService;
 
 /**
  * A service for unique timestamps.

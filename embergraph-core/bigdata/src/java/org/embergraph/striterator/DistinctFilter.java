@@ -32,17 +32,17 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.UUID;
 
-import com.bigdata.bop.solutions.JVMDistinctBindingSetsOp;
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.NOPTupleSerializer;
-import com.bigdata.btree.keys.ASCIIKeyBuilderFactory;
-import com.bigdata.btree.keys.KVO;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.TemporaryStore;
-import com.bigdata.relation.rule.IRule;
-import com.bigdata.relation.rule.eval.ISolution;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.bop.solutions.JVMDistinctBindingSetsOp;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.NOPTupleSerializer;
+import org.embergraph.btree.keys.ASCIIKeyBuilderFactory;
+import org.embergraph.btree.keys.KVO;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.TemporaryStore;
+import org.embergraph.relation.rule.IRule;
+import org.embergraph.relation.rule.eval.ISolution;
+import org.embergraph.util.BytesUtil;
 
 /**
  * A filter that imposes a DISTINCT constraint on the {@link ISolution}s

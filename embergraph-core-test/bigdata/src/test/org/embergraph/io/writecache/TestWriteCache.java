@@ -38,15 +38,15 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import junit.framework.AssertionFailedError;
 
-import com.bigdata.io.ChecksumUtility;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.io.FileChannelUtility;
-import com.bigdata.io.IBufferAccess;
-import com.bigdata.io.IReopenChannel;
-import com.bigdata.io.TestCase3;
-import com.bigdata.io.writecache.WriteCache;
-import com.bigdata.util.Bytes;
-import com.bigdata.util.ChecksumError;
+import org.embergraph.io.ChecksumUtility;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.io.FileChannelUtility;
+import org.embergraph.io.IBufferAccess;
+import org.embergraph.io.IReopenChannel;
+import org.embergraph.io.TestCase3;
+import org.embergraph.io.writecache.WriteCache;
+import org.embergraph.util.Bytes;
+import org.embergraph.util.ChecksumError;
 
 /**
  * Test suite for the {@link WriteCache}.

@@ -12,8 +12,8 @@ import java.util.concurrent.locks.ReentrantLock;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import java.io.*;
 
-import com.bigdata.jsr166.JSR166TestCase.CheckedRunnable;
-import com.bigdata.jsr166.JSR166TestCase.ThreadShouldThrow;
+import org.embergraph.jsr166.JSR166TestCase.CheckedRunnable;
+import org.embergraph.jsr166.JSR166TestCase.ThreadShouldThrow;
 
 public class LinkedBlockingDequeTest extends JSR166TestCase {
 

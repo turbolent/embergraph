@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bfs;
 
-import com.bigdata.bfs.BigdataFileSystem;
+import org.embergraph.bfs.BigdataFileSystem;
 
 /**
  * Test suite for {@link BigdataFileSystem#deleteAll(String, String)}.

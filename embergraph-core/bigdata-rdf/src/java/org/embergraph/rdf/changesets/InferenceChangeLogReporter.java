@@ -6,15 +6,15 @@ import java.util.Set;
 
 import org.openrdf.model.Value;
 
-import com.bigdata.bop.rdf.filter.NativeDistinctFilter;
-import com.bigdata.htree.HTree;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.BigdataStatementIterator;
-import com.bigdata.rdf.store.BigdataStatementIteratorImpl;
-import com.bigdata.striterator.ChunkedWrappedIterator;
-import com.bigdata.striterator.IChunkedOrderedIterator;
+import org.embergraph.bop.rdf.filter.NativeDistinctFilter;
+import org.embergraph.htree.HTree;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.BigdataStatementIterator;
+import org.embergraph.rdf.store.BigdataStatementIteratorImpl;
+import org.embergraph.striterator.ChunkedWrappedIterator;
+import org.embergraph.striterator.IChunkedOrderedIterator;
 
 import cutthecrap.utils.striterators.ICloseable;
 

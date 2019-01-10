@@ -28,15 +28,15 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation.accesspath;
 
-import com.bigdata.bop.IElement;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.btree.IIndex;
-import com.bigdata.relation.IRelation;
-import com.bigdata.relation.rule.IQueryOptions;
-import com.bigdata.relation.rule.IRule;
-import com.bigdata.service.IDataService;
-import com.bigdata.striterator.IChunkedOrderedIterator;
-import com.bigdata.striterator.IKeyOrder;
+import org.embergraph.bop.IElement;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.btree.IIndex;
+import org.embergraph.relation.IRelation;
+import org.embergraph.relation.rule.IQueryOptions;
+import org.embergraph.relation.rule.IRule;
+import org.embergraph.service.IDataService;
+import org.embergraph.striterator.IChunkedOrderedIterator;
+import org.embergraph.striterator.IKeyOrder;
 
 /**
  * An abstraction for efficient reads of {@link IElement}s from a

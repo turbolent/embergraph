@@ -44,8 +44,8 @@ import junit.framework.TestCase;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.concurrent.NonBlockingLockManagerWithNewDesign.LockFutureTask;
-import com.bigdata.util.DaemonThreadFactory;
+import org.embergraph.concurrent.NonBlockingLockManagerWithNewDesign.LockFutureTask;
+import org.embergraph.util.DaemonThreadFactory;
 
 /**
  * basic unit tests.

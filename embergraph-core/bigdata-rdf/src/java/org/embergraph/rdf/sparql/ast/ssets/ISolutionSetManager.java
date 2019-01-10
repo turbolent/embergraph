@@ -27,9 +27,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.ssets;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.rdf.sparql.ast.ISolutionSetStats;
-import com.bigdata.rdf.spo.ISPO;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.rdf.sparql.ast.ISolutionSetStats;
+import org.embergraph.rdf.spo.ISPO;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

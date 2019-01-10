@@ -1,9 +1,9 @@
 package org.embergraph.bop.joinGraph.fast;
 
-import com.bigdata.bop.joinGraph.IEvaluationPlan;
-import com.bigdata.bop.joinGraph.IEvaluationPlanFactory;
-import com.bigdata.relation.rule.IRule;
-import com.bigdata.relation.rule.eval.IJoinNexus;
+import org.embergraph.bop.joinGraph.IEvaluationPlan;
+import org.embergraph.bop.joinGraph.IEvaluationPlanFactory;
+import org.embergraph.relation.rule.IRule;
+import org.embergraph.relation.rule.eval.IJoinNexus;
 
 /**
  * Factory for {@link DefaultEvaluationPlan2}s.

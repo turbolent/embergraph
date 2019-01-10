@@ -36,12 +36,12 @@ import java.nio.ByteBuffer;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.ICounterSet;
-import com.bigdata.counters.Instrument;
-import com.bigdata.io.LongPacker;
-import com.bigdata.io.SerializerUtil;
-import com.bigdata.rawstore.IRawStore;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.ICounterSet;
+import org.embergraph.counters.Instrument;
+import org.embergraph.io.LongPacker;
+import org.embergraph.io.SerializerUtil;
+import org.embergraph.rawstore.IRawStore;
 
 /**
  * Encapsulates the actual implementation class and provides the protocol for

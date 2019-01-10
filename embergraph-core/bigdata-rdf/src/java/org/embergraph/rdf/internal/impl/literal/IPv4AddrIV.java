@@ -31,14 +31,14 @@ import java.util.regex.Pattern;
 import org.apache.log4j.Logger;
 import org.openrdf.model.Literal;
 
-import com.bigdata.rdf.internal.DTE;
-import com.bigdata.rdf.internal.DTEExtension;
-import com.bigdata.rdf.internal.IPv4Address;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.XSD;
-import com.bigdata.rdf.lexicon.LexiconRelation;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.rdf.internal.DTE;
+import org.embergraph.rdf.internal.DTEExtension;
+import org.embergraph.rdf.internal.IPv4Address;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.XSD;
+import org.embergraph.rdf.lexicon.LexiconRelation;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Internal value representing an inline IP address. Uses the IPv4Address class

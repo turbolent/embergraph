@@ -32,9 +32,9 @@ import java.util.Iterator;
 
 import org.apache.log4j.Level;
 
-import com.bigdata.btree.IndexSegment.ImmutableLeafCursor;
-import com.bigdata.btree.IndexSegment.ImmutableNodeFactory.ImmutableLeaf;
-import com.bigdata.io.DirectBufferPool;
+import org.embergraph.btree.IndexSegment.ImmutableLeafCursor;
+import org.embergraph.btree.IndexSegment.ImmutableNodeFactory.ImmutableLeaf;
+import org.embergraph.io.DirectBufferPool;
 
 /**
  * Adds some methods for testing an {@link IndexSegment} for consistency.

@@ -27,11 +27,11 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import org.apache.log4j.Logger;
-import com.bigdata.rdf.model.BigdataStatement;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.BigdataStatementIterator;
-import com.bigdata.striterator.ChunkedArrayIterator;
+import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.BigdataStatementIterator;
+import org.embergraph.striterator.ChunkedArrayIterator;
 
 /**
  * This is a very simple implementation of a change log.  NOTE: This is not

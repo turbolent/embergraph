@@ -27,8 +27,8 @@ package org.embergraph.ha.althalog;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-import com.bigdata.ha.msg.IHAWriteMessage;
-import com.bigdata.journal.IRootBlockView;
+import org.embergraph.ha.msg.IHAWriteMessage;
+import org.embergraph.journal.IRootBlockView;
 
 /**
  * A constrained interface to a new HALogFile to allow writing.

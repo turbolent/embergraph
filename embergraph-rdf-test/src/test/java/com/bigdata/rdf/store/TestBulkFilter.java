@@ -30,11 +30,11 @@ package com.bigdata.rdf.store;
 
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.StatementEnum;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.rdf.spo.SPO;
-import com.bigdata.striterator.IChunkedOrderedIterator;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.rdf.spo.SPO;
+import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /**
  * Test bulk filter API.

@@ -64,8 +64,8 @@ import java.util.Properties;
 
 import org.apache.commons.io.output.WriterOutputStream;
 
-import com.bigdata.rdf.properties.PropertiesFormat;
-import com.bigdata.rdf.properties.PropertiesWriter;
+import org.embergraph.rdf.properties.PropertiesFormat;
+import org.embergraph.rdf.properties.PropertiesWriter;
 
 /**
  * {@link PropertiesFormat#TEXT} writer.

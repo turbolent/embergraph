@@ -29,9 +29,9 @@ package org.embergraph.rdf.internal;
 
 import org.openrdf.model.Value;
 
-import com.bigdata.rdf.lexicon.LexiconRelation;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.lexicon.LexiconRelation;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
 
 /**
  * Interface for managing the {@link BigdataValue} cached on an {@link IV}.

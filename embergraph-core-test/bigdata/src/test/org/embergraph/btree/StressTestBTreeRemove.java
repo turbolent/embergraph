@@ -33,12 +33,12 @@ import junit.framework.TestCase2;
 
 import org.apache.log4j.Level;
 
-import com.bigdata.Banner;
-import com.bigdata.btree.keys.TestKeyBuilder;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.io.SerializerUtil;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rwstore.sector.MemStore;
+import org.embergraph.Banner;
+import org.embergraph.btree.keys.TestKeyBuilder;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.io.SerializerUtil;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rwstore.sector.MemStore;
 
 public class StressTestBTreeRemove extends TestCase2 { //AbstractBTreeTestCase {
 

@@ -110,7 +110,7 @@ import org.openrdf.rio.helpers.BasicParserSettings;
 import org.openrdf.rio.helpers.RDFHandlerBase;
 import org.openrdf.sail.memory.MemoryStore;
 
-import com.bigdata.rdf.store.BD;
+import org.embergraph.rdf.store.BD;
 
 public abstract class RepositoryConnectionTest extends TestCase {
 

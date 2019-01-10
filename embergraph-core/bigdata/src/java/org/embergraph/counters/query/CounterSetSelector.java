@@ -34,10 +34,10 @@ import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.HistoryInstrument;
-import com.bigdata.counters.ICounter;
-import com.bigdata.counters.PeriodEnum;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.HistoryInstrument;
+import org.embergraph.counters.ICounter;
+import org.embergraph.counters.PeriodEnum;
 
 /**
  * Reads counters from a {@link CounterSet}.

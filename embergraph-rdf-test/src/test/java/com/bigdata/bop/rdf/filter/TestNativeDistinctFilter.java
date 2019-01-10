@@ -35,19 +35,19 @@ import java.util.Properties;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.Journal;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.model.StatementEnum;
-import com.bigdata.rdf.spo.SPO;
-import com.bigdata.rdf.spo.SPOKeyOrder;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.LocalTripleStore;
-import com.bigdata.rdf.vocab.decls.FOAFVocabularyDecl;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Journal;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.rdf.spo.SPO;
+import org.embergraph.rdf.spo.SPOKeyOrder;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.LocalTripleStore;
+import org.embergraph.rdf.vocab.decls.FOAFVocabularyDecl;
 
 /**
  * Unit tests for {@link NativeDistinctFilter}.

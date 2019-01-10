@@ -31,11 +31,11 @@ package org.embergraph.counters.render;
 import java.io.IOException;
 import java.io.Writer;
 
-import com.bigdata.counters.ICounter;
-import com.bigdata.counters.query.HistoryTable;
-import com.bigdata.counters.query.ICounterSelector;
-import com.bigdata.counters.query.PivotTable;
-import com.bigdata.counters.query.URLQueryModel;
+import org.embergraph.counters.ICounter;
+import org.embergraph.counters.query.HistoryTable;
+import org.embergraph.counters.query.ICounterSelector;
+import org.embergraph.counters.query.PivotTable;
+import org.embergraph.counters.query.URLQueryModel;
 
 /**
  * {@link IRenderer} for <code>text/plain</code>.

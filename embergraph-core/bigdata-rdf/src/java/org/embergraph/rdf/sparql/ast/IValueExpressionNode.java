@@ -1,7 +1,7 @@
 package org.embergraph.rdf.sparql.ast;
 
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.rdf.internal.IV;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.rdf.internal.IV;
 
 /**
  * An AST node which models a value expression.

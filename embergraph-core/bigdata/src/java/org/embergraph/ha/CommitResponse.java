@@ -28,7 +28,7 @@ package org.embergraph.ha;
 
 import java.util.ArrayList;
 
-import com.bigdata.util.concurrent.ExecutionExceptions;
+import org.embergraph.util.concurrent.ExecutionExceptions;
 
 /**
  * Response for a 2-phase commit.

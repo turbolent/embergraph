@@ -33,17 +33,17 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpBase;
-import com.bigdata.bop.Bind;
-import com.bigdata.bop.IBind;
-import com.bigdata.bop.IConstraint;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.IVariableFactory;
-import com.bigdata.bop.IVariableOrConstant;
-import com.bigdata.bop.Var;
-import com.bigdata.bop.aggregate.IAggregate;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpBase;
+import org.embergraph.bop.Bind;
+import org.embergraph.bop.IBind;
+import org.embergraph.bop.IConstraint;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.IVariableFactory;
+import org.embergraph.bop.IVariableOrConstant;
+import org.embergraph.bop.Var;
+import org.embergraph.bop.aggregate.IAggregate;
 
 /**
  * Utility class simplifies an aggregation operator through a rewrite.

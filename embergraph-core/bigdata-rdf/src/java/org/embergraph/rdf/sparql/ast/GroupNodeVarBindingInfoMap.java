@@ -29,7 +29,7 @@ package org.embergraph.rdf.sparql.ast;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.bigdata.rdf.sparql.ast.optimizers.ASTJoinGroupFilterExistsInfo;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTJoinGroupFilterExistsInfo;
 
 
 

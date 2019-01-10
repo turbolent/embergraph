@@ -1,6 +1,6 @@
 package org.embergraph.io.writecache;
 
-import com.bigdata.rwstore.RWStore;
+import org.embergraph.rwstore.RWStore;
 
 public interface IBufferedWriter {
 

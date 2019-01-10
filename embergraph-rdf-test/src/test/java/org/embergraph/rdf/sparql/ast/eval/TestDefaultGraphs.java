@@ -27,14 +27,14 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.eval;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.ap.filter.BOpResolver;
-import com.bigdata.bop.join.AccessPathJoinAnnotations;
-import com.bigdata.bop.rdf.filter.NativeDistinctFilter;
-import com.bigdata.rdf.sparql.ast.ASTContainer;
-import com.bigdata.rdf.spo.SPOPredicate;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.ap.filter.BOpResolver;
+import org.embergraph.bop.join.AccessPathJoinAnnotations;
+import org.embergraph.bop.rdf.filter.NativeDistinctFilter;
+import org.embergraph.rdf.sparql.ast.ASTContainer;
+import org.embergraph.rdf.spo.SPOPredicate;
 
 /**
  * Unit tests for default graph semantics ported from the old

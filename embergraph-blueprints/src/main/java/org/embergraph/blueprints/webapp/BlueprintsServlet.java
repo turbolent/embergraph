@@ -31,13 +31,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.blueprints.BigdataGraphBulkLoad;
-import com.bigdata.journal.ITx;
-import com.bigdata.rdf.sail.BigdataSailRepositoryConnection;
-import com.bigdata.rdf.sail.webapp.AbstractRestApiTask;
-import com.bigdata.rdf.sail.webapp.BigdataRDFServlet;
-import com.bigdata.rdf.sail.webapp.BlueprintsServletProxy;
-import com.bigdata.rdf.sail.webapp.client.MiniMime;
+import org.embergraph.blueprints.BigdataGraphBulkLoad;
+import org.embergraph.journal.ITx;
+import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.rdf.sail.webapp.AbstractRestApiTask;
+import org.embergraph.rdf.sail.webapp.BigdataRDFServlet;
+import org.embergraph.rdf.sail.webapp.BlueprintsServletProxy;
+import org.embergraph.rdf.sail.webapp.client.MiniMime;
 import com.tinkerpop.blueprints.util.io.graphml.GraphMLReader;
 
 /**

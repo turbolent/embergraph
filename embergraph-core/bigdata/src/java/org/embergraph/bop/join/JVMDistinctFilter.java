@@ -31,12 +31,12 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.bindingSet.ListBindingSet;
-import com.bigdata.bop.engine.BOpStats;
-import com.bigdata.relation.accesspath.IBuffer;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.bindingSet.ListBindingSet;
+import org.embergraph.bop.engine.BOpStats;
+import org.embergraph.relation.accesspath.IBuffer;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

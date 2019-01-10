@@ -9,12 +9,12 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
-import com.bigdata.rdf.internal.INonInlineExtensionCodes;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.VTE;
-import com.bigdata.rdf.internal.impl.AbstractNonInlineExtensionIVWithDelegateIV;
-import com.bigdata.rdf.internal.impl.uri.PartlyInlineURIIV;
-import com.bigdata.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.internal.INonInlineExtensionCodes;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.VTE;
+import org.embergraph.rdf.internal.impl.AbstractNonInlineExtensionIVWithDelegateIV;
+import org.embergraph.rdf.internal.impl.uri.PartlyInlineURIIV;
+import org.embergraph.rdf.model.BigdataLiteral;
 
 /**
  * A {@link Literal} modeled as a datatype {@link IV} plus an inline Unicode

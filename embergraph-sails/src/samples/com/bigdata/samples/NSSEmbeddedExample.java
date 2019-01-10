@@ -6,9 +6,9 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.eclipse.jetty.server.Server;
 
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.webapp.NanoSparqlServer;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.webapp.NanoSparqlServer;
 
 /**
  * Class demonstrates how to start the {@link NanoSparqlServer} from within

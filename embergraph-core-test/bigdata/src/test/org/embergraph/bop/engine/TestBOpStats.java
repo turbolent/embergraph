@@ -29,7 +29,7 @@ package org.embergraph.bop.engine;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.io.SerializerUtil;
+import org.embergraph.io.SerializerUtil;
 
 /**
  * Test suite for {@link BOpStats}.

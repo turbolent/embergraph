@@ -32,10 +32,10 @@ import java.util.Properties;
 
 import junit.framework.TestCase;
 
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.rdf.lexicon.LexiconKeyOrder;
-import com.bigdata.rdf.lexicon.LexiconRelation;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.lexicon.LexiconKeyOrder;
+import org.embergraph.rdf.lexicon.LexiconRelation;
 
 /**
  * Unit tests for {@link Configuration}.

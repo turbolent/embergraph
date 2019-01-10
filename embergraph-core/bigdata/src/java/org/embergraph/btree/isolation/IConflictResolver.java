@@ -29,10 +29,10 @@ package org.embergraph.btree.isolation;
 
 import java.io.Serializable;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.ITuple;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.Tx;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.ITuple;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.Tx;
 
 /**
  * <p>

@@ -29,9 +29,9 @@ package org.embergraph.bop.solutions;
 
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.aggregate.IAggregate;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.aggregate.IAggregate;
 
 /**
  * Base class for operators which perform aggregation operations on binding

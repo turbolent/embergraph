@@ -28,9 +28,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation.locator;
 
-import com.bigdata.relation.IDatabase;
-import com.bigdata.relation.IRelation;
-import com.bigdata.service.IBigdataFederation;
+import org.embergraph.relation.IDatabase;
+import org.embergraph.relation.IRelation;
+import org.embergraph.service.IBigdataFederation;
 
 /**
  * An object that knows how to resolve a resource identifier (aka namespace) to

@@ -1,8 +1,8 @@
 package org.embergraph.relation.rule.eval.pipeline;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.relation.accesspath.AbstractUnsynchronizedArrayBuffer;
-import com.bigdata.relation.accesspath.IBlockingBuffer;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.relation.accesspath.AbstractUnsynchronizedArrayBuffer;
+import org.embergraph.relation.accesspath.IBlockingBuffer;
 
 /**
  * Keeps track of the chunks of binding sets that are generated on the caller's

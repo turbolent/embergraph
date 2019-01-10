@@ -2,9 +2,9 @@ package org.embergraph.rdf.sparql.ast;
 
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.rdf.internal.IV;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.rdf.internal.IV;
 
 /**
  * AST node for value expressions.

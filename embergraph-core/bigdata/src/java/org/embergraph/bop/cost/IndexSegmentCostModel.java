@@ -28,7 +28,7 @@ package org.embergraph.bop.cost;
 
 import java.io.Serializable;
 
-import com.bigdata.btree.IndexSegment;
+import org.embergraph.btree.IndexSegment;
 
 /**
  * A cost model for a range scan on an {@link IndexSegment}.

@@ -30,7 +30,7 @@ package org.embergraph.btree;
 
 import java.io.Serializable;
 
-import com.bigdata.rawstore.IRawStore;
+import org.embergraph.rawstore.IRawStore;
 
 /**
  * An interface that allows you to inspect index entries during an

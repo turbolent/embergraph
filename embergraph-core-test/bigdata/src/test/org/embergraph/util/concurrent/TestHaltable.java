@@ -34,7 +34,7 @@ import java.util.concurrent.TimeoutException;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.util.InnerCause;
+import org.embergraph.util.InnerCause;
 
 /**
  * Test suite for {@link Haltable}.

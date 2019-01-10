@@ -29,8 +29,8 @@ package org.embergraph.rdf.sparql.ast;
 
 import java.util.Set;
 
-import com.bigdata.bop.IVariable;
-import com.bigdata.rdf.internal.constraints.INeedsMaterialization;
+import org.embergraph.bop.IVariable;
+import org.embergraph.rdf.internal.constraints.INeedsMaterialization;
 
 /**
  * Abstract base class for AST nodes which embed value expressions and hence

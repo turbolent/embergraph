@@ -29,24 +29,24 @@ package org.embergraph.service;
 
 import java.util.Properties;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.proc.IIndexProcedure;
-import com.bigdata.cache.HardReferenceQueue;
-import com.bigdata.counters.AbstractStatisticsCollector;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.query.QueryUtil;
-import com.bigdata.ganglia.GangliaService;
-import com.bigdata.ganglia.IGangliaDefaults;
-import com.bigdata.journal.IIndexStore;
-import com.bigdata.journal.ITx;
-import com.bigdata.mdi.IMetadataIndex;
-import com.bigdata.relation.accesspath.IAccessPath;
-import com.bigdata.relation.locator.ILocatableResource;
-import com.bigdata.relation.locator.IResourceLocator;
-import com.bigdata.relation.rule.eval.ProgramTask;
-import com.bigdata.resources.StaleLocatorException;
-import com.bigdata.service.ndx.ClientIndexView;
-import com.bigdata.util.concurrent.ThreadPoolExecutorStatisticsTask;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.proc.IIndexProcedure;
+import org.embergraph.cache.HardReferenceQueue;
+import org.embergraph.counters.AbstractStatisticsCollector;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.query.QueryUtil;
+import org.embergraph.ganglia.GangliaService;
+import org.embergraph.ganglia.IGangliaDefaults;
+import org.embergraph.journal.IIndexStore;
+import org.embergraph.journal.ITx;
+import org.embergraph.mdi.IMetadataIndex;
+import org.embergraph.relation.accesspath.IAccessPath;
+import org.embergraph.relation.locator.ILocatableResource;
+import org.embergraph.relation.locator.IResourceLocator;
+import org.embergraph.relation.rule.eval.ProgramTask;
+import org.embergraph.resources.StaleLocatorException;
+import org.embergraph.service.ndx.ClientIndexView;
+import org.embergraph.util.concurrent.ThreadPoolExecutorStatisticsTask;
 
 /**
  * Interface for clients of a {@link IBigdataFederation}.

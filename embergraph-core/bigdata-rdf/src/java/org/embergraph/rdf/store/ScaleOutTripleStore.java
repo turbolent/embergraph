@@ -29,9 +29,9 @@ package org.embergraph.rdf.store;
 
 import java.util.Properties;
 
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.relation.locator.DefaultResourceLocator;
-import com.bigdata.service.IBigdataFederation;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.relation.locator.DefaultResourceLocator;
+import org.embergraph.service.IBigdataFederation;
 
 /**
  * Implementation of an {@link ITripleStore} as a client of an

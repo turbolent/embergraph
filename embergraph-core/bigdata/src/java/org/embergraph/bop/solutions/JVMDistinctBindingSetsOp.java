@@ -28,20 +28,20 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.FutureTask;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpContext;
-import com.bigdata.bop.ConcurrentHashMapAnnotations;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IQueryAttributes;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.NV;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.engine.BOpStats;
-import com.bigdata.bop.join.IDistinctFilter;
-import com.bigdata.bop.join.JVMDistinctFilter;
-import com.bigdata.bop.join.JVMHashJoinUtility;
-import com.bigdata.relation.accesspath.IBlockingBuffer;
-import com.bigdata.relation.accesspath.UnsyncLocalOutputBuffer;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpContext;
+import org.embergraph.bop.ConcurrentHashMapAnnotations;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IQueryAttributes;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.NV;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.engine.BOpStats;
+import org.embergraph.bop.join.IDistinctFilter;
+import org.embergraph.bop.join.JVMDistinctFilter;
+import org.embergraph.bop.join.JVMHashJoinUtility;
+import org.embergraph.relation.accesspath.IBlockingBuffer;
+import org.embergraph.relation.accesspath.UnsyncLocalOutputBuffer;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

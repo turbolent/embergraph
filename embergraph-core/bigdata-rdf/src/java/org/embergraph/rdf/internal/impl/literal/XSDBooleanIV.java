@@ -26,10 +26,10 @@ package org.embergraph.rdf.internal.impl.literal;
 
 import org.openrdf.model.Literal;
 
-import com.bigdata.rdf.internal.DTE;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.lexicon.LexiconRelation;
-import com.bigdata.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.internal.DTE;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.lexicon.LexiconRelation;
+import org.embergraph.rdf.model.BigdataLiteral;
 
 /** Implementation for inline <code>xsd:boolean</code>. */
 public class XSDBooleanIV<V extends BigdataLiteral> extends

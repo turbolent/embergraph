@@ -8,10 +8,10 @@ import junit.framework.TestCase2;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.rdf.internal.impl.literal.FullyInlineTypedLiteralIV;
-import com.bigdata.rdf.lexicon.BlobsIndexHelper;
-import com.bigdata.rdf.model.BigdataLiteral;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.rdf.internal.impl.literal.FullyInlineTypedLiteralIV;
+import org.embergraph.rdf.lexicon.BlobsIndexHelper;
+import org.embergraph.rdf.model.BigdataLiteral;
 
 /**
  * Test suite for {@link FullyInlineTypedLiteralIV}.

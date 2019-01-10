@@ -29,7 +29,7 @@ package org.embergraph.rdf.sparql.ast.optimizers;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.rdf.sparql.ast.AbstractASTEvaluationTestCase;
+import org.embergraph.rdf.sparql.ast.AbstractASTEvaluationTestCase;
 
 /**
  * Test suite for {@link ASTLiftPreFiltersOptimizer}.

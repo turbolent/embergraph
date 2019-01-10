@@ -25,7 +25,7 @@ package org.embergraph.rdf.sail.webapp;
 import java.io.IOException;
 import java.io.Writer;
 
-import com.bigdata.util.HTMLUtility;
+import org.embergraph.util.HTMLUtility;
 
 /**
  * Utility Java class for outputting XML.

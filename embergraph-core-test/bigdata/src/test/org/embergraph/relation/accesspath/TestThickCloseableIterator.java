@@ -30,7 +30,7 @@ package org.embergraph.relation.accesspath;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.io.SerializerUtil;
+import org.embergraph.io.SerializerUtil;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

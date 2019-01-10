@@ -6,8 +6,8 @@ import java.io.IOException;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.journal.IResourceManager;
-import com.bigdata.resources.ResourceManager.Options;
+import org.embergraph.journal.IResourceManager;
+import org.embergraph.resources.ResourceManager.Options;
 
 /**
  * The default implementation accepts directories under the configured

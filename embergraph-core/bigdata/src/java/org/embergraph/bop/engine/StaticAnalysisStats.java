@@ -34,8 +34,8 @@ import java.util.Map;
 
 import org.openrdf.model.Value;
 
-import com.bigdata.rdf.sparql.ast.ASTContainer;
-import com.bigdata.rdf.sparql.ast.optimizers.ASTOptimizerList;
+import org.embergraph.rdf.sparql.ast.ASTContainer;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTOptimizerList;
 
 /**
  * Statistics associated with the Static Analysis phase, such as runtime for

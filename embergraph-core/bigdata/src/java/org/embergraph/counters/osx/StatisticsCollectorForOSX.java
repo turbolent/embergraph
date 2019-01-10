@@ -2,11 +2,11 @@ package org.embergraph.counters.osx;
 
 import java.util.UUID;
 
-import com.bigdata.counters.AbstractStatisticsCollector;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.IHostCounters;
-import com.bigdata.counters.IRequiredHostCounters;
-import com.bigdata.counters.PIDUtil;
+import org.embergraph.counters.AbstractStatisticsCollector;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.IHostCounters;
+import org.embergraph.counters.IRequiredHostCounters;
+import org.embergraph.counters.PIDUtil;
 
 /**
  * Collection of host performance data using OSX native utilities (curent

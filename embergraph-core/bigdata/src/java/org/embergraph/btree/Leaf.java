@@ -33,17 +33,17 @@ import java.util.WeakHashMap;
 
 import org.apache.log4j.Level;
 
-import com.bigdata.btree.data.DefaultLeafCoder;
-import com.bigdata.btree.data.ILeafData;
-import com.bigdata.btree.filter.EmptyTupleIterator;
-import com.bigdata.btree.isolation.IsolatedFusedView;
-import com.bigdata.btree.raba.IRaba;
-import com.bigdata.btree.raba.MutableKeyBuffer;
-import com.bigdata.btree.raba.MutableValueBuffer;
-import com.bigdata.io.AbstractFixedByteArrayBuffer;
-import com.bigdata.journal.ITransactionService;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.data.DefaultLeafCoder;
+import org.embergraph.btree.data.ILeafData;
+import org.embergraph.btree.filter.EmptyTupleIterator;
+import org.embergraph.btree.isolation.IsolatedFusedView;
+import org.embergraph.btree.raba.IRaba;
+import org.embergraph.btree.raba.MutableKeyBuffer;
+import org.embergraph.btree.raba.MutableValueBuffer;
+import org.embergraph.io.AbstractFixedByteArrayBuffer;
+import org.embergraph.journal.ITransactionService;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.util.BytesUtil;
 
 import cutthecrap.utils.striterators.EmptyIterator;
 import cutthecrap.utils.striterators.SingleValueIterator;

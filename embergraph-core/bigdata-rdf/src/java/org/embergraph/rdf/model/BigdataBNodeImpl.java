@@ -49,12 +49,12 @@ package org.embergraph.rdf.model;
 
 import org.openrdf.model.BNode;
 
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.impl.bnode.SidIV;
-import com.bigdata.rdf.rio.StatementBuffer;
-import com.bigdata.rdf.rio.UnificationException;
-import com.bigdata.rdf.spo.SPO;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.impl.bnode.SidIV;
+import org.embergraph.rdf.rio.StatementBuffer;
+import org.embergraph.rdf.rio.UnificationException;
+import org.embergraph.rdf.spo.SPO;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * A blank node. Use {@link BigdataValueFactory} to create instances of this

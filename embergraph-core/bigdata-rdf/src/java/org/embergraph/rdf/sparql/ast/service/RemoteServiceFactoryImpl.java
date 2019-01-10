@@ -31,10 +31,10 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.IVariableOrConstant;
-import com.bigdata.rdf.sparql.ast.eval.AbstractServiceFactoryBase;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.IVariableOrConstant;
+import org.embergraph.rdf.sparql.ast.eval.AbstractServiceFactoryBase;
 
 /**
  * A factory for service calls against remote SPARQL end points. You can control

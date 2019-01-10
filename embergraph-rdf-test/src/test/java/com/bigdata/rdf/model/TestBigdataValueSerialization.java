@@ -14,7 +14,7 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.impl.ValueFactoryImpl;
 import org.openrdf.model.vocabulary.XMLSchema;
 
-import com.bigdata.io.SerializerUtil;
+import org.embergraph.io.SerializerUtil;
 
 /**
  * Test suite for {@link BigdataValueImpl} serialization semantics, including

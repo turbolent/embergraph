@@ -5,9 +5,9 @@ import java.util.concurrent.Future;
 
 import org.openrdf.model.Statement;
 
-import com.bigdata.counters.CounterSet;
-import com.bigdata.rdf.load.IStatementBufferFactory;
-import com.bigdata.relation.accesspath.IBuffer;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.rdf.load.IStatementBufferFactory;
+import org.embergraph.relation.accesspath.IBuffer;
 
 /**
  * Factory interface for asynchronous writers on an {@link ITripleStore}.

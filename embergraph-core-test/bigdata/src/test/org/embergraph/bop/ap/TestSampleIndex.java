@@ -34,21 +34,21 @@ import java.util.Random;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpContextBase;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.NV;
-import com.bigdata.bop.Var;
-import com.bigdata.bop.IPredicate.Annotations;
-import com.bigdata.bop.ap.SampleIndex.AcceptanceSetOffsetSampler;
-import com.bigdata.bop.ap.SampleIndex.IOffsetSampler;
-import com.bigdata.bop.ap.SampleIndex.SampleType;
-import com.bigdata.bop.ap.SampleIndex.SmartOffsetSampler;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.Journal;
-import com.bigdata.striterator.ChunkedArrayIterator;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpContextBase;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.NV;
+import org.embergraph.bop.Var;
+import org.embergraph.bop.IPredicate.Annotations;
+import org.embergraph.bop.ap.SampleIndex.AcceptanceSetOffsetSampler;
+import org.embergraph.bop.ap.SampleIndex.IOffsetSampler;
+import org.embergraph.bop.ap.SampleIndex.SampleType;
+import org.embergraph.bop.ap.SampleIndex.SmartOffsetSampler;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Journal;
+import org.embergraph.striterator.ChunkedArrayIterator;
 
 /**
  * Test suite for {@link SampleIndex}.

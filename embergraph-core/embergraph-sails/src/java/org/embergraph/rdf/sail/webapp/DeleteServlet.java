@@ -49,14 +49,14 @@ import org.openrdf.rio.RDFParserRegistry;
 import org.openrdf.rio.helpers.RDFHandlerBase;
 import org.openrdf.sail.SailException;
 
-import com.bigdata.journal.ITx;
-import com.bigdata.rdf.sail.BigdataSail.BigdataSailConnection;
-import com.bigdata.rdf.sail.sparql.Bigdata2ASTSPARQLParser;
-import com.bigdata.rdf.sail.BigdataSailRepositoryConnection;
-import com.bigdata.rdf.sail.webapp.BigdataRDFContext.AbstractQueryTask;
-import com.bigdata.rdf.sail.webapp.client.EncodeDecodeValue;
-import com.bigdata.rdf.sail.webapp.client.MiniMime;
-import com.bigdata.rdf.sparql.ast.ASTContainer;
+import org.embergraph.journal.ITx;
+import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
+import org.embergraph.rdf.sail.sparql.Bigdata2ASTSPARQLParser;
+import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.rdf.sail.webapp.BigdataRDFContext.AbstractQueryTask;
+import org.embergraph.rdf.sail.webapp.client.EncodeDecodeValue;
+import org.embergraph.rdf.sail.webapp.client.MiniMime;
+import org.embergraph.rdf.sparql.ast.ASTContainer;
 
 /**
  * Handler for DELETE by query (DELETE verb) and DELETE by data (POST).

@@ -42,15 +42,15 @@ import org.openrdf.query.TupleQuery;
 import org.openrdf.query.TupleQueryResult;
 import org.openrdf.rio.RDFFormat;
 
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.BigdataSailRepository;
-import com.bigdata.rdf.sail.BigdataSailRepositoryConnection;
-import com.bigdata.rdf.sail.ProxyBigdataSailTestCase;
-import com.bigdata.rdf.vocab.BaseVocabulary;
-import com.bigdata.rdf.vocab.NoVocabulary;
-import com.bigdata.rdf.vocab.RDFSVocabulary;
-import com.bigdata.rdf.vocab.VocabularyDecl;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.BigdataSailRepository;
+import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.rdf.sail.ProxyBigdataSailTestCase;
+import org.embergraph.rdf.vocab.BaseVocabulary;
+import org.embergraph.rdf.vocab.NoVocabulary;
+import org.embergraph.rdf.vocab.RDFSVocabulary;
+import org.embergraph.rdf.vocab.VocabularyDecl;
 
 public class TestPaths extends ProxyBigdataSailTestCase {
 

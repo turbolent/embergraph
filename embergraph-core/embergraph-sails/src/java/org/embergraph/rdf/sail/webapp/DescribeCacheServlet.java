@@ -41,16 +41,16 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFWriter;
 import org.openrdf.rio.RDFWriterRegistry;
 
-import com.bigdata.bop.engine.QueryEngine;
-import com.bigdata.bop.fed.QueryEngineFactory;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.sparql.ast.cache.CacheConnectionFactory;
-import com.bigdata.rdf.sparql.ast.cache.ICacheConnection;
-import com.bigdata.rdf.sparql.ast.cache.IDescribeCache;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.bop.engine.QueryEngine;
+import org.embergraph.bop.fed.QueryEngineFactory;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.sparql.ast.cache.CacheConnectionFactory;
+import org.embergraph.rdf.sparql.ast.cache.ICacheConnection;
+import org.embergraph.rdf.sparql.ast.cache.IDescribeCache;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * A maintained cache for DESCRIBE of URIs.

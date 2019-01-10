@@ -2,7 +2,7 @@ package org.embergraph.relation.accesspath;
 
 import java.util.concurrent.Callable;
 
-import com.bigdata.relation.rule.eval.ISolution;
+import org.embergraph.relation.rule.eval.ISolution;
 
 /**
  * Task invokes {@link IBuffer#flush()} and returns its return value.

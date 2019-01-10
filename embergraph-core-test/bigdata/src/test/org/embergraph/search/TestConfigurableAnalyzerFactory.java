@@ -34,7 +34,7 @@ import org.apache.lucene.analysis.de.GermanAnalyzer;
 import org.apache.lucene.analysis.ru.RussianAnalyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 
-import com.bigdata.search.ConfigurableAnalyzerFactory.AnalyzerOptions;
+import org.embergraph.search.ConfigurableAnalyzerFactory.AnalyzerOptions;
 
 /**
  * Unit tests for {@link ConfigurableAnalyzerFactory}.

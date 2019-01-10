@@ -30,7 +30,7 @@ package org.embergraph.relation;
 
 import java.util.Iterator;
 
-import com.bigdata.relation.locator.ILocatableResource;
+import org.embergraph.relation.locator.ILocatableResource;
 
 /**
  * A collection of relations having a unique namespace. The relations within the

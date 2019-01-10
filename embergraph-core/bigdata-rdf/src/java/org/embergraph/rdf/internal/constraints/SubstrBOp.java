@@ -29,13 +29,13 @@ import java.util.Map;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.rdf.error.SparqlTypeErrorException;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.sparql.ast.GlobalAnnotations;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.rdf.error.SparqlTypeErrorException;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 
 /**
  * This function has an origin of ONE (1) not ZERO (0). The start and offset

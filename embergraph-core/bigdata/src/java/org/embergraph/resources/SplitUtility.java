@@ -35,20 +35,20 @@ import java.util.concurrent.Future;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.ILocalBTreeView;
-import com.bigdata.btree.ISimpleSplitHandler;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.IndexSegment;
-import com.bigdata.btree.Leaf;
-import com.bigdata.btree.Node;
-import com.bigdata.journal.TimestampUtility;
-import com.bigdata.mdi.LocalPartitionMetadata;
-import com.bigdata.service.Event;
-import com.bigdata.service.Split;
-import com.bigdata.util.BytesUtil;
-import com.bigdata.util.concurrent.ExecutionExceptions;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.ILocalBTreeView;
+import org.embergraph.btree.ISimpleSplitHandler;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.IndexSegment;
+import org.embergraph.btree.Leaf;
+import org.embergraph.btree.Node;
+import org.embergraph.journal.TimestampUtility;
+import org.embergraph.mdi.LocalPartitionMetadata;
+import org.embergraph.service.Event;
+import org.embergraph.service.Split;
+import org.embergraph.util.BytesUtil;
+import org.embergraph.util.concurrent.ExecutionExceptions;
 
 /**
  * Utility methods for {@link ISimpleSplitHandler}s and friends.

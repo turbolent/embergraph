@@ -7,10 +7,10 @@ import junit.framework.TestCase2;
 
 import org.openrdf.model.impl.URIImpl;
 
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.rdf.internal.impl.uri.FullyInlineURIIV;
-import com.bigdata.rdf.lexicon.BlobsIndexHelper;
-import com.bigdata.rdf.model.BigdataURI;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.rdf.internal.impl.uri.FullyInlineURIIV;
+import org.embergraph.rdf.lexicon.BlobsIndexHelper;
+import org.embergraph.rdf.model.BigdataURI;
 
 /**
  * Test suite for {@link FullyInlineURIIV}.

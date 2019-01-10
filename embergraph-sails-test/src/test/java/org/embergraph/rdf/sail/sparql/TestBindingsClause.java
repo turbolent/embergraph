@@ -35,25 +35,25 @@ import org.apache.log4j.Logger;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.Var;
-import com.bigdata.bop.bindingSet.ListBindingSet;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.sail.sparql.ast.ParseException;
-import com.bigdata.rdf.sail.sparql.ast.TokenMgrError;
-import com.bigdata.rdf.sail.sparql.ast.VisitorException;
-import com.bigdata.rdf.sparql.AbstractBigdataExprBuilderTestCase;
-import com.bigdata.rdf.sparql.ast.BindingsClause;
-import com.bigdata.rdf.sparql.ast.ConstantNode;
-import com.bigdata.rdf.sparql.ast.JoinGroupNode;
-import com.bigdata.rdf.sparql.ast.ProjectionNode;
-import com.bigdata.rdf.sparql.ast.QueryRoot;
-import com.bigdata.rdf.sparql.ast.QueryType;
-import com.bigdata.rdf.sparql.ast.StatementPatternNode;
-import com.bigdata.rdf.sparql.ast.VarNode;
-import com.bigdata.util.InnerCause;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.Var;
+import org.embergraph.bop.bindingSet.ListBindingSet;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.sail.sparql.ast.ParseException;
+import org.embergraph.rdf.sail.sparql.ast.TokenMgrError;
+import org.embergraph.rdf.sail.sparql.ast.VisitorException;
+import org.embergraph.rdf.sparql.AbstractBigdataExprBuilderTestCase;
+import org.embergraph.rdf.sparql.ast.BindingsClause;
+import org.embergraph.rdf.sparql.ast.ConstantNode;
+import org.embergraph.rdf.sparql.ast.JoinGroupNode;
+import org.embergraph.rdf.sparql.ast.ProjectionNode;
+import org.embergraph.rdf.sparql.ast.QueryRoot;
+import org.embergraph.rdf.sparql.ast.QueryType;
+import org.embergraph.rdf.sparql.ast.StatementPatternNode;
+import org.embergraph.rdf.sparql.ast.VarNode;
+import org.embergraph.util.InnerCause;
 
 /**
  * Test suite for the BINDINGS clause.

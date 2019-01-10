@@ -30,12 +30,12 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-import com.bigdata.io.LongPacker;
-import com.bigdata.rdf.internal.DTE;
-import com.bigdata.rdf.internal.DTEExtension;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.lexicon.LexiconRelation;
-import com.bigdata.rdf.model.BigdataLiteral;
+import org.embergraph.io.LongPacker;
+import org.embergraph.rdf.internal.DTE;
+import org.embergraph.rdf.internal.DTEExtension;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.lexicon.LexiconRelation;
+import org.embergraph.rdf.model.BigdataLiteral;
 
 /**
  * Internal value representing a packed long in the range [0;72057594037927935L].

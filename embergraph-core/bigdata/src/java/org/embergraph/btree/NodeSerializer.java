@@ -29,23 +29,23 @@ package org.embergraph.btree;
 import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
 
-import com.bigdata.BigdataStatics;
-import com.bigdata.btree.data.AbstractReadOnlyNodeData;
-import com.bigdata.btree.data.DefaultLeafCoder;
-import com.bigdata.btree.data.DefaultNodeCoder;
-import com.bigdata.btree.data.IAbstractNodeData;
-import com.bigdata.btree.data.IAbstractNodeDataCoder;
-import com.bigdata.btree.data.ILeafData;
-import com.bigdata.btree.data.INodeData;
-import com.bigdata.io.AbstractFixedByteArrayBuffer;
-import com.bigdata.io.DataOutputBuffer;
-import com.bigdata.io.FixedByteArrayBuffer;
-import com.bigdata.io.IDataRecord;
-import com.bigdata.io.compression.IRecordCompressor;
-import com.bigdata.io.compression.IRecordCompressorFactory;
-import com.bigdata.io.compression.NOPRecordCompressor;
-import com.bigdata.rawstore.IAddressManager;
-import com.bigdata.rawstore.IRawStore;
+import org.embergraph.BigdataStatics;
+import org.embergraph.btree.data.AbstractReadOnlyNodeData;
+import org.embergraph.btree.data.DefaultLeafCoder;
+import org.embergraph.btree.data.DefaultNodeCoder;
+import org.embergraph.btree.data.IAbstractNodeData;
+import org.embergraph.btree.data.IAbstractNodeDataCoder;
+import org.embergraph.btree.data.ILeafData;
+import org.embergraph.btree.data.INodeData;
+import org.embergraph.io.AbstractFixedByteArrayBuffer;
+import org.embergraph.io.DataOutputBuffer;
+import org.embergraph.io.FixedByteArrayBuffer;
+import org.embergraph.io.IDataRecord;
+import org.embergraph.io.compression.IRecordCompressor;
+import org.embergraph.io.compression.IRecordCompressorFactory;
+import org.embergraph.io.compression.NOPRecordCompressor;
+import org.embergraph.rawstore.IAddressManager;
+import org.embergraph.rawstore.IRawStore;
 
 /**
  * <p>

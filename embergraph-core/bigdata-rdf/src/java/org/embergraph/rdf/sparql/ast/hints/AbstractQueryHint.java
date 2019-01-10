@@ -29,9 +29,9 @@ package org.embergraph.rdf.sparql.ast.hints;
 
 import java.util.Properties;
 
-import com.bigdata.rdf.sparql.ast.ASTBase;
-import com.bigdata.rdf.sparql.ast.eval.IEvaluationContext;
-import com.bigdata.rdf.sparql.ast.optimizers.IASTOptimizer;
+import org.embergraph.rdf.sparql.ast.ASTBase;
+import org.embergraph.rdf.sparql.ast.eval.IEvaluationContext;
+import org.embergraph.rdf.sparql.ast.optimizers.IASTOptimizer;
 
 /**
  * Base class for query hints.

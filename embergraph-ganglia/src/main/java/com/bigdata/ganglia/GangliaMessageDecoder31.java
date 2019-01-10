@@ -21,7 +21,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.ganglia.xdr.XDRInputBuffer;
+import org.embergraph.ganglia.xdr.XDRInputBuffer;
 
 /**
  * Class decodes a Ganglia 3.1 wire format message.

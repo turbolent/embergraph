@@ -28,12 +28,12 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree;
 
-import com.bigdata.btree.proc.AbstractKeyArrayIndexProcedureConstructor;
-import com.bigdata.btree.proc.IKeyRangeIndexProcedure;
-import com.bigdata.btree.proc.IResultHandler;
-import com.bigdata.btree.proc.ISimpleIndexProcedure;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.mdi.IResourceMetadata;
+import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedureConstructor;
+import org.embergraph.btree.proc.IKeyRangeIndexProcedure;
+import org.embergraph.btree.proc.IResultHandler;
+import org.embergraph.btree.proc.ISimpleIndexProcedure;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.mdi.IResourceMetadata;
 
 import cutthecrap.utils.striterators.IFilter;
 

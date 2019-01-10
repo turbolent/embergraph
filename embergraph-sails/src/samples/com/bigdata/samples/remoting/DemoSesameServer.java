@@ -11,8 +11,8 @@ import org.openrdf.query.QueryLanguage;
 import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.http.HTTPRepository;
-import com.bigdata.rdf.store.BD;
-import com.bigdata.samples.SparqlBuilder;
+import org.embergraph.rdf.store.BD;
+import org.embergraph.samples.SparqlBuilder;
 
 public class DemoSesameServer {
     

@@ -32,19 +32,19 @@ import java.util.Arrays;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.btree.AbstractBTreeTestCase;
-import com.bigdata.btree.raba.IRaba;
-import com.bigdata.btree.raba.ReadOnlyKeysRaba;
-import com.bigdata.btree.raba.codec.CanonicalHuffmanRabaCoder;
-import com.bigdata.btree.raba.codec.FrontCodedRabaCoder;
-import com.bigdata.btree.raba.codec.ICodedRaba;
-import com.bigdata.btree.raba.codec.IRabaCoder;
-import com.bigdata.btree.raba.codec.SimpleRabaCoder;
-import com.bigdata.io.AbstractFixedByteArrayBuffer;
-import com.bigdata.io.DataOutputBuffer;
-import com.bigdata.io.FixedByteArrayBuffer;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.test.MockTermIdFactory;
+import org.embergraph.btree.AbstractBTreeTestCase;
+import org.embergraph.btree.raba.IRaba;
+import org.embergraph.btree.raba.ReadOnlyKeysRaba;
+import org.embergraph.btree.raba.codec.CanonicalHuffmanRabaCoder;
+import org.embergraph.btree.raba.codec.FrontCodedRabaCoder;
+import org.embergraph.btree.raba.codec.ICodedRaba;
+import org.embergraph.btree.raba.codec.IRabaCoder;
+import org.embergraph.btree.raba.codec.SimpleRabaCoder;
+import org.embergraph.io.AbstractFixedByteArrayBuffer;
+import org.embergraph.io.DataOutputBuffer;
+import org.embergraph.io.FixedByteArrayBuffer;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.test.MockTermIdFactory;
 
 /**
  * Test suite for approaches to key compression for statement indices (keys are

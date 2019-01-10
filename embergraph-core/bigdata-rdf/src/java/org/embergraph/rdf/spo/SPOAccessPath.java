@@ -23,14 +23,14 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.spo;
 
-import com.bigdata.bop.IPredicate;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.relation.IRelation;
-import com.bigdata.relation.accesspath.AccessPath;
-import com.bigdata.relation.accesspath.IAccessPath;
-import com.bigdata.striterator.IChunkedOrderedIterator;
-import com.bigdata.striterator.IKeyOrder;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.relation.IRelation;
+import org.embergraph.relation.accesspath.AccessPath;
+import org.embergraph.relation.accesspath.IAccessPath;
+import org.embergraph.striterator.IChunkedOrderedIterator;
+import org.embergraph.striterator.IKeyOrder;
 
 /**
  * {@link IAccessPath} implementation for an {@link SPORelation}.

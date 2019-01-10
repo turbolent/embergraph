@@ -30,7 +30,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.util.concurrent.ThreadPoolExecutorBaseStatisticsTask;
+import org.embergraph.util.concurrent.ThreadPoolExecutorBaseStatisticsTask;
 
 /**
  * Plugin for sampling the {@link ExecutorService}. This collects interesting

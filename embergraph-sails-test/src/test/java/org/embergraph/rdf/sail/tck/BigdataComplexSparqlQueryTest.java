@@ -46,15 +46,15 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
-import com.bigdata.BigdataStatics;
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.BigdataSail.Options;
-import com.bigdata.rdf.sail.BigdataSailRepository;
-import com.bigdata.rdf.sail.BigdataSailTupleQuery;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpUtility;
+import org.embergraph.BigdataStatics;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.BigdataSail.Options;
+import org.embergraph.rdf.sail.BigdataSailRepository;
+import org.embergraph.rdf.sail.BigdataSailTupleQuery;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpUtility;
 
 /**
  * Bigdata integration for the {@link ComplexSPARQLQueryTest}.

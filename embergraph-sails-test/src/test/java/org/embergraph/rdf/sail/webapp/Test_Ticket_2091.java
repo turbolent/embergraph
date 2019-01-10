@@ -28,9 +28,9 @@ import org.openrdf.model.Value;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQueryResult;
-import com.bigdata.bop.engine.NativeHeapStandloneChunkHandler;
-import com.bigdata.rdf.sail.remote.BigdataSailRemoteRepositoryConnection;
-import com.bigdata.rdf.sparql.ast.QueryHints;
+import org.embergraph.bop.engine.NativeHeapStandloneChunkHandler;
+import org.embergraph.rdf.sail.remote.BigdataSailRemoteRepositoryConnection;
+import org.embergraph.rdf.sparql.ast.QueryHints;
 
 import junit.framework.Test;
 

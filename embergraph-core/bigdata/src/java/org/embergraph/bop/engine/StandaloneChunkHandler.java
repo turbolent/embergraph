@@ -27,8 +27,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.engine;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.solutions.SolutionSetStream;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.solutions.SolutionSetStream;
 
 /**
  * Implementation supports a standalone database. Depending on the specific

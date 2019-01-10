@@ -28,8 +28,8 @@ import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.util.UUID;
 
-import com.bigdata.counters.CounterSet;
-import com.bigdata.mdi.IResourceMetadata;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.mdi.IResourceMetadata;
 
 /**
  * Simple delegation pattern.

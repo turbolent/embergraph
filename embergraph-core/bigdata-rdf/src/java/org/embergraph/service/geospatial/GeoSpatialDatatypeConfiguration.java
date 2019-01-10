@@ -42,9 +42,9 @@ import org.codehaus.jettison.json.JSONObject;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-import com.bigdata.rdf.internal.impl.extensions.InvalidGeoSpatialDatatypeConfigurationError;
-import com.bigdata.service.geospatial.GeoSpatialDatatypeFieldConfiguration.ServiceMapping;
-import com.bigdata.service.geospatial.GeoSpatialDatatypeFieldConfiguration.ValueType;
+import org.embergraph.rdf.internal.impl.extensions.InvalidGeoSpatialDatatypeConfigurationError;
+import org.embergraph.service.geospatial.GeoSpatialDatatypeFieldConfiguration.ServiceMapping;
+import org.embergraph.service.geospatial.GeoSpatialDatatypeFieldConfiguration.ValueType;
 
 /**
  * Configuration of a single geospatial datatype, including value type, multiplier,

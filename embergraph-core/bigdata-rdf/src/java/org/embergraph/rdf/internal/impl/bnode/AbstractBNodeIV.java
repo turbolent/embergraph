@@ -27,12 +27,12 @@ import org.openrdf.model.BNode;
 import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 
-import com.bigdata.rdf.internal.DTE;
-import com.bigdata.rdf.internal.VTE;
-import com.bigdata.rdf.internal.impl.AbstractInlineIV;
-import com.bigdata.rdf.lexicon.LexiconRelation;
-import com.bigdata.rdf.model.BigdataBNode;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.internal.DTE;
+import org.embergraph.rdf.internal.VTE;
+import org.embergraph.rdf.internal.impl.AbstractInlineIV;
+import org.embergraph.rdf.lexicon.LexiconRelation;
+import org.embergraph.rdf.model.BigdataBNode;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * Class for inline RDF blank nodes. 

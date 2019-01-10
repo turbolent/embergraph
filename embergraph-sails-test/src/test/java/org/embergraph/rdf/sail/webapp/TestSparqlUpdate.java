@@ -77,11 +77,11 @@ import org.openrdf.query.parser.sparql.SPARQLUpdateTest;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
 
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.rdf.sail.webapp.client.IPreparedTupleQuery;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepository;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepository.AddOp;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.sail.webapp.client.IPreparedTupleQuery;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository.AddOp;
 
 /**
  * Proxied test suite.

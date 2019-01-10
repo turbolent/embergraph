@@ -35,17 +35,17 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.IndexSegment;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.Journal;
-import com.bigdata.mdi.LocalPartitionMetadata;
-import com.bigdata.resources.ResourceManager.Options;
-import com.bigdata.sparse.GlobalRowStoreHelper;
-import com.bigdata.sparse.GlobalRowStoreSchema;
-import com.bigdata.sparse.ITPS;
-import com.bigdata.sparse.SparseRowStore;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.IndexSegment;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Journal;
+import org.embergraph.mdi.LocalPartitionMetadata;
+import org.embergraph.resources.ResourceManager.Options;
+import org.embergraph.sparse.GlobalRowStoreHelper;
+import org.embergraph.sparse.GlobalRowStoreSchema;
+import org.embergraph.sparse.ITPS;
+import org.embergraph.sparse.SparseRowStore;
 
 /**
  * Test drives inserts on the GRS index partition until the data service is

@@ -32,7 +32,7 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
-import com.bigdata.journal.Name2Addr;
+import org.embergraph.journal.Name2Addr;
 import com.ibm.icu.util.VersionInfo;
 
 /**

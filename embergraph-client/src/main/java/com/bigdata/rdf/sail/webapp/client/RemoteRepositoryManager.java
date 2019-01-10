@@ -69,17 +69,17 @@ import org.openrdf.rio.RDFParser;
 import org.openrdf.rio.RDFParserFactory;
 import org.openrdf.rio.RDFParserRegistry;
 
-import com.bigdata.rdf.ServiceProviderHook;
-import com.bigdata.rdf.properties.PropertiesFormat;
-import com.bigdata.rdf.properties.PropertiesParser;
-import com.bigdata.rdf.properties.PropertiesParserFactory;
-import com.bigdata.rdf.properties.PropertiesParserRegistry;
-import com.bigdata.rdf.properties.PropertiesWriter;
-import com.bigdata.rdf.properties.PropertiesWriterRegistry;
-import com.bigdata.rdf.sail.model.JsonHelper;
-import com.bigdata.rdf.sail.model.RunningQuery;
-import com.bigdata.util.InnerCause;
-import com.bigdata.util.PropertyUtil;
+import org.embergraph.rdf.ServiceProviderHook;
+import org.embergraph.rdf.properties.PropertiesFormat;
+import org.embergraph.rdf.properties.PropertiesParser;
+import org.embergraph.rdf.properties.PropertiesParserFactory;
+import org.embergraph.rdf.properties.PropertiesParserRegistry;
+import org.embergraph.rdf.properties.PropertiesWriter;
+import org.embergraph.rdf.properties.PropertiesWriterRegistry;
+import org.embergraph.rdf.sail.model.JsonHelper;
+import org.embergraph.rdf.sail.model.RunningQuery;
+import org.embergraph.util.InnerCause;
+import org.embergraph.util.PropertyUtil;
 
 /**
  * A manager for connections to one or more REST API / SPARQL end points for the

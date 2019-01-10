@@ -25,7 +25,7 @@ package org.embergraph.btree.proc;
 
 import java.util.Comparator;
 
-import com.bigdata.service.Split;
+import org.embergraph.service.Split;
 
 /**
  * A key/value pair where the key is a Split.

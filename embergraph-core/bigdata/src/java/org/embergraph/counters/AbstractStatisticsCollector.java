@@ -43,17 +43,17 @@ import java.util.UUID;
 import org.apache.log4j.Logger;
 import org.apache.system.SystemUtil;
 
-import com.bigdata.Banner;
-import com.bigdata.BigdataStatics;
-import com.bigdata.counters.httpd.CounterSetHTTPD;
-import com.bigdata.counters.linux.StatisticsCollectorForLinux;
-import com.bigdata.counters.osx.StatisticsCollectorForOSX;
-import com.bigdata.counters.win.StatisticsCollectorForWindows;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.util.Bytes;
-import com.bigdata.util.config.NicUtil;
-import com.bigdata.util.httpd.AbstractHTTPD;
-import com.bigdata.util.httpd.Config;
+import org.embergraph.Banner;
+import org.embergraph.BigdataStatics;
+import org.embergraph.counters.httpd.CounterSetHTTPD;
+import org.embergraph.counters.linux.StatisticsCollectorForLinux;
+import org.embergraph.counters.osx.StatisticsCollectorForOSX;
+import org.embergraph.counters.win.StatisticsCollectorForWindows;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.util.Bytes;
+import org.embergraph.util.config.NicUtil;
+import org.embergraph.util.httpd.AbstractHTTPD;
+import org.embergraph.util.httpd.Config;
 
 /**
  * Base class for collecting data on a host. The data are described by a

@@ -8,13 +8,13 @@ import org.openrdf.query.TupleQueryResult;
 import org.openrdf.query.algebra.evaluation.QueryBindingSet;
 import org.openrdf.repository.sail.SailTupleQuery;
 
-import com.bigdata.rdf.sparql.ast.ASTContainer;
-import com.bigdata.rdf.sparql.ast.BindingsClause;
-import com.bigdata.rdf.sparql.ast.DatasetNode;
-import com.bigdata.rdf.sparql.ast.QueryRoot;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpContext;
-import com.bigdata.rdf.sparql.ast.eval.ASTEvalHelper;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.sparql.ast.ASTContainer;
+import org.embergraph.rdf.sparql.ast.BindingsClause;
+import org.embergraph.rdf.sparql.ast.DatasetNode;
+import org.embergraph.rdf.sparql.ast.QueryRoot;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
+import org.embergraph.rdf.sparql.ast.eval.ASTEvalHelper;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 public class BigdataSailTupleQuery extends SailTupleQuery 
         implements BigdataSailQuery {

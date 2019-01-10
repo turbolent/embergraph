@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.store;
 
-import com.bigdata.rdf.model.BigdataStatement;
+import org.embergraph.rdf.model.BigdataStatement;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

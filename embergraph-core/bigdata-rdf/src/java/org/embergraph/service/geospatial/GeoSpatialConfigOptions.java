@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.service.geospatial;
 
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * Class hosting options for geospatial configuration and defaults.

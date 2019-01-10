@@ -1,10 +1,10 @@
 package org.embergraph.rdf.spo;
 
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.ISortKeyBuilder;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.rdf.store.IRawTripleStore;
-import com.bigdata.util.Bytes;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.ISortKeyBuilder;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.rdf.store.IRawTripleStore;
+import org.embergraph.util.Bytes;
 
 /**
  * Class produces unsigned byte[] sort keys for {@link ISPO}s. This

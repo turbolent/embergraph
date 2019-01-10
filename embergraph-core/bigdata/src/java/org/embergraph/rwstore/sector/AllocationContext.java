@@ -35,15 +35,15 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.cache.ConcurrentWeakValueCache;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.OneShotInstrument;
-import com.bigdata.journal.AbstractJournal;
-import com.bigdata.journal.ICommitter;
-import com.bigdata.rawstore.IAllocationContext;
-import com.bigdata.rawstore.IPSOutputStream;
-import com.bigdata.rwstore.IRawTx;
-import com.bigdata.rwstore.PSOutputStream;
+import org.embergraph.cache.ConcurrentWeakValueCache;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.OneShotInstrument;
+import org.embergraph.journal.AbstractJournal;
+import org.embergraph.journal.ICommitter;
+import org.embergraph.rawstore.IAllocationContext;
+import org.embergraph.rawstore.IPSOutputStream;
+import org.embergraph.rwstore.IRawTx;
+import org.embergraph.rwstore.PSOutputStream;
 
 /**
  * The {@link AllocationContext} is used to maintain a handle on allocations

@@ -29,9 +29,9 @@ package org.embergraph.rdf.model;
 
 import java.io.IOException;
 
-import com.bigdata.bop.IElement;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.IVUtility;
+import org.embergraph.bop.IElement;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.IVUtility;
 
 /**
  * Abstract base class for {@link BigdataValue} implementations.

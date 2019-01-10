@@ -30,15 +30,15 @@ package org.embergraph.rdf.internal.encoder;
 import java.util.Collections;
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpBase;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rawstore.SimpleMemoryRawStore;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.IVCache;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpUtility;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpBase;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.IVCache;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpUtility;
 
 /**
  * Test suite for {@link IVBindingSetEncoderWithIVCache}. This class supports an

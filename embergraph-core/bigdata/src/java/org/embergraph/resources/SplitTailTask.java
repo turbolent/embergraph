@@ -30,11 +30,11 @@ package org.embergraph.resources;
 
 import java.util.UUID;
 
-import com.bigdata.journal.TimestampUtility;
-import com.bigdata.service.DataService;
-import com.bigdata.service.Event;
-import com.bigdata.service.EventResource;
-import com.bigdata.service.Split;
+import org.embergraph.journal.TimestampUtility;
+import org.embergraph.service.DataService;
+import org.embergraph.service.Event;
+import org.embergraph.service.EventResource;
+import org.embergraph.service.Split;
 
 /**
  * Splits the tail of an index partition and optionally submits a task to move

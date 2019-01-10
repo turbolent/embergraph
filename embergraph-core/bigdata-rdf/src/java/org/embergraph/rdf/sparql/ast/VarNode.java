@@ -2,11 +2,11 @@ package org.embergraph.rdf.sparql.ast;
 
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.Var;
-import com.bigdata.rdf.internal.IV;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.Var;
+import org.embergraph.rdf.internal.IV;
 
 /**
  * Used to represent a variable in the AST.

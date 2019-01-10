@@ -25,14 +25,14 @@ package org.embergraph.bop.rdf.aggregate;
 
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.bop.aggregate.AggregateBase;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.constraints.INeedsMaterialization;
-import com.bigdata.rdf.internal.constraints.IPassesMaterialization;
-import com.bigdata.rdf.internal.constraints.INeedsMaterialization.Requirement;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.bop.aggregate.AggregateBase;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.constraints.INeedsMaterialization;
+import org.embergraph.rdf.internal.constraints.IPassesMaterialization;
+import org.embergraph.rdf.internal.constraints.INeedsMaterialization.Requirement;
 
 /**
  * Operator reports an arbitrary value from presented binding sets for the given

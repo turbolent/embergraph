@@ -24,9 +24,9 @@
  */
 package org.embergraph.rdf.task;
 
-import com.bigdata.journal.AbstractTask;
-import com.bigdata.journal.IConcurrencyManager;
-import com.bigdata.journal.Journal;
+import org.embergraph.journal.AbstractTask;
+import org.embergraph.journal.IConcurrencyManager;
+import org.embergraph.journal.Journal;
 
 /**
  * Wrapper for a task to be executed on the {@link IConcurrencyManager} of a

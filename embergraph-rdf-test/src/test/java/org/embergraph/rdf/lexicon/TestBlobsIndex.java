@@ -33,28 +33,28 @@ import junit.framework.TestCase2;
 
 import org.openrdf.model.vocabulary.XMLSchema;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.KVO;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.io.SerializerUtil;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rawstore.SimpleMemoryRawStore;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.IVUtility;
-import com.bigdata.rdf.internal.VTE;
-import com.bigdata.rdf.internal.impl.AbstractIV;
-import com.bigdata.rdf.internal.impl.BlobIV;
-import com.bigdata.rdf.lexicon.BlobsWriteTask.BlobsWriteProcResultHandler;
-import com.bigdata.rdf.model.BigdataBNode;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.model.BigdataValueFactoryImpl;
-import com.bigdata.rdf.util.DumpLexicon;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.KVO;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.io.SerializerUtil;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.IVUtility;
+import org.embergraph.rdf.internal.VTE;
+import org.embergraph.rdf.internal.impl.AbstractIV;
+import org.embergraph.rdf.internal.impl.BlobIV;
+import org.embergraph.rdf.lexicon.BlobsWriteTask.BlobsWriteProcResultHandler;
+import org.embergraph.rdf.model.BigdataBNode;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.util.DumpLexicon;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Test suite for low-level operations on the BLOBS index.

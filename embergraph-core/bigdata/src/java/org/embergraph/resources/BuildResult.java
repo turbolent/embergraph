@@ -3,14 +3,14 @@ package org.embergraph.resources;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.bigdata.btree.AbstractBTree;
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.IndexSegment;
-import com.bigdata.btree.IndexSegmentBuilder;
-import com.bigdata.mdi.IResourceMetadata;
-import com.bigdata.mdi.SegmentMetadata;
-import com.bigdata.service.Params;
+import org.embergraph.btree.AbstractBTree;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.IndexSegment;
+import org.embergraph.btree.IndexSegmentBuilder;
+import org.embergraph.mdi.IResourceMetadata;
+import org.embergraph.mdi.SegmentMetadata;
+import org.embergraph.service.Params;
 
 /**
  * The result of an {@link CompactingMergeTask}.

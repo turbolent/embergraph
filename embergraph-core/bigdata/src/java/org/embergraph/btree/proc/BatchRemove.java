@@ -31,11 +31,11 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
-import com.bigdata.btree.Errors;
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.raba.IRaba;
-import com.bigdata.btree.raba.codec.IRabaCoder;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.Errors;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.raba.IRaba;
+import org.embergraph.btree.raba.codec.IRabaCoder;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Batch removal of one or more tuples, optionally returning their existing

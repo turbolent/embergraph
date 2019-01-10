@@ -15,7 +15,7 @@
 */
 package com.bigdata.ganglia;
 
-import com.bigdata.ganglia.GangliaMunge;
+import org.embergraph.ganglia.GangliaMunge;
 
 import junit.framework.TestCase;
 

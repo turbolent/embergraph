@@ -11,14 +11,14 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.Bind;
-import com.bigdata.bop.IConstraint;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.joinGraph.rto.JoinGraph;
-import com.bigdata.rdf.sparql.ast.StaticAnalysis_CanJoin;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.Bind;
+import org.embergraph.bop.IConstraint;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.joinGraph.rto.JoinGraph;
+import org.embergraph.rdf.sparql.ast.StaticAnalysis_CanJoin;
 
 /**
  * Class accepts a join group and partitions it into a join graph and a tail

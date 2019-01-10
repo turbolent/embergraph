@@ -31,8 +31,8 @@ import java.util.Properties;
 
 import org.openrdf.query.Dataset;
 
-import com.bigdata.journal.Journal;
-import com.bigdata.rdf.sail.BigdataSail.Options;
+import org.embergraph.journal.Journal;
+import org.embergraph.rdf.sail.BigdataSail.Options;
 
 /**
  * Test harness for running the SPARQL test suites against a {@link Journal}

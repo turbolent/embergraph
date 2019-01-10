@@ -29,9 +29,9 @@ package org.embergraph.bop.join;
 
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.NV;
-import com.bigdata.bop.PipelineOp;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.NV;
+import org.embergraph.bop.PipelineOp;
 
 /**
  * Abstract base class for MERGE JOIN implementations.

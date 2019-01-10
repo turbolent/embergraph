@@ -25,8 +25,8 @@ package org.embergraph.rdf.internal;
 
 import java.util.UUID;
 
-import com.bigdata.rdf.internal.impl.literal.AbstractLiteralIV;
-import com.bigdata.rdf.internal.impl.literal.UUIDLiteralIV;
+import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
+import org.embergraph.rdf.internal.impl.literal.UUIDLiteralIV;
 
 /**
  * Inline URI handler for UUIDs.

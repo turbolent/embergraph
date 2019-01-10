@@ -32,8 +32,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.quorum.AsynchronousQuorumCloseException;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.quorum.AsynchronousQuorumCloseException;
 
 /**
  * Proxy class / factory pattern to break bigdata-jini dependency.  See BLZG-1370.

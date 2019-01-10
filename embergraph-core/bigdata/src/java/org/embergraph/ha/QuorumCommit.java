@@ -30,7 +30,7 @@ package org.embergraph.ha;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
-import com.bigdata.quorum.Quorum;
+import org.embergraph.quorum.Quorum;
 
 /**
  * A non-remote interface for a member service in a {@link Quorum} defining

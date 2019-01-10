@@ -36,11 +36,11 @@ import java.util.Properties;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import com.bigdata.rdf.sparql.ast.FunctionRegistry;
-import com.bigdata.rdf.sparql.ast.QueryRoot;
-import com.bigdata.rdf.sparql.ast.StatementPatternNode;
-import com.bigdata.rdf.sparql.ast.VarNode;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.sparql.ast.FunctionRegistry;
+import org.embergraph.rdf.sparql.ast.QueryRoot;
+import org.embergraph.rdf.sparql.ast.StatementPatternNode;
+import org.embergraph.rdf.sparql.ast.VarNode;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * Test suite for {@link ASTFastRangeCountOptimizer}. This needs to handle a

@@ -22,7 +22,7 @@ import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.net.SocketException;
 
-import com.bigdata.ganglia.xdr.XDROutputBuffer;
+import org.embergraph.ganglia.xdr.XDROutputBuffer;
 
 /**
  * Class for sending metrics to Ganglia.

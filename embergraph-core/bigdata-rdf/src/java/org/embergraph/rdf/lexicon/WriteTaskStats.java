@@ -3,7 +3,7 @@ package org.embergraph.rdf.lexicon;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.bigdata.counters.CAT;
+import org.embergraph.counters.CAT;
 
 /**
  * Class for reporting various timings for writes on the lexicon indices.

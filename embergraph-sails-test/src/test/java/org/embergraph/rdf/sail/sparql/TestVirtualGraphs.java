@@ -38,26 +38,26 @@ import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 import org.openrdf.query.impl.DatasetImpl;
 
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.BigdataStatement;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.StatementEnum;
-import com.bigdata.rdf.rio.StatementBuffer;
-import com.bigdata.rdf.sail.sparql.ast.ParseException;
-import com.bigdata.rdf.sail.sparql.ast.TokenMgrError;
-import com.bigdata.rdf.sparql.AbstractBigdataExprBuilderTestCase;
-import com.bigdata.rdf.sparql.ast.ConstantNode;
-import com.bigdata.rdf.sparql.ast.DatasetNode;
-import com.bigdata.rdf.sparql.ast.JoinGroupNode;
-import com.bigdata.rdf.sparql.ast.ProjectionNode;
-import com.bigdata.rdf.sparql.ast.QueryRoot;
-import com.bigdata.rdf.sparql.ast.QueryType;
-import com.bigdata.rdf.sparql.ast.StatementPatternNode;
-import com.bigdata.rdf.sparql.ast.VarNode;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.BD;
-import com.bigdata.rdf.vocab.decls.FOAFVocabularyDecl;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.rdf.rio.StatementBuffer;
+import org.embergraph.rdf.sail.sparql.ast.ParseException;
+import org.embergraph.rdf.sail.sparql.ast.TokenMgrError;
+import org.embergraph.rdf.sparql.AbstractBigdataExprBuilderTestCase;
+import org.embergraph.rdf.sparql.ast.ConstantNode;
+import org.embergraph.rdf.sparql.ast.DatasetNode;
+import org.embergraph.rdf.sparql.ast.JoinGroupNode;
+import org.embergraph.rdf.sparql.ast.ProjectionNode;
+import org.embergraph.rdf.sparql.ast.QueryRoot;
+import org.embergraph.rdf.sparql.ast.QueryType;
+import org.embergraph.rdf.sparql.ast.StatementPatternNode;
+import org.embergraph.rdf.sparql.ast.VarNode;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.BD;
+import org.embergraph.rdf.vocab.decls.FOAFVocabularyDecl;
 
 /**
  * Test suite for the <code>VIRTUAL GRAPHS</code> SPARQL extension.

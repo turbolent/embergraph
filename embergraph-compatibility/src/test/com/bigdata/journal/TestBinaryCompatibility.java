@@ -34,9 +34,9 @@ import java.util.UUID;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.Banner;
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.IndexMetadata;
+import org.embergraph.Banner;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.IndexMetadata;
 
 /**
  * Test suite for binary compatibility, portability, and forward compatibility

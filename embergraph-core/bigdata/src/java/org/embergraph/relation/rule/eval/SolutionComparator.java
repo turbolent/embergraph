@@ -30,7 +30,7 @@ package org.embergraph.relation.rule.eval;
 
 import java.util.Comparator;
 
-import com.bigdata.striterator.IKeyOrder;
+import org.embergraph.striterator.IKeyOrder;
 
 /**
  * Wraps the {@link Comparator} obtained from a {@link IKeyOrder} such that it

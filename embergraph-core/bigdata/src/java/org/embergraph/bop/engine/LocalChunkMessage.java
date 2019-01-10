@@ -3,10 +3,10 @@ package org.embergraph.bop.engine;
 import java.rmi.RemoteException;
 import java.util.UUID;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.fed.FederatedRunningQuery;
-import com.bigdata.relation.accesspath.ThickCloseableIterator;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.fed.FederatedRunningQuery;
+import org.embergraph.relation.accesspath.ThickCloseableIterator;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

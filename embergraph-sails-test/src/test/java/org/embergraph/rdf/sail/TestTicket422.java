@@ -37,9 +37,9 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.sail.SailException;
 
-import com.bigdata.rdf.sail.BigdataSail.BigdataSailConnection;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.TempTripleStore;
+import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.TempTripleStore;
 
 import info.aduna.iteration.CloseableIteration;
 

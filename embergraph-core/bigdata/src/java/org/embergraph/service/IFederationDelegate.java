@@ -31,10 +31,10 @@ package org.embergraph.service;
 import java.io.IOException;
 import java.util.UUID;
 
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.ICounterSetAccess;
-import com.bigdata.counters.httpd.CounterSetHTTPD;
-import com.bigdata.util.httpd.AbstractHTTPD;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.ICounterSetAccess;
+import org.embergraph.counters.httpd.CounterSetHTTPD;
+import org.embergraph.util.httpd.AbstractHTTPD;
 
 /**
  * Interface allowing services to take over handling of events normally handled

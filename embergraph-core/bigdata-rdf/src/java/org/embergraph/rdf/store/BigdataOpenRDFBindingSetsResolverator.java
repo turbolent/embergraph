@@ -38,21 +38,21 @@ import org.openrdf.model.Value;
 import org.openrdf.query.Binding;
 import org.openrdf.query.BindingSet;
 
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.Var;
-import com.bigdata.bop.bindingSet.ListBindingSet;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.VTE;
-import com.bigdata.rdf.internal.impl.TermId;
-import com.bigdata.rdf.lexicon.LexiconRelation;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.sail.BigdataValueReplacer;
-import com.bigdata.relation.accesspath.BlockingBuffer;
-import com.bigdata.relation.rule.eval.ISolution;
-import com.bigdata.striterator.AbstractChunkedResolverator;
-import com.bigdata.striterator.IChunkedOrderedIterator;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.Var;
+import org.embergraph.bop.bindingSet.ListBindingSet;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.VTE;
+import org.embergraph.rdf.internal.impl.TermId;
+import org.embergraph.rdf.lexicon.LexiconRelation;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.sail.BigdataValueReplacer;
+import org.embergraph.relation.accesspath.BlockingBuffer;
+import org.embergraph.relation.rule.eval.ISolution;
+import org.embergraph.striterator.AbstractChunkedResolverator;
+import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /**
  * Efficiently resolve openrdf {@link BindingSet}s to bigdata

@@ -51,32 +51,32 @@ import javax.servlet.ServletContextListener;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.Banner;
-import com.bigdata.bop.engine.QueryEngine;
-import com.bigdata.bop.fed.QueryEngineFactory;
-import com.bigdata.btree.BaseIndexStats;
-import com.bigdata.cache.SynchronizedHardReferenceQueueWithTimeout;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.ICounterSetAccess;
-import com.bigdata.counters.IProcessCounters;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.ITransactionService;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.WarmUpTask;
-import com.bigdata.rdf.ServiceProviderHook;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.CreateKBTask;
-import com.bigdata.rdf.sparql.ast.service.ServiceRegistry;
-import com.bigdata.rdf.task.AbstractApiTask;
-import com.bigdata.service.AbstractDistributedFederation;
-import com.bigdata.service.AbstractScaleOutClient;
-import com.bigdata.service.DefaultClientDelegate;
-import com.bigdata.service.ScaleOutClientFactory;
-import com.bigdata.service.IBigdataClient;
-import com.bigdata.service.IBigdataFederation;
-import com.bigdata.util.httpd.AbstractHTTPD;
+import org.embergraph.Banner;
+import org.embergraph.bop.engine.QueryEngine;
+import org.embergraph.bop.fed.QueryEngineFactory;
+import org.embergraph.btree.BaseIndexStats;
+import org.embergraph.cache.SynchronizedHardReferenceQueueWithTimeout;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.ICounterSetAccess;
+import org.embergraph.counters.IProcessCounters;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.ITransactionService;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.WarmUpTask;
+import org.embergraph.rdf.ServiceProviderHook;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.CreateKBTask;
+import org.embergraph.rdf.sparql.ast.service.ServiceRegistry;
+import org.embergraph.rdf.task.AbstractApiTask;
+import org.embergraph.service.AbstractDistributedFederation;
+import org.embergraph.service.AbstractScaleOutClient;
+import org.embergraph.service.DefaultClientDelegate;
+import org.embergraph.service.ScaleOutClientFactory;
+import org.embergraph.service.IBigdataClient;
+import org.embergraph.service.IBigdataFederation;
+import org.embergraph.util.httpd.AbstractHTTPD;
 
 /**
  * Listener provides life cycle management of the {@link IIndexManager} by

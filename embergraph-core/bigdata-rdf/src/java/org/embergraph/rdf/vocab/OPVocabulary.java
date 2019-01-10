@@ -1,11 +1,11 @@
 package org.embergraph.rdf.vocab;
 
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.vocab.decls.DCAllVocabularyDecl;
-import com.bigdata.rdf.vocab.decls.OPVocabularyDecl;
-import com.bigdata.rdf.vocab.decls.RDFSVocabularyDecl;
-import com.bigdata.rdf.vocab.decls.RDFVocabularyDecl;
-import com.bigdata.rdf.vocab.decls.XMLSchemaVocabularyDecl;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.vocab.decls.DCAllVocabularyDecl;
+import org.embergraph.rdf.vocab.decls.OPVocabularyDecl;
+import org.embergraph.rdf.vocab.decls.RDFSVocabularyDecl;
+import org.embergraph.rdf.vocab.decls.RDFVocabularyDecl;
+import org.embergraph.rdf.vocab.decls.XMLSchemaVocabularyDecl;
 
 public class OPVocabulary extends BaseVocabulary {
 

@@ -30,10 +30,10 @@ package org.embergraph.service.ndx;
 
 import java.util.concurrent.TimeUnit;
 
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.Instrument;
-import com.bigdata.resources.StaleLocatorException;
-import com.bigdata.util.concurrent.TaskCounters;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.Instrument;
+import org.embergraph.resources.StaleLocatorException;
+import org.embergraph.util.concurrent.TaskCounters;
 
 /**
  * Counters used for sync RPC on scale-out indices.

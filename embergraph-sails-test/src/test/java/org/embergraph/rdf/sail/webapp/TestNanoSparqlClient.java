@@ -47,16 +47,16 @@ import org.openrdf.rio.RDFWriter;
 import org.openrdf.rio.RDFWriterFactory;
 import org.openrdf.rio.RDFWriterRegistry;
 
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.rdf.sail.remote.BigdataSailRemoteRepository;
-import com.bigdata.rdf.sail.remote.BigdataSailRemoteRepositoryConnection;
-import com.bigdata.rdf.sail.webapp.client.IPreparedBooleanQuery;
-import com.bigdata.rdf.sail.webapp.client.IPreparedGraphQuery;
-import com.bigdata.rdf.sail.webapp.client.IPreparedTupleQuery;
-import com.bigdata.rdf.sail.webapp.client.IRemoteRepository.TupleQuery;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepository.AddOp;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepository.RemoveOp;
-import com.bigdata.rdf.store.BD;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.sail.remote.BigdataSailRemoteRepository;
+import org.embergraph.rdf.sail.remote.BigdataSailRemoteRepositoryConnection;
+import org.embergraph.rdf.sail.webapp.client.IPreparedBooleanQuery;
+import org.embergraph.rdf.sail.webapp.client.IPreparedGraphQuery;
+import org.embergraph.rdf.sail.webapp.client.IPreparedTupleQuery;
+import org.embergraph.rdf.sail.webapp.client.IRemoteRepository.TupleQuery;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository.AddOp;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository.RemoveOp;
+import org.embergraph.rdf.store.BD;
 
 /**
  * Proxied test suite.

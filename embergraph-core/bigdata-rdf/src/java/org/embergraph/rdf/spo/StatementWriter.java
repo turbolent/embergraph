@@ -4,15 +4,15 @@ import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.atomic.AtomicLong;
 import org.apache.log4j.Logger;
-import com.bigdata.rdf.changesets.ChangeRecord;
-import com.bigdata.rdf.changesets.IChangeLog;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.BigdataBNode;
-import com.bigdata.rdf.model.BigdataStatement;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.BigdataStatementIteratorImpl;
-import com.bigdata.relation.accesspath.IElementFilter;
-import com.bigdata.striterator.IChunkedOrderedIterator;
+import org.embergraph.rdf.changesets.ChangeRecord;
+import org.embergraph.rdf.changesets.IChangeLog;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.BigdataBNode;
+import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.BigdataStatementIteratorImpl;
+import org.embergraph.relation.accesspath.IElementFilter;
+import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /**
  * Writes statements on all the statement indices in parallel.

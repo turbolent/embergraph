@@ -39,7 +39,7 @@ import java.util.regex.PatternSyntaxException;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.util.CaseInsensitiveStringComparator;
+import org.embergraph.util.CaseInsensitiveStringComparator;
 
 
 /**

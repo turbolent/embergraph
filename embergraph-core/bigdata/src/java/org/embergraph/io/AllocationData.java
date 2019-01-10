@@ -28,7 +28,7 @@ import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.Channel;
 
-import com.bigdata.io.compression.IRecordCompressor;
+import org.embergraph.io.compression.IRecordCompressor;
 
 /**
  * Utility class to handle Compression and Checksums on a ByteArraySlice

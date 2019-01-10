@@ -43,8 +43,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.counters.AbstractStatisticsCollector;
-import com.bigdata.journal.ITransactionService;
+import org.embergraph.counters.AbstractStatisticsCollector;
+import org.embergraph.journal.ITransactionService;
 
 /**
  * An event. Events are queued by the {@link IBigdataClient} and self-reported

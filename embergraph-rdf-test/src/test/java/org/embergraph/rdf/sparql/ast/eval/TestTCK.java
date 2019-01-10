@@ -32,10 +32,10 @@ import junit.framework.TestSuite;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.BigdataStatics;
-import com.bigdata.rdf.sparql.ast.ASTContainer;
-import com.bigdata.rdf.sparql.ast.optimizers.ASTBottomUpOptimizer;
-import com.bigdata.rdf.sparql.ast.optimizers.ASTSimpleOptionalOptimizer;
+import org.embergraph.BigdataStatics;
+import org.embergraph.rdf.sparql.ast.ASTContainer;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTBottomUpOptimizer;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTSimpleOptionalOptimizer;
 
 /**
  * Test driver for debugging Sesame or DAWG manifest tests.

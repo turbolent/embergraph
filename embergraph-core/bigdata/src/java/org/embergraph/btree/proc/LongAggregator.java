@@ -30,7 +30,7 @@ package org.embergraph.btree.proc;
 
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.bigdata.service.Split;
+import org.embergraph.service.Split;
 
 /**
  * Aggregates the value of an {@link Long} result.

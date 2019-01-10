@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree;
 
-import com.bigdata.rawstore.IRawStore;
+import org.embergraph.rawstore.IRawStore;
 
 /**
  * Test suite for the {@link IDirtyListener} protocol.

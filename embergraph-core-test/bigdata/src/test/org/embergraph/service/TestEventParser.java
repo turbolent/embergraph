@@ -34,7 +34,7 @@ import java.util.Map;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.service.TestEventReceiver.MyEvent;
+import org.embergraph.service.TestEventReceiver.MyEvent;
 
 /**
  * Unit tests for parsing {@link Event}s.

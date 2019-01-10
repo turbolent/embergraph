@@ -2,8 +2,8 @@ package org.embergraph.bop.fed;
 
 import java.nio.ByteBuffer;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.io.DirectBufferPoolAllocator.IAllocationContext;
+import org.embergraph.bop.BOp;
+import org.embergraph.io.DirectBufferPoolAllocator.IAllocationContext;
 
 /**
  * The allocation context key groups together allocations onto the same

@@ -35,27 +35,27 @@ import java.util.UUID;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.Var;
-import com.bigdata.bop.bindingSet.ListBindingSet;
-import com.bigdata.bop.engine.IChunkMessage;
-import com.bigdata.bop.engine.IHaltOpMessage;
-import com.bigdata.bop.engine.IQueryClient;
-import com.bigdata.bop.engine.IQueryDecl;
-import com.bigdata.bop.engine.IQueryPeer;
-import com.bigdata.bop.engine.IStartOpMessage;
-import com.bigdata.io.SerializerUtil;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.IVCache;
-import com.bigdata.rdf.internal.VTE;
-import com.bigdata.rdf.internal.impl.TermId;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.model.BigdataValueFactoryImpl;
-import com.bigdata.striterator.Dechunkerator;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.Var;
+import org.embergraph.bop.bindingSet.ListBindingSet;
+import org.embergraph.bop.engine.IChunkMessage;
+import org.embergraph.bop.engine.IHaltOpMessage;
+import org.embergraph.bop.engine.IQueryClient;
+import org.embergraph.bop.engine.IQueryDecl;
+import org.embergraph.bop.engine.IQueryPeer;
+import org.embergraph.bop.engine.IStartOpMessage;
+import org.embergraph.io.SerializerUtil;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.IVCache;
+import org.embergraph.rdf.internal.VTE;
+import org.embergraph.rdf.internal.impl.TermId;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.striterator.Dechunkerator;
 
 /**
  * Unit tests for {@link ThickChunkMessage}.

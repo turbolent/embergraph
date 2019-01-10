@@ -32,7 +32,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.btree.keys.KVO;
+import org.embergraph.btree.keys.KVO;
 
 /**
  * Test suite for {@link DefaultDuplicateRemover}.

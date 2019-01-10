@@ -32,10 +32,10 @@ import java.util.Properties;
 import org.openrdf.model.URI;
 import org.openrdf.model.vocabulary.RDF;
 
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.relation.rule.Rule;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.relation.rule.Rule;
 
 /**
  * Test suite for {@link RuleRdf01}.

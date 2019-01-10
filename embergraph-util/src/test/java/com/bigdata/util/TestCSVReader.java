@@ -37,7 +37,7 @@ import java.util.TreeMap;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.util.CSVReader.Header;
+import org.embergraph.util.CSVReader.Header;
 
 /**
  * Test suite for {@link CSVReader}.

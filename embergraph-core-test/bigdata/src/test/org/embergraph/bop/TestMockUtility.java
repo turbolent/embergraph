@@ -26,20 +26,20 @@ package org.embergraph.bop;
 import java.util.Properties;
 import java.util.UUID;
 
-import com.bigdata.bop.engine.BOpStats;
-import com.bigdata.bop.engine.BlockingBufferWithStats;
-import com.bigdata.bop.engine.IRunningQuery;
-import com.bigdata.bop.engine.MockRunningQuery;
-import com.bigdata.bop.solutions.MockQuery;
-import com.bigdata.bop.solutions.MockQueryContext;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.Journal;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.LocalTripleStore;
-import com.bigdata.relation.accesspath.IAsynchronousIterator;
-import com.bigdata.relation.accesspath.IBlockingBuffer;
-import com.bigdata.relation.accesspath.ThickAsynchronousIterator;
+import org.embergraph.bop.engine.BOpStats;
+import org.embergraph.bop.engine.BlockingBufferWithStats;
+import org.embergraph.bop.engine.IRunningQuery;
+import org.embergraph.bop.engine.MockRunningQuery;
+import org.embergraph.bop.solutions.MockQuery;
+import org.embergraph.bop.solutions.MockQueryContext;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Journal;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.LocalTripleStore;
+import org.embergraph.relation.accesspath.IAsynchronousIterator;
+import org.embergraph.relation.accesspath.IBlockingBuffer;
+import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
 
 /**
  * Mock utility for test cases.

@@ -38,13 +38,13 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 
-import com.bigdata.io.ByteArrayBuffer;
-import com.bigdata.io.DataInputBuffer;
-import com.bigdata.io.DataOutputBuffer;
-import com.bigdata.io.ShortPacker;
-import com.bigdata.io.compression.NoCompressor;
-import com.bigdata.io.compression.UnicodeHelper;
-import com.bigdata.rdf.lexicon.ITermIndexCodes;
+import org.embergraph.io.ByteArrayBuffer;
+import org.embergraph.io.DataInputBuffer;
+import org.embergraph.io.DataOutputBuffer;
+import org.embergraph.io.ShortPacker;
+import org.embergraph.io.compression.NoCompressor;
+import org.embergraph.io.compression.UnicodeHelper;
+import org.embergraph.rdf.lexicon.ITermIndexCodes;
 
 /**
  * Helper class provides efficient stand-off serialization of RDF {@link Value}

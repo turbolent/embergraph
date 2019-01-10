@@ -30,10 +30,10 @@ package org.embergraph.striterator;
 
 import java.util.Arrays;
 
-import com.bigdata.striterator.ChunkedStriterator;
-import com.bigdata.striterator.ChunkedWrappedIterator;
-import com.bigdata.striterator.IChunkedIterator;
-import com.bigdata.striterator.MergeFilter;
+import org.embergraph.striterator.ChunkedStriterator;
+import org.embergraph.striterator.ChunkedWrappedIterator;
+import org.embergraph.striterator.IChunkedIterator;
+import org.embergraph.striterator.MergeFilter;
 
 import junit.framework.TestCase2;
 

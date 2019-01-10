@@ -25,7 +25,7 @@ package org.embergraph.bop;
 
 import java.util.Collections;
 
-import com.bigdata.rdf.sparql.ast.FilterNode;
+import org.embergraph.rdf.sparql.ast.FilterNode;
 
 /**
  * A constant.

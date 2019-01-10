@@ -29,18 +29,18 @@ import java.util.TimeZone;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
-import com.bigdata.rdf.internal.constraints.IMathOpHandler;
-import com.bigdata.rdf.internal.impl.AbstractInlineExtensionIV;
-import com.bigdata.rdf.internal.impl.extensions.XSDStringExtension;
-import com.bigdata.rdf.internal.impl.literal.AbstractLiteralIV;
-import com.bigdata.rdf.internal.impl.literal.LiteralExtensionIV;
-import com.bigdata.rdf.lexicon.LexiconKeyOrder;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.vocab.Vocabulary;
-import com.bigdata.service.geospatial.GeoSpatialConfig;
+import org.embergraph.rdf.internal.constraints.IMathOpHandler;
+import org.embergraph.rdf.internal.impl.AbstractInlineExtensionIV;
+import org.embergraph.rdf.internal.impl.extensions.XSDStringExtension;
+import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
+import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
+import org.embergraph.rdf.lexicon.LexiconKeyOrder;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.vocab.Vocabulary;
+import org.embergraph.service.geospatial.GeoSpatialConfig;
 
 /**
  * Configuration determines which RDF Values are inlined into the statement

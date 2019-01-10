@@ -35,16 +35,16 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bfs.BigdataFileSystem;
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.Checkpoint;
-import com.bigdata.btree.IOverflowHandler;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.IndexSegmentBuilder;
-import com.bigdata.journal.Journal.Options;
-import com.bigdata.resources.OverflowManager;
-import com.bigdata.util.DaemonThreadFactory;
-import com.bigdata.util.concurrent.ShutdownHelper;
+import org.embergraph.bfs.BigdataFileSystem;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.Checkpoint;
+import org.embergraph.btree.IOverflowHandler;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.IndexSegmentBuilder;
+import org.embergraph.journal.Journal.Options;
+import org.embergraph.resources.OverflowManager;
+import org.embergraph.util.DaemonThreadFactory;
+import org.embergraph.util.concurrent.ShutdownHelper;
 
 /**
  * Task compacts the journal state onto a caller specified file. This may be

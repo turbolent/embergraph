@@ -30,15 +30,15 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.keys.KVO;
-import com.bigdata.btree.proc.AbstractKeyArrayIndexProcedureConstructor;
-import com.bigdata.btree.proc.IResultHandler;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.lexicon.Term2IdWriteProc.Term2IdWriteProcConstructor;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.service.Split;
-import com.bigdata.service.ndx.pipeline.KVOList;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.keys.KVO;
+import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedureConstructor;
+import org.embergraph.btree.proc.IResultHandler;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.lexicon.Term2IdWriteProc.Term2IdWriteProcConstructor;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.service.Split;
+import org.embergraph.service.ndx.pipeline.KVOList;
 
 /**
  * Synchronous RPC write on the TERM2ID index.

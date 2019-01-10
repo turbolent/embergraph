@@ -29,8 +29,8 @@ package org.embergraph.btree.filter;
 
 import java.util.NoSuchElementException;
 
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleIterator;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleIterator;
 
 /**
  * Empty iterator.

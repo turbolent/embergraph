@@ -47,9 +47,9 @@ Modifications:
 
 package com.bigdata.rdf.rules;
 
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.vocab.Vocabulary;
-import com.bigdata.relation.rule.IRule;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.vocab.Vocabulary;
+import org.embergraph.relation.rule.IRule;
 
 /**
  * {@link MappedProgram} is used to produce the full closure and fast closure

@@ -47,9 +47,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.log4j.Logger;
 import org.apache.system.SystemUtil;
 
-import com.bigdata.io.FileChannelUtility.AsyncTransfer;
-import com.bigdata.util.Bytes;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.io.FileChannelUtility.AsyncTransfer;
+import org.embergraph.util.Bytes;
+import org.embergraph.util.BytesUtil;
 
 import junit.framework.TestCase;
 

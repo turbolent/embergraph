@@ -37,21 +37,21 @@ import java.util.concurrent.FutureTask;
 import org.apache.log4j.Logger;
 import org.openrdf.model.Statement;
 
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.TimestampUtility;
-import com.bigdata.rdf.axioms.Axioms;
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.BigdataStatement;
-import com.bigdata.rdf.rio.AbstractStatementBuffer.StatementBuffer2;
-import com.bigdata.rdf.rio.StatementBuffer;
-import com.bigdata.rdf.rules.BackchainAccessPath;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.rdf.spo.SPO;
-import com.bigdata.rdf.store.AbstractTripleStore.Options;
-import com.bigdata.relation.accesspath.BlockingBuffer;
-import com.bigdata.relation.accesspath.IAccessPath;
-import com.bigdata.striterator.IChunkedOrderedIterator;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.TimestampUtility;
+import org.embergraph.rdf.axioms.Axioms;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.rio.AbstractStatementBuffer.StatementBuffer2;
+import org.embergraph.rdf.rio.StatementBuffer;
+import org.embergraph.rdf.rules.BackchainAccessPath;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.rdf.spo.SPO;
+import org.embergraph.rdf.store.AbstractTripleStore.Options;
+import org.embergraph.relation.accesspath.BlockingBuffer;
+import org.embergraph.relation.accesspath.IAccessPath;
+import org.embergraph.striterator.IChunkedOrderedIterator;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

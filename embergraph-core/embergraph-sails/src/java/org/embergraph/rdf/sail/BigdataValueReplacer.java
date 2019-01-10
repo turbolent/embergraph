@@ -41,13 +41,13 @@ import org.openrdf.query.impl.BindingImpl;
 import org.openrdf.query.impl.DatasetImpl;
 import org.openrdf.query.impl.MapBindingSet;
 
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.VTE;
-import com.bigdata.rdf.internal.impl.TermId;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.BigdataOpenRDFBindingSetsResolverator;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.VTE;
+import org.embergraph.rdf.internal.impl.TermId;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.BigdataOpenRDFBindingSetsResolverator;
 
 /**
  * Utility class to manage the efficient translation of openrdf {@link Value}s

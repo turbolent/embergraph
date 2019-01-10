@@ -30,16 +30,16 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.query.algebra.evaluation.util.ValueComparator;
 
-import com.bigdata.rdf.graph.Factory;
-import com.bigdata.rdf.graph.IGASContext;
-import com.bigdata.rdf.graph.IGASEngine;
-import com.bigdata.rdf.graph.IGASProgram;
-import com.bigdata.rdf.graph.IGASSchedulerImpl;
-import com.bigdata.rdf.graph.IGASState;
-import com.bigdata.rdf.graph.IGraphAccessor;
-import com.bigdata.rdf.graph.IReducer;
-import com.bigdata.rdf.graph.IStaticFrontier;
-import com.bigdata.rdf.graph.util.GASUtil;
+import org.embergraph.rdf.graph.Factory;
+import org.embergraph.rdf.graph.IGASContext;
+import org.embergraph.rdf.graph.IGASEngine;
+import org.embergraph.rdf.graph.IGASProgram;
+import org.embergraph.rdf.graph.IGASSchedulerImpl;
+import org.embergraph.rdf.graph.IGASState;
+import org.embergraph.rdf.graph.IGraphAccessor;
+import org.embergraph.rdf.graph.IReducer;
+import org.embergraph.rdf.graph.IStaticFrontier;
+import org.embergraph.rdf.graph.util.GASUtil;
 
 public class GASState<VS, ES, ST> implements IGASState<VS, ES, ST> {
 

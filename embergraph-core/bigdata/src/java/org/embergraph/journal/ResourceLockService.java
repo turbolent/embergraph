@@ -32,7 +32,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.locks.Lock;
 
-import com.bigdata.concurrent.NamedLock;
+import org.embergraph.concurrent.NamedLock;
 
 /**
  * An implementation using {@link NamedLock}s suitable for within JVM locking.

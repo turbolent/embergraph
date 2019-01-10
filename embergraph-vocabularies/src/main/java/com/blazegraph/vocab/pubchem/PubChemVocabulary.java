@@ -26,8 +26,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package com.blazegraph.vocab.pubchem;
 
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.vocab.core.BigdataCoreVocabulary_v20151210;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.vocab.core.BigdataCoreVocabulary_v20151210;
 
 /**
  * 

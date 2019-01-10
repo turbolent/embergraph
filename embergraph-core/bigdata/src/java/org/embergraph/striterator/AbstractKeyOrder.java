@@ -27,13 +27,13 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.striterator;
 
-import com.bigdata.bop.IElement;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.IVariableOrConstant;
-import com.bigdata.btree.DefaultTupleSerializer;
-import com.bigdata.btree.ITupleSerializer;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.SuccessorUtil;
+import org.embergraph.bop.IElement;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.IVariableOrConstant;
+import org.embergraph.btree.DefaultTupleSerializer;
+import org.embergraph.btree.ITupleSerializer;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.SuccessorUtil;
 
 /**
  * Abstract base class provides default behavior for generating keys for a given

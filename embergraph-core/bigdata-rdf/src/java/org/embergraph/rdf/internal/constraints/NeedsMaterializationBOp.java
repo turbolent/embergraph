@@ -26,11 +26,11 @@ package org.embergraph.rdf.internal.constraints;
 
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.rdf.internal.NotMaterializedException;
-import com.bigdata.util.InnerCause;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.rdf.internal.NotMaterializedException;
+import org.embergraph.util.InnerCause;
 
 /**
  * Attempts to run a constraint prior to materialization. Returns

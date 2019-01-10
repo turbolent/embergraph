@@ -28,14 +28,14 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.sparse;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.ILocalBTreeView;
-import com.bigdata.journal.IJournal;
-import com.bigdata.journal.ITimestampService;
-import com.bigdata.journal.TemporaryRawStore;
-import com.bigdata.sparse.TPS.TPV;
-import com.bigdata.util.MillisecondTimestampFactory;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.ILocalBTreeView;
+import org.embergraph.journal.IJournal;
+import org.embergraph.journal.ITimestampService;
+import org.embergraph.journal.TemporaryRawStore;
+import org.embergraph.sparse.TPS.TPV;
+import org.embergraph.util.MillisecondTimestampFactory;
 
 /**
  * Utility class for choosing timestamps for the {@link SparseRowStore} on the

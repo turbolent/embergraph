@@ -30,9 +30,9 @@ package org.embergraph.journal;
 import java.io.File;
 import java.util.Properties;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.rwstore.RWStore;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.rwstore.RWStore;
 
 /**
  * Given an existing journal, ensure that any commitRecords that reference a

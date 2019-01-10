@@ -34,16 +34,16 @@ import org.openrdf.model.Value;
 import org.openrdf.query.algebra.evaluation.ValueExprEvaluationException;
 import org.openrdf.query.algebra.evaluation.util.QueryEvaluationUtil;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.bop.NV;
-import com.bigdata.rdf.error.SparqlTypeErrorException;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.sparql.ast.GlobalAnnotations;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.bop.NV;
+import org.embergraph.rdf.error.SparqlTypeErrorException;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 
 /**
  * @see http://www.w3.org/2009/sparql/docs/query-1.1/rq25.xml#func-replace

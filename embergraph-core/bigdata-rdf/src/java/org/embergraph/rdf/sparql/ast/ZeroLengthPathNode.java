@@ -6,10 +6,10 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.NV;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.NV;
 
 /**
  * A special kind of AST node that represents the SPARQL 1.1 zero length path

@@ -28,7 +28,7 @@ package org.embergraph.rdf.internal;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.service.geospatial.ZOrderRangeScanUtil;
+import org.embergraph.service.geospatial.ZOrderRangeScanUtil;
 
 /**
  * Test for utility functionalities required for zOrder index construction,

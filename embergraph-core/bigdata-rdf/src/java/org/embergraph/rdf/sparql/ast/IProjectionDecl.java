@@ -29,7 +29,7 @@ package org.embergraph.rdf.sparql.ast;
 
 import java.util.Set;
 
-import com.bigdata.bop.IVariable;
+import org.embergraph.bop.IVariable;
 
 /**
  * Interface and annotations for AST nodes which have a {@link ProjectionNode}.

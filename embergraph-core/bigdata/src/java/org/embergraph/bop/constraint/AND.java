@@ -26,9 +26,9 @@ package org.embergraph.bop.constraint;
 
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpBase;
-import com.bigdata.bop.IBindingSet;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpBase;
+import org.embergraph.bop.IBindingSet;
 
 /**
  * Imposes the constraint <code>x AND y</code>.

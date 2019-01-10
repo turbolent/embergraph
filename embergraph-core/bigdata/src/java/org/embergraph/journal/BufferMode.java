@@ -25,9 +25,9 @@ package org.embergraph.journal;
 
 import java.nio.ByteBuffer;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.rwstore.RWStore;
-import com.bigdata.rwstore.sector.MemoryManager;
+import org.embergraph.btree.BTree;
+import org.embergraph.rwstore.RWStore;
+import org.embergraph.rwstore.sector.MemoryManager;
 
 /**
  * <p>

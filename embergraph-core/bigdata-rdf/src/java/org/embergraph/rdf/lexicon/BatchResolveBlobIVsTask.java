@@ -11,13 +11,13 @@ import java.util.concurrent.Future;
 
 import org.openrdf.model.Value;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.impl.BlobIV;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.impl.BlobIV;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
 
 /**
  * Batch resolve {@link BlobIV}s to RDF {@link Value}s.

@@ -43,24 +43,24 @@ import junit.framework.TestCase2;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.data.IAbstractNodeData;
-import com.bigdata.btree.data.IKeysData;
-import com.bigdata.btree.data.ILeafData;
-import com.bigdata.btree.data.INodeData;
-import com.bigdata.btree.data.ISpannedTupleCountData;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.KV;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.btree.keys.TestKeyBuilder;
-import com.bigdata.btree.raba.IRaba;
-import com.bigdata.btree.raba.codec.RandomKeysGenerator;
-import com.bigdata.cache.HardReferenceQueue;
-import com.bigdata.io.SerializerUtil;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rawstore.SimpleMemoryRawStore;
-import com.bigdata.service.ndx.ClientIndexView;
-import com.bigdata.util.Bytes;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.data.IAbstractNodeData;
+import org.embergraph.btree.data.IKeysData;
+import org.embergraph.btree.data.ILeafData;
+import org.embergraph.btree.data.INodeData;
+import org.embergraph.btree.data.ISpannedTupleCountData;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.KV;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.btree.keys.TestKeyBuilder;
+import org.embergraph.btree.raba.IRaba;
+import org.embergraph.btree.raba.codec.RandomKeysGenerator;
+import org.embergraph.cache.HardReferenceQueue;
+import org.embergraph.io.SerializerUtil;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
+import org.embergraph.service.ndx.ClientIndexView;
+import org.embergraph.util.Bytes;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Abstract test case for {@link BTree} tests.

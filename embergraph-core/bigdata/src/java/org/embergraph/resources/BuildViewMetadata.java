@@ -5,12 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.bigdata.btree.AbstractBTree;
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.ILocalBTreeView;
-import com.bigdata.btree.IndexSegment;
-import com.bigdata.btree.view.FusedView;
-import com.bigdata.service.Event;
+import org.embergraph.btree.AbstractBTree;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.ILocalBTreeView;
+import org.embergraph.btree.IndexSegment;
+import org.embergraph.btree.view.FusedView;
+import org.embergraph.service.Event;
 
 /**
  * Helper class examines an index partition view and returns a view for which we

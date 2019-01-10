@@ -32,10 +32,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import com.bigdata.bop.IVariable;
-import com.bigdata.rdf.sparql.ast.GroupNodeVarBindingInfoMap;
-import com.bigdata.rdf.sparql.ast.IGroupMemberNode;
-import com.bigdata.rdf.sparql.ast.StaticAnalysis;
+import org.embergraph.bop.IVariable;
+import org.embergraph.rdf.sparql.ast.GroupNodeVarBindingInfoMap;
+import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
+import org.embergraph.rdf.sparql.ast.StaticAnalysis;
 
 /**
  * Class representing an ordered list of {@link ASTJoinGroupPartition}s.

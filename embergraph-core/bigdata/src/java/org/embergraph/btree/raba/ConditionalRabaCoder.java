@@ -36,11 +36,11 @@ import java.io.OutputStream;
 import java.util.Iterator;
 
 
-import com.bigdata.btree.raba.codec.ICodedRaba;
-import com.bigdata.btree.raba.codec.IRabaCoder;
-import com.bigdata.io.AbstractFixedByteArrayBuffer;
-import com.bigdata.io.DataOutputBuffer;
-import com.bigdata.io.LongPacker;
+import org.embergraph.btree.raba.codec.ICodedRaba;
+import org.embergraph.btree.raba.codec.IRabaCoder;
+import org.embergraph.io.AbstractFixedByteArrayBuffer;
+import org.embergraph.io.DataOutputBuffer;
+import org.embergraph.io.LongPacker;
 
 /**
  * Coder conditionally applies other {@link IRabaCoder}s based on a condition,

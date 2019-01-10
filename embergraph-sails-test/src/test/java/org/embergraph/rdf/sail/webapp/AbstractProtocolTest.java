@@ -51,8 +51,8 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.rdf.sail.webapp.client.ConnectOptions;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.sail.webapp.client.ConnectOptions;
 
 /**
  * This class supports making requests to the server with fairly low level control.

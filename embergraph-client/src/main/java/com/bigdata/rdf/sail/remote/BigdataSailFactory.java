@@ -33,8 +33,8 @@ import java.util.Properties;
 import org.openrdf.repository.sail.SailRepository;
 import org.openrdf.sail.Sail;
 
-import com.bigdata.rdf.sail.webapp.client.RemoteRepositoryManager;
-import com.bigdata.util.httpd.Config;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepositoryManager;
+import org.embergraph.util.httpd.Config;
 
 /**
  * Helper class to create a bigdata instance.

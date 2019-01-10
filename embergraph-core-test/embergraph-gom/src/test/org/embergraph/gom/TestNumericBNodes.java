@@ -5,9 +5,9 @@ import java.util.Properties;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParserRegistry;
 
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.rio.turtle.BigdataTurtleParser;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.rio.turtle.BigdataTurtleParser;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * Test suite for numeric bnodes parsing.

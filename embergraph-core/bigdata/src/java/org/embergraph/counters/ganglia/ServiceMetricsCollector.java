@@ -3,13 +3,13 @@ package org.embergraph.counters.ganglia;
 import java.util.Iterator;
 import java.util.regex.Pattern;
 
-import com.bigdata.counters.AbstractStatisticsCollector;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.ICounter;
-import com.bigdata.counters.ICounterSet;
-import com.bigdata.ganglia.GangliaMunge;
-import com.bigdata.ganglia.IGangliaMetricsCollector;
-import com.bigdata.ganglia.IGangliaMetricsReporter;
+import org.embergraph.counters.AbstractStatisticsCollector;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.ICounter;
+import org.embergraph.counters.ICounterSet;
+import org.embergraph.ganglia.GangliaMunge;
+import org.embergraph.ganglia.IGangliaMetricsCollector;
+import org.embergraph.ganglia.IGangliaMetricsReporter;
 
 /**
  * Reflects collected service metrics to ganglia.

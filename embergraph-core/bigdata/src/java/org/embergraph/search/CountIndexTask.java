@@ -2,11 +2,11 @@ package org.embergraph.search;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.IRangeQuery;
-import com.bigdata.btree.ISimpleSplitHandler;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.SuccessorUtil;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.IRangeQuery;
+import org.embergraph.btree.ISimpleSplitHandler;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.SuccessorUtil;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Procedure reads on the terms index, aggregating data on a per-{@link Hit}

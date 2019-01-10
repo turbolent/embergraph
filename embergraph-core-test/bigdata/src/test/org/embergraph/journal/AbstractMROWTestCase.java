@@ -43,11 +43,11 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.bigdata.rawstore.AbstractRawStoreTestCase;
-import com.bigdata.rawstore.IMROW;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.testutil.ExperimentDriver;
-import com.bigdata.util.DaemonThreadFactory;
+import org.embergraph.rawstore.AbstractRawStoreTestCase;
+import org.embergraph.rawstore.IMROW;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.testutil.ExperimentDriver;
+import org.embergraph.util.DaemonThreadFactory;
 
 /**
  * Test suite for MROW (Multiple Readers, One Writer) support.

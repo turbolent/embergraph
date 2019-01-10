@@ -27,11 +27,11 @@ package org.embergraph.rdf.model;
 import org.openrdf.model.Statement;
 import org.openrdf.model.Value;
 
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.impl.bnode.SidIV;
-import com.bigdata.rdf.spo.ModifiedEnum;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.IRawTripleStore;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.impl.bnode.SidIV;
+import org.embergraph.rdf.spo.ModifiedEnum;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.IRawTripleStore;
 
 /**
  * Implementation reveals whether a statement is explicit, inferred, or an axiom

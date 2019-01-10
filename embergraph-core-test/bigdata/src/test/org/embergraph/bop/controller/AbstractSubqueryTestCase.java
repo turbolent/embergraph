@@ -2,9 +2,9 @@ package org.embergraph.bop.controller;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.relation.accesspath.IAsynchronousIterator;
-import com.bigdata.relation.accesspath.ThickAsynchronousIterator;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.relation.accesspath.IAsynchronousIterator;
+import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
 
 /**
  * Abstract base class for subquery join test suites.

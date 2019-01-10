@@ -6,10 +6,10 @@ import java.util.concurrent.FutureTask;
 
 import junit.framework.AssertionFailedError;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpContext;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.IBindingSet;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpContext;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.IBindingSet;
 
 /**
  * Operator blocks evaluation (sleeps) for the specified

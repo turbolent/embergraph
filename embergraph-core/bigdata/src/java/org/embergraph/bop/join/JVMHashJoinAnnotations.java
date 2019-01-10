@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.join;
 
-import com.bigdata.bop.HashMapAnnotations;
+import org.embergraph.bop.HashMapAnnotations;
 
 /**
  * Annotations in common for JVM based hash joins.

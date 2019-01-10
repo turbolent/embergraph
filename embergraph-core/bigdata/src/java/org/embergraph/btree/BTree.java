@@ -32,20 +32,20 @@ import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.locks.Lock;
 
-import com.bigdata.BigdataStatics;
-import com.bigdata.btree.AbstractBTreeTupleCursor.MutableBTreeTupleCursor;
-import com.bigdata.btree.Leaf.ILeafListener;
-import com.bigdata.btree.data.ILeafData;
-import com.bigdata.btree.data.INodeData;
-import com.bigdata.io.ByteArrayBuffer;
-import com.bigdata.journal.AbstractJournal;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.mdi.IResourceMetadata;
-import com.bigdata.mdi.JournalMetadata;
-import com.bigdata.mdi.LocalPartitionMetadata;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rwstore.IRWStrategy;
-import com.bigdata.util.Bytes;
+import org.embergraph.BigdataStatics;
+import org.embergraph.btree.AbstractBTreeTupleCursor.MutableBTreeTupleCursor;
+import org.embergraph.btree.Leaf.ILeafListener;
+import org.embergraph.btree.data.ILeafData;
+import org.embergraph.btree.data.INodeData;
+import org.embergraph.io.ByteArrayBuffer;
+import org.embergraph.journal.AbstractJournal;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.mdi.IResourceMetadata;
+import org.embergraph.mdi.JournalMetadata;
+import org.embergraph.mdi.LocalPartitionMetadata;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rwstore.IRWStrategy;
+import org.embergraph.util.Bytes;
 
 /**
  * <p>

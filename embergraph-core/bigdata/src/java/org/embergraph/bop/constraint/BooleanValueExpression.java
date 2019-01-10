@@ -24,8 +24,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.bop.constraint;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IValueExpression;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IValueExpression;
 
 /**
  * Interface for boolean value expression BOps.  Value expressions perform some

@@ -27,9 +27,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.service;
 
-import com.bigdata.rdf.changesets.IChangeLog;
-import com.bigdata.rdf.sail.BigdataSail.BigdataSailConnection;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.changesets.IChangeLog;
+import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * Interface for custom services.

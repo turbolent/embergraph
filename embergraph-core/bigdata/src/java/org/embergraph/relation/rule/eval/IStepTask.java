@@ -31,7 +31,7 @@ package org.embergraph.relation.rule.eval;
 import java.io.Serializable;
 import java.util.concurrent.Callable;
 
-import com.bigdata.relation.rule.IStep;
+import org.embergraph.relation.rule.IStep;
 
 /**
  * Interface for evaluation of an {@link IStep}. Tasks are created on the

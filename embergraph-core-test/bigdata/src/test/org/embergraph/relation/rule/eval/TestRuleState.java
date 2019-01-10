@@ -31,15 +31,15 @@ package org.embergraph.relation.rule.eval;
 import java.util.Arrays;
 import junit.framework.TestCase2;
 
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.Var;
-import com.bigdata.rdf.spo.SPOPredicate;
-import com.bigdata.relation.rule.IRule;
-import com.bigdata.relation.rule.QueryOptions;
-import com.bigdata.relation.rule.Rule;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.Var;
+import org.embergraph.rdf.spo.SPOPredicate;
+import org.embergraph.relation.rule.IRule;
+import org.embergraph.relation.rule.QueryOptions;
+import org.embergraph.relation.rule.Rule;
 
 /**
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Mike Personick</a>

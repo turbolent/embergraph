@@ -33,15 +33,15 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.rdf.internal.XSD;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpContext;
-import com.bigdata.rdf.sparql.ast.optimizers.ASTSetValueExpressionsOptimizer;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.rdf.internal.XSD;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTSetValueExpressionsOptimizer;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * Problem setup for BSBM Q5.

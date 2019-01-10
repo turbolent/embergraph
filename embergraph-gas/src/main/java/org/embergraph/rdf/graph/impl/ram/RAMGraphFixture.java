@@ -20,11 +20,11 @@ import org.openrdf.sail.SailConnection;
 import org.openrdf.sail.SailException;
 import org.openrdf.sail.memory.MemoryStore;
 
-import com.bigdata.rdf.graph.IGASEngine;
-import com.bigdata.rdf.graph.IGraphAccessor;
-import com.bigdata.rdf.graph.impl.ram.RAMGASEngine.RAMGraph;
-import com.bigdata.rdf.graph.impl.sail.SAILGASEngine.SAILGraphAccessor;
-import com.bigdata.rdf.graph.util.AbstractGraphFixture;
+import org.embergraph.rdf.graph.IGASEngine;
+import org.embergraph.rdf.graph.IGraphAccessor;
+import org.embergraph.rdf.graph.impl.ram.RAMGASEngine.RAMGraph;
+import org.embergraph.rdf.graph.impl.sail.SAILGASEngine.SAILGraphAccessor;
+import org.embergraph.rdf.graph.util.AbstractGraphFixture;
 
 public class RAMGraphFixture extends AbstractGraphFixture {
     

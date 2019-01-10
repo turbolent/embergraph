@@ -34,14 +34,14 @@ import java.util.concurrent.TimeUnit;
 
 import org.openrdf.rio.RDFFormat;
 
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.journal.ITx;
-import com.bigdata.rdf.lexicon.LexiconKeyOrder;
-import com.bigdata.rdf.lexicon.LexiconRelation;
-import com.bigdata.rdf.model.BigdataStatement;
-import com.bigdata.rdf.store.ScaleOutTripleStore;
-import com.bigdata.service.EmbeddedClient;
-import com.bigdata.service.EmbeddedFederation;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.journal.ITx;
+import org.embergraph.rdf.lexicon.LexiconKeyOrder;
+import org.embergraph.rdf.lexicon.LexiconRelation;
+import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.store.ScaleOutTripleStore;
+import org.embergraph.service.EmbeddedClient;
+import org.embergraph.service.EmbeddedFederation;
 
 /**
  * <pre>

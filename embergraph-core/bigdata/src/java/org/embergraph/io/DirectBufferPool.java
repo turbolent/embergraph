@@ -14,13 +14,13 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.counters.CAT;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.OneShotInstrument;
-import com.bigdata.journal.IBufferStrategy;
-import com.bigdata.journal.TemporaryRawStore;
-import com.bigdata.journal.TransientBufferStrategy;
-import com.bigdata.util.Bytes;
+import org.embergraph.counters.CAT;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.OneShotInstrument;
+import org.embergraph.journal.IBufferStrategy;
+import org.embergraph.journal.TemporaryRawStore;
+import org.embergraph.journal.TransientBufferStrategy;
+import org.embergraph.util.Bytes;
 
 /**
  * An instance of this class manages a JVM-wide pool of direct (aka native)

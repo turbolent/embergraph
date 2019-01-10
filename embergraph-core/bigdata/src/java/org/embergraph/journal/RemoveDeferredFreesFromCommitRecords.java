@@ -26,12 +26,12 @@ import java.io.File;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicReference;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.Journal.Options;
-import com.bigdata.service.AbstractTransactionService;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.Journal.Options;
+import org.embergraph.service.AbstractTransactionService;
 
 /**
  * A utility to fix a store with invalid addresses in the deferred

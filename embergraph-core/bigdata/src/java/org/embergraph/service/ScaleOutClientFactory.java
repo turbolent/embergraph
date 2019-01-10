@@ -26,8 +26,8 @@ package org.embergraph.service;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.rdf.sail.webapp.HAStatusServletUtilProxy;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.sail.webapp.HAStatusServletUtilProxy;
 
 /**
  * 

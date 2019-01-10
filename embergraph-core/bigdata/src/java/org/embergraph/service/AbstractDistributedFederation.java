@@ -25,9 +25,9 @@ package org.embergraph.service;
 
 import java.util.concurrent.Future;
 
-import com.bigdata.io.IStreamSerializer;
-import com.bigdata.relation.accesspath.IAsynchronousIterator;
-import com.bigdata.relation.accesspath.IBuffer;
+import org.embergraph.io.IStreamSerializer;
+import org.embergraph.relation.accesspath.IAsynchronousIterator;
+import org.embergraph.relation.accesspath.IBuffer;
 
 /**
  * Abstract base class for {@link IBigdataFederation} implementations where the

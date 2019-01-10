@@ -1,6 +1,6 @@
 package org.embergraph.rwstore;
 
-import com.bigdata.io.writecache.WriteCache.FileChannelScatteredWriteCache;
+import org.embergraph.io.writecache.WriteCache.FileChannelScatteredWriteCache;
 
 /**
  * This is a callback interface that can be used to synchronize store allocation

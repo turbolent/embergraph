@@ -12,14 +12,14 @@ import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDFS;
 
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.rdf.internal.impl.literal.FullyInlineTypedLiteralIV;
-import com.bigdata.rdf.internal.impl.uri.URIExtensionIV;
-import com.bigdata.rdf.lexicon.BlobsIndexHelper;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.vocab.BaseVocabulary;
-import com.bigdata.rdf.vocab.VocabularyDecl;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.rdf.internal.impl.literal.FullyInlineTypedLiteralIV;
+import org.embergraph.rdf.internal.impl.uri.URIExtensionIV;
+import org.embergraph.rdf.lexicon.BlobsIndexHelper;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.vocab.BaseVocabulary;
+import org.embergraph.rdf.vocab.VocabularyDecl;
 
 /**
  * Test suite for {@link URIExtensionIV}.

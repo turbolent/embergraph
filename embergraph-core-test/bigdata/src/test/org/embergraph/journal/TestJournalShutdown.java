@@ -34,8 +34,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.util.Bytes;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.util.Bytes;
 
 /**
  * Stress test for correct shutdown of journals based on weak reference

@@ -31,15 +31,15 @@ import java.util.Random;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.rdf.internal.impl.AbstractIV;
-import com.bigdata.rdf.internal.impl.TermId;
-import com.bigdata.rdf.lexicon.BlobsIndexHelper;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactoryImpl;
-import com.bigdata.util.Bytes;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.rdf.internal.impl.AbstractIV;
+import org.embergraph.rdf.internal.impl.TermId;
+import org.embergraph.rdf.lexicon.BlobsIndexHelper;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.util.Bytes;
 
 /**
  * Test suite for {@link TermId}.

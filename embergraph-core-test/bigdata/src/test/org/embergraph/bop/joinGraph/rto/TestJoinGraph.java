@@ -29,17 +29,17 @@ package org.embergraph.bop.joinGraph.rto;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpEvaluationContext;
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IConstraint;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.NV;
-import com.bigdata.bop.Var;
-import com.bigdata.bop.ap.Predicate;
-import com.bigdata.bop.constraint.Constraint;
-import com.bigdata.bop.constraint.NEConstant;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpEvaluationContext;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IConstraint;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.NV;
+import org.embergraph.bop.Var;
+import org.embergraph.bop.ap.Predicate;
+import org.embergraph.bop.constraint.Constraint;
+import org.embergraph.bop.constraint.NEConstant;
 
 /**
  * Unit tests for the {@link JoinGraph} operator.

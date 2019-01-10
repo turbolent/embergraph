@@ -28,8 +28,8 @@ package org.embergraph.ha.pipeline;
 
 import java.util.concurrent.CancellationException;
 
-import com.bigdata.ha.QuorumPipelineImpl;
-import com.bigdata.quorum.QuorumException;
+import org.embergraph.ha.QuorumPipelineImpl;
+import org.embergraph.quorum.QuorumException;
 
 /**
  * Exception thrown when the downstream service is changed by a pipeline

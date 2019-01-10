@@ -7,7 +7,7 @@ import java.io.Serializable;
 import org.apache.log4j.Logger;
 import org.openrdf.rio.RDFFormat;
 
-import com.bigdata.rdf.ServiceProviderHook;
+import org.embergraph.rdf.ServiceProviderHook;
 
 /**
  * Filter recognizes anything that is a registered as an {@link RDFFormat} or

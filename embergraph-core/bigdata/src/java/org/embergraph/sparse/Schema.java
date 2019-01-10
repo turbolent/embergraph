@@ -31,9 +31,9 @@ import java.io.ObjectOutput;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.btree.keys.SuccessorUtil;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.btree.keys.SuccessorUtil;
 
 /**
  * A schema for a sparse row store. Note that more than one schema may be used

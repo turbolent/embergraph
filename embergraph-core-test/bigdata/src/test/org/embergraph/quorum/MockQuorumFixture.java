@@ -55,22 +55,22 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.ha.HAPipelineGlue;
-import com.bigdata.ha.IHAPipelineResetRequest;
-import com.bigdata.ha.IHAPipelineResetResponse;
-import com.bigdata.ha.msg.IHALogRequest;
-import com.bigdata.ha.msg.IHALogRootBlocksRequest;
-import com.bigdata.ha.msg.IHALogRootBlocksResponse;
-import com.bigdata.ha.msg.IHARebuildRequest;
-import com.bigdata.ha.msg.IHASendState;
-import com.bigdata.ha.msg.IHASendStoreResponse;
-import com.bigdata.ha.msg.IHASyncRequest;
-import com.bigdata.ha.msg.IHAWriteMessage;
-import com.bigdata.ha.msg.IHAWriteSetStateRequest;
-import com.bigdata.ha.msg.IHAWriteSetStateResponse;
-import com.bigdata.quorum.MockQuorumFixture.MockQuorum.MockQuorumWatcher;
-import com.bigdata.util.DaemonThreadFactory;
-import com.bigdata.util.InnerCause;
+import org.embergraph.ha.HAPipelineGlue;
+import org.embergraph.ha.IHAPipelineResetRequest;
+import org.embergraph.ha.IHAPipelineResetResponse;
+import org.embergraph.ha.msg.IHALogRequest;
+import org.embergraph.ha.msg.IHALogRootBlocksRequest;
+import org.embergraph.ha.msg.IHALogRootBlocksResponse;
+import org.embergraph.ha.msg.IHARebuildRequest;
+import org.embergraph.ha.msg.IHASendState;
+import org.embergraph.ha.msg.IHASendStoreResponse;
+import org.embergraph.ha.msg.IHASyncRequest;
+import org.embergraph.ha.msg.IHAWriteMessage;
+import org.embergraph.ha.msg.IHAWriteSetStateRequest;
+import org.embergraph.ha.msg.IHAWriteSetStateResponse;
+import org.embergraph.quorum.MockQuorumFixture.MockQuorum.MockQuorumWatcher;
+import org.embergraph.util.DaemonThreadFactory;
+import org.embergraph.util.InnerCause;
 
 /**
  * A mock object providing the shared quorum state for a set of

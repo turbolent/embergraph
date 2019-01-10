@@ -23,9 +23,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.io.writecache;
 
-import com.bigdata.io.writecache.WriteCache.ReadCache;
-import com.bigdata.io.writecache.WriteCacheService.WriteTask;
-import com.bigdata.util.concurrent.Memoizer;
+import org.embergraph.io.writecache.WriteCache.ReadCache;
+import org.embergraph.io.writecache.WriteCacheService.WriteTask;
+import org.embergraph.util.concurrent.Memoizer;
 
 /**
  * Interface declaring the counters exposed by the {@link WriteCacheService} .

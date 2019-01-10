@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.hints;
 
-import com.bigdata.rdf.sparql.ast.ASTBase;
+import org.embergraph.rdf.sparql.ast.ASTBase;
 
 /**
  * Exception thrown when a query hint is invalid/illegal.

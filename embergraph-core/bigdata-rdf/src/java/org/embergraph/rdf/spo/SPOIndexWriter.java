@@ -52,12 +52,12 @@ import java.util.Comparator;
 import java.util.concurrent.Callable;
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.proc.AbstractKeyArrayIndexProcedure.ResultBitBuffer;
-import com.bigdata.btree.proc.AbstractKeyArrayIndexProcedure.ResultBitBufferHandler;
-import com.bigdata.btree.proc.LongAggregator;
-import com.bigdata.rdf.spo.SPOIndexWriteProc.IndexWriteProcConstructor;
-import com.bigdata.relation.accesspath.IElementFilter;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure.ResultBitBuffer;
+import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure.ResultBitBufferHandler;
+import org.embergraph.btree.proc.LongAggregator;
+import org.embergraph.rdf.spo.SPOIndexWriteProc.IndexWriteProcConstructor;
+import org.embergraph.relation.accesspath.IElementFilter;
 
 /**
  * Helper class writes an {@link ISPO}[] on one of the statement indices.

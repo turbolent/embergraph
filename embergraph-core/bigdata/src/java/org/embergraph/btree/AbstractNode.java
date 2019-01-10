@@ -34,13 +34,13 @@ import java.util.Iterator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.data.IAbstractNodeData;
-import com.bigdata.btree.data.IKeysData;
-import com.bigdata.btree.filter.EmptyTupleIterator;
-import com.bigdata.btree.raba.IRaba;
-import com.bigdata.btree.raba.MutableKeyBuffer;
-import com.bigdata.cache.HardReferenceQueue;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.data.IAbstractNodeData;
+import org.embergraph.btree.data.IKeysData;
+import org.embergraph.btree.filter.EmptyTupleIterator;
+import org.embergraph.btree.raba.IRaba;
+import org.embergraph.btree.raba.MutableKeyBuffer;
+import org.embergraph.cache.HardReferenceQueue;
+import org.embergraph.util.BytesUtil;
 
 import cutthecrap.utils.striterators.Expander;
 import cutthecrap.utils.striterators.IStriterator;

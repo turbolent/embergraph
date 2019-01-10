@@ -37,14 +37,14 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.cache.ConcurrentWeakValueCache;
-import com.bigdata.io.ChecksumUtility;
-import com.bigdata.journal.AbstractJournal.ISnapshotData;
-import com.bigdata.journal.ICommitter;
-import com.bigdata.rawstore.IAllocationContext;
-import com.bigdata.rwstore.RWStore.AllocationStats;
-import com.bigdata.rwstore.StorageStats.Bucket;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.cache.ConcurrentWeakValueCache;
+import org.embergraph.io.ChecksumUtility;
+import org.embergraph.journal.AbstractJournal.ISnapshotData;
+import org.embergraph.journal.ICommitter;
+import org.embergraph.rawstore.IAllocationContext;
+import org.embergraph.rwstore.RWStore.AllocationStats;
+import org.embergraph.rwstore.StorageStats.Bucket;
+import org.embergraph.util.BytesUtil;
 
 /**
  * FixedAllocator

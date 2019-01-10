@@ -29,23 +29,23 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-import com.bigdata.bfs.BigdataFileSystem;
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.IIndexStore;
-import com.bigdata.journal.IResourceLockService;
-import com.bigdata.journal.TemporaryStore;
-import com.bigdata.relation.locator.IResourceLocator;
-import com.bigdata.relation.rule.eval.pipeline.DistributedJoinTask;
-import com.bigdata.relation.rule.eval.pipeline.JoinTaskFactoryTask;
-import com.bigdata.resources.IndexManager;
-import com.bigdata.resources.StoreManager.ManagedJournal;
-import com.bigdata.service.DataService;
-import com.bigdata.service.IBigdataFederation;
-import com.bigdata.sparse.SparseRowStore;
+import org.embergraph.bfs.BigdataFileSystem;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.IIndexStore;
+import org.embergraph.journal.IResourceLockService;
+import org.embergraph.journal.TemporaryStore;
+import org.embergraph.relation.locator.IResourceLocator;
+import org.embergraph.relation.rule.eval.pipeline.DistributedJoinTask;
+import org.embergraph.relation.rule.eval.pipeline.JoinTaskFactoryTask;
+import org.embergraph.resources.IndexManager;
+import org.embergraph.resources.StoreManager.ManagedJournal;
+import org.embergraph.service.DataService;
+import org.embergraph.service.IBigdataFederation;
+import org.embergraph.sparse.SparseRowStore;
 
 /**
  * The index view that we need for the {@link DistributedJoinTask} is on the

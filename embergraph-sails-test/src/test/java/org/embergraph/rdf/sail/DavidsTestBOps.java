@@ -48,8 +48,8 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 import org.openrdf.sail.SailException;
 
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.vocab.NoVocabulary;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.vocab.NoVocabulary;
 
 /**
  * A test suite developed for some bits and pieces of SPARQL 1.0 coverage.

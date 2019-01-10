@@ -31,15 +31,15 @@ package org.embergraph.btree;
 import java.io.Serializable;
 import java.util.Locale;
 
-import com.bigdata.btree.data.ILeafData;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.IKeyBuilderFactory;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.btree.raba.codec.IRabaCoder;
-import com.bigdata.journal.AbstractJournal;
-import com.bigdata.journal.CommitRecordIndex;
-import com.bigdata.journal.Journal;
-import com.bigdata.service.IMetadataService;
+import org.embergraph.btree.data.ILeafData;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.IKeyBuilderFactory;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.btree.raba.codec.IRabaCoder;
+import org.embergraph.journal.AbstractJournal;
+import org.embergraph.journal.CommitRecordIndex;
+import org.embergraph.journal.Journal;
+import org.embergraph.service.IMetadataService;
 
 /**
  * An interface that provides for the (de)-serialization of the value of a tuple

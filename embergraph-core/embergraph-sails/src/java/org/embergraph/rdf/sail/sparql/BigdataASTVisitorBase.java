@@ -36,23 +36,23 @@ package org.embergraph.rdf.sail.sparql;
 
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.sail.sparql.ast.ASTBlankNode;
-import com.bigdata.rdf.sail.sparql.ast.ASTFalse;
-import com.bigdata.rdf.sail.sparql.ast.ASTGraphGraphPattern;
-import com.bigdata.rdf.sail.sparql.ast.ASTIRI;
-import com.bigdata.rdf.sail.sparql.ast.ASTNumericLiteral;
-import com.bigdata.rdf.sail.sparql.ast.ASTQName;
-import com.bigdata.rdf.sail.sparql.ast.ASTRDFLiteral;
-import com.bigdata.rdf.sail.sparql.ast.ASTString;
-import com.bigdata.rdf.sail.sparql.ast.ASTTrue;
-import com.bigdata.rdf.sail.sparql.ast.ASTVar;
-import com.bigdata.rdf.sail.sparql.ast.Node;
-import com.bigdata.rdf.sail.sparql.ast.VisitorException;
-import com.bigdata.rdf.sparql.ast.ConstantNode;
-import com.bigdata.rdf.sparql.ast.TermNode;
-import com.bigdata.rdf.sparql.ast.VarNode;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.sail.sparql.ast.ASTBlankNode;
+import org.embergraph.rdf.sail.sparql.ast.ASTFalse;
+import org.embergraph.rdf.sail.sparql.ast.ASTGraphGraphPattern;
+import org.embergraph.rdf.sail.sparql.ast.ASTIRI;
+import org.embergraph.rdf.sail.sparql.ast.ASTNumericLiteral;
+import org.embergraph.rdf.sail.sparql.ast.ASTQName;
+import org.embergraph.rdf.sail.sparql.ast.ASTRDFLiteral;
+import org.embergraph.rdf.sail.sparql.ast.ASTString;
+import org.embergraph.rdf.sail.sparql.ast.ASTTrue;
+import org.embergraph.rdf.sail.sparql.ast.ASTVar;
+import org.embergraph.rdf.sail.sparql.ast.Node;
+import org.embergraph.rdf.sail.sparql.ast.VisitorException;
+import org.embergraph.rdf.sparql.ast.ConstantNode;
+import org.embergraph.rdf.sparql.ast.TermNode;
+import org.embergraph.rdf.sparql.ast.VarNode;
 
 /**
  * Base class for AST visitor impls.

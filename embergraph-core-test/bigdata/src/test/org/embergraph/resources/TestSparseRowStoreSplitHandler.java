@@ -32,21 +32,21 @@ import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.IndexSegment;
-import com.bigdata.btree.IndexSegmentBuilder;
-import com.bigdata.btree.IndexSegmentStore;
-import com.bigdata.journal.IJournal;
-import com.bigdata.mdi.IResourceMetadata;
-import com.bigdata.mdi.LocalPartitionMetadata;
-import com.bigdata.service.Split;
-import com.bigdata.sparse.KeyDecoder;
-import com.bigdata.sparse.KeyType;
-import com.bigdata.sparse.LogicalRowSplitHandler;
-import com.bigdata.sparse.Schema;
-import com.bigdata.sparse.SparseRowStore;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.IndexSegment;
+import org.embergraph.btree.IndexSegmentBuilder;
+import org.embergraph.btree.IndexSegmentStore;
+import org.embergraph.journal.IJournal;
+import org.embergraph.mdi.IResourceMetadata;
+import org.embergraph.mdi.LocalPartitionMetadata;
+import org.embergraph.service.Split;
+import org.embergraph.sparse.KeyDecoder;
+import org.embergraph.sparse.KeyType;
+import org.embergraph.sparse.LogicalRowSplitHandler;
+import org.embergraph.sparse.Schema;
+import org.embergraph.sparse.SparseRowStore;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Tetst suite for {@link LogicalRowSplitHandler}.

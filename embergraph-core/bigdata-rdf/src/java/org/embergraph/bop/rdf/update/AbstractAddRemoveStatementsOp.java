@@ -31,19 +31,19 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpContext;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.ILocatableResourceAnnotations;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.Var;
-import com.bigdata.bop.engine.BOpStats;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.StatementEnum;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.rdf.spo.SPO;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpContext;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.ILocatableResourceAnnotations;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.Var;
+import org.embergraph.bop.engine.BOpStats;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.rdf.spo.SPO;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

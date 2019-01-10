@@ -28,8 +28,8 @@ import java.util.Enumeration;
 import java.util.Map;
 import java.util.Properties;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IBindingSet;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IBindingSet;
 
 /**
  * The top-level Query.

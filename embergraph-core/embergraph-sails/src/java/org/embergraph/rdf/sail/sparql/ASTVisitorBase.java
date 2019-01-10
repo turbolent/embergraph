@@ -5,7 +5,7 @@
  */
 package org.embergraph.rdf.sail.sparql;
 
-import com.bigdata.rdf.sail.sparql.ast.*;
+import org.embergraph.rdf.sail.sparql.ast.*;
 
 /**
  * Base class for visitors of the SPARQL AST.

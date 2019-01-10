@@ -32,8 +32,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IVariable;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IVariable;
 
 /**
  * The top level container for a sequence of UPDATE operations.

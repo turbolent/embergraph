@@ -27,22 +27,22 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.joinGraph.fast.DefaultEvaluationPlanFactory2;
-import com.bigdata.rdf.axioms.Axioms;
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.axioms.RdfsAxioms;
-import com.bigdata.rdf.inf.BackchainTypeResourceIterator;
-import com.bigdata.rdf.inf.ClosureStats;
-import com.bigdata.rdf.inf.Justification;
-import com.bigdata.rdf.inf.TruthMaintenance;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.DataLoader;
-import com.bigdata.rdf.store.TempTripleStore;
-import com.bigdata.relation.accesspath.IElementFilter;
-import com.bigdata.relation.rule.Program;
-import com.bigdata.relation.rule.eval.ActionEnum;
-import com.bigdata.relation.rule.eval.IJoinNexus;
-import com.bigdata.relation.rule.eval.IJoinNexusFactory;
+import org.embergraph.bop.joinGraph.fast.DefaultEvaluationPlanFactory2;
+import org.embergraph.rdf.axioms.Axioms;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.axioms.RdfsAxioms;
+import org.embergraph.rdf.inf.BackchainTypeResourceIterator;
+import org.embergraph.rdf.inf.ClosureStats;
+import org.embergraph.rdf.inf.Justification;
+import org.embergraph.rdf.inf.TruthMaintenance;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.DataLoader;
+import org.embergraph.rdf.store.TempTripleStore;
+import org.embergraph.relation.accesspath.IElementFilter;
+import org.embergraph.relation.rule.Program;
+import org.embergraph.relation.rule.eval.ActionEnum;
+import org.embergraph.relation.rule.eval.IJoinNexus;
+import org.embergraph.relation.rule.eval.IJoinNexusFactory;
 
 /**
  * Flyweight object encapsulates some configuration state and provides methods

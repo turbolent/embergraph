@@ -29,13 +29,13 @@ package org.embergraph.btree;
 
 import java.util.Iterator;
 
-import com.bigdata.bfs.BigdataFileSystem;
-import com.bigdata.btree.IndexSegment.IndexSegmentTupleCursor;
-import com.bigdata.btree.filter.ITupleFilter;
-import com.bigdata.btree.filter.TupleRemover;
-import com.bigdata.service.IBigdataClient;
-import com.bigdata.service.IDataService;
-import com.bigdata.service.ndx.IClientIndex;
+import org.embergraph.bfs.BigdataFileSystem;
+import org.embergraph.btree.IndexSegment.IndexSegmentTupleCursor;
+import org.embergraph.btree.filter.ITupleFilter;
+import org.embergraph.btree.filter.TupleRemover;
+import org.embergraph.service.IBigdataClient;
+import org.embergraph.service.IDataService;
+import org.embergraph.service.ndx.IClientIndex;
 
 import cutthecrap.utils.striterators.IFilter;
 import cutthecrap.utils.striterators.Striterator;

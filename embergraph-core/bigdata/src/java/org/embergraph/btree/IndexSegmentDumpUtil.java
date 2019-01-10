@@ -4,8 +4,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
 
-import com.bigdata.btree.IndexSegment.ImmutableLeafCursor;
-import com.bigdata.btree.IndexSegment.ImmutableNodeFactory.ImmutableLeaf;
+import org.embergraph.btree.IndexSegment.ImmutableLeafCursor;
+import org.embergraph.btree.IndexSegment.ImmutableNodeFactory.ImmutableLeaf;
 
 public class IndexSegmentDumpUtil {
     /**

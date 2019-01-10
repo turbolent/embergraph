@@ -37,11 +37,11 @@ import java.util.UUID;
 
 import junit.framework.TestCase;
 
-import com.bigdata.btree.keys.DefaultKeyBuilderFactory;
-import com.bigdata.btree.keys.IKeyBuilderFactory;
-import com.bigdata.btree.keys.TestKeyBuilder;
-import com.bigdata.io.SerializerUtil;
-import com.bigdata.rawstore.SimpleMemoryRawStore;
+import org.embergraph.btree.keys.DefaultKeyBuilderFactory;
+import org.embergraph.btree.keys.IKeyBuilderFactory;
+import org.embergraph.btree.keys.TestKeyBuilder;
+import org.embergraph.io.SerializerUtil;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /**
  * Test suite for {@link BigdataMap}.

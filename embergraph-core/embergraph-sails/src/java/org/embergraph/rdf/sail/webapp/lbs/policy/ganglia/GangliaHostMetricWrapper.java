@@ -15,10 +15,10 @@
 */
 package org.embergraph.rdf.sail.webapp.lbs.policy.ganglia;
 
-import com.bigdata.ganglia.IGangliaMetricMessage;
-import com.bigdata.ganglia.IHostReport;
-import com.bigdata.rdf.sail.webapp.lbs.AbstractHostMetrics;
-import com.bigdata.rdf.sail.webapp.lbs.IHostMetrics;
+import org.embergraph.ganglia.IGangliaMetricMessage;
+import org.embergraph.ganglia.IHostReport;
+import org.embergraph.rdf.sail.webapp.lbs.AbstractHostMetrics;
+import org.embergraph.rdf.sail.webapp.lbs.IHostMetrics;
 
 /**
  * Wraps an {@link IHostReport} as an {@link IHostMetrics} object.

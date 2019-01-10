@@ -6,13 +6,13 @@ import org.openrdf.model.ValueFactory;
 import org.openrdf.sail.SailConnection;
 import org.openrdf.sail.SailException;
 
-import com.bigdata.rdf.graph.IGraphAccessor;
-import com.bigdata.rdf.graph.impl.bd.BigdataGASEngine.BigdataGraphAccessor;
-import com.bigdata.rdf.graph.util.AbstractGraphFixture;
-import com.bigdata.rdf.graph.util.SailGraphLoader;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.BigdataSail.BigdataSailConnection;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.graph.IGraphAccessor;
+import org.embergraph.rdf.graph.impl.bd.BigdataGASEngine.BigdataGraphAccessor;
+import org.embergraph.rdf.graph.util.AbstractGraphFixture;
+import org.embergraph.rdf.graph.util.SailGraphLoader;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 public class BigdataGraphFixture extends AbstractGraphFixture {
 

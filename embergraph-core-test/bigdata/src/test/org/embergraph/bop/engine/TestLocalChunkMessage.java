@@ -32,12 +32,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.Var;
-import com.bigdata.bop.bindingSet.HashBindingSet;
-import com.bigdata.striterator.Dechunkerator;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.Var;
+import org.embergraph.bop.bindingSet.HashBindingSet;
+import org.embergraph.striterator.Dechunkerator;
 
 import junit.framework.TestCase2;
 

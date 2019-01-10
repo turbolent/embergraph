@@ -32,8 +32,8 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import com.bigdata.rdf.store.ITripleStore;
-import com.bigdata.rdf.store.TestLocalTripleStore;
+import org.embergraph.rdf.store.ITripleStore;
+import org.embergraph.rdf.store.TestLocalTripleStore;
 
 /**
  * Runs tests for each {@link ITripleStore} implementation.

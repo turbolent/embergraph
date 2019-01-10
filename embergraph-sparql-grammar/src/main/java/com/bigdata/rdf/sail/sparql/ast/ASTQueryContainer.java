@@ -2,9 +2,9 @@
 
 package com.bigdata.rdf.sail.sparql.ast;
 
-import com.bigdata.rdf.sail.sparql.ast.ASTOperationContainer;
-import com.bigdata.rdf.sail.sparql.ast.ASTQuery;
-import com.bigdata.rdf.sail.sparql.ast.SyntaxTreeBuilder;
+import org.embergraph.rdf.sail.sparql.ast.ASTOperationContainer;
+import org.embergraph.rdf.sail.sparql.ast.ASTQuery;
+import org.embergraph.rdf.sail.sparql.ast.SyntaxTreeBuilder;
 
 public class ASTQueryContainer extends ASTOperationContainer {
 

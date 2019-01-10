@@ -33,7 +33,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.Banner;
+import org.embergraph.Banner;
 
 /**
  * Abstract base class for {@link IBigdataClient} implementations.

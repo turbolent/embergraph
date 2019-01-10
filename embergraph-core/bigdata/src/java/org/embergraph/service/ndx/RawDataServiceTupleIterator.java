@@ -31,16 +31,16 @@ package org.embergraph.service.ndx;
 import java.io.IOException;
 import java.util.Iterator;
 
-import com.bigdata.btree.AbstractChunkedTupleIterator;
-import com.bigdata.btree.ResultSet;
-import com.bigdata.btree.proc.BatchRemove.BatchRemoveConstructor;
-import com.bigdata.journal.IIndexStore;
-import com.bigdata.journal.ITx;
-import com.bigdata.mdi.IResourceMetadata;
-import com.bigdata.rawstore.IBlock;
-import com.bigdata.service.AbstractDistributedFederation;
-import com.bigdata.service.IDataService;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.AbstractChunkedTupleIterator;
+import org.embergraph.btree.ResultSet;
+import org.embergraph.btree.proc.BatchRemove.BatchRemoveConstructor;
+import org.embergraph.journal.IIndexStore;
+import org.embergraph.journal.ITx;
+import org.embergraph.mdi.IResourceMetadata;
+import org.embergraph.rawstore.IBlock;
+import org.embergraph.service.AbstractDistributedFederation;
+import org.embergraph.service.IDataService;
+import org.embergraph.util.BytesUtil;
 
 import cutthecrap.utils.striterators.IFilter;
 

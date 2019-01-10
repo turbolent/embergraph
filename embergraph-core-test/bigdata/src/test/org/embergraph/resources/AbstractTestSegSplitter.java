@@ -34,15 +34,15 @@ import java.util.Properties;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.ILocalBTreeView;
-import com.bigdata.btree.ISimpleSplitHandler;
-import com.bigdata.btree.IndexSegment;
-import com.bigdata.btree.IndexSegmentBuilder;
-import com.bigdata.journal.IJournal;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.Options;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.ILocalBTreeView;
+import org.embergraph.btree.ISimpleSplitHandler;
+import org.embergraph.btree.IndexSegment;
+import org.embergraph.btree.IndexSegmentBuilder;
+import org.embergraph.journal.IJournal;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.Options;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Unit tests for splitting an index segment based on its size on the disk, the

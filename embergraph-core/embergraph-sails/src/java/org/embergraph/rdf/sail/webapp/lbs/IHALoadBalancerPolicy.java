@@ -28,7 +28,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bigdata.rdf.sail.webapp.HALoadBalancerServlet;
+import org.embergraph.rdf.sail.webapp.HALoadBalancerServlet;
 
 /**
  * Load balancer policy interface.

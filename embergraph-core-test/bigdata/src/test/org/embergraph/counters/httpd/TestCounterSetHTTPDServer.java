@@ -33,14 +33,14 @@ import java.util.Random;
 
 import junit.framework.TestCase;
 
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.History;
-import com.bigdata.counters.HistoryInstrument;
-import com.bigdata.counters.ICounterSetAccess;
-import com.bigdata.counters.Instrument;
-import com.bigdata.counters.OneShotInstrument;
-import com.bigdata.counters.PeriodEnum;
-import com.bigdata.util.config.NicUtil;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.History;
+import org.embergraph.counters.HistoryInstrument;
+import org.embergraph.counters.ICounterSetAccess;
+import org.embergraph.counters.Instrument;
+import org.embergraph.counters.OneShotInstrument;
+import org.embergraph.counters.PeriodEnum;
+import org.embergraph.util.config.NicUtil;
 
 /**
  * Utility class for testing {@link CounterSetHTTPD} or

@@ -27,9 +27,9 @@ package org.embergraph.rdf.internal.constraints;
 
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.rdf.error.SparqlTypeErrorException;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.rdf.error.SparqlTypeErrorException;
 
 
 /**

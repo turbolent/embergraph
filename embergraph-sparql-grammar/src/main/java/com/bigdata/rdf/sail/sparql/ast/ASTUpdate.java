@@ -5,8 +5,8 @@
  */
 package com.bigdata.rdf.sail.sparql.ast;
 
-import com.bigdata.rdf.sail.sparql.ast.ASTOperation;
-import com.bigdata.rdf.sail.sparql.ast.SyntaxTreeBuilder;
+import org.embergraph.rdf.sail.sparql.ast.ASTOperation;
+import org.embergraph.rdf.sail.sparql.ast.SyntaxTreeBuilder;
 
 /**
  * @author jeen

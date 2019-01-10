@@ -1,7 +1,7 @@
 package org.embergraph.resources;
 
-import com.bigdata.journal.AbstractLocalTransactionManager;
-import com.bigdata.journal.ITransactionService;
+import org.embergraph.journal.AbstractLocalTransactionManager;
+import org.embergraph.journal.ITransactionService;
 
 /**
  * Mock implementation used by some of the unit tests.

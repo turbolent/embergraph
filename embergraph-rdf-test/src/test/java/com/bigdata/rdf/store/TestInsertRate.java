@@ -33,8 +33,8 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 
-import com.bigdata.rdf.rio.StatementBuffer;
-import com.bigdata.util.BytesUtil.UnsignedByteArrayComparator;
+import org.embergraph.rdf.rio.StatementBuffer;
+import org.embergraph.util.BytesUtil.UnsignedByteArrayComparator;
 
 /**
  * A test for measuring the possible insert rate for a triple store based on a

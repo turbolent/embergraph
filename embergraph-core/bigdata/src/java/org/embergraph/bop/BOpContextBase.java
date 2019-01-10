@@ -30,16 +30,16 @@ package org.embergraph.bop;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 
-import com.bigdata.bop.engine.QueryEngine;
-import com.bigdata.btree.ILocalBTreeView;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.relation.IRelation;
-import com.bigdata.relation.accesspath.IAccessPath;
-import com.bigdata.relation.locator.ILocatableResource;
-import com.bigdata.relation.locator.IResourceLocator;
-import com.bigdata.relation.rule.IRule;
-import com.bigdata.relation.rule.eval.IJoinNexus;
-import com.bigdata.service.IBigdataFederation;
+import org.embergraph.bop.engine.QueryEngine;
+import org.embergraph.btree.ILocalBTreeView;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.relation.IRelation;
+import org.embergraph.relation.accesspath.IAccessPath;
+import org.embergraph.relation.locator.ILocatableResource;
+import org.embergraph.relation.locator.IResourceLocator;
+import org.embergraph.relation.rule.IRule;
+import org.embergraph.relation.rule.eval.IJoinNexus;
+import org.embergraph.service.IBigdataFederation;
 
 /**
  * Base class for the bigdata operation evaluation context (NOT serializable).

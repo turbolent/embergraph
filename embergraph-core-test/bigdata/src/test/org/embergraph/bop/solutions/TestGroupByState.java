@@ -33,25 +33,25 @@ import junit.framework.TestCase2;
 
 import org.openrdf.query.algebra.Compare.CompareOp;
 
-import com.bigdata.bop.Bind;
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IConstraint;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.Var;
-import com.bigdata.bop.aggregate.IAggregate;
-import com.bigdata.bop.rdf.aggregate.MIN;
-import com.bigdata.bop.rdf.aggregate.SUM;
-import com.bigdata.journal.ITx;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.constraints.CompareBOp;
-import com.bigdata.rdf.internal.constraints.MathBOp;
-import com.bigdata.rdf.internal.constraints.MathBOp.MathOp;
-import com.bigdata.rdf.internal.constraints.SPARQLConstraint;
-import com.bigdata.rdf.internal.constraints.UcaseBOp;
-import com.bigdata.rdf.internal.impl.literal.XSDBooleanIV;
-import com.bigdata.rdf.internal.impl.literal.XSDNumericIV;
-import com.bigdata.rdf.sparql.ast.GlobalAnnotations;
+import org.embergraph.bop.Bind;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IConstraint;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.Var;
+import org.embergraph.bop.aggregate.IAggregate;
+import org.embergraph.bop.rdf.aggregate.MIN;
+import org.embergraph.bop.rdf.aggregate.SUM;
+import org.embergraph.journal.ITx;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.constraints.CompareBOp;
+import org.embergraph.rdf.internal.constraints.MathBOp;
+import org.embergraph.rdf.internal.constraints.MathBOp.MathOp;
+import org.embergraph.rdf.internal.constraints.SPARQLConstraint;
+import org.embergraph.rdf.internal.constraints.UcaseBOp;
+import org.embergraph.rdf.internal.impl.literal.XSDBooleanIV;
+import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
+import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 
 /**
  * Test suite for {@link GroupByState}.

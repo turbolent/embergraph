@@ -32,11 +32,11 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.ha.msg.IHAWriteMessage;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.io.IBufferAccess;
-import com.bigdata.journal.IRootBlockView;
-import com.bigdata.journal.StoreTypeEnum;
+import org.embergraph.ha.msg.IHAWriteMessage;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.io.IBufferAccess;
+import org.embergraph.journal.IRootBlockView;
+import org.embergraph.journal.StoreTypeEnum;
 
 /**
  * Provides the top level control

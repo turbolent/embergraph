@@ -29,25 +29,25 @@ package org.embergraph.rdf.sparql.ast.eval.reif;
 
 import java.util.Properties;
 
-import com.bigdata.BigdataStatics;
-import com.bigdata.bop.ap.Predicate;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.internal.XSD;
-import com.bigdata.rdf.internal.impl.bnode.SidIV;
-import com.bigdata.rdf.model.BigdataBNode;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.model.BigdataStatement;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.model.StatementEnum;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.rdf.spo.SPO;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.vocab.decls.DCTermsVocabularyDecl;
+import org.embergraph.BigdataStatics;
+import org.embergraph.bop.ap.Predicate;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.internal.XSD;
+import org.embergraph.rdf.internal.impl.bnode.SidIV;
+import org.embergraph.rdf.model.BigdataBNode;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.rdf.spo.SPO;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.vocab.decls.DCTermsVocabularyDecl;
 
 /**
  * Reification Done Right test suite.

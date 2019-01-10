@@ -46,17 +46,17 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.journal.Journal.Options;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.testutil.ExperimentDriver;
-import com.bigdata.testutil.ExperimentDriver.IComparisonTest;
-import com.bigdata.testutil.ExperimentDriver.Result;
-import com.bigdata.util.Bytes;
-import com.bigdata.util.NV;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.journal.Journal.Options;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.testutil.ExperimentDriver;
+import org.embergraph.testutil.ExperimentDriver.IComparisonTest;
+import org.embergraph.testutil.ExperimentDriver.Result;
+import org.embergraph.util.Bytes;
+import org.embergraph.util.NV;
 
 /**
  * Stress test of the group commit mechanism. This class may be used to tune the

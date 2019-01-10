@@ -39,9 +39,9 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.ha.msg.HASendState;
-import com.bigdata.util.InnerCause;
-import com.bigdata.util.concurrent.Haltable;
+import org.embergraph.ha.msg.HASendState;
+import org.embergraph.util.InnerCause;
+import org.embergraph.util.concurrent.Haltable;
 
 /**
  * A service for sending raw {@link ByteBuffer}s across a socket. This service

@@ -47,7 +47,7 @@ Modifications:
 
 package org.embergraph.btree;
 
-import com.bigdata.mdi.LocalPartitionMetadata;
+import org.embergraph.mdi.LocalPartitionMetadata;
 
 /**
  * Helper class collects some statistics about an {@link ILocalBTreeView}.

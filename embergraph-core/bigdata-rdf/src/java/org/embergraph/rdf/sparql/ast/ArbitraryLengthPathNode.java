@@ -34,15 +34,15 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.NV;
-import com.bigdata.rdf.sparql.ast.PathNode.PathMod;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpBase;
-import com.bigdata.rdf.sparql.ast.optimizers.ASTALPServiceOptimizer;
-import com.bigdata.rdf.sparql.ast.optimizers.StaticOptimizer;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.NV;
+import org.embergraph.rdf.sparql.ast.PathNode.PathMod;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpBase;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTALPServiceOptimizer;
+import org.embergraph.rdf.sparql.ast.optimizers.StaticOptimizer;
 
 /**
  * A special kind of AST node that represents the SPARQL 1.1 arbitrary length

@@ -36,8 +36,8 @@ import java.util.concurrent.FutureTask;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.TimeUnit;
 
-import com.bigdata.counters.ICounterSetAccess;
-import com.bigdata.service.IServiceShutdown;
+import org.embergraph.counters.ICounterSetAccess;
+import org.embergraph.service.IServiceShutdown;
 
 /**
  * Interface for managing concurrent access to resources (indices).

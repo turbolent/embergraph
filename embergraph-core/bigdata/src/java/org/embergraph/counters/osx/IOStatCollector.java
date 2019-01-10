@@ -28,8 +28,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.counters.osx;
 
-import com.bigdata.counters.*;
-import com.bigdata.util.Bytes;
+import org.embergraph.counters.*;
+import org.embergraph.util.Bytes;
 
 import java.util.HashMap;
 import java.util.LinkedList;

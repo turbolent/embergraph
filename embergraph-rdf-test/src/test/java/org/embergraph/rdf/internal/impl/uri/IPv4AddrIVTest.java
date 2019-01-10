@@ -30,8 +30,8 @@ import junit.framework.TestCase;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
-import com.bigdata.rdf.internal.impl.literal.IPv4AddrIV;
-import com.bigdata.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.internal.impl.literal.IPv4AddrIV;
+import org.embergraph.rdf.model.BigdataLiteral;
 
 public class IPv4AddrIVTest extends TestCase {
 

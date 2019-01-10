@@ -27,9 +27,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IVariable;
-import com.bigdata.rdf.sparql.ast.optimizers.ASTSparql11SubqueryOptimizer;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IVariable;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTSparql11SubqueryOptimizer;
 
 /**
  * A SPARQL 1.1 style subquery.

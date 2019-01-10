@@ -32,14 +32,14 @@ import junit.extensions.proxy.ProxyTestSuite;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import com.bigdata.rdf.sail.BigdataSail.Options;
-import com.bigdata.rdf.sail.sparql.TestVerifyAggregates;
-import com.bigdata.rdf.sail.tck.BigdataComplexSparqlQueryTest;
-import com.bigdata.rdf.sail.tck.BigdataConnectionTest;
-import com.bigdata.rdf.sail.tck.BigdataSPARQLUpdateConformanceTest;
-import com.bigdata.rdf.sail.tck.BigdataSparqlFullRWTxTest;
-import com.bigdata.rdf.sail.tck.BigdataSparqlTest;
-import com.bigdata.rdf.sail.tck.BigdataStoreTest;
+import org.embergraph.rdf.sail.BigdataSail.Options;
+import org.embergraph.rdf.sail.sparql.TestVerifyAggregates;
+import org.embergraph.rdf.sail.tck.BigdataComplexSparqlQueryTest;
+import org.embergraph.rdf.sail.tck.BigdataConnectionTest;
+import org.embergraph.rdf.sail.tck.BigdataSPARQLUpdateConformanceTest;
+import org.embergraph.rdf.sail.tck.BigdataSparqlFullRWTxTest;
+import org.embergraph.rdf.sail.tck.BigdataSparqlTest;
+import org.embergraph.rdf.sail.tck.BigdataStoreTest;
 
 /**
  * Test suite for the {@link BigdataSail} with quads enabled. The provenance

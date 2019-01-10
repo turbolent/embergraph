@@ -31,13 +31,13 @@ package org.embergraph.service.ndx;
 import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.bigdata.btree.ITuple;
-import com.bigdata.journal.ITx;
-import com.bigdata.mdi.IMetadataIndex;
-import com.bigdata.mdi.PartitionLocator;
-import com.bigdata.resources.StaleLocatorException;
-import com.bigdata.service.AbstractScaleOutFederation;
-import com.bigdata.service.IDataService;
+import org.embergraph.btree.ITuple;
+import org.embergraph.journal.ITx;
+import org.embergraph.mdi.IMetadataIndex;
+import org.embergraph.mdi.PartitionLocator;
+import org.embergraph.resources.StaleLocatorException;
+import org.embergraph.service.AbstractScaleOutFederation;
+import org.embergraph.service.IDataService;
 
 /**
  * A client-side view of a scale-out index.

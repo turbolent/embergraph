@@ -59,9 +59,9 @@ import java.util.LinkedHashSet;
 
 import junit.framework.Test;
 
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.rdf.sail.webapp.client.IPreparedTupleQuery;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.sail.webapp.client.IPreparedTupleQuery;
 
 
 public class TestSparqlUpdateSuppressTruthMaintenance<S extends IIndexManager> extends

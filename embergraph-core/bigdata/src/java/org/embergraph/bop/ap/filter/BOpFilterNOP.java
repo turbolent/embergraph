@@ -30,7 +30,7 @@ package org.embergraph.bop.ap.filter;
 import java.util.Iterator;
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
+import org.embergraph.bop.BOp;
 
 /**
  * A filter which does nothing. This may be used to stack existing

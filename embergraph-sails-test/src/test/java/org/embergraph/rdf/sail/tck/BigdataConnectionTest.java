@@ -50,15 +50,15 @@ import org.openrdf.query.TupleQueryResult;
 import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryConnectionTest;
 
-import com.bigdata.bop.fed.QueryEngineFactory;
-import com.bigdata.btree.keys.CollatorEnum;
-import com.bigdata.btree.keys.StrengthEnum;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.Journal;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.BigdataSail.Options;
-import com.bigdata.rdf.sail.BigdataSailRepository;
+import org.embergraph.bop.fed.QueryEngineFactory;
+import org.embergraph.btree.keys.CollatorEnum;
+import org.embergraph.btree.keys.StrengthEnum;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.Journal;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.BigdataSail.Options;
+import org.embergraph.rdf.sail.BigdataSailRepository;
 
 /**
  * Bigdata uses snapshot isolation for transactions while openrdf assumes that

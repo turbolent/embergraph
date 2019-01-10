@@ -30,8 +30,8 @@ package org.embergraph.relation.rule;
 
 import java.io.Serializable;
 
-import com.bigdata.bop.IPredicate;
-import com.bigdata.relation.accesspath.IAccessPath;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.relation.accesspath.IAccessPath;
 
 /**
  * An interface for expander patterns for an {@link IPredicate} when it appears

@@ -28,9 +28,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.counters.linux;
 
-import com.bigdata.counters.*;
-import com.bigdata.counters.linux.SarCpuUtilizationCollector.DI;
-import com.bigdata.util.Bytes;
+import org.embergraph.counters.*;
+import org.embergraph.counters.linux.SarCpuUtilizationCollector.DI;
+import org.embergraph.util.Bytes;
 
 import java.io.IOException;
 import java.util.LinkedList;

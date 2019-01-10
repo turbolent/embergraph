@@ -27,7 +27,7 @@ package org.embergraph.ha;
 
 import java.util.UUID;
 
-import com.bigdata.journal.IJournal;
+import org.embergraph.journal.IJournal;
 
 /**
  * Convenience interface created in BLZG-1370 to factor out bigdata-jini

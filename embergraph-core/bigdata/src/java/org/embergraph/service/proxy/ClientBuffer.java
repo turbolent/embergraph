@@ -30,7 +30,7 @@ package org.embergraph.service.proxy;
 import java.io.IOException;
 import java.io.Serializable;
 
-import com.bigdata.relation.accesspath.IBuffer;
+import org.embergraph.relation.accesspath.IBuffer;
 
 /**
  * {@link Serializable} class wraps a {@link RemoteBuffer} delegating methods

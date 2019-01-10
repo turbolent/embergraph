@@ -28,18 +28,18 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.io.LongPacker;
-import com.bigdata.rdf.internal.DTE;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.IVUtility;
-import com.bigdata.rdf.internal.NotMaterializedException;
-import com.bigdata.rdf.internal.VTE;
-import com.bigdata.rdf.internal.impl.literal.NumericIV;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.util.Bytes;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.io.LongPacker;
+import org.embergraph.rdf.internal.DTE;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.IVUtility;
+import org.embergraph.rdf.internal.NotMaterializedException;
+import org.embergraph.rdf.internal.VTE;
+import org.embergraph.rdf.internal.impl.literal.NumericIV;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.util.Bytes;
 
 /**
  * Implementation for any kind of RDF {@link Value} when the values is not being

@@ -18,8 +18,8 @@ package org.embergraph.rdf.graph.impl;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.bigdata.rdf.graph.IGASStats;
-import com.bigdata.rdf.graph.util.GASUtil;
+import org.embergraph.rdf.graph.IGASStats;
+import org.embergraph.rdf.graph.util.GASUtil;
 
 /**
  * Statistics for GAS algorithms.

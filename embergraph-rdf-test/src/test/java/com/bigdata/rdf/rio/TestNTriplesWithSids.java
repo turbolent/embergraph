@@ -11,15 +11,15 @@ import org.openrdf.rio.RDFHandlerException;
 import org.openrdf.rio.RDFParseException;
 import org.openrdf.rio.RDFParserRegistry;
 
-import com.bigdata.rdf.ServiceProviderHook;
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.model.BigdataStatement;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.rio.ntriples.BigdataNTriplesParser;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.AbstractTripleStoreTestCase;
-import com.bigdata.rdf.store.BigdataStatementIterator;
-import com.bigdata.rdf.store.DataLoader;
+import org.embergraph.rdf.ServiceProviderHook;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.rio.ntriples.BigdataNTriplesParser;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.AbstractTripleStoreTestCase;
+import org.embergraph.rdf.store.BigdataStatementIterator;
+import org.embergraph.rdf.store.DataLoader;
 
 /**
  * Test suite for SIDS support with NTRIPLES data.  

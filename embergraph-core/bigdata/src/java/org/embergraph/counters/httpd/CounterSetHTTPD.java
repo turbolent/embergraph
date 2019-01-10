@@ -34,16 +34,16 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.ICounterSetAccess;
-import com.bigdata.counters.query.CounterSetSelector;
-import com.bigdata.counters.query.ICounterSelector;
-import com.bigdata.counters.query.URLQueryModel;
-import com.bigdata.counters.render.IRenderer;
-import com.bigdata.counters.render.RendererFactory;
-import com.bigdata.service.IService;
-import com.bigdata.util.Bytes;
-import com.bigdata.util.httpd.AbstractHTTPD;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.ICounterSetAccess;
+import org.embergraph.counters.query.CounterSetSelector;
+import org.embergraph.counters.query.ICounterSelector;
+import org.embergraph.counters.query.URLQueryModel;
+import org.embergraph.counters.render.IRenderer;
+import org.embergraph.counters.render.RendererFactory;
+import org.embergraph.service.IService;
+import org.embergraph.util.Bytes;
+import org.embergraph.util.httpd.AbstractHTTPD;
 
 /**
  * Exposes a {@link CounterSet} via HTTPD.

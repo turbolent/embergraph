@@ -37,16 +37,16 @@ import java.util.concurrent.TimeoutException;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.ha.msg.IHASendState;
-import com.bigdata.ha.msg.IHASyncRequest;
-import com.bigdata.ha.msg.IHAWriteMessage;
-import com.bigdata.journal.AbstractJournal;
-import com.bigdata.journal.IResourceManager;
-import com.bigdata.journal.IRootBlockView;
-import com.bigdata.journal.Journal;
-import com.bigdata.quorum.AbstractQuorumMember;
-import com.bigdata.service.proxy.ThickFuture;
-import com.bigdata.util.InnerCause;
+import org.embergraph.ha.msg.IHASendState;
+import org.embergraph.ha.msg.IHASyncRequest;
+import org.embergraph.ha.msg.IHAWriteMessage;
+import org.embergraph.journal.AbstractJournal;
+import org.embergraph.journal.IResourceManager;
+import org.embergraph.journal.IRootBlockView;
+import org.embergraph.journal.Journal;
+import org.embergraph.quorum.AbstractQuorumMember;
+import org.embergraph.service.proxy.ThickFuture;
+import org.embergraph.util.InnerCause;
 
 /**
  * Abstract implementation provides the logic for distributing messages for the

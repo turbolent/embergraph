@@ -32,7 +32,7 @@ import junit.framework.TestCase;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.io.DirectBufferPoolTestHelper;
+import org.embergraph.io.DirectBufferPoolTestHelper;
 
 /**
  * Some helper methods for CI.

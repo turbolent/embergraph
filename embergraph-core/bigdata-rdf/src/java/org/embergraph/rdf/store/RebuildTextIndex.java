@@ -32,10 +32,10 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Properties;
 
-import com.bigdata.Banner;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.Options;
+import org.embergraph.Banner;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.Options;
 
 
 /**

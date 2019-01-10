@@ -26,19 +26,19 @@ import java.util.Map;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IConstraint;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.IVariableOrConstant;
-import com.bigdata.bop.Var;
-import com.bigdata.bop.constraint.Constraint;
-import com.bigdata.bop.constraint.NE;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.VTE;
-import com.bigdata.rdf.sparql.ast.FilterNode;
-import com.bigdata.rdf.spo.SPOPredicate;
-import com.bigdata.test.MockTermIdFactory;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IConstraint;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.IVariableOrConstant;
+import org.embergraph.bop.Var;
+import org.embergraph.bop.constraint.Constraint;
+import org.embergraph.bop.constraint.NE;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.VTE;
+import org.embergraph.rdf.sparql.ast.FilterNode;
+import org.embergraph.rdf.spo.SPOPredicate;
+import org.embergraph.test.MockTermIdFactory;
 
 /**
  * 

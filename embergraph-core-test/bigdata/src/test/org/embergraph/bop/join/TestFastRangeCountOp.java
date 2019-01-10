@@ -34,32 +34,32 @@ import java.util.concurrent.FutureTask;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpContext;
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IPredicate.Annotations;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.IVariableOrConstant;
-import com.bigdata.bop.NV;
-import com.bigdata.bop.Var;
-import com.bigdata.bop.ap.E;
-import com.bigdata.bop.ap.Predicate;
-import com.bigdata.bop.ap.R;
-import com.bigdata.bop.bindingSet.ListBindingSet;
-import com.bigdata.bop.engine.AbstractQueryEngineTestCase;
-import com.bigdata.bop.engine.BOpStats;
-import com.bigdata.bop.engine.BlockingBufferWithStats;
-import com.bigdata.bop.engine.MockRunningQuery;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.Journal;
-import com.bigdata.rdf.internal.impl.literal.XSDIntegerIV;
-import com.bigdata.relation.accesspath.IAsynchronousIterator;
-import com.bigdata.relation.accesspath.IBlockingBuffer;
-import com.bigdata.relation.accesspath.ThickAsynchronousIterator;
-import com.bigdata.striterator.ChunkedArrayIterator;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpContext;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IPredicate.Annotations;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.IVariableOrConstant;
+import org.embergraph.bop.NV;
+import org.embergraph.bop.Var;
+import org.embergraph.bop.ap.E;
+import org.embergraph.bop.ap.Predicate;
+import org.embergraph.bop.ap.R;
+import org.embergraph.bop.bindingSet.ListBindingSet;
+import org.embergraph.bop.engine.AbstractQueryEngineTestCase;
+import org.embergraph.bop.engine.BOpStats;
+import org.embergraph.bop.engine.BlockingBufferWithStats;
+import org.embergraph.bop.engine.MockRunningQuery;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Journal;
+import org.embergraph.rdf.internal.impl.literal.XSDIntegerIV;
+import org.embergraph.relation.accesspath.IAsynchronousIterator;
+import org.embergraph.relation.accesspath.IBlockingBuffer;
+import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
+import org.embergraph.striterator.ChunkedArrayIterator;
 
 /**
  * Unit tests for the {@link FastRangeCountOp} operator.

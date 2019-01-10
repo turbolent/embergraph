@@ -37,16 +37,16 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.impl.AbstractInlineIV;
-import com.bigdata.rdf.sail.sparql.ast.VisitorException;
-import com.bigdata.rdf.sparql.ast.ASTContainer;
-import com.bigdata.rdf.sparql.ast.ConstantNode;
-import com.bigdata.rdf.sparql.ast.GraphPatternGroup;
-import com.bigdata.rdf.sparql.ast.QueryRoot;
-import com.bigdata.rdf.sparql.ast.StatementPatternNode;
-import com.bigdata.rdf.store.TempTripleStore.Options;
+import org.embergraph.bop.BOp;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.impl.AbstractInlineIV;
+import org.embergraph.rdf.sail.sparql.ast.VisitorException;
+import org.embergraph.rdf.sparql.ast.ASTContainer;
+import org.embergraph.rdf.sparql.ast.ConstantNode;
+import org.embergraph.rdf.sparql.ast.GraphPatternGroup;
+import org.embergraph.rdf.sparql.ast.QueryRoot;
+import org.embergraph.rdf.sparql.ast.StatementPatternNode;
+import org.embergraph.rdf.store.TempTripleStore.Options;
 
 /**
  * Unit test template for use in submission of bugs.

@@ -30,8 +30,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.openrdf.model.Resource;
 import org.openrdf.repository.RepositoryResult;
 
-import com.bigdata.rdf.sail.BigdataSailRepositoryConnection;
-import com.bigdata.rdf.sail.webapp.XMLBuilder.Node;
+import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.rdf.sail.webapp.XMLBuilder.Node;
 
 /**
  * Task to report the contexts used by a QUADS mode KB instance.

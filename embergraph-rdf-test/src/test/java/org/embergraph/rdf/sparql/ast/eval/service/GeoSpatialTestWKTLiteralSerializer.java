@@ -28,11 +28,11 @@ package org.embergraph.rdf.sparql.ast.eval.service;
 
 import org.openrdf.model.impl.URIImpl;
 
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.sparql.ast.DummyConstantNode;
-import com.bigdata.service.geospatial.GeoSpatialDefaultLiteralSerializer;
-import com.bigdata.service.geospatial.GeoSpatialSearchException;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.sparql.ast.DummyConstantNode;
+import org.embergraph.service.geospatial.GeoSpatialDefaultLiteralSerializer;
+import org.embergraph.service.geospatial.GeoSpatialSearchException;
 
 /**
  * Test serializer for WKT literals of the form Point(lat,lon).

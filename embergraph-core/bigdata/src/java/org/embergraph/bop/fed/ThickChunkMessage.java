@@ -34,20 +34,20 @@ import java.io.ObjectOutput;
 import java.rmi.RemoteException;
 import java.util.UUID;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.engine.IChunkAccessor;
-import com.bigdata.bop.engine.IChunkMessage;
-import com.bigdata.bop.engine.IQueryClient;
-import com.bigdata.io.DataInputBuffer;
-import com.bigdata.io.DataOutputBuffer;
-import com.bigdata.io.LongPacker;
-import com.bigdata.io.ShortPacker;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.IVCache;
-import com.bigdata.rdf.internal.encoder.IVSolutionSetDecoder;
-import com.bigdata.rdf.internal.encoder.IVSolutionSetEncoder;
-import com.bigdata.relation.accesspath.EmptyCloseableIterator;
-import com.bigdata.relation.accesspath.ThickCloseableIterator;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.engine.IChunkAccessor;
+import org.embergraph.bop.engine.IChunkMessage;
+import org.embergraph.bop.engine.IQueryClient;
+import org.embergraph.io.DataInputBuffer;
+import org.embergraph.io.DataOutputBuffer;
+import org.embergraph.io.LongPacker;
+import org.embergraph.io.ShortPacker;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.IVCache;
+import org.embergraph.rdf.internal.encoder.IVSolutionSetDecoder;
+import org.embergraph.rdf.internal.encoder.IVSolutionSetEncoder;
+import org.embergraph.relation.accesspath.EmptyCloseableIterator;
+import org.embergraph.relation.accesspath.ThickCloseableIterator;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

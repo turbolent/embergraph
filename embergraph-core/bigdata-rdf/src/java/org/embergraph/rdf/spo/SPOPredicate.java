@@ -25,18 +25,18 @@ package org.embergraph.rdf.spo;
 
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.IVariableOrConstant;
-import com.bigdata.bop.NV;
-import com.bigdata.bop.ap.Predicate;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.impl.bnode.SidIV;
-import com.bigdata.rdf.model.StatementEnum;
-import com.bigdata.rdf.sparql.ast.FilterNode;
-import com.bigdata.relation.rule.IAccessPathExpander;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.IVariableOrConstant;
+import org.embergraph.bop.NV;
+import org.embergraph.bop.ap.Predicate;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.impl.bnode.SidIV;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.rdf.sparql.ast.FilterNode;
+import org.embergraph.relation.rule.IAccessPathExpander;
 
 /**
  * A predicate that is a triple with one or more variables. While the general

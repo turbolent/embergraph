@@ -36,22 +36,22 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.UUID;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.IVariableOrConstant;
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.ITupleSerializer;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.relation.AbstractRelation;
-import com.bigdata.relation.locator.ILocatableResource;
-import com.bigdata.service.AbstractScaleOutFederation;
-import com.bigdata.striterator.AbstractKeyOrder;
-import com.bigdata.striterator.IChunkedOrderedIterator;
-import com.bigdata.striterator.IKeyOrder;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.IVariableOrConstant;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.ITupleSerializer;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.relation.AbstractRelation;
+import org.embergraph.relation.locator.ILocatableResource;
+import org.embergraph.service.AbstractScaleOutFederation;
+import org.embergraph.striterator.AbstractKeyOrder;
+import org.embergraph.striterator.IChunkedOrderedIterator;
+import org.embergraph.striterator.IKeyOrder;
+import org.embergraph.util.BytesUtil;
 
 import cutthecrap.utils.striterators.SingleValueIterator;
 

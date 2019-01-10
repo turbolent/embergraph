@@ -2,8 +2,8 @@ package org.embergraph.rdf.rules;
 
 import java.util.List;
 
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.relation.rule.Rule;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.relation.rule.Rule;
 
 /**
  * A program that uses the fix point of the configured rules to compute the

@@ -44,10 +44,10 @@ import org.openrdf.query.algebra.evaluation.ValueExprEvaluationException;
 import org.openrdf.query.algebra.evaluation.util.QueryEvaluationUtil;
 import org.openrdf.query.algebra.evaluation.util.ValueComparator;
 
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.impl.bnode.SidIV;
-import com.bigdata.rdf.internal.impl.literal.LiteralExtensionIV;
-import com.bigdata.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.impl.bnode.SidIV;
+import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
+import org.embergraph.rdf.model.BigdataLiteral;
 
 /**
  * A comparator that compares {@link IV}s according the SPARQL value ordering as

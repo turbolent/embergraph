@@ -26,14 +26,14 @@ package org.embergraph.ha.pipeline;
 import java.nio.ByteBuffer;
 import java.util.UUID;
 
-import com.bigdata.ha.msg.HAMessageWrapper;
-import com.bigdata.ha.msg.HASendState;
-import com.bigdata.ha.msg.HAWriteMessageBase;
-import com.bigdata.ha.msg.IHASendState;
-import com.bigdata.ha.msg.IHASyncRequest;
-import com.bigdata.ha.msg.IHAWriteMessageBase;
-import com.bigdata.io.ChecksumUtility;
-import com.bigdata.io.TestCase3;
+import org.embergraph.ha.msg.HAMessageWrapper;
+import org.embergraph.ha.msg.HASendState;
+import org.embergraph.ha.msg.HAWriteMessageBase;
+import org.embergraph.ha.msg.IHASendState;
+import org.embergraph.ha.msg.IHASyncRequest;
+import org.embergraph.ha.msg.IHAWriteMessageBase;
+import org.embergraph.io.ChecksumUtility;
+import org.embergraph.io.TestCase3;
 
 public class AbstractHASendAndReceiveTestCase extends TestCase3 {
 

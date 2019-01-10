@@ -25,10 +25,10 @@ package org.embergraph.rdf.internal;
 
 import org.openrdf.model.URI;
 
-import com.bigdata.rdf.internal.impl.literal.AbstractLiteralIV;
-import com.bigdata.rdf.internal.impl.uri.URIExtensionIV;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.vocab.Vocabulary;
+import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
+import org.embergraph.rdf.internal.impl.uri.URIExtensionIV;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.vocab.Vocabulary;
 
 /**
  * Do-nothing inline URI factory used in the case where there is no vocabulary

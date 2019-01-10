@@ -26,8 +26,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.sparql.ast;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.rdf.sparql.ast.optimizers.ASTStaticBindingsOptimizer;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTStaticBindingsOptimizer;
 
 /**
  * Class for wrapping a query node and an associated binding set (as starting

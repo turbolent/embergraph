@@ -36,8 +36,8 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.io.SerializerUtil;
-import com.bigdata.service.ClientService;
+import org.embergraph.io.SerializerUtil;
+import org.embergraph.service.ClientService;
 
 /**
  * This is a test suite for the {@link ReentrantLock} deserialization pattern

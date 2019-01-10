@@ -2,10 +2,10 @@
 
 package com.bigdata.rdf.sail.sparql.ast;
 
-import com.bigdata.rdf.sail.sparql.ast.ASTRDFValue;
-import com.bigdata.rdf.sail.sparql.ast.SyntaxTreeBuilder;
-import com.bigdata.rdf.sail.sparql.ast.SyntaxTreeBuilderVisitor;
-import com.bigdata.rdf.sail.sparql.ast.VisitorException;
+import org.embergraph.rdf.sail.sparql.ast.ASTRDFValue;
+import org.embergraph.rdf.sail.sparql.ast.SyntaxTreeBuilder;
+import org.embergraph.rdf.sail.sparql.ast.SyntaxTreeBuilderVisitor;
+import org.embergraph.rdf.sail.sparql.ast.VisitorException;
 
 public class ASTBlankNode extends ASTRDFValue {
 

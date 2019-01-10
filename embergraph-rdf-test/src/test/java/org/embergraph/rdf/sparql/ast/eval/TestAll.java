@@ -27,8 +27,8 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import com.bigdata.rdf.sparql.ast.QueryHints;
-import com.bigdata.rdf.sparql.ast.eval.reif.TestReificationDoneRightEval;
+import org.embergraph.rdf.sparql.ast.QueryHints;
+import org.embergraph.rdf.sparql.ast.eval.reif.TestReificationDoneRightEval;
 
 /**
  * Aggregates test suites into increasing dependency order.

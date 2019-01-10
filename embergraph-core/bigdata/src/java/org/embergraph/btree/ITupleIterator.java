@@ -30,7 +30,7 @@ package org.embergraph.btree;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import com.bigdata.btree.filter.TupleFilter;
+import org.embergraph.btree.filter.TupleFilter;
 
 /**
  * Interface visits {@link ITuple}s populated with the data and metadata for

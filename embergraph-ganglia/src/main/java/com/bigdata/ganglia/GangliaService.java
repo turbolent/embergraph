@@ -37,7 +37,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.ganglia.util.DaemonThreadFactory;
+import org.embergraph.ganglia.util.DaemonThreadFactory;
 
 /**
  * A full ganglia-aware service suitable for embedding with a Java application.

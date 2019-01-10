@@ -37,12 +37,12 @@ import java.util.UUID;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.ICounterSetAccess;
-import com.bigdata.counters.IProcessCounters;
-import com.bigdata.counters.httpd.CounterSetHTTPD;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.util.httpd.AbstractHTTPD;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.ICounterSetAccess;
+import org.embergraph.counters.IProcessCounters;
+import org.embergraph.counters.httpd.CounterSetHTTPD;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.util.httpd.AbstractHTTPD;
 
 /**
  * Basic delegate for services that need to override the service UUID and

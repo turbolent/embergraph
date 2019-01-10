@@ -4,11 +4,11 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.TreeSet;
 import org.apache.log4j.Logger;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.TempTripleStore;
-import com.bigdata.striterator.IChunkedOrderedIterator;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.TempTripleStore;
+import org.embergraph.striterator.IChunkedOrderedIterator;
 
 public abstract class BackchainOwlSameAsIterator implements IChunkedOrderedIterator<ISPO> {
     

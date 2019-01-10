@@ -46,8 +46,8 @@ import org.openrdf.query.TupleQueryResult;
 import org.openrdf.query.impl.BindingImpl;
 import org.openrdf.rio.RDFFormat;
 
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.vocab.NoVocabulary;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.vocab.NoVocabulary;
 
 /**
  * Test suite for ticket #1388: xsd:date function

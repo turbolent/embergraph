@@ -36,9 +36,9 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 
-import com.bigdata.counters.CounterSet;
-import com.bigdata.journal.TemporaryRawStore;
-import com.bigdata.mdi.IResourceMetadata;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.journal.TemporaryRawStore;
+import org.embergraph.mdi.IResourceMetadata;
 
 /**
  * A purely transient append-only implementation useful when data need to be

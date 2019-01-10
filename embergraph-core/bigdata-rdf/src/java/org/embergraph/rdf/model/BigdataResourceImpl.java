@@ -47,7 +47,7 @@ Modifications:
 
 package org.embergraph.rdf.model;
 
-import com.bigdata.rdf.internal.IV;
+import org.embergraph.rdf.internal.IV;
 
 /**
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

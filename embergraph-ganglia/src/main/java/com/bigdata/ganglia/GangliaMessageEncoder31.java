@@ -17,8 +17,8 @@ package com.bigdata.ganglia;
 
 import java.util.Map;
 
-import com.bigdata.ganglia.util.UnsignedUtil;
-import com.bigdata.ganglia.xdr.XDROutputBuffer;
+import org.embergraph.ganglia.util.UnsignedUtil;
+import org.embergraph.ganglia.xdr.XDROutputBuffer;
 
 /**
  * Class for generating Ganglia 3.1 protocol messages.

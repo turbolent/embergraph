@@ -31,10 +31,10 @@ import java.util.Properties;
 
 import org.openrdf.model.Statement;
 
-import com.bigdata.btree.UnisolatedReadWriteIndex;
-import com.bigdata.rdf.load.IStatementBufferFactory;
-import com.bigdata.rdf.model.BigdataStatement;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.btree.UnisolatedReadWriteIndex;
+import org.embergraph.rdf.load.IStatementBufferFactory;
+import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * Test loads an RDF/XML resource into a database and then verifies by re-parse

@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree.keys;
 
-import com.bigdata.io.SerializerUtil;
+import org.embergraph.io.SerializerUtil;
 import com.ibm.icu.util.VersionInfo;
 
 import junit.framework.TestCase2;

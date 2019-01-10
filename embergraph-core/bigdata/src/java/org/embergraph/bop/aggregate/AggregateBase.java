@@ -5,15 +5,15 @@ import java.util.Map;
 import org.openrdf.model.Literal;
 import org.openrdf.model.impl.LiteralImpl;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.bop.ImmutableBOp;
-import com.bigdata.bop.NV;
-import com.bigdata.bop.Var;
-import com.bigdata.rdf.internal.impl.literal.NumericIV;
-import com.bigdata.rdf.internal.impl.literal.XSDNumericIV;
-import com.bigdata.rdf.model.BigdataLiteral;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.bop.ImmutableBOp;
+import org.embergraph.bop.NV;
+import org.embergraph.bop.Var;
+import org.embergraph.rdf.internal.impl.literal.NumericIV;
+import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
+import org.embergraph.rdf.model.BigdataLiteral;
 
 /**
  * Abstract base class for aggregate functions.

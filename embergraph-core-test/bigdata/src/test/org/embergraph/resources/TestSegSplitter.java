@@ -36,20 +36,20 @@ import java.util.UUID;
 
 import junit.framework.AssertionFailedError;
 
-import com.bigdata.btree.AbstractBTreeTestCase;
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.ISimpleSplitHandler;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.IndexSegment;
-import com.bigdata.btree.IndexSegmentBuilder;
-import com.bigdata.btree.IndexSegmentStore;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.btree.keys.TestKeyBuilder;
-import com.bigdata.journal.IJournal;
-import com.bigdata.mdi.IResourceMetadata;
-import com.bigdata.mdi.LocalPartitionMetadata;
-import com.bigdata.service.Split;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.AbstractBTreeTestCase;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.ISimpleSplitHandler;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.IndexSegment;
+import org.embergraph.btree.IndexSegmentBuilder;
+import org.embergraph.btree.IndexSegmentStore;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.btree.keys.TestKeyBuilder;
+import org.embergraph.journal.IJournal;
+import org.embergraph.mdi.IResourceMetadata;
+import org.embergraph.mdi.LocalPartitionMetadata;
+import org.embergraph.service.Split;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Unit tests for splitting an index segment based on its size on the disk, the

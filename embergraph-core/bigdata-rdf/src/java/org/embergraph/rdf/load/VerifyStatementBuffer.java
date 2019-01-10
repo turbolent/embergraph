@@ -8,14 +8,14 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
-import com.bigdata.rdf.model.BigdataStatement;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.StatementEnum;
-import com.bigdata.rdf.rio.StatementBuffer;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.rdf.spo.SPO;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.striterator.IChunkedOrderedIterator;
+import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.rdf.rio.StatementBuffer;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.rdf.spo.SPO;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /**
  * Statements inserted into the buffer are verified against the database. No

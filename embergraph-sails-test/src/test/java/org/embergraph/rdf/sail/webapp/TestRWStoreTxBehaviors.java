@@ -26,12 +26,12 @@ import java.util.Collections;
 
 import junit.framework.Test;
 
-import com.bigdata.journal.AbstractJournal;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.RWStrategy;
-import com.bigdata.rdf.sail.webapp.client.IPreparedSparqlUpdate;
-import com.bigdata.rwstore.RWStore;
+import org.embergraph.journal.AbstractJournal;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.RWStrategy;
+import org.embergraph.rdf.sail.webapp.client.IPreparedSparqlUpdate;
+import org.embergraph.rwstore.RWStore;
 
 /**
  * Tests that are RWStore specific.

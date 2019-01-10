@@ -26,10 +26,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.sparql.ast.eval.service;
 
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.sparql.ast.DummyConstantNode;
-import com.bigdata.service.geospatial.GeoSpatialDefaultLiteralSerializer;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.sparql.ast.DummyConstantNode;
+import org.embergraph.service.geospatial.GeoSpatialDefaultLiteralSerializer;
 
 /**
  * Test serializer for WKT literals of the form Point(lat,lon).

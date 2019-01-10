@@ -25,8 +25,8 @@ package org.embergraph.rdf.sparql.ast;
 
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.rdf.sparql.ast.optimizers.ASTNamedSubqueryOptimizer;
+import org.embergraph.bop.BOp;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTNamedSubqueryOptimizer;
 
 /**
  * A subquery with a named solution set which can be referenced from other parts

@@ -3,7 +3,7 @@ package org.embergraph.rdf.lexicon;
 import java.util.Iterator;
 import java.util.concurrent.Callable;
 
-import com.bigdata.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValue;
 
 /**
  * Index terms for keyword search.

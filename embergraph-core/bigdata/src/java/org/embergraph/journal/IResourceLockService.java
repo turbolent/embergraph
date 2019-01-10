@@ -30,7 +30,7 @@ package org.embergraph.journal;
 
 import java.util.concurrent.TimeoutException;
 
-import com.bigdata.relation.AbstractResource;
+import org.embergraph.relation.AbstractResource;
 
 /**
  * Interface named synchronous distributed locks without deadlock detection.

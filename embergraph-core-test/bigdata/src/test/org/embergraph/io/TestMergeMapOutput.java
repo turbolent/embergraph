@@ -9,9 +9,9 @@ import junit.framework.TestCase2;
 
 import org.junit.Test;
 
-import com.bigdata.io.MergeStreamWithSnapshotData;
-import com.bigdata.journal.AbstractJournal;
-import com.bigdata.journal.AbstractJournal.ISnapshotData;
+import org.embergraph.io.MergeStreamWithSnapshotData;
+import org.embergraph.journal.AbstractJournal;
+import org.embergraph.journal.AbstractJournal.ISnapshotData;
 
 /**
  * Tests the utility to merge an input stream with a sorted set of <Long, ByteBuffer>

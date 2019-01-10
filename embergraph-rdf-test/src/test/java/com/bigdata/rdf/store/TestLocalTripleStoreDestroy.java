@@ -32,16 +32,16 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.ITx;
-import com.bigdata.rdf.lexicon.LexiconKeyOrder;
-import com.bigdata.rdf.spo.SPOKeyOrder;
-import com.bigdata.relation.AbstractResource;
-import com.bigdata.relation.RelationSchema;
-import com.bigdata.relation.locator.DefaultResourceLocator;
-import com.bigdata.sparse.ITPS;
-import com.bigdata.sparse.SparseRowStore;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.ITx;
+import org.embergraph.rdf.lexicon.LexiconKeyOrder;
+import org.embergraph.rdf.spo.SPOKeyOrder;
+import org.embergraph.relation.AbstractResource;
+import org.embergraph.relation.RelationSchema;
+import org.embergraph.relation.locator.DefaultResourceLocator;
+import org.embergraph.sparse.ITPS;
+import org.embergraph.sparse.SparseRowStore;
 
 /**
  * Test suite to verify the semantics of destroying a {@link LocalTripleStore},

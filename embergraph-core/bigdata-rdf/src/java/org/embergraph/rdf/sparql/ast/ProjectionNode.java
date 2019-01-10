@@ -34,11 +34,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.Bind;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.bop.IVariable;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.Bind;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.bop.IVariable;
 import java.util.HashSet;
 
 /**

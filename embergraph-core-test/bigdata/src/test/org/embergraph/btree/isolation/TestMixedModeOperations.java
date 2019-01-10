@@ -31,15 +31,15 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.UUID;
 
-import com.bigdata.btree.AbstractBTreeTestCase;
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.ILocalBTreeView;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.Options;
-import com.bigdata.journal.ValidationError;
+import org.embergraph.btree.AbstractBTreeTestCase;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.ILocalBTreeView;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.Options;
+import org.embergraph.journal.ValidationError;
 
 /**
  * This is a test suite for mixing full transactions with unisolated operations

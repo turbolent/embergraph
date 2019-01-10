@@ -5,14 +5,14 @@ import java.util.Comparator;
 
 import org.openrdf.model.Value;
 
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.journal.Journal;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.VTE;
-import com.bigdata.rdf.internal.impl.BlobIV;
-import com.bigdata.rdf.internal.impl.TermId;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.striterator.AbstractKeyOrder;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.journal.Journal;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.VTE;
+import org.embergraph.rdf.internal.impl.BlobIV;
+import org.embergraph.rdf.internal.impl.TermId;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.striterator.AbstractKeyOrder;
 
 /**
  * Natural index orders for the {@link LexiconRelation}.

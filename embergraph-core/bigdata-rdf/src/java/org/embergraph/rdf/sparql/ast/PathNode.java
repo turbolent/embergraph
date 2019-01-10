@@ -2,8 +2,8 @@ package org.embergraph.rdf.sparql.ast;
 
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.NV;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.NV;
 
 /**
  * AST Node used to represent a property path.

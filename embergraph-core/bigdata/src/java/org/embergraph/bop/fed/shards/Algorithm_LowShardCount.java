@@ -1,8 +1,8 @@
 package org.embergraph.bop.fed.shards;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.mdi.IMetadataIndex;
-import com.bigdata.mdi.PartitionLocator;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.mdi.IMetadataIndex;
+import org.embergraph.mdi.PartitionLocator;
 
 /**
  * @todo Implement {@link Algorithm_LowShardCount}.

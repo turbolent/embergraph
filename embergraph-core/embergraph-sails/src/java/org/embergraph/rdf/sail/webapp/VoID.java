@@ -41,20 +41,20 @@ import org.openrdf.model.URI;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.vocabulary.RDF;
 
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.NotMaterializedException;
-import com.bigdata.rdf.model.BigdataResource;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.sail.webapp.client.ConnectOptions;
-import com.bigdata.rdf.spo.SPOKeyOrder;
-import com.bigdata.rdf.spo.SPORelation;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.BigdataValueIterator;
-import com.bigdata.rdf.store.BigdataValueIteratorImpl;
-import com.bigdata.rdf.vocab.decls.DCTermsVocabularyDecl;
-import com.bigdata.rdf.vocab.decls.VoidVocabularyDecl;
-import com.bigdata.striterator.IChunkedIterator;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.NotMaterializedException;
+import org.embergraph.rdf.model.BigdataResource;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.sail.webapp.client.ConnectOptions;
+import org.embergraph.rdf.spo.SPOKeyOrder;
+import org.embergraph.rdf.spo.SPORelation;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.BigdataValueIterator;
+import org.embergraph.rdf.store.BigdataValueIteratorImpl;
+import org.embergraph.rdf.vocab.decls.DCTermsVocabularyDecl;
+import org.embergraph.rdf.vocab.decls.VoidVocabularyDecl;
+import org.embergraph.striterator.IChunkedIterator;
 
 /**
  * Helper class for VoID descriptions.

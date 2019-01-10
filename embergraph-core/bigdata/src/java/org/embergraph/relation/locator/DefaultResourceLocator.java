@@ -41,28 +41,28 @@ import java.util.concurrent.locks.Lock;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.cache.ConcurrentWeakValueCache;
-import com.bigdata.cache.ConcurrentWeakValueCacheWithTimeout;
-import com.bigdata.cache.LRUCache;
-import com.bigdata.concurrent.NamedLock;
-import com.bigdata.journal.AbstractTask;
-import com.bigdata.journal.ICommitRecord;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.IIndexStore;
-import com.bigdata.journal.IJournal;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.TemporaryStore;
-import com.bigdata.journal.TimestampUtility;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.relation.AbstractResource;
-import com.bigdata.relation.IRelation;
-import com.bigdata.relation.RelationSchema;
-import com.bigdata.service.IBigdataFederation;
-import com.bigdata.sparse.GlobalRowStoreHelper;
-import com.bigdata.sparse.SparseRowStore;
-import com.bigdata.util.NT;
+import org.embergraph.btree.IIndex;
+import org.embergraph.cache.ConcurrentWeakValueCache;
+import org.embergraph.cache.ConcurrentWeakValueCacheWithTimeout;
+import org.embergraph.cache.LRUCache;
+import org.embergraph.concurrent.NamedLock;
+import org.embergraph.journal.AbstractTask;
+import org.embergraph.journal.ICommitRecord;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.IIndexStore;
+import org.embergraph.journal.IJournal;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.TemporaryStore;
+import org.embergraph.journal.TimestampUtility;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.relation.AbstractResource;
+import org.embergraph.relation.IRelation;
+import org.embergraph.relation.RelationSchema;
+import org.embergraph.service.IBigdataFederation;
+import org.embergraph.sparse.GlobalRowStoreHelper;
+import org.embergraph.sparse.SparseRowStore;
+import org.embergraph.util.NT;
 
 /**
  * Generic implementation relies on a ctor for the resource with the following

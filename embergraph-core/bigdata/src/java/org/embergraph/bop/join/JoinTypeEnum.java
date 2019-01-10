@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.join;
 
-import com.bigdata.bop.IPredicate;
+import org.embergraph.bop.IPredicate;
 
 /**
  * A type safe enumeration of the different flavors of hash index "joins".

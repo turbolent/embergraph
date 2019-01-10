@@ -26,11 +26,11 @@ package org.embergraph.btree;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.bigdata.btree.AbstractBTree.IBTreeCounters;
-import com.bigdata.counters.CAT;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.ICounterSetAccess;
-import com.bigdata.counters.Instrument;
+import org.embergraph.btree.AbstractBTree.IBTreeCounters;
+import org.embergraph.counters.CAT;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.ICounterSetAccess;
+import org.embergraph.counters.Instrument;
 
 /**
  * A helper class that collects statistics on an {@link AbstractBTree}.

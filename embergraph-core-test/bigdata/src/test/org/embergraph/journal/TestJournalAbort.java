@@ -9,12 +9,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.journal.Journal.Options;
-import com.bigdata.rwstore.RWStore;
-import com.bigdata.util.Bytes;
-import com.bigdata.util.InnerCause;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.journal.Journal.Options;
+import org.embergraph.rwstore.RWStore;
+import org.embergraph.util.Bytes;
+import org.embergraph.util.InnerCause;
 
 /**
  * Test suite for a failure to handle errors inside of abort() by marking the

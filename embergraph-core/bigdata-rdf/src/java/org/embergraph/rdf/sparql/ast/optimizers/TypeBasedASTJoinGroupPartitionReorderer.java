@@ -29,15 +29,15 @@ package org.embergraph.rdf.sparql.ast.optimizers;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.bigdata.rdf.sparql.ast.ArbitraryLengthPathNode;
-import com.bigdata.rdf.sparql.ast.GraphPatternGroup;
-import com.bigdata.rdf.sparql.ast.IGroupMemberNode;
-import com.bigdata.rdf.sparql.ast.NamedSubqueryInclude;
-import com.bigdata.rdf.sparql.ast.PropertyPathUnionNode;
-import com.bigdata.rdf.sparql.ast.StatementPatternNode;
-import com.bigdata.rdf.sparql.ast.SubqueryRoot;
-import com.bigdata.rdf.sparql.ast.ZeroLengthPathNode;
-import com.bigdata.rdf.sparql.ast.service.ServiceNode;
+import org.embergraph.rdf.sparql.ast.ArbitraryLengthPathNode;
+import org.embergraph.rdf.sparql.ast.GraphPatternGroup;
+import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
+import org.embergraph.rdf.sparql.ast.NamedSubqueryInclude;
+import org.embergraph.rdf.sparql.ast.PropertyPathUnionNode;
+import org.embergraph.rdf.sparql.ast.StatementPatternNode;
+import org.embergraph.rdf.sparql.ast.SubqueryRoot;
+import org.embergraph.rdf.sparql.ast.ZeroLengthPathNode;
+import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 
 
 /**

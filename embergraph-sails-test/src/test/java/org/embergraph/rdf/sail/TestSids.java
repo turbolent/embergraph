@@ -38,12 +38,12 @@ import org.openrdf.query.TupleQuery;
 import org.openrdf.query.TupleQueryResult;
 import org.openrdf.query.impl.BindingImpl;
 
-import com.bigdata.rdf.ServiceProviderHook;
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.model.BigdataBNode;
-import com.bigdata.rdf.model.BigdataStatement;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.vocab.NoVocabulary;
+import org.embergraph.rdf.ServiceProviderHook;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.model.BigdataBNode;
+import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.vocab.NoVocabulary;
 
 /**
  * Test case for reverse lookup from SID to statement.

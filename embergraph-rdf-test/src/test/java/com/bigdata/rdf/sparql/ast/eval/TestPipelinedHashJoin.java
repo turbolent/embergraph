@@ -27,14 +27,14 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package com.bigdata.rdf.sparql.ast.eval;
 
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.join.HTreePipelinedHashJoinUtility;
-import com.bigdata.bop.join.HashIndexOpBase.Annotations;
-import com.bigdata.bop.join.JVMPipelinedHashJoinUtility;
-import com.bigdata.bop.join.PipelinedHashIndexAndSolutionSetJoinOp;
-import com.bigdata.rdf.sparql.ast.ASTContainer;
-import com.bigdata.rdf.sparql.ast.QueryHints;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.join.HTreePipelinedHashJoinUtility;
+import org.embergraph.bop.join.HashIndexOpBase.Annotations;
+import org.embergraph.bop.join.JVMPipelinedHashJoinUtility;
+import org.embergraph.bop.join.PipelinedHashIndexAndSolutionSetJoinOp;
+import org.embergraph.rdf.sparql.ast.ASTContainer;
+import org.embergraph.rdf.sparql.ast.QueryHints;
 
 /**
  * Test suite for {@link PipelinedHashIndexAndSolutionSetJoinOp}, which implements a

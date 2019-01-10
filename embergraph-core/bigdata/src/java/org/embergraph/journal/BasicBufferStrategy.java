@@ -28,8 +28,8 @@ import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
-import com.bigdata.counters.CounterSet;
-import com.bigdata.io.FileChannelUtility;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.io.FileChannelUtility;
 
 /**
  * Implements logic to read from and write on a buffer. This is sufficient

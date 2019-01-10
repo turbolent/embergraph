@@ -29,11 +29,11 @@ package org.embergraph.bop.rdf.filter;
 
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.ap.filter.BOpResolver;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.rdf.spo.SPO;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.ap.filter.BOpResolver;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.rdf.spo.SPO;
 
 /**
  * Strips the context information from an {@link SPO}. This is used in default

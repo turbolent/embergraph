@@ -27,8 +27,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree.data;
 
-import com.bigdata.btree.raba.ReadOnlyKeysRaba;
-import com.bigdata.io.DataOutputBuffer;
+import org.embergraph.btree.raba.ReadOnlyKeysRaba;
+import org.embergraph.io.DataOutputBuffer;
 
 /**
  * Test suite for the B+Tree {@link INodeData} records (accessing coded data in

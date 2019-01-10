@@ -16,19 +16,19 @@ import org.openrdf.model.ValueFactory;
 import org.openrdf.model.impl.ContextStatementImpl;
 import org.openrdf.model.impl.StatementImpl;
 
-import com.bigdata.rdf.lexicon.LexiconRelation;
-import com.bigdata.rdf.model.BigdataBNode;
-import com.bigdata.rdf.model.BigdataResource;
-import com.bigdata.rdf.model.BigdataStatement;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.model.StatementEnum;
-import com.bigdata.rdf.spo.SPO;
-import com.bigdata.rdf.spo.SPORelation;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.IRawTripleStore;
-import com.bigdata.rdf.store.TripleStoreUtility;
+import org.embergraph.rdf.lexicon.LexiconRelation;
+import org.embergraph.rdf.model.BigdataBNode;
+import org.embergraph.rdf.model.BigdataResource;
+import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.rdf.spo.SPO;
+import org.embergraph.rdf.spo.SPORelation;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.IRawTripleStore;
+import org.embergraph.rdf.store.TripleStoreUtility;
 
 /**
  * Class for efficiently converting {@link Statement}s into

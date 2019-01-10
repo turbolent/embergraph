@@ -4,11 +4,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.rdf.graph.IGASEngine;
-import com.bigdata.rdf.graph.IGraphAccessor;
-import com.bigdata.rdf.graph.impl.ram.RAMGASEngine.RAMGraph;
-import com.bigdata.rdf.graph.impl.ram.RAMGASEngine.RAMGraphAccessor;
-import com.bigdata.rdf.graph.impl.util.GASRunnerBase;
+import org.embergraph.rdf.graph.IGASEngine;
+import org.embergraph.rdf.graph.IGraphAccessor;
+import org.embergraph.rdf.graph.impl.ram.RAMGASEngine.RAMGraph;
+import org.embergraph.rdf.graph.impl.ram.RAMGASEngine.RAMGraphAccessor;
+import org.embergraph.rdf.graph.impl.util.GASRunnerBase;
 
 /**
  * Class for running GAS performance tests against the SAIL.

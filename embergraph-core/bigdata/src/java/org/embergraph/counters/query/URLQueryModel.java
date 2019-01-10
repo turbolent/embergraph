@@ -54,15 +54,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.counters.History;
-import com.bigdata.counters.ICounterSet;
-import com.bigdata.counters.PeriodEnum;
-import com.bigdata.counters.httpd.CounterSetHTTPD;
-import com.bigdata.service.Event;
-import com.bigdata.service.IEventReportingService;
-import com.bigdata.service.IService;
-import com.bigdata.util.CaseInsensitiveStringComparator;
-import com.bigdata.util.httpd.NanoHTTPD;
+import org.embergraph.counters.History;
+import org.embergraph.counters.ICounterSet;
+import org.embergraph.counters.PeriodEnum;
+import org.embergraph.counters.httpd.CounterSetHTTPD;
+import org.embergraph.service.Event;
+import org.embergraph.service.IEventReportingService;
+import org.embergraph.service.IService;
+import org.embergraph.util.CaseInsensitiveStringComparator;
+import org.embergraph.util.httpd.NanoHTTPD;
 
 /**
  * The model for a URL used to query an {@link ICounterSelector}.

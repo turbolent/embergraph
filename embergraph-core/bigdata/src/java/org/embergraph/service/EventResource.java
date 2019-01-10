@@ -31,8 +31,8 @@ package org.embergraph.service;
 import java.io.File;
 import java.io.Serializable;
 
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.mdi.LocalPartitionMetadata;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.mdi.LocalPartitionMetadata;
 
 /**
  * Semi-structured representation of the data service on which the event

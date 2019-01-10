@@ -29,9 +29,9 @@ import java.net.URLEncoder;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.counters.AbstractStatisticsCollector;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.httpd.CounterSetHTTPD;
+import org.embergraph.counters.AbstractStatisticsCollector;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.httpd.CounterSetHTTPD;
 
 /**
  * {@link CounterSetHTTPD} plug-in.

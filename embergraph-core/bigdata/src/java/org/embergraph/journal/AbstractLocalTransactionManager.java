@@ -5,12 +5,12 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.Instrument;
-import com.bigdata.resources.StoreManager;
-import com.bigdata.service.IBigdataFederation;
-import com.bigdata.service.IDataService;
-import com.bigdata.service.ITxState;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.Instrument;
+import org.embergraph.resources.StoreManager;
+import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IDataService;
+import org.embergraph.service.ITxState;
 
 /**
  * Manages the client side of a transaction either for a standalone

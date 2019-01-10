@@ -47,7 +47,7 @@ Modifications:
 
 package org.embergraph.rdf.store;
 
-import com.bigdata.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValue;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

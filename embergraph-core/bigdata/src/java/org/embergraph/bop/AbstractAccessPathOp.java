@@ -29,8 +29,8 @@ package org.embergraph.bop;
 
 import java.util.Map;
 
-import com.bigdata.relation.accesspath.IAccessPath;
-import com.bigdata.striterator.IChunkedOrderedIterator;
+import org.embergraph.relation.accesspath.IAccessPath;
+import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /**
  * Interface for evaluating operations producing chunks of elements (tuples

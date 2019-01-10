@@ -27,8 +27,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.hints;
 
-import com.bigdata.bop.BufferAnnotations;
-import com.bigdata.bop.IBindingSet;
+import org.embergraph.bop.BufferAnnotations;
+import org.embergraph.bop.IBindingSet;
 
 /**
  * Sets the capacity of the {@link IBindingSet}[]s used to accumulate a chunk of

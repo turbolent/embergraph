@@ -27,10 +27,10 @@ import java.util.Properties;
 
 import junit.framework.Test;
 
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.webapp.client.IRemoteTx;
-import com.bigdata.rdf.sail.webapp.client.RemoteTransactionManager;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.webapp.client.IRemoteTx;
+import org.embergraph.rdf.sail.webapp.client.RemoteTransactionManager;
 
 /**
  * Proxied test suite for testing the transaction management API. The outer

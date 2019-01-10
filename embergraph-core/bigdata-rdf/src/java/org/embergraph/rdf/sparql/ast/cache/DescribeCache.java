@@ -7,12 +7,12 @@ import org.apache.log4j.Logger;
 import org.openrdf.model.Graph;
 import org.openrdf.query.GraphQueryResult;
 
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.htree.HTree;
-import com.bigdata.io.SerializerUtil;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.htree.HTree;
+import org.embergraph.io.SerializerUtil;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * An interface providing a maintained DESCRIBE cache for some

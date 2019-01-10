@@ -48,22 +48,22 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
-import com.bigdata.BigdataStatics;
-import com.bigdata.gom.om.IObjectManager;
-import com.bigdata.gom.om.NanoSparqlObjectManager;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.Journal.Options;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.BigdataSailRepository;
-import com.bigdata.rdf.sail.BigdataSailRepositoryConnection;
-import com.bigdata.rdf.sail.webapp.ConfigParams;
-import com.bigdata.rdf.sail.webapp.NanoSparqlServer;
-import com.bigdata.rdf.sail.webapp.client.HttpClientConfigurator;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepositoryManager;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.util.config.NicUtil;
+import org.embergraph.BigdataStatics;
+import org.embergraph.gom.om.IObjectManager;
+import org.embergraph.gom.om.NanoSparqlObjectManager;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Journal.Options;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.BigdataSailRepository;
+import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.rdf.sail.webapp.ConfigParams;
+import org.embergraph.rdf.sail.webapp.NanoSparqlServer;
+import org.embergraph.rdf.sail.webapp.client.HttpClientConfigurator;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepositoryManager;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.util.config.NicUtil;
 
 /**
  * Similar to TestGOM but is setup to connect to the NanoSparqlServer using a

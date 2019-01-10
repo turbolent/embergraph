@@ -32,7 +32,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Random;
 
-import com.bigdata.bfs.FileVersionOutputStream;
+import org.embergraph.bfs.FileVersionOutputStream;
 
 
 /**

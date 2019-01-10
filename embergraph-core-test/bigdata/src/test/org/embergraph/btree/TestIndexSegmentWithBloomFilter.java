@@ -32,12 +32,12 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.UUID;
 
-import com.bigdata.btree.keys.TestKeyBuilder;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.Options;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rawstore.SimpleMemoryRawStore;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.keys.TestKeyBuilder;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.Options;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Test build trees on the journal, evicts them into an {@link IndexSegment},

@@ -31,10 +31,10 @@ import java.util.Iterator;
 
 import org.openrdf.model.Value;
 
-import com.bigdata.bop.IConstant;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.lexicon.LexiconRelation;
-import com.bigdata.rdf.model.BigdataValue;
+import org.embergraph.bop.IConstant;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.lexicon.LexiconRelation;
+import org.embergraph.rdf.model.BigdataValue;
 
 /**
  * Interface for a pre-defined vocabulary.

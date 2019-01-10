@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.counters.ganglia;
 
-import com.bigdata.counters.ganglia.TestHostMetricsCollector;
+import org.embergraph.counters.ganglia.TestHostMetricsCollector;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

@@ -1,6 +1,6 @@
 package org.embergraph.counters.osx;
 
-import com.bigdata.counters.*;
+import org.embergraph.counters.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

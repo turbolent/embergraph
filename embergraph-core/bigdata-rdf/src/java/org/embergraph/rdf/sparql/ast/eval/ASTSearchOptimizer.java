@@ -33,8 +33,8 @@ import java.util.Set;
 
 import org.openrdf.model.URI;
 
-import com.bigdata.rdf.sparql.ast.service.ServiceNode;
-import com.bigdata.rdf.store.BDS;
+import org.embergraph.rdf.sparql.ast.service.ServiceNode;
+import org.embergraph.rdf.store.BDS;
 
 /**
  * Translate {@link BDS#SEARCH} and related magic predicates into a

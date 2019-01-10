@@ -30,13 +30,13 @@ package org.embergraph.rdf.spo;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
-import com.bigdata.rdf.inf.TruthMaintenance;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.relation.accesspath.IAccessPath;
-import com.bigdata.relation.accesspath.IElementFilter;
-import com.bigdata.striterator.ChunkedArrayIterator;
-import com.bigdata.striterator.IChunkedOrderedIterator;
-import com.bigdata.striterator.IKeyOrder;
+import org.embergraph.rdf.inf.TruthMaintenance;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.relation.accesspath.IAccessPath;
+import org.embergraph.relation.accesspath.IElementFilter;
+import org.embergraph.striterator.ChunkedArrayIterator;
+import org.embergraph.striterator.IChunkedOrderedIterator;
+import org.embergraph.striterator.IKeyOrder;
 
 /**
  * Iterator visits {@link SPO}s and supports removal (fully buffered).

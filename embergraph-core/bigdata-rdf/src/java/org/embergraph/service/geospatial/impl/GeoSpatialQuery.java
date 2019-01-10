@@ -36,21 +36,21 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.openrdf.model.URI;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IVariable;
-import com.bigdata.rdf.internal.gis.CoordinateDD;
-import com.bigdata.rdf.internal.gis.CoordinateUtility;
-import com.bigdata.rdf.internal.gis.ICoordinate.UNITS;
-import com.bigdata.rdf.sparql.ast.TermNode;
-import com.bigdata.service.geospatial.GeoSpatial;
-import com.bigdata.service.geospatial.GeoSpatial.GeoFunction;
-import com.bigdata.service.geospatial.GeoSpatialConfig;
-import com.bigdata.service.geospatial.GeoSpatialDatatypeConfiguration;
-import com.bigdata.service.geospatial.GeoSpatialDatatypeFieldConfiguration;
-import com.bigdata.service.geospatial.GeoSpatialSearchException;
-import com.bigdata.service.geospatial.IGeoSpatialQuery;
-import com.bigdata.service.geospatial.impl.GeoSpatialUtility.PointLatLon;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IVariable;
+import org.embergraph.rdf.internal.gis.CoordinateDD;
+import org.embergraph.rdf.internal.gis.CoordinateUtility;
+import org.embergraph.rdf.internal.gis.ICoordinate.UNITS;
+import org.embergraph.rdf.sparql.ast.TermNode;
+import org.embergraph.service.geospatial.GeoSpatial;
+import org.embergraph.service.geospatial.GeoSpatial.GeoFunction;
+import org.embergraph.service.geospatial.GeoSpatialConfig;
+import org.embergraph.service.geospatial.GeoSpatialDatatypeConfiguration;
+import org.embergraph.service.geospatial.GeoSpatialDatatypeFieldConfiguration;
+import org.embergraph.service.geospatial.GeoSpatialSearchException;
+import org.embergraph.service.geospatial.IGeoSpatialQuery;
+import org.embergraph.service.geospatial.impl.GeoSpatialUtility.PointLatLon;
 
 /**
  * Implementation of the {@link IGeoSpatialQuery} interface.

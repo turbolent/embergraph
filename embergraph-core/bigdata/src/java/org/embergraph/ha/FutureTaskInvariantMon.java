@@ -33,12 +33,12 @@ import java.util.concurrent.FutureTask;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.concurrent.FutureTaskMon;
-import com.bigdata.quorum.Quorum;
-import com.bigdata.quorum.QuorumEvent;
-import com.bigdata.quorum.QuorumEventEnum;
-import com.bigdata.quorum.QuorumListener;
-import com.bigdata.util.StackInfoReport;
+import org.embergraph.concurrent.FutureTaskMon;
+import org.embergraph.quorum.Quorum;
+import org.embergraph.quorum.QuorumEvent;
+import org.embergraph.quorum.QuorumEventEnum;
+import org.embergraph.quorum.QuorumListener;
+import org.embergraph.util.StackInfoReport;
 
 /**
  * A {@link Future} that allows you to cancel a computation if an invariant is

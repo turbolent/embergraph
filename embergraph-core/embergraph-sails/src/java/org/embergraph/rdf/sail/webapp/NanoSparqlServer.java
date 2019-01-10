@@ -44,14 +44,14 @@ import org.eclipse.jetty.util.resource.Resource;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.eclipse.jetty.xml.XmlConfiguration;
 
-import com.bigdata.Banner;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.TimestampUtility;
-import com.bigdata.resources.IndexManager;
-import com.bigdata.util.config.NicUtil;
-import com.bigdata.util.httpd.Config;
+import org.embergraph.Banner;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.TimestampUtility;
+import org.embergraph.resources.IndexManager;
+import org.embergraph.util.config.NicUtil;
+import org.embergraph.util.httpd.Config;
 
 /**
  * Utility class provides a simple SPARQL end point with a REST API.

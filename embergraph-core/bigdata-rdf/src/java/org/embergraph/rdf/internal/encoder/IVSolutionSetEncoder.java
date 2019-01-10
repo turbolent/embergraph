@@ -37,24 +37,24 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.openrdf.model.Value;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.bindingSet.ListBindingSet;
-import com.bigdata.btree.keys.ASCIIKeyBuilderFactory;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.htree.HTree;
-import com.bigdata.io.ByteArrayBuffer;
-import com.bigdata.io.DataOutputBuffer;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.IVCache;
-import com.bigdata.rdf.internal.IVUtility;
-import com.bigdata.rdf.internal.impl.TermId;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.model.BigdataValueFactoryImpl;
-import com.bigdata.rdf.model.BigdataValueSerializer;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.bindingSet.ListBindingSet;
+import org.embergraph.btree.keys.ASCIIKeyBuilderFactory;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.htree.HTree;
+import org.embergraph.io.ByteArrayBuffer;
+import org.embergraph.io.DataOutputBuffer;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.IVCache;
+import org.embergraph.rdf.internal.IVUtility;
+import org.embergraph.rdf.internal.impl.TermId;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.model.BigdataValueSerializer;
+import org.embergraph.util.BytesUtil;
 
 /**
  * This class provides fast, efficient serialization for solution sets. Each

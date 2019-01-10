@@ -28,11 +28,11 @@ import java.util.Properties;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.join.DistinctTermScanOp;
-import com.bigdata.bop.join.FastRangeCountOp;
-import com.bigdata.rdf.sparql.ast.optimizers.ASTSimpleGroupByAndCountOptimizer;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.join.DistinctTermScanOp;
+import org.embergraph.bop.join.FastRangeCountOp;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTSimpleGroupByAndCountOptimizer;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * SPARQL level test suite for the {@link ASTSimpleGroupByAndCountOptimizer}.

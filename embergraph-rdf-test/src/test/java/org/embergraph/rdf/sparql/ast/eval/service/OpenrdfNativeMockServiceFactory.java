@@ -31,13 +31,13 @@ import java.util.List;
 
 import org.openrdf.query.BindingSet;
 
-import com.bigdata.rdf.sparql.ast.eval.AbstractServiceFactoryBase;
-import com.bigdata.rdf.sparql.ast.service.ExternalServiceCall;
-import com.bigdata.rdf.sparql.ast.service.IServiceOptions;
-import com.bigdata.rdf.sparql.ast.service.OpenrdfNativeServiceOptions;
-import com.bigdata.rdf.sparql.ast.service.ServiceCall;
-import com.bigdata.rdf.sparql.ast.service.ServiceCallCreateParams;
-import com.bigdata.striterator.CloseableIteratorWrapper;
+import org.embergraph.rdf.sparql.ast.eval.AbstractServiceFactoryBase;
+import org.embergraph.rdf.sparql.ast.service.ExternalServiceCall;
+import org.embergraph.rdf.sparql.ast.service.IServiceOptions;
+import org.embergraph.rdf.sparql.ast.service.OpenrdfNativeServiceOptions;
+import org.embergraph.rdf.sparql.ast.service.ServiceCall;
+import org.embergraph.rdf.sparql.ast.service.ServiceCallCreateParams;
+import org.embergraph.striterator.CloseableIteratorWrapper;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

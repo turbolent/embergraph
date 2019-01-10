@@ -31,10 +31,10 @@ import java.io.IOException;
 import java.rmi.Remote;
 import java.util.concurrent.Future;
 
-import com.bigdata.ha.msg.IHA2PhaseAbortMessage;
-import com.bigdata.ha.msg.IHA2PhaseCommitMessage;
-import com.bigdata.ha.msg.IHA2PhasePrepareMessage;
-import com.bigdata.journal.AbstractJournal;
+import org.embergraph.ha.msg.IHA2PhaseAbortMessage;
+import org.embergraph.ha.msg.IHA2PhaseCommitMessage;
+import org.embergraph.ha.msg.IHA2PhasePrepareMessage;
+import org.embergraph.journal.AbstractJournal;
 
 /**
  * A {@link Remote} interface supporting a 2-phase commit protocol for the

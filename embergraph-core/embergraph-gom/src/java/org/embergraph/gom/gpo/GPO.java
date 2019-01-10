@@ -22,12 +22,12 @@ import org.openrdf.model.impl.StatementImpl;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.query.BindingSet;
 
-import com.bigdata.gom.om.IObjectManager;
-import com.bigdata.gom.om.ObjectMgrModel;
-import com.bigdata.gom.skin.GenericSkinRegistry;
-import com.bigdata.rdf.model.BigdataLiteralImpl;
-import com.bigdata.rdf.model.BigdataResource;
-import com.bigdata.rdf.model.BigdataStatement;
+import org.embergraph.gom.om.IObjectManager;
+import org.embergraph.gom.om.ObjectMgrModel;
+import org.embergraph.gom.skin.GenericSkinRegistry;
+import org.embergraph.rdf.model.BigdataLiteralImpl;
+import org.embergraph.rdf.model.BigdataResource;
+import org.embergraph.rdf.model.BigdataStatement;
 
 import cutthecrap.utils.striterators.EmptyIterator;
 import cutthecrap.utils.striterators.ICloseableIterator;

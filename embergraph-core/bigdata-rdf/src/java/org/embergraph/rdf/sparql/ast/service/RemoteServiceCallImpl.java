@@ -34,9 +34,9 @@ import org.openrdf.query.BindingSet;
 import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.query.TupleQueryResult;
 
-import com.bigdata.rdf.sail.Sesame2BigdataIterator;
-import com.bigdata.rdf.sail.webapp.client.ConnectOptions;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepositoryManager;
+import org.embergraph.rdf.sail.Sesame2BigdataIterator;
+import org.embergraph.rdf.sail.webapp.client.ConnectOptions;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepositoryManager;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

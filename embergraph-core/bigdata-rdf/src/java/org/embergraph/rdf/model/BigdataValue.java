@@ -49,10 +49,10 @@ package org.embergraph.rdf.model;
 
 import org.openrdf.model.Value;
 
-import com.bigdata.bop.IElement;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.store.IRawTripleStore;
-import com.bigdata.rdf.store.TempTripleStore;
+import org.embergraph.bop.IElement;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.store.IRawTripleStore;
+import org.embergraph.rdf.store.TempTripleStore;
 
 /**
  * An interface which exposes the internal 64-bit long integer identifiers for

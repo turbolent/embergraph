@@ -42,7 +42,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.util.InnerCause;
+import org.embergraph.util.InnerCause;
 
 /**
  * Test the ability to rollback a commit.

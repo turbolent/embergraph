@@ -34,10 +34,10 @@ import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-import com.bigdata.btree.AbstractBTreeTestCase;
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.keys.KV;
+import org.embergraph.btree.AbstractBTreeTestCase;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.keys.KV;
 
 /**
  * Test suite for {@link Journal#compact(java.io.File)}.

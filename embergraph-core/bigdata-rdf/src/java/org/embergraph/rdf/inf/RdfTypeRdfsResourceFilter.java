@@ -8,11 +8,11 @@ import java.io.ObjectOutput;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.rdf.spo.SPOFilter;
-import com.bigdata.rdf.vocab.Vocabulary;
-import com.bigdata.relation.rule.eval.ISolution;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.rdf.spo.SPOFilter;
+import org.embergraph.rdf.vocab.Vocabulary;
+import org.embergraph.relation.rule.eval.ISolution;
 
 /**
  * Filter matches <code>(x rdf:type rdfs:Resource).

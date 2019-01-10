@@ -27,11 +27,11 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import com.bigdata.ha.HAGlue;
-import com.bigdata.ha.QuorumService;
-import com.bigdata.quorum.AsynchronousQuorumCloseException;
-import com.bigdata.quorum.Quorum;
-import com.bigdata.rawstore.IMRMW;
+import org.embergraph.ha.HAGlue;
+import org.embergraph.ha.QuorumService;
+import org.embergraph.quorum.AsynchronousQuorumCloseException;
+import org.embergraph.quorum.Quorum;
+import org.embergraph.rawstore.IMRMW;
 
 /**
  * An persistence capable data structure supporting atomic commit, scalable

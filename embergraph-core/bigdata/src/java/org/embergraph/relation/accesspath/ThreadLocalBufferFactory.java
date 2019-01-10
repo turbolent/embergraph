@@ -32,8 +32,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.relation.rule.eval.pipeline.JoinTask;
-import com.bigdata.util.concurrent.Haltable;
+import org.embergraph.relation.rule.eval.pipeline.JoinTask;
+import org.embergraph.util.concurrent.Haltable;
 
 /**
  * A factory pattern for per-thread objects whose life cycle is tied to some

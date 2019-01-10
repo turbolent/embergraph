@@ -37,14 +37,14 @@ import org.openrdf.query.TupleQuery;
 import org.openrdf.query.TupleQueryResult;
 import org.openrdf.query.Update;
 
-import com.bigdata.journal.BufferMode;
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.internal.impl.extensions.GeoSpatialLiteralExtension;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.BigdataSailRepository;
-import com.bigdata.rdf.sail.BigdataSailRepositoryConnection;
-import com.bigdata.rdf.sail.ProxyBigdataSailTestCase;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.internal.impl.extensions.GeoSpatialLiteralExtension;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.BigdataSailRepository;
+import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.rdf.sail.ProxyBigdataSailTestCase;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * Test case for ticket BLZG-1943: thread safety issues related to reuse of

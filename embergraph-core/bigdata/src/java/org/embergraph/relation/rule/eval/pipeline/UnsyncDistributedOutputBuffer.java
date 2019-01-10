@@ -4,13 +4,13 @@ import java.util.Iterator;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.mdi.PartitionLocator;
-import com.bigdata.relation.accesspath.AbstractUnsynchronizedArrayBuffer;
-import com.bigdata.relation.rule.eval.IJoinNexus;
-import com.bigdata.service.AbstractScaleOutFederation;
-import com.bigdata.service.IBigdataFederation;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.mdi.PartitionLocator;
+import org.embergraph.relation.accesspath.AbstractUnsynchronizedArrayBuffer;
+import org.embergraph.relation.rule.eval.IJoinNexus;
+import org.embergraph.service.AbstractScaleOutFederation;
+import org.embergraph.service.IBigdataFederation;
 
 /**
  * Unsynchronized buffer maps the {@link IBindingSet}s across the index

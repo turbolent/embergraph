@@ -40,14 +40,14 @@ import org.openrdf.model.impl.StatementImpl;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.query.QueryEvaluationException;
 
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepository;
-import com.bigdata.rdf.spo.NoAxiomFilter;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.util.DaemonThreadFactory;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository;
+import org.embergraph.rdf.spo.NoAxiomFilter;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.util.DaemonThreadFactory;
 
 import junit.framework.Test;
 

@@ -30,8 +30,8 @@ package org.embergraph.relation.accesspath;
 
 import java.util.concurrent.TimeUnit;
 
-import com.bigdata.relation.rule.IQueryOptions;
-import com.bigdata.relation.rule.IRule;
+import org.embergraph.relation.rule.IQueryOptions;
+import org.embergraph.relation.rule.IRule;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

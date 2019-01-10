@@ -36,21 +36,21 @@ import java.util.concurrent.locks.Lock;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.Checkpoint;
-import com.bigdata.btree.DefaultTupleSerializer;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.ITupleSerializer;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.UnisolatedReadWriteIndex;
-import com.bigdata.btree.keys.ASCIIKeyBuilderFactory;
-import com.bigdata.btree.keys.IKeyBuilderFactory;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.journal.CommitRecordIndex.Entry;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.relation.accesspath.TupleObjectResolver;
-import com.bigdata.util.Bytes;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.Checkpoint;
+import org.embergraph.btree.DefaultTupleSerializer;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.ITupleSerializer;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.UnisolatedReadWriteIndex;
+import org.embergraph.btree.keys.ASCIIKeyBuilderFactory;
+import org.embergraph.btree.keys.IKeyBuilderFactory;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.journal.CommitRecordIndex.Entry;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.relation.accesspath.TupleObjectResolver;
+import org.embergraph.util.Bytes;
 
 import cutthecrap.utils.striterators.Striterator;
 

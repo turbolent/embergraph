@@ -37,20 +37,20 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IVariable;
-import com.bigdata.btree.BaseIndexStats;
-import com.bigdata.btree.Checkpoint;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.io.SerializerUtil;
-import com.bigdata.rawstore.IPSOutputStream;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rdf.internal.encoder.SolutionSetStreamDecoder;
-import com.bigdata.rdf.internal.encoder.SolutionSetStreamEncoder;
-import com.bigdata.rdf.sparql.ast.ISolutionSetStats;
-import com.bigdata.stream.Stream;
-import com.bigdata.striterator.Chunkerator;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IVariable;
+import org.embergraph.btree.BaseIndexStats;
+import org.embergraph.btree.Checkpoint;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.io.SerializerUtil;
+import org.embergraph.rawstore.IPSOutputStream;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rdf.internal.encoder.SolutionSetStreamDecoder;
+import org.embergraph.rdf.internal.encoder.SolutionSetStreamEncoder;
+import org.embergraph.rdf.sparql.ast.ISolutionSetStats;
+import org.embergraph.stream.Stream;
+import org.embergraph.striterator.Chunkerator;
 
 import cutthecrap.utils.striterators.ArrayIterator;
 import cutthecrap.utils.striterators.Expander;

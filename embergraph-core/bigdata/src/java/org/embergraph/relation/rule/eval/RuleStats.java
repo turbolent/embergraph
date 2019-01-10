@@ -32,18 +32,18 @@ import java.util.List;
 import java.util.Vector;
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.joinGraph.IEvaluationPlan;
-import com.bigdata.bop.joinGraph.IRangeCountFactory;
-import com.bigdata.relation.IMutableRelation;
-import com.bigdata.relation.accesspath.IBuffer;
-import com.bigdata.relation.rule.IProgram;
-import com.bigdata.relation.rule.IRule;
-import com.bigdata.relation.rule.ISlice;
-import com.bigdata.relation.rule.IStep;
-import com.bigdata.relation.rule.Rule;
-import com.bigdata.service.ILoadBalancerService;
-import com.bigdata.striterator.IKeyOrder;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.joinGraph.IEvaluationPlan;
+import org.embergraph.bop.joinGraph.IRangeCountFactory;
+import org.embergraph.relation.IMutableRelation;
+import org.embergraph.relation.accesspath.IBuffer;
+import org.embergraph.relation.rule.IProgram;
+import org.embergraph.relation.rule.IRule;
+import org.embergraph.relation.rule.ISlice;
+import org.embergraph.relation.rule.IStep;
+import org.embergraph.relation.rule.Rule;
+import org.embergraph.service.ILoadBalancerService;
+import org.embergraph.striterator.IKeyOrder;
 
 /**
  * Statistics about what an {@link IStep} did when it was executed.

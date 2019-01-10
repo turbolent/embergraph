@@ -60,15 +60,15 @@ import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
 
-import com.bigdata.bop.engine.AbstractQueryEngineTestCase;
-import com.bigdata.journal.AbstractTask;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.BigdataSail.Options;
-import com.bigdata.rdf.sail.BigdataSailRepository;
-import com.bigdata.rdf.sail.BigdataSailRepositoryConnection;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.bop.engine.AbstractQueryEngineTestCase;
+import org.embergraph.journal.AbstractTask;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.BigdataSail.Options;
+import org.embergraph.rdf.sail.BigdataSailRepository;
+import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * Test suite for BIGDATA extension to SPARQL UPDATE for NAMED SOLUTION SETS.

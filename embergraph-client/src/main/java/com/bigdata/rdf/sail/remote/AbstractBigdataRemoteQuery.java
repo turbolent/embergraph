@@ -4,9 +4,9 @@ import org.openrdf.model.URI;
 import org.openrdf.query.Binding;
 import org.openrdf.query.impl.AbstractQuery;
 
-import com.bigdata.rdf.sail.webapp.client.EncodeDecodeValue;
-import com.bigdata.rdf.sail.webapp.client.IPreparedQuery;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepositoryDecls;
+import org.embergraph.rdf.sail.webapp.client.EncodeDecodeValue;
+import org.embergraph.rdf.sail.webapp.client.IPreparedQuery;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepositoryDecls;
 
 public abstract class AbstractBigdataRemoteQuery extends AbstractQuery {
 

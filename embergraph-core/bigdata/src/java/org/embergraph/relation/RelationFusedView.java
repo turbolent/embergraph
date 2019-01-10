@@ -6,16 +6,16 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.btree.IIndex;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.TemporaryStore;
-import com.bigdata.relation.accesspath.AccessPath;
-import com.bigdata.relation.accesspath.AccessPathFusedView;
-import com.bigdata.relation.accesspath.IAccessPath;
-import com.bigdata.striterator.IKeyOrder;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.btree.IIndex;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.TemporaryStore;
+import org.embergraph.relation.accesspath.AccessPath;
+import org.embergraph.relation.accesspath.AccessPathFusedView;
+import org.embergraph.relation.accesspath.IAccessPath;
+import org.embergraph.striterator.IKeyOrder;
 
 import cutthecrap.utils.striterators.Striterator;
 

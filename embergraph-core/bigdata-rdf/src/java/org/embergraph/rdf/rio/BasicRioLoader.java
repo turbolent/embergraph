@@ -37,7 +37,7 @@ import org.openrdf.rio.RDFHandlerException;
 import org.openrdf.rio.RDFParser;
 import org.openrdf.rio.Rio;
 
-import com.bigdata.rdf.ServiceProviderHook;
+import org.embergraph.rdf.ServiceProviderHook;
 
 /**
  * Parses data but does not load it into the indices.

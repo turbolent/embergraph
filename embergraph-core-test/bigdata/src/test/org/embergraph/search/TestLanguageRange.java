@@ -28,7 +28,7 @@ package org.embergraph.search;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.search.LanguageRange;
+import org.embergraph.search.LanguageRange;
 
 public class TestLanguageRange extends TestCase2 {
 

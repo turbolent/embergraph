@@ -30,8 +30,8 @@ package com.bigdata.rdf.spo;
 
 import java.io.Serializable;
 
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IVariable;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IVariable;
 
 /**
  * Interface for a binding.

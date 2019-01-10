@@ -27,9 +27,9 @@ import java.math.BigInteger;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.rdf.internal.impl.literal.AbstractLiteralIV;
-import com.bigdata.rdf.internal.impl.literal.XSDIntegerIV;
-import com.bigdata.rdf.internal.impl.literal.XSDNumericIV;
+import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
+import org.embergraph.rdf.internal.impl.literal.XSDIntegerIV;
+import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
 
 /**
  * Simple InlineURIHandler that packs the localName portion of the URI into an

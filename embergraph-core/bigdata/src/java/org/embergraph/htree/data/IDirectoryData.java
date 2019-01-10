@@ -26,8 +26,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.htree.data;
 
-import com.bigdata.btree.data.ITreeNodeData;
-import com.bigdata.rawstore.IRawStore;
+import org.embergraph.btree.data.ITreeNodeData;
+import org.embergraph.rawstore.IRawStore;
 
 /**
  * Interface for the data record of a hash directory. A hash directory provides

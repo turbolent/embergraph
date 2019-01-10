@@ -32,16 +32,16 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.joinGraph.IEvaluationPlanFactory;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.rdf.axioms.Axioms;
-import com.bigdata.rdf.spo.SPORelation;
-import com.bigdata.relation.accesspath.IAccessPath;
-import com.bigdata.relation.accesspath.IElementFilter;
-import com.bigdata.relation.rule.eval.AbstractJoinNexusFactory;
-import com.bigdata.relation.rule.eval.ActionEnum;
-import com.bigdata.relation.rule.eval.IJoinNexus;
-import com.bigdata.relation.rule.eval.IRuleTaskFactory;
+import org.embergraph.bop.joinGraph.IEvaluationPlanFactory;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.axioms.Axioms;
+import org.embergraph.rdf.spo.SPORelation;
+import org.embergraph.relation.accesspath.IAccessPath;
+import org.embergraph.relation.accesspath.IElementFilter;
+import org.embergraph.relation.rule.eval.AbstractJoinNexusFactory;
+import org.embergraph.relation.rule.eval.ActionEnum;
+import org.embergraph.relation.rule.eval.IJoinNexus;
+import org.embergraph.relation.rule.eval.IRuleTaskFactory;
 
 /**
  * Factory for {@link RDFJoinNexus} objects.

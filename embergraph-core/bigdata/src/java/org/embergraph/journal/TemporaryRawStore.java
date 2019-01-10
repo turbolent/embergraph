@@ -36,15 +36,15 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.counters.CounterSet;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.mdi.AbstractResourceMetadata;
-import com.bigdata.mdi.IResourceMetadata;
-import com.bigdata.quorum.Quorum;
-import com.bigdata.rawstore.AbstractRawWormStore;
-import com.bigdata.rawstore.IMRMW;
-import com.bigdata.rawstore.WormAddressManager;
-import com.bigdata.relation.locator.ILocatableResource;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.mdi.AbstractResourceMetadata;
+import org.embergraph.mdi.IResourceMetadata;
+import org.embergraph.quorum.Quorum;
+import org.embergraph.rawstore.AbstractRawWormStore;
+import org.embergraph.rawstore.IMRMW;
+import org.embergraph.rawstore.WormAddressManager;
+import org.embergraph.relation.locator.ILocatableResource;
 
 /**
  * A non-restart-safe store for temporary data that buffers data in memory until

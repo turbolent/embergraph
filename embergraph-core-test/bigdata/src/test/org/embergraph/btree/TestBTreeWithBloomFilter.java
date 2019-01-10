@@ -30,9 +30,9 @@ package org.embergraph.btree;
 
 import java.util.UUID;
 
-import com.bigdata.io.SerializerUtil;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rawstore.SimpleMemoryRawStore;
+import org.embergraph.io.SerializerUtil;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /**
  * Unit tests for a {@link BTree} with its bloom filter enabled. This class is

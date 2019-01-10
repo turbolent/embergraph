@@ -28,8 +28,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation.rule.eval;
 
-import com.bigdata.relation.IMutableRelation;
-import com.bigdata.relation.rule.IProgram;
+import org.embergraph.relation.IMutableRelation;
+import org.embergraph.relation.rule.IProgram;
 
 /**
  * Symbolic constants corresponding to the type of action associated with the

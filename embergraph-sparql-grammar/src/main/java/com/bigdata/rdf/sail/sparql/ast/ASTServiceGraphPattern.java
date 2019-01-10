@@ -4,12 +4,12 @@ package com.bigdata.rdf.sail.sparql.ast;
 
 import java.util.Map;
 
-import com.bigdata.rdf.sail.sparql.ast.ASTOperationContainer;
-import com.bigdata.rdf.sail.sparql.ast.Node;
-import com.bigdata.rdf.sail.sparql.ast.SimpleNode;
-import com.bigdata.rdf.sail.sparql.ast.SyntaxTreeBuilder;
-import com.bigdata.rdf.sail.sparql.ast.SyntaxTreeBuilderVisitor;
-import com.bigdata.rdf.sail.sparql.ast.VisitorException;
+import org.embergraph.rdf.sail.sparql.ast.ASTOperationContainer;
+import org.embergraph.rdf.sail.sparql.ast.Node;
+import org.embergraph.rdf.sail.sparql.ast.SimpleNode;
+import org.embergraph.rdf.sail.sparql.ast.SyntaxTreeBuilder;
+import org.embergraph.rdf.sail.sparql.ast.SyntaxTreeBuilderVisitor;
+import org.embergraph.rdf.sail.sparql.ast.VisitorException;
 
 public class ASTServiceGraphPattern extends SimpleNode {
 

@@ -27,7 +27,7 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import com.bigdata.btree.TestIndexCounter;
+import org.embergraph.btree.TestIndexCounter;
 
 /**
  * Aggregates test suites into increasing dependency order.

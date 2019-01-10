@@ -42,25 +42,25 @@ import java.util.UUID;
 import org.apache.log4j.Logger;
 import org.openrdf.model.URI;
 
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.internal.ColorsEnumExtension;
-import com.bigdata.rdf.internal.EpochExtension;
-import com.bigdata.rdf.internal.IExtension;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.SampleExtensionFactory;
-import com.bigdata.rdf.internal.XSD;
-import com.bigdata.rdf.internal.impl.literal.LiteralExtensionIV;
-import com.bigdata.rdf.model.BigdataBNode;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.AbstractTripleStore.Options;
-import com.bigdata.rdf.store.AbstractTripleStoreTestCase;
-import com.bigdata.rdf.vocab.BaseVocabulary;
-import com.bigdata.rdf.vocab.NoVocabulary;
-import com.bigdata.rdf.vocab.VocabularyDecl;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.internal.ColorsEnumExtension;
+import org.embergraph.rdf.internal.EpochExtension;
+import org.embergraph.rdf.internal.IExtension;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.SampleExtensionFactory;
+import org.embergraph.rdf.internal.XSD;
+import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
+import org.embergraph.rdf.model.BigdataBNode;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.AbstractTripleStore.Options;
+import org.embergraph.rdf.store.AbstractTripleStoreTestCase;
+import org.embergraph.rdf.vocab.BaseVocabulary;
+import org.embergraph.rdf.vocab.NoVocabulary;
+import org.embergraph.rdf.vocab.VocabularyDecl;
 
 /**
  * Test suite for adding terms to the lexicon.

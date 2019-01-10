@@ -27,8 +27,8 @@ package org.embergraph.rwstore;
 import java.io.File;
 import java.util.concurrent.locks.Lock;
 
-import com.bigdata.rawstore.IAllocationContext;
-import com.bigdata.rawstore.IStreamStore;
+import org.embergraph.rawstore.IAllocationContext;
+import org.embergraph.rawstore.IStreamStore;
 
 /**
  * The {@link IStore} interface provides persistent storage abstraction for

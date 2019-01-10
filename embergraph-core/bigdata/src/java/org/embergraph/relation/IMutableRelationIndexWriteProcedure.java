@@ -28,10 +28,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.proc.AbstractKeyArrayIndexProcedure;
-import com.bigdata.btree.proc.IIndexProcedure;
-import com.bigdata.btree.proc.IParallelizableIndexProcedure;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure;
+import org.embergraph.btree.proc.IIndexProcedure;
+import org.embergraph.btree.proc.IParallelizableIndexProcedure;
 
 /**
  * Marker interface for procedures responsible for writing on an {@link IIndex}

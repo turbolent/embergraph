@@ -26,7 +26,7 @@ package org.embergraph.journal;
 
 import java.nio.ByteBuffer;
 
-import com.bigdata.btree.IndexInconsistentError;
+import org.embergraph.btree.IndexInconsistentError;
 
 /**
  * Provides the callback to save the previous root block and store the address

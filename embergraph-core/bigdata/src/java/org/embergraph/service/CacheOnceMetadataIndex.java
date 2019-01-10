@@ -30,16 +30,16 @@ package org.embergraph.service;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.IRangeQuery;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.journal.TimestampUtility;
-import com.bigdata.mdi.IMetadataIndex;
-import com.bigdata.mdi.MetadataIndex;
-import com.bigdata.mdi.MetadataIndex.MetadataIndexMetadata;
-import com.bigdata.mdi.PartitionLocator;
-import com.bigdata.service.ndx.RawDataServiceTupleIterator;
+import org.embergraph.btree.IRangeQuery;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.journal.TimestampUtility;
+import org.embergraph.mdi.IMetadataIndex;
+import org.embergraph.mdi.MetadataIndex;
+import org.embergraph.mdi.MetadataIndex.MetadataIndexMetadata;
+import org.embergraph.mdi.PartitionLocator;
+import org.embergraph.service.ndx.RawDataServiceTupleIterator;
 
 import cutthecrap.utils.striterators.IFilter;
 

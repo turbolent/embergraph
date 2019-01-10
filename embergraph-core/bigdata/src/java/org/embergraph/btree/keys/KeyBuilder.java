@@ -37,10 +37,10 @@ import java.util.UUID;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleSerializer;
-import com.bigdata.io.LongPacker;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleSerializer;
+import org.embergraph.io.LongPacker;
+import org.embergraph.util.BytesUtil;
 
 /**
  * A class that may be used to form multi-component keys but which does not

@@ -30,8 +30,8 @@ package org.embergraph.resources;
 
 import java.util.Properties;
 
-import com.bigdata.service.AbstractFederation;
-import com.bigdata.service.AbstractTransactionService;
+import org.embergraph.service.AbstractFederation;
+import org.embergraph.service.AbstractTransactionService;
 
 /**
  * Mock implementation supporting only those features required to bootstrap the

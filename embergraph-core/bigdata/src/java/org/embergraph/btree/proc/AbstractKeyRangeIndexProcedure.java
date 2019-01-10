@@ -33,8 +33,8 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
-import com.bigdata.mdi.ISeparatorKeys;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.mdi.ISeparatorKeys;
+import org.embergraph.util.BytesUtil;
 
 /**
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

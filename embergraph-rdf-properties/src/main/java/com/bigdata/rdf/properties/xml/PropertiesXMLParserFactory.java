@@ -59,9 +59,9 @@ package com.bigdata.rdf.properties.xml;
 
 import java.util.Properties;
 
-import com.bigdata.rdf.properties.PropertiesFormat;
-import com.bigdata.rdf.properties.PropertiesParser;
-import com.bigdata.rdf.properties.PropertiesParserFactory;
+import org.embergraph.rdf.properties.PropertiesFormat;
+import org.embergraph.rdf.properties.PropertiesParser;
+import org.embergraph.rdf.properties.PropertiesParserFactory;
 
 /**
  * An {@link PropertiesParserFactory} for {@link Properties} objects in XML.

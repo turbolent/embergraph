@@ -35,7 +35,7 @@ import java.util.concurrent.TimeoutException;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.resources.AsynchronousOverflowTask;
+import org.embergraph.resources.AsynchronousOverflowTask;
 
 /**
  * Unit tests for the round robin behaviors of the load balancer in isolation

@@ -29,7 +29,7 @@ package org.embergraph.bop.engine;
 
 import java.util.UUID;
 
-import com.bigdata.io.SerializerUtil;
+import org.embergraph.io.SerializerUtil;
 
 import junit.framework.TestCase2;
 

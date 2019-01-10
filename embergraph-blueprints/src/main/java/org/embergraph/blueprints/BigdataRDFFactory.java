@@ -28,7 +28,7 @@ import org.openrdf.model.impl.ValueFactoryImpl;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-import com.bigdata.rdf.store.BD;
+import org.embergraph.rdf.store.BD;
 
 /**
  * Default implementation of a {@link BlueprintsValueFactory} for converting 

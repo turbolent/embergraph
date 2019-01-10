@@ -37,10 +37,10 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.VTE;
-import com.bigdata.rdf.internal.XSD;
-import com.bigdata.rdf.internal.impl.TermId;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.VTE;
+import org.embergraph.rdf.internal.XSD;
+import org.embergraph.rdf.internal.impl.TermId;
 
 /**
  * Unit tests for {@link BigdataValueFactoryImpl}.

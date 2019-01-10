@@ -34,10 +34,10 @@ import java.nio.channels.ClosedByInterruptException;
 import java.nio.channels.FileChannel;
 import java.util.concurrent.ExecutionException;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.rawstore.AbstractRawStoreTestCase;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rwstore.IRWStrategy;
+import org.embergraph.btree.BTree;
+import org.embergraph.rawstore.AbstractRawStoreTestCase;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rwstore.IRWStrategy;
 
 /**
  * Test suite for correct handling of {@link ClosedByInterruptException}s. When

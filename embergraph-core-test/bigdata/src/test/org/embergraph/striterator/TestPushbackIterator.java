@@ -30,7 +30,7 @@ package org.embergraph.striterator;
 
 import java.util.Arrays;
 
-import com.bigdata.striterator.PushbackIterator;
+import org.embergraph.striterator.PushbackIterator;
 
 import junit.framework.TestCase2;
 

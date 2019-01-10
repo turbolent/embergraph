@@ -4,11 +4,11 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.bop.IVariable;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.constraints.EBVBOp;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.bop.IVariable;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.constraints.EBVBOp;
 
 /**
  * AST node models a value expression which imposes a constraint.

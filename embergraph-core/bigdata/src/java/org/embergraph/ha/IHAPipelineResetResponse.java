@@ -23,7 +23,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.ha;
 
-import com.bigdata.ha.msg.IHAMessage;
+import org.embergraph.ha.msg.IHAMessage;
 
 /**
  * Message reporting the outcome of a pipeline reset on a service.

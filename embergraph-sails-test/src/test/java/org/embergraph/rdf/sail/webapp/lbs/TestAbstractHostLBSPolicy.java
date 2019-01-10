@@ -28,8 +28,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.BigdataStatics;
-import com.bigdata.util.httpd.Config;
+import org.embergraph.BigdataStatics;
+import org.embergraph.util.httpd.Config;
 
 /**
  * Test suite for the basic stochastic load balancing mechanism for LBS policies

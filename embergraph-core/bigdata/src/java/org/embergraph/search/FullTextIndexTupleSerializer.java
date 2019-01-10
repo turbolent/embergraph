@@ -35,15 +35,15 @@ import org.apache.log4j.Logger;
 import org.apache.lucene.search.similarities.DefaultSimilarity;
 import org.apache.lucene.search.similarities.Similarity;
 
-import com.bigdata.btree.DefaultTupleSerializer;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.IKeyBuilderFactory;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.btree.raba.codec.IRabaCoder;
-import com.bigdata.io.ByteArrayBuffer;
-import com.bigdata.util.Bytes;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.DefaultTupleSerializer;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.IKeyBuilderFactory;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.btree.raba.codec.IRabaCoder;
+import org.embergraph.io.ByteArrayBuffer;
+import org.embergraph.util.Bytes;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Class manages the encoding and decoding of keys for the full text index. You

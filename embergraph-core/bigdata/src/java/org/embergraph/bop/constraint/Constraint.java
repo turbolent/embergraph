@@ -26,12 +26,12 @@ package org.embergraph.bop.constraint;
 
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpBase;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstraint;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.bop.IValueExpressionConstraint;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpBase;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstraint;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.bop.IValueExpressionConstraint;
 
 /**
  * {@link Constraint} wraps a {@link BooleanValueExpression}.

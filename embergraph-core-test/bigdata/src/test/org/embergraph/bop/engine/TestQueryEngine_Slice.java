@@ -33,20 +33,20 @@ import java.util.UUID;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpEvaluationContext;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.NV;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.bindingSet.EmptyBindingSet;
-import com.bigdata.bop.bset.StartOp;
-import com.bigdata.bop.solutions.MemorySortOp;
-import com.bigdata.bop.solutions.SliceOp;
-import com.bigdata.bop.solutions.SliceOp.SliceStats;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.Journal;
-import com.bigdata.relation.accesspath.IAsynchronousIterator;
-import com.bigdata.relation.accesspath.ThickAsynchronousIterator;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpEvaluationContext;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.NV;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.bindingSet.EmptyBindingSet;
+import org.embergraph.bop.bset.StartOp;
+import org.embergraph.bop.solutions.MemorySortOp;
+import org.embergraph.bop.solutions.SliceOp;
+import org.embergraph.bop.solutions.SliceOp.SliceStats;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.Journal;
+import org.embergraph.relation.accesspath.IAsynchronousIterator;
+import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

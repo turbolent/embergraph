@@ -45,8 +45,8 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import junit.framework.AssertionFailedError;
 
-import com.bigdata.io.TestCase3;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.io.TestCase3;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Test suite for basic socket behaviors.

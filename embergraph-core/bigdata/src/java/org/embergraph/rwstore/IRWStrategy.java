@@ -2,11 +2,11 @@ package org.embergraph.rwstore;
 
 import java.util.concurrent.locks.Lock;
 
-import com.bigdata.journal.IBufferStrategy;
-import com.bigdata.journal.RWStrategy;
-import com.bigdata.rawstore.IAllocationContext;
-import com.bigdata.rawstore.IAllocationManagerStore;
-import com.bigdata.rwstore.sector.MemStrategy;
+import org.embergraph.journal.IBufferStrategy;
+import org.embergraph.journal.RWStrategy;
+import org.embergraph.rawstore.IAllocationContext;
+import org.embergraph.rawstore.IAllocationManagerStore;
+import org.embergraph.rwstore.sector.MemStrategy;
 
 /**
  * Defines a marker interface to be used to indicate strategies that share RW

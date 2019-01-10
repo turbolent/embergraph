@@ -34,8 +34,8 @@ import java.util.Iterator;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-import com.bigdata.rdf.vocab.VocabularyDecl;
-import com.bigdata.service.geospatial.GeoSpatial;
+import org.embergraph.rdf.vocab.VocabularyDecl;
+import org.embergraph.service.geospatial.GeoSpatial;
 
 /**
  * Vocabulary and namespace for GeoSpatial extensions.

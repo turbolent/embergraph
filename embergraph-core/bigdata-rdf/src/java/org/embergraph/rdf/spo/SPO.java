@@ -28,25 +28,25 @@ import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.IVariableOrConstant;
-import com.bigdata.rdf.inf.Justification;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.IVCache;
-import com.bigdata.rdf.internal.IVUtility;
-import com.bigdata.rdf.internal.NotMaterializedException;
-import com.bigdata.rdf.internal.impl.bnode.SidIV;
-import com.bigdata.rdf.model.BigdataResource;
-import com.bigdata.rdf.model.BigdataStatement;
-import com.bigdata.rdf.model.BigdataStatementImpl;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.StatementEnum;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.IRawTripleStore;
-import com.bigdata.relation.accesspath.IAccessPath;
-import com.bigdata.util.Bits;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.IVariableOrConstant;
+import org.embergraph.rdf.inf.Justification;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.IVCache;
+import org.embergraph.rdf.internal.IVUtility;
+import org.embergraph.rdf.internal.NotMaterializedException;
+import org.embergraph.rdf.internal.impl.bnode.SidIV;
+import org.embergraph.rdf.model.BigdataResource;
+import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.model.BigdataStatementImpl;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.IRawTripleStore;
+import org.embergraph.relation.accesspath.IAccessPath;
+import org.embergraph.util.Bits;
 
 /**
  * Represents a triple, triple+SID, or quad. When used to represent a triple,

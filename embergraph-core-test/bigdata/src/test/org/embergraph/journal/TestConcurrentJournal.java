@@ -44,17 +44,17 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.journal.AbstractInterruptsTestCase.InterruptMyselfTask;
-import com.bigdata.journal.AbstractTask.ResubmitException;
-import com.bigdata.journal.ConcurrencyManager.Options;
-import com.bigdata.service.DataService;
-import com.bigdata.service.ndx.DataServiceTupleIterator;
-import com.bigdata.util.DaemonThreadFactory;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.journal.AbstractInterruptsTestCase.InterruptMyselfTask;
+import org.embergraph.journal.AbstractTask.ResubmitException;
+import org.embergraph.journal.ConcurrencyManager.Options;
+import org.embergraph.service.DataService;
+import org.embergraph.service.ndx.DataServiceTupleIterator;
+import org.embergraph.util.DaemonThreadFactory;
 
 /**
  * Test suite for the {@link IConcurrencyManager} interface on the

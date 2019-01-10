@@ -37,12 +37,12 @@ import java.util.UUID;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.IndexSegment;
-import com.bigdata.io.ShortPacker;
-import com.bigdata.journal.Journal;
-import com.bigdata.resources.IndexManager;
-import com.bigdata.service.Params;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.IndexSegment;
+import org.embergraph.io.ShortPacker;
+import org.embergraph.journal.Journal;
+import org.embergraph.resources.IndexManager;
+import org.embergraph.service.Params;
 
 /**
  * Base class for {@link IResourceMetadata} implementations.

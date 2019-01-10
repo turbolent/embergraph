@@ -22,9 +22,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.sail.webapp.lbs.policy.counters;
 
-import com.bigdata.counters.IHostCounters;
-import com.bigdata.rdf.sail.webapp.lbs.IHostMetrics;
-import com.bigdata.rdf.sail.webapp.lbs.IHostScoringRule;
+import org.embergraph.counters.IHostCounters;
+import org.embergraph.rdf.sail.webapp.lbs.IHostMetrics;
+import org.embergraph.rdf.sail.webapp.lbs.IHostScoringRule;
 
 /**
  * Best effort computation of a workload score based on CPU Utilization and IO

@@ -28,12 +28,12 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.relation.rule;
 
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IVariable;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.ISortKeyBuilder;
-import com.bigdata.rdf.internal.IV;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IVariable;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.ISortKeyBuilder;
+import org.embergraph.rdf.internal.IV;
 
 /**
  * Builds unsigned byte[] sort keys from {@link IBindingSet}s.

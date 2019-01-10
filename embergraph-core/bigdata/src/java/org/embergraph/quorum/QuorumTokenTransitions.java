@@ -23,8 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.quorum;
 
-import com.bigdata.ha.HAGlue;
-import com.bigdata.ha.QuorumService;
+import org.embergraph.ha.HAGlue;
+import org.embergraph.ha.QuorumService;
 
 
 /**

@@ -28,8 +28,8 @@ import junit.framework.Test;
 import org.openrdf.model.Graph;
 import org.openrdf.model.ValueFactory;
 
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepository;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository;
 
 /**
  * Proxied test suite.

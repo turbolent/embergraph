@@ -29,7 +29,7 @@ package org.embergraph.htree;
 
 import it.unimi.dsi.bits.Fast;
 
-import com.bigdata.util.BytesUtil;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Static utility methods and data for an {@link HTree}.

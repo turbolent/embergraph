@@ -2,9 +2,9 @@ package org.embergraph.btree;
 
 import java.util.Arrays;
 
-import com.bigdata.io.ByteArrayBuffer;
-import com.bigdata.io.DataInputBuffer;
-import com.bigdata.rawstore.IBlock;
+import org.embergraph.io.ByteArrayBuffer;
+import org.embergraph.io.DataInputBuffer;
+import org.embergraph.rawstore.IBlock;
 
 /**
  * Test helper for a tuple with static data.

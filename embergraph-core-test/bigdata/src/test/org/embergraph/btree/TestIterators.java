@@ -29,9 +29,9 @@ package org.embergraph.btree;
 
 import org.apache.log4j.Level;
 
-import com.bigdata.btree.filter.TupleFilter;
-import com.bigdata.btree.keys.TestKeyBuilder;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.filter.TupleFilter;
+import org.embergraph.btree.keys.TestKeyBuilder;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Test suite for iterators. The tests are presented from the least dependencies

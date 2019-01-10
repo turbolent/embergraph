@@ -12,19 +12,19 @@ import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
-import com.bigdata.rdf.graph.IGASEngine;
-import com.bigdata.rdf.graph.IGASProgram;
-import com.bigdata.rdf.graph.IGASSchedulerImpl;
-import com.bigdata.rdf.graph.IStaticFrontier;
-import com.bigdata.rdf.graph.impl.GASState;
-import com.bigdata.rdf.graph.impl.bd.BigdataGASEngine.BigdataGraphAccessor;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.IVUtility;
-import com.bigdata.rdf.internal.impl.TermId;
-import com.bigdata.rdf.internal.impl.bnode.SidIV;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.graph.IGASEngine;
+import org.embergraph.rdf.graph.IGASProgram;
+import org.embergraph.rdf.graph.IGASSchedulerImpl;
+import org.embergraph.rdf.graph.IStaticFrontier;
+import org.embergraph.rdf.graph.impl.GASState;
+import org.embergraph.rdf.graph.impl.bd.BigdataGASEngine.BigdataGraphAccessor;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.IVUtility;
+import org.embergraph.rdf.internal.impl.TermId;
+import org.embergraph.rdf.internal.impl.bnode.SidIV;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 public class BigdataGASState<VS, ES, ST> extends GASState<VS, ES, ST> {
 

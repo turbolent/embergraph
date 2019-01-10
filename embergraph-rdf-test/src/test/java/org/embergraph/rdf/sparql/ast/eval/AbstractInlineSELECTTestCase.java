@@ -104,11 +104,11 @@ import org.openrdf.rio.Rio;
 import org.openrdf.rio.helpers.RDFHandlerBase;
 import org.openrdf.rio.helpers.StatementCollector;
 
-import com.bigdata.rdf.model.StatementEnum;
-import com.bigdata.rdf.rio.StatementBuffer;
-import com.bigdata.rdf.sail.sparql.Bigdata2ASTSPARQLParser;
-import com.bigdata.rdf.sparql.ast.AbstractASTEvaluationTestCase;
-import com.bigdata.rdf.sparql.ast.QueryRoot;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.rdf.rio.StatementBuffer;
+import org.embergraph.rdf.sail.sparql.Bigdata2ASTSPARQLParser;
+import org.embergraph.rdf.sparql.ast.AbstractASTEvaluationTestCase;
+import org.embergraph.rdf.sparql.ast.QueryRoot;
 
 /**
  * The idea here is that the subclasses provide the data for the test

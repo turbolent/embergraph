@@ -26,7 +26,7 @@ package org.embergraph.ha;
 import java.io.Serializable;
 import java.util.concurrent.Callable;
 
-import com.bigdata.journal.IIndexManager;
+import org.embergraph.journal.IIndexManager;
 
 /**
  * Interface allows arbitrary tasks to be submitted to an {@link HAGlue} service

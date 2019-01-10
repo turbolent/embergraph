@@ -25,8 +25,8 @@ package org.embergraph.rdf.sail.webapp;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.rdf.sparql.ast.service.ServiceFactory;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.sparql.ast.service.ServiceFactory;
 
 /**
  * Interface declaring the <code>config-param</code>s understood by the

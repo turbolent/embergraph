@@ -23,8 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.lexicon;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.BTree.PartitionedCounter;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.BTree.PartitionedCounter;
 
 /**
  * An encoder/decoder for long values formed from a partition identifier in the

@@ -9,15 +9,15 @@ import info.aduna.net.ParsedURI;
 
 import org.openrdf.query.MalformedQueryException;
 
-import com.bigdata.rdf.sail.sparql.ast.ASTBaseDecl;
-import com.bigdata.rdf.sail.sparql.ast.ASTDeleteData;
-import com.bigdata.rdf.sail.sparql.ast.ASTIRI;
-import com.bigdata.rdf.sail.sparql.ast.ASTIRIFunc;
-import com.bigdata.rdf.sail.sparql.ast.ASTInsertData;
-import com.bigdata.rdf.sail.sparql.ast.ASTOperationContainer;
-import com.bigdata.rdf.sail.sparql.ast.ASTServiceGraphPattern;
-import com.bigdata.rdf.sail.sparql.ast.ASTUnparsedQuadDataBlock;
-import com.bigdata.rdf.sail.sparql.ast.VisitorException;
+import org.embergraph.rdf.sail.sparql.ast.ASTBaseDecl;
+import org.embergraph.rdf.sail.sparql.ast.ASTDeleteData;
+import org.embergraph.rdf.sail.sparql.ast.ASTIRI;
+import org.embergraph.rdf.sail.sparql.ast.ASTIRIFunc;
+import org.embergraph.rdf.sail.sparql.ast.ASTInsertData;
+import org.embergraph.rdf.sail.sparql.ast.ASTOperationContainer;
+import org.embergraph.rdf.sail.sparql.ast.ASTServiceGraphPattern;
+import org.embergraph.rdf.sail.sparql.ast.ASTUnparsedQuadDataBlock;
+import org.embergraph.rdf.sail.sparql.ast.VisitorException;
 
 /**
  * Resolves relative URIs in a query model using either an external base URI or

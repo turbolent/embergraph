@@ -21,7 +21,7 @@ import java.util.Random;
 import org.openrdf.model.Statement;
 import org.openrdf.model.Value;
 
-import com.bigdata.rdf.graph.impl.util.VertexDistribution;
+import org.embergraph.rdf.graph.impl.util.VertexDistribution;
 
 /**
  * Interface abstracts access to a backend graph implementation.

@@ -25,7 +25,7 @@ package org.embergraph.rdf.sail.webapp.lbs;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 
-import com.bigdata.journal.IIndexManager;
+import org.embergraph.journal.IIndexManager;
 
 public interface IHAPolicyLifeCycle {
 

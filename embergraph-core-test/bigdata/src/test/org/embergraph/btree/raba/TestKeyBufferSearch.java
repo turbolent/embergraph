@@ -29,7 +29,7 @@ package org.embergraph.btree.raba;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.util.BytesUtil;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Unit tests for {@link IKeyBuffer#search(byte[] searchKey)}.

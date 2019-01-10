@@ -39,16 +39,16 @@ import java.util.concurrent.TimeUnit;
 
 import junit.framework.AssertionFailedError;
 
-import com.bigdata.ha.HAPipelineGlue;
-import com.bigdata.io.ChecksumUtility;
-import com.bigdata.io.FileChannelUtility;
-import com.bigdata.io.IReopenChannel;
-import com.bigdata.io.TestCase3;
-import com.bigdata.io.writecache.TestWORMWriteCacheService.MyMockQuorumMember;
-import com.bigdata.quorum.MockQuorumFixture;
-import com.bigdata.quorum.MockQuorumFixture.MockQuorum;
-import com.bigdata.quorum.QuorumActor;
-import com.bigdata.rwstore.RWWriteCacheService;
+import org.embergraph.ha.HAPipelineGlue;
+import org.embergraph.io.ChecksumUtility;
+import org.embergraph.io.FileChannelUtility;
+import org.embergraph.io.IReopenChannel;
+import org.embergraph.io.TestCase3;
+import org.embergraph.io.writecache.TestWORMWriteCacheService.MyMockQuorumMember;
+import org.embergraph.quorum.MockQuorumFixture;
+import org.embergraph.quorum.MockQuorumFixture.MockQuorum;
+import org.embergraph.quorum.QuorumActor;
+import org.embergraph.rwstore.RWWriteCacheService;
 
 /**
  * Test suite for the {@link WriteCacheService} using scattered writes on a

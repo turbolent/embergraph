@@ -39,8 +39,8 @@ import java.util.zip.GZIPOutputStream;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.journal.AbstractJournal.ISnapshotData;
-import com.bigdata.quorum.Quorum;
+import org.embergraph.journal.AbstractJournal.ISnapshotData;
+import org.embergraph.quorum.Quorum;
 
 /**
  * Take a snapshot of the journal.

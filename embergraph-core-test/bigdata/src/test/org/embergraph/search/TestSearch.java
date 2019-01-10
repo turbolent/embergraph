@@ -33,7 +33,7 @@ import java.util.Iterator;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-import com.bigdata.rdf.lexicon.ITextIndexer.FullTextQuery;
+import org.embergraph.rdf.lexicon.ITextIndexer.FullTextQuery;
 
 /**
  * Test suite using examples based on <a

@@ -15,7 +15,7 @@
 */
 package com.bigdata.ganglia;
 
-import com.bigdata.ganglia.xdr.XDROutputBuffer;
+import org.embergraph.ganglia.xdr.XDROutputBuffer;
 
 /**
  * An earlier version of the Ganglia protocol.

@@ -30,8 +30,8 @@ package org.embergraph.rdf.spo;
 import java.io.IOException;
 import java.io.ObjectStreamException;
 
-import com.bigdata.rdf.model.StatementEnum;
-import com.bigdata.relation.rule.eval.ISolution;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.relation.rule.eval.ISolution;
 
 /**
  * A filter that matches explicit or inferred statements but not those whose

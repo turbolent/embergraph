@@ -1,7 +1,7 @@
 package com.bigdata.rdf.sparql.ast;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.striterator.CloseableIteratorWrapper;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.striterator.CloseableIteratorWrapper;
 
 import cutthecrap.utils.striterators.SingleValueIterator;
 

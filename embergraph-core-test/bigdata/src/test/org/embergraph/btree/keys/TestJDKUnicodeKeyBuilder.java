@@ -30,7 +30,7 @@ package org.embergraph.btree.keys;
 
 import java.util.Properties;
 
-import com.bigdata.btree.keys.KeyBuilder.Options;
+import org.embergraph.btree.keys.KeyBuilder.Options;
 
 /**
  * 

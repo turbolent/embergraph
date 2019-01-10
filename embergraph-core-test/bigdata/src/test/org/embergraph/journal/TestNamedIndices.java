@@ -29,10 +29,10 @@ package org.embergraph.journal;
 
 import java.util.UUID;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.HTreeIndexMetadata;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.htree.HTree;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.HTreeIndexMetadata;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.htree.HTree;
 
 /**
  * Test suite for api supporting registration, lookup, use, and atomic commit of

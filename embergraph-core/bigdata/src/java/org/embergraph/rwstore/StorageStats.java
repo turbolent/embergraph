@@ -33,7 +33,7 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import com.bigdata.rwstore.sector.SectorAllocator;
+import org.embergraph.rwstore.sector.SectorAllocator;
 
 /**
  * Maintains stats on the RWStore allocations, useful for tuning Allocator

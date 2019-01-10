@@ -27,11 +27,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.join;
 
-import com.bigdata.bop.HTreeAnnotations;
-import com.bigdata.bop.ap.Predicate;
-import com.bigdata.htree.HTree;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.BigdataValue;
+import org.embergraph.bop.HTreeAnnotations;
+import org.embergraph.bop.ap.Predicate;
+import org.embergraph.htree.HTree;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.BigdataValue;
 
 /**
  * Annotations in common for {@link HTree} based hash joins.

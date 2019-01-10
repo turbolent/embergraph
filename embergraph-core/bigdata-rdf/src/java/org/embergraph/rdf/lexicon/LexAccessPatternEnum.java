@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.lexicon;
 
-import com.bigdata.bop.IPredicate;
+import org.embergraph.bop.IPredicate;
 
 /**
  * Type safe enumeration of access patterns for the {@link LexPredicate}.

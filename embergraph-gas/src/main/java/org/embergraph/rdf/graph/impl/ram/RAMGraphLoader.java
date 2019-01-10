@@ -20,8 +20,8 @@ import org.openrdf.model.Statement;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.rio.RDFHandlerException;
 
-import com.bigdata.rdf.graph.impl.ram.RAMGASEngine.RAMGraph;
-import com.bigdata.rdf.graph.util.GraphLoader;
+import org.embergraph.rdf.graph.impl.ram.RAMGASEngine.RAMGraph;
+import org.embergraph.rdf.graph.util.GraphLoader;
 
 /**
  * TODO Blank nodes have global scope. We should have a bnode resolution scope

@@ -15,16 +15,16 @@ import org.openrdf.model.Value;
 import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.query.BindingSet;
 
-import com.bigdata.BigdataStatics;
-import com.bigdata.gom.gpo.IGPO;
-import com.bigdata.gom.gpo.ILinkSet;
-import com.bigdata.gom.om.IObjectManager;
-import com.bigdata.gom.om.NanoSparqlObjectManager;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.sail.webapp.client.AutoCloseHttpClient;
-import com.bigdata.rdf.sail.webapp.client.HttpClientConfigurator;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepositoryManager;
-import com.bigdata.util.httpd.Config;
+import org.embergraph.BigdataStatics;
+import org.embergraph.gom.gpo.IGPO;
+import org.embergraph.gom.gpo.ILinkSet;
+import org.embergraph.gom.om.IObjectManager;
+import org.embergraph.gom.om.NanoSparqlObjectManager;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.sail.webapp.client.AutoCloseHttpClient;
+import org.embergraph.rdf.sail.webapp.client.HttpClientConfigurator;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepositoryManager;
+import org.embergraph.util.httpd.Config;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

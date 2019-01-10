@@ -40,10 +40,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.journal.AbstractTask;
-import com.bigdata.rdf.sparql.ast.QueryHints;
-import com.bigdata.rdf.task.AbstractApiTask;
-import com.bigdata.util.NV;
+import org.embergraph.journal.AbstractTask;
+import org.embergraph.rdf.sparql.ast.QueryHints;
+import org.embergraph.rdf.task.AbstractApiTask;
+import org.embergraph.util.NV;
 
 /**
  * Abstract base class for REST API methods. This class is compatible with a

@@ -33,23 +33,23 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpEvaluationContext;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.IVariable;
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.rdf.lexicon.LexiconRelation;
-import com.bigdata.rdf.spo.SPORelation;
-import com.bigdata.relation.accesspath.AccessPath;
-import com.bigdata.relation.accesspath.IAccessPath;
-import com.bigdata.relation.accesspath.IElementFilter;
-import com.bigdata.relation.locator.ILocatableResource;
-import com.bigdata.service.IBigdataFederation;
-import com.bigdata.striterator.IKeyOrder;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpEvaluationContext;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.IVariable;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.lexicon.LexiconRelation;
+import org.embergraph.rdf.spo.SPORelation;
+import org.embergraph.relation.accesspath.AccessPath;
+import org.embergraph.relation.accesspath.IAccessPath;
+import org.embergraph.relation.accesspath.IElementFilter;
+import org.embergraph.relation.locator.ILocatableResource;
+import org.embergraph.service.IBigdataFederation;
+import org.embergraph.striterator.IKeyOrder;
 
 /**
  * An abstraction corresponding to a set of elements using some schema (think a

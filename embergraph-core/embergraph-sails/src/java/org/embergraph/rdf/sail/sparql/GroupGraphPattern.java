@@ -36,19 +36,19 @@ import org.apache.log4j.Logger;
 import org.openrdf.query.algebra.StatementPattern;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.rdf.sparql.ast.FilterNode;
-import com.bigdata.rdf.sparql.ast.GroupNodeBase;
-import com.bigdata.rdf.sparql.ast.IGroupMemberNode;
-import com.bigdata.rdf.sparql.ast.JoinGroupNode;
-import com.bigdata.rdf.sparql.ast.PathNode;
-import com.bigdata.rdf.sparql.ast.PropertyPathNode;
-import com.bigdata.rdf.sparql.ast.QuadData;
-import com.bigdata.rdf.sparql.ast.StatementPatternNode;
-import com.bigdata.rdf.sparql.ast.TermNode;
-import com.bigdata.rdf.sparql.ast.UnionNode;
-import com.bigdata.rdf.sparql.ast.ValueExpressionNode;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.rdf.sparql.ast.FilterNode;
+import org.embergraph.rdf.sparql.ast.GroupNodeBase;
+import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
+import org.embergraph.rdf.sparql.ast.JoinGroupNode;
+import org.embergraph.rdf.sparql.ast.PathNode;
+import org.embergraph.rdf.sparql.ast.PropertyPathNode;
+import org.embergraph.rdf.sparql.ast.QuadData;
+import org.embergraph.rdf.sparql.ast.StatementPatternNode;
+import org.embergraph.rdf.sparql.ast.TermNode;
+import org.embergraph.rdf.sparql.ast.UnionNode;
+import org.embergraph.rdf.sparql.ast.ValueExpressionNode;
 
 /**
  * A group graph pattern consisting of (required and optional) tuple

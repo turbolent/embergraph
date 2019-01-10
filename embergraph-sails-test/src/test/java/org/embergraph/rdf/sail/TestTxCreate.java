@@ -31,10 +31,10 @@ import java.util.Properties;
 
 import org.openrdf.sail.SailException;
 
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.internal.LexiconConfiguration;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.vocab.NoVocabulary;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.internal.LexiconConfiguration;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.vocab.NoVocabulary;
 
 /**
  * Unit test for the creation of a Sail with isolatable indices. This unit test

@@ -35,7 +35,7 @@ import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.XMLSchema;
 
-import com.bigdata.rdf.vocab.VocabularyDecl;
+import org.embergraph.rdf.vocab.VocabularyDecl;
 
 /**
  * Vocabulary and namespace for {@link XMLSchema}.

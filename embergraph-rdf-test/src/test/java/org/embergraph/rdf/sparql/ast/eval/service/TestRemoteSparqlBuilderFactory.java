@@ -42,27 +42,27 @@ import org.openrdf.model.vocabulary.DC;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.impl.MapBindingSet;
 
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.Var;
-import com.bigdata.rdf.internal.XSD;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.sparql.AbstractBigdataExprBuilderTestCase;
-import com.bigdata.rdf.sparql.ast.ConstantNode;
-import com.bigdata.rdf.sparql.ast.GraphPatternGroup;
-import com.bigdata.rdf.sparql.ast.IGroupMemberNode;
-import com.bigdata.rdf.sparql.ast.JoinGroupNode;
-import com.bigdata.rdf.sparql.ast.StatementPatternNode;
-import com.bigdata.rdf.sparql.ast.VarNode;
-import com.bigdata.rdf.sparql.ast.service.IRemoteSparqlQueryBuilder;
-import com.bigdata.rdf.sparql.ast.service.RemoteServiceOptions;
-import com.bigdata.rdf.sparql.ast.service.RemoteSparql10QueryBuilder;
-import com.bigdata.rdf.sparql.ast.service.RemoteSparql11DraftQueryBuilder;
-import com.bigdata.rdf.sparql.ast.service.RemoteSparql11QueryBuilder;
-import com.bigdata.rdf.sparql.ast.service.RemoteSparqlBuilderFactory;
-import com.bigdata.rdf.sparql.ast.service.SPARQLVersion;
-import com.bigdata.rdf.sparql.ast.service.ServiceNode;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.Var;
+import org.embergraph.rdf.internal.XSD;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.sparql.AbstractBigdataExprBuilderTestCase;
+import org.embergraph.rdf.sparql.ast.ConstantNode;
+import org.embergraph.rdf.sparql.ast.GraphPatternGroup;
+import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
+import org.embergraph.rdf.sparql.ast.JoinGroupNode;
+import org.embergraph.rdf.sparql.ast.StatementPatternNode;
+import org.embergraph.rdf.sparql.ast.VarNode;
+import org.embergraph.rdf.sparql.ast.service.IRemoteSparqlQueryBuilder;
+import org.embergraph.rdf.sparql.ast.service.RemoteServiceOptions;
+import org.embergraph.rdf.sparql.ast.service.RemoteSparql10QueryBuilder;
+import org.embergraph.rdf.sparql.ast.service.RemoteSparql11DraftQueryBuilder;
+import org.embergraph.rdf.sparql.ast.service.RemoteSparql11QueryBuilder;
+import org.embergraph.rdf.sparql.ast.service.RemoteSparqlBuilderFactory;
+import org.embergraph.rdf.sparql.ast.service.SPARQLVersion;
+import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 
 /**
  * Test suite the {@link RemoteSparqlBuilderFactory}

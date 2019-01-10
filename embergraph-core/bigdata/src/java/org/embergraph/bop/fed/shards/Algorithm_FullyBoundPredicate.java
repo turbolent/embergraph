@@ -4,13 +4,13 @@ import java.util.LinkedList;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.mdi.PartitionLocator;
-import com.bigdata.relation.accesspath.IBuffer;
-import com.bigdata.service.Split;
-import com.bigdata.service.ndx.AbstractSplitter;
-import com.bigdata.service.ndx.ISplitter;
-import com.bigdata.striterator.IKeyOrder;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.mdi.PartitionLocator;
+import org.embergraph.relation.accesspath.IBuffer;
+import org.embergraph.service.Split;
+import org.embergraph.service.ndx.AbstractSplitter;
+import org.embergraph.service.ndx.ISplitter;
+import org.embergraph.striterator.IKeyOrder;
 
 /**
  * When the asBound predicates are known to be fully bound, then the

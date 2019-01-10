@@ -33,9 +33,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import com.bigdata.striterator.ChunkedStriterator;
-import com.bigdata.striterator.IChunkedStriterator;
-import com.bigdata.striterator.Resolver;
+import org.embergraph.striterator.ChunkedStriterator;
+import org.embergraph.striterator.IChunkedStriterator;
+import org.embergraph.striterator.Resolver;
 
 import junit.framework.TestCase2;
 

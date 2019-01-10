@@ -27,12 +27,12 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.join;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstraint;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.engine.BOpStats;
-import com.bigdata.htree.HTree;
-import com.bigdata.relation.accesspath.IBuffer;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstraint;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.engine.BOpStats;
+import org.embergraph.htree.HTree;
+import org.embergraph.relation.accesspath.IBuffer;
 import com.ibm.icu.util.BytesTrie.Iterator;
 
 import cutthecrap.utils.striterators.ICloseableIterator;

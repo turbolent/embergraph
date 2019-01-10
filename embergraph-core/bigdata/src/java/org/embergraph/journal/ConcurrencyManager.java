@@ -48,21 +48,21 @@ import java.util.concurrent.TimeoutException;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.BigdataStatics;
-import com.bigdata.btree.BTree;
-import com.bigdata.concurrent.NonBlockingLockManager;
-import com.bigdata.concurrent.NonBlockingLockManagerWithNewDesign;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.ICounterSet;
-import com.bigdata.counters.Instrument;
-import com.bigdata.resources.StoreManager;
-import com.bigdata.service.AbstractDistributedFederation;
-import com.bigdata.service.IBigdataClient;
-import com.bigdata.service.IServiceShutdown;
-import com.bigdata.util.DaemonThreadFactory;
-import com.bigdata.util.concurrent.TaskCounters;
-import com.bigdata.util.concurrent.ThreadPoolExecutorStatisticsTask;
-import com.bigdata.util.concurrent.WriteTaskCounters;
+import org.embergraph.BigdataStatics;
+import org.embergraph.btree.BTree;
+import org.embergraph.concurrent.NonBlockingLockManager;
+import org.embergraph.concurrent.NonBlockingLockManagerWithNewDesign;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.ICounterSet;
+import org.embergraph.counters.Instrument;
+import org.embergraph.resources.StoreManager;
+import org.embergraph.service.AbstractDistributedFederation;
+import org.embergraph.service.IBigdataClient;
+import org.embergraph.service.IServiceShutdown;
+import org.embergraph.util.DaemonThreadFactory;
+import org.embergraph.util.concurrent.TaskCounters;
+import org.embergraph.util.concurrent.ThreadPoolExecutorStatisticsTask;
+import org.embergraph.util.concurrent.WriteTaskCounters;
 
 /**
  * Supports concurrent operations against named indices. Historical read and

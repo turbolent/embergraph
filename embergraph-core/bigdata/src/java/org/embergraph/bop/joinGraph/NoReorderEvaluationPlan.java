@@ -25,10 +25,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.joinGraph;
 
-import com.bigdata.bop.IPredicate;
-import com.bigdata.relation.rule.IRule;
-import com.bigdata.relation.rule.IAccessPathExpander;
-import com.bigdata.relation.rule.eval.IJoinNexus;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.relation.rule.IRule;
+import org.embergraph.relation.rule.IAccessPathExpander;
+import org.embergraph.relation.rule.eval.IJoinNexus;
 
 /**
  * Useful for testing - will not reorder the join predicates.

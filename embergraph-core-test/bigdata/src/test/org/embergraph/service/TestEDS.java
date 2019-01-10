@@ -30,9 +30,9 @@ package org.embergraph.service;
 import java.io.File;
 import java.util.Properties;
 
-import com.bigdata.journal.AbstractIndexManagerTestCase;
-import com.bigdata.journal.ProxyTestCase;
-import com.bigdata.resources.OverflowManager;
+import org.embergraph.journal.AbstractIndexManagerTestCase;
+import org.embergraph.journal.ProxyTestCase;
+import org.embergraph.resources.OverflowManager;
 
 /**
  * Delegate for {@link ProxyTestCase}s for services running against an

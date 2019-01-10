@@ -27,8 +27,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.fed.nodes;
 
-import com.bigdata.service.AbstractEmbeddedFederationTestCase;
-import com.bigdata.service.DataService;
+import org.embergraph.service.AbstractEmbeddedFederationTestCase;
+import org.embergraph.service.DataService;
 
 /**
  * Unit tests for mapping binding sets over nodes. For the purpose of this test

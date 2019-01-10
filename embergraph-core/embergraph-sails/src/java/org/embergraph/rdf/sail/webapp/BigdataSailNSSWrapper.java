@@ -30,12 +30,12 @@ import org.apache.log4j.Logger;
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.server.Server;
 
-import com.bigdata.BigdataStatics;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.webapp.client.HttpClientConfigurator;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepositoryManager;
-import com.bigdata.util.StackInfoReport;
-import com.bigdata.util.config.NicUtil;
+import org.embergraph.BigdataStatics;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.webapp.client.HttpClientConfigurator;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepositoryManager;
+import org.embergraph.util.StackInfoReport;
+import org.embergraph.util.config.NicUtil;
 
 public class BigdataSailNSSWrapper {
     

@@ -46,12 +46,12 @@ import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.bigdata.btree.keys.KVO;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.btree.keys.TestKeyBuilder;
-import com.bigdata.mdi.IMetadataIndex;
-import com.bigdata.relation.accesspath.BlockingBuffer;
-import com.bigdata.util.Bytes;
+import org.embergraph.btree.keys.KVO;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.btree.keys.TestKeyBuilder;
+import org.embergraph.mdi.IMetadataIndex;
+import org.embergraph.relation.accesspath.BlockingBuffer;
+import org.embergraph.util.Bytes;
 
 /**
  * Stress test using key-range partitioned index ({@link IMetadataIndex}), which

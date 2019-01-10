@@ -28,16 +28,16 @@ import java.util.Properties;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.vocabulary.RDF;
 
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.Journal;
-import com.bigdata.rdf.graph.AbstractGraphTestCase;
-import com.bigdata.rdf.graph.util.IGraphFixture;
-import com.bigdata.rdf.graph.util.IGraphFixtureFactory;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.BigdataSail.BigdataSailConnection;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.Journal;
+import org.embergraph.rdf.graph.AbstractGraphTestCase;
+import org.embergraph.rdf.graph.util.IGraphFixture;
+import org.embergraph.rdf.graph.util.IGraphFixtureFactory;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
 
 public class AbstractBigdataGraphTestCase extends AbstractGraphTestCase {
 

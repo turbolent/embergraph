@@ -39,24 +39,24 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.IVariableOrConstant;
-import com.bigdata.bop.Var;
-import com.bigdata.bop.joinGraph.IEvaluationPlan;
-import com.bigdata.bop.joinGraph.IEvaluationPlanFactory;
-import com.bigdata.bop.joinGraph.fast.DefaultEvaluationPlanFactory2;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.rio.StatementBuffer;
-import com.bigdata.rdf.spo.SPOPredicate;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.relation.rule.IRule;
-import com.bigdata.relation.rule.Rule;
-import com.bigdata.relation.rule.eval.ActionEnum;
-import com.bigdata.relation.rule.eval.IJoinNexus;
-import com.bigdata.relation.rule.eval.IJoinNexusFactory;
-import com.bigdata.relation.rule.eval.ISolution;
-import com.bigdata.striterator.IChunkedOrderedIterator;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.IVariableOrConstant;
+import org.embergraph.bop.Var;
+import org.embergraph.bop.joinGraph.IEvaluationPlan;
+import org.embergraph.bop.joinGraph.IEvaluationPlanFactory;
+import org.embergraph.bop.joinGraph.fast.DefaultEvaluationPlanFactory2;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.rio.StatementBuffer;
+import org.embergraph.rdf.spo.SPOPredicate;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.relation.rule.IRule;
+import org.embergraph.relation.rule.Rule;
+import org.embergraph.relation.rule.eval.ActionEnum;
+import org.embergraph.relation.rule.eval.IJoinNexus;
+import org.embergraph.relation.rule.eval.IJoinNexusFactory;
+import org.embergraph.relation.rule.eval.ISolution;
+import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /**
  * @author <a href="mailto:mpersonick@users.sourceforge.net">Mike Personick</a>

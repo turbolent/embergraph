@@ -38,8 +38,8 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.query.BindingSet;
 
-import com.bigdata.gom.gpo.IGPO;
-import com.bigdata.rdf.model.BigdataValueFactory;
+import org.embergraph.gom.gpo.IGPO;
+import org.embergraph.rdf.model.BigdataValueFactory;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

@@ -5,18 +5,18 @@ import java.util.Properties;
 
 import org.openrdf.model.Statement;
 
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.ITransactionService;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.Journal;
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.model.StatementEnum;
-import com.bigdata.rdf.rio.StatementBuffer;
-import com.bigdata.rdf.spo.SPO;
-import com.bigdata.rdf.vocab.NoVocabulary;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.ITransactionService;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Journal;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.rdf.rio.StatementBuffer;
+import org.embergraph.rdf.spo.SPO;
+import org.embergraph.rdf.vocab.NoVocabulary;
 
 /**
  * Test suite for the transaction semantics of the {@link LocalTripleStore}.

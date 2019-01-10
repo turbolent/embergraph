@@ -2,7 +2,7 @@ package org.embergraph.bop.engine;
 
 import java.util.UUID;
 
-import com.bigdata.bop.PipelineOp;
+import org.embergraph.bop.PipelineOp;
 
 /**
  * A query declaration.

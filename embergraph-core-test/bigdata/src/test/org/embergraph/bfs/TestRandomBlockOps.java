@@ -35,7 +35,7 @@ import java.util.Random;
 import java.util.TreeMap;
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.bigdata.bfs.BigdataFileSystem;
+import org.embergraph.bfs.BigdataFileSystem;
 
 import junit.framework.TestCase;
 

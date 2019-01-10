@@ -31,15 +31,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IVariable;
-import com.bigdata.rdf.sparql.ast.eval.AbstractServiceFactoryBase;
-import com.bigdata.rdf.sparql.ast.service.BigdataServiceCall;
-import com.bigdata.rdf.sparql.ast.service.IServiceOptions;
-import com.bigdata.rdf.sparql.ast.service.OpenrdfNativeServiceOptions;
-import com.bigdata.rdf.sparql.ast.service.ServiceCallCreateParams;
-import com.bigdata.rdf.sparql.ast.service.ServiceNode;
-import com.bigdata.striterator.CloseableIteratorWrapper;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IVariable;
+import org.embergraph.rdf.sparql.ast.eval.AbstractServiceFactoryBase;
+import org.embergraph.rdf.sparql.ast.service.BigdataServiceCall;
+import org.embergraph.rdf.sparql.ast.service.IServiceOptions;
+import org.embergraph.rdf.sparql.ast.service.OpenrdfNativeServiceOptions;
+import org.embergraph.rdf.sparql.ast.service.ServiceCallCreateParams;
+import org.embergraph.rdf.sparql.ast.service.ServiceNode;
+import org.embergraph.striterator.CloseableIteratorWrapper;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

@@ -38,19 +38,19 @@ import org.openrdf.query.parser.sparql.manifest.SPARQLQueryTest;
 import org.openrdf.repository.Repository;
 import org.openrdf.repository.dataset.DatasetRepository;
 
-import com.bigdata.BigdataStatics;
-import com.bigdata.btree.keys.CollatorEnum;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.btree.keys.StrengthEnum;
-import com.bigdata.journal.ITx;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.BigdataSail.Options;
-import com.bigdata.rdf.sail.BigdataSailRepository;
-import com.bigdata.rdf.sail.BigdataSailRepositoryConnection;
-import com.bigdata.rdf.store.ScaleOutTripleStore;
-import com.bigdata.service.AbstractDistributedFederation;
-import com.bigdata.service.AbstractScaleOutClient;
-import com.bigdata.service.ScaleOutClientFactory;
+import org.embergraph.BigdataStatics;
+import org.embergraph.btree.keys.CollatorEnum;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.btree.keys.StrengthEnum;
+import org.embergraph.journal.ITx;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.BigdataSail.Options;
+import org.embergraph.rdf.sail.BigdataSailRepository;
+import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.rdf.store.ScaleOutTripleStore;
+import org.embergraph.service.AbstractDistributedFederation;
+import org.embergraph.service.AbstractScaleOutClient;
+import org.embergraph.service.ScaleOutClientFactory;
 
 /**
  * Runs the SPARQL test suite against a JiniFederation, which must be

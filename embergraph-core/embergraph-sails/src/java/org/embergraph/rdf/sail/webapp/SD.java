@@ -36,21 +36,21 @@ import org.openrdf.model.ValueFactory;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDF;
 
-import com.bigdata.ha.HAGlue;
-import com.bigdata.ha.QuorumService;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.IJournal;
-import com.bigdata.quorum.Quorum;
-import com.bigdata.rdf.axioms.Axioms;
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.axioms.OwlAxioms;
-import com.bigdata.rdf.axioms.RdfsAxioms;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.BD;
-import com.bigdata.rdf.vocab.decls.VoidVocabularyDecl;
-import com.bigdata.service.IBigdataFederation;
-import com.bigdata.util.ClassPathUtil;
+import org.embergraph.ha.HAGlue;
+import org.embergraph.ha.QuorumService;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.IJournal;
+import org.embergraph.quorum.Quorum;
+import org.embergraph.rdf.axioms.Axioms;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.axioms.OwlAxioms;
+import org.embergraph.rdf.axioms.RdfsAxioms;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.BD;
+import org.embergraph.rdf.vocab.decls.VoidVocabularyDecl;
+import org.embergraph.service.IBigdataFederation;
+import org.embergraph.util.ClassPathUtil;
 
 /**
  * SPARQL 1.1 Service Description vocabulary class.

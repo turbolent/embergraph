@@ -3,7 +3,7 @@ package org.embergraph.btree;
 import java.io.File;
 import java.io.IOException;
 
-import com.bigdata.btree.keys.TestKeyBuilder;
+import org.embergraph.btree.keys.TestKeyBuilder;
 
 public class TestIndexSegmentBuilderWithBlobCapacity extends
         AbstractIndexSegmentTestCase {

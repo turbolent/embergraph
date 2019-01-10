@@ -33,11 +33,11 @@ import java.util.concurrent.TimeUnit;
 
 import org.openrdf.model.Value;
 
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.BDS;
-import com.bigdata.search.FullTextIndex;
-import com.bigdata.search.Hiterator;
-import com.bigdata.search.IHit;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.BDS;
+import org.embergraph.search.FullTextIndex;
+import org.embergraph.search.Hiterator;
+import org.embergraph.search.IHit;
 
 /**
  * Abstraction for the text indexer for RDF {@link Value}s allowing either the

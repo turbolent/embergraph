@@ -2,9 +2,9 @@ package org.embergraph.counters.linux;
 
 import java.util.UUID;
 
-import com.bigdata.counters.AbstractStatisticsCollector;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.PIDUtil;
+import org.embergraph.counters.AbstractStatisticsCollector;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.PIDUtil;
 
 /**
  * Collection of host performance data using <code>vmstat</code> and

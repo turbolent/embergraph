@@ -31,10 +31,10 @@ import java.io.IOException;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.btree.raba.IRaba;
-import com.bigdata.btree.raba.ReadOnlyValuesRaba;
-import com.bigdata.htree.HTree;
-import com.bigdata.io.DataInputBuffer;
+import org.embergraph.btree.raba.IRaba;
+import org.embergraph.btree.raba.ReadOnlyValuesRaba;
+import org.embergraph.htree.HTree;
+import org.embergraph.io.DataInputBuffer;
 
 /**
  * Test suite for {@link MutableKeyBuffer}.

@@ -32,16 +32,16 @@ import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-import com.bigdata.btree.keys.KVO;
-import com.bigdata.btree.proc.IAsyncResultHandler;
-import com.bigdata.btree.proc.IKeyArrayIndexProcedure;
-import com.bigdata.mdi.PartitionLocator;
-import com.bigdata.relation.accesspath.BlockingBuffer;
-import com.bigdata.resources.StaleLocatorException;
-import com.bigdata.service.DataService;
-import com.bigdata.service.IDataService;
-import com.bigdata.service.Split;
-import com.bigdata.util.InnerCause;
+import org.embergraph.btree.keys.KVO;
+import org.embergraph.btree.proc.IAsyncResultHandler;
+import org.embergraph.btree.proc.IKeyArrayIndexProcedure;
+import org.embergraph.mdi.PartitionLocator;
+import org.embergraph.relation.accesspath.BlockingBuffer;
+import org.embergraph.resources.StaleLocatorException;
+import org.embergraph.service.DataService;
+import org.embergraph.service.IDataService;
+import org.embergraph.service.Split;
+import org.embergraph.util.InnerCause;
 
 /**
  * Class drains a {@link BlockingBuffer} writing on a specific index

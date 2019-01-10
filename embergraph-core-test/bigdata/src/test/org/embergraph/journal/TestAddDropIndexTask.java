@@ -32,9 +32,9 @@ import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.journal.Journal.Options;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.journal.Journal.Options;
 
 /**
  * Test suite for {@link RegisterIndexTask} and {@link DropIndexTask}.

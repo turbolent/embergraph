@@ -2,10 +2,10 @@ package org.embergraph.bop.engine;
 
 import java.util.UUID;
 
-import com.bigdata.bop.BOpEvaluationContext;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.fed.FederatedRunningQuery;
-import com.bigdata.service.ResourceService;
+import org.embergraph.bop.BOpEvaluationContext;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.fed.FederatedRunningQuery;
+import org.embergraph.service.ResourceService;
 
 /**
  * A message describing a chunk of intermediate results which are available for

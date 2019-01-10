@@ -29,7 +29,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
-import com.bigdata.quorum.Quorum;
+import org.embergraph.quorum.Quorum;
 
 /**
  * Helper class finds all joined and non-joined services for the quorum

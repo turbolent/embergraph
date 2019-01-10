@@ -5,8 +5,8 @@ import java.util.concurrent.TimeUnit;
 import org.openrdf.query.BooleanQuery;
 import org.openrdf.query.QueryEvaluationException;
 
-import com.bigdata.rdf.sail.webapp.client.IPreparedBooleanQuery;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepository;
+import org.embergraph.rdf.sail.webapp.client.IPreparedBooleanQuery;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository;
 
 public class BigdataRemoteBooleanQuery extends AbstractBigdataRemoteQuery implements BooleanQuery {
 

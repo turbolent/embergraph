@@ -29,10 +29,10 @@ package org.embergraph.btree.data;
 
 import java.nio.ByteBuffer;
 
-import com.bigdata.btree.IndexSegment;
-import com.bigdata.btree.Leaf;
-import com.bigdata.btree.Node;
-import com.bigdata.util.Bytes;
+import org.embergraph.btree.IndexSegment;
+import org.embergraph.btree.Leaf;
+import org.embergraph.btree.Node;
+import org.embergraph.util.Bytes;
 
 /**
  * Abstract base class for a read-only view of the data for B+Tree node or leaf.

@@ -33,20 +33,20 @@ import java.util.Iterator;
 import java.util.Properties;
 import java.util.UUID;
 
-import com.bigdata.btree.AbstractBTree;
-import com.bigdata.btree.AbstractBTreeTestCase;
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.IRangeQuery;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.isolation.IsolatedFusedView;
-import com.bigdata.btree.view.FusedView;
-import com.bigdata.btree.view.TestFusedView;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.Options;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.AbstractBTree;
+import org.embergraph.btree.AbstractBTreeTestCase;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.IRangeQuery;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.isolation.IsolatedFusedView;
+import org.embergraph.btree.view.FusedView;
+import org.embergraph.btree.view.TestFusedView;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.Options;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Test suite for {@link IsolatedFusedView}.

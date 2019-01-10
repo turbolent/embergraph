@@ -7,9 +7,9 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.Instrument;
-import com.bigdata.util.concurrent.IQueueCounters.IThreadPoolExecutorCounters;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.Instrument;
+import org.embergraph.util.concurrent.IQueueCounters.IThreadPoolExecutorCounters;
 
 /**
  * Class tracks a variety of information about a {@link ThreadPoolExecutor}

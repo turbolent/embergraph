@@ -27,12 +27,12 @@
 
 package org.embergraph.rdf.spo;
 
-import com.bigdata.rdf.inf.Justification;
-import com.bigdata.relation.accesspath.IBuffer;
-import com.bigdata.relation.accesspath.AbstractElementBuffer.InsertBuffer;
-import com.bigdata.relation.rule.Rule;
-import com.bigdata.relation.rule.eval.ISolution;
-import com.bigdata.relation.rule.eval.AbstractSolutionBuffer.InsertSolutionBuffer;
+import org.embergraph.rdf.inf.Justification;
+import org.embergraph.relation.accesspath.IBuffer;
+import org.embergraph.relation.accesspath.AbstractElementBuffer.InsertBuffer;
+import org.embergraph.relation.rule.Rule;
+import org.embergraph.relation.rule.eval.ISolution;
+import org.embergraph.relation.rule.eval.AbstractSolutionBuffer.InsertSolutionBuffer;
 
 /**
  * A buffer that is written on by {@link Rule}s.

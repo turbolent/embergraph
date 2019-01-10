@@ -29,11 +29,11 @@ package org.embergraph.rdf.sparql.ast;
 
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IConstraint;
-import com.bigdata.rdf.internal.constraints.SPARQLConstraint;
-import com.bigdata.rdf.internal.impl.literal.XSDBooleanIV;
-import com.bigdata.rdf.model.BigdataLiteral;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IConstraint;
+import org.embergraph.rdf.internal.constraints.SPARQLConstraint;
+import org.embergraph.rdf.internal.impl.literal.XSDBooleanIV;
+import org.embergraph.rdf.model.BigdataLiteral;
 
 /**
  * AST node for a HAVING clause.

@@ -23,14 +23,14 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.btree;
 
-import com.bigdata.btree.view.FusedView;
-import com.bigdata.counters.ICounterSetAccess;
-import com.bigdata.journal.AbstractJournal;
-import com.bigdata.journal.AbstractTask;
-import com.bigdata.journal.IAtomicStore;
-import com.bigdata.journal.ICommitter;
-import com.bigdata.journal.Name2Addr;
-import com.bigdata.journal.Name2Addr.Entry;
+import org.embergraph.btree.view.FusedView;
+import org.embergraph.counters.ICounterSetAccess;
+import org.embergraph.journal.AbstractJournal;
+import org.embergraph.journal.AbstractTask;
+import org.embergraph.journal.IAtomicStore;
+import org.embergraph.journal.ICommitter;
+import org.embergraph.journal.Name2Addr;
+import org.embergraph.journal.Name2Addr.Entry;
 
 /**
  * Interface in support of the {@link Checkpoint} record protocol.

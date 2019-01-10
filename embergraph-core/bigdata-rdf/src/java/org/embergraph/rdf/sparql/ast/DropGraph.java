@@ -31,7 +31,7 @@ import java.util.Map;
 
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-import com.bigdata.bop.BOp;
+import org.embergraph.bop.BOp;
 
 /**
  * The DROP operation removes the specified graph(s) from the Graph Store.

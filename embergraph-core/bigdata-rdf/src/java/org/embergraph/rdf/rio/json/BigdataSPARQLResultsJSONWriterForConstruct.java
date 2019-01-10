@@ -32,7 +32,7 @@ import org.openrdf.rio.RDFWriter;
 import org.openrdf.rio.RioSetting;
 import org.openrdf.rio.WriterConfig;
 
-import com.bigdata.rdf.ServiceProviderHook;
+import org.embergraph.rdf.ServiceProviderHook;
 
 /**
  * A TupleQueryResultWriter that writes query results in the <a

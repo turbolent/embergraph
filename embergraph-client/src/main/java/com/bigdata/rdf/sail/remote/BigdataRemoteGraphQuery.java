@@ -8,8 +8,8 @@ import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.rio.RDFHandler;
 import org.openrdf.rio.RDFHandlerException;
 
-import com.bigdata.rdf.sail.webapp.client.IPreparedGraphQuery;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepository;
+import org.embergraph.rdf.sail.webapp.client.IPreparedGraphQuery;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository;
 
 public class BigdataRemoteGraphQuery extends AbstractBigdataRemoteQuery implements GraphQuery {
 

@@ -29,11 +29,11 @@ package org.embergraph.service.ndx;
 
 import java.util.Iterator;
 
-import com.bigdata.btree.proc.BatchRemove.BatchRemoveConstructor;
-import com.bigdata.journal.IIndexStore;
-import com.bigdata.journal.ITx;
-import com.bigdata.resources.StaleLocatorException;
-import com.bigdata.service.IDataService;
+import org.embergraph.btree.proc.BatchRemove.BatchRemoveConstructor;
+import org.embergraph.journal.IIndexStore;
+import org.embergraph.journal.ITx;
+import org.embergraph.resources.StaleLocatorException;
+import org.embergraph.service.IDataService;
 
 import cutthecrap.utils.striterators.IFilter;
 

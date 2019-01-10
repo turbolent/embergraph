@@ -25,7 +25,7 @@ package org.embergraph.ha.msg;
 
 import java.io.Serializable;
 
-import com.bigdata.util.BytesUtil;
+import org.embergraph.util.BytesUtil;
 
 public class HALogDigestResponse implements IHALogDigestResponse, Serializable {
 

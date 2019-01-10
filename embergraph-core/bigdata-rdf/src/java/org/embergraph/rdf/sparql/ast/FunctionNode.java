@@ -7,9 +7,9 @@ import java.util.Map;
 
 import org.openrdf.model.URI;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.bop.NV;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.bop.NV;
 
 /**
  * AST node for anything which is neither a constant nor a variable, including

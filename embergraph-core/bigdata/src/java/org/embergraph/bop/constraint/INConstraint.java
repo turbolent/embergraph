@@ -29,13 +29,13 @@ package org.embergraph.bop.constraint;
 
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpBase;
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IConstraint;
-import com.bigdata.bop.IVariable;
-import com.bigdata.rdf.spo.InGraphBinarySearchFilter;
-import com.bigdata.rdf.spo.InGraphHashSetFilter;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpBase;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IConstraint;
+import org.embergraph.bop.IVariable;
+import org.embergraph.rdf.spo.InGraphBinarySearchFilter;
+import org.embergraph.rdf.spo.InGraphHashSetFilter;
 
 /**
  * Abstract base class for "IN" {@link IConstraint} implementations.

@@ -30,14 +30,14 @@ package org.embergraph.btree.proc;
 
 import java.io.Serializable;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.IRangeQuery;
-import com.bigdata.btree.ISimpleBTree;
-import com.bigdata.journal.IReadOnly;
-import com.bigdata.service.DataService;
-import com.bigdata.service.IDataService;
-import com.bigdata.service.ndx.ClientIndexView;
-import com.bigdata.sparse.SparseRowStore;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.IRangeQuery;
+import org.embergraph.btree.ISimpleBTree;
+import org.embergraph.journal.IReadOnly;
+import org.embergraph.service.DataService;
+import org.embergraph.service.IDataService;
+import org.embergraph.service.ndx.ClientIndexView;
+import org.embergraph.sparse.SparseRowStore;
 
 /**
  * An arbitrary procedure run against a single index.

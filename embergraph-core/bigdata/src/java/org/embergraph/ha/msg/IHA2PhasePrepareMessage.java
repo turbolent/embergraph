@@ -25,8 +25,8 @@ package org.embergraph.ha.msg;
 
 import java.util.concurrent.TimeUnit;
 
-import com.bigdata.ha.HACommitGlue;
-import com.bigdata.journal.IRootBlockView;
+import org.embergraph.ha.HACommitGlue;
+import org.embergraph.journal.IRootBlockView;
 
 /**
  * Message used by the {@link HACommitGlue} interface to indicate that the

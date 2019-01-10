@@ -10,8 +10,8 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.UUID;
 
-import com.bigdata.io.DataOutputBuffer;
-import com.bigdata.util.Bytes;
+import org.embergraph.io.DataOutputBuffer;
+import org.embergraph.util.Bytes;
 
 public class HASendState implements IHASendState, Externalizable {
 

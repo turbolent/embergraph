@@ -2,9 +2,9 @@ package org.embergraph.bop.solutions;
 
 import java.util.Comparator;
 
-import com.bigdata.bop.IBind;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IValueExpression;
+import org.embergraph.bop.IBind;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IValueExpression;
 
 /**
  * A comparator for binding sets.

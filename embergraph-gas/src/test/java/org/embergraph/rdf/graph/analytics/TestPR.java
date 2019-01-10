@@ -15,7 +15,7 @@
 */
 package org.embergraph.rdf.graph.analytics;
 
-import com.bigdata.rdf.graph.impl.sail.AbstractSailGraphTestCase;
+import org.embergraph.rdf.graph.impl.sail.AbstractSailGraphTestCase;
 
 /**
  * Test class for Breadth First Search (BFS) traversal.

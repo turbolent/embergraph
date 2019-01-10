@@ -34,12 +34,12 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.rio.IStatementBuffer;
-import com.bigdata.rdf.rio.StatementBuffer;
-import com.bigdata.rdf.rules.InferenceEngine.Options;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.relation.rule.Rule;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.rio.IStatementBuffer;
+import org.embergraph.rdf.rio.StatementBuffer;
+import org.embergraph.rdf.rules.InferenceEngine.Options;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.relation.rule.Rule;
 
 /**
  * Note: rdfs 6, 8, 10, 12, and 13 use the same base clase.

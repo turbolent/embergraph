@@ -31,8 +31,8 @@ import java.util.Iterator;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.journal.AbstractJournal.ISnapshotData;
-import com.bigdata.journal.AbstractJournal.ISnapshotEntry;
+import org.embergraph.journal.AbstractJournal.ISnapshotData;
+import org.embergraph.journal.AbstractJournal.ISnapshotEntry;
 
 /**
  * This utility class provide a method to write an InputStream to an OutputStream, merging with

@@ -1,10 +1,10 @@
 package org.embergraph.relation.accesspath;
 
-import com.bigdata.relation.IMutableRelation;
-import com.bigdata.relation.IRelation;
-import com.bigdata.striterator.ChunkedArrayIterator;
-import com.bigdata.striterator.IChunkedOrderedIterator;
-import com.bigdata.striterator.IKeyOrder;
+import org.embergraph.relation.IMutableRelation;
+import org.embergraph.relation.IRelation;
+import org.embergraph.striterator.ChunkedArrayIterator;
+import org.embergraph.striterator.IChunkedOrderedIterator;
+import org.embergraph.striterator.IKeyOrder;
 
 
 /**

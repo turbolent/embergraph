@@ -34,8 +34,8 @@ import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.rawstore.IAllocationContext;
-import com.bigdata.rawstore.IPSOutputStream;
+import org.embergraph.rawstore.IAllocationContext;
+import org.embergraph.rawstore.IPSOutputStream;
 
 
 /************************************************************************

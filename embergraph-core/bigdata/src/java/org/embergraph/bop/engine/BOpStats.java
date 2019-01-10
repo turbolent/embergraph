@@ -29,8 +29,8 @@ package org.embergraph.bop.engine;
 
 import java.io.Serializable;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.counters.CAT;
+import org.embergraph.bop.BOp;
+import org.embergraph.counters.CAT;
 
 /**
  * Statistics associated with the evaluation of a {@link BOp}. These statistics

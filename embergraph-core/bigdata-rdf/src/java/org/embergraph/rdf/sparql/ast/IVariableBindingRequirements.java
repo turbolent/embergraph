@@ -28,7 +28,7 @@ package org.embergraph.rdf.sparql.ast;
 
 import java.util.Set;
 
-import com.bigdata.bop.IVariable;
+import org.embergraph.bop.IVariable;
 
 /**
  * Interface describing constraints and desiderata w.r.t. variable bindings

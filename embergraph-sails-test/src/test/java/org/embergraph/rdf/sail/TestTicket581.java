@@ -32,9 +32,9 @@ import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.sail.SailGraphQuery;
 import org.openrdf.rio.RDFFormat;
 
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.store.BDS;
-import com.bigdata.rdf.vocab.NoVocabulary;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.store.BDS;
+import org.embergraph.rdf.vocab.NoVocabulary;
 
 /**
  * Unit test template for use in submission of bugs.

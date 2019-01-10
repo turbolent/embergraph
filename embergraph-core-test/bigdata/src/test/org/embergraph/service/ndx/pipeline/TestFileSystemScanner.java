@@ -38,10 +38,10 @@ import java.util.concurrent.FutureTask;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.relation.accesspath.BlockingBuffer;
-import com.bigdata.service.master.AbstractResourceScanner;
-import com.bigdata.service.master.FileSystemScanner;
-import com.bigdata.util.DaemonThreadFactory;
+import org.embergraph.relation.accesspath.BlockingBuffer;
+import org.embergraph.service.master.AbstractResourceScanner;
+import org.embergraph.service.master.FileSystemScanner;
+import org.embergraph.util.DaemonThreadFactory;
 
 /**
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

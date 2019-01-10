@@ -1,6 +1,6 @@
 package org.embergraph.service.ndx.pipeline;
 
-import com.bigdata.btree.keys.KVO;
+import org.embergraph.btree.keys.KVO;
 
 /**
  * NOP implementation.

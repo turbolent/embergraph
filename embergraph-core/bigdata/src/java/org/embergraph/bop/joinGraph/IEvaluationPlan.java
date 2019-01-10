@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.joinGraph;
 
-import com.bigdata.relation.rule.IRule;
+import org.embergraph.relation.rule.IRule;
 
 /**
  * Interface for evaluation orders.

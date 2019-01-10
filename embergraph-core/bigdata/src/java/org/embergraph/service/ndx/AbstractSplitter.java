@@ -33,12 +33,12 @@ import java.util.LinkedList;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.keys.KVO;
-import com.bigdata.mdi.IMetadataIndex;
-import com.bigdata.mdi.PartitionLocator;
-import com.bigdata.service.IMetadataService;
-import com.bigdata.service.Split;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.keys.KVO;
+import org.embergraph.mdi.IMetadataIndex;
+import org.embergraph.mdi.PartitionLocator;
+import org.embergraph.service.IMetadataService;
+import org.embergraph.service.Split;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Basic implementation - you only need to provide resolution for the

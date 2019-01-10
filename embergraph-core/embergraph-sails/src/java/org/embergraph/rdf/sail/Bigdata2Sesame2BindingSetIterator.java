@@ -36,13 +36,13 @@ import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.query.QueryInterruptedException;
 import org.openrdf.query.impl.MapBindingSet;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.engine.QueryTimeoutException;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.util.InnerCause;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.engine.QueryTimeoutException;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.util.InnerCause;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

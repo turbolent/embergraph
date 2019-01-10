@@ -28,9 +28,9 @@ import java.util.Iterator;
 
 import org.openrdf.model.URI;
 
-import com.bigdata.rdf.internal.impl.BlobIV;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValue;
+import org.embergraph.rdf.internal.impl.BlobIV;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValue;
 
 /**
  * IExtensionFactories are responsible for enumerating what extensions are

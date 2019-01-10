@@ -29,9 +29,9 @@ package org.embergraph.journal;
 
 import java.io.IOException;
 
-import com.bigdata.btree.isolation.IConflictResolver;
-import com.bigdata.service.IBigdataFederation;
-import com.bigdata.service.IDataService;
+import org.embergraph.btree.isolation.IConflictResolver;
+import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IDataService;
 
 /**
  * <p>

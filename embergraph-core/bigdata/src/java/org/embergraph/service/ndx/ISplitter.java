@@ -30,10 +30,10 @@ package org.embergraph.service.ndx;
 
 import java.util.LinkedList;
 
-import com.bigdata.btree.keys.KVO;
-import com.bigdata.mdi.IMetadataIndex;
-import com.bigdata.resources.StaleLocatorException;
-import com.bigdata.service.Split;
+import org.embergraph.btree.keys.KVO;
+import org.embergraph.mdi.IMetadataIndex;
+import org.embergraph.resources.StaleLocatorException;
+import org.embergraph.service.Split;
 
 /**
  * Interface for finding the {@link Split}s for an ordered set of unsigned

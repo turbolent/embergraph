@@ -6,12 +6,12 @@ import java.util.concurrent.Executors;
 import org.openrdf.query.GraphQueryResult;
 import org.openrdf.query.TupleQueryResult;
 
-import com.bigdata.BigdataStatics;
-import com.bigdata.util.httpd.Config;
-import com.bigdata.rdf.sail.webapp.client.DefaultClientConnectionManagerFactory;
-import com.bigdata.rdf.sail.webapp.client.IPreparedGraphQuery;
-import com.bigdata.rdf.sail.webapp.client.IPreparedTupleQuery;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepository;
+import org.embergraph.BigdataStatics;
+import org.embergraph.util.httpd.Config;
+import org.embergraph.rdf.sail.webapp.client.DefaultClientConnectionManagerFactory;
+import org.embergraph.rdf.sail.webapp.client.IPreparedGraphQuery;
+import org.embergraph.rdf.sail.webapp.client.IPreparedTupleQuery;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository;
 
 public class TestQuery {
 

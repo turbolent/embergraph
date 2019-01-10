@@ -36,18 +36,18 @@ import junit.framework.TestListener;
 import junit.framework.TestResult;
 import junit.textui.ResultPrinter;
 
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.Journal;
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.vocab.NoVocabulary;
-import com.bigdata.service.AbstractDistributedFederation;
-import com.bigdata.service.AbstractScaleOutClient;
-import com.bigdata.service.IBigdataFederation;
-import com.bigdata.service.ScaleOutClientFactory;
-import com.bigdata.util.Bytes;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.Journal;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.vocab.NoVocabulary;
+import org.embergraph.service.AbstractDistributedFederation;
+import org.embergraph.service.AbstractScaleOutClient;
+import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.ScaleOutClientFactory;
+import org.embergraph.util.Bytes;
 
 /**
  * A version of the test suite that is intended for local debugging and is NOT

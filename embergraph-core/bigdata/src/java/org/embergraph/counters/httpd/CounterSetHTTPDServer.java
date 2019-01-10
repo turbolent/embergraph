@@ -37,18 +37,18 @@ import java.util.regex.Pattern;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.AbstractBTree;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.ICounterSetAccess;
-import com.bigdata.counters.PeriodEnum;
-import com.bigdata.counters.query.QueryUtil;
-import com.bigdata.counters.render.XHTMLRenderer;
-import com.bigdata.service.Event;
-import com.bigdata.service.IService;
-import com.bigdata.util.InnerCause;
-import com.bigdata.util.httpd.AbstractHTTPD;
-import com.bigdata.util.httpd.Config;
-import com.bigdata.util.httpd.NanoHTTPD;
+import org.embergraph.btree.AbstractBTree;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.ICounterSetAccess;
+import org.embergraph.counters.PeriodEnum;
+import org.embergraph.counters.query.QueryUtil;
+import org.embergraph.counters.render.XHTMLRenderer;
+import org.embergraph.service.Event;
+import org.embergraph.service.IService;
+import org.embergraph.util.InnerCause;
+import org.embergraph.util.httpd.AbstractHTTPD;
+import org.embergraph.util.httpd.Config;
+import org.embergraph.util.httpd.NanoHTTPD;
 
 /**
  * An httpd server exposing a {@link CounterSet}. This may be used either for

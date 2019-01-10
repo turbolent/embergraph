@@ -27,9 +27,9 @@ package org.embergraph.sparse;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.util.BytesUtil;
 
 /**
  * A utility class that decodes a key in a {@link SparseRowStore} into the

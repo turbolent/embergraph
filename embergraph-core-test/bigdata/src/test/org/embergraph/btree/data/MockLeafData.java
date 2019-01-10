@@ -1,9 +1,9 @@
 package org.embergraph.btree.data;
 
-import com.bigdata.btree.AbstractBTree;
-import com.bigdata.btree.raba.IRaba;
-import com.bigdata.io.AbstractFixedByteArrayBuffer;
-import com.bigdata.rawstore.IRawStore;
+import org.embergraph.btree.AbstractBTree;
+import org.embergraph.btree.raba.IRaba;
+import org.embergraph.io.AbstractFixedByteArrayBuffer;
+import org.embergraph.rawstore.IRawStore;
 
 /**
  * Mock object for {@link ILeafData} used for unit tests.

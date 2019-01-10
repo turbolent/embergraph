@@ -33,8 +33,8 @@ import java.util.Properties;
 import junit.extensions.proxy.ProxyTestSuite;
 import junit.framework.Test;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.journal.Options;
+import org.embergraph.btree.BTree;
+import org.embergraph.journal.Options;
 
 /**
  * Proxy test suite for {@link LocalTripleStore} when the backing indices are

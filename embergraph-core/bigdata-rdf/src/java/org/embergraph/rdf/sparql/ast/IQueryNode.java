@@ -2,12 +2,12 @@ package org.embergraph.rdf.sparql.ast;
 
 import java.util.Properties;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpContext;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpUtility;
-import com.bigdata.rdf.sparql.ast.optimizers.ASTQueryHintOptimizer;
-import com.bigdata.rdf.sparql.ast.optimizers.IASTOptimizer;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpUtility;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTQueryHintOptimizer;
+import org.embergraph.rdf.sparql.ast.optimizers.IASTOptimizer;
 
 /**
  * This is the basic interface for any AST operator that appears in the query

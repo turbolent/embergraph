@@ -29,8 +29,8 @@ package org.embergraph.bop.solutions;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.bop.engine.BOpStats;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.bop.engine.BOpStats;
 
 /**
  * A utility class for logging type errors.

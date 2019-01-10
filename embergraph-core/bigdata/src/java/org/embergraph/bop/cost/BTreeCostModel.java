@@ -29,9 +29,9 @@ package org.embergraph.bop.cost;
 import java.io.Serializable;
 import java.text.NumberFormat;
 
-import com.bigdata.btree.AbstractBTree;
-import com.bigdata.btree.BTree;
-import com.bigdata.journal.Journal;
+import org.embergraph.btree.AbstractBTree;
+import org.embergraph.btree.BTree;
+import org.embergraph.journal.Journal;
 
 /**
  * A cost model for a range scan on a {@link BTree} backed by a {@link Journal}.

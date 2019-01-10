@@ -5,13 +5,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.openrdf.repository.RepositoryException;
 
-import com.bigdata.gom.om.ObjectManager;
-import com.bigdata.journal.ITx;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.BigdataSailRepository;
-import com.bigdata.rdf.sail.webapp.BigdataRDFContext;
-import com.bigdata.rdf.sail.webapp.BigdataRDFServlet;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.gom.om.ObjectManager;
+import org.embergraph.journal.ITx;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.BigdataSailRepository;
+import org.embergraph.rdf.sail.webapp.BigdataRDFContext;
+import org.embergraph.rdf.sail.webapp.BigdataRDFServlet;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * A simple utility class that can be initialized with a ServletRequest and used

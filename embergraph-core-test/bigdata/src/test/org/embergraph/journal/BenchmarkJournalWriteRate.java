@@ -39,14 +39,14 @@ import junit.framework.Test;
 import junit.framework.TestCase2;
 import junit.framework.TestSuite;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.testutil.ExperimentDriver;
-import com.bigdata.util.Bytes;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.testutil.ExperimentDriver;
+import org.embergraph.util.Bytes;
 
 /**
  * <p>

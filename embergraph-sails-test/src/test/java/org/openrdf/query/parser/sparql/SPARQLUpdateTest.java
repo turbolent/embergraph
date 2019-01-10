@@ -53,7 +53,7 @@ import org.openrdf.rio.RDFParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.bigdata.rdf.store.BD;
+import org.embergraph.rdf.store.BD;
 
 /**
  * Tests for SPARQL 1.1 Update functionality.

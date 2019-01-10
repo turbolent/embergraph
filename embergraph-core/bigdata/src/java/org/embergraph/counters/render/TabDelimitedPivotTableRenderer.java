@@ -4,11 +4,11 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.Arrays;
 
-import com.bigdata.counters.ICounter;
-import com.bigdata.counters.IHistoryEntry;
-import com.bigdata.counters.query.CSet;
-import com.bigdata.counters.query.HistoryTable;
-import com.bigdata.counters.query.PivotTable;
+import org.embergraph.counters.ICounter;
+import org.embergraph.counters.IHistoryEntry;
+import org.embergraph.counters.query.CSet;
+import org.embergraph.counters.query.HistoryTable;
+import org.embergraph.counters.query.PivotTable;
 
 /**
  * 

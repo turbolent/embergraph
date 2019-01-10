@@ -7,10 +7,10 @@ import junit.framework.TestCase;
 import org.apache.log4j.Logger;
 import org.openrdf.query.QueryLanguage;
 
-import com.bigdata.rdf.sail.BigdataSailRepositoryConnection;
-import com.bigdata.rdf.sail.BigdataSailTupleQuery;
-import com.bigdata.rdf.sparql.ast.QueryRoot;
-import com.bigdata.rdf.store.BDS;
+import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.rdf.sail.BigdataSailTupleQuery;
+import org.embergraph.rdf.sparql.ast.QueryRoot;
+import org.embergraph.rdf.store.BDS;
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Vertex;
 

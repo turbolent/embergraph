@@ -2,8 +2,8 @@ package org.embergraph.bop.bset;
 
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.PipelineOp;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.PipelineOp;
 
 /**
  * A version of {@link CopyOp} which is always evaluated on the query

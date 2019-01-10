@@ -25,7 +25,7 @@ package org.embergraph.ha.msg;
 
 import java.util.UUID;
 
-import com.bigdata.rawstore.IRawStore;
+import org.embergraph.rawstore.IRawStore;
 
 /**
  * Message used to request the digest of a backing store.

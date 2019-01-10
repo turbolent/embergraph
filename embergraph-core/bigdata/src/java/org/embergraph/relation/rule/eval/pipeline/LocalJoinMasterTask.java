@@ -6,16 +6,16 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.btree.UnisolatedReadWriteIndex;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.Journal;
-import com.bigdata.relation.accesspath.IAsynchronousIterator;
-import com.bigdata.relation.accesspath.IBuffer;
-import com.bigdata.relation.rule.IRule;
-import com.bigdata.relation.rule.eval.IJoinNexus;
-import com.bigdata.relation.rule.eval.ISolution;
-import com.bigdata.service.IBigdataFederation;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.btree.UnisolatedReadWriteIndex;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Journal;
+import org.embergraph.relation.accesspath.IAsynchronousIterator;
+import org.embergraph.relation.accesspath.IBuffer;
+import org.embergraph.relation.rule.IRule;
+import org.embergraph.relation.rule.eval.IJoinNexus;
+import org.embergraph.relation.rule.eval.ISolution;
+import org.embergraph.service.IBigdataFederation;
 
 /**
  * Implementation for local join execution on a {@link Journal}.

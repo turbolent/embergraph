@@ -29,7 +29,7 @@ package org.embergraph.rdf.sparql.ast.service;
 
 import org.openrdf.query.BindingSet;
 
-import com.bigdata.bop.IBindingSet;
+import org.embergraph.bop.IBindingSet;
 
 /**
  * Service options base class for with JVM services which handle openrdf

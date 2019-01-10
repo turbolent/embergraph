@@ -8,18 +8,18 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 
-import com.bigdata.rdf.internal.DTE;
-import com.bigdata.rdf.internal.DTEExtension;
-import com.bigdata.rdf.internal.IExtension;
-import com.bigdata.rdf.internal.ILexiconConfiguration;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.InlineLiteralIV;
-import com.bigdata.rdf.internal.VTE;
-import com.bigdata.rdf.internal.impl.AbstractIV;
-import com.bigdata.rdf.internal.impl.AbstractInlineExtensionIV;
-import com.bigdata.rdf.lexicon.LexiconRelation;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.model.BigdataURI;
+import org.embergraph.rdf.internal.DTE;
+import org.embergraph.rdf.internal.DTEExtension;
+import org.embergraph.rdf.internal.IExtension;
+import org.embergraph.rdf.internal.ILexiconConfiguration;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.InlineLiteralIV;
+import org.embergraph.rdf.internal.VTE;
+import org.embergraph.rdf.internal.impl.AbstractIV;
+import org.embergraph.rdf.internal.impl.AbstractInlineExtensionIV;
+import org.embergraph.rdf.lexicon.LexiconRelation;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.BigdataURI;
 
 /**
  * Class provides support for datatype {@link Literal}s for which an

@@ -42,22 +42,22 @@ import java.util.concurrent.TimeoutException;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.ILinearList;
-import com.bigdata.btree.IRangeQuery;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.IndexSegment;
-import com.bigdata.journal.ITransactionService;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.NoSuchIndexException;
-import com.bigdata.journal.TimestampUtility;
-import com.bigdata.mdi.IMetadataIndex;
-import com.bigdata.mdi.PartitionLocator;
-import com.bigdata.resources.StoreManager;
-import com.bigdata.service.AbstractScaleOutClient.MetadataIndexCachePolicy;
-import com.bigdata.service.AbstractScaleOutClient.Options;
-import com.bigdata.service.ndx.ClientIndexView;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.ILinearList;
+import org.embergraph.btree.IRangeQuery;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.IndexSegment;
+import org.embergraph.journal.ITransactionService;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.NoSuchIndexException;
+import org.embergraph.journal.TimestampUtility;
+import org.embergraph.mdi.IMetadataIndex;
+import org.embergraph.mdi.PartitionLocator;
+import org.embergraph.resources.StoreManager;
+import org.embergraph.service.AbstractScaleOutClient.MetadataIndexCachePolicy;
+import org.embergraph.service.AbstractScaleOutClient.Options;
+import org.embergraph.service.ndx.ClientIndexView;
+import org.embergraph.util.BytesUtil;
 
 import cutthecrap.utils.striterators.Resolver;
 import cutthecrap.utils.striterators.Striterator;

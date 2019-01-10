@@ -17,7 +17,7 @@ package org.embergraph.rdf.spo;
 
 import java.util.HashSet;
 
-import com.bigdata.rdf.internal.IV;
+import org.embergraph.rdf.internal.IV;
 
 /**
  * "IN" filter for the context position based on a native long hash set

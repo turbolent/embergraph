@@ -30,13 +30,13 @@ package org.embergraph.search;
 
 import java.util.Properties;
 
-import com.bigdata.btree.ITupleSerializer;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.btree.keys.StrengthEnum;
-import com.bigdata.search.FullTextIndex.Options;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.ITupleSerializer;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.btree.keys.StrengthEnum;
+import org.embergraph.search.FullTextIndex.Options;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Unit tests for key formation for the {@link FullTextIndex}.

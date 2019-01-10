@@ -7,7 +7,7 @@ import java.util.Iterator;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-import com.bigdata.rdf.vocab.VocabularyDecl;
+import org.embergraph.rdf.vocab.VocabularyDecl;
 
 public class OPVocabularyDecl implements VocabularyDecl {
 

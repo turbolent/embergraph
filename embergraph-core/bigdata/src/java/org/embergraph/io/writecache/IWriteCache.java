@@ -32,8 +32,8 @@ import java.nio.ByteBuffer;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import com.bigdata.journal.IAtomicStore;
-import com.bigdata.util.ChecksumError;
+import org.embergraph.journal.IAtomicStore;
+import org.embergraph.util.ChecksumError;
 
 /**
  * Interface for a write cache with read back and the capability to update

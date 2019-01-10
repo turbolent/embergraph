@@ -36,9 +36,9 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IVariable;
-import com.bigdata.rdf.sparql.ast.optimizers.ASTHashJoinOptimizer;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IVariable;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTHashJoinOptimizer;
 
 /**
  * Utility class for join analysis.

@@ -25,7 +25,7 @@ package org.embergraph.ha.msg;
 
 import java.util.UUID;
 
-import com.bigdata.journal.ITransactionService;
+import org.embergraph.journal.ITransactionService;
 
 /**
  * Message from a follower to the leader in which the follower specifies the

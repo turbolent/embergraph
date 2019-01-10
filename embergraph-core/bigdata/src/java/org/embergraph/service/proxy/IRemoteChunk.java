@@ -3,7 +3,7 @@ package org.embergraph.service.proxy;
 import java.io.Serializable;
 import java.rmi.Remote;
 
-import com.bigdata.striterator.IKeyOrder;
+import org.embergraph.striterator.IKeyOrder;
 
 /**
  * Abstraction for a chunk from a remote iterator. Instances of this interface

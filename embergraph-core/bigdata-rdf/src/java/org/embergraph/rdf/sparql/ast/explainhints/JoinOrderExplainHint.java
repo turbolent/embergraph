@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.sparql.ast.explainhints;
 
-import com.bigdata.rdf.sparql.ast.IGroupMemberNode;
+import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
 
 /**
  * Explain hint indicating potential problems caused by the join order within

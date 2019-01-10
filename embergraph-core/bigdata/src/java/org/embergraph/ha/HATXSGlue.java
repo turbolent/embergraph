@@ -28,10 +28,10 @@ import java.rmi.Remote;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.Future;
 
-import com.bigdata.ha.msg.IHAGatherReleaseTimeRequest;
-import com.bigdata.ha.msg.IHANotifyReleaseTimeRequest;
-import com.bigdata.ha.msg.IHANotifyReleaseTimeResponse;
-import com.bigdata.journal.ITransactionService;
+import org.embergraph.ha.msg.IHAGatherReleaseTimeRequest;
+import org.embergraph.ha.msg.IHANotifyReleaseTimeRequest;
+import org.embergraph.ha.msg.IHANotifyReleaseTimeResponse;
+import org.embergraph.journal.ITransactionService;
 
 /**
  * RMI interface for the {@link ITransactionService} for HA.

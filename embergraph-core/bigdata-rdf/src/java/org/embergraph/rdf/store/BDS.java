@@ -31,7 +31,7 @@ package org.embergraph.rdf.store;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-import com.bigdata.rdf.sparql.ast.eval.SliceServiceFactory;
+import org.embergraph.rdf.sparql.ast.eval.SliceServiceFactory;
 
 
 /**

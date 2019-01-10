@@ -32,8 +32,8 @@ import java.io.IOException;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.mdi.MetadataIndex;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.mdi.MetadataIndex;
 
 /**
  * Some unit tests for the {@link MetadataIndex} as accessed via the

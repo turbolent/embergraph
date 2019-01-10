@@ -37,9 +37,9 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.relation.accesspath.BlockingBuffer;
-import com.bigdata.relation.accesspath.ChunkMergeSortHelper;
-import com.bigdata.relation.accesspath.IAsynchronousIterator;
+import org.embergraph.relation.accesspath.BlockingBuffer;
+import org.embergraph.relation.accesspath.ChunkMergeSortHelper;
+import org.embergraph.relation.accesspath.IAsynchronousIterator;
 
 /**
  * Abstract implementation of a subtask for the {@link AbstractMasterTask}

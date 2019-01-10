@@ -33,9 +33,9 @@ import java.util.Properties;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
-import com.bigdata.rdf.store.DataLoader.ClosureEnum;
-import com.bigdata.rdf.store.DataLoader.CommitEnum;
-import com.bigdata.util.InnerCause;
+import org.embergraph.rdf.store.DataLoader.ClosureEnum;
+import org.embergraph.rdf.store.DataLoader.CommitEnum;
+import org.embergraph.util.InnerCause;
 
 /**
  * Test suite for the {@link DataLoader}.

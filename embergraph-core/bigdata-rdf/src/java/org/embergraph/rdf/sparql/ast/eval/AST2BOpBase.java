@@ -35,12 +35,12 @@ import org.apache.log4j.Logger;
 import org.openrdf.query.Dataset;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.cost.SubqueryCostReport;
-import com.bigdata.rdf.sparql.ast.ASTBase;
-import com.bigdata.rdf.sparql.ast.StatementPatternNode;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.cost.SubqueryCostReport;
+import org.embergraph.rdf.sparql.ast.ASTBase;
+import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 
 /**
  * Base class provides support for triples, sids, and quads mode joins which

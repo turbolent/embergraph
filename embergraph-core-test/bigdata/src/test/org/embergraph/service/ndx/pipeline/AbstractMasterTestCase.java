@@ -41,9 +41,9 @@ import java.util.concurrent.TimeUnit;
 import junit.framework.AssertionFailedError;
 import junit.framework.TestCase2;
 
-import com.bigdata.btree.keys.KVO;
-import com.bigdata.relation.accesspath.BlockingBuffer;
-import com.bigdata.util.DaemonThreadFactory;
+import org.embergraph.btree.keys.KVO;
+import org.embergraph.relation.accesspath.BlockingBuffer;
+import org.embergraph.util.DaemonThreadFactory;
 
 /**
  * Abstract base class for test suites for the {@link AbstractMasterTask} and

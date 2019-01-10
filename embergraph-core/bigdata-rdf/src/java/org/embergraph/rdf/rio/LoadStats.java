@@ -24,8 +24,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.rio;
 
-import com.bigdata.counters.CAT;
-import com.bigdata.rdf.inf.ClosureStats;
+import org.embergraph.counters.CAT;
+import org.embergraph.rdf.inf.ClosureStats;
 
 /**
  * Used to report statistics when loading data.

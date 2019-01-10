@@ -28,13 +28,13 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.rdf.internal.impl.literal.AbstractLiteralIV;
-import com.bigdata.rdf.internal.impl.literal.LiteralArrayIV;
-import com.bigdata.rdf.internal.impl.literal.LiteralExtensionIV;
-import com.bigdata.rdf.internal.impl.uri.URIExtensionIV;
-import com.bigdata.rdf.internal.impl.uri.VocabURIByteIV;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
+import org.embergraph.rdf.internal.impl.literal.LiteralArrayIV;
+import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
+import org.embergraph.rdf.internal.impl.uri.URIExtensionIV;
+import org.embergraph.rdf.internal.impl.uri.VocabURIByteIV;
 
 /**
  * Encode/decode unit tests for {@link LiteralArrayIV}.

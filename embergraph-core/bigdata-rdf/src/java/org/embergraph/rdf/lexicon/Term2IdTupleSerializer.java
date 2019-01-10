@@ -34,14 +34,14 @@ import java.util.Properties;
 
 import org.openrdf.model.Value;
 
-import com.bigdata.btree.DefaultTupleSerializer;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.keys.DefaultKeyBuilderFactory;
-import com.bigdata.btree.keys.IKeyBuilderFactory;
-import com.bigdata.io.ByteArrayBuffer;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.IVUtility;
-import com.bigdata.rdf.internal.impl.TermId;
+import org.embergraph.btree.DefaultTupleSerializer;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.keys.DefaultKeyBuilderFactory;
+import org.embergraph.btree.keys.IKeyBuilderFactory;
+import org.embergraph.io.ByteArrayBuffer;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.IVUtility;
+import org.embergraph.rdf.internal.impl.TermId;
 
 /**
  * Handles the term:id index (forward mapping for the lexicon). The keys are

@@ -32,9 +32,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Iterator;
 
-import com.bigdata.btree.ResultSet;
-import com.bigdata.btree.proc.IIndexProcedure;
-import com.bigdata.io.ByteArrayBuffer;
+import org.embergraph.btree.ResultSet;
+import org.embergraph.btree.proc.IIndexProcedure;
+import org.embergraph.io.ByteArrayBuffer;
 
 /**
  * Interface for random access to a logical byte[][]s. This is primarily used

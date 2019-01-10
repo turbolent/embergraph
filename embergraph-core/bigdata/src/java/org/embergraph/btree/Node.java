@@ -38,19 +38,19 @@ import java.util.concurrent.atomic.AtomicReferenceArray;
 
 import org.apache.log4j.Level;
 
-import com.bigdata.BigdataStatics;
-import com.bigdata.btree.AbstractBTree.ChildMemoizer;
-import com.bigdata.btree.AbstractBTree.LoadChildRequest;
-import com.bigdata.btree.data.DefaultNodeCoder;
-import com.bigdata.btree.data.INodeData;
-import com.bigdata.btree.raba.IRaba;
-import com.bigdata.btree.raba.MutableKeyBuffer;
-import com.bigdata.io.AbstractFixedByteArrayBuffer;
-import com.bigdata.journal.Journal;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.util.BytesUtil;
-import com.bigdata.util.concurrent.LatchedExecutor;
-import com.bigdata.util.concurrent.Memoizer;
+import org.embergraph.BigdataStatics;
+import org.embergraph.btree.AbstractBTree.ChildMemoizer;
+import org.embergraph.btree.AbstractBTree.LoadChildRequest;
+import org.embergraph.btree.data.DefaultNodeCoder;
+import org.embergraph.btree.data.INodeData;
+import org.embergraph.btree.raba.IRaba;
+import org.embergraph.btree.raba.MutableKeyBuffer;
+import org.embergraph.io.AbstractFixedByteArrayBuffer;
+import org.embergraph.journal.Journal;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.util.BytesUtil;
+import org.embergraph.util.concurrent.LatchedExecutor;
+import org.embergraph.util.concurrent.Memoizer;
 
 import cutthecrap.utils.striterators.EmptyIterator;
 import cutthecrap.utils.striterators.Expander;

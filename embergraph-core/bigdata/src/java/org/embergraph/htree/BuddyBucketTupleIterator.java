@@ -2,13 +2,13 @@ package org.embergraph.htree;
 
 import java.util.NoSuchElementException;
 
-import com.bigdata.btree.AbstractTuple;
-import com.bigdata.btree.IRangeQuery;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.LeafTupleIterator;
-import com.bigdata.btree.raba.IRaba;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.AbstractTuple;
+import org.embergraph.btree.IRangeQuery;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.LeafTupleIterator;
+import org.embergraph.btree.raba.IRaba;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Iterator visits all tuples in a buddy bucket having the desired key. 

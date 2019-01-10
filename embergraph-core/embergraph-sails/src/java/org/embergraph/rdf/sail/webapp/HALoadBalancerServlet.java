@@ -40,18 +40,18 @@ import org.apache.log4j.Logger;
 import org.eclipse.jetty.client.api.Response;
 import org.eclipse.jetty.proxy.ProxyServlet;
 
-import com.bigdata.BigdataStatics;
-import com.bigdata.counters.CAT;
-import com.bigdata.journal.AbstractJournal;
-import com.bigdata.journal.IIndexManager;
-//import com.bigdata.journal.jini.ha.HAJournal;
-import com.bigdata.rdf.sail.webapp.lbs.DefaultHARequestURIRewriter;
-import com.bigdata.rdf.sail.webapp.lbs.IHALoadBalancerPolicy;
-import com.bigdata.rdf.sail.webapp.lbs.IHAPolicyLifeCycle;
-import com.bigdata.rdf.sail.webapp.lbs.IHARequestURIRewriter;
-import com.bigdata.rdf.sail.webapp.lbs.policy.NOPLBSPolicy;
-import com.bigdata.util.InnerCause;
-import com.bigdata.util.StackInfoReport;
+import org.embergraph.BigdataStatics;
+import org.embergraph.counters.CAT;
+import org.embergraph.journal.AbstractJournal;
+import org.embergraph.journal.IIndexManager;
+//import org.embergraph.journal.jini.ha.HAJournal;
+import org.embergraph.rdf.sail.webapp.lbs.DefaultHARequestURIRewriter;
+import org.embergraph.rdf.sail.webapp.lbs.IHALoadBalancerPolicy;
+import org.embergraph.rdf.sail.webapp.lbs.IHAPolicyLifeCycle;
+import org.embergraph.rdf.sail.webapp.lbs.IHARequestURIRewriter;
+import org.embergraph.rdf.sail.webapp.lbs.policy.NOPLBSPolicy;
+import org.embergraph.util.InnerCause;
+import org.embergraph.util.StackInfoReport;
 
 /**
  * The HA Load Balancer servlet provides a transparent proxy for requests

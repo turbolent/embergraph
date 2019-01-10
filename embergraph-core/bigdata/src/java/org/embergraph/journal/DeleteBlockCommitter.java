@@ -24,8 +24,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.journal;
 
-import com.bigdata.btree.IndexInconsistentError;
-import com.bigdata.rwstore.IRWStrategy;
+import org.embergraph.btree.IndexInconsistentError;
+import org.embergraph.rwstore.IRWStrategy;
 
 /**
  * Defines the callback object called on commit that enables the deferred 

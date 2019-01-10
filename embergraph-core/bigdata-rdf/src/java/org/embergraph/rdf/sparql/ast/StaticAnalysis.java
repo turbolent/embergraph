@@ -40,27 +40,27 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.openrdf.model.URI;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IConstraint;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.aggregate.IAggregate;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.constraints.INeedsMaterialization;
-import com.bigdata.rdf.internal.constraints.INeedsMaterialization.Requirement;
-import com.bigdata.rdf.internal.constraints.IPassesMaterialization;
-import com.bigdata.rdf.internal.impl.literal.FullyInlineTypedLiteralIV;
-import com.bigdata.rdf.sparql.ast.cache.CacheConnectionImpl;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpContext;
-import com.bigdata.rdf.sparql.ast.eval.IEvaluationContext;
-import com.bigdata.rdf.sparql.ast.optimizers.ASTBottomUpOptimizer;
-import com.bigdata.rdf.sparql.ast.optimizers.ASTLiftPreFiltersOptimizer;
-import com.bigdata.rdf.sparql.ast.optimizers.ASTOptimizerList;
-import com.bigdata.rdf.sparql.ast.service.ServiceNode;
-import com.bigdata.rdf.sparql.ast.ssets.ISolutionSetManager;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IConstraint;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.aggregate.IAggregate;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.constraints.INeedsMaterialization;
+import org.embergraph.rdf.internal.constraints.INeedsMaterialization.Requirement;
+import org.embergraph.rdf.internal.constraints.IPassesMaterialization;
+import org.embergraph.rdf.internal.impl.literal.FullyInlineTypedLiteralIV;
+import org.embergraph.rdf.sparql.ast.cache.CacheConnectionImpl;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
+import org.embergraph.rdf.sparql.ast.eval.IEvaluationContext;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTBottomUpOptimizer;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTLiftPreFiltersOptimizer;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTOptimizerList;
+import org.embergraph.rdf.sparql.ast.service.ServiceNode;
+import org.embergraph.rdf.sparql.ast.ssets.ISolutionSetManager;
 
 /**
  * Methods for static analysis of a query. There is one method which looks "up".

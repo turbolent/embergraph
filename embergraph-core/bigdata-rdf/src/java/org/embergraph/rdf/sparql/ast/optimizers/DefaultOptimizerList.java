@@ -35,13 +35,13 @@ import org.openrdf.query.algebra.evaluation.impl.IterativeEvaluationOptimizer;
 import org.openrdf.query.algebra.evaluation.impl.QueryModelNormalizer;
 import org.openrdf.query.algebra.evaluation.impl.SameTermFilterOptimizer;
 
-import com.bigdata.rdf.sparql.ast.FunctionRegistry;
-import com.bigdata.rdf.sparql.ast.QueryHints;
-import com.bigdata.rdf.sparql.ast.eval.ASTFulltextSearchOptimizer;
-import com.bigdata.rdf.sparql.ast.eval.ASTGeoSpatialSearchOptimizer;
-import com.bigdata.rdf.sparql.ast.eval.ASTSearchInSearchOptimizer;
-import com.bigdata.rdf.sparql.ast.eval.ASTSearchOptimizer;
-import com.bigdata.util.ClassPathUtil;
+import org.embergraph.rdf.sparql.ast.FunctionRegistry;
+import org.embergraph.rdf.sparql.ast.QueryHints;
+import org.embergraph.rdf.sparql.ast.eval.ASTFulltextSearchOptimizer;
+import org.embergraph.rdf.sparql.ast.eval.ASTGeoSpatialSearchOptimizer;
+import org.embergraph.rdf.sparql.ast.eval.ASTSearchInSearchOptimizer;
+import org.embergraph.rdf.sparql.ast.eval.ASTSearchOptimizer;
+import org.embergraph.util.ClassPathUtil;
 
 /**
  * Pre-populated list of the default optimizers.

@@ -32,17 +32,17 @@ import java.util.NoSuchElementException;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.AbstractTuple;
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.IRangeQuery;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.ITupleSerializer;
-import com.bigdata.btree.filter.TupleTransformer;
-import com.bigdata.btree.filter.LookaheadTupleFilter.ILookaheadTupleIterator;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.sparse.TPS.TPV;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.AbstractTuple;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.IRangeQuery;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.ITupleSerializer;
+import org.embergraph.btree.filter.TupleTransformer;
+import org.embergraph.btree.filter.LookaheadTupleFilter.ILookaheadTupleIterator;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.sparse.TPS.TPV;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Transforms an {@link ITupleIterator} reading directly on an {@link IIndex}

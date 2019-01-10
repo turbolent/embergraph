@@ -4,15 +4,15 @@ import java.lang.ref.SoftReference;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.BTreeCounters;
-import com.bigdata.btree.ILocalBTreeView;
-import com.bigdata.btree.ISimpleSplitHandler;
-import com.bigdata.btree.IndexSegment;
-import com.bigdata.mdi.IMetadataIndex;
-import com.bigdata.service.Event;
-import com.bigdata.service.Params;
-import com.bigdata.util.InnerCause;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.BTreeCounters;
+import org.embergraph.btree.ILocalBTreeView;
+import org.embergraph.btree.ISimpleSplitHandler;
+import org.embergraph.btree.IndexSegment;
+import org.embergraph.mdi.IMetadataIndex;
+import org.embergraph.service.Event;
+import org.embergraph.service.Params;
+import org.embergraph.util.InnerCause;
 
 /**
  * Adds additional metadata to a {@link BTreeMetadata} that deals with the index

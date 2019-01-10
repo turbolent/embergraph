@@ -29,7 +29,7 @@ package org.embergraph.bop.ap;
 
 import java.io.Serializable;
 
-import com.bigdata.bop.IElement;
+import org.embergraph.bop.IElement;
 
 /**
  * An element for the test {@link R relation}.

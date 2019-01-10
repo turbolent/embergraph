@@ -41,10 +41,10 @@ import java.util.UUID;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.journal.AbstractJournal;
-import com.bigdata.journal.FileMetadata;
-import com.bigdata.journal.Options;
-import com.bigdata.resources.StoreManager;
+import org.embergraph.journal.AbstractJournal;
+import org.embergraph.journal.FileMetadata;
+import org.embergraph.journal.Options;
+import org.embergraph.resources.StoreManager;
 
 /**
  * Utility methods for managing exlusive {@link FileLock}s and advisory locks

@@ -38,7 +38,7 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 
-import com.bigdata.rdf.store.IRawTripleStore;
+import org.embergraph.rdf.store.IRawTripleStore;
 
 /**
  * Interface strengthens the return types and adds some custom extensions.

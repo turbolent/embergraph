@@ -35,7 +35,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.relation.accesspath.BlockingBuffer;
+import org.embergraph.relation.accesspath.BlockingBuffer;
 
 /**
  * Abstract base class for the scanner for a mapped master job. The

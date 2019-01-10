@@ -3,7 +3,7 @@ package org.embergraph.bop.engine;
 import java.rmi.RemoteException;
 import java.util.UUID;
 
-import com.bigdata.bop.PipelineOp;
+import org.embergraph.bop.PipelineOp;
 
 /**
  * Interface for a client executing queries (the query controller).

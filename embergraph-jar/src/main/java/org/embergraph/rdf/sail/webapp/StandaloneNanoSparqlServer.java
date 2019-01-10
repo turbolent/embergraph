@@ -28,10 +28,10 @@ import java.util.Map;
 
 import org.eclipse.jetty.server.Server;
 
-import com.bigdata.Banner;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.TimestampUtility;
-import com.bigdata.util.httpd.Config;
+import org.embergraph.Banner;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.TimestampUtility;
+import org.embergraph.util.httpd.Config;
 
 /**
  * Utility class provides a simple SPARQL end point with a REST API.  

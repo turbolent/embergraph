@@ -31,9 +31,9 @@ import java.util.UUID;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.quorum.MockQuorumFixture.MockQuorum;
-import com.bigdata.quorum.MockQuorumFixture.MockQuorumMember;
-import com.bigdata.quorum.MockQuorumFixture.MockQuorum.MockQuorumActor;
+import org.embergraph.quorum.MockQuorumFixture.MockQuorum;
+import org.embergraph.quorum.MockQuorumFixture.MockQuorumMember;
+import org.embergraph.quorum.MockQuorumFixture.MockQuorum.MockQuorumActor;
 
 /**
  * Test suite for the {@link MockQuorumFixture}. This class is responsible for

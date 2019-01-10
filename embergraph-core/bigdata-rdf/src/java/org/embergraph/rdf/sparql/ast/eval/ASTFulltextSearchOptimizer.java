@@ -33,8 +33,8 @@ import java.util.Set;
 
 import org.openrdf.model.URI;
 
-import com.bigdata.rdf.sparql.ast.service.ServiceNode;
-import com.bigdata.service.fts.FTS;
+import org.embergraph.rdf.sparql.ast.service.ServiceNode;
+import org.embergraph.service.fts.FTS;
 
 /**
  * Translate {@link FTS#SEARCH} and related magic predicates into a

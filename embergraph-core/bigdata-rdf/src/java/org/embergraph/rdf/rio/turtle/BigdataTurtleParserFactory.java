@@ -10,7 +10,7 @@ import org.openrdf.rio.RDFParser;
 import org.openrdf.rio.RDFParserFactory;
 import org.openrdf.rio.turtle.TurtleParser;
 
-import com.bigdata.rdf.ServiceProviderHook;
+import org.embergraph.rdf.ServiceProviderHook;
 
 /**
  * An RDR-aware {@link RDFParserFactory} for Turtle parsers.

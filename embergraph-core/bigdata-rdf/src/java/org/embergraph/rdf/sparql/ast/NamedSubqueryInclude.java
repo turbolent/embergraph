@@ -34,9 +34,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IVariable;
-import com.bigdata.rdf.sparql.ast.eval.IEvaluationContext;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IVariable;
+import org.embergraph.rdf.sparql.ast.eval.IEvaluationContext;
 
 /**
  * An AST node which provides a reference in an {@link IGroupNode} and indicates

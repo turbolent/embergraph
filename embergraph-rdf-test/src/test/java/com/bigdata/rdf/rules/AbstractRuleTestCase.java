@@ -29,17 +29,17 @@ package com.bigdata.rdf.rules;
 
 
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.joinGraph.IEvaluationPlanFactory;
-import com.bigdata.bop.joinGraph.fast.DefaultEvaluationPlanFactory2;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.relation.accesspath.IElementFilter;
-import com.bigdata.relation.rule.IRule;
-import com.bigdata.relation.rule.eval.ActionEnum;
-import com.bigdata.relation.rule.eval.IJoinNexus;
-import com.bigdata.relation.rule.eval.ISolution;
-import com.bigdata.striterator.IChunkedOrderedIterator;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.joinGraph.IEvaluationPlanFactory;
+import org.embergraph.bop.joinGraph.fast.DefaultEvaluationPlanFactory2;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.relation.accesspath.IElementFilter;
+import org.embergraph.relation.rule.IRule;
+import org.embergraph.relation.rule.eval.ActionEnum;
+import org.embergraph.relation.rule.eval.IJoinNexus;
+import org.embergraph.relation.rule.eval.ISolution;
+import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /**
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

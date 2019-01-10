@@ -42,9 +42,9 @@ import java.util.zip.InflaterInputStream;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.IndexSegment;
-import com.bigdata.io.ByteBufferInputStream;
-import com.bigdata.io.ByteBufferOutputStream;
+import org.embergraph.btree.IndexSegment;
+import org.embergraph.io.ByteBufferInputStream;
+import org.embergraph.io.ByteBufferOutputStream;
 
 /**
  * Bulk data (de-)compressor used for leaves in {@link IndexSegment}s. The

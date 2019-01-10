@@ -34,12 +34,12 @@ import java.util.UUID;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.mdi.IMetadataIndex;
-import com.bigdata.mdi.MetadataIndex;
-import com.bigdata.mdi.PartitionLocator;
-import com.bigdata.rawstore.SimpleMemoryRawStore;
-import com.bigdata.service.Split;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.mdi.IMetadataIndex;
+import org.embergraph.mdi.MetadataIndex;
+import org.embergraph.mdi.PartitionLocator;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
+import org.embergraph.service.Split;
 
 /**
  * Unit tests for {@link ISplitter}.

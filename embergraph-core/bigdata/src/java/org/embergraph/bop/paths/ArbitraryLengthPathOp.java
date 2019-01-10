@@ -33,14 +33,14 @@ import java.util.concurrent.FutureTask;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpContext;
-import com.bigdata.bop.HashMapAnnotations;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.NV;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.solutions.JVMDistinctBindingSetsOp;
-import com.bigdata.rdf.sparql.ast.ArbitraryLengthPathNode.Annotations;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpContext;
+import org.embergraph.bop.HashMapAnnotations;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.NV;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.solutions.JVMDistinctBindingSetsOp;
+import org.embergraph.rdf.sparql.ast.ArbitraryLengthPathNode.Annotations;
 
 /**
  * @see {@link ArbitraryLengthPathTask}

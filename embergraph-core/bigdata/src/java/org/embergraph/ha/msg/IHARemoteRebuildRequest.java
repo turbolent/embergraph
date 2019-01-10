@@ -23,7 +23,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.ha.msg;
 
-import com.bigdata.ha.HAGlue;
+import org.embergraph.ha.HAGlue;
 
 /**
  * Message requesting disaster recovery of the service from the quorum

@@ -30,10 +30,10 @@ package org.embergraph.bop.solutions;
 
 import java.io.Serializable;
 
-import com.bigdata.bop.IBind;
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.bop.IVariable;
+import org.embergraph.bop.IBind;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.bop.IVariable;
 
 /**
  * A value expression and a direction flag for the ordering of the computed

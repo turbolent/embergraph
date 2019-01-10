@@ -33,15 +33,15 @@ import org.openrdf.query.Dataset;
 import org.openrdf.query.algebra.evaluation.QueryBindingSet;
 import org.openrdf.sail.SailException;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.journal.ITx;
-import com.bigdata.rdf.internal.IVCache;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.BigdataSailRepositoryConnection;
-import com.bigdata.rdf.sparql.ast.ASTContainer;
-import com.bigdata.rdf.store.BD;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.journal.ITx;
+import org.embergraph.rdf.internal.IVCache;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.rdf.sparql.ast.ASTContainer;
+import org.embergraph.rdf.store.BD;
 
 /**
  * Extended to expose the connection used to execute the SPARQL UPDATE request.

@@ -34,12 +34,12 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.rdf.internal.impl.TermId;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.store.AbstractTripleStore.Options;
-import com.bigdata.rdf.vocab.Vocabulary;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.rdf.internal.impl.TermId;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.store.AbstractTripleStore.Options;
+import org.embergraph.rdf.vocab.Vocabulary;
 
 /**
  * Interface for the internal representation of an RDF {@link Value} (the

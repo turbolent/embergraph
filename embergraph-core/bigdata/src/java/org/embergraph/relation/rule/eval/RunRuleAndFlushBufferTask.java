@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.relation.accesspath.IBuffer;
-import com.bigdata.relation.rule.IRule;
+import org.embergraph.relation.accesspath.IBuffer;
+import org.embergraph.relation.rule.IRule;
 
 /**
  * Helper class is used for sequential {@link IRule} step execution. It runs

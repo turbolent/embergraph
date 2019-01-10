@@ -30,23 +30,23 @@ package org.embergraph.service.ndx;
 
 import java.util.concurrent.Future;
 
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.UnisolatedReadWriteIndex;
-import com.bigdata.btree.keys.KVO;
-import com.bigdata.btree.proc.AbstractKeyArrayIndexProcedureConstructor;
-import com.bigdata.btree.proc.IKeyArrayIndexProcedure;
-import com.bigdata.btree.proc.IResultHandler;
-import com.bigdata.relation.accesspath.BlockingBuffer;
-import com.bigdata.relation.accesspath.IBlockingBuffer;
-import com.bigdata.relation.accesspath.IRunnableBuffer;
-import com.bigdata.service.AbstractFederation;
-import com.bigdata.service.IBigdataFederation;
-import com.bigdata.service.ILoadBalancerService;
-import com.bigdata.service.Split;
-import com.bigdata.service.ndx.pipeline.IDuplicateRemover;
-import com.bigdata.service.ndx.pipeline.IndexAsyncWriteStats;
-import com.bigdata.service.ndx.pipeline.KVOC;
-import com.bigdata.service.ndx.pipeline.KVOLatch;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.UnisolatedReadWriteIndex;
+import org.embergraph.btree.keys.KVO;
+import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedureConstructor;
+import org.embergraph.btree.proc.IKeyArrayIndexProcedure;
+import org.embergraph.btree.proc.IResultHandler;
+import org.embergraph.relation.accesspath.BlockingBuffer;
+import org.embergraph.relation.accesspath.IBlockingBuffer;
+import org.embergraph.relation.accesspath.IRunnableBuffer;
+import org.embergraph.service.AbstractFederation;
+import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.ILoadBalancerService;
+import org.embergraph.service.Split;
+import org.embergraph.service.ndx.pipeline.IDuplicateRemover;
+import org.embergraph.service.ndx.pipeline.IndexAsyncWriteStats;
+import org.embergraph.service.ndx.pipeline.KVOC;
+import org.embergraph.service.ndx.pipeline.KVOLatch;
 
 /**
  * Interface for asynchronous writes on scale-out indices. 

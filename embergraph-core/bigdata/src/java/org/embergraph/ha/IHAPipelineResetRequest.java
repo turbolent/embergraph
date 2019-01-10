@@ -25,7 +25,7 @@ package org.embergraph.ha;
 
 import java.util.UUID;
 
-import com.bigdata.ha.msg.IHAMessage;
+import org.embergraph.ha.msg.IHAMessage;
 
 /**
  * Message requesting a pipeline reset on a service.

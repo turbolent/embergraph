@@ -31,8 +31,8 @@ import java.util.Properties;
 import junit.extensions.proxy.ProxyTestSuite;
 import junit.framework.Test;
 
-import com.bigdata.rdf.sail.BigdataSail.Options;
-import com.bigdata.rdf.sail.sparql.TestVerifyAggregates;
+import org.embergraph.rdf.sail.BigdataSail.Options;
+import org.embergraph.rdf.sail.sparql.TestVerifyAggregates;
 
 /**
  * Test suite for the {@link BigdataSail} with statement identifiers enabled.

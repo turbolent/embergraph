@@ -35,8 +35,8 @@ import java.nio.ByteBuffer;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
-import com.bigdata.io.ByteBufferInputStream;
-import com.bigdata.io.ByteBufferOutputStream;
+import org.embergraph.io.ByteBufferInputStream;
+import org.embergraph.io.ByteBufferOutputStream;
 
 public class GZipCompressor implements IRecordCompressor {
 

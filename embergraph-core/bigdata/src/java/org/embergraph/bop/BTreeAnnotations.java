@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop;
 
-import com.bigdata.btree.BTree;
+import org.embergraph.btree.BTree;
 
 /**
  * Annotations for an operator using an {@link BTree}.

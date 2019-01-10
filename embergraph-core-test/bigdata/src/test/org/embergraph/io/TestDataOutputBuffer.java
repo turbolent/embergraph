@@ -31,7 +31,7 @@ import java.io.IOException;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.util.BytesUtil;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Test suite for {@link DataOutputBuffer}.

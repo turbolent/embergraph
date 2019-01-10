@@ -38,30 +38,30 @@ import java.util.concurrent.locks.Lock;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.cache.ConcurrentWeakValueCache;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.ha.HAGlue;
-import com.bigdata.ha.QuorumRead;
-import com.bigdata.ha.QuorumService;
-import com.bigdata.ha.msg.HARebuildRequest;
-import com.bigdata.ha.msg.IHALogRequest;
-import com.bigdata.ha.msg.IHARebuildRequest;
-import com.bigdata.ha.msg.IHAWriteMessage;
-import com.bigdata.io.IBufferAccess;
-import com.bigdata.io.writecache.WriteCacheService;
-import com.bigdata.journal.AbstractJournal.ISnapshotData;
-import com.bigdata.mdi.IResourceMetadata;
-import com.bigdata.quorum.Quorum;
-import com.bigdata.quorum.QuorumException;
-import com.bigdata.rawstore.AbstractRawStore;
-import com.bigdata.rawstore.IAddressManager;
-import com.bigdata.rawstore.IAllocationContext;
-import com.bigdata.rawstore.IPSOutputStream;
-import com.bigdata.rwstore.IRWStrategy;
-import com.bigdata.rwstore.IRawTx;
-import com.bigdata.rwstore.RWStore;
-import com.bigdata.rwstore.RWStore.StoreCounters;
-import com.bigdata.util.ChecksumError;
+import org.embergraph.cache.ConcurrentWeakValueCache;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.ha.HAGlue;
+import org.embergraph.ha.QuorumRead;
+import org.embergraph.ha.QuorumService;
+import org.embergraph.ha.msg.HARebuildRequest;
+import org.embergraph.ha.msg.IHALogRequest;
+import org.embergraph.ha.msg.IHARebuildRequest;
+import org.embergraph.ha.msg.IHAWriteMessage;
+import org.embergraph.io.IBufferAccess;
+import org.embergraph.io.writecache.WriteCacheService;
+import org.embergraph.journal.AbstractJournal.ISnapshotData;
+import org.embergraph.mdi.IResourceMetadata;
+import org.embergraph.quorum.Quorum;
+import org.embergraph.quorum.QuorumException;
+import org.embergraph.rawstore.AbstractRawStore;
+import org.embergraph.rawstore.IAddressManager;
+import org.embergraph.rawstore.IAllocationContext;
+import org.embergraph.rawstore.IPSOutputStream;
+import org.embergraph.rwstore.IRWStrategy;
+import org.embergraph.rwstore.IRawTx;
+import org.embergraph.rwstore.RWStore;
+import org.embergraph.rwstore.RWStore.StoreCounters;
+import org.embergraph.util.ChecksumError;
 
 /**
  * A highly scalable persistent {@link IBufferStrategy} wrapping the

@@ -37,8 +37,8 @@ import java.io.InputStream;
 import java.io.ObjectInput;
 import java.io.OutputStream;
 
-import com.bigdata.io.compression.IUnicodeCompressor;
-import com.bigdata.journal.Name2Addr;
+import org.embergraph.io.compression.IUnicodeCompressor;
+import org.embergraph.journal.Name2Addr;
 
 /**
  * Fast special purpose serialization onto a managed byte[] buffer conforming to

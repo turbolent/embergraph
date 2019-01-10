@@ -28,14 +28,14 @@ import java.util.UUID;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.rdf.sail.BigdataSailRepositoryConnection;
-import com.bigdata.rdf.sail.model.RunningQuery;
-import com.bigdata.rdf.sail.remote.BigdataSailFactory;
-import com.bigdata.rdf.sail.remote.BigdataSailRemoteRepository;
-import com.bigdata.rdf.sail.remote.BigdataSailRemoteRepositoryConnection;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepository;
-import com.bigdata.rdf.sparql.ast.ASTContainer;
-import com.bigdata.rdf.sparql.ast.QueryType;
+import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.rdf.sail.model.RunningQuery;
+import org.embergraph.rdf.sail.remote.BigdataSailFactory;
+import org.embergraph.rdf.sail.remote.BigdataSailRemoteRepository;
+import org.embergraph.rdf.sail.remote.BigdataSailRemoteRepositoryConnection;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository;
+import org.embergraph.rdf.sparql.ast.ASTContainer;
+import org.embergraph.rdf.sparql.ast.QueryType;
 import com.tinkerpop.blueprints.Features;
 
 /**

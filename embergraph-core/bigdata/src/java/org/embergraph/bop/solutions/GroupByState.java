@@ -35,15 +35,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.IBind;
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IConstraint;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.bop.IValueExpressionConstraint;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.aggregate.IAggregate;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.IBind;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IConstraint;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.bop.IValueExpressionConstraint;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.aggregate.IAggregate;
 
 /**
  * An object which encapsulates the validation and state of an aggregation

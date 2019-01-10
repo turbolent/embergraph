@@ -29,12 +29,12 @@ package com.bigdata.rdf.spo;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.io.SerializerUtil;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.VTE;
-import com.bigdata.rdf.internal.impl.TermId;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.StatementEnum;
+import org.embergraph.io.SerializerUtil;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.VTE;
+import org.embergraph.rdf.internal.impl.TermId;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.StatementEnum;
 
 /**
  * Test suite for the {@link SPO} class.

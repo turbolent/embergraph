@@ -27,8 +27,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.hints;
 
-import com.bigdata.bop.BufferAnnotations;
-import com.bigdata.rdf.sparql.ast.QueryHints;
+import org.embergraph.bop.BufferAnnotations;
+import org.embergraph.rdf.sparql.ast.QueryHints;
 
 /**
  * This is identical to the {@link BufferChunkCapacityHint}, but it is accessed

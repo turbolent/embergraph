@@ -33,24 +33,24 @@ import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
-import com.bigdata.btree.AbstractBTreeTestCase;
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.IndexSegment;
-import com.bigdata.btree.IndexSegmentStore;
-import com.bigdata.btree.keys.TestKeyBuilder;
-import com.bigdata.btree.proc.IIndexProcedure;
-import com.bigdata.btree.proc.BatchInsert.BatchInsertConstructor;
-import com.bigdata.journal.AbstractJournal;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.IndexProcedureTask;
-import com.bigdata.journal.RegisterIndexTask;
-import com.bigdata.mdi.IResourceMetadata;
-import com.bigdata.mdi.IndexPartitionCause;
-import com.bigdata.mdi.LocalPartitionMetadata;
-import com.bigdata.mdi.MetadataIndex;
-import com.bigdata.rawstore.SimpleMemoryRawStore;
+import org.embergraph.btree.AbstractBTreeTestCase;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.IndexSegment;
+import org.embergraph.btree.IndexSegmentStore;
+import org.embergraph.btree.keys.TestKeyBuilder;
+import org.embergraph.btree.proc.IIndexProcedure;
+import org.embergraph.btree.proc.BatchInsert.BatchInsertConstructor;
+import org.embergraph.journal.AbstractJournal;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.IndexProcedureTask;
+import org.embergraph.journal.RegisterIndexTask;
+import org.embergraph.mdi.IResourceMetadata;
+import org.embergraph.mdi.IndexPartitionCause;
+import org.embergraph.mdi.LocalPartitionMetadata;
+import org.embergraph.mdi.MetadataIndex;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /**
  * Basic test of compacting merge for an index partition on overflow.

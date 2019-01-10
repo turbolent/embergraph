@@ -38,26 +38,26 @@ import java.util.Set;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.bop.ap.Predicate;
-import com.bigdata.bop.constraint.EQ;
-import com.bigdata.bop.constraint.EQConstant;
-import com.bigdata.bop.constraint.INBinarySearch;
-import com.bigdata.bop.constraint.NE;
-import com.bigdata.bop.constraint.NEConstant;
-import com.bigdata.bop.constraint.OR;
-import com.bigdata.rdf.internal.constraints.AndBOp;
-import com.bigdata.rdf.internal.constraints.CompareBOp;
-import com.bigdata.rdf.internal.constraints.EBVBOp;
-import com.bigdata.rdf.internal.constraints.IsBoundBOp;
-import com.bigdata.rdf.internal.constraints.IsInlineBOp;
-import com.bigdata.rdf.internal.constraints.IsLiteralBOp;
-import com.bigdata.rdf.internal.constraints.MathBOp;
-import com.bigdata.rdf.internal.constraints.NotBOp;
-import com.bigdata.rdf.internal.constraints.OrBOp;
-import com.bigdata.rdf.internal.constraints.SameTermBOp;
-import com.bigdata.rdf.rules.RejectAnythingSameAsItself;
-import com.bigdata.rdf.spo.SPOPredicate;
-import com.bigdata.rdf.spo.SPOStarJoin;
+import org.embergraph.bop.ap.Predicate;
+import org.embergraph.bop.constraint.EQ;
+import org.embergraph.bop.constraint.EQConstant;
+import org.embergraph.bop.constraint.INBinarySearch;
+import org.embergraph.bop.constraint.NE;
+import org.embergraph.bop.constraint.NEConstant;
+import org.embergraph.bop.constraint.OR;
+import org.embergraph.rdf.internal.constraints.AndBOp;
+import org.embergraph.rdf.internal.constraints.CompareBOp;
+import org.embergraph.rdf.internal.constraints.EBVBOp;
+import org.embergraph.rdf.internal.constraints.IsBoundBOp;
+import org.embergraph.rdf.internal.constraints.IsInlineBOp;
+import org.embergraph.rdf.internal.constraints.IsLiteralBOp;
+import org.embergraph.rdf.internal.constraints.MathBOp;
+import org.embergraph.rdf.internal.constraints.NotBOp;
+import org.embergraph.rdf.internal.constraints.OrBOp;
+import org.embergraph.rdf.internal.constraints.SameTermBOp;
+import org.embergraph.rdf.rules.RejectAnythingSameAsItself;
+import org.embergraph.rdf.spo.SPOPredicate;
+import org.embergraph.rdf.spo.SPOStarJoin;
 
 /**
  * Unit tests for the existence of the required deep copy semantics for

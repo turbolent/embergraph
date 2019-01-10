@@ -37,22 +37,22 @@ import java.util.UUID;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.Journal.Options;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.relation.AbstractRelation;
-import com.bigdata.relation.AbstractResource;
-import com.bigdata.service.IBigdataFederation;
-import com.bigdata.striterator.IChunkedOrderedIterator;
-import com.bigdata.striterator.IKeyOrder;
-import com.bigdata.util.NT;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.Journal.Options;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.relation.AbstractRelation;
+import org.embergraph.relation.AbstractResource;
+import org.embergraph.service.IBigdataFederation;
+import org.embergraph.striterator.IChunkedOrderedIterator;
+import org.embergraph.striterator.IKeyOrder;
+import org.embergraph.util.NT;
 
 /**
  * Test suite for location relations, etc.

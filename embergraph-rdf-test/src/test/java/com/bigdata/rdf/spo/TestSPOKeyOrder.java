@@ -32,19 +32,19 @@ import java.util.Iterator;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.NV;
-import com.bigdata.bop.Var;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.btree.keys.SuccessorUtil;
-import com.bigdata.io.SerializerUtil;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.VTE;
-import com.bigdata.test.MockTermIdFactory;
-import com.bigdata.util.Bytes;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.NV;
+import org.embergraph.bop.Var;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.btree.keys.SuccessorUtil;
+import org.embergraph.io.SerializerUtil;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.VTE;
+import org.embergraph.test.MockTermIdFactory;
+import org.embergraph.util.Bytes;
+import org.embergraph.util.BytesUtil;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

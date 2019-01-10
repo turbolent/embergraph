@@ -34,7 +34,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import com.bigdata.journal.ICommitter;
+import org.embergraph.journal.ICommitter;
 
 /**
  * Base class for managing read/write locks for unisolated {@link ICommitter}s.

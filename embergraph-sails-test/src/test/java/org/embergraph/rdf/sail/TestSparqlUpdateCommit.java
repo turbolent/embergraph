@@ -29,8 +29,8 @@ package org.embergraph.rdf.sail;
 import org.apache.log4j.Logger;
 import org.openrdf.query.QueryLanguage;
 
-import com.bigdata.rdf.changesets.IChangeLog;
-import com.bigdata.rdf.changesets.IChangeRecord;
+import org.embergraph.rdf.changesets.IChangeLog;
+import org.embergraph.rdf.changesets.IChangeRecord;
 
 /**
  */

@@ -32,7 +32,7 @@ import org.openrdf.model.ValueFactory;
 import org.openrdf.model.impl.ValueFactoryImpl;
 import org.openrdf.model.vocabulary.RDFS;
 
-import com.bigdata.rdf.internal.XSD;
+import org.embergraph.rdf.internal.XSD;
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Element;
 

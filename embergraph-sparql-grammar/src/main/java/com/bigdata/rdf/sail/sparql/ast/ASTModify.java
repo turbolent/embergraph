@@ -2,14 +2,14 @@
 /* JavaCCOptions:MULTI=true,NODE_USES_PARSER=false,VISITOR=true,TRACK_TOKENS=false,NODE_PREFIX=AST,NODE_EXTENDS=,NODE_FACTORY=,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 package com.bigdata.rdf.sail.sparql.ast;
 
-import com.bigdata.rdf.sail.sparql.ast.ASTDeleteClause;
-import com.bigdata.rdf.sail.sparql.ast.ASTGraphPatternGroup;
-import com.bigdata.rdf.sail.sparql.ast.ASTIRI;
-import com.bigdata.rdf.sail.sparql.ast.ASTInsertClause;
-import com.bigdata.rdf.sail.sparql.ast.ASTUpdate;
-import com.bigdata.rdf.sail.sparql.ast.SyntaxTreeBuilder;
-import com.bigdata.rdf.sail.sparql.ast.SyntaxTreeBuilderVisitor;
-import com.bigdata.rdf.sail.sparql.ast.VisitorException;
+import org.embergraph.rdf.sail.sparql.ast.ASTDeleteClause;
+import org.embergraph.rdf.sail.sparql.ast.ASTGraphPatternGroup;
+import org.embergraph.rdf.sail.sparql.ast.ASTIRI;
+import org.embergraph.rdf.sail.sparql.ast.ASTInsertClause;
+import org.embergraph.rdf.sail.sparql.ast.ASTUpdate;
+import org.embergraph.rdf.sail.sparql.ast.SyntaxTreeBuilder;
+import org.embergraph.rdf.sail.sparql.ast.SyntaxTreeBuilderVisitor;
+import org.embergraph.rdf.sail.sparql.ast.VisitorException;
 
 public
 class ASTModify extends ASTUpdate {

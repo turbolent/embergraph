@@ -1,7 +1,7 @@
 package org.embergraph.bop.fed.shards;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.mdi.PartitionLocator;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.mdi.PartitionLocator;
 
 /**
  * FIXME Implement {@link Algorithm_GroupByLocatorScan}.

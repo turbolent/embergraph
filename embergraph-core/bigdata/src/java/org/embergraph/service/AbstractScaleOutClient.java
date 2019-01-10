@@ -30,8 +30,8 @@ package org.embergraph.service;
 
 import java.util.Properties;
 
-import com.bigdata.mdi.IMetadataIndex;
-import com.bigdata.mdi.PartitionLocator;
+import org.embergraph.mdi.IMetadataIndex;
+import org.embergraph.mdi.PartitionLocator;
 
 /**
  * Client class for {@link AbstractScaleOutFederation}s.

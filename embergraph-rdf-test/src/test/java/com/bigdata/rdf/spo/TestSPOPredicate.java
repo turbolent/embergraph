@@ -30,17 +30,17 @@ package com.bigdata.rdf.spo;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.NV;
-import com.bigdata.bop.Var;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.VTE;
-import com.bigdata.rdf.internal.impl.BlobIV;
-import com.bigdata.rdf.lexicon.BlobsIndexHelper;
-import com.bigdata.test.MockTermIdFactory;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.NV;
+import org.embergraph.bop.Var;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.VTE;
+import org.embergraph.rdf.internal.impl.BlobIV;
+import org.embergraph.rdf.lexicon.BlobsIndexHelper;
+import org.embergraph.test.MockTermIdFactory;
 
 /**
  * Test suite for {@link SPOPredicate}.

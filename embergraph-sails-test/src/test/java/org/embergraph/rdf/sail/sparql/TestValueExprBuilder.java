@@ -32,21 +32,21 @@ import java.util.Map;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-import com.bigdata.bop.aggregate.AggregateBase;
-import com.bigdata.rdf.sail.sparql.ast.ParseException;
-import com.bigdata.rdf.sail.sparql.ast.TokenMgrError;
-import com.bigdata.rdf.sparql.AbstractBigdataExprBuilderTestCase;
-import com.bigdata.rdf.sparql.ast.AssignmentNode;
-import com.bigdata.rdf.sparql.ast.ConstantNode;
-import com.bigdata.rdf.sparql.ast.FunctionNode;
-import com.bigdata.rdf.sparql.ast.FunctionRegistry;
-import com.bigdata.rdf.sparql.ast.JoinGroupNode;
-import com.bigdata.rdf.sparql.ast.ProjectionNode;
-import com.bigdata.rdf.sparql.ast.QueryRoot;
-import com.bigdata.rdf.sparql.ast.QueryType;
-import com.bigdata.rdf.sparql.ast.StatementPatternNode;
-import com.bigdata.rdf.sparql.ast.ValueExpressionNode;
-import com.bigdata.rdf.sparql.ast.VarNode;
+import org.embergraph.bop.aggregate.AggregateBase;
+import org.embergraph.rdf.sail.sparql.ast.ParseException;
+import org.embergraph.rdf.sail.sparql.ast.TokenMgrError;
+import org.embergraph.rdf.sparql.AbstractBigdataExprBuilderTestCase;
+import org.embergraph.rdf.sparql.ast.AssignmentNode;
+import org.embergraph.rdf.sparql.ast.ConstantNode;
+import org.embergraph.rdf.sparql.ast.FunctionNode;
+import org.embergraph.rdf.sparql.ast.FunctionRegistry;
+import org.embergraph.rdf.sparql.ast.JoinGroupNode;
+import org.embergraph.rdf.sparql.ast.ProjectionNode;
+import org.embergraph.rdf.sparql.ast.QueryRoot;
+import org.embergraph.rdf.sparql.ast.QueryType;
+import org.embergraph.rdf.sparql.ast.StatementPatternNode;
+import org.embergraph.rdf.sparql.ast.ValueExpressionNode;
+import org.embergraph.rdf.sparql.ast.VarNode;
 
 /**
  * Test suite for {@link ValueExprBuilder}.

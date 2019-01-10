@@ -5,22 +5,22 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.engine.QueryEngine;
-import com.bigdata.bop.solutions.SortOp;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.journal.NoSuchIndexException;
-import com.bigdata.journal.TimestampUtility;
-import com.bigdata.mdi.IMetadataIndex;
-import com.bigdata.mdi.PartitionLocator;
-import com.bigdata.relation.IRelation;
-import com.bigdata.relation.accesspath.AbstractUnsynchronizedArrayBuffer;
-import com.bigdata.relation.accesspath.IBuffer;
-import com.bigdata.service.AbstractScaleOutFederation;
-import com.bigdata.service.IBigdataFederation;
-import com.bigdata.striterator.IKeyOrder;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.engine.QueryEngine;
+import org.embergraph.bop.solutions.SortOp;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.journal.NoSuchIndexException;
+import org.embergraph.journal.TimestampUtility;
+import org.embergraph.mdi.IMetadataIndex;
+import org.embergraph.mdi.PartitionLocator;
+import org.embergraph.relation.IRelation;
+import org.embergraph.relation.accesspath.AbstractUnsynchronizedArrayBuffer;
+import org.embergraph.relation.accesspath.IBuffer;
+import org.embergraph.service.AbstractScaleOutFederation;
+import org.embergraph.service.IBigdataFederation;
+import org.embergraph.striterator.IKeyOrder;
 
 /**
  * A stream of {@link IBindingSet} are mapped across the shards which will have

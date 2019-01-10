@@ -28,8 +28,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation.rule.eval;
 
-import com.bigdata.relation.rule.eval.pipeline.JoinMasterTask;
-import com.bigdata.relation.rule.eval.pipeline.JoinTask;
+import org.embergraph.relation.rule.eval.pipeline.JoinMasterTask;
+import org.embergraph.relation.rule.eval.pipeline.JoinTask;
 
 /**
  * Utility class that may be used to trace the chunks accepted for join

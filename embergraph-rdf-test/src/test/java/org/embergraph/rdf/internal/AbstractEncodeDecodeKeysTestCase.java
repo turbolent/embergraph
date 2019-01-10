@@ -31,12 +31,12 @@ import java.util.Arrays;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.io.SerializerUtil;
-import com.bigdata.rdf.lexicon.BlobsIndexHelper;
-import com.bigdata.test.MockTermIdFactory;
-import com.bigdata.util.BytesUtil.UnsignedByteArrayComparator;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.io.SerializerUtil;
+import org.embergraph.rdf.lexicon.BlobsIndexHelper;
+import org.embergraph.test.MockTermIdFactory;
+import org.embergraph.util.BytesUtil.UnsignedByteArrayComparator;
 
 /**
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

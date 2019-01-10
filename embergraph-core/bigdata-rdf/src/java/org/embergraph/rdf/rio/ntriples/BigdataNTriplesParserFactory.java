@@ -9,7 +9,7 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParser;
 import org.openrdf.rio.RDFParserFactory;
 
-import com.bigdata.rdf.ServiceProviderHook;
+import org.embergraph.rdf.ServiceProviderHook;
 
 /**
  * An RDR-aware {@link RDFParserFactory} for N-Triples parsers.

@@ -30,11 +30,11 @@ import java.util.Iterator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.PO;
-import com.bigdata.btree.data.IAbstractNodeData;
-import com.bigdata.cache.HardReferenceQueue;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.PO;
+import org.embergraph.btree.data.IAbstractNodeData;
+import org.embergraph.cache.HardReferenceQueue;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Persistence capable abstract base class for HTree pages.

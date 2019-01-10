@@ -50,16 +50,16 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.bigdata.rawstore.AbstractRawStoreTestCase;
-import com.bigdata.rawstore.IMRMW;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.testutil.ExperimentDriver;
-import com.bigdata.testutil.ExperimentDriver.IComparisonTest;
-import com.bigdata.testutil.ExperimentDriver.Result;
-import com.bigdata.util.Bytes;
-import com.bigdata.util.DaemonThreadFactory;
-import com.bigdata.util.InnerCause;
-import com.bigdata.util.NV;
+import org.embergraph.rawstore.AbstractRawStoreTestCase;
+import org.embergraph.rawstore.IMRMW;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.testutil.ExperimentDriver;
+import org.embergraph.testutil.ExperimentDriver.IComparisonTest;
+import org.embergraph.testutil.ExperimentDriver.Result;
+import org.embergraph.util.Bytes;
+import org.embergraph.util.DaemonThreadFactory;
+import org.embergraph.util.InnerCause;
+import org.embergraph.util.NV;
 
 /**
  * Test suite for MRMW (Multiple Readers, Multiple Writers) support.

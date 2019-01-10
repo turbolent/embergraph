@@ -32,21 +32,21 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bfs.BigdataFileSystem;
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.IRangeQuery;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.keys.CollatorEnum;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.ITimestampService;
-import com.bigdata.journal.Journal;
-import com.bigdata.btree.AbstractBTree;
-import com.bigdata.journal.TimestampUtility;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.relation.RelationSchema;
-import com.bigdata.service.ndx.IClientIndex;
+import org.embergraph.bfs.BigdataFileSystem;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.IRangeQuery;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.keys.CollatorEnum;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.ITimestampService;
+import org.embergraph.journal.Journal;
+import org.embergraph.btree.AbstractBTree;
+import org.embergraph.journal.TimestampUtility;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.relation.RelationSchema;
+import org.embergraph.service.ndx.IClientIndex;
 
 import cutthecrap.utils.striterators.Resolver;
 import cutthecrap.utils.striterators.Striterator;

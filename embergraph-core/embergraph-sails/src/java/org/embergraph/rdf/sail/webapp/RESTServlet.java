@@ -34,7 +34,7 @@ import org.apache.log4j.Logger;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-import com.bigdata.rdf.sail.webapp.client.MiniMime;
+import org.embergraph.rdf.sail.webapp.client.MiniMime;
 
 /**
  * Default dispatch pattern for a core REST API.

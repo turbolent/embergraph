@@ -33,13 +33,13 @@ import java.util.Properties;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.ITx;
-import com.bigdata.mdi.IMetadataIndex;
-import com.bigdata.mdi.PartitionLocator;
-import com.bigdata.resources.ResourceManager.Options;
-import com.bigdata.service.ndx.ClientIndexView;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.ITx;
+import org.embergraph.mdi.IMetadataIndex;
+import org.embergraph.mdi.PartitionLocator;
+import org.embergraph.resources.ResourceManager.Options;
+import org.embergraph.service.ndx.ClientIndexView;
 
 /**
  * Simple test verifies that a scale-out index is preserved across both

@@ -18,8 +18,8 @@ package org.embergraph.rdf.graph;
 import org.openrdf.model.Statement;
 import org.openrdf.model.Value;
 
-import com.bigdata.rdf.graph.analytics.CC;
-import com.bigdata.rdf.graph.impl.util.GASRunnerBase;
+import org.embergraph.rdf.graph.analytics.CC;
+import org.embergraph.rdf.graph.impl.util.GASRunnerBase;
 
 /**
  * Interface for options that are understood by the {@link IGASEngine} and which

@@ -23,7 +23,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.bop.controller;
 
-import com.bigdata.bop.join.SolutionSetHashJoinOp;
+import org.embergraph.bop.join.SolutionSetHashJoinOp;
 
 /**
  * Marker interface for named subquery evaluation. Solutions from the pipeline

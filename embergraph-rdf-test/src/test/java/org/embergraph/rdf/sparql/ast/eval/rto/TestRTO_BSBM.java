@@ -33,9 +33,9 @@ import java.util.Properties;
 
 import junit.framework.AssertionFailedError;
 
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sparql.ast.QueryHints;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sparql.ast.QueryHints;
 
 /**
  * Data driven test suite for the Runtime Query Optimizer (RTO) using BSBM data

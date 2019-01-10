@@ -36,13 +36,13 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.UUID;
 
-import com.bigdata.counters.AbstractStatisticsCollector;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.IResourceLockService;
-import com.bigdata.journal.ITransactionService;
-import com.bigdata.journal.ResourceLockService;
-import com.bigdata.journal.WriteExecutorService;
-import com.bigdata.service.EmbeddedClient.Options;
+import org.embergraph.counters.AbstractStatisticsCollector;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.IResourceLockService;
+import org.embergraph.journal.ITransactionService;
+import org.embergraph.journal.ResourceLockService;
+import org.embergraph.journal.WriteExecutorService;
+import org.embergraph.service.EmbeddedClient.Options;
 
 /**
  * An implementation that uses an embedded database rather than a distributed

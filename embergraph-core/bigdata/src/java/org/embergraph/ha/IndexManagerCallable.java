@@ -24,7 +24,7 @@
  */
 package org.embergraph.ha;
 
-import com.bigdata.journal.IIndexManager;
+import org.embergraph.journal.IIndexManager;
 
 @SuppressWarnings("serial")
 public abstract class IndexManagerCallable<T> implements

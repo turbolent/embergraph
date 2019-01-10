@@ -34,18 +34,18 @@ import java.util.Iterator;
 import java.util.Set;
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.IVariableOrConstant;
-import com.bigdata.bop.Var;
-import com.bigdata.bop.joinGraph.IEvaluationPlan;
-import com.bigdata.bop.joinGraph.IRangeCountFactory;
-import com.bigdata.journal.ITx;
-import com.bigdata.relation.rule.IRule;
-import com.bigdata.relation.rule.IAccessPathExpander;
-import com.bigdata.relation.rule.IStarJoin;
-import com.bigdata.relation.rule.eval.IJoinNexus;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.IVariableOrConstant;
+import org.embergraph.bop.Var;
+import org.embergraph.bop.joinGraph.IEvaluationPlan;
+import org.embergraph.bop.joinGraph.IRangeCountFactory;
+import org.embergraph.journal.ITx;
+import org.embergraph.relation.rule.IRule;
+import org.embergraph.relation.rule.IAccessPathExpander;
+import org.embergraph.relation.rule.IStarJoin;
+import org.embergraph.relation.rule.eval.IJoinNexus;
 
 /**
  * The evaluation order is determined by analysis of the propagation of

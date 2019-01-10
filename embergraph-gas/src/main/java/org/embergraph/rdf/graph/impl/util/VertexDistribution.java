@@ -25,7 +25,7 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.spi.LoggerFactory;
 import org.openrdf.model.Resource;
 
-import com.bigdata.rdf.graph.EdgesEnum;
+import org.embergraph.rdf.graph.EdgesEnum;
 
 /**
  * Utility class for sampling vertices from a graph.

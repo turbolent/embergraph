@@ -2,12 +2,12 @@ package org.embergraph.bop.fed.shards;
 
 import java.util.Arrays;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.mdi.PartitionLocator;
-import com.bigdata.striterator.IKeyOrder;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.mdi.PartitionLocator;
+import org.embergraph.striterator.IKeyOrder;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Helper class used to place the binding sets into order based on the

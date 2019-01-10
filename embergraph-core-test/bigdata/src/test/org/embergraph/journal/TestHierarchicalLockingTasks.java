@@ -30,9 +30,9 @@ package org.embergraph.journal;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.ILocalBTreeView;
-import com.bigdata.btree.IndexMetadata;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.ILocalBTreeView;
+import org.embergraph.btree.IndexMetadata;
 
 /**
  * Test suite for hierarchical locking of indices based on namespace prefixes.

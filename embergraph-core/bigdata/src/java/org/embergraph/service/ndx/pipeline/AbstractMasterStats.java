@@ -35,11 +35,11 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.bigdata.cache.ConcurrentWeakValueCache;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.Instrument;
-import com.bigdata.relation.accesspath.BlockingBuffer;
-import com.bigdata.resources.StaleLocatorException;
+import org.embergraph.cache.ConcurrentWeakValueCache;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.Instrument;
+import org.embergraph.relation.accesspath.BlockingBuffer;
+import org.embergraph.resources.StaleLocatorException;
 
 /**
  * Abstract base class providing statistics for the {@link AbstractMasterTask}

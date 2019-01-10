@@ -29,11 +29,11 @@ import static com.bigdata.rdf.sparql.ast.optimizers.AbstractOptimizerTestCase.He
 import static com.bigdata.rdf.sparql.ast.optimizers.AbstractOptimizerTestCase.HelperFlag.ZERO_OR_MORE;
 import static com.bigdata.rdf.sparql.ast.optimizers.AbstractOptimizerTestCase.HelperFlag.ZERO_OR_ONE;
 
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.sparql.ast.ArbitraryLengthPathNode;
-import com.bigdata.rdf.sparql.ast.GroupMemberNodeBase;
-import com.bigdata.rdf.sparql.ast.StatementPatternNode;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpContext;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.sparql.ast.ArbitraryLengthPathNode;
+import org.embergraph.rdf.sparql.ast.GroupMemberNodeBase;
+import org.embergraph.rdf.sparql.ast.StatementPatternNode;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /**
  * Trac733 shows some strange behavior, this test case is intended

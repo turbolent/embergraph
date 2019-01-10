@@ -33,7 +33,7 @@ import java.util.Properties;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.resources.ResourceManager.Options;
+import org.embergraph.resources.ResourceManager.Options;
 
 /**
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

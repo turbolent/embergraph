@@ -33,9 +33,9 @@ import java.util.Vector;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.gom.gpo.IGPO;
-import com.bigdata.gom.gpo.IGenericSkin;
-import com.bigdata.gom.gpo.ILinkSet;
+import org.embergraph.gom.gpo.IGPO;
+import org.embergraph.gom.gpo.IGenericSkin;
+import org.embergraph.gom.gpo.ILinkSet;
 
 /**
  * <p>Helper class provides a global (JVM wide) registery for {@link

@@ -31,8 +31,8 @@ import org.apache.http.conn.ClientConnectionManager;
 import org.eclipse.jetty.client.HttpClient;
 import org.openrdf.model.URI;
 
-import com.bigdata.bop.join.BaseJoinStats;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.bop.join.BaseJoinStats;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * Interface for the parameters used by a {@link ServiceFactory} to create a

@@ -27,8 +27,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree.data;
 
-import com.bigdata.btree.raba.codec.CanonicalHuffmanRabaCoder;
-import com.bigdata.btree.raba.codec.FrontCodedRabaCoder;
+import org.embergraph.btree.raba.codec.CanonicalHuffmanRabaCoder;
+import org.embergraph.btree.raba.codec.FrontCodedRabaCoder;
 
 /**
  * Test suite for the B+Tree {@link ILeafData} records (accessing coded data in

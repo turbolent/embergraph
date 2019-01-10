@@ -30,7 +30,7 @@ package org.embergraph.rdf.sparql.ast;
 import java.util.Iterator;
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
+import org.embergraph.bop.BOp;
 
 /**
  * Base class for AST nodes which model an ordered list of value expressions.

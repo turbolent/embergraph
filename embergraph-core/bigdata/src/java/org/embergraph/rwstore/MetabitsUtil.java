@@ -26,10 +26,10 @@ package org.embergraph.rwstore;
 import java.io.File;
 import java.util.Properties;
 
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.Journal.Options;
-import com.bigdata.journal.RWStrategy;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.Journal.Options;
+import org.embergraph.journal.RWStrategy;
 
 /**
  * A utility class to explicitly change the metabits storage to allow for

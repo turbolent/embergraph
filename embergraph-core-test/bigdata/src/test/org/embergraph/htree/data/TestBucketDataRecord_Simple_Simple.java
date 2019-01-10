@@ -27,8 +27,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.htree.data;
 
-import com.bigdata.btree.data.DefaultLeafCoder;
-import com.bigdata.btree.raba.codec.SimpleRabaCoder;
+import org.embergraph.btree.data.DefaultLeafCoder;
+import org.embergraph.btree.raba.codec.SimpleRabaCoder;
 
 /**
  * Test with simple coding for keys and values (no compression).

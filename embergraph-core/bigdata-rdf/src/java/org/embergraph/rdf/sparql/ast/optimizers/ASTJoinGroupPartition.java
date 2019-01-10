@@ -34,10 +34,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.bigdata.bop.IVariable;
-import com.bigdata.rdf.sparql.ast.GroupNodeVarBindingInfo;
-import com.bigdata.rdf.sparql.ast.GroupNodeVarBindingInfoMap;
-import com.bigdata.rdf.sparql.ast.IGroupMemberNode;
+import org.embergraph.bop.IVariable;
+import org.embergraph.rdf.sparql.ast.GroupNodeVarBindingInfo;
+import org.embergraph.rdf.sparql.ast.GroupNodeVarBindingInfoMap;
+import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
 
 /**
  * Partition of a join group, defined by a (possibly empty) list of

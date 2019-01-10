@@ -28,14 +28,14 @@ import java.util.UUID;
 
 import junit.framework.AssertionFailedError;
 
-import com.bigdata.btree.HTreeIndexMetadata;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rawstore.SimpleMemoryRawStore;
-import com.bigdata.rwstore.sector.MemStore;
-import com.bigdata.util.PseudoRandom;
+import org.embergraph.btree.HTreeIndexMetadata;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
+import org.embergraph.rwstore.sector.MemStore;
+import org.embergraph.util.PseudoRandom;
 
 /**
  * Unit tests for the close/checkpoint/reopen protocol designed to manage the

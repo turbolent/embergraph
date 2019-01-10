@@ -32,16 +32,16 @@ import java.util.UUID;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.isolation.IConflictResolver;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.Options;
-import com.bigdata.journal.ValidationError;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.isolation.IConflictResolver;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.Options;
+import org.embergraph.journal.ValidationError;
 
 /**
  * Tests of write-write conflict resolution.

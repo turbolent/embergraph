@@ -35,20 +35,20 @@ import junit.framework.TestCase2;
 
 import org.apache.log4j.Level;
 
-import com.bigdata.btree.AbstractTupleCursorTestCase;
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.DefaultTupleSerializer;
-import com.bigdata.btree.IRangeQuery;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.ITupleSerializer;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.TestTuple;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.btree.keys.StrengthEnum;
-import com.bigdata.rawstore.SimpleMemoryRawStore;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.AbstractTupleCursorTestCase;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.DefaultTupleSerializer;
+import org.embergraph.btree.IRangeQuery;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.ITupleSerializer;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.TestTuple;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.btree.keys.StrengthEnum;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Test suite for the {@link PrefixFilter}.

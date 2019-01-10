@@ -28,11 +28,11 @@
 
 package org.embergraph.btree;
 
-import com.bigdata.btree.view.FusedView;
-import com.bigdata.io.ByteArrayBuffer;
-import com.bigdata.io.DataInputBuffer;
-import com.bigdata.rawstore.IBlock;
-import com.bigdata.rawstore.IRawStore;
+import org.embergraph.btree.view.FusedView;
+import org.embergraph.io.ByteArrayBuffer;
+import org.embergraph.io.DataInputBuffer;
+import org.embergraph.rawstore.IBlock;
+import org.embergraph.rawstore.IRawStore;
 
 /**
  * Interface exposes more direct access to keys and values visited by an

@@ -27,9 +27,9 @@ import java.io.IOException;
 import java.util.UUID;
 import java.util.concurrent.BrokenBarrierException;
 
-import com.bigdata.service.IBigdataFederation;
-import com.bigdata.service.IDataService;
-import com.bigdata.service.ITxCommitProtocol;
+import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IDataService;
+import org.embergraph.service.ITxCommitProtocol;
 
 /**
  * Extended interface for distributed 2-phase transactions for an

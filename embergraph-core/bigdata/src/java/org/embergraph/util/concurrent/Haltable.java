@@ -44,11 +44,11 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.engine.QueryTimeoutException;
-import com.bigdata.relation.accesspath.BufferClosedException;
-import com.bigdata.relation.accesspath.IAsynchronousIterator;
-import com.bigdata.relation.accesspath.IBlockingBuffer;
-import com.bigdata.util.InnerCause;
+import org.embergraph.bop.engine.QueryTimeoutException;
+import org.embergraph.relation.accesspath.BufferClosedException;
+import org.embergraph.relation.accesspath.IAsynchronousIterator;
+import org.embergraph.relation.accesspath.IBlockingBuffer;
+import org.embergraph.util.InnerCause;
 
 /**
  * Abstract base class for tasks whose processing may be halted asynchronously.

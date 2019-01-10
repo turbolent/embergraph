@@ -4,16 +4,16 @@ import java.util.Iterator;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.counters.AbstractStatisticsCollector;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.ICounter;
-import com.bigdata.counters.ICounterSet;
-import com.bigdata.ganglia.GangliaMunge;
-import com.bigdata.ganglia.IGangliaMetricsCollector;
-import com.bigdata.ganglia.IGangliaMetricsReporter;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.service.IBigdataFederation;
-import com.bigdata.service.IFederationDelegate;
+import org.embergraph.counters.AbstractStatisticsCollector;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.ICounter;
+import org.embergraph.counters.ICounterSet;
+import org.embergraph.ganglia.GangliaMunge;
+import org.embergraph.ganglia.IGangliaMetricsCollector;
+import org.embergraph.ganglia.IGangliaMetricsReporter;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IFederationDelegate;
 
 /**
  * Reflects query engine metrics from the data server nodes to ganglia.

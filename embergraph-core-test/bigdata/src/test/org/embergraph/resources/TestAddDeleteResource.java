@@ -33,12 +33,12 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.UUID;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.journal.Journal;
-import com.bigdata.rawstore.SimpleMemoryRawStore;
-import com.bigdata.service.Event;
-import com.bigdata.service.EventResource;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.journal.Journal;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
+import org.embergraph.service.Event;
+import org.embergraph.service.EventResource;
 
 /**
  * Unit test of the {@link StoreManager} when adding and deleting journals and

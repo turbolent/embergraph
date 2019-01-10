@@ -33,22 +33,22 @@ import org.openrdf.model.impl.LiteralImpl;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDF;
 
-import com.bigdata.rdf.internal.impl.bnode.FullyInlineUnicodeBNodeIV;
-import com.bigdata.rdf.internal.impl.extensions.XSDStringExtension;
-import com.bigdata.rdf.internal.impl.literal.FullyInlineTypedLiteralIV;
-import com.bigdata.rdf.internal.impl.literal.PartlyInlineTypedLiteralIV;
-import com.bigdata.rdf.internal.impl.uri.FullyInlineURIIV;
-import com.bigdata.rdf.internal.impl.uri.PartlyInlineURIIV;
-import com.bigdata.rdf.internal.impl.uri.URIExtensionIV;
-import com.bigdata.rdf.internal.impl.uri.VocabURIByteIV;
-import com.bigdata.rdf.internal.impl.uri.VocabURIShortIV;
-import com.bigdata.rdf.model.BigdataBNode;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.model.BigdataValueFactoryImpl;
-import com.bigdata.rdf.vocab.Vocabulary;
+import org.embergraph.rdf.internal.impl.bnode.FullyInlineUnicodeBNodeIV;
+import org.embergraph.rdf.internal.impl.extensions.XSDStringExtension;
+import org.embergraph.rdf.internal.impl.literal.FullyInlineTypedLiteralIV;
+import org.embergraph.rdf.internal.impl.literal.PartlyInlineTypedLiteralIV;
+import org.embergraph.rdf.internal.impl.uri.FullyInlineURIIV;
+import org.embergraph.rdf.internal.impl.uri.PartlyInlineURIIV;
+import org.embergraph.rdf.internal.impl.uri.URIExtensionIV;
+import org.embergraph.rdf.internal.impl.uri.VocabURIByteIV;
+import org.embergraph.rdf.internal.impl.uri.VocabURIShortIV;
+import org.embergraph.rdf.model.BigdataBNode;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.vocab.Vocabulary;
 
 /**
  * Unit tests for {@link IV}s which inline Unicode data.

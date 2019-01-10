@@ -28,10 +28,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree.proc;
 
-import com.bigdata.btree.keys.KVO;
-import com.bigdata.service.Split;
-import com.bigdata.service.ndx.IAsynchronousWriteBufferFactory;
-import com.bigdata.service.ndx.pipeline.IndexPartitionWriteTask;
+import org.embergraph.btree.keys.KVO;
+import org.embergraph.service.Split;
+import org.embergraph.service.ndx.IAsynchronousWriteBufferFactory;
+import org.embergraph.service.ndx.pipeline.IndexPartitionWriteTask;
 
 /**
  * Interface for chunk-at-a-time result processing for asynchronous index

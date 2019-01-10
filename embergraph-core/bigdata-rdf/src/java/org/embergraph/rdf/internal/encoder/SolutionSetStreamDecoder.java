@@ -32,8 +32,8 @@ import java.util.NoSuchElementException;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.io.DataInputBuffer;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.io.DataInputBuffer;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

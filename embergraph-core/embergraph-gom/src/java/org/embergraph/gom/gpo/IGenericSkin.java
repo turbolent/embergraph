@@ -26,7 +26,7 @@ package org.embergraph.gom.gpo;
 
 import java.util.Iterator;
 
-import com.bigdata.gom.skin.GenericSkinRegistry;
+import org.embergraph.gom.skin.GenericSkinRegistry;
 
 /**
  * A generic skin is a set of behaviors, typically disclosed by one or

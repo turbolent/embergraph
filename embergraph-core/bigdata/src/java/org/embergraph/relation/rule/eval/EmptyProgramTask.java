@@ -1,8 +1,8 @@
 package org.embergraph.relation.rule.eval;
 
-import com.bigdata.relation.rule.IProgram;
-import com.bigdata.relation.rule.IStep;
-import com.bigdata.striterator.EmptyChunkedIterator;
+import org.embergraph.relation.rule.IProgram;
+import org.embergraph.relation.rule.IStep;
+import org.embergraph.striterator.EmptyChunkedIterator;
 
 
 /**

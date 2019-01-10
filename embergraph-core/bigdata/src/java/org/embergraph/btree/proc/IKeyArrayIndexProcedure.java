@@ -24,8 +24,8 @@
  */
 package org.embergraph.btree.proc;
 
-import com.bigdata.btree.raba.IRaba;
-import com.bigdata.service.ndx.ClientIndexView;
+import org.embergraph.btree.raba.IRaba;
+import org.embergraph.service.ndx.ClientIndexView;
 
 /**
  * Interface for procedures that are mapped across one or more index partitions

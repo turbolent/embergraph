@@ -32,24 +32,24 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import com.bigdata.ha.msg.IHAAwaitServiceJoinRequest;
-import com.bigdata.ha.msg.IHADigestRequest;
-import com.bigdata.ha.msg.IHADigestResponse;
-import com.bigdata.ha.msg.IHALogDigestRequest;
-import com.bigdata.ha.msg.IHALogDigestResponse;
-import com.bigdata.ha.msg.IHANotifyReleaseTimeResponse;
-import com.bigdata.ha.msg.IHARemoteRebuildRequest;
-import com.bigdata.ha.msg.IHARootBlockRequest;
-import com.bigdata.ha.msg.IHARootBlockResponse;
-import com.bigdata.ha.msg.IHASnapshotDigestRequest;
-import com.bigdata.ha.msg.IHASnapshotDigestResponse;
-import com.bigdata.ha.msg.IHASnapshotRequest;
-import com.bigdata.ha.msg.IHASnapshotResponse;
-import com.bigdata.journal.AbstractJournal;
-import com.bigdata.quorum.AsynchronousQuorumCloseException;
-import com.bigdata.quorum.QuorumException;
-import com.bigdata.rdf.task.IApiTask;
-import com.bigdata.service.IService;
+import org.embergraph.ha.msg.IHAAwaitServiceJoinRequest;
+import org.embergraph.ha.msg.IHADigestRequest;
+import org.embergraph.ha.msg.IHADigestResponse;
+import org.embergraph.ha.msg.IHALogDigestRequest;
+import org.embergraph.ha.msg.IHALogDigestResponse;
+import org.embergraph.ha.msg.IHANotifyReleaseTimeResponse;
+import org.embergraph.ha.msg.IHARemoteRebuildRequest;
+import org.embergraph.ha.msg.IHARootBlockRequest;
+import org.embergraph.ha.msg.IHARootBlockResponse;
+import org.embergraph.ha.msg.IHASnapshotDigestRequest;
+import org.embergraph.ha.msg.IHASnapshotDigestResponse;
+import org.embergraph.ha.msg.IHASnapshotRequest;
+import org.embergraph.ha.msg.IHASnapshotResponse;
+import org.embergraph.journal.AbstractJournal;
+import org.embergraph.quorum.AsynchronousQuorumCloseException;
+import org.embergraph.quorum.QuorumException;
+import org.embergraph.rdf.task.IApiTask;
+import org.embergraph.service.IService;
 
 /**
  * A {@link Remote} interface for methods supporting high availability for a set

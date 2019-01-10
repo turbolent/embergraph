@@ -27,8 +27,8 @@ import java.io.Serializable;
 
 import org.eclipse.jetty.client.HttpClient;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.service.fts.FTS.SearchResultType;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.service.fts.FTS.SearchResultType;
 
 /**
  * Abstraction for search interface against external Solr index.

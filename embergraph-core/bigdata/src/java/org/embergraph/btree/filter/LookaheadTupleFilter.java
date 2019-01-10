@@ -31,11 +31,11 @@ package org.embergraph.btree.filter;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import com.bigdata.btree.AbstractTuple;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleCursor;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.ITupleSerializer;
+import org.embergraph.btree.AbstractTuple;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleCursor;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.ITupleSerializer;
 
 import cutthecrap.utils.striterators.FilterBase;
 

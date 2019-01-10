@@ -30,7 +30,7 @@ package org.embergraph.resources;
 
 import java.util.UUID;
 
-import com.bigdata.btree.BTree;
+import org.embergraph.btree.BTree;
 
 /**
  * Abstract base class for tasks responsible for the atomic update of the view

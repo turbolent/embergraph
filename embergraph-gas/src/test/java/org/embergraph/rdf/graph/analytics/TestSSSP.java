@@ -17,11 +17,11 @@ package org.embergraph.rdf.graph.analytics;
 
 import org.openrdf.sail.SailConnection;
 
-import com.bigdata.rdf.graph.IGASContext;
-import com.bigdata.rdf.graph.IGASEngine;
-import com.bigdata.rdf.graph.IGASState;
-import com.bigdata.rdf.graph.IGraphAccessor;
-import com.bigdata.rdf.graph.impl.sail.AbstractSailGraphTestCase;
+import org.embergraph.rdf.graph.IGASContext;
+import org.embergraph.rdf.graph.IGASEngine;
+import org.embergraph.rdf.graph.IGASState;
+import org.embergraph.rdf.graph.IGraphAccessor;
+import org.embergraph.rdf.graph.impl.sail.AbstractSailGraphTestCase;
 
 /**
  * Test class for SSP traversal.

@@ -48,25 +48,25 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.model.vocabulary.XMLSchema;
 
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.lexicon.Id2TermWriteProc;
-import com.bigdata.rdf.lexicon.LexiconRelation;
-import com.bigdata.rdf.lexicon.Term2IdWriteProc;
-import com.bigdata.rdf.model.BigdataBNode;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.model.StatementEnum;
-import com.bigdata.rdf.rio.IStatementBuffer;
-import com.bigdata.rdf.rio.StatementBuffer;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.rdf.spo.SPO;
-import com.bigdata.rdf.spo.SPOKeyOrder;
-import com.bigdata.rdf.util.DumpLexicon;
-import com.bigdata.rdf.vocab.NoVocabulary;
-import com.bigdata.striterator.ChunkedArrayIterator;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.lexicon.Id2TermWriteProc;
+import org.embergraph.rdf.lexicon.LexiconRelation;
+import org.embergraph.rdf.lexicon.Term2IdWriteProc;
+import org.embergraph.rdf.model.BigdataBNode;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.rdf.rio.IStatementBuffer;
+import org.embergraph.rdf.rio.StatementBuffer;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.rdf.spo.SPO;
+import org.embergraph.rdf.spo.SPOKeyOrder;
+import org.embergraph.rdf.util.DumpLexicon;
+import org.embergraph.rdf.vocab.NoVocabulary;
+import org.embergraph.striterator.ChunkedArrayIterator;
 
 /**
  * Test basic features of the {@link ITripleStore} API.

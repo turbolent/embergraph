@@ -36,22 +36,22 @@ import org.openrdf.model.URI;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.axioms.OwlAxioms;
-import com.bigdata.rdf.changesets.ChangeAction;
-import com.bigdata.rdf.changesets.ChangeRecord;
-import com.bigdata.rdf.changesets.IChangeLog;
-import com.bigdata.rdf.changesets.IChangeRecord;
-import com.bigdata.rdf.changesets.InMemChangeLog;
-import com.bigdata.rdf.changesets.InferenceChangeLogReporter;
-import com.bigdata.rdf.model.BigdataBNode;
-import com.bigdata.rdf.model.BigdataStatement;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.spo.ModifiedEnum;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.BD;
-import com.bigdata.rdf.vocab.NoVocabulary;
-import com.bigdata.rdf.vocab.RDFSVocabulary;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.axioms.OwlAxioms;
+import org.embergraph.rdf.changesets.ChangeAction;
+import org.embergraph.rdf.changesets.ChangeRecord;
+import org.embergraph.rdf.changesets.IChangeLog;
+import org.embergraph.rdf.changesets.IChangeRecord;
+import org.embergraph.rdf.changesets.InMemChangeLog;
+import org.embergraph.rdf.changesets.InferenceChangeLogReporter;
+import org.embergraph.rdf.model.BigdataBNode;
+import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.spo.ModifiedEnum;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.BD;
+import org.embergraph.rdf.vocab.NoVocabulary;
+import org.embergraph.rdf.vocab.RDFSVocabulary;
 
 /**
  * Test suite for the {@link IChangeLog} feature.

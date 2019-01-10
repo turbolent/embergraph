@@ -34,8 +34,8 @@ import java.util.Iterator;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-import com.bigdata.rdf.util.VocabBuilder;
-import com.bigdata.rdf.vocab.VocabularyDecl;
+import org.embergraph.rdf.util.VocabBuilder;
+import org.embergraph.rdf.vocab.VocabularyDecl;
 
 /**
  * Vocabulary declarations covering the PubChem data from {@link https://pubchem.ncbi.nlm.nih.gov/rdf/}.

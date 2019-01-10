@@ -31,13 +31,13 @@ import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpContext;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.ITimestampAnnotations;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.TimestampUtility;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpContext;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.ITimestampAnnotations;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.TimestampUtility;
 
 /**
  * Commit the operation. If the operation is isolated by a transaction, then the

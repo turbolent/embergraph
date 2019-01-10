@@ -2,13 +2,13 @@
 
 package com.bigdata.rdf.sail.sparql.ast;
 
-import com.bigdata.rdf.sail.sparql.ast.ASTObjectList;
-import com.bigdata.rdf.sail.sparql.ast.ASTPropertyList;
-import com.bigdata.rdf.sail.sparql.ast.Node;
-import com.bigdata.rdf.sail.sparql.ast.SimpleNode;
-import com.bigdata.rdf.sail.sparql.ast.SyntaxTreeBuilder;
-import com.bigdata.rdf.sail.sparql.ast.SyntaxTreeBuilderVisitor;
-import com.bigdata.rdf.sail.sparql.ast.VisitorException;
+import org.embergraph.rdf.sail.sparql.ast.ASTObjectList;
+import org.embergraph.rdf.sail.sparql.ast.ASTPropertyList;
+import org.embergraph.rdf.sail.sparql.ast.Node;
+import org.embergraph.rdf.sail.sparql.ast.SimpleNode;
+import org.embergraph.rdf.sail.sparql.ast.SyntaxTreeBuilder;
+import org.embergraph.rdf.sail.sparql.ast.SyntaxTreeBuilderVisitor;
+import org.embergraph.rdf.sail.sparql.ast.VisitorException;
 
 public class ASTPropertyList extends SimpleNode {
 

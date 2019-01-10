@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree.raba.codec;
 
-import com.bigdata.btree.raba.ConditionalRabaCoder;
+import org.embergraph.btree.raba.ConditionalRabaCoder;
 
 /**
  * Test suite for the {@link ConditionalRabaCoder}.

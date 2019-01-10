@@ -39,7 +39,7 @@ import org.codehaus.jettison.json.JSONObject;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-import com.bigdata.rdf.internal.impl.extensions.InvalidGeoSpatialDatatypeConfigurationError;
+import org.embergraph.rdf.internal.impl.extensions.InvalidGeoSpatialDatatypeConfigurationError;
 
 /**
  * Class providing access to the GeoSpatial index configuration,

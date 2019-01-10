@@ -29,20 +29,20 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.datatypes.XMLDatatypeUtil;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.bop.aggregate.AggregateBase;
-import com.bigdata.rdf.error.SparqlTypeErrorException;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.IVUtility;
-import com.bigdata.rdf.internal.NotMaterializedException;
-import com.bigdata.rdf.internal.constraints.INeedsMaterialization;
-import com.bigdata.rdf.internal.constraints.IVValueExpression;
-import com.bigdata.rdf.internal.constraints.MathBOp.MathOp;
-import com.bigdata.rdf.internal.constraints.MathUtility;
-import com.bigdata.rdf.internal.impl.literal.NumericIV;
-import com.bigdata.rdf.model.BigdataValue;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.bop.aggregate.AggregateBase;
+import org.embergraph.rdf.error.SparqlTypeErrorException;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.IVUtility;
+import org.embergraph.rdf.internal.NotMaterializedException;
+import org.embergraph.rdf.internal.constraints.INeedsMaterialization;
+import org.embergraph.rdf.internal.constraints.IVValueExpression;
+import org.embergraph.rdf.internal.constraints.MathBOp.MathOp;
+import org.embergraph.rdf.internal.constraints.MathUtility;
+import org.embergraph.rdf.internal.impl.literal.NumericIV;
+import org.embergraph.rdf.model.BigdataValue;
 
 /**
  * Operator computes the running sum over the presented binding sets for the

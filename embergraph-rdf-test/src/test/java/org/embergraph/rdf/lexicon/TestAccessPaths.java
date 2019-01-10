@@ -35,21 +35,21 @@ import java.util.Properties;
 
 import org.openrdf.model.vocabulary.RDF;
 
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.Var;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.ITx;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.AbstractTripleStore.Options;
-import com.bigdata.rdf.store.AbstractTripleStoreTestCase;
-import com.bigdata.rdf.vocab.NoVocabulary;
-import com.bigdata.relation.accesspath.IAccessPath;
-import com.bigdata.striterator.IKeyOrder;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.Var;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.ITx;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.AbstractTripleStore.Options;
+import org.embergraph.rdf.store.AbstractTripleStoreTestCase;
+import org.embergraph.rdf.vocab.NoVocabulary;
+import org.embergraph.relation.accesspath.IAccessPath;
+import org.embergraph.striterator.IKeyOrder;
 
 /**
  * Test suite for

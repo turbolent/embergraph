@@ -6,12 +6,12 @@ import java.util.NoSuchElementException;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.IndexSegment.IndexSegmentTupleCursor;
-import com.bigdata.btree.IndexSegment.ImmutableNodeFactory.ImmutableLeaf;
-import com.bigdata.btree.data.ILeafData;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.io.IBufferAccess;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.IndexSegment.IndexSegmentTupleCursor;
+import org.embergraph.btree.IndexSegment.ImmutableNodeFactory.ImmutableLeaf;
+import org.embergraph.btree.data.ILeafData;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.io.IBufferAccess;
+import org.embergraph.util.BytesUtil;
 
 /**
  * A fast iterator based on multi-block IO for the {@link IndexSegment}. This

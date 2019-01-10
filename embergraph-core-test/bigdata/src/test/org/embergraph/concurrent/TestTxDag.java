@@ -38,7 +38,7 @@ import junit.framework.TestCase;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.concurrent.TxDag.Edge;
+import org.embergraph.concurrent.TxDag.Edge;
 
 /**
  * Test suite for online transaction deadlock algorithm.

@@ -29,7 +29,7 @@ package org.embergraph.rdf.store;
 
 import java.util.NoSuchElementException;
 
-import com.bigdata.rdf.model.BigdataStatement;
+import org.embergraph.rdf.model.BigdataStatement;
 
 /**
  * Empty iterator.

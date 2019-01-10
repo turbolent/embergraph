@@ -31,11 +31,11 @@ import java.io.IOException;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.io.DataOutputBuffer;
-import com.bigdata.rdf.sparql.ast.ISolutionSetStats;
-import com.bigdata.rdf.sparql.ast.SolutionSetStatserator;
-import com.bigdata.util.Bytes;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.io.DataOutputBuffer;
+import org.embergraph.rdf.sparql.ast.ISolutionSetStats;
+import org.embergraph.rdf.sparql.ast.SolutionSetStatserator;
+import org.embergraph.util.Bytes;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

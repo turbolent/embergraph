@@ -30,9 +30,9 @@ package org.embergraph.rdf.sparql.ast;
 import java.util.Map;
 import java.util.Set;
 
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IVariable;
-import com.bigdata.rdf.internal.IVCache;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IVariable;
+import org.embergraph.rdf.internal.IVCache;
 
 /**
  * A set of interesting statistics on a solution set.

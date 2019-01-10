@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.Journal;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Journal;
 
 /**
  * Utility class may be used to dump out a <em>small</em> database.

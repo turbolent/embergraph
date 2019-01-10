@@ -48,7 +48,7 @@ Modifications:
 package org.embergraph.rdf.model;
 
 import java.util.Comparator;
-import com.bigdata.rdf.internal.IV;
+import org.embergraph.rdf.internal.IV;
 
 /**
  * Places {@link BigdataValue}s into an ordering determined by their assigned

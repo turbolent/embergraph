@@ -28,11 +28,11 @@ package org.embergraph.rdf.sail;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.journal.ITx;
-import com.bigdata.rdf.sail.BigdataSail.BigdataSailConnection;
-import com.bigdata.rdf.sail.webapp.DatasetNotFoundException;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.task.AbstractApiTask;
+import org.embergraph.journal.ITx;
+import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
+import org.embergraph.rdf.sail.webapp.DatasetNotFoundException;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.task.AbstractApiTask;
 
 /**
  * Task destroys a KB for the given namespace. The correct use of this class is

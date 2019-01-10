@@ -27,10 +27,10 @@ import java.util.Iterator;
 
 import org.openrdf.model.vocabulary.RDFS;
 
-import com.bigdata.gom.gpo.BasicSkin;
-import com.bigdata.gom.gpo.GPO;
-import com.bigdata.gom.gpo.IGPO;
-import com.bigdata.gom.gpo.IGenericSkin;
+import org.embergraph.gom.gpo.BasicSkin;
+import org.embergraph.gom.gpo.GPO;
+import org.embergraph.gom.gpo.IGPO;
+import org.embergraph.gom.gpo.IGenericSkin;
 
 public class OWLClassSkin extends BasicSkin implements IGenericSkin {
 

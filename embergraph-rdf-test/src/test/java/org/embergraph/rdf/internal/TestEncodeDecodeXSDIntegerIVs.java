@@ -32,8 +32,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import com.bigdata.rdf.internal.impl.literal.XSDIntegerIV;
-import com.bigdata.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.internal.impl.literal.XSDIntegerIV;
+import org.embergraph.rdf.model.BigdataLiteral;
 
 /**
  * Unit tests for {@link XSDIntegerIV}.

@@ -32,9 +32,9 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import com.bigdata.ha.msg.HAMessageWrapper;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.io.IBufferAccess;
+import org.embergraph.ha.msg.HAMessageWrapper;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.io.IBufferAccess;
 
 /**
  * Test the raw socket protocol implemented by {@link HASendService} and

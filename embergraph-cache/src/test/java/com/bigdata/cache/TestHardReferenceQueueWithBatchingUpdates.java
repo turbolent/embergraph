@@ -48,12 +48,12 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.testutil.ExperimentDriver;
-import com.bigdata.testutil.XorShift;
-import com.bigdata.testutil.ExperimentDriver.IComparisonTest;
-import com.bigdata.testutil.ExperimentDriver.Result;
-import com.bigdata.util.DaemonThreadFactory;
-import com.bigdata.util.NV;
+import org.embergraph.testutil.ExperimentDriver;
+import org.embergraph.testutil.XorShift;
+import org.embergraph.testutil.ExperimentDriver.IComparisonTest;
+import org.embergraph.testutil.ExperimentDriver.Result;
+import org.embergraph.util.DaemonThreadFactory;
+import org.embergraph.util.NV;
 
 /**
  * Test suite for {@link HardReferenceQueueWithBatchingUpdates}. The class under

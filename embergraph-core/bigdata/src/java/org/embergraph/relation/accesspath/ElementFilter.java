@@ -27,10 +27,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation.accesspath;
 
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.filter.ITupleFilter;
-import com.bigdata.btree.filter.TupleFilter;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.filter.ITupleFilter;
+import org.embergraph.btree.filter.TupleFilter;
 
 import cutthecrap.utils.striterators.IFilter;
 import cutthecrap.utils.striterators.IFilterTest;

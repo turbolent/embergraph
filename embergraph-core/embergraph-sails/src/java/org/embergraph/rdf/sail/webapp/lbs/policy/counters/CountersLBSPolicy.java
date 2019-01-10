@@ -40,25 +40,25 @@ import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.client.api.Request;
 import org.eclipse.jetty.http.HttpMethod;
 
-import com.bigdata.bop.engine.QueryEngine;
-import com.bigdata.bop.fed.QueryEngineFactory;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.DefaultInstrumentFactory;
-import com.bigdata.counters.ICounterNode;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.PlatformStatsPlugIn;
-import com.bigdata.rdf.sail.webapp.CountersServlet;
-import com.bigdata.rdf.sail.webapp.client.ConnectOptions;
-import com.bigdata.rdf.sail.webapp.client.EntityContentProvider;
-import com.bigdata.rdf.sail.webapp.client.IMimeTypes;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepository;
-import com.bigdata.rdf.sail.webapp.client.JettyResponseListener;
-import com.bigdata.rdf.sail.webapp.lbs.AbstractHostLBSPolicy;
-import com.bigdata.rdf.sail.webapp.lbs.IHALoadBalancerPolicy;
-import com.bigdata.rdf.sail.webapp.lbs.IHostMetrics;
-import com.bigdata.rdf.sail.webapp.lbs.IHostScoringRule;
-import com.bigdata.rdf.sail.webapp.lbs.ServiceScore;
+import org.embergraph.bop.engine.QueryEngine;
+import org.embergraph.bop.fed.QueryEngineFactory;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.DefaultInstrumentFactory;
+import org.embergraph.counters.ICounterNode;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.PlatformStatsPlugIn;
+import org.embergraph.rdf.sail.webapp.CountersServlet;
+import org.embergraph.rdf.sail.webapp.client.ConnectOptions;
+import org.embergraph.rdf.sail.webapp.client.EntityContentProvider;
+import org.embergraph.rdf.sail.webapp.client.IMimeTypes;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository;
+import org.embergraph.rdf.sail.webapp.client.JettyResponseListener;
+import org.embergraph.rdf.sail.webapp.lbs.AbstractHostLBSPolicy;
+import org.embergraph.rdf.sail.webapp.lbs.IHALoadBalancerPolicy;
+import org.embergraph.rdf.sail.webapp.lbs.IHostMetrics;
+import org.embergraph.rdf.sail.webapp.lbs.IHostScoringRule;
+import org.embergraph.rdf.sail.webapp.lbs.ServiceScore;
 
 /**
  * Stochastically proxy the request to the services based on their load.

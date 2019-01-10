@@ -46,25 +46,25 @@ import org.openrdf.model.Graph;
 import org.openrdf.model.impl.LinkedHashModel;
 import org.openrdf.model.impl.ValueFactoryImpl;
 
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.IJournal;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.Tx;
-import com.bigdata.rdf.properties.PropertiesFormat;
-import com.bigdata.rdf.properties.PropertiesParser;
-import com.bigdata.rdf.properties.PropertiesParserFactory;
-import com.bigdata.rdf.properties.PropertiesParserRegistry;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.BigdataSailRepositoryConnection;
-import com.bigdata.rdf.sail.webapp.client.ConnectOptions;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.relation.RelationSchema;
-import com.bigdata.service.AbstractFederation;
-import com.bigdata.service.AbstractTransactionService;
-import com.bigdata.service.IBigdataFederation;
-import com.bigdata.util.InnerCause;
-import com.bigdata.util.PropertyUtil;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.IJournal;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.Tx;
+import org.embergraph.rdf.properties.PropertiesFormat;
+import org.embergraph.rdf.properties.PropertiesParser;
+import org.embergraph.rdf.properties.PropertiesParserFactory;
+import org.embergraph.rdf.properties.PropertiesParserRegistry;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.rdf.sail.webapp.client.ConnectOptions;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.relation.RelationSchema;
+import org.embergraph.service.AbstractFederation;
+import org.embergraph.service.AbstractTransactionService;
+import org.embergraph.service.IBigdataFederation;
+import org.embergraph.util.InnerCause;
+import org.embergraph.util.PropertyUtil;
 
 /**
  * Mult-tenancy Administration Servlet (management for bigdata namespaces). A

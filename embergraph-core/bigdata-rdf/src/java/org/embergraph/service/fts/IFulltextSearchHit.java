@@ -24,8 +24,8 @@
  */
 package org.embergraph.service.fts;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.service.fts.FTS.SearchResultType;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.service.fts.FTS.SearchResultType;
 
 /**
  * Metadata about a fulltext search result (against an external service).

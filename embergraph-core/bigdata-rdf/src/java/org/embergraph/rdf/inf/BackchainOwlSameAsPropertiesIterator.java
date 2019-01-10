@@ -31,13 +31,13 @@ import java.io.StringWriter;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.rules.InferenceEngine;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.IRawTripleStore;
-import com.bigdata.striterator.IChunkedOrderedIterator;
-import com.bigdata.striterator.IKeyOrder;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.rules.InferenceEngine;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.IRawTripleStore;
+import org.embergraph.striterator.IChunkedOrderedIterator;
+import org.embergraph.striterator.IKeyOrder;
 
 /**
  * Provides backward chaining for property collection and reverse property

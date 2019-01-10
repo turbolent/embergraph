@@ -4,12 +4,12 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.DefaultTupleSerializer;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleSerializer;
-import com.bigdata.btree.keys.IKeyBuilderFactory;
-import com.bigdata.io.SerializerUtil;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.DefaultTupleSerializer;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleSerializer;
+import org.embergraph.btree.keys.IKeyBuilderFactory;
+import org.embergraph.io.SerializerUtil;
 
 /**
  * Helper class for (de-)serializing logical rows for {@link AtomicRowFilter}.

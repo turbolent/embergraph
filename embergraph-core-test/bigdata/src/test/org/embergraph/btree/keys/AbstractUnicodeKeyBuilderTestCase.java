@@ -34,12 +34,12 @@ import java.util.Properties;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.btree.keys.DefaultKeyBuilderFactory;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.btree.keys.StrengthEnum;
-import com.bigdata.btree.keys.KeyBuilder.Options;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.keys.DefaultKeyBuilderFactory;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.btree.keys.StrengthEnum;
+import org.embergraph.btree.keys.KeyBuilder.Options;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Base class for the test suites that examine support for Unicode sort keys in

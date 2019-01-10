@@ -31,10 +31,10 @@ import java.util.Properties;
 import junit.framework.TestCase;
 import junit.framework.TestCase2;
 
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.TestHelper;
-import com.bigdata.rdf.sail.BigdataSail.Options;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.TestHelper;
+import org.embergraph.rdf.sail.BigdataSail.Options;
 
 /**
  * <p>

@@ -32,24 +32,24 @@ import java.io.File;
 import java.util.UUID;
 import java.util.concurrent.Future;
 
-import com.bigdata.btree.AbstractBTree;
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.BTreeCounters;
-import com.bigdata.btree.ILocalBTreeView;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.IndexSegment;
-import com.bigdata.btree.IndexSegmentStore;
-import com.bigdata.btree.view.FusedView;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.htree.HTree;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.resources.ResourceManager;
-import com.bigdata.resources.StaleLocatorException;
-import com.bigdata.resources.StaleLocatorReason;
-import com.bigdata.service.DataService;
-import com.bigdata.service.IBigdataFederation;
-import com.bigdata.service.IDataService;
-import com.bigdata.service.IServiceShutdown;
+import org.embergraph.btree.AbstractBTree;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.BTreeCounters;
+import org.embergraph.btree.ILocalBTreeView;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.IndexSegment;
+import org.embergraph.btree.IndexSegmentStore;
+import org.embergraph.btree.view.FusedView;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.htree.HTree;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.resources.ResourceManager;
+import org.embergraph.resources.StaleLocatorException;
+import org.embergraph.resources.StaleLocatorReason;
+import org.embergraph.service.DataService;
+import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IDataService;
+import org.embergraph.service.IServiceShutdown;
 
 /**
  * Interface manging the resources on which indices are stored. The resources

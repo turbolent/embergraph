@@ -13,14 +13,14 @@ import java.util.Set;
 
 import org.openrdf.query.MalformedQueryException;
 
-import com.bigdata.rdf.sail.sparql.ast.ASTBasicGraphPattern;
-import com.bigdata.rdf.sail.sparql.ast.ASTBlankNode;
-import com.bigdata.rdf.sail.sparql.ast.ASTBlankNodePropertyList;
-import com.bigdata.rdf.sail.sparql.ast.ASTCollection;
-import com.bigdata.rdf.sail.sparql.ast.ASTOperationContainer;
-import com.bigdata.rdf.sail.sparql.ast.ASTVar;
-import com.bigdata.rdf.sail.sparql.ast.SyntaxTreeBuilderTreeConstants;
-import com.bigdata.rdf.sail.sparql.ast.VisitorException;
+import org.embergraph.rdf.sail.sparql.ast.ASTBasicGraphPattern;
+import org.embergraph.rdf.sail.sparql.ast.ASTBlankNode;
+import org.embergraph.rdf.sail.sparql.ast.ASTBlankNodePropertyList;
+import org.embergraph.rdf.sail.sparql.ast.ASTCollection;
+import org.embergraph.rdf.sail.sparql.ast.ASTOperationContainer;
+import org.embergraph.rdf.sail.sparql.ast.ASTVar;
+import org.embergraph.rdf.sail.sparql.ast.SyntaxTreeBuilderTreeConstants;
+import org.embergraph.rdf.sail.sparql.ast.VisitorException;
 
 /**
  * Processes blank nodes in the query body, replacing them with variables while

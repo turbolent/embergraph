@@ -5,16 +5,16 @@ import java.util.NoSuchElementException;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.AbstractBTree;
-import com.bigdata.btree.AbstractTuple;
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.IRangeQuery;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleCursor;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.ITupleSerializer;
-import com.bigdata.btree.Tuple;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.AbstractBTree;
+import org.embergraph.btree.AbstractTuple;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.IRangeQuery;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleCursor;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.ITupleSerializer;
+import org.embergraph.btree.Tuple;
+import org.embergraph.util.BytesUtil;
 
 import cutthecrap.utils.striterators.Filter;
 import cutthecrap.utils.striterators.FilterBase;

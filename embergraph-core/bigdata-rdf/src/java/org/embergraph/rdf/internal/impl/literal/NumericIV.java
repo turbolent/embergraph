@@ -32,9 +32,9 @@ import java.util.Set;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 
-import com.bigdata.rdf.internal.DTE;
-import com.bigdata.rdf.internal.XSD;
-import com.bigdata.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.internal.DTE;
+import org.embergraph.rdf.internal.XSD;
+import org.embergraph.rdf.model.BigdataLiteral;
 
 /**
  * Superclass for the inline numerics - {@link XSDNumericIV},

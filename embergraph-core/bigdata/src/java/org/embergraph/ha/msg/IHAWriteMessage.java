@@ -26,8 +26,8 @@ package org.embergraph.ha.msg;
 import java.nio.ByteBuffer;
 import java.util.UUID;
 
-import com.bigdata.io.compression.IRecordCompressor;
-import com.bigdata.journal.StoreTypeEnum;
+import org.embergraph.io.compression.IRecordCompressor;
+import org.embergraph.journal.StoreTypeEnum;
 
 /**
  * A message carrying RMI metadata about a payload which will be replicated

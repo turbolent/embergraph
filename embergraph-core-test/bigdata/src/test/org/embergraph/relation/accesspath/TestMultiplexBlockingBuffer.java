@@ -29,9 +29,9 @@ package org.embergraph.relation.accesspath;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.relation.accesspath.BlockingBuffer;
-import com.bigdata.relation.accesspath.BufferClosedException;
-import com.bigdata.relation.accesspath.IBlockingBuffer;
+import org.embergraph.relation.accesspath.BlockingBuffer;
+import org.embergraph.relation.accesspath.BufferClosedException;
+import org.embergraph.relation.accesspath.IBlockingBuffer;
 
 /**
  * Test suite for {@link MultiplexBlockingBuffer}.

@@ -30,8 +30,8 @@ package org.embergraph.btree.raba.codec;
 import java.util.Arrays;
 import java.util.Random;
 
-import com.bigdata.btree.keys.TestKeyBuilder;
-import com.bigdata.util.BytesUtil.UnsignedByteArrayComparator;
+import org.embergraph.btree.keys.TestKeyBuilder;
+import org.embergraph.util.BytesUtil.UnsignedByteArrayComparator;
 
 /**
  * Generate <i>n</i> random and distinct URIs. This distribution has a shared

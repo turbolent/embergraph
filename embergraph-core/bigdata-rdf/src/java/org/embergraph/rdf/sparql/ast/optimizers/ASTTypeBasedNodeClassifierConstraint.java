@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.sparql.ast.optimizers;
 
-import com.bigdata.rdf.sparql.ast.IGroupMemberNode;
+import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
 
 /**
  * Additional constraint associated with an {@link ASTTypeBasedNodeClassifier}.

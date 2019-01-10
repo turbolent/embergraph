@@ -27,13 +27,13 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.vocab;
 
-import com.bigdata.rdf.internal.impl.extensions.DerivedNumericsExtension;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.vocab.decls.LUBMVocabularyDecl;
-import com.bigdata.rdf.vocab.decls.OWLVocabularyDecl;
-import com.bigdata.rdf.vocab.decls.RDFSVocabularyDecl;
-import com.bigdata.rdf.vocab.decls.RDFVocabularyDecl;
-import com.bigdata.rdf.vocab.decls.XMLSchemaVocabularyDecl;
+import org.embergraph.rdf.internal.impl.extensions.DerivedNumericsExtension;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.vocab.decls.LUBMVocabularyDecl;
+import org.embergraph.rdf.vocab.decls.OWLVocabularyDecl;
+import org.embergraph.rdf.vocab.decls.RDFSVocabularyDecl;
+import org.embergraph.rdf.vocab.decls.RDFVocabularyDecl;
+import org.embergraph.rdf.vocab.decls.XMLSchemaVocabularyDecl;
 
 /**
  * A {@link Vocabulary} covering the ontologies used by LUBM.

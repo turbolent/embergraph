@@ -36,7 +36,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.util.ClassPathUtil;
+import org.embergraph.util.ClassPathUtil;
 
 public class MapgraphServletProxy extends BigdataRDFServlet {
 	

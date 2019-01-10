@@ -1,7 +1,7 @@
 package org.embergraph.btree.isolation;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.ITuple;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.ITuple;
 
 /**
  * Does not resolve any conflicts.

@@ -9,19 +9,19 @@ import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 import org.openrdf.model.Value;
 
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.impl.bnode.SidIV;
-import com.bigdata.rdf.model.BigdataBNode;
-import com.bigdata.rdf.model.BigdataBNodeImpl;
-import com.bigdata.rdf.model.BigdataResource;
-import com.bigdata.rdf.model.BigdataStatement;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.relation.accesspath.BlockingBuffer;
-import com.bigdata.striterator.AbstractChunkedResolverator;
-import com.bigdata.striterator.IChunkedOrderedIterator;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.impl.bnode.SidIV;
+import org.embergraph.rdf.model.BigdataBNode;
+import org.embergraph.rdf.model.BigdataBNodeImpl;
+import org.embergraph.rdf.model.BigdataResource;
+import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.relation.accesspath.BlockingBuffer;
+import org.embergraph.striterator.AbstractChunkedResolverator;
+import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /**
  * Efficiently resolve term identifiers in Bigdata {@link ISPO}s to RDF

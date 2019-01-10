@@ -34,10 +34,10 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import org.openrdf.sail.SailException;
 
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.sail.BigdataSail.BigdataSailConnection;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.vocab.NoVocabulary;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.vocab.NoVocabulary;
 
 /**
  * Test suite for BLZG-2056 BigdataSailConnections not always closed by

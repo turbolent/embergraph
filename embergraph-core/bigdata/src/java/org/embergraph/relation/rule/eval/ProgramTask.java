@@ -37,26 +37,26 @@ import java.util.concurrent.Future;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.journal.AbstractTask;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.ConcurrencyManager;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.IIndexStore;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.TimestampUtility;
-import com.bigdata.relation.IMutableRelation;
-import com.bigdata.relation.accesspath.ChunkConsumerIterator;
-import com.bigdata.relation.accesspath.IAsynchronousIterator;
-import com.bigdata.relation.accesspath.IBlockingBuffer;
-import com.bigdata.relation.rule.IProgram;
-import com.bigdata.relation.rule.IRule;
-import com.bigdata.relation.rule.IStep;
-import com.bigdata.service.DataService;
-import com.bigdata.service.DataServiceCallable;
-import com.bigdata.service.IBigdataFederation;
-import com.bigdata.service.IDataService;
-import com.bigdata.striterator.IChunkedOrderedIterator;
+import org.embergraph.journal.AbstractTask;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.ConcurrencyManager;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.IIndexStore;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.TimestampUtility;
+import org.embergraph.relation.IMutableRelation;
+import org.embergraph.relation.accesspath.ChunkConsumerIterator;
+import org.embergraph.relation.accesspath.IAsynchronousIterator;
+import org.embergraph.relation.accesspath.IBlockingBuffer;
+import org.embergraph.relation.rule.IProgram;
+import org.embergraph.relation.rule.IRule;
+import org.embergraph.relation.rule.IStep;
+import org.embergraph.service.DataService;
+import org.embergraph.service.DataServiceCallable;
+import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IDataService;
+import org.embergraph.striterator.IChunkedOrderedIterator;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

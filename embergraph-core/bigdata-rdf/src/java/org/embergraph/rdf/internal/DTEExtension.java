@@ -25,8 +25,8 @@ package org.embergraph.rdf.internal;
 
 import org.openrdf.model.URI;
 
-import com.bigdata.rdf.internal.impl.AbstractIV;
-import com.bigdata.rdf.internal.impl.literal.PackedLongIV;
+import org.embergraph.rdf.internal.impl.AbstractIV;
+import org.embergraph.rdf.internal.impl.literal.PackedLongIV;
 
 /**
  * An extension of the intrinsic types defined by {@link DTE}.

@@ -30,21 +30,21 @@ package org.embergraph.bop.join;
 import java.util.Map;
 import java.util.UUID;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpEvaluationContext;
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IPredicate.Annotations;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.IVariableOrConstant;
-import com.bigdata.bop.NV;
-import com.bigdata.bop.NamedSolutionSetRefUtility;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.Var;
-import com.bigdata.bop.ap.Predicate;
-import com.bigdata.bop.controller.NamedSetAnnotations;
-import com.bigdata.journal.ITx;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.util.Bytes;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpEvaluationContext;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IPredicate.Annotations;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.IVariableOrConstant;
+import org.embergraph.bop.NV;
+import org.embergraph.bop.NamedSolutionSetRefUtility;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.Var;
+import org.embergraph.bop.ap.Predicate;
+import org.embergraph.bop.controller.NamedSetAnnotations;
+import org.embergraph.journal.ITx;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.util.Bytes;
 
 /**
  * Test suite for {@link JVMHashJoinOp}.

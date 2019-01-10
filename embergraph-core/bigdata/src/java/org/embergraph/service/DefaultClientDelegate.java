@@ -5,10 +5,10 @@ import java.util.UUID;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.counters.AbstractStatisticsCollector;
-import com.bigdata.counters.ICounterSetAccess;
-import com.bigdata.counters.httpd.CounterSetHTTPD;
-import com.bigdata.util.httpd.AbstractHTTPD;
+import org.embergraph.counters.AbstractStatisticsCollector;
+import org.embergraph.counters.ICounterSetAccess;
+import org.embergraph.counters.httpd.CounterSetHTTPD;
+import org.embergraph.util.httpd.AbstractHTTPD;
 
 /**
  * Default {@link IFederationDelegate} implementation used by a standard client.

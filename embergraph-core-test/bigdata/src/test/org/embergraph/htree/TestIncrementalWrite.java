@@ -29,21 +29,21 @@ package org.embergraph.htree;
 
 import java.util.UUID;
 
-import com.bigdata.btree.AbstractNode;
-import com.bigdata.btree.Checkpoint;
-import com.bigdata.btree.DefaultTupleSerializer;
-import com.bigdata.btree.HTreeIndexMetadata;
-import com.bigdata.btree.ITupleSerializer;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.MyHardReferenceQueue;
-import com.bigdata.btree.PO;
-import com.bigdata.btree.keys.ASCIIKeyBuilderFactory;
-import com.bigdata.btree.raba.codec.FrontCodedRabaCoderDupKeys;
-import com.bigdata.btree.raba.codec.SimpleRabaCoder;
-import com.bigdata.cache.HardReferenceQueue;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rawstore.SimpleMemoryRawStore;
-import com.bigdata.util.Bytes;
+import org.embergraph.btree.AbstractNode;
+import org.embergraph.btree.Checkpoint;
+import org.embergraph.btree.DefaultTupleSerializer;
+import org.embergraph.btree.HTreeIndexMetadata;
+import org.embergraph.btree.ITupleSerializer;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.MyHardReferenceQueue;
+import org.embergraph.btree.PO;
+import org.embergraph.btree.keys.ASCIIKeyBuilderFactory;
+import org.embergraph.btree.raba.codec.FrontCodedRabaCoderDupKeys;
+import org.embergraph.btree.raba.codec.SimpleRabaCoder;
+import org.embergraph.cache.HardReferenceQueue;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
+import org.embergraph.util.Bytes;
 
 /**
  * Test suite for the logic performing incremental writes of nodes and leaves

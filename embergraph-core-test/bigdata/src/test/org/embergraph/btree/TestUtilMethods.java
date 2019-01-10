@@ -27,8 +27,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree;
 
-import com.bigdata.btree.raba.MutableKeyBuffer;
-import com.bigdata.btree.raba.MutableValueBuffer;
+import org.embergraph.btree.raba.MutableKeyBuffer;
+import org.embergraph.btree.raba.MutableValueBuffer;
 
 /**
  * Test suite for various utility methods, both static and instance, on

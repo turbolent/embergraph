@@ -30,10 +30,10 @@ package org.embergraph.htree;
 
 import java.io.IOException;
 
-import com.bigdata.btree.data.IAbstractNodeDataCoder;
-import com.bigdata.btree.raba.codec.IRabaCoder;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rawstore.SimpleMemoryRawStore;
+import org.embergraph.btree.data.IAbstractNodeDataCoder;
+import org.embergraph.btree.raba.codec.IRabaCoder;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /**
  * Test of storing null values under a key with persistence.

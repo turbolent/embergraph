@@ -33,9 +33,9 @@ import java.util.Properties;
 import junit.extensions.proxy.ProxyTestSuite;
 import junit.framework.Test;
 
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.Options;
-import com.bigdata.rdf.axioms.NoAxioms;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.Options;
+import org.embergraph.rdf.axioms.NoAxioms;
 
 /**
  * Proxy test suite for {@link LocalTripleStore} in quad-store mode.

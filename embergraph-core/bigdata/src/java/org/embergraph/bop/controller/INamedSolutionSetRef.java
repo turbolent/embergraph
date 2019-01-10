@@ -29,10 +29,10 @@ package org.embergraph.bop.controller;
 import java.io.Serializable;
 import java.util.UUID;
 
-import com.bigdata.bop.IQueryAttributes;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.NamedSolutionSetRefUtility;
-import com.bigdata.bop.engine.IRunningQuery;
+import org.embergraph.bop.IQueryAttributes;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.NamedSolutionSetRefUtility;
+import org.embergraph.bop.engine.IRunningQuery;
 
 /**
  * An interface specifying the information required to locate a named solution

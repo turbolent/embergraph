@@ -26,11 +26,11 @@ package org.embergraph.journal;
 
 import java.util.UUID;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.mdi.IResourceMetadata;
-import com.bigdata.mdi.LocalPartitionMetadata;
-import com.bigdata.service.IDataService;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.mdi.IResourceMetadata;
+import org.embergraph.mdi.LocalPartitionMetadata;
+import org.embergraph.service.IDataService;
 
 /**
  * Register a named index (unisolated write operation).

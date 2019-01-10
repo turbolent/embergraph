@@ -34,19 +34,19 @@ import java.util.concurrent.FutureTask;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpBase;
-import com.bigdata.bop.BOpContext;
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.BadBOpIdTypeException;
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.DuplicateBOpIdException;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.NV;
-import com.bigdata.bop.NotPipelineOpException;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.Var;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpBase;
+import org.embergraph.bop.BOpContext;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.BadBOpIdTypeException;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.DuplicateBOpIdException;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.NV;
+import org.embergraph.bop.NotPipelineOpException;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.Var;
 
 /**
  * Unit tests for {@link BOpUtility}.

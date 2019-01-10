@@ -28,8 +28,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation.accesspath;
 
-import com.bigdata.relation.IMutableRelation;
-import com.bigdata.relation.IRelation;
+import org.embergraph.relation.IMutableRelation;
+import org.embergraph.relation.IRelation;
 
 /**
  * A buffer abstraction.

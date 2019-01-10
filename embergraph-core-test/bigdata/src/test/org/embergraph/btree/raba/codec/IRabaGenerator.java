@@ -1,6 +1,6 @@
 package org.embergraph.btree.raba.codec;
 
-import com.bigdata.btree.raba.IRaba;
+import org.embergraph.btree.raba.IRaba;
 
 /**
  * Interface for {@link IRaba} data generators. A generator produces a

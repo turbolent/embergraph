@@ -24,12 +24,12 @@ import java.util.concurrent.ConcurrentMap;
 
 import org.openrdf.model.Value;
 
-import com.bigdata.rdf.graph.IGASContext;
-import com.bigdata.rdf.graph.IGASEngine;
-import com.bigdata.rdf.graph.IGASState;
-import com.bigdata.rdf.graph.IGraphAccessor;
-import com.bigdata.rdf.graph.IStaticFrontier;
-import com.bigdata.rdf.graph.analytics.FuzzySSSP.FuzzySSSPResult;
+import org.embergraph.rdf.graph.IGASContext;
+import org.embergraph.rdf.graph.IGASEngine;
+import org.embergraph.rdf.graph.IGASState;
+import org.embergraph.rdf.graph.IGraphAccessor;
+import org.embergraph.rdf.graph.IStaticFrontier;
+import org.embergraph.rdf.graph.analytics.FuzzySSSP.FuzzySSSPResult;
 
 /**
  * This algorithm provides a fuzzy implementation of the shortest paths between

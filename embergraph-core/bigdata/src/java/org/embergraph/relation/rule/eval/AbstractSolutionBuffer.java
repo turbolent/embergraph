@@ -1,13 +1,13 @@
 package org.embergraph.relation.rule.eval;
 
-import com.bigdata.relation.IMutableRelation;
-import com.bigdata.relation.IRelation;
-import com.bigdata.relation.accesspath.AbstractArrayBuffer;
-import com.bigdata.relation.accesspath.IBuffer;
-import com.bigdata.striterator.ChunkedArrayIterator;
-import com.bigdata.striterator.ChunkedResolvingIterator;
-import com.bigdata.striterator.IChunkedIterator;
-import com.bigdata.striterator.IChunkedOrderedIterator;
+import org.embergraph.relation.IMutableRelation;
+import org.embergraph.relation.IRelation;
+import org.embergraph.relation.accesspath.AbstractArrayBuffer;
+import org.embergraph.relation.accesspath.IBuffer;
+import org.embergraph.striterator.ChunkedArrayIterator;
+import org.embergraph.striterator.ChunkedResolvingIterator;
+import org.embergraph.striterator.IChunkedIterator;
+import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /**
  * Base class for {@link IBuffer} whose target is a mutation (insert, delete, or

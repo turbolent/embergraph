@@ -29,9 +29,9 @@ package org.embergraph.bop.rdf.join;
 
 import java.util.NoSuchElementException;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IVariable;
-import com.bigdata.rdf.lexicon.LexiconRelation;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IVariable;
+import org.embergraph.rdf.lexicon.LexiconRelation;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

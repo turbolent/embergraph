@@ -2,12 +2,12 @@ package org.embergraph.rdf.internal.constraints;
 
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpBase;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.constraint.BooleanValueExpression;
-import com.bigdata.rdf.error.SparqlTypeErrorException;
-import com.bigdata.rdf.internal.impl.literal.XSDBooleanIV;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpBase;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.constraint.BooleanValueExpression;
+import org.embergraph.rdf.error.SparqlTypeErrorException;
+import org.embergraph.rdf.internal.impl.literal.XSDBooleanIV;
 
 public class InferenceBVE extends BOpBase implements BooleanValueExpression {
 

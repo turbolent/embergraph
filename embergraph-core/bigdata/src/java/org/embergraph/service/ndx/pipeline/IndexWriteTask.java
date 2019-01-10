@@ -34,17 +34,17 @@ import java.util.concurrent.FutureTask;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
 
-import com.bigdata.btree.keys.KVO;
-import com.bigdata.btree.proc.AbstractKeyArrayIndexProcedureConstructor;
-import com.bigdata.btree.proc.IIndexProcedure;
-import com.bigdata.btree.proc.IKeyArrayIndexProcedure;
-import com.bigdata.btree.proc.IResultHandler;
-import com.bigdata.mdi.PartitionLocator;
-import com.bigdata.relation.accesspath.BlockingBuffer;
-import com.bigdata.relation.accesspath.IAsynchronousIterator;
-import com.bigdata.service.IDataService;
-import com.bigdata.service.Split;
-import com.bigdata.service.ndx.IScaleOutClientIndex;
+import org.embergraph.btree.keys.KVO;
+import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedureConstructor;
+import org.embergraph.btree.proc.IIndexProcedure;
+import org.embergraph.btree.proc.IKeyArrayIndexProcedure;
+import org.embergraph.btree.proc.IResultHandler;
+import org.embergraph.mdi.PartitionLocator;
+import org.embergraph.relation.accesspath.BlockingBuffer;
+import org.embergraph.relation.accesspath.IAsynchronousIterator;
+import org.embergraph.service.IDataService;
+import org.embergraph.service.Split;
+import org.embergraph.service.ndx.IScaleOutClientIndex;
 
 /**
  * Task drains a {@link BlockingBuffer} containing {@link KVO}[] chunks, splits

@@ -1,9 +1,9 @@
 package org.embergraph.relation;
 
-import com.bigdata.relation.locator.DefaultResourceLocator;
-import com.bigdata.relation.locator.ILocatableResource;
-import com.bigdata.sparse.KeyType;
-import com.bigdata.sparse.Schema;
+import org.embergraph.relation.locator.DefaultResourceLocator;
+import org.embergraph.relation.locator.ILocatableResource;
+import org.embergraph.sparse.KeyType;
+import org.embergraph.sparse.Schema;
 
 /**
  * A {@link Schema} for metadata about existing relations. Each relation

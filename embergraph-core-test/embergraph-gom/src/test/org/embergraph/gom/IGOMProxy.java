@@ -8,7 +8,7 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
-import com.bigdata.gom.om.IObjectManager;
+import org.embergraph.gom.om.IObjectManager;
 
 public interface IGOMProxy {
 	

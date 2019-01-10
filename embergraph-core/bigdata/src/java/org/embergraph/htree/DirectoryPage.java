@@ -34,16 +34,16 @@ import java.util.concurrent.FutureTask;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.Node;
-import com.bigdata.htree.AbstractHTree.ChildMemoizer;
-import com.bigdata.htree.AbstractHTree.LoadChildRequest;
-import com.bigdata.htree.data.IDirectoryData;
-import com.bigdata.io.AbstractFixedByteArrayBuffer;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.util.BytesUtil;
-import com.bigdata.util.concurrent.Memoizer;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.Node;
+import org.embergraph.htree.AbstractHTree.ChildMemoizer;
+import org.embergraph.htree.AbstractHTree.LoadChildRequest;
+import org.embergraph.htree.data.IDirectoryData;
+import org.embergraph.io.AbstractFixedByteArrayBuffer;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.util.BytesUtil;
+import org.embergraph.util.concurrent.Memoizer;
 
 import cutthecrap.utils.striterators.EmptyIterator;
 import cutthecrap.utils.striterators.Expander;

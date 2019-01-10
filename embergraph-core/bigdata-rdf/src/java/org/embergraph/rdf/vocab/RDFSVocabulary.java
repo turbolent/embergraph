@@ -34,16 +34,16 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.model.vocabulary.XMLSchema;
 
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.vocab.decls.DCAllVocabularyDecl;
-import com.bigdata.rdf.vocab.decls.FOAFVocabularyDecl;
-import com.bigdata.rdf.vocab.decls.OWLVocabularyDecl;
-import com.bigdata.rdf.vocab.decls.RDFSVocabularyDecl;
-import com.bigdata.rdf.vocab.decls.RDFVocabularyDecl;
-import com.bigdata.rdf.vocab.decls.SKOSVocabularyDecl;
-import com.bigdata.rdf.vocab.decls.SesameVocabularyDecl;
-import com.bigdata.rdf.vocab.decls.VoidVocabularyDecl;
-import com.bigdata.rdf.vocab.decls.XMLSchemaVocabularyDecl;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.vocab.decls.DCAllVocabularyDecl;
+import org.embergraph.rdf.vocab.decls.FOAFVocabularyDecl;
+import org.embergraph.rdf.vocab.decls.OWLVocabularyDecl;
+import org.embergraph.rdf.vocab.decls.RDFSVocabularyDecl;
+import org.embergraph.rdf.vocab.decls.RDFVocabularyDecl;
+import org.embergraph.rdf.vocab.decls.SKOSVocabularyDecl;
+import org.embergraph.rdf.vocab.decls.SesameVocabularyDecl;
+import org.embergraph.rdf.vocab.decls.VoidVocabularyDecl;
+import org.embergraph.rdf.vocab.decls.XMLSchemaVocabularyDecl;
 
 /**
  * A {@link Vocabulary} including well-known {@link Value}s for {@link RDF},

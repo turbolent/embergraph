@@ -50,7 +50,7 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import com.bigdata.util.httpd.HTTPHeaderUtility;
+import org.embergraph.util.httpd.HTTPHeaderUtility;
 
 /**
  * Test suite for {@link HTTPHeaderUtility}.

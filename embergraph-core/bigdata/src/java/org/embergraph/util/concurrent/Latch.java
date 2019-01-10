@@ -36,7 +36,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.util.InnerCause;
+import org.embergraph.util.InnerCause;
 
 /**
  * A synchronization aid that allows one or more threads to await a counter

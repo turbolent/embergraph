@@ -32,10 +32,10 @@ import junit.framework.Test;
 
 import org.openrdf.rio.RDFFormat;
 
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepository.AddOp;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepositoryManager;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository.AddOp;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepositoryManager;
 
 /**
  * Proxied test suite for {@link DataLoaderServlet}

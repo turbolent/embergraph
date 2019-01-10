@@ -27,8 +27,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.join;
 
-import com.bigdata.bop.IPredicate;
-import com.bigdata.relation.accesspath.IAccessPath;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.relation.accesspath.IAccessPath;
 
 /**
  * Interface declares additional annotations for joins against an

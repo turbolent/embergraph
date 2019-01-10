@@ -2,11 +2,11 @@ package org.embergraph.service;
 
 import java.util.concurrent.ExecutionException;
 
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.NoSuchIndexException;
-import com.bigdata.mdi.IMetadataIndex;
-import com.bigdata.mdi.MetadataIndex.MetadataIndexMetadata;
-import com.bigdata.util.InnerCause;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.NoSuchIndexException;
+import org.embergraph.mdi.IMetadataIndex;
+import org.embergraph.mdi.MetadataIndex.MetadataIndexMetadata;
+import org.embergraph.util.InnerCause;
 
 /**
  * Concrete implementation for {@link IMetadataIndex} views.

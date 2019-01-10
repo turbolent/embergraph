@@ -8,8 +8,8 @@ import org.openrdf.query.TupleQueryResult;
 import org.openrdf.query.TupleQueryResultHandler;
 import org.openrdf.query.TupleQueryResultHandlerException;
 
-import com.bigdata.rdf.sail.webapp.client.IPreparedTupleQuery;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepository;
+import org.embergraph.rdf.sail.webapp.client.IPreparedTupleQuery;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository;
 
 public class BigdataRemoteTupleQuery extends AbstractBigdataRemoteQuery implements TupleQuery {
 

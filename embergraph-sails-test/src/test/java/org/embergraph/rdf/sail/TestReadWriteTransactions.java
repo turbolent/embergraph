@@ -37,10 +37,10 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryResult;
 
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.model.BigdataStatement;
-import com.bigdata.rdf.store.BD;
-import com.bigdata.rdf.vocab.NoVocabulary;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.store.BD;
+import org.embergraph.rdf.vocab.NoVocabulary;
 
 /**
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>

@@ -23,8 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.btree;
 
-import com.bigdata.cache.HardReferenceQueue;
-import com.bigdata.cache.HardReferenceQueueEvictionListener;
+import org.embergraph.cache.HardReferenceQueue;
+import org.embergraph.cache.HardReferenceQueueEvictionListener;
 
 /**
  * Wraps the basic implementation and exposes a protected method that we

@@ -27,8 +27,8 @@ import junit.framework.Test;
 
 import org.openrdf.query.resultio.BooleanQueryResultFormat;
 
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.rdf.sail.webapp.client.IPreparedBooleanQuery;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.sail.webapp.client.IPreparedBooleanQuery;
 
 /**
  * Proxied test suite.

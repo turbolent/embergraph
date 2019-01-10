@@ -30,15 +30,15 @@ package org.embergraph.bop.engine;
 import java.util.Map;
 import java.util.UUID;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.IQueryContext;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.btree.ILocalBTreeView;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.service.IBigdataFederation;
-import com.bigdata.util.concurrent.IHaltable;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.IQueryContext;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.btree.ILocalBTreeView;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.service.IBigdataFederation;
+import org.embergraph.util.concurrent.IHaltable;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

@@ -30,8 +30,8 @@ package org.embergraph.rdf.sparql.ast.hints;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import com.bigdata.bop.join.IHashJoinUtility;
-import com.bigdata.rdf.sparql.ast.FunctionRegistry.Factory;
+import org.embergraph.bop.join.IHashJoinUtility;
+import org.embergraph.rdf.sparql.ast.FunctionRegistry.Factory;
 
 /**
  * A factory which is used to register and resolve query hints.

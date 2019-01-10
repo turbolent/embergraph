@@ -25,9 +25,9 @@ package org.embergraph.htree;
 
 import java.io.IOException;
 
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rawstore.SimpleMemoryRawStore;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /**
  * Test {@link HTree} with duplicate keys.

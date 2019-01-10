@@ -6,16 +6,16 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.BTreeCounters;
-import com.bigdata.btree.ILocalBTreeView;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.IndexSegment;
-import com.bigdata.journal.AbstractJournal;
-import com.bigdata.mdi.IResourceMetadata;
-import com.bigdata.mdi.LocalPartitionMetadata;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.resources.StoreManager.ManagedJournal;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.BTreeCounters;
+import org.embergraph.btree.ILocalBTreeView;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.IndexSegment;
+import org.embergraph.journal.AbstractJournal;
+import org.embergraph.mdi.IResourceMetadata;
+import org.embergraph.mdi.LocalPartitionMetadata;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.resources.StoreManager.ManagedJournal;
 
 /**
  * Class encapsulates a bunch of metadata used to make decisions about how to

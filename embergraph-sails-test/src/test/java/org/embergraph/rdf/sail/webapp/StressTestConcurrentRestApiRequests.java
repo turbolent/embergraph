@@ -65,17 +65,17 @@ import org.openrdf.query.BindingSet;
 import org.openrdf.query.TupleQueryResult;
 import org.openrdf.query.parser.sparql.SPARQLUpdateTest;
 
-import com.bigdata.BigdataStatics;
-import com.bigdata.bop.engine.QueryTimeoutException;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepository;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepositoryManager;
-import com.bigdata.relation.accesspath.BufferClosedException;
-import com.bigdata.testutil.ExperimentDriver.Result;
-import com.bigdata.util.Bytes;
-import com.bigdata.util.DaemonThreadFactory;
-import com.bigdata.util.InnerCause;
+import org.embergraph.BigdataStatics;
+import org.embergraph.bop.engine.QueryTimeoutException;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepositoryManager;
+import org.embergraph.relation.accesspath.BufferClosedException;
+import org.embergraph.testutil.ExperimentDriver.Result;
+import org.embergraph.util.Bytes;
+import org.embergraph.util.DaemonThreadFactory;
+import org.embergraph.util.InnerCause;
 
 /**
  * Proxied test suite.

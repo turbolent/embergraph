@@ -46,21 +46,21 @@ import java.util.concurrent.TimeUnit;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.bfs.BigdataFileSystem;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.ICounterSetAccess;
-import com.bigdata.io.SerializerUtil;
-import com.bigdata.journal.IResourceLockService;
-import com.bigdata.journal.ITransactionService;
-import com.bigdata.journal.TemporaryStore;
-import com.bigdata.mdi.IMetadataIndex;
-import com.bigdata.relation.locator.IResourceLocator;
-import com.bigdata.service.EventReceiver.EventBTree;
-import com.bigdata.service.ndx.IClientIndex;
-import com.bigdata.sparse.SparseRowStore;
-import com.bigdata.util.DaemonThreadFactory;
-import com.bigdata.util.httpd.AbstractHTTPD;
+import org.embergraph.bfs.BigdataFileSystem;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.ICounterSetAccess;
+import org.embergraph.io.SerializerUtil;
+import org.embergraph.journal.IResourceLockService;
+import org.embergraph.journal.ITransactionService;
+import org.embergraph.journal.TemporaryStore;
+import org.embergraph.mdi.IMetadataIndex;
+import org.embergraph.relation.locator.IResourceLocator;
+import org.embergraph.service.EventReceiver.EventBTree;
+import org.embergraph.service.ndx.IClientIndex;
+import org.embergraph.sparse.SparseRowStore;
+import org.embergraph.util.DaemonThreadFactory;
+import org.embergraph.util.httpd.AbstractHTTPD;
 
 /**
  * Unit tests for the {@link EventReceiver}.

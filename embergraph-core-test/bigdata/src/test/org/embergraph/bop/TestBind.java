@@ -3,7 +3,7 @@
  */
 package org.embergraph.bop;
 
-import com.bigdata.bop.bindingSet.ListBindingSet;
+import org.embergraph.bop.bindingSet.ListBindingSet;
 
 import junit.framework.TestCase2;
 

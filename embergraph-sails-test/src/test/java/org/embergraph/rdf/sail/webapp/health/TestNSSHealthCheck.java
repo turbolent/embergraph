@@ -43,26 +43,26 @@ import junit.textui.ResultPrinter;
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.server.Server;
 
-import com.bigdata.BigdataStatics;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.Journal.Options;
-import com.bigdata.rdf.sail.CreateKBTask;
-import com.bigdata.rdf.sail.DestroyKBTask;
-import com.bigdata.rdf.sail.webapp.ConfigParams;
-import com.bigdata.rdf.sail.webapp.DatasetNotFoundException;
-import com.bigdata.rdf.sail.webapp.NanoSparqlServer;
-import com.bigdata.rdf.sail.webapp.client.ConnectOptions;
-import com.bigdata.rdf.sail.webapp.client.HttpClientConfigurator;
-import com.bigdata.rdf.sail.webapp.client.HttpException;
-import com.bigdata.rdf.sail.webapp.client.JettyResponseListener;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepository;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepositoryManager;
-import com.bigdata.rdf.task.AbstractApiTask;
-import com.bigdata.util.DaemonThreadFactory;
-import com.bigdata.util.InnerCause;
-import com.bigdata.util.config.NicUtil;
+import org.embergraph.BigdataStatics;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.Journal.Options;
+import org.embergraph.rdf.sail.CreateKBTask;
+import org.embergraph.rdf.sail.DestroyKBTask;
+import org.embergraph.rdf.sail.webapp.ConfigParams;
+import org.embergraph.rdf.sail.webapp.DatasetNotFoundException;
+import org.embergraph.rdf.sail.webapp.NanoSparqlServer;
+import org.embergraph.rdf.sail.webapp.client.ConnectOptions;
+import org.embergraph.rdf.sail.webapp.client.HttpClientConfigurator;
+import org.embergraph.rdf.sail.webapp.client.HttpException;
+import org.embergraph.rdf.sail.webapp.client.JettyResponseListener;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepositoryManager;
+import org.embergraph.rdf.task.AbstractApiTask;
+import org.embergraph.util.DaemonThreadFactory;
+import org.embergraph.util.InnerCause;
+import org.embergraph.util.config.NicUtil;
 
 /**
  * Utility test suite provides a health check for a deployed instance.

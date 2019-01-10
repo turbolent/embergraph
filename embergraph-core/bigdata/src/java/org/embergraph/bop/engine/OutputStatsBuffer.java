@@ -29,8 +29,8 @@ package org.embergraph.bop.engine;
 
 import java.util.concurrent.Future;
 
-import com.bigdata.relation.accesspath.IAsynchronousIterator;
-import com.bigdata.relation.accesspath.IBlockingBuffer;
+import org.embergraph.relation.accesspath.IAsynchronousIterator;
+import org.embergraph.relation.accesspath.IBlockingBuffer;
 
 /**
  * Delegation pattern handles the {@link SinkTransitionMetadata}.

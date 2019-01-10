@@ -30,7 +30,7 @@ package org.embergraph.service.proxy;
 import java.io.IOException;
 import java.rmi.Remote;
 
-import com.bigdata.striterator.IChunkedIterator;
+import org.embergraph.striterator.IChunkedIterator;
 
 /**
  * Interface for objects proxying for asynchronous chunked iterators. This is

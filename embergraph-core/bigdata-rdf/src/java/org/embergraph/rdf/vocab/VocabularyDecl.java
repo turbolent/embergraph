@@ -31,8 +31,8 @@ import java.util.Iterator;
 
 import org.openrdf.model.URI;
 
-import com.bigdata.rdf.internal.impl.uri.VocabURIShortIV;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.internal.impl.uri.VocabURIShortIV;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * A class for declaring a {@link Vocabulary}.

@@ -2,7 +2,7 @@ package org.embergraph.resources;
 
 import java.util.Arrays;
 
-import com.bigdata.btree.IndexMetadata;
+import org.embergraph.btree.IndexMetadata;
 
 /**
  * The result of a {@link JoinIndexPartitionTask}.

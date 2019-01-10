@@ -31,8 +31,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import com.bigdata.testutil.ExperimentDriver;
-import com.bigdata.util.NV;
+import org.embergraph.testutil.ExperimentDriver;
+import org.embergraph.util.NV;
 
 /**
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

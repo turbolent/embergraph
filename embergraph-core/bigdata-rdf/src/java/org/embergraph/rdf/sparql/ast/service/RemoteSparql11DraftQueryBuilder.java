@@ -37,7 +37,7 @@ import org.openrdf.model.Value;
 import org.openrdf.query.Binding;
 import org.openrdf.query.BindingSet;
 
-import com.bigdata.bop.IVariable;
+import org.embergraph.bop.IVariable;
 
 /**
  * Utility class constructs a valid SPARQL query for a remote

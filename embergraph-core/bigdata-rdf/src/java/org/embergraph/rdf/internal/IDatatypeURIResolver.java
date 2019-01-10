@@ -26,9 +26,9 @@ package org.embergraph.rdf.internal;
 
 import org.openrdf.model.URI;
 
-import com.bigdata.rdf.lexicon.LexiconRelation;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.vocab.Vocabulary;
+import org.embergraph.rdf.lexicon.LexiconRelation;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.vocab.Vocabulary;
 
 /**
  * Specialized interface for resolving (and creating if necessary) datatype

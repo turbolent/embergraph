@@ -43,22 +43,22 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.config.LongValidator;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.ICounterSetAccess;
-import com.bigdata.counters.Instrument;
-import com.bigdata.ha.HAStatusEnum;
-import com.bigdata.journal.ITransactionService;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.RunState;
-import com.bigdata.journal.TimestampUtility;
-import com.bigdata.journal.ValidationError;
-import com.bigdata.resources.ResourceManager;
-import com.bigdata.util.InnerCause;
-import com.bigdata.util.MillisecondTimestampFactory;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.config.LongValidator;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.ICounterSetAccess;
+import org.embergraph.counters.Instrument;
+import org.embergraph.ha.HAStatusEnum;
+import org.embergraph.journal.ITransactionService;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.RunState;
+import org.embergraph.journal.TimestampUtility;
+import org.embergraph.journal.ValidationError;
+import org.embergraph.resources.ResourceManager;
+import org.embergraph.util.InnerCause;
+import org.embergraph.util.MillisecondTimestampFactory;
 
 /**
  * Centralized transaction manager service. In response to a client request, the

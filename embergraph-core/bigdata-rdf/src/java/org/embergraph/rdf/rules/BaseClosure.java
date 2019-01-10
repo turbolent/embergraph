@@ -3,10 +3,10 @@ package org.embergraph.rdf.rules;
 import java.util.Collections;
 import java.util.List;
 
-import com.bigdata.rdf.axioms.Axioms;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.vocab.Vocabulary;
-import com.bigdata.relation.rule.Rule;
+import org.embergraph.rdf.axioms.Axioms;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.vocab.Vocabulary;
+import org.embergraph.relation.rule.Rule;
 
 /**
  * Base class for classes that provide closure programs.

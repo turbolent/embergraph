@@ -2,8 +2,8 @@ package org.embergraph.service.ndx.pipeline;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.keys.KVO;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.keys.KVO;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Implementation which retains one instance of each tuple having the same

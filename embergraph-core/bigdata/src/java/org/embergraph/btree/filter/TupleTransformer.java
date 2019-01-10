@@ -30,9 +30,9 @@ package org.embergraph.btree.filter;
 
 import java.util.Iterator;
 
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.ITupleSerializer;
-import com.bigdata.btree.filter.LookaheadTupleFilter.ILookaheadTupleIterator;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.ITupleSerializer;
+import org.embergraph.btree.filter.LookaheadTupleFilter.ILookaheadTupleIterator;
 
 import cutthecrap.utils.striterators.FilterBase;
 

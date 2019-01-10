@@ -55,10 +55,10 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.RepositoryResult;
 import org.openrdf.rio.RDFFormat;
 
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.remote.BigdataSailRemoteRepository;
-import com.bigdata.rdf.sail.remote.BigdataSailRemoteRepositoryConnection;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.remote.BigdataSailRemoteRepository;
+import org.embergraph.rdf.sail.remote.BigdataSailRemoteRepositoryConnection;
 
 /**
  * Proxied test suite for {@link BigdataSailRemoteRepository} and

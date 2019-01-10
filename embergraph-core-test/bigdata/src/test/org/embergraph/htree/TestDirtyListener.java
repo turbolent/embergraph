@@ -27,10 +27,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.htree;
 
-import com.bigdata.btree.ICheckpointProtocol;
-import com.bigdata.btree.IDirtyListener;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rawstore.SimpleMemoryRawStore;
+import org.embergraph.btree.ICheckpointProtocol;
+import org.embergraph.btree.IDirtyListener;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /**
  * Test suite for the {@link IDirtyListener} protocol.

@@ -27,9 +27,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.rdf.sparql.ast.optimizers.StaticOptimizer;
-import com.bigdata.rdf.store.ITripleStore;
+import org.embergraph.bop.BOp;
+import org.embergraph.rdf.sparql.ast.optimizers.StaticOptimizer;
+import org.embergraph.rdf.store.ITripleStore;
 
 /**
  * Interface for things which can be re-ordered by the static join

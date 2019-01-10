@@ -32,7 +32,7 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
-import com.bigdata.rdf.internal.impl.AbstractIV;
+import org.embergraph.rdf.internal.impl.AbstractIV;
 
 /**
  * Value Type Enumeration (IVTE) is a class with methods for interpreting and 

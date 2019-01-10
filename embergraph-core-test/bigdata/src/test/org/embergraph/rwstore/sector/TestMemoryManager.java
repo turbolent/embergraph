@@ -22,13 +22,13 @@ import java.util.concurrent.TimeoutException;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.rawstore.IAllocationContext;
-import com.bigdata.rawstore.IPSOutputStream;
-import com.bigdata.rwstore.PSInputStream;
-import com.bigdata.rwstore.PSOutputStream;
-import com.bigdata.util.DaemonThreadFactory;
-import com.bigdata.util.InnerCause;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.rawstore.IAllocationContext;
+import org.embergraph.rawstore.IPSOutputStream;
+import org.embergraph.rwstore.PSInputStream;
+import org.embergraph.rwstore.PSOutputStream;
+import org.embergraph.util.DaemonThreadFactory;
+import org.embergraph.util.InnerCause;
 
 public class TestMemoryManager extends TestCase2 {
 

@@ -31,7 +31,7 @@ package org.embergraph.bfs;
 import java.io.IOException;
 import java.util.Random;
 
-import com.bigdata.bfs.BigdataFileSystem;
+import org.embergraph.bfs.BigdataFileSystem;
 
 /**
  * Test atomic append operations on the file data index for the

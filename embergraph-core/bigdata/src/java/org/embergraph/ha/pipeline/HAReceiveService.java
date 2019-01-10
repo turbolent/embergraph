@@ -52,18 +52,18 @@ import java.util.zip.Adler32;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.ha.QuorumPipelineImpl;
-import com.bigdata.ha.msg.HAMessageWrapper;
-import com.bigdata.ha.msg.HASendState;
-import com.bigdata.ha.msg.IHAMessage;
-import com.bigdata.ha.msg.IHASyncRequest;
-import com.bigdata.ha.msg.IHAWriteMessage;
-import com.bigdata.ha.msg.IHAWriteMessageBase;
-import com.bigdata.ha.pipeline.HASendService.IncSendTask;
-import com.bigdata.io.writecache.WriteCache;
-import com.bigdata.io.writecache.WriteCacheService;
-import com.bigdata.util.BytesUtil;
-import com.bigdata.util.ChecksumError;
+import org.embergraph.ha.QuorumPipelineImpl;
+import org.embergraph.ha.msg.HAMessageWrapper;
+import org.embergraph.ha.msg.HASendState;
+import org.embergraph.ha.msg.IHAMessage;
+import org.embergraph.ha.msg.IHASyncRequest;
+import org.embergraph.ha.msg.IHAWriteMessage;
+import org.embergraph.ha.msg.IHAWriteMessageBase;
+import org.embergraph.ha.pipeline.HASendService.IncSendTask;
+import org.embergraph.io.writecache.WriteCache;
+import org.embergraph.io.writecache.WriteCacheService;
+import org.embergraph.util.BytesUtil;
+import org.embergraph.util.ChecksumError;
 
 /**
  * Receives data from an {@link HASendService}.

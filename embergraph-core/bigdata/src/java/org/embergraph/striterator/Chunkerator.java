@@ -30,7 +30,7 @@ package org.embergraph.striterator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import com.bigdata.relation.accesspath.IElementFilter;
+import org.embergraph.relation.accesspath.IElementFilter;
 
 import cutthecrap.utils.striterators.ICloseable;
 import cutthecrap.utils.striterators.ICloseableIterator;

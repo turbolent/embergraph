@@ -51,31 +51,31 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.ha.msg.HAMessageWrapper;
-import com.bigdata.ha.msg.HASendState;
-import com.bigdata.ha.msg.IHAMessage;
-import com.bigdata.ha.msg.IHASendState;
-import com.bigdata.ha.msg.IHASyncRequest;
-import com.bigdata.ha.msg.IHAWriteMessage;
-import com.bigdata.ha.pipeline.HAReceiveService;
-import com.bigdata.ha.pipeline.HAReceiveService.IHAReceiveCallback;
-import com.bigdata.ha.pipeline.HASendService;
-import com.bigdata.ha.pipeline.ImmediateDownstreamReplicationException;
-import com.bigdata.ha.pipeline.NestedPipelineException;
-import com.bigdata.ha.pipeline.PipelineImmediateDownstreamReplicationException;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.io.IBufferAccess;
-import com.bigdata.quorum.QCE;
-import com.bigdata.quorum.Quorum;
-import com.bigdata.quorum.QuorumException;
-import com.bigdata.quorum.QuorumMember;
-import com.bigdata.quorum.QuorumStateChangeEvent;
-import com.bigdata.quorum.QuorumStateChangeEventEnum;
-import com.bigdata.quorum.QuorumStateChangeListener;
-import com.bigdata.quorum.QuorumStateChangeListenerBase;
-import com.bigdata.quorum.ServiceLookup;
-import com.bigdata.util.InnerCause;
-import com.bigdata.util.concurrent.ExecutionExceptions;
+import org.embergraph.ha.msg.HAMessageWrapper;
+import org.embergraph.ha.msg.HASendState;
+import org.embergraph.ha.msg.IHAMessage;
+import org.embergraph.ha.msg.IHASendState;
+import org.embergraph.ha.msg.IHASyncRequest;
+import org.embergraph.ha.msg.IHAWriteMessage;
+import org.embergraph.ha.pipeline.HAReceiveService;
+import org.embergraph.ha.pipeline.HAReceiveService.IHAReceiveCallback;
+import org.embergraph.ha.pipeline.HASendService;
+import org.embergraph.ha.pipeline.ImmediateDownstreamReplicationException;
+import org.embergraph.ha.pipeline.NestedPipelineException;
+import org.embergraph.ha.pipeline.PipelineImmediateDownstreamReplicationException;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.io.IBufferAccess;
+import org.embergraph.quorum.QCE;
+import org.embergraph.quorum.Quorum;
+import org.embergraph.quorum.QuorumException;
+import org.embergraph.quorum.QuorumMember;
+import org.embergraph.quorum.QuorumStateChangeEvent;
+import org.embergraph.quorum.QuorumStateChangeEventEnum;
+import org.embergraph.quorum.QuorumStateChangeListener;
+import org.embergraph.quorum.QuorumStateChangeListenerBase;
+import org.embergraph.quorum.ServiceLookup;
+import org.embergraph.util.InnerCause;
+import org.embergraph.util.concurrent.ExecutionExceptions;
 
 /**
  * {@link QuorumPipeline} implementation.

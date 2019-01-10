@@ -29,10 +29,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.ModifiableBOpBase;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpBase;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.ModifiableBOpBase;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpBase;
 
 /**
  * Base class for AST group nodes.

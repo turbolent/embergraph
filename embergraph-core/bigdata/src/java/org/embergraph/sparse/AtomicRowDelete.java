@@ -8,8 +8,8 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.keys.IKeyBuilder;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.keys.IKeyBuilder;
 
 /**
  * Atomic delete of a logical row. All property values written will have the

@@ -1,7 +1,7 @@
 package org.embergraph.bop.fed.shards;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IPredicate;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IPredicate;
 
 /**
  * Interface for mapping {@link Bundle}s over shards.

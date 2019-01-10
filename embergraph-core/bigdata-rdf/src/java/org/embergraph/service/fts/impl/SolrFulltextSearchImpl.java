@@ -37,11 +37,11 @@ import org.eclipse.jetty.client.api.ContentResponse;
 import org.eclipse.jetty.client.api.Request;
 import org.eclipse.jetty.client.util.FutureResponseListener;
 
-import com.bigdata.service.fts.FTS;
-import com.bigdata.service.fts.FulltextSearchException;
-import com.bigdata.service.fts.FulltextSearchHit;
-import com.bigdata.service.fts.FulltextSearchHiterator;
-import com.bigdata.service.fts.IFulltextSearch;
+import org.embergraph.service.fts.FTS;
+import org.embergraph.service.fts.FulltextSearchException;
+import org.embergraph.service.fts.FulltextSearchHit;
+import org.embergraph.service.fts.FulltextSearchHiterator;
+import org.embergraph.service.fts.IFulltextSearch;
 
 /**
  * Implementation based on the built-in keyword search capabilities for bigdata.

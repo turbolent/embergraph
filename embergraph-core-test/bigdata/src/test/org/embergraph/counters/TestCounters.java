@@ -42,7 +42,7 @@ import junit.framework.TestCase;
 
 import org.xml.sax.SAXException;
 
-import com.bigdata.counters.ICounterSet.IInstrumentFactory;
+import org.embergraph.counters.ICounterSet.IInstrumentFactory;
 
 /**
  * Unit tests for {@link CounterSet}.

@@ -29,10 +29,10 @@ package org.embergraph.rdf.lexicon;
 
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.ap.filter.BOpResolver;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.BigdataValue;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.ap.filter.BOpResolver;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.BigdataValue;
 
 /**
  * Cache the {@link BigdataValue} on the {@link IV} (create a cross linkage).

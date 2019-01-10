@@ -30,8 +30,8 @@ package org.embergraph.bop.joinGraph;
 
 import java.util.Arrays;
 
-import com.bigdata.relation.rule.IRule;
-import com.bigdata.relation.rule.eval.IJoinNexus;
+import org.embergraph.relation.rule.IRule;
+import org.embergraph.relation.rule.eval.IJoinNexus;
 
 /**
  * A factory for {@link IEvaluationPlan}s that uses a caller specified

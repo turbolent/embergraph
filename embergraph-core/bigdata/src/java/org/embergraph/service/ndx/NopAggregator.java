@@ -23,8 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.service.ndx;
 
-import com.bigdata.btree.proc.IResultHandler;
-import com.bigdata.service.Split;
+import org.embergraph.btree.proc.IResultHandler;
+import org.embergraph.service.Split;
 
 /**
  * NOP aggregator does nothing and returns <code>null</code>. This is used for

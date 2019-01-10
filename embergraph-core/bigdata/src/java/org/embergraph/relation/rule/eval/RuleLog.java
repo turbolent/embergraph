@@ -30,9 +30,9 @@ package org.embergraph.relation.rule.eval;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.IPredicate;
-import com.bigdata.relation.rule.IRule;
-import com.bigdata.relation.rule.eval.pipeline.JoinStats;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.relation.rule.IRule;
+import org.embergraph.relation.rule.eval.pipeline.JoinStats;
 
 /**
  * Class defines the log on which rule execution statistics are written. This

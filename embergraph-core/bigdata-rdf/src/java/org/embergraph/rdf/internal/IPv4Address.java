@@ -26,7 +26,7 @@ package org.embergraph.rdf.internal;
 import java.io.Serializable;
 import java.util.Arrays;
 
-import com.bigdata.util.BytesUtil.UnsignedByteArrayComparator;
+import org.embergraph.util.BytesUtil.UnsignedByteArrayComparator;
 
 /**
  * Class models an IPv4 address.

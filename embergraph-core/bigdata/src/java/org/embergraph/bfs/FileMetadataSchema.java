@@ -1,8 +1,8 @@
 package org.embergraph.bfs;
 
-import com.bigdata.sparse.KeyType;
-import com.bigdata.sparse.Schema;
-import com.bigdata.sparse.SparseRowStore;
+import org.embergraph.sparse.KeyType;
+import org.embergraph.sparse.Schema;
+import org.embergraph.sparse.SparseRowStore;
 
 /**
  * The schema for metadata about file versions stored in the

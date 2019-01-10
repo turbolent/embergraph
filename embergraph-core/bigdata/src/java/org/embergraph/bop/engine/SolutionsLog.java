@@ -32,12 +32,12 @@ import java.util.UUID;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.IVariableOrConstant;
-import com.bigdata.bop.join.PipelineJoin;
-import com.bigdata.util.Bytes;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.IVariableOrConstant;
+import org.embergraph.bop.join.PipelineJoin;
+import org.embergraph.util.Bytes;
 
 /**
  * Class provides a logger which may be used for observing all solutions flowing

@@ -19,16 +19,16 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 
-import com.bigdata.counters.ICounter;
-import com.bigdata.counters.IHostCounters;
-import com.bigdata.counters.IProcessCounters;
-import com.bigdata.ganglia.GangliaCoreMetricDecls;
-import com.bigdata.ganglia.GangliaMessageTypeEnum;
-import com.bigdata.ganglia.GangliaMetadataMessage;
-import com.bigdata.ganglia.GangliaMunge;
-import com.bigdata.ganglia.GangliaSlopeEnum;
-import com.bigdata.ganglia.IGangliaMetadataFactory;
-import com.bigdata.ganglia.IGangliaMetadataMessage;
+import org.embergraph.counters.ICounter;
+import org.embergraph.counters.IHostCounters;
+import org.embergraph.counters.IProcessCounters;
+import org.embergraph.ganglia.GangliaCoreMetricDecls;
+import org.embergraph.ganglia.GangliaMessageTypeEnum;
+import org.embergraph.ganglia.GangliaMetadataMessage;
+import org.embergraph.ganglia.GangliaMunge;
+import org.embergraph.ganglia.GangliaSlopeEnum;
+import org.embergraph.ganglia.IGangliaMetadataFactory;
+import org.embergraph.ganglia.IGangliaMetadataMessage;
 
 /**
  * A factory which integrates the bigdata hierarchical counter set model with

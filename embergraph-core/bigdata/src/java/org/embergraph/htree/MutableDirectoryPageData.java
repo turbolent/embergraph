@@ -1,9 +1,9 @@
 package org.embergraph.htree;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.htree.data.IDirectoryData;
-import com.bigdata.io.AbstractFixedByteArrayBuffer;
-import com.bigdata.rawstore.IRawStore;
+import org.embergraph.btree.BTree;
+import org.embergraph.htree.data.IDirectoryData;
+import org.embergraph.io.AbstractFixedByteArrayBuffer;
+import org.embergraph.rawstore.IRawStore;
 
 /**
  * Implementation maintains Java objects corresponding to the persistent data

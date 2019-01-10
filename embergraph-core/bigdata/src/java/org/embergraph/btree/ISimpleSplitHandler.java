@@ -1,6 +1,6 @@
 package org.embergraph.btree;
 
-import com.bigdata.sparse.SparseRowStore;
+import org.embergraph.sparse.SparseRowStore;
 
 /**
  * Interface allows an application to constrain the choice of the separator

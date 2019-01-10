@@ -27,11 +27,11 @@ package org.embergraph.rdf.internal.impl.literal;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
-import com.bigdata.rdf.internal.DTE;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.lexicon.LexiconRelation;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.internal.DTE;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.lexicon.LexiconRelation;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.BigdataValueFactory;
 
 /** Implementation for inline <code>xsd:unsignedByte</code>. */
 public class XSDUnsignedByteIV<V extends BigdataLiteral> extends

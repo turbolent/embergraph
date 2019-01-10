@@ -39,24 +39,24 @@ import java.util.concurrent.Callable;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.BOpContext;
-import com.bigdata.bop.ConcurrentHashMapAnnotations;
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.IVariableOrConstant;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.bindingSet.EmptyBindingSet;
-import com.bigdata.bop.engine.AbstractRunningQuery;
-import com.bigdata.bop.engine.IRunningQuery;
-import com.bigdata.bop.engine.QueryEngine;
-import com.bigdata.bop.join.IDistinctFilter;
-import com.bigdata.bop.join.JVMDistinctFilter;
-import com.bigdata.bop.paths.ArbitraryLengthPathOp.Annotations;
-import com.bigdata.bop.solutions.JVMDistinctBindingSetsOp;
-import com.bigdata.rdf.sparql.ast.QueryHints;
-import com.bigdata.relation.accesspath.UnsynchronizedArrayBuffer;
+import org.embergraph.bop.BOpContext;
+import org.embergraph.bop.ConcurrentHashMapAnnotations;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.IVariableOrConstant;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.bindingSet.EmptyBindingSet;
+import org.embergraph.bop.engine.AbstractRunningQuery;
+import org.embergraph.bop.engine.IRunningQuery;
+import org.embergraph.bop.engine.QueryEngine;
+import org.embergraph.bop.join.IDistinctFilter;
+import org.embergraph.bop.join.JVMDistinctFilter;
+import org.embergraph.bop.paths.ArbitraryLengthPathOp.Annotations;
+import org.embergraph.bop.solutions.JVMDistinctBindingSetsOp;
+import org.embergraph.rdf.sparql.ast.QueryHints;
+import org.embergraph.relation.accesspath.UnsynchronizedArrayBuffer;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

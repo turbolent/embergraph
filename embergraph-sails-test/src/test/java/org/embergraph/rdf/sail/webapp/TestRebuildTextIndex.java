@@ -40,12 +40,12 @@ import org.openrdf.model.impl.ValueFactoryImpl;
 import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.query.TupleQueryResult;
 
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.rdf.sail.webapp.client.HttpException;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepository;
-import com.bigdata.rdf.store.AbstractTripleStore.Options;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepository.AddOp;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.sail.webapp.client.HttpException;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository;
+import org.embergraph.rdf.store.AbstractTripleStore.Options;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository.AddOp;
 
 /**
  * Proxied test suite for rebuilding full text index.

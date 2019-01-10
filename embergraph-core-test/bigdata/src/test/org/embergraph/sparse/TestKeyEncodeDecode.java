@@ -33,10 +33,10 @@ import java.util.Properties;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.btree.keys.CollatorEnum;
-import com.bigdata.btree.keys.DefaultKeyBuilderFactory;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.KeyBuilder;
+import org.embergraph.btree.keys.CollatorEnum;
+import org.embergraph.btree.keys.DefaultKeyBuilderFactory;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.KeyBuilder;
 import com.ibm.icu.text.CollationKey;
 
 /**

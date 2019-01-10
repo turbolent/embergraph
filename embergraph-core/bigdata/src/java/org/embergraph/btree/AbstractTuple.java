@@ -31,12 +31,12 @@ package org.embergraph.btree;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 
-import com.bigdata.btree.data.ILeafData;
-import com.bigdata.io.ByteArrayBuffer;
-import com.bigdata.io.DataInputBuffer;
-import com.bigdata.io.DataOutputBuffer;
-import com.bigdata.rawstore.IBlock;
-import com.bigdata.rawstore.IRawStore;
+import org.embergraph.btree.data.ILeafData;
+import org.embergraph.io.ByteArrayBuffer;
+import org.embergraph.io.DataInputBuffer;
+import org.embergraph.io.DataOutputBuffer;
+import org.embergraph.rawstore.IBlock;
+import org.embergraph.rawstore.IRawStore;
 
 /**
  * Abstract base class with much of the functionality of {@link ITuple}.

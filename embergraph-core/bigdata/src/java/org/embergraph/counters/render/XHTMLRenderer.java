@@ -18,26 +18,26 @@ import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.HistoryInstrument;
-import com.bigdata.counters.ICounter;
-import com.bigdata.counters.ICounterNode;
-import com.bigdata.counters.ICounterSet;
-import com.bigdata.counters.IHistoryEntry;
-import com.bigdata.counters.IServiceCounters;
-import com.bigdata.counters.PeriodEnum;
-import com.bigdata.counters.query.CSet;
-import com.bigdata.counters.query.CounterSetSelector;
-import com.bigdata.counters.query.HistoryTable;
-import com.bigdata.counters.query.ICounterSelector;
-import com.bigdata.counters.query.PivotTable;
-import com.bigdata.counters.query.ReportEnum;
-import com.bigdata.counters.query.TimestampFormatEnum;
-import com.bigdata.counters.query.URLQueryModel;
-import com.bigdata.counters.query.URLQueryParam;
-import com.bigdata.service.Event;
-import com.bigdata.service.IEventReportingService;
-import com.bigdata.util.HTMLUtility;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.HistoryInstrument;
+import org.embergraph.counters.ICounter;
+import org.embergraph.counters.ICounterNode;
+import org.embergraph.counters.ICounterSet;
+import org.embergraph.counters.IHistoryEntry;
+import org.embergraph.counters.IServiceCounters;
+import org.embergraph.counters.PeriodEnum;
+import org.embergraph.counters.query.CSet;
+import org.embergraph.counters.query.CounterSetSelector;
+import org.embergraph.counters.query.HistoryTable;
+import org.embergraph.counters.query.ICounterSelector;
+import org.embergraph.counters.query.PivotTable;
+import org.embergraph.counters.query.ReportEnum;
+import org.embergraph.counters.query.TimestampFormatEnum;
+import org.embergraph.counters.query.URLQueryModel;
+import org.embergraph.counters.query.URLQueryParam;
+import org.embergraph.service.Event;
+import org.embergraph.service.IEventReportingService;
+import org.embergraph.util.HTMLUtility;
 
 /**
  * (X)HTML rendering of a {@link CounterSet}.

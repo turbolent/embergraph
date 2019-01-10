@@ -34,13 +34,13 @@ import java.util.concurrent.atomic.AtomicLong;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import com.bigdata.io.FileChannelUtility;
-import com.bigdata.mdi.IResourceMetadata;
-import com.bigdata.rawstore.AbstractRawWormStore;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rawstore.WormAddressManager;
-import com.bigdata.resources.ResourceManager;
-import com.bigdata.util.Bytes;
+import org.embergraph.io.FileChannelUtility;
+import org.embergraph.mdi.IResourceMetadata;
+import org.embergraph.rawstore.AbstractRawWormStore;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rawstore.WormAddressManager;
+import org.embergraph.resources.ResourceManager;
+import org.embergraph.util.Bytes;
 
 /**
  * Abstract base class for {@link IBufferStrategy} implementation.

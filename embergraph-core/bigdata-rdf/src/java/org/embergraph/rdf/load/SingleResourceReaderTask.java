@@ -12,10 +12,10 @@ import org.apache.log4j.Logger;
 import org.openrdf.model.Statement;
 import org.openrdf.rio.RDFFormat;
 
-import com.bigdata.rdf.rio.IStatementBuffer;
-import com.bigdata.rdf.rio.LoadStats;
-import com.bigdata.rdf.rio.PresortRioLoader;
-import com.bigdata.rdf.rio.RDFParserOptions;
+import org.embergraph.rdf.rio.IStatementBuffer;
+import org.embergraph.rdf.rio.LoadStats;
+import org.embergraph.rdf.rio.PresortRioLoader;
+import org.embergraph.rdf.rio.RDFParserOptions;
 
 /**
  * Tasks either loads a RDF resource or verifies that the told triples found

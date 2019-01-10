@@ -7,8 +7,8 @@ package com.bigdata.rdf.rio.ntriples;
 
 import org.openrdf.rio.RDFParser;
 
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.BigdataValueFactoryImpl;
 
 /**
  * JUnit test for the N-Triples parser.

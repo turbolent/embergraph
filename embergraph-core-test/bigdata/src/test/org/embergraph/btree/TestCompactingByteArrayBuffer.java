@@ -32,7 +32,7 @@ import java.nio.ByteBuffer;
 
 import junit.framework.TestCase;
 
-import com.bigdata.io.DataOutputBuffer;
+import org.embergraph.io.DataOutputBuffer;
 
 /**
  * Test harness used to develop a compacting buffer for maintaining branch nodes

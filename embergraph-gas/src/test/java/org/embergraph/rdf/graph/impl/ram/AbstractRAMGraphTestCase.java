@@ -20,10 +20,10 @@ import org.openrdf.model.ValueFactory;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-import com.bigdata.rdf.graph.AbstractGraphTestCase;
-import com.bigdata.rdf.graph.impl.ram.RAMGASEngine.RAMGraph;
-import com.bigdata.rdf.graph.util.IGraphFixture;
-import com.bigdata.rdf.graph.util.IGraphFixtureFactory;
+import org.embergraph.rdf.graph.AbstractGraphTestCase;
+import org.embergraph.rdf.graph.impl.ram.RAMGASEngine.RAMGraph;
+import org.embergraph.rdf.graph.util.IGraphFixture;
+import org.embergraph.rdf.graph.util.IGraphFixtureFactory;
 
 public class AbstractRAMGraphTestCase extends AbstractGraphTestCase {
 

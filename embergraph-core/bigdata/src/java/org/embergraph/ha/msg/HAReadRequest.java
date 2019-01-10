@@ -26,7 +26,7 @@ package org.embergraph.ha.msg;
 import java.io.Serializable;
 import java.util.UUID;
 
-import com.bigdata.rawstore.IRawStore;
+import org.embergraph.rawstore.IRawStore;
 
 public class HAReadRequest implements IHAReadRequest,
         Serializable {

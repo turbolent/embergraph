@@ -47,8 +47,8 @@ Modifications:
 
 package com.bigdata.rdf.store;
 
-import com.bigdata.rdf.lexicon.LexiconRelation;
-import com.bigdata.rdf.spo.SPORelation;
+import org.embergraph.rdf.lexicon.LexiconRelation;
+import org.embergraph.rdf.spo.SPORelation;
 
 /**
  * Test suite for locating an {@link AbstractTripleStore}, locating the

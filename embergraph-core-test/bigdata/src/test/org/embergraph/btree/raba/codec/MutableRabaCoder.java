@@ -27,13 +27,13 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree.raba.codec;
 
-import com.bigdata.btree.Leaf;
-import com.bigdata.btree.Node;
-import com.bigdata.btree.raba.IRaba;
-import com.bigdata.btree.raba.MutableKeyBuffer;
-import com.bigdata.btree.raba.MutableValueBuffer;
-import com.bigdata.io.AbstractFixedByteArrayBuffer;
-import com.bigdata.io.DataOutputBuffer;
+import org.embergraph.btree.Leaf;
+import org.embergraph.btree.Node;
+import org.embergraph.btree.raba.IRaba;
+import org.embergraph.btree.raba.MutableKeyBuffer;
+import org.embergraph.btree.raba.MutableValueBuffer;
+import org.embergraph.io.AbstractFixedByteArrayBuffer;
+import org.embergraph.io.DataOutputBuffer;
 
 /**
  * This "codes" a raba as a {@link MutableKeyBuffer} or

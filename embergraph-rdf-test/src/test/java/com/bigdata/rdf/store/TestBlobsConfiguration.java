@@ -30,7 +30,7 @@ package com.bigdata.rdf.store;
 
 import java.util.Properties;
 
-import com.bigdata.btree.IIndex;
+import org.embergraph.btree.IIndex;
 
 /**
  * Test suite for configuration of the BLOBS index support.

@@ -35,24 +35,24 @@ import java.io.ObjectOutput;
 import org.apache.log4j.Logger;
 import org.apache.lucene.search.similarities.DefaultSimilarity;
 
-import com.bigdata.btree.DefaultTupleSerializer;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.IKeyBuilderFactory;
-import com.bigdata.btree.raba.codec.IRabaCoder;
-import com.bigdata.io.ByteArrayBuffer;
-import com.bigdata.io.DataOutputBuffer;
-import com.bigdata.io.ShortPacker;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.IVUtility;
-import com.bigdata.search.FullTextIndexTupleSerializer;
-import com.bigdata.search.ITermDocKey;
-import com.bigdata.search.ITermDocRecord;
-import com.bigdata.search.ITermDocVal;
-import com.bigdata.search.ReadOnlyTermDocKey;
-import com.bigdata.search.ReadOnlyTermDocRecord;
-import com.bigdata.util.Bytes;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.DefaultTupleSerializer;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.IKeyBuilderFactory;
+import org.embergraph.btree.raba.codec.IRabaCoder;
+import org.embergraph.io.ByteArrayBuffer;
+import org.embergraph.io.DataOutputBuffer;
+import org.embergraph.io.ShortPacker;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.IVUtility;
+import org.embergraph.search.FullTextIndexTupleSerializer;
+import org.embergraph.search.ITermDocKey;
+import org.embergraph.search.ITermDocRecord;
+import org.embergraph.search.ITermDocVal;
+import org.embergraph.search.ReadOnlyTermDocKey;
+import org.embergraph.search.ReadOnlyTermDocRecord;
+import org.embergraph.util.Bytes;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Replaces the {@link FullTextIndexTupleSerializer} to support {@link IV}s as

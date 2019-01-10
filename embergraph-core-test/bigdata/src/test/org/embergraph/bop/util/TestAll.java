@@ -23,8 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.bop.util;
 
-import com.bigdata.bop.joinGraph.TestPartitionedJoinGroup_canJoin;
-import com.bigdata.bop.joinGraph.TestPartitionedJoinGroup_canJoinUsingConstraints;
+import org.embergraph.bop.joinGraph.TestPartitionedJoinGroup_canJoin;
+import org.embergraph.bop.joinGraph.TestPartitionedJoinGroup_canJoinUsingConstraints;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

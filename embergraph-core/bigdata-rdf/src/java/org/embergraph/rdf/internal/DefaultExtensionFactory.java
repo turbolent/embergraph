@@ -6,13 +6,13 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.bigdata.rdf.internal.impl.extensions.DateTimeExtension;
-import com.bigdata.rdf.internal.impl.extensions.DerivedNumericsExtension;
-import com.bigdata.rdf.internal.impl.extensions.GeoSpatialLiteralExtension;
-import com.bigdata.rdf.internal.impl.extensions.XSDStringExtension;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.service.geospatial.GeoSpatialDatatypeConfiguration;
+import org.embergraph.rdf.internal.impl.extensions.DateTimeExtension;
+import org.embergraph.rdf.internal.impl.extensions.DerivedNumericsExtension;
+import org.embergraph.rdf.internal.impl.extensions.GeoSpatialLiteralExtension;
+import org.embergraph.rdf.internal.impl.extensions.XSDStringExtension;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.service.geospatial.GeoSpatialDatatypeConfiguration;
 
 /**
  * Default {@link IExtensionFactory}. The following extensions are supported:

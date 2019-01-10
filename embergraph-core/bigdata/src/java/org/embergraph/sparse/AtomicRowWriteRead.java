@@ -33,9 +33,9 @@ import java.util.TreeMap;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.util.InnerCause;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.util.InnerCause;
 
 /**
  * Atomic write on a logical row. All property values written will have the

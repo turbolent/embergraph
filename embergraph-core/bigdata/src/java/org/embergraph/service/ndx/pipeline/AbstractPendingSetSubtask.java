@@ -34,9 +34,9 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
-import com.bigdata.relation.accesspath.BlockingBuffer;
-import com.bigdata.service.IRemoteExecutor;
-import com.bigdata.service.master.IAsynchronousClientTask;
+import org.embergraph.relation.accesspath.BlockingBuffer;
+import org.embergraph.service.IRemoteExecutor;
+import org.embergraph.service.master.IAsynchronousClientTask;
 
 /**
  * Extended to assign chunks of work items to a remote

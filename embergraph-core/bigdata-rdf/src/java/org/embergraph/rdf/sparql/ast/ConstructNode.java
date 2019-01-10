@@ -29,9 +29,9 @@ package org.embergraph.rdf.sparql.ast;
 
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpContext;
-import com.bigdata.rdf.spo.ISPO;
+import org.embergraph.bop.BOp;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
+import org.embergraph.rdf.spo.ISPO;
 
 /**
  * A template for the construction of one or more graphs based on the solutions

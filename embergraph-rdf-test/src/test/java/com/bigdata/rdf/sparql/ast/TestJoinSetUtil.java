@@ -29,9 +29,9 @@ package com.bigdata.rdf.sparql.ast;
 
 import java.util.Collections;
 
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.Var;
-import com.bigdata.rdf.sparql.ast.JoinSetUtil.VertexJoinSet;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.Var;
+import org.embergraph.rdf.sparql.ast.JoinSetUtil.VertexJoinSet;
 
 /**
  * Test suite for {@link JoinSetUtil}.

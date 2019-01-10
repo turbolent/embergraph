@@ -1,6 +1,6 @@
 package org.embergraph.htree;
 
-import com.bigdata.btree.ICounter;
+import org.embergraph.btree.ICounter;
 
 /**
  * Mutable counter.

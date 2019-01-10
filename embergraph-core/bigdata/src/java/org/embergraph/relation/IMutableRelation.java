@@ -28,9 +28,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.journal.AbstractJournal;
-import com.bigdata.striterator.IChunkedOrderedIterator;
+import org.embergraph.btree.BTree;
+import org.embergraph.journal.AbstractJournal;
+import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /**
  * A mutable {@link IRelation}. The relation must maintain any secondary

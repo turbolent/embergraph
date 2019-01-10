@@ -41,10 +41,10 @@ import org.openrdf.query.impl.BindingImpl;
 import org.openrdf.repository.RepositoryResult;
 import org.openrdf.rio.RDFFormat;
 
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
 
 /**
  * Test suite for {@link AbstractQuery#setBinding(String, Value)}

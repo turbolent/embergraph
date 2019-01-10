@@ -30,8 +30,8 @@ package org.embergraph.journal;
 
 import java.util.Set;
 
-import com.bigdata.service.IServiceShutdown;
-import com.bigdata.service.ITxState;
+import org.embergraph.service.IServiceShutdown;
+import org.embergraph.service.ITxState;
 
 /**
  * Interface for managing local transaction state (the client side of the

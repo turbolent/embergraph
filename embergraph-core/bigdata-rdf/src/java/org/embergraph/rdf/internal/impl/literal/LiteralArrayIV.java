@@ -26,17 +26,17 @@ import java.util.Arrays;
 
 import org.openrdf.model.Literal;
 
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.rdf.internal.DTE;
-import com.bigdata.rdf.internal.DTEExtension;
-import com.bigdata.rdf.internal.IExtension;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.InlineLiteralIV;
-import com.bigdata.rdf.internal.InlineURIHandler;
-import com.bigdata.rdf.internal.impl.uri.URIExtensionIV;
-import com.bigdata.rdf.lexicon.LexiconRelation;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.rdf.internal.DTE;
+import org.embergraph.rdf.internal.DTEExtension;
+import org.embergraph.rdf.internal.IExtension;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.InlineLiteralIV;
+import org.embergraph.rdf.internal.InlineURIHandler;
+import org.embergraph.rdf.internal.impl.uri.URIExtensionIV;
+import org.embergraph.rdf.lexicon.LexiconRelation;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.util.BytesUtil;
 
 /**
  * An inline literal IV composed of an array of other inline literal IVs. This

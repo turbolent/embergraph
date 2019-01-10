@@ -32,23 +32,23 @@ import junit.framework.TestCase2;
 
 import org.openrdf.model.URI;
 
-import com.bigdata.rdf.internal.IDatatypeURIResolver;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.VTE;
-import com.bigdata.rdf.internal.XSD;
-import com.bigdata.rdf.internal.impl.TermId;
-import com.bigdata.rdf.internal.impl.bnode.NumericBNodeIV;
-import com.bigdata.rdf.internal.impl.bnode.SidIV;
-import com.bigdata.rdf.internal.impl.extensions.DateTimeExtension;
-import com.bigdata.rdf.internal.impl.literal.XSDBooleanIV;
-import com.bigdata.rdf.internal.impl.literal.XSDNumericIV;
-import com.bigdata.rdf.model.BigdataBNode;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.model.BigdataValueFactoryImpl;
-import com.bigdata.rdf.spo.SPO;
+import org.embergraph.rdf.internal.IDatatypeURIResolver;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.VTE;
+import org.embergraph.rdf.internal.XSD;
+import org.embergraph.rdf.internal.impl.TermId;
+import org.embergraph.rdf.internal.impl.bnode.NumericBNodeIV;
+import org.embergraph.rdf.internal.impl.bnode.SidIV;
+import org.embergraph.rdf.internal.impl.extensions.DateTimeExtension;
+import org.embergraph.rdf.internal.impl.literal.XSDBooleanIV;
+import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
+import org.embergraph.rdf.model.BigdataBNode;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.spo.SPO;
 
 /**
  * Test suite for {@link IVComparator}.

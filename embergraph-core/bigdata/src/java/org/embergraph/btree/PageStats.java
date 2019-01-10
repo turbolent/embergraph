@@ -23,9 +23,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.btree;
 
-import com.bigdata.btree.data.IAbstractNodeData;
-import com.bigdata.btree.data.ILeafData;
-import com.bigdata.rawstore.IRawStore;
+import org.embergraph.btree.data.IAbstractNodeData;
+import org.embergraph.btree.data.ILeafData;
+import org.embergraph.rawstore.IRawStore;
 
 /**
  * Class reports various summary statistics for nodes and leaves.

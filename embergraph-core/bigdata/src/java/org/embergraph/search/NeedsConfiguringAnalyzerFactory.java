@@ -50,10 +50,10 @@ import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.analysis.util.CharArraySet;
 import org.apache.lucene.util.Version;
 
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.search.ConfigurableAnalyzerFactory.AnalyzerOptions;
-import com.bigdata.search.ConfigurableAnalyzerFactory.Options;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.search.ConfigurableAnalyzerFactory.AnalyzerOptions;
+import org.embergraph.search.ConfigurableAnalyzerFactory.Options;
 
 
 /**

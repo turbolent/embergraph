@@ -37,18 +37,18 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 
-import com.bigdata.BigdataStatics;
-import com.bigdata.bop.solutions.SolutionSetStream;
-import com.bigdata.btree.AbstractBTreeTestCase;
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.HTreeIndexMetadata;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.keys.KV;
-import com.bigdata.concurrent.FutureTaskMon;
-import com.bigdata.htree.HTree;
-import com.bigdata.rwstore.IRWStrategy;
-import com.bigdata.stream.Stream.StreamIndexMetadata;
-import com.bigdata.util.concurrent.LatchedExecutor;
+import org.embergraph.BigdataStatics;
+import org.embergraph.bop.solutions.SolutionSetStream;
+import org.embergraph.btree.AbstractBTreeTestCase;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.HTreeIndexMetadata;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.keys.KV;
+import org.embergraph.concurrent.FutureTaskMon;
+import org.embergraph.htree.HTree;
+import org.embergraph.rwstore.IRWStrategy;
+import org.embergraph.stream.Stream.StreamIndexMetadata;
+import org.embergraph.util.concurrent.LatchedExecutor;
 
 /**
  * Test suite for {@link DumpJournal}.

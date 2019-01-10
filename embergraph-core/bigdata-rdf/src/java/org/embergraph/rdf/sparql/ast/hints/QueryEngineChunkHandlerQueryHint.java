@@ -27,12 +27,12 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.hints;
 
-import com.bigdata.bop.engine.IChunkHandler;
-import com.bigdata.bop.engine.NativeHeapStandloneChunkHandler;
-import com.bigdata.rdf.sparql.ast.ASTBase;
-import com.bigdata.rdf.sparql.ast.QueryHints;
-import com.bigdata.rdf.sparql.ast.QueryRoot;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpContext;
+import org.embergraph.bop.engine.IChunkHandler;
+import org.embergraph.bop.engine.NativeHeapStandloneChunkHandler;
+import org.embergraph.rdf.sparql.ast.ASTBase;
+import org.embergraph.rdf.sparql.ast.QueryHints;
+import org.embergraph.rdf.sparql.ast.QueryRoot;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /**
  * Query hint deciding on the {@link IChunkHandler} to be used.

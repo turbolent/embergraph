@@ -27,10 +27,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree;
 
-import com.bigdata.btree.data.INodeData;
-import com.bigdata.btree.raba.IRaba;
-import com.bigdata.btree.raba.MutableKeyBuffer;
-import com.bigdata.io.AbstractFixedByteArrayBuffer;
+import org.embergraph.btree.data.INodeData;
+import org.embergraph.btree.raba.IRaba;
+import org.embergraph.btree.raba.MutableKeyBuffer;
+import org.embergraph.io.AbstractFixedByteArrayBuffer;
 
 /**
  * Implementation maintains Java objects corresponding to the persistent data

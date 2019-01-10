@@ -29,8 +29,8 @@ package org.embergraph.rdf.sparql.ast.eval.rto;
 
 import java.util.Properties;
 
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.sail.BigdataSail;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.sail.BigdataSail;
 
 /**
  * Data driven test suite for the Runtime Query Optimizer (RTO) using LUBM data

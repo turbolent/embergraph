@@ -29,8 +29,8 @@ package org.embergraph.rdf.sparql.ast.service;
 
 import org.openrdf.query.BindingSet;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.relation.accesspath.IBindingSetAccessPath;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.relation.accesspath.IBindingSetAccessPath;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

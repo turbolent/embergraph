@@ -35,11 +35,11 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
-import com.bigdata.gom.alchemy.owl.OWLClassSkin;
-import com.bigdata.gom.alchemy.owl.OWLOntologySkin;
-import com.bigdata.gom.alchemy.owl.OWLPropertySkin;
-import com.bigdata.gom.alchemy.owl.OWLSkins;
-import com.bigdata.gom.gpo.IGPO;
+import org.embergraph.gom.alchemy.owl.OWLClassSkin;
+import org.embergraph.gom.alchemy.owl.OWLOntologySkin;
+import org.embergraph.gom.alchemy.owl.OWLPropertySkin;
+import org.embergraph.gom.alchemy.owl.OWLSkins;
+import org.embergraph.gom.gpo.IGPO;
 
 public class TestOWLSkin extends LocalGOMTestCase {
 //	BigdataSailRepository m_repo = null;

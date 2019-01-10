@@ -8,18 +8,18 @@ import java.util.UUID;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.engine.QueryEngine;
-import com.bigdata.cache.ConcurrentWeakValueCache;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.IBTreeManager;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.Journal;
-import com.bigdata.relation.locator.IResourceLocator;
-import com.bigdata.service.IBigdataClient;
-import com.bigdata.service.IBigdataFederation;
-import com.bigdata.service.ManagedResourceService;
-import com.bigdata.service.ResourceService;
-import com.bigdata.util.config.NicUtil;
+import org.embergraph.bop.engine.QueryEngine;
+import org.embergraph.cache.ConcurrentWeakValueCache;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.IBTreeManager;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.Journal;
+import org.embergraph.relation.locator.IResourceLocator;
+import org.embergraph.service.IBigdataClient;
+import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.ManagedResourceService;
+import org.embergraph.service.ResourceService;
+import org.embergraph.util.config.NicUtil;
 
 /**
  * Default {@link IQueryEngineFactory} implementation.

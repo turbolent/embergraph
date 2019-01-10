@@ -1,7 +1,7 @@
 package org.embergraph.htree.data;
 
-import com.bigdata.btree.data.MockLeafData;
-import com.bigdata.btree.raba.IRaba;
+import org.embergraph.btree.data.MockLeafData;
+import org.embergraph.btree.raba.IRaba;
 
 /**
  * Mock object for a hash bucket.

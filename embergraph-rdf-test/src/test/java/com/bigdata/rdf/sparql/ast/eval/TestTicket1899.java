@@ -25,10 +25,10 @@ package com.bigdata.rdf.sparql.ast.eval;
 
 import java.util.Properties;
 
-import com.bigdata.journal.BufferMode;
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 
 /**

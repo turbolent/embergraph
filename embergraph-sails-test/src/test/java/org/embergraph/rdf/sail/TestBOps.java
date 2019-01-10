@@ -46,9 +46,9 @@ import org.openrdf.query.TupleQuery;
 import org.openrdf.query.TupleQueryResult;
 import org.openrdf.query.impl.BindingImpl;
 
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.store.BD;
-import com.bigdata.rdf.vocab.NoVocabulary;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.store.BD;
+import org.embergraph.rdf.vocab.NoVocabulary;
 
 /**
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>

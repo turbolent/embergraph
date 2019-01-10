@@ -31,7 +31,7 @@ import java.nio.ByteBuffer;
 import java.util.Random;
 import java.util.zip.Adler32;
 
-import com.bigdata.io.ChecksumUtility;
+import org.embergraph.io.ChecksumUtility;
 
 import junit.framework.TestCase;
 

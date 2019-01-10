@@ -31,12 +31,12 @@ import java.math.BigInteger;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.rdf.internal.impl.literal.XSDUnsignedByteIV;
-import com.bigdata.rdf.internal.impl.literal.XSDUnsignedIntIV;
-import com.bigdata.rdf.internal.impl.literal.XSDUnsignedLongIV;
-import com.bigdata.rdf.internal.impl.literal.XSDUnsignedShortIV;
-import com.bigdata.rdf.model.BigdataLiteral;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.rdf.internal.impl.literal.XSDUnsignedByteIV;
+import org.embergraph.rdf.internal.impl.literal.XSDUnsignedIntIV;
+import org.embergraph.rdf.internal.impl.literal.XSDUnsignedLongIV;
+import org.embergraph.rdf.internal.impl.literal.XSDUnsignedShortIV;
+import org.embergraph.rdf.model.BigdataLiteral;
 
 /**
  * Test suite for the xsd:unsigned IV which are internally represented by Java

@@ -27,8 +27,8 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.counters.AbstractStatisticsCollector;
-import com.bigdata.counters.ICounterSet;
+import org.embergraph.counters.AbstractStatisticsCollector;
+import org.embergraph.counters.ICounterSet;
 
 /**
  * {@link IPlugin} for collecting statistics from the operating system.

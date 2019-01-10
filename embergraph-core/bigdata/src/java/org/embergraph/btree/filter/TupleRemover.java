@@ -3,10 +3,10 @@ package org.embergraph.btree.filter;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.IRangeQuery;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleIterator;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.IRangeQuery;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleIterator;
 
 import cutthecrap.utils.striterators.FilterBase;
 

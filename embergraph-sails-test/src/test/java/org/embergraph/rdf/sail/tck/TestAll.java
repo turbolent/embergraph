@@ -27,12 +27,12 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import com.bigdata.rdf.sail.tck.BigdataSPARQLUpdateTest;
-import com.bigdata.rdf.sail.tck.BigdataSPARQLUpdateTest2;
-import com.bigdata.rdf.sail.tck.BigdataSPARQLUpdateTest2DiskRW;
-import com.bigdata.rdf.sail.tck.BigdataSPARQLUpdateTest2DiskWORM;
-import com.bigdata.rdf.sail.tck.BigdataSPARQLUpdateTxTest;
-import com.bigdata.rdf.sail.tck.BigdataSPARQLUpdateTxTest2;
+import org.embergraph.rdf.sail.tck.BigdataSPARQLUpdateTest;
+import org.embergraph.rdf.sail.tck.BigdataSPARQLUpdateTest2;
+import org.embergraph.rdf.sail.tck.BigdataSPARQLUpdateTest2DiskRW;
+import org.embergraph.rdf.sail.tck.BigdataSPARQLUpdateTest2DiskWORM;
+import org.embergraph.rdf.sail.tck.BigdataSPARQLUpdateTxTest;
+import org.embergraph.rdf.sail.tck.BigdataSPARQLUpdateTxTest2;
 
 /**
  * Aggregates test suites into increasing dependency order.

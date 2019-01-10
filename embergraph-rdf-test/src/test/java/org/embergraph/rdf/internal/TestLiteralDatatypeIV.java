@@ -5,14 +5,14 @@ import java.util.List;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.rdf.internal.impl.AbstractIV;
-import com.bigdata.rdf.internal.impl.AbstractNonInlineExtensionIVWithDelegateIV;
-import com.bigdata.rdf.internal.impl.literal.FullyInlineTypedLiteralIV;
-import com.bigdata.rdf.internal.impl.literal.PartlyInlineTypedLiteralIV;
-import com.bigdata.rdf.lexicon.BlobsIndexHelper;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.test.MockTermIdFactory;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.rdf.internal.impl.AbstractIV;
+import org.embergraph.rdf.internal.impl.AbstractNonInlineExtensionIVWithDelegateIV;
+import org.embergraph.rdf.internal.impl.literal.FullyInlineTypedLiteralIV;
+import org.embergraph.rdf.internal.impl.literal.PartlyInlineTypedLiteralIV;
+import org.embergraph.rdf.lexicon.BlobsIndexHelper;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.test.MockTermIdFactory;
 
 /**
  * Test suite for {@link PartlyInlineTypedLiteralIV}.

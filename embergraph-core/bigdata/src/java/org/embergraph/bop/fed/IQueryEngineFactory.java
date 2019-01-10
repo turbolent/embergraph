@@ -1,12 +1,12 @@
 package org.embergraph.bop.fed;
 
-import com.bigdata.bop.engine.QueryEngine;
-import com.bigdata.journal.IBTreeManager;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.TemporaryStore;
-import com.bigdata.service.DataService;
-import com.bigdata.service.IBigdataFederation;
+import org.embergraph.bop.engine.QueryEngine;
+import org.embergraph.journal.IBTreeManager;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.TemporaryStore;
+import org.embergraph.service.DataService;
+import org.embergraph.service.IBigdataFederation;
 
 /**
  * Factory for a {@link QueryEngine} or derived class.

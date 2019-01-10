@@ -30,7 +30,7 @@ package org.embergraph.relation.rule.eval;
 
 import java.util.concurrent.Callable;
 
-import com.bigdata.striterator.IChunkedOrderedIterator;
+import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /**
  * Interface for a task that executes a (complex) program (vs a single rule).

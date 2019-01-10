@@ -28,12 +28,12 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.service.ndx;
 
-import com.bigdata.btree.ICounter;
-import com.bigdata.btree.IIndex;
-import com.bigdata.journal.IConcurrencyManager;
-import com.bigdata.journal.ITx;
-import com.bigdata.service.IBigdataClient;
-import com.bigdata.service.IDataService;
+import org.embergraph.btree.ICounter;
+import org.embergraph.btree.IIndex;
+import org.embergraph.journal.IConcurrencyManager;
+import org.embergraph.journal.ITx;
+import org.embergraph.service.IBigdataClient;
+import org.embergraph.service.IDataService;
 
 /**
  * {@link IBigdataClient}-side {@link IIndex} interface.

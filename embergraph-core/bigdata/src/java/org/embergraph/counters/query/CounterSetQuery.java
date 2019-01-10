@@ -54,17 +54,17 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.apache.log4j.Logger;
 import org.xml.sax.SAXException;
 
-import com.bigdata.Banner;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.IHostCounters;
-import com.bigdata.counters.IRequiredHostCounters;
-import com.bigdata.counters.PeriodEnum;
-import com.bigdata.counters.XMLUtility;
-import com.bigdata.counters.httpd.DummyEventReportingService;
-import com.bigdata.counters.render.IRenderer;
-import com.bigdata.counters.render.RendererFactory;
-import com.bigdata.service.Event;
-import com.bigdata.util.httpd.NanoHTTPD;
+import org.embergraph.Banner;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.IHostCounters;
+import org.embergraph.counters.IRequiredHostCounters;
+import org.embergraph.counters.PeriodEnum;
+import org.embergraph.counters.XMLUtility;
+import org.embergraph.counters.httpd.DummyEventReportingService;
+import org.embergraph.counters.render.IRenderer;
+import org.embergraph.counters.render.RendererFactory;
+import org.embergraph.service.Event;
+import org.embergraph.util.httpd.NanoHTTPD;
 
 /**
  * Utility to extract a batch of performance counters from a collection of

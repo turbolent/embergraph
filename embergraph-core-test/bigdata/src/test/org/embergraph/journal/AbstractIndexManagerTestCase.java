@@ -34,7 +34,7 @@ import java.util.concurrent.Callable;
 
 import junit.framework.TestCase;
 
-import com.bigdata.io.TestCase3;
+import org.embergraph.io.TestCase3;
 
 /**
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -24,7 +24,7 @@ package org.embergraph.rdf.sail.webapp.lbs;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.bigdata.rdf.sail.webapp.HALoadBalancerServlet;
+import org.embergraph.rdf.sail.webapp.HALoadBalancerServlet;
 
 /**
  * Interface for rewriting the Request-URI once the load balancer has determined

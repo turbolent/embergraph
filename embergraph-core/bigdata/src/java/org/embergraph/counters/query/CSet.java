@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.bigdata.counters.ICounter;
-import com.bigdata.counters.ICounterNode;
+import org.embergraph.counters.ICounter;
+import org.embergraph.counters.ICounterNode;
 
 /**
  * Pairs together an ordered set of category values for a pivot table with the

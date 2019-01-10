@@ -34,28 +34,28 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.ICounter;
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.btree.proc.AbstractKeyArrayIndexProcedure;
-import com.bigdata.btree.proc.AbstractKeyArrayIndexProcedureConstructor;
-import com.bigdata.btree.proc.AbstractLocalSplitResultAggregator;
-import com.bigdata.btree.proc.IParallelizableIndexProcedure;
-import com.bigdata.btree.proc.IResultHandler;
-import com.bigdata.btree.proc.SplitValuePair;
-import com.bigdata.btree.raba.IRaba;
-import com.bigdata.btree.raba.codec.IRabaCoder;
-import com.bigdata.io.DataOutputBuffer;
-import com.bigdata.io.LongPacker;
-import com.bigdata.io.ShortPacker;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.IVUtility;
-import com.bigdata.rdf.internal.VTE;
-import com.bigdata.rdf.internal.impl.TermId;
-import com.bigdata.rdf.lexicon.Term2IdWriteProc.Result;
-import com.bigdata.relation.IMutableRelationIndexWriteProcedure;
-import com.bigdata.service.Split;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.ICounter;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure;
+import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedureConstructor;
+import org.embergraph.btree.proc.AbstractLocalSplitResultAggregator;
+import org.embergraph.btree.proc.IParallelizableIndexProcedure;
+import org.embergraph.btree.proc.IResultHandler;
+import org.embergraph.btree.proc.SplitValuePair;
+import org.embergraph.btree.raba.IRaba;
+import org.embergraph.btree.raba.codec.IRabaCoder;
+import org.embergraph.io.DataOutputBuffer;
+import org.embergraph.io.LongPacker;
+import org.embergraph.io.ShortPacker;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.IVUtility;
+import org.embergraph.rdf.internal.VTE;
+import org.embergraph.rdf.internal.impl.TermId;
+import org.embergraph.rdf.lexicon.Term2IdWriteProc.Result;
+import org.embergraph.relation.IMutableRelationIndexWriteProcedure;
+import org.embergraph.service.Split;
+import org.embergraph.util.BytesUtil;
 
 /**
  * This unisolated operation inserts terms into the <em>term:id</em> index,

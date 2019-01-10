@@ -2,11 +2,11 @@ package org.embergraph.service.ndx;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.bigdata.btree.proc.AbstractKeyArrayIndexProcedure;
-import com.bigdata.btree.proc.AbstractKeyArrayIndexProcedureConstructor;
-import com.bigdata.btree.proc.IKeyArrayIndexProcedure;
-import com.bigdata.btree.proc.IResultHandler;
-import com.bigdata.service.Split;
+import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure;
+import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedureConstructor;
+import org.embergraph.btree.proc.IKeyArrayIndexProcedure;
+import org.embergraph.btree.proc.IResultHandler;
+import org.embergraph.service.Split;
 
 /**
  * Handles stale locators for {@link IKeyArrayIndexProcedure}s. When

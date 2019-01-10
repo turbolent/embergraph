@@ -25,17 +25,17 @@ package org.embergraph.resources;
 
 import java.util.UUID;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.Checkpoint;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.IndexSegmentStore;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.io.SerializerUtil;
-import com.bigdata.mdi.IResourceMetadata;
-import com.bigdata.mdi.SegmentMetadata;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.util.Bytes;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.Checkpoint;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.IndexSegmentStore;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.io.SerializerUtil;
+import org.embergraph.mdi.IResourceMetadata;
+import org.embergraph.mdi.SegmentMetadata;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.util.Bytes;
 
 /**
  * {@link BTree} mapping {@link IndexSegmentStore} <em>createTime</em>s to

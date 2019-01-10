@@ -30,10 +30,10 @@ package com.bigdata.rdf.sparql.ast.eval;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.bigdata.rdf.sparql.ast.ASTContainer;
-import com.bigdata.rdf.sparql.ast.ConstructNode;
-import com.bigdata.rdf.sparql.ast.QueryRoot;
-import com.bigdata.rdf.sparql.ast.StatementPatternNode;
+import org.embergraph.rdf.sparql.ast.ASTContainer;
+import org.embergraph.rdf.sparql.ast.ConstructNode;
+import org.embergraph.rdf.sparql.ast.QueryRoot;
+import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 
 /**
  * Data driven test suite for CONSTRUCT queries.

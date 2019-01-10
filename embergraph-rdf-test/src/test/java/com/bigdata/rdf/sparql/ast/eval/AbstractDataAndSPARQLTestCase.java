@@ -74,12 +74,12 @@ import org.openrdf.rio.RDFParser;
 import org.openrdf.rio.RDFParserRegistry;
 import org.openrdf.rio.helpers.RDFHandlerBase;
 
-import com.bigdata.bop.engine.AbstractQueryEngineTestCase;
-import com.bigdata.rdf.model.StatementEnum;
-import com.bigdata.rdf.rio.StatementBuffer;
-import com.bigdata.rdf.sparql.ast.ASTContainer;
-import com.bigdata.rdf.sparql.ast.AbstractASTEvaluationTestCase;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.bop.engine.AbstractQueryEngineTestCase;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.rdf.rio.StatementBuffer;
+import org.embergraph.rdf.sparql.ast.ASTContainer;
+import org.embergraph.rdf.sparql.ast.AbstractASTEvaluationTestCase;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 public abstract class AbstractDataAndSPARQLTestCase extends AbstractASTEvaluationTestCase {
 

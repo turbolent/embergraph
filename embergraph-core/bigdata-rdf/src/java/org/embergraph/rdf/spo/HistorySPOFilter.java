@@ -30,8 +30,8 @@ package org.embergraph.rdf.spo;
 import java.io.IOException;
 import java.io.ObjectStreamException;
 
-import com.bigdata.rdf.model.StatementEnum;
-import com.bigdata.relation.accesspath.IElementFilter;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.relation.accesspath.IElementFilter;
 
 /**
  * Filters out {@link StatementEnum#History} {@link ISPO}s.

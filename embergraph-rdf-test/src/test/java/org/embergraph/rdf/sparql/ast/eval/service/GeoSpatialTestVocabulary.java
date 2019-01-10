@@ -26,9 +26,9 @@ package org.embergraph.rdf.sparql.ast.eval.service;
 
 import org.openrdf.model.impl.URIImpl;
 
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.vocab.BaseVocabularyDecl;
-import com.bigdata.rdf.vocab.core.BigdataCoreVocabulary_v20160317;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.vocab.BaseVocabularyDecl;
+import org.embergraph.rdf.vocab.core.BigdataCoreVocabulary_v20160317;
 
 /**
  * Test class for GeoSpatial data type extensions.

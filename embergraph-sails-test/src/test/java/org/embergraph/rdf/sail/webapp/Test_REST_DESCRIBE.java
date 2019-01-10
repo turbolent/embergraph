@@ -41,9 +41,9 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.rio.RDFFormat;
 
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepository.AddOp;
-import com.bigdata.rdf.store.BD;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository.AddOp;
+import org.embergraph.rdf.store.BD;
 
 /**
  * Proxied test suite.

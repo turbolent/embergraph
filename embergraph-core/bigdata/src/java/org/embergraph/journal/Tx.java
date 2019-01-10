@@ -42,17 +42,17 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.AbstractBTree;
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.ILocalBTreeView;
-import com.bigdata.btree.IndexSegment;
-import com.bigdata.btree.isolation.IsolatedFusedView;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.resources.ResourceManager;
-import com.bigdata.resources.StoreManager;
-import com.bigdata.service.DataService;
-import com.bigdata.service.IBigdataFederation;
-import com.bigdata.service.IDataService;
+import org.embergraph.btree.AbstractBTree;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.ILocalBTreeView;
+import org.embergraph.btree.IndexSegment;
+import org.embergraph.btree.isolation.IsolatedFusedView;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.resources.ResourceManager;
+import org.embergraph.resources.StoreManager;
+import org.embergraph.service.DataService;
+import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IDataService;
 
 /**
  * <p>

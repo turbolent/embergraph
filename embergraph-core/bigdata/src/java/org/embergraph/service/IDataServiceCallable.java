@@ -1,9 +1,9 @@
 package org.embergraph.service;
 
-import com.bigdata.btree.proc.IIndexProcedure;
-import com.bigdata.journal.AbstractTask;
-import com.bigdata.journal.DropIndexTask;
-import com.bigdata.journal.RegisterIndexTask;
+import org.embergraph.btree.proc.IIndexProcedure;
+import org.embergraph.journal.AbstractTask;
+import org.embergraph.journal.DropIndexTask;
+import org.embergraph.journal.RegisterIndexTask;
 
 /**
  * Interface for procedures that require access to the {@link IDataService} and

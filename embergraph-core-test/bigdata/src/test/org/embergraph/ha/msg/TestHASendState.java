@@ -26,7 +26,7 @@ package org.embergraph.ha.msg;
 import java.io.IOException;
 import java.util.UUID;
 
-import com.bigdata.io.SerializerUtil;
+import org.embergraph.io.SerializerUtil;
 
 import junit.framework.TestCase2;
 

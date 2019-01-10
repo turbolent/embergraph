@@ -36,7 +36,7 @@ import org.openrdf.query.TupleQueryResult;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.sail.SailTupleQuery;
 
-import com.bigdata.rdf.store.BD;
+import org.embergraph.rdf.store.BD;
 
 public class TestMaterialization extends ProxyBigdataSailTestCase {
 

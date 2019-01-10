@@ -29,12 +29,12 @@ package org.embergraph.btree;
 
 import it.unimi.dsi.bits.BitVector;
 
-import com.bigdata.btree.data.ILeafData;
-import com.bigdata.btree.raba.IRaba;
-import com.bigdata.btree.raba.MutableKeyBuffer;
-import com.bigdata.btree.raba.MutableValueBuffer;
-import com.bigdata.io.AbstractFixedByteArrayBuffer;
-import com.bigdata.rawstore.IRawStore;
+import org.embergraph.btree.data.ILeafData;
+import org.embergraph.btree.raba.IRaba;
+import org.embergraph.btree.raba.MutableKeyBuffer;
+import org.embergraph.btree.raba.MutableValueBuffer;
+import org.embergraph.io.AbstractFixedByteArrayBuffer;
+import org.embergraph.rawstore.IRawStore;
 
 /**
  * Implementation maintains Java objects corresponding to the persistent data

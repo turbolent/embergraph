@@ -31,9 +31,9 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.engine.IChunkMessage;
-import com.bigdata.rwstore.sector.IMemoryManager;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.engine.IChunkMessage;
+import org.embergraph.rwstore.sector.IMemoryManager;
 
 /**
  * Base class for a sample taken from a vertex (access path) or edge (cutoff

@@ -25,8 +25,8 @@ package com.bigdata.rdf.sparql.ast.eval;
 
 import java.util.Properties;
 
-import com.bigdata.rdf.internal.NotMaterializedException;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.internal.NotMaterializedException;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 
 /**

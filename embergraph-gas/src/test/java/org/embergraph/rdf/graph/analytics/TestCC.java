@@ -21,13 +21,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.openrdf.model.Value;
 import org.openrdf.sail.SailConnection;
 
-import com.bigdata.rdf.graph.IGASContext;
-import com.bigdata.rdf.graph.IGASEngine;
-import com.bigdata.rdf.graph.IGASState;
-import com.bigdata.rdf.graph.IGASStats;
-import com.bigdata.rdf.graph.IGraphAccessor;
-import com.bigdata.rdf.graph.analytics.CC.VS;
-import com.bigdata.rdf.graph.impl.sail.AbstractSailGraphTestCase;
+import org.embergraph.rdf.graph.IGASContext;
+import org.embergraph.rdf.graph.IGASEngine;
+import org.embergraph.rdf.graph.IGASState;
+import org.embergraph.rdf.graph.IGASStats;
+import org.embergraph.rdf.graph.IGraphAccessor;
+import org.embergraph.rdf.graph.analytics.CC.VS;
+import org.embergraph.rdf.graph.impl.sail.AbstractSailGraphTestCase;
 
 /**
  * Test class for Breadth First Search (BFS) traversal.

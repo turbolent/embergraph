@@ -26,7 +26,7 @@ package org.embergraph.rdf.sail.webapp;
 
 import junit.framework.Test;
 
-import com.bigdata.journal.IIndexManager;
+import org.embergraph.journal.IIndexManager;
 
 /**
  * Proxied test suite.

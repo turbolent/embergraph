@@ -27,8 +27,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.service;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.rdf.internal.IV;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.rdf.internal.IV;
 
 /**
  * Service options base class for bigdata aware services. Such services are

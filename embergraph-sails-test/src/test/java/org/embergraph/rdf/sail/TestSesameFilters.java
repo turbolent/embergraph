@@ -43,9 +43,9 @@ import org.openrdf.query.impl.BindingImpl;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.sail.SailTupleQuery;
 
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.store.BD;
-import com.bigdata.rdf.vocab.NoVocabulary;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.store.BD;
+import org.embergraph.rdf.vocab.NoVocabulary;
 
 public class TestSesameFilters extends ProxyBigdataSailTestCase {
 

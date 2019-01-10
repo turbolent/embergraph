@@ -40,10 +40,10 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.DefaultInstrumentFactory;
-import com.bigdata.counters.store.CounterSetBTree;
-import com.bigdata.journal.Journal;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.DefaultInstrumentFactory;
+import org.embergraph.counters.store.CounterSetBTree;
+import org.embergraph.journal.Journal;
 
 /**
  * Utility class to load data from XML representations of counter sets into a

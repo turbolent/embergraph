@@ -36,9 +36,9 @@ import java.util.UUID;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.io.ChecksumUtility;
-import com.bigdata.io.FileChannelUtility;
-import com.bigdata.io.IReopenChannel;
+import org.embergraph.io.ChecksumUtility;
+import org.embergraph.io.FileChannelUtility;
+import org.embergraph.io.IReopenChannel;
 
 /**
  * Utility class will read both root blocks of a file and indicate which one

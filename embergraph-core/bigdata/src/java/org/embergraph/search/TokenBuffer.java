@@ -5,9 +5,9 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.ITupleSerializer;
-import com.bigdata.btree.keys.KV;
-import com.bigdata.btree.proc.LongAggregator;
+import org.embergraph.btree.ITupleSerializer;
+import org.embergraph.btree.keys.KV;
+import org.embergraph.btree.proc.LongAggregator;
 
 /**
  * A buffer holding tokens extracted from one or more documents / fields.

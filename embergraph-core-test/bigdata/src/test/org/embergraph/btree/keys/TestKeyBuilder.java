@@ -42,9 +42,9 @@ import java.util.UUID;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.io.LongPacker;
-import com.bigdata.util.BytesUtil;
-import com.bigdata.util.BytesUtil.UnsignedByteArrayComparator;
+import org.embergraph.io.LongPacker;
+import org.embergraph.util.BytesUtil;
+import org.embergraph.util.BytesUtil.UnsignedByteArrayComparator;
 
 /**
  * Test suite for high level operations that build variable length _unsigned_

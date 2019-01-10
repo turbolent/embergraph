@@ -34,10 +34,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 import junit.extensions.proxy.ProxyTestSuite;
 import junit.framework.Test;
 
-import com.bigdata.journal.ITx;
-import com.bigdata.service.DataService;
-import com.bigdata.service.EmbeddedClient;
-import com.bigdata.service.EmbeddedFederation;
+import org.embergraph.journal.ITx;
+import org.embergraph.service.DataService;
+import org.embergraph.service.EmbeddedClient;
+import org.embergraph.service.EmbeddedFederation;
 
 /**
  * Proxy test suite for {@link ScaleOutTripleStore} running against an

@@ -32,14 +32,14 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IVariable;
-import com.bigdata.rdf.sparql.ast.eval.IEvaluationContext;
-import com.bigdata.rdf.sparql.ast.service.ServiceNode;
-import com.bigdata.rdf.sparql.ast.ssets.ISolutionSetManager;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IVariable;
+import org.embergraph.rdf.sparql.ast.eval.IEvaluationContext;
+import org.embergraph.rdf.sparql.ast.service.ServiceNode;
+import org.embergraph.rdf.sparql.ast.ssets.ISolutionSetManager;
 
 /**
  * Base class for static analysis.

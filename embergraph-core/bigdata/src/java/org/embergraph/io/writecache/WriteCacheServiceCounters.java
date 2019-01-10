@@ -25,13 +25,13 @@ package org.embergraph.io.writecache;
 
 import java.util.concurrent.TimeUnit;
 
-import com.bigdata.counters.CAT;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.Instrument;
-import com.bigdata.counters.OneShotInstrument;
-import com.bigdata.io.writecache.WriteCache.ReadCache;
-import com.bigdata.io.writecache.WriteCacheService.WriteTask;
-import com.bigdata.util.Bytes;
+import org.embergraph.counters.CAT;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.Instrument;
+import org.embergraph.counters.OneShotInstrument;
+import org.embergraph.io.writecache.WriteCache.ReadCache;
+import org.embergraph.io.writecache.WriteCacheService.WriteTask;
+import org.embergraph.util.Bytes;
 
 /**
  * Performance counters for the {@link WriteCacheService}.

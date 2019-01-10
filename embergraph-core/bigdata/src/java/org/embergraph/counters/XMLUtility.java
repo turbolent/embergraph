@@ -43,9 +43,9 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import com.bigdata.counters.History.SampleIterator;
-import com.bigdata.counters.ICounterSet.IInstrumentFactory;
-import com.bigdata.util.HTMLUtility;
+import org.embergraph.counters.History.SampleIterator;
+import org.embergraph.counters.ICounterSet.IInstrumentFactory;
+import org.embergraph.util.HTMLUtility;
 
 /**
  * XML (de-)serialization of {@link CounterSet}s.

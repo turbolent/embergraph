@@ -107,20 +107,20 @@ import org.openrdf.rio.RDFParser.DatatypeHandling;
 import org.openrdf.rio.Rio;
 import org.openrdf.rio.helpers.StatementCollector;
 
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.ITx;
-import com.bigdata.rdf.sail.remote.BigdataSailRemoteRepositoryConnection;
-import com.bigdata.rdf.sail.sparql.Bigdata2ASTSPARQLParser;
-import com.bigdata.rdf.sail.webapp.client.HttpException;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepository;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepository.AddOp;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepositoryManager;
-import com.bigdata.rdf.sparql.ast.ASTContainer;
-import com.bigdata.rdf.sparql.ast.QueryType;
-import com.bigdata.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
-import com.bigdata.rdf.sparql.ast.service.ServiceRegistry;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.ITx;
+import org.embergraph.rdf.sail.remote.BigdataSailRemoteRepositoryConnection;
+import org.embergraph.rdf.sail.sparql.Bigdata2ASTSPARQLParser;
+import org.embergraph.rdf.sail.webapp.client.HttpException;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository.AddOp;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepositoryManager;
+import org.embergraph.rdf.sparql.ast.ASTContainer;
+import org.embergraph.rdf.sparql.ast.QueryType;
+import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
+import org.embergraph.rdf.sparql.ast.service.ServiceRegistry;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * Proxied test suite for SPARQL 1.1 Federated Query. In general, each test

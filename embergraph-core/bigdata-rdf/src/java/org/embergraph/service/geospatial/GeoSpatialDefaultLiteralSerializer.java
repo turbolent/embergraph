@@ -26,11 +26,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.service.geospatial;
 
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.gis.ICoordinate.UNITS;
-import com.bigdata.rdf.internal.impl.literal.XSDNumericIV;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.sparql.ast.DummyConstantNode;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.gis.ICoordinate.UNITS;
+import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.sparql.ast.DummyConstantNode;
 
 /**
  * Default implementation of {@link IGeoSpatialLiteralSerializer}, translating

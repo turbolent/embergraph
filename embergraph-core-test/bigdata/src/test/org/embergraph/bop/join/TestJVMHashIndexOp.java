@@ -29,15 +29,15 @@ package org.embergraph.bop.join;
 
 import java.util.UUID;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpEvaluationContext;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.NV;
-import com.bigdata.bop.NamedSolutionSetRefUtility;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.Var;
-import com.bigdata.bop.controller.INamedSolutionSetRef;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpEvaluationContext;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.NV;
+import org.embergraph.bop.NamedSolutionSetRefUtility;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.Var;
+import org.embergraph.bop.controller.INamedSolutionSetRef;
 
 /**
  * Test suite for {@link HashIndexOp} that uses a {@link JVMHashJoinUtility}

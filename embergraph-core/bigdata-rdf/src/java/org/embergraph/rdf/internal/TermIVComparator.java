@@ -2,7 +2,7 @@ package org.embergraph.rdf.internal;
 
 import java.util.Comparator;
 
-import com.bigdata.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValue;
 
 /**
  * Places {@link BigdataValue}s into an ordering determined by their assigned

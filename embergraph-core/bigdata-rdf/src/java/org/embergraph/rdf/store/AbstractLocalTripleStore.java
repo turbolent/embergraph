@@ -29,12 +29,12 @@ package org.embergraph.rdf.store;
 
 import java.util.Properties;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.BTreeCounters;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.ITx;
-import com.bigdata.rdf.lexicon.LexiconRelation;
-import com.bigdata.rdf.spo.SPORelation;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.BTreeCounters;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.ITx;
+import org.embergraph.rdf.lexicon.LexiconRelation;
+import org.embergraph.rdf.spo.SPORelation;
 
 /**
  * Abstract base class for both transient and persistent {@link ITripleStore}

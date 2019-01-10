@@ -32,8 +32,8 @@ import java.util.Random;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.util.Bytes;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.util.Bytes;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Test suite for {@link FixedByteArrayBuffer}.

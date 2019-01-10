@@ -7,9 +7,9 @@ import org.openrdf.model.vocabulary.FOAF;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.repository.RepositoryConnection;
 
-import com.bigdata.rdf.sail.remote.BigdataSailRemoteRepository;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepositoryManager;
-import com.bigdata.util.httpd.Config;
+import org.embergraph.rdf.sail.remote.BigdataSailRemoteRepository;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepositoryManager;
+import org.embergraph.util.httpd.Config;
 
 /**
  * Helper class to debug the NSS by issuing commands that we can not issue

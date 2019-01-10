@@ -26,7 +26,7 @@ package org.embergraph.ha.msg;
 import java.io.Serializable;
 import java.util.UUID;
 
-import com.bigdata.util.BytesUtil;
+import org.embergraph.util.BytesUtil;
 
 public class HADigestResponse implements IHADigestResponse, Serializable {
 

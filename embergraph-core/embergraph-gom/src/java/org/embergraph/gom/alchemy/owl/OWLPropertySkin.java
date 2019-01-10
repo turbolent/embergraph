@@ -27,9 +27,9 @@ import org.openrdf.model.vocabulary.OWL;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-import com.bigdata.gom.gpo.BasicSkin;
-import com.bigdata.gom.gpo.IGPO;
-import com.bigdata.gom.gpo.IGenericSkin;
+import org.embergraph.gom.gpo.BasicSkin;
+import org.embergraph.gom.gpo.IGPO;
+import org.embergraph.gom.gpo.IGenericSkin;
 
 /** 
  * The OWLClassSkin returns Iterator<OWLPropertySkin> with the

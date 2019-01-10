@@ -61,16 +61,16 @@ import org.openrdf.rio.RDFParser;
 import org.openrdf.rio.RDFParserRegistry;
 import org.openrdf.rio.helpers.StatementCollector;
 
-import com.bigdata.counters.CAT;
-import com.bigdata.journal.TemporaryStore;
-import com.bigdata.jsr166.LinkedBlockingQueue;
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.sail.sparql.Bigdata2ASTSPARQLParser;
-import com.bigdata.rdf.sparql.ast.ASTContainer;
-import com.bigdata.rdf.sparql.ast.QueryType;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.TempTripleStore;
-import com.bigdata.rdf.store.AbstractTripleStore.Options;
+import org.embergraph.counters.CAT;
+import org.embergraph.journal.TemporaryStore;
+import org.embergraph.jsr166.LinkedBlockingQueue;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.sail.sparql.Bigdata2ASTSPARQLParser;
+import org.embergraph.rdf.sparql.ast.ASTContainer;
+import org.embergraph.rdf.sparql.ast.QueryType;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.TempTripleStore;
+import org.embergraph.rdf.store.AbstractTripleStore.Options;
 
 /**
  * A flyweight utility for issuing queries to an http SPARQL endpoint.

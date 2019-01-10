@@ -32,7 +32,7 @@ import java.util.UUID;
 
 import junit.framework.TestCase;
 
-import com.bigdata.rawstore.SimpleMemoryRawStore;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /**
  * Test suite for {@link BigdataSet}.

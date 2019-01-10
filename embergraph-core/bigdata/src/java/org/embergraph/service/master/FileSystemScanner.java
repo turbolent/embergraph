@@ -31,7 +31,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.util.Queue;
 
-import com.bigdata.relation.accesspath.BlockingBuffer;
+import org.embergraph.relation.accesspath.BlockingBuffer;
 
 /**
  * Adds all files accepted by the filter to the {@link Queue}.

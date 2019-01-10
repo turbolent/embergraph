@@ -35,8 +35,8 @@ import java.util.concurrent.TimeUnit;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.io.SerializerUtil;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.io.SerializerUtil;
 
 /**
  * Abstract base class for {@link IRecordCompressor} test suites.

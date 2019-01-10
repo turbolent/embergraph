@@ -28,9 +28,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.resources;
 
-import com.bigdata.btree.IndexSegment;
-import com.bigdata.btree.IndexSegmentStore;
-import com.bigdata.service.ResourceService;
+import org.embergraph.btree.IndexSegment;
+import org.embergraph.btree.IndexSegmentStore;
+import org.embergraph.service.ResourceService;
 
 /**
  * Various kinds of subtasks for asynchronous index partition overflow tasks.

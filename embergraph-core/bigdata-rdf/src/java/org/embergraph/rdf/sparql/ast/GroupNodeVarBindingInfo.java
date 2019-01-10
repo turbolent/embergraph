@@ -29,8 +29,8 @@ package org.embergraph.rdf.sparql.ast;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.bigdata.bop.IVariable;
-import com.bigdata.rdf.sparql.ast.optimizers.ASTJoinGroupFilterExistsInfo;
+import org.embergraph.bop.IVariable;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTJoinGroupFilterExistsInfo;
 
 
 

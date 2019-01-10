@@ -37,17 +37,17 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.sail.SailException;
 
-import com.bigdata.BigdataStatics;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.TimestampUtility;
-import com.bigdata.rdf.sail.webapp.DatasetNotFoundException;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.task.AbstractApiTask;
-import com.bigdata.rdf.vocab.BSBMVocabulary;
-import com.bigdata.rdf.vocab.RDFSVocabulary;
-import com.bigdata.util.InnerCause;
+import org.embergraph.BigdataStatics;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.TimestampUtility;
+import org.embergraph.rdf.sail.webapp.DatasetNotFoundException;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.task.AbstractApiTask;
+import org.embergraph.rdf.vocab.BSBMVocabulary;
+import org.embergraph.rdf.vocab.RDFSVocabulary;
+import org.embergraph.util.InnerCause;
 
 /**
  * Test suite for the concurrent create and discovery of a KB instance.

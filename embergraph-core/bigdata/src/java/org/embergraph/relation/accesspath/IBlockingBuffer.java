@@ -31,9 +31,9 @@ package org.embergraph.relation.accesspath;
 import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
 
-import com.bigdata.relation.IMutableRelation;
-import com.bigdata.relation.IRelation;
-import com.bigdata.striterator.IChunkedIterator;
+import org.embergraph.relation.IMutableRelation;
+import org.embergraph.relation.IRelation;
+import org.embergraph.striterator.IChunkedIterator;
 
 /**
  * <p>

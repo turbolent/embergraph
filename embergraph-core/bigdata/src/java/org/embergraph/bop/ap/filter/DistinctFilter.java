@@ -5,11 +5,11 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.HashMapAnnotations;
-import com.bigdata.rdf.spo.SPO;
-import com.bigdata.striterator.IChunkConverter;
-import com.bigdata.striterator.MergeFilter;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.HashMapAnnotations;
+import org.embergraph.rdf.spo.SPO;
+import org.embergraph.striterator.IChunkConverter;
+import org.embergraph.striterator.MergeFilter;
 
 import cutthecrap.utils.striterators.Filter;
 import cutthecrap.utils.striterators.Filterator;

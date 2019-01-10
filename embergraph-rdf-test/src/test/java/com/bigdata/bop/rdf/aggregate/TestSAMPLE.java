@@ -28,23 +28,23 @@ import java.util.Set;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.bop.BOpContext;
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.ContextBindingSet;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.TestMockUtility;
-import com.bigdata.bop.Var;
-import com.bigdata.bop.bindingSet.ListBindingSet;
-import com.bigdata.journal.ITx;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.constraints.MathBOp;
-import com.bigdata.rdf.internal.impl.literal.XSDNumericIV;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.sparql.ast.GlobalAnnotations;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.bop.BOpContext;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.ContextBindingSet;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.TestMockUtility;
+import org.embergraph.bop.Var;
+import org.embergraph.bop.bindingSet.ListBindingSet;
+import org.embergraph.journal.ITx;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.constraints.MathBOp;
+import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * Unit tests for {@link SAMPLE}.

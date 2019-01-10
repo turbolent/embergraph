@@ -38,7 +38,7 @@ import java.util.Iterator;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.sparse.TPS.TPV;
+import org.embergraph.sparse.TPS.TPV;
 
 /**
  * Test of {@link TPS} (property timestamp set implementation).

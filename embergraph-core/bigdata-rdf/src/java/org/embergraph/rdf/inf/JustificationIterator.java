@@ -35,12 +35,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.IRangeQuery;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.relation.accesspath.IElementFilter;
-import com.bigdata.util.Bytes;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.IRangeQuery;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.relation.accesspath.IElementFilter;
+import org.embergraph.util.Bytes;
 
 /**
  * Iterator visits {@link Justification}s reading from the justification index.

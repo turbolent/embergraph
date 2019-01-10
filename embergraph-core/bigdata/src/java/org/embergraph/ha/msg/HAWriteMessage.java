@@ -35,9 +35,9 @@ import java.util.UUID;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.io.compression.CompressorRegistry;
-import com.bigdata.io.compression.IRecordCompressor;
-import com.bigdata.journal.StoreTypeEnum;
+import org.embergraph.io.compression.CompressorRegistry;
+import org.embergraph.io.compression.IRecordCompressor;
+import org.embergraph.journal.StoreTypeEnum;
 
 /**
  * A message carrying RMI metadata about a payload which will be replicated

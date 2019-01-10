@@ -91,14 +91,14 @@ import org.openrdf.rio.RDFParser.DatatypeHandling;
 import org.openrdf.rio.Rio;
 import org.openrdf.rio.helpers.StatementCollector;
 
-import com.bigdata.bop.engine.AbstractQueryEngineTestCase;
-import com.bigdata.bop.engine.QueryEngine;
-import com.bigdata.bop.fed.QueryEngineFactory;
-import com.bigdata.journal.IBTreeManager;
-import com.bigdata.rdf.sail.sparql.Bigdata2ASTSPARQLParser;
-import com.bigdata.rdf.sparql.ast.ASTContainer;
-import com.bigdata.rdf.sparql.ast.QueryRoot;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.bop.engine.AbstractQueryEngineTestCase;
+import org.embergraph.bop.engine.QueryEngine;
+import org.embergraph.bop.fed.QueryEngineFactory;
+import org.embergraph.journal.IBTreeManager;
+import org.embergraph.rdf.sail.sparql.Bigdata2ASTSPARQLParser;
+import org.embergraph.rdf.sparql.ast.ASTContainer;
+import org.embergraph.rdf.sparql.ast.QueryRoot;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 import info.aduna.iteration.Iterations;
 

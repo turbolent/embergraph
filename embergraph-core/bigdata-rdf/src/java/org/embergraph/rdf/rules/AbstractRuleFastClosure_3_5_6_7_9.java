@@ -31,32 +31,32 @@ import java.util.concurrent.Callable;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.Var;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.IVUtility;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.rdf.spo.SPOKeyOrder;
-import com.bigdata.rdf.spo.SPOPredicate;
-import com.bigdata.rdf.spo.SPORelation;
-import com.bigdata.rdf.store.IRawTripleStore;
-import com.bigdata.rdf.vocab.RDFSVocabulary;
-import com.bigdata.relation.IRelation;
-import com.bigdata.relation.RelationFusedView;
-import com.bigdata.relation.accesspath.IAccessPath;
-import com.bigdata.relation.accesspath.IBuffer;
-import com.bigdata.relation.locator.IResourceLocator;
-import com.bigdata.relation.rule.IRule;
-import com.bigdata.relation.rule.QueryOptions;
-import com.bigdata.relation.rule.Rule;
-import com.bigdata.relation.rule.eval.IJoinNexus;
-import com.bigdata.relation.rule.eval.IRuleTaskFactory;
-import com.bigdata.relation.rule.eval.ISolution;
-import com.bigdata.relation.rule.eval.IStepTask;
-import com.bigdata.relation.rule.eval.RuleStats;
-import com.bigdata.striterator.IChunkedOrderedIterator;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.Var;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.IVUtility;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.rdf.spo.SPOKeyOrder;
+import org.embergraph.rdf.spo.SPOPredicate;
+import org.embergraph.rdf.spo.SPORelation;
+import org.embergraph.rdf.store.IRawTripleStore;
+import org.embergraph.rdf.vocab.RDFSVocabulary;
+import org.embergraph.relation.IRelation;
+import org.embergraph.relation.RelationFusedView;
+import org.embergraph.relation.accesspath.IAccessPath;
+import org.embergraph.relation.accesspath.IBuffer;
+import org.embergraph.relation.locator.IResourceLocator;
+import org.embergraph.relation.rule.IRule;
+import org.embergraph.relation.rule.QueryOptions;
+import org.embergraph.relation.rule.Rule;
+import org.embergraph.relation.rule.eval.IJoinNexus;
+import org.embergraph.relation.rule.eval.IRuleTaskFactory;
+import org.embergraph.relation.rule.eval.ISolution;
+import org.embergraph.relation.rule.eval.IStepTask;
+import org.embergraph.relation.rule.eval.RuleStats;
+import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /**
  * Rule used in steps 3, 5, 6, 7, and 9 of the fast forward closure program.

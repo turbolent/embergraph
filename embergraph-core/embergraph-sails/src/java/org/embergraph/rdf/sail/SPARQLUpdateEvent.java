@@ -26,7 +26,7 @@ package org.embergraph.rdf.sail;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.bigdata.rdf.sparql.ast.Update;
+import org.embergraph.rdf.sparql.ast.Update;
 
 /**
  * An event reflecting progress for some sequence of SPARQL UPDATE operations.

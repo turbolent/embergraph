@@ -1,11 +1,11 @@
 package org.embergraph.btree.proc;
 
-import com.bigdata.btree.DefaultTupleSerializer;
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.ITupleSerializer;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.raba.codec.IRabaCoder;
-import com.bigdata.service.IDataService;
+import org.embergraph.btree.DefaultTupleSerializer;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.ITupleSerializer;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.raba.codec.IRabaCoder;
+import org.embergraph.service.IDataService;
 
 /**
  * A factory for {@link IKeyArrayIndexProcedure}s so that their data may be key

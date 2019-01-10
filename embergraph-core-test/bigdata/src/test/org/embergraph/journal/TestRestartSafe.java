@@ -33,13 +33,13 @@ import java.util.UUID;
 
 import org.apache.log4j.Level;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.Checkpoint;
-import com.bigdata.btree.ICounter;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.SimpleEntry;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rawstore.WormAddressManager;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.Checkpoint;
+import org.embergraph.btree.ICounter;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.SimpleEntry;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rawstore.WormAddressManager;
 
 /**
  * Test suite for restart-safety of {@link BTree}s backed by an

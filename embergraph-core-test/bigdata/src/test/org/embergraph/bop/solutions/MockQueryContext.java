@@ -29,12 +29,12 @@ package org.embergraph.bop.solutions;
 
 import java.util.UUID;
 
-import com.bigdata.bop.DefaultQueryAttributes;
-import com.bigdata.bop.IQueryAttributes;
-import com.bigdata.bop.IQueryContext;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.rwstore.sector.IMemoryManager;
-import com.bigdata.rwstore.sector.MemoryManager;
+import org.embergraph.bop.DefaultQueryAttributes;
+import org.embergraph.bop.IQueryAttributes;
+import org.embergraph.bop.IQueryContext;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.rwstore.sector.IMemoryManager;
+import org.embergraph.rwstore.sector.MemoryManager;
 
 /**
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

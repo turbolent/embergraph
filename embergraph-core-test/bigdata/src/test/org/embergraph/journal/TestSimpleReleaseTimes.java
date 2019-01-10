@@ -7,10 +7,10 @@ import java.util.Date;
 import java.util.Properties;
 import java.util.UUID;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.service.AbstractClient;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.service.AbstractClient;
 
 /**
  * Example of Commit History usage.

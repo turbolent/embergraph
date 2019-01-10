@@ -31,9 +31,9 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-import com.bigdata.io.ByteBufferInputStream;
-import com.bigdata.io.LongPacker;
-import com.bigdata.util.Bytes;
+import org.embergraph.io.ByteBufferInputStream;
+import org.embergraph.io.LongPacker;
+import org.embergraph.util.Bytes;
 
 /**
  * A helper class for (de-)serializing the root addresses.

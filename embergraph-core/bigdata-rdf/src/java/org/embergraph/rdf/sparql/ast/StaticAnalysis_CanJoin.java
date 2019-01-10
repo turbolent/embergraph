@@ -35,10 +35,10 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IVariable;
-import com.bigdata.rdf.sparql.ast.eval.IEvaluationContext;
-import com.bigdata.rdf.sparql.ast.ssets.ISolutionSetManager;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IVariable;
+import org.embergraph.rdf.sparql.ast.eval.IEvaluationContext;
+import org.embergraph.rdf.sparql.ast.ssets.ISolutionSetManager;
 
 /**
  * Class provides methods to determine if two {@link IJoinNode}s can join on a

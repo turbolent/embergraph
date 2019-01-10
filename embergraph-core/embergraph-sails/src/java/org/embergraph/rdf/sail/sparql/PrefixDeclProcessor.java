@@ -26,22 +26,22 @@ import org.openrdf.model.vocabulary.SESAME;
 import org.openrdf.model.vocabulary.XMLSchema;
 import org.openrdf.query.MalformedQueryException;
 
-import com.bigdata.rdf.graph.impl.bd.GASService;
-import com.bigdata.rdf.internal.XSD;
-import com.bigdata.rdf.sail.sparql.ast.ASTDeleteData;
-import com.bigdata.rdf.sail.sparql.ast.ASTIRI;
-import com.bigdata.rdf.sail.sparql.ast.ASTInsertData;
-import com.bigdata.rdf.sail.sparql.ast.ASTOperationContainer;
-import com.bigdata.rdf.sail.sparql.ast.ASTPrefixDecl;
-import com.bigdata.rdf.sail.sparql.ast.ASTQName;
-import com.bigdata.rdf.sail.sparql.ast.ASTServiceGraphPattern;
-import com.bigdata.rdf.sail.sparql.ast.ASTUnparsedQuadDataBlock;
-import com.bigdata.rdf.sail.sparql.ast.SyntaxTreeBuilderTreeConstants;
-import com.bigdata.rdf.sail.sparql.ast.VisitorException;
-import com.bigdata.rdf.sparql.ast.QueryHints;
-import com.bigdata.rdf.store.BD;
-import com.bigdata.rdf.store.BDS;
-import com.bigdata.rdf.vocab.decls.FOAFVocabularyDecl;
+import org.embergraph.rdf.graph.impl.bd.GASService;
+import org.embergraph.rdf.internal.XSD;
+import org.embergraph.rdf.sail.sparql.ast.ASTDeleteData;
+import org.embergraph.rdf.sail.sparql.ast.ASTIRI;
+import org.embergraph.rdf.sail.sparql.ast.ASTInsertData;
+import org.embergraph.rdf.sail.sparql.ast.ASTOperationContainer;
+import org.embergraph.rdf.sail.sparql.ast.ASTPrefixDecl;
+import org.embergraph.rdf.sail.sparql.ast.ASTQName;
+import org.embergraph.rdf.sail.sparql.ast.ASTServiceGraphPattern;
+import org.embergraph.rdf.sail.sparql.ast.ASTUnparsedQuadDataBlock;
+import org.embergraph.rdf.sail.sparql.ast.SyntaxTreeBuilderTreeConstants;
+import org.embergraph.rdf.sail.sparql.ast.VisitorException;
+import org.embergraph.rdf.sparql.ast.QueryHints;
+import org.embergraph.rdf.store.BD;
+import org.embergraph.rdf.store.BDS;
+import org.embergraph.rdf.vocab.decls.FOAFVocabularyDecl;
 
 /**
  * Processes the prefix declarations in a SPARQL query model.

@@ -27,8 +27,8 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.bigdata.btree.proc.SplitValuePair.PairComparator;
-import com.bigdata.service.Split;
+import org.embergraph.btree.proc.SplitValuePair.PairComparator;
+import org.embergraph.service.Split;
 
 /**
  * Aggregator base class collects the individual results in an internal ordered

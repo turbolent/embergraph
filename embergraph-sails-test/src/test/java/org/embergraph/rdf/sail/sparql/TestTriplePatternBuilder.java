@@ -36,19 +36,19 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-import com.bigdata.rdf.internal.XSD;
-import com.bigdata.rdf.sail.sparql.ast.ParseException;
-import com.bigdata.rdf.sail.sparql.ast.TokenMgrError;
-import com.bigdata.rdf.sparql.AbstractBigdataExprBuilderTestCase;
-import com.bigdata.rdf.sparql.ast.ConstantNode;
-import com.bigdata.rdf.sparql.ast.JoinGroupNode;
-import com.bigdata.rdf.sparql.ast.ProjectionNode;
-import com.bigdata.rdf.sparql.ast.QueryRoot;
-import com.bigdata.rdf.sparql.ast.QueryType;
-import com.bigdata.rdf.sparql.ast.StatementPatternNode;
-import com.bigdata.rdf.sparql.ast.VarNode;
-import com.bigdata.rdf.vocab.decls.DCElementsVocabularyDecl;
-import com.bigdata.rdf.vocab.decls.FOAFVocabularyDecl;
+import org.embergraph.rdf.internal.XSD;
+import org.embergraph.rdf.sail.sparql.ast.ParseException;
+import org.embergraph.rdf.sail.sparql.ast.TokenMgrError;
+import org.embergraph.rdf.sparql.AbstractBigdataExprBuilderTestCase;
+import org.embergraph.rdf.sparql.ast.ConstantNode;
+import org.embergraph.rdf.sparql.ast.JoinGroupNode;
+import org.embergraph.rdf.sparql.ast.ProjectionNode;
+import org.embergraph.rdf.sparql.ast.QueryRoot;
+import org.embergraph.rdf.sparql.ast.QueryType;
+import org.embergraph.rdf.sparql.ast.StatementPatternNode;
+import org.embergraph.rdf.sparql.ast.VarNode;
+import org.embergraph.rdf.vocab.decls.DCElementsVocabularyDecl;
+import org.embergraph.rdf.vocab.decls.FOAFVocabularyDecl;
 
 /**
  * Test suite for building up triple patterns, including those which are covered

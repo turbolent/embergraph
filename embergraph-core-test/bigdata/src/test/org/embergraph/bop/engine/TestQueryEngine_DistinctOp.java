@@ -31,11 +31,11 @@ import java.util.Properties;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.Journal;
-import com.bigdata.relation.accesspath.IAsynchronousIterator;
-import com.bigdata.relation.accesspath.ThickAsynchronousIterator;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.Journal;
+import org.embergraph.relation.accesspath.IAsynchronousIterator;
+import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
 
 /**
  * Test suite for DISTINCT solution operators when integrated with the query

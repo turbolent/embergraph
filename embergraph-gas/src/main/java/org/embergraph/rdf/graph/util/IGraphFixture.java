@@ -18,8 +18,8 @@ package org.embergraph.rdf.graph.util;
 import org.openrdf.sail.Sail;
 import org.openrdf.sail.SailConnection;
 
-import com.bigdata.rdf.graph.IGASEngine;
-import com.bigdata.rdf.graph.IGraphAccessor;
+import org.embergraph.rdf.graph.IGASEngine;
+import org.embergraph.rdf.graph.IGraphAccessor;
 
 /**
  * A fixture for a graph.

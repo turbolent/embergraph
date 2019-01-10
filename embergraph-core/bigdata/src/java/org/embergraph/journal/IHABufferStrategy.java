@@ -35,18 +35,18 @@ import java.security.MessageDigest;
 import java.util.UUID;
 import java.util.concurrent.Future;
 
-import com.bigdata.ha.HAGlue;
-import com.bigdata.ha.QuorumService;
-import com.bigdata.ha.msg.HARebuildRequest;
-import com.bigdata.ha.msg.IHALogRequest;
-import com.bigdata.ha.msg.IHARebuildRequest;
-import com.bigdata.ha.msg.IHAWriteMessage;
-import com.bigdata.io.IBufferAccess;
-import com.bigdata.io.writecache.WriteCache;
-import com.bigdata.io.writecache.WriteCacheService;
-import com.bigdata.journal.AbstractJournal.ISnapshotData;
-import com.bigdata.quorum.Quorum;
-import com.bigdata.quorum.QuorumException;
+import org.embergraph.ha.HAGlue;
+import org.embergraph.ha.QuorumService;
+import org.embergraph.ha.msg.HARebuildRequest;
+import org.embergraph.ha.msg.IHALogRequest;
+import org.embergraph.ha.msg.IHARebuildRequest;
+import org.embergraph.ha.msg.IHAWriteMessage;
+import org.embergraph.io.IBufferAccess;
+import org.embergraph.io.writecache.WriteCache;
+import org.embergraph.io.writecache.WriteCacheService;
+import org.embergraph.journal.AbstractJournal.ISnapshotData;
+import org.embergraph.quorum.Quorum;
+import org.embergraph.quorum.QuorumException;
 
 /**
  * A highly available {@link IBufferStrategy}.

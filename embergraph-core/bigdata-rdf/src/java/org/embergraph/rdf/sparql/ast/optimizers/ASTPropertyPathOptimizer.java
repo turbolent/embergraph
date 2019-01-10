@@ -35,32 +35,32 @@ import java.util.UUID;
 
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.rdf.sparql.ast.ArbitraryLengthPathNode;
-import com.bigdata.rdf.sparql.ast.ConstantNode;
-import com.bigdata.rdf.sparql.ast.FilterNode;
-import com.bigdata.rdf.sparql.ast.FunctionNode;
-import com.bigdata.rdf.sparql.ast.FunctionRegistry;
-import com.bigdata.rdf.sparql.ast.GraphPatternGroup;
-import com.bigdata.rdf.sparql.ast.IGroupMemberNode;
-import com.bigdata.rdf.sparql.ast.JoinGroupNode;
-import com.bigdata.rdf.sparql.ast.PathNode.PathAlternative;
-import com.bigdata.rdf.sparql.ast.PathNode.PathElt;
-import com.bigdata.rdf.sparql.ast.PathNode.PathMod;
-import com.bigdata.rdf.sparql.ast.PathNode.PathNegatedPropertySet;
-import com.bigdata.rdf.sparql.ast.PathNode.PathOneInPropertySet;
-import com.bigdata.rdf.sparql.ast.PathNode.PathSequence;
-import com.bigdata.rdf.sparql.ast.PropertyPathNode;
-import com.bigdata.rdf.sparql.ast.PropertyPathUnionNode;
-import com.bigdata.rdf.sparql.ast.QueryHints;
-import com.bigdata.rdf.sparql.ast.StatementPatternNode;
-import com.bigdata.rdf.sparql.ast.StaticAnalysis;
-import com.bigdata.rdf.sparql.ast.TermNode;
-import com.bigdata.rdf.sparql.ast.UnionNode;
-import com.bigdata.rdf.sparql.ast.VarNode;
-import com.bigdata.rdf.sparql.ast.ZeroLengthPathNode;
-import com.bigdata.rdf.sparql.ast.eval.AST2BOpContext;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.rdf.sparql.ast.ArbitraryLengthPathNode;
+import org.embergraph.rdf.sparql.ast.ConstantNode;
+import org.embergraph.rdf.sparql.ast.FilterNode;
+import org.embergraph.rdf.sparql.ast.FunctionNode;
+import org.embergraph.rdf.sparql.ast.FunctionRegistry;
+import org.embergraph.rdf.sparql.ast.GraphPatternGroup;
+import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
+import org.embergraph.rdf.sparql.ast.JoinGroupNode;
+import org.embergraph.rdf.sparql.ast.PathNode.PathAlternative;
+import org.embergraph.rdf.sparql.ast.PathNode.PathElt;
+import org.embergraph.rdf.sparql.ast.PathNode.PathMod;
+import org.embergraph.rdf.sparql.ast.PathNode.PathNegatedPropertySet;
+import org.embergraph.rdf.sparql.ast.PathNode.PathOneInPropertySet;
+import org.embergraph.rdf.sparql.ast.PathNode.PathSequence;
+import org.embergraph.rdf.sparql.ast.PropertyPathNode;
+import org.embergraph.rdf.sparql.ast.PropertyPathUnionNode;
+import org.embergraph.rdf.sparql.ast.QueryHints;
+import org.embergraph.rdf.sparql.ast.StatementPatternNode;
+import org.embergraph.rdf.sparql.ast.StaticAnalysis;
+import org.embergraph.rdf.sparql.ast.TermNode;
+import org.embergraph.rdf.sparql.ast.UnionNode;
+import org.embergraph.rdf.sparql.ast.VarNode;
+import org.embergraph.rdf.sparql.ast.ZeroLengthPathNode;
+import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 public class ASTPropertyPathOptimizer extends AbstractJoinGroupOptimizer
 		implements IASTOptimizer {

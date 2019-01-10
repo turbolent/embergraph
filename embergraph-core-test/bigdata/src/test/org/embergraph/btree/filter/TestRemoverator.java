@@ -30,17 +30,17 @@ package org.embergraph.btree.filter;
 
 import java.util.UUID;
 
-import com.bigdata.btree.AbstractBTree;
-import com.bigdata.btree.AbstractTupleCursorTestCase;
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleCursor2;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.TestTuple;
-import com.bigdata.btree.Tuple;
-import com.bigdata.btree.AbstractBTreeTupleCursor.MutableBTreeTupleCursor;
-import com.bigdata.rawstore.SimpleMemoryRawStore;
+import org.embergraph.btree.AbstractBTree;
+import org.embergraph.btree.AbstractTupleCursorTestCase;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleCursor2;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.TestTuple;
+import org.embergraph.btree.Tuple;
+import org.embergraph.btree.AbstractBTreeTupleCursor.MutableBTreeTupleCursor;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /**
  * Test suite for the {@link Removerator}.

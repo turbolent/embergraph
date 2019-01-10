@@ -27,11 +27,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.eval;
 
-import com.bigdata.rdf.sparql.ast.service.BigdataServiceCall;
-import com.bigdata.rdf.sparql.ast.service.ServiceCallCreateParams;
-import com.bigdata.rdf.sparql.ast.service.ServiceFactory;
-import com.bigdata.rdf.sparql.ast.service.ServiceNode;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.sparql.ast.service.BigdataServiceCall;
+import org.embergraph.rdf.sparql.ast.service.ServiceCallCreateParams;
+import org.embergraph.rdf.sparql.ast.service.ServiceFactory;
+import org.embergraph.rdf.sparql.ast.service.ServiceNode;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * An abstract {@link ServiceFactory} that deals with service parameters (magic

@@ -39,8 +39,8 @@ import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQuery;
 import org.openrdf.query.TupleQueryResult;
 
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepository.AddOp;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository.AddOp;
 
 /**
  * GETSTMTS test suite for includeInferred.

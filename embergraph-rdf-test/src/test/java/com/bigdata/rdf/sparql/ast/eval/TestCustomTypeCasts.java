@@ -27,8 +27,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package com.bigdata.rdf.sparql.ast.eval;
 
-import com.bigdata.rdf.internal.constraints.XsdLongBOp;
-import com.bigdata.rdf.internal.constraints.XsdUnsignedLongBOp;
+import org.embergraph.rdf.internal.constraints.XsdLongBOp;
+import org.embergraph.rdf.internal.constraints.XsdUnsignedLongBOp;
 
 /**
  * Test suite for standard type cast function such as {@link XsdLongBOp} and

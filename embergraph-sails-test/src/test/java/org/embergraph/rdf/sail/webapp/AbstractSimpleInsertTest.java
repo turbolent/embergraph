@@ -66,7 +66,7 @@ import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.model.vocabulary.XMLSchema;
 import org.openrdf.repository.RepositoryException;
 
-import com.bigdata.journal.IIndexManager;
+import org.embergraph.journal.IIndexManager;
 
 public class AbstractSimpleInsertTest<S extends IIndexManager> extends
 		AbstractTestNanoSparqlClient<S> {

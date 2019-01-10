@@ -30,8 +30,8 @@ package org.embergraph.btree.keys;
 
 import java.util.Arrays;
 
-import com.bigdata.service.ndx.pipeline.KVOC;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.service.ndx.pipeline.KVOC;
+import org.embergraph.util.BytesUtil;
 
 /**
  * A key-value-object tuple. Comparison places the {@link KVO} tuples into an

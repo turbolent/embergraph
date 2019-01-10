@@ -38,22 +38,22 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.engine.AbstractRunningQuery;
-import com.bigdata.bop.engine.IChunkMessage;
-import com.bigdata.bop.engine.IQueryClient;
-import com.bigdata.bop.engine.IQueryDecl;
-import com.bigdata.bop.engine.IQueryPeer;
-import com.bigdata.bop.engine.QueryEngine;
-import com.bigdata.bop.engine.QueryEngineCounters;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.service.AbstractDistributedFederation;
-import com.bigdata.service.DataService;
-import com.bigdata.service.IBigdataFederation;
-import com.bigdata.service.IDataService;
-import com.bigdata.service.ManagedResourceService;
-import com.bigdata.service.ResourceService;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.engine.AbstractRunningQuery;
+import org.embergraph.bop.engine.IChunkMessage;
+import org.embergraph.bop.engine.IQueryClient;
+import org.embergraph.bop.engine.IQueryDecl;
+import org.embergraph.bop.engine.IQueryPeer;
+import org.embergraph.bop.engine.QueryEngine;
+import org.embergraph.bop.engine.QueryEngineCounters;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.service.AbstractDistributedFederation;
+import org.embergraph.service.DataService;
+import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IDataService;
+import org.embergraph.service.ManagedResourceService;
+import org.embergraph.service.ResourceService;
 
 /**
  * An {@link IBigdataFederation} aware {@link QueryEngine}.

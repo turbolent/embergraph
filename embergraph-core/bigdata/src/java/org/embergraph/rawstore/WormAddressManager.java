@@ -30,7 +30,7 @@ package org.embergraph.rawstore;
 import java.math.BigInteger;
 import java.text.NumberFormat;
 
-import com.bigdata.btree.IndexSegmentAddressManager;
+import org.embergraph.btree.IndexSegmentAddressManager;
 
 /**
  * Encapsulates logic for operations on an opaque long integer comprising an

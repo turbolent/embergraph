@@ -27,8 +27,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.rdf.update;
 
-import com.bigdata.bop.engine.BOpStats;
-import com.bigdata.counters.CAT;
+import org.embergraph.bop.engine.BOpStats;
+import org.embergraph.counters.CAT;
 
 /**
  * Extends {@link BOpStats} to report RDF parser specific statistics.

@@ -30,23 +30,23 @@ package org.embergraph.service;
 import java.io.IOException;
 import java.util.UUID;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.IRangeQuery;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.ITupleSerializer;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.NOPTupleSerializer;
-import com.bigdata.btree.TestTuple;
-import com.bigdata.btree.filter.TupleFilter;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.btree.keys.TestKeyBuilder;
-import com.bigdata.btree.proc.BatchInsert.BatchInsertConstructor;
-import com.bigdata.journal.ITx;
-import com.bigdata.mdi.PartitionLocator;
-import com.bigdata.service.ndx.ClientIndexView;
-import com.bigdata.service.ndx.PartitionedTupleIterator;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.IRangeQuery;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.ITupleSerializer;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.NOPTupleSerializer;
+import org.embergraph.btree.TestTuple;
+import org.embergraph.btree.filter.TupleFilter;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.btree.keys.TestKeyBuilder;
+import org.embergraph.btree.proc.BatchInsert.BatchInsertConstructor;
+import org.embergraph.journal.ITx;
+import org.embergraph.mdi.PartitionLocator;
+import org.embergraph.service.ndx.ClientIndexView;
+import org.embergraph.service.ndx.PartitionedTupleIterator;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Test suite for the {@link IRangeQuery} API.

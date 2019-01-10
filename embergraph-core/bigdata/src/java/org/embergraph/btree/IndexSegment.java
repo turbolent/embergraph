@@ -25,18 +25,18 @@ package org.embergraph.btree;
 
 import java.io.IOException;
 
-import com.bigdata.btree.AbstractBTreeTupleCursor.AbstractCursorPosition;
-import com.bigdata.btree.IndexSegment.ImmutableNodeFactory.ImmutableLeaf;
-import com.bigdata.btree.data.ILeafData;
-import com.bigdata.btree.data.INodeData;
-import com.bigdata.btree.raba.IRaba;
-import com.bigdata.btree.raba.ReadOnlyKeysRaba;
-import com.bigdata.btree.raba.ReadOnlyValuesRaba;
-import com.bigdata.io.AbstractFixedByteArrayBuffer;
-import com.bigdata.io.FixedByteArrayBuffer;
-import com.bigdata.service.Event;
-import com.bigdata.service.EventResource;
-import com.bigdata.service.EventType;
+import org.embergraph.btree.AbstractBTreeTupleCursor.AbstractCursorPosition;
+import org.embergraph.btree.IndexSegment.ImmutableNodeFactory.ImmutableLeaf;
+import org.embergraph.btree.data.ILeafData;
+import org.embergraph.btree.data.INodeData;
+import org.embergraph.btree.raba.IRaba;
+import org.embergraph.btree.raba.ReadOnlyKeysRaba;
+import org.embergraph.btree.raba.ReadOnlyValuesRaba;
+import org.embergraph.io.AbstractFixedByteArrayBuffer;
+import org.embergraph.io.FixedByteArrayBuffer;
+import org.embergraph.service.Event;
+import org.embergraph.service.EventResource;
+import org.embergraph.service.EventType;
 
 /**
  * An index segment is read-only btree corresponding to some key range of a

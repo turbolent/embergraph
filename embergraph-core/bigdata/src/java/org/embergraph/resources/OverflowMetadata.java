@@ -12,16 +12,16 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.BTreeCounters;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.io.DataInputBuffer;
-import com.bigdata.journal.AbstractJournal;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.Name2Addr.Entry;
-import com.bigdata.journal.Name2Addr.EntrySerializer;
-import com.bigdata.service.IDataService;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.BTreeCounters;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.io.DataInputBuffer;
+import org.embergraph.journal.AbstractJournal;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Name2Addr.Entry;
+import org.embergraph.journal.Name2Addr.EntrySerializer;
+import org.embergraph.service.IDataService;
 
 /**
  * Metadata on the entire synchronous and asynchronous overflow task.

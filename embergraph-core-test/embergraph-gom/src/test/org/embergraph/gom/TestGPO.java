@@ -38,12 +38,12 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
-import com.bigdata.gom.gpo.IGPO;
-import com.bigdata.gom.gpo.ILinkSet;
-import com.bigdata.gom.om.IObjectManager;
-import com.bigdata.gom.om.ObjectManager;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.BigdataSailRepository;
+import org.embergraph.gom.gpo.IGPO;
+import org.embergraph.gom.gpo.ILinkSet;
+import org.embergraph.gom.om.IObjectManager;
+import org.embergraph.gom.om.ObjectManager;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.BigdataSailRepository;
 
 public class TestGPO extends ProxyGOMTest {
 

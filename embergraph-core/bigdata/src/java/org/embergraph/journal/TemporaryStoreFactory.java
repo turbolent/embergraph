@@ -37,10 +37,10 @@ import java.util.UUID;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.cache.ConcurrentWeakValueCache;
-import com.bigdata.rawstore.WormAddressManager;
-import com.bigdata.util.Bytes;
-import com.bigdata.util.InnerCause;
+import org.embergraph.cache.ConcurrentWeakValueCache;
+import org.embergraph.rawstore.WormAddressManager;
+import org.embergraph.util.Bytes;
+import org.embergraph.util.InnerCause;
 
 /**
  * Helper class for {@link IIndexStore#getTempStore()}. This class is very light

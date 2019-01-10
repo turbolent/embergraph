@@ -29,8 +29,8 @@ package org.embergraph.util.httpd;
 
 import java.util.Collection;
 
-import com.bigdata.util.httpd.NanoHTTPD.Request;
-import com.bigdata.util.httpd.NanoHTTPD.Response;
+import org.embergraph.util.httpd.NanoHTTPD.Request;
+import org.embergraph.util.httpd.NanoHTTPD.Response;
 
 /**
  * Interface allows for implementation of different handlers for "GET".

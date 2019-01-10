@@ -41,7 +41,7 @@ import java.util.TreeMap;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.proc.AbstractKeyArrayIndexProcedure;
+import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure;
 
 /**
  * Default implementation.

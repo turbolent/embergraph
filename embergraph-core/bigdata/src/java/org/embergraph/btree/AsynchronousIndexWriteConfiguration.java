@@ -6,12 +6,12 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
 
-import com.bigdata.io.LongPacker;
-import com.bigdata.relation.accesspath.IAsynchronousIterator;
-import com.bigdata.resources.StaleLocatorException;
-import com.bigdata.service.ndx.IAsynchronousWriteBufferFactory;
-import com.bigdata.service.ndx.pipeline.AbstractMasterTask;
-import com.bigdata.service.ndx.pipeline.AbstractSubtask;
+import org.embergraph.io.LongPacker;
+import org.embergraph.relation.accesspath.IAsynchronousIterator;
+import org.embergraph.resources.StaleLocatorException;
+import org.embergraph.service.ndx.IAsynchronousWriteBufferFactory;
+import org.embergraph.service.ndx.pipeline.AbstractMasterTask;
+import org.embergraph.service.ndx.pipeline.AbstractSubtask;
 
 /**
  * Configuration for the asynchronous index write API.

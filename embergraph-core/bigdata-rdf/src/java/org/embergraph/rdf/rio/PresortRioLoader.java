@@ -29,7 +29,7 @@ import org.openrdf.model.Value;
 import org.openrdf.rio.RDFHandler;
 import org.openrdf.rio.RDFHandlerException;
 
-import com.bigdata.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataURI;
 
 /**
  * Statement handler for the RIO RDF Parser that writes on a

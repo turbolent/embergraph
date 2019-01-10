@@ -24,13 +24,13 @@ import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.rio.RDFFormat;
 
-import com.bigdata.journal.ITx;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.BigdataSailRepository;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.ScaleOutTripleStore;
-import com.bigdata.service.jini.JiniClient;
-import com.bigdata.service.jini.JiniFederation;
+import org.embergraph.journal.ITx;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.BigdataSailRepository;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.ScaleOutTripleStore;
+import org.embergraph.service.jini.JiniClient;
+import org.embergraph.service.jini.JiniFederation;
 
 /**
  * This class demonstrates concurrent reading and writing with the U10 data set

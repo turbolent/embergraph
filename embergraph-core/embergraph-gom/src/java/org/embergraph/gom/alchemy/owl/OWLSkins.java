@@ -23,7 +23,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.gom.alchemy.owl;
 
-import com.bigdata.gom.skin.GenericSkinRegistry;
+import org.embergraph.gom.skin.GenericSkinRegistry;
 
 /**
  * This is just a hook class to register the OWL GPO skins.

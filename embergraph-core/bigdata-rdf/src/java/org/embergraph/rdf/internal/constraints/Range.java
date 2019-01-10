@@ -26,7 +26,7 @@ package org.embergraph.rdf.internal.constraints;
 
 import java.io.Serializable;
 
-import com.bigdata.rdf.internal.IV;
+import org.embergraph.rdf.internal.IV;
 
 /**
  * Represents a numerical range of IVs - a lower bound and an upper bound.

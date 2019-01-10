@@ -34,19 +34,19 @@ import java.util.UUID;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.IIndexStore;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.TemporaryStore;
-import com.bigdata.rdf.inf.TruthMaintenance;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.spo.SPORelation;
-import com.bigdata.relation.locator.DefaultResourceLocator;
-import com.bigdata.service.IBigdataFederation;
-import com.bigdata.util.PropertyUtil;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.IIndexStore;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.TemporaryStore;
+import org.embergraph.rdf.inf.TruthMaintenance;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.spo.SPORelation;
+import org.embergraph.relation.locator.DefaultResourceLocator;
+import org.embergraph.service.IBigdataFederation;
+import org.embergraph.util.PropertyUtil;
 
 /**
  * A temporary triple store based on the <em>bigdata</em> architecture. Data

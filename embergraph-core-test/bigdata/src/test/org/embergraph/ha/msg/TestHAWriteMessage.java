@@ -28,9 +28,9 @@ import java.util.UUID;
 
 import junit.framework.TestCase;
 
-import com.bigdata.io.SerializerUtil;
-import com.bigdata.journal.StoreTypeEnum;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.io.SerializerUtil;
+import org.embergraph.journal.StoreTypeEnum;
+import org.embergraph.util.BytesUtil;
 
 public class TestHAWriteMessage extends TestCase {
 

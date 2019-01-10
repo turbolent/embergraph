@@ -30,10 +30,10 @@ package org.embergraph.bop.joinGraph;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.IPredicate;
-import com.bigdata.relation.IRelation;
-import com.bigdata.relation.accesspath.IAccessPath;
-import com.bigdata.relation.rule.eval.IJoinNexus;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.relation.IRelation;
+import org.embergraph.relation.accesspath.IAccessPath;
+import org.embergraph.relation.rule.eval.IJoinNexus;
 
 /**
  * Default implementation.

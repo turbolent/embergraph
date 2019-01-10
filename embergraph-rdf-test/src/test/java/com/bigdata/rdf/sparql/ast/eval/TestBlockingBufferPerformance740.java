@@ -29,7 +29,7 @@ import java.lang.management.ThreadMXBean;
 import junit.framework.TestCase;
 
 
-import com.bigdata.rdf.sparql.ast.ASTContainer;
+import org.embergraph.rdf.sparql.ast.ASTContainer;
 
 public class TestBlockingBufferPerformance740 extends AbstractDataDrivenSPARQLTestCase {
 

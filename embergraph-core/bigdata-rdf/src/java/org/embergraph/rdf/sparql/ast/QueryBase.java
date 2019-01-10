@@ -26,9 +26,9 @@ package org.embergraph.rdf.sparql.ast;
 import java.util.Map;
 import java.util.Set;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IVariable;
-import com.bigdata.rdf.sparql.ast.QueryRoot.Annotations;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IVariable;
+import org.embergraph.rdf.sparql.ast.QueryRoot.Annotations;
 
 /**
  * Contains the projection clause, where clause, and solution modified clauses.

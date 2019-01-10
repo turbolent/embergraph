@@ -28,8 +28,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree;
 
-import com.bigdata.mdi.ISeparatorKeys;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.mdi.ISeparatorKeys;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Exception thrown when a key is before the start of the half-open range of an

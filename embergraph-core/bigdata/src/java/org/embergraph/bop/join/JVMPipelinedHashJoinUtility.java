@@ -36,25 +36,25 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.BOpContext;
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IConstraint;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.controller.INamedSolutionSetRef;
-import com.bigdata.bop.engine.AbstractRunningQuery;
-import com.bigdata.bop.engine.BOpStats;
-import com.bigdata.bop.engine.IRunningQuery;
-import com.bigdata.bop.engine.QueryEngine;
-import com.bigdata.bop.join.JVMHashIndex.Bucket;
-import com.bigdata.bop.join.JVMHashIndex.SolutionHit;
-import com.bigdata.counters.CAT;
-import com.bigdata.rdf.internal.impl.literal.XSDBooleanIV;
-import com.bigdata.relation.accesspath.BufferClosedException;
-import com.bigdata.relation.accesspath.IBuffer;
-import com.bigdata.relation.accesspath.UnsyncLocalOutputBuffer;
-import com.bigdata.util.InnerCause;
+import org.embergraph.bop.BOpContext;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IConstraint;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.controller.INamedSolutionSetRef;
+import org.embergraph.bop.engine.AbstractRunningQuery;
+import org.embergraph.bop.engine.BOpStats;
+import org.embergraph.bop.engine.IRunningQuery;
+import org.embergraph.bop.engine.QueryEngine;
+import org.embergraph.bop.join.JVMHashIndex.Bucket;
+import org.embergraph.bop.join.JVMHashIndex.SolutionHit;
+import org.embergraph.counters.CAT;
+import org.embergraph.rdf.internal.impl.literal.XSDBooleanIV;
+import org.embergraph.relation.accesspath.BufferClosedException;
+import org.embergraph.relation.accesspath.IBuffer;
+import org.embergraph.relation.accesspath.UnsyncLocalOutputBuffer;
+import org.embergraph.util.InnerCause;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

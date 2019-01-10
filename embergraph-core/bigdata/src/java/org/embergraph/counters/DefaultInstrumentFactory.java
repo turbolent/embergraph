@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.counters;
 
-import com.bigdata.counters.ICounterSet.IInstrumentFactory;
+import org.embergraph.counters.ICounterSet.IInstrumentFactory;
 
 /**
  * Used to read in {@link CounterSet} XML, aggregating data into

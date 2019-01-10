@@ -32,10 +32,10 @@ import java.nio.ByteBuffer;
 import java.util.Properties;
 import java.util.UUID;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.rwstore.IRWStrategy;
-import com.bigdata.service.AbstractTransactionService;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.rwstore.IRWStrategy;
+import org.embergraph.service.AbstractTransactionService;
 
 /**
  * Test the ability to get (exact match) and find (most recent less than or

@@ -25,9 +25,9 @@ package org.embergraph.btree.raba.codec;
 
 import java.io.Serializable;
 
-import com.bigdata.btree.raba.IRaba;
-import com.bigdata.io.AbstractFixedByteArrayBuffer;
-import com.bigdata.io.DataOutputBuffer;
+import org.embergraph.btree.raba.IRaba;
+import org.embergraph.io.AbstractFixedByteArrayBuffer;
+import org.embergraph.io.DataOutputBuffer;
 
 /**
  * Interface for coding (compressing) a logical <code>byte[][]</code> and for

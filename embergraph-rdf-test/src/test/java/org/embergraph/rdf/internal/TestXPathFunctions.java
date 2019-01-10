@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.internal;
 
-import com.bigdata.rdf.sparql.ast.FunctionRegistry;
+import org.embergraph.rdf.sparql.ast.FunctionRegistry;
 
 import junit.framework.TestCase2;
 

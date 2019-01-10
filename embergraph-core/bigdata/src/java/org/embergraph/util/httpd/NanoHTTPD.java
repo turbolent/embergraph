@@ -31,10 +31,10 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.service.IServiceShutdown;
-import com.bigdata.util.Bytes;
-import com.bigdata.util.CaseInsensitiveStringComparator;
-import com.bigdata.util.DaemonThreadFactory;
+import org.embergraph.service.IServiceShutdown;
+import org.embergraph.util.Bytes;
+import org.embergraph.util.CaseInsensitiveStringComparator;
+import org.embergraph.util.DaemonThreadFactory;
 
 /**
  * A simple, tiny, nicely embeddable HTTP 1.0 server in Java

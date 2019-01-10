@@ -23,7 +23,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.htree;
 
-import com.bigdata.btree.PageStats;
+import org.embergraph.btree.PageStats;
 
 public class HTreePageStats extends PageStats {
 

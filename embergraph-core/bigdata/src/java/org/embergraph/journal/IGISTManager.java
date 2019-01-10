@@ -28,7 +28,7 @@ package org.embergraph.journal;
 
 import java.util.Iterator;
 
-import com.bigdata.btree.IndexMetadata;
+import org.embergraph.btree.IndexMetadata;
 
 /**
  * Interface for managing local or distributed index structures in a manner that

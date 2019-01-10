@@ -34,7 +34,7 @@ import org.apache.log4j.Level;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.rawstore.SimpleMemoryRawStore;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /**
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

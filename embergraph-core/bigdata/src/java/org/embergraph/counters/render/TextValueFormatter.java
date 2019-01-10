@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.io.Writer;
 import java.text.Format;
 
-import com.bigdata.counters.ICounter;
-import com.bigdata.counters.query.URLQueryModel;
+import org.embergraph.counters.ICounter;
+import org.embergraph.counters.query.URLQueryModel;
 
 /**
  * 

@@ -4,23 +4,23 @@ import java.util.Arrays;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.ILocalBTreeView;
-import com.bigdata.btree.ISimpleSplitHandler;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.IndexSegment;
-import com.bigdata.journal.AbstractTask;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.TimestampUtility;
-import com.bigdata.mdi.IResourceMetadata;
-import com.bigdata.mdi.IndexPartitionCause;
-import com.bigdata.mdi.LocalPartitionMetadata;
-import com.bigdata.mdi.MetadataIndex;
-import com.bigdata.mdi.PartitionLocator;
-import com.bigdata.service.DataService;
-import com.bigdata.service.Event;
-import com.bigdata.service.EventResource;
-import com.bigdata.service.Split;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.ILocalBTreeView;
+import org.embergraph.btree.ISimpleSplitHandler;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.IndexSegment;
+import org.embergraph.journal.AbstractTask;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.TimestampUtility;
+import org.embergraph.mdi.IResourceMetadata;
+import org.embergraph.mdi.IndexPartitionCause;
+import org.embergraph.mdi.LocalPartitionMetadata;
+import org.embergraph.mdi.MetadataIndex;
+import org.embergraph.mdi.PartitionLocator;
+import org.embergraph.service.DataService;
+import org.embergraph.service.Event;
+import org.embergraph.service.EventResource;
+import org.embergraph.service.Split;
 
 /**
  * Task splits an index partition which is a compact view (no more than one

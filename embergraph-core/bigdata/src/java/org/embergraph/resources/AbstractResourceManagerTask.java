@@ -30,10 +30,10 @@ package org.embergraph.resources;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.journal.AbstractTask;
-import com.bigdata.journal.ITx;
-import com.bigdata.service.IDataService;
-import com.bigdata.service.IMetadataService;
+import org.embergraph.journal.AbstractTask;
+import org.embergraph.journal.ITx;
+import org.embergraph.service.IDataService;
+import org.embergraph.service.IMetadataService;
 
 /**
  * Abstract base class for tasks run during post-processing of a journal by the

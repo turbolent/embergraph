@@ -31,20 +31,20 @@ import java.util.UUID;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.NamedSolutionSetRefUtility;
-import com.bigdata.bop.solutions.SolutionSetStream;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.journal.IBTreeManager;
-import com.bigdata.journal.IJournal;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.TimestampUtility;
-import com.bigdata.rdf.sparql.ast.ISolutionSetStats;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.relation.AbstractResource;
-import com.bigdata.stream.Stream.StreamIndexMetadata;
-import com.bigdata.striterator.CloseableIteratorWrapper;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.NamedSolutionSetRefUtility;
+import org.embergraph.bop.solutions.SolutionSetStream;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.journal.IBTreeManager;
+import org.embergraph.journal.IJournal;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.TimestampUtility;
+import org.embergraph.rdf.sparql.ast.ISolutionSetStats;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.relation.AbstractResource;
+import org.embergraph.stream.Stream.StreamIndexMetadata;
+import org.embergraph.striterator.CloseableIteratorWrapper;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

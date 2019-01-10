@@ -45,7 +45,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.util.DaemonThreadFactory;
+import org.embergraph.util.DaemonThreadFactory;
 
 /**
  * Test suite for {@link BlockingBuffer} and its {@link IAsynchronousIterator}

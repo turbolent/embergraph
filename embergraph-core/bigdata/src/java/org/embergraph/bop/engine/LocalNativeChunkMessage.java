@@ -3,16 +3,16 @@ package org.embergraph.bop.engine;
 import java.rmi.RemoteException;
 import java.util.UUID;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IQueryContext;
-import com.bigdata.bop.fed.FederatedRunningQuery;
-import com.bigdata.bop.solutions.SolutionSetStream;
-import com.bigdata.btree.Checkpoint;
-import com.bigdata.relation.accesspath.EmptyCloseableIterator;
-import com.bigdata.relation.accesspath.ThickCloseableIterator;
-import com.bigdata.rwstore.sector.MemStore;
-import com.bigdata.stream.Stream.StreamIndexMetadata;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IQueryContext;
+import org.embergraph.bop.fed.FederatedRunningQuery;
+import org.embergraph.bop.solutions.SolutionSetStream;
+import org.embergraph.btree.Checkpoint;
+import org.embergraph.relation.accesspath.EmptyCloseableIterator;
+import org.embergraph.relation.accesspath.ThickCloseableIterator;
+import org.embergraph.rwstore.sector.MemStore;
+import org.embergraph.stream.Stream.StreamIndexMetadata;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

@@ -29,10 +29,10 @@ package org.embergraph.btree;
 
 import java.util.UUID;
 
-import com.bigdata.btree.keys.TestKeyBuilder;
-import com.bigdata.cache.HardReferenceQueue;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rawstore.SimpleMemoryRawStore;
+import org.embergraph.btree.keys.TestKeyBuilder;
+import org.embergraph.cache.HardReferenceQueue;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /**
  * Test suite for {@link BTree#touch(AbstractNode)}. None of these tests cause

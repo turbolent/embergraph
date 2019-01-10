@@ -25,12 +25,12 @@ package org.embergraph.rdf.internal;
 
 import java.util.UUID;
 
-import com.bigdata.rdf.internal.impl.literal.AbstractLiteralIV;
-import com.bigdata.rdf.internal.impl.literal.FullyInlineTypedLiteralIV;
-import com.bigdata.rdf.internal.impl.literal.IPv4AddrIV;
-import com.bigdata.rdf.internal.impl.literal.UUIDLiteralIV;
-import com.bigdata.rdf.internal.impl.literal.XSDNumericIV;
-import com.bigdata.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
+import org.embergraph.rdf.internal.impl.literal.FullyInlineTypedLiteralIV;
+import org.embergraph.rdf.internal.impl.literal.IPv4AddrIV;
+import org.embergraph.rdf.internal.impl.literal.UUIDLiteralIV;
+import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
+import org.embergraph.rdf.model.BigdataLiteral;
 
 /**
  * Inline URI handler for IDs of multiple types.

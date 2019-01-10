@@ -31,10 +31,10 @@ import java.util.Collections;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.bop.Constant;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.VTE;
-import com.bigdata.rdf.internal.impl.TermId;
+import org.embergraph.bop.Constant;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.VTE;
+import org.embergraph.rdf.internal.impl.TermId;
 
 /**
  * @see StaticAnalysis#canJoin(IJoinNode, IJoinNode)

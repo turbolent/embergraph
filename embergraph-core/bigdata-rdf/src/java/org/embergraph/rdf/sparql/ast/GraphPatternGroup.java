@@ -31,9 +31,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IVariable;
-import com.bigdata.rdf.sparql.ast.optimizers.ASTSubGroupJoinVarOptimizer;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IVariable;
+import org.embergraph.rdf.sparql.ast.optimizers.ASTSubGroupJoinVarOptimizer;
 
 /**
  * Join group or union.

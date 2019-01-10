@@ -29,13 +29,13 @@ import java.util.Properties;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.Var;
-import com.bigdata.rdf.internal.impl.TermId;
-import com.bigdata.rdf.spo.SPOPredicate;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.Var;
+import org.embergraph.rdf.internal.impl.TermId;
+import org.embergraph.rdf.spo.SPOPredicate;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * SPARQL level test suite for the {@link ASTSimpleBindingsOptimizer}.

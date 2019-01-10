@@ -7,17 +7,17 @@ import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-import com.bigdata.btree.ILocalBTreeView;
-import com.bigdata.btree.ISimpleSplitHandler;
-import com.bigdata.btree.IndexSegment;
-import com.bigdata.journal.TimestampUtility;
-import com.bigdata.mdi.MetadataIndex;
-import com.bigdata.resources.SplitIndexPartitionTask.AtomicUpdateSplitIndexPartitionTask;
-import com.bigdata.service.DataService;
-import com.bigdata.service.Event;
-import com.bigdata.service.EventResource;
-import com.bigdata.service.Split;
-import com.bigdata.sparse.SparseRowStore;
+import org.embergraph.btree.ILocalBTreeView;
+import org.embergraph.btree.ISimpleSplitHandler;
+import org.embergraph.btree.IndexSegment;
+import org.embergraph.journal.TimestampUtility;
+import org.embergraph.mdi.MetadataIndex;
+import org.embergraph.resources.SplitIndexPartitionTask.AtomicUpdateSplitIndexPartitionTask;
+import org.embergraph.service.DataService;
+import org.embergraph.service.Event;
+import org.embergraph.service.EventResource;
+import org.embergraph.service.Split;
+import org.embergraph.sparse.SparseRowStore;
 
 /**
  * Task splits an index partition into N equal sized index partitions and

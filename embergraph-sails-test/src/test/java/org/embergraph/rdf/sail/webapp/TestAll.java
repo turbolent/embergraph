@@ -30,7 +30,7 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import com.bigdata.journal.BufferMode;
+import org.embergraph.journal.BufferMode;
 
 /**
  * Test suite.

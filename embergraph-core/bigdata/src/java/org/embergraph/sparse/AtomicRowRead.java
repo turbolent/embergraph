@@ -24,7 +24,7 @@
  */
 package org.embergraph.sparse;
 
-import com.bigdata.btree.IIndex;
+import org.embergraph.btree.IIndex;
 
 
 /**

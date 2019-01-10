@@ -31,8 +31,8 @@ import java.util.UUID;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rawstore.SimpleMemoryRawStore;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /**
  * Unit tests for commit functionality that do not trigger copy-on-write.

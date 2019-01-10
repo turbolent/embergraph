@@ -35,12 +35,12 @@ import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.eclipse.jetty.client.api.Request;
 import org.eclipse.jetty.server.Server;
 
-import com.bigdata.BigdataStatics;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.rdf.sail.webapp.client.ConnectOptions;
-import com.bigdata.rdf.sail.webapp.client.HttpException;
-import com.bigdata.rdf.sail.webapp.client.JettyResponseListener;
-import com.bigdata.util.config.NicUtil;
+import org.embergraph.BigdataStatics;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.sail.webapp.client.ConnectOptions;
+import org.embergraph.rdf.sail.webapp.client.HttpException;
+import org.embergraph.rdf.sail.webapp.client.JettyResponseListener;
+import org.embergraph.util.config.NicUtil;
 
 /**
  * Proxied test suite for bootstrap and basic structure tests for the REST API.

@@ -39,8 +39,8 @@ import java.nio.charset.Charset;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.io.ByteCountInputStream;
-import com.bigdata.io.ByteCountOutputStream;
+import org.embergraph.io.ByteCountInputStream;
+import org.embergraph.io.ByteCountOutputStream;
 
 /**
  * BOCU-1 version.

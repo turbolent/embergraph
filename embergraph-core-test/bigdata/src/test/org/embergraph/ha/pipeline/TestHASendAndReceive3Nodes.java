@@ -33,13 +33,13 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import com.bigdata.BigdataStatics;
-import com.bigdata.ha.msg.HAMessageWrapper;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.io.IBufferAccess;
-import com.bigdata.util.Bytes;
-import com.bigdata.util.ChecksumError;
-import com.bigdata.util.InnerCause;
+import org.embergraph.BigdataStatics;
+import org.embergraph.ha.msg.HAMessageWrapper;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.io.IBufferAccess;
+import org.embergraph.util.Bytes;
+import org.embergraph.util.ChecksumError;
+import org.embergraph.util.InnerCause;
 
 /**
  * Test the raw socket protocol implemented by {@link HASendService} and

@@ -23,9 +23,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.internal.impl;
 
-import com.bigdata.rdf.internal.DTE;
-import com.bigdata.rdf.internal.VTE;
-import com.bigdata.rdf.model.BigdataValue;
+import org.embergraph.rdf.internal.DTE;
+import org.embergraph.rdf.internal.VTE;
+import org.embergraph.rdf.model.BigdataValue;
 
 /**
  * Abstract base class for inline RDF values (literals, blank nodes, and

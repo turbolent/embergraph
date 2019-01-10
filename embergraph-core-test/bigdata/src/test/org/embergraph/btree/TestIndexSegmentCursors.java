@@ -31,7 +31,7 @@ package org.embergraph.btree;
 import java.io.File;
 import java.io.IOException;
 
-import com.bigdata.btree.IndexSegment.IndexSegmentTupleCursor;
+import org.embergraph.btree.IndexSegment.IndexSegmentTupleCursor;
 
 /**
  * Test suite for {@link IndexSegmentTupleCursor}.

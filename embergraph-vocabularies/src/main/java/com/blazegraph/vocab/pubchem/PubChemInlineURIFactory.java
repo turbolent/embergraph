@@ -23,12 +23,12 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package com.blazegraph.vocab.pubchem;
 
-import com.bigdata.rdf.internal.InlineIntegerURIHandlerMap;
-import com.bigdata.rdf.internal.InlinePrefixedFixedWidthIntegerURIHandler;
-import com.bigdata.rdf.internal.InlinePrefixedIntegerURIHandler;
-import com.bigdata.rdf.internal.InlinePrefixedSuffixedIntegerURIHandler;
-import com.bigdata.rdf.internal.InlineURIFactory;
-import com.bigdata.rdf.internal.InlineURIHandler;
+import org.embergraph.rdf.internal.InlineIntegerURIHandlerMap;
+import org.embergraph.rdf.internal.InlinePrefixedFixedWidthIntegerURIHandler;
+import org.embergraph.rdf.internal.InlinePrefixedIntegerURIHandler;
+import org.embergraph.rdf.internal.InlinePrefixedSuffixedIntegerURIHandler;
+import org.embergraph.rdf.internal.InlineURIFactory;
+import org.embergraph.rdf.internal.InlineURIHandler;
 
 /**
  * {@link InlineURIFactory} for the {@link PubChemVocabularyDecl} to load the PubChem data from {@link https://pubchem.ncbi.nlm.nih.gov/rdf/}.

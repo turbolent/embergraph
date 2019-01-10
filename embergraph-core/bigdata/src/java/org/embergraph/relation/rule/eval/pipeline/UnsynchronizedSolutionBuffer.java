@@ -1,13 +1,13 @@
 package org.embergraph.relation.rule.eval.pipeline;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.relation.accesspath.BufferClosedException;
-import com.bigdata.relation.accesspath.IBlockingBuffer;
-import com.bigdata.relation.accesspath.IBuffer;
-import com.bigdata.relation.accesspath.IElementFilter;
-import com.bigdata.relation.rule.IRule;
-import com.bigdata.relation.rule.eval.IJoinNexus;
-import com.bigdata.relation.rule.eval.ISolution;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.relation.accesspath.BufferClosedException;
+import org.embergraph.relation.accesspath.IBlockingBuffer;
+import org.embergraph.relation.accesspath.IBuffer;
+import org.embergraph.relation.accesspath.IElementFilter;
+import org.embergraph.relation.rule.IRule;
+import org.embergraph.relation.rule.eval.IJoinNexus;
+import org.embergraph.relation.rule.eval.ISolution;
 
 /**
  * Implementation used to write on the {@link JoinTask#getSolutionBuffer()}

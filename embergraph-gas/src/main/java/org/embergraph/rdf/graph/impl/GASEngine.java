@@ -27,16 +27,16 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import org.openrdf.model.Value;
 
-import com.bigdata.rdf.graph.IGASContext;
-import com.bigdata.rdf.graph.IGASEngine;
-import com.bigdata.rdf.graph.IGASProgram;
-import com.bigdata.rdf.graph.IGASScheduler;
-import com.bigdata.rdf.graph.IGASSchedulerImpl;
-import com.bigdata.rdf.graph.IGASState;
-import com.bigdata.rdf.graph.IGraphAccessor;
-import com.bigdata.rdf.graph.IStaticFrontier;
-import com.bigdata.rdf.graph.impl.frontier.StaticFrontier2;
-import com.bigdata.rdf.graph.impl.scheduler.CHMScheduler;
+import org.embergraph.rdf.graph.IGASContext;
+import org.embergraph.rdf.graph.IGASEngine;
+import org.embergraph.rdf.graph.IGASProgram;
+import org.embergraph.rdf.graph.IGASScheduler;
+import org.embergraph.rdf.graph.IGASSchedulerImpl;
+import org.embergraph.rdf.graph.IGASState;
+import org.embergraph.rdf.graph.IGraphAccessor;
+import org.embergraph.rdf.graph.IStaticFrontier;
+import org.embergraph.rdf.graph.impl.frontier.StaticFrontier2;
+import org.embergraph.rdf.graph.impl.scheduler.CHMScheduler;
 
 /**
  * {@link IGASEngine} for dynamic activation of vertices. This implementation

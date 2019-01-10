@@ -28,9 +28,9 @@ import java.util.UUID;
 
 import javax.xml.bind.DatatypeConverter;
 
-import com.bigdata.rdf.internal.impl.literal.AbstractLiteralIV;
-import com.bigdata.rdf.internal.impl.literal.UUIDLiteralIV;
-import com.bigdata.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
+import org.embergraph.rdf.internal.impl.literal.UUIDLiteralIV;
+import org.embergraph.rdf.model.BigdataLiteral;
 
 /**
  * 

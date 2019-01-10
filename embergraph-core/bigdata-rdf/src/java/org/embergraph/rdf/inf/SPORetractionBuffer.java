@@ -28,16 +28,16 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.inf;
 
 import java.util.Map;
-import com.bigdata.rdf.changesets.IChangeLog;
-import com.bigdata.rdf.changesets.StatementWriter;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.BigdataBNode;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.rdf.spo.SPO;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.relation.accesspath.AbstractElementBuffer.DeleteBuffer;
-import com.bigdata.relation.rule.eval.AbstractSolutionBuffer.DeleteSolutionBuffer;
-import com.bigdata.striterator.ChunkedArrayIterator;
+import org.embergraph.rdf.changesets.IChangeLog;
+import org.embergraph.rdf.changesets.StatementWriter;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.BigdataBNode;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.rdf.spo.SPO;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.relation.accesspath.AbstractElementBuffer.DeleteBuffer;
+import org.embergraph.relation.rule.eval.AbstractSolutionBuffer.DeleteSolutionBuffer;
+import org.embergraph.striterator.ChunkedArrayIterator;
 
 /**
  * A buffer for {@link SPO}s which causes the corresponding statements (and

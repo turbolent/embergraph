@@ -28,8 +28,8 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.webapp.BigdataSailNSSWrapper;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.webapp.BigdataSailNSSWrapper;
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Graph;
 import com.tinkerpop.blueprints.TestSuite;

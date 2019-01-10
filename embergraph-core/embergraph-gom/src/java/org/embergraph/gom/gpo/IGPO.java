@@ -32,9 +32,9 @@ import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
-import com.bigdata.gom.om.IObjectManager;
-import com.bigdata.gom.skin.GenericSkinRegistry;
-import com.bigdata.rdf.model.BigdataResource;
+import org.embergraph.gom.om.IObjectManager;
+import org.embergraph.gom.skin.GenericSkinRegistry;
+import org.embergraph.rdf.model.BigdataResource;
 
 /**
  * A generic object has identity and an extensible, loosely-typed property set.

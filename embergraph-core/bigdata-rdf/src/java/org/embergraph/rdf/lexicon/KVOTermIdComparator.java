@@ -2,9 +2,9 @@ package org.embergraph.rdf.lexicon;
 
 import java.util.Comparator;
 
-import com.bigdata.btree.keys.KVO;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.BigdataValue;
+import org.embergraph.btree.keys.KVO;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.BigdataValue;
 
 /**
  * Places {@link KVO}s containing {@link BigdataValue} references into an

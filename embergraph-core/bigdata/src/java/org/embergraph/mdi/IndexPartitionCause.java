@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
-import com.bigdata.resources.ResourceManager;
+import org.embergraph.resources.ResourceManager;
 
 /**
  * Encapsulate the reason why an index partition was created and the

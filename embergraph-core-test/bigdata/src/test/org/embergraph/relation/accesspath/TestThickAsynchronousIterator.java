@@ -32,7 +32,7 @@ import java.util.concurrent.TimeUnit;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.io.SerializerUtil;
+import org.embergraph.io.SerializerUtil;
 
 /**
  * Unit tests for {@link ThickAsynchronousIterator}.

@@ -23,7 +23,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.ha.pipeline;
 
-import com.bigdata.quorum.QuorumException;
+import org.embergraph.quorum.QuorumException;
 
 /**
  * A quorum related exception dealing with the write replication pipeline.

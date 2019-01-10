@@ -32,10 +32,10 @@ import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.util.Iterator;
 
-import com.bigdata.btree.filter.ITupleFilter;
-import com.bigdata.io.ByteBufferInputStream;
-import com.bigdata.rawstore.IBlock;
-import com.bigdata.rawstore.IRawStore;
+import org.embergraph.btree.filter.ITupleFilter;
+import org.embergraph.io.ByteBufferInputStream;
+import org.embergraph.rawstore.IBlock;
+import org.embergraph.rawstore.IRawStore;
 
 import cutthecrap.utils.striterators.IFilter;
 

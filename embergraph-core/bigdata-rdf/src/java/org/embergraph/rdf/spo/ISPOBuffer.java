@@ -31,7 +31,7 @@ package org.embergraph.rdf.spo;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import com.bigdata.relation.accesspath.IBuffer;
+import org.embergraph.relation.accesspath.IBuffer;
 
 /**
  * A buffer for {@link SPO}s. {@link ISPOBuffer}s are used to collect

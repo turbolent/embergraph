@@ -8,11 +8,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
-import com.bigdata.counters.AbstractStatisticsCollector;
-import com.bigdata.service.Event;
-import com.bigdata.service.EventReceiver;
-import com.bigdata.service.IEventReportingService;
-import com.bigdata.service.IService;
+import org.embergraph.counters.AbstractStatisticsCollector;
+import org.embergraph.service.Event;
+import org.embergraph.service.EventReceiver;
+import org.embergraph.service.IEventReportingService;
+import org.embergraph.service.IService;
 
 /**
  * A dummy implementation of the {@link IEventReportingService} interface, used

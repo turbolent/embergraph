@@ -30,7 +30,7 @@ package org.embergraph.service.proxy;
 import java.io.IOException;
 import java.rmi.Remote;
 
-import com.bigdata.relation.accesspath.IBuffer;
+import org.embergraph.relation.accesspath.IBuffer;
 
 /**
  * {@link Remote} interface declaring the API of {@link IBuffer} but also

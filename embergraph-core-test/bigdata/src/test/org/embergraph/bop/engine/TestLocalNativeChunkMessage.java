@@ -32,20 +32,20 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.DefaultQueryAttributes;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IQueryAttributes;
-import com.bigdata.bop.IQueryContext;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.Var;
-import com.bigdata.bop.bindingSet.ListBindingSet;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.impl.literal.FullyInlineTypedLiteralIV;
-import com.bigdata.rwstore.sector.IMemoryManager;
-import com.bigdata.rwstore.sector.MemoryManager;
-import com.bigdata.striterator.Dechunkerator;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.DefaultQueryAttributes;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IQueryAttributes;
+import org.embergraph.bop.IQueryContext;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.Var;
+import org.embergraph.bop.bindingSet.ListBindingSet;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.impl.literal.FullyInlineTypedLiteralIV;
+import org.embergraph.rwstore.sector.IMemoryManager;
+import org.embergraph.rwstore.sector.MemoryManager;
+import org.embergraph.striterator.Dechunkerator;
 
 import junit.framework.TestCase2;
 

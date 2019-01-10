@@ -31,21 +31,21 @@ package org.embergraph.resources;
 import java.util.Random;
 import java.util.UUID;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.FixedLengthPrefixSplits;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.IndexSegment;
-import com.bigdata.btree.IndexSegmentBuilder;
-import com.bigdata.btree.IndexSegmentStore;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.btree.keys.TestKeyBuilder;
-import com.bigdata.journal.IJournal;
-import com.bigdata.mdi.IResourceMetadata;
-import com.bigdata.mdi.LocalPartitionMetadata;
-import com.bigdata.service.Split;
-import com.bigdata.util.Bytes;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.FixedLengthPrefixSplits;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.IndexSegment;
+import org.embergraph.btree.IndexSegmentBuilder;
+import org.embergraph.btree.IndexSegmentStore;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.btree.keys.TestKeyBuilder;
+import org.embergraph.journal.IJournal;
+import org.embergraph.mdi.IResourceMetadata;
+import org.embergraph.mdi.LocalPartitionMetadata;
+import org.embergraph.service.Split;
+import org.embergraph.util.Bytes;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Unit tests for splitting an index segment based on its size on the disk, the

@@ -30,9 +30,9 @@ package org.embergraph.btree;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.btree.proc.AbstractKeyRangeIndexProcedure;
-import com.bigdata.mdi.ISeparatorKeys;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.proc.AbstractKeyRangeIndexProcedure;
+import org.embergraph.mdi.ISeparatorKeys;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Test imposing constraint on a fromKey or toKey based on an index partition's

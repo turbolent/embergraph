@@ -27,17 +27,17 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.htree;
 
-import com.bigdata.btree.AbstractBTree;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.IndexSegment;
-import com.bigdata.btree.MutableLeafData;
-import com.bigdata.btree.data.ILeafData;
-import com.bigdata.btree.raba.IRaba;
-import com.bigdata.htree.raba.MutableKeyBuffer;
-import com.bigdata.htree.raba.MutableValueBuffer;
-import com.bigdata.io.AbstractFixedByteArrayBuffer;
-import com.bigdata.io.IDataRecord;
-import com.bigdata.rawstore.IRawStore;
+import org.embergraph.btree.AbstractBTree;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.IndexSegment;
+import org.embergraph.btree.MutableLeafData;
+import org.embergraph.btree.data.ILeafData;
+import org.embergraph.btree.raba.IRaba;
+import org.embergraph.htree.raba.MutableKeyBuffer;
+import org.embergraph.htree.raba.MutableValueBuffer;
+import org.embergraph.io.AbstractFixedByteArrayBuffer;
+import org.embergraph.io.IDataRecord;
+import org.embergraph.rawstore.IRawStore;
 
 /**
  * Implementation maintains Java objects corresponding to the persistent data

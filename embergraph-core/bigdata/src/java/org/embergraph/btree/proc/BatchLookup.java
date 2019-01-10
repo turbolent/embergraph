@@ -27,11 +27,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree.proc;
 
-import com.bigdata.btree.Errors;
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.proc.AbstractKeyArrayIndexProcedure.ResultBuffer;
-import com.bigdata.btree.raba.IRaba;
-import com.bigdata.btree.raba.codec.IRabaCoder;
+import org.embergraph.btree.Errors;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure.ResultBuffer;
+import org.embergraph.btree.raba.IRaba;
+import org.embergraph.btree.raba.codec.IRabaCoder;
 
 /**
  * Batch lookup operation.

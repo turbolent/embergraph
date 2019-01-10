@@ -32,10 +32,10 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import com.bigdata.journal.AbstractIndexManagerTestCase;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.service.TestEDS;
-import com.bigdata.service.TestJournal;
+import org.embergraph.journal.AbstractIndexManagerTestCase;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.service.TestEDS;
+import org.embergraph.service.TestJournal;
 
 /**
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

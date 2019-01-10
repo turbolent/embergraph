@@ -27,8 +27,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree.data;
 
-import com.bigdata.io.AbstractFixedByteArrayBuffer;
-import com.bigdata.io.IDataRecordAccess;
+import org.embergraph.io.AbstractFixedByteArrayBuffer;
+import org.embergraph.io.IDataRecordAccess;
 
 /**
  * Interface for low-level data access.

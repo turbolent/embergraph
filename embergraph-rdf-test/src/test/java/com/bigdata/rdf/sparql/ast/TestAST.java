@@ -32,19 +32,19 @@ import junit.framework.TestCase;
 import org.apache.log4j.Logger;
 import org.openrdf.query.algebra.Compare.CompareOp;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.bop.NV;
-import com.bigdata.bop.Var;
-import com.bigdata.bop.ap.Predicate;
-import com.bigdata.journal.ITx;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.VTE;
-import com.bigdata.rdf.internal.constraints.CompareBOp;
-import com.bigdata.rdf.internal.constraints.IVValueExpression;
-import com.bigdata.rdf.internal.constraints.XSDBooleanIVValueExpression;
-import com.bigdata.rdf.internal.impl.TermId;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.bop.NV;
+import org.embergraph.bop.Var;
+import org.embergraph.bop.ap.Predicate;
+import org.embergraph.journal.ITx;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.VTE;
+import org.embergraph.rdf.internal.constraints.CompareBOp;
+import org.embergraph.rdf.internal.constraints.IVValueExpression;
+import org.embergraph.rdf.internal.constraints.XSDBooleanIVValueExpression;
+import org.embergraph.rdf.internal.impl.TermId;
 
 /**
  * TODO This does not really "test" much, just exercises some basic aspects of

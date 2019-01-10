@@ -41,15 +41,15 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
-import com.bigdata.BigdataStatics;
-import com.bigdata.gom.om.IObjectManager;
-import com.bigdata.gom.om.ObjectManager;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.Journal.Options;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.BigdataSailRepository;
-import com.bigdata.rdf.sail.BigdataSailRepositoryConnection;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.BigdataStatics;
+import org.embergraph.gom.om.IObjectManager;
+import org.embergraph.gom.om.ObjectManager;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.Journal.Options;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.BigdataSailRepository;
+import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 public class LocalGOMTestCase extends TestCase implements IGOMProxy {
 

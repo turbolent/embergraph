@@ -27,10 +27,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.sparql.ast.service.history;
 
-import com.bigdata.rdf.changesets.ChangeAction;
-import com.bigdata.rdf.changesets.ChangeRecord;
-import com.bigdata.rdf.changesets.IChangeRecord;
-import com.bigdata.rdf.spo.ISPO;
+import org.embergraph.rdf.changesets.ChangeAction;
+import org.embergraph.rdf.changesets.ChangeRecord;
+import org.embergraph.rdf.changesets.IChangeRecord;
+import org.embergraph.rdf.spo.ISPO;
 
 /**
  * Extended to include a revision time for each record.

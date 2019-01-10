@@ -44,17 +44,17 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFWriterRegistry;
 import org.openrdf.rio.helpers.StatementCollector;
 
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.StoreTypeEnum;
-import com.bigdata.rdf.model.BigdataStatement;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.BigdataSail.BigdataSailConnection;
-import com.bigdata.rdf.sail.BigdataSailRepository;
-import com.bigdata.rdf.sail.BigdataSailRepositoryConnection;
-import com.bigdata.rdf.store.BD;
-import com.bigdata.rdf.store.BDS;
-import com.bigdata.service.AbstractTransactionService;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.StoreTypeEnum;
+import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
+import org.embergraph.rdf.sail.BigdataSailRepository;
+import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.rdf.store.BD;
+import org.embergraph.rdf.store.BDS;
+import org.embergraph.service.AbstractTransactionService;
 
 /**
  * Demonstrate how to use bigdata.  You are free to use this code for whatever

@@ -29,9 +29,9 @@ package org.embergraph.rdf.internal;
 
 import java.util.Collection;
 
-import com.bigdata.rdf.internal.impl.extensions.USDFloatExtension;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.model.BigdataValue;
+import org.embergraph.rdf.internal.impl.extensions.USDFloatExtension;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.BigdataValue;
 
 /**
  * Adds inlining for the

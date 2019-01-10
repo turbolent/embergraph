@@ -30,7 +30,7 @@ package org.embergraph.resources;
 
 import java.util.Comparator;
 
-import com.bigdata.btree.BTreeCounters;
+import org.embergraph.btree.BTreeCounters;
 
 /**
  * Helper class assigns a raw and a normalized score to each index based on

@@ -2,11 +2,11 @@ package org.embergraph.htree;
 
 import java.util.UUID;
 
-import com.bigdata.btree.HTreeIndexMetadata;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rawstore.SimpleMemoryRawStore;
-import com.bigdata.util.InnerCause;
+import org.embergraph.btree.HTreeIndexMetadata;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
+import org.embergraph.util.InnerCause;
 
 /**
  * Unit tests for bootstrap of an {@link HTree} instance.

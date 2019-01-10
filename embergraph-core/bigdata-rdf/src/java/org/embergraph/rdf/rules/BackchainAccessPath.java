@@ -32,23 +32,23 @@ import org.openrdf.model.vocabulary.OWL;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-import com.bigdata.bop.IPredicate;
-import com.bigdata.btree.IIndex;
-import com.bigdata.rdf.axioms.Axioms;
-import com.bigdata.rdf.inf.BackchainTypeResourceIterator;
-import com.bigdata.rdf.inf.OwlSameAsPropertiesExpandingIterator;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.rdf.spo.SPO;
-import com.bigdata.rdf.spo.SPORelation;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.vocab.Vocabulary;
-import com.bigdata.relation.accesspath.IAccessPath;
-import com.bigdata.relation.accesspath.IElementFilter;
-import com.bigdata.striterator.ChunkedWrappedIterator;
-import com.bigdata.striterator.IChunkedIterator;
-import com.bigdata.striterator.IChunkedOrderedIterator;
-import com.bigdata.striterator.IKeyOrder;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.btree.IIndex;
+import org.embergraph.rdf.axioms.Axioms;
+import org.embergraph.rdf.inf.BackchainTypeResourceIterator;
+import org.embergraph.rdf.inf.OwlSameAsPropertiesExpandingIterator;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.rdf.spo.SPO;
+import org.embergraph.rdf.spo.SPORelation;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.vocab.Vocabulary;
+import org.embergraph.relation.accesspath.IAccessPath;
+import org.embergraph.relation.accesspath.IElementFilter;
+import org.embergraph.striterator.ChunkedWrappedIterator;
+import org.embergraph.striterator.IChunkedIterator;
+import org.embergraph.striterator.IChunkedOrderedIterator;
+import org.embergraph.striterator.IKeyOrder;
 
 /**
  * A read-only {@link IAccessPath} that backchains certain inferences.

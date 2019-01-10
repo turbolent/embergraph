@@ -29,8 +29,8 @@ package org.embergraph.journal;
 
 import java.util.UUID;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.IndexMetadata;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.IndexMetadata;
 
 /**
  * Test suite for fully isolated read-only transactions reading from a caller

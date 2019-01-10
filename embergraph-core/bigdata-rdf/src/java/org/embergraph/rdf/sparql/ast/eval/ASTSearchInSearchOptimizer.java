@@ -31,26 +31,26 @@ import java.util.Map;
 
 import org.openrdf.model.Literal;
 
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.NV;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.lexicon.ITextIndexer;
-import com.bigdata.rdf.lexicon.ITextIndexer.FullTextQuery;
-import com.bigdata.rdf.sparql.ast.ConstantNode;
-import com.bigdata.rdf.sparql.ast.FilterNode;
-import com.bigdata.rdf.sparql.ast.FunctionNode;
-import com.bigdata.rdf.sparql.ast.FunctionRegistry;
-import com.bigdata.rdf.sparql.ast.FunctionRegistry.InFactory;
-import com.bigdata.rdf.sparql.ast.IValueExpressionNode;
-import com.bigdata.rdf.sparql.ast.JoinGroupNode;
-import com.bigdata.rdf.sparql.ast.StaticAnalysis;
-import com.bigdata.rdf.sparql.ast.ValueExpressionNode;
-import com.bigdata.rdf.sparql.ast.VarNode;
-import com.bigdata.rdf.sparql.ast.optimizers.AbstractJoinGroupOptimizer;
-import com.bigdata.rdf.store.BDS;
-import com.bigdata.search.Hiterator;
-import com.bigdata.search.IHit;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.NV;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.lexicon.ITextIndexer;
+import org.embergraph.rdf.lexicon.ITextIndexer.FullTextQuery;
+import org.embergraph.rdf.sparql.ast.ConstantNode;
+import org.embergraph.rdf.sparql.ast.FilterNode;
+import org.embergraph.rdf.sparql.ast.FunctionNode;
+import org.embergraph.rdf.sparql.ast.FunctionRegistry;
+import org.embergraph.rdf.sparql.ast.FunctionRegistry.InFactory;
+import org.embergraph.rdf.sparql.ast.IValueExpressionNode;
+import org.embergraph.rdf.sparql.ast.JoinGroupNode;
+import org.embergraph.rdf.sparql.ast.StaticAnalysis;
+import org.embergraph.rdf.sparql.ast.ValueExpressionNode;
+import org.embergraph.rdf.sparql.ast.VarNode;
+import org.embergraph.rdf.sparql.ast.optimizers.AbstractJoinGroupOptimizer;
+import org.embergraph.rdf.store.BDS;
+import org.embergraph.search.Hiterator;
+import org.embergraph.search.IHit;
 
 /**
  * Converts a {@link BDS#SEARCH_IN_SEARCH} function call (inside a filter) into

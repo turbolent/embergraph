@@ -30,22 +30,22 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpContext;
-import com.bigdata.bop.BOpContextBase;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IElement;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.NV;
-import com.bigdata.bop.ap.SampleIndex;
-import com.bigdata.bop.ap.SampleIndex.SampleType;
-import com.bigdata.bop.bindingSet.ListBindingSet;
-import com.bigdata.bop.engine.QueryEngine;
-import com.bigdata.htree.HTree;
-import com.bigdata.relation.IRelation;
-import com.bigdata.relation.accesspath.IAccessPath;
-import com.bigdata.relation.accesspath.IBindingSetAccessPath;
-import com.bigdata.striterator.IChunkedIterator;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpContext;
+import org.embergraph.bop.BOpContextBase;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IElement;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.NV;
+import org.embergraph.bop.ap.SampleIndex;
+import org.embergraph.bop.ap.SampleIndex.SampleType;
+import org.embergraph.bop.bindingSet.ListBindingSet;
+import org.embergraph.bop.engine.QueryEngine;
+import org.embergraph.htree.HTree;
+import org.embergraph.relation.IRelation;
+import org.embergraph.relation.accesspath.IAccessPath;
+import org.embergraph.relation.accesspath.IBindingSetAccessPath;
+import org.embergraph.striterator.IChunkedIterator;
 
 /**
  * A vertex of the join graph is an annotated relation (this corresponds to an

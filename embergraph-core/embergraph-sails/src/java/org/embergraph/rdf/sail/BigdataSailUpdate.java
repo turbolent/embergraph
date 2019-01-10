@@ -28,9 +28,9 @@ import org.openrdf.query.algebra.evaluation.QueryBindingSet;
 import org.openrdf.query.parser.ParsedUpdate;
 import org.openrdf.repository.sail.SailUpdate;
 
-import com.bigdata.rdf.sparql.ast.ASTContainer;
-import com.bigdata.rdf.sparql.ast.eval.ASTEvalHelper;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.sparql.ast.ASTContainer;
+import org.embergraph.rdf.sparql.ast.eval.ASTEvalHelper;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * Extension API for bigdata.

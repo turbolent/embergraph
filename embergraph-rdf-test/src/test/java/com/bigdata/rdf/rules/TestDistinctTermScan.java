@@ -51,13 +51,13 @@ import java.util.Arrays;
 import java.util.Properties;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.rio.IStatementBuffer;
-import com.bigdata.rdf.rio.StatementBuffer;
-import com.bigdata.rdf.spo.DistinctTermAdvancer;
-import com.bigdata.rdf.spo.SPOKeyOrder;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.rio.IStatementBuffer;
+import org.embergraph.rdf.rio.StatementBuffer;
+import org.embergraph.rdf.spo.DistinctTermAdvancer;
+import org.embergraph.rdf.spo.SPOKeyOrder;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * Test suite for the {@link DistinctTermAdvancer}.

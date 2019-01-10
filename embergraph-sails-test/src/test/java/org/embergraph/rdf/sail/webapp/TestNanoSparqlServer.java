@@ -32,18 +32,18 @@ import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
 
-import com.bigdata.BigdataStatics;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.Journal;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.CreateKBTask;
-import com.bigdata.rdf.sail.DestroyKBTask;
-import com.bigdata.rdf.sail.webapp.client.HttpClientConfigurator;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepositoryManager;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.task.AbstractApiTask;
-import com.bigdata.util.config.NicUtil;
+import org.embergraph.BigdataStatics;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Journal;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.CreateKBTask;
+import org.embergraph.rdf.sail.DestroyKBTask;
+import org.embergraph.rdf.sail.webapp.client.HttpClientConfigurator;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepositoryManager;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.task.AbstractApiTask;
+import org.embergraph.util.config.NicUtil;
 
 import junit.framework.TestCase2;
 

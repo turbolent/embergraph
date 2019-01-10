@@ -49,11 +49,11 @@ import org.openrdf.rio.RDFWriterFactory;
 import org.openrdf.rio.RDFWriterRegistry;
 import org.openrdf.sail.SailConnection;
 
-import com.bigdata.rdf.ServiceProviderHook;
-import com.bigdata.rdf.model.BigdataStatementImpl;
-import com.bigdata.rdf.sail.BigdataSail.BigdataSailConnection;
-import com.bigdata.rdf.store.BigdataStatementIterator;
-import com.bigdata.rdf.store.DataLoader;
+import org.embergraph.rdf.ServiceProviderHook;
+import org.embergraph.rdf.model.BigdataStatementImpl;
+import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
+import org.embergraph.rdf.store.BigdataStatementIterator;
+import org.embergraph.rdf.store.DataLoader;
 
 /**
  * Test suite for high-level query against a graph containing statements about

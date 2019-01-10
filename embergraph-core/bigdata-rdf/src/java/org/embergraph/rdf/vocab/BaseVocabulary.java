@@ -41,17 +41,17 @@ import org.apache.log4j.Logger;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.IConstant;
-import com.bigdata.io.LongPacker;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.impl.uri.VocabURIByteIV;
-import com.bigdata.rdf.internal.impl.uri.VocabURIShortIV;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.rdf.model.BigdataValue;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.model.BigdataValueFactoryImpl;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.IConstant;
+import org.embergraph.io.LongPacker;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.impl.uri.VocabURIByteIV;
+import org.embergraph.rdf.internal.impl.uri.VocabURIShortIV;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * Base class for {@link Vocabulary} implementations.

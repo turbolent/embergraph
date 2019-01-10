@@ -31,9 +31,9 @@ import java.nio.ByteBuffer;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.io.DirectBufferPoolAllocator.Allocation;
-import com.bigdata.io.DirectBufferPoolAllocator.IAllocation;
-import com.bigdata.io.DirectBufferPoolAllocator.IAllocationContext;
+import org.embergraph.io.DirectBufferPoolAllocator.Allocation;
+import org.embergraph.io.DirectBufferPoolAllocator.IAllocation;
+import org.embergraph.io.DirectBufferPoolAllocator.IAllocationContext;
 
 /**
  * Test suite for {@link DirectBufferPoolAllocator}.

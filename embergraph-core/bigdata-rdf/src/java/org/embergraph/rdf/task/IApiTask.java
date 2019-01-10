@@ -26,7 +26,7 @@ package org.embergraph.rdf.task;
 
 import java.util.concurrent.Callable;
 
-import com.bigdata.journal.IIndexManager;
+import org.embergraph.journal.IIndexManager;
 
 /**
  * A task that can be run either with direct index access or using the

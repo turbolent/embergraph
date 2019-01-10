@@ -52,15 +52,15 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.sail.SailConnection;
 import org.openrdf.sail.SailException;
 
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.Journal;
-import com.bigdata.rdf.model.BigdataStatement;
-import com.bigdata.rdf.sail.BigdataSail.BigdataSailConnection;
-import com.bigdata.rdf.sail.BigdataSail.Options;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.LocalTripleStore;
-import com.bigdata.util.InnerCause;
-import com.bigdata.concurrent.AccessSemaphore.AccessSemaphoreNotReentrantException;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Journal;
+import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
+import org.embergraph.rdf.sail.BigdataSail.Options;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.LocalTripleStore;
+import org.embergraph.util.InnerCause;
+import org.embergraph.concurrent.AccessSemaphore.AccessSemaphoreNotReentrantException;
 
 /**
  * Bootstrap test case for bringing up the {@link BigdataSail}.

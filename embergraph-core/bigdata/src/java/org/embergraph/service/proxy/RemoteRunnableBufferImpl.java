@@ -32,8 +32,8 @@ import java.io.IOException;
 import java.rmi.Remote;
 import java.util.concurrent.Future;
 
-import com.bigdata.relation.accesspath.IBlockingBuffer;
-import com.bigdata.relation.accesspath.IRunnableBuffer;
+import org.embergraph.relation.accesspath.IBlockingBuffer;
+import org.embergraph.relation.accesspath.IRunnableBuffer;
 
 /**
  * A helper object that provides the API of {@link IBlockingBuffer} but whose

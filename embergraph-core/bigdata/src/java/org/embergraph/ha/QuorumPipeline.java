@@ -32,16 +32,16 @@ import java.nio.ByteBuffer;
 import java.util.UUID;
 import java.util.concurrent.Future;
 
-import com.bigdata.ha.halog.HALogWriter;
-import com.bigdata.ha.msg.IHASendState;
-import com.bigdata.ha.msg.IHASyncRequest;
-import com.bigdata.ha.msg.IHAWriteMessage;
-import com.bigdata.ha.pipeline.HAReceiveService;
-import com.bigdata.ha.pipeline.HASendService;
-import com.bigdata.io.writecache.WriteCache;
-import com.bigdata.journal.IRootBlockView;
-import com.bigdata.quorum.Quorum;
-import com.bigdata.quorum.QuorumMember;
+import org.embergraph.ha.halog.HALogWriter;
+import org.embergraph.ha.msg.IHASendState;
+import org.embergraph.ha.msg.IHASyncRequest;
+import org.embergraph.ha.msg.IHAWriteMessage;
+import org.embergraph.ha.pipeline.HAReceiveService;
+import org.embergraph.ha.pipeline.HASendService;
+import org.embergraph.io.writecache.WriteCache;
+import org.embergraph.journal.IRootBlockView;
+import org.embergraph.quorum.Quorum;
+import org.embergraph.quorum.QuorumMember;
 
 /**
  * A non-remote interface for a member service in a {@link Quorum} defining

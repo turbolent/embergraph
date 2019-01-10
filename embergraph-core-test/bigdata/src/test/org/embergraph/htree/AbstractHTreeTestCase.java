@@ -33,24 +33,24 @@ import java.util.UUID;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.btree.AbstractBTreeTestCase;
-import com.bigdata.btree.Checkpoint;
-import com.bigdata.btree.DefaultTupleSerializer;
-import com.bigdata.btree.HTreeIndexMetadata;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.ITupleSerializer;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.NoEvictionListener;
-import com.bigdata.btree.PO;
-import com.bigdata.btree.data.ILeafData;
-import com.bigdata.btree.keys.ASCIIKeyBuilderFactory;
-import com.bigdata.btree.raba.codec.FrontCodedRabaCoderDupKeys;
-import com.bigdata.btree.raba.codec.SimpleRabaCoder;
-import com.bigdata.cache.HardReferenceQueue;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.util.Bytes;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.AbstractBTreeTestCase;
+import org.embergraph.btree.Checkpoint;
+import org.embergraph.btree.DefaultTupleSerializer;
+import org.embergraph.btree.HTreeIndexMetadata;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.ITupleSerializer;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.NoEvictionListener;
+import org.embergraph.btree.PO;
+import org.embergraph.btree.data.ILeafData;
+import org.embergraph.btree.keys.ASCIIKeyBuilderFactory;
+import org.embergraph.btree.raba.codec.FrontCodedRabaCoderDupKeys;
+import org.embergraph.btree.raba.codec.SimpleRabaCoder;
+import org.embergraph.cache.HardReferenceQueue;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.util.Bytes;
+import org.embergraph.util.BytesUtil;
 
 public class AbstractHTreeTestCase extends TestCase2 {
 

@@ -13,8 +13,8 @@ import org.openrdf.model.BNode;
 import org.openrdf.rio.RDFWriter;
 import org.openrdf.rio.turtle.TurtleWriter;
 
-import com.bigdata.rdf.model.BigdataBNode;
-import com.bigdata.rdf.model.BigdataStatement;
+import org.embergraph.rdf.model.BigdataBNode;
+import org.embergraph.rdf.model.BigdataStatement;
 
 /**
  * An implementation of the RDFWriter interface that writes RDF documents in

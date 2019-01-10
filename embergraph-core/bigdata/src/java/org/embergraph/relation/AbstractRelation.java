@@ -31,27 +31,27 @@ package org.embergraph.relation;
 import java.util.Properties;
 import java.util.UUID;
 
-import com.bigdata.bop.BOpContextBase;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.ap.Predicate;
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.IndexTypeEnum;
-import com.bigdata.btree.UnisolatedReadWriteIndex;
-import com.bigdata.journal.ConcurrencyManager;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.IJournal;
-import com.bigdata.journal.ITx;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.TemporaryRawStore;
-import com.bigdata.journal.TemporaryStore;
-import com.bigdata.relation.accesspath.AccessPath;
-import com.bigdata.relation.accesspath.IAccessPath;
-import com.bigdata.relation.locator.ILocatableResource;
-import com.bigdata.relation.rule.IAccessPathExpander;
-import com.bigdata.service.IBigdataFederation;
-import com.bigdata.striterator.IKeyOrder;
+import org.embergraph.bop.BOpContextBase;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.ap.Predicate;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.IndexTypeEnum;
+import org.embergraph.btree.UnisolatedReadWriteIndex;
+import org.embergraph.journal.ConcurrencyManager;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.IJournal;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.TemporaryRawStore;
+import org.embergraph.journal.TemporaryStore;
+import org.embergraph.relation.accesspath.AccessPath;
+import org.embergraph.relation.accesspath.IAccessPath;
+import org.embergraph.relation.locator.ILocatableResource;
+import org.embergraph.relation.rule.IAccessPathExpander;
+import org.embergraph.service.IBigdataFederation;
+import org.embergraph.striterator.IKeyOrder;
 
 /**
  * Base class for {@link IRelation} and {@link IMutableRelation} impls.

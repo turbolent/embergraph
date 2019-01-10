@@ -34,13 +34,13 @@ import java.util.UUID;
 import junit.extensions.proxy.ProxyTestSuite;
 import junit.framework.Test;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.HTreeIndexMetadata;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.htree.HTree;
-import com.bigdata.rawstore.AbstractRawStoreTestCase;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.util.Bytes;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.HTreeIndexMetadata;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.htree.HTree;
+import org.embergraph.rawstore.AbstractRawStoreTestCase;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.util.Bytes;
 
 /**
  * Test suite for {@link TemporaryStore} (temporary store with named indices).

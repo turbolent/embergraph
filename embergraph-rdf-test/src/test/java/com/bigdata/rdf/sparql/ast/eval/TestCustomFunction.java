@@ -34,20 +34,20 @@ import org.openrdf.model.URI;
 import org.openrdf.model.impl.LiteralImpl;
 import org.openrdf.model.impl.URIImpl;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.BOpContextBase;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.bop.NV;
-import com.bigdata.rdf.error.SparqlTypeErrorException;
-import com.bigdata.rdf.internal.ILexiconConfiguration;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.constraints.INeedsMaterialization;
-import com.bigdata.rdf.internal.constraints.IVValueExpression;
-import com.bigdata.rdf.internal.constraints.XSDBooleanIVValueExpression;
-import com.bigdata.rdf.sparql.ast.FunctionRegistry;
-import com.bigdata.rdf.sparql.ast.GlobalAnnotations;
-import com.bigdata.rdf.sparql.ast.ValueExpressionNode;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.BOpContextBase;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.bop.NV;
+import org.embergraph.rdf.error.SparqlTypeErrorException;
+import org.embergraph.rdf.internal.ILexiconConfiguration;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.constraints.INeedsMaterialization;
+import org.embergraph.rdf.internal.constraints.IVValueExpression;
+import org.embergraph.rdf.internal.constraints.XSDBooleanIVValueExpression;
+import org.embergraph.rdf.sparql.ast.FunctionRegistry;
+import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
+import org.embergraph.rdf.sparql.ast.ValueExpressionNode;
 
 /**
  * Test suite for registering and evaluating custom functions.

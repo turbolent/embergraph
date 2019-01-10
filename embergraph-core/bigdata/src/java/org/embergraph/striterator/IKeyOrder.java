@@ -29,9 +29,9 @@ package org.embergraph.striterator;
 
 import java.util.Comparator;
 
-import com.bigdata.bop.IElement;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.btree.keys.IKeyBuilder;
+import org.embergraph.bop.IElement;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.btree.keys.IKeyBuilder;
 
 /**
  * An interface representing the natural traversal orders for the different

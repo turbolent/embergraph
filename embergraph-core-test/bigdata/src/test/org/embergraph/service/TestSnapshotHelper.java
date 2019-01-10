@@ -31,9 +31,9 @@ package org.embergraph.service;
 import java.io.File;
 import java.io.IOException;
 
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.service.DistributedTransactionService.SnapshotHelper;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.service.DistributedTransactionService.SnapshotHelper;
 
 import junit.framework.TestCase2;
 

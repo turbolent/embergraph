@@ -30,11 +30,11 @@ import java.util.Random;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.rdf.internal.impl.BlobIV;
-import com.bigdata.rdf.lexicon.BlobsIndexHelper;
-import com.bigdata.rdf.model.BigdataURI;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.rdf.internal.impl.BlobIV;
+import org.embergraph.rdf.lexicon.BlobsIndexHelper;
+import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.util.BytesUtil;
 
 /**
  * Unit tests for {@link BlobIV}.

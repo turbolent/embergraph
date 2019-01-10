@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.sparse;
 
-import com.bigdata.util.Bytes;
+import org.embergraph.util.Bytes;
 
 /**
  * A type safe enumeration of key types and the byte values that are used to

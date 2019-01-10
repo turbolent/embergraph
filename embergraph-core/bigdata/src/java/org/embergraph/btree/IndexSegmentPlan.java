@@ -25,7 +25,7 @@ package org.embergraph.btree;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.IndexMetadata.Options;
+import org.embergraph.btree.IndexMetadata.Options;
 
 /**
  * A plan for building a B+-Tree based on an input branching factor and #of

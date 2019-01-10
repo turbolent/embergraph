@@ -29,7 +29,7 @@ package org.embergraph.rdf.sparql.ast.eval;
 
 import java.util.Properties;
 
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 
 /**

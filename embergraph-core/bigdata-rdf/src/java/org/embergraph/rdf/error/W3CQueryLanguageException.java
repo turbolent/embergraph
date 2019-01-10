@@ -29,7 +29,7 @@ package org.embergraph.rdf.error;
 
 import java.util.Formatter;
 
-import com.bigdata.util.NV;
+import org.embergraph.util.NV;
 
 /**
  * Exception Base class for errors defined by the W3C for XQuery, XPath, and

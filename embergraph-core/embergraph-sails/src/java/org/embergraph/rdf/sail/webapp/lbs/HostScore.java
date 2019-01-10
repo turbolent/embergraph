@@ -24,7 +24,7 @@ package org.embergraph.rdf.sail.webapp.lbs;
 
 import java.util.Comparator;
 
-import com.bigdata.counters.AbstractStatisticsCollector;
+import org.embergraph.counters.AbstractStatisticsCollector;
 
 /**
  * Helper class pairs a hostname and the normalized availabilty for that host.

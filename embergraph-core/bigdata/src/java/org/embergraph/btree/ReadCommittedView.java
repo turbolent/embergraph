@@ -28,18 +28,18 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree;
 
-import com.bigdata.btree.proc.AbstractKeyArrayIndexProcedureConstructor;
-import com.bigdata.btree.proc.IKeyRangeIndexProcedure;
-import com.bigdata.btree.proc.IResultHandler;
-import com.bigdata.btree.proc.ISimpleIndexProcedure;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.journal.AbstractJournal;
-import com.bigdata.journal.ICommitRecord;
-import com.bigdata.journal.IResourceManager;
-import com.bigdata.journal.Journal;
-import com.bigdata.mdi.IResourceMetadata;
-import com.bigdata.resources.IndexManager;
-import com.bigdata.resources.StoreManager.ManagedJournal;
+import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedureConstructor;
+import org.embergraph.btree.proc.IKeyRangeIndexProcedure;
+import org.embergraph.btree.proc.IResultHandler;
+import org.embergraph.btree.proc.ISimpleIndexProcedure;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.journal.AbstractJournal;
+import org.embergraph.journal.ICommitRecord;
+import org.embergraph.journal.IResourceManager;
+import org.embergraph.journal.Journal;
+import org.embergraph.mdi.IResourceMetadata;
+import org.embergraph.resources.IndexManager;
+import org.embergraph.resources.StoreManager.ManagedJournal;
 
 import cutthecrap.utils.striterators.IFilter;
 

@@ -31,10 +31,10 @@ import java.io.File;
 import java.util.Properties;
 import java.util.UUID;
 
-import com.bigdata.btree.IndexSegmentBuilder.BuildEnum;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.Journal;
-import com.bigdata.journal.Options;
+import org.embergraph.btree.IndexSegmentBuilder.BuildEnum;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.Journal;
+import org.embergraph.journal.Options;
 
 /**
  * Test build trees on the journal, evicts them into an {@link IndexSegment},

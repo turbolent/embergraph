@@ -32,9 +32,9 @@ import java.util.UUID;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.btree.BTree.Stack;
-import com.bigdata.btree.keys.TestKeyBuilder;
-import com.bigdata.rawstore.SimpleMemoryRawStore;
+import org.embergraph.btree.BTree.Stack;
+import org.embergraph.btree.keys.TestKeyBuilder;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /**
  * Test suite for the {@link BTree}'s {@link ILeafCursor} implementation. The

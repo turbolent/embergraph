@@ -31,10 +31,10 @@ import org.openrdf.rio.helpers.NTriplesParserSettings;
 import org.openrdf.rio.helpers.RDFParserBase;
 import org.openrdf.rio.ntriples.NTriplesUtil;
 
-import com.bigdata.rdf.model.BigdataBNode;
-import com.bigdata.rdf.model.BigdataStatement;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.model.BigdataBNode;
+import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.BigdataValueFactoryImpl;
 
 /**
  * RDF parser for N-Triples files. A specification of NTriples can be found in

@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.inf;
 
-import com.bigdata.striterator.IChunkedIterator;
+import org.embergraph.striterator.IChunkedIterator;
 
 /**
  * Interface for chunked {@link Justification} iterators.

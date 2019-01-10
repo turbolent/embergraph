@@ -26,10 +26,10 @@ package org.embergraph.rdf.task;
 
 import java.util.concurrent.Callable;
 
-import com.bigdata.journal.IConcurrencyManager;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.Journal;
-import com.bigdata.service.IBigdataFederation;
+import org.embergraph.journal.IConcurrencyManager;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.Journal;
+import org.embergraph.service.IBigdataFederation;
 
 /**
  * Wrapper for a task to be executed in a stand-off fashion. This can be used

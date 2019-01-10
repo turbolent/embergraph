@@ -27,8 +27,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.journal;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.counters.ICounterSetAccess;
+import org.embergraph.btree.IIndex;
+import org.embergraph.counters.ICounterSetAccess;
 
 /**
  * Interface for managing named indices.

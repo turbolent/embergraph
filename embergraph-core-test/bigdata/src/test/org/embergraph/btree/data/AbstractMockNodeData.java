@@ -2,7 +2,7 @@ package org.embergraph.btree.data;
 
 import java.io.OutputStream;
 
-import com.bigdata.btree.raba.IRaba;
+import org.embergraph.btree.raba.IRaba;
 
 /**
  * Abstract base class for mock node and leaf data implementations for unit

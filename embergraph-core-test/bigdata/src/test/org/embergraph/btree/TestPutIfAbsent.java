@@ -30,7 +30,7 @@ package org.embergraph.btree;
 
 import java.util.UUID;
 
-import com.bigdata.rawstore.SimpleMemoryRawStore;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /**
  * Test of basic btree operations when delete markers are maintained.

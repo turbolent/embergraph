@@ -32,15 +32,15 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.OWL;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
-import com.bigdata.rdf.inf.OwlSameAsPropertiesExpandingIterator;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.model.StatementEnum;
-import com.bigdata.rdf.rio.StatementBuffer;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.rdf.spo.SPO;
-import com.bigdata.rdf.spo.SPOAccessPath;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.striterator.IChunkedOrderedIterator;
+import org.embergraph.rdf.inf.OwlSameAsPropertiesExpandingIterator;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.rdf.rio.StatementBuffer;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.rdf.spo.SPO;
+import org.embergraph.rdf.spo.SPOAccessPath;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /**
  * Test suite for {@link OwlSameAsPropertiesExpandingIterator}.

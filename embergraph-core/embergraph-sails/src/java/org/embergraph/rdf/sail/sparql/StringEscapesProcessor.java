@@ -7,9 +7,9 @@ package org.embergraph.rdf.sail.sparql;
 
 import org.openrdf.query.MalformedQueryException;
 
-import com.bigdata.rdf.sail.sparql.ast.ASTOperationContainer;
-import com.bigdata.rdf.sail.sparql.ast.ASTString;
-import com.bigdata.rdf.sail.sparql.ast.VisitorException;
+import org.embergraph.rdf.sail.sparql.ast.ASTOperationContainer;
+import org.embergraph.rdf.sail.sparql.ast.ASTString;
+import org.embergraph.rdf.sail.sparql.ast.VisitorException;
 
 /**
  * Processes escape sequences in strings, replacing the escape sequence with

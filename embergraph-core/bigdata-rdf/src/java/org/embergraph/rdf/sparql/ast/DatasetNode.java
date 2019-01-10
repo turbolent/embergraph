@@ -6,11 +6,11 @@ import java.util.Set;
 
 import org.openrdf.query.Dataset;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.sparql.ast.eval.DataSetSummary;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.relation.accesspath.IElementFilter;
+import org.embergraph.bop.BOp;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.sparql.ast.eval.DataSetSummary;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.relation.accesspath.IElementFilter;
 
 /**
  * AST node models a SPARQL default graph and/or named graph data set.

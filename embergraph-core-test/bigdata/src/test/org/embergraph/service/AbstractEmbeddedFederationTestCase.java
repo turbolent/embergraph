@@ -32,21 +32,21 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.UUID;
 
-import com.bigdata.bfs.BigdataFileSystem;
-import com.bigdata.bfs.BigdataFileSystem.Options;
-import com.bigdata.btree.AbstractBTreeTestCase;
-import com.bigdata.btree.IRangeQuery;
-import com.bigdata.btree.ITuple;
-import com.bigdata.btree.ITupleIterator;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.io.SerializerUtil;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.ITx;
-import com.bigdata.mdi.MetadataIndex;
-import com.bigdata.resources.ResourceManager;
-import com.bigdata.search.FullTextIndex;
-import com.bigdata.service.ndx.RawDataServiceTupleIterator;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.bfs.BigdataFileSystem;
+import org.embergraph.bfs.BigdataFileSystem.Options;
+import org.embergraph.btree.AbstractBTreeTestCase;
+import org.embergraph.btree.IRangeQuery;
+import org.embergraph.btree.ITuple;
+import org.embergraph.btree.ITupleIterator;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.io.SerializerUtil;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.ITx;
+import org.embergraph.mdi.MetadataIndex;
+import org.embergraph.resources.ResourceManager;
+import org.embergraph.search.FullTextIndex;
+import org.embergraph.service.ndx.RawDataServiceTupleIterator;
+import org.embergraph.util.BytesUtil;
 
 /**
  * An abstract test harness that sets up (and tears down) the metadata and data

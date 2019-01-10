@@ -31,7 +31,7 @@ import org.openrdf.model.vocabulary.RDFS;
 
 import junit.framework.Test;
 
-import com.bigdata.journal.IIndexManager;
+import org.embergraph.journal.IIndexManager;
 
 /**
  * Proxied test suite for the DELETE_BY_ACCESS_PATH method.

@@ -2,7 +2,7 @@ package org.embergraph.resources;
 
 import java.util.UUID;
 
-import com.bigdata.journal.ITx;
+import org.embergraph.journal.ITx;
 
 /**
  * An instance of this class is thrown when a {@link UUID} does not identify any

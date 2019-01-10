@@ -28,16 +28,16 @@
 
 package org.embergraph.rdf.spo;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.proc.AbstractKeyArrayIndexProcedure;
-import com.bigdata.btree.proc.AbstractKeyArrayIndexProcedureConstructor;
-import com.bigdata.btree.proc.IParallelizableIndexProcedure;
-import com.bigdata.btree.proc.IResultHandler;
-import com.bigdata.btree.proc.LongAggregator;
-import com.bigdata.btree.raba.IRaba;
-import com.bigdata.btree.raba.codec.IRabaCoder;
-import com.bigdata.rdf.inf.Justification;
-import com.bigdata.relation.IMutableRelationIndexWriteProcedure;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure;
+import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedureConstructor;
+import org.embergraph.btree.proc.IParallelizableIndexProcedure;
+import org.embergraph.btree.proc.IResultHandler;
+import org.embergraph.btree.proc.LongAggregator;
+import org.embergraph.btree.raba.IRaba;
+import org.embergraph.btree.raba.codec.IRabaCoder;
+import org.embergraph.rdf.inf.Justification;
+import org.embergraph.relation.IMutableRelationIndexWriteProcedure;
 
 /**
  * Procedure for writing {@link Justification}s on an index or index

@@ -59,30 +59,30 @@ import java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.counters.CounterSet;
-import com.bigdata.ha.HAPipelineGlue;
-import com.bigdata.ha.QuorumPipeline;
-import com.bigdata.io.ChecksumUtility;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.io.IBufferAccess;
-import com.bigdata.io.IReopenChannel;
-import com.bigdata.io.writecache.WriteCache.ReadCache;
-import com.bigdata.io.writecache.WriteCache.RecordMetadata;
-import com.bigdata.journal.AbstractBufferStrategy;
-import com.bigdata.journal.IBufferStrategy;
-import com.bigdata.journal.IRootBlockView;
-import com.bigdata.journal.RWStrategy;
-import com.bigdata.journal.WORMStrategy;
-import com.bigdata.quorum.Quorum;
-import com.bigdata.quorum.QuorumMember;
-import com.bigdata.rawstore.IAddressManager;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rwstore.RWStore;
-import com.bigdata.util.ChecksumError;
-import com.bigdata.util.DaemonThreadFactory;
-import com.bigdata.util.InnerCause;
-import com.bigdata.util.concurrent.Computable;
-import com.bigdata.util.concurrent.Memoizer;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.ha.HAPipelineGlue;
+import org.embergraph.ha.QuorumPipeline;
+import org.embergraph.io.ChecksumUtility;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.io.IBufferAccess;
+import org.embergraph.io.IReopenChannel;
+import org.embergraph.io.writecache.WriteCache.ReadCache;
+import org.embergraph.io.writecache.WriteCache.RecordMetadata;
+import org.embergraph.journal.AbstractBufferStrategy;
+import org.embergraph.journal.IBufferStrategy;
+import org.embergraph.journal.IRootBlockView;
+import org.embergraph.journal.RWStrategy;
+import org.embergraph.journal.WORMStrategy;
+import org.embergraph.quorum.Quorum;
+import org.embergraph.quorum.QuorumMember;
+import org.embergraph.rawstore.IAddressManager;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rwstore.RWStore;
+import org.embergraph.util.ChecksumError;
+import org.embergraph.util.DaemonThreadFactory;
+import org.embergraph.util.InnerCause;
+import org.embergraph.util.concurrent.Computable;
+import org.embergraph.util.concurrent.Memoizer;
 
 /**
  * A {@link WriteCacheService} is provisioned with some number of

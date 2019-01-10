@@ -44,7 +44,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.apache.log4j.Logger;
 import org.xml.sax.SAXException;
 
-import com.bigdata.util.StackInfoReport;
+import org.embergraph.util.StackInfoReport;
 
 import cutthecrap.utils.striterators.Expander;
 import cutthecrap.utils.striterators.Filter;

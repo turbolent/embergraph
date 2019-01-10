@@ -34,9 +34,9 @@ import java.util.Locale;
 import java.util.Properties;
 import java.util.UUID;
 
-import com.bigdata.btree.keys.KeyBuilder.Options;
-import com.bigdata.io.IManagedByteArray;
-import com.bigdata.util.BytesUtil;
+import org.embergraph.btree.keys.KeyBuilder.Options;
+import org.embergraph.io.IManagedByteArray;
+import org.embergraph.util.BytesUtil;
 
 /**
  * <p>

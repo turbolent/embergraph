@@ -26,13 +26,13 @@ import java.util.Iterator;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.rdf.spo.ModifiedEnum;
-import com.bigdata.rdf.spo.SPO;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.relation.accesspath.IElementFilter;
-import com.bigdata.striterator.ChunkedArrayIterator;
-import com.bigdata.striterator.IChunkedOrderedIterator;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.rdf.spo.ModifiedEnum;
+import org.embergraph.rdf.spo.SPO;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.relation.accesspath.IElementFilter;
+import org.embergraph.striterator.ChunkedArrayIterator;
+import org.embergraph.striterator.IChunkedOrderedIterator;
 
 public class StatementWriter {
     

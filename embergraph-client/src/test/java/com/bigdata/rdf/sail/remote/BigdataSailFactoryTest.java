@@ -27,7 +27,7 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 
-import com.bigdata.util.httpd.Config;
+import org.embergraph.util.httpd.Config;
 
 /**
  * Test suite for the {@link BigdataSailFactory}.

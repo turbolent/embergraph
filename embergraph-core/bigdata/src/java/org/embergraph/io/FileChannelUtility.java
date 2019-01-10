@@ -46,8 +46,8 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.journal.TemporaryRawStore;
-import com.bigdata.util.InnerCause;
+import org.embergraph.journal.TemporaryRawStore;
+import org.embergraph.util.InnerCause;
 
 /**
  * A helper class for operations on {@link FileChannel}s.

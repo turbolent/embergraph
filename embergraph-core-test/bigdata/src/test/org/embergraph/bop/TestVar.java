@@ -30,8 +30,8 @@ package org.embergraph.bop;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.bop.Var;
-import com.bigdata.io.SerializerUtil;
+import org.embergraph.bop.Var;
+import org.embergraph.io.SerializerUtil;
 
 /**
  * Test suite for {@link Var}.

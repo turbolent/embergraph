@@ -7,10 +7,10 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.Instrument;
-import com.bigdata.service.AbstractFederation;
-import com.bigdata.util.concurrent.MovingAverageTask;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.Instrument;
+import org.embergraph.service.AbstractFederation;
+import org.embergraph.util.concurrent.MovingAverageTask;
 
 /**
  * Extended to report the moving average of the pending set size for the master

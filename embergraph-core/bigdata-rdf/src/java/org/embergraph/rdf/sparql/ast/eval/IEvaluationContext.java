@@ -29,20 +29,20 @@ package org.embergraph.rdf.sparql.ast.eval;
 
 import java.util.Set;
 
-import com.bigdata.bop.BOpContextBase;
-import com.bigdata.bop.ContextBindingSet;
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IValueExpression;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.engine.StaticAnalysisStats;
-import com.bigdata.rdf.lexicon.LexiconRelation;
-import com.bigdata.rdf.sparql.ast.ISolutionSetStats;
-import com.bigdata.rdf.sparql.ast.QueryHints;
-import com.bigdata.rdf.sparql.ast.cache.IDescribeCache;
-import com.bigdata.rdf.sparql.ast.optimizers.IASTOptimizer;
-import com.bigdata.rdf.sparql.ast.ssets.ISolutionSetManager;
-import com.bigdata.rdf.spo.SPORelation;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.bop.BOpContextBase;
+import org.embergraph.bop.ContextBindingSet;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IValueExpression;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.engine.StaticAnalysisStats;
+import org.embergraph.rdf.lexicon.LexiconRelation;
+import org.embergraph.rdf.sparql.ast.ISolutionSetStats;
+import org.embergraph.rdf.sparql.ast.QueryHints;
+import org.embergraph.rdf.sparql.ast.cache.IDescribeCache;
+import org.embergraph.rdf.sparql.ast.optimizers.IASTOptimizer;
+import org.embergraph.rdf.sparql.ast.ssets.ISolutionSetManager;
+import org.embergraph.rdf.spo.SPORelation;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * Interface providing access to various things of interest when preparing and

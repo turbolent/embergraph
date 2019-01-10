@@ -3,12 +3,12 @@ package org.embergraph.htree;
 import java.util.Random;
 import java.util.UUID;
 
-import com.bigdata.btree.HTreeIndexMetadata;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.io.TestCase3;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rawstore.SimpleMemoryRawStore;
-import com.bigdata.rwstore.sector.MemStore;
+import org.embergraph.btree.HTreeIndexMetadata;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.io.TestCase3;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rawstore.SimpleMemoryRawStore;
+import org.embergraph.rwstore.sector.MemStore;
 
 public class TestRemovals extends AbstractHTreeTestCase {
 

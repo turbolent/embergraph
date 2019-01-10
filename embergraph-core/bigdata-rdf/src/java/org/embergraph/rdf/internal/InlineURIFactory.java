@@ -28,10 +28,10 @@ import java.util.TreeMap;
 
 import org.openrdf.model.URI;
 
-import com.bigdata.rdf.internal.impl.literal.AbstractLiteralIV;
-import com.bigdata.rdf.internal.impl.uri.URIExtensionIV;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.vocab.Vocabulary;
+import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
+import org.embergraph.rdf.internal.impl.uri.URIExtensionIV;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.vocab.Vocabulary;
 
 /**
  * Default implementation of {@link IInlineURIFactory} that comes pre-loaded

@@ -25,7 +25,7 @@ package org.embergraph.rawstore;
 
 import java.nio.ByteBuffer;
 
-import com.bigdata.rwstore.IAllocationManager;
+import org.embergraph.rwstore.IAllocationManager;
 
 /**
  * Adds capability to write and delete allocations within an

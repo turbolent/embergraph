@@ -33,14 +33,14 @@ import org.openrdf.query.TupleQueryResult;
 
 import junit.framework.Test;
 
-import com.bigdata.journal.BufferMode;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.rdf.properties.PropertiesFormat;
-import com.bigdata.rdf.properties.PropertiesParserFactory;
-import com.bigdata.rdf.properties.PropertiesParserRegistry;
-import com.bigdata.rdf.sail.remote.BigdataSailRemoteRepositoryConnection;
-import com.bigdata.rdf.sail.webapp.client.HttpException;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepository;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.properties.PropertiesFormat;
+import org.embergraph.rdf.properties.PropertiesParserFactory;
+import org.embergraph.rdf.properties.PropertiesParserRegistry;
+import org.embergraph.rdf.sail.remote.BigdataSailRemoteRepositoryConnection;
+import org.embergraph.rdf.sail.webapp.client.HttpException;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository;
 
 /**
  * Proxied test suite for {@link DataLoaderServlet}

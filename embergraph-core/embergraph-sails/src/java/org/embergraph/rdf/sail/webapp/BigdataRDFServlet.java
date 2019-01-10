@@ -61,14 +61,14 @@ import org.openrdf.rio.RDFWriter;
 import org.openrdf.rio.RDFWriterFactory;
 import org.openrdf.rio.RDFWriterRegistry;
 
-import com.bigdata.journal.IAtomicStore;
-import com.bigdata.rdf.properties.PropertiesFormat;
-import com.bigdata.rdf.properties.PropertiesWriter;
-import com.bigdata.rdf.properties.PropertiesWriterRegistry;
-import com.bigdata.rdf.rules.ConstraintViolationException;
-import com.bigdata.rdf.sail.webapp.client.EncodeDecodeValue;
-import com.bigdata.rdf.sparql.ast.QuadsOperationInTriplesModeException;
-import com.bigdata.util.InnerCause;
+import org.embergraph.journal.IAtomicStore;
+import org.embergraph.rdf.properties.PropertiesFormat;
+import org.embergraph.rdf.properties.PropertiesWriter;
+import org.embergraph.rdf.properties.PropertiesWriterRegistry;
+import org.embergraph.rdf.rules.ConstraintViolationException;
+import org.embergraph.rdf.sail.webapp.client.EncodeDecodeValue;
+import org.embergraph.rdf.sparql.ast.QuadsOperationInTriplesModeException;
+import org.embergraph.util.InnerCause;
 
 /**
  * Abstract base class for {@link Servlet}s which interact with the bigdata RDF

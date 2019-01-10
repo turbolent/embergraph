@@ -60,9 +60,9 @@ package com.bigdata.rdf.properties.text;
 import java.io.OutputStream;
 import java.io.Writer;
 
-import com.bigdata.rdf.properties.PropertiesFormat;
-import com.bigdata.rdf.properties.PropertiesWriter;
-import com.bigdata.rdf.properties.PropertiesWriterFactory;
+import org.embergraph.rdf.properties.PropertiesFormat;
+import org.embergraph.rdf.properties.PropertiesWriter;
+import org.embergraph.rdf.properties.PropertiesWriterFactory;
 
 /**
  * An {@link PropertiesWriterFactory} for text writers.

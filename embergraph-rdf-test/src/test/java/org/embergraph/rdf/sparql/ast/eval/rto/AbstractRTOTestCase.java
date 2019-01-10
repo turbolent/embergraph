@@ -36,20 +36,20 @@ import java.util.UUID;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.bop.BOpUtility;
-import com.bigdata.bop.PipelineOp;
-import com.bigdata.bop.engine.IRunningQuery;
-import com.bigdata.bop.engine.QueryEngine;
-import com.bigdata.bop.engine.QueryEngine.IRunningQueryListener;
-import com.bigdata.bop.fed.QueryEngineFactory;
-import com.bigdata.bop.joinGraph.rto.JGraph;
-import com.bigdata.bop.joinGraph.rto.JoinGraph;
-import com.bigdata.bop.joinGraph.rto.Path;
-import com.bigdata.journal.IBTreeManager;
-import com.bigdata.rdf.sparql.ast.ASTContainer;
-import com.bigdata.rdf.sparql.ast.QueryHints;
-import com.bigdata.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
-import com.bigdata.rdf.sparql.ast.optimizers.IASTOptimizer;
+import org.embergraph.bop.BOpUtility;
+import org.embergraph.bop.PipelineOp;
+import org.embergraph.bop.engine.IRunningQuery;
+import org.embergraph.bop.engine.QueryEngine;
+import org.embergraph.bop.engine.QueryEngine.IRunningQueryListener;
+import org.embergraph.bop.fed.QueryEngineFactory;
+import org.embergraph.bop.joinGraph.rto.JGraph;
+import org.embergraph.bop.joinGraph.rto.JoinGraph;
+import org.embergraph.bop.joinGraph.rto.Path;
+import org.embergraph.journal.IBTreeManager;
+import org.embergraph.rdf.sparql.ast.ASTContainer;
+import org.embergraph.rdf.sparql.ast.QueryHints;
+import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
+import org.embergraph.rdf.sparql.ast.optimizers.IASTOptimizer;
 
 /**
  * Data driven test suite for the Runtime Query Optimizer (RTO).

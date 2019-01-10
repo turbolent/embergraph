@@ -57,14 +57,14 @@ import org.openrdf.repository.sail.SailRepository;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.sail.memory.MemoryStore;
 
-import com.bigdata.BigdataStatics;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sail.BigdataSail.Options;
-import com.bigdata.rdf.sail.BigdataSailRepository;
-import com.bigdata.rdf.sail.BigdataSailRepositoryConnection;
-import com.bigdata.rdf.sail.BigdataSailUpdate;
-import com.bigdata.rdf.sparql.ast.UpdateRoot;
+import org.embergraph.BigdataStatics;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.BigdataSail.Options;
+import org.embergraph.rdf.sail.BigdataSailRepository;
+import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.rdf.sail.BigdataSailUpdate;
+import org.embergraph.rdf.sparql.ast.UpdateRoot;
 
 /**
  * Harness for running the SPARQL 1.1 UPDATE compliance tests (DAWG).

@@ -43,15 +43,15 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.keys.KVO;
-import com.bigdata.mdi.PartitionLocator;
-import com.bigdata.relation.accesspath.BlockingBuffer;
-import com.bigdata.relation.accesspath.BufferClosedException;
-import com.bigdata.relation.accesspath.IAsynchronousIterator;
-import com.bigdata.resources.StaleLocatorException;
-import com.bigdata.service.Split;
-import com.bigdata.service.ndx.ISplitter;
-import com.bigdata.util.concurrent.AbstractHaltableProcess;
+import org.embergraph.btree.keys.KVO;
+import org.embergraph.mdi.PartitionLocator;
+import org.embergraph.relation.accesspath.BlockingBuffer;
+import org.embergraph.relation.accesspath.BufferClosedException;
+import org.embergraph.relation.accesspath.IAsynchronousIterator;
+import org.embergraph.resources.StaleLocatorException;
+import org.embergraph.service.Split;
+import org.embergraph.service.ndx.ISplitter;
+import org.embergraph.util.concurrent.AbstractHaltableProcess;
 
 /**
  * Abstract base class for a master task which consumes chunks of elements

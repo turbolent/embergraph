@@ -28,18 +28,18 @@ package org.embergraph.rdf.inf;
 
 import java.util.Arrays;
 import java.util.Iterator;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.IVUtility;
-import com.bigdata.rdf.model.StatementEnum;
-import com.bigdata.rdf.rules.InferenceEngine;
-import com.bigdata.rdf.spo.ISPO;
-import com.bigdata.rdf.spo.SPO;
-import com.bigdata.rdf.spo.SPOKeyOrder;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.TempTripleStore;
-import com.bigdata.striterator.EmptyChunkedIterator;
-import com.bigdata.striterator.IChunkedOrderedIterator;
-import com.bigdata.striterator.IKeyOrder;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.IVUtility;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.rdf.rules.InferenceEngine;
+import org.embergraph.rdf.spo.ISPO;
+import org.embergraph.rdf.spo.SPO;
+import org.embergraph.rdf.spo.SPOKeyOrder;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.TempTripleStore;
+import org.embergraph.striterator.EmptyChunkedIterator;
+import org.embergraph.striterator.IChunkedOrderedIterator;
+import org.embergraph.striterator.IKeyOrder;
 
 /**
  * Provides backward chaining for reverse property collection on owl:sameAs for

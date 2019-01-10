@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.sparql.ast;
 
-import com.bigdata.bop.controller.SubqueryOp;
+import org.embergraph.bop.controller.SubqueryOp;
 
 /**
  * Used to specify the query plan for FILTER (NOT) EXISTS. There are two basic

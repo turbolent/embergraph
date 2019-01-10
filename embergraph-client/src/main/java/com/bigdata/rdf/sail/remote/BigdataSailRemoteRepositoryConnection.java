@@ -68,14 +68,14 @@ import org.openrdf.rio.RDFHandler;
 import org.openrdf.rio.RDFHandlerException;
 import org.openrdf.rio.RDFParseException;
 
-import com.bigdata.rdf.sail.webapp.client.IPreparedSparqlUpdate;
-import com.bigdata.rdf.sail.webapp.client.IRemoteTx;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepository;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepository.AddOp;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepository.RemoveOp;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepositoryManager;
-import com.bigdata.rdf.sail.webapp.client.RemoteTransactionManager;
-import com.bigdata.rdf.sail.webapp.client.RemoteTransactionNotFoundException;
+import org.embergraph.rdf.sail.webapp.client.IPreparedSparqlUpdate;
+import org.embergraph.rdf.sail.webapp.client.IRemoteTx;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository.AddOp;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository.RemoveOp;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepositoryManager;
+import org.embergraph.rdf.sail.webapp.client.RemoteTransactionManager;
+import org.embergraph.rdf.sail.webapp.client.RemoteTransactionNotFoundException;
 
 /**
  * An implementation of Sesame's RepositoryConnection interface that wraps a

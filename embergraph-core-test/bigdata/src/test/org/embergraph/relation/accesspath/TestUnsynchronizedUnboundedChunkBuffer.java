@@ -30,7 +30,7 @@ package org.embergraph.relation.accesspath;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.striterator.IChunkedIterator;
+import org.embergraph.striterator.IChunkedIterator;
 
 /**
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

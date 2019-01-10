@@ -28,9 +28,9 @@ package org.embergraph.service.geospatial;
 
 import java.io.Serializable;
 
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.gis.ICoordinate.UNITS;
-import com.bigdata.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.gis.ICoordinate.UNITS;
+import org.embergraph.rdf.model.BigdataValueFactory;
 
 
 /**

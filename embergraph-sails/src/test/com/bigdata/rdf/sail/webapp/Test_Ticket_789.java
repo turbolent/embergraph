@@ -40,10 +40,10 @@ import org.openrdf.query.TupleQuery;
 import org.openrdf.query.TupleQueryResult;
 import org.openrdf.query.impl.DatasetImpl;
 
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.rdf.sail.remote.BigdataSailRemoteRepository;
-import com.bigdata.rdf.sail.remote.BigdataSailRemoteRepositoryConnection;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepository.AddOp;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.sail.remote.BigdataSailRemoteRepository;
+import org.embergraph.rdf.sail.remote.BigdataSailRemoteRepositoryConnection;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository.AddOp;
 
 /**
  * Test suite for remote support of Sesame API Query methods (setBinding, setDataset, setIncludeInferred) and support of contexts in getStatements

@@ -32,7 +32,7 @@ import java.util.Stack;
 import junit.framework.AssertionFailedError;
 import junit.framework.TestCase2;
 
-import com.bigdata.cache.SynchronizedHardReferenceQueueWithTimeout.IRef;
+import org.embergraph.cache.SynchronizedHardReferenceQueueWithTimeout.IRef;
 
 /**
  * Test suite for {@link SynchronizedHardReferenceQueueWithTimeout}.

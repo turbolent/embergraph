@@ -37,21 +37,21 @@ import java.util.UUID;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.btree.BTreeCounters;
-import com.bigdata.btree.DefaultTupleSerializer;
-import com.bigdata.btree.HTreeIndexMetadata;
-import com.bigdata.btree.ITupleSerializer;
-import com.bigdata.btree.keys.ASCIIKeyBuilderFactory;
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.btree.raba.codec.SimpleRabaCoder;
-import com.bigdata.io.DirectBufferPool;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rwstore.sector.IMemoryManager;
-import com.bigdata.rwstore.sector.MemStore;
-import com.bigdata.rwstore.sector.MemoryManager;
-import com.bigdata.util.Bytes;
-import com.bigdata.util.PseudoRandom;
+import org.embergraph.btree.BTreeCounters;
+import org.embergraph.btree.DefaultTupleSerializer;
+import org.embergraph.btree.HTreeIndexMetadata;
+import org.embergraph.btree.ITupleSerializer;
+import org.embergraph.btree.keys.ASCIIKeyBuilderFactory;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.btree.raba.codec.SimpleRabaCoder;
+import org.embergraph.io.DirectBufferPool;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rwstore.sector.IMemoryManager;
+import org.embergraph.rwstore.sector.MemStore;
+import org.embergraph.rwstore.sector.MemoryManager;
+import org.embergraph.util.Bytes;
+import org.embergraph.util.PseudoRandom;
 
 /**
  * A simple demonstration which may be used to compare the {@link HTree}

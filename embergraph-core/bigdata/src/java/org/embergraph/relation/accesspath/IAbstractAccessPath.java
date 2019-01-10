@@ -27,9 +27,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation.accesspath;
 
-import com.bigdata.bop.IPredicate;
-import com.bigdata.btree.IRangeQuery;
-import com.bigdata.relation.IRelation;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.btree.IRangeQuery;
+import org.embergraph.relation.IRelation;
 
 import cutthecrap.utils.striterators.IFilter;
 

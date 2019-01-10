@@ -26,17 +26,17 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.lexicon;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.proc.AbstractKeyArrayIndexProcedure;
-import com.bigdata.btree.proc.AbstractKeyArrayIndexProcedureConstructor;
-import com.bigdata.btree.proc.IParallelizableIndexProcedure;
-import com.bigdata.btree.proc.IResultHandler;
-import com.bigdata.btree.raba.IRaba;
-import com.bigdata.btree.raba.codec.IRabaCoder;
-import com.bigdata.rdf.internal.impl.TermId;
-import com.bigdata.rdf.model.BigdataValueSerializer;
-import com.bigdata.relation.IMutableRelationIndexWriteProcedure;
-import com.bigdata.service.ndx.NopAggregator;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure;
+import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedureConstructor;
+import org.embergraph.btree.proc.IParallelizableIndexProcedure;
+import org.embergraph.btree.proc.IResultHandler;
+import org.embergraph.btree.raba.IRaba;
+import org.embergraph.btree.raba.codec.IRabaCoder;
+import org.embergraph.rdf.internal.impl.TermId;
+import org.embergraph.rdf.model.BigdataValueSerializer;
+import org.embergraph.relation.IMutableRelationIndexWriteProcedure;
+import org.embergraph.service.ndx.NopAggregator;
 
 /**
  * Unisolated write operation makes consistent assertions on the

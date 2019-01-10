@@ -29,7 +29,7 @@ import java.nio.channels.ClosedByInterruptException;
 import java.nio.channels.ClosedChannelException;
 import java.util.concurrent.ExecutorService;
 
-import com.bigdata.io.FileChannelUtility;
+import org.embergraph.io.FileChannelUtility;
 
 /**
  * Direct buffer strategy uses a direct {@link ByteBuffer} as a write through

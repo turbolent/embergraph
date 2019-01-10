@@ -31,21 +31,21 @@ import java.util.Iterator;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 
-import com.bigdata.bop.cost.BTreeCostModel;
-import com.bigdata.bop.cost.DiskCostModel;
-import com.bigdata.bop.cost.ScanCostReport;
-import com.bigdata.btree.proc.AbstractKeyArrayIndexProcedureConstructor;
-import com.bigdata.btree.proc.IIndexProcedure;
-import com.bigdata.btree.proc.IKeyRangeIndexProcedure;
-import com.bigdata.btree.proc.IResultHandler;
-import com.bigdata.btree.proc.ISimpleIndexProcedure;
-import com.bigdata.btree.view.FusedView;
-import com.bigdata.counters.CounterSet;
-import com.bigdata.journal.ConcurrencyManager;
-import com.bigdata.journal.IConcurrencyManager;
-import com.bigdata.mdi.IResourceMetadata;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.service.Split;
+import org.embergraph.bop.cost.BTreeCostModel;
+import org.embergraph.bop.cost.DiskCostModel;
+import org.embergraph.bop.cost.ScanCostReport;
+import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedureConstructor;
+import org.embergraph.btree.proc.IIndexProcedure;
+import org.embergraph.btree.proc.IKeyRangeIndexProcedure;
+import org.embergraph.btree.proc.IResultHandler;
+import org.embergraph.btree.proc.ISimpleIndexProcedure;
+import org.embergraph.btree.view.FusedView;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.journal.ConcurrencyManager;
+import org.embergraph.journal.IConcurrencyManager;
+import org.embergraph.mdi.IResourceMetadata;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.service.Split;
 
 import cutthecrap.utils.striterators.IFilter;
 

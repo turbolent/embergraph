@@ -3,11 +3,11 @@ package org.embergraph.util.concurrent;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.bigdata.counters.CounterSet;
-import com.bigdata.counters.Instrument;
-import com.bigdata.journal.AbstractTask;
-import com.bigdata.journal.ConcurrencyManager;
-import com.bigdata.util.concurrent.IQueueCounters.ITaskCounters;
+import org.embergraph.counters.CounterSet;
+import org.embergraph.counters.Instrument;
+import org.embergraph.journal.AbstractTask;
+import org.embergraph.journal.ConcurrencyManager;
+import org.embergraph.util.concurrent.IQueueCounters.ITaskCounters;
 
 /**
  * Class captures various data about the execution of {@link AbstractTask}s.

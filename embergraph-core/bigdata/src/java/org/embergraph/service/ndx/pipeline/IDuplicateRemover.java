@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.service.ndx.pipeline;
 
-import com.bigdata.btree.keys.KVO;
+import org.embergraph.btree.keys.KVO;
 
 /**
  * Interface allowing application specific elimination of duplicates.

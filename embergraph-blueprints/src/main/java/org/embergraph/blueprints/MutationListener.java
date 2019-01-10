@@ -1,8 +1,8 @@
 package org.embergraph.blueprints;
 
-import com.bigdata.rdf.changesets.ChangeAction;
-import com.bigdata.rdf.changesets.IChangeLog;
-import com.bigdata.rdf.changesets.IChangeRecord;
+import org.embergraph.rdf.changesets.ChangeAction;
+import org.embergraph.rdf.changesets.IChangeLog;
+import org.embergraph.rdf.changesets.IChangeRecord;
 
 public class MutationListener implements IChangeLog {
     

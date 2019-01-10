@@ -31,13 +31,13 @@ package org.embergraph.relation.rule.eval;
 import java.io.Serializable;
 import java.util.Properties;
 
-import com.bigdata.bop.joinGraph.IEvaluationPlanFactory;
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.journal.IIndexStore;
-import com.bigdata.relation.accesspath.IElementFilter;
-import com.bigdata.relation.rule.IProgram;
-import com.bigdata.service.DataService;
-import com.bigdata.service.IBigdataFederation;
+import org.embergraph.bop.joinGraph.IEvaluationPlanFactory;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.journal.IIndexStore;
+import org.embergraph.relation.accesspath.IElementFilter;
+import org.embergraph.relation.rule.IProgram;
+import org.embergraph.service.DataService;
+import org.embergraph.service.IBigdataFederation;
 
 /**
  * A factory for {@link IJoinNexus} instances.

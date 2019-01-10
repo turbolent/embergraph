@@ -46,8 +46,8 @@ import org.openrdf.rio.Rio;
 import org.openrdf.rio.helpers.RDFHandlerBase;
 import org.openrdf.sail.memory.MemoryStore;
 
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.vocab.NoVocabulary;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.vocab.NoVocabulary;
 
 /**
  * Unit test template for use in submission of bugs.

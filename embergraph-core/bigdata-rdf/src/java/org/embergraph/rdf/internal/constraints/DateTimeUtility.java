@@ -9,13 +9,13 @@ import org.openrdf.model.URI;
 import org.openrdf.model.datatypes.XMLDatatypeUtil;
 import org.openrdf.model.vocabulary.XMLSchema;
 
-import com.bigdata.rdf.error.SparqlTypeErrorException;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.constraints.MathBOp.MathOp;
-import com.bigdata.rdf.internal.impl.literal.XSDNumericIV;
-import com.bigdata.rdf.model.BigdataLiteral;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.sparql.ast.DummyConstantNode;
+import org.embergraph.rdf.error.SparqlTypeErrorException;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.constraints.MathBOp.MathOp;
+import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
+import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.sparql.ast.DummyConstantNode;
 
 public class DateTimeUtility implements IMathOpHandler {
     static protected final DatatypeFactory datatypeFactory;

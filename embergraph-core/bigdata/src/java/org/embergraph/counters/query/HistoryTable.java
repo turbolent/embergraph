@@ -4,11 +4,11 @@ import java.util.Arrays;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.counters.HistoryInstrument;
-import com.bigdata.counters.ICounter;
-import com.bigdata.counters.IHistoryEntry;
-import com.bigdata.counters.PeriodEnum;
-import com.bigdata.counters.History.SampleIterator;
+import org.embergraph.counters.HistoryInstrument;
+import org.embergraph.counters.ICounter;
+import org.embergraph.counters.IHistoryEntry;
+import org.embergraph.counters.PeriodEnum;
+import org.embergraph.counters.History.SampleIterator;
 
 /**
  * A class representing one or more performance counter histories where those

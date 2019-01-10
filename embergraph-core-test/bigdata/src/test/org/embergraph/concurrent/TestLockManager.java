@@ -46,12 +46,12 @@ import junit.framework.TestCase;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.service.DataService;
-import com.bigdata.testutil.ExperimentDriver;
-import com.bigdata.testutil.ExperimentDriver.IComparisonTest;
-import com.bigdata.testutil.ExperimentDriver.Result;
-import com.bigdata.util.DaemonThreadFactory;
-import com.bigdata.util.NV;
+import org.embergraph.service.DataService;
+import org.embergraph.testutil.ExperimentDriver;
+import org.embergraph.testutil.ExperimentDriver.IComparisonTest;
+import org.embergraph.testutil.ExperimentDriver.Result;
+import org.embergraph.util.DaemonThreadFactory;
+import org.embergraph.util.NV;
 
 /**
  * Suite of stress tests of the concurrency control mechanisms (without the

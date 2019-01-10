@@ -28,7 +28,7 @@ package org.embergraph.btree;
 
 import java.util.Formatter;
 
-import com.bigdata.util.BytesUtil;
+import org.embergraph.util.BytesUtil;
 
 import junit.framework.TestCase2;
 

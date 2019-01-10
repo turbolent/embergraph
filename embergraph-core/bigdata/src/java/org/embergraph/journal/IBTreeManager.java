@@ -28,15 +28,15 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.journal;
 
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.ICheckpointProtocol;
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.btree.view.FusedView;
-import com.bigdata.htree.HTree;
-import com.bigdata.service.IDataService;
-import com.bigdata.service.IMetadataService;
-import com.bigdata.service.ndx.IClientIndex;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.ICheckpointProtocol;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.btree.view.FusedView;
+import org.embergraph.htree.HTree;
+import org.embergraph.service.IDataService;
+import org.embergraph.service.IMetadataService;
+import org.embergraph.service.ndx.IClientIndex;
 
 /**
  * Interface for management of local index resources such as {@link BTree},

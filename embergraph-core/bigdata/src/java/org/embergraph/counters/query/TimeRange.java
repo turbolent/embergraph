@@ -34,7 +34,7 @@ import java.util.regex.Pattern;
 
 import cern.clhep.Units;
 
-import com.bigdata.counters.render.XHTMLRenderer;
+import org.embergraph.counters.render.XHTMLRenderer;
 
 /**
  * Utility class to interpret URL query parameters as a time range. Some

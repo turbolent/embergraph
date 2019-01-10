@@ -4,13 +4,13 @@ import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.counters.HistoryInstrument;
-import com.bigdata.counters.ICounter;
-import com.bigdata.counters.ICounterNode;
-import com.bigdata.counters.PeriodEnum;
-import com.bigdata.counters.query.HistoryTable;
-import com.bigdata.counters.query.PivotTable;
-import com.bigdata.counters.query.URLQueryModel;
+import org.embergraph.counters.HistoryInstrument;
+import org.embergraph.counters.ICounter;
+import org.embergraph.counters.ICounterNode;
+import org.embergraph.counters.PeriodEnum;
+import org.embergraph.counters.query.HistoryTable;
+import org.embergraph.counters.query.PivotTable;
+import org.embergraph.counters.query.URLQueryModel;
 
 /**
  * Writes out a pivot table containing the histories for the selected

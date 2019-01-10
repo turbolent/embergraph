@@ -27,8 +27,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sail;
 
-import com.bigdata.rdf.sparql.ast.ASTContainer;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.sparql.ast.ASTContainer;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * Extension API for high level operations (Query and Update) against the Sail.

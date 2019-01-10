@@ -34,8 +34,8 @@ import org.openrdf.model.impl.ValueFactoryImpl;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.TupleQueryResult;
 
-import com.bigdata.journal.IIndexManager;
-import com.bigdata.rdf.sail.webapp.client.RemoteRepository.AddOp;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository.AddOp;
 
 /**
  * @see <a href="http://trac.bigdata.com/ticket/605" > Error in function

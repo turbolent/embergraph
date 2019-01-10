@@ -32,22 +32,22 @@ import java.net.InetSocketAddress;
 import java.rmi.Remote;
 import java.util.concurrent.Future;
 
-import com.bigdata.ha.msg.HAWriteMessage;
-import com.bigdata.ha.msg.IHALogRequest;
-import com.bigdata.ha.msg.IHALogRootBlocksRequest;
-import com.bigdata.ha.msg.IHALogRootBlocksResponse;
-import com.bigdata.ha.msg.IHARebuildRequest;
-import com.bigdata.ha.msg.IHASendState;
-import com.bigdata.ha.msg.IHASendStoreResponse;
-import com.bigdata.ha.msg.IHASyncRequest;
-import com.bigdata.ha.msg.IHAWriteMessage;
-import com.bigdata.ha.msg.IHAWriteSetStateRequest;
-import com.bigdata.ha.msg.IHAWriteSetStateResponse;
-import com.bigdata.ha.pipeline.HAReceiveService;
-import com.bigdata.ha.pipeline.HASendService;
-import com.bigdata.io.writecache.WriteCache;
-import com.bigdata.journal.WriteExecutorService;
-import com.bigdata.service.proxy.ThickFuture;
+import org.embergraph.ha.msg.HAWriteMessage;
+import org.embergraph.ha.msg.IHALogRequest;
+import org.embergraph.ha.msg.IHALogRootBlocksRequest;
+import org.embergraph.ha.msg.IHALogRootBlocksResponse;
+import org.embergraph.ha.msg.IHARebuildRequest;
+import org.embergraph.ha.msg.IHASendState;
+import org.embergraph.ha.msg.IHASendStoreResponse;
+import org.embergraph.ha.msg.IHASyncRequest;
+import org.embergraph.ha.msg.IHAWriteMessage;
+import org.embergraph.ha.msg.IHAWriteSetStateRequest;
+import org.embergraph.ha.msg.IHAWriteSetStateResponse;
+import org.embergraph.ha.pipeline.HAReceiveService;
+import org.embergraph.ha.pipeline.HASendService;
+import org.embergraph.io.writecache.WriteCache;
+import org.embergraph.journal.WriteExecutorService;
+import org.embergraph.service.proxy.ThickFuture;
 
 /**
  * A {@link Remote} interface supporting the write replication pipeline. The

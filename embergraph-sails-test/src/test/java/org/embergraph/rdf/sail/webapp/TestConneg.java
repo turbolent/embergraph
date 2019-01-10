@@ -33,7 +33,7 @@ import org.openrdf.query.resultio.BooleanQueryResultFormat;
 import org.openrdf.query.resultio.TupleQueryResultFormat;
 import org.openrdf.rio.RDFFormat;
 
-import com.bigdata.counters.format.CounterSetFormat;
+import org.embergraph.counters.format.CounterSetFormat;
 
 /**
  * Test suite for content negotiation helper class.

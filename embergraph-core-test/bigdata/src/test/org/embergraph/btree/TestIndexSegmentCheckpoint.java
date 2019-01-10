@@ -36,8 +36,8 @@ import junit.framework.TestCase;
 
 import org.apache.log4j.Logger;
 
-import com.bigdata.rawstore.WormAddressManager;
-import com.bigdata.util.Bytes;
+import org.embergraph.rawstore.WormAddressManager;
+import org.embergraph.util.Bytes;
 
 /**
  * Test suite for {@link IndexSegmentCheckpoint}.

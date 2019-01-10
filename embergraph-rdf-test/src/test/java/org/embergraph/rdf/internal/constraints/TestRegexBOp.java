@@ -27,14 +27,14 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.internal.constraints;
 
-import com.bigdata.bop.Constant;
-import com.bigdata.bop.bindingSet.ListBindingSet;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.impl.literal.XSDBooleanIV;
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.sparql.ast.DummyConstantNode;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.ProxyTestCase;
+import org.embergraph.bop.Constant;
+import org.embergraph.bop.bindingSet.ListBindingSet;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.impl.literal.XSDBooleanIV;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.sparql.ast.DummyConstantNode;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.ProxyTestCase;
 
 /**
  * Test suite for {@link RegexBOp}.

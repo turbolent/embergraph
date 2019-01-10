@@ -28,13 +28,13 @@
 
 package org.embergraph.relation.rule.eval;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.joinGraph.IEvaluationPlan;
-import com.bigdata.relation.rule.IRule;
-import com.bigdata.relation.rule.Rule;
-import com.bigdata.striterator.IKeyOrder;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.joinGraph.IEvaluationPlan;
+import org.embergraph.relation.rule.IRule;
+import org.embergraph.relation.rule.Rule;
+import org.embergraph.striterator.IKeyOrder;
 
 /**
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -2,9 +2,9 @@ package org.embergraph.rdf.internal.constraints;
 
 import org.openrdf.model.Literal;
 
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.internal.constraints.MathBOp.MathOp;
-import com.bigdata.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.constraints.MathBOp.MathOp;
+import org.embergraph.rdf.model.BigdataValueFactory;
 
 /**
  * Interface for handling math operations on specific data type.

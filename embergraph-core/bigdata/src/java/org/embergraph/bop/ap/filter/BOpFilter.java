@@ -30,8 +30,8 @@ package org.embergraph.bop.ap.filter;
 import java.util.Iterator;
 import java.util.Map;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.btree.ITupleIterator;
+import org.embergraph.bop.BOp;
+import org.embergraph.btree.ITupleIterator;
 
 import cutthecrap.utils.striterators.Filter;
 import cutthecrap.utils.striterators.Filterator;

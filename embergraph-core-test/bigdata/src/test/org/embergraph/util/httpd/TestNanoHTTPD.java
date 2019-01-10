@@ -51,8 +51,8 @@ import java.util.concurrent.TimeoutException;
 
 import junit.framework.TestCase2;
 
-import com.bigdata.util.Bytes;
-import com.bigdata.util.config.NicUtil;
+import org.embergraph.util.Bytes;
+import org.embergraph.util.config.NicUtil;
 
 /**
  * Test suite for {@link NanoHTTPD}.

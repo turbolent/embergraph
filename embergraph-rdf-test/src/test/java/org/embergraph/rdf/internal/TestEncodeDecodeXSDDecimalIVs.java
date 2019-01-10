@@ -32,10 +32,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import com.bigdata.btree.keys.IKeyBuilder;
-import com.bigdata.btree.keys.KeyBuilder;
-import com.bigdata.rdf.internal.impl.literal.XSDDecimalIV;
-import com.bigdata.rdf.model.BigdataLiteral;
+import org.embergraph.btree.keys.IKeyBuilder;
+import org.embergraph.btree.keys.KeyBuilder;
+import org.embergraph.rdf.internal.impl.literal.XSDDecimalIV;
+import org.embergraph.rdf.model.BigdataLiteral;
 
 /**
  * Unit tests for {@link XSDDecimalIV}.

@@ -36,8 +36,8 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import com.bigdata.relation.accesspath.BufferClosedException;
-import com.bigdata.util.InnerCause;
+import org.embergraph.relation.accesspath.BufferClosedException;
+import org.embergraph.util.InnerCause;
 
 /**
  * Abstract base class for tasks whose processing may be halted asynchronously.

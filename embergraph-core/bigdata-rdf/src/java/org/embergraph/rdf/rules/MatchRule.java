@@ -5,22 +5,22 @@ import org.openrdf.model.URI;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-import com.bigdata.bop.BOp;
-import com.bigdata.bop.IConstant;
-import com.bigdata.bop.IConstraint;
-import com.bigdata.bop.IPredicate;
-import com.bigdata.bop.IVariable;
-import com.bigdata.bop.NV;
-import com.bigdata.bop.constraint.Constraint;
-import com.bigdata.bop.constraint.INBinarySearch;
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.spo.ExplicitSPOFilter;
-import com.bigdata.rdf.spo.SPO;
-import com.bigdata.rdf.spo.SPOPredicate;
-import com.bigdata.rdf.store.LocalTripleStore;
-import com.bigdata.rdf.vocab.Vocabulary;
-import com.bigdata.relation.accesspath.ElementFilter;
-import com.bigdata.relation.rule.Rule;
+import org.embergraph.bop.BOp;
+import org.embergraph.bop.IConstant;
+import org.embergraph.bop.IConstraint;
+import org.embergraph.bop.IPredicate;
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.NV;
+import org.embergraph.bop.constraint.Constraint;
+import org.embergraph.bop.constraint.INBinarySearch;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.spo.ExplicitSPOFilter;
+import org.embergraph.rdf.spo.SPO;
+import org.embergraph.rdf.spo.SPOPredicate;
+import org.embergraph.rdf.store.LocalTripleStore;
+import org.embergraph.rdf.vocab.Vocabulary;
+import org.embergraph.relation.accesspath.ElementFilter;
+import org.embergraph.relation.rule.Rule;
 
 /**
  * Rule supporting {@link LocalTripleStore#match(Literal[], URI[], URI)}.

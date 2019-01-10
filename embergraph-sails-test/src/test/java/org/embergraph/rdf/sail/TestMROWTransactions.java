@@ -46,21 +46,21 @@ import org.openrdf.model.Value;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.sail.SailException;
 
-import com.bigdata.btree.AbstractNode;
-import com.bigdata.btree.BTree;
-import com.bigdata.btree.Checkpoint;
-import com.bigdata.btree.IndexMetadata;
-import com.bigdata.counters.CAT;
-import com.bigdata.journal.BufferMode;
-import com.bigdata.rawstore.IRawStore;
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.sail.BigdataSail.BigdataSailConnection;
-import com.bigdata.rdf.sail.BigdataSail.Options;
-import com.bigdata.rdf.store.BD;
-import com.bigdata.rdf.vocab.NoVocabulary;
-import com.bigdata.service.AbstractTransactionService;
-import com.bigdata.util.DaemonThreadFactory;
-import com.bigdata.util.InnerCause;
+import org.embergraph.btree.AbstractNode;
+import org.embergraph.btree.BTree;
+import org.embergraph.btree.Checkpoint;
+import org.embergraph.btree.IndexMetadata;
+import org.embergraph.counters.CAT;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.rawstore.IRawStore;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
+import org.embergraph.rdf.sail.BigdataSail.Options;
+import org.embergraph.rdf.store.BD;
+import org.embergraph.rdf.vocab.NoVocabulary;
+import org.embergraph.service.AbstractTransactionService;
+import org.embergraph.util.DaemonThreadFactory;
+import org.embergraph.util.InnerCause;
 
 /**
  * TestCase to test single writer/mutiple transaction committed readers with

@@ -34,12 +34,12 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.bigdata.btree.IIndex;
-import com.bigdata.btree.ILocalBTreeView;
-import com.bigdata.cache.ConcurrentWeakValueCache;
-import com.bigdata.cache.ConcurrentWeakValueCacheWithTimeout;
-import com.bigdata.journal.ITx;
-import com.bigdata.util.NT;
+import org.embergraph.btree.IIndex;
+import org.embergraph.btree.ILocalBTreeView;
+import org.embergraph.cache.ConcurrentWeakValueCache;
+import org.embergraph.cache.ConcurrentWeakValueCacheWithTimeout;
+import org.embergraph.journal.ITx;
+import org.embergraph.util.NT;
 
 /**
  * Extends the {@link ConcurrentWeakValueCache} to track the earliest timestamp

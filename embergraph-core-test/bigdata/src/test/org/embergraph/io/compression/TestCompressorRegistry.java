@@ -26,7 +26,7 @@ package org.embergraph.io.compression;
 import java.nio.ByteBuffer;
 import java.util.Random;
 
-import com.bigdata.io.TestCase3;
+import org.embergraph.io.TestCase3;
 
 public class TestCompressorRegistry extends TestCase3 {
 	final Random r = new Random();

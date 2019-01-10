@@ -10,8 +10,8 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.query.BindingSet;
 
-import com.bigdata.gom.om.IObjectManager;
-import com.bigdata.gom.om.ObjectMgrModel;
+import org.embergraph.gom.om.IObjectManager;
+import org.embergraph.gom.om.ObjectMgrModel;
 
 import cutthecrap.utils.striterators.EmptyIterator;
 import cutthecrap.utils.striterators.ICloseableIterator;

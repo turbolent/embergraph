@@ -35,11 +35,11 @@ import java.io.Reader;
 import java.io.StringWriter;
 import java.util.Properties;
 
-import com.bigdata.bfs.BigdataFileSystem;
-import com.bigdata.bfs.BigdataFileSystem.Options;
-import com.bigdata.journal.ITx;
-import com.bigdata.rawstore.WormAddressManager;
-import com.bigdata.service.AbstractEmbeddedFederationTestCase;
+import org.embergraph.bfs.BigdataFileSystem;
+import org.embergraph.bfs.BigdataFileSystem.Options;
+import org.embergraph.journal.ITx;
+import org.embergraph.rawstore.WormAddressManager;
+import org.embergraph.service.AbstractEmbeddedFederationTestCase;
 
 /**
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -33,10 +33,10 @@ import java.rmi.Remote;
 import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
-import com.bigdata.bop.IBindingSet;
-import com.bigdata.relation.accesspath.IAsynchronousIterator;
-import com.bigdata.relation.rule.eval.ISolution;
-import com.bigdata.relation.rule.eval.pipeline.JoinTask;
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.relation.accesspath.IAsynchronousIterator;
+import org.embergraph.relation.rule.eval.ISolution;
+import org.embergraph.relation.rule.eval.pipeline.JoinTask;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 

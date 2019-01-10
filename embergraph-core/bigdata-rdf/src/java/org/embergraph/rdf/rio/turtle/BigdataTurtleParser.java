@@ -18,8 +18,8 @@ import org.openrdf.rio.RDFParseException;
 import org.openrdf.rio.turtle.TurtleParser;
 import org.openrdf.rio.turtle.TurtleUtil;
 
-import com.bigdata.rdf.model.BigdataValueFactory;
-import com.bigdata.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.BigdataValueFactoryImpl;
 
 /**
  * RDF parser for <a href="http://www.dajobe.org/2004/01/turtle/">Turtle</a>

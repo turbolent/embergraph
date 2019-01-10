@@ -32,7 +32,7 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import com.bigdata.btree.raba.AbstractRaba;
+import org.embergraph.btree.raba.AbstractRaba;
 
 /**
  * Abstract implementation throws {@link UnsupportedOperationException} for all

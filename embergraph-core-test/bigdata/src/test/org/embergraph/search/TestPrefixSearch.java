@@ -31,7 +31,7 @@ package org.embergraph.search;
 import java.io.StringReader;
 import java.util.concurrent.TimeUnit;
 
-import com.bigdata.rdf.lexicon.ITextIndexer.FullTextQuery;
+import org.embergraph.rdf.lexicon.ITextIndexer.FullTextQuery;
 
 /**
  * Unit test for prefix and exact match searches. Prefix search allows a query

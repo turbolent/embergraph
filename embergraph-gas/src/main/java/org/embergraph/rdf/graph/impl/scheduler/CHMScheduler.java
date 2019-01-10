@@ -19,9 +19,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.openrdf.model.Value;
 
-import com.bigdata.rdf.graph.IGASSchedulerImpl;
-import com.bigdata.rdf.graph.IStaticFrontier;
-import com.bigdata.rdf.graph.impl.GASEngine;
+import org.embergraph.rdf.graph.IGASSchedulerImpl;
+import org.embergraph.rdf.graph.IStaticFrontier;
+import org.embergraph.rdf.graph.impl.GASEngine;
 
 /**
  * A simple scheduler based on a {@link ConcurrentHashMap}.

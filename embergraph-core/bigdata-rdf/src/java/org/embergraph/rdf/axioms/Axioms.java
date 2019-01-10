@@ -28,9 +28,9 @@ package org.embergraph.rdf.axioms;
 
 import java.util.Iterator;
 
-import com.bigdata.rdf.internal.IV;
-import com.bigdata.rdf.lexicon.LexiconRelation;
-import com.bigdata.rdf.spo.SPO;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.lexicon.LexiconRelation;
+import org.embergraph.rdf.spo.SPO;
 
 
 /**

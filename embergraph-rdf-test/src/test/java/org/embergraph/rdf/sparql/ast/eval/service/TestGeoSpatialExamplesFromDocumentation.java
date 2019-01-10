@@ -28,11 +28,11 @@ package org.embergraph.rdf.sparql.ast.eval.service;
 
 import java.util.Properties;
 
-import com.bigdata.journal.BufferMode;
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
-import com.bigdata.rdf.store.AbstractTripleStore;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
+import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * Data driven test suite asserting that the examples in the geospatial

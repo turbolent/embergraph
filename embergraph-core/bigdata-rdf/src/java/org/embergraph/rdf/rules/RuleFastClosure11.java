@@ -27,11 +27,11 @@ package org.embergraph.rdf.rules;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-import com.bigdata.bop.IConstraint;
-import com.bigdata.bop.constraint.Constraint;
-import com.bigdata.bop.constraint.NE;
-import com.bigdata.rdf.spo.SPOPredicate;
-import com.bigdata.rdf.vocab.Vocabulary;
+import org.embergraph.bop.IConstraint;
+import org.embergraph.bop.constraint.Constraint;
+import org.embergraph.bop.constraint.NE;
+import org.embergraph.rdf.spo.SPOPredicate;
+import org.embergraph.rdf.vocab.Vocabulary;
 
 /**
  * Rule for step 11 of {@link InferenceEngine#fastForwardClosure()}.

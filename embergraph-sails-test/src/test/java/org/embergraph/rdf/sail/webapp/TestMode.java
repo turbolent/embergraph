@@ -29,12 +29,12 @@ package org.embergraph.rdf.sail.webapp;
 
 import java.util.Properties;
 
-import com.bigdata.rdf.axioms.NoAxioms;
-import com.bigdata.rdf.axioms.OwlAxioms;
-import com.bigdata.rdf.sail.BigdataSail;
-import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.vocab.DefaultBigdataVocabulary;
-import com.bigdata.rdf.vocab.NoVocabulary;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.axioms.OwlAxioms;
+import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.vocab.DefaultBigdataVocabulary;
+import org.embergraph.rdf.vocab.NoVocabulary;
 
 /**
  * The test mode.
