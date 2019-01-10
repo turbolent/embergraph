@@ -12,8 +12,8 @@ import org.embergraph.resources.ResourceManager.Options;
 /**
  * The default implementation accepts directories under the configured
  * {@link IResourceManager#getDataDir()} and files with either
- * {@link com.bigdata.journal.Options#JNL} or
- * {@link com.bigdata.journal.Options#SEG} file extensions.
+ * {@link org.embergraph.journal.Options#JNL} or
+ * {@link org.embergraph.journal.Options#SEG} file extensions.
  * <p> *
  * <P>
  * If you define additional files that are stored within the

@@ -29,8 +29,8 @@ public interface IRemoteTxState0 {
     * The transaction identifier. Negative values are read/write transaction
     * identifiers. Positive values are read-only transaction identifiers.
     * 
-    * @see com.bigdata.journal.ITx
-    * @see com.bigdata.journal.TimestampUtility
+    * @see org.embergraph.journal.ITx
+    * @see org.embergraph.journal.TimestampUtility
     */
    long getTxId();
    

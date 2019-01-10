@@ -174,9 +174,9 @@ public class TestFederatedQuery<S extends IIndexManager> extends
        * buffer for a Transient store, so I am specifying a disk-backed mode
        * here.
        */
-        p.setProperty(com.bigdata.journal.Options.BUFFER_MODE, BufferMode.DiskRW.toString());
+        p.setProperty(org.embergraph.journal.Options.BUFFER_MODE, BufferMode.DiskRW.toString());
         
-        p.setProperty(com.bigdata.journal.Options.CREATE_TEMP_FILE, "true");
+        p.setProperty(org.embergraph.journal.Options.CREATE_TEMP_FILE, "true");
         
 //        localRepository = m_repo;
         

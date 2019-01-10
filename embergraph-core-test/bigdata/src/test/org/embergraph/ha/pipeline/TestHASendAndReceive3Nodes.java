@@ -604,9 +604,9 @@ public class TestHASendAndReceive3Nodes extends
      * Caused by: java.net.BindException: Address already in use: connect
      *     at sun.nio.ch.Net.connect(Native Method)
      *     at sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:507)
-     *     at com.bigdata.journal.ha.HASendService.openChannel(HASendService.java:272)
-     *     at com.bigdata.journal.ha.HASendService$SendTask.call(HASendService.java:319)
-     *     at com.bigdata.journal.ha.HASendService$SendTask.call(HASendService.java:1)
+     *     at org.embergraph.journal.ha.HASendService.openChannel(HASendService.java:272)
+     *     at org.embergraph.journal.ha.HASendService$SendTask.call(HASendService.java:319)
+     *     at org.embergraph.journal.ha.HASendService$SendTask.call(HASendService.java:1)
      *     at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:303)
      *     at java.util.concurrent.FutureTask.run(FutureTask.java:138)
      *     at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:886)
@@ -626,7 +626,7 @@ public class TestHASendAndReceive3Nodes extends
      *     at sun.nio.ch.WindowsSelectorImpl.<init>(WindowsSelectorImpl.java:105)
      *     at sun.nio.ch.WindowsSelectorProvider.openSelector(WindowsSelectorProvider.java:26)
      *     at java.nio.channels.Selector.open(Selector.java:209)
-     *     at com.bigdata.journal.ha.HAReceiveService$ReadTask.call(HAReceiveService.java:508)
+     *     at org.embergraph.journal.ha.HAReceiveService$ReadTask.call(HAReceiveService.java:508)
      * </pre>
      * 
      * It seems that we need to hold the client socket open across send and

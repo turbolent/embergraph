@@ -239,7 +239,7 @@ public class WORMStrategy extends AbstractBufferStrategy implements
     /**
      * The #of read cache buffers to use.
      * 
-     * @see com.bigdata.journal.Options#READ_CACHE_BUFFER_COUNT
+     * @see org.embergraph.journal.Options#READ_CACHE_BUFFER_COUNT
      */
     private final int readCacheBufferCount;
     
@@ -247,14 +247,14 @@ public class WORMStrategy extends AbstractBufferStrategy implements
      * The threshold at which readCache records are moved to the
      * hotCache
      * 
-     * @see com.bigdata.journal.Options#HOT_CACHE_THRESHOLD
+     * @see org.embergraph.journal.Options#HOT_CACHE_THRESHOLD
      */
     private final int hotCacheThreshold;
     
     /**
      * The number of hotCache buffers
      * 
-     * @see com.bigdata.journal.Options#HOT_CACHE_SIZE
+     * @see org.embergraph.journal.Options#HOT_CACHE_SIZE
      */
     private final int hotCacheSize;
     
@@ -262,7 +262,7 @@ public class WORMStrategy extends AbstractBufferStrategy implements
      * The key for the {@link CompressorRegistry} which identifies the
      * {@link IRecordCompressor} to be applied (optional).
      * 
-     * @see com.bigdata.journal.Options#HALOG_COMPRESSOR
+     * @see org.embergraph.journal.Options#HALOG_COMPRESSOR
      */
     private final String compressorKey;
     
@@ -955,20 +955,20 @@ public class WORMStrategy extends AbstractBufferStrategy implements
         this.writeCacheBufferCount = fileMetadata.writeCacheBufferCount;
         
         this.readCacheBufferCount = Integer.valueOf(fileMetadata.getProperty(
-                com.bigdata.journal.Options.READ_CACHE_BUFFER_COUNT,
-                com.bigdata.journal.Options.DEFAULT_READ_CACHE_BUFFER_COUNT));
+                org.embergraph.journal.Options.READ_CACHE_BUFFER_COUNT,
+                org.embergraph.journal.Options.DEFAULT_READ_CACHE_BUFFER_COUNT));
         
         this.hotCacheThreshold = Integer.valueOf(fileMetadata.getProperty(
-                com.bigdata.journal.Options.HOT_CACHE_THRESHOLD,
-                com.bigdata.journal.Options.DEFAULT_HOT_CACHE_THRESHOLD));
+                org.embergraph.journal.Options.HOT_CACHE_THRESHOLD,
+                org.embergraph.journal.Options.DEFAULT_HOT_CACHE_THRESHOLD));
         
         this.hotCacheSize = Integer.valueOf(fileMetadata.getProperty(
-                com.bigdata.journal.Options.HOT_CACHE_SIZE,
-                com.bigdata.journal.Options.DEFAULT_HOT_CACHE_SIZE));
+                org.embergraph.journal.Options.HOT_CACHE_SIZE,
+                org.embergraph.journal.Options.DEFAULT_HOT_CACHE_SIZE));
         
         this.compressorKey = fileMetadata.getProperty(
-                com.bigdata.journal.Options.HALOG_COMPRESSOR,
-                com.bigdata.journal.Options.DEFAULT_HALOG_COMPRESSOR);
+                org.embergraph.journal.Options.HALOG_COMPRESSOR,
+                org.embergraph.journal.Options.DEFAULT_HALOG_COMPRESSOR);
 
         isQuorumUsed = quorum != null; // && quorum.isHighlyAvailable();
 

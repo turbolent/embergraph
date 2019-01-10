@@ -739,7 +739,7 @@ public class RWStrategy extends AbstractRawStore implements IBufferStrategy,
      * for current committed data could otherwise be overwritten and the store
      * invalidated.
      * 
-     * @see com.bigdata.journal.IHABufferStrategy#setExtentForLocalStore(long)
+     * @see org.embergraph.journal.IHABufferStrategy#setExtentForLocalStore(long)
      */
     public void setExtentForLocalStore(final long extent) throws IOException,
             InterruptedException {

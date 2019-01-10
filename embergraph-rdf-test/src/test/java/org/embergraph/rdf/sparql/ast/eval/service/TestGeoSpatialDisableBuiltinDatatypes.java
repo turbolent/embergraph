@@ -138,7 +138,7 @@ public class TestGeoSpatialDisableBuiltinDatatypes extends AbstractDataDrivenSPA
                 NoAxioms.class.getName());
 
         // no persistence.
-        properties.setProperty(com.bigdata.journal.Options.BUFFER_MODE,
+        properties.setProperty(org.embergraph.journal.Options.BUFFER_MODE,
                 BufferMode.Transient.toString());
 
         // enable GeoSpatial index

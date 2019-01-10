@@ -144,13 +144,13 @@ abstract public class StoreManager extends ResourceEvents implements
      * 
      * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
      */
-    public static interface Options extends com.bigdata.journal.Options {
+    public static interface Options extends org.embergraph.journal.Options {
 
         /**
          * The property whose value is the name of the directory in which the
          * store files will be created (no default). This property is required
          * unless the instance is transient. If you specify
-         * {@link com.bigdata.journal.Options#BUFFER_MODE} as
+         * {@link org.embergraph.journal.Options#BUFFER_MODE} as
          * {@link BufferMode#Transient} then journals will be NOT stored in the
          * file system and {@link ResourceManager#overflow()} will be disabled.
          * <p>
@@ -610,7 +610,7 @@ abstract public class StoreManager extends ResourceEvents implements
 //     * <code>releaseTemporaryDirectBuffer()</code> to release temporary direct
 //     * {@link ByteBuffer}s that are allocated for channel IO.
 //     * 
-//     * @see com.bigdata.journal.Options#WRITE_CACHE_CAPACITY
+//     * @see org.embergraph.journal.Options#WRITE_CACHE_CAPACITY
 //     * @see DiskOnlyStrategy
 //     */
 //    private ByteBuffer writeCache;

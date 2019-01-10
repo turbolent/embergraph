@@ -63,7 +63,7 @@ public class QueryEngineFactoryBase implements IQueryEngineFactory {
     );
 
     /* (non-Javadoc)
-	 * @see com.bigdata.bop.fed.IQueryEngineFactory#getExistingQueryController(com.bigdata.journal.IBTreeManager)
+	 * @see com.bigdata.bop.fed.IQueryEngineFactory#getExistingQueryController(org.embergraph.journal.IBTreeManager)
 	 */
     @Override
 	public QueryEngine getExistingQueryController(
@@ -80,7 +80,7 @@ public class QueryEngineFactoryBase implements IQueryEngineFactory {
     }
 
     /* (non-Javadoc)
-	 * @see com.bigdata.bop.fed.IQueryEngineFactory#getQueryController(com.bigdata.journal.IIndexManager)
+	 * @see com.bigdata.bop.fed.IQueryEngineFactory#getQueryController(org.embergraph.journal.IIndexManager)
 	 */
     @Override
 	public QueryEngine getQueryController(final IIndexManager indexManager) {
@@ -96,7 +96,7 @@ public class QueryEngineFactoryBase implements IQueryEngineFactory {
     }
 
     /* (non-Javadoc)
-	 * @see com.bigdata.bop.fed.IQueryEngineFactory#getStandaloneQueryController(com.bigdata.journal.IBTreeManager)
+	 * @see com.bigdata.bop.fed.IQueryEngineFactory#getStandaloneQueryController(org.embergraph.journal.IBTreeManager)
 	 */
     @Override
 	public QueryEngine getStandaloneQueryController(

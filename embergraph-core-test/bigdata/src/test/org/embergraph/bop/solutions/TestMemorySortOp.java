@@ -349,7 +349,7 @@ public class TestMemorySortOp extends TestCase2 {
         final String namespace = getName();
         final String lexiconNamespace;
         final Properties properties = new Properties();
-        properties.setProperty(com.bigdata.journal.Options.BUFFER_MODE,BufferMode.MemStore.name());
+        properties.setProperty(org.embergraph.journal.Options.BUFFER_MODE,BufferMode.MemStore.name());
         final Journal store = new Journal(properties);
         try {
             {

@@ -292,7 +292,7 @@ public class TestGeoSpatialServiceEvaluationQuads extends AbstractDataDrivenSPAR
                 NoAxioms.class.getName());
 
         // no persistence.
-        properties.setProperty(com.bigdata.journal.Options.BUFFER_MODE,
+        properties.setProperty(org.embergraph.journal.Options.BUFFER_MODE,
                 BufferMode.Transient.toString());
 
         // enable GeoSpatial index

@@ -66,7 +66,7 @@ import org.embergraph.service.EmbeddedClient.Options;
  *       specify the data directory for the federation (they could just use a
  *       jini configuration). Ditto for the "transient" or "createTempFile"
  *       properties. Everything is namespaced now and the overridden semantics
- *       of com.bigdata.journal.Options.CREATE_TEMP_FILE and
+ *       of org.embergraph.journal.Options.CREATE_TEMP_FILE and
  *       StoreManager#DATA_DIR are just getting us into trouble. Look at all
  *       uses of these options in the unit tests and decouple them from the
  *       journal's options.

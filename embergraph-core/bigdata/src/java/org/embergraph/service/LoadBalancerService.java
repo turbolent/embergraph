@@ -620,7 +620,7 @@ abstract public class LoadBalancerService extends AbstractService
 
                 final Properties p = new Properties();
 
-                p.setProperty(com.bigdata.journal.Options.BUFFER_MODE,
+                p.setProperty(org.embergraph.journal.Options.BUFFER_MODE,
                         BufferMode.Transient.toString());
 
                 eventStore = new Journal(p);
@@ -633,8 +633,8 @@ abstract public class LoadBalancerService extends AbstractService
                 
                 final Properties p = new Properties();
 
-                p.setProperty(com.bigdata.journal.Options.FILE, new File(
-                        logDir, "events" + com.bigdata.journal.Options.JNL)
+                p.setProperty(org.embergraph.journal.Options.FILE, new File(
+                        logDir, "events" + org.embergraph.journal.Options.JNL)
                         .toString());
 
                 eventStore = new Journal(p);

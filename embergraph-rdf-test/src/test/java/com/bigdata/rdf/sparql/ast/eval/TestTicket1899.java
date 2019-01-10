@@ -202,7 +202,7 @@ public class TestTicket1899 extends AbstractDataDrivenSPARQLTestCase {
                 NoAxioms.class.getName());
 
         // no persistence.
-        properties.setProperty(com.bigdata.journal.Options.BUFFER_MODE, BufferMode.Transient.toString());
+        properties.setProperty(org.embergraph.journal.Options.BUFFER_MODE, BufferMode.Transient.toString());
 
         // enable GeoSpatial index with default configuration
         properties.setProperty(com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL, "true");

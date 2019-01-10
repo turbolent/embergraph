@@ -44,7 +44,7 @@ import org.embergraph.util.InnerCause;
 
 /**
  * Test suite for
- * {@link Journal#snapshot(com.bigdata.journal.Journal.ISnapshotFactory)}.
+ * {@link Journal#snapshot(org.embergraph.journal.Journal.ISnapshotFactory)}.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * 

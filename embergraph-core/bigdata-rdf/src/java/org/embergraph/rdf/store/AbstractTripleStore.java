@@ -522,7 +522,7 @@ abstract public class AbstractTripleStore extends
      * @version $Id$
      */
     public static interface Options extends AbstractResource.Options,
-            InferenceEngine.Options, com.bigdata.journal.Options,
+            InferenceEngine.Options, org.embergraph.journal.Options,
             KeyBuilder.Options, DataLoader.Options, FullTextIndex.Options,
             GeoSpatialConfigOptions.Options {
 

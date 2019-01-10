@@ -82,8 +82,8 @@ public class RootBlockUtility {
      * 
      * @throws IOException
      * 
-     * @see com.bigdata.journal.Options#ALTERNATE_ROOT_BLOCK
-     * @see com.bigdata.journal.Options#IGNORE_BAD_ROOT_BLOCK
+     * @see org.embergraph.journal.Options#ALTERNATE_ROOT_BLOCK
+     * @see org.embergraph.journal.Options#IGNORE_BAD_ROOT_BLOCK
      */
     public RootBlockUtility(final IReopenChannel<FileChannel> opener,
             final File file, final boolean validateChecksum,

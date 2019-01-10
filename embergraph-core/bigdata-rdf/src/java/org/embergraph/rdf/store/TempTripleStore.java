@@ -76,7 +76,7 @@ import org.embergraph.util.PropertyUtil;
  * <p>
  * Note: If you want an in-memory {@link ITripleStore} that supports commit and
  * abort then use a {@link LocalTripleStore} and specify
- * {@link com.bigdata.journal.Options#BUFFER_MODE} as
+ * {@link org.embergraph.journal.Options#BUFFER_MODE} as
  * {@link BufferMode#Temporary} or as {@link BufferMode#Transient} if you want
  * the triple store to begin in memory and overflow to disk if necessary. Both
  * of these configurations provide full concurrency control and group commit.

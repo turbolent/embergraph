@@ -527,7 +527,7 @@ public class SampleCode {
          */
         final Properties properties = loadProperties("fastload.properties");
         
-        if (properties.getProperty(com.bigdata.journal.Options.FILE) == null) {
+        if (properties.getProperty(org.embergraph.journal.Options.FILE) == null) {
             /*
              * Create a backing temporary file iff none was specified in the
              * properties file.
@@ -689,7 +689,7 @@ public class SampleCode {
 
             final Properties properties = sampleCode.loadProperties(propertiesFile);
 
-            if (properties.getProperty(com.bigdata.journal.Options.FILE) == null) {
+            if (properties.getProperty(org.embergraph.journal.Options.FILE) == null) {
                 /*
                  * Create a backing file iff none was specified in the
                  * properties file.

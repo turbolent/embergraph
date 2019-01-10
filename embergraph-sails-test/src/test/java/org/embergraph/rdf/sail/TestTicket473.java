@@ -91,7 +91,7 @@ public class TestTicket473 extends TestCase {
         
         final Properties props = new Properties();
         props.setProperty(BigdataSail.Options.NAMESPACE,"foo.bar.snapdragon.kb");
-        props.setProperty(com.bigdata.journal.Options.BUFFER_MODE,BufferMode.DiskRW.name());
+        props.setProperty(org.embergraph.journal.Options.BUFFER_MODE,BufferMode.DiskRW.name());
         props.setProperty(IndexMetadata.Options.WRITE_RETENTION_QUEUE_CAPACITY,"4000");
         props.setProperty(IndexMetadata.Options.BTREE_BRANCHING_FACTOR,"128");
 
@@ -103,10 +103,10 @@ public class TestTicket473 extends TestCase {
         props.setProperty(AbstractTripleStore.Options.JUSTIFY,"false");
         props.setProperty(com.bigdata.rdf.store.AbstractTripleStore.Options.STATEMENT_IDENTIFIERS,"false");
         props.setProperty(com.bigdata.rdf.store.AbstractTripleStore.Options.QUADS_MODE,"false");
-        props.setProperty(com.bigdata.journal.Options.MAXIMUM_EXTENT,"209715200");
+        props.setProperty(org.embergraph.journal.Options.MAXIMUM_EXTENT,"209715200");
         props.setProperty(BigdataSail.Options.BUFFER_CAPACITY,"100000");
         props.setProperty(AbstractTripleStore.Options.BLOOM_FILTER,"false");
-        props.setProperty(com.bigdata.journal.Options.FILE,"ticket473.jnl");
+        props.setProperty(org.embergraph.journal.Options.FILE,"ticket473.jnl");
 
         return props;
         

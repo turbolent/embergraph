@@ -411,7 +411,7 @@ public class DataLoader {
 		 * 
 		 * This specifies the size in Bytes to use. The default is 65535.
 		 * 
-		 * -Dcom.bigdata.journal.DataLoader.gzipBufferSize=65535
+		 * -Dorg.embergraph.journal.DataLoader.gzipBufferSize=65535
 		 * 
 		 * See BLZG-1777
 		 * 
@@ -2174,13 +2174,13 @@ public class DataLoader {
                     is.close();
                 }
             }
-//			if (System.getProperty(com.bigdata.journal.Options.FILE) != null) {
+//			if (System.getProperty(org.embergraph.journal.Options.FILE) != null) {
 //				// Override/set from the environment.
 //				final String file = System
-//						.getProperty(com.bigdata.journal.Options.FILE);
-//				if(!quiet) System.out.println("Using: " + com.bigdata.journal.Options.FILE
+//						.getProperty(org.embergraph.journal.Options.FILE);
+//				if(!quiet) System.out.println("Using: " + org.embergraph.journal.Options.FILE
 //						+ "=" + file);
-//                properties.setProperty(com.bigdata.journal.Options.FILE, file);
+//                properties.setProperty(org.embergraph.journal.Options.FILE, file);
 //            }
         }
 		if (durableQueues) {
@@ -2196,7 +2196,7 @@ public class DataLoader {
         {
             final String[] overrides = new String[] {
                     // Journal options.
-                    com.bigdata.journal.Options.FILE,
+                    org.embergraph.journal.Options.FILE,
                     // RDFParserOptions.
                     RDFParserOptions.Options.DATATYPE_HANDLING,
                     RDFParserOptions.Options.PRESERVE_BNODE_IDS,
@@ -2216,7 +2216,7 @@ public class DataLoader {
                     Journal.Options.WRITE_CACHE_BUFFER_COUNT,
                     Journal.Options.WRITE_CACHE_MIN_CLEAN_LIST_SIZE,
                     // HttpPlugin
-                    com.bigdata.journal.HttpPlugin.Options.HTTPD_PORT,
+                    org.embergraph.journal.HttpPlugin.Options.HTTPD_PORT,
                     // DirectBufferPool options.
                     com.bigdata.io.DirectBufferPool.Options.BUFFER_CAPACITY,
                     // B+Tree

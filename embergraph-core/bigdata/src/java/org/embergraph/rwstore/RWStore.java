@@ -610,34 +610,34 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     /**
      * The #of buffers that will be used by the {@link WriteCacheService}.
      * 
-     * @see com.bigdata.journal.Options#WRITE_CACHE_BUFFER_COUNT
+     * @see org.embergraph.journal.Options#WRITE_CACHE_BUFFER_COUNT
      */
     private final int m_writeCacheBufferCount;
 
     /**
-     * @see com.bigdata.journal.Options#WRITE_CACHE_MIN_CLEAN_LIST_SIZE
+     * @see org.embergraph.journal.Options#WRITE_CACHE_MIN_CLEAN_LIST_SIZE
      */
     private final int m_minCleanListSize;
 
     /**
      * The #of read buffers that will be used by the {@link WriteCacheService}.
      * 
-     * @see com.bigdata.journal.Options#READ_CACHE_BUFFER_COUNT
+     * @see org.embergraph.journal.Options#READ_CACHE_BUFFER_COUNT
      */
     private final int m_readCacheBufferCount;
 
     /**
-     * @see com.bigdata.journal.Options#WRITE_CACHE_COMPACTION_THRESHOLD
+     * @see org.embergraph.journal.Options#WRITE_CACHE_COMPACTION_THRESHOLD
      */
     private final int m_compactionThreshold;
     
     /**
-     * @see com.bigdata.journal.Options#HOT_CACHE_THRESHOLD
+     * @see org.embergraph.journal.Options#HOT_CACHE_THRESHOLD
      */
     private final int m_hotCacheThreshold;
     
     /**
-     * @see com.bigdata.journal.Options#HOT_CACHE_SIZE
+     * @see org.embergraph.journal.Options#HOT_CACHE_SIZE
      */
     private final int m_hotCacheSize;
     
@@ -645,7 +645,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
      * The key for the {@link CompressorRegistry} which identifies the
      * {@link IRecordCompressor} to be applied (optional).
      * 
-     * @see com.bigdata.journal.Options#HALOG_COMPRESSOR
+     * @see org.embergraph.journal.Options#HALOG_COMPRESSOR
      */
     private final String m_compressorKey;
     
@@ -1021,51 +1021,51 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
         m_writeCacheBufferCount = fileMetadata.writeCacheBufferCount;
         
         m_readCacheBufferCount = Integer.valueOf(fileMetadata.getProperty(
-                com.bigdata.journal.Options.READ_CACHE_BUFFER_COUNT,
-                com.bigdata.journal.Options.DEFAULT_READ_CACHE_BUFFER_COUNT));
+                org.embergraph.journal.Options.READ_CACHE_BUFFER_COUNT,
+                org.embergraph.journal.Options.DEFAULT_READ_CACHE_BUFFER_COUNT));
         
         if (log.isInfoEnabled())
-            log.info(com.bigdata.journal.Options.WRITE_CACHE_BUFFER_COUNT
+            log.info(org.embergraph.journal.Options.WRITE_CACHE_BUFFER_COUNT
                     + "=" + m_writeCacheBufferCount);
 
         this.m_minCleanListSize = Integer.valueOf(fileMetadata.getProperty(
-                com.bigdata.journal.Options.WRITE_CACHE_MIN_CLEAN_LIST_SIZE,
-                com.bigdata.journal.Options.DEFAULT_WRITE_CACHE_MIN_CLEAN_LIST_SIZE));
+                org.embergraph.journal.Options.WRITE_CACHE_MIN_CLEAN_LIST_SIZE,
+                org.embergraph.journal.Options.DEFAULT_WRITE_CACHE_MIN_CLEAN_LIST_SIZE));
 
         if (log.isInfoEnabled())
-            log.info(com.bigdata.journal.Options.WRITE_CACHE_MIN_CLEAN_LIST_SIZE + "="
+            log.info(org.embergraph.journal.Options.WRITE_CACHE_MIN_CLEAN_LIST_SIZE + "="
                     + m_minCleanListSize);
 
         this.m_compactionThreshold = Double.valueOf(fileMetadata.getProperty(
-                com.bigdata.journal.Options.WRITE_CACHE_COMPACTION_THRESHOLD,
-                com.bigdata.journal.Options.DEFAULT_WRITE_CACHE_COMPACTION_THRESHOLD)).intValue();
+                org.embergraph.journal.Options.WRITE_CACHE_COMPACTION_THRESHOLD,
+                org.embergraph.journal.Options.DEFAULT_WRITE_CACHE_COMPACTION_THRESHOLD)).intValue();
 
         if (log.isInfoEnabled())
-            log.info(com.bigdata.journal.Options.WRITE_CACHE_COMPACTION_THRESHOLD + "="
+            log.info(org.embergraph.journal.Options.WRITE_CACHE_COMPACTION_THRESHOLD + "="
                     + m_compactionThreshold);
 
         this.m_hotCacheThreshold = Double.valueOf(fileMetadata.getProperty(
-                com.bigdata.journal.Options.HOT_CACHE_THRESHOLD,
-                com.bigdata.journal.Options.DEFAULT_HOT_CACHE_THRESHOLD)).intValue();
+                org.embergraph.journal.Options.HOT_CACHE_THRESHOLD,
+                org.embergraph.journal.Options.DEFAULT_HOT_CACHE_THRESHOLD)).intValue();
 
         if (log.isInfoEnabled())
-            log.info(com.bigdata.journal.Options.HOT_CACHE_THRESHOLD + "="
+            log.info(org.embergraph.journal.Options.HOT_CACHE_THRESHOLD + "="
                     + m_hotCacheThreshold);
 
         this.m_hotCacheSize = Double.valueOf(fileMetadata.getProperty(
-                com.bigdata.journal.Options.HOT_CACHE_SIZE,
-                com.bigdata.journal.Options.DEFAULT_HOT_CACHE_SIZE)).intValue();
+                org.embergraph.journal.Options.HOT_CACHE_SIZE,
+                org.embergraph.journal.Options.DEFAULT_HOT_CACHE_SIZE)).intValue();
 
         if (log.isInfoEnabled())
-            log.info(com.bigdata.journal.Options.HOT_CACHE_SIZE + "="
+            log.info(org.embergraph.journal.Options.HOT_CACHE_SIZE + "="
                     + m_hotCacheSize);
 
         this.m_compressorKey = fileMetadata.getProperty(
-                com.bigdata.journal.Options.HALOG_COMPRESSOR,
-                com.bigdata.journal.Options.DEFAULT_HALOG_COMPRESSOR);
+                org.embergraph.journal.Options.HALOG_COMPRESSOR,
+                org.embergraph.journal.Options.DEFAULT_HALOG_COMPRESSOR);
 
         if (log.isInfoEnabled())
-            log.info(com.bigdata.journal.Options.HALOG_COMPRESSOR + "="
+            log.info(org.embergraph.journal.Options.HALOG_COMPRESSOR + "="
                     + m_compressorKey);
 
         // m_writeCache = newWriteCache();

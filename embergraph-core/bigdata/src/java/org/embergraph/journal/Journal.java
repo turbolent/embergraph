@@ -154,14 +154,14 @@ public class Journal extends AbstractJournal implements IConcurrencyManager,
      * 
      * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
      */
-    public interface Options extends com.bigdata.journal.Options,
-            com.bigdata.journal.ConcurrencyManager.Options,
-            com.bigdata.journal.TemporaryStoreFactory.Options,
-            com.bigdata.journal.QueueStatsPlugIn.Options,
-            com.bigdata.journal.PlatformStatsPlugIn.Options,
-            com.bigdata.journal.HttpPlugin.Options
+    public interface Options extends org.embergraph.journal.Options,
+            org.embergraph.journal.ConcurrencyManager.Options,
+            org.embergraph.journal.TemporaryStoreFactory.Options,
+            org.embergraph.journal.QueueStatsPlugIn.Options,
+            org.embergraph.journal.PlatformStatsPlugIn.Options,
+            org.embergraph.journal.HttpPlugin.Options
             // Note: Do not import. Forces embergraph-ganglia dependency.
-            // com.bigdata.journal.GangliaPlugIn.Options
+            // org.embergraph.journal.GangliaPlugIn.Options
             {
 
        /**
@@ -262,7 +262,7 @@ public class Journal extends AbstractJournal implements IConcurrencyManager,
      * Create or re-open a journal.
      * 
      * @param properties
-     *            See {@link com.bigdata.journal.Options}.
+     *            See {@link org.embergraph.journal.Options}.
      */
     public Journal(final Properties properties) {
         

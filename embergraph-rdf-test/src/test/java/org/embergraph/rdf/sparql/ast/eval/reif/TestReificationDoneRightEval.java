@@ -583,7 +583,7 @@ public class TestReificationDoneRightEval extends AbstractDataDrivenSPARQLTestCa
                 NoAxioms.class.getName());
 
         // no persistence.
-        properties.setProperty(com.bigdata.journal.Options.BUFFER_MODE,
+        properties.setProperty(org.embergraph.journal.Options.BUFFER_MODE,
                 BufferMode.Transient.toString());
         
 //        properties.setProperty(AbstractTripleStore.Options.STORE_BLANK_NODES, "true");

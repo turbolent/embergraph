@@ -96,10 +96,10 @@ public class TestNanoSparqlServerWithProxyIndexManager2<S extends IIndexManager>
 
 		final Properties properties = new Properties();
 
-		properties.setProperty(com.bigdata.journal.Options.BUFFER_MODE,
+		properties.setProperty(org.embergraph.journal.Options.BUFFER_MODE,
 				BufferMode.Transient.toString());
 
-		properties.setProperty(com.bigdata.journal.Options.INITIAL_EXTENT, ""
+		properties.setProperty(org.embergraph.journal.Options.INITIAL_EXTENT, ""
 				+ (Bytes.megabyte32 * 1));
 
 		return new Journal(properties);
@@ -347,14 +347,14 @@ public class TestNanoSparqlServerWithProxyIndexManager2<S extends IIndexManager>
                                 .getProperty(BigdataSail.Options.FILE));
                     }
 					if (properties
-							.getProperty(com.bigdata.journal.Options.FILE) == null) {
+							.getProperty(org.embergraph.journal.Options.FILE) == null) {
 						// Run against a transient journal if no file was
 						// specified.
 						properties.setProperty(
-								com.bigdata.journal.Options.BUFFER_MODE,
+								org.embergraph.journal.Options.BUFFER_MODE,
 								BufferMode.Transient.toString());
 						properties.setProperty(
-								com.bigdata.journal.Options.INITIAL_EXTENT, ""
+								org.embergraph.journal.Options.INITIAL_EXTENT, ""
 										+ (Bytes.megabyte32 * 1));
 					}
 

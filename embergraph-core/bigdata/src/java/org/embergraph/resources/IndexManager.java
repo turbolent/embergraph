@@ -130,11 +130,11 @@ abstract public class IndexManager extends StoreManager {
          * <p>
          * Note: The retention of the {@link BTree}s on the live
          * {@link ManagedJournal}s is governed by
-         * {@link com.bigdata.journal.Options#LIVE_INDEX_CACHE_CAPACITY}.
+         * {@link org.embergraph.journal.Options#LIVE_INDEX_CACHE_CAPACITY}.
          * <p>
          * Note: The retention of the {@link BTree}s on the open historical
          * {@link ManagedJournal}s is governed by
-         * {@link com.bigdata.journal.Options#HISTORICAL_INDEX_CACHE_CAPACITY}.
+         * {@link org.embergraph.journal.Options#HISTORICAL_INDEX_CACHE_CAPACITY}.
          * 
          * @see #DEFAULT_INDEX_CACHE_CAPACITY
          */

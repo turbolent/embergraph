@@ -59,7 +59,7 @@ public class TestMROWTransactionsNoHistory extends TestMROWTransactions {
      * supported at this time.
      * 
      * <pre>
-     * junit.framework.AssertionFailedError: Test failed: firstCause=java.lang.RuntimeException: java.lang.RuntimeException: Could not load Checkpoint: store=com.bigdata.journal.Journal@327556d1, addrCheckpoint={off=852288,len=220}, retentionMillis=0, nreaderThreads=19, nwriters=100, nreaders=400, indexManager=com.bigdata.journal.Journal@327556d1
+     * junit.framework.AssertionFailedError: Test failed: firstCause=java.lang.RuntimeException: java.lang.RuntimeException: Could not load Checkpoint: store=org.embergraph.journal.Journal@327556d1, addrCheckpoint={off=852288,len=220}, retentionMillis=0, nreaderThreads=19, nwriters=100, nreaders=400, indexManager=org.embergraph.journal.Journal@327556d1
      *     at junit.framework.TestCase2.fail(TestCase2.java:90)
      *     at com.bigdata.rdf.sail.TestMROWTransactions.domultiple_csem_transaction2(TestMROWTransactions.java:237)
      *     at com.bigdata.rdf.sail.TestMROWTransactionsNoHistory.test_multiple_csem_transaction_no_history_stress(TestMROWTransactionsNoHistory.java:66)
@@ -81,7 +81,7 @@ public class TestMROWTransactionsNoHistory extends TestMROWTransactions {
      *     at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
      *     at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
      *     at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
-     * Caused by: java.lang.RuntimeException: java.lang.RuntimeException: Could not load Checkpoint: store=com.bigdata.journal.Journal@327556d1, addrCheckpoint={off=852288,len=220}
+     * Caused by: java.lang.RuntimeException: java.lang.RuntimeException: Could not load Checkpoint: store=org.embergraph.journal.Journal@327556d1, addrCheckpoint={off=852288,len=220}
      *     at com.bigdata.rdf.lexicon.LexiconRelation.addTerms(LexiconRelation.java:1861)
      *     at com.bigdata.rdf.lexicon.LexiconRelation.addTerms(LexiconRelation.java:1722)
      *     at com.bigdata.rdf.store.AbstractTripleStore.getAccessPath(AbstractTripleStore.java:2868)
@@ -94,15 +94,15 @@ public class TestMROWTransactionsNoHistory extends TestMROWTransactions {
      *     at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
      *     at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
      *     at java.lang.Thread.run(Thread.java:745)
-     * Caused by: java.lang.RuntimeException: Could not load Checkpoint: store=com.bigdata.journal.Journal@327556d1, addrCheckpoint={off=852288,len=220}
+     * Caused by: java.lang.RuntimeException: Could not load Checkpoint: store=org.embergraph.journal.Journal@327556d1, addrCheckpoint={off=852288,len=220}
      *     at com.bigdata.btree.Checkpoint.loadFromCheckpoint(Checkpoint.java:756)
-     *     at com.bigdata.journal.AbstractJournal.getIndexWithCheckpointAddr(AbstractJournal.java:5288)
-     *     at com.bigdata.journal.AbstractJournal.getIndexWithCommitRecord(AbstractJournal.java:5135)
-     *     at com.bigdata.journal.AbstractJournal.getIndexLocal(AbstractJournal.java:5005)
-     *     at com.bigdata.journal.AbstractJournal.getIndex(AbstractJournal.java:4897)
-     *     at com.bigdata.journal.Journal.getIndexSources(Journal.java:2656)
-     *     at com.bigdata.journal.Journal.getIndex(Journal.java:2892)
-     *     at com.bigdata.journal.Journal.getIndex(Journal.java:1)
+     *     at org.embergraph.journal.AbstractJournal.getIndexWithCheckpointAddr(AbstractJournal.java:5288)
+     *     at org.embergraph.journal.AbstractJournal.getIndexWithCommitRecord(AbstractJournal.java:5135)
+     *     at org.embergraph.journal.AbstractJournal.getIndexLocal(AbstractJournal.java:5005)
+     *     at org.embergraph.journal.AbstractJournal.getIndex(AbstractJournal.java:4897)
+     *     at org.embergraph.journal.Journal.getIndexSources(Journal.java:2656)
+     *     at org.embergraph.journal.Journal.getIndex(Journal.java:2892)
+     *     at org.embergraph.journal.Journal.getIndex(Journal.java:1)
      *     at com.bigdata.relation.AbstractRelation.getIndex(AbstractRelation.java:238)
      *     at com.bigdata.relation.AbstractRelation.getIndex(AbstractRelation.java:198)
      *     at com.bigdata.relation.AbstractRelation.getIndex(AbstractRelation.java:166)
@@ -111,9 +111,9 @@ public class TestMROWTransactionsNoHistory extends TestMROWTransactions {
      *     ... 11 more
      * Caused by: java.lang.RuntimeException: addr=-8196 : cause=com.bigdata.util.ChecksumError: offset=852288,nbytes=224,expected=721420255,actual=-1747893185
      *     at com.bigdata.rwstore.RWStore.getData(RWStore.java:1899)
-     *     at com.bigdata.journal.RWStrategy.readFromLocalStore(RWStrategy.java:727)
-     *     at com.bigdata.journal.RWStrategy.read(RWStrategy.java:154)
-     *     at com.bigdata.journal.AbstractJournal.read(AbstractJournal.java:4043)
+     *     at org.embergraph.journal.RWStrategy.readFromLocalStore(RWStrategy.java:727)
+     *     at org.embergraph.journal.RWStrategy.read(RWStrategy.java:154)
+     *     at org.embergraph.journal.AbstractJournal.read(AbstractJournal.java:4043)
      *     at com.bigdata.btree.Checkpoint.load(Checkpoint.java:575)
      *     at com.bigdata.btree.Checkpoint.loadFromCheckpoint(Checkpoint.java:754)
      *     ... 23 more

@@ -99,7 +99,7 @@ public class TestAll extends TestCase {
          * Commented out since this mode is not used and there is an occasional
          * test failure in:
          * 
-         * com.bigdata.journal.TestConcurrentJournal.test_concurrentReadersAreOk
+         * org.embergraph.journal.TestConcurrentJournal.test_concurrentReadersAreOk
          * 
          * This error is stochastic and appears to be restricted to
          * BufferMode#Direct. This is a journal mode based by a fixed capacity
@@ -146,7 +146,7 @@ public class TestAll extends TestCase {
 //         * Note: There is a separate test suite for DataService high
 //         * availability and for the zookeeper HA integration.
 //         */
-//        suite.addTest(com.bigdata.journal.ha.TestAll.suite());
+//        suite.addTest(org.embergraph.journal.ha.TestAll.suite());
         
         return suite;
 

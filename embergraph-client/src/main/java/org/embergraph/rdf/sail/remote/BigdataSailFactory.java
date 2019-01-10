@@ -247,7 +247,7 @@ public class BigdataSailFactory {
         } else {
         
             final Properties props = new Properties();
-            props.setProperty("com.bigdata.journal.AbstractJournal.file", file);
+            props.setProperty("org.embergraph.journal.AbstractJournal.file", file);
             
             final Sail sail = getSailProviderInstance(props);
             
@@ -363,10 +363,10 @@ public class BigdataSailFactory {
         */
 
         if (file != null) {
-            props.setProperty("com.bigdata.journal.AbstractJournal.file", file);
-            props.setProperty("com.bigdata.journal.AbstractJournal.bufferMode", "DiskRW");
+            props.setProperty("org.embergraph.journal.AbstractJournal.file", file);
+            props.setProperty("org.embergraph.journal.AbstractJournal.bufferMode", "DiskRW");
         } else {
-            props.setProperty("com.bigdata.journal.AbstractJournal.bufferMode", "MemStore");
+            props.setProperty("org.embergraph.journal.AbstractJournal.bufferMode", "MemStore");
         }
         if (options.contains(Option.Inference)) {
         	props.setProperty("com.bigdata.rdf.store.AbstractTripleStore.axiomsClass","com.bigdata.rdf.axioms.OwlAxioms");

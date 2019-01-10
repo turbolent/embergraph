@@ -68,7 +68,7 @@ public class StressTest_ClosedByInterrupt_RW extends TestCase {
 
         final Properties props = new Properties();
         props.setProperty("com.bigdata.rdf.sail.namespace", "emc.srm.topology.kb");
-        props.setProperty("com.bigdata.journal.AbstractJournal.bufferMode", "DiskRW");
+        props.setProperty("org.embergraph.journal.AbstractJournal.bufferMode", "DiskRW");
         props.setProperty("com.bigdata.btree.writeRetentionQueue.capacity", "4000");
         props.setProperty("com.bigdata.btree.BTree.branchingFactor", "128");
         props.setProperty("com.bigdata.service.AbstractTransactionService.minReleaseAge", "1");
@@ -93,7 +93,7 @@ public class StressTest_ClosedByInterrupt_RW extends TestCase {
         props.setProperty("com.bigdata.rdf.store.AbstractTripleStore.justify", "false");
         props.setProperty("com.bigdata.rdf.store.AbstractTripleStore.statementIdentifiers", "false");
         props.setProperty("com.bigdata.rdf.store.AbstractTripleStore.quadsMode", "true");
-        props.setProperty("com.bigdata.journal.AbstractJournal.maximumExtent", "209715200");
+        props.setProperty("org.embergraph.journal.AbstractJournal.maximumExtent", "209715200");
         props.setProperty("com.bigdata.service.IBigdataClient.collectPlatformStatistics", "false");
         props.setProperty("com.bigdata.service.IBigdataClient.httpdPort", "-1");
         props.setProperty("com.bigdata.rdf.sail.bufferCapacity", "100000");

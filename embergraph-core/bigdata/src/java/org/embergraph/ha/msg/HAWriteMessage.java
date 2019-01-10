@@ -92,7 +92,7 @@ public class HAWriteMessage extends HAWriteMessageBase implements
     }
 
     /* (non-Javadoc)
-     * @see com.bigdata.journal.ha.IHAWriteMessage#getCommitCounter()
+     * @see org.embergraph.journal.ha.IHAWriteMessage#getCommitCounter()
      */
     @Override
     public long getCommitCounter() {
@@ -100,7 +100,7 @@ public class HAWriteMessage extends HAWriteMessageBase implements
     }
     
     /* (non-Javadoc)
-     * @see com.bigdata.journal.ha.IHAWriteMessage#getLastCommitTime()
+     * @see org.embergraph.journal.ha.IHAWriteMessage#getLastCommitTime()
      */
     @Override
     public long getLastCommitTime() {
@@ -108,7 +108,7 @@ public class HAWriteMessage extends HAWriteMessageBase implements
     }
 
     /* (non-Javadoc)
-     * @see com.bigdata.journal.ha.IHAWriteMessage#getSequence()
+     * @see org.embergraph.journal.ha.IHAWriteMessage#getSequence()
      */
     @Override
     public long getSequence() {
@@ -118,7 +118,7 @@ public class HAWriteMessage extends HAWriteMessageBase implements
     
     
     /* (non-Javadoc)
-     * @see com.bigdata.journal.ha.IHAWriteMessage#getStoreType()
+     * @see org.embergraph.journal.ha.IHAWriteMessage#getStoreType()
      */
     @Override
     public StoreTypeEnum getStoreType() {
@@ -126,7 +126,7 @@ public class HAWriteMessage extends HAWriteMessageBase implements
     }
     
     /* (non-Javadoc)
-     * @see com.bigdata.journal.ha.IHAWriteMessage#getQuorumToken()
+     * @see org.embergraph.journal.ha.IHAWriteMessage#getQuorumToken()
      */
     @Override
     public long getQuorumToken() {
@@ -139,7 +139,7 @@ public class HAWriteMessage extends HAWriteMessageBase implements
     }
     
     /* (non-Javadoc)
-     * @see com.bigdata.journal.ha.IHAWriteMessage#getFileExtent()
+     * @see org.embergraph.journal.ha.IHAWriteMessage#getFileExtent()
      */
     @Override
     public long getFileExtent() {
@@ -147,7 +147,7 @@ public class HAWriteMessage extends HAWriteMessageBase implements
     }
     
     /* (non-Javadoc)
-     * @see com.bigdata.journal.ha.IHAWriteMessage#getFirstOffset()
+     * @see org.embergraph.journal.ha.IHAWriteMessage#getFirstOffset()
      */
     @Override
     public long getFirstOffset() {

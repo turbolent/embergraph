@@ -97,7 +97,7 @@ public class Bigdata2ASTSPARQL11SyntaxTest extends SPARQL11SyntaxTest {
                 NoAxioms.class.getName());
 
         // Note: No persistence.
-        properties.setProperty(com.bigdata.journal.Options.BUFFER_MODE,
+        properties.setProperty(org.embergraph.journal.Options.BUFFER_MODE,
                 BufferMode.Transient.toString());
         
         return properties;

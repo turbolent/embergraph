@@ -112,20 +112,20 @@ public class TestNanoSparqlServerWithProxyIndexManager<S extends IIndexManager>
 		
 		final Properties properties = new Properties();
 
-		properties.setProperty(com.bigdata.journal.Options.BUFFER_MODE,
+		properties.setProperty(org.embergraph.journal.Options.BUFFER_MODE,
 				bufferMode.toString());
 
       // Enable GROUP_COMMIT. See BLZG-192
-      properties.setProperty(com.bigdata.journal.Journal.Options.GROUP_COMMIT,
+      properties.setProperty(org.embergraph.journal.Journal.Options.GROUP_COMMIT,
             "false");
 
 		if (bufferMode.isStable()) {
 			
 			// Using something that is backed by the disk.
 			properties.setProperty(
-					com.bigdata.journal.Options.CREATE_TEMP_FILE, "true");
+					org.embergraph.journal.Options.CREATE_TEMP_FILE, "true");
 			
-			properties.setProperty(com.bigdata.journal.Options.DELETE_ON_CLOSE,
+			properties.setProperty(org.embergraph.journal.Options.DELETE_ON_CLOSE,
 					"true");
 
 		} else if (bufferMode.isFullyBuffered()) {
@@ -133,7 +133,7 @@ public class TestNanoSparqlServerWithProxyIndexManager<S extends IIndexManager>
 			// Using something that is fully buffered in memory. Reduce the
 			// initial buffer size so we do not claim too much memory for the
 			// backing store.
-			properties.setProperty(com.bigdata.journal.Options.INITIAL_EXTENT,
+			properties.setProperty(org.embergraph.journal.Options.INITIAL_EXTENT,
 					"" + (Bytes.megabyte32 * 1));
 		}
 
@@ -461,14 +461,14 @@ public class TestNanoSparqlServerWithProxyIndexManager<S extends IIndexManager>
                                 .getProperty(BigdataSail.Options.FILE));
                     }
 					if (properties
-							.getProperty(com.bigdata.journal.Options.FILE) == null) {
+							.getProperty(org.embergraph.journal.Options.FILE) == null) {
 						// Run against a transient journal if no file was
 						// specified.
 						properties.setProperty(
-								com.bigdata.journal.Options.BUFFER_MODE,
+								org.embergraph.journal.Options.BUFFER_MODE,
 								BufferMode.Transient.toString());
 						properties.setProperty(
-								com.bigdata.journal.Options.INITIAL_EXTENT, ""
+								org.embergraph.journal.Options.INITIAL_EXTENT, ""
 										+ (Bytes.megabyte32 * 1));
 					}
 

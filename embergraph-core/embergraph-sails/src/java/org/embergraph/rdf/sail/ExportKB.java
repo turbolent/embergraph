@@ -515,7 +515,7 @@ public class ExportKB {
         {
             final String[] overrides = new String[] {
                     // Journal options.
-                    com.bigdata.journal.Options.FILE,
+                    org.embergraph.journal.Options.FILE,
             };
             for (String s : overrides) {
                 if (System.getProperty(s) != null) {

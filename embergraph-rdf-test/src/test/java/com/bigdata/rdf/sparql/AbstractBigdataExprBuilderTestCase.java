@@ -214,7 +214,7 @@ public class AbstractBigdataExprBuilderTestCase extends TestCase {
                 NoAxioms.class.getName());
 
         // Note: No persistence.
-        properties.setProperty(com.bigdata.journal.Options.BUFFER_MODE,
+        properties.setProperty(org.embergraph.journal.Options.BUFFER_MODE,
                 BufferMode.Transient.toString());
         
         return properties;

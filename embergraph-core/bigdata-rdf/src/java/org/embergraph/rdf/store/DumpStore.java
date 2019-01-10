@@ -110,7 +110,7 @@ public class DumpStore {
         {
             final String[] overrides = new String[] {
                     // Journal options.
-                    com.bigdata.journal.Options.FILE,
+                    org.embergraph.journal.Options.FILE,
 //                    // RDFParserOptions.
 //                    RDFParserOptions.Options.DATATYPE_HANDLING,
 //                    RDFParserOptions.Options.PRESERVE_BNODE_IDS,

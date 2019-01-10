@@ -415,7 +415,7 @@ public interface QueryHints {
      * hint the application assumes responsibility for applying
      * {@link UUID#randomUUID()} to generate a unique {@link UUID} for the
      * query. The application may then discover the {@link IRunningQuery} using
-     * {@link QueryEngineFactory#getQueryController(com.bigdata.journal.IIndexManager)}
+     * {@link QueryEngineFactory#getQueryController(org.embergraph.journal.IIndexManager)}
      * and {@link QueryEngine#getQuery(UUID)}.
      * <p>
      * Note: The openrdf iteration interface has a close() method, but this can

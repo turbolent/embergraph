@@ -226,7 +226,7 @@ public class BigdataFileSystem extends
      * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
      * @version $Id$
      */
-    public static interface Options extends com.bigdata.journal.Options, KeyBuilder.Options {
+    public static interface Options extends org.embergraph.journal.Options, KeyBuilder.Options {
         
     }
     
@@ -242,7 +242,7 @@ public class BigdataFileSystem extends
      * The #of bits in a 64-bit long integer identifier that are used to encode
      * the byte offset of a record in the store as an unsigned integer.
      * 
-     * @see com.bigdata.journal.Options#OFFSET_BITS
+     * @see org.embergraph.journal.Options#OFFSET_BITS
      * @see #getBlockSize()
      */
     public final int getOffsetBits() {
@@ -257,7 +257,7 @@ public class BigdataFileSystem extends
      * Exabytes).
      * <p>
      * Note: The {@link BigdataFileSystem} makes the <strong>assumption</strong>
-     * that the {@link com.bigdata.journal.Options#OFFSET_BITS} is the #of
+     * that the {@link org.embergraph.journal.Options#OFFSET_BITS} is the #of
      * offset bits configured for the {@link IDataService}s in the connected
      * {@link IBigdataFederation} and computes the
      * {@link BigdataFileSystem#getBlockSize()} based on that assumption. It is
@@ -265,7 +265,7 @@ public class BigdataFileSystem extends
      * is greater than the maximum block size actually configured for the
      * {@link IDataService}s in the connected {@link IBigdataFederation}.
      * 
-     * @see com.bigdata.journal.Options#OFFSET_BITS
+     * @see org.embergraph.journal.Options#OFFSET_BITS
      * @see #getOffsetBits()
      */
     public final int getBlockSize() {

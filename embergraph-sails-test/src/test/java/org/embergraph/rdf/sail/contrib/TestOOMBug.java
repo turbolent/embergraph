@@ -82,13 +82,13 @@ public class TestOOMBug extends ProxyBigdataSailTestCase {
 		 */
 		sb.append("com.bigdata.btree.BTree.branchingFactor=4196").append("\n");
 		
-//		sb.append("com.bigdata.journal.AbstractJournal.bufferMode=DiskRW").append("\n");
+//		sb.append("org.embergraph.journal.AbstractJournal.bufferMode=DiskRW").append("\n");
 //		sb.append("com.bigdata.btree.writeRetentionQueue.capacity=8000").append("\n");
 //		sb.append("com.bigdata.LRUNexus.enabled=false").append("\n");
 //		sb.append("com.bigdata.io.DirectBufferPool.bufferCapacity=10485760").append("\n");
 //		sb.append("com.bigdata.rwstore.RWStore.allocationSizes=1, 2, 3, 5, 8, 12, 16, 32, 48, 64, 128, 192, 320, 512, 832, 1344, 2176, 3520").append("\n");
-//		sb.append("com.bigdata.journal.AbstractJournal.initialExtent=209715200").append("\n");
-//		sb.append("com.bigdata.journal.AbstractJournal.maximumExtent=209715200").append("\n");
+//		sb.append("org.embergraph.journal.AbstractJournal.initialExtent=209715200").append("\n");
+//		sb.append("org.embergraph.journal.AbstractJournal.maximumExtent=209715200").append("\n");
 //		sb.append("com.bigdata.rdf.sail.queryTimeExpander=false").append("\n");
 		
 		try {

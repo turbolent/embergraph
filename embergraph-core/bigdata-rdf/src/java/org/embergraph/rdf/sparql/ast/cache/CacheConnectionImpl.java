@@ -157,14 +157,14 @@ public class CacheConnectionImpl implements ICacheConnection {
          * Note: The cache will be backed by ByteBuffer objects allocated on the
          * native process heap (Zero GC).
          */
-        properties.setProperty(com.bigdata.journal.Options.BUFFER_MODE,
+        properties.setProperty(org.embergraph.journal.Options.BUFFER_MODE,
                 BufferMode.MemStore.name());
 
         // Start small, grow as required.
-        properties.setProperty(com.bigdata.journal.Options.INITIAL_EXTENT, ""
+        properties.setProperty(org.embergraph.journal.Options.INITIAL_EXTENT, ""
                 + (1 * Bytes.megabyte));
 
-//        properties.setProperty(com.bigdata.journal.Options.CREATE_TEMP_FILE,
+//        properties.setProperty(org.embergraph.journal.Options.CREATE_TEMP_FILE,
 //                "true");
 //
 ////        properties.setProperty(Journal.Options.COLLECT_PLATFORM_STATISTICS,

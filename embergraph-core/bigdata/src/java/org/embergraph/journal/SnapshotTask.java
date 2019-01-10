@@ -67,11 +67,11 @@ public class SnapshotTask implements Callable<ISnapshotResult> {
 	   * 
 	   * This specifies the size in Bytes to use.  The default is 512k.
 	   * 
-	   * -Dcom.bigdata.journal.SnapshotTask.gzipBufferSize=512
+	   * -Dorg.embergraph.journal.SnapshotTask.gzipBufferSize=512
 	   * 
 	   * A larger value such as below is recommended for larger files.
 	   * 
-	   * -Dcom.bigdata.journal.SnapshotTask.gzipBufferSize=65535
+	   * -Dorg.embergraph.journal.SnapshotTask.gzipBufferSize=65535
 	   *  
 	   */
 	   

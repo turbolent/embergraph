@@ -43,7 +43,7 @@ public class RunQuery {
 	 * Read a query from a file or stdin and run it against a journal. Use
 	 * 
 	 * <pre>
-	 * -Dcom.bigdata.journal.AbstractJournal.file=...
+	 * -Dorg.embergraph.journal.AbstractJournal.file=...
 	 * </pre>
 	 * 
 	 * to specify the name of the journal file if it is not specified in the
@@ -96,7 +96,7 @@ public class RunQuery {
 	        {
 	            final String[] overrides = new String[] {
 	                    // Journal options.
-	                    com.bigdata.journal.Options.FILE,
+	                    org.embergraph.journal.Options.FILE,
 //	                    // RDFParserOptions.
 //	                    RDFParserOptions.Options.DATATYPE_HANDLING,
 //	                    RDFParserOptions.Options.PRESERVE_BNODE_IDS,
@@ -112,7 +112,7 @@ public class RunQuery {
 	                if (System.getProperty(s) != null) {
 	                    // Override/set from the environment.
 	                    String v = System.getProperty(s);
-	                    if (s.equalsIgnoreCase(com.bigdata.journal.Options.FILE))
+	                    if (s.equalsIgnoreCase(org.embergraph.journal.Options.FILE))
 	                    	v = new File(v).getAbsolutePath();
 	                    System.out.println("Using: " + s + "=" + v);
 	                    

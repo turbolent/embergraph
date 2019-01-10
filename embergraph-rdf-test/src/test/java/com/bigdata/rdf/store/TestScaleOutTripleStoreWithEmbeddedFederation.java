@@ -236,7 +236,7 @@ public class TestScaleOutTripleStoreWithEmbeddedFederation extends AbstractTestC
         client.disconnect(true/*immediateShutdown*/);
 
         // Turn this off now since we want to re-open the same store.
-        properties.setProperty(com.bigdata.journal.Options.CREATE_TEMP_FILE, "false");
+        properties.setProperty(org.embergraph.journal.Options.CREATE_TEMP_FILE, "false");
 
         // The data directory for the embedded federation.
         final File file = ((EmbeddedFederation) ((ScaleOutTripleStore) store)

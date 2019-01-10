@@ -1258,7 +1258,7 @@ public class BigdataSail extends SailBase implements Sail {
     * <p>
     * <h3>Group Commit Enabled</h3>
     * <p>
-    * If {@link com.bigdata.journal.Journal.Options#GROUP_COMMIT group commit}
+    * If {@link org.embergraph.journal.Journal.Options#GROUP_COMMIT group commit}
     * is enabled and you use the either the REST API or the
     * {@link com.bigdata.rdf.task.AbstractApiTask#submitApiTask(IIndexManager, com.bigdata.rdf.task.IApiTask)}
     * pattern to submit tasks, then concurrent unisolated connections will be

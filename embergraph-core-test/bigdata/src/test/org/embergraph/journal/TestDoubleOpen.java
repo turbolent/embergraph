@@ -85,7 +85,7 @@ public class TestDoubleOpen extends ProxyTestCase<Journal> {
      * java.util.concurrent.ExecutionException: java.lang.RuntimeException: file=C:\DOCUME~1\BRYANT~1\LOCALS~1\Temp\bigdata-Disk-6474551553928984593.jnl
      *     at java.util.concurrent.FutureTask$Sync.innerGet(FutureTask.java:222)
      *     at java.util.concurrent.FutureTask.get(FutureTask.java:83)
-     *     at com.bigdata.journal.TestDoubleOpen.test_doubleOpen(TestDoubleOpen.java:119)
+     *     at org.embergraph.journal.TestDoubleOpen.test_doubleOpen(TestDoubleOpen.java:119)
      *     at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
      *     at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
      *     at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
@@ -105,12 +105,12 @@ public class TestDoubleOpen extends ProxyTestCase<Journal> {
      *     at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
      *     at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
      * Caused by: java.lang.RuntimeException: file=C:\DOCUME~1\BRYANT~1\LOCALS~1\Temp\bigdata-Disk-6474551553928984593.jnl
-     *     at com.bigdata.journal.FileMetadata.<init>(FileMetadata.java:760)
-     *     at com.bigdata.journal.AbstractJournal.<init>(AbstractJournal.java:1066)
-     *     at com.bigdata.journal.AbstractJournal.<init>(AbstractJournal.java:659)
-     *     at com.bigdata.journal.Journal.<init>(Journal.java:136)
-     *     at com.bigdata.journal.TestDoubleOpen$1.call(TestDoubleOpen.java:103)
-     *     at com.bigdata.journal.TestDoubleOpen$1.call(TestDoubleOpen.java:1)
+     *     at org.embergraph.journal.FileMetadata.<init>(FileMetadata.java:760)
+     *     at org.embergraph.journal.AbstractJournal.<init>(AbstractJournal.java:1066)
+     *     at org.embergraph.journal.AbstractJournal.<init>(AbstractJournal.java:659)
+     *     at org.embergraph.journal.Journal.<init>(Journal.java:136)
+     *     at org.embergraph.journal.TestDoubleOpen$1.call(TestDoubleOpen.java:103)
+     *     at org.embergraph.journal.TestDoubleOpen$1.call(TestDoubleOpen.java:1)
      *     at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:303)
      *     at java.util.concurrent.FutureTask.run(FutureTask.java:138)
      *     at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:886)
@@ -118,7 +118,7 @@ public class TestDoubleOpen extends ProxyTestCase<Journal> {
      *     at java.lang.Thread.run(Thread.java:619)
      * Caused by: java.io.IOException: The handle is invalid
      *     at java.io.RandomAccessFile.length(Native Method)
-     *     at com.bigdata.journal.FileMetadata.<init>(FileMetadata.java:420)
+     *     at org.embergraph.journal.FileMetadata.<init>(FileMetadata.java:420)
      *     ... 10 more
      * </pre>
      * Here is another odd exception which can be thrown (Windows XP)
@@ -126,16 +126,16 @@ public class TestDoubleOpen extends ProxyTestCase<Journal> {
      * Caused by: java.lang.NullPointerException
      *     at sun.nio.ch.FileChannelImpl$SharedFileLockTable.remove(FileChannelImpl.java:1100)
      *     at sun.nio.ch.FileChannelImpl.tryLock(FileChannelImpl.java:881)
-     *     at com.bigdata.journal.FileMetadata.reopenChannel(FileMetadata.java:1188)
-     *     at com.bigdata.journal.FileMetadata.access$0(FileMetadata.java:1156)
-     *     at com.bigdata.journal.FileMetadata$1.reopenChannel(FileMetadata.java:1141)
-     *     at com.bigdata.journal.FileMetadata$1.reopenChannel(FileMetadata.java:1)
-     *     at com.bigdata.journal.FileMetadata.<init>(FileMetadata.java:923)
-     *     at com.bigdata.journal.FileMetadata.createInstance(FileMetadata.java:1448)
-     *     at com.bigdata.journal.AbstractJournal.<init>(AbstractJournal.java:870)
-     *     at com.bigdata.journal.Journal.<init>(Journal.java:228)
-     *     at com.bigdata.journal.Journal.<init>(Journal.java:221)
-     *     at com.bigdata.journal.TestDoubleOpen$DoubleOpenTask.call(TestDoubleOpen.java:239)
+     *     at org.embergraph.journal.FileMetadata.reopenChannel(FileMetadata.java:1188)
+     *     at org.embergraph.journal.FileMetadata.access$0(FileMetadata.java:1156)
+     *     at org.embergraph.journal.FileMetadata$1.reopenChannel(FileMetadata.java:1141)
+     *     at org.embergraph.journal.FileMetadata$1.reopenChannel(FileMetadata.java:1)
+     *     at org.embergraph.journal.FileMetadata.<init>(FileMetadata.java:923)
+     *     at org.embergraph.journal.FileMetadata.createInstance(FileMetadata.java:1448)
+     *     at org.embergraph.journal.AbstractJournal.<init>(AbstractJournal.java:870)
+     *     at org.embergraph.journal.Journal.<init>(Journal.java:228)
+     *     at org.embergraph.journal.Journal.<init>(Journal.java:221)
+     *     at org.embergraph.journal.TestDoubleOpen$DoubleOpenTask.call(TestDoubleOpen.java:239)
      *     ... 6 more
      * </pre>
      * 

@@ -61,7 +61,7 @@ public class TestMockUtility {
       
       final Properties properties = new Properties();
       properties.setProperty(
-         com.bigdata.journal.Options.BUFFER_MODE,BufferMode.MemStore.name());
+         org.embergraph.journal.Options.BUFFER_MODE,BufferMode.MemStore.name());
       
       final Journal store = new Journal(properties);
 

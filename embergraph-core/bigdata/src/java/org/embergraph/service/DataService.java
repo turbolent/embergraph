@@ -129,8 +129,8 @@ abstract public class DataService extends AbstractService
      * 
      * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
      */
-    public static interface Options extends com.bigdata.journal.Options,
-            com.bigdata.journal.ConcurrencyManager.Options,
+    public static interface Options extends org.embergraph.journal.Options,
+            org.embergraph.journal.ConcurrencyManager.Options,
             com.bigdata.resources.ResourceManager.Options,
             com.bigdata.counters.AbstractStatisticsCollector.Options,
             com.bigdata.service.IBigdataClient.Options

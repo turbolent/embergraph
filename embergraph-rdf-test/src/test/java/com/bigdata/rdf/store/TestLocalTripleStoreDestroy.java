@@ -86,7 +86,7 @@ public class TestLocalTripleStoreDestroy extends ProxyTestCase {
                 + SPOKeyOrder.SPO.getIndexName();
         
         final Properties properties = new Properties();
-        properties.setProperty(com.bigdata.journal.Options.CREATE_TEMP_FILE, "true");
+        properties.setProperty(org.embergraph.journal.Options.CREATE_TEMP_FILE, "true");
         properties.setProperty(AbstractTripleStore.Options.TRIPLES_MODE,"true");
         
         final AbstractTripleStore store = getStore(properties);
@@ -188,7 +188,7 @@ public class TestLocalTripleStoreDestroy extends ProxyTestCase {
                 + SPOKeyOrder.SPO.getIndexName();
         
         final Properties properties = new Properties();
-        properties.setProperty(com.bigdata.journal.Options.CREATE_TEMP_FILE, "true");
+        properties.setProperty(org.embergraph.journal.Options.CREATE_TEMP_FILE, "true");
         properties.setProperty(AbstractTripleStore.Options.BUFFER_MODE,BufferMode.DiskWORM.toString());
         properties.setProperty(AbstractTripleStore.Options.TRIPLES_MODE,"true");
         
@@ -382,7 +382,7 @@ public class TestLocalTripleStoreDestroy extends ProxyTestCase {
                 + SPOKeyOrder.SPO.getIndexName();
         
         final Properties properties = new Properties();
-        properties.setProperty(com.bigdata.journal.Options.CREATE_TEMP_FILE, "true");
+        properties.setProperty(org.embergraph.journal.Options.CREATE_TEMP_FILE, "true");
         properties.setProperty(AbstractTripleStore.Options.BUFFER_MODE,BufferMode.DiskWORM.toString());
         properties.setProperty(AbstractTripleStore.Options.TRIPLES_MODE,"true");
         

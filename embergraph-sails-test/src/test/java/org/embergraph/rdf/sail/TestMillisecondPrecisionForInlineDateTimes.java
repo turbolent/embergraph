@@ -95,7 +95,7 @@ public class TestMillisecondPrecisionForInlineDateTimes extends QuadsTestCase {
 		props.setProperty(BigdataSail.Options.INLINE_DATE_TIMES_TIMEZONE, "GMT");
 
 		// No disk file.
-        props.setProperty(com.bigdata.journal.Options.BUFFER_MODE,
+        props.setProperty(org.embergraph.journal.Options.BUFFER_MODE,
                 BufferMode.Transient.toString());
 		
         return props;

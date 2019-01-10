@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 /*
  * Created on Nov 19, 2010
  */
-package com.bigdata.journal;
+package org.embergraph.journal;
 
 import java.io.File;
 import java.io.IOException;

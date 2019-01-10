@@ -101,7 +101,7 @@ public class TestInclude extends AbstractDataDrivenSPARQLTestCase {
         // Note: clone to avoid modifying!!!
         final Properties properties = (Properties) super.getProperties().clone();
 
-        properties.setProperty(com.bigdata.journal.Options.BUFFER_MODE,
+        properties.setProperty(org.embergraph.journal.Options.BUFFER_MODE,
                 BufferMode.MemStore.name());
         
         return properties;

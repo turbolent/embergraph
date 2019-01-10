@@ -480,13 +480,13 @@ public class TripleStoreUtility {
 
             final Properties p = new Properties();
 
-            p.setProperty(com.bigdata.journal.Options.READ_ONLY, "true");
+            p.setProperty(org.embergraph.journal.Options.READ_ONLY, "true");
 
             final AbstractTripleStore ts1;
             {
                 Properties properties = new Properties(p);
 
-                properties.setProperty(com.bigdata.journal.Options.FILE, file1
+                properties.setProperty(org.embergraph.journal.Options.FILE, file1
                         .toString());
 
                 j1 = new Journal(properties);
@@ -502,7 +502,7 @@ public class TripleStoreUtility {
             {
                 Properties properties = new Properties(p);
 
-                properties.setProperty(com.bigdata.journal.Options.FILE, file2
+                properties.setProperty(org.embergraph.journal.Options.FILE, file2
                         .toString());
 
                 j2 = new Journal(properties);

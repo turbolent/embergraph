@@ -172,7 +172,7 @@ public class ExperimentDriver {
     public static interface IComparisonTest {
         
         /**
-         * ala JUnit, but allows us to run {@link com.bigdata.journal.ProxyTestCase}s as well.
+         * ala JUnit, but allows us to run {@link org.embergraph.journal.ProxyTestCase}s as well.
          * 
          * @param properties May be used to configure the test fixture.
          * 
@@ -191,7 +191,7 @@ public class ExperimentDriver {
         public Result doComparisonTest(Properties properties) throws Exception;
         
         /**
-         * ala JUnit, but allows us to run {@link com.bigdata.journal.ProxyTestCase}s as well.
+         * ala JUnit, but allows us to run {@link org.embergraph.journal.ProxyTestCase}s as well.
          * 
          * @throws Exception
          */

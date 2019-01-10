@@ -470,7 +470,7 @@ abstract public class OverflowManager extends IndexManager {
          * grow large enough that throughput will drop (due to IOWAIT on random
          * seeks against the journal) and it is possible that the maximum
          * possible journal extent can be exceeded unless you also configure
-         * {@link com.bigdata.journal.Options#OFFSET_BITS} for scale-up.
+         * {@link org.embergraph.journal.Options#OFFSET_BITS} for scale-up.
          * 
          * @deprecated This is no longer used, even for testing.
          */
@@ -484,7 +484,7 @@ abstract public class OverflowManager extends IndexManager {
          * extent at which synchronous overflow processing will be triggered
          * (default {@link #DEFAULT_OVERFLOW_THRESHOLD}). The value is
          * multiplied into the configured
-         * {@link com.bigdata.journal.Options#MAXIMUM_EXTENT}. If the result is
+         * {@link org.embergraph.journal.Options#MAXIMUM_EXTENT}. If the result is
          * GTE the current extend of the live journal, then synchronous overflow
          * processing will be triggered. However, note that synchronous overflow
          * processing can not be triggered until asynchronous overflow
