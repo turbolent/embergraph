@@ -407,7 +407,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
     <module>embergraph-war</module>
     <module>embergraph-jar</module>
     <module>embergraph-deb/</module>
-    <module>blazegraph-rpm/</module>
+    <module>embergraph-rpm/</module>
     <module>embergraph-tgz/</module>
     -->
       </modules>

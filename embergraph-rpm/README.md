@@ -9,7 +9,7 @@ yum -y install rpm-build
 
 ```
 mvn package
-rpm --install target/rpm/blazegraph-rpm/RPMS/noarch/blazegraph-rpm-1.6.0-SNAPSHOT.noarch.rpm
+rpm --install target/rpm/embergraph-rpm/RPMS/noarch/embergraph-rpm-1.6.0-SNAPSHOT.noarch.rpm
 service blazegraph start
 ```
 

@@ -56,7 +56,7 @@ If you'd just link the Blazegraph Database dependencies without any of the exter
 
 ###Deployers
 
-Starting with 2.0.0, the default context path for deployment is `http://localhost:9999/blazegraph/`.  There are also Maven artifacts for WAR deployers (`embergraph-war`), executable Jar files (`embergraph-jar`), [Debian Package](embergraph-deb/) (`embergraph-deb`), [RPM](blazegraph-rpm/) (`blazegraph-rpm`), and a [Tarball](embergraph-tgz/) (`embergraph-tgz`).
+Starting with 2.0.0, the default context path for deployment is `http://localhost:9999/blazegraph/`.  There are also Maven artifacts for WAR deployers (`embergraph-war`), executable Jar files (`embergraph-jar`), [Debian Package](embergraph-deb/) (`embergraph-deb`), [RPM](embergraph-rpm/) (`embergraph-rpm`), and a [Tarball](embergraph-tgz/) (`embergraph-tgz`).
 
 ###Tinkerpop3
 Tinkerpop3 supports requires Java 1.8 and is now in a separate repository.  See [Tinkerpop3](https://github.com/blazegraph/tinkerpop3).  It is also available as Maven Central artifact.

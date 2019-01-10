@@ -20,7 +20,7 @@ for artifact in $ARTIFACTS; do
 done
 
 #Build RPM without signing the code see BLZG-1725
-mvn -f "${BASE_DIR}"/../blazegraph-rpm/pom.xml clean package -P \!code-signing -DskipTests=true
+mvn -f "${BASE_DIR}"/../embergraph-rpm/pom.xml clean package -P \!code-signing -DskipTests=true
 
 #Assembly artifacts must uses the assembly:single lifecycle
 mvn -f "${BASE_DIR}"/../embergraph-tgz/pom.xml clean package assembly:single -DskipTests=true

@@ -28,7 +28,7 @@ mvn -f "${BASE_DIR}"/../pom.xml install deploy -DskipTests=true -P maven-central
 #Deploy the deployment artifacts
 mvn -f "${BASE_DIR}"/../embergraph-artifacts/pom.xml install deploy -N -DskipTests=true -Pmaven-central
 
-#Temporarily disabled for blazegraph-rpm see BLZG-1725.  Using specific artifacts
+#Temporarily disabled for embergraph-rpm see BLZG-1725.  Using specific artifacts
 projects="embergraph-jar bigdata-jar embergraph-war bigdata-war embergraph-deb"
 for project in $projects; do
 	mvn -f "${BASE_DIR}"/../$project/pom.xml install deploy -DskipTests=true -P maven-central
