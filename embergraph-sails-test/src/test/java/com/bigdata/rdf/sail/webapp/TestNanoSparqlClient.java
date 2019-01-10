@@ -406,7 +406,7 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
 //			// opts.requestParams
 //			// .put("uri",
 //			// new String[] {
-//			// "file:bigdata-sails/src/test/com/bigdata/rdf/sail/webapp/quads.nq"
+//			// "file:embergraph-sails/src/test/com/bigdata/rdf/sail/webapp/quads.nq"
 //			// });
 //			//
 //			// final MutationResult result =

@@ -327,7 +327,7 @@ public class SPARQLUpdateTestv2 extends TestCase {
                         "   _:bnode a <http://example/Foo> . \n" + //
                         "   <http://example/s> <http://example/p> 2 . \n" + //
                         "}}\n"//
-                        // "LOAD <file:bigdata-sails/src/test/org/openrdf/query/parser/sparql/ticket571.ttl> INTO GRAPH graphA: ;\n"//
+                        // "LOAD <file:embergraph-sails/src/test/org/openrdf/query/parser/sparql/ticket571.ttl> INTO GRAPH graphA: ;\n"//
         ).execute();
 
         System.err.println("##### DATA IN DATABASE AFTER INSERT");

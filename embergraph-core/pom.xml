@@ -72,7 +72,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
         </includes>
       </resource>
       <resource>
-        <directory>bigdata-sails/src/java</directory>
+        <directory>embergraph-sails/src/java</directory>
         <includes>
           <include>**/*.properties</include>
           <include>**/*.xml</include>
@@ -168,7 +168,7 @@ public class BuildInfo {
               <sources>
                 <source>bigdata/src/java</source>
                 <source>bigdata-rdf/src/java</source>
-                <source>bigdata-sails/src/java</source>
+                <source>embergraph-sails/src/java</source>
                 <source>embergraph-gom/src/java</source>
               </sources>
             </configuration>

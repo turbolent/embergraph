@@ -277,54 +277,54 @@ embergraph-core/bigdata/src/java/com/bigdata/BuildInfo.java
 /bigdata-rdf/src/test/com/bigdata/rdf/rules/wordnet_nouns-20010201.rdf
 /bigdata-rdf/src/test/com/bigdata/rdf/rules/notes.txt
 
-# /bigdata-sails/
-/bigdata-sails/bin
-/bigdata-sails/target
-/bigdata-sails/*.dump
-/bigdata-sails/*.mdmp
-/bigdata-sails/*.jnl
-/bigdata-sails/test.rdf
-/bigdata-sails/.classpath
-/bigdata-sails/.project
-/bigdata-sails/data
-/bigdata-sails/countersfinal.xml
+# /embergraph-sails/
+/embergraph-sails/bin
+/embergraph-sails/target
+/embergraph-sails/*.dump
+/embergraph-sails/*.mdmp
+/embergraph-sails/*.jnl
+/embergraph-sails/test.rdf
+/embergraph-sails/.classpath
+/embergraph-sails/.project
+/embergraph-sails/data
+/embergraph-sails/countersfinal.xml
 
-# /bigdata-sails/LEGAL/
-/bigdata-sails/LEGAL/piccolo-LICENSE.txt
+# /embergraph-sails/LEGAL/
+/embergraph-sails/LEGAL/piccolo-LICENSE.txt
 
-# /bigdata-sails/src/java/
-/bigdata-sails/src/java/edu
-/bigdata-sails/src/java/sesamewrapper
+# /embergraph-sails/src/java/
+/embergraph-sails/src/java/edu
+/embergraph-sails/src/java/sesamewrapper
 
-# /bigdata-sails/src/java/com/bigdata/rdf/
-/bigdata-sails/src/java/com/bigdata/rdf/blip
+# /embergraph-sails/src/java/com/bigdata/rdf/
+/embergraph-sails/src/java/com/bigdata/rdf/blip
 
-# /bigdata-sails/src/java/com/bigdata/rdf/sail/
-/bigdata-sails/src/java/com/bigdata/rdf/sail/SimpleRdfsRepository.java
+# /embergraph-sails/src/java/com/bigdata/rdf/sail/
+/embergraph-sails/src/java/com/bigdata/rdf/sail/SimpleRdfsRepository.java
 
-# /bigdata-sails/src/java/com/bigdata/rdf/sail/bench/
-/bigdata-sails/src/java/com/bigdata/rdf/sail/bench/ChangeFederationBranchingFactor.java
+# /embergraph-sails/src/java/com/bigdata/rdf/sail/bench/
+/embergraph-sails/src/java/com/bigdata/rdf/sail/bench/ChangeFederationBranchingFactor.java
 
-# /bigdata-sails/src/resources/
-/bigdata-sails/src/resources/U1
+# /embergraph-sails/src/resources/
+/embergraph-sails/src/resources/U1
 
-# /bigdata-sails/src/samples/com/bigdata/samples/
-/bigdata-sails/src/samples/com/bigdata/samples/baseball.stats.out.rdf.zip
+# /embergraph-sails/src/samples/com/bigdata/samples/
+/embergraph-sails/src/samples/com/bigdata/samples/baseball.stats.out.rdf.zip
 
-# /bigdata-sails/src/test/com/bigdata/rdf/sail/
-/bigdata-sails/src/test/com/bigdata/rdf/sail/old
-/bigdata-sails/src/test/com/bigdata/rdf/sail/Test.java
-/bigdata-sails/src/test/com/bigdata/rdf/sail/system.rdfs
-/bigdata-sails/src/test/com/bigdata/rdf/sail/test.rdf
+# /embergraph-sails/src/test/com/bigdata/rdf/sail/
+/embergraph-sails/src/test/com/bigdata/rdf/sail/old
+/embergraph-sails/src/test/com/bigdata/rdf/sail/Test.java
+/embergraph-sails/src/test/com/bigdata/rdf/sail/system.rdfs
+/embergraph-sails/src/test/com/bigdata/rdf/sail/test.rdf
 
-# /bigdata-sails/src/test/com/bigdata/rdf/sail/tck/
-/bigdata-sails/src/test/com/bigdata/rdf/sail/tck/DoNotDistribute_QueryTest.java
-/bigdata-sails/src/test/com/bigdata/rdf/sail/tck/data-2.ttl
-/bigdata-sails/src/test/com/bigdata/rdf/sail/tck/TestSparqlStuff.java
+# /embergraph-sails/src/test/com/bigdata/rdf/sail/tck/
+/embergraph-sails/src/test/com/bigdata/rdf/sail/tck/DoNotDistribute_QueryTest.java
+/embergraph-sails/src/test/com/bigdata/rdf/sail/tck/data-2.ttl
+/embergraph-sails/src/test/com/bigdata/rdf/sail/tck/TestSparqlStuff.java
 
-# /bigdata-sails/src/test/com/bigdata/rdf/stress/
-/bigdata-sails/src/test/com/bigdata/rdf/stress/LoadClosureAndQueryExperiment-EOSSYS.xml
-/bigdata-sails/src/test/com/bigdata/rdf/stress/config.query.eossys
+# /embergraph-sails/src/test/com/bigdata/rdf/stress/
+/embergraph-sails/src/test/com/bigdata/rdf/stress/LoadClosureAndQueryExperiment-EOSSYS.xml
+/embergraph-sails/src/test/com/bigdata/rdf/stress/config.query.eossys
 
 # /dsi-utils/
 /dsi-utils/ant-build
