@@ -11,7 +11,7 @@ fi
 BASE_DIR=`dirname $0`
 
 PARENT_POM="${BASE_DIR}"/../pom.xml
-ARTIFACTS_POM="${BASE_DIR}"/../blazegraph-artifacts/pom.xml
+ARTIFACTS_POM="${BASE_DIR}"/../embergraph-artifacts/pom.xml
 NEW_VERSION=$1
 
 echo "Updating POM versions to $NEW_VERSION"

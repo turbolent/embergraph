@@ -402,8 +402,8 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
         <module>embergraph-core-test/</module>
         <module>embergraph-rdf-test/</module>
         <module>embergraph-sails-test/</module>
-        <module>blazegraph-artifacts/</module>
-        <!-- Moved to blazegraph-artifacts
+        <module>embergraph-artifacts/</module>
+        <!-- Moved to embergraph-artifacts
     <module>blazegraph-war</module>
     <module>blazegraph-jar</module>
     <module>blazegraph-deb/</module>

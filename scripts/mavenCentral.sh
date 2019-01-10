@@ -26,7 +26,7 @@ mvn -f "${BASE_DIR}"/../pom.xml install deploy -N -DskipTests=true -P maven-cent
 mvn -f "${BASE_DIR}"/../pom.xml install deploy -DskipTests=true -P maven-central,Development
 
 #Deploy the deployment artifacts
-mvn -f "${BASE_DIR}"/../blazegraph-artifacts/pom.xml install deploy -N -DskipTests=true -Pmaven-central
+mvn -f "${BASE_DIR}"/../embergraph-artifacts/pom.xml install deploy -N -DskipTests=true -Pmaven-central
 
 #Temporarily disabled for blazegraph-rpm see BLZG-1725.  Using specific artifacts
 projects="blazegraph-jar bigdata-jar blazegraph-war bigdata-war blazegraph-deb"
