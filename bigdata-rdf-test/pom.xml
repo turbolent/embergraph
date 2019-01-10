@@ -367,7 +367,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
     </dependency>
     <dependency>
       <groupId>com.blazegraph</groupId>
-      <artifactId>bigdata-cache</artifactId>
+      <artifactId>embergraph-cache</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>

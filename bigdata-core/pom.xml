@@ -364,7 +364,7 @@ public class BuildInfo {
     </dependency>
     <dependency>
       <groupId>com.blazegraph</groupId>
-      <artifactId>bigdata-cache</artifactId>
+      <artifactId>embergraph-cache</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>

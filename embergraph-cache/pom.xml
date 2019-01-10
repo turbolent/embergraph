@@ -32,10 +32,10 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
     <relativePath>../pom.xml</relativePath>
   </parent>
   <groupId>com.blazegraph</groupId>
-  <artifactId>bigdata-cache</artifactId>
+  <artifactId>embergraph-cache</artifactId>
   <version>2.1.5-SNAPSHOT</version>
-  <name>Blazegraph Cache</name>
-  <description>Blazegraph Cache utilities</description>
+  <name>Embergraph Cache</name>
+  <description>Embergraph Cache utilities</description>
   <packaging>jar</packaging>
   <build>
     <plugins>
@@ -64,7 +64,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
           <maxmemory>1000m</maxmemory>
           <author>true</author>
           <version>true</version>
-          <doctitle><![CDATA[<h1>Blazegraph Cache</h1>]]></doctitle>
+          <doctitle><![CDATA[<h1>Embergraph Cache</h1>]]></doctitle>
           <bottom><![CDATA[<i>Copyright &#169; 2006-2016 SYSTAP, LLC DBA Blazegraph. All Rights Reserved.</i>
 <script>
 jQuery(document).ready(function(){
