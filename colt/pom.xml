@@ -26,15 +26,15 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.turbolent</groupId>
-    <artifactId>blazegraph-parent</artifactId>
+    <groupId>org.embergraph</groupId>
+    <artifactId>embergraph-parent</artifactId>
     <version>2.1.5-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>colt</artifactId>
   <version>2.1.5-SNAPSHOT</version>
   <name>Embergraph Colt</name>
-  <description>Blazegraph Modifications to the Colt libraries to remove hep.aida.  Forked under LGPL 2.1 from the original license: Copyright (c) 1999 CERN - European Organization for Nuclear Research.  Permission to use, copy, modify, distribute and sell this software and its documentation for any purpose is hereby granted without fee, provided that the above copyright notice appear in all copies and that both that copyright notice and this permission notice appear in supporting documentation. CERN makes no representations about the suitability of this software for any purpose. It is provided "as is" without expressed or implied warranty.</description>
+  <description>Embergraph Modifications to the Colt libraries to remove hep.aida.  Forked under LGPL 2.1 from the original license: Copyright (c) 1999 CERN - European Organization for Nuclear Research.  Permission to use, copy, modify, distribute and sell this software and its documentation for any purpose is hereby granted without fee, provided that the above copyright notice appear in all copies and that both that copyright notice and this permission notice appear in supporting documentation. CERN makes no representations about the suitability of this software for any purpose. It is provided "as is" without expressed or implied warranty.</description>
   <packaging>jar</packaging>
   <licenses>
     <license>
@@ -69,7 +69,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
             <include>**/*Test.java</include>
           </includes>
           <excludes>
-            <exclude>com/bigdata/TestAll.java</exclude>
+            <exclude>org/embergraph/TestAll.java</exclude>
           </excludes>
           <forkCount>1</forkCount>
           <reuseForks>true</reuseForks>
@@ -92,7 +92,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
           <maxmemory>1000m</maxmemory>
           <author>true</author>
           <version>true</version>
-          <doctitle><![CDATA[<h1>Blazegraph Colt Fork</h1>]]></doctitle>
+          <doctitle><![CDATA[<h1>Embergraph Colt Fork</h1>]]></doctitle>
           <bottom><![CDATA[ <i> 
                            Copyright (C) SYSTAP, LLC DBA Blazegraph 2006-2016.  All rights reserved.<p>
 

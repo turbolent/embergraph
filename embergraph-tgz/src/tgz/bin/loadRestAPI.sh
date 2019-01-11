@@ -2,15 +2,15 @@
 
 FILE_OR_DIR=$1
 
-if [ -f "/etc/default/blazegraph" ] ; then
-    . "/etc/default/blazegraph" 
+if [ -f "/etc/default/embergraph" ] ; then
+    . "/etc/default/embergraph"
 else
     JETTY_PORT=9999
 fi
 
 LOAD_PROP_FILE=/tmp/$$.properties
 
-[ -z "${NSS_PROPERTIES}" ] && export NSS_PROPERTIES=/usr/local/blazegraph/conf/RWStore.properties
+[ -z "${NSS_PROPERTIES}" ] && export NSS_PROPERTIES=/usr/local/embergraph/conf/RWStore.properties
 
 
 #Probably some unused properties below, but copied all to be safe.
@@ -37,7 +37,7 @@ echo "Loading with properties..."
 
 cat $LOAD_PROP_FILE
 
-curl -X POST --data-binary @${LOAD_PROP_FILE} --header 'Content-Type:text/plain' http://localhost:${JETTY_PORT}/blazegraph/dataloader
+curl -X POST --data-binary @${LOAD_PROP_FILE} --header 'Content-Type:text/plain' http://localhost:${JETTY_PORT}/embergraph/dataloader
 
 #Let the output go to STDOUT/ERR to allow script redirection
 

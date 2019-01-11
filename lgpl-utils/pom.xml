@@ -26,15 +26,15 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.turbolent</groupId>
-    <artifactId>blazegraph-parent</artifactId>
+    <groupId>org.embergraph</groupId>
+    <artifactId>embergraph-parent</artifactId>
     <version>2.1.5-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>lgpl-utils</artifactId>
   <version>2.1.5-SNAPSHOT</version>
   <name>Embergraph LGPL Utils</name>
-  <description>Blazegraph Modifications to the LGPL utils.  This are forked from a version under LGPLv2.1.</description>
+  <description>Embergraph Modifications to the LGPL utils.  This are forked from a version under LGPLv2.1.</description>
   <packaging>jar</packaging>
   <licenses>
     <license>
@@ -53,7 +53,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
           <maxmemory>1000m</maxmemory>
           <author>true</author>
           <version>true</version>
-          <doctitle><![CDATA[<h1>Blazegraph LGPL Utils</h1>]]></doctitle>
+          <doctitle><![CDATA[<h1>Embergraph LGPL Utils</h1>]]></doctitle>
           <bottom><![CDATA[ <i> 
                             Copyright (C) SYSTAP, LLC DBA Blazegraph 2006-2016.  All rights reserved.<p>
 
@@ -84,7 +84,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>com.turbolent</groupId>
+      <groupId>org.embergraph</groupId>
       <artifactId>colt</artifactId>
       <version>${colt.version}</version>
     </dependency>

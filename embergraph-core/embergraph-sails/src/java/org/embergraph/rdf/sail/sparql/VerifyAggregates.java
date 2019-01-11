@@ -70,7 +70,7 @@ import cutthecrap.utils.striterators.Striterator;
  * aggregation operator to compute the select expressions).
  * <p>
  * Note: This is a port of {@link org.embergraph.bop.solutions.GroupByState} that
- * does not depend on the blazegraph operator model. It was developed as part of
+ * does not depend on the embergraph operator model. It was developed as part of
  * BLZG-1176 to decouple the SPARQL parser from the database.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

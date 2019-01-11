@@ -373,7 +373,6 @@ embergraph-rdf-test/test_small.out
 
 *.out
 
-**/blazegraph.jnl
 **/embergraph.jnl
 
 build

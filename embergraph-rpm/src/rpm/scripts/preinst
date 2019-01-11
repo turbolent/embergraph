@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-[ -f /etc/blazegraph/blazegraph ] && . /etc/blazegraph/blazegraph
+[ -f /etc/embergraph/embergraph ] && . /etc/embergraph/embergraph
 
 JAVA=`which java 2> /dev/null` || true
 
@@ -18,30 +18,30 @@ if [ -z "$JAVA" ] ; then
 	echo "*                                                                                     *"
 	echo "* You must install JAVA to start Blazegraph.                                          *"
 	echo "*                                                                                     *"
-	echo "* Once java is installed run:  service blazegraph start                               *"
+	echo "* Once java is installed run:  service embergraph start                               *"
 	echo "***************************************************************************************"
 	echo ""
 
 fi
 
-        [ -z "$NAME" ] && NAME="blazegraph"
+        [ -z "$NAME" ] && NAME="embergraph"
         [ -z "$BLZG_USER" ] && BLZG_USER="blzg"
         [ -z "$BLZG_GROUP" ] && BLZG_GROUP="blzg"
         [ -z "$BLZG_DATA" ] && BLZG_DATA="/var/lib/$NAME"
         [ -z "$BLZG_LOG" ] && BLZG_LOG="/var/log/$NAME"
 
-        # Add the blazegraph group
+        # Add the embergraph group
         groupadd -f -r "$BLZG_GROUP" >& /dev/null
 
-        # Add the blazegraph user with the home directory
+        # Add the embergraph user with the home directory
         # Allow the home directory to be created later by the installer
         if ! getent passwd "$BLZG_USER" > /dev/null 2>&1 ; then
 		    useradd -r -g "$BLZG_USER" -d /usr/share/$NAME -s /sbin/nologin blzg >& /dev/null
         fi
 
-        # Make the blazegraph data and log directories here
+        # Make the embergraph data and log directories here
         # instead of as a jdeb template to allow overriding of user/group
-        # if /etc/default/blazegraph is in place before installation.
+        # if /etc/default/embergraph is in place before installation.
         if [ ! -d "$BLZG_DATA" -a ! -L "$BLZG_DATA" ]; then
             mkdir -p $BLZG_DATA
         fi

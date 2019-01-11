@@ -27,8 +27,8 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.turbolent</groupId>
-    <artifactId>blazegraph-parent</artifactId>
+    <groupId>org.embergraph</groupId>
+    <artifactId>embergraph-parent</artifactId>
     <version>2.1.5-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
@@ -36,13 +36,13 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
   <version>2.1.5-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>Embergraph Core</name>
-  <description>Blazegraph(TM) DB Core Platform.  It contains all Blazegraph DB dependencies other than Blueprints.</description>
+  <description>Embergraph Core Platform.  It contains all Embergraph dependencies other than Blueprints.</description>
   <!-- properties are now in the parent POM. -->
   <build>
-    <sourceDirectory>bigdata/src/java</sourceDirectory>
+    <sourceDirectory>embergraph/src/java</sourceDirectory>
     <resources>
       <resource>
-        <directory>bigdata/src/java</directory>
+        <directory>embergraph/src/java</directory>
         <includes>
           <include>**/*.properties</include>
           <include>**/*.xml</include>
@@ -56,7 +56,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
         </includes>
       </resource>
       <resource>
-        <directory>bigdata-rdf/src/java</directory>
+        <directory>embergraph-rdf/src/java</directory>
         <includes>
           <include>**/*.properties</include>
           <include>**/*.xml</include>
@@ -111,7 +111,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
             <phase>process-resources</phase>
             <configuration>
               <target>
-                <property name="buildinfo.file" value="bigdata/src/java/org/embergraph/BuildInfo.java"/>
+                <property name="buildinfo.file" value="embergraph/src/java/org/embergraph/BuildInfo.java"/>
                 <property name="build.ver" value="${project.version}"/>
                 <tstamp>
                   <format property="build.timestamp" pattern="yyyy/MM/dd HH:mm:ss z" locale="en,US"/>
@@ -166,8 +166,8 @@ public class BuildInfo {
             </goals>
             <configuration>
               <sources>
-                <source>bigdata/src/java</source>
-                <source>bigdata-rdf/src/java</source>
+                <source>embergraph/src/java</source>
+                <source>embergraph-rdf/src/java</source>
                 <source>embergraph-sails/src/java</source>
                 <source>embergraph-gom/src/java</source>
               </sources>
@@ -187,7 +187,7 @@ public class BuildInfo {
       <version>${highscalelib.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.turbolent</groupId>
+      <groupId>org.embergraph</groupId>
       <artifactId>colt</artifactId>
       <version>${colt.version}</version>
     </dependency>
@@ -327,52 +327,52 @@ public class BuildInfo {
       <version>${zookeeper.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.turbolent</groupId>
+      <groupId>org.embergraph</groupId>
       <artifactId>embergraph-ganglia</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.turbolent</groupId>
+      <groupId>org.embergraph</groupId>
       <artifactId>ctc-striterators</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.turbolent</groupId>
+      <groupId>org.embergraph</groupId>
       <artifactId>dsi-utils</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.turbolent</groupId>
+      <groupId>org.embergraph</groupId>
       <artifactId>embergraph-sparql-grammar</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.turbolent</groupId>
+      <groupId>org.embergraph</groupId>
       <artifactId>lgpl-utils</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.turbolent</groupId>
+      <groupId>org.embergraph</groupId>
       <artifactId>embergraph-rdf-properties</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.turbolent</groupId>
+      <groupId>org.embergraph</groupId>
       <artifactId>embergraph-util</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.turbolent</groupId>
+      <groupId>org.embergraph</groupId>
       <artifactId>embergraph-cache</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.turbolent</groupId>
+      <groupId>org.embergraph</groupId>
       <artifactId>embergraph-client</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.turbolent</groupId>
+      <groupId>org.embergraph</groupId>
       <artifactId>embergraph-gas</artifactId>
       <version>${project.version}</version>
     </dependency>

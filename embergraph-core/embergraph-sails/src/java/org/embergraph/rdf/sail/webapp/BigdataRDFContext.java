@@ -2859,7 +2859,7 @@ public class BigdataRDFContext extends BigdataBaseContext {
 		current = current.node("head");
 		current.node("meta").attr("http-equiv", "Content-Type")
 				.attr("content", "text/html;charset=" + charset).close();
-		current.node("title").textNoEncode("blazegraph&trade; by SYSTAP")
+		current.node("title").textNoEncode("embergraph&trade; by SYSTAP")
 				.close();
 		current = current.close();// close the head.
 

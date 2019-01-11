@@ -92,8 +92,8 @@
 -->
     <graphs>
         <graph>
-            <graph-name>bigdata</graph-name>
-            <graph-type>org.embergraph.blueprints.BigdataGraphConfiguration</graph-type>
+            <graph-name>embergraph</graph-name>
+            <graph-type>org.embergraph.blueprints.EmbergraphGraphConfiguration</graph-type>
             <properties>
 <!--
                 <type>embedded</type>

@@ -9,8 +9,8 @@ if [ -z "${BLZG_HOME}" ]; then
 fi
 
 #Check for default configuration file
-if [ -f "${BLZG_HOME}/conf/blazegraph" ] ; then
-   . "${BLZG_HOME}/conf/blazegraph"
+if [ -f "${BLZG_HOME}/conf/embergraph" ] ; then
+   . "${BLZG_HOME}/conf/embergraph"
 fi
 
 export INSTALL_DIR=${BLZG_HOME}
@@ -20,7 +20,7 @@ else
    export LIB_DIR=${INSTALL_DIR}/lib
 fi
 
-export JETTY_CLASSPATH=`find ${LIB_DIR} -name 'blazegraph-*.jar' -print0 | tr '\0' ':'`:`find ${LIB_DIR} -name '*.jar' -print0 | tr '\0' ':'`
+export JETTY_CLASSPATH=`find ${LIB_DIR} -name 'embergraph-*.jar' -print0 | tr '\0' ':'`:`find ${LIB_DIR} -name '*.jar' -print0 | tr '\0' ':'`
 
 export DATA_DIR=${BLZG_HOME}/data
 
@@ -101,7 +101,7 @@ case "$1" in
                 echo $"`date` : `hostname` : $pid died?"
                 rm -f "$BLZG_PID"
             else
-                echo -ne $"`date` : `hostname` : bringing blazegraph service down ... "
+                echo -ne $"`date` : `hostname` : bringing embergraph service down ... "
                 kill $pid
                 rm -f "$BLZG_PID"
                 echo "done!"

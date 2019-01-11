@@ -46,7 +46,6 @@ import org.embergraph.rdf.model.BigdataResource;
 import org.embergraph.rdf.model.BigdataStatement;
 import org.embergraph.rdf.model.BigdataURI;
 import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.sail.sparql.ast.ParseException;
 import org.embergraph.rdf.sail.sparql.ast.TokenMgrError;
 import org.embergraph.rdf.sparql.AbstractBigdataExprBuilderTestCase;

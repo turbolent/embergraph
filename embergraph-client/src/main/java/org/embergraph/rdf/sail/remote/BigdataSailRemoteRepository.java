@@ -41,8 +41,8 @@ import org.embergraph.rdf.sail.webapp.client.RemoteRepositoryManager;
 
 /**
  * An fully compliant implementation of Sesame's {@link Repository} that wraps
- * the blazegraph remote API. Additional functionality is available using the
- * blazegraph {@link RemoteRepositoryManager}. The proper incantation to create
+ * the embergraph remote API. Additional functionality is available using the
+ * embergraph {@link RemoteRepositoryManager}. The proper incantation to create
  * an instance of this class is:
  * 
  * <pre>
@@ -66,7 +66,7 @@ import org.embergraph.rdf.sail.webapp.client.RemoteRepositoryManager;
  * This pattern makes it possible to:
  * <ul>
  * <li>Obtain {@link BigdataSailRemoteRepository} objects for different sparql
- * end points on the same blazegraph server.</li>
+ * end points on the same embergraph server.</li>
  * <li>Those {@link BigdataSailRemoteRepository} objects are flyweight.</li>
  * <li>The {@link RemoteRepositoryManager} can be used to access additional
  * interfaces, including the multi-tenancy API and the transaction API.</li>
@@ -152,7 +152,7 @@ public class BigdataSailRemoteRepository implements Repository {
     }
     
    /**
-    * Flyweight constructor wraps the blazegraph remote client for a SPARQL
+    * Flyweight constructor wraps the embergraph remote client for a SPARQL
     * endpoint as an openrdf {@link Repository}.
     * 
     * @see RemoteRepository#getBigdataSailRemoteRepository()

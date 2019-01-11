@@ -27,11 +27,11 @@
       <!-- --> 
       <!-- The configuration file for the database instance. It must be readable by the web application. --> 
       <!-- --> 
-      <entry key="propertyFile">/Users/beebs/Documents/systap/github/bigdata/dataloader.props</entry> 
+      <entry key="propertyFile">/Users/beebs/Documents/systap/github/embergraph/dataloader.props</entry>
       <!-- --> 
       <!-- Zero or more files or directories containing the data to be loaded. This should be a comma
       delimited list. The files must be readable by the web application. -->
       <!-- --> 
       <!-- <entry key="fileOrDirs">file1,dir1,file2,dir2</entry> -->
-      <entry key="fileOrDirs">/Users/beebs/Documents/systap/github/bigdata/embergraph-rdf-test/src/test/resources/data/lehigh/U1,/Users/beebs/Documents/systap/github/bigdata/embergraph-rdf-test/src/test/resources/data/lehigh/U1</entry>
+      <entry key="fileOrDirs">/Users/beebs/Documents/systap/github/embergraph/embergraph-rdf-test/src/test/resources/data/lehigh/U1,/Users/beebs/Documents/systap/github/embergraph/embergraph-rdf-test/src/test/resources/data/lehigh/U1</entry>
 </properties>

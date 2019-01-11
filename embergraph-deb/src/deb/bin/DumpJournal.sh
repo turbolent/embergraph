@@ -14,9 +14,9 @@
 # -tuples    : Dump the records in the indices.
 
 # Setup the source environment.
-[ -f /etc/default/blazegraph ] && . /etc/default/blazegraph
+[ -f /etc/default/embergraph ] && . /etc/default/embergraph
 
-[ -z "$BLZG_HOME" ] && BLZG_HOME=/usr/share/blazegraph
+[ -z "$BLZG_HOME" ] && BLZG_HOME=/usr/share/embergraph
 LIB_DIR="$BLZG_HOME"/lib
 
 CLASSPATH=`find ${LIB_DIR} -name '*.jar' -print0 | tr '\0' ':'`:${CLASSPATH}

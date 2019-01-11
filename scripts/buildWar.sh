@@ -18,7 +18,7 @@ fi
 mkdir -p "${ARTIFACT_DIR}"
 
 #copy the war artifacts
-WAR_ARTIFACTS="blazegraph"
+WAR_ARTIFACTS="embergraph"
 
 for file in $WAR_ARTIFACTS; do
     EXT=war
@@ -32,4 +32,4 @@ for file in $WAR_ARTIFACTS; do
     fi
 done
 
-echo "Copied blazegraph.war to ${ARTIFACT_DIR}."
+echo "Copied embergraph.war to ${ARTIFACT_DIR}."

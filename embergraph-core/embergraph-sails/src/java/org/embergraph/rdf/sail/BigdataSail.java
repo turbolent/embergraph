@@ -549,7 +549,7 @@ public class BigdataSail extends SailBase implements Sail {
     final private QueryEngine queryEngine;
 
     /**
-     * Return the blazegraph namespace associated with the {@link BigdataSail}.
+     * Return the embergraph namespace associated with the {@link BigdataSail}.
      * 
      * @see Options#NAMESPACE
      * @see BLZG-2023: BigdataSail.getUnisolatedConnection() encapsulation 

@@ -1,18 +1,18 @@
 #!/bin/sh
 set -e
 
-[ -f /etc/default/blazegraph ] && . /etc/default/blazegraph
+[ -f /etc/default/embergraph ] && . /etc/default/embergraph
 
 startBlazegraph() {
-    service blazegraph start || true
+    service embergraph start || true
 }
 
-        [ -z "$BLZG_DATA" ] && BLZG_DATA=/var/lib/blazegraph
-        [ -z "$BLZG_CONF" ] && BLZG_CONF=/etc/blazegraph
-        [ -z "$JOURNAL" ] && JOURNAL="${BLZG_DATA}"/blazegraph.jnl
+        [ -z "$BLZG_DATA" ] && BLZG_DATA=/var/lib/embergraph
+        [ -z "$BLZG_CONF" ] && BLZG_CONF=/etc/embergraph
+        [ -z "$JOURNAL" ] && JOURNAL="${BLZG_DATA}"/embergraph.jnl
         [ -z "$BLZG_USER" ] && BLZG_USER=blzg
         [ -z "$BLZG_GROUP" ] && BLZG_GROUP=blzg
-        [ -z "$BLZG_LOG" ] && BLZG_LOG=/var/log/blazegraph
+        [ -z "$BLZG_LOG" ] && BLZG_LOG=/var/log/embergraph
 
         # Update the journal file location
         sed -i -e "s|com\\.bigdata\\.journal\\.AbstractJournal\\.file=.*|org.embergraph.journal.AbstractJournal.file=$JOURNAL|" \
@@ -27,13 +27,13 @@ startBlazegraph() {
 
         # if $2 is set, this is an upgrade
         if ( [ -n $2 ] && [ "$RESTART_ON_UPGRADE" != "false" ] ) ; then
-            chkconfig blazegraph on
+            chkconfig embergraph on
             startBlazegraph
             # this is a fresh installation
         elif [ -z $2 ] ; then
-            echo "### NOT starting blazegraph after install, please execute"
-            echo " sudo service blazegraph start"
+            echo "### NOT starting embergraph after install, please execute"
+            echo " sudo service embergraph start"
         fi
-        # Change user name in config files that cannot read /etc/default/blazegraph;
-        # unfortunately we can do this only if /etc/default/blazegraph is in place before installation
-        sed -i -e "s/create 640 blzg blzg/create 640 $BLZG_USER $BLZG_GROUP/" /etc/logrotate.d/blazegraph
+        # Change user name in config files that cannot read /etc/default/embergraph;
+        # unfortunately we can do this only if /etc/default/embergraph is in place before installation
+        sed -i -e "s/create 640 blzg blzg/create 640 $BLZG_USER $BLZG_GROUP/" /etc/logrotate.d/embergraph

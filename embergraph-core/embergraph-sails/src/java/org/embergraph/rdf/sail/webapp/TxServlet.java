@@ -59,7 +59,7 @@ import org.embergraph.util.NV;
  * can not be reconciled, then the transaction will be unable to commit.
  * <p>
  * Read only transactions may also be requested in order to have snapshot
- * isolation across a series of queries. blazegraph provides snapshot isolation
+ * isolation across a series of queries. embergraph provides snapshot isolation
  * for queries regardless. The use of an explicit read only transaction is only
  * required to maintain the same snapshot across multiple queries.
  * 

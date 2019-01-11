@@ -149,7 +149,7 @@ public class BigdataSailFactory {
 
 	/**
 	 * Massage the service endpoint to ensure that it ends with
-	 * </code>/blazegraph</code>
+	 * </code>/embergraph</code>
 	 */
    @Deprecated // We are getting rid of this, right?
     static private String normalizeEndpoint(final String serviceEndpoint) {
@@ -175,12 +175,12 @@ public class BigdataSailFactory {
         	
 		} else if (serviceEndpoint.contains("/" + Config.PATH)
 				&& serviceEndpoint.endsWith("/")) {
-			// This is the case of /blazegraph/namespace/NAMESPACE/
+			// This is the case of /embergraph/namespace/NAMESPACE/
 
 			return serviceEndpoint.substring(0, serviceEndpoint.length() - 1);
 
 		} else if (serviceEndpoint.contains("/" + Config.PATH)) {
-			// This is the case of /blazegraph/namespace/NAMESPACE
+			// This is the case of /embergraph/namespace/NAMESPACE
 
 			return serviceEndpoint;
 

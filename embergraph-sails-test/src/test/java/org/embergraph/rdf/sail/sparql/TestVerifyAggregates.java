@@ -51,7 +51,7 @@ import org.embergraph.rdf.sparql.ast.VarNode;
  * Test suite for {@link VerifyAggregates}.
  * 
  * Note: This is a port of {@link org.embergraph.bop.solutions.TestGroupByState} that
- * does not depend on the blazegraph operator model. It was developed as part of
+ * does not depend on the embergraph operator model. It was developed as part of
  * BLZG-1176 to decouple the SPARQL parser from the database.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

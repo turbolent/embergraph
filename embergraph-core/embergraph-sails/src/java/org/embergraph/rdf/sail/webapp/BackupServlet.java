@@ -40,7 +40,7 @@ import org.embergraph.journal.Journal;
  * written to the backup file specified as the value of the Request Parameter,
  * i.e.
  * 
- * <code> curl --data-urlencode "file=/path/to/backup.jnl" http://localhost:9999/blazegraph/backup <code>
+ * <code> curl --data-urlencode "file=/path/to/backup.jnl" http://localhost:9999/embergraph/backup <code>
  * 
  * Will place the backup file in /path/to/backup.jnl. If not backupFile is specified, it will be written to backup.jnl 
  * in the directory where the java process is currently executing.
@@ -55,7 +55,7 @@ import org.embergraph.journal.Journal;
  * 			--data-urlencode "file=/path/to/backup.jnl" \
  * 			--data-urlencode "compress=true" \
  * 			--data-urlencode "block=true" \
- * 			http://localhost:9999/blazegraph/backup 
+ * 			http://localhost:9999/embergraph/backup
  * <code>
  * 
  */

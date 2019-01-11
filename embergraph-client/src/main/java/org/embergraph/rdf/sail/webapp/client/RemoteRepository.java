@@ -116,7 +116,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
     /**
      * Create a connection to a remote repository. This can be used with any
      * SPARQL end point as long as you restrict yourself to SPARQL QUERY or
-     * SPARQL UPDATE.  The other methods can only be used with a blazegraph
+     * SPARQL UPDATE.  The other methods can only be used with a embergraph
      * backend.
      * 
      * @param mgr

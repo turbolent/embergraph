@@ -16,7 +16,7 @@ You can then:
 
 ```
 cd embergraph-tgz-2.0.0
-./bin/blazegraph.sh start # also supports start|stop|restart|status
+./bin/embergraph.sh start # also supports start|stop|restart|status
 ```
 
 The general layout is:
@@ -26,7 +26,7 @@ bin/   #Scripts and other utilities
 conf/   #Configuration files for Journal properties, logging, and startup
 data/   #data directory.  The journal properties must be configured to use this.
 lib/    #Java libraries
-log/    #Log file.  The default is blazegraph.out
+log/    #Log file.  The default is embergraph.out
 pid/    #pid file
 war/    #web application sources for the Blazegraph Workbench
 ```

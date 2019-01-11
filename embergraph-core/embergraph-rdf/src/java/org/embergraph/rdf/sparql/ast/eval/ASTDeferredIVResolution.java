@@ -980,7 +980,7 @@ public class ASTDeferredIVResolution {
         		    // https://jira.blazegraph.com/browse/BLZG-2091 (Regression: IF + BOUND produce exception in 2.1.4)
         		    // any constant IV with set value should be resolved against target store,
         		    // but those IVs, which do not have materialized value, do not require resolution 
-        		    // https://github.com/blazegraph/database/pull/23#issuecomment-261355901
+        		    // https://github.com/embergraph/database/pull/23#issuecomment-261355901
         		    // fix failing TestTicket1747: not materialized IVs do not require resolution
         		    if (veBop instanceof Constant && ((Constant)veBop).get() instanceof IV &&
         		            ((IV) ((Constant)veBop).get()).hasValue()) {

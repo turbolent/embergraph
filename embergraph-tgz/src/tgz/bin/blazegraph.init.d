@@ -1,13 +1,13 @@
 #!/bin/sh
 #
-# /etc/init.d/blazegraph -- startup script for Blazegraph
+# /etc/init.d/embergraph -- startup script for Blazegraph
 #
 # chkconfig: 2345 65 25
 # description:  Blazegraph High Performance Graph Database
 #
-# processname: blazegraph
-# config: /etc/blazegraph/blazegraph
-# pid:  /var/run/blazegraph.pid
+# processname: embergraph
+# config: /etc/embergraph/embergraph
+# pid:  /var/run/embergraph.pid
 #
 # Modified from the tomcat7 script
 # Written by Miquel van Smoorenburg <miquels@cistron.nl>.
@@ -19,7 +19,7 @@
 # Modified for Blazegraph by Brad Bebee <beebs@systap.com>
 #
 ### BEGIN INIT INFO
-# Provides:          blazegraph
+# Provides:          embergraph
 # Required-Start:    $local_fs $remote_fs $network
 # Required-Stop:     $local_fs $remote_fs $network
 # Should-Start:      $named
@@ -40,7 +40,7 @@ if [ `id -u` -ne 0 ]; then
 	exit 1
 fi
  
-# Make sure blazegraph is started with system locale
+# Make sure embergraph is started with system locale
 if [ -r /etc/default/locale ]; then
 	. /etc/default/locale
 	export LANG
@@ -49,13 +49,13 @@ fi
 
 NAME="$(basename $0)"
 
-NAME=blazegraph
+NAME=embergraph
 DESC="Blazegraph High Performance Database"
 
-#Modify this value to the current location of your conf/blazegraph.
-#You may also create a symbolic link to to /etc/blazegraph/blazegraph.
+#Modify this value to the current location of your conf/embergraph.
+#You may also create a symbolic link to to /etc/embergraph/embergraph.
 DEFAULT=/etc/${NAME}/$NAME
-JVM_TMP=/tmp/blazegraph-$NAME-tmp
+JVM_TMP=/tmp/embergraph-$NAME-tmp
 
 unset ISBOOT
 if [ "${NAME:0:1}" = "S" -o "${NAME:0:1}" = "K" ]; then
@@ -137,7 +137,7 @@ if [ -f "$DEFAULT" ]; then
 	. "$DEFAULT"
 fi
 
-if [ ! -f "$BLZG_HOME/bin/blazegraph.sh" ]; then
+if [ ! -f "$BLZG_HOME/bin/embergraph.sh" ]; then
 	echo "$NAME is not installed"
 	exit 1
 fi
@@ -153,18 +153,18 @@ fi
 
 # Define other required variables
 BLZG_PID="/var/run/$NAME.pid"
-BLZG_SH="$BLZG_HOME/bin/blazegraph.sh"
+BLZG_SH="$BLZG_HOME/bin/embergraph.sh"
 
 # Look for Java Secure Sockets Extension (JSSE) JARs
 if [ -z "${JSSE_HOME}" -a -r "${JAVA_HOME}/jre/lib/jsse.jar" ]; then
     JSSE_HOME="${JAVA_HOME}/jre/"
 fi
 
-blazegraph_sh() {
+embergraph_sh() {
 	# Escape any double quotes in the value of JAVA_OPTS
 	JAVA_OPTS="$(echo $JAVA_OPTS | sed 's/\"/\\\"/g')"
 
-	# Define the command to run Tomcat's blazegraph.sh as a daemon
+	# Define the command to run Tomcat's embergraph.sh as a daemon
 	# set -a tells sh to export assigned variables to spawned shells.
 	BLZGCMD_SH="set -a; JAVA_HOME=\"$JAVA_HOME\"; \
 		source \"$DEFAULT\"; \
@@ -172,15 +172,15 @@ blazegraph_sh() {
 		BLZG_BASE=\"$BLZG_BASE\"; \
 		JAVA_OPTS=\"$JAVA_OPTS\"; \
 		BLZG_PID=\"$BLZG_PID\"; \
-		BLZG_LOG=\"$BLZG_LOG\"/blazegraph.out; \
+		BLZG_LOG=\"$BLZG_LOG\"/embergraph.out; \
 		BLZG_TMPDIR=\"$BLZG_TMPDIR\"; \
 		LANG=\"$LANG\"; JSSE_HOME=\"$JSSE_HOME\"; \
 		cd \"$BLZG_BASE\"; \
 		\"$BLZG_SH\" $@"
 
 	set +e
-	touch "$BLZG_PID" "$BLZG_LOG"/blazegraph.out
-	chown $BLZG_USER "$BLZG_PID" "$BLZG_LOG"/blazegraph.out
+	touch "$BLZG_PID" "$BLZG_LOG"/embergraph.out
+	chown $BLZG_USER "$BLZG_PID" "$BLZG_LOG"/embergraph.out
 	$SU - $BLZG_USER -c "$BLZGCMD_SH start"
 	status="$?"
 
@@ -231,7 +231,7 @@ case "$1" in
 		exit 1
 	}
 	chown $BLZG_USER "$JVM_TMP"
-	blazegraph_sh start 
+	embergraph_sh start
 
 	sleep 5
 	;;

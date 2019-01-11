@@ -3,8 +3,8 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_1.xsd"
       version="3.1">
-  <display-name>Bigdata</display-name>
-  <description>Bigdata</description>
+  <display-name>Embergraph</display-name>
+  <description>Embergraph</description>
   <context-param>
    <description>The property file (for a standalone database instance) or the
    jini configuration file (for a federation).  The file MUST end with either
@@ -28,7 +28,7 @@
    <param-value>RWStore.properties</param-value>
   </context-param>
   <context-param>
-   <description>The default bigdata namespace of for the triple or quad store
+   <description>The default embergraph namespace of for the triple or quad store
    instance to be exposed.</description>
    <param-name>namespace</param-name>
    <param-value>kb</param-value>
@@ -81,7 +81,7 @@
    <param-value>org.embergraph.blueprints.webapp.BlueprintsServlet</param-value>
   </context-param>
   <listener>
-   <listener-class>org.embergraph.rdf.sail.webapp.BigdataRDFServletContextListener</listener-class>
+   <listener-class>org.embergraph.rdf.sail.webapp.EmbergraphRDFServletContextListener</listener-class>
   </listener>
   <servlet>
    <servlet-name>REST API</servlet-name>

@@ -1,10 +1,10 @@
 #!/bin/sh
 set -e
 
-[ -f /etc/default/blazegraph ] && . /etc/default/blazegraph
+[ -f /etc/default/embergraph ] && . /etc/default/embergraph
 
 stopBlazegraph() {
-    service blazegraph stop || true
+    service embergraph stop || true
 }
 
 case "$1" in

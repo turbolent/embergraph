@@ -18,15 +18,15 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.turbolent</groupId>
-    <artifactId>blazegraph-parent</artifactId>
+    <groupId>org.embergraph</groupId>
+    <artifactId>embergraph-parent</artifactId>
     <version>2.1.5-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>junit-ext</artifactId>
   <version>2.1.5-SNAPSHOT</version>
   <name>Embergraph Junit Extensions</name>
-  <description>Blazegraph JUnit Extensions</description>
+  <description>Embergraph JUnit Extensions</description>
   <packaging>jar</packaging>
   <licenses>
     <license>
@@ -45,7 +45,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
           <maxmemory>1000m</maxmemory>
           <author>true</author>
           <version>true</version>
-          <doctitle><![CDATA[<h1>Blazegraph Junit Extensions</h1>]]></doctitle>
+          <doctitle><![CDATA[<h1>Embergraph Junit Extensions</h1>]]></doctitle>
           <bottom><![CDATA[ <i> 
                            Copyright (C) SYSTAP, LLC DBA Blazegraph 2006-2012.  All rights reserved.<p>
 

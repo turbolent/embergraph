@@ -281,9 +281,9 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     }
 
     /**
-     * Create a manager that is not aware of a specific blazegraph backend. This
+     * Create a manager that is not aware of a specific embergraph backend. This
      * constructor is intended for patterns where a sparql end point is
-     * available but the top-level serviceURL for blazegraph is either not
+     * available but the top-level serviceURL for embergraph is either not
      * visible or not known:
      * 
      * <pre>
@@ -291,7 +291,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
      * </pre>
      * 
      * The same pattern MAY be used to perform SPARQL QUERY or SPARQL UPDATE
-     * operations against non-blazegraph sparql end points.
+     * operations against non-embergraph sparql end points.
      */
     public RemoteRepositoryManager() {
 

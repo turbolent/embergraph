@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# /etc/init.d/blazegraph -- startup script for Blazegraph
+# /etc/init.d/embergraph -- startup script for Blazegraph
 #
 # Modified from the tomcat7 script
 # Written by Miquel van Smoorenburg <miquels@cistron.nl>.
@@ -11,7 +11,7 @@
 # Additional improvements by Jason Brittain <jason.brittain@mulesoft.com>.
 #
 ### BEGIN INIT INFO
-# Provides:          blazegraph
+# Provides:          embergraph
 # Required-Start:    $local_fs $remote_fs $network
 # Required-Stop:     $local_fs $remote_fs $network
 # Should-Start:      $named
@@ -25,17 +25,17 @@
 set -e
 
 PATH=/bin:/usr/bin:/sbin:/usr/sbin
-NAME=blazegraph
+NAME=embergraph
 DESC="Blazegraph High Performance Database"
 DEFAULT=/etc/default/$NAME
-JVM_TMP=/tmp/blazegraph-$NAME-tmp
+JVM_TMP=/tmp/embergraph-$NAME-tmp
 
 if [ `id -u` -ne 0 -a "$1" != "status" ]; then
 	echo "You need root privileges to run this script"
 	exit 1
 fi
 
-# Make sure blazegraph is started with system locale
+# Make sure embergraph is started with system locale
 if [ -r /etc/default/locale ]; then
 	. /etc/default/locale
 	export LANG
@@ -102,7 +102,7 @@ BLZG_SECURITY=no
 # overwrite settings from default file
 [ -f "$DEFAULT" ] && . "$DEFAULT"
 
-[ -z "$BLZG_SH" ] && BLZG_SH="/usr/bin/blazegraph"
+[ -z "$BLZG_SH" ] && BLZG_SH="/usr/bin/embergraph"
 if [ ! -f "$BLZG_SH" ]; then
 	log_failure_msg "$NAME is not installed"
 	exit 1
@@ -112,7 +112,7 @@ fi
 
 [ -z "$BLZG_TMPDIR" ] && BLZG_TMPDIR="$JVM_TMP"
 
-# Set the JSP compiler if set in the blazegraph.default file
+# Set the JSP compiler if set in the embergraph.default file
 [ -n "$JSP_COMPILER" ] && JAVA_OPTS="$JAVA_OPTS -Dbuild.compiler=\"$JSP_COMPILER\""
 
 SECURITY=""
@@ -124,11 +124,11 @@ BLZG_PID="/var/run/$NAME.pid"
 # Look for Java Secure Sockets Extension (JSSE) JARs
 [ -z "${JSSE_HOME}" -a -r "${JAVA_HOME}/jre/lib/jsse.jar" ] && JSSE_HOME="${JAVA_HOME}/jre/"
 
-blazegraph_sh() {
+embergraph_sh() {
 	# Escape any double quotes in the value of JAVA_OPTS
 	JAVA_OPTS="$(echo $JAVA_OPTS | sed 's/\"/\\\"/g')"
 
-	# Define the command to run Tomcat's blazegraph.sh as a daemon
+	# Define the command to run Tomcat's embergraph.sh as a daemon
 	# set -a tells sh to export assigned variables to spawned shells.
 	# TODO: BLZG_TMPDIR is unused in downstream script
 	# TODO: JAVA_OPTS is overwritten in downstream script
@@ -140,7 +140,7 @@ blazegraph_sh() {
 		BLZG_HOME=\"$BLZG_HOME\"; \
 		JAVA_OPTS=\"$JAVA_OPTS\"; \
 		BLZG_PID=\"$BLZG_PID\"; \
-		BLZG_LOG=\"$BLZG_LOG\"/blazegraph.log; \
+		BLZG_LOG=\"$BLZG_LOG\"/embergraph.log; \
 		BLZG_TMPDIR=\"$BLZG_TMPDIR\"; \
 		LANG=\"$LANG\"; \
 		JSSE_HOME=\"$JSSE_HOME\"; \
@@ -152,7 +152,7 @@ blazegraph_sh() {
 		BLZGCMD_SH="'$BLZGCMD_SH'"
 	fi
 
-	# Run the blazegraph.sh script as a daemon
+	# Run the embergraph.sh script as a daemon
 	set +e
 	touch "$BLZG_PID" "$BLZG_LOG"/${NAME}.log
 	chown $BLZG_USER "$BLZG_PID" "$BLZG_LOG"/${NAME}.log
@@ -183,7 +183,7 @@ case "$1" in
 
 		# Regenerate POLICY_CACHE file
 		#	umask 022
-		#	echo "// AUTO-GENERATED FILE from /etc/blazegraph/policy.d/" \
+		#	echo "// AUTO-GENERATED FILE from /etc/embergraph/policy.d/" \
 		#		> "$POLICY_CACHE"
 		#	echo ""  >> "$POLICY_CACHE"
 		#	cat $BLZG_CONF/policy.d/*.policy \
@@ -197,7 +197,7 @@ case "$1" in
 		}
 		chown $BLZG_USER "$JVM_TMP"
 
-		blazegraph_sh start $SECURITY
+		embergraph_sh start $SECURITY
 		sleep 5
 		if start-stop-daemon --test --start --pidfile "$BLZG_PID" \
 			--user $BLZG_USER --exec "$JAVA_HOME/bin/java" \

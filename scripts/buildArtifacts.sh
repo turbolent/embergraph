@@ -37,7 +37,7 @@ fi
 mkdir -p "${ARTIFACT_DIR}"
 
 #copy the war artifacts
-WAR_ARTIFACTS="bigdata blazegraph"
+WAR_ARTIFACTS="bigdata embergraph"
 
 for file in $WAR_ARTIFACTS; do
     EXT=war
@@ -52,7 +52,7 @@ for file in $WAR_ARTIFACTS; do
 done
 
 #copy the jar artifacts
-JAR_ARTIFACTS="bigdata blazegraph"
+JAR_ARTIFACTS="bigdata embergraph"
 
 for file in $JAR_ARTIFACTS; do
     EXT=jar
@@ -68,7 +68,7 @@ done
 
 #Copy the debian deployer
 EXT=deb
-file=blazegraph
+file=embergraph
 ARTIFACT=`find "${BASE_DIR}/../${file}-${EXT}" -type f -name "${file}-*.${EXT}" | head -1`
 
 if [ -f "${ARTIFACT}" ] ; then
@@ -80,7 +80,7 @@ fi
 
 #Copy the rpm deployer
 EXT=rpm
-file=blazegraph
+file=embergraph
 ARTIFACT=`find "${BASE_DIR}/../${file}-${EXT}" -type f -name "${file}-*.${EXT}" | head -1`
 
 if [ -f "${ARTIFACT}" ] ; then
@@ -93,7 +93,7 @@ fi
 #Copy the tarball deployer
 EXT=tgz
 FILE_EXT="tar.gz tar.bz2 zip"
-file=blazegraph
+file=embergraph
 
 for tarball in $FILE_EXT; do 
    

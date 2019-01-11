@@ -14,7 +14,7 @@ PARENT_POM="${BASE_DIR}"/../pom.xml
 CURRENT_VERSION=`grep "CURRENT_VERSION" ${BASE_DIR}/version.properties | cut -d= -f2`
 #GIT REPOS to push to.  
 #This must be configured as ${GIT_CMD} remote add sourceforge ssh://beebs@git.code.sf.net/p/bigdata/git
-REMOTE_GITS="origin blazegraph"
+REMOTE_GITS="origin embergraph"
 #Uncomment to only push to private GIT
 #REMOTE_GITS="origin"
 
@@ -65,7 +65,7 @@ echo "Deploying to Maven Central..."
 
 "${BASE_DIR}"/mavenCentral.sh
 
-echo "Publishing javadoc to https://blazegraph.github.io/database/apidocs/index.html..."
+echo "Publishing javadoc to https://embergraph.github.io/database/apidocs/index.html..."
 
 "${BASE_DIR}"/publishJavadoc.sh
 

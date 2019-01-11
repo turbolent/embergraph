@@ -27,8 +27,8 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.turbolent</groupId>
-    <artifactId>blazegraph-parent</artifactId>
+    <groupId>org.embergraph</groupId>
+    <artifactId>embergraph-parent</artifactId>
     <version>2.1.5-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
@@ -36,7 +36,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
   <version>2.1.5-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>Embergraph Sparql Grammar</name>
-  <description>Blazegraph(TM) SPARQL Grammar</description>
+  <description>Embergraph SPARQL Grammar</description>
   <!-- properties are now in the parent POM. -->
   <properties>
     <javacc.home>/opt/javacc-5.0</javacc.home>

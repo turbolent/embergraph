@@ -1,9 +1,9 @@
-NAME=blazegraph
+NAME=embergraph
 BLZG_HOME=/usr/share/${NAME}
 BLZG_CONF=/etc/${NAME}
 BLZG_LOG=/var/log/${NAME}
 BLZG_DATA=/var/lib/${NAME}
-JOURNAL_FILE=blazegraph.jnl
+JOURNAL_FILE=embergraph.jnl
 JOURNAL="${BLZG_DATA}"/"${JOURNAL_FILE}"
 # Run Blazegraph as this user ID and group ID
 BLZG_USER=blzg

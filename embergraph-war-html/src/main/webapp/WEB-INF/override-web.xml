@@ -22,11 +22,11 @@
    to a joined service in the met quorum based on the configured load
    balancer policy.
    
-   Requests directed to /bigdata/LBS/leader are proxied to the quorum
+   Requests directed to /embergraph/LBS/leader are proxied to the quorum
    leader - this URL must be used for non-idempotent requests
    (updates).
    
-   Requests directed to /bigdata/LBS/read are load balanced over the
+   Requests directed to /embergraph/LBS/read are load balanced over the
    services joined with the met quourm.  This URL may only be used
    with idempotent requests (reads).
    

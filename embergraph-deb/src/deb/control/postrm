@@ -1,9 +1,9 @@
 #!/bin/sh
 set -e
 
-[ -f /etc/default/blazegraph ] && . /etc/default/blazegraph
-[ -z "$BLZG_LOG" ] && BLZG_LOG=/var/log/blazegraph
-[ -z "$BLZG_DATA" ] && BLZG_DATA=/var/lib/blazegraph
+[ -f /etc/default/embergraph ] && . /etc/default/embergraph
+[ -z "$BLZG_LOG" ] && BLZG_LOG=/var/log/embergraph
+[ -z "$BLZG_DATA" ] && BLZG_DATA=/var/lib/embergraph
 
 case "$1" in
     remove)
@@ -18,7 +18,7 @@ case "$1" in
         [ -z "$BLZG_USER" ] && BLZG_USER="blzg"
         [ -z "$BLZG_GROUP" ] && BLZG_GROUP="blzg"
         # Remove service
-        update-rc.d blazegraph remove >/dev/null || true
+        update-rc.d embergraph remove >/dev/null || true
 
         # Remove logs and data
         rm -rf $BLZG_LOG $BLZG_DATA

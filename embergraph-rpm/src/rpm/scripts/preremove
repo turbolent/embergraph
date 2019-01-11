@@ -1,10 +1,10 @@
 #!/bin/sh
 set -e
 
-[ -f /etc/blazegraph/blazegraph ] && . /etc/blazegraph/blazegraph
+[ -f /etc/embergraph/embergraph ] && . /etc/embergraph/embergraph
 
 stopBlazegraph() {
-    service blazegraph stop || true
+    service embergraph stop || true
 }
 
         stopBlazegraph

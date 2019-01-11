@@ -1,4 +1,4 @@
-/var/log/blazegraph/blazegraph.out {
+/var/log/embergraph/embergraph.out {
   copytruncate
   weekly
   rotate 52

@@ -1,5 +1,5 @@
 #!/bin/sh
-NAME=blazegraph
+NAME=embergraph
 if [ -z BLZG_HOME ] ; then
    #Try to use the current directory, if this is not passed in.
    BLZG_HOME=`pwd`

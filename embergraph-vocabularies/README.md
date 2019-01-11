@@ -1,7 +1,7 @@
-#Blazegraph Vocabularies
-Blazegraph Custom Vocabularies and Inline URI factories are a great way to get the best load and query performance from Blazegraph.   This package contains some commonly used vocabularies for public data sets.
+# Embergraph Vocabularies
+Embergraph Custom Vocabularies and Inline URI factories are a great way to get the best load and query performance from Embergraph.   This package contains some commonly used vocabularies for public data sets.
 
-##Pubchem
+## Pubchem
 The [Pubchem](https://pubchem.ncbi.nlm.nih.gov/rdf/) data set is widely used in industry and research. 
 
 _PubChemRDF content includes a number of semantic relationships, such as those between compounds and substances, the chemical descriptors associated with compounds and substances, the relationships between compounds, the provenance and attribution metadata of substances, and the concise bioactivity data view of substances._
@@ -76,7 +76,7 @@ Update the file below `dataloader.xml` with your local configuration for `pubche
 Then post it into your running instance.
 
 ```
-curl -X POST --data-binary @dataloader.xml --header 'Content-Type:application/xml' http://localhost:9999/blazegraph/dataloader
+curl -X POST --data-binary @dataloader.xml --header 'Content-Type:application/xml' http://localhost:9999/embergraph/dataloader
 ```
 
 This will bulk load the namespace `pubchem` with the files from `/path/to/pubchem-core`.

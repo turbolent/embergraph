@@ -2,10 +2,10 @@
 set -e
 
 [ -z "${JAVA_HOME}" ] && JAVA_HOME=/usr
-[ -z "${BLZG_HOME}" ] && BLZG_HOME=/usr/share/blazegraph
-[ -z "${BLZG_LOG}" ] && BLZG_LOG=/var/log/blazegraph/blazgraph.log
-[ -z "${BLZG_DATA}" ] && BLZG_DATA=/var/lib/blazegraph
-[ -z "${BLZG_CONF}" ] && BLZG_CONF=/etc/blazegraph
+[ -z "${BLZG_HOME}" ] && BLZG_HOME=/usr/share/embergraph
+[ -z "${BLZG_LOG}" ] && BLZG_LOG=/var/log/embergraph/blazgraph.log
+[ -z "${BLZG_DATA}" ] && BLZG_DATA=/var/lib/embergraph
+[ -z "${BLZG_CONF}" ] && BLZG_CONF=/etc/embergraph
 [ -z "${LOGGING_CONFIG}" ] && LOGGING_CONFIG=${BLZG_CONF}/logging.properties
 [ -z "${LOG4J_CONFIG}" ] && LOG4J_CONFIG=${BLZG_CONF}/log4j.properties
 [ -z "${NSS}" ] && NSS="org.embergraph.rdf.sail.webapp.NanoSparqlServer"
@@ -19,7 +19,7 @@ else
    export LIB_DIR=${INSTALL_DIR}/lib
 fi
 
-JETTY_CLASSPATH=`find ${LIB_DIR} -name 'blazegraph-*.jar' -print0 | tr '\0' ':'`:`find ${LIB_DIR} -name '*.jar' -print0 | tr '\0' ':'`
+JETTY_CLASSPATH=`find ${LIB_DIR} -name 'embergraph-*.jar' -print0 | tr '\0' ':'`:`find ${LIB_DIR} -name '*.jar' -print0 | tr '\0' ':'`
 
 [ -d "${BLZG_DATA}" ] || mkdir -p "${BLZG_DATA}"
 
@@ -87,7 +87,7 @@ case "$1" in
                 rm -f "$BLZG_PID"
 		exit 0
             else
-                echo -ne $"`date` : `hostname` : bringing blazegraph service down ... "
+                echo -ne $"`date` : `hostname` : bringing embergraph service down ... "
                 kill $pid
                 rm -f "$BLZG_PID"
 		exit 0
