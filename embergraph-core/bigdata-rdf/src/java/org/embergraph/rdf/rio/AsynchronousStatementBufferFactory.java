@@ -2728,7 +2728,7 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
          * NOP
          * 
          * @see #aggregateAsync(KVO[],
-         *      com.bigdata.rdf.lexicon.Term2IdWriteProc.Result, Split)
+         *      org.embergraph.rdf.lexicon.Term2IdWriteProc.Result, Split)
          */
         public void aggregate(final Term2IdWriteProc.Result result,
                 final Split split) {
@@ -2826,7 +2826,7 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
          * NOP
          * 
          * @see #aggregateAsync(KVO[],
-         *      com.bigdata.rdf.lexicon.BlobsWriteProc.Result, Split)
+         *      org.embergraph.rdf.lexicon.BlobsWriteProc.Result, Split)
          */
         public void aggregate(final BlobsWriteProc.Result result,
                 final Split split) {

@@ -28,7 +28,7 @@ import cutthecrap.utils.striterators.ICloseableIterator;
  * local machine).
  * 
  * <pre>
- * LOAD  <file:///Users/bryan/Documents/workspace/BIGDATA_RELEASE_1_2_0/embergraph-gom/src/samples/com/bigdata/gom/samples/example2.trig>
+ * LOAD  <file:///Users/bryan/Documents/workspace/BIGDATA_RELEASE_1_2_0/embergraph-gom/src/samples/org/embergraph/gom/samples/example2.trig>
  * </pre>
  * 
  * You can then run this example, and it will construct the graph. You can load
@@ -83,7 +83,7 @@ public class Example1 implements Callable<Void> {
         /**
          * The top-level SPARQL end point for a NanoSparqlServer instance.
          */
-        final String serviceURL = "http://localhost:" + Config.BLAZEGRAPH_HTTP_PORT + "/"
+        final String serviceURL = "http://localhost:" + Config.HTTP_PORT + "/"
                 + BigdataStatics.getContextPath();
 
         /**

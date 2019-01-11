@@ -350,7 +350,7 @@ public class TestHTree extends AbstractHTreeTestCase {
 
 //    /**
 //     * Unit test for
-//     * {@link HTree#addLevel(DirectoryPage, int, int, com.bigdata.htree.HTree.AbstractPage)}
+//     * {@link HTree#addLevel(DirectoryPage, int, int, org.embergraph.htree.HTree.AbstractPage)}
 //     * .
 //     */
 //    public void test_example1_splitDir_addressBits2_splitBits1() {
@@ -446,7 +446,7 @@ public class TestHTree extends AbstractHTreeTestCase {
 //    
 //    /**
 //     * Unit test for
-//     * {@link HTree#addLevel(DirectoryPage, int, int, com.bigdata.htree.HTree.AbstractPage)}
+//     * {@link HTree#addLevel(DirectoryPage, int, int, org.embergraph.htree.HTree.AbstractPage)}
 //     * .
 //     */
 //    public void test_example1_splitDir_addressBits2_splitBits2() {

@@ -55,7 +55,7 @@ import org.embergraph.rdf.error.SparqlTypeErrorException;
  *
  */
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public class ProjectedConstraint extends com.bigdata.bop.constraint.Constraint {
+public class ProjectedConstraint extends org.embergraph.bop.constraint.Constraint {
 
     private static final long serialVersionUID = 1L;
     

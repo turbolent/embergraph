@@ -1,4 +1,4 @@
-package com.bigdata.samples;
+package org.embergraph.samples;
 
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;

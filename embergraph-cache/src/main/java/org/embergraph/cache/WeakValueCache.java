@@ -327,7 +327,7 @@ final public class WeakValueCache<K,T>
      * @param resetCounters
      *            When true the counters will be reset to zero.
      * 
-     * @todo modify to use {@link com.bigdata.counters.CounterSet}.
+     * @todo modify to use {@link org.embergraph.counters.CounterSet}.
      */
     synchronized public void reportStatistics( boolean resetCounters )
     {

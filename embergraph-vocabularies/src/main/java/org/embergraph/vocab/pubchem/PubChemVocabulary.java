@@ -35,7 +35,7 @@ import org.embergraph.rdf.vocab.core.BigdataCoreVocabulary_v20151210;
  * Use the vocabulary by adding a property to your journal file per below.
  * 
  * <code>
- * com.bigdata.rdf.store.AbstractTripleStore.vocabularyClass=com.blazegraph.vocab.pubchem.PubChemVocabulary
+ * org.embergraph.rdf.store.AbstractTripleStore.vocabularyClass=org.embergraph.vocab.pubchem.PubChemVocabulary
  * </code>
  * 
  * @author beebs

@@ -37,7 +37,7 @@ public class TestHelper extends TestCase {
       final String sparqlEndpointURL = args[0];
 
       final RemoteRepositoryManager mgr = new RemoteRepositoryManager(
-            "localhost:" + Config.BLAZEGRAPH_HTTP_PORT /* serviceURLIsIngored */);
+            "localhost:" + Config.HTTP_PORT /* serviceURLIsIngored */);
 
       try {
 

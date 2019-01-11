@@ -97,7 +97,7 @@ public class ServiceMetricsCollector implements IGangliaMetricsCollector {
              * nodes would use the same name for a given performance counter.
              * 
              * / bigdata10.bigdata.com / service /
-             * com.bigdata.service.IMetadataService /
+             * org.embergraph.service.IMetadataService /
              * f4c2ee13-0679-494d-913d-76d14f7d0385 / ...
              */
 //            final String s = path.substring(pathPrefix.length());

@@ -9,5 +9,5 @@ WHERE {
   ?_var10 a <http://www.rdfabout.com/rdf/schema/vote/Option>. # 315k, 300ms for AP scan.
   ?_var10 <http://www.rdfabout.com/rdf/schema/vote/votedBy> ?_var3 . #2M, 17623ms for AP scan.
   hint:Prior hint:hashJoin "true" . # use a hash join.
-  hint:Prior hint:com.bigdata.bop.IPredicate.keyOrder "PCSO" . # use a specific index (default is POCS)
+  hint:Prior hint:org.embergraph.bop.IPredicate.keyOrder "PCSO" . # use a specific index (default is POCS)
 }

@@ -67,7 +67,7 @@ public class NeedsMaterializationBOp extends XSDBooleanIVValueExpression {
     }
 
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      */
     public NeedsMaterializationBOp(final NeedsMaterializationBOp op) {
         super(op);

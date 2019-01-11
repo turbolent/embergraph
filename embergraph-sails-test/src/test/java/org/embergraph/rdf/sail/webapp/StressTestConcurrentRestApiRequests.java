@@ -458,7 +458,7 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
             restApiOps
                     .add(new SparqlUpdate(
                             sharedTestState,
-                            "LOAD <file:src/test/java/com/bigdata/rdf/sail/webapp/dataset-update.trig>"));
+                            "LOAD <file:src/test/java/org/embergraph/rdf/sail/webapp/dataset-update.trig>"));
 
             restApiOps.add(new SparqlUpdate(sharedTestState,
                     "INSERT {?x rdfs:label ?y . } WHERE {?x foaf:name ?y }"));

@@ -217,7 +217,7 @@ abstract public class AbstractSolutionBuffer<R> extends
 
 //            final IChunkedOrderedIterator<E> itr2 = new ChunkedOrderedStriterator(
 //                    itr)
-//                    .addFilter(new com.bigdata.striterator.Resolver<Iterator<ISolution<E>>, ISolution<E>, E>() {
+//                    .addFilter(new org.embergraph.striterator.Resolver<Iterator<ISolution<E>>, ISolution<E>, E>() {
 //
 //                        protected E resolve(ISolution<E> e) {
 //

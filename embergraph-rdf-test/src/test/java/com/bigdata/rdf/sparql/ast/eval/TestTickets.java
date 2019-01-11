@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * Created on Sep 29, 2011
  */
 
-package com.bigdata.rdf.sparql.ast.eval;
+package org.embergraph.rdf.sparql.ast.eval;
 
 import java.util.List;
 
@@ -2655,8 +2655,8 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
    
    /**
     * Ticket: https://github.com/SYSTAP/bigdata-gpu/issues/368
-    * ClassCast Exception when Loading LUBM: com.bigdata.rdf.internal.impl.literal.XSDBooleanIV
-    * cannot be cast to com.bigdata.rdf.internal.impl.literal.NumericIV
+    * ClassCast Exception when Loading LUBM: org.embergraph.rdf.internal.impl.literal.XSDBooleanIV
+    * cannot be cast to org.embergraph.rdf.internal.impl.literal.NumericIV
     */
    public void testTicketBigdataGPU368() throws Exception {
        

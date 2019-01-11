@@ -116,38 +116,38 @@ public class TestBigdataSailWithQuads extends AbstractBigdataSailTestCase {
         // test suite for the history index.
         suite.addTestSuite(TestHistoryIndex.class);
 
-		suite.addTestSuite(com.bigdata.rdf.sail.TestRollbacks.class);
-		suite.addTestSuite(com.bigdata.rdf.sail.TestRollbacksTx.class);
-		suite.addTestSuite(com.bigdata.rdf.sail.TestMROWTransactionsNoHistory.class);
-		suite.addTestSuite(com.bigdata.rdf.sail.TestMROWTransactionsWithHistory.class);
+		suite.addTestSuite(org.embergraph.rdf.sail.TestRollbacks.class);
+		suite.addTestSuite(org.embergraph.rdf.sail.TestRollbacksTx.class);
+		suite.addTestSuite(org.embergraph.rdf.sail.TestMROWTransactionsNoHistory.class);
+		suite.addTestSuite(org.embergraph.rdf.sail.TestMROWTransactionsWithHistory.class);
         
-		suite.addTestSuite(com.bigdata.rdf.sail.TestMillisecondPrecisionForInlineDateTimes.class);
+		suite.addTestSuite(org.embergraph.rdf.sail.TestMillisecondPrecisionForInlineDateTimes.class);
 		
-        suite.addTestSuite(com.bigdata.rdf.sail.TestTicket275.class);
-        suite.addTestSuite(com.bigdata.rdf.sail.TestTicket276.class);
-        suite.addTestSuite(com.bigdata.rdf.sail.TestTicket348.class);
-//        suite.addTestSuite(com.bigdata.rdf.sail.TestTicket352.class);
-        suite.addTestSuite(com.bigdata.rdf.sail.TestTicket353.class);
-        suite.addTestSuite(com.bigdata.rdf.sail.TestTicket355.class);
-//      suite.addTestSuite(com.bigdata.rdf.sail.TestTicket361.class);
-	suite.addTestSuite(com.bigdata.rdf.sail.TestTicket422.class);
-		suite.addTestSuite(com.bigdata.rdf.sail.TestTicket1747.class);
-        suite.addTestSuite(com.bigdata.rdf.sail.TestTicket1753.class);
+        suite.addTestSuite(org.embergraph.rdf.sail.TestTicket275.class);
+        suite.addTestSuite(org.embergraph.rdf.sail.TestTicket276.class);
+        suite.addTestSuite(org.embergraph.rdf.sail.TestTicket348.class);
+//        suite.addTestSuite(org.embergraph.rdf.sail.TestTicket352.class);
+        suite.addTestSuite(org.embergraph.rdf.sail.TestTicket353.class);
+        suite.addTestSuite(org.embergraph.rdf.sail.TestTicket355.class);
+//      suite.addTestSuite(org.embergraph.rdf.sail.TestTicket361.class);
+	suite.addTestSuite(org.embergraph.rdf.sail.TestTicket422.class);
+		suite.addTestSuite(org.embergraph.rdf.sail.TestTicket1747.class);
+        suite.addTestSuite(org.embergraph.rdf.sail.TestTicket1753.class);
 
-        suite.addTestSuite(com.bigdata.rdf.sail.TestTicket1755.class);
-        suite.addTestSuite(com.bigdata.rdf.sail.TestTicket1785.class);
-        suite.addTestSuite(com.bigdata.rdf.sail.TestTicket1788.class);
+        suite.addTestSuite(org.embergraph.rdf.sail.TestTicket1755.class);
+        suite.addTestSuite(org.embergraph.rdf.sail.TestTicket1785.class);
+        suite.addTestSuite(org.embergraph.rdf.sail.TestTicket1788.class);
 
-        suite.addTestSuite(com.bigdata.rdf.sail.DavidsTestBOps.class);
+        suite.addTestSuite(org.embergraph.rdf.sail.DavidsTestBOps.class);
 
-        suite.addTestSuite(com.bigdata.rdf.sail.TestLexJoinOps.class);
-        suite.addTestSuite(com.bigdata.rdf.sail.TestMaterialization.class);
-        suite.addTestSuite(com.bigdata.rdf.sail.TestTicket632.class);
-        suite.addTestSuite(com.bigdata.rdf.sail.TestTicket669.class);
-        suite.addTestSuite(com.bigdata.rdf.sail.TestTicket1889.class);
-        suite.addTestSuite(com.bigdata.rdf.sail.TestTicket4249.class);
+        suite.addTestSuite(org.embergraph.rdf.sail.TestLexJoinOps.class);
+        suite.addTestSuite(org.embergraph.rdf.sail.TestMaterialization.class);
+        suite.addTestSuite(org.embergraph.rdf.sail.TestTicket632.class);
+        suite.addTestSuite(org.embergraph.rdf.sail.TestTicket669.class);
+        suite.addTestSuite(org.embergraph.rdf.sail.TestTicket1889.class);
+        suite.addTestSuite(org.embergraph.rdf.sail.TestTicket4249.class);
 
-        suite.addTestSuite(com.bigdata.rdf.sail.TestNoExceptions.class);
+        suite.addTestSuite(org.embergraph.rdf.sail.TestNoExceptions.class);
 
         // The Sesame TCK, including the SPARQL test suite.
         {
@@ -189,7 +189,7 @@ public class TestBigdataSailWithQuads extends AbstractBigdataSailTestCase {
 
             /*
              * Note: The SPARQL 1.1 update test suite is run from
-             * com.bigdata.rdf.sparql.ast.eval.update.TestAll.
+             * org.embergraph.rdf.sparql.ast.eval.update.TestAll.
              */
 //            tckSuite.addTestSuite(BigdataSPARQLUpdateTest.class);
             try {

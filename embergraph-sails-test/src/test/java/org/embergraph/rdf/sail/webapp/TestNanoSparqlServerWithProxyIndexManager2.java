@@ -65,7 +65,7 @@ public class TestNanoSparqlServerWithProxyIndexManager2<S extends IIndexManager>
 
 	/**
 	 * The {@link IIndexManager} for the backing persistence engine (may be a
-	 * {@link Journal} or {@link com.bigdata.service.jini.JiniFederation}).
+	 * {@link Journal} or {@link org.embergraph.service.jini.JiniFederation}).
 	 */
 	private IIndexManager m_indexManager;
 
@@ -111,7 +111,7 @@ public class TestNanoSparqlServerWithProxyIndexManager2<S extends IIndexManager>
 	 * which is in turn running against the caller's {@link IIndexManager}.
 	 * 
 	 * @param indexManager
-	 *            The {@link Journal} or {@link com.bigdata.service.jini.JiniFederation}.
+	 *            The {@link Journal} or {@link org.embergraph.service.jini.JiniFederation}.
 	 * @param testMode
 	 *            Identifies what mode the kb instance will be using.
 	 */

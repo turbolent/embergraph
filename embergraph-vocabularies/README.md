@@ -10,8 +10,8 @@ _PubChemRDF content includes a number of semantic relationships, such as those b
 To use the Pubchem vocabulary include the following lines your namespace properties file:
 
 ```
-com.bigdata.rdf.store.AbstractTripleStore.inlineURIFactory=com.blazegraph.vocab.pubchem.PubChemInlineURIFactory
-com.bigdata.rdf.store.AbstractTripleStore.vocabularyClass=com.blazegraph.vocab.pubchem.PubChemVocabulary
+org.embergraph.rdf.store.AbstractTripleStore.inlineURIFactory=org.embergraph.vocab.pubchem.PubChemInlineURIFactory
+org.embergraph.rdf.store.AbstractTripleStore.vocabularyClass=org.embergraph.vocab.pubchem.PubChemVocabulary
 ```
 
 ###An example with Pubchem Core

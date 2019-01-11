@@ -101,8 +101,8 @@ import org.embergraph.util.concurrent.ExecutionExceptions;
  * The last join dimension is slightly different. Its
  * {@link UnsynchronizedArrayBuffer} writes onto the
  * {@link IJoinNexus#newQueryBuffer()},
- * {@link IJoinNexus#newInsertBuffer(com.bigdata.relation.IMutableRelation)}, or
- * {@link IJoinNexus#newDeleteBuffer(com.bigdata.relation.IMutableRelation)}
+ * {@link IJoinNexus#newInsertBuffer(org.embergraph.relation.IMutableRelation)}, or
+ * {@link IJoinNexus#newDeleteBuffer(org.embergraph.relation.IMutableRelation)}
  * depending on the {@link ActionEnum}.
  * <p>
  * For each {@link JoinTask}, once its source iterator(s) have been exhausted

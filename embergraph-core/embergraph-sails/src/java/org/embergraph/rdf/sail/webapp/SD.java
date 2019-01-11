@@ -771,7 +771,7 @@ public class SD {
     boolean isMapgraphCompatible() {
 
         final IFeatureSupported obj = ClassPathUtil.classForName(//
-                "com.blazegraph.rdf.gpu.MapgraphCompatibleNamespace", // preferredClassName,
+                "org.embergraph.rdf.gpu.MapgraphCompatibleNamespace", // preferredClassName,
                 null, // defaultClass,
                 IFeatureSupported.class, // sharedInterface,
                 getClass().getClassLoader() // classLoader
@@ -793,7 +793,7 @@ public class SD {
     boolean isMapgraphAccelerated() {
 
         final IFeatureSupported obj = ClassPathUtil.classForName(//
-                "com.blazegraph.rdf.gpu.MapgraphAcceleratedNamespace", // preferredClassName,
+                "org.embergraph.rdf.gpu.MapgraphAcceleratedNamespace", // preferredClassName,
                 null, // defaultClass,
                 IFeatureSupported.class, // sharedInterface,
                 getClass().getClassLoader() // classLoader

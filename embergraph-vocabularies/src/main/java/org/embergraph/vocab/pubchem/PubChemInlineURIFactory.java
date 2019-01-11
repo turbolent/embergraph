@@ -36,7 +36,7 @@ import org.embergraph.rdf.internal.InlineURIHandler;
  * Include by adding the line below to your namespace properties.  It is intended to be used with {@link PubChemVocabulary}.
  * 
  * <code> 
- * com.bigdata.rdf.store.AbstractTripleStore.inlineURIFactory=com.blazegraph.vocab.pubchem.PubChemInlineURIFactory
+ * org.embergraph.rdf.store.AbstractTripleStore.inlineURIFactory=org.embergraph.vocab.pubchem.PubChemInlineURIFactory
  * </code>
  * 
  * 

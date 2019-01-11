@@ -98,8 +98,8 @@ public class Term2IdTupleSerializer extends DefaultTupleSerializer {
 //        super(keyBuilderFactory);
         super(keyBuilderFactory, getDefaultLeafKeysCoder(),
             IVUtility.PACK_TIDS //
-            ? new com.bigdata.btree.raba.codec.SimpleRabaCoder()//
-            : new com.bigdata.btree.raba.codec.FixedLengthValueRabaCoder(9)//
+            ? new org.embergraph.btree.raba.codec.SimpleRabaCoder()//
+            : new org.embergraph.btree.raba.codec.FixedLengthValueRabaCoder(9)//
             );
         
     }

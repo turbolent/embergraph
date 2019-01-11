@@ -48,7 +48,7 @@ public abstract class ValueExpressionNode extends ASTBase implements
     }
     
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      */
     public ValueExpressionNode(final ValueExpressionNode op) {
         super(op);

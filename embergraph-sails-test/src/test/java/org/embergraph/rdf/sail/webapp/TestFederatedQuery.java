@@ -139,7 +139,7 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 public class TestFederatedQuery<S extends IIndexManager> extends
         AbstractTestNanoSparqlClient<S> {
 	
-	public static final String TEST_RESOURCE_PATH = "/com/bigdata/rdf/sail/webapp/openrdf-service/";
+	public static final String TEST_RESOURCE_PATH = "/org/embergraph/rdf/sail/webapp/openrdf-service/";
 
     public TestFederatedQuery() {
 

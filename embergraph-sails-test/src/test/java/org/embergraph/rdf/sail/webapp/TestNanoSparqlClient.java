@@ -406,7 +406,7 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
 //			// opts.requestParams
 //			// .put("uri",
 //			// new String[] {
-//			// "file:embergraph-sails/src/test/com/bigdata/rdf/sail/webapp/quads.nq"
+//			// "file:embergraph-sails/src/test/org/embergraph/rdf/sail/webapp/quads.nq"
 //			// });
 //			//
 //			// final MutationResult result =
@@ -416,7 +416,7 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
 //			// assertEquals(expectedStatementCount, result.mutationCount);
 //
 //			final AddOp add = new AddOp(
-//					"file:src/test/java/com/bigdata/rdf/sail/webapp/quads.nq");
+//					"file:src/test/java/org/embergraph/rdf/sail/webapp/quads.nq");
 //			assertEquals(expectedStatementCount, m_repo.add(add));
 //
 //		}
@@ -524,7 +524,7 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
 //			// opts.requestParams
 //			// .put("uri",
 //			// new String[] {
-//			// "file:bigdata-rdf/src/test/com/bigdata/rdf/rio/small.rdf" });
+//			// "file:bigdata-rdf/src/test/org/embergraph/rdf/rio/small.rdf" });
 //			//
 //			// final MutationResult result =
 //			// getMutationResult(doSparqlQuery(opts,
@@ -533,7 +533,7 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
 //			// assertEquals(expectedStatementCount, result.mutationCount);
 //
 //			final AddOp add = new AddOp(
-//					this.getClass().getClassLoader().getResource("com/bigdata/rdf/rio/small.rdf").toExternalForm()
+//					this.getClass().getClassLoader().getResource("org/embergraph/rdf/rio/small.rdf").toExternalForm()
 //					);
 //			assertEquals(expectedStatementCount, m_repo.add(add));
 //
@@ -659,7 +659,7 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
 //        // Load data. Includes the same triple in 2 different named graphs.
 //        m_repo.add(new AddOp(
 //                new File(
-//                        "src/test/java/com/bigdata/rdf/sail/webapp/construct-eliminates-duplicate-triples.trig"),
+//                        "src/test/java/org/embergraph/rdf/sail/webapp/construct-eliminates-duplicate-triples.trig"),
 //                RDFFormat.TRIG));
 //
 //        // Should be two statements.
@@ -713,7 +713,7 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
 //        // Load data. Includes the same triple in 2 different named graphs.
 //        m_repo.add(new AddOp(
 //                new File(
-//                        "src/test/java/com/bigdata/rdf/sail/webapp/construct-eliminates-duplicate-triples.trig"),
+//                        "src/test/java/org/embergraph/rdf/sail/webapp/construct-eliminates-duplicate-triples.trig"),
 //                RDFFormat.TRIG));
 //
 //        // Should be two statements.

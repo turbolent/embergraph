@@ -99,7 +99,7 @@ public class TestGeoSpatialQueryIfGeospatialDisabled extends AbstractDataDrivenS
 
         // enable GeoSpatial index
         properties.setProperty(
-           com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL, "false");
+           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL, "false");
 
         return properties;
 

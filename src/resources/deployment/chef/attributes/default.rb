@@ -133,13 +133,13 @@ default['bigdata']['rdf.sail.truthMaintenance'] = "false"
 default['bigdata']['rdf.store.AbstractTripleStore.quads'] = "false"
 default['bigdata']['rdf.store.AbstractTripleStore.statementIdentifiers'] = "false"
 default['bigdata']['rdf.store.AbstractTripleStore.textIndex'] = "false"
-default['bigdata']['rdf.store.AbstractTripleStore.axiomsClass'] = "com.bigdata.rdf.axioms.NoAxioms"
+default['bigdata']['rdf.store.AbstractTripleStore.axiomsClass'] = "org.embergraph.rdf.axioms.NoAxioms"
 
 # Bump up the branching factor for the lexicon indices on the default kb.
-default['bigdata']['namespace.kb.lex.com.bigdata.btree.BTree.branchingFactor'] = "400"
+default['bigdata']['namespace.kb.lex.org.embergraph.btree.BTree.branchingFactor'] = "400"
 
 # Bump up the branching factor for the statement indices on the default kb.
-default['bigdata']['namespace.kb.spo.com.bigdata.btree.BTree.branchingFactor'] = "1024"
+default['bigdata']['namespace.kb.spo.org.embergraph.btree.BTree.branchingFactor'] = "1024"
 default['bigdata']['rdf.sail.bufferCapacity'] = "100000"
 
 #

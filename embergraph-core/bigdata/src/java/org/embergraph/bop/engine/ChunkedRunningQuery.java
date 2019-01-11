@@ -306,7 +306,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
                         : Integer.MAX_VALUE;
 
                 // Create a new queue using [lock].
-                queue = new com.bigdata.jsr166.LinkedBlockingDeque<IChunkMessage<IBindingSet>>(//
+                queue = new org.embergraph.jsr166.LinkedBlockingDeque<IChunkMessage<IBindingSet>>(//
                         capacity,
                         lock);
 

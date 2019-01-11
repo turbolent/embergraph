@@ -86,7 +86,7 @@ public class LangMatchesBOp extends XSDBooleanIVValueExpression
     }
 
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      */
     public LangMatchesBOp(final LangMatchesBOp op) {
         super(op);

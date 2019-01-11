@@ -139,10 +139,10 @@ public class TestGeoSpatialDefaults extends AbstractDataDrivenSPARQLTestCase {
         properties.setProperty(org.embergraph.journal.Options.BUFFER_MODE, BufferMode.Transient.toString());
 
         // enable GeoSpatial index with default configuration
-        properties.setProperty(com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL, "true");
+        properties.setProperty(org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL, "true");
 
         properties.setProperty(
-            com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DEFAULT_DATATYPE,
+            org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DEFAULT_DATATYPE,
             "http://www.bigdata.com/rdf/geospatial/literals/v1#lat-lon");
         
         return properties;

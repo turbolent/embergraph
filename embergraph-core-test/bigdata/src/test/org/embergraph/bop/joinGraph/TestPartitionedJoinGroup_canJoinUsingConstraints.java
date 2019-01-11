@@ -248,7 +248,7 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
         private static final long serialVersionUID = 1L;
 
         /**
-         * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+         * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
          * 
          * @param op
          */
@@ -281,7 +281,7 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
         private static final long serialVersionUID = 1L;
 
         /**
-         * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+         * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
          * 
          * @param op
          */
@@ -318,7 +318,7 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
         private static final long serialVersionUID = 1L;
 
         /**
-         * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+         * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
          * 
          * @param op
          */
@@ -821,7 +821,7 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
 	 * estimate.
 	 * 
 	 * <pre>
-	 * INFO : 3529      main com.bigdata.bop.joinGraph.rto.JGraph.expand(JGraph.java:1116): 
+	 * INFO : 3529      main org.embergraph.bop.joinGraph.rto.JGraph.expand(JGraph.java:1116):
 	 * ** round=4: paths{in=14,considered=26,out=6}
 	 * path    srcCard  *          f (      in  sumRgCt tplsRead      out    limit  adjCard) =    estRead    estCard  : sumEstRead sumEstCard sumEstCost  joinPath
 	 *    0          0E *       0.00 (       0        0        0        0      200        0) =          0          0E :          1          0          0  [ 5  6  0  2  1  4 ]

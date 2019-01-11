@@ -528,7 +528,7 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
 
     /**
 	 * Note: The use of this interface is NOT encouraged. It is used to hook the
-	 * axioms in {@link com.bigdata.rdf.axioms.BaseAxioms}. Ideally this could
+	 * axioms in {@link org.embergraph.rdf.axioms.BaseAxioms}. Ideally this could
 	 * be backed out in favor of using the {@link IChangeLog} but I was not able
 	 * to make that work out very easily.
 	 * 

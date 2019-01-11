@@ -52,7 +52,7 @@ import org.embergraph.rdf.store.DataLoader.MyLoadStats;
 
 /**
  * 
- * Provides {@link com.bigdata.rdf.store.DataLoader} via the REST API.
+ * Provides {@link org.embergraph.rdf.store.DataLoader} via the REST API.
  * 
  * See BLZG-1713
  * 
@@ -120,7 +120,7 @@ public class DataLoaderServlet extends BigdataRDFServlet {
 
 	/**
 	 * 
-	 * Provides {@link com.bigdata.rdf.store.DataLoader} via the REST API.
+	 * Provides {@link org.embergraph.rdf.store.DataLoader} via the REST API.
 	 * 
 	 * @author beebs@systap.com
 	 * 

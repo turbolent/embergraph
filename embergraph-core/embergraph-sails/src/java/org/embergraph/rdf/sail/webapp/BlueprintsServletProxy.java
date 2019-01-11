@@ -40,7 +40,7 @@ import org.apache.log4j.Logger;
 
 public class BlueprintsServletProxy extends BigdataRDFServlet {
 	
-	private static final String DEFAULT_PROVIDER = "com.bigdata.blueprints.webapp.BlueprintsServlet";
+	private static final String DEFAULT_PROVIDER = "org.embergraph.blueprints.webapp.BlueprintsServlet";
 	
     static private final transient Logger log = Logger.getLogger(BlueprintsServletProxy.class);
 

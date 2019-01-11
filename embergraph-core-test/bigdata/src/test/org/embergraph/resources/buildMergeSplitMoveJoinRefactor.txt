@@ -293,7 +293,7 @@ Build, Merge, Split, Move refactor design narrative.
 
 ============================================================
 
-Errors in unit tests for com.bigdata.resources before the refactor.
+Errors in unit tests for org.embergraph.resources before the refactor.
 These errors are all related to whether resources are released during
 synchronous or asynchronous overflow.
 

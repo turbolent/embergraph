@@ -57,7 +57,7 @@ public class TestUnionMinus extends AbstractInlineSELECTTestCase {
     /*
     public void test_union_minus_01() throws Exception {
     	// Concerning omitting the test with hash joins, see Trac776 and 
-    	// com.bigdata.rdf.internal.encoder.AbstractBindingSetEncoderTestCase.test_solutionWithOneMockIV()
+    	// org.embergraph.rdf.internal.encoder.AbstractBindingSetEncoderTestCase.test_solutionWithOneMockIV()
   
         new Execute(
         		"SELECT  ?s                \r\n" + 

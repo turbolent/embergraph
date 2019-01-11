@@ -109,7 +109,7 @@ public class TestGangliaListenerShutdown extends TestCase {
           * non-blocking IO and multicast.
           * 
           * @see <a href="http://trac.bigdata.com/ticket/1188">
-          *      com.bigdata.ganglia.TestGangliaListenerShutdown fails due to
+          *      org.embergraph.ganglia.TestGangliaListenerShutdown fails due to
           *      blocking NIO. </a>
           */
 //            assertFalse(gangliaListener.isListening());

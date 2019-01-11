@@ -1692,7 +1692,7 @@ public class NanoSparqlClient {
      * temporary store is backed by a buffer until that buffer overflows, there
      * will not be a backing disk file unless someone starts writing on this.
      * 
-     * @param mode the database modus (such as com.bigdata.rdf.store.AbstractTripleStore.Options.TRIPLES_MODE_WITH_PROVENANCE)					
+     * @param mode the database modus (such as org.embergraph.rdf.store.AbstractTripleStore.Options.TRIPLES_MODE_WITH_PROVENANCE)
      * 
      */
     private static AbstractTripleStore createTempKb(String mode) {
@@ -1708,7 +1708,7 @@ public class NanoSparqlClient {
         } else if (mode.equalsIgnoreCase("quads")) {
         
            p.setProperty(Options.QUADS, "true"); 
-           p.setProperty(Options.AXIOMS_CLASS, "com.bigdata.rdf.axioms.NoAxioms");
+           p.setProperty(Options.AXIOMS_CLASS, "org.embergraph.rdf.axioms.NoAxioms");
            
         
         } else if (mode.equalsIgnoreCase("provenance")) {

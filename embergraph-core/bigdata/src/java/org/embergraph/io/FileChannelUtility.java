@@ -741,12 +741,12 @@ public class FileChannelUtility {
      *         at sun.nio.ch.FileChannelImpl.map(FileChannelImpl.java:758)
      *         at sun.nio.ch.FileChannelImpl.transferFromFileChannel(FileChannelImpl.java:537)
      *         at sun.nio.ch.FileChannelImpl.transferFrom(FileChannelImpl.java:600)
-     *         at com.bigdata.io.FileChannelUtility.transferAll(FileChannelUtility.java:553)
+     *         at org.embergraph.io.FileChannelUtility.transferAll(FileChannelUtility.java:553)
      *         at org.embergraph.journal.AbstractBufferStrategy.transferFromDiskTo(AbstractBufferStrategy.java:420)
      *         at org.embergraph.journal.DiskOnlyStrategy.transferTo(DiskOnlyStrategy.java:2442)
-     *         at com.bigdata.btree.IndexSegmentBuilder.writeIndexSegment(IndexSegmentBuilder.java:1865)
-     *         at com.bigdata.btree.IndexSegmentBuilder.call(IndexSegmentBuilder.java:1148)
-     *         at com.bigdata.resources.IndexManager.buildIndexSegment(IndexManager.java:1755)
+     *         at org.embergraph.btree.IndexSegmentBuilder.writeIndexSegment(IndexSegmentBuilder.java:1865)
+     *         at org.embergraph.btree.IndexSegmentBuilder.call(IndexSegmentBuilder.java:1148)
+     *         at org.embergraph.resources.IndexManager.buildIndexSegment(IndexManager.java:1755)
      * </pre>
      */
      static public int transferAll(final FileChannel sourceChannel,

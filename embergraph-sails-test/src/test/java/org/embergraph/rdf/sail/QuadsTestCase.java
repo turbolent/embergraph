@@ -30,7 +30,7 @@ import org.apache.log4j.Logger;
 
 /**
  * Unit tests for named graphs. Specify
- * <code>-DtestClass=com.bigdata.rdf.sail.TestBigdataSailWithQuads</code> to
+ * <code>-DtestClass=org.embergraph.rdf.sail.TestBigdataSailWithQuads</code> to
  * run this test suite.
  * 
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>

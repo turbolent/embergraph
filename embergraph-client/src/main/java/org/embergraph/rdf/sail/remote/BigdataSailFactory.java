@@ -30,6 +30,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 
+import org.embergraph.BigdataStatics;
 import org.openrdf.repository.sail.SailRepository;
 import org.openrdf.sail.Sail;
 
@@ -49,14 +50,14 @@ public class BigdataSailFactory {
 	/**
 	 * The default bigdata SAIL_PROVIDER.
 	 */
-	public static final String BIGDATA_SAIL_INSTANCE = "com.bigdata.rdf.sail.BigdataSail";
+	public static final String BIGDATA_SAIL_INSTANCE = "org.embergraph.rdf.sail.BigdataSail";
 	
 	/**
 	 * The name of the property to set with the class that will provide the Sail.
 	 * 
 	 * It must have a constructor that takes a single properties file as the parameter.
 	 */
-	public static final String SAIL_PROVIDER = "com.bigdata.rdf.sail.remote.Provider";
+	public static final String SAIL_PROVIDER = "org.embergraph.rdf.sail.remote.Provider";
 
     /**
      * A handy list of common Options you might want to specify when creating
@@ -104,11 +105,11 @@ public class BigdataSailFactory {
     * Connect to a remote bigdata instance.
     * 
     * FIXME This does not parameterize the value of the ContextPath. See
-    * {@link com.bigdata.BigdataStatics#getContextPath()}.
+    * {@link BigdataStatics#getContextPath()}.
     */
    public static BigdataSailRemoteRepository connect(final String host,
          final int port) {
-       return connect("http://" + host + ":" + port + "/" + Config.BLAZEGRAPH_PATH); 
+       return connect("http://" + host + ":" + port + "/" + Config.PATH);
         
     }
     
@@ -121,7 +122,7 @@ public class BigdataSailFactory {
 	 * FIXME This does not support the HA load balancer pattern. See #1148.
 	 * 
 	 * FIXME This does not parameterize the value of the ContextPath. See
-	 * {@link com.bigdata.BigdataStatics#getContextPath()}.
+	 * {@link BigdataStatics#getContextPath()}.
 	 * 
 	 * FIXME This MIGHT leak HttpClient or Executor resources.
 	 */
@@ -163,33 +164,33 @@ public class BigdataSailFactory {
         	return serviceEndpoint.substring(0,
         				serviceEndpoint.length()-"/sparql/".length());
         	
-        } else if (serviceEndpoint.endsWith("/" + Config.BLAZEGRAPH_PATH + "/")) {
+        } else if (serviceEndpoint.endsWith("/" + Config.PATH + "/")) {
             
         	return serviceEndpoint.substring(0, 
         				serviceEndpoint.length()-1) ;
        
-        } else if (serviceEndpoint.endsWith("/" + Config.BLAZEGRAPH_PATH)) {
+        } else if (serviceEndpoint.endsWith("/" + Config.PATH)) {
             
         	return serviceEndpoint;
         	
-		} else if (serviceEndpoint.contains("/" + Config.BLAZEGRAPH_PATH)
+		} else if (serviceEndpoint.contains("/" + Config.PATH)
 				&& serviceEndpoint.endsWith("/")) {
 			// This is the case of /blazegraph/namespace/NAMESPACE/
 
 			return serviceEndpoint.substring(0, serviceEndpoint.length() - 1);
 
-		} else if (serviceEndpoint.contains("/" + Config.BLAZEGRAPH_PATH)) {
+		} else if (serviceEndpoint.contains("/" + Config.PATH)) {
 			// This is the case of /blazegraph/namespace/NAMESPACE
 
 			return serviceEndpoint;
 
 		} else if (serviceEndpoint.endsWith("/")) {
 
-			return serviceEndpoint + Config.BLAZEGRAPH_PATH;
+			return serviceEndpoint + Config.PATH;
 
 		} else {
             
-        	return serviceEndpoint + "/" + Config.BLAZEGRAPH_PATH;
+        	return serviceEndpoint + "/" + Config.PATH;
         	
         }
         
@@ -369,32 +370,32 @@ public class BigdataSailFactory {
             props.setProperty("org.embergraph.journal.AbstractJournal.bufferMode", "MemStore");
         }
         if (options.contains(Option.Inference)) {
-        	props.setProperty("com.bigdata.rdf.store.AbstractTripleStore.axiomsClass","com.bigdata.rdf.axioms.OwlAxioms");
-            props.setProperty("com.bigdata.rdf.sail.truthMaintenance","true");
-            props.setProperty("com.bigdata.rdf.store.AbstractTripleStore.justify", "true");
+        	props.setProperty("org.embergraph.rdf.store.AbstractTripleStore.axiomsClass","org.embergraph.rdf.axioms.OwlAxioms");
+            props.setProperty("org.embergraph.rdf.sail.truthMaintenance","true");
+            props.setProperty("org.embergraph.rdf.store.AbstractTripleStore.justify", "true");
         } else {
-        	props.setProperty("com.bigdata.rdf.store.AbstractTripleStore.axiomsClass","com.bigdata.rdf.axioms.NoAxioms");
-            props.setProperty("com.bigdata.rdf.sail.truthMaintenance","false");
-            props.setProperty("com.bigdata.rdf.store.AbstractTripleStore.justify", "false");
+        	props.setProperty("org.embergraph.rdf.store.AbstractTripleStore.axiomsClass","org.embergraph.rdf.axioms.NoAxioms");
+            props.setProperty("org.embergraph.rdf.sail.truthMaintenance","false");
+            props.setProperty("org.embergraph.rdf.store.AbstractTripleStore.justify", "false");
         }
         
-        props.setProperty("com.bigdata.rdf.store.AbstractTripleStore.textIndex", 
+        props.setProperty("org.embergraph.rdf.store.AbstractTripleStore.textIndex",
                 String.valueOf(options.contains(Option.TextIndex))); 
 
-        props.setProperty("com.bigdata.rdf.store.AbstractTripleStore.statementIdentifiers",
+        props.setProperty("org.embergraph.rdf.store.AbstractTripleStore.statementIdentifiers",
                 String.valueOf(options.contains(Option.RDR)));
         
-        props.setProperty("com.bigdata.rdf.store.AbstractTripleStore.quads",
+        props.setProperty("org.embergraph.rdf.store.AbstractTripleStore.quads",
                 String.valueOf(options.contains(Option.Quads)));
         
         // Setup for the RWStore recycler rather than session protection.
-        props.setProperty("com.bigdata.service.AbstractTransactionService.minReleaseAge","1");
-        props.setProperty("com.bigdata.btree.writeRetentionQueue.capacity","4000");
-        props.setProperty("com.bigdata.btree.BTree.branchingFactor","128");
+        props.setProperty("org.embergraph.service.AbstractTransactionService.minReleaseAge","1");
+        props.setProperty("org.embergraph.btree.writeRetentionQueue.capacity","4000");
+        props.setProperty("org.embergraph.btree.BTree.branchingFactor","128");
         // Bump up the branching factor for the lexicon indices on the default kb.
-        props.setProperty("com.bigdata.namespace.kb.lex.com.bigdata.btree.BTree.branchingFactor","400");
+        props.setProperty("org.embergraph.namespace.kb.lex.org.embergraph.btree.BTree.branchingFactor","400");
         // Bump up the branching factor for the statement indices on the default kb.
-        props.setProperty("com.bigdata.namespace.kb.spo.com.bigdata.btree.BTree.branchingFactor","1024");
+        props.setProperty("org.embergraph.namespace.kb.spo.org.embergraph.btree.BTree.branchingFactor","1024");
         
         final Sail sail = getSailProviderInstance(props);
         

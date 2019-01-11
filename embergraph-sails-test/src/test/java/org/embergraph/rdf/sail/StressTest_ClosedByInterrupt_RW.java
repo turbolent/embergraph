@@ -67,37 +67,37 @@ public class StressTest_ClosedByInterrupt_RW extends TestCase {
         }
 
         final Properties props = new Properties();
-        props.setProperty("com.bigdata.rdf.sail.namespace", "emc.srm.topology.kb");
+        props.setProperty("org.embergraph.rdf.sail.namespace", "emc.srm.topology.kb");
         props.setProperty("org.embergraph.journal.AbstractJournal.bufferMode", "DiskRW");
-        props.setProperty("com.bigdata.btree.writeRetentionQueue.capacity", "4000");
-        props.setProperty("com.bigdata.btree.BTree.branchingFactor", "128");
-        props.setProperty("com.bigdata.service.AbstractTransactionService.minReleaseAge", "1");
-        props.setProperty("com.bigdata.rdf.store.AbstractTripleStore.textIndex", "false");
+        props.setProperty("org.embergraph.btree.writeRetentionQueue.capacity", "4000");
+        props.setProperty("org.embergraph.btree.BTree.branchingFactor", "128");
+        props.setProperty("org.embergraph.service.AbstractTransactionService.minReleaseAge", "1");
+        props.setProperty("org.embergraph.rdf.store.AbstractTripleStore.textIndex", "false");
         props.setProperty(
-                "com.bigdata.rdf.rules.InferenceEngine.forwardChainOwlTransitiveProperty", "false");
-        props.setProperty("com.bigdata.rdf.rules.InferenceEngine.forwardChainOwlSameAsClosure",
+                "org.embergraph.rdf.rules.InferenceEngine.forwardChainOwlTransitiveProperty", "false");
+        props.setProperty("org.embergraph.rdf.rules.InferenceEngine.forwardChainOwlSameAsClosure",
                 "false");
-        props.setProperty("com.bigdata.rdf.rules.InferenceEngine.forwardChainOwlSameAsProperties",
+        props.setProperty("org.embergraph.rdf.rules.InferenceEngine.forwardChainOwlSameAsProperties",
                 "false");
-        props.setProperty("com.bigdata.rdf.rules.InferenceEngine.forwardChainOwlInverseOf", "false");
-        props.setProperty("com.bigdata.rdf.rules.InferenceEngine.forwardChainOwlEquivalentClass",
+        props.setProperty("org.embergraph.rdf.rules.InferenceEngine.forwardChainOwlInverseOf", "false");
+        props.setProperty("org.embergraph.rdf.rules.InferenceEngine.forwardChainOwlEquivalentClass",
                 "false");
         props.setProperty(
-                "com.bigdata.rdf.rules.InferenceEngine.forwardChainOwlEquivalentProperty", "false");
-        props.setProperty("com.bigdata.rdf.rules.InferenceEngine.forwardChainOwlHasValue", "false");
-        props.setProperty("com.bigdata.rdf.rules.InferenceEngine.forwardChainRdfTypeRdfsResource",
+                "org.embergraph.rdf.rules.InferenceEngine.forwardChainOwlEquivalentProperty", "false");
+        props.setProperty("org.embergraph.rdf.rules.InferenceEngine.forwardChainOwlHasValue", "false");
+        props.setProperty("org.embergraph.rdf.rules.InferenceEngine.forwardChainRdfTypeRdfsResource",
                 "false");
-        props.setProperty("com.bigdata.rdf.store.AbstractTripleStore.axiomsClass",
-                "com.bigdata.rdf.axioms.NoAxioms");
-        props.setProperty("com.bigdata.rdf.sail.truthMaintenance", "false");
-        props.setProperty("com.bigdata.rdf.store.AbstractTripleStore.justify", "false");
-        props.setProperty("com.bigdata.rdf.store.AbstractTripleStore.statementIdentifiers", "false");
-        props.setProperty("com.bigdata.rdf.store.AbstractTripleStore.quadsMode", "true");
+        props.setProperty("org.embergraph.rdf.store.AbstractTripleStore.axiomsClass",
+                "org.embergraph.rdf.axioms.NoAxioms");
+        props.setProperty("org.embergraph.rdf.sail.truthMaintenance", "false");
+        props.setProperty("org.embergraph.rdf.store.AbstractTripleStore.justify", "false");
+        props.setProperty("org.embergraph.rdf.store.AbstractTripleStore.statementIdentifiers", "false");
+        props.setProperty("org.embergraph.rdf.store.AbstractTripleStore.quadsMode", "true");
         props.setProperty("org.embergraph.journal.AbstractJournal.maximumExtent", "209715200");
-        props.setProperty("com.bigdata.service.IBigdataClient.collectPlatformStatistics", "false");
-        props.setProperty("com.bigdata.service.IBigdataClient.httpdPort", "-1");
-        props.setProperty("com.bigdata.rdf.sail.bufferCapacity", "100000");
-        props.setProperty("com.bigdata.rdf.store.AbstractTripleStore.bloomFilter", "false");
+        props.setProperty("org.embergraph.service.IBigdataClient.collectPlatformStatistics", "false");
+        props.setProperty("org.embergraph.service.IBigdataClient.httpdPort", "-1");
+        props.setProperty("org.embergraph.rdf.sail.bufferCapacity", "100000");
+        props.setProperty("org.embergraph.rdf.store.AbstractTripleStore.bloomFilter", "false");
 
         props.setProperty(BigdataSail.Options.CREATE_TEMP_FILE, Boolean.FALSE.toString());
         props.setProperty(BigdataSail.Options.FILE, jnlFile.toString());

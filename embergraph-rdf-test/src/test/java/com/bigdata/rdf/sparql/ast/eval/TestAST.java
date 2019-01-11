@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * Created on Sep 7, 2011
  */
 
-package com.bigdata.rdf.sparql.ast.eval;
+package org.embergraph.rdf.sparql.ast.eval;
 
 import org.embergraph.rdf.internal.constraints.INeedsMaterialization;
 
@@ -185,7 +185,7 @@ public class TestAST extends AbstractDataDrivenSPARQLTestCase {
      *   JoinGroupNode {
      *     StatementPatternNode(VarNode(s), ConstantNode(TermId(4U)), ConstantNode(TermId(2U)), DEFAULT_CONTEXTS)
      *     StatementPatternNode(VarNode(s), ConstantNode(TermId(5U)), VarNode(o), DEFAULT_CONTEXTS)
-     *     ( com.bigdata.rdf.sparql.ast.ValueExpressionNode()[ valueExpr=com.bigdata.rdf.internal.constraints.StrBOp(com.bigdata.rdf.internal.constraints.CoalesceBOp(s,o))[ com.bigdata.rdf.internal.constraints.StrBOp.namespace=kb]] AS VarNode(index) )
+     *     ( org.embergraph.rdf.sparql.ast.ValueExpressionNode()[ valueExpr=org.embergraph.rdf.internal.constraints.StrBOp(org.embergraph.rdf.internal.constraints.CoalesceBOp(s,o))[ org.embergraph.rdf.internal.constraints.StrBOp.namespace=kb]] AS VarNode(index) )
      *   }
      * </pre>
      *

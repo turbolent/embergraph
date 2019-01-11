@@ -101,7 +101,7 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager> exte
      * The path used to resolve resources in this package when they are being
      * uploaded to the {@link NanoSparqlServer}.
      */
-    protected static final String packagePath = "src/test/java/com/bigdata/rdf/sail/webapp/";
+    protected static final String packagePath = "src/test/java/org/embergraph/rdf/sail/webapp/";
 
 	/**
 	 * A jetty {@link Server} running a {@link NanoSparqlServer} instance.

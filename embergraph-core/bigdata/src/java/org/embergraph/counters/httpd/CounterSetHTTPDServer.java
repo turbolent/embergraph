@@ -103,7 +103,7 @@ public class CounterSetHTTPDServer implements Runnable {
     public static void main(final String[] args) throws Exception {
 
         // default port.
-        int port = Config.BLAZEGRAPH_HTTP_PORT;
+        int port = Config.HTTP_PORT;
 
         // @todo args
         final int unitsToRetain = 1000;

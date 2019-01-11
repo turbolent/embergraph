@@ -3,7 +3,7 @@
 /src
 /bin
 /bin/**
-/bigdata*.jar
+/embergraph*.jar
 /ant-release
 /standalone
 /test*
@@ -15,88 +15,88 @@
 /SYSTAP-BBT-result.txt
 /U10load+query
 /*.hprof
-/com.bigdata.cache.TestHardReferenceQueueWithBatchingUpdates.exp.csv
+/org.embergraph.cache.TestHardReferenceQueueWithBatchingUpdates.exp.csv
 /commit-log.txt
 /eventLog
 /dist
-/bigdata-test
-/com.bigdata.rdf.stress.LoadClosureAndQueryTest.*.csv
+/embergraph-test
+/org.embergraph.rdf.stress.LoadClosureAndQueryTest.*.csv
 /DIST.*.tgz
 /REL.*.tgz
 /target
 .classpath
 .project
 
-# /bigdata/
-/bigdata/bin
-/bigdata/*.jnl
-/bigdata/*.mdmp
-/bigdata/*.dump
-/bigdata/*.out
-/bigdata/*.seg
-/bigdata/com_bigdata_btree_BytesUtil_UnsignedByteArrayComparator.h
-/bigdata/com_bigdata_btree_BytesUtil.h
-/bigdata/*.raw2
-/bigdata/*.tmp
-/bigdata/test_*
-/bigdata/com.bigdata.journal.StressTestConcurrent.comparison.csv
-/bigdata/bigdata.jar
-/bigdata/run.bat
-/bigdata/ant-build
-/bigdata/ant-deploy
-/bigdata/log
-/bigdata/TestService.id
-/bigdata/stack-traces
-/bigdata/*.csv
-/bigdata/*.xls
-/bigdata/*.id
-/bigdata/target
-/bigdata/output.tsv
-/bigdata/counters*.xml
-/bigdata/.classpath
-/bigdata/.project
-/bigdata/EDS
-/bigdata/row
-/bigdata/store
-/bigdata/testIndex
-/bigdata/src/java/com/bigdata/BuildInfo.java
-embergraph-core/bigdata/src/java/com/bigdata/BuildInfo.java
+# /embergraph/
+/embergraph/bin
+/embergraph/*.jnl
+/embergraph/*.mdmp
+/embergraph/*.dump
+/embergraph/*.out
+/embergraph/*.seg
+/embergraph/com_embergraph_btree_BytesUtil_UnsignedByteArrayComparator.h
+/embergraph/com_embergraph_btree_BytesUtil.h
+/embergraph/*.raw2
+/embergraph/*.tmp
+/embergraph/test_*
+/embergraph/org.embergraph.journal.StressTestConcurrent.comparison.csv
+/embergraph/embergraph.jar
+/embergraph/run.bat
+/embergraph/ant-build
+/embergraph/ant-deploy
+/embergraph/log
+/embergraph/TestService.id
+/embergraph/stack-traces
+/embergraph/*.csv
+/embergraph/*.xls
+/embergraph/*.id
+/embergraph/target
+/embergraph/output.tsv
+/embergraph/counters*.xml
+/embergraph/.classpath
+/embergraph/.project
+/embergraph/EDS
+/embergraph/row
+/embergraph/store
+/embergraph/testIndex
+/embergraph/src/java/com/embergraph/BuildInfo.java
+embergraph-core/embergraph/src/java/com/embergraph/BuildInfo.java
 **/BuildInfo.java
 
-# /bigdata/lib/
-/bigdata/lib/rio-1.2.1.jar
-/bigdata/lib/openrdf-model-1.2.1.jar
-/bigdata/lib/bigdata.jar
+# /embergraph/lib/
+/embergraph/lib/rio-1.2.1.jar
+/embergraph/lib/openrdf-model-1.2.1.jar
+/embergraph/lib/embergraph.jar
 
-# /bigdata/src/architecture/
-/bigdata/src/architecture/btree
-/bigdata/src/architecture/(version
-/bigdata/src/architecture/1).xls
+# /embergraph/src/architecture/
+/embergraph/src/architecture/btree
+/embergraph/src/architecture/(version
+/embergraph/src/architecture/1).xls
 
-# /bigdata/src/java/com/bigdata/cache/
-/bigdata/src/java/com/bigdata/cache/BCHMGlobalLRU.java
+# /embergraph/src/java/com/embergraph/cache/
+/embergraph/src/java/com/embergraph/cache/BCHMGlobalLRU.java
 
-# /bigdata/src/java/com/bigdata/relation/accesspath/
-/bigdata/src/java/com/bigdata/relation/accesspath/BlockingBufferRefactorTemp.java
+# /embergraph/src/java/com/embergraph/relation/accesspath/
+/embergraph/src/java/com/embergraph/relation/accesspath/BlockingBufferRefactorTemp.java
 
-# /bigdata/src/java/com/bigdata/relation/rule/eval/
-/bigdata/src/java/com/bigdata/relation/rule/eval/NestedSubqueryWithAdvancerTask.java
+# /embergraph/src/java/com/embergraph/relation/rule/eval/
+/embergraph/src/java/com/embergraph/relation/rule/eval/NestedSubqueryWithAdvancerTask.java
 
-# /bigdata/src/java/com/bigdata/sparse/
-/bigdata/src/java/com/bigdata/sparse/IDistributedLock.java
+# /embergraph/src/java/com/embergraph/sparse/
+/embergraph/src/java/com/embergraph/sparse/IDistributedLock.java
 
-# /bigdata/src/resources/xml/
-/bigdata/src/resources/xml/counters1.xml
-/bigdata/src/resources/xml/counters0.xml
-/bigdata/src/resources/xml/counters2.xml
+# /embergraph/src/resources/xml/
+/embergraph/src/resources/xml/counters1.xml
+/embergraph/src/resources/xml/counters0.xml
+/embergraph/src/resources/xml/counters2.xml
 
-# /bigdata/src/samples/com/bigdata/samples/btree/
-/bigdata/src/samples/com/bigdata/samples/btree/JournalTxExample.java
-/bigdata/src/samples/com/bigdata/samples/btree/ReadWriteIndexTxExample.java
+# /embergraph/src/samples/com/embergraph/samples/btree/
+/embergraph/src/samples/com/embergraph/samples/btree/JournalTxExample.java
+/embergraph/src/samples/com/embergraph/samples/btree/ReadWriteIndexTxExample.java
 
-# /bigdata/src/test/com/bigdata/util/concurrent/
-/bigdata/src/test/com/bigdata/util/concurrent/TestCompletionService.java
-/bigdata/src/test/com/bigdata/util/concurrent/CompletionServiceImpl.java
+# /embergraph/src/test/com/embergraph/util/concurrent/
+/embergraph/src/test/com/embergraph/util/concurrent/TestCompletionService.java
+/embergraph/src/test/com/embergraph/util/concurrent/CompletionServiceImpl.java
 
 # /embergraph-gom/
 /embergraph-gom/bin
@@ -115,51 +115,51 @@ embergraph-core/bigdata/src/java/com/bigdata/BuildInfo.java
 /embergraph-gom/*.jnl
 /embergraph-gom/*.mdmp
 
-# /bigdata-jini/
-/bigdata-jini/bin
-/bigdata-jini/*.jnl
-/bigdata-jini/*.mdmp
-/bigdata-jini/*.dump
-/bigdata-jini/*.out
-/bigdata-jini/*.seg
-/bigdata-jini/com_bigdata_btree_BytesUtil_UnsignedByteArrayComparator.h
-/bigdata-jini/com_bigdata_btree_BytesUtil.h
-/bigdata-jini/*.raw2
-/bigdata-jini/*.tmp
-/bigdata-jini/test_*
-/bigdata-jini/com.bigdata.journal.StressTestConcurrent.comparison.csv
-/bigdata-jini/bigdata.jar
-/bigdata-jini/run.bat
-/bigdata-jini/ant-build
-/bigdata-jini/ant-deploy
-/bigdata-jini/log
-/bigdata-jini/TestService.id
-/bigdata-jini/stack-traces
-/bigdata-jini/*.csv
-/bigdata-jini/*.xls
-/bigdata-jini/*.id
-/bigdata-jini/target
-/bigdata-jini/standalone
-/bigdata-jini/bigdata-jini.jar
-/bigdata-jini/.classpath
-/bigdata-jini/.project
-/bigdata-jini/counters*.xml
-/bigdata-jini/zookeeper
-/bigdata-jini/test-fed
+# /embergraph-jini/
+/embergraph-jini/bin
+/embergraph-jini/*.jnl
+/embergraph-jini/*.mdmp
+/embergraph-jini/*.dump
+/embergraph-jini/*.out
+/embergraph-jini/*.seg
+/embergraph-jini/com_embergraph_btree_BytesUtil_UnsignedByteArrayComparator.h
+/embergraph-jini/com_embergraph_btree_BytesUtil.h
+/embergraph-jini/*.raw2
+/embergraph-jini/*.tmp
+/embergraph-jini/test_*
+/embergraph-jini/org.embergraph.journal.StressTestConcurrent.comparison.csv
+/embergraph-jini/embergraph.jar
+/embergraph-jini/run.bat
+/embergraph-jini/ant-build
+/embergraph-jini/ant-deploy
+/embergraph-jini/log
+/embergraph-jini/TestService.id
+/embergraph-jini/stack-traces
+/embergraph-jini/*.csv
+/embergraph-jini/*.xls
+/embergraph-jini/*.id
+/embergraph-jini/target
+/embergraph-jini/standalone
+/embergraph-jini/embergraph-jini.jar
+/embergraph-jini/.classpath
+/embergraph-jini/.project
+/embergraph-jini/counters*.xml
+/embergraph-jini/zookeeper
+/embergraph-jini/test-fed
 
-# /bigdata-jini/lib/
-/bigdata-jini/lib/rio-1.2.1.jar
-/bigdata-jini/lib/openrdf-model-1.2.1.jar
-/bigdata-jini/lib/bigdata.jar
+# /embergraph-jini/lib/
+/embergraph-jini/lib/rio-1.2.1.jar
+/embergraph-jini/lib/openrdf-model-1.2.1.jar
+/embergraph-jini/lib/embergraph.jar
 
-# /bigdata-jini/src/java/com/bigdata/service/jini/
-/bigdata-jini/src/java/com/bigdata/service/jini/SolutionSerializer.java
+# /embergraph-jini/src/java/com/embergraph/service/jini/
+/embergraph-jini/src/java/com/embergraph/service/jini/SolutionSerializer.java
 
-# /bigdata-jini/src/test/com/bigdata/service/jini/
-/bigdata-jini/src/test/com/bigdata/service/jini/IteratorProxy.java
-/bigdata-jini/src/test/com/bigdata/service/jini/IteratorProxyState.java
-/bigdata-jini/src/test/com/bigdata/service/jini/TestPageServer.java
-/bigdata-jini/src/test/com/bigdata/service/jini/IteratorService.java
+# /embergraph-jini/src/test/com/embergraph/service/jini/
+/embergraph-jini/src/test/com/embergraph/service/jini/IteratorProxy.java
+/embergraph-jini/src/test/com/embergraph/service/jini/IteratorProxyState.java
+/embergraph-jini/src/test/com/embergraph/service/jini/TestPageServer.java
+/embergraph-jini/src/test/com/embergraph/service/jini/IteratorService.java
 
 # /embergraph-perf/bsbm/
 /embergraph-perf/bsbm/ant-build
@@ -172,110 +172,110 @@ embergraph-core/bigdata/src/java/com/bigdata/BuildInfo.java
 # /embergraph-perf/lubm/src/java/edu/lehigh/swat/bench/ubt/
 /embergraph-perf/lubm/src/java/edu/lehigh/swat/bench/ubt/answers (U1)
 
-# /embergraph-perf/lubm/src/java/edu/lehigh/swat/bench/ubt/bigdata/
-/embergraph-perf/lubm/src/java/edu/lehigh/swat/bench/ubt/bigdata/*eossys*
-/embergraph-perf/lubm/src/java/edu/lehigh/swat/bench/ubt/bigdata/notes.txt
-/embergraph-perf/lubm/src/java/edu/lehigh/swat/bench/ubt/bigdata/JDSTest.java
+# /embergraph-perf/lubm/src/java/edu/lehigh/swat/bench/ubt/embergraph/
+/embergraph-perf/lubm/src/java/edu/lehigh/swat/bench/ubt/embergraph/*eossys*
+/embergraph-perf/lubm/src/java/edu/lehigh/swat/bench/ubt/embergraph/notes.txt
+/embergraph-perf/lubm/src/java/edu/lehigh/swat/bench/ubt/embergraph/JDSTest.java
 
-# /bigdata-rdf/
-/bigdata-rdf/*.jnl
-/bigdata-rdf/perf.doc
-/bigdata-rdf/perf.txt
-/bigdata-rdf/README.txt
-/bigdata-rdf/data
-/bigdata-rdf/run.bat
-/bigdata-rdf/.settings
-/bigdata-rdf/perf.xls
-/bigdata-rdf/*.out
-/bigdata-rdf/*.jardesc
-/bigdata-rdf/testjar
-/bigdata-rdf/bin
-/bigdata-rdf/bigdata-rdf.jar
-/bigdata-rdf/ant-build
-/bigdata-rdf/*.seg
-/bigdata-rdf/TaskA
-/bigdata-rdf/TestMetrics-metrics.csv
-/bigdata-rdf/TestMetrics-metrics-compare256a.xls
-/bigdata-rdf/*.dump
-/bigdata-rdf/*.mdmp
-/bigdata-rdf/TestMetrics-metrics-smallDocuments-overflow20M.xls
-/bigdata-rdf/TestMetrics-metrics-documents-1partition-10k-OOM.csv
-/bigdata-rdf/TestMetrics-metrics-smallDocuments-noPartitions.csv
-/bigdata-rdf/smallDocuments
-/bigdata-rdf/test_loadFile_presortRioLoader
-/bigdata-rdf/TestMetrics-metrics*
-/bigdata-rdf/BBN
-/bigdata-rdf/Triple
-/bigdata-rdf/Store
-/bigdata-rdf/Study
-/bigdata-rdf/*.id
-/bigdata-rdf/test_*
-/bigdata-rdf/next-steps.doc
-/bigdata-rdf/target
-/bigdata-rdf/~*
-/bigdata-rdf/worklist
-/bigdata-rdf/TestMetrics
-/bigdata-rdf/segments
-/bigdata-rdf/journals
-/bigdata-rdf/standalone
-/bigdata-rdf/counters*.xml
-/bigdata-rdf/U10*
-/bigdata-rdf/test
-/bigdata-rdf/docs
-/bigdata-rdf/bigdata.jar
-/bigdata-rdf/bigdata-starter-kit.tgz
-/bigdata-rdf/.project
-/bigdata-rdf/.classpath
-/bigdata-rdf/docs.zip
-/bigdata-rdf/timegrid.xml
-/bigdata-rdf/timegrid.xhtml
-/bigdata-rdf/moveerr1.txt
-/bigdata-rdf/moveerr2.txt
-/bigdata-rdf/err1.txt
-/bigdata-rdf/U*MovesOk.txt
-/bigdata-rdf/U*Ok?.txt
-/bigdata-rdf/test*
+# /embergraph-rdf/
+/embergraph-rdf/*.jnl
+/embergraph-rdf/perf.doc
+/embergraph-rdf/perf.txt
+/embergraph-rdf/README.txt
+/embergraph-rdf/data
+/embergraph-rdf/run.bat
+/embergraph-rdf/.settings
+/embergraph-rdf/perf.xls
+/embergraph-rdf/*.out
+/embergraph-rdf/*.jardesc
+/embergraph-rdf/testjar
+/embergraph-rdf/bin
+/embergraph-rdf/embergraph-rdf.jar
+/embergraph-rdf/ant-build
+/embergraph-rdf/*.seg
+/embergraph-rdf/TaskA
+/embergraph-rdf/TestMetrics-metrics.csv
+/embergraph-rdf/TestMetrics-metrics-compare256a.xls
+/embergraph-rdf/*.dump
+/embergraph-rdf/*.mdmp
+/embergraph-rdf/TestMetrics-metrics-smallDocuments-overflow20M.xls
+/embergraph-rdf/TestMetrics-metrics-documents-1partition-10k-OOM.csv
+/embergraph-rdf/TestMetrics-metrics-smallDocuments-noPartitions.csv
+/embergraph-rdf/smallDocuments
+/embergraph-rdf/test_loadFile_presortRioLoader
+/embergraph-rdf/TestMetrics-metrics*
+/embergraph-rdf/BBN
+/embergraph-rdf/Triple
+/embergraph-rdf/Store
+/embergraph-rdf/Study
+/embergraph-rdf/*.id
+/embergraph-rdf/test_*
+/embergraph-rdf/next-steps.doc
+/embergraph-rdf/target
+/embergraph-rdf/~*
+/embergraph-rdf/worklist
+/embergraph-rdf/TestMetrics
+/embergraph-rdf/segments
+/embergraph-rdf/journals
+/embergraph-rdf/standalone
+/embergraph-rdf/counters*.xml
+/embergraph-rdf/U10*
+/embergraph-rdf/test
+/embergraph-rdf/docs
+/embergraph-rdf/embergraph.jar
+/embergraph-rdf/embergraph-starter-kit.tgz
+/embergraph-rdf/.project
+/embergraph-rdf/.classpath
+/embergraph-rdf/docs.zip
+/embergraph-rdf/timegrid.xml
+/embergraph-rdf/timegrid.xhtml
+/embergraph-rdf/moveerr1.txt
+/embergraph-rdf/moveerr2.txt
+/embergraph-rdf/err1.txt
+/embergraph-rdf/U*MovesOk.txt
+/embergraph-rdf/U*Ok?.txt
+/embergraph-rdf/test*
 
-# /bigdata-rdf/LEGAL/
-/bigdata-rdf/LEGAL/piccolo-LICENSE.txt
+# /embergraph-rdf/LEGAL/
+/embergraph-rdf/LEGAL/piccolo-LICENSE.txt
 
-# /bigdata-rdf/lib/
-/bigdata-rdf/lib/piccolo-README.txt
-/bigdata-rdf/lib/Piccolo.jar
+# /embergraph-rdf/lib/
+/embergraph-rdf/lib/piccolo-README.txt
+/embergraph-rdf/lib/Piccolo.jar
 
-# /bigdata-rdf/src/java/
-/bigdata-rdf/src/java/edu
-/bigdata-rdf/src/java/sesamewrapper
+# /embergraph-rdf/src/java/
+/embergraph-rdf/src/java/edu
+/embergraph-rdf/src/java/sesamewrapper
 
-# /bigdata-rdf/src/java/com/bigdata/rdf/load/
-/bigdata-rdf/src/java/com/bigdata/rdf/load/DumpUtility.java
+# /embergraph-rdf/src/java/com/embergraph/rdf/load/
+/embergraph-rdf/src/java/com/embergraph/rdf/load/DumpUtility.java
 
-# /bigdata-rdf/src/java/com/bigdata/rdf/spo/
-/bigdata-rdf/src/java/com/bigdata/rdf/spo/FastRDFSIDValueCoder.java
+# /embergraph-rdf/src/java/com/embergraph/rdf/spo/
+/embergraph-rdf/src/java/com/embergraph/rdf/spo/FastRDFSIDValueCoder.java
 
-# /bigdata-rdf/src/java/org/openrdf/rio/
-/bigdata-rdf/src/java/org/openrdf/rio/helpers
+# /embergraph-rdf/src/java/org/openrdf/rio/
+/embergraph-rdf/src/java/org/openrdf/rio/helpers
 
-# /bigdata-rdf/src/test/
-/bigdata-rdf/src/test/edu
+# /embergraph-rdf/src/test/
+/embergraph-rdf/src/test/edu
 
-# /bigdata-rdf/src/test/com/bigdata/rdf/
-/bigdata-rdf/src/test/com/bigdata/rdf/blip
+# /embergraph-rdf/src/test/com/embergraph/rdf/
+/embergraph-rdf/src/test/com/embergraph/rdf/blip
 
-# /bigdata-rdf/src/test/com/bigdata/rdf/inf/
-/bigdata-rdf/src/test/com/bigdata/rdf/inf/alibaba_v41.rdf
-/bigdata-rdf/src/test/com/bigdata/rdf/inf/wordnet-20000620.rdfs
-/bigdata-rdf/src/test/com/bigdata/rdf/inf/wordnet_nouns-20010201.rdf
-/bigdata-rdf/src/test/com/bigdata/rdf/inf/notes.txt
+# /embergraph-rdf/src/test/com/embergraph/rdf/inf/
+/embergraph-rdf/src/test/com/embergraph/rdf/inf/alibaba_v41.rdf
+/embergraph-rdf/src/test/com/embergraph/rdf/inf/wordnet-20000620.rdfs
+/embergraph-rdf/src/test/com/embergraph/rdf/inf/wordnet_nouns-20010201.rdf
+/embergraph-rdf/src/test/com/embergraph/rdf/inf/notes.txt
 
-# /bigdata-rdf/src/test/com/bigdata/rdf/metrics/
-/bigdata-rdf/src/test/com/bigdata/rdf/metrics/Test*ReferenceLoad.java
+# /embergraph-rdf/src/test/com/embergraph/rdf/metrics/
+/embergraph-rdf/src/test/com/embergraph/rdf/metrics/Test*ReferenceLoad.java
 
-# /bigdata-rdf/src/test/com/bigdata/rdf/rules/
-/bigdata-rdf/src/test/com/bigdata/rdf/rules/alibaba_v41.rdf
-/bigdata-rdf/src/test/com/bigdata/rdf/rules/wordnet-20000620.rdfs
-/bigdata-rdf/src/test/com/bigdata/rdf/rules/wordnet_nouns-20010201.rdf
-/bigdata-rdf/src/test/com/bigdata/rdf/rules/notes.txt
+# /embergraph-rdf/src/test/com/embergraph/rdf/rules/
+/embergraph-rdf/src/test/com/embergraph/rdf/rules/alibaba_v41.rdf
+/embergraph-rdf/src/test/com/embergraph/rdf/rules/wordnet-20000620.rdfs
+/embergraph-rdf/src/test/com/embergraph/rdf/rules/wordnet_nouns-20010201.rdf
+/embergraph-rdf/src/test/com/embergraph/rdf/rules/notes.txt
 
 # /embergraph-sails/
 /embergraph-sails/bin
@@ -296,35 +296,35 @@ embergraph-core/bigdata/src/java/com/bigdata/BuildInfo.java
 /embergraph-sails/src/java/edu
 /embergraph-sails/src/java/sesamewrapper
 
-# /embergraph-sails/src/java/com/bigdata/rdf/
-/embergraph-sails/src/java/com/bigdata/rdf/blip
+# /embergraph-sails/src/java/com/embergraph/rdf/
+/embergraph-sails/src/java/com/embergraph/rdf/blip
 
-# /embergraph-sails/src/java/com/bigdata/rdf/sail/
-/embergraph-sails/src/java/com/bigdata/rdf/sail/SimpleRdfsRepository.java
+# /embergraph-sails/src/java/com/embergraph/rdf/sail/
+/embergraph-sails/src/java/com/embergraph/rdf/sail/SimpleRdfsRepository.java
 
-# /embergraph-sails/src/java/com/bigdata/rdf/sail/bench/
-/embergraph-sails/src/java/com/bigdata/rdf/sail/bench/ChangeFederationBranchingFactor.java
+# /embergraph-sails/src/java/com/embergraph/rdf/sail/bench/
+/embergraph-sails/src/java/com/embergraph/rdf/sail/bench/ChangeFederationBranchingFactor.java
 
 # /embergraph-sails/src/resources/
 /embergraph-sails/src/resources/U1
 
-# /embergraph-sails/src/samples/com/bigdata/samples/
-/embergraph-sails/src/samples/com/bigdata/samples/baseball.stats.out.rdf.zip
+# /embergraph-sails/src/samples/com/embergraph/samples/
+/embergraph-sails/src/samples/com/embergraph/samples/baseball.stats.out.rdf.zip
 
-# /embergraph-sails/src/test/com/bigdata/rdf/sail/
-/embergraph-sails/src/test/com/bigdata/rdf/sail/old
-/embergraph-sails/src/test/com/bigdata/rdf/sail/Test.java
-/embergraph-sails/src/test/com/bigdata/rdf/sail/system.rdfs
-/embergraph-sails/src/test/com/bigdata/rdf/sail/test.rdf
+# /embergraph-sails/src/test/com/embergraph/rdf/sail/
+/embergraph-sails/src/test/com/embergraph/rdf/sail/old
+/embergraph-sails/src/test/com/embergraph/rdf/sail/Test.java
+/embergraph-sails/src/test/com/embergraph/rdf/sail/system.rdfs
+/embergraph-sails/src/test/com/embergraph/rdf/sail/test.rdf
 
-# /embergraph-sails/src/test/com/bigdata/rdf/sail/tck/
-/embergraph-sails/src/test/com/bigdata/rdf/sail/tck/DoNotDistribute_QueryTest.java
-/embergraph-sails/src/test/com/bigdata/rdf/sail/tck/data-2.ttl
-/embergraph-sails/src/test/com/bigdata/rdf/sail/tck/TestSparqlStuff.java
+# /embergraph-sails/src/test/com/embergraph/rdf/sail/tck/
+/embergraph-sails/src/test/com/embergraph/rdf/sail/tck/DoNotDistribute_QueryTest.java
+/embergraph-sails/src/test/com/embergraph/rdf/sail/tck/data-2.ttl
+/embergraph-sails/src/test/com/embergraph/rdf/sail/tck/TestSparqlStuff.java
 
-# /embergraph-sails/src/test/com/bigdata/rdf/stress/
-/embergraph-sails/src/test/com/bigdata/rdf/stress/LoadClosureAndQueryExperiment-EOSSYS.xml
-/embergraph-sails/src/test/com/bigdata/rdf/stress/config.query.eossys
+# /embergraph-sails/src/test/com/embergraph/rdf/stress/
+/embergraph-sails/src/test/com/embergraph/rdf/stress/LoadClosureAndQueryExperiment-EOSSYS.xml
+/embergraph-sails/src/test/com/embergraph/rdf/stress/config.query.eossys
 
 # /dsi-utils/
 /dsi-utils/ant-build
@@ -333,7 +333,7 @@ embergraph-core/bigdata/src/java/com/bigdata/BuildInfo.java
 /lgpl-utils/ant-build
 
 # /src/resources/config/
-/src/resources/config/bigdataCluster-bbt.config
+/src/resources/config/embergraphCluster-bbt.config
 
 # ignore all HA CI benchmark files.
 benchmark
@@ -374,7 +374,7 @@ embergraph-rdf-test/test_small.out
 *.out
 
 **/blazegraph.jnl
-**/bigdata.jnl
+**/embergraph.jnl
 
 build
 .gradle

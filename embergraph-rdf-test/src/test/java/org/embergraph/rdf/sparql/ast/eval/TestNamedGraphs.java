@@ -120,7 +120,7 @@ public class TestNamedGraphs extends AbstractDataDrivenSPARQLTestCase {
     }
 
     /*
-     * Ported from com.bigdata.rdf.sail.TestNamedGraphs
+     * Ported from org.embergraph.rdf.sail.TestNamedGraphs
      */
     
     /**

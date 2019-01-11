@@ -1,1 +1,1 @@
-com.bigdata.rdf.rio.json.BigdataSPARQLResultsJSONWriterFactory
+org.embergraph.rdf.rio.json.BigdataSPARQLResultsJSONWriterFactory

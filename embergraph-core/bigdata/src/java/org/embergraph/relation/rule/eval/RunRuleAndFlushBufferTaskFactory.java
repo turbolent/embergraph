@@ -13,7 +13,7 @@ import org.embergraph.relation.rule.IRule;
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  * 
- * @deprecated This is now handled by {@link MutationTask#newMutationTasks(com.bigdata.relation.rule.IStep, IJoinNexus, java.util.Map)}
+ * @deprecated This is now handled by {@link MutationTask#newMutationTasks(org.embergraph.relation.rule.IStep, IJoinNexus, java.util.Map)}
  */
 public class RunRuleAndFlushBufferTaskFactory implements IRuleTaskFactory {
 

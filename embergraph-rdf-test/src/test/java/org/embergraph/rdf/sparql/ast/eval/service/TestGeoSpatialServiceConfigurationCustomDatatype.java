@@ -360,13 +360,13 @@ public class TestGeoSpatialServiceConfigurationCustomDatatype extends AbstractDa
 
         // enable GeoSpatial index
         properties.setProperty(
-           com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL, "true");
+           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL, "true");
 
         // set GeoSpatial configuration: use a higher precision and range shifts; 
         // the test accounts for this higher precision (and assert that range shifts
         // actually do not harm the evaluation process)
         properties.setProperty(
-           com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".0",
+           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".0",
            "{\"config\": "
            + "{ \"uri\": \"http://my.custom.datatype/lat-lon-time\", "
            + "\"fields\": [ "
@@ -376,7 +376,7 @@ public class TestGeoSpatialServiceConfigurationCustomDatatype extends AbstractDa
            + "]}}");
         
         properties.setProperty(
-           com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".1",
+           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".1",
            "{\"config\": "
            + "{ \"uri\": \"http://my.custom.datatype/time-lat-lon\", "
            + "\"fields\": [ "
@@ -386,7 +386,7 @@ public class TestGeoSpatialServiceConfigurationCustomDatatype extends AbstractDa
            + "]}}");
         
         properties.setProperty(
-           com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".2",
+           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".2",
            "{\"config\": "
            + "{ \"uri\": \"http://my.custom.datatype/lat-time-lon\", "
            + "\"fields\": [ "
@@ -397,7 +397,7 @@ public class TestGeoSpatialServiceConfigurationCustomDatatype extends AbstractDa
         
 
         properties.setProperty(
-           com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".3",
+           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".3",
            "{\"config\": "
            + "{ \"uri\": \"http://my.custom.datatype/lat-lon-coord\", "
            + "\"fields\": [ "
@@ -407,7 +407,7 @@ public class TestGeoSpatialServiceConfigurationCustomDatatype extends AbstractDa
            + "]}}");
         
         properties.setProperty(
-           com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".4",
+           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".4",
            "{\"config\": "
            + "{ \"uri\": \"http://my.custom.datatype/time-coord\", "
            + "\"fields\": [ "
@@ -416,8 +416,8 @@ public class TestGeoSpatialServiceConfigurationCustomDatatype extends AbstractDa
            + "]}}");
         
         properties.setProperty(
-           com.bigdata.rdf.store.AbstractLocalTripleStore.Options.VOCABULARY_CLASS,
-           "com.bigdata.rdf.sparql.ast.eval.service.GeoSpatialTestVocabulary");
+           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.VOCABULARY_CLASS,
+           "org.embergraph.rdf.sparql.ast.eval.service.GeoSpatialTestVocabulary");
         
         return properties;
 

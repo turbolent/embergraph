@@ -65,7 +65,7 @@ public class VarNode extends TermNode {
     }
     
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      */
     public VarNode(VarNode op) {
         super(op);

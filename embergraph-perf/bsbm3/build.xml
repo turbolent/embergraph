@@ -18,14 +18,14 @@
 		    description="Load a data set.">
 		<!-- delete file if it exists so we load into a new journal. -->
 		<delete file="${bsbm.journalFile}" />
-		<java classname="com.bigdata.rdf.store.DataLoader"
+		<java classname="org.embergraph.rdf.store.DataLoader"
 		      fork="true" failonerror="true"
 		      >
 			<arg line="-namespace ${bsbm.namespace} ${bsbm.journalPropertyFile} ${bsbm.outputFile}.${bsbm.outputType}${bsbm.compressType}" />
 			<!-- specify/override the journal file name. -->
-			<jvmarg line="${queryJvmArgs} -Dcom.bigdata.journal.AbstractJournal.file=${bsbm.journalFile}
-				-Dcom.bigdata.rdf.store.DataLoader.bufferCapacity=1000000
-				-Dcom.bigdata.io.DirectBufferPool.bufferCapacity=10485760
+			<jvmarg line="${queryJvmArgs} -Dorg.embergraph.journal.AbstractJournal.file=${bsbm.journalFile}
+				-Dorg.embergraph.rdf.store.DataLoader.bufferCapacity=1000000
+				-Dorg.embergraph.io.DirectBufferPool.bufferCapacity=10485760
 				" />
 			<classpath>
 				<path refid="runtime.classpath" />
@@ -35,12 +35,12 @@
 
 	<target name="start-sparql-server"
 		    description="Start a small http server fronting for a bigdata database instance.">
-		<java classname="com.bigdata.rdf.sail.webapp.NanoSparqlServer"
+		<java classname="org.embergraph.rdf.sail.webapp.NanoSparqlServer"
 		      fork="true" failonerror="true"
 		      >
 			<arg line="${bsbm.nanoServerPort} ${bsbm.namespace} ${bsbm.journalPropertyFile}" />
 			<!-- specify/override the journal file name. -->
-			<jvmarg line="${queryJvmArgs} -Dcom.bigdata.journal.AbstractJournal.file=${bsbm.journalFile}" />
+			<jvmarg line="${queryJvmArgs} -Dorg.embergraph.journal.AbstractJournal.file=${bsbm.journalFile}" />
 			<classpath>
 				<path refid="runtime.classpath" />
 			</classpath>
@@ -49,7 +49,7 @@
 		
 	<target name="dump-journal" 
 		    description="Dump interesting facts about the loaded data.">
-		<java classname="com.bigdata.journal.DumpJournal"
+		<java classname="org.embergraph.journal.DumpJournal"
                            fork="true" failonerror="true">
 			<arg line="-pages ${bsbm.journalFile}"/>
 			<classpath>

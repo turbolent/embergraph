@@ -74,7 +74,7 @@ public class NowBOp extends IVValueExpression<IV> implements INeedsMaterializati
     }
 
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      *
      * @param op
      */

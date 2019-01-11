@@ -54,7 +54,7 @@ public class ArbitraryLengthPathOp extends PipelineOp {
      */
     private static final long serialVersionUID = 1L;
 
-    public interface Annotations extends com.bigdata.bop.PipelineOp.Annotations {
+    public interface Annotations extends org.embergraph.bop.PipelineOp.Annotations {
 
         /**
          * The subquery representing the path between left and right.

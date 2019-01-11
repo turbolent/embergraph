@@ -74,7 +74,7 @@ public class OrBOp extends XSDBooleanIVValueExpression {
     }
 
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      */
     public OrBOp(final OrBOp op) {
         super(op);

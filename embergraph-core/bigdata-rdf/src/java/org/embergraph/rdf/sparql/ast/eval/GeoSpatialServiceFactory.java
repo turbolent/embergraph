@@ -205,9 +205,9 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
        * 
        * <code>
           hint:Prior <http://www.bigdata.com/queryHints#maxParallel> "20" .
-          hint:Prior <http://www.bigdata.com/queryHints#com.bigdata.relation.accesspath.BlockingBuffer.chunkOfChunksCapacity> "10" .
-          hint:Prior <http://www.bigdata.com/queryHints#com.bigdata.relation.accesspath.IBuffer.chunkCapacity> "100" .
-          hint:Prior <http://www.bigdata.com/queryHints#com.bigdata.bop.join.PipelineJoin.avgDataPointsPerThread> "25000" .
+          hint:Prior <http://www.bigdata.com/queryHints#org.embergraph.relation.accesspath.BlockingBuffer.chunkOfChunksCapacity> "10" .
+          hint:Prior <http://www.bigdata.com/queryHints#org.embergraph.relation.accesspath.IBuffer.chunkCapacity> "100" .
+          hint:Prior <http://www.bigdata.com/queryHints#org.embergraph.bop.join.PipelineJoin.avgDataPointsPerThread> "25000" .
          </code>
        */
       final Integer maxParallel = 

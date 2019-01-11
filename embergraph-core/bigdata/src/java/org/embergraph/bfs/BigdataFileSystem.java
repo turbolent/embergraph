@@ -645,7 +645,7 @@ public class BigdataFileSystem extends
      *         of that timestamp.
      * 
      * @see ITPS
-     * @see SparseRowStore#read(Schema, Object, long, com.bigdata.sparse.INameFilter)
+     * @see SparseRowStore#read(Schema, Object, long, org.embergraph.sparse.INameFilter)
      */
     public ITPS readMetadata(final String id, final long timestamp) {
 

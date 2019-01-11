@@ -84,7 +84,7 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
      * Dedicated logger for quorum state.
      */
     static protected final transient Logger qlog = Logger
-            .getLogger("com.bigdata.quorum.quorumState");
+            .getLogger("org.embergraph.quorum.quorumState");
 
     /**
      * Text when an operation is not permitted because the service is not a
@@ -659,7 +659,7 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
                                         + ((ThreadPoolExecutor) watcherActionService)
                                                 .getActiveCount());
                     }
-                } catch (com.bigdata.concurrent.TimeoutException ex) {
+                } catch (org.embergraph.concurrent.TimeoutException ex) {
                     // Ignore.
                 } catch (InterruptedException ex) {
                     // Will be propagated below.
@@ -684,7 +684,7 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
                             actorShutdownTimeout, TimeUnit.MILLISECONDS)) {
                         log.error("ActorActionService termination timeout");
                     }
-                } catch (com.bigdata.concurrent.TimeoutException ex) {
+                } catch (org.embergraph.concurrent.TimeoutException ex) {
                     // Ignore.
                 } catch (InterruptedException ex) {
                     // Will be propagated below.
@@ -706,7 +706,7 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
                 eventService.shutdown();
                 try {
                     eventService.awaitTermination(1000, TimeUnit.MILLISECONDS);
-                } catch (com.bigdata.concurrent.TimeoutException ex) {
+                } catch (org.embergraph.concurrent.TimeoutException ex) {
                     // Ignore.
                 } catch (InterruptedException ex) {
                     // Will be propagated below.
@@ -2391,7 +2391,7 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
          * 
          * @return <code>true</code> if the pipeline order was modified.
          * 
-         * @see com.bigdata.ha.HAGlue#moveToEndOfPipeline()
+         * @see org.embergraph.ha.HAGlue#moveToEndOfPipeline()
          * 
          * @todo Provide hooks to optimize the write pipeline for the network
          *       topology.

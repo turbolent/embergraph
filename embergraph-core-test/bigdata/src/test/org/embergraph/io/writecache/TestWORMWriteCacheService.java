@@ -94,9 +94,9 @@ import org.embergraph.util.Bytes;
  *       This would appear to be an problem with the record map maintenance.
  * 
  *       <pre>
- * Caused by: java.lang.AssertionError: Empty cache: com.bigdata.io.WriteCache$FileChannelWriteCache@92dcdb{recordCount=1674,firstOffset=0,releaseBuffer=true,bytesWritten=0,bytesRemaining=1048576}
- *     at com.bigdata.io.WriteCacheService$WriteTask.call(WriteCacheService.java:536)
- *     at com.bigdata.io.WriteCacheService$WriteTask.call(WriteCacheService.java:1)
+ * Caused by: java.lang.AssertionError: Empty cache: org.embergraph.io.WriteCache$FileChannelWriteCache@92dcdb{recordCount=1674,firstOffset=0,releaseBuffer=true,bytesWritten=0,bytesRemaining=1048576}
+ *     at org.embergraph.io.WriteCacheService$WriteTask.call(WriteCacheService.java:536)
+ *     at org.embergraph.io.WriteCacheService$WriteTask.call(WriteCacheService.java:1)
  *     at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:303)
  *     at java.util.concurrent.FutureTask.run(FutureTask.java:138)
  *     at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:886)
@@ -1277,10 +1277,10 @@ public class TestWORMWriteCacheService extends TestCase3 {
      * This will create a deadlock after a failure in serviceJoin spewed from
      * the pipeline reorganization:
      * 
-     * com.bigdata.quorum.QuorumException: Not a pipeline member : 3b680846-30dc-4013-bc15-47fd1c4b20a5
-     *      at com.bigdata.quorum.AbstractQuorum$QuorumActorBase.serviceJoin(AbstractQuorum.java:1251)
-     *      at com.bigdata.quorum.AbstractQuorum$QuorumWatcherBase$3.run(AbstractQuorum.java:2249)
-     *      at com.bigdata.quorum.AbstractQuorum$QuorumWatcherBase$1.run(AbstractQuorum.java:1927)
+     * org.embergraph.quorum.QuorumException: Not a pipeline member : 3b680846-30dc-4013-bc15-47fd1c4b20a5
+     *      at org.embergraph.quorum.AbstractQuorum$QuorumActorBase.serviceJoin(AbstractQuorum.java:1251)
+     *      at org.embergraph.quorum.AbstractQuorum$QuorumWatcherBase$3.run(AbstractQuorum.java:2249)
+     *      at org.embergraph.quorum.AbstractQuorum$QuorumWatcherBase$1.run(AbstractQuorum.java:1927)
      *      at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:886)
      *      at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:908)
      *      at java.lang.Thread.run(Thread.java:680)

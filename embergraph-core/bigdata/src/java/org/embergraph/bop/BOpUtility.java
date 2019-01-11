@@ -1107,15 +1107,15 @@ public class BOpUtility {
     public static String toString2(final BOp bop) {
 
         String s = toString(bop);
-        s = s.replaceAll("com.bigdata.bop.controller.", "");
-        s = s.replaceAll("com.bigdata.bop.join.", "");
-        s = s.replaceAll("com.bigdata.bop.solutions.", "");
-        s = s.replaceAll("com.bigdata.bop.rdf.filter.", "");
-        s = s.replaceAll("com.bigdata.bop.bset", "");
-        s = s.replaceAll("com.bigdata.bop.", "");
-        s = s.replaceAll("com.bigdata.rdf.sail.", "");
-        s = s.replaceAll("com.bigdata.rdf.spo.", "");
-        s = s.replaceAll("com.bigdata.rdf.internal.constraints.", "");
+        s = s.replaceAll("org.embergraph.bop.controller.", "");
+        s = s.replaceAll("org.embergraph.bop.join.", "");
+        s = s.replaceAll("org.embergraph.bop.solutions.", "");
+        s = s.replaceAll("org.embergraph.bop.rdf.filter.", "");
+        s = s.replaceAll("org.embergraph.bop.bset", "");
+        s = s.replaceAll("org.embergraph.bop.", "");
+        s = s.replaceAll("org.embergraph.rdf.sail.", "");
+        s = s.replaceAll("org.embergraph.rdf.spo.", "");
+        s = s.replaceAll("org.embergraph.rdf.internal.constraints.", "");
         return s;
         
     }

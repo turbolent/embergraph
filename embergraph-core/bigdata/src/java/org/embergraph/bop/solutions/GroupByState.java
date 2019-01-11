@@ -54,7 +54,7 @@ import org.embergraph.bop.aggregate.IAggregate;
  * <p>
  * Note: As part of decoupling the SPARQL parser from the database in BLZG-1176,
  * a copy of this logic is now maintained in
- * {@link com.bigdata.rdf.sail.sparql.VerifyAggregates}.
+ * {@link org.embergraph.rdf.sail.sparql.VerifyAggregates}.
  * 
  * @see https://jira.blazegraph.com/browse/BLZG-1176
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

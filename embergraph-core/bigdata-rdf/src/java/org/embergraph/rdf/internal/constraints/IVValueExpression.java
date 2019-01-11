@@ -172,7 +172,7 @@ public abstract class IVValueExpression<T extends IV> extends BOpBase
     }
 
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      */
     public IVValueExpression(final IVValueExpression<T> op) {
         super(op);

@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * Created on Oct 24, 2011
  */
 
-package com.bigdata.rdf.sparql.ast.eval;
+package org.embergraph.rdf.sparql.ast.eval;
 
 /**
  * Test suite for UNION.
@@ -152,7 +152,7 @@ public class TestUnions extends AbstractDataDrivenSPARQLTestCase {
     }
 
     /*
-     * ported from com.bigdata.rdf.sail.TestNestedUnions
+     * ported from org.embergraph.rdf.sail.TestNestedUnions
      */
     
     // Note: was testSimplestNestedUnion().

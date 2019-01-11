@@ -233,7 +233,7 @@ public class BigdataSailHelper {
          * Turn off incremental closure in the DataLoader object.
          */
         properties.setProperty(
-                com.bigdata.rdf.store.DataLoader.Options.CLOSURE,
+                org.embergraph.rdf.store.DataLoader.Options.CLOSURE,
                 DataLoader.ClosureEnum.None.toString());
 
         /*
@@ -242,7 +242,7 @@ public class BigdataSailHelper {
          * over the database.
          */
         properties.setProperty(
-                com.bigdata.rdf.store.DataLoader.Options.COMMIT,
+                org.embergraph.rdf.store.DataLoader.Options.COMMIT,
                 DataLoader.CommitEnum.None.toString());
 
         /*
@@ -613,7 +613,7 @@ public class BigdataSailHelper {
 //            final Properties properties = new Properties();
 //            
 //            properties.setProperty(
-//                    com.bigdata.service.LocalDataServiceClient.Options.DATA_DIR,
+//                    org.embergraph.service.LocalDataServiceClient.Options.DATA_DIR,
 //                    filename);
 //            
 //            // disable platform statistics collection.
@@ -635,7 +635,7 @@ public class BigdataSailHelper {
 //            final Properties properties = new Properties();
 //            
 //            properties.setProperty(
-//                    com.bigdata.service.EmbeddedClient.Options.DATA_DIR,
+//                    org.embergraph.service.EmbeddedClient.Options.DATA_DIR,
 //                    filename);
 //            
 //            // disable platform statistics collection.

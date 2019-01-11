@@ -1585,27 +1585,27 @@ abstract public class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
          * 
          * <pre>
          * Leader(A):
-         * ERROR: 10:47:39,027 29698      com.bigdata.rwstore.RWStore$11 com.bigdata.io.writecache.WriteCacheService$WriteTask.call(WriteCacheService.java:937): java.util.concurrent.ExecutionException: java.lang.RuntimeException: java.util.concurrent.CancellationException
+         * ERROR: 10:47:39,027 29698      org.embergraph.rwstore.RWStore$11 org.embergraph.io.writecache.WriteCacheService$WriteTask.call(WriteCacheService.java:937): java.util.concurrent.ExecutionException: java.lang.RuntimeException: java.util.concurrent.CancellationException
          * java.util.concurrent.ExecutionException: java.lang.RuntimeException: java.util.concurrent.CancellationException
          *     at java.util.concurrent.FutureTask$Sync.innerGet(FutureTask.java:252)
          *     at java.util.concurrent.FutureTask.get(FutureTask.java:111)
-         *     at com.bigdata.io.writecache.WriteCacheService$WriteTask.writeCacheBlock(WriteCacheService.java:1466)
-         *     at com.bigdata.io.writecache.WriteCacheService$WriteTask.doRun(WriteCacheService.java:1015)
-         *     at com.bigdata.io.writecache.WriteCacheService$WriteTask.call(WriteCacheService.java:884)
-         *     at com.bigdata.io.writecache.WriteCacheService$WriteTask.call(WriteCacheService.java:1)
+         *     at org.embergraph.io.writecache.WriteCacheService$WriteTask.writeCacheBlock(WriteCacheService.java:1466)
+         *     at org.embergraph.io.writecache.WriteCacheService$WriteTask.doRun(WriteCacheService.java:1015)
+         *     at org.embergraph.io.writecache.WriteCacheService$WriteTask.call(WriteCacheService.java:884)
+         *     at org.embergraph.io.writecache.WriteCacheService$WriteTask.call(WriteCacheService.java:1)
          *     at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:334)
          *     at java.util.concurrent.FutureTask.run(FutureTask.java:166)
          *     at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110)
          *     at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603)
          *     at java.lang.Thread.run(Thread.java:722)
          * Caused by: java.lang.RuntimeException: java.util.concurrent.CancellationException
-         *     at com.bigdata.ha.QuorumPipelineImpl$RobustReplicateTask.call(QuorumPipelineImpl.java:912)
-         *     at com.bigdata.ha.QuorumPipelineImpl$RobustReplicateTask.call(QuorumPipelineImpl.java:1)
+         *     at org.embergraph.ha.QuorumPipelineImpl$RobustReplicateTask.call(QuorumPipelineImpl.java:912)
+         *     at org.embergraph.ha.QuorumPipelineImpl$RobustReplicateTask.call(QuorumPipelineImpl.java:1)
          *     ... 5 more
          * Caused by: java.util.concurrent.CancellationException
          *     at java.util.concurrent.FutureTask$Sync.innerGet(FutureTask.java:250)
          *     at java.util.concurrent.FutureTask.get(FutureTask.java:111)
-         *     at com.bigdata.service.proxy.ThickFuture.<init>(ThickFuture.java:66)
+         *     at org.embergraph.service.proxy.ThickFuture.<init>(ThickFuture.java:66)
          *     at org.embergraph.journal.jini.ha.HAJournal$HAGlueService.getProxy(HAJournal.java:1539)
          *     at org.embergraph.journal.AbstractJournal$BasicHA.getProxy(AbstractJournal.java:5976)
          *     at org.embergraph.journal.AbstractJournal$BasicHA.receiveAndReplicate(AbstractJournal.java:6718)
@@ -1637,21 +1637,21 @@ abstract public class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
          *     at net.jini.jeri.BasicInvocationHandler.invokeRemoteMethod(BasicInvocationHandler.java:659)
          *     at net.jini.jeri.BasicInvocationHandler.invoke(BasicInvocationHandler.java:528)
          *     at $Proxy2.receiveAndReplicate(Unknown Source)
-         *     at com.bigdata.ha.QuorumPipelineImpl$SendBufferTask.doRunWithLock(QuorumPipelineImpl.java:1127)
-         *     at com.bigdata.ha.QuorumPipelineImpl$SendBufferTask.call(QuorumPipelineImpl.java:1105)
-         *     at com.bigdata.ha.QuorumPipelineImpl$RobustReplicateTask.innerReplicate(QuorumPipelineImpl.java:967)
-         *     at com.bigdata.ha.QuorumPipelineImpl$RobustReplicateTask.call(QuorumPipelineImpl.java:906)
+         *     at org.embergraph.ha.QuorumPipelineImpl$SendBufferTask.doRunWithLock(QuorumPipelineImpl.java:1127)
+         *     at org.embergraph.ha.QuorumPipelineImpl$SendBufferTask.call(QuorumPipelineImpl.java:1105)
+         *     at org.embergraph.ha.QuorumPipelineImpl$RobustReplicateTask.innerReplicate(QuorumPipelineImpl.java:967)
+         *     at org.embergraph.ha.QuorumPipelineImpl$RobustReplicateTask.call(QuorumPipelineImpl.java:906)
          *     ... 6 more
          * </pre>
          * 
          * <pre>
          * First follower (C):
-         * WARN : 10:47:39,002 14879      com.bigdata.ha.pipeline.HAReceiveService@705072408{addrSelf=localhost/127.0.0.1:9092} com.bigdata.ha.pipeline.HAReceiveService.runNoBlock(HAReceiveService.java:547): java.util.concurrent.CancellationException
+         * WARN : 10:47:39,002 14879      org.embergraph.ha.pipeline.HAReceiveService@705072408{addrSelf=localhost/127.0.0.1:9092} org.embergraph.ha.pipeline.HAReceiveService.runNoBlock(HAReceiveService.java:547): java.util.concurrent.CancellationException
          * java.util.concurrent.CancellationException
          *     at java.util.concurrent.FutureTask$Sync.innerGet(FutureTask.java:250)
          *     at java.util.concurrent.FutureTask.get(FutureTask.java:111)
-         *     at com.bigdata.ha.pipeline.HAReceiveService.runNoBlock(HAReceiveService.java:545)
-         *     at com.bigdata.ha.pipeline.HAReceiveService.run(HAReceiveService.java:431)
+         *     at org.embergraph.ha.pipeline.HAReceiveService.runNoBlock(HAReceiveService.java:545)
+         *     at org.embergraph.ha.pipeline.HAReceiveService.run(HAReceiveService.java:431)
          * </pre>
          */
         @Override

@@ -970,12 +970,12 @@ public class DumpJournal {
                     
                     final AbstractBTree btree = (AbstractBTree) ndx;
 
-                    final com.bigdata.btree.NodeSerializer nodeSer = btree
+                    final org.embergraph.btree.NodeSerializer nodeSer = btree
                             .getNodeSerializer();
                     
                     try {
                     
-                        final com.bigdata.btree.data.IAbstractNodeData nodeOrLeaf = nodeSer
+                        final org.embergraph.btree.data.IAbstractNodeData nodeOrLeaf = nodeSer
                                 .decode(buf.duplicate());
 
                         log.warn("Record decoded from index=" + name);
@@ -991,11 +991,11 @@ public class DumpJournal {
 
                     final AbstractHTree htree = (AbstractHTree)ndx;
                     
-                    final com.bigdata.htree.NodeSerializer nodeSer = htree.getNodeSerializer();
+                    final org.embergraph.htree.NodeSerializer nodeSer = htree.getNodeSerializer();
 
                     try {
 
-                        final com.bigdata.btree.data.IAbstractNodeData nodeOrLeaf = nodeSer
+                        final org.embergraph.btree.data.IAbstractNodeData nodeOrLeaf = nodeSer
                                 .decode(buf.duplicate());
 
                         log.warn("Record decoded from index=" + name);

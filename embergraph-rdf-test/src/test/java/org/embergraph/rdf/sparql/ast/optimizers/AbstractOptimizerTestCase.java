@@ -90,10 +90,10 @@ public abstract class AbstractOptimizerTestCase extends
 		AbstractASTEvaluationTestCase {
 
 	public interface Annotations extends
-			com.bigdata.rdf.sparql.ast.GraphPatternGroup.Annotations,
-			com.bigdata.rdf.sparql.ast.ArbitraryLengthPathNode.Annotations,
-			com.bigdata.rdf.sparql.ast.eval.AST2BOpBase.Annotations,
-			com.bigdata.rdf.sparql.ast.StatementPatternNode.Annotations
+			org.embergraph.rdf.sparql.ast.GraphPatternGroup.Annotations,
+			org.embergraph.rdf.sparql.ast.ArbitraryLengthPathNode.Annotations,
+			org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.Annotations,
+			org.embergraph.rdf.sparql.ast.StatementPatternNode.Annotations
 			{
 	}
 	

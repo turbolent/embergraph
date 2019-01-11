@@ -74,7 +74,7 @@ public class BigdataSailFactoryTest extends TestCase {
 	@Test
 	public void testHostOnly() {
 		
-		String serviceEndpoint = "http://" + Config.DEFAULT_HOST + ":" + Config.BLAZEGRAPH_HTTP_PORT + "/";
+		String serviceEndpoint = "http://" + Config.DEFAULT_HOST + ":" + Config.HTTP_PORT + "/";
 		String normalizedServiceURL = 
 				BigdataSailFactory.testServiceEndpointUrl(serviceEndpoint);
 
@@ -84,7 +84,7 @@ public class BigdataSailFactoryTest extends TestCase {
 	@Test
 	public void testHostOnlyNoTrailingSlash() {
 		
-		String serviceEndpoint = "http://" + Config.DEFAULT_HOST + ":" + Config.BLAZEGRAPH_HTTP_PORT;
+		String serviceEndpoint = "http://" + Config.DEFAULT_HOST + ":" + Config.HTTP_PORT;
 		String normalizedServiceURL = 
 				BigdataSailFactory.testServiceEndpointUrl(serviceEndpoint);
 

@@ -1,4 +1,4 @@
-package com.bigdata.samples;
+package org.embergraph.samples;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;

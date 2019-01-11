@@ -97,40 +97,40 @@ public class TestBigdataSailWithSids extends AbstractBigdataSailTestCase {
         // test suite for the history index.
         suite.addTestSuite(TestHistoryIndex.class);
         
-		suite.addTestSuite(com.bigdata.rdf.sail.TestRollbacks.class);
-		suite.addTestSuite(com.bigdata.rdf.sail.TestRollbacksTx.class);
-        suite.addTestSuite(com.bigdata.rdf.sail.TestRollbacksTM.class);
-        suite.addTestSuite(com.bigdata.rdf.sail.TestMROWTransactionsNoHistory.class);
-        suite.addTestSuite(com.bigdata.rdf.sail.TestMROWTransactionsWithHistory.class);
+		suite.addTestSuite(org.embergraph.rdf.sail.TestRollbacks.class);
+		suite.addTestSuite(org.embergraph.rdf.sail.TestRollbacksTx.class);
+        suite.addTestSuite(org.embergraph.rdf.sail.TestRollbacksTM.class);
+        suite.addTestSuite(org.embergraph.rdf.sail.TestMROWTransactionsNoHistory.class);
+        suite.addTestSuite(org.embergraph.rdf.sail.TestMROWTransactionsWithHistory.class);
 
-        suite.addTestSuite(com.bigdata.rdf.sail.TestMillisecondPrecisionForInlineDateTimes.class);
+        suite.addTestSuite(org.embergraph.rdf.sail.TestMillisecondPrecisionForInlineDateTimes.class);
 
-        suite.addTestSuite(com.bigdata.rdf.sail.TestTicket275.class);
-        suite.addTestSuite(com.bigdata.rdf.sail.TestTicket276.class);
-        suite.addTestSuite(com.bigdata.rdf.sail.TestTicket422.class);
+        suite.addTestSuite(org.embergraph.rdf.sail.TestTicket275.class);
+        suite.addTestSuite(org.embergraph.rdf.sail.TestTicket276.class);
+        suite.addTestSuite(org.embergraph.rdf.sail.TestTicket422.class);
 
-        suite.addTestSuite(com.bigdata.rdf.sail.TestLexJoinOps.class);
-        suite.addTestSuite(com.bigdata.rdf.sail.TestMaterialization.class);
+        suite.addTestSuite(org.embergraph.rdf.sail.TestLexJoinOps.class);
+        suite.addTestSuite(org.embergraph.rdf.sail.TestMaterialization.class);
 
-        suite.addTestSuite(com.bigdata.rdf.sail.TestTicket610.class);
-        suite.addTestSuite(com.bigdata.rdf.sail.TestTicket669.class);
+        suite.addTestSuite(org.embergraph.rdf.sail.TestTicket610.class);
+        suite.addTestSuite(org.embergraph.rdf.sail.TestTicket669.class);
         
-        suite.addTestSuite(com.bigdata.rdf.sail.TestTicket1086.class);
+        suite.addTestSuite(org.embergraph.rdf.sail.TestTicket1086.class);
 
-		suite.addTestSuite(com.bigdata.rdf.sail.TestTicket1747.class);
-        suite.addTestSuite(com.bigdata.rdf.sail.TestTicket1753.class);
+		suite.addTestSuite(org.embergraph.rdf.sail.TestTicket1747.class);
+        suite.addTestSuite(org.embergraph.rdf.sail.TestTicket1753.class);
 
-        suite.addTestSuite(com.bigdata.rdf.sail.TestTicket1755.class);
-        suite.addTestSuite(com.bigdata.rdf.sail.TestTicket1785.class);
-        suite.addTestSuite(com.bigdata.rdf.sail.TestTicket1788.class);
-        suite.addTestSuite(com.bigdata.rdf.sail.TestTicket1875.class);
-        suite.addTestSuite(com.bigdata.rdf.sail.TestTicket4249.class);
+        suite.addTestSuite(org.embergraph.rdf.sail.TestTicket1755.class);
+        suite.addTestSuite(org.embergraph.rdf.sail.TestTicket1785.class);
+        suite.addTestSuite(org.embergraph.rdf.sail.TestTicket1788.class);
+        suite.addTestSuite(org.embergraph.rdf.sail.TestTicket1875.class);
+        suite.addTestSuite(org.embergraph.rdf.sail.TestTicket4249.class);
 
         suite.addTestSuite(TestRDRHistory.class);
 
         suite.addTestSuite(TestSparqlStar.class);
         
-        suite.addTestSuite(com.bigdata.rdf.sail.TestTicket1518.class);
+        suite.addTestSuite(org.embergraph.rdf.sail.TestTicket1518.class);
 
         return suite;
         

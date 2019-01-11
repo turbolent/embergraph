@@ -172,7 +172,7 @@ public class TruthMaintenance {
 
         // turn off the lexicon since we will only use the statement indices.
         properties.setProperty(
-                com.bigdata.rdf.store.AbstractTripleStore.Options.LEXICON,
+                org.embergraph.rdf.store.AbstractTripleStore.Options.LEXICON,
                 "false");
 
         /*
@@ -181,7 +181,7 @@ public class TruthMaintenance {
          * it substantially.
          */
         properties.setProperty(
-                com.bigdata.rdf.store.AbstractTripleStore.Options.BLOOM_FILTER,
+                org.embergraph.rdf.store.AbstractTripleStore.Options.BLOOM_FILTER,
                 "false");
         
         final TempTripleStore tempStore = new TempTripleStore(database

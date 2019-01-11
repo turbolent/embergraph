@@ -298,7 +298,7 @@ public class TestCommitHistory extends ProxyTestCase<Journal> {
     public void test_commitRecordIndex_find() throws IOException {
         
     	final Properties props = getProperties();
-    	props.setProperty("com.bigdata.service.AbstractTransactionService.minReleaseAge","2000"); // 2 seconds
+    	props.setProperty("org.embergraph.service.AbstractTransactionService.minReleaseAge","2000"); // 2 seconds
         Journal journal = new Journal(props);
 
         try {

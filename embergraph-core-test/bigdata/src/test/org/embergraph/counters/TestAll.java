@@ -65,17 +65,17 @@ public class TestAll extends TestCase {
 
         suite.addTestSuite(TestHistoryInstrument.class);
         
-        suite.addTest(com.bigdata.counters.store.TestAll.suite());
+        suite.addTest(org.embergraph.counters.store.TestAll.suite());
 
-        suite.addTest(com.bigdata.counters.query.TestAll.suite());
+        suite.addTest(org.embergraph.counters.query.TestAll.suite());
 
-        suite.addTest(com.bigdata.counters.linux.TestAll.suite());
+        suite.addTest(org.embergraph.counters.linux.TestAll.suite());
 
-        suite.addTest(com.bigdata.counters.osx.TestAll.suite());
+        suite.addTest(org.embergraph.counters.osx.TestAll.suite());
 
-        suite.addTest(com.bigdata.counters.striped.TestAll.suite());
+        suite.addTest(org.embergraph.counters.striped.TestAll.suite());
 
-        suite.addTest(com.bigdata.counters.ganglia.TestAll.suite());
+        suite.addTest(org.embergraph.counters.ganglia.TestAll.suite());
 
         return suite;
         

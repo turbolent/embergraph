@@ -57,7 +57,7 @@ public class SolrFulltextSearchImpl implements
 
    @Override
    public FulltextSearchHiterator<FulltextSearchHit> search(
-         com.bigdata.service.fts.IFulltextSearch.FulltextSearchQuery query,
+         org.embergraph.service.fts.IFulltextSearch.FulltextSearchQuery query,
          HttpClient client) {
 
       if (query != null) {

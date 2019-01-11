@@ -798,7 +798,7 @@ public class ASTEvalHelper {
 
             final Binding binding = itr.next();
 
-            final IVariable<IV> var = com.bigdata.bop.Var.var(binding.getName());
+            final IVariable<IV> var = org.embergraph.bop.Var.var(binding.getName());
             
             final IV iv = ((BigdataValue) binding.getValue()).getIV();
             

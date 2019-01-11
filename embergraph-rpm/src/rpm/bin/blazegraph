@@ -8,7 +8,7 @@ set -e
 [ -z "${BLZG_CONF}" ] && BLZG_CONF=/etc/blazegraph
 [ -z "${LOGGING_CONFIG}" ] && LOGGING_CONFIG=${BLZG_CONF}/logging.properties
 [ -z "${LOG4J_CONFIG}" ] && LOG4J_CONFIG=${BLZG_CONF}/log4j.properties
-[ -z "${NSS}" ] && NSS="com.bigdata.rdf.sail.webapp.NanoSparqlServer"
+[ -z "${NSS}" ] && NSS="org.embergraph.rdf.sail.webapp.NanoSparqlServer"
 [ -z "${NSS_NAMESPACE}" ] && NSS_NAMESPACE="kb"
 [ -z "${NSS_PROPERTIES}" ] && NSS_PROPERTIES="${BLZG_CONF}"/RWStore.properties
 

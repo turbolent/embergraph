@@ -13,5 +13,5 @@ source `dirname $0`/bigdataenv
 java ${JAVA_OPTS} \
         -Xmx400m \
     -cp ${CLASSPATH} \
-    com.bigdata.rdf.load.MappedRDFDataLoadMaster \
+    org.embergraph.rdf.load.MappedRDFDataLoadMaster \
     ${BIGDATA_CONFIG} ${BIGDATA_CONFIG_OVERRIDES}

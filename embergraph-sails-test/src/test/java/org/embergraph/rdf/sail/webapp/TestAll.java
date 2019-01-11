@@ -66,7 +66,7 @@ public class TestAll extends TestCase {
 //        /*
 //         * WebApp Client.
 //         */
-//        suite.addTest(com.bigdata.rdf.sail.webapp.client.TestAll.suite());
+//        suite.addTest(org.embergraph.rdf.sail.webapp.client.TestAll.suite());
 //
 //        /*
 //         * Test suite utility class for building XML/HTML documents.
@@ -81,7 +81,7 @@ public class TestAll extends TestCase {
 //        /*
 //         * Basic LBS unit tests (ranking and scoring hosts).
 //         */
-//        suite.addTest(com.bigdata.rdf.sail.webapp.lbs.TestAll.suite());
+//        suite.addTest(org.embergraph.rdf.sail.webapp.lbs.TestAll.suite());
 
         /*
          * Core test suite for REST API behavior. This test suite is run for

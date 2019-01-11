@@ -44,14 +44,12 @@ import org.apache.log4j.Logger;
 import org.apache.system.SystemUtil;
 
 import org.embergraph.Banner;
-import org.embergraph.BigdataStatics;
 import org.embergraph.counters.httpd.CounterSetHTTPD;
 import org.embergraph.counters.linux.StatisticsCollectorForLinux;
 import org.embergraph.counters.osx.StatisticsCollectorForOSX;
 import org.embergraph.counters.win.StatisticsCollectorForWindows;
 import org.embergraph.io.DirectBufferPool;
 import org.embergraph.util.Bytes;
-import org.embergraph.util.config.NicUtil;
 import org.embergraph.util.httpd.AbstractHTTPD;
 import org.embergraph.util.httpd.Config;
 
@@ -824,7 +822,7 @@ abstract public class AbstractStatisticsCollector implements IStatisticsCollecto
          */
         AbstractHTTPD httpd = null;
         {
-            final int port = Config.BLAZEGRAPH_HTTP_PORT;
+            final int port = Config.HTTP_PORT;
             if (port != 0) {
                 try {
                     httpd = new CounterSetHTTPD(port, client);

@@ -55,11 +55,11 @@ Attributes
 
 `node['bigdata']['rdf.store.AbstractTripleStore.textIndex']` - Switch text indexing on/off.  (Default: false)
 
-`node['bigdata']['rdf.store.AbstractTripleStore.axiomsClass']` - The class to handle RDF axioms.  (Default: com.bigdata.rdf.axioms.NoAxioms)
+`node['bigdata']['rdf.store.AbstractTripleStore.axiomsClass']` - The class to handle RDF axioms.  (Default: org.embergraph.rdf.axioms.NoAxioms)
 
-`node['bigdata']['namespace.kb.lex.com.bigdata.btree.BTree.branchingFactor']` - Branching factor for the journal's Lexical B-Tree.  (Default:- 400)
+`node['bigdata']['namespace.kb.lex.org.embergraph.btree.BTree.branchingFactor']` - Branching factor for the journal's Lexical B-Tree.  (Default:- 400)
 
-`node['bigdata']['namespace.kb.spo.com.bigdata.btree.BTree.branchingFactor']` - Branching factor for the journal's SPO B-Tree.  (Default: 1024)
+`node['bigdata']['namespace.kb.spo.org.embergraph.btree.BTree.branchingFactor']` - Branching factor for the journal's SPO B-Tree.  (Default: 1024)
 
 `node['bigdata']['rdf.sail.bufferCapacity']` - The number of statements to buffer before committing triples to the persistence layer.  (Default: 100000)
 

@@ -309,7 +309,7 @@ public final class StaticOptimizer {
 	 * Start by looking at every possible initial join. Take every tail and
 	 * match it with every other tail to find the lowest possible cardinality.
 	 * See
-	 * {@link #computeJoinCardinality(com.bigdata.bop.joinGraph.fast.DefaultEvaluationPlan2.IJoinDimension, com.bigdata.bop.joinGraph.fast.DefaultEvaluationPlan2.IJoinDimension)}
+	 * {@link #computeJoinCardinality(org.embergraph.bop.joinGraph.fast.DefaultEvaluationPlan2.IJoinDimension, org.embergraph.bop.joinGraph.fast.DefaultEvaluationPlan2.IJoinDimension)}
 	 * for more on this.
 	 */
 	private StaticOptimizer.Join getFirstJoin() {

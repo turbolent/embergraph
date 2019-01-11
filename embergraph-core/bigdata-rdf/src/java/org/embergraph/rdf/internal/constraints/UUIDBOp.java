@@ -82,7 +82,7 @@ public class UUIDBOp extends IVValueExpression<IV> implements INeedsMaterializat
     }
 
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      *
      * @param op
      */

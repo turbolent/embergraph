@@ -69,10 +69,10 @@ public class TestAll extends TestCase {
         suite.addTestSuite(TestPartitionedJoinGroup_canJoinUsingConstraints.class);
 
         // static query optimizer test suite.
-        suite.addTest(com.bigdata.bop.joinGraph.fast.TestAll.suite());
+        suite.addTest(org.embergraph.bop.joinGraph.fast.TestAll.suite());
 
         // runtime query optimizer test suite.
-        suite.addTest(com.bigdata.bop.joinGraph.rto.TestAll.suite());
+        suite.addTest(org.embergraph.bop.joinGraph.rto.TestAll.suite());
 
         return suite;
         

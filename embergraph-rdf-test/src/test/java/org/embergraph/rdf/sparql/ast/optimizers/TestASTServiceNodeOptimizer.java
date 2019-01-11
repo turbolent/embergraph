@@ -85,8 +85,8 @@ public class TestASTServiceNodeOptimizer extends AbstractASTEvaluationTestCase {
      *         }
      *       }
      *       StatementPatternNode(VarNode(subj), VarNode(p), VarNode(lit), DEFAULT_CONTEXTS)
-     *         com.bigdata.rdf.sparql.ast.eval.AST2BOpBase.estimatedCardinality=5
-     *         com.bigdata.rdf.sparql.ast.eval.AST2BOpBase.originalIndex=SPOC
+     *         org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.estimatedCardinality=5
+     *         org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.originalIndex=SPOC
      *     }
      * }
      * </pre>
@@ -149,8 +149,8 @@ public class TestASTServiceNodeOptimizer extends AbstractASTEvaluationTestCase {
          *         }
          *       }
          *       StatementPatternNode(VarNode(subj), VarNode(p), VarNode(lit), DEFAULT_CONTEXTS)
-         *         com.bigdata.rdf.sparql.ast.eval.AST2BOpBase.estimatedCardinality=5
-         *         com.bigdata.rdf.sparql.ast.eval.AST2BOpBase.originalIndex=SPOC
+         *         org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.estimatedCardinality=5
+         *         org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.originalIndex=SPOC
          *     }
          * }
          * </pre>

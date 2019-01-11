@@ -53,11 +53,11 @@ fi
 #JAVA_OPTS="-ea -Xdebug -Xrunjdwp:${JDWP_OPTS} ${JAVA_OPTS}"
 java ${JAVA_OPTS} \
      -cp ${CLASSPATH} \
-     com.bigdata.service.jini.util.BroadcastSighup \
+     org.embergraph.service.jini.util.BroadcastSighup \
      ${BIGDATA_CONFIG} \
-     "com.bigdata.service.jini.util.BroadcastSighup.signalTarget=\"$target\"" \
-     "com.bigdata.service.jini.util.BroadcastSighup.localOrAll=\"$local_or_all\"" \
-     "com.bigdata.service.jini.util.BroadcastSighup.pushConfig=true" \
-     "com.bigdata.service.jini.util.BroadcastSighup.restartServices=true" \
+     "org.embergraph.service.jini.util.BroadcastSighup.signalTarget=\"$target\"" \
+     "org.embergraph.service.jini.util.BroadcastSighup.localOrAll=\"$local_or_all\"" \
+     "org.embergraph.service.jini.util.BroadcastSighup.pushConfig=true" \
+     "org.embergraph.service.jini.util.BroadcastSighup.restartServices=true" \
      ${BIGDATA_CONFIG_OVERRIDES}
 exit 0

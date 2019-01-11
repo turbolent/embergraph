@@ -510,7 +510,7 @@ public class TestSearchQuery extends ProxyBigdataSailTestCase {
 
     }
 
-//    Note: This test was migrated to com.bigdata.rdf.sparql.ast.eval.TestSearch
+//    Note: This test was migrated to org.embergraph.rdf.sparql.ast.eval.TestSearch
 //    and is found in test_search_named_graphs10a()...e().
 //    
 //    public void testWithNamedGraphs() throws Exception {
@@ -2434,7 +2434,7 @@ public class TestSearchQuery extends ProxyBigdataSailTestCase {
     
     /*
 
-prefix BIGDATA_QUERY_HINTS: <http://www.bigdata.com/queryHints#com.bigdata.rdf.sail.QueryHints.optimizer=None>
+prefix BIGDATA_QUERY_HINTS: <http://www.bigdata.com/queryHints#org.embergraph.rdf.sail.QueryHints.optimizer=None>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#> 
 select distinct ?target0  
 where { 
@@ -2449,7 +2449,7 @@ where {
 		     
   FILTER (?category = <http://www.ms2w.com/ontologies/autocad/AutoCADBlock>  || ?category = <http://www.ms2w.com/ontologies/autocad/AutoCADBlockAttribute>  || ?category = <http://www.ms2w.com/ontologies/autocad/AutoCADBlockReference>  || ?category = <http://www.ms2w.com/ontologies/autocad/AutoCADFile>  || ?category = <http://www.ms2w.com/ontologies/autocad/AutoCADTable>  || ?category = <http://www.ms2w.com/ontologies/autocad/AutoCADTitleBlock>  || ?category = <http://www.ms2w.com/ontologies/file/Directory>  || ?category = <http://www.ms2w.com/ontologies/file/File>  || ?category = <http://www.ms2w.com/ontologies/pdffile/PdfAnnotation>  || ?category = <http://www.ms2w.com/ontologies/pdffile/PdfFile>  || ?category = <http://www.ms2w.com/ontologies/solidworks/20091023/swDmDocumentAssembly>  || ?category = <http://www.ms2w.com/ontologies/solidworks/20091023/swDmTableTypeBOM>  || ?category = <http://www.ms2w.com/ontologies/solidworks/20091023/Component>  || ?category = <http://www.ms2w.com/ontologies/solidworks/20091023/Configuration>  || ?category = <http://www.ms2w.com/ontologies/solidworks/20091023/swDmDocumentDrawing>  || ?category = <http://www.ms2w.com/ontologies/solidworks/20091023/swDmBOMTableTypeIndented>  || ?category = <http://www.ms2w.com/ontologies/solidworks/20091023/swDmDocumentPart>  || ?category = <http://www.ms2w.com/ontologies/solidworks/20091023/swDmBOMTableTypePartsOnly>  || ?category = <http://www.ms2w.com/ontologies/solidworks/20091023/swDmTableTypeRevision>  || ?category = <http://www.ms2w.com/ontologies/solidworks/20091023/swDmToolboxCopiedPart>  || ?category = <http://www.ms2w.com/ontologies/solidworks/20091023/swDmToolboxStandardPart>  || ?category = <http://www.ms2w.com/ontologies/solidworks/20091023/swDmBOMTableTypeTopLevelOnly> ) . 
 
-prefix BIGDATA_QUERY_HINTS: <http://www.bigdata.com/queryHints#com.bigdata.rdf.sail.QueryHints.optimizer=None>
+prefix BIGDATA_QUERY_HINTS: <http://www.bigdata.com/queryHints#org.embergraph.rdf.sail.QueryHints.optimizer=None>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#> 
 select distinct ?target  
 where { 

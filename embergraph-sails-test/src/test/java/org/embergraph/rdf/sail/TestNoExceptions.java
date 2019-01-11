@@ -87,7 +87,7 @@ public class TestNoExceptions extends
             	return super.getOurDelegate();
 
             }
-            setDelegate(new com.bigdata.rdf.sail.TestBigdataSailWithQuads());
+            setDelegate(new org.embergraph.rdf.sail.TestBigdataSailWithQuads());
         }
         return (AbstractBigdataSailTestCase) super.getDelegate();
     }

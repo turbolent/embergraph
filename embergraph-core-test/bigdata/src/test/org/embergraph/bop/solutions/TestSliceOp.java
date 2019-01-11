@@ -820,7 +820,7 @@ public class TestSliceOp extends TestCase2 {
     }
 
     private static class MockRunningQuery extends
-            com.bigdata.bop.engine.MockRunningQuery {
+            org.embergraph.bop.engine.MockRunningQuery {
         
         private final IBlockingBuffer<IBindingSet[]> sink;
         

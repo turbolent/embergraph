@@ -69,7 +69,7 @@ import cutthecrap.utils.striterators.IPropertySet;
  * 10k each time the map reached 20k. This can not be done with the
  * {@link LinkedHashMap} as its API is not sufficient for this purpose. However,
  * similar batch LRU update classes have been defined in the
- * <code>com.bigdata.cache</code> package and could be adapted here for that
+ * <code>org.embergraph.cache</code> package and could be adapted here for that
  * purpose.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -84,7 +84,7 @@ public class NativeDistinctFilter extends BOpFilterBase {
     private static final long serialVersionUID = 1L;
 
     public interface Annotations extends
-            com.bigdata.bop.ap.filter.BOpFilter.Annotations, BTreeAnnotations,
+            org.embergraph.bop.ap.filter.BOpFilter.Annotations, BTreeAnnotations,
             HashMapAnnotations {
         
         /**
@@ -126,7 +126,7 @@ public class NativeDistinctFilter extends BOpFilterBase {
     }
     
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      */
     public NativeDistinctFilter(final NativeDistinctFilter op) {
         super(op);

@@ -49,11 +49,11 @@ public class TestAll extends TestCase {
 
         final TestSuite suite = new TestSuite("GAS API");
 
-        suite.addTest(com.bigdata.rdf.graph.impl.sail.TestAll.suite());
+        suite.addTest(org.embergraph.rdf.graph.impl.sail.TestAll.suite());
 
-        suite.addTest(com.bigdata.rdf.graph.impl.ram.TestAll.suite());
+        suite.addTest(org.embergraph.rdf.graph.impl.ram.TestAll.suite());
 
-        suite.addTest(com.bigdata.rdf.graph.analytics.TestAll.suite());
+        suite.addTest(org.embergraph.rdf.graph.analytics.TestAll.suite());
         
         return suite;
         

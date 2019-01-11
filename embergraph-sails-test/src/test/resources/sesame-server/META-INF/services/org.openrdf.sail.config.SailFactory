@@ -1,1 +1,1 @@
-com.bigdata.rdf.sail.config.BigdataSailFactory
+org.embergraph.rdf.sail.config.BigdataSailFactory

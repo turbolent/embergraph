@@ -59,7 +59,7 @@ public class ClientFuture<T> implements Future<T>, Serializable {
      * java.util.concurrent.ExecutionException: java.lang.RuntimeException: java.rmi.NoSuchObjectException: no such object in table
      *         at java.util.concurrent.FutureTask$Sync.innerGet(FutureTask.java:232)
      *         at java.util.concurrent.FutureTask.get(FutureTask.java:91)
-     *         at com.bigdata.service.proxy.RemoteFutureImpl.get(RemoteFutureImpl.java:48)
+     *         at org.embergraph.service.proxy.RemoteFutureImpl.get(RemoteFutureImpl.java:48)
      *         at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
      *         at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
      *         at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
@@ -88,23 +88,23 @@ public class ClientFuture<T> implements Future<T>, Serializable {
      *         at net.jini.jeri.BasicInvocationHandler.invokeRemoteMethod(BasicInvocationHandler.java:659)
      *         at net.jini.jeri.BasicInvocationHandler.invoke(BasicInvocationHandler.java:528)
      *         at $Proxy8.get(Unknown Source)
-     *         at com.bigdata.service.proxy.ClientFuture.get(ClientFuture.java:67)
-     *         at com.bigdata.relation.rule.eval.pipeline.JoinMasterTask.awaitAll(JoinMasterTask.java:528)
-     *         at com.bigdata.relation.rule.eval.pipeline.JoinMasterTask.call(JoinMasterTask.java:378)
-     *         at com.bigdata.relation.rule.eval.pipeline.JoinMasterTask.call(JoinMasterTask.java:236)
-     *         at com.bigdata.relation.rule.eval.AbstractStepTask.runOne(AbstractStepTask.java:331)
-     *         at com.bigdata.relation.rule.eval.MutationTask.call(MutationTask.java:113)
-     *         at com.bigdata.relation.rule.eval.MutationTask.call(MutationTask.java:55)
+     *         at org.embergraph.service.proxy.ClientFuture.get(ClientFuture.java:67)
+     *         at org.embergraph.relation.rule.eval.pipeline.JoinMasterTask.awaitAll(JoinMasterTask.java:528)
+     *         at org.embergraph.relation.rule.eval.pipeline.JoinMasterTask.call(JoinMasterTask.java:378)
+     *         at org.embergraph.relation.rule.eval.pipeline.JoinMasterTask.call(JoinMasterTask.java:236)
+     *         at org.embergraph.relation.rule.eval.AbstractStepTask.runOne(AbstractStepTask.java:331)
+     *         at org.embergraph.relation.rule.eval.MutationTask.call(MutationTask.java:113)
+     *         at org.embergraph.relation.rule.eval.MutationTask.call(MutationTask.java:55)
      *         at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:303)
      *         at java.util.concurrent.FutureTask.run(FutureTask.java:138)
      *         at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:885)
      *         at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:907)
      *         at java.lang.Thread.run(Thread.java:619)
      * Caused by: java.lang.RuntimeException: java.rmi.NoSuchObjectException: no such object in table
-     *         at com.bigdata.service.proxy.ClientFuture.cancel(ClientFuture.java:48)
-     *         at com.bigdata.relation.rule.eval.pipeline.DistributedJoinTask.cancelSinks(DistributedJoinTask.java:956)
-     *         at com.bigdata.relation.rule.eval.pipeline.JoinTask.call(JoinTask.java:511)
-     *         at com.bigdata.relation.rule.eval.pipeline.JoinTask.call(JoinTask.java:128)
+     *         at org.embergraph.service.proxy.ClientFuture.cancel(ClientFuture.java:48)
+     *         at org.embergraph.relation.rule.eval.pipeline.DistributedJoinTask.cancelSinks(DistributedJoinTask.java:956)
+     *         at org.embergraph.relation.rule.eval.pipeline.JoinTask.call(JoinTask.java:511)
+     *         at org.embergraph.relation.rule.eval.pipeline.JoinTask.call(JoinTask.java:128)
      *         ... 5 more
      * Caused by: java.rmi.NoSuchObjectException: no such object in table
      *         at net.jini.jeri.BasicObjectEndpoint.executeCall(BasicObjectEndpoint.java:420)
@@ -112,7 +112,7 @@ public class ClientFuture<T> implements Future<T>, Serializable {
      *         at net.jini.jeri.BasicInvocationHandler.invokeRemoteMethod(BasicInvocationHandler.java:659)
      *         at net.jini.jeri.BasicInvocationHandler.invoke(BasicInvocationHandler.java:528)
      *         at $Proxy9.cancel(Unknown Source)
-     *         at com.bigdata.service.proxy.ClientFuture.cancel(ClientFuture.java:46)
+     *         at org.embergraph.service.proxy.ClientFuture.cancel(ClientFuture.java:46)
      *         ... 8 more
      * </pre>
      * 

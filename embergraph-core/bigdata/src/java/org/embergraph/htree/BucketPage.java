@@ -1175,7 +1175,7 @@ class BucketPage extends AbstractPage implements ILeafData, IRawRecordAccess {
 //	/**
 //	 * To insert in a BucketPage must handle split
 //	 * 
-//	 * @see com.bigdata.htree.AbstractPage#insertRawTuple(byte[], byte[], int)
+//	 * @see org.embergraph.htree.AbstractPage#insertRawTuple(byte[], byte[], int)
 //	 */
 //	void insertRawTuple(final byte[] key, final byte[] val, final int buddy) {
 //		final int slotsPerBuddy = slotsOnPage(); // (1 << htree.addressBits);

@@ -685,7 +685,7 @@ abstract public class AbstractNodeOrLeafDataRecordTestCase extends
 //
 //        // based on a tokenized source code file.
 //        a = new TokenizeKeysGenerator(
-//                "bigdata/src/test/com/bigdata/btree/raba/codec/AbstractRabaCoderTestCase.java")
+//                "bigdata/src/test/org/embergraph/btree/raba/codec/AbstractRabaCoderTestCase.java")
 //                .generateKeys(size);
 //        
 //        /*

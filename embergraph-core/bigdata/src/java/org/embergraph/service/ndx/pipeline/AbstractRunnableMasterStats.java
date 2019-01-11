@@ -40,21 +40,21 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats> ext
 
     /**
      * The #of chunks that have passed through
-     * {@link IndexWriteTask#handleChunk(com.bigdata.btree.keys.KVO[], boolean)}
+     * {@link IndexWriteTask#handleChunk(org.embergraph.btree.keys.KVO[], boolean)}
      * .
      */
     public final AtomicLong handledChunkCount = new AtomicLong();
     
     /**
      * Elapsed nanoseconds in
-     * {@link IndexWriteTask#handleChunk(com.bigdata.btree.keys.KVO[], boolean)}
+     * {@link IndexWriteTask#handleChunk(org.embergraph.btree.keys.KVO[], boolean)}
      * required to split a chunk drained from the master.
      */
     public long elapsedSplitChunkNanos = 0L;
     
     /**
      * Elapsed nanoseconds in
-     * {@link IndexWriteTask#handleChunk(com.bigdata.btree.keys.KVO[], boolean)}
+     * {@link IndexWriteTask#handleChunk(org.embergraph.btree.keys.KVO[], boolean)}
      * .
      */
     public long elapsedHandleChunkNanos = 0L;

@@ -45,7 +45,7 @@ of sorting the lock requests into a total order by the resource (the index name)
 
 <p>
 
-Note: While {@link com.bigdata.concurrent.TxDag} provides the ability
+Note: While {@link org.embergraph.concurrent.TxDag} provides the ability
 to detect deadlocks, in the special case where locks are pre-declared,
 simply sorting the lock requests made by each task is sufficient to
 guarentee that deadlocks can not arise.  Thus, in practice deadlock

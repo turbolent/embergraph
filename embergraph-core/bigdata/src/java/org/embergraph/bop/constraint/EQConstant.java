@@ -60,7 +60,7 @@ public class EQConstant extends BOpBase implements BooleanValueExpression {
     }
 
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      */
     public EQConstant(final EQConstant op) {
         super(op);

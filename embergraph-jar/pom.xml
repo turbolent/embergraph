@@ -44,7 +44,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
           <include>**/*.xml</include>
           <include>**/*.properties</include>
           <include>**/org.openrdf.rio.*</include>
-          <include>**/com.bigdata.*</include>
+          <include>**/org.embergraph.*</include>
         </includes>
       </resource>
     </resources>
@@ -147,7 +147,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
               <transformers>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                   <manifestEntries>
-                    <Main-Class>com.bigdata.rdf.sail.webapp.StandaloneNanoSparqlServer</Main-Class>
+                    <Main-Class>org.embergraph.rdf.sail.webapp.StandaloneNanoSparqlServer</Main-Class>
                     <Build-Number>${project.version}</Build-Number>
                   </manifestEntries>
                 </transformer>

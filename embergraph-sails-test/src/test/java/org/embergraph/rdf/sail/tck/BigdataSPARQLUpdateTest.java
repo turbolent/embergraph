@@ -753,7 +753,8 @@ public class BigdataSPARQLUpdateTest extends SPARQLUpdateTest {
         {
     
     	//Depends on bigdata-rdf test resource
-    	final URL url = this.getClass().getClassLoader().getResource("com/bigdata/rdf/rio/small.rdf.gz");
+    	final URL url = this.getClass().getClassLoader().getResource(
+          "org/embergraph/rdf/rio/small.rdf.gz");
     	
         final String update = "LOAD <" + url.toExternalForm() + ">";
         

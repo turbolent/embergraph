@@ -55,7 +55,7 @@ public class SysstatUtil {
          * 
          * @see #DEFAULT_PATH
          */
-        String PATH = "com.bigdata.counters.linux.sysstat.path";
+        String PATH = "org.embergraph.counters.linux.sysstat.path";
     	
         String DEFAULT_PATH = "/usr/bin";
     }

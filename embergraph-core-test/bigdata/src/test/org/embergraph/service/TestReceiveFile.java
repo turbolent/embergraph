@@ -76,7 +76,7 @@ public class TestReceiveFile extends TestCase3 {
         final UUID allowedUUID = UUID.randomUUID();
 
         final File allowedFile = new File(
-                "bigdata/src/test/com/bigdata/service/testSendFile.seg");
+                "bigdata/src/test/org/embergraph/service/testSendFile.seg");
 
         assertTrue("Could not locate file: " + allowedFile, allowedFile
                 .exists());
@@ -162,7 +162,7 @@ public class TestReceiveFile extends TestCase3 {
         final UUID allowedUUID = UUID.randomUUID();
 
         final File allowedFile = new File(
-                "bigdata/src/test/com/bigdata/service/testSendFile.seg");
+                "bigdata/src/test/org/embergraph/service/testSendFile.seg");
 
         assertTrue("Could not locate file: " + allowedFile, allowedFile
                 .exists());

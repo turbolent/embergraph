@@ -62,7 +62,7 @@ import org.embergraph.util.InnerCause;
 public class CreateKBTask extends AbstractApiTask<Void> {
 
     private static final transient Logger log = Logger.getLogger(CreateKBTask.class);
-    private static final transient Logger txLog = Logger.getLogger("com.bigdata.txLog");
+    private static final transient Logger txLog = Logger.getLogger("org.embergraph.txLog");
     
     /**
      * The effective properties that will be used to create the namespace.

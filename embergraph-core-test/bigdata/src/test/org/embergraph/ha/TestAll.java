@@ -62,13 +62,13 @@ public class TestAll extends TestCase {
 
         final TestSuite suite = new TestSuite("high availability");
 
-        suite.addTest(com.bigdata.ha.msg.TestAll.suite());
+        suite.addTest(org.embergraph.ha.msg.TestAll.suite());
         
         // Note: This was disabled in the dev branch.  Use HA Version when merging.
-        suite.addTest(com.bigdata.ha.halog.TestAll.suite());
+        suite.addTest(org.embergraph.ha.halog.TestAll.suite());
         
 //        if (s_includeHA)
-        	suite.addTest(com.bigdata.ha.pipeline.TestAll.suite());
+        	suite.addTest(org.embergraph.ha.pipeline.TestAll.suite());
         
         return suite;
 

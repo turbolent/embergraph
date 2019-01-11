@@ -105,7 +105,7 @@ public class TestProvenanceQuery extends ProxyBigdataSailTestCase {
 
                     final DataLoader dataLoader = conn.getTripleStore().getDataLoader();
 
-                    dataLoader.loadData("/com/bigdata/rdf/sail/provenance01.ttlx", ""/* baseURL */,
+                    dataLoader.loadData("/org/embergraph/rdf/sail/provenance01.ttlx", ""/* baseURL */,
                             ServiceProviderHook.TURTLE_RDR);
 
                     conn.commit();

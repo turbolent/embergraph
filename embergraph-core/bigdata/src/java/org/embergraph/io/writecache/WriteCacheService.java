@@ -204,7 +204,7 @@ abstract public class WriteCacheService implements IWriteCache {
     /**
      * Logger for HA events.
      */
-    private static final Logger haLog = Logger.getLogger("com.bigdata.ha");
+    private static final Logger haLog = Logger.getLogger("org.embergraph.ha");
 
     /**
      * <code>true</code> until the service is {@link #close() closed}.

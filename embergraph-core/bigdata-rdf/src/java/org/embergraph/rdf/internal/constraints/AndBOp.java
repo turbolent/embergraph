@@ -74,7 +74,7 @@ public class AndBOp extends XSDBooleanIVValueExpression {
     }
 
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      */
     public AndBOp(final AndBOp op) {
         super(op);

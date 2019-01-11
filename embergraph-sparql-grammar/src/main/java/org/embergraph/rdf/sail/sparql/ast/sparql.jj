@@ -56,7 +56,7 @@ options {
 
 PARSER_BEGIN(SyntaxTreeBuilder)
 
-package com.bigdata.rdf.sail.sparql.ast;
+package org.embergraph.rdf.sail.sparql.ast;
 
 import java.io.StringReader;
 

@@ -42,7 +42,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @version $Id$
  * 
  * @todo This class was created to improve concurrency for the read-only
- *       {@link com.bigdata.btree.BTree} by batching updates from each thread using a thread-local
+ *       {@link org.embergraph.btree.BTree} by batching updates from each thread using a thread-local
  *       queue. While SOME of the methods from the base class have been modified
  *       to preserve the {@link Queue} or {@link IHardReferenceQueue} semantics
  *       across both the thread-local and the backing shared queue, many methods
@@ -291,7 +291,7 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements
      * <i>this</i> queue. Therefore {@link #getThreadLocalQueue()} MUST NOT
      * be used if the value returned by {@link #add(Object)} is significant (for
      * example, do not use the thread-local batch queue for the mutable
-     * {@link com.bigdata.btree.BTree}!).
+     * {@link org.embergraph.btree.BTree}!).
      * 
      * @return The thread-local queue used to batch updates to <i>this</i>
      *         queue.

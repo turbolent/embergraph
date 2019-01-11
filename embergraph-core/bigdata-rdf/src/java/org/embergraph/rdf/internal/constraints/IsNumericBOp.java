@@ -62,7 +62,7 @@ public class IsNumericBOp extends XSDBooleanIVValueExpression implements INeedsM
     }
 
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      */
     public IsNumericBOp(final IsNumericBOp op) {
         super(op);

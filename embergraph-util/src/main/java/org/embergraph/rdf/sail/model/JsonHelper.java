@@ -51,7 +51,7 @@ public class JsonHelper {
 		final TypeFactory typeFactory = mapper.getTypeFactory();
 		final ObjectWriter writer = mapper.writerWithType(typeFactory
 				.constructCollectionType(List.class,
-						com.bigdata.rdf.sail.model.RunningQuery.class));
+						org.embergraph.rdf.sail.model.RunningQuery.class));
 
 		writer.writeValue(w, rQueries);
 	}
@@ -64,7 +64,7 @@ public class JsonHelper {
 		final TypeFactory typeFactory = mapper.getTypeFactory();
 		final ObjectReader reader = mapper.reader(typeFactory
 				.constructCollectionType(List.class,
-						com.bigdata.rdf.sail.model.RunningQuery.class));
+						org.embergraph.rdf.sail.model.RunningQuery.class));
 
 		// TODO: Change this when upgrading to a newer Jackson version
 		return (List<RunningQuery>) reader.readValue(is);

@@ -231,11 +231,11 @@ public class TestGeoSpatialQueryVaryOneDimension extends AbstractDataDrivenSPARQ
 
         // enable GeoSpatial index
         properties.setProperty(
-           com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL, "true");
+           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL, "true");
 
         // set up a datatype containing everything, including a dummy literal serializer
         properties.setProperty(
-           com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".0",
+           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".0",
            "{\"config\": "
            + "{ \"uri\": \"http://my.custom.datatype/x-y-z-lat-lon-time-coord\", "
            + "\"fields\": [ "
@@ -249,8 +249,8 @@ public class TestGeoSpatialQueryVaryOneDimension extends AbstractDataDrivenSPARQ
            + "]}}");
         
         properties.setProperty(
-           com.bigdata.rdf.store.AbstractLocalTripleStore.Options.VOCABULARY_CLASS,
-           "com.bigdata.rdf.sparql.ast.eval.service.GeoSpatialTestVocabulary");
+           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.VOCABULARY_CLASS,
+           "org.embergraph.rdf.sparql.ast.eval.service.GeoSpatialTestVocabulary");
         
         return properties;
 

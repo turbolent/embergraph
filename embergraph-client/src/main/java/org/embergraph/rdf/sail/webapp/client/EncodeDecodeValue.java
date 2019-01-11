@@ -440,7 +440,7 @@ public class EncodeDecodeValue {
     * @throws IllegalArgumentException
     *            if the argument is <code>null</code>.
     * 
-    * @see com.bigdata.rdf.store.BD;#NULL_GRAPH
+    * @see org.embergraph.rdf.store.BD;#NULL_GRAPH
     * 
     * @see <a href="http://trac.bigdata.com/ticket/1177"> Resource... contexts
     *      not encoded/decoded according to openrdf semantics (REST API) </a>
@@ -505,7 +505,7 @@ public class EncodeDecodeValue {
     * @throws IllegalArgumentException
     *            if the argument is <code>null</code>.
     * 
-    * @see com.bigdata.rdf.store.BD;#NULL_GRAPH
+    * @see org.embergraph.rdf.store.BD;#NULL_GRAPH
     * 
     * @see <a href="http://trac.bigdata.com/ticket/1177"> Resource... contexts
     *      not encoded/decoded according to openrdf semantics (REST API) </a>

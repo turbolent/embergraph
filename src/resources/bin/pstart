@@ -25,12 +25,12 @@ Options:
 
   --groups=group0[,group1[...]]
         Set the list of Jini groups to join
-        [com.bigdata.group.0,com.bigdata.group.1]
+        [org.embergraph.group.0,org.embergraph.group.1]
 
   --mGroups=group0[,group1[...]]
         Set the list of Jini membership groups. This is only useful
         when starting reggie, the Jini lookup service.
-        [com.bigdata.group.0,com.bigdata.group.1]
+        [org.embergraph.group.0,org.embergraph.group.1]
 
   --nohttpd
         Do not start a codebase server with the requested service.
@@ -86,8 +86,8 @@ Useful properties:
 class Params:
     def __init__(self):
         self.serviceName = None
-        self.groups = [ "com.bigdata.group.0", "com.bigdata.group.1" ]
-        self.mGroups = [ "com.bigdata.group.0", "com.bigdata.group.1" ]
+        self.groups = [ "org.embergraph.group.0", "org.embergraph.group.1" ]
+        self.mGroups = [ "org.embergraph.group.0", "org.embergraph.group.1" ]
         self.lookupLocators = []
         self.appHome = None
         self.startCodebaseHttpd = True
@@ -263,7 +263,7 @@ class GenericBigdataService(BigdataServiceBase):
        following rules:
          * The implementation Jar file is named "${appHome}/lib/<service>.jar"
          * The implementation is started by constructing an object of
-           the class "com.bigdata.<service>.ServiceImpl"
+           the class "org.embergraph.<service>.ServiceImpl"
          * The codebase Jar file is named "${appHome}/lib-dl/<service>-dl.jar"
          * The service config file is named
            "${appHome}/bin/config/<service>.config"
@@ -275,7 +275,7 @@ class GenericBigdataService(BigdataServiceBase):
         self.properties['entityType'] = self.serviceName
         self.properties['entityClasspathJar'] = os.path.join(self.appHome, \
             "lib", "bigdata.jar")
-        self.properties['entityMain'] = "com.bigdata." + self.serviceName + \
+        self.properties['entityMain'] = "org.embergraph." + self.serviceName + \
             ".ServiceImpl"
         self.properties['entityCodebaseJar'] = self.serviceName + "-dl.jar"
         self.properties['entityConfig'] = os.path.join(self.appHome, \

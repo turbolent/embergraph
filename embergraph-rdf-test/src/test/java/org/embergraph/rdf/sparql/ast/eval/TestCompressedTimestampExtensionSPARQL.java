@@ -154,7 +154,7 @@ public class TestCompressedTimestampExtensionSPARQL extends AbstractDataDrivenSP
 
         properties.setProperty(
             AbstractTripleStore.Options.EXTENSION_FACTORY_CLASS, 
-            "com.bigdata.rdf.internal.CompressedTimestampExtensionFactory");
+            "org.embergraph.rdf.internal.CompressedTimestampExtensionFactory");
 
         return properties;
 

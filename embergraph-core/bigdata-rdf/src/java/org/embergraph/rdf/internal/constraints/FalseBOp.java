@@ -57,7 +57,7 @@ public class FalseBOp extends XSDBooleanIVValueExpression {
     }
 
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      */
     public FalseBOp(final FalseBOp op) {
         super(op);

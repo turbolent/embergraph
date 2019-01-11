@@ -45,7 +45,7 @@ public class AssignmentNode extends GroupMemberValueExpressionNodeBase
     }
 
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      */
     public AssignmentNode(final AssignmentNode op) {
 

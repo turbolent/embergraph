@@ -266,12 +266,12 @@ public abstract class AbstractJournal implements IJournal/* , ITimestampService 
      * @see http://sourceforge.net/apps/trac/bigdata/ticket/443 (Logger for
      *      RWStore transaction service and recycler)
      */
-    private static final Logger txLog = Logger.getLogger("com.bigdata.txLog");
+    private static final Logger txLog = Logger.getLogger("org.embergraph.txLog");
 
     /**
      * Logger for HA events.
      */
-    protected static final Logger haLog = Logger.getLogger("com.bigdata.haLog");
+    protected static final Logger haLog = Logger.getLogger("org.embergraph.haLog");
 
     /**
 	 * The index of the root address containing the address of the persistent

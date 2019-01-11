@@ -15,6 +15,6 @@ WHERE {
   ?x rdf:type foaf:Person .
 
   # Override the statement index.
-  hint:Prior hint:com.bigdata.bop.IPredicate.keyOrder "PCSO" .
+  hint:Prior hint:org.embergraph.bop.IPredicate.keyOrder "PCSO" .
 
 }

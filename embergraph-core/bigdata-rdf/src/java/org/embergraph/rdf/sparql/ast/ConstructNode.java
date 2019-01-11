@@ -107,7 +107,7 @@ public class ConstructNode extends AbstractStatementContainer<StatementPatternNo
     }
     
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      */
     public ConstructNode(final ConstructNode op) {
 

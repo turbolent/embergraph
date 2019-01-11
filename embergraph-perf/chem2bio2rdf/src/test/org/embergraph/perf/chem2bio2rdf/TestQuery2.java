@@ -1,4 +1,4 @@
-package com.bigdata.perf.chem2bio2rdf;
+package org.embergraph.perf.chem2bio2rdf;
 
 import java.io.FileReader;
 import java.io.Reader;

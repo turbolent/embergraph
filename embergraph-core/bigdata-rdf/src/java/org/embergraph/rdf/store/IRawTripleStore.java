@@ -128,7 +128,7 @@ public interface IRawTripleStore extends ITripleStore {
      * to perform a {@link IAccessPath#distinctTermScan()}.
      * 
      * @deprecated by
-     *             {@link SPORelation#getAccessPath(SPOKeyOrder, com.bigdata.relation.rule.IPredicate)}
+     *             {@link SPORelation#getAccessPath(SPOKeyOrder, org.embergraph.relation.rule.IPredicate)}
      */
     public IAccessPath<ISPO> getAccessPath(IKeyOrder<ISPO> keyOrder);
 

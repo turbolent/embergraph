@@ -32,7 +32,7 @@ import org.openrdf.model.impl.URIImpl;
 /**
  * Various declarations used by the client API.
  * <p>
- * Note: Some of these fields are replicated from the com.bigdata.rdf.store.BD
+ * Note: Some of these fields are replicated from the org.embergraph.rdf.store.BD
  * interface in order to avoid dragging in other aspects of the bigdata code
  * base.
  */
@@ -113,7 +113,7 @@ public class RemoteRepositoryDecls {
     * 
     * @see #DEFAULT_NAMESPACE
     */
-   public static final String OPTION_CREATE_KB_NAMESPACE = "com.bigdata.rdf.sail.namespace";
+   public static final String OPTION_CREATE_KB_NAMESPACE = "org.embergraph.rdf.sail.namespace";
 
    /**
     * The name of the default namespace.
@@ -130,54 +130,54 @@ public class RemoteRepositoryDecls {
 
    /**
     * The name of the parameter/attribute that contains boolean flag to include inferred statements for remote queries execution or returning statements.
-    * @see com.bigdata.rdf.sail.webapp.QueryServlet.INCLUDE_INFERRED
+    * @see org.embergraph.rdf.sail.webapp.QueryServlet.INCLUDE_INFERRED
     */
    public static final String INCLUDE_INFERRED = "includeInferred";
 
    /**
     * The name of the parameter/attribute that contains baseURI for remote queries execution.
-    * @see com.bigdata.rdf.sail.webapp.QueryServlet.BASE_URI
+    * @see org.embergraph.rdf.sail.webapp.QueryServlet.BASE_URI
     */
    public static final String BASE_URI = "baseURI";
 
    /**
     * The name of the parameter/attribute that contains high resolution maxQueryTime (milliseconds) for remote queries execution.
     * Minimum value of maxQueryTimeMillis and {@link RemoteRepositoryDecls.HTTP_HEADER_BIGDATA_MAX_QUERY_MILLIS HTTP_HEADER_BIGDATA_MAX_QUERY_MILLIS header} will be used as an effective timeout.
-    * @see com.bigdata.rdf.sail.webapp.QueryServlet.TIMEOUT
+    * @see org.embergraph.rdf.sail.webapp.QueryServlet.TIMEOUT
     */
    public static final String MAX_QUERY_TIME_MILLIS = "maxQueryTimeMillis";
 
    /**
     * URL query parameter used to specify a URI in the default graph for SPARQL
     * query (but not for SPARQL update).
-    * @see com.bigdata.rdf.sail.webapp.BigdataRDFContext.DEFAULT_GRAPH_URI
+    * @see org.embergraph.rdf.sail.webapp.BigdataRDFContext.DEFAULT_GRAPH_URI
     */
    public static final String DEFAULT_GRAPH_URI = "default-graph-uri";
 
    /**
     * URL query parameter used to specify a URI in the set of named graphs for
     * SPARQL query (but not for SPARQL update).
-    * @see com.bigdata.rdf.sail.webapp.BigdataRDFContext.NAMED_GRAPH_URI
+    * @see org.embergraph.rdf.sail.webapp.BigdataRDFContext.NAMED_GRAPH_URI
     */
    public static final String NAMED_GRAPH_URI = "named-graph-uri";
    
    /**
     * URL query parameter used to specify a URI in the default graph for SPARQL
     * UPDATE.
-    * @see com.bigdata.rdf.sail.webapp.BigdataRDFContext.USING_GRAPH_URI
+    * @see org.embergraph.rdf.sail.webapp.BigdataRDFContext.USING_GRAPH_URI
     */
    public static final String USING_GRAPH_URI = "using-graph-uri";
 
    /**
     * URL query parameter used to specify a URI in the set of named graphs for
     * SPARQL UPDATE.
-    * @see com.bigdata.rdf.sail.webapp.BigdataRDFContext.USING_NAMED_GRAPH_URI
+    * @see org.embergraph.rdf.sail.webapp.BigdataRDFContext.USING_NAMED_GRAPH_URI
     */
    public static final String USING_NAMED_GRAPH_URI = "using-named-graph-uri";
 
    /**
     * The Prefix of the parameter/attribute that contains binding for remote queries execution.
-    * @see com.bigdata.rdf.sail.webapp.QueryServlet.BINDING_PREFIX
+    * @see org.embergraph.rdf.sail.webapp.QueryServlet.BINDING_PREFIX
     */
    public static final String BINDING_PREFIX = "$";
    

@@ -24,7 +24,7 @@ soon start on all hosts in the cluster.
 
 You can watch the progress using:
 
-@BIN_DIR@/listServices.sh com.bigdata.service.jini.util.ListServices.repeatCount=0
+@BIN_DIR@/listServices.sh org.embergraph.service.jini.util.ListServices.repeatCount=0
 
 You can look for errors using.
 

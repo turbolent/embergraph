@@ -159,7 +159,7 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements
         
         try {
         
-        final String resourceName = "com/bigdata/sparse/test.csv";
+        final String resourceName = "org/embergraph/sparse/test.csv";
         
         final String charSet = "ASCII";
         

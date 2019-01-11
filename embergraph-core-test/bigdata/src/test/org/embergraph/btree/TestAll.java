@@ -64,13 +64,13 @@ public class TestAll extends TestCase {
         suite.addTestSuite(TestGetBitsFromInt32.class);
 
         // unsigned byte[] key encoding and decoding.
-        suite.addTest(com.bigdata.btree.keys.TestAll.suite());
+        suite.addTest(org.embergraph.btree.keys.TestAll.suite());
 
         // test rabas implementations, including key search and coded data.
-        suite.addTest(com.bigdata.btree.raba.TestAll.suite());
+        suite.addTest(org.embergraph.btree.raba.TestAll.suite());
         
         // test suite for the B+Tree node and leaf data records.
-        suite.addTest(com.bigdata.btree.data.TestAll.suite());
+        suite.addTest(org.embergraph.btree.data.TestAll.suite());
 
         // core B+Tree API tests, including w/ and w/o persistence.
         suite.addTest(TestAll_BTreeBasics.suite());
@@ -87,16 +87,16 @@ public class TestAll extends TestCase {
         /*
          * Test fused views, including iterators for the fused view.
          */
-        suite.addTest(com.bigdata.btree.view.TestAll.suite());
+        suite.addTest(org.embergraph.btree.view.TestAll.suite());
 
         /*
          * Test transactional isolation support, including iterators and
          * iterator#remove() for the isolated index.
          */
-        suite.addTest(com.bigdata.btree.isolation.TestAll.suite());
+        suite.addTest(org.embergraph.btree.isolation.TestAll.suite());
 
         // test index procedures.
-        suite.addTest(com.bigdata.btree.proc.TestAll.suite());
+        suite.addTest(org.embergraph.btree.proc.TestAll.suite());
 
         return suite;
         

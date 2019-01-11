@@ -138,7 +138,7 @@ public class TestSimpleReleaseTimes {
         properties.setProperty(Options.BUFFER_MODE, BufferMode.DiskRW.toString());
         
         // Set minimum commit history
-        properties.setProperty("com.bigdata.service.AbstractTransactionService.minReleaseAge", releaseAge);
+        properties.setProperty("org.embergraph.service.AbstractTransactionService.minReleaseAge", releaseAge);
        
         return properties;
         

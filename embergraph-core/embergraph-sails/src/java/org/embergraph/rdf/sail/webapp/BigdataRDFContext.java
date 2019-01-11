@@ -363,7 +363,7 @@ public class BigdataRDFContext extends BigdataBaseContext {
          }
          
          /**
- 		 * Convenience method to return com.bigdata.rdf.sail.model.RunningQuery from a BigdataRDFContext
+ 		 * Convenience method to return org.embergraph.rdf.sail.model.RunningQuery from a BigdataRDFContext
  		 * running query. 
  		 * 
  		 * There is a current difference between the embedded and the REST model in that
@@ -375,13 +375,13 @@ public class BigdataRDFContext extends BigdataBaseContext {
  		 * 
  		 * @return 
  		 */
- 		public com.bigdata.rdf.sail.model.RunningQuery getModelRunningQuery() {
+ 		public org.embergraph.rdf.sail.model.RunningQuery getModelRunningQuery() {
  		
- 			final com.bigdata.rdf.sail.model.RunningQuery modelQuery;
+ 			final org.embergraph.rdf.sail.model.RunningQuery modelQuery;
  			
  			final boolean isUpdateQuery = false;
  			
- 			modelQuery = new com.bigdata.rdf.sail.model.RunningQuery(
+ 			modelQuery = new org.embergraph.rdf.sail.model.RunningQuery(
  					Long.toString(this.beginNanos), this.task.uuid, this.beginNanos,
  					isUpdateQuery);
  			
@@ -2581,7 +2581,7 @@ public class BigdataRDFContext extends BigdataBaseContext {
 		}
 		
 		/**
-		 * Convenience method to return com.bigdata.rdf.sail.model.RunningQuery from a BigdataRDFContext
+		 * Convenience method to return org.embergraph.rdf.sail.model.RunningQuery from a BigdataRDFContext
 		 * running query. 
 		 * 
 		 * There is a current difference between the embedded and the REST model in that
@@ -2591,13 +2591,13 @@ public class BigdataRDFContext extends BigdataBaseContext {
 		 * 
 		 * @return 
 		 */
-		public com.bigdata.rdf.sail.model.RunningQuery getModelRunningQuery() {
+		public org.embergraph.rdf.sail.model.RunningQuery getModelRunningQuery() {
 		
-			final com.bigdata.rdf.sail.model.RunningQuery modelQuery;
+			final org.embergraph.rdf.sail.model.RunningQuery modelQuery;
 			
 			final boolean isUpdateQuery = queryTask instanceof UpdateTask?true:false;
 			
-			modelQuery = new com.bigdata.rdf.sail.model.RunningQuery(
+			modelQuery = new org.embergraph.rdf.sail.model.RunningQuery(
 					Long.toString(this.queryId), this.queryId2, this.begin,
 					isUpdateQuery);
 			

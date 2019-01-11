@@ -941,7 +941,7 @@ public class ASTConstructIterator implements
                 	
                 	// @see https://jira.blazegraph.com/browse/BLZG-1229
                 	// To support TRefs in construct clause we should keep TRef as it was prepared by 
-                	// com.bigdata.rdf.sail.sparql.TriplePatternExprBuilder.visit(ASTTRefPattern, Object)
+                	// org.embergraph.rdf.sail.sparql.TriplePatternExprBuilder.visit(ASTTRefPattern, Object)
                 	
                 	return value;
                 	

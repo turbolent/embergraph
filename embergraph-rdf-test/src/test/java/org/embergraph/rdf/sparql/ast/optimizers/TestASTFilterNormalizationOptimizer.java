@@ -76,7 +76,7 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
    
    /**
     * Test the {@link ASTFilterNormalizationOptimizer#extractToplevelConjuncts(
-    * com.bigdata.rdf.sparql.ast.IValueExpressionNode, List)} method.
+    * org.embergraph.rdf.sparql.ast.IValueExpressionNode, List)} method.
     */
    public void testExtractTopLevelConjunctsMethod() {
 

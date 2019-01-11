@@ -255,7 +255,7 @@ public class TestVocabulary extends AbstractTripleStoreTestCase {
     static protected void assertSameVocabulary(final Vocabulary expected,
             final Vocabulary actual) {
 
-        com.bigdata.rdf.vocab.TestVocabulary.assertSameVocabulary(expected,actual);
+        org.embergraph.rdf.vocab.TestVocabulary.assertSameVocabulary(expected,actual);
         
     }
     

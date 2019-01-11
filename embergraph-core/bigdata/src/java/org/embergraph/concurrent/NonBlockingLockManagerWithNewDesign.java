@@ -27,9 +27,9 @@
 
 package org.embergraph.concurrent;
 
-import static com.bigdata.concurrent.NonBlockingLockManagerWithNewDesign.ServiceRunState.Running;
-import static com.bigdata.concurrent.NonBlockingLockManagerWithNewDesign.ServiceRunState.Shutdown;
-import static com.bigdata.concurrent.NonBlockingLockManagerWithNewDesign.ServiceRunState.Starting;
+import static org.embergraph.concurrent.NonBlockingLockManagerWithNewDesign.ServiceRunState.Running;
+import static org.embergraph.concurrent.NonBlockingLockManagerWithNewDesign.ServiceRunState.Shutdown;
+import static org.embergraph.concurrent.NonBlockingLockManagerWithNewDesign.ServiceRunState.Starting;
 
 import java.lang.ref.WeakReference;
 import java.util.Arrays;

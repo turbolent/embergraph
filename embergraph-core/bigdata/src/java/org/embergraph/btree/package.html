@@ -5,7 +5,7 @@
 <body>
 
 <p>
-The {@link com.bigdata.btree.BTree} is a scalable B+-Tree with copy-on-write
+The {@link org.embergraph.btree.BTree} is a scalable B+-Tree with copy-on-write
 semantics mapping variable length <code>unsigned byte[]</code> keys to variable
 length <code>byte[]</code> values (null values are allowed).  This class is
 designed for read-write operations. 
@@ -17,7 +17,7 @@ variable length keys and values and does not directly constrain the
 serialized size of a node or leaf.  The branching factor is determined
 when the B+Tree is created.  Bulk index builds are supported from a
 variety of sources, including a merge of mutable and immutable
-B+-Trees.  Bulk index builds result in immutable {@link com.bigdata.btree.IndexSegment}s
+B+-Trees.  Bulk index builds result in immutable {@link org.embergraph.btree.IndexSegment}s
 which may have a branching distinct from that of their source
 B+Tree(s).
 </p>
@@ -32,17 +32,17 @@ copied and is dirty, the mutable node is always used.  Therefore
 mutations never overwrite the historical state of the B+-Tree and
 always produce a new well-formed tree.  The root of the new tree is
 accessible from root block of the store after a commit (this is handled
-by the {@link com.bigdata.journal.AbstractJournal}.
+by the {@link org.embergraph.journal.AbstractJournal}.
 </p>
 
 <h2>Coding (Compression)</h2>
 
 <p>
-The {@link com.bigdata.btree.INodeData} and {@link com.bigdata.btree.ILeafData}
+The {@link org.embergraph.btree.INodeData} and {@link org.embergraph.btree.ILeafData}
 interfaces represent the persistent state of a node or leaf.  The keys of a
-node or leaf are represented by an {@link com.bigdata.btree.raba.IRaba}, which
+node or leaf are represented by an {@link org.embergraph.btree.raba.IRaba}, which
 is an abstraction for a logical <code>byte[][]</code>.  Likewise, the values
-of a leaf are represented by an {@link com.bigdata.btree.raba.IRaba}.  For keys,
+of a leaf are represented by an {@link org.embergraph.btree.raba.IRaba}.  For keys,
 the rabas support search.  For values, they allow nulls.  The node and leaf
 data records maintain additional persistent state, for example, leaf data
 records track tuple delete markers and tuple revision timestamps while node
@@ -55,12 +55,12 @@ Coding of node and leaf data records is performed when they are evicted from a
 to maintain recently used nodes and leaves in their mutable form and to defer
 eviction onto the disk until their data is stable (has not been changed recently).
 When a dirty node or leaf is evicted from the write retention queue, it is first
-coded (compressed) using a {@link com.bigdata.btree.data.INodeDataCoder} or a
-{@link com.bigdata.btree.data.ILeafDataCoder} as appropriate.  Those coders in
-turn will apply the configured {@link com.bigdata.btree.raba.IRabaCoder} to
+coded (compressed) using a {@link org.embergraph.btree.data.INodeDataCoder} or a
+{@link org.embergraph.btree.data.ILeafDataCoder} as appropriate.  Those coders in
+turn will apply the configured {@link org.embergraph.btree.raba.IRabaCoder} to
 code the keys and the values.  Once the node or leaf has been coded, it is
 represented as a slice on a byte[].  That slice can be wrapped by the same
-{@link com.bigdata.btree.raba.IRabaCoder}, returning an efficient view of the
+{@link org.embergraph.btree.raba.IRabaCoder}, returning an efficient view of the
 compressed data record supporting search (for keys) and random access to the
 keys and values.
 </p>
@@ -77,11 +77,11 @@ separator keys, not full length application keys.
 
 <p>
 Coding, decoding, and promotion to a mutable data record are handled transparently
-by the B+Tree.  The {@link com.bigdata.btree.NodeSerializer} provides a facility
+by the B+Tree.  The {@link org.embergraph.btree.NodeSerializer} provides a facility
 for coding and decoding nodes and leaves.  Coding uses a shared (per B+Tree
 instance) extensible byte[] buffer to reduce heap churn.  Decoding simply wraps
 the coded record.  Promotion to a mutable data record is handled by converting
-to a {@link com.bigdata.btree.MutableNodeData} or {@link com.bigdata.btree.MutableLeafData}
+to a {@link org.embergraph.btree.MutableNodeData} or {@link org.embergraph.btree.MutableLeafData}
 respectively.
 </p>
 
@@ -89,7 +89,7 @@ respectively.
 
 <p>
 When nodes or leaves are evicted from the write retention queue their coded
-data record is written onto the backing {@link com.bigdata.rawstore.IRawStore}.
+data record is written onto the backing {@link org.embergraph.rawstore.IRawStore}.
 The resulting int64 address is updated on the parent of the node or leaf.  Weak
 references are used between a child and its parent.  The existence of the node
 or leaf on the write retention queue prevents weak references from being cleared.
@@ -109,14 +109,14 @@ A B+-Tree <em>checkpoint</em> record corresponds to a persistent state of the
 B+Tree on the disk.  The B+Tree may be reloaded from that checkpoint.  After
 a checkpoint operation, all nodes and leaves in the B+Tree will be clean. However,
 a checkpoint IS NOT a commit.  The commit protocol is handled by the 
-{@link com.bigdata.journal.AbstractJournal}.
+{@link org.embergraph.journal.AbstractJournal}.
 </p>
 
 <h2>Transient B+-Tree Support</h2>
 
 <p>
 A BTree is designated as transient by specifying <code>null</code> for the backing
-{@link com.bigdata.rawstore.IRawStore}.  Nodes and leaves of a transient B+-Tree
+{@link org.embergraph.rawstore.IRawStore}.  Nodes and leaves of a transient B+-Tree
 are linked by hard references to ensure that they remain reachable.  However,
 mutable nodes and leaves are still converted to coded (compressed) nodes and
 leaves when they are evicted from the write retention queue.

@@ -88,7 +88,7 @@ public class TestReificationDoneRightEval extends AbstractDataDrivenSPARQLTestCa
 
 //    private static final Logger log = Logger.getLogger(TestReificationDoneRight.class);
 	
-	public static final String TEST_RESOURCE_PREFIX = "/com/bigdata/rdf/sparql/ast/eval/reif/";
+	public static final String TEST_RESOURCE_PREFIX = "/org/embergraph/rdf/sparql/ast/eval/reif/";
     
     /**
      * 

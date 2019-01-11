@@ -92,7 +92,7 @@ import org.embergraph.rdf.sail.webapp.client.RemoteTransactionNotFoundException;
  * order for you to WRITE on the namespace using a transaction.
  * 
  * @see RemoteTransactionManager
- * @see com.bigdata.rdf.sail.BigdataSail.Options#ISOLATABLE_INDICES
+ * @see org.embergraph.rdf.sail.BigdataSail.Options#ISOLATABLE_INDICES
  * @see <a href="http://trac.bigdata.com/ticket/1156"> Support read/write
  *      transactions in the REST API</a>
  * @see <a href="http://trac.bigdata.com/ticket/698">

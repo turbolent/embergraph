@@ -82,16 +82,16 @@ public class TestAll extends TestCase {
         
         suite.addTest(TestAll_Packers.suite());
         
-        suite.addTest(com.bigdata.io.compression.TestAll.suite());
+        suite.addTest(org.embergraph.io.compression.TestAll.suite());
         
         // test checksum computations (used by serialization).
         suite.addTestSuite( TestChecksumUtility.class );
 
 //        /*
 //         * Note: This is added into the test suite at a different location since
-//         * there is a dependency on the com.bigdata.quorum package.
+//         * there is a dependency on the org.embergraph.quorum package.
 //         */
-//        suite.addTest(com.bigdata.io.writecache.TestAll.suite());
+//        suite.addTest(org.embergraph.io.writecache.TestAll.suite());
 
         return suite;
         

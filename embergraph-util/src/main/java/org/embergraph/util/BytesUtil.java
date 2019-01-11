@@ -51,7 +51,7 @@ import org.apache.log4j.Logger;
  * property, e.g.,
  * 
  * <pre>
- * java -Dcom.bigdata.btree.BytesUtil.jni=true ...
+ * java -Dorg.embergraph.btree.BytesUtil.jni=true ...
  * </pre>
  * 
  * See BytesUtil.c in this package for instructions on compiling the JNI
@@ -99,7 +99,7 @@ public class BytesUtil {
 
 		final boolean jni;
 
-		String val = System.getProperty("com.bigdata.btree.BytesUtil.jni");
+		String val = System.getProperty("org.embergraph.btree.BytesUtil.jni");
 
 		if (val != null) {
 
@@ -127,11 +127,11 @@ public class BytesUtil {
 	 * Attempt to load the JNI library.
 	 * <p>
 	 * Note: this is done automatically if the optional boolean system property
-	 * <code>com.bigdata.btree.BytesUtil.jni=true</code> is specified, e.g.,
+	 * <code>org.embergraph.btree.BytesUtil.jni=true</code> is specified, e.g.,
 	 * using
 	 * 
 	 * <pre>
-	 *    java -Dcom.bigdata.btree.BytesUtil.jni=true ...
+	 *    java -Dorg.embergraph.btree.BytesUtil.jni=true ...
 	 * </pre>
 	 * 
 	 * @return True iff the JNI library was successfully linked.
@@ -817,7 +817,7 @@ public class BytesUtil {
 	 * <pre>
 	 *   cd bigdata
 	 *   set PATH=%PATH%;lib
-	 *   java -cp bin com.bigdata.btree.BytesUtil
+	 *   java -cp bin org.embergraph.btree.BytesUtil
 	 * </pre>
 	 * 
 	 * <p>
@@ -825,7 +825,7 @@ public class BytesUtil {
 	 * library location
 	 * 
 	 * <pre>
-	 *    java -Djava.library.path=lib com.bigdata.btree.BytesUtil
+	 *    java -Djava.library.path=lib org.embergraph.btree.BytesUtil
 	 * </pre>
 	 * 
 	 * @param args

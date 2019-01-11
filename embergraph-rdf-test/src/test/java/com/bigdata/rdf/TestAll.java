@@ -21,7 +21,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
-package com.bigdata.rdf;
+package org.embergraph.rdf;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -60,39 +60,39 @@ public class TestAll extends TestCase {
         /*
          * test suite for the rio parser without the triple store integrations.
          */
-        suite.addTest(com.bigdata.rdf.rio.TestAll_RIO.suite());
+        suite.addTest(org.embergraph.rdf.rio.TestAll_RIO.suite());
 
         // test suite for the internal representation of RDF Values.
-        suite.addTest( com.bigdata.rdf.internal.TestAll.suite() );
+        suite.addTest( org.embergraph.rdf.internal.TestAll.suite() );
 
         // vocabulary test suite (w/o triple store)
-        suite.addTest( com.bigdata.rdf.vocab.TestAll.suite() );
+        suite.addTest( org.embergraph.rdf.vocab.TestAll.suite() );
 
         // axioms test suite (w/o triple store) [Note: axioms test suite is now proxied.]
-        //suite.addTest( com.bigdata.rdf.axioms.TestAll.suite() );
+        //suite.addTest( org.embergraph.rdf.axioms.TestAll.suite() );
 
         // test RDF Value and Statement object model (Sesame compliance).
-        suite.addTest( com.bigdata.rdf.model.TestAll.suite() );
+        suite.addTest( org.embergraph.rdf.model.TestAll.suite() );
         
         // test suite for RDF specific operators.
-        suite.addTest( com.bigdata.bop.rdf.TestAll.suite() );
+        suite.addTest( org.embergraph.bop.rdf.TestAll.suite() );
 
         // SPARQL, including the parser, AST, AST optimizers, & AST evaluation.
-        suite.addTest(com.bigdata.rdf.sparql.TestAll.suite());
+        suite.addTest(org.embergraph.rdf.sparql.TestAll.suite());
 
         // test various RDF database implementations.
-        suite.addTest( com.bigdata.rdf.store.TestAll.suite() );
+        suite.addTest( org.embergraph.rdf.store.TestAll.suite() );
 
         // test the bulk data loader : @todo use proxy tests and move into per-store suites?
-        suite.addTest( com.bigdata.rdf.load.TestAll.suite() );
+        suite.addTest( org.embergraph.rdf.load.TestAll.suite() );
 
         // test RDF graph mining/analytics
-//        suite.addTest(com.bigdata.rdf.graph.TestAll.suite()); // Note: This is in its own maven project.
-        suite.addTest(com.bigdata.rdf.graph.impl.bd.TestAll.suite());
+//        suite.addTest(org.embergraph.rdf.graph.TestAll.suite()); // Note: This is in its own maven project.
+        suite.addTest(org.embergraph.rdf.graph.impl.bd.TestAll.suite());
 
         
         // BOp execution
-        suite.addTest(com.bigdata.bop.solutions.TestAll.suite());
+        suite.addTest(org.embergraph.bop.solutions.TestAll.suite());
         
         return suite;
         

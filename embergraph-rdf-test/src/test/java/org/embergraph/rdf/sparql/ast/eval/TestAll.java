@@ -216,17 +216,17 @@ public class TestAll extends TestCase {
         /*
          * Runtime Query Optimizer (RTO).
          */
-        suite.addTest(com.bigdata.rdf.sparql.ast.eval.rto.TestAll.suite());
+        suite.addTest(org.embergraph.rdf.sparql.ast.eval.rto.TestAll.suite());
 
         /*
          * SPARQL 1.1 UPDATE
          */
-        suite.addTest(com.bigdata.rdf.sparql.ast.eval.update.TestAll.suite());
+        suite.addTest(org.embergraph.rdf.sparql.ast.eval.update.TestAll.suite());
         
         /*
          * SPARQL 1.1 Federated Query.
          */
-        suite.addTest(com.bigdata.rdf.sparql.ast.eval.service.TestAll.suite());
+        suite.addTest(org.embergraph.rdf.sparql.ast.eval.service.TestAll.suite());
 
         return suite;
         

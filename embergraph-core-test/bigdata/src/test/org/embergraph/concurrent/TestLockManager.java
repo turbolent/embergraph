@@ -743,7 +743,7 @@ public class TestLockManager extends TestCase implements IComparisonTest {
      * 
      * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/237" > CI
      *      deadlock in
-     *      com.bigdata.concurrent.TestLockManager.test_multipleResourceLocking_resources10_locktries10</a>
+     *      org.embergraph.concurrent.TestLockManager.test_multipleResourceLocking_resources10_locktries10</a>
      */
     public void test_multipleResourceLocking_resources10_locktries10_predeclareLocks() throws Exception {
 
@@ -780,7 +780,7 @@ public class TestLockManager extends TestCase implements IComparisonTest {
      * 
      * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/237" > CI
      *      deadlock in
-     *      com.bigdata.concurrent.TestLockManager.test_multipleResourceLocking_resources10_locktries10</a>
+     *      org.embergraph.concurrent.TestLockManager.test_multipleResourceLocking_resources10_locktries10</a>
      */
     public void test_multipleResourceLocking_resources10_locktries10() throws Exception {
 

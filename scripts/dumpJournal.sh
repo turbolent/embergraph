@@ -2,5 +2,5 @@
 
 BASE_DIR=`dirname $0`
 
-${BASE_DIR}/prog.sh com.bigdata.journal.DumpJournal -pages $*
+${BASE_DIR}/prog.sh org.embergraph.journal.DumpJournal -pages $*
 

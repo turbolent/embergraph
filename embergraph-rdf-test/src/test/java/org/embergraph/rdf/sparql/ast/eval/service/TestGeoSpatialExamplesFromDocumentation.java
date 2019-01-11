@@ -157,10 +157,10 @@ public class TestGeoSpatialExamplesFromDocumentation extends AbstractDataDrivenS
 
         // enable GeoSpatial index
         properties.setProperty(
-           com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL, "true");
+           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL, "true");
         
         properties.setProperty(
-           com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".0",
+           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".0",
            "{ \"config\": "
            + "{ \"uri\": \"http://my-lat-lon-starttime-endtime-dt\", "
            + "\"fields\": [ "
@@ -170,7 +170,7 @@ public class TestGeoSpatialExamplesFromDocumentation extends AbstractDataDrivenS
            + "{ \"valueType\": \"LONG\", \"serviceMapping\": \"endtime\" } ] } }");
 
         properties.setProperty(
-           com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".1",
+           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".1",
            "{ \"config\": { "
            + "\"uri\": \"http://width-height-length-dt\", "
            + "\"fields\": [ "
@@ -179,8 +179,8 @@ public class TestGeoSpatialExamplesFromDocumentation extends AbstractDataDrivenS
            + "{ \"valueType\": \"LONG\", \"serviceMapping\": \"length\" } ] } }");
 
         properties.setProperty(
-                com.bigdata.rdf.store.AbstractLocalTripleStore.Options.VOCABULARY_CLASS,
-                "com.bigdata.rdf.sparql.ast.eval.service.GeoSpatialTestVocabulary");
+                org.embergraph.rdf.store.AbstractLocalTripleStore.Options.VOCABULARY_CLASS,
+                "org.embergraph.rdf.sparql.ast.eval.service.GeoSpatialTestVocabulary");
 
         return properties;
 

@@ -167,7 +167,7 @@ public interface QueryHints {
 //     * statistics for tagged queries.
 //     * 
 //     * <pre>
-//     * PREFIX BIGDATA_QUERY_HINTS: &lt;http://www.bigdata.com/queryHints#com.bigdata.rdf.sparql.ast.QueryHints.tag=Query12&gt;
+//     * PREFIX BIGDATA_QUERY_HINTS: &lt;http://www.bigdata.com/queryHints#org.embergraph.rdf.sparql.ast.QueryHints.tag=Query12&gt;
 //     * </pre>
 //     * 
 //     * @see http://sourceforge.net/apps/trac/bigdata/ticket/207 (Report on Top-N
@@ -202,7 +202,7 @@ public interface QueryHints {
      * overridden using the environment variable named
      * 
      * <pre>
-     * com.bigdata.rdf.sparql.ast.QueryHints.analytic
+     * org.embergraph.rdf.sparql.ast.QueryHints.analytic
      * </pre>
      * 
      * @see #NATIVE_DISTINCT_SPO
@@ -230,7 +230,7 @@ public interface QueryHints {
      * overridden using the environment variable named
      * 
      * <pre>
-     * com.bigdata.rdf.sparql.ast.QueryHints.analyticMaxMemoryPerQuery
+     * org.embergraph.rdf.sparql.ast.QueryHints.analyticMaxMemoryPerQuery
      * </pre>
      * <p>
      * Native memory allocations are made using a {@link DirectBufferPool}. The
@@ -264,8 +264,8 @@ public interface QueryHints {
     IChunkHandler DEFAULT_QUERY_ENGINE_CHUNK_HANDLER = 
             ClassPathUtil.classForName(//
                     System.getProperty(QueryHints.class.getName() + "."+QUERY_ENGINE_CHUNK_HANDLER,
-                          com.bigdata.bop.engine.ManagedHeapStandloneChunkHandler.class.getName()
-//                            com.bigdata.bop.engine.NativeHeapStandloneChunkHandler.class.getName()
+                          org.embergraph.bop.engine.ManagedHeapStandloneChunkHandler.class.getName()
+//                            org.embergraph.bop.engine.NativeHeapStandloneChunkHandler.class.getName()
                             ), // preferredClassName,
                     null, // defaultClass,
                     IChunkHandler.class, // sharedInterface,

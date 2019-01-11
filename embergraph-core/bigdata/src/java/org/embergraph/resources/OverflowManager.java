@@ -1669,11 +1669,11 @@ abstract public class OverflowManager extends IndexManager {
              * override [minShardSize] in order to test against smaller shards.
              * The correct value is [Bytes.megabyte].
              * 
-             * @see com.bigdata.resources.TestSplitTask
+             * @see org.embergraph.resources.TestSplitTask
              * 
-             * @see com.bigdata.services.TestSplitJoin
+             * @see org.embergraph.services.TestSplitJoin
              * 
-             * @see com.bigdata.services.StressTestConcurrent
+             * @see org.embergraph.services.StressTestConcurrent
              */
             final long minShardSize = Bytes.kilobyte;
             if (nominalShardSize < minShardSize) {

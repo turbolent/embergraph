@@ -267,7 +267,7 @@ public class BigdataSail extends SailBase implements Sail {
      * 
      * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
      */
-    public static interface Options extends com.bigdata.rdf.store.AbstractTripleStore.Options {
+    public static interface Options extends org.embergraph.rdf.store.AbstractTripleStore.Options {
     
         /**
          * This optional boolean property may be used to specify whether or not
@@ -467,7 +467,7 @@ public class BigdataSail extends SailBase implements Sail {
      * @see http://sourceforge.net/apps/trac/bigdata/ticket/443 (Logger for
      *      RWStore transaction service and recycler)
      */
-    private static final Logger txLog = Logger.getLogger("com.bigdata.txLog");
+    private static final Logger txLog = Logger.getLogger("org.embergraph.txLog");
 
     /**
     * Sesame has the notion of a "null" graph which we use for the quad store
@@ -1260,7 +1260,7 @@ public class BigdataSail extends SailBase implements Sail {
     * <p>
     * If {@link org.embergraph.journal.Journal.Options#GROUP_COMMIT group commit}
     * is enabled and you use the either the REST API or the
-    * {@link com.bigdata.rdf.task.AbstractApiTask#submitApiTask(IIndexManager, com.bigdata.rdf.task.IApiTask)}
+    * {@link org.embergraph.rdf.task.AbstractApiTask#submitApiTask(IIndexManager, org.embergraph.rdf.task.IApiTask)}
     * pattern to submit tasks, then concurrent unisolated connections will be
     * granted for different namespaces and multiple unisolated connections for
     * the same namespace MAY be melded into the same commit group (whether they

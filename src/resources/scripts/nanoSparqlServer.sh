@@ -25,7 +25,7 @@ echo "port=$port namespace=$namespace config=$BIGDATA_CONFIG"
 
 java ${JAVA_OPTS} \
     -cp ${CLASSPATH} \
-    com.bigdata.rdf.sail.webapp.NanoSparqlServer \
+    org.embergraph.rdf.sail.webapp.NanoSparqlServer \
     -readLock $readLock \
 	-nthreads $nthreads \
     $port \

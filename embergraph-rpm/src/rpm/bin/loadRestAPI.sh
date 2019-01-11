@@ -21,9 +21,9 @@ closure=false
 durableQueues=true
 #Needed for quads
 #defaultGraph=
-com.bigdata.rdf.store.DataLoader.flush=false
-com.bigdata.rdf.store.DataLoader.bufferCapacity=100000
-com.bigdata.rdf.store.DataLoader.queueCapacity=10
+org.embergraph.rdf.store.DataLoader.flush=false
+org.embergraph.rdf.store.DataLoader.bufferCapacity=100000
+org.embergraph.rdf.store.DataLoader.queueCapacity=10
 #Namespace to load
 namespace=kb
 #Files to load

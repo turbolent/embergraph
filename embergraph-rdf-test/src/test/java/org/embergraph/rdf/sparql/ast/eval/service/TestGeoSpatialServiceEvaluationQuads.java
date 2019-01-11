@@ -297,10 +297,10 @@ public class TestGeoSpatialServiceEvaluationQuads extends AbstractDataDrivenSPAR
 
         // enable GeoSpatial index
         properties.setProperty(
-           com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL, "true");
+           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL, "true");
 
         properties.setProperty(
-            com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".0",
+            org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".0",
             "{\"config\": "
             + "{ \"uri\": \"http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral\", "
             + "\"fields\": [ "
@@ -310,7 +310,7 @@ public class TestGeoSpatialServiceEvaluationQuads extends AbstractDataDrivenSPAR
             + "]}}");
         
         properties.setProperty(
-                com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DEFAULT_DATATYPE,
+                org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DEFAULT_DATATYPE,
                 "http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral");
         
         return properties;

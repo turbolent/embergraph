@@ -67,7 +67,7 @@ public class NicUtil {
     // This class cannot be instantiated.
     private NicUtil() {
         throw new AssertionError
-                   ("com.bigdata.util.NicUtil cannot be instantiated");
+                   ("org.embergraph.util.NicUtil cannot be instantiated");
     }
       
     /**

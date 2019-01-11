@@ -1,7 +1,7 @@
 PREFIX gas: <http://www.bigdata.com/rdf/gas#>
 SELECT * {
   SERVICE gas:service {
-    gas:program gas:gasClass "com.bigdata.rdf.graph.analytics.SSSP" .
+    gas:program gas:gasClass "org.embergraph.rdf.graph.analytics.SSSP" .
     gas:program gas:in </:source> . # starting point
     gas:program gas:target </:target1> . # target vertices
     gas:program gas:target </:target2> . # target vertices

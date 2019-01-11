@@ -258,7 +258,7 @@ public class FunctionRegistry {
 //                final IValueExpression ve = args[0].getValueExpression();
                 final IValueExpression ve = AST2BOpUtility.toVE(context, globals, args[0]);
                 
-                return new com.bigdata.bop.rdf.aggregate.AVERAGE(new BOp[]{ve}, scalarValues);
+                return new org.embergraph.bop.rdf.aggregate.AVERAGE(new BOp[]{ve}, scalarValues);
 
             }
         });
@@ -272,7 +272,7 @@ public class FunctionRegistry {
 //                final IValueExpression ve = args[0].getValueExpression();
                 final IValueExpression ve = AST2BOpUtility.toVE(context, globals, args[0]);
 
-                return new com.bigdata.bop.rdf.aggregate.COUNT(new BOp[]{ve}, scalarValues);
+                return new org.embergraph.bop.rdf.aggregate.COUNT(new BOp[]{ve}, scalarValues);
 
             }
         });
@@ -289,7 +289,7 @@ public class FunctionRegistry {
                 for(int i=0;i<args.length;i++){
                     expressions[i] = AST2BOpUtility.toVE(context, globals, args[i]);
                 }
-                return new com.bigdata.bop.rdf.aggregate.MAX(expressions, scalarValues);
+                return new org.embergraph.bop.rdf.aggregate.MAX(expressions, scalarValues);
             }
         });
 
@@ -303,7 +303,7 @@ public class FunctionRegistry {
                 for(int i=0;i<args.length;i++){
                     expressions[i] = AST2BOpUtility.toVE(context, globals, args[i]);
                 }
-                return new com.bigdata.bop.rdf.aggregate.MIN(expressions, scalarValues);
+                return new org.embergraph.bop.rdf.aggregate.MIN(expressions, scalarValues);
 
             }
         });
@@ -317,7 +317,7 @@ public class FunctionRegistry {
 //              final IValueExpression ve = args[0].getValueExpression();
                 final IValueExpression ve = AST2BOpUtility.toVE(context, globals, args[0]);
 
-                return new com.bigdata.bop.rdf.aggregate.SAMPLE(false,ve);
+                return new org.embergraph.bop.rdf.aggregate.SAMPLE(false,ve);
 
             }
         });
@@ -332,7 +332,7 @@ public class FunctionRegistry {
                 for(int i=0;i<args.length;i++){
                     expressions[i] = AST2BOpUtility.toVE(context, globals, args[i]);
                 }
-                return new com.bigdata.bop.rdf.aggregate.SUM(expressions, scalarValues);
+                return new org.embergraph.bop.rdf.aggregate.SUM(expressions, scalarValues);
 
             }
         });
@@ -1478,7 +1478,7 @@ public class FunctionRegistry {
             
             final IValueExpression ve = AST2BOpUtility.toVE(context,globals, args[0]);
 
-            return new com.bigdata.bop.rdf.aggregate.GROUP_CONCAT(
+            return new org.embergraph.bop.rdf.aggregate.GROUP_CONCAT(
                     new BOp[] { ve }, tmp);
 
         }
@@ -1768,7 +1768,7 @@ public class FunctionRegistry {
 		}
 		
 		/**
-		 * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+		 * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
 		 * 
 		 * @param op
 		 */

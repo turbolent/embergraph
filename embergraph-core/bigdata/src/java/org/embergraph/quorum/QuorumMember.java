@@ -63,7 +63,7 @@ public interface QuorumMember<S extends Remote> extends QuorumClient<S>,
      * <p>
      * A service operating as a {@link QuorumMember} has both {@link Remote}
      * interface and a non-remote interface. These interfaces typically define
-     * similar methods (for example, compare {@link com.bigdata.ha.HACommitGlue}, which is
+     * similar methods (for example, compare {@link org.embergraph.ha.HACommitGlue}, which is
      * {@link Remote}, with {@link QuorumCommit}, which is non-remote). The
      * {@link Remote} interface in turn will have a local implementation object
      * inside of the JVM and an exported proxy for that {@link Remote}

@@ -57,7 +57,7 @@ public class TestNestedLoopJoinOp extends TestCase2 {
 	/**
 	 * Note: There are some tests at the data-driven level.
 	 * 
-	 * @see com.bigdata.rdf.sparql.ast.eval.TestInclude
+	 * @see org.embergraph.rdf.sparql.ast.eval.TestInclude
 	 * 
 	 * FIXME Implement test.
 	 */

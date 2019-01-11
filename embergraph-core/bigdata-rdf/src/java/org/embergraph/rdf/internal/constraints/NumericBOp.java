@@ -103,7 +103,7 @@ public class NumericBOp extends IVValueExpression<IV> implements INeedsMateriali
     }
 
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      *
      * @param op
      */

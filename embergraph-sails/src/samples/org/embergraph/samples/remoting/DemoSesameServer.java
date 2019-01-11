@@ -1,4 +1,4 @@
-package com.bigdata.samples.remoting;
+package org.embergraph.samples.remoting;
 
 import org.openrdf.model.Graph;
 import org.openrdf.model.Statement;

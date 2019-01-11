@@ -43,7 +43,7 @@ import org.embergraph.util.InnerCause;
  */
 @SuppressWarnings("rawtypes")
 public class SPARQLConstraint<X extends XSDBooleanIV> extends
-        com.bigdata.bop.constraint.Constraint<X> {
+        org.embergraph.bop.constraint.Constraint<X> {
 
 	/**
 	 * 
@@ -89,7 +89,7 @@ public class SPARQLConstraint<X extends XSDBooleanIV> extends
     }
 
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      */
     public SPARQLConstraint(final SPARQLConstraint<X> op) {
 

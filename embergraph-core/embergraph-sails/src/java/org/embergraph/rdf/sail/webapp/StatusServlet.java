@@ -483,7 +483,7 @@ public class StatusServlet extends BigdataRDFServlet {
         if (req.getParameter(MAPGRAPH) != null) {
 
             final IServletDelegate delegate = ClassPathUtil.classForName(//
-                        "com.blazegraph.gpu.webapp.MapgraphStatusServletDelegate", // preferredClassName,
+                        "org.embergraph.gpu.webapp.MapgraphStatusServletDelegate", // preferredClassName,
                         ServletDelegateBase.class, // defaultClass,
                         IServletDelegate.class, // sharedInterface,
                         getClass().getClassLoader() // classLoader
@@ -533,7 +533,7 @@ public class StatusServlet extends BigdataRDFServlet {
 		// requests).
 		final Map<UUID/* IRunningQuery.queryId */, RunningQuery> crosswalkMap = getQueryCrosswalkMap();
 
-		final List<com.bigdata.rdf.sail.model.RunningQuery> modelRunningQueries = new ArrayList<com.bigdata.rdf.sail.model.RunningQuery>();
+		final List<org.embergraph.rdf.sail.model.RunningQuery> modelRunningQueries = new ArrayList<org.embergraph.rdf.sail.model.RunningQuery>();
 
 		/*
 		 * Show the queries that are currently executing (actually running on

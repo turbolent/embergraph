@@ -342,7 +342,7 @@ public class PipelinedHashIndexAndSolutionSetJoinOp extends HashIndexOp {
     /**
      * A chunk task. See outer class for explanation of parameters.
      */
-    private static class ChunkTask extends com.bigdata.bop.join.HashIndexOp.ChunkTask {
+    private static class ChunkTask extends org.embergraph.bop.join.HashIndexOp.ChunkTask {
 
         final PipelineOp subquery;
 

@@ -46,7 +46,7 @@ package org.embergraph.rdf.internal;
  *   It current supports up to 32 different inline values for a single namespace URI.  It is used
  *   in conjunction with the {@link InlineIntegerURIHandlerMap}.
  *   
- *   For an example, see {@see com.blazegraph.vocab.pubchem.PubchemInlineURIFactory}.
+ *   For an example, see {@see org.embergraph.vocab.pubchem.PubchemInlineURIFactory}.
  *   
  *   The max inline integer value that can supported in this scheme is 2^57 - 1, which is 2^5 less
  *   than the Java {@link Long.MAX_VALUE}.  

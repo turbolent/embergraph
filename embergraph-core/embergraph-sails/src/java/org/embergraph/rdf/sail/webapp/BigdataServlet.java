@@ -83,10 +83,10 @@ abstract public class BigdataServlet extends HttpServlet implements IMimeTypes {
      * HALoadBalancerServlet (DO NOT LINK JAVADOC) iff it is running.
      * <p>
      * Note: Do NOT reference the <code>HALoadBalancerServlet</code> or anything
-     * in the <code>com.bigdata.rdf.sail.webapp.lbs</code> package here. It will
+     * in the <code>org.embergraph.rdf.sail.webapp.lbs</code> package here. It will
      * drag in the jetty dependencies and that breaks the tomcat WAR deployment.
      */
-    static final String ATTRIBUTE_LBS_PREFIX = "com.bigdata.rdf.sail.webapp.HALoadBalancerServlet.prefix";
+    static final String ATTRIBUTE_LBS_PREFIX = "org.embergraph.rdf.sail.webapp.HALoadBalancerServlet.prefix";
     
     /**
      * The {@link ServletContext} attribute that is managed by the
@@ -96,10 +96,10 @@ abstract public class BigdataServlet extends HttpServlet implements IMimeTypes {
      * servlet instances.
      * <p>
      * Note: Do NOT reference the <code>HALoadBalancerServlet</code> or anything
-     * in the <code>com.bigdata.rdf.sail.webapp.lbs</code> package here. It will
+     * in the <code>org.embergraph.rdf.sail.webapp.lbs</code> package here. It will
      * drag in the jetty dependencies and that breaks the tomcat WAR deployment.
      */
-    static final String ATTRIBUTE_LBS_INSTANCES = "com.bigdata.rdf.sail.webapp.HALoadBalancerServlet.instances";
+    static final String ATTRIBUTE_LBS_INSTANCES = "org.embergraph.rdf.sail.webapp.HALoadBalancerServlet.instances";
     
 //    /**
 //     * The {@link ServletContext} attribute whose value is the

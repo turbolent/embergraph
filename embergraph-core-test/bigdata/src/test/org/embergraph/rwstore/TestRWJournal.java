@@ -174,10 +174,10 @@ public class TestRWJournal extends AbstractJournalTestCase {
 	    properties.setProperty(Options.WRITE_CACHE_BUFFER_COUNT, "10");
 	       
 		// number of bits in FixedAllocators
-		properties.setProperty(com.bigdata.rwstore.RWStore.Options.DEFAULT_FREE_BITS_THRESHOLD, "1000");
+		properties.setProperty(org.embergraph.rwstore.RWStore.Options.DEFAULT_FREE_BITS_THRESHOLD, "1000");
 
 		// Size of META_BITS_BLOCKS
-		properties.setProperty(com.bigdata.rwstore.RWStore.Options.DEFAULT_META_BITS_SIZE, "9");
+		properties.setProperty(org.embergraph.rwstore.RWStore.Options.DEFAULT_META_BITS_SIZE, "9");
 		
 		// properties.setProperty(RWStore.Options.ALLOCATION_SIZES,
 		// "1,2,3,5,8,12,16,32"); // 2K max

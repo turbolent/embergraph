@@ -225,7 +225,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable,
             .getLogger(IndexMetadata.class);
 
     /**
-     * Options and their defaults for the {@link com.bigdata.btree} package and
+     * Options and their defaults for the {@link org.embergraph.btree} package and
      * the {@link BTree} and {@link IndexSegment} classes. Options that apply
      * equally to views and {@link AbstractBTree}s are in the package namespace,
      * such as whether or not a bloom filter is enabled. Options that apply to
@@ -321,7 +321,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable,
          * 
          * @see #DEFAULT_BLOOM_FILTER
          */
-        String BLOOM_FILTER = (com.bigdata.btree.BTree.class.getPackage()
+        String BLOOM_FILTER = (org.embergraph.btree.BTree.class.getPackage()
                 .getName()
                 + ".bloomFilter").intern();
         
@@ -336,7 +336,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable,
 		 * @see IndexMetadata#getRawRecords()
 		 * @see IndexMetadata#getMaxRecLen()
 		 */
-		String MAX_REC_LEN = (com.bigdata.btree.BTree.class.getPackage()
+		String MAX_REC_LEN = (org.embergraph.btree.BTree.class.getPackage()
 				.getName() + ".maxRecLen").intern();
 
 		String DEFAULT_MAX_REC_LEN = "256";
@@ -356,7 +356,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable,
          * <code>null</code>.
          */
         // note: property applies to views so namespace is the package.
-        String INITIAL_DATA_SERVICE = com.bigdata.btree.BTree.class
+        String INITIAL_DATA_SERVICE = org.embergraph.btree.BTree.class
                 .getPackage().getName()
                 + ".initialDataService";
 
@@ -398,7 +398,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable,
          * application is performing sustained writes on the index (hundreds of
          * thousands to millions of records).
          */
-        String WRITE_RETENTION_QUEUE_CAPACITY = (com.bigdata.btree.AbstractBTree.class
+        String WRITE_RETENTION_QUEUE_CAPACITY = (org.embergraph.btree.AbstractBTree.class
                 .getPackage().getName()
                 + ".writeRetentionQueue.capacity").intern();
 
@@ -411,7 +411,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable,
          * incremental writes occur iff the {@link AbstractNode#referenceCount}
          * is zero and the node or leaf is dirty.
          */
-        String WRITE_RETENTION_QUEUE_SCAN = (com.bigdata.btree.AbstractBTree.class
+        String WRITE_RETENTION_QUEUE_SCAN = (org.embergraph.btree.AbstractBTree.class
                 .getPackage().getName()
                 + ".writeRetentionQueue.scan").intern();
 
@@ -427,7 +427,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable,
          * 
          * FIXME {@link KeyBuilder} configuration support is not finished.
          */
-        String KEY_BUILDER_FACTORY = (com.bigdata.btree.AbstractBTree.class
+        String KEY_BUILDER_FACTORY = (org.embergraph.btree.AbstractBTree.class
                 .getPackage().getName()
                 + "keyBuilderFactory").intern();
 
@@ -435,7 +435,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable,
          * Override the {@link IRabaCoder} used for the keys in the nodes of a
          * B+Tree (the default is a {@link FrontCodedRabaCoder} instance).
          */
-        String NODE_KEYS_CODER = (com.bigdata.btree.AbstractBTree.class
+        String NODE_KEYS_CODER = (org.embergraph.btree.AbstractBTree.class
                 .getPackage().getName()
                 + "nodeKeysCoder").intern();
 
@@ -445,7 +445,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable,
          * 
          * @see DefaultTupleSerializer#setLeafKeysCoder(IRabaCoder)
          */
-        String LEAF_KEYS_CODER = (com.bigdata.btree.AbstractBTree.class
+        String LEAF_KEYS_CODER = (org.embergraph.btree.AbstractBTree.class
                 .getPackage().getName()
                 + ".leafKeysCoder").intern();
 
@@ -455,7 +455,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable,
          * 
          * @see DefaultTupleSerializer#setLeafValuesCoder(IRabaCoder)
          */
-        String LEAF_VALUES_CODER = (com.bigdata.btree.AbstractBTree.class
+        String LEAF_VALUES_CODER = (org.embergraph.btree.AbstractBTree.class
                 .getPackage().getName()
                 + ".leafValuesCoder").intern();
 
@@ -479,7 +479,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable,
 //         * each {@link Node} in the {@link BTree}.  This is why it is turned off
 //         * by default.
 //         */
-//        String CHILD_LOCKS = com.bigdata.btree.AbstractBTree.class.getPackage()
+//        String CHILD_LOCKS = org.embergraph.btree.AbstractBTree.class.getPackage()
 //                .getName()
 //                + ".childLocks";
 //
@@ -585,7 +585,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable,
 //         *       based on that parameter. And of course it can be easily
 //         *       provisioned when the BTree is {@link #reopen()}ed.
 //         */
-//        String BTREE_READ_RETENTION_QUEUE_CAPACITY = com.bigdata.btree.BTree.class
+//        String BTREE_READ_RETENTION_QUEUE_CAPACITY = org.embergraph.btree.BTree.class
 //                .getPackage().getName()
 //                + ".readRetentionQueue.capacity";
 //
@@ -597,7 +597,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable,
 //         * off the cost of scanning entries on the queue, which is handled by
 //         * the queue itself, against the cost of queue churn.
 //         */
-//        String BTREE_READ_RETENTION_QUEUE_SCAN = com.bigdata.btree.BTree.class
+//        String BTREE_READ_RETENTION_QUEUE_SCAN = org.embergraph.btree.BTree.class
 //                .getPackage().getName()
 //                + ".readRetentionQueue.scan";
 //
@@ -2118,8 +2118,8 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable,
         // Note: default assumes NOT an index partition.
         this.pmd = null;
         
-        /* Intern'd to reduce duplication on the heap. Will be com.bigdata.btree.BTree or
-         * com.bigdata.btree.IndexSegment and occasionally a class derived from BTree.
+        /* Intern'd to reduce duplication on the heap. Will be org.embergraph.btree.BTree or
+         * org.embergraph.btree.IndexSegment and occasionally a class derived from BTree.
          */
         this.btreeClassName = getProperty(indexManager, properties, namespace,
                 Options.BTREE_CLASS_NAME, BTree.class.getName()).intern();

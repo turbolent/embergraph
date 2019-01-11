@@ -54,7 +54,7 @@ import org.embergraph.rdf.sparql.ast.service.ServiceRegistry;
  * SERVICE call.
  * <p>
  * To run this test case, specify the following JVM property:
- * <code>-DtestClass=com.bigdata.rdf.sail.TestBigdataSailWithQuads</code>
+ * <code>-DtestClass=org.embergraph.rdf.sail.TestBigdataSailWithQuads</code>
  */
 public class TestTicket632 extends QuadsTestCase {
 

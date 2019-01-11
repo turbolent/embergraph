@@ -811,7 +811,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
         protected IASTOptimizer initGPURangeCountOptimizer() {
 
            return ClassPathUtil.classForName(//
-                 "com.blazegraph.rdf.gpu.sparql.ast.optimizers.ASTGPURangeCountOptimizer", // preferredClassName,
+                 "org.embergraph.rdf.gpu.sparql.ast.optimizers.ASTGPURangeCountOptimizer", // preferredClassName,
                  null, // defaultClass,
                  IASTOptimizer.class, // sharedInterface,
                  getClass().getClassLoader() // classLoader
@@ -828,7 +828,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
         protected IASTOptimizer initGPUFastRangeCountOptimizer() {
 
            return ClassPathUtil.classForName(//
-                 "com.blazegraph.rdf.gpu.sparql.ast.optimizers.ASTGPUFastRangeCountOptimizer", // preferredClassName,
+                 "org.embergraph.rdf.gpu.sparql.ast.optimizers.ASTGPUFastRangeCountOptimizer", // preferredClassName,
                  null, // defaultClass,
                  IASTOptimizer.class, // sharedInterface,
                  getClass().getClassLoader() // classLoader
@@ -843,7 +843,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
         protected IASTOptimizer initGPUAccelerationOptimizer() {
 
             return ClassPathUtil.classForName(//
-                    "com.blazegraph.rdf.gpu.sparql.ast.optimizers.ASTGPUAccelerationOptimizer", // preferredClassName,
+                    "org.embergraph.rdf.gpu.sparql.ast.optimizers.ASTGPUAccelerationOptimizer", // preferredClassName,
                     null, // defaultClass,
                     IASTOptimizer.class, // sharedInterface,
                     getClass().getClassLoader() // classLoader

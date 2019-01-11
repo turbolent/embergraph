@@ -363,7 +363,7 @@ public class FusedView implements IIndex, ILocalBTreeView {//, IValueAge {
 //    protected final ThreadLocal<Tuple> containsTuple = new ThreadLocal<Tuple>() {
 //
 //        @Override
-//        protected com.bigdata.btree.Tuple initialValue() {
+//        protected org.embergraph.btree.Tuple initialValue() {
 //
 //            return new Tuple(getMutableBTree(), 0);
 //            

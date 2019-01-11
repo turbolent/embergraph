@@ -116,7 +116,7 @@ public class LogUtil {
         /**
          * This may be used to suppress the banner text. 
          */
-        String QUIET = "com.bigdata.util.config.LogUtil.quiet";
+        String QUIET = "org.embergraph.util.config.LogUtil.quiet";
         
     }
     

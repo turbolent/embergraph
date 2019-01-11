@@ -55,7 +55,7 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpUtility;
  * to retire the class and, instead, do remove variables from the doneSet within the
  * {@link AST2BOpUtility} update process whenever we set up an analytic hash join.
  * 
- * This test is deprecated and has been disabled in com.bigdata.rdf.internal.encoder.TestAll.
+ * This test is deprecated and has been disabled in org.embergraph.rdf.internal.encoder.TestAll.
  * Note that, if at some point we decide to re-enable the test, we would need to fix
  * the {@link IVBindingSetEncoderWithIVCache} (I've recently added some tests to this
  * class which are failing). Unless the {@link IVBindingSetEncoderWithIVCache} is resurrected,

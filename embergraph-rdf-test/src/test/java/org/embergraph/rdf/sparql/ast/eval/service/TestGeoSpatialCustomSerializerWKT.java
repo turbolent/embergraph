@@ -175,16 +175,16 @@ public class TestGeoSpatialCustomSerializerWKT extends AbstractDataDrivenSPARQLT
 
         // enable GeoSpatial index
         properties.setProperty(
-           com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL, "true");
+           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL, "true");
 
         // set GeoSpatial configuration: use a higher precision and range shifts; 
         // the test accounts for this higher precision (and assert that range shifts
         // actually do not harm the evaluation process)
         properties.setProperty(
-           com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".0",
+           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".0",
            "{\"config\": "
            + "{ \"uri\": \"http://www.opengis.net/ont/geosparql#wktLiteral\", "
-           + "\"literalSerializer\": \"com.bigdata.rdf.sparql.ast.eval.service.GeoSpatialTestWKTLiteralSerializer\",  "
+           + "\"literalSerializer\": \"org.embergraph.rdf.sparql.ast.eval.service.GeoSpatialTestWKTLiteralSerializer\",  "
            + "\"fields\": [ "
            + "{ \"valueType\": \"DOUBLE\", \"minVal\" : \"0\", \"multiplier\": \"1000000\", \"serviceMapping\": \"LATITUDE\" }, "
            + "{ \"valueType\": \"DOUBLE\", \"minVal\" : \"0\", \"multiplier\": \"100000\", \"serviceMapping\": \"LONGITUDE\" } "
@@ -192,12 +192,12 @@ public class TestGeoSpatialCustomSerializerWKT extends AbstractDataDrivenSPARQLT
         
         // make our dummy WKT datatype default to ease querying
         properties.setProperty(
-            com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DEFAULT_DATATYPE, 
+            org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DEFAULT_DATATYPE,
             "http://www.opengis.net/ont/geosparql#wktLiteral");
         
         properties.setProperty(
-           com.bigdata.rdf.store.AbstractLocalTripleStore.Options.VOCABULARY_CLASS,
-           "com.bigdata.rdf.sparql.ast.eval.service.GeoSpatialTestVocabulary");
+           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.VOCABULARY_CLASS,
+           "org.embergraph.rdf.sparql.ast.eval.service.GeoSpatialTestVocabulary");
         
         return properties;
 

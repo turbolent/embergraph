@@ -58,7 +58,7 @@ import org.embergraph.util.concurrent.LatchedExecutor;
  *      TODO The current implementation assigns one thread per index. However,
  *      it is also possible to use a reader pool to accelerate the index scans.
  *      This would require a change to the
- *      {@link com.bigdata.btree.AbstractBTree#dumpPages(boolean, boolean)}
+ *      {@link org.embergraph.btree.AbstractBTree#dumpPages(boolean, boolean)}
  *      implementation to parallelize the IOs over the children of a node. We
  *      have experimented with that in the past but not observed a big win for
  *      query. It might be more significant for warmup since we are using a full

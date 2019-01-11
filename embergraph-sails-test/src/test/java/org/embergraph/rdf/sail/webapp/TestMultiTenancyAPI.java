@@ -291,20 +291,20 @@ public class TestMultiTenancyAPI<S extends IIndexManager> extends
 //        log.error(p.toString());
         
         /*
-         * ERROR: 1403 main com.bigdata.rdf.sail.webapp.TestMultiTenancyAPI.
+         * ERROR: 1403 main org.embergraph.rdf.sail.webapp.TestMultiTenancyAPI.
          * test_getRepositoryProperties01(TestMultiTenancyAPI.java:222):
-         * {com.bigdata
+         * {org.embergraph
          * .relation.namespace=test_getRepositoryProperties01d16045fb
          * -0343-4c40-b49a-1865253e26cc,
-         * com.bigdata.search.FullTextIndex.fieldsEnabled=false,
-         * com.bigdata.relation.class=com.bigdata.rdf.store.LocalTripleStore,
+         * org.embergraph.search.FullTextIndex.fieldsEnabled=false,
+         * org.embergraph.relation.class=org.embergraph.rdf.store.LocalTripleStore,
          * com
-         * .bigdata.rdf.store.AbstractTripleStore.vocabularyClass=com.bigdata.
+         * .bigdata.rdf.store.AbstractTripleStore.vocabularyClass=org.embergraph.
          * rdf.vocab.NoVocabulary,
-         * com.bigdata.rdf.store.AbstractTripleStore.statementIdentifiers=false,
-         * com.bigdata.rdf.sail.truthMaintenance=false,
-         * com.bigdata.rdf.store.AbstractTripleStore
-         * .axiomsClass=com.bigdata.rdf.axioms.NoAxioms}
+         * org.embergraph.rdf.store.AbstractTripleStore.statementIdentifiers=false,
+         * org.embergraph.rdf.sail.truthMaintenance=false,
+         * org.embergraph.rdf.store.AbstractTripleStore
+         * .axiomsClass=org.embergraph.rdf.axioms.NoAxioms}
          */
 
         assertEquals(namespace, p.getProperty(RelationSchema.NAMESPACE));
@@ -325,8 +325,8 @@ public class TestMultiTenancyAPI<S extends IIndexManager> extends
         
         final Properties p = m_mgr.getPreparedProperties(namespace, properties);
         
-		properties.put("com.bigdata.rdf.sail.truthMaintenance", "true");
-		properties.put("com.bigdata.rdf.store.AbstractTripleStore.quads", "true");
+		properties.put("org.embergraph.rdf.sail.truthMaintenance", "true");
+		properties.put("org.embergraph.rdf.store.AbstractTripleStore.quads", "true");
 				
 		try {
 
@@ -350,13 +350,13 @@ public class TestMultiTenancyAPI<S extends IIndexManager> extends
         Properties properties = new Properties();
         
         properties.put(RemoteRepository.OPTION_CREATE_KB_NAMESPACE, namespace);
-        properties.put("com.bigdata.namespace." + RemoteRepository.DEFAULT_NAMESPACE + ".spo.com.bigdata.btree.BTree.branchingFactor", "1024");
-        properties.put("com.bigdata.namespace." + RemoteRepository.DEFAULT_NAMESPACE + ".lex.com.bigdata.btree.BTree.branchingFactor", "400");
+        properties.put("org.embergraph.namespace." + RemoteRepository.DEFAULT_NAMESPACE + ".spo.org.embergraph.btree.BTree.branchingFactor", "1024");
+        properties.put("org.embergraph.namespace." + RemoteRepository.DEFAULT_NAMESPACE + ".lex.org.embergraph.btree.BTree.branchingFactor", "400");
         
         final Properties p = m_mgr.getPreparedProperties(namespace, properties);
         
-        assertTrue(p.containsKey("com.bigdata.namespace." + namespace + ".spo.com.bigdata.btree.BTree.branchingFactor"));
-        assertTrue(p.containsKey("com.bigdata.namespace." + namespace + ".lex.com.bigdata.btree.BTree.branchingFactor"));
+        assertTrue(p.containsKey("org.embergraph.namespace." + namespace + ".spo.org.embergraph.btree.BTree.branchingFactor"));
+        assertTrue(p.containsKey("org.embergraph.namespace." + namespace + ".lex.org.embergraph.btree.BTree.branchingFactor"));
                
     }
     
@@ -371,13 +371,13 @@ public class TestMultiTenancyAPI<S extends IIndexManager> extends
         Properties properties = new Properties();
         
         properties.put(RemoteRepository.OPTION_CREATE_KB_NAMESPACE, namespace);
-        properties.put("com.bigdata.namespace." + RemoteRepository.DEFAULT_NAMESPACE + ".spo.com.bigdata.btree.BTree.branchingFactor", "1024");
-        properties.put("com.bigdata.namespace." + RemoteRepository.DEFAULT_NAMESPACE + ".lex.com.bigdata.btree.BTree.branchingFactor", "400");
+        properties.put("org.embergraph.namespace." + RemoteRepository.DEFAULT_NAMESPACE + ".spo.org.embergraph.btree.BTree.branchingFactor", "1024");
+        properties.put("org.embergraph.namespace." + RemoteRepository.DEFAULT_NAMESPACE + ".lex.org.embergraph.btree.BTree.branchingFactor", "400");
         
         final Properties p = m_mgr.getPreparedProperties(namespace, properties);
         
-        assertFalse(p.containsKey("com.bigdata.namespace." + RemoteRepository.DEFAULT_NAMESPACE + ".spo.com.bigdata.btree.BTree.branchingFactor"));
-        assertFalse(p.containsKey("com.bigdata.namespace." + RemoteRepository.DEFAULT_NAMESPACE + ".lex.com.bigdata.btree.BTree.branchingFactor"));
+        assertFalse(p.containsKey("org.embergraph.namespace." + RemoteRepository.DEFAULT_NAMESPACE + ".spo.org.embergraph.btree.BTree.branchingFactor"));
+        assertFalse(p.containsKey("org.embergraph.namespace." + RemoteRepository.DEFAULT_NAMESPACE + ".lex.org.embergraph.btree.BTree.branchingFactor"));
                
     }
     

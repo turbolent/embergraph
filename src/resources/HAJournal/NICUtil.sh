@@ -10,4 +10,4 @@ java\
  -Djava.security.policy=${POLICY_FILE}\
  -Dlog4j.configuration=${LOG4J_CONFIG}\
  -Djava.util.logging.config.file=${LOGGING_CONFIG}\
- com.bigdata.util.config.NicUtil
+ org.embergraph.util.config.NicUtil

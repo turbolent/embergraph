@@ -377,7 +377,7 @@ public class TestASTBottomUpOptimizer extends
      *       StatementPatternNode(ConstantNode(TermId(0U)[http://example/x]), ConstantNode(TermId(0U)[http://example/q]), VarNode(w), DEFAULT_CONTEXTS)
      *       JoinGroupNode [optional] {
      *         StatementPatternNode(ConstantNode(TermId(0U)[http://example/x]), ConstantNode(TermId(0U)[http://example/p]), VarNode(v2), DEFAULT_CONTEXTS)
-     *         FILTER( com.bigdata.rdf.sparql.ast.FunctionNode(VarNode(v),ConstantNode(XSDInteger(1)))[ com.bigdata.rdf.sparql.ast.FunctionNode.functionURI=http://www.w3.org/2005/xpath-functions#equal-to] )
+     *         FILTER( org.embergraph.rdf.sparql.ast.FunctionNode(VarNode(v),ConstantNode(XSDInteger(1)))[ org.embergraph.rdf.sparql.ast.FunctionNode.functionURI=http://www.w3.org/2005/xpath-functions#equal-to] )
      *       }
      *     }
      *   }
@@ -1537,13 +1537,13 @@ public class TestASTBottomUpOptimizer extends
 //         *     SERVICE <ConstantNode(TermId(1U))> {
 //         *       JoinGroupNode {
 //         *         StatementPatternNode(VarNode(a), ConstantNode(Vocab(14)), VarNode(t1), DEFAULT_CONTEXTS)
-//         *         FILTER( com.bigdata.rdf.sparql.ast.FunctionNode(VarNode(t1),ConstantNode(Vocab(39)))[ com.bigdata.rdf.sparql.ast.FunctionNode.functionURI=http://www.w3.org/2005/xpath-functions#equal-to] )
+//         *         FILTER( org.embergraph.rdf.sparql.ast.FunctionNode(VarNode(t1),ConstantNode(Vocab(39)))[ org.embergraph.rdf.sparql.ast.FunctionNode.functionURI=http://www.w3.org/2005/xpath-functions#equal-to] )
 //         *       }
 //         *     }
 //         *     SERVICE <ConstantNode(TermId(1U))> {
 //         *       JoinGroupNode {
 //         *         StatementPatternNode(VarNode(b), ConstantNode(Vocab(14)), VarNode(t2), DEFAULT_CONTEXTS)
-//         *         FILTER( com.bigdata.rdf.sparql.ast.FunctionNode(VarNode(t2),ConstantNode(Vocab(39)))[ com.bigdata.rdf.sparql.ast.FunctionNode.functionURI=http://www.w3.org/2005/xpath-functions#equal-to] )
+//         *         FILTER( org.embergraph.rdf.sparql.ast.FunctionNode(VarNode(t2),ConstantNode(Vocab(39)))[ org.embergraph.rdf.sparql.ast.FunctionNode.functionURI=http://www.w3.org/2005/xpath-functions#equal-to] )
 //         *       }
 //         *     }
 //         *   }

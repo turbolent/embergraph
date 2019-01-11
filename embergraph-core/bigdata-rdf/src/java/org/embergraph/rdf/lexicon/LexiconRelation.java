@@ -2426,7 +2426,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
 	 * the same as for truth maintenance on add.
 	 * <p>
 	 * It looks like the right place to hook in truth maintenance for add is
-	 * {@link AbstractTripleStore#addStatements(AbstractTripleStore, boolean, IChunkedOrderedIterator, com.bigdata.relation.accesspath.IElementFilter)}
+	 * {@link AbstractTripleStore#addStatements(AbstractTripleStore, boolean, IChunkedOrderedIterator, org.embergraph.relation.accesspath.IElementFilter)}
 	 * after the ISPOs are added to the SPORelation. Likewise, the place to hook
 	 * in truth maintenance for delete is
 	 * {@link AbstractTripleStore#removeStatements(IChunkedOrderedIterator, boolean)}

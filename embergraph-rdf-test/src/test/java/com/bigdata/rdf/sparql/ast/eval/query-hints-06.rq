@@ -19,7 +19,7 @@ WHERE {
 
   ?x rdfs:label ?o .
   # Override the vector size for the previous join.
-  hint:Prior hint:com.bigdata.relation.accesspath.IBuffer.chunkCapacity 1001 .
+  hint:Prior hint:org.embergraph.relation.accesspath.IBuffer.chunkCapacity 1001 .
   
   { 
      SELECT ?x {

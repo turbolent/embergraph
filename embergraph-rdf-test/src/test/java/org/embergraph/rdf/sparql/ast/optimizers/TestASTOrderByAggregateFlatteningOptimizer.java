@@ -112,12 +112,12 @@ public class TestASTOrderByAggregateFlatteningOptimizer
 
         // Check that the rewriter has produced something like this:
 //QueryType: SELECT
-//SELECT VarNode(o) ( com.bigdata.rdf.sparql.ast.FunctionNode(VarNode(s))[ FunctionNode.scalarVals=null, FunctionNode.functionURI=http://www.w3.org/2006/sparql-functions#count, valueExpr=com.bigdata.bop.rdf.aggregate.COUNT(s)] AS VarNode(d999c13a-6aea-4c0d-ae37-cf99a1a04d46) )[excludeFromProjection]
+//SELECT VarNode(o) ( org.embergraph.rdf.sparql.ast.FunctionNode(VarNode(s))[ FunctionNode.scalarVals=null, FunctionNode.functionURI=http://www.w3.org/2006/sparql-functions#count, valueExpr=org.embergraph.bop.rdf.aggregate.COUNT(s)] AS VarNode(d999c13a-6aea-4c0d-ae37-cf99a1a04d46) )[excludeFromProjection]
 //  JoinGroupNode {
 //    StatementPatternNode(VarNode(s), ConstantNode(TermId(0U)[http://example/p]), VarNode(o)) [scope=DEFAULT_CONTEXTS]
 //  }
 //group by VarNode(o)
-//ORDER BY com.bigdata.rdf.sparql.ast.OrderByExpr(VarNode(d999c13a-6aea-4c0d-ae37-cf99a1a04d46))[ ascending=true]
+//ORDER BY org.embergraph.rdf.sparql.ast.OrderByExpr(VarNode(d999c13a-6aea-4c0d-ae37-cf99a1a04d46))[ ascending=true]
 
 
         final NamedSubqueriesNode namedSubqueries = actual.getNamedSubqueries();
@@ -128,7 +128,7 @@ public class TestASTOrderByAggregateFlatteningOptimizer
 
 
         // Check
-        // SELECT VarNode(o) ( com.bigdata.rdf.sparql.ast.FunctionNode(VarNode(s))[ FunctionNode.scalarVals=null, FunctionNode.functionURI=http://www.w3.org/2006/sparql-functions#count, valueExpr=com.bigdata.bop.rdf.aggregate.COUNT(s)] AS VarNode(d999c13a-6aea-4c0d-ae37-cf99a1a04d46) )[excludeFromProjection]
+        // SELECT VarNode(o) ( org.embergraph.rdf.sparql.ast.FunctionNode(VarNode(s))[ FunctionNode.scalarVals=null, FunctionNode.functionURI=http://www.w3.org/2006/sparql-functions#count, valueExpr=org.embergraph.bop.rdf.aggregate.COUNT(s)] AS VarNode(d999c13a-6aea-4c0d-ae37-cf99a1a04d46) )[excludeFromProjection]
 
         final ProjectionNode projection = actual.getProjection();
         assertNotNull(projection);
@@ -150,7 +150,7 @@ public class TestASTOrderByAggregateFlatteningOptimizer
         assertFalse(projection.excludeFromProjection(var1));
 
 
-        //       Check ( com.bigdata.rdf.sparql.ast.FunctionNode(VarNode(s))[ FunctionNode.scalarVals=null, FunctionNode.functionURI=http://www.w3.org/2006/sparql-functions#count, valueExpr=com.bigdata.bop.rdf.aggregate.COUNT(s)] AS VarNode(d999c13a-6aea-4c0d-ae37-cf99a1a04d46) )[excludeFromProjection]
+        //       Check ( org.embergraph.rdf.sparql.ast.FunctionNode(VarNode(s))[ FunctionNode.scalarVals=null, FunctionNode.functionURI=http://www.w3.org/2006/sparql-functions#count, valueExpr=org.embergraph.bop.rdf.aggregate.COUNT(s)] AS VarNode(d999c13a-6aea-4c0d-ae37-cf99a1a04d46) )[excludeFromProjection]
         assertNotNull(assignments[1]);
         assertTrue(assignments[1] instanceof Bind);
 
@@ -182,7 +182,7 @@ public class TestASTOrderByAggregateFlatteningOptimizer
 
 
         // Check 
-        // ORDER BY com.bigdata.rdf.sparql.ast.OrderByExpr(VarNode(d999c13a-6aea-4c0d-ae37-cf99a1a04d46))[ ascending=true]
+        // ORDER BY org.embergraph.rdf.sparql.ast.OrderByExpr(VarNode(d999c13a-6aea-4c0d-ae37-cf99a1a04d46))[ ascending=true]
 
         final OrderByNode orderBy = actual.getOrderBy();
         final Iterator<OrderByExpr> orderByArgs = orderBy.iterator();
@@ -271,13 +271,13 @@ public class TestASTOrderByAggregateFlatteningOptimizer
 
         // Check that the rewriter has produced something like this:
 //QueryType: SELECT
-//SELECT VarNode(x) VarNode(y) ( com.bigdata.rdf.sparql.ast.FunctionNode(VarNode(z))[ FunctionNode.scalarVals=null, FunctionNode.functionURI=http://www.w3.org/2006/sparql-functions#max, valueExpr=com.bigdata.bop.rdf.aggregate.MAX(z)] AS VarNode(e6501b59-cd5b-4fbf-9587-1797b79464b2) )[excludeFromProjection] ( com.bigdata.rdf.sparql.ast.FunctionNode(VarNode(z))[ FunctionNode.scalarVals=null, FunctionNode.functionURI=http://www.w3.org/2006/sparql-functions#count, valueExpr=com.bigdata.bop.rdf.aggregate.COUNT(z)] AS VarNode(086758ec-366a-4b33-86da-e958744d6650) )[excludeFromProjection]
+//SELECT VarNode(x) VarNode(y) ( org.embergraph.rdf.sparql.ast.FunctionNode(VarNode(z))[ FunctionNode.scalarVals=null, FunctionNode.functionURI=http://www.w3.org/2006/sparql-functions#max, valueExpr=org.embergraph.bop.rdf.aggregate.MAX(z)] AS VarNode(e6501b59-cd5b-4fbf-9587-1797b79464b2) )[excludeFromProjection] ( org.embergraph.rdf.sparql.ast.FunctionNode(VarNode(z))[ FunctionNode.scalarVals=null, FunctionNode.functionURI=http://www.w3.org/2006/sparql-functions#count, valueExpr=org.embergraph.bop.rdf.aggregate.COUNT(z)] AS VarNode(086758ec-366a-4b33-86da-e958744d6650) )[excludeFromProjection]
 //  JoinGroupNode {
 //    StatementPatternNode(VarNode(x), ConstantNode(TermId(0U)[http://example.org/r]), VarNode(y)) [scope=DEFAULT_CONTEXTS]
 //    StatementPatternNode(VarNode(y), ConstantNode(TermId(0U)[http://example.org/q]), VarNode(z)) [scope=DEFAULT_CONTEXTS]
 //  }
 //group by VarNode(x) VarNode(y)
-//ORDER BY com.bigdata.rdf.sparql.ast.OrderByExpr(VarNode(e6501b59-cd5b-4fbf-9587-1797b79464b2))[ ascending=false] com.bigdata.rdf.sparql.ast.OrderByExpr(VarNode(x))[ ascending=true] com.bigdata.rdf.sparql.ast.OrderByExpr(VarNode(086758ec-366a-4b33-86da-e958744d6650))[ ascending=true] com.bigdata.rdf.sparql.ast.OrderByExpr(VarNode(y))[ ascending=false]
+//ORDER BY org.embergraph.rdf.sparql.ast.OrderByExpr(VarNode(e6501b59-cd5b-4fbf-9587-1797b79464b2))[ ascending=false] org.embergraph.rdf.sparql.ast.OrderByExpr(VarNode(x))[ ascending=true] org.embergraph.rdf.sparql.ast.OrderByExpr(VarNode(086758ec-366a-4b33-86da-e958744d6650))[ ascending=true] org.embergraph.rdf.sparql.ast.OrderByExpr(VarNode(y))[ ascending=false]
 
 
         final NamedSubqueriesNode namedSubqueries = actual.getNamedSubqueries();
@@ -289,7 +289,7 @@ public class TestASTOrderByAggregateFlatteningOptimizer
 
 
         // Check
-        // SELECT VarNode(x) VarNode(y) ( com.bigdata.rdf.sparql.ast.FunctionNode(VarNode(z))[ FunctionNode.scalarVals=null, FunctionNode.functionURI=http://www.w3.org/2006/sparql-functions#max, valueExpr=com.bigdata.bop.rdf.aggregate.MAX(z)] AS VarNode(e6501b59-cd5b-4fbf-9587-1797b79464b2) )[excludeFromProjection] ( com.bigdata.rdf.sparql.ast.FunctionNode(VarNode(z))[ FunctionNode.scalarVals=null, FunctionNode.functionURI=http://www.w3.org/2006/sparql-functions#count, valueExpr=com.bigdata.bop.rdf.aggregate.COUNT(z)] AS VarNode(086758ec-366a-4b33-86da-e958744d6650) )[excludeFromProjection]
+        // SELECT VarNode(x) VarNode(y) ( org.embergraph.rdf.sparql.ast.FunctionNode(VarNode(z))[ FunctionNode.scalarVals=null, FunctionNode.functionURI=http://www.w3.org/2006/sparql-functions#max, valueExpr=org.embergraph.bop.rdf.aggregate.MAX(z)] AS VarNode(e6501b59-cd5b-4fbf-9587-1797b79464b2) )[excludeFromProjection] ( org.embergraph.rdf.sparql.ast.FunctionNode(VarNode(z))[ FunctionNode.scalarVals=null, FunctionNode.functionURI=http://www.w3.org/2006/sparql-functions#count, valueExpr=org.embergraph.bop.rdf.aggregate.COUNT(z)] AS VarNode(086758ec-366a-4b33-86da-e958744d6650) )[excludeFromProjection]
 
 
 
@@ -328,7 +328,7 @@ public class TestASTOrderByAggregateFlatteningOptimizer
 
 
 
-        //       Check  ( com.bigdata.rdf.sparql.ast.FunctionNode(VarNode(z))[ FunctionNode.scalarVals=null, FunctionNode.functionURI=http://www.w3.org/2006/sparql-functions#max, valueExpr=com.bigdata.bop.rdf.aggregate.MAX(z)] AS VarNode(e6501b59-cd5b-4fbf-9587-1797b79464b2) )[excludeFromProjection]
+        //       Check  ( org.embergraph.rdf.sparql.ast.FunctionNode(VarNode(z))[ FunctionNode.scalarVals=null, FunctionNode.functionURI=http://www.w3.org/2006/sparql-functions#max, valueExpr=org.embergraph.bop.rdf.aggregate.MAX(z)] AS VarNode(e6501b59-cd5b-4fbf-9587-1797b79464b2) )[excludeFromProjection]
         assertNotNull(assignments[2]);
         assertTrue(assignments[2] instanceof Bind);
 
@@ -348,7 +348,7 @@ public class TestASTOrderByAggregateFlatteningOptimizer
 
 
 
-        //       Check ( com.bigdata.rdf.sparql.ast.FunctionNode(VarNode(z))[ FunctionNode.scalarVals=null, FunctionNode.functionURI=http://www.w3.org/2006/sparql-functions#count, valueExpr=com.bigdata.bop.rdf.aggregate.COUNT(z)] AS VarNode(086758ec-366a-4b33-86da-e958744d6650) )[excludeFromProjection]
+        //       Check ( org.embergraph.rdf.sparql.ast.FunctionNode(VarNode(z))[ FunctionNode.scalarVals=null, FunctionNode.functionURI=http://www.w3.org/2006/sparql-functions#count, valueExpr=org.embergraph.bop.rdf.aggregate.COUNT(z)] AS VarNode(086758ec-366a-4b33-86da-e958744d6650) )[excludeFromProjection]
         assertNotNull(assignments[3]);
         assertTrue(assignments[3] instanceof Bind);
 
@@ -387,7 +387,7 @@ public class TestASTOrderByAggregateFlatteningOptimizer
 
 
         // Check 
-        // ORDER BY com.bigdata.rdf.sparql.ast.OrderByExpr(VarNode(e6501b59-cd5b-4fbf-9587-1797b79464b2))[ ascending=false] com.bigdata.rdf.sparql.ast.OrderByExpr(VarNode(x))[ ascending=true] com.bigdata.rdf.sparql.ast.OrderByExpr(VarNode(086758ec-366a-4b33-86da-e958744d6650))[ ascending=true] com.bigdata.rdf.sparql.ast.OrderByExpr(VarNode(y))[ ascending=false]
+        // ORDER BY org.embergraph.rdf.sparql.ast.OrderByExpr(VarNode(e6501b59-cd5b-4fbf-9587-1797b79464b2))[ ascending=false] org.embergraph.rdf.sparql.ast.OrderByExpr(VarNode(x))[ ascending=true] org.embergraph.rdf.sparql.ast.OrderByExpr(VarNode(086758ec-366a-4b33-86da-e958744d6650))[ ascending=true] org.embergraph.rdf.sparql.ast.OrderByExpr(VarNode(y))[ ascending=false]
 
 
         final OrderByNode orderBy = actual.getOrderBy();

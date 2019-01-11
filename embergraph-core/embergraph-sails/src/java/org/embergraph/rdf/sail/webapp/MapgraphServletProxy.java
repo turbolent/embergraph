@@ -40,7 +40,7 @@ import org.embergraph.util.ClassPathUtil;
 
 public class MapgraphServletProxy extends BigdataRDFServlet {
 	
-	private static final String DEFAULT_PROVIDER = "com.blazegraph.gpu.webapp.MapgraphServlet";
+	private static final String DEFAULT_PROVIDER = "org.embergraph.gpu.webapp.MapgraphServlet";
 	
     static private final transient Logger log = Logger.getLogger(MapgraphServletProxy.class);
 

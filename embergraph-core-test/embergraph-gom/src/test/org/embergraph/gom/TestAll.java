@@ -52,19 +52,19 @@ public class TestAll extends TestCase {
         final TestSuite suite = new TestSuite("GOM");
 
         // Embedded GOM test suite.
-        suite.addTest(com.bigdata.gom.LocalGOMTestCase.suite());
+        suite.addTest(org.embergraph.gom.LocalGOMTestCase.suite());
         
         // Remote GOM test suite
-        suite.addTest(com.bigdata.gom.RemoteGOMTestCase.suite());
+        suite.addTest(org.embergraph.gom.RemoteGOMTestCase.suite());
         
         
  
-        suite.addTestSuite(com.bigdata.gom.TestOWLSkin.class);
+        suite.addTestSuite(org.embergraph.gom.TestOWLSkin.class);
 
         // JavaScript GOM test suite.
-        suite.addTestSuite(com.bigdata.gom.TestJavaScriptGOM.class);
+        suite.addTestSuite(org.embergraph.gom.TestJavaScriptGOM.class);
 
-//        suite.addTestSuite(com.bigdata.gom.TestNumericBNodes.class);
+//        suite.addTestSuite(org.embergraph.gom.TestNumericBNodes.class);
         
         return suite;
 

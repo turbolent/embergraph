@@ -84,7 +84,7 @@ public class XsdUnsignedLongBOp extends IVValueExpression<IV>
     }
 
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      */
     public XsdUnsignedLongBOp(final XsdUnsignedLongBOp op) {
         super(op);

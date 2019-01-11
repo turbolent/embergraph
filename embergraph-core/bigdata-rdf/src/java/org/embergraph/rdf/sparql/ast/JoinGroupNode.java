@@ -81,7 +81,7 @@ public class JoinGroupNode extends GraphPatternGroup<IGroupMemberNode> {
     }
     
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      * <p>
      * <strong>Note: There is a nasty potential for a conflict here.  This constructor is part
      * of the deep copy semantics.  The <code>JoinGroupNode(IGroupMemberNode child)</code<

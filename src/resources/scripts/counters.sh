@@ -9,4 +9,4 @@ source `dirname $0`/bigdataenv
 
 java ${JAVA_OPTS} \
 	-cp ${CLASSPATH}\
-    com.bigdata.counters.httpd.CounterSetHTTPDServer $* 
+    org.embergraph.counters.httpd.CounterSetHTTPDServer $*

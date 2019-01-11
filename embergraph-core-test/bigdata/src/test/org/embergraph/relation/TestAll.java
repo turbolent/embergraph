@@ -61,22 +61,22 @@ public class TestAll extends TestCase {
         final TestSuite suite = new TestSuite("relations");
 
         // data declaration layer.
-        suite.addTest(com.bigdata.relation.ddl.TestAll.suite());
+        suite.addTest(org.embergraph.relation.ddl.TestAll.suite());
         
         // test suite for rules, but not rule execution.
-        suite.addTest(com.bigdata.relation.rule.TestAll.suite());
+        suite.addTest(org.embergraph.relation.rule.TestAll.suite());
         
         // test suite for access paths.
-        suite.addTest(com.bigdata.relation.accesspath.TestAll.suite());
+        suite.addTest(org.embergraph.relation.accesspath.TestAll.suite());
 
         // test suite for locating resources.
-        suite.addTest(com.bigdata.relation.locator.TestAll.suite());
+        suite.addTest(org.embergraph.relation.locator.TestAll.suite());
         
         /*
          * Note: The relation impls, access path impls, and rule execution are
          * currently tested in the context of the RDF DB.
          */
-//        suite.addTest(com.bigdata.relation.rdf.TestAll.suite());
+//        suite.addTest(org.embergraph.relation.rdf.TestAll.suite());
         
         return suite;
         

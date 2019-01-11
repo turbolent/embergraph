@@ -1467,7 +1467,7 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
      * @see <a href="http://trac.blazegraph.com/ticket/886" >Provide workaround for
      *      bad reverse DNS setups</a>
      */
-    public static final String HOSTNAME = "com.bigdata.hostname";
+    public static final String HOSTNAME = "org.embergraph.hostname";
 
     /**
      * The name for this host.

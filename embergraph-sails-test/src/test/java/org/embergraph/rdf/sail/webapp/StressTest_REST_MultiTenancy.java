@@ -256,7 +256,7 @@ public class StressTest_REST_MultiTenancy<S extends IIndexManager> extends
             public void run() {
                final String namespace = "n" + namespaceCount.getAndIncrement();
                final Properties properties = new Properties();
-               properties.put("com.bigdata.rdf.sail.namespace", namespace);
+               properties.put("org.embergraph.rdf.sail.namespace", namespace);
                try {
                   log.warn(String.format("Create namespace %s...", namespace));
                   m_mgr.createRepository(namespace, properties);

@@ -737,7 +737,7 @@ public class HALoadBalancerServlet extends ProxyServlet {
      * Create an instance of some type based on the servlet init parameters.
      * <p>
      * Note: The configuration parameter MAY also be specified as <code>
-     * com.bigdata.rdf.sail.webapp.HALoadBalancerServlet.<i>name</i></code>.
+     * org.embergraph.rdf.sail.webapp.HALoadBalancerServlet.<i>name</i></code>.
      * 
      * @param servletConfig
      *            The {@link ServletConfig}.

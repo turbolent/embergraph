@@ -67,7 +67,7 @@ public class TestAll extends TestCase {
         suite.addTestSuite(TestConstant.class);
 
         // test binding set impls.
-        suite.addTest(com.bigdata.bop.bindingSet.TestAll.suite());
+        suite.addTest(org.embergraph.bop.bindingSet.TestAll.suite());
 
         // unit tests for ctor existence and deep copy semantics
         suite.addTestSuite(TestDeepCopy.class);
@@ -76,52 +76,52 @@ public class TestAll extends TestCase {
         suite.addTestSuite(TestBOpUtility.class);
 
         // bop utils.
-        suite.addTest(com.bigdata.bop.util.TestAll.suite());
+        suite.addTest(org.embergraph.bop.util.TestAll.suite());
 
         // constraint operators (EQ, NE, etc).
-        suite.addTest(com.bigdata.bop.constraint.TestAll.suite());
+        suite.addTest(org.embergraph.bop.constraint.TestAll.suite());
 
         // pure binding set operators.
-        suite.addTest(com.bigdata.bop.bset.TestAll.suite());
+        suite.addTest(org.embergraph.bop.bset.TestAll.suite());
 
         // bind(var,expr)
         suite.addTestSuite(TestBind.class);
         
         // index operators.
-        suite.addTest(com.bigdata.bop.ndx.TestAll.suite());
+        suite.addTest(org.embergraph.bop.ndx.TestAll.suite());
 
         // access path filters
-        suite.addTest(com.bigdata.bop.ap.filter.TestAll.suite());
+        suite.addTest(org.embergraph.bop.ap.filter.TestAll.suite());
 
         // access path operators
-        suite.addTest(com.bigdata.bop.ap.TestAll.suite());
+        suite.addTest(org.embergraph.bop.ap.TestAll.suite());
 
         // mutation operators
-        suite.addTest(com.bigdata.bop.mutation.TestAll.suite());
+        suite.addTest(org.embergraph.bop.mutation.TestAll.suite());
 
         // join operators.
-        suite.addTest(com.bigdata.bop.join.TestAll.suite());
+        suite.addTest(org.embergraph.bop.join.TestAll.suite());
 
         // aggregation operators.
-        suite.addTest(com.bigdata.bop.solutions.TestAll.suite());
+        suite.addTest(org.embergraph.bop.solutions.TestAll.suite());
 
         // Unit tests for named solution set references.
         suite.addTestSuite(TestNamedSolutionSetRef.class);
         
         // query engine.
-        suite.addTest(com.bigdata.bop.engine.TestAll.suite());
+        suite.addTest(org.embergraph.bop.engine.TestAll.suite());
 
         // high level query optimization and evaluation.
-        suite.addTest(com.bigdata.bop.controller.TestAll.suite());
+        suite.addTest(org.embergraph.bop.controller.TestAll.suite());
 
         // join graph processing (RTO, etc).
-        suite.addTest(com.bigdata.bop.joinGraph.TestAll.suite());
+        suite.addTest(org.embergraph.bop.joinGraph.TestAll.suite());
 
         /*
          * Note: This is tested later once we have gone through the core unit
          * tests for the services.
          */
-        suite.addTest( com.bigdata.bop.fed.TestAll.suite() );
+        suite.addTest( org.embergraph.bop.fed.TestAll.suite() );
 
         return suite;
         

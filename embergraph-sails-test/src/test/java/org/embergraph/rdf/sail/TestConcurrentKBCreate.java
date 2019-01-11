@@ -66,9 +66,9 @@ import org.embergraph.util.InnerCause;
  * <pre>
  * INFO : 41211 2012-11-06 08:38:41,874 : WARN : 8542 2012-11-06 08:38:41,873      qtp877533177-45 org.eclipse.jetty.util.log.Slf4jLog.warn(Slf4jLog.java:50): /sparql
  * INFO : 41211 2012-11-06 08:38:41,874 : java.lang.RuntimeException: java.lang.RuntimeException: java.lang.RuntimeException: No axioms defined? : LocalTripleStore{timestamp=-1, namespace=kb, container=null, indexManager=org.embergraph.journal.jini.ha.HAJournal@4d092447}
- * INFO : 41211 2012-11-06 08:38:41,874 :    at com.bigdata.rdf.sail.webapp.QueryServlet.doEstCard(QueryServlet.java:1120)
- * INFO : 41211 2012-11-06 08:38:41,874 :    at com.bigdata.rdf.sail.webapp.QueryServlet.doGet(QueryServlet.java:178)
- * INFO : 41211 2012-11-06 08:38:41,874 :    at com.bigdata.rdf.sail.webapp.RESTServlet.doGet(RESTServlet.java:175)
+ * INFO : 41211 2012-11-06 08:38:41,874 :    at org.embergraph.rdf.sail.webapp.QueryServlet.doEstCard(QueryServlet.java:1120)
+ * INFO : 41211 2012-11-06 08:38:41,874 :    at org.embergraph.rdf.sail.webapp.QueryServlet.doGet(QueryServlet.java:178)
+ * INFO : 41211 2012-11-06 08:38:41,874 :    at org.embergraph.rdf.sail.webapp.RESTServlet.doGet(RESTServlet.java:175)
  * INFO : 41211 2012-11-06 08:38:41,874 :    at javax.servlet.http.HttpServlet.service(HttpServlet.java:707)
  * INFO : 41211 2012-11-06 08:38:41,874 :    at javax.servlet.http.HttpServlet.service(HttpServlet.java:820)
  * INFO : 41211 2012-11-06 08:38:41,874 :    at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:534)
@@ -91,14 +91,14 @@ import org.embergraph.util.InnerCause;
  * INFO : 41212 2012-11-06 08:38:41,875 :    at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:451)
  * INFO : 41212 2012-11-06 08:38:41,875 :    at java.lang.Thread.run(Thread.java:680)
  * INFO : 41212 2012-11-06 08:38:41,875 : Caused by: java.lang.RuntimeException: java.lang.RuntimeException: No axioms defined? : LocalTripleStore{timestamp=-1, namespace=kb, container=null, indexManager=org.embergraph.journal.jini.ha.HAJournal@4d092447}
- * INFO : 41212 2012-11-06 08:38:41,875 :    at com.bigdata.rdf.sail.webapp.QueryServlet.doEstCard(QueryServlet.java:1102)
+ * INFO : 41212 2012-11-06 08:38:41,875 :    at org.embergraph.rdf.sail.webapp.QueryServlet.doEstCard(QueryServlet.java:1102)
  * INFO : 41212 2012-11-06 08:38:41,875 :    ... 23 more
  * INFO : 41212 2012-11-06 08:38:41,875 : Caused by: java.lang.RuntimeException: No axioms defined? : LocalTripleStore{timestamp=-1, namespace=kb, container=null, indexManager=org.embergraph.journal.jini.ha.HAJournal@4d092447}
- * INFO : 41212 2012-11-06 08:38:41,875 :    at com.bigdata.rdf.store.AbstractTripleStore.getAxioms(AbstractTripleStore.java:1787)
- * INFO : 41212 2012-11-06 08:38:41,875 :    at com.bigdata.rdf.sail.BigdataSail.<init>(BigdataSail.java:934)
- * INFO : 41212 2012-11-06 08:38:41,875 :    at com.bigdata.rdf.sail.BigdataSail.<init>(BigdataSail.java:891)
- * INFO : 41212 2012-11-06 08:38:41,875 :    at com.bigdata.rdf.sail.webapp.BigdataRDFContext.getQueryConnection(BigdataRDFContext.java:1858)
- * INFO : 41212 2012-11-06 08:38:41,875 :    at com.bigdata.rdf.sail.webapp.QueryServlet.doEstCard(QueryServlet.java:1074)
+ * INFO : 41212 2012-11-06 08:38:41,875 :    at org.embergraph.rdf.store.AbstractTripleStore.getAxioms(AbstractTripleStore.java:1787)
+ * INFO : 41212 2012-11-06 08:38:41,875 :    at org.embergraph.rdf.sail.BigdataSail.<init>(BigdataSail.java:934)
+ * INFO : 41212 2012-11-06 08:38:41,875 :    at org.embergraph.rdf.sail.BigdataSail.<init>(BigdataSail.java:891)
+ * INFO : 41212 2012-11-06 08:38:41,875 :    at org.embergraph.rdf.sail.webapp.BigdataRDFContext.getQueryConnection(BigdataRDFContext.java:1858)
+ * INFO : 41212 2012-11-06 08:38:41,875 :    at org.embergraph.rdf.sail.webapp.QueryServlet.doEstCard(QueryServlet.java:1074)
  * INFO : 41212 2012-11-06 08:38:41,875 :    ... 23 more
  * </pre>
  * 

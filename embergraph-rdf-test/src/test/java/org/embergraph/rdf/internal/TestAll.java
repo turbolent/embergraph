@@ -137,10 +137,10 @@ public class TestAll extends TestCase {
         suite.addTestSuite(TestEncodeDecodeMixedIVs.class);
 
         // Encoding/decoding of individual IV binding sets
-        suite.addTest(com.bigdata.rdf.internal.encoder.TestAll.suite());
+        suite.addTest(org.embergraph.rdf.internal.encoder.TestAll.suite());
 
         // inline URI tests.
-        suite.addTest(com.bigdata.rdf.internal.impl.uri.TestAll.suite());
+        suite.addTest(org.embergraph.rdf.internal.impl.uri.TestAll.suite());
 
         /*
          * Note: This is an old and never finished test suite. All it does is
@@ -153,7 +153,7 @@ public class TestAll extends TestCase {
         suite.addTestSuite(TestXPathFunctions.class);
 
         // geospatial format handling.
-        suite.addTest(com.bigdata.rdf.internal.gis.TestAll.suite());
+        suite.addTest(org.embergraph.rdf.internal.gis.TestAll.suite());
 
         // DTEExtension encoding of packed long integer representing a timestamp.
         suite.addTestSuite(TestEncodeDecodePackedLongIVs.class);

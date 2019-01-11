@@ -619,14 +619,14 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
     private static IExternalAST2BOp initGPUEvaluation() {
     	
 		return ClassPathUtil.classForName(//
-				"com.blazegraph.rdf.gpu.sparql.ast.eval.GPUEvaluation", // preferredClassName,
+				"org.embergraph.rdf.gpu.sparql.ast.eval.GPUEvaluation", // preferredClassName,
 				null, // defaultClass,
 				IExternalAST2BOp.class, // sharedInterface,
 				AST2BOpContext.class.getClassLoader() // classLoader
 		);
 
 //       try {
-//          final Class<?> cls = Class.forName( "com.blazegraph.rdf.gpu.sparql.ast.eval.GPUEvaluation" );
+//          final Class<?> cls = Class.forName( "org.embergraph.rdf.gpu.sparql.ast.eval.GPUEvaluation" );
 //
 //          if (IExternalAST2BOp.class.isAssignableFrom(cls)) {
 //	     if(log.isInfoEnabled()) {

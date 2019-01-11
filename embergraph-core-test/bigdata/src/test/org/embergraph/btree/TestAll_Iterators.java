@@ -70,7 +70,7 @@ public class TestAll_Iterators extends TestCase {
         suite.addTestSuite(TestMutableBTreeCursors.class);
         
         // test stackable tuple filters
-        suite.addTest(com.bigdata.btree.filter.TestAll.suite());
+        suite.addTest(org.embergraph.btree.filter.TestAll.suite());
         
         // test chunked iterators.
         suite.addTestSuite(TestChunkedIterators.class);

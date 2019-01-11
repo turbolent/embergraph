@@ -5,5 +5,5 @@ JETTY_XML="${BASE_DIR}"/../embergraph-war-html/src/main/resources/jetty.xml
 JETTY_RESOURCE_BASE="${BASE_DIR}"/../embergraph-war-html/src/main/webapp/
 
 
-"${BASE_DIR}"/prog.sh -Djetty.resourceBase=$JETTY_RESOURCE_BASE -DjettyXml=$JETTY_XML com.bigdata.rdf.sail.webapp.NanoSparqlServer $*
+"${BASE_DIR}"/prog.sh -Djetty.resourceBase=$JETTY_RESOURCE_BASE -DjettyXml=$JETTY_XML org.embergraph.rdf.sail.webapp.NanoSparqlServer $*
 

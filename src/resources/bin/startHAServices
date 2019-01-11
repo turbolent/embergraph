@@ -83,7 +83,7 @@ export HA_OPTS="\
  -DHA_PORT=${HA_PORT}\
  -DgroupCommit=${GROUP_COMMIT}\
  -DWRITE_CACHE_BUFFER_COUNT=${WRITE_CACHE_BUFFER_COUNT}\
- "-Dcom.bigdata.hostname=${BIGDATA_HOSTNAME}"\
+ "-Dorg.embergraph.hostname=${BIGDATA_HOSTNAME}"\
  "-Djetty.port=${JETTY_PORT}"\
  "-Djetty.threads.min=${JETTY_THREADS_MIN}"\
  "-Djetty.threads.max=${JETTY_THREADS_MAX}"\
@@ -95,13 +95,13 @@ export HA_OPTS="\
  -DGANGLIA_REPORT=${GANGLIA_REPORT}\
  -DGANGLIA_LISTEN=${GANGLIA_LISTEN}\
  -DSYSSTAT_DIR=${SYSSTAT_DIR}\
- -Dcom.bigdata.counters.linux.sysstat.path=${SYSSTAT_DIR}\
- -Dcom.bigdata.rdf.sail.webapp.HALoadBalancerServlet.policy=${LBS_POLICY}\
- -Dcom.bigdata.rdf.sail.webapp.HALoadBalancerServlet.rewriter=${LBS_REWRITER}\
- -Dcom.bigdata.rdf.sail.webapp.lbs.AbstractHostLBSPolicy.hostScoringRule=${LBS_HOST_SCORING_RULE}\
- -Dcom.bigdata.rdf.sail.webapp.lbs.AbstractHostLBSPolicy.localForwardThreshold=${LBS_LOCAL_FORWARD_THRESHOLD}\
- -Dcom.bigdata.rdf.sail.webapp.lbs.AbstractHostLBSPolicy.hostDiscoveryInitialDelay=${LBS_HOST_DISCOVERY_INITIAL_DELAY}\
- -Dcom.bigdata.rdf.sail.webapp.lbs.AbstractHostLBSPolicy.hostDiscoveryDelay=${LBS_HOST_DISCOVERY_DELAY}\
+ -Dorg.embergraph.counters.linux.sysstat.path=${SYSSTAT_DIR}\
+ -Dorg.embergraph.rdf.sail.webapp.HALoadBalancerServlet.policy=${LBS_POLICY}\
+ -Dorg.embergraph.rdf.sail.webapp.HALoadBalancerServlet.rewriter=${LBS_REWRITER}\
+ -Dorg.embergraph.rdf.sail.webapp.lbs.AbstractHostLBSPolicy.hostScoringRule=${LBS_HOST_SCORING_RULE}\
+ -Dorg.embergraph.rdf.sail.webapp.lbs.AbstractHostLBSPolicy.localForwardThreshold=${LBS_LOCAL_FORWARD_THRESHOLD}\
+ -Dorg.embergraph.rdf.sail.webapp.lbs.AbstractHostLBSPolicy.hostDiscoveryInitialDelay=${LBS_HOST_DISCOVERY_INITIAL_DELAY}\
+ -Dorg.embergraph.rdf.sail.webapp.lbs.AbstractHostLBSPolicy.hostDiscoveryDelay=${LBS_HOST_DISCOVERY_DELAY}\
 "
 
 ##

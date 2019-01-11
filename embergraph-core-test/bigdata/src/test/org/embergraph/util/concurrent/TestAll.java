@@ -59,7 +59,7 @@ public class TestAll extends TestCase {
     public static Test suite()
     {
 
-        final TestSuite suite = new TestSuite("com.bigdata.util.concurrent");
+        final TestSuite suite = new TestSuite("org.embergraph.util.concurrent");
 
         suite.addTestSuite( TestLatch.class );
 

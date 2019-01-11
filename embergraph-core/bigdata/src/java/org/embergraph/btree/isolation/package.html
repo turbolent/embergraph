@@ -8,9 +8,9 @@
 
 <p>
 Support for transactional isolation builds on the basic features of the 
-{@link com.bigdata.btree} package, including copy-on-write semantics, per-tuple
+{@link org.embergraph.btree} package, including copy-on-write semantics, per-tuple
 delete markers, and per-tuple revision timestamps, and on the characteristics
-of the {@link com.bigdata.journal.AbstractJournal}, which guarantees that valid
+of the {@link org.embergraph.journal.AbstractJournal}, which guarantees that valid
 data are never overwritten (it is an immortal database aka temporal store aka
 WORM store).  In order to support transactional isolation, the B+Tree MUST be
 provisioned to maintain both per-tuple delete markers and per-tuple revision
@@ -28,9 +28,9 @@ against a historical committed state of the store (the ground state,
 which is typically the last committed state of the store at the time
 that the transaction begins) while writes are isolated (they are not
 visible outside of the transaction). The basic mechanism for isolation
-is an {@link com.bigdata.btree.isolated.IsolatedFusedView} which reads through
+is an {@link org.embergraph.btree.isolated.IsolatedFusedView} which reads through
 to a read-only btree loaded from a historical metadata record while writes
-go into the isolated {@link com.bigdata.btree.BTree} (aka the transaction
+go into the isolated {@link org.embergraph.btree.BTree} (aka the transaction
 write set).  
 </p>
 

@@ -39,7 +39,7 @@ import org.embergraph.service.ndx.pipeline.KVOList;
  * write operation when an {@link IDuplicateRemover} was applied.
  * 
  * @todo this should be more transparent. One way to do that is to get rid of
- *       {@link KVOList#map(com.bigdata.service.ndx.pipeline.KVOList.Op)} and
+ *       {@link KVOList#map(org.embergraph.service.ndx.pipeline.KVOList.Op)} and
  *       {@link KVOList.Op} and provide a TERM2ID index write specific interface
  *       extending KVO. When the term identifier is assigned, we then invoke the
  *       method on that interface to set the term identifier on the original and

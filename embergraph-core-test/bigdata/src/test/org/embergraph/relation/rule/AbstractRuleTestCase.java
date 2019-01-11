@@ -146,7 +146,7 @@ abstract public class AbstractRuleTestCase extends TestCase2 {
         }
 
         /**
-         * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+         * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
          */
         public P(final P op) {
             super(op);

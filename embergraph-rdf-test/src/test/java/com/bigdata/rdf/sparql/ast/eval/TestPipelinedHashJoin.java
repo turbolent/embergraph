@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * Created on Oct 27, 2015
  */
 
-package com.bigdata.rdf.sparql.ast.eval;
+package org.embergraph.rdf.sparql.ast.eval;
 
 import org.embergraph.bop.BOpUtility;
 import org.embergraph.bop.PipelineOp;
@@ -1047,8 +1047,8 @@ public class TestPipelinedHashJoin extends AbstractDataDrivenSPARQLTestCase {
              * The string checking below is a workaround for dealing with the anonymous
              * inner classes, what we have here is something lie
              * 
-             * observedUtilClass.toString() := class com.bigdata.bop.join.JVMPipelinedHashJoinUtility$1
-             * expectedUtilClass.toString() := class com.bigdata.bop.join.JVMPipelinedHashJoinUtility
+             * observedUtilClass.toString() := class org.embergraph.bop.join.JVMPipelinedHashJoinUtility$1
+             * expectedUtilClass.toString() := class org.embergraph.bop.join.JVMPipelinedHashJoinUtility
              */
             if (!observedUtilClass.toString().contains(expectedUtilClass.toString())) {
                 fail("Expecting util factory of type " + expectedUtilClass + ", but used one is " + utilFactory.getClass());

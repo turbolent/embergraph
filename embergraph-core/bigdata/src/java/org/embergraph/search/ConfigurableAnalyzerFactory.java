@@ -69,7 +69,7 @@ import org.apache.lucene.util.Version;
  * stopwords and a constructor with stopwords, then the former is assumed to use a default stop word set.
  * <p>
  * Configuration is by means of the bigdata properties file.
- * All relevant properties start <code>com.bigdata.search.ConfigurableAnalyzerFactory</code> which we 
+ * All relevant properties start <code>org.embergraph.search.ConfigurableAnalyzerFactory</code> which we
  * abbreviate to <code>c.b.s.C</code> in this documentation. 
  * Properties from {@link Options} apply to the factory.
  * <p>
@@ -120,7 +120,7 @@ public class ConfigurableAnalyzerFactory implements IAnalyzerFactory {
     	 * These settings may then be overridden by the settings of the user.
     	 * Specifically the following properties are loaded, prior to loading the
     	 * user's specification (with <code>c.b.s.C</code> expanding to 
-    	 * <code>com.bigdata.search.ConfigurableAnalyzerFactory</code>)
+    	 * <code>org.embergraph.search.ConfigurableAnalyzerFactory</code>)
 <pre>
 c.b.s.C.analyzer._.like=eng
 c.b.s.C.analyzer.por.analyzerClass=org.apache.lucene.analysis.br.BrazilianAnalyzer

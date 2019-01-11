@@ -40,7 +40,7 @@ import org.embergraph.rdf.model.BigdataLiteral;
  * 
  * Currently, up to 32 different URI handlers are supported for a given namespace.
  * 
- * For an example, see {@see com.blazegraph.vocabulary.pubchem.PubChemInlineURIFactory}.
+ * For an example, see {@see org.embergraph.vocabulary.pubchem.PubChemInlineURIFactory}.
  * 
  * @author beebs
  *

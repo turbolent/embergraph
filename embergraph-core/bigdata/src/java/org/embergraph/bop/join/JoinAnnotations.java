@@ -39,7 +39,7 @@ import org.embergraph.bop.joinGraph.rto.JoinGraph;
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public interface JoinAnnotations extends com.bigdata.bop.PipelineOp.Annotations {
+public interface JoinAnnotations extends org.embergraph.bop.PipelineOp.Annotations {
 
 //    /**
 //     * Boolean annotation is <code>true</code> iff the solutions will be

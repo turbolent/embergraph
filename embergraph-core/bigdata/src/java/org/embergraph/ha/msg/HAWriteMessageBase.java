@@ -79,7 +79,7 @@ public class HAWriteMessageBase implements Externalizable, IHAWriteMessageBase {
 	public HAWriteMessageBase() {}
 
 	/* (non-Javadoc)
-     * @see com.bigdata.ha.pipeline.IHAWriteMessageBase#getSize()
+     * @see org.embergraph.ha.pipeline.IHAWriteMessageBase#getSize()
      */
 	@Override
     public int getSize() {
@@ -89,7 +89,7 @@ public class HAWriteMessageBase implements Externalizable, IHAWriteMessageBase {
 	}
 
 	/* (non-Javadoc)
-     * @see com.bigdata.ha.pipeline.IHAWriteMessageBase#getChk()
+     * @see org.embergraph.ha.pipeline.IHAWriteMessageBase#getChk()
      */
 	@Override
     public int getChk() {

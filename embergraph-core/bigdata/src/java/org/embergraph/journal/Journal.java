@@ -132,7 +132,7 @@ public class Journal extends AbstractJournal implements IConcurrencyManager,
      * @see http://sourceforge.net/apps/trac/bigdata/ticket/443 (Logger for
      *      RWStore transaction service and recycler)
      */
-    private static final Logger txLog = Logger.getLogger("com.bigdata.txLog");
+    private static final Logger txLog = Logger.getLogger("org.embergraph.txLog");
 
     /**
      * Object used to manage local transactions. 

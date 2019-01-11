@@ -1050,10 +1050,10 @@ public class TestHA3QuorumSemantics extends AbstractQuorumTestCase {
                      *     at junit.framework.Assert.assertEquals(Assert.java:64)
                      *     at junit.framework.Assert.assertEquals(Assert.java:201)
                      *     at junit.framework.Assert.assertEquals(Assert.java:207)
-                     *     at com.bigdata.quorum.TestHA3QuorumSemantics$19.run(TestHA3QuorumSemantics.java:1034)
-                     *     at com.bigdata.quorum.AbstractQuorumTestCase.assertCondition(AbstractQuorumTestCase.java:184)
-                     *     at com.bigdata.quorum.AbstractQuorumTestCase.assertCondition(AbstractQuorumTestCase.java:225)
-                     *     at com.bigdata.quorum.TestHA3QuorumSemantics.test_serviceJoin3_simple(TestHA3QuorumSemantics.java:1031)
+                     *     at org.embergraph.quorum.TestHA3QuorumSemantics$19.run(TestHA3QuorumSemantics.java:1034)
+                     *     at org.embergraph.quorum.AbstractQuorumTestCase.assertCondition(AbstractQuorumTestCase.java:184)
+                     *     at org.embergraph.quorum.AbstractQuorumTestCase.assertCondition(AbstractQuorumTestCase.java:225)
+                     *     at org.embergraph.quorum.TestHA3QuorumSemantics.test_serviceJoin3_simple(TestHA3QuorumSemantics.java:1031)
                      * </pre>
                      */
 
@@ -1630,10 +1630,10 @@ public class TestHA3QuorumSemantics extends AbstractQuorumTestCase {
                      *     at junit.framework.Assert.assertEquals(Assert.java:64)
                      *     at junit.framework.Assert.assertEquals(Assert.java:201)
                      *     at junit.framework.Assert.assertEquals(Assert.java:207)
-                     *     at com.bigdata.quorum.TestHA3QuorumSemantics$19.run(TestHA3QuorumSemantics.java:1034)
-                     *     at com.bigdata.quorum.AbstractQuorumTestCase.assertCondition(AbstractQuorumTestCase.java:184)
-                     *     at com.bigdata.quorum.AbstractQuorumTestCase.assertCondition(AbstractQuorumTestCase.java:225)
-                     *     at com.bigdata.quorum.TestHA3QuorumSemantics.test_serviceJoin3_simple(TestHA3QuorumSemantics.java:1031)
+                     *     at org.embergraph.quorum.TestHA3QuorumSemantics$19.run(TestHA3QuorumSemantics.java:1034)
+                     *     at org.embergraph.quorum.AbstractQuorumTestCase.assertCondition(AbstractQuorumTestCase.java:184)
+                     *     at org.embergraph.quorum.AbstractQuorumTestCase.assertCondition(AbstractQuorumTestCase.java:225)
+                     *     at org.embergraph.quorum.TestHA3QuorumSemantics.test_serviceJoin3_simple(TestHA3QuorumSemantics.java:1031)
                      * </pre>
                      */
 

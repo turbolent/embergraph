@@ -34,12 +34,12 @@ public class QueryEngineMetricsCollector implements IGangliaMetricsCollector {
 //    static {
 //
 //        // bigdata10.bigdata.com / service /
-//        // com.bigdata.service.IMetadataService /
+//        // org.embergraph.service.IMetadataService /
 //        // dabb5034-9db0-4218-a6dd-f9032fc05ce6 / Query Engine /
 //        // blockedWorkQueueCount
 //
 //        filter = Pattern
-//                .compile("^.*/service/com.bigdata.service.IDataService/.*/Query Engine/.*$");
+//                .compile("^.*/service/org.embergraph.service.IDataService/.*/Query Engine/.*$");
 //        
 //    }
 

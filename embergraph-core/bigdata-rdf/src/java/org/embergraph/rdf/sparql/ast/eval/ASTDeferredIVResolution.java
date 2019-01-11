@@ -910,7 +910,7 @@ public class ASTDeferredIVResolution {
             final AbstractGraphDataUpdate update = ((AbstractGraphDataUpdate)bop);
             // @see https://jira.blazegraph.com/browse/BLZG-1176
             // Check for using context value in DATA block with triple store not supporting quads
-            // Moved from com.bigdata.rdf.sail.sparql.UpdateExprBuilder.doUnparsedQuadsDataBlock(ASTUpdate, Object, boolean, boolean)
+            // Moved from org.embergraph.rdf.sail.sparql.UpdateExprBuilder.doUnparsedQuadsDataBlock(ASTUpdate, Object, boolean, boolean)
             if (!store.isQuads()) {
                 for (final BigdataStatement sp: update.getData()) {
                     if (sp.getContext()!=null) {
@@ -1030,7 +1030,7 @@ public class ASTDeferredIVResolution {
             final StatementPatternNode sp = (StatementPatternNode)bop;
             // @see https://jira.blazegraph.com/browse/BLZG-1176
             // Check for using WITH keyword with triple store not supporting quads
-            // Moved from com.bigdata.rdf.sail.sparql.UpdateExprBuilder.visit(ASTModify, Object)
+            // Moved from org.embergraph.rdf.sail.sparql.UpdateExprBuilder.visit(ASTModify, Object)
             // Check for using GRAPH keyword with triple store not supporting quads
             // Moved from GroupGraphPatternBuilder.visit(final ASTGraphGraphPattern node, Object data)
             // At this point it is not possible to distinguish using WITH keyword from GRAPH construct,
@@ -1208,7 +1208,7 @@ public class ASTDeferredIVResolution {
                          * the issue only shows up with embedded SPARQL query
                          * use.
                          * 
-                         * @see com.bigdata.rdf.sail.TestBigdataValueReplacer.test_dropUnusedBindings()
+                         * @see org.embergraph.rdf.sail.TestBigdataValueReplacer.test_dropUnusedBindings()
                          * @see TestRollbacks
                          */
                         final String label = ((Literal) v).getLabel();

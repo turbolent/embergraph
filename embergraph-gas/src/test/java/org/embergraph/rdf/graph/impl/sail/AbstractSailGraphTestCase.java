@@ -76,8 +76,8 @@ public class AbstractSailGraphTestCase extends AbstractGraphTestCase {
         /**
          * The data file.
          */
-        static private final String smallGraph1 = "embergraph-gas/src/test/resources/com/bigdata/rdf/graph/data/smallGraph.ttl";
-        static private final String smallGraph2 = "src/test/resources/com/bigdata/rdf/graph/data/smallGraph.ttl";
+        static private final String smallGraph1 = "embergraph-gas/src/test/resources/org/embergraph/rdf/graph/data/smallGraph.ttl";
+        static private final String smallGraph2 = "src/test/resources/org/embergraph/rdf/graph/data/smallGraph.ttl";
         
         private final URI rdfType, foafKnows, foafPerson, mike, bryan, martyn, dc;
 
@@ -202,8 +202,8 @@ public class AbstractSailGraphTestCase extends AbstractGraphTestCase {
         /**
          * The data file.
          */
-        static private final String ssspGraph1 = "src/test/resources/com/bigdata/rdf/graph/data/ssspGraph.ttlx";
-        static private final String ssspGraph2 = "src/test/resources/com/bigdata/rdf/graph/data/ssspGraph.ttlx";
+        static private final String ssspGraph1 = "src/test/resources/org/embergraph/rdf/graph/data/ssspGraph.ttlx";
+        static private final String ssspGraph2 = "src/test/resources/org/embergraph/rdf/graph/data/ssspGraph.ttlx";
         
         public final URI link, v1, v2, v3, v4, v5;
 

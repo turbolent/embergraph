@@ -93,12 +93,12 @@ import org.embergraph.rdf.sparql.ast.service.ServiceNode;
  * ...
  * {
  *    # query hint binds for this join group.
- *    hint:Group hint:com.bigdata.bop.PipelineOp.maxParallel 10
+ *    hint:Group hint:org.embergraph.bop.PipelineOp.maxParallel 10
  *    
  *    ...
  *    
  *    # query hint binds for the next basic graph pattern in this join group.
- *    hint:Prior hint:com.bigdata.relation.accesspath.IBuffer.chunkCapacity 100
+ *    hint:Prior hint:org.embergraph.relation.accesspath.IBuffer.chunkCapacity 100
  *    
  *    ?x rdf:type foaf:Person .
  * }
@@ -504,7 +504,7 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
      * We also have non-public, fully qualified, query hints, e.g.,
      * 
      * <pre>
-     * hint:com.bigdata.relation.accesspath.IBuffer.chunkCapacity
+     * hint:org.embergraph.relation.accesspath.IBuffer.chunkCapacity
      * </pre>
      * 
      * In both cases, an {@link IQueryHint} is registered with the

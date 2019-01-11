@@ -21,5 +21,5 @@ java\
  -Djava.util.logging.config.file=${LOGGING_CONFIG}\
  ${debug}\
  ${profilerAgent} ${profilerAgentOptions}\
- com.bigdata.journal.jini.ha.HAJournalServer\
+ org.embergraph.journal.jini.ha.HAJournalServer\
  ${HAJOURNAL_CONFIG}

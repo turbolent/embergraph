@@ -17,7 +17,7 @@ which partition the key space into URIs, blank nodes, literals, and statement
 identifiers, a bit flag indicating whether the value is inline, followed by either
 pad bits and the term identifier or a code which identifies the data type of the
 inline value and minimum length decodable representation of the data type value
-formed using {@link com.bigdata.btree.keys.IKeyBuilder}.  This design clusters
+formed using {@link org.embergraph.btree.keys.IKeyBuilder}.  This design clusters
 different kinds of RDF values within different regions of the ID2TERM index.
 </p><p>
 Inline values have a significant performance advantage since the RDF Value object

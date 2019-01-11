@@ -30,7 +30,7 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 public class NonEnglishExamples {
-	private static final String BUNDLE_NAME = "com.bigdata.search.examples"; //$NON-NLS-1$
+	private static final String BUNDLE_NAME = "org.embergraph.search.examples"; //$NON-NLS-1$
 
 	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
 

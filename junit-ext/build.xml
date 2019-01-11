@@ -44,7 +44,7 @@
         <formatter type="xml"/>
         <!-- Individual test suite to run when -DtestName is set -->
         <!-- to the fully-qualified name of the test suite       -->
-        <!-- ant -DtestName=com.bigdata.cache.TestAll junit      -->
+        <!-- ant -DtestName=org.embergraph.cache.TestAll junit      -->
         <test name="${testName}" todir="${test.results.dir}" if="testName"/>
         <!-- Test suites to run when -DtestName is not set -->
         <test name="junit.TestAll" todir="${test.results.dir}" unless="testName" />

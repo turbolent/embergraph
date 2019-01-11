@@ -73,7 +73,7 @@ public class StandaloneNanoSparqlServer extends NanoSparqlServer {
         
         String portStr = System.getProperty(
         		SystemProperties.JETTY_PORT ,
-        		Integer.toString(Config.BLAZEGRAPH_HTTP_PORT)
+        		Integer.toString(Config.HTTP_PORT)
         		);
         
         port = Integer.parseInt(portStr);
@@ -151,7 +151,7 @@ public class StandaloneNanoSparqlServer extends NanoSparqlServer {
 
         System.out.println("\n\nWelcome to the Blazegraph(tm) Database.\n");
         //BLZG-1812:  Updated for correction of port override.
-        System.out.println("Go to http://" + getHost() + ":" + port + "/" + Config.BLAZEGRAPH_PATH + "/ to get started.");
+        System.out.println("Go to http://" + getHost() + ":" + port + "/" + Config.PATH + "/ to get started.");
         
         // Wait for the service to terminate.
         server.join();

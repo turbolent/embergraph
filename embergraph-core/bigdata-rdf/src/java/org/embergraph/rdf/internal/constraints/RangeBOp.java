@@ -105,7 +105,7 @@ final public class RangeBOp extends ModifiableBOpBase { // implements IVariable<
     }
 
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      */
     public RangeBOp(final RangeBOp op) {
         super(op);

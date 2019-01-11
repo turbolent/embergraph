@@ -117,7 +117,7 @@ public class StatementWriter implements Callable<Long>{
             
         } else {
 
-            n = com.bigdata.rdf.changesets.StatementWriter.addStatements(
+            n = org.embergraph.rdf.changesets.StatementWriter.addStatements(
                     database, 
                     statementStore, 
                     copyOnly, 

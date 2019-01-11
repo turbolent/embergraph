@@ -72,14 +72,14 @@ public class NamedSolutionSetRef implements INamedSolutionSetRef {
 	 * <dl>
 	 * <dt>new NamedSolutionSetRef(queryId, namedSet, joinVars);</dt>
 	 * <dd>This form is used to refer to an
-	 * {@link com.bigdata.bop.IQueryAttributes}. When queryId is
+	 * {@link org.embergraph.bop.IQueryAttributes}. When queryId is
 	 * <code>null</code>, the code will look at the
-	 * {@link com.bigdata.bop.IQueryAttributes} for the current running query
+	 * {@link org.embergraph.bop.IQueryAttributes} for the current running query
 	 * (this form is the new usage and makes it possible to scope an attribute
 	 * to an instance of a query when the same query plan is executed more than
 	 * once, as it is for the sub-queries issued by the property path operator).
 	 * Otherwise it will resolve the identified query and use its
-	 * {@link com.bigdata.bop.IQueryAttributes} (this 2nd form is the historical
+	 * {@link org.embergraph.bop.IQueryAttributes} (this 2nd form is the historical
 	 * usage and makes it possible to reference an attribute on a parent query).
 	 * </dd>
 	 * <dt>NamedSolutionSetRef(namespace, timestamp, localName, joinVars);</dt>

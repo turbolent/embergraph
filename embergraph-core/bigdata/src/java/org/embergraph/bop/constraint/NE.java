@@ -63,7 +63,7 @@ public class NE extends BOpBase implements BooleanValueExpression {
     }
 
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      */
     public NE(final NE op) {
         super(op);

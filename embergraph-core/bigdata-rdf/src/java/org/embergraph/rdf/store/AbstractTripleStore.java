@@ -305,7 +305,7 @@ abstract public class AbstractTripleStore extends
     /**
      * The {@link Axioms} class.
      * 
-     * @see com.bigdata.rdf.store.AbstractTripleStore.Options#AXIOMS_CLASS
+     * @see org.embergraph.rdf.store.AbstractTripleStore.Options#AXIOMS_CLASS
      */
     final private Class<? extends BaseAxioms> axiomClass;
     
@@ -914,7 +914,7 @@ abstract public class AbstractTripleStore extends
          * <li>{@link AbstractTripleStore.Options#STATEMENT_IDENTIFIERS} 
          *          = <code>false</code></li>
          * <li>{@link AbstractTripleStore.Options#AXIOMS_CLASS} 
-         *          = <code>com.bigdata.rdf.store.AbstractTripleStore.NoAxioms</code></li>
+         *          = <code>org.embergraph.rdf.store.AbstractTripleStore.NoAxioms</code></li>
          * </ul> 
          */
         String QUADS_MODE = AbstractTripleStore.class.getName() + ".quadsMode";
@@ -2098,7 +2098,7 @@ abstract public class AbstractTripleStore extends
      *             if there is no lexicon.
      * 
      * @see Options#LEXICON
-     * @see com.bigdata.rdf.store.AbstractTripleStore.Options#AXIOMS_CLASS
+     * @see org.embergraph.rdf.store.AbstractTripleStore.Options#AXIOMS_CLASS
      */
     final public Axioms getAxioms() {
 
@@ -4113,7 +4113,7 @@ abstract public class AbstractTripleStore extends
                     
                 } else {
                     
-                    return com.bigdata.rdf.changesets.StatementWriter.addStatements(
+                    return org.embergraph.rdf.changesets.StatementWriter.addStatements(
                                     dst, 
                                     dst, 
                                     true/* copyOnly */, 
@@ -4591,7 +4591,7 @@ abstract public class AbstractTripleStore extends
 
         // no axioms.
         properties.setProperty(
-                com.bigdata.rdf.store.AbstractTripleStore.Options.AXIOMS_CLASS,
+                org.embergraph.rdf.store.AbstractTripleStore.Options.AXIOMS_CLASS,
                 NoAxioms.class.getName());
 
         final TempTripleStore tmp = new TempTripleStore(getIndexManager()

@@ -132,8 +132,8 @@ public class TestCanonicalHuffmanRabaCoder extends AbstractRabaCoderTestCase {
      * java.lang.ArrayIndexOutOfBoundsException: -2
      *     at it.unimi.dsi.compression.CanonicalFast64CodeWordDecoder.&lt;init&gt;(CanonicalFast64CodeWordDecoder.java:62)
      *     at it.unimi.dsi.compression.HuffmanCodec.&lt;init&gt;(HuffmanCodec.java:107)
-     *     at com.bigdata.btree.raba.codec.TestCanonicalHuffmanRabaCoder.doRoundTripTest(TestCanonicalHuffmanRabaCoder.java:166)
-     *     at com.bigdata.btree.raba.codec.TestCanonicalHuffmanRabaCoder.test_huffmanCodec_noSymbols(TestCanonicalHuffmanRabaCoder.java:121)
+     *     at org.embergraph.btree.raba.codec.TestCanonicalHuffmanRabaCoder.doRoundTripTest(TestCanonicalHuffmanRabaCoder.java:166)
+     *     at org.embergraph.btree.raba.codec.TestCanonicalHuffmanRabaCoder.test_huffmanCodec_noSymbols(TestCanonicalHuffmanRabaCoder.java:121)
      * </pre>
      */
     public void test_huffmanCodec_noSymbols() {
@@ -152,8 +152,8 @@ public class TestCanonicalHuffmanRabaCoder extends AbstractRabaCoderTestCase {
      * java.lang.ArrayIndexOutOfBoundsException: -1
      *     at it.unimi.dsi.compression.CanonicalFast64CodeWordDecoder.&lt;init&gt;(CanonicalFast64CodeWordDecoder.java:89)
      *     at it.unimi.dsi.compression.HuffmanCodec.&lt;init&gt;(HuffmanCodec.java:107)
-     *     at com.bigdata.btree.raba.codec.TestCanonicalHuffmanRabaCoder.doRoundTripTest(TestCanonicalHuffmanRabaCoder.java:166)
-     *     at com.bigdata.btree.raba.codec.TestCanonicalHuffmanRabaCoder.test_huffmanCodec_oneSymbols(TestCanonicalHuffmanRabaCoder.java:132)
+     *     at org.embergraph.btree.raba.codec.TestCanonicalHuffmanRabaCoder.doRoundTripTest(TestCanonicalHuffmanRabaCoder.java:166)
+     *     at org.embergraph.btree.raba.codec.TestCanonicalHuffmanRabaCoder.test_huffmanCodec_oneSymbols(TestCanonicalHuffmanRabaCoder.java:132)
      * </pre>
      */
     public void test_huffmanCodec_oneSymbols() {
@@ -623,7 +623,7 @@ public class TestCanonicalHuffmanRabaCoder extends AbstractRabaCoderTestCase {
              * <pre>
              * java.lang.IllegalArgumentException: n must be positive
              *     at java.util.Random.nextInt(Random.java:250)
-             *     at com.bigdata.btree.raba.codec.TestCanonicalHuffmanRabaCoder.test_stress_InputBitStream_compatible(TestCanonicalHuffmanRabaCoder.java:618)             *
+             *     at org.embergraph.btree.raba.codec.TestCanonicalHuffmanRabaCoder.test_stress_InputBitStream_compatible(TestCanonicalHuffmanRabaCoder.java:618)             *
              * </pre>
              */
             final int sliceBitOff = r.nextInt(Math.max(bitlen - 32, 1));

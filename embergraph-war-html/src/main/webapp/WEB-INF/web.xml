@@ -15,7 +15,7 @@
    of the database file on which it will persist your data.
 
    Note: You MAY override this parameter using
-   "-Dcom.bigdata.rdf.sail.webapp.ConfigParams.propertyFile=FILE"
+   "-Dorg.embergraph.rdf.sail.webapp.ConfigParams.propertyFile=FILE"
    when starting the servlet container.
    </description>
    <!-- Note: This path is relative to the directory in which you start -->
@@ -78,10 +78,10 @@
   <context-param>
    <description>The name of the class to use for the Blueprints Servlet instance</description>
    <param-name>blueprintsServletProvider</param-name>
-   <param-value>com.bigdata.blueprints.webapp.BlueprintsServlet</param-value>
+   <param-value>org.embergraph.blueprints.webapp.BlueprintsServlet</param-value>
   </context-param>
   <listener>
-   <listener-class>com.bigdata.rdf.sail.webapp.BigdataRDFServletContextListener</listener-class>
+   <listener-class>org.embergraph.rdf.sail.webapp.BigdataRDFServletContextListener</listener-class>
   </listener>
   <servlet>
    <servlet-name>REST API</servlet-name>
@@ -89,7 +89,7 @@
    <description>The REST API, including a SPARQL end point, as described at
    https://wiki.blazegraph.com/wiki/index.php/NanoSparqlServer
    </description>
-   <servlet-class>com.bigdata.rdf.sail.webapp.RESTServlet</servlet-class>
+   <servlet-class>org.embergraph.rdf.sail.webapp.RESTServlet</servlet-class>
    <load-on-startup>0</load-on-startup>
    <async-supported>true</async-supported>
   </servlet>
@@ -99,7 +99,7 @@
    <description>The REST API for managing multiple KBs in a single Journal
    or Federation.
    </description>
-   <servlet-class>com.bigdata.rdf.sail.webapp.MultiTenancyServlet</servlet-class>
+   <servlet-class>org.embergraph.rdf.sail.webapp.MultiTenancyServlet</servlet-class>
    <async-supported>true</async-supported>
   </servlet>
   <servlet>
@@ -107,14 +107,14 @@
    <display-name>DataLoader Servlet</display-name>
    <description>Servlet providing DataLoader functionality for bulk loading into
    a namespace.</description>
-   <servlet-class>com.bigdata.rdf.sail.webapp.DataLoaderServlet</servlet-class>
+   <servlet-class>org.embergraph.rdf.sail.webapp.DataLoaderServlet</servlet-class>
    <async-supported>true</async-supported>
   </servlet>
   <servlet>
    <servlet-name>Backup</servlet-name>
    <display-name>Backup Servlet</display-name>
    <description>Servlet providing a REST API for creating online backups.</description>
-   <servlet-class>com.bigdata.rdf.sail.webapp.BackupServlet</servlet-class>
+   <servlet-class>org.embergraph.rdf.sail.webapp.BackupServlet</servlet-class>
    <async-supported>true</async-supported>
   </servlet>
   <servlet>
@@ -122,21 +122,21 @@
    <display-name>Transaction Management API</display-name>
    <description>The REST API for managing transactions for a Journal.
    </description>
-   <servlet-class>com.bigdata.rdf.sail.webapp.TxServlet</servlet-class>
+   <servlet-class>org.embergraph.rdf.sail.webapp.TxServlet</servlet-class>
    <async-supported>true</async-supported>
   </servlet>
   <servlet>
    <servlet-name>Status</servlet-name>
    <display-name>Status</display-name>
    <description>A status page.</description>
-   <servlet-class>com.bigdata.rdf.sail.webapp.StatusServlet</servlet-class>
+   <servlet-class>org.embergraph.rdf.sail.webapp.StatusServlet</servlet-class>
    <async-supported>true</async-supported>
   </servlet>
   <servlet>
    <servlet-name>Counters</servlet-name>
    <display-name>Performance counters</display-name>
    <description>Performance counters.</description>
-   <servlet-class>com.bigdata.rdf.sail.webapp.CountersServlet</servlet-class>
+   <servlet-class>org.embergraph.rdf.sail.webapp.CountersServlet</servlet-class>
    <async-supported>true</async-supported>
   </servlet>
   <!-- Note: The HALoadBalancerServlet is deployed from override-web.xml -->

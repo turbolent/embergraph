@@ -50,7 +50,7 @@ import org.embergraph.rdf.sail.webapp.client.RemoteRepository;
 public class TestDataLoaderServlet<S extends IIndexManager> extends
 		AbstractTestNanoSparqlClient<S> {
 
-	final static String BASE = "com/bigdata/rdf/sail/webapp/";
+	final static String BASE = "org/embergraph/rdf/sail/webapp/";
 
 	public TestDataLoaderServlet() {
 

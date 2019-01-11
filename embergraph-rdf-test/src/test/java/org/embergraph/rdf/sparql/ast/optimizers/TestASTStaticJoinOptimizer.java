@@ -27,8 +27,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.optimizers;
 
-import static com.bigdata.rdf.sparql.ast.optimizers.AbstractOptimizerTestCase.HelperFlag.DISTINCT;
-import static com.bigdata.rdf.sparql.ast.optimizers.AbstractOptimizerTestCase.HelperFlag.OPTIONAL;
+import static org.embergraph.rdf.sparql.ast.optimizers.AbstractOptimizerTestCase.HelperFlag.DISTINCT;
+import static org.embergraph.rdf.sparql.ast.optimizers.AbstractOptimizerTestCase.HelperFlag.OPTIONAL;
 
 import org.openrdf.model.impl.LiteralImpl;
 import org.openrdf.model.impl.URIImpl;
@@ -1508,7 +1508,7 @@ public class TestASTStaticJoinOptimizer extends AbstractOptimizerTestCase
      *     StatementPatternNode(VarNode(review), ConstantNode(#reviewFor), VarNode(product)) [2.8m]
      *     StatementPatternNode(VarNode(review), ConstantNode(#reviewer), VarNode(reviewer)) [2.8m]
      *     StatementPatternNode(VarNode(reviewer), ConstantNode(#country), ConstantNode(#US)) [61k]
-     *     hint:Prior hint:com.bigdata.rdf.sparql.ast.optimizers.ASTStaticJoinOptimizer.optimistic "false" .
+     *     hint:Prior hint:org.embergraph.rdf.sparql.ast.optimizers.ASTStaticJoinOptimizer.optimistic "false" .
      *   }
      * </pre>
      *

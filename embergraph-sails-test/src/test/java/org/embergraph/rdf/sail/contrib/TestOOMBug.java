@@ -39,13 +39,13 @@ import org.embergraph.rdf.sail.ProxyBigdataSailTestCase;
  * <p>
  * This test case will delegate to an underlying backing store. You can specify
  * this store via a JVM property as follows:
- * <code>-DtestClass=com.bigdata.rdf.sail.TestBigdataSailWithQuads</code>
+ * <code>-DtestClass=org.embergraph.rdf.sail.TestBigdataSailWithQuads</code>
  * <p>
  * There are three possible configurations for the testClass:
  * <ul>
- * <li>com.bigdata.rdf.sail.TestBigdataSailWithQuads (quads mode)</li>
- * <li>com.bigdata.rdf.sail.TestBigdataSailWithoutSids (triples mode)</li>
- * <li>com.bigdata.rdf.sail.TestBigdataSailWithSids (SIDs mode)</li>
+ * <li>org.embergraph.rdf.sail.TestBigdataSailWithQuads (quads mode)</li>
+ * <li>org.embergraph.rdf.sail.TestBigdataSailWithoutSids (triples mode)</li>
+ * <li>org.embergraph.rdf.sail.TestBigdataSailWithSids (SIDs mode)</li>
  * </ul>
  * <p>
  * The default for triples and SIDs mode is for inference with truth maintenance
@@ -80,16 +80,16 @@ public class TestOOMBug extends ProxyBigdataSailTestCase {
 		/*
 		 * This one is the culprit.
 		 */
-		sb.append("com.bigdata.btree.BTree.branchingFactor=4196").append("\n");
+		sb.append("org.embergraph.btree.BTree.branchingFactor=4196").append("\n");
 		
 //		sb.append("org.embergraph.journal.AbstractJournal.bufferMode=DiskRW").append("\n");
-//		sb.append("com.bigdata.btree.writeRetentionQueue.capacity=8000").append("\n");
-//		sb.append("com.bigdata.LRUNexus.enabled=false").append("\n");
-//		sb.append("com.bigdata.io.DirectBufferPool.bufferCapacity=10485760").append("\n");
-//		sb.append("com.bigdata.rwstore.RWStore.allocationSizes=1, 2, 3, 5, 8, 12, 16, 32, 48, 64, 128, 192, 320, 512, 832, 1344, 2176, 3520").append("\n");
+//		sb.append("org.embergraph.btree.writeRetentionQueue.capacity=8000").append("\n");
+//		sb.append("org.embergraph.LRUNexus.enabled=false").append("\n");
+//		sb.append("org.embergraph.io.DirectBufferPool.bufferCapacity=10485760").append("\n");
+//		sb.append("org.embergraph.rwstore.RWStore.allocationSizes=1, 2, 3, 5, 8, 12, 16, 32, 48, 64, 128, 192, 320, 512, 832, 1344, 2176, 3520").append("\n");
 //		sb.append("org.embergraph.journal.AbstractJournal.initialExtent=209715200").append("\n");
 //		sb.append("org.embergraph.journal.AbstractJournal.maximumExtent=209715200").append("\n");
-//		sb.append("com.bigdata.rdf.sail.queryTimeExpander=false").append("\n");
+//		sb.append("org.embergraph.rdf.sail.queryTimeExpander=false").append("\n");
 		
 		try {
 			props.load(new StringReader(sb.toString()));

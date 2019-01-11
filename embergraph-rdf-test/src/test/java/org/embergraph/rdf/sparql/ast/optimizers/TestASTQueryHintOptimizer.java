@@ -114,7 +114,7 @@ public class TestASTQueryHintOptimizer extends
      *             OPTIONAL {
      *                 ?_var10 p2:votedBy ?_var3. 
      *                 ?_var10 rdfs:label ?_var2.
-     *                 hint:com.bigdata.relation.accesspath.IBuffer.chunkCapacity "200".
+     *                 hint:org.embergraph.relation.accesspath.IBuffer.chunkCapacity "200".
      *             }
      *         }
      *         GROUP BY ?_var2 ?_var3
@@ -361,7 +361,7 @@ public class TestASTQueryHintOptimizer extends
      *     ?_var10 a <http://www.rdfabout.com/rdf/schema/vote/Option>. # 315k, 300ms for AP scan.
      *     ?_var10 <http://www.rdfabout.com/rdf/schema/vote/votedBy> ?_var3 . #2M, 17623ms for AP scan.
      *     hint:Prior hint:hashJoin "true" . # use a hash join.
-     *     hint:Prior hint:com.bigdata.bop.IPredicate.keyOrder "PCSO" . # use a specific index (default is POCS)
+     *     hint:Prior hint:org.embergraph.bop.IPredicate.keyOrder "PCSO" . # use a specific index (default is POCS)
      *   }
      * }
      * </pre>

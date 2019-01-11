@@ -88,7 +88,7 @@ fi
 #
 java ${JAVA_OPTS} -Xmx400m \
 	 -cp ${CLASSPATH} \
-	 com.bigdata.jini.start.ServicesManagerServer \
+	 org.embergraph.jini.start.ServicesManagerServer \
 	 ${BIGDATA_CONFIG} ${BIGDATA_CONFIG_OVERRIDES} &
 
 pid=$!

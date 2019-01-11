@@ -43,7 +43,7 @@ import org.embergraph.quorum.AsynchronousQuorumCloseException;
  */
 public class HAStatusServletUtilProxy {
 	
-	private static final String DEFAULT_PROVIDER = "com.bigdata.rdf.sail.webapp.HAStatusServletUtil";
+	private static final String DEFAULT_PROVIDER = "org.embergraph.rdf.sail.webapp.HAStatusServletUtil";
 	
 	private static final String WITHOUT_JINI_MSG = "Running without the bigdata-jini package.  See BLZG-1370.";
 	

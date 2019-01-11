@@ -482,7 +482,7 @@ abstract public class StoreManager extends ResourceEvents implements
      * 
      * @see #purgeOldResources()
      * @see IndexManager#buildIndexSegment(String,
-     *      com.bigdata.btree.ILocalBTreeView, boolean, long, byte[], byte[],
+     *      org.embergraph.btree.ILocalBTreeView, boolean, long, byte[], byte[],
      *      Event)
      */
     final private Set<UUID> retentionSet = new HashSet<UUID>();
@@ -3640,7 +3640,7 @@ abstract public class StoreManager extends ResourceEvents implements
      *            NOT be deleted.
      * 
      * @see IndexManager#buildIndexSegment(String,
-     *      com.bigdata.btree.ILocalBTreeView, boolean, long, byte[], byte[],
+     *      org.embergraph.btree.ILocalBTreeView, boolean, long, byte[], byte[],
      *      Event)
      */
     private void deleteUnusedResources(final long commitTimeToPreserve,

@@ -216,8 +216,8 @@ public class TestASTAttachJoinFiltersOptimizer extends AbstractASTEvaluationTest
          *       JoinGroupNode {
          *         StatementPatternNode(VarNode(s), VarNode(p), VarNode(o)) [scope=DEFAULT_CONTEXTS]
          *     }
-         *     FILTER( FunctionNode(VarNode(s),VarNode(s))[FunctionNode.scalarVals=null, FunctionNode.functionURI=http://www.w3.org/2005/xpath-functions#not-equal-to, valueExpr=com.bigdata.rdf.internal.constraints.CompareBOp(s,TermId(0U)[eg:b])[ CompareBOp.op=NE]] )
-         *     FILTER( FunctionNode(VarNode(s),VarNode(s))[ FunctionNode.scalarVals=null, FunctionNode.functionURI=http://www.w3.org/2005/xpath-functions#not-equal-to, valueExpr=com.bigdata.rdf.internal.constraints.CompareBOp(s,TermId(0U)[eg:b])[ CompareBOp.op=NE]] )
+         *     FILTER( FunctionNode(VarNode(s),VarNode(s))[FunctionNode.scalarVals=null, FunctionNode.functionURI=http://www.w3.org/2005/xpath-functions#not-equal-to, valueExpr=org.embergraph.rdf.internal.constraints.CompareBOp(s,TermId(0U)[eg:b])[ CompareBOp.op=NE]] )
+         *     FILTER( FunctionNode(VarNode(s),VarNode(s))[ FunctionNode.scalarVals=null, FunctionNode.functionURI=http://www.w3.org/2005/xpath-functions#not-equal-to, valueExpr=org.embergraph.rdf.internal.constraints.CompareBOp(s,TermId(0U)[eg:b])[ CompareBOp.op=NE]] )
          *   }
          */
         final QueryRoot qUnoptimized = new QueryRoot(QueryType.SELECT);
@@ -303,7 +303,7 @@ public class TestASTAttachJoinFiltersOptimizer extends AbstractASTEvaluationTest
          *       JoinGroupNode {
          *         StatementPatternNode(VarNode(s), VarNode(p), VarNode(o)) [scope=DEFAULT_CONTEXTS]
          *       }
-         *       FILTER( FunctionNode(ConstantNode(TermId(1U)[http://www.example.com/I]),VarNode(s))[ FunctionNode.scalarVals=null, FunctionNode.functionURI=http://www.w3.org/2005/xpath-functions#not-equal-to, valueExpr=com.bigdata.rdf.internal.constraints.CompareBOp(TermId(1U)[http://www.example.com/I],s)[ CompareBOp.op=NE]] )
+         *       FILTER( FunctionNode(ConstantNode(TermId(1U)[http://www.example.com/I]),VarNode(s))[ FunctionNode.scalarVals=null, FunctionNode.functionURI=http://www.w3.org/2005/xpath-functions#not-equal-to, valueExpr=org.embergraph.rdf.internal.constraints.CompareBOp(TermId(1U)[http://www.example.com/I],s)[ CompareBOp.op=NE]] )
          *   }
          */
         

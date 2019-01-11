@@ -71,7 +71,7 @@ public class TestAll extends TestCase {
 //        suite.addTestSuite(TestKeyBufferSearch.class);
 //
 //        // compressed data implementations.
-//        suite.addTest(com.bigdata.btree.raba.codec.TestAll.suite());
+//        suite.addTest(org.embergraph.btree.raba.codec.TestAll.suite());
 
         return suite;
         

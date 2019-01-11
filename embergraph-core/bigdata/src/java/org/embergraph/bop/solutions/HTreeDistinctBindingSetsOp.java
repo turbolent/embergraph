@@ -72,7 +72,7 @@ public class HTreeDistinctBindingSetsOp extends PipelineOp implements
 	}
 
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      */
     public HTreeDistinctBindingSetsOp(final HTreeDistinctBindingSetsOp op) {
         super(op);

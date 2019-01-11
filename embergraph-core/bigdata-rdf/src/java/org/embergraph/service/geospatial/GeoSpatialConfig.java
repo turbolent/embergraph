@@ -109,7 +109,7 @@ public class GeoSpatialConfig implements Serializable {
          * 
          * {"config": { 
          *   "uri": "http://my.custom.datatype2.uri", 
-         *   "literalSerializer": "com.bigdata.service.GeoSpatialLiteralSerializer",
+         *   "literalSerializer": "org.embergraph.service.GeoSpatialLiteralSerializer",
          *   "fields": [ 
          *     { "valueType": "DOUBLE", "multiplier": "100000", "serviceMapping": "LATITUDE" }, 
          *     { "valueType": "DOUBLE", "multiplier": "100000", "serviceMapping": "LONGITUDE" }, 

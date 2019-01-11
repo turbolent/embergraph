@@ -110,7 +110,7 @@ public class RDFParserOptions implements Serializable, IRDFParserOptions {
     private boolean verifyData = Boolean.valueOf(Options.DEFAULT_VERIFY_DATA);
 
     /* (non-Javadoc)
-     * @see com.bigdata.rdf.rio.IRDFParserOptions#getVerifyData()
+     * @see org.embergraph.rdf.rio.IRDFParserOptions#getVerifyData()
      */
     @Override
     synchronized public boolean getVerifyData() {
@@ -118,7 +118,7 @@ public class RDFParserOptions implements Serializable, IRDFParserOptions {
     }
     
     /* (non-Javadoc)
-     * @see com.bigdata.rdf.rio.IRDFParserOptions#getStopAtFirstError()
+     * @see org.embergraph.rdf.rio.IRDFParserOptions#getStopAtFirstError()
      */
     @Override
     synchronized public boolean getStopAtFirstError() {
@@ -126,7 +126,7 @@ public class RDFParserOptions implements Serializable, IRDFParserOptions {
     }
     
     /* (non-Javadoc)
-     * @see com.bigdata.rdf.rio.IRDFParserOptions#getPreserveBNodeIDs()
+     * @see org.embergraph.rdf.rio.IRDFParserOptions#getPreserveBNodeIDs()
      */
     @Override
     synchronized public boolean getPreserveBNodeIDs() {
@@ -134,7 +134,7 @@ public class RDFParserOptions implements Serializable, IRDFParserOptions {
     }
 
     /* (non-Javadoc)
-     * @see com.bigdata.rdf.rio.IRDFParserOptions#getDatatypeHandling()
+     * @see org.embergraph.rdf.rio.IRDFParserOptions#getDatatypeHandling()
      */
     @Override
     synchronized public DatatypeHandling getDatatypeHandling() {
@@ -209,7 +209,7 @@ public class RDFParserOptions implements Serializable, IRDFParserOptions {
     }
 
     /* (non-Javadoc)
-     * @see com.bigdata.rdf.rio.IRDFParserOptions#setDatatypeHandling(org.openrdf.rio.RDFParser.DatatypeHandling)
+     * @see org.embergraph.rdf.rio.IRDFParserOptions#setDatatypeHandling(org.openrdf.rio.RDFParser.DatatypeHandling)
      */
     @Override
     synchronized public void setDatatypeHandling(
@@ -223,7 +223,7 @@ public class RDFParserOptions implements Serializable, IRDFParserOptions {
     }
 
     /* (non-Javadoc)
-     * @see com.bigdata.rdf.rio.IRDFParserOptions#setPreserveBNodeIDs(boolean)
+     * @see org.embergraph.rdf.rio.IRDFParserOptions#setPreserveBNodeIDs(boolean)
      */
     @Override
     synchronized public void setPreserveBNodeIDs(final boolean preserveBNodeIDs) {
@@ -231,7 +231,7 @@ public class RDFParserOptions implements Serializable, IRDFParserOptions {
     }
 
     /* (non-Javadoc)
-     * @see com.bigdata.rdf.rio.IRDFParserOptions#setStopAtFirstError(boolean)
+     * @see org.embergraph.rdf.rio.IRDFParserOptions#setStopAtFirstError(boolean)
      */
     @Override
     synchronized public void setStopAtFirstError(final boolean stopAtFirstError) {
@@ -239,7 +239,7 @@ public class RDFParserOptions implements Serializable, IRDFParserOptions {
     }
 
     /* (non-Javadoc)
-     * @see com.bigdata.rdf.rio.IRDFParserOptions#setVerifyData(boolean)
+     * @see org.embergraph.rdf.rio.IRDFParserOptions#setVerifyData(boolean)
      */
     @Override
     synchronized public void setVerifyData(final boolean verifyData) {

@@ -220,7 +220,7 @@ public class StatementPatternNode extends
     }
     
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      */
     public StatementPatternNode(final StatementPatternNode op) {
 
@@ -720,7 +720,7 @@ public class StatementPatternNode extends
     }
 
 	/* (non-Javadoc)
-	 * @see com.bigdata.rdf.sparql.ast.IReorderableNode#isReorderable()
+	 * @see org.embergraph.rdf.sparql.ast.IReorderableNode#isReorderable()
 	 */
 	@Override
 	public boolean isReorderable() {
@@ -730,7 +730,7 @@ public class StatementPatternNode extends
 	}
 
 	/* (non-Javadoc)
-	 * @see com.bigdata.rdf.sparql.ast.IReorderableNode#getEstimatedCardinality()
+	 * @see org.embergraph.rdf.sparql.ast.IReorderableNode#getEstimatedCardinality()
 	 */
 	@Override
 	public long getEstimatedCardinality(StaticOptimizer opt) {

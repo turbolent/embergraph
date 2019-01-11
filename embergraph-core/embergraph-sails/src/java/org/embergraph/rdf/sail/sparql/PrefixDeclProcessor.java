@@ -73,7 +73,7 @@ public class PrefixDeclProcessor {
          * This should be passed as a Java Property as:
          * 
          * <code>
-         * -Dcom.bigdata.rdf.sail.sparql.PrefixDeclProcessor.additionalDeclsFile=/path/to/file
+         * -Dorg.embergraph.rdf.sail.sparql.PrefixDeclProcessor.additionalDeclsFile=/path/to/file
          * </code>
          * 
          * {@see https://jira.blazegraph.com/browse/BLZG-1773}

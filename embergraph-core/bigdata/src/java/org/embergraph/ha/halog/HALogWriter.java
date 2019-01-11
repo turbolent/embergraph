@@ -66,7 +66,7 @@ public class HALogWriter implements IHALogWriter {
 	/**
 	 * Logger for HA events.
 	 */
-	private static final Logger haLog = Logger.getLogger("com.bigdata.haLog");
+	private static final Logger haLog = Logger.getLogger("org.embergraph.haLog");
 
 	/*
 	 * Note: All of this stuff is to be more or less compatible with the magic

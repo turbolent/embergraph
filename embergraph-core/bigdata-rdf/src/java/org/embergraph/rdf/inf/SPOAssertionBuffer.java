@@ -234,7 +234,7 @@ public class SPOAssertionBuffer extends AbstractSPOBuffer implements ISPOAsserti
                 
             } else {
                 
-                n = com.bigdata.rdf.changesets.StatementWriter.addStatements(
+                n = org.embergraph.rdf.changesets.StatementWriter.addStatements(
                                 db, 
                                 focusStore, 
                                 true/* copyOnly */, 

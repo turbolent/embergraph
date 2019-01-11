@@ -1,4 +1,4 @@
-package com.bigdata.perf.chem2bio2rdf;
+package org.embergraph.perf.chem2bio2rdf;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -60,7 +60,7 @@ public class TestQuery {
 	 */
 	public static void main(String[] args) throws Exception {
 		
-        final String serviceURL = "http://localhost:" + Config.BLAZEGRAPH_HTTP_PORT
+        final String serviceURL = "http://localhost:" + Config.HTTP_PORT
                 + BigdataStatics.getContextPath() + "/sparql";
 
 		final HttpClient httpClient = 

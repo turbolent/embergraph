@@ -249,7 +249,7 @@ public class BigdataRDFServletContextListener implements
              *
              * Note: You may override the location of the property file using
              * <pre>
-             * -Dcom.bigdata.rdf.sail.webapp.ConfigParams.propertyFile=FILE
+             * -Dorg.embergraph.rdf.sail.webapp.ConfigParams.propertyFile=FILE
              * </pre>
              */
 

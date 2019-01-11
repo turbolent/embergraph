@@ -103,10 +103,10 @@ public class TestSearch extends AbstractDataDrivenSPARQLTestCase {
      *         }
      *       }
      *       StatementPatternNode(VarNode(subj), VarNode(p), VarNode(lit), DEFAULT_CONTEXTS)
-     *         com.bigdata.rdf.sparql.ast.eval.AST2BOpBase.estimatedCardinality=5
-     *         com.bigdata.rdf.sparql.ast.eval.AST2BOpBase.originalIndex=SPOC
+     *         org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.estimatedCardinality=5
+     *         org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.originalIndex=SPOC
      *     }
-     *   order by com.bigdata.rdf.sparql.ast.OrderByExpr(VarNode(score))[ ascending=false]
+     *   order by org.embergraph.rdf.sparql.ast.OrderByExpr(VarNode(score))[ ascending=false]
      *   slice(limit=10)
      * } AS %searchSet1 JOIN ON () DEPENDS ON ()
      * QueryType: SELECT
@@ -293,7 +293,7 @@ public class TestSearch extends AbstractDataDrivenSPARQLTestCase {
      * tests were migrated to this format.
      * <p>
      * Note: This is the first of a series of tests which are a port of
-     * com.bigdata.rdf.sail.TestSearchQuery#testWithNamedGraphs(). Some errors
+     * org.embergraph.rdf.sail.TestSearchQuery#testWithNamedGraphs(). Some errors
      * in that test were corrected when the tests were migrated to this format.
      */
     public void test_search_named_graphs10a() throws Exception {

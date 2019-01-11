@@ -71,15 +71,15 @@ var DEFAULT_NAMESPACE, NAMESPACE;
 
 // namespace creation
 var NAMESPACE_PARAMS = {
-   'name': 'com.bigdata.rdf.sail.namespace',
-   'textIndex': 'com.bigdata.rdf.store.AbstractTripleStore.textIndex',
-   'truthMaintenance': 'com.bigdata.rdf.sail.truthMaintenance',
-   'quads': 'com.bigdata.rdf.store.AbstractTripleStore.quads',
-   'rdr': 'com.bigdata.rdf.store.AbstractTripleStore.statementIdentifiers',
-   'axioms': 'com.bigdata.rdf.store.AbstractTripleStore.axiomsClass',
-   'justify': 'com.bigdata.rdf.store.AbstractTripleStore.justify',
-   'isolatableIndices': 'com.bigdata.rdf.sail.isolatableIndices',
-   'geoSpatial': 'com.bigdata.rdf.store.AbstractTripleStore.geoSpatial'
+   'name': 'org.embergraph.rdf.sail.namespace',
+   'textIndex': 'org.embergraph.rdf.store.AbstractTripleStore.textIndex',
+   'truthMaintenance': 'org.embergraph.rdf.sail.truthMaintenance',
+   'quads': 'org.embergraph.rdf.store.AbstractTripleStore.quads',
+   'rdr': 'org.embergraph.rdf.store.AbstractTripleStore.statementIdentifiers',
+   'axioms': 'org.embergraph.rdf.store.AbstractTripleStore.axiomsClass',
+   'justify': 'org.embergraph.rdf.store.AbstractTripleStore.justify',
+   'isolatableIndices': 'org.embergraph.rdf.sail.isolatableIndices',
+   'geoSpatial': 'org.embergraph.rdf.store.AbstractTripleStore.geoSpatial'
 };
 
 var NAMESPACE_SHORTCUTS = {
@@ -403,12 +403,12 @@ function getPreparedProperties(elem) {
           
           if($('#new-namespace-inference').is(':checked')) {
              // Enable inference related options.
-             params.axioms = 'com.bigdata.rdf.axioms.OwlAxioms';
+             params.axioms = 'org.embergraph.rdf.axioms.OwlAxioms';
              params.truthMaintenance = true;
              params.justify = true;
           } else {
              // Disable inference related options.
-             params.axioms = 'com.bigdata.rdf.axioms.NoAxioms';
+             params.axioms = 'org.embergraph.rdf.axioms.NoAxioms';
              params.truthMaintenance = false;
              params.justify = false;
           }
@@ -467,7 +467,7 @@ function cloneNamespace(namespace) {
          return;
       }
       $('#new-namespace-mode').val(mode);
-      $('#new-namespace-inference').prop('checked', params[NAMESPACE_PARAMS.axioms] == 'com.bigdata.rdf.axioms.OwlAxioms');
+      $('#new-namespace-inference').prop('checked', params[NAMESPACE_PARAMS.axioms] == 'org.embergraph.rdf.axioms.OwlAxioms');
       $('#new-namespace-textIndex').prop('checked', params[NAMESPACE_PARAMS.textIndex] == 'true');
       $('#new-namespace-isolatableIndices').prop('checked', params[NAMESPACE_PARAMS.isolatableIndices] == 'true');
       $('#new-namespace-geoSpatial').prop('checked', params[NAMESPACE_PARAMS.geoSpatial] == 'true');      
@@ -618,12 +618,12 @@ function changeNamespaceMode() {
    
    if($('#new-namespace-inference').is(':checked')) {
       // Enable inference related options.
-      params.axioms = 'com.bigdata.rdf.axioms.OwlAxioms';
+      params.axioms = 'org.embergraph.rdf.axioms.OwlAxioms';
       params.truthMaintenance = true;
       params.justify = true;
    } else {
       // Disable inference related options.
-      params.axioms = 'com.bigdata.rdf.axioms.NoAxioms';
+      params.axioms = 'org.embergraph.rdf.axioms.NoAxioms';
       params.truthMaintenance = false;
       params.justify = false;
    }

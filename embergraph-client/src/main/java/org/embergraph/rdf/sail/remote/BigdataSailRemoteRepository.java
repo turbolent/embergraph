@@ -82,7 +82,7 @@ import org.embergraph.rdf.sail.webapp.client.RemoteRepositoryManager;
  * order for you to WRITE on the namespace using a transaction.
  * 
  * @see RemoteTransactionManager
- * @see com.bigdata.rdf.sail.BigdataSail.Options#ISOLATABLE_INDICES
+ * @see org.embergraph.rdf.sail.BigdataSail.Options#ISOLATABLE_INDICES
  * @see BigdataSailRemoteRepositoryConnection
  */
 public class BigdataSailRemoteRepository implements Repository {

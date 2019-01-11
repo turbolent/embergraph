@@ -93,8 +93,8 @@ public class TestASTSearchOptimizer extends AbstractASTEvaluationTestCase {
      * SELECT ( VarNode(subj) AS VarNode(subj) ) ( VarNode(score) AS VarNode(score) )
      *     JoinGroupNode {
      *       StatementPatternNode(VarNode(subj), VarNode(p), VarNode(lit), DEFAULT_CONTEXTS)
-     *         com.bigdata.rdf.sparql.ast.eval.AST2BOpBase.estimatedCardinality=5
-     *         com.bigdata.rdf.sparql.ast.eval.AST2BOpBase.originalIndex=SPOC
+     *         org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.estimatedCardinality=5
+     *         org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.originalIndex=SPOC
      *       SERVICE <ConstantNode(TermId(0U)[http://www.bigdata.com/rdf/search#search])> {
      *         JoinGroupNode {
      *           StatementPatternNode(VarNode(lit), ConstantNode(TermId(0U)[http://www.bigdata.com/rdf/search#search]), ConstantNode(TermId(0L)[mike]), DEFAULT_CONTEXTS)
@@ -179,8 +179,8 @@ public class TestASTSearchOptimizer extends AbstractASTEvaluationTestCase {
          * SELECT ( VarNode(subj) AS VarNode(subj) ) ( VarNode(score) AS VarNode(score) )
          *     JoinGroupNode {
          *       StatementPatternNode(VarNode(subj), VarNode(p), VarNode(lit), DEFAULT_CONTEXTS)
-         *         com.bigdata.rdf.sparql.ast.eval.AST2BOpBase.estimatedCardinality=5
-         *         com.bigdata.rdf.sparql.ast.eval.AST2BOpBase.originalIndex=SPOC
+         *         org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.estimatedCardinality=5
+         *         org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.originalIndex=SPOC
          *       SERVICE <ConstantNode(TermId(0U)[http://www.bigdata.com/rdf/search#search])> {
          *         JoinGroupNode {
          *           StatementPatternNode(VarNode(lit), ConstantNode(TermId(0U)[http://www.bigdata.com/rdf/search#search]), ConstantNode(TermId(0L)[mike]), DEFAULT_CONTEXTS)

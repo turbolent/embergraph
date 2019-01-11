@@ -824,7 +824,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
      *             tested with SLICE.
      * 
      *             Those tests should be located in
-     *             {@link com.bigdata.rdf.spo.TestSPOAccessPath}.
+     *             {@link org.embergraph.rdf.spo.TestSPOAccessPath}.
      * 
      *             FIXME The offset and limit should probably be rolled into the
      *             predicate and removed from the {@link IAccessPath}. This way

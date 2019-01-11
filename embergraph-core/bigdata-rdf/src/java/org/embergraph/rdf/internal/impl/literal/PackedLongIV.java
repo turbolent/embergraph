@@ -57,7 +57,7 @@ public class PackedLongIV<V extends BigdataLiteral>
 
     /**
      *  The {@link PackedLongIV} uses the {@link LongPacker} to compress values.
-     *  {@link LongPacker#packLong(long, byte[], com.bigdata.io.LongPacker.IByteBuffer)}
+     *  {@link LongPacker#packLong(long, byte[], org.embergraph.io.LongPacker.IByteBuffer)}
      *  is order preserving whenever the first byte is 0. Since the IV relies on an
      *  order preserving encoding, we restrict the supported range to values in
      *  [0;MAX_POS_LONG_WITH_LEADING_ZERO_BYTE], where MAX_POS_LONG_WITH_LEADING_ZERO_BYTE

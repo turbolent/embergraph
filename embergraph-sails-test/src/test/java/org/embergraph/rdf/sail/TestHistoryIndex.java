@@ -126,7 +126,7 @@ public class TestHistoryIndex extends ProxyBigdataSailTestCase  {
         // disable the history service.
         properties
                 .setProperty(
-                        com.bigdata.rdf.store.AbstractTripleStore.Options.HISTORY_SERVICE,
+                        org.embergraph.rdf.store.AbstractTripleStore.Options.HISTORY_SERVICE,
                         "false");
 
         final BigdataSail sail = getSail(properties);
@@ -174,12 +174,12 @@ public class TestHistoryIndex extends ProxyBigdataSailTestCase  {
         // enable the history service.
         properties
                 .setProperty(
-                        com.bigdata.rdf.store.AbstractTripleStore.Options.HISTORY_SERVICE,
+                        org.embergraph.rdf.store.AbstractTripleStore.Options.HISTORY_SERVICE,
                         "true");
 
         // disable inference.
         properties.setProperty(
-                com.bigdata.rdf.store.AbstractTripleStore.Options.AXIOMS_CLASS,
+                org.embergraph.rdf.store.AbstractTripleStore.Options.AXIOMS_CLASS,
                 NoAxioms.class.getName());
 
         final BigdataSail sail = getSail(properties);
@@ -377,18 +377,18 @@ public class TestHistoryIndex extends ProxyBigdataSailTestCase  {
         // enable the history service.
         properties
                 .setProperty(
-                        com.bigdata.rdf.store.AbstractTripleStore.Options.HISTORY_SERVICE,
+                        org.embergraph.rdf.store.AbstractTripleStore.Options.HISTORY_SERVICE,
                         "true");
 
         // prune history after 1 millisecond.
         properties
                 .setProperty(
-                        com.bigdata.rdf.store.AbstractTripleStore.Options.HISTORY_SERVICE_MIN_RELEASE_AGE,
+                        org.embergraph.rdf.store.AbstractTripleStore.Options.HISTORY_SERVICE_MIN_RELEASE_AGE,
                         "1");
 
         // disable inference.
         properties.setProperty(
-                com.bigdata.rdf.store.AbstractTripleStore.Options.AXIOMS_CLASS,
+                org.embergraph.rdf.store.AbstractTripleStore.Options.AXIOMS_CLASS,
                 NoAxioms.class.getName());
 
         final BigdataSail sail = getSail(properties);

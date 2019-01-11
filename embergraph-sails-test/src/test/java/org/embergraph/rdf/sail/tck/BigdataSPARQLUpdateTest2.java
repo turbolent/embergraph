@@ -101,7 +101,7 @@ public class BigdataSPARQLUpdateTest2 extends TestCase2 {
     /**
      * The file path name for the package in which the data files are found.
      */
-    protected final String packagePath = "file:src/test/java/com/bigdata/rdf/sail/tck/data/";
+    protected final String packagePath = "file:src/test/java/org/embergraph/rdf/sail/tck/data/";
     
     /**
      * Note: This field MUST be cleared in tearDown or a hard reference will be

@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <!DOCTYPE experiment PUBLIC "-//systap.com//DTD BIGDATA EXPERIMENT 0.1//EN" "Experiment.dtd">
-<experiment class="com.bigdata.journal.AbstractMRMWTestCase$StressTestMRMW">
+<experiment class="org.embergraph.journal.AbstractMRMWTestCase$StressTestMRMW">
  <defaults>
   <property name="maximumExtent">419430400</property>
   <property name="timeout">30</property>

@@ -63,7 +63,7 @@ public class QueryEngineFactoryBase implements IQueryEngineFactory {
     );
 
     /* (non-Javadoc)
-	 * @see com.bigdata.bop.fed.IQueryEngineFactory#getExistingQueryController(org.embergraph.journal.IBTreeManager)
+	 * @see org.embergraph.bop.fed.IQueryEngineFactory#getExistingQueryController(org.embergraph.journal.IBTreeManager)
 	 */
     @Override
 	public QueryEngine getExistingQueryController(
@@ -80,7 +80,7 @@ public class QueryEngineFactoryBase implements IQueryEngineFactory {
     }
 
     /* (non-Javadoc)
-	 * @see com.bigdata.bop.fed.IQueryEngineFactory#getQueryController(org.embergraph.journal.IIndexManager)
+	 * @see org.embergraph.bop.fed.IQueryEngineFactory#getQueryController(org.embergraph.journal.IIndexManager)
 	 */
     @Override
 	public QueryEngine getQueryController(final IIndexManager indexManager) {
@@ -96,7 +96,7 @@ public class QueryEngineFactoryBase implements IQueryEngineFactory {
     }
 
     /* (non-Javadoc)
-	 * @see com.bigdata.bop.fed.IQueryEngineFactory#getStandaloneQueryController(org.embergraph.journal.IBTreeManager)
+	 * @see org.embergraph.bop.fed.IQueryEngineFactory#getStandaloneQueryController(org.embergraph.journal.IBTreeManager)
 	 */
     @Override
 	public QueryEngine getStandaloneQueryController(
@@ -150,7 +150,7 @@ public class QueryEngineFactoryBase implements IQueryEngineFactory {
     }
     
     /* (non-Javadoc)
-	 * @see com.bigdata.bop.fed.IQueryEngineFactory#getFederatedQueryController(com.bigdata.service.IBigdataFederation)
+	 * @see org.embergraph.bop.fed.IQueryEngineFactory#getFederatedQueryController(org.embergraph.service.IBigdataFederation)
 	 */
     @Override
 	public FederatedQueryEngine getFederatedQueryController(
@@ -328,7 +328,7 @@ public class QueryEngineFactoryBase implements IQueryEngineFactory {
     }
 
     /* (non-Javadoc)
-	 * @see com.bigdata.bop.fed.IQueryEngineFactory#getQueryControllerCount()
+	 * @see org.embergraph.bop.fed.IQueryEngineFactory#getQueryControllerCount()
 	 */
     @Override
 	public int getQueryControllerCount() {

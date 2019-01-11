@@ -58,13 +58,13 @@ public class TestAll extends TestCase {
         final TestSuite suite = new TestSuite("HTree");
 
         // htree specific raba unit tests.
-        suite.addTest(com.bigdata.htree.raba.TestAll.suite());
+        suite.addTest(org.embergraph.htree.raba.TestAll.suite());
 
         // htree specific data record tests.
-        suite.addTest(com.bigdata.htree.data.TestAll.suite());
+        suite.addTest(org.embergraph.htree.data.TestAll.suite());
 
         // htree data structure tests.
-        suite.addTest(com.bigdata.htree.TestAll_HTree.suite());
+        suite.addTest(org.embergraph.htree.TestAll_HTree.suite());
 
 		return suite;
 

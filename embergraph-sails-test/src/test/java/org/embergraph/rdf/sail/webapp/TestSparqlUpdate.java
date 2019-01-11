@@ -170,7 +170,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends
 		 * UPDATE "LOAD".
 		 */
         loadFile(
-                "src/test/java/com/bigdata/rdf/sail/webapp/dataset-update.trig",
+                "src/test/java/org/embergraph/rdf/sail/webapp/dataset-update.trig",
                 RDFFormat.TRIG);
 	}
 	
@@ -1603,7 +1603,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends
         m_repo.prepareUpdate("DROP ALL").evaluate();
         // Note: local copy of: /testdata-update/dataset-update-example9.trig
         m_repo.prepareUpdate(
-                "LOAD <file:src/test/java/com/bigdata/rdf/sail/webapp/dataset-update-example9.trig>")
+                "LOAD <file:src/test/java/org/embergraph/rdf/sail/webapp/dataset-update-example9.trig>")
                 .evaluate();
 
         final URI book1 = f.createURI("http://example/book1");
@@ -1751,7 +1751,8 @@ public class TestSparqlUpdate<S extends IIndexManager> extends
     public void testLoad()
             throws Exception
         {
-    	final URL url = this.getClass().getClassLoader().getResource("com/bigdata/rdf/rio/small.rdf");
+    	final URL url = this.getClass().getClassLoader().getResource(
+          "org/embergraph/rdf/rio/small.rdf");
 
         final String update = "LOAD <" + url.toExternalForm() + ">";
         
@@ -1768,7 +1769,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends
     public void testLoadSilent()
         throws Exception
     {
-        final String update = "LOAD SILENT <file:src/test/com/bigdata/rdf/rio/NOT-FOUND.rdf>";
+        final String update = "LOAD SILENT <file:src/test/org/embergraph/rdf/rio/NOT-FOUND.rdf>";
         
         final String ns = "http://bigdata.com/test/data#";
         
@@ -1783,7 +1784,8 @@ public class TestSparqlUpdate<S extends IIndexManager> extends
     public void testLoadIntoGraph()
         throws Exception
     {
-    	final URL url = this.getClass().getClassLoader().getResource("com/bigdata/rdf/rio/small.rdf");
+    	final URL url = this.getClass().getClassLoader().getResource(
+          "org/embergraph/rdf/rio/small.rdf");
 
 
         final URI g1 = f.createURI("http://www.bigdata.com/g1");
@@ -1811,7 +1813,8 @@ public class TestSparqlUpdate<S extends IIndexManager> extends
             throws Exception
         {
     
-    	final URL url = this.getClass().getClassLoader().getResource("com/bigdata/rdf/rio/small.rdf.gz");
+    	final URL url = this.getClass().getClassLoader().getResource(
+          "org/embergraph/rdf/rio/small.rdf.gz");
     	
         final String update = "LOAD <" + url.toExternalForm() + ">";
         
@@ -1830,7 +1833,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends
 //    public void testLoadZip()
 //            throws Exception
 //        {
-//        final String update = "LOAD <file:src/test/com/bigdata/rdf/rio/small.rdf.zip>";
+//        final String update = "LOAD <file:src/test/org/embergraph/rdf/rio/small.rdf.zip>";
 //        
 //        final String ns = "http://bigdata.com/test/data#";
 //        

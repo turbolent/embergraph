@@ -64,7 +64,7 @@ public class TestFileSystemScanner extends TestCase2 {
         final BlockingBuffer<File[]> buffer = new BlockingBuffer<File[]>();
         
         final AbstractResourceScanner<File> scanner = FileSystemScanner.newFactory(
-                new File("bigdata/src/java/com/bigdata/service/ndx/pipeline"), new FilenameFilter() {
+                new File("bigdata/src/java/org/embergraph/service/ndx/pipeline"), new FilenameFilter() {
 
                     public boolean accept(File dir, String name) {
                                 if (log.isInfoEnabled())

@@ -15,7 +15,7 @@ startBlazegraph() {
         [ -z "$BLZG_LOG" ] && BLZG_LOG=/var/log/blazegraph
 
         # Update the journal file location
-        sed -i -e "s|com\\.bigdata\\.journal\\.AbstractJournal\\.file=.*|com.bigdata.journal.AbstractJournal.file=$JOURNAL|" \
+        sed -i -e "s|com\\.bigdata\\.journal\\.AbstractJournal\\.file=.*|org.embergraph.journal.AbstractJournal.file=$JOURNAL|" \
         $BLZG_CONF/RWStore.properties
 
         # Update the rules.log location

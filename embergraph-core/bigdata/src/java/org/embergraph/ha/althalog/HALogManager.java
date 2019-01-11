@@ -48,7 +48,7 @@ public class HALogManager {
 	/**
 	 * Logger for HA events.
 	 */
-	private static final Logger haLog = Logger.getLogger("com.bigdata.haLog");
+	private static final Logger haLog = Logger.getLogger("org.embergraph.haLog");
 
 	private final File m_halogdir;
 	

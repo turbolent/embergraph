@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <!DOCTYPE experiment PUBLIC "-//systap.com//DTD BIGDATA EXPERIMENT 0.1//EN" "Experiment.dtd">
 <!-- There are 48 conditions. -->
-<experiment class="com.bigdata.journal.StressTestConcurrentTx">
+<experiment class="org.embergraph.journal.StressTestConcurrentTx">
  <defaults>
   <property name="maximumExtent">419430400</property>
   <property name="timeout">30</property>

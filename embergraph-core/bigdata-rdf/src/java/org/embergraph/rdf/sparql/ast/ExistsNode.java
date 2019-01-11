@@ -59,7 +59,7 @@ public class ExistsNode extends SubqueryFunctionNodeBase {
     }
 
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      */
     public ExistsNode(ExistsNode op) {
         super(op);

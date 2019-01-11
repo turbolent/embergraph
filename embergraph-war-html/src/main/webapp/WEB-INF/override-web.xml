@@ -47,12 +47,12 @@
    not running gmond, then the GangliaPlugIn should be configured
    as both a listener and a sender.
    </description>
-   <servlet-class>com.bigdata.rdf.sail.webapp.HALoadBalancerServlet</servlet-class>
+   <servlet-class>org.embergraph.rdf.sail.webapp.HALoadBalancerServlet</servlet-class>
    <load-on-startup>1</load-on-startup>
    <async-supported>true</async-supported>
    <init-param>
       <param-name>policy</param-name>
-      <param-value>com.bigdata.rdf.sail.webapp.lbs.policy.RoundRobinLBSPolicy</param-value>
+      <param-value>org.embergraph.rdf.sail.webapp.lbs.policy.RoundRobinLBSPolicy</param-value>
       <description>
       The load balancer policy. This must be an instance of the
       IHALoadBalancerPolicy interface.  A default policy (NOPLBSPolicy) is
@@ -64,22 +64,22 @@
       
       The following policies are pre-defined:
       
-      com.bigdata.rdf.sail.webapp.lbs.policy.NOPLBSPolicy:
+      org.embergraph.rdf.sail.webapp.lbs.policy.NOPLBSPolicy:
       
          Does not load balance read requests.
       
-      com.bigdata.rdf.sail.webapp.lbs.policy.RoundRobinLBSPolicy:
+      org.embergraph.rdf.sail.webapp.lbs.policy.RoundRobinLBSPolicy:
       
          Round robin for read requests.
       
-      com.bigdata.rdf.sail.webapp.lbs.policy.counters.CountersLBSPolicy:
+      org.embergraph.rdf.sail.webapp.lbs.policy.counters.CountersLBSPolicy:
       
          Load based proxying for read requests using the build in http
          service for reporting performance counters.  This policy requires
          the PlatformStatsPlugIn and may also require platform specific
          metrics collection dependencies, e.g., sysstat.
 
-      com.bigdata.rdf.sail.webapp.lbs.policy.ganglia.GangliaLBSPolicy:
+      org.embergraph.rdf.sail.webapp.lbs.policy.ganglia.GangliaLBSPolicy:
       
          Load based proxying for read requests using ganglia. This policy
          requires the requires the PlatformStatsPlugIn.  In addition, either

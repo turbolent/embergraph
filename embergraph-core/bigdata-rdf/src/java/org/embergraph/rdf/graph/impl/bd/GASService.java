@@ -94,7 +94,7 @@ import cutthecrap.utils.striterators.ICloseableIterator;
  * PREFIX gas: <http://www.bigdata.com/rdf/gas#>
  * #...
  * SERVICE &lt;gas#service&gt; {
- *    gas:program gas:gasClass "com.bigdata.rdf.graph.analytics.BFS" .
+ *    gas:program gas:gasClass "org.embergraph.rdf.graph.analytics.BFS" .
  *    gas:program gas:in &lt;IRI&gt; . # one or more times, specifies the initial frontier.
  *    gas:program gas:out ?out . # exactly once - will be bound to the visited vertices.
  *    gas:program gas:maxIterations 4 . # optional limit on breadth first expansion.
@@ -109,7 +109,7 @@ import cutthecrap.utils.striterators.ICloseableIterator;
  * PREFIX gas: <http://www.bigdata.com/rdf/gas#>
  * #...
  * SERVICE &lt;gas:service&gt; {
- *    gas:program gas:gasClass "com.bigdata.rdf.graph.analytics.FuzzySSSP" .
+ *    gas:program gas:gasClass "org.embergraph.rdf.graph.analytics.FuzzySSSP" .
  *    gas:program gas:in &lt;IRI&gt; . # one or more times, specifies the initial frontier.
  *    gas:program gas:target &lt;IRI&gt; . # one or more times, identifies the target vertices and hence the paths of interest.
  *    gas:program gas:out ?out . # exactly once - will be bound to the visited vertices laying within N-hops of the shortest paths.

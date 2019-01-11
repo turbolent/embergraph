@@ -76,7 +76,7 @@ public class Constraint<X> extends BOpBase implements
     }
 
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      */
     public Constraint(final Constraint<X> op) {
         super(op);

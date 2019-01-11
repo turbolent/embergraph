@@ -155,7 +155,7 @@ public class StressTestConcurrent extends
         // Note: another way to disable moves is to restrict the test to a
         // single data service.
         properties.setProperty(
-                com.bigdata.service.EmbeddedClient.Options.NDATA_SERVICES, "2");
+                org.embergraph.service.EmbeddedClient.Options.NDATA_SERVICES, "2");
 
         // enable moves (one per target).
         properties.setProperty(
@@ -691,12 +691,12 @@ public class StressTestConcurrent extends
                      * sure if this is a test harness problem (assumptions that
                      * the test harness is making) or a system problem.
                      * 
-                     * expected=com.bigdata.btree.Tuple@8291269{ nvisited=2368,
+                     * expected=org.embergraph.btree.Tuple@8291269{ nvisited=2368,
                      * flags=[KEYS,VALS], key=[-128, 0, 11, -45], val=[108,
                      * -114, -104, -47, -70], obj=[108, -114, -104, -47, -70],
                      * sourceIndex=0},
                      * 
-                     * actual=com.bigdata.btree.
+                     * actual=org.embergraph.btree.
                      * AbstractChunkedTupleIterator$ResultSetTuple@33369876{
                      * nvisited=197, flags=[KEYS,VALS], key=[-128, 0, 11, -46],
                      * val=[111, 56, 17, 100, 56], obj=[111, 56, 17, 100, 56],

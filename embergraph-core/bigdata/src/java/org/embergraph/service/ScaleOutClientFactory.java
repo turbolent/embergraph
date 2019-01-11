@@ -38,7 +38,7 @@ import org.embergraph.rdf.sail.webapp.HAStatusServletUtilProxy;
  */
 public class ScaleOutClientFactory {
 
-	public static final String DEFAULT_PROVIDER = "com.bigdata.service.jini.JiniClient";
+	public static final String DEFAULT_PROVIDER = "org.embergraph.service.jini.JiniClient";
 
 	public static AbstractScaleOutClient<?> getJiniClient(
 			final String[] propertyFiles) {

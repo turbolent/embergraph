@@ -131,9 +131,9 @@ abstract public class DataService extends AbstractService
      */
     public static interface Options extends org.embergraph.journal.Options,
             org.embergraph.journal.ConcurrencyManager.Options,
-            com.bigdata.resources.ResourceManager.Options,
-            com.bigdata.counters.AbstractStatisticsCollector.Options,
-            com.bigdata.service.IBigdataClient.Options
+            org.embergraph.resources.ResourceManager.Options,
+            org.embergraph.counters.AbstractStatisticsCollector.Options,
+            org.embergraph.service.IBigdataClient.Options
             // @todo local tx manager options?
             {
 

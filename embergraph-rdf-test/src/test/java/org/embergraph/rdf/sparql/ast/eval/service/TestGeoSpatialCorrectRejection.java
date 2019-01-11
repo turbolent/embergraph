@@ -1086,10 +1086,10 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
 
         // enable GeoSpatial index
         properties.setProperty(
-           com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL, "true");
+           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL, "true");
         
         properties.setProperty(
-           com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".0",
+           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".0",
            "{\"config\": "
            + "{ \"uri\": \"http://my.custom.datatype/x-y-z\", "
            + "\"fields\": [ "
@@ -1099,7 +1099,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
            + "]}}");
 
         properties.setProperty(
-           com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".1",
+           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".1",
            "{\"config\": "
            + "{ \"uri\": \"http://my.custom.datatype/time-x-y-z\", "
            + "\"fields\": [ "
@@ -1110,7 +1110,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
            + "]}}");
 
         properties.setProperty(
-                com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".2",
+                org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".2",
                 "{\"config\": "
                 + "{ \"uri\": \"http://my.custom.datatype/x-y-z-lat-lon\", "
                 + "\"fields\": [ "
@@ -1122,7 +1122,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
                 + "]}}");
         
         properties.setProperty(
-                com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".3",
+                org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".3",
                 "{\"config\": "
                 + "{ \"uri\": \"http://my.custom.datatype/x-y-z-lat-lon-time\", "
                 + "\"fields\": [ "
@@ -1135,7 +1135,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
                 + "]}}");
         
         properties.setProperty(
-           com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".4",
+           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".4",
            "{\"config\": "
            + "{ \"uri\": \"http://my.custom.datatype/x-y-z-lat-lon-time-coord\", "
            + "\"fields\": [ "
@@ -1149,7 +1149,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
            + "]}}");
 
         properties.setProperty(
-                com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".5",
+                org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".5",
                 "{\"config\": "
                 + "{ \"uri\": \"http://my.custom.datatype/lat-lon\", "
                 + "\"fields\": [ "
@@ -1158,8 +1158,8 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
                 + "]}}");        
         
         properties.setProperty(
-                com.bigdata.rdf.store.AbstractLocalTripleStore.Options.VOCABULARY_CLASS,
-                "com.bigdata.rdf.sparql.ast.eval.service.GeoSpatialTestVocabulary");
+                org.embergraph.rdf.store.AbstractLocalTripleStore.Options.VOCABULARY_CLASS,
+                "org.embergraph.rdf.sparql.ast.eval.service.GeoSpatialTestVocabulary");
 
         return properties;
 

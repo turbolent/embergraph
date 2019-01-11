@@ -74,22 +74,22 @@ public class TestAll extends TestCase {
 //        retval.addTestSuite( TestCacheEntry.class );
 
         // Test LRU semantics.
-        //BLZG-1497 moved to com.bigdata.cache.lru
+        //BLZG-1497 moved to org.embergraph.cache.lru
         //suite.addTestSuite(TestLRUCache.class);
 
         // Test cache semantics with weak/soft reference values.
         suite.addTestSuite(TestWeakValueCache.class);
 
-        //BLZG-1497 moved to com.bigdata.cache.lru
+        //BLZG-1497 moved to org.embergraph.cache.lru
         //suite.addTestSuite(TestStoreAndAddressLRUCache.class);
 
         // Note: This implementation is not used.
 //        suite.addTestSuite(TestHardReferenceGlobalLRU.class);
 
-        //BLZG-1497 moved to com.bigdata.cache.lru
+        //BLZG-1497 moved to org.embergraph.cache.lru
         //suite.addTestSuite(TestHardReferenceGlobalLRURecycler.class);
 
-        //BLZG-1497 moved to com.bigdata.cache.lru
+        //BLZG-1497 moved to org.embergraph.cache.lru
         //suite.addTestSuite(TestHardReferenceGlobalLRURecyclerExplicitDeleteRequired.class);
 
         /*
@@ -111,10 +111,10 @@ public class TestAll extends TestCase {
          * support for memory cap. The cache can be configured with thread-lock
          * buffers or striped locks, so we test it both ways.
          */
-        //BLZG-1497 moved to com.bigdata.cache.lru
+        //BLZG-1497 moved to org.embergraph.cache.lru
         //suite.addTestSuite(TestBCHMGlobalLRU2WithThreadLocalBuffers.class);
 //        suite.addTestSuite(TestBCHMGlobalLRU2WithThreadLocalBuffersAndLIRS.class);
-        //BLZG-1497 moved to com.bigdata.cache.lru
+        //BLZG-1497 moved to org.embergraph.cache.lru
         //suite.addTestSuite(TestBCHMGlobalLRU2WithStripedLocks.class);
 //        suite.addTestSuite(TestBCHMGlobalLRU2WithStripedLocksAndLIRS.class);
 
@@ -155,7 +155,7 @@ public class TestAll extends TestCase {
             ExperimentDriver
                     .doMain(
                             new File(
-                                    "bigdata/src/test/com/bigdata/cache/StressTestGlobalLRU.xml"),
+                                    "bigdata/src/test/org/embergraph/cache/StressTestGlobalLRU.xml"),
                             1/* nruns */, true/* randomize */);
         }
     }

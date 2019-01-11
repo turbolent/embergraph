@@ -19,5 +19,5 @@ WHERE {
 
   # Request a hash join for the rdfs:label BGP.  
   hint:Prior hint:hashJoin "true" .
-  hint:Prior hint:com.bigdata.bop.IPredicate.keyOrder "PCSO" . # default is POCS
+  hint:Prior hint:org.embergraph.bop.IPredicate.keyOrder "PCSO" . # default is POCS
 }

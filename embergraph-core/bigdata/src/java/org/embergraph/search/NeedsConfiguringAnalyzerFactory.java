@@ -80,37 +80,37 @@ class NeedsConfiguringAnalyzerFactory implements IAnalyzerFactory {
 
 
 	private static final String ALL_LUCENE_NATURAL_LANGUAGES =  
-			"com.bigdata.search.ConfigurableAnalyzerFactory.analyzer.*.like=eng\n" +
-		    "com.bigdata.search.ConfigurableAnalyzerFactory.analyzer.por.analyzerClass=org.apache.lucene.analysis.br.BrazilianAnalyzer\n" +
-		    "com.bigdata.search.ConfigurableAnalyzerFactory.analyzer.pt.like=por\n" +
-		    "com.bigdata.search.ConfigurableAnalyzerFactory.analyzer.zho.analyzerClass=org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer\n" +
-		    "com.bigdata.search.ConfigurableAnalyzerFactory.analyzer.chi.like=zho\n" +
-		    "com.bigdata.search.ConfigurableAnalyzerFactory.analyzer.zh.like=zho\n" +
-		    "com.bigdata.search.ConfigurableAnalyzerFactory.analyzer.jpn.analyzerClass=org.apache.lucene.analysis.cjk.CJKAnalyzer\n" +
-		    "com.bigdata.search.ConfigurableAnalyzerFactory.analyzer.ja.like=jpn\n" +
-		    "com.bigdata.search.ConfigurableAnalyzerFactory.analyzer.kor.like=jpn\n" +
-		    "com.bigdata.search.ConfigurableAnalyzerFactory.analyzer.ko.like=kor\n" +
-		    "com.bigdata.search.ConfigurableAnalyzerFactory.analyzer.ces.analyzerClass=org.apache.lucene.analysis.cz.CzechAnalyzer\n" +
-		    "com.bigdata.search.ConfigurableAnalyzerFactory.analyzer.cze.like=ces\n" +
-		    "com.bigdata.search.ConfigurableAnalyzerFactory.analyzer.cs.like=ces\n" +
-		    "com.bigdata.search.ConfigurableAnalyzerFactory.analyzer.dut.analyzerClass=org.apache.lucene.analysis.nl.DutchAnalyzer\n" +
-		    "com.bigdata.search.ConfigurableAnalyzerFactory.analyzer.nld.like=dut\n" +
-		    "com.bigdata.search.ConfigurableAnalyzerFactory.analyzer.nl.like=dut\n" +
-		    "com.bigdata.search.ConfigurableAnalyzerFactory.analyzer.deu.analyzerClass=org.apache.lucene.analysis.de.GermanAnalyzer\n" +
-		    "com.bigdata.search.ConfigurableAnalyzerFactory.analyzer.ger.like=deu\n" +
-		    "com.bigdata.search.ConfigurableAnalyzerFactory.analyzer.de.like=deu\n" +
-		    "com.bigdata.search.ConfigurableAnalyzerFactory.analyzer.gre.analyzerClass=org.apache.lucene.analysis.el.GreekAnalyzer\n" +
-		    "com.bigdata.search.ConfigurableAnalyzerFactory.analyzer.ell.like=gre\n" +
-		    "com.bigdata.search.ConfigurableAnalyzerFactory.analyzer.el.like=gre\n" +
-		    "com.bigdata.search.ConfigurableAnalyzerFactory.analyzer.rus.analyzerClass=org.apache.lucene.analysis.ru.RussianAnalyzer\n" +
-		    "com.bigdata.search.ConfigurableAnalyzerFactory.analyzer.ru.like=rus\n" +
-		    "com.bigdata.search.ConfigurableAnalyzerFactory.analyzer.tha.analyzerClass=org.apache.lucene.analysis.th.ThaiAnalyzer\n" +
-		    "com.bigdata.search.ConfigurableAnalyzerFactory.analyzer.th.like=tha\n" +
-		    "com.bigdata.search.ConfigurableAnalyzerFactory.analyzer.eng.analyzerClass=org.apache.lucene.analysis.standard.StandardAnalyzer\n" +
-		    "com.bigdata.search.ConfigurableAnalyzerFactory.analyzer.en.like=eng\n";
+			"org.embergraph.search.ConfigurableAnalyzerFactory.analyzer.*.like=eng\n" +
+		    "org.embergraph.search.ConfigurableAnalyzerFactory.analyzer.por.analyzerClass=org.apache.lucene.analysis.br.BrazilianAnalyzer\n" +
+		    "org.embergraph.search.ConfigurableAnalyzerFactory.analyzer.pt.like=por\n" +
+		    "org.embergraph.search.ConfigurableAnalyzerFactory.analyzer.zho.analyzerClass=org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer\n" +
+		    "org.embergraph.search.ConfigurableAnalyzerFactory.analyzer.chi.like=zho\n" +
+		    "org.embergraph.search.ConfigurableAnalyzerFactory.analyzer.zh.like=zho\n" +
+		    "org.embergraph.search.ConfigurableAnalyzerFactory.analyzer.jpn.analyzerClass=org.apache.lucene.analysis.cjk.CJKAnalyzer\n" +
+		    "org.embergraph.search.ConfigurableAnalyzerFactory.analyzer.ja.like=jpn\n" +
+		    "org.embergraph.search.ConfigurableAnalyzerFactory.analyzer.kor.like=jpn\n" +
+		    "org.embergraph.search.ConfigurableAnalyzerFactory.analyzer.ko.like=kor\n" +
+		    "org.embergraph.search.ConfigurableAnalyzerFactory.analyzer.ces.analyzerClass=org.apache.lucene.analysis.cz.CzechAnalyzer\n" +
+		    "org.embergraph.search.ConfigurableAnalyzerFactory.analyzer.cze.like=ces\n" +
+		    "org.embergraph.search.ConfigurableAnalyzerFactory.analyzer.cs.like=ces\n" +
+		    "org.embergraph.search.ConfigurableAnalyzerFactory.analyzer.dut.analyzerClass=org.apache.lucene.analysis.nl.DutchAnalyzer\n" +
+		    "org.embergraph.search.ConfigurableAnalyzerFactory.analyzer.nld.like=dut\n" +
+		    "org.embergraph.search.ConfigurableAnalyzerFactory.analyzer.nl.like=dut\n" +
+		    "org.embergraph.search.ConfigurableAnalyzerFactory.analyzer.deu.analyzerClass=org.apache.lucene.analysis.de.GermanAnalyzer\n" +
+		    "org.embergraph.search.ConfigurableAnalyzerFactory.analyzer.ger.like=deu\n" +
+		    "org.embergraph.search.ConfigurableAnalyzerFactory.analyzer.de.like=deu\n" +
+		    "org.embergraph.search.ConfigurableAnalyzerFactory.analyzer.gre.analyzerClass=org.apache.lucene.analysis.el.GreekAnalyzer\n" +
+		    "org.embergraph.search.ConfigurableAnalyzerFactory.analyzer.ell.like=gre\n" +
+		    "org.embergraph.search.ConfigurableAnalyzerFactory.analyzer.el.like=gre\n" +
+		    "org.embergraph.search.ConfigurableAnalyzerFactory.analyzer.rus.analyzerClass=org.apache.lucene.analysis.ru.RussianAnalyzer\n" +
+		    "org.embergraph.search.ConfigurableAnalyzerFactory.analyzer.ru.like=rus\n" +
+		    "org.embergraph.search.ConfigurableAnalyzerFactory.analyzer.tha.analyzerClass=org.apache.lucene.analysis.th.ThaiAnalyzer\n" +
+		    "org.embergraph.search.ConfigurableAnalyzerFactory.analyzer.th.like=tha\n" +
+		    "org.embergraph.search.ConfigurableAnalyzerFactory.analyzer.eng.analyzerClass=org.apache.lucene.analysis.standard.StandardAnalyzer\n" +
+		    "org.embergraph.search.ConfigurableAnalyzerFactory.analyzer.en.like=eng\n";
 
 	private static final String LUCENE_STANDARD_ANALYZER = 
-			"com.bigdata.search.ConfigurableAnalyzerFactory.analyzer.*.analyzerClass=org.apache.lucene.analysis.standard.StandardAnalyzer\n";
+			"org.embergraph.search.ConfigurableAnalyzerFactory.analyzer.*.analyzerClass=org.apache.lucene.analysis.standard.StandardAnalyzer\n";
 	
 	static int loggerIdCounter = 0;
 

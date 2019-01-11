@@ -101,8 +101,8 @@ public class TestTicket473 extends TestCase {
         props.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS,NoAxioms.class.getName());
         props.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE,"false");
         props.setProperty(AbstractTripleStore.Options.JUSTIFY,"false");
-        props.setProperty(com.bigdata.rdf.store.AbstractTripleStore.Options.STATEMENT_IDENTIFIERS,"false");
-        props.setProperty(com.bigdata.rdf.store.AbstractTripleStore.Options.QUADS_MODE,"false");
+        props.setProperty(org.embergraph.rdf.store.AbstractTripleStore.Options.STATEMENT_IDENTIFIERS,"false");
+        props.setProperty(org.embergraph.rdf.store.AbstractTripleStore.Options.QUADS_MODE,"false");
         props.setProperty(org.embergraph.journal.Options.MAXIMUM_EXTENT,"209715200");
         props.setProperty(BigdataSail.Options.BUFFER_CAPACITY,"100000");
         props.setProperty(AbstractTripleStore.Options.BLOOM_FILTER,"false");

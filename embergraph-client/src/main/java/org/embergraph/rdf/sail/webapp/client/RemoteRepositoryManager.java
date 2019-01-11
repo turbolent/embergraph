@@ -1409,7 +1409,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     }
     
     /**
-     * Initiate an online backup using the {@link com.bigdata.rdf.sail.webapp.BackupServlet}.
+     * Initiate an online backup using the {@link org.embergraph.rdf.sail.webapp.BackupServlet}.
      * 
      * 
      * @param file  -- The name of the file for the backup. (default = "backup.jnl")
@@ -1422,7 +1422,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
 			final boolean block) throws Exception {
 		
 		/**
-		 * Use copies of these from {@link com.bigdata.rdf.sail.webapp.BackupServlet}
+		 * Use copies of these from {@link org.embergraph.rdf.sail.webapp.BackupServlet}
 		 * to avoid introducing cyclical dependency with bigdata-core.
 		 * 
 		 */

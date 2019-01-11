@@ -27,9 +27,9 @@
 
 package org.embergraph.concurrent;
 
-import static com.bigdata.concurrent.NonBlockingLockManager.RunState.Running;
-import static com.bigdata.concurrent.NonBlockingLockManager.RunState.Shutdown;
-import static com.bigdata.concurrent.NonBlockingLockManager.RunState.Starting;
+import static org.embergraph.concurrent.NonBlockingLockManager.RunState.Running;
+import static org.embergraph.concurrent.NonBlockingLockManager.RunState.Shutdown;
+import static org.embergraph.concurrent.NonBlockingLockManager.RunState.Starting;
 
 import java.lang.ref.WeakReference;
 import java.util.Arrays;

@@ -820,7 +820,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
      * @todo Optimize this to avoid the byte[] allocation.
      * 
      * @todo An alternative optimization would be to specify a variant of
-     *       {@link #get(int)} which accepts a com.bigdata.io.ByteArrayBuffer
+     *       {@link #get(int)} which accepts a org.embergraph.io.ByteArrayBuffer
      *       that is automatically extended to have sufficient capacity.
      */
     public int writeOn(final OutputStream os, final int index)

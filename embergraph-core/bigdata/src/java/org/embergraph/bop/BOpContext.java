@@ -1228,7 +1228,7 @@ public class BOpContext<E> extends BOpContextBase {
 
         //return new CloseableIteratorWrapper(
         final IChunkedStriterator itr1 =
-                new com.bigdata.striterator.ChunkedStriterator(src).addFilter(
+                new org.embergraph.striterator.ChunkedStriterator(src).addFilter(
 //                        new ChunkedFilter() {
                         new ChunkedFilter<IChunkedIterator<Object>, Object, Object>() {
 
@@ -1248,7 +1248,7 @@ public class BOpContext<E> extends BOpContextBase {
 
                             }
 
-                        }).addFilter(new com.bigdata.striterator.Resolver() {
+                        }).addFilter(new org.embergraph.striterator.Resolver() {
 
                     private static final long serialVersionUID = 1L;
 

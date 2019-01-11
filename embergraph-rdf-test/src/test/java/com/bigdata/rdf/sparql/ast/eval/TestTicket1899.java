@@ -21,7 +21,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
-package com.bigdata.rdf.sparql.ast.eval;
+package org.embergraph.rdf.sparql.ast.eval;
 
 import java.util.Properties;
 
@@ -205,10 +205,10 @@ public class TestTicket1899 extends AbstractDataDrivenSPARQLTestCase {
         properties.setProperty(org.embergraph.journal.Options.BUFFER_MODE, BufferMode.Transient.toString());
 
         // enable GeoSpatial index with default configuration
-        properties.setProperty(com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL, "true");
+        properties.setProperty(org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL, "true");
 
         properties.setProperty(
-            com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DEFAULT_DATATYPE,
+            org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DEFAULT_DATATYPE,
             "http://www.bigdata.com/rdf/geospatial/literals/v1#lat-lon");
         
         return properties;

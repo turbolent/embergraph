@@ -52,7 +52,7 @@ import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 /**
  * This compulsory AST transformation (not an optional optimizer!) enforces the
  * correct treatment of aggregates in ORDER BY clauses, according to the SPARQL
- * semantic, under the asumption that {@link com.bigdata.bop.solutions.MemorySortOp} does not have to deal
+ * semantic, under the asumption that {@link org.embergraph.bop.solutions.MemorySortOp} does not have to deal
  * with aggregates. In a nutshell, this is done by introducing aliases for the
  * aggregate expressions and thus pushing the computation of the aggregates to
  * where they can already be processed.

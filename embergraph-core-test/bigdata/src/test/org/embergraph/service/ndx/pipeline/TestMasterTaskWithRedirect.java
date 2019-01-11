@@ -409,7 +409,7 @@ public class TestMasterTaskWithRedirect extends AbstractMasterTestCase {
              * 
              * <pre>
              * junit.framework.AssertionFailedError: chunksOut expected:<2> but was:<0>
-             *     at com.bigdata.service.ndx.pipeline.TestMasterTaskWithRedirect.test_startWriteRedirectWithReopenStop(TestMasterTaskWithRedirect.java:399)             *
+             *     at org.embergraph.service.ndx.pipeline.TestMasterTaskWithRedirect.test_startWriteRedirectWithReopenStop(TestMasterTaskWithRedirect.java:399)             *
              * </pre>
              */
             assertEquals("chunksOut", 2, subtaskStats.chunksOut.get());

@@ -49,7 +49,7 @@ public class TestAbstractHostLBSPolicy extends TestCase2 {
 
     @Override
     protected void setUp() throws Exception {
-        nextPort = new AtomicInteger(Config.BLAZEGRAPH_HTTP_PORT);
+        nextPort = new AtomicInteger(Config.HTTP_PORT);
       
     }
 

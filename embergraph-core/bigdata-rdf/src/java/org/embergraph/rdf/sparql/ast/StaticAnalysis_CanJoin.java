@@ -45,7 +45,7 @@ import org.embergraph.rdf.sparql.ast.ssets.ISolutionSetManager;
  * shared variable and if they can join on an variable which is indirectly
  * shared through constraints which can be attached to that join.
  * <p>
- * Note: This is a port of com.bigdata.bop.joinGraph.PartitionedJoinGroup
+ * Note: This is a port of org.embergraph.bop.joinGraph.PartitionedJoinGroup
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: StaticAnalysis_CanJoin.java 5378 2011-10-20 20:37:08Z

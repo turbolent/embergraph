@@ -48,7 +48,7 @@ import org.embergraph.rdf.sail.BigdataSail.Options;
  * <p>
  * This test case will delegate to an underlying backing store. You can specify
  * this store via a JVM property as follows:
- * <code>-DtestClass=com.bigdata.rdf.sail.TestBigdataSailWithQuads</code>
+ * <code>-DtestClass=org.embergraph.rdf.sail.TestBigdataSailWithQuads</code>
  * 
  * @see https://jira.blazegraph.com/browse/BLZG-1889
  * 		ArrayIndexOutOfBound Exception

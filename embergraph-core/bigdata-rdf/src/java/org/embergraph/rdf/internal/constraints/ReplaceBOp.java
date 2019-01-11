@@ -135,7 +135,7 @@ public class ReplaceBOp extends IVValueExpression<IV> implements INeedsMateriali
     }
 
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      */
     public ReplaceBOp(final ReplaceBOp op) {
         super(op);

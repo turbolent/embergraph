@@ -63,7 +63,7 @@ public class AbstractResourceManagerBootstrapTestCase extends TestCase2 {
 			log.info("Setting " + Options.DATA_DIR + "=" + dataDir);
 
         properties.setProperty(
-                com.bigdata.resources.ResourceManager.Options.DATA_DIR, dataDir
+                org.embergraph.resources.ResourceManager.Options.DATA_DIR, dataDir
                         .toString());
 
 //        // disable the write cache to avoid memory leak in the test suite.

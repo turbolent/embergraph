@@ -208,20 +208,20 @@ public class TestQueryHints extends AbstractDataDrivenSPARQLTestCase {
      *   hint:Group hint:maxParallel 10 .
      * 
      *   # query hint binds for the group and any subgroups.
-     *   hint:GroupAndSubGroups hint:com.bigdata.bop.PipelineOp.pipelineQueueCapacity 20 .
+     *   hint:GroupAndSubGroups hint:org.embergraph.bop.PipelineOp.pipelineQueueCapacity 20 .
      * 
      *   # query hint binds for the (sub)query but does not effect other (sub)queries.
-     *   hint:SubQuery hint:com.bigdata.relation.accesspath.BlockingBuffer.chunkOfChunksCapacity 20 .
+     *   hint:SubQuery hint:org.embergraph.relation.accesspath.BlockingBuffer.chunkOfChunksCapacity 20 .
      * 
      *   ?x rdfs:label ?o .
      * 
      *   ?x rdf:type foaf:Person .
      * 
      *   # query hint binds for the immediately proceeding basic graph pattern.
-     *   hint:Prior hint:com.bigdata.relation.accesspath.IBuffer.chunkCapacity 1000 .
+     *   hint:Prior hint:org.embergraph.relation.accesspath.IBuffer.chunkCapacity 1000 .
      * 
      *   # query hint binds for the immediately proceeding basic graph pattern.
-     *   #hint:Prior hint:com.bigdata.bop.IPredicate.fullyBufferedReadThreshold 5000 .
+     *   #hint:Prior hint:org.embergraph.bop.IPredicate.fullyBufferedReadThreshold 5000 .
      * 
      * }
      * </pre>
@@ -552,7 +552,7 @@ public class TestQueryHints extends AbstractDataDrivenSPARQLTestCase {
                 astContainer
                         .getQueryPlan()
                         .getProperty(
-                                com.bigdata.bop.engine.QueryEngine.Annotations.QUERY_ID));
+                                org.embergraph.bop.engine.QueryEngine.Annotations.QUERY_ID));
 
     }
 
@@ -667,7 +667,7 @@ public class TestQueryHints extends AbstractDataDrivenSPARQLTestCase {
      *   hint:Prior hint:hashJoin "true" .
      * 
      *   # Override the statement index.
-     *   hint:Prior hint:com.bigdata.bop.IPredicate.keyOrder "PCSO" .
+     *   hint:Prior hint:org.embergraph.bop.IPredicate.keyOrder "PCSO" .
      * 
      * }
      * </pre>
@@ -914,7 +914,7 @@ public class TestQueryHints extends AbstractDataDrivenSPARQLTestCase {
      * 
      *   ?x rdfs:label ?o .
      *   # Override the vector size for the previous join.
-     *   hint:Prior hint:com.bigdata.relation.accesspath.IBuffer.chunkCapacity 1001 .
+     *   hint:Prior hint:org.embergraph.relation.accesspath.IBuffer.chunkCapacity 1001 .
      *   
      *   { 
      *      SELECT ?x {

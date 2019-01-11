@@ -133,7 +133,7 @@ public class JVMDistinctFilter implements IDistinctFilter {
     }
 
     /* (non-Javadoc)
-     * @see com.bigdata.bop.join.IDistinctFilter#clear()
+     * @see org.embergraph.bop.join.IDistinctFilter#clear()
      */
     @Override
     public void release() {
@@ -189,7 +189,7 @@ public class JVMDistinctFilter implements IDistinctFilter {
     }
 
     /* (non-Javadoc)
-     * @see com.bigdata.bop.join.IDistinctFilter#accept(com.bigdata.bop.IBindingSet)
+     * @see org.embergraph.bop.join.IDistinctFilter#accept(org.embergraph.bop.IBindingSet)
      */
     @Override
     public IBindingSet accept(final IBindingSet bset) {

@@ -145,8 +145,8 @@ public class TestHistoryInstrument extends TestCase2 {
          * TODO There is a stochastic test failure in CI (pretty rare). If fails on the next with:
         
          java.lang.IllegalArgumentException: timestamp=0, value=12.0
-           at com.bigdata.counters.History.add(History.java:726)
-           at com.bigdata.counters.TestHistoryInstrument.test_historyOverflow(TestHistoryInstrument.java:143)
+           at org.embergraph.counters.History.add(History.java:726)
+           at org.embergraph.counters.TestHistoryInstrument.test_historyOverflow(TestHistoryInstrument.java:143)
         */   
         h.add(t0,12d);
 

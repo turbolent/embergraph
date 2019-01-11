@@ -398,31 +398,31 @@ abstract public class AbstractRabaCoderTestCase extends TestCase2 {
      * 
      * <pre>
      * junit.framework.AssertionFailedError: search([44, 186, 169, 175, 191, 31, 36, 227]): expectedIndex=1, actualIndex=-1,
-     * expected=com.bigdata.btree.raba.ReadOnlyKeysRaba{ capacity=3, size=2, isKeys=true, isReadOnly=true, [
+     * expected=org.embergraph.btree.raba.ReadOnlyKeysRaba{ capacity=3, size=2, isKeys=true, isReadOnly=true, [
      * [44, 186, 169, 175, 191, 31, 36, 12],
      * [44, 186, 169, 175, 191, 31, 36, 227]]},
-     * actual=com.bigdata.btree.raba.codec.CanonicalHuffmanRabaCoder$RabaDecoder{ capacity=2, size=2, isKeys=true, isReadOnly=true, [
+     * actual=org.embergraph.btree.raba.codec.CanonicalHuffmanRabaCoder$RabaDecoder{ capacity=2, size=2, isKeys=true, isReadOnly=true, [
      * [44, 186, 169, 175, 191, 31, 36, 12],
      * [44, 186, 169, 175, 191, 31, 36, 227]]}
      *     at junit.framework.Assert.fail(Assert.java:47)
-     *     at com.bigdata.btree.AbstractBTreeTestCase.assertSameRaba(AbstractBTreeTestCase.java:583)
-     *     at com.bigdata.btree.raba.codec.AbstractRabaCoderTestCase.doRoundTripTest(AbstractRabaCoderTestCase.java:499)
-     *     at com.bigdata.btree.raba.codec.AbstractRabaCoderTestCase.doRandomRoundTripTest(AbstractRabaCoderTestCase.java:487)
-     *     at com.bigdata.btree.raba.codec.AbstractRabaCoderTestCase.test_entryCount2(AbstractRabaCoderTestCase.java:247)
+     *     at org.embergraph.btree.AbstractBTreeTestCase.assertSameRaba(AbstractBTreeTestCase.java:583)
+     *     at org.embergraph.btree.raba.codec.AbstractRabaCoderTestCase.doRoundTripTest(AbstractRabaCoderTestCase.java:499)
+     *     at org.embergraph.btree.raba.codec.AbstractRabaCoderTestCase.doRandomRoundTripTest(AbstractRabaCoderTestCase.java:487)
+     *     at org.embergraph.btree.raba.codec.AbstractRabaCoderTestCase.test_entryCount2(AbstractRabaCoderTestCase.java:247)
      * </pre>
      * 
      * <pre>
      * junit.framework.AssertionFailedError: search([44, 197, 214, 208, 192, 31, 36, 156]): expectedIndex=1, actualIndex=-1,
-     * expected=com.bigdata.btree.raba.ReadOnlyKeysRaba{ capacity=2, size=2, isKeys=true, isReadOnly=true, [
+     * expected=org.embergraph.btree.raba.ReadOnlyKeysRaba{ capacity=2, size=2, isKeys=true, isReadOnly=true, [
      * [44, 197, 214, 208, 192, 31, 36, 12],
      * [44, 197, 214, 208, 192, 31, 36, 156]]},
-     * actual=com.bigdata.btree.raba.codec.CanonicalHuffmanRabaCoder$RabaDecoder{ capacity=2, size=2, isKeys=true, isReadOnly=true, [
+     * actual=org.embergraph.btree.raba.codec.CanonicalHuffmanRabaCoder$RabaDecoder{ capacity=2, size=2, isKeys=true, isReadOnly=true, [
      * [44, 197, 214, 208, 192, 31, 36, 12],
      * [44, 197, 214, 208, 192, 31, 36, 156]]}
      *     at junit.framework.Assert.fail(Assert.java:47)
-     *     at com.bigdata.btree.AbstractBTreeTestCase.assertSameRaba(AbstractBTreeTestCase.java:583)
-     *     at com.bigdata.btree.raba.codec.AbstractRabaCoderTestCase.doRoundTripTest(AbstractRabaCoderTestCase.java:538)
-     *     at com.bigdata.btree.raba.codec.AbstractRabaCoderTestCase.test_error2(AbstractRabaCoderTestCase.java:325)
+     *     at org.embergraph.btree.AbstractBTreeTestCase.assertSameRaba(AbstractBTreeTestCase.java:583)
+     *     at org.embergraph.btree.raba.codec.AbstractRabaCoderTestCase.doRoundTripTest(AbstractRabaCoderTestCase.java:538)
+     *     at org.embergraph.btree.raba.codec.AbstractRabaCoderTestCase.test_error2(AbstractRabaCoderTestCase.java:325)
      * </pre>
      */
     public void test_error2() {
@@ -850,7 +850,7 @@ abstract public class AbstractRabaCoderTestCase extends TestCase2 {
 
         // based on a tokenized source code file.
         a = new TokenizeKeysGenerator(
-                "bigdata/src/test/com/bigdata/btree/raba/codec/AbstractRabaCoderTestCase.java")
+                "bigdata/src/test/org/embergraph/btree/raba/codec/AbstractRabaCoderTestCase.java")
                 .generateKeys(size);
         
         /*

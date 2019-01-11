@@ -77,7 +77,7 @@ public class TestAll extends TestCase {
         suite.addTestSuite(TestMetadataIndex.class);
 
         // tests of the client's view of a scale-out index.
-        suite.addTest(com.bigdata.service.ndx.TestAll.suite());
+        suite.addTest(org.embergraph.service.ndx.TestAll.suite());
         
         // test ability to re-open an embedded federation.
         suite.addTestSuite(TestRestartSafe.class);
@@ -97,9 +97,9 @@ public class TestAll extends TestCase {
         // test scale-out operator semantics. 
         /*
          * Note: this was being run 3 times (!). It is invoked out of the
-         * com.bigdata.bop test suite now.
+         * org.embergraph.bop test suite now.
          */
-//        suite.addTest(com.bigdata.bop.fed.TestAll.suite());
+//        suite.addTest(org.embergraph.bop.fed.TestAll.suite());
         
         /*
          * Stress test of concurrent clients writing on a single data service.

@@ -83,25 +83,25 @@ public class TestDeepCopy extends TestCase2 {
      * maintained by hand.
      */
     static final Class<?>[] all = { //
-        // com.bigdata.bop
+        // org.embergraph.bop
             BOp.class,//
             BOpBase.class,//
             Predicate.class,//
             Constant.class,//
             Var.class,//
             Bind.class,//
-            // com.bigdata.bop.constraint
+            // org.embergraph.bop.constraint
             EQ.class,//
             NE.class,//
             EQConstant.class,//
             NEConstant.class,//
             OR.class,//
             INBinarySearch.class,//
-            // com.bigdata.rdf.spo
+            // org.embergraph.rdf.spo
             SPOPredicate.class,//
             SPOStarJoin.class,//
-//            com.bigdata.rdf.magic.MagicPredicate.class,//
-            // com.bigdata.rdf.internal.constraint
+//            org.embergraph.rdf.magic.MagicPredicate.class,//
+            // org.embergraph.rdf.internal.constraint
             CompareBOp.class,//
             IsInlineBOp.class,//
             IsLiteralBOp.class,//
@@ -112,7 +112,7 @@ public class TestDeepCopy extends TestCase2 {
             NotBOp.class,
             OrBOp.class,
             SameTermBOp.class,
-            // com.bigdata.rdf.inf
+            // org.embergraph.rdf.inf
             RejectAnythingSameAsItself.class,
 
     };

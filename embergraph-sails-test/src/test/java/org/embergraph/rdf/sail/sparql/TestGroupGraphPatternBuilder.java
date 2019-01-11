@@ -34,17 +34,10 @@ import org.openrdf.model.impl.LiteralImpl;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-import org.embergraph.rdf.internal.DTE;
 import org.embergraph.rdf.internal.ILexiconConfiguration;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.internal.InlineUnsignedIntegerURIHandler;
-import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.XSD;
 import org.embergraph.rdf.internal.constraints.ComputedIN;
-import org.embergraph.rdf.internal.impl.TermId;
-import org.embergraph.rdf.internal.impl.literal.MockedValueIV;
-import org.embergraph.rdf.internal.impl.literal.XSDUnsignedLongIV;
-import org.embergraph.rdf.model.BigdataLiteral;
 import org.embergraph.rdf.model.BigdataValue;
 import org.embergraph.rdf.sail.sparql.ast.ParseException;
 import org.embergraph.rdf.sail.sparql.ast.TokenMgrError;
@@ -63,7 +56,6 @@ import org.embergraph.rdf.sparql.ast.UnionNode;
 import org.embergraph.rdf.sparql.ast.ValueExpressionNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
-import org.embergraph.rdf.store.TestInsertRate.XMLSchema;
 
 /**
  * Test suite for translating the openrdf SPARQL AST nodes for

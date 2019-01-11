@@ -186,27 +186,27 @@ public class TestOwlGOM extends ProxyGOMTest {
 //				IndexMetadata.Options.WRITE_RETENTION_QUEUE_CAPACITY, "200");
 //		properties
 //				.setProperty(
-//						"com.bigdata.namespace.kb.spo.SPO.com.bigdata.btree.BTree.branchingFactor",
+//						"org.embergraph.namespace.kb.spo.SPO.org.embergraph.btree.BTree.branchingFactor",
 //						"200");
 //		properties
 //				.setProperty(
-//						"com.bigdata.namespace.kb.spo.POS.com.bigdata.btree.BTree.branchingFactor",
+//						"org.embergraph.namespace.kb.spo.POS.org.embergraph.btree.BTree.branchingFactor",
 //						"200");
 //		properties
 //				.setProperty(
-//						"com.bigdata.namespace.kb.spo.OSP.com.bigdata.btree.BTree.branchingFactor",
+//						"org.embergraph.namespace.kb.spo.OSP.org.embergraph.btree.BTree.branchingFactor",
 //						"200");
 //		properties
 //				.setProperty(
-//						"com.bigdata.namespace.kb.spo.BLOBS.com.bigdata.btree.BTree.branchingFactor",
+//						"org.embergraph.namespace.kb.spo.BLOBS.org.embergraph.btree.BTree.branchingFactor",
 //						"200");
 //		properties
 //				.setProperty(
-//						"com.bigdata.namespace.kb.lex.TERM2ID.com.bigdata.btree.BTree.branchingFactor",
+//						"org.embergraph.namespace.kb.lex.TERM2ID.org.embergraph.btree.BTree.branchingFactor",
 //						"200");
 //		properties
 //				.setProperty(
-//						"com.bigdata.namespace.kb.lex.ID2TERM.com.bigdata.btree.BTree.branchingFactor",
+//						"org.embergraph.namespace.kb.lex.ID2TERM.org.embergraph.btree.BTree.branchingFactor",
 //						"200");
 //
 //		// instantiate a sail and a Sesame repository

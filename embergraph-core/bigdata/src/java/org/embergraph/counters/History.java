@@ -941,11 +941,11 @@ public class History<T> {
                  * task, but the problem is clearly in the History class itself:
                  * 
                  * java.lang.AssertionError: size=1000, capacity=24
-    at com.bigdata.counters.History.add(History.java:938)
-    at com.bigdata.counters.History.add(History.java:894)
-    at com.bigdata.counters.HistoryInstrument.add(HistoryInstrument.java:130)
-    at com.bigdata.service.LoadBalancerService$UpdateTask.setupCounters(LoadBalancerService.java:1668)
-    at com.bigdata.service.LoadBalancerService$UpdateTask.run(LoadBalancerService.java:843)
+    at org.embergraph.counters.History.add(History.java:938)
+    at org.embergraph.counters.History.add(History.java:894)
+    at org.embergraph.counters.HistoryInstrument.add(HistoryInstrument.java:130)
+    at org.embergraph.service.LoadBalancerService$UpdateTask.setupCounters(LoadBalancerService.java:1668)
+    at org.embergraph.service.LoadBalancerService$UpdateTask.run(LoadBalancerService.java:843)
     at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:441)
     at java.util.concurrent.FutureTask$Sync.innerRunAndReset(FutureTask.java:317)
     at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:150)

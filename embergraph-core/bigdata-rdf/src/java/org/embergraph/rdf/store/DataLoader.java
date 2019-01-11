@@ -85,7 +85,7 @@ import org.embergraph.rdf.spo.SPO;
  * Note: This class is not efficient for scale-out.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @see com.bigdata.rdf.load.MappedRDFDataLoadMaster
+ * @see org.embergraph.rdf.load.MappedRDFDataLoadMaster
  */
 public class DataLoader {
 
@@ -2218,16 +2218,16 @@ public class DataLoader {
                     // HttpPlugin
                     org.embergraph.journal.HttpPlugin.Options.HTTPD_PORT,
                     // DirectBufferPool options.
-                    com.bigdata.io.DirectBufferPool.Options.BUFFER_CAPACITY,
+                    org.embergraph.io.DirectBufferPool.Options.BUFFER_CAPACITY,
                     // B+Tree
-                    com.bigdata.btree.IndexMetadata.Options.WRITE_RETENTION_QUEUE_CAPACITY,
+                    org.embergraph.btree.IndexMetadata.Options.WRITE_RETENTION_QUEUE_CAPACITY,
                     // Index procedure // FIXME Remove or replace with symbolic Options.
                     // @see BLZG-1537 (Schedule more IOs when loading data)
-                    "com.bigdata.btree.proc.AbstractKeyArrayIndexProcedure.maxReaders",
-                    "com.bigdata.btree.proc.AbstractKeyArrayIndexProcedure.skipCount",
-                    "com.bigdata.btree.proc.AbstractKeyArrayIndexProcedure.spannedRangeMultiplier",
-                    "com.bigdata.btree.proc.AbstractKeyArrayIndexProcedure.batchSize",
-                    "com.bigdata.btree.proc.AbstractKeyArrayIndexProcedure.queueCapacity",
+                    "org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure.maxReaders",
+                    "org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure.skipCount",
+                    "org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure.spannedRangeMultiplier",
+                    "org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure.batchSize",
+                    "org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure.queueCapacity",
 
             };
             for (String s : overrides) {

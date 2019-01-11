@@ -41,7 +41,7 @@ import junit.framework.TestCase2;
  * @version $Id$
  * 
  * @deprecated This is currently duplicating a class by the same name in
- *             com.bigdata.io in the JOURNAL_HA_BRANCH. Those classes should be
+ *             org.embergraph.io in the JOURNAL_HA_BRANCH. Those classes should be
  *             reconciled.
  *             <p>
  *             I have added {@link #fillBufferWithRandomData(ByteBuffer)} to

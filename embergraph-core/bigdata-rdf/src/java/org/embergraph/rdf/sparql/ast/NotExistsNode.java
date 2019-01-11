@@ -58,7 +58,7 @@ public class NotExistsNode extends SubqueryFunctionNodeBase {
     }
 
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      */
     public NotExistsNode(NotExistsNode op) {
         super(op);

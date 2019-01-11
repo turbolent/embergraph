@@ -21,7 +21,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-package com.bigdata.rdf.sparql.ast.eval;
+package org.embergraph.rdf.sparql.ast.eval;
 
 import java.util.Properties;
 
@@ -72,11 +72,11 @@ public class TestTicket1591 extends AbstractDataDrivenSPARQLTestCase {
 
       properties.setProperty(
           AbstractTripleStore.Options.VOCABULARY_CLASS, 
-          "com.bigdata.rdf.vocab.TestVocabulary_BLZG1591");
+          "org.embergraph.rdf.vocab.TestVocabulary_BLZG1591");
 
       properties.setProperty(
           AbstractTripleStore.Options.INLINE_URI_FACTORY_CLASS, 
-          "com.bigdata.rdf.vocab.TestUriInlineFactory_BLZG1591");
+          "org.embergraph.rdf.vocab.TestUriInlineFactory_BLZG1591");
 
       return properties;
 

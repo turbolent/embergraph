@@ -293,7 +293,7 @@ public class TestRemoteAccessPath extends AbstractEmbeddedFederationTestCase {
                 Var.var("name"), Var.var("value") }, NV
                 .asMap(new NV[] {//
                         new NV(Annotations.RELATION_NAME, new String[] { namespace }),//
-                        new NV(com.bigdata.bop.IPredicate.Annotations.TIMESTAMP, tx),//
+                        new NV(org.embergraph.bop.IPredicate.Annotations.TIMESTAMP, tx),//
                         new NV(Annotations.REMOTE_ACCESS_PATH, true),//
                         // Note: turns off shard-wise parallelism!
                         new NV(Annotations.FLAGS,IRangeQuery.DEFAULT),//
@@ -359,7 +359,7 @@ public class TestRemoteAccessPath extends AbstractEmbeddedFederationTestCase {
                 new Constant<String>("John"), Var.var("value") }, NV
                 .asMap(new NV[] {//
                         new NV(Annotations.RELATION_NAME, new String[] { namespace }),//
-                        new NV(com.bigdata.bop.IPredicate.Annotations.TIMESTAMP, tx),//
+                        new NV(org.embergraph.bop.IPredicate.Annotations.TIMESTAMP, tx),//
                         new NV(Annotations.REMOTE_ACCESS_PATH, true),//
                 }));
 
@@ -417,7 +417,7 @@ public class TestRemoteAccessPath extends AbstractEmbeddedFederationTestCase {
                 new Constant<String>("Mary"), Var.var("value") }, NV
                 .asMap(new NV[] {//
                         new NV(Annotations.RELATION_NAME, new String[] { namespace }),//
-                        new NV(com.bigdata.bop.IPredicate.Annotations.TIMESTAMP, tx),//
+                        new NV(org.embergraph.bop.IPredicate.Annotations.TIMESTAMP, tx),//
                         new NV(Annotations.REMOTE_ACCESS_PATH, true),//
                 }));
 

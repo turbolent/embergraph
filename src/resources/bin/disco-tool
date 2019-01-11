@@ -9,7 +9,7 @@ def usage():
     str = """Usage: %s [options]
 
 Convenient command line utility that executes the class
-com.bigdata.disco.DiscoveryTool to perform service
+org.embergraph.disco.DiscoveryTool to perform service
 discovery based on lookup groups, locators, and/or the
 service type itself.
 
@@ -100,7 +100,7 @@ Examples:
     Show information about the quorum peer service (zookeeper),
     using any lookup service(s) with the group name "foo" (note
     that the fully-qualified service interface name for that
-    service object is com.bigdata.service.QuorumPeerService):
+    service object is org.embergraph.service.QuorumPeerService):
         $ disco-tool -g foo -s QuorumPeerService
 
     Write discovery information gathered over 30 seconds into the file
@@ -149,7 +149,7 @@ app_paths = Paths(
             "var/config/logging/disco-logging.properties",
         "appHome": ""})
 
-java_class = "com.bigdata.disco.DiscoveryTool"
+java_class = "org.embergraph.disco.DiscoveryTool"
 
 if __name__ == '__main__':
     err = None

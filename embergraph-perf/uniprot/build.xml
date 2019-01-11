@@ -24,14 +24,14 @@
 
 	<!-- Note: For scale-out, split the data files and use MappedRDFDataLoadMaster. -->
 	<target name="run-load" depends="clean, prepare">
-		<java classname="com.bigdata.rdf.store.DataLoader" fork="true" failonerror="true">
+		<java classname="org.embergraph.rdf.store.DataLoader" fork="true" failonerror="true">
 			<arg line="-namespace ${namespace} ${journalPropertyFile} ${dataFiles}" />
 			<!-- specify/override the journal file name. -->
 			<!-- uniprot has datatype validation errors so we set stopAtFirstError=false -->
 			<jvmarg line="${queryJvmArgs}
-				-Dcom.bigdata.journal.AbstractJournal.file=${journalFile}
-				-Dcom.bigdata.rdf.rio.RDFParserOptions.stopAtFirstError=false
-				-Dcom.bigdata.rdf.store.DataLoader.bufferCapacity=1000000
+				-Dorg.embergraph.journal.AbstractJournal.file=${journalFile}
+				-Dorg.embergraph.rdf.rio.RDFParserOptions.stopAtFirstError=false
+				-Dorg.embergraph.rdf.store.DataLoader.bufferCapacity=1000000
 				" />
 			<classpath>
 				<path refid="runtime.classpath" />
@@ -40,11 +40,11 @@
 	</target>
 
 	<target name="start-nano-server" depends="prepare" description="Start a small http server fronting for a bigdata database instance.">
-		<java classname="com.bigdata.rdf.sail.webapp.NanoSparqlServer" fork="true" failonerror="true">
+		<java classname="org.embergraph.rdf.sail.webapp.NanoSparqlServer" fork="true" failonerror="true">
 			<arg line="${nanoServerPort} ${namespace} ${journalPropertyFile}" />
 			<!-- specify/override the journal file name. -->
 			<jvmarg line="${queryJvmArgs}
-				-Dcom.bigdata.journal.AbstractJournal.file=${journalFile}
+				-Dorg.embergraph.journal.AbstractJournal.file=${journalFile}
 			" />
 			<classpath>
 				<path refid="runtime.classpath" />

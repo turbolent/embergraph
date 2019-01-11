@@ -77,7 +77,7 @@ public class StrBOp extends IVValueExpression<IV>
     }
 
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      */
     public StrBOp(final StrBOp op) {
         super(op);

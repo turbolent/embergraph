@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * Created on Oct 26, 2011
  */
 
-package com.bigdata.rdf.sparql.ast.eval;
+package org.embergraph.rdf.sparql.ast.eval;
 
 import java.util.Iterator;
 
@@ -143,7 +143,7 @@ public class TestHashJoin extends AbstractDataDrivenSPARQLTestCase {
      * 
      *   # Request a hash join for the rdfs:label BGP.  
      *   hint:Prior hint:hashJoin "true" .
-     *   hint:Prior hint:com.bigdata.bop.IPredicate.keyOrder "PCSO" . # default is POCS
+     *   hint:Prior hint:org.embergraph.bop.IPredicate.keyOrder "PCSO" . # default is POCS
      * }
      * </pre>
      * 

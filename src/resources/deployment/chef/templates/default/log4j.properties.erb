@@ -12,18 +12,18 @@ log4j.rootCategory=WARN, file
 
 # Loggers.
 # Note: logging here at INFO or DEBUG will significantly impact throughput!
-log4j.logger.com.bigdata=WARN
-log4j.logger.com.bigdata.btree=WARN
-log4j.logger.com.bigdata.counters.History=ERROR
-log4j.logger.com.bigdata.counters.XMLUtility$MyHandler=ERROR
-log4j.logger.com.bigdata.counters.query.CounterSetQuery=INFO
-log4j.logger.com.bigdata.journal.CompactTask=INFO
-log4j.logger.com.bigdata.relation.accesspath.BlockingBuffer=ERROR
-log4j.logger.com.bigdata.rdf.load=INFO
-log4j.logger.com.bigdata.resources.AsynchronousOverflowTask=INFO
+log4j.logger.org.embergraph=WARN
+log4j.logger.org.embergraph.btree=WARN
+log4j.logger.org.embergraph.counters.History=ERROR
+log4j.logger.org.embergraph.counters.XMLUtility$MyHandler=ERROR
+log4j.logger.org.embergraph.counters.query.CounterSetQuery=INFO
+log4j.logger.org.embergraph.journal.CompactTask=INFO
+log4j.logger.org.embergraph.relation.accesspath.BlockingBuffer=ERROR
+log4j.logger.org.embergraph.rdf.load=INFO
+log4j.logger.org.embergraph.resources.AsynchronousOverflowTask=INFO
 
 # Normal data loader (single threaded).
-# log4j.logger.com.bigdata.rdf.store.DataLoader=INFO
+# log4j.logger.org.embergraph.rdf.store.DataLoader=INFO
 
 
 # file
@@ -53,8 +53,8 @@ log4j.appender.dest1.layout.ConversionPattern=%d{MMM dd, yyyy HH:mm:ss} %-5p: %F
 #
 ### 
 ## Rule execution log. This is a formatted log file (comma delimited).
-log4j.logger.com.bigdata.relation.rule.eval.RuleLog=INFO,ruleLog
-log4j.additivity.com.bigdata.relation.rule.eval.RuleLog=false
+log4j.logger.org.embergraph.relation.rule.eval.RuleLog=INFO,ruleLog
+log4j.additivity.org.embergraph.relation.rule.eval.RuleLog=false
 log4j.appender.ruleLog=org.apache.log4j.FileAppender
 log4j.appender.ruleLog.Threshold=ALL
 log4j.appender.ruleLog.File=rules.log
@@ -69,8 +69,8 @@ log4j.appender.ruleLog.layout.ConversionPattern=%m
 #
 ### 
 ## Summary query evaluation log (tab delimited file). Uncomment the next line to enable
-##log4j.logger.com.bigdata.bop.engine.QueryLog=INFO,queryLog
-#log4j.additivity.com.bigdata.bop.engine.QueryLog=false
+##log4j.logger.org.embergraph.bop.engine.QueryLog=INFO,queryLog
+#log4j.additivity.org.embergraph.bop.engine.QueryLog=false
 #log4j.appender.queryLog=org.apache.log4j.FileAppender
 #log4j.appender.queryLog.Threshold=ALL
 #log4j.appender.queryLog.File=<%= node['bigdata'][:log_dir] %>/queryLog.csv
@@ -84,8 +84,8 @@ log4j.appender.ruleLog.layout.ConversionPattern=%m
 #
 ### 
 ## BOp run state trace (tab delimited file).  Uncomment the next line to enable.
-##log4j.logger.com.bigdata.bop.engine.RunState$TableLog=INFO,queryRunStateLog
-#log4j.additivity.com.bigdata.bop.engine.RunState$TableLog=false
+##log4j.logger.org.embergraph.bop.engine.RunState$TableLog=INFO,queryRunStateLog
+#log4j.additivity.org.embergraph.bop.engine.RunState$TableLog=false
 #log4j.appender.queryRunStateLog=org.apache.log4j.FileAppender
 #log4j.appender.queryRunStateLog.Threshold=ALL
 #log4j.appender.queryRunStateLog.File=<%= node['bigdata'][:log_dir] %>/queryRunState.log

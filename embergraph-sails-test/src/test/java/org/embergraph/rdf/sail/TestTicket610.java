@@ -42,7 +42,7 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * To run this test case, specify the following JVM property:
- * <code>-DtestClass=com.bigdata.rdf.sail.TestBigdataSailWithoutSids</code>
+ * <code>-DtestClass=org.embergraph.rdf.sail.TestBigdataSailWithoutSids</code>
  *  
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$

@@ -45,7 +45,7 @@ import org.embergraph.rdf.sail.webapp.client.RemoteRepositoryManager;
 public class TestBackupServlet<S extends IIndexManager> extends
 		AbstractTestNanoSparqlClient<S> {
 
-	final static String BASE = "com/bigdata/rdf/sail/webapp/";
+	final static String BASE = "org/embergraph/rdf/sail/webapp/";
 
 	public TestBackupServlet() {
 

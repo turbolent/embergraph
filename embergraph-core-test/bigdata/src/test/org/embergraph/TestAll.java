@@ -89,56 +89,56 @@ public class TestAll extends TestCase {
         final TestSuite suite = new TestSuite("bigdata");
 
         // core bigdata packages.
-        suite.addTest( com.bigdata.cache.TestAll.suite() );
-        suite.addTest( com.bigdata.io.TestAll.suite() );
-        suite.addTest( com.bigdata.net.TestAll.suite() );
-        suite.addTest( com.bigdata.config.TestAll.suite() );
-        //suite.addTest( com.bigdata.util.TestAll.suite() );
-        suite.addTest( com.bigdata.util.concurrent.TestAll.suite() );
-        suite.addTest( com.bigdata.jsr166.TestAll.suite() );
-        suite.addTest( com.bigdata.striterator.TestAll.suite() );
-        suite.addTest( com.bigdata.counters.TestAll.suite() );
-        suite.addTest( com.bigdata.rawstore.TestAll.suite() );
-        suite.addTest( com.bigdata.btree.TestAll.suite() );
-        suite.addTest( com.bigdata.htree.TestAll.suite() );
-        suite.addTest( com.bigdata.concurrent.TestAll.suite() );
-        suite.addTest( com.bigdata.quorum.TestAll.suite() );
-        suite.addTest( com.bigdata.ha.TestAll.suite() );
+        suite.addTest( org.embergraph.cache.TestAll.suite() );
+        suite.addTest( org.embergraph.io.TestAll.suite() );
+        suite.addTest( org.embergraph.net.TestAll.suite() );
+        suite.addTest( org.embergraph.config.TestAll.suite() );
+        //suite.addTest( org.embergraph.util.TestAll.suite() );
+        suite.addTest( org.embergraph.util.concurrent.TestAll.suite() );
+        suite.addTest( org.embergraph.jsr166.TestAll.suite() );
+        suite.addTest( org.embergraph.striterator.TestAll.suite() );
+        suite.addTest( org.embergraph.counters.TestAll.suite() );
+        suite.addTest( org.embergraph.rawstore.TestAll.suite() );
+        suite.addTest( org.embergraph.btree.TestAll.suite() );
+        suite.addTest( org.embergraph.htree.TestAll.suite() );
+        suite.addTest( org.embergraph.concurrent.TestAll.suite() );
+        suite.addTest( org.embergraph.quorum.TestAll.suite() );
+        suite.addTest( org.embergraph.ha.TestAll.suite() );
         // Note: this has a dependency on the quorum package.
-        suite.addTest(com.bigdata.io.writecache.TestAll.suite());
+        suite.addTest(org.embergraph.io.writecache.TestAll.suite());
         suite.addTest( org.embergraph.journal.TestAll.suite() );
-        suite.addTest( com.bigdata.rwstore.TestAll.suite() );
-        suite.addTest( com.bigdata.resources.TestAll.suite() );
-        suite.addTest( com.bigdata.relation.TestAll.suite() );
-        suite.addTest( com.bigdata.bop.TestAll.suite() );
-        suite.addTest( com.bigdata.relation.rule.eval.TestAll.suite() );
-        suite.addTest( com.bigdata.mdi.TestAll.suite() );
-        suite.addTest( com.bigdata.service.TestAll.suite() );
-//        suite.addTest( com.bigdata.bop.fed.TestAll.suite() );//This was being run 3 times(!)
-        suite.addTest( com.bigdata.sparse.TestAll.suite() );
-        suite.addTest( com.bigdata.search.TestAll.suite() );
-        suite.addTest( com.bigdata.bfs.TestAll.suite() );
-//        suite.addTest( com.bigdata.service.mapReduce.TestAll.suite() );
+        suite.addTest( org.embergraph.rwstore.TestAll.suite() );
+        suite.addTest( org.embergraph.resources.TestAll.suite() );
+        suite.addTest( org.embergraph.relation.TestAll.suite() );
+        suite.addTest( org.embergraph.bop.TestAll.suite() );
+        suite.addTest( org.embergraph.relation.rule.eval.TestAll.suite() );
+        suite.addTest( org.embergraph.mdi.TestAll.suite() );
+        suite.addTest( org.embergraph.service.TestAll.suite() );
+//        suite.addTest( org.embergraph.bop.fed.TestAll.suite() );//This was being run 3 times(!)
+        suite.addTest( org.embergraph.sparse.TestAll.suite() );
+        suite.addTest( org.embergraph.search.TestAll.suite() );
+        suite.addTest( org.embergraph.bfs.TestAll.suite() );
+//        suite.addTest( org.embergraph.service.mapReduce.TestAll.suite() );
 
         // Jini integration
         //BLZG-1370 moved to jini package.
-        //suite.addTest(com.bigdata.jini.TestAll.suite());
+        //suite.addTest(org.embergraph.jini.TestAll.suite());
 
         // RDF
         //Moved into embergraph-rdf-test
-        //suite.addTest(com.bigdata.rdf.TestAll.suite());
+        //suite.addTest(org.embergraph.rdf.TestAll.suite());
         //Moved into embergraph-sails-test
- //       suite.addTest(com.bigdata.rdf.sail.TestAll.suite());
+ //       suite.addTest(org.embergraph.rdf.sail.TestAll.suite());
 
         // The REST API test suite.
         //Moved into embergraph-sails-test
-  //      suite.addTest(com.bigdata.rdf.sail.webapp.TestAll.suite());
+  //      suite.addTest(org.embergraph.rdf.sail.webapp.TestAll.suite());
 
 		/*
 		 * The Generic Object Model and Graph API (includes remote tests against
 		 * the NanoSparqlServer layer).
 		 */
-        suite.addTest(com.bigdata.gom.TestAll.suite());
+        suite.addTest(org.embergraph.gom.TestAll.suite());
 
         return suite;
         

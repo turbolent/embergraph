@@ -81,7 +81,7 @@ public class TestAll extends TestCase {
         final TestSuite suite = new TestSuite("Sesame 2.x integration");
 
         // test suite for the SPARQL parse tree => bigdata AST translation.
-        suite.addTest(com.bigdata.rdf.sail.sparql.TestAll.suite());
+        suite.addTest(org.embergraph.rdf.sail.sparql.TestAll.suite());
         
         // bootstrap tests for the BigdataSail
         suite.addTestSuite(TestBootstrapBigdataSail.class);
@@ -96,10 +96,10 @@ public class TestAll extends TestCase {
         suite.addTest(TestBigdataSailWithQuads.suite());
 
         // SPARQL Updates
-        suite.addTest(com.bigdata.rdf.sail.tck.TestAll.suite());
+        suite.addTest(org.embergraph.rdf.sail.tck.TestAll.suite());
 
         // NanoSparqlServer
-        suite.addTest(com.bigdata.rdf.sail.webapp.TestAll.suite());
+        suite.addTest(org.embergraph.rdf.sail.webapp.TestAll.suite());
         
         /* FIXME Restore:: quad store in scale-out.
          * 

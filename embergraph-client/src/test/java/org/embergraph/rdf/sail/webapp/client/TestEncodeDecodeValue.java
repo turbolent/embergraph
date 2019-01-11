@@ -209,7 +209,7 @@ public class TestEncodeDecodeValue extends TestCase2 {
     * Test case for <code>foo(s,p,o,(Resource[]) null)</code>. This is case is
     * disallowed.
     * 
-    * @see com.bigdata.rdf.store.BD#NULL_GRAPH
+    * @see org.embergraph.rdf.store.BD#NULL_GRAPH
     * @see <a href="http://trac.bigdata.com/ticket/1177"> Resource... contexts
     *      not encoded/decoded according to openrdf semantics (REST API) </a>
     */
@@ -240,7 +240,7 @@ public class TestEncodeDecodeValue extends TestCase2 {
     * <code>foo(s,p,o,new Resource[0]). It is allowed and refers
     * to all named graphs.
     * 
-    * @see com.bigdata.rdf.store.BD#NULL_GRAPH
+    * @see org.embergraph.rdf.store.BD#NULL_GRAPH
     * @see <a href="http://trac.bigdata.com/ticket/1177"> Resource... contexts
     *      not encoded/decoded according to openrdf semantics (REST API) </a>
     */
@@ -263,7 +263,7 @@ public class TestEncodeDecodeValue extends TestCase2 {
     * <code>foo(s,p,o,new Resource[]{null}). It is allowed and refers
     * to the "null" graph.
     * 
-    * @see com.bigdata.rdf.store.BD#NULL_GRAPH
+    * @see org.embergraph.rdf.store.BD#NULL_GRAPH
     * @see <a href="http://trac.bigdata.com/ticket/1177"> Resource... contexts
     *      not encoded/decoded according to openrdf semantics (REST API) </a>
     */
@@ -291,7 +291,7 @@ public class TestEncodeDecodeValue extends TestCase2 {
     * length string. Therefore this test verifies that we decode a zero length
     * string into a <code>null</code>.
     * 
-    * @see com.bigdata.rdf.store.BD#NULL_GRAPH
+    * @see org.embergraph.rdf.store.BD#NULL_GRAPH
     * @see <a href="http://trac.bigdata.com/ticket/1177"> Resource... contexts
     *      not encoded/decoded according to openrdf semantics (REST API) </a>
     */
@@ -310,7 +310,7 @@ public class TestEncodeDecodeValue extends TestCase2 {
     * <code>foo(s,p,o,new Resource[]{x,y,z}). It is allowed and refers
     * to the specified named graphs.
     * 
-    * @see com.bigdata.rdf.store.BD#NULL_GRAPH
+    * @see org.embergraph.rdf.store.BD#NULL_GRAPH
     * @see <a href="http://trac.bigdata.com/ticket/1177"> Resource... contexts
     *      not encoded/decoded according to openrdf semantics (REST API) </a>
     */
@@ -338,7 +338,7 @@ public class TestEncodeDecodeValue extends TestCase2 {
     * to <code>foo(s,p,o,new Resource[]{x,null,z}). It is allowed and refers
     * to the named graph (x), the null graph, and the named graph (z).
     * 
-    * @see com.bigdata.rdf.store.BD#NULL_GRAPH
+    * @see org.embergraph.rdf.store.BD#NULL_GRAPH
     * @see <a href="http://trac.bigdata.com/ticket/1177"> Resource... contexts
     *      not encoded/decoded according to openrdf semantics (REST API) </a>
     */
@@ -371,7 +371,7 @@ public class TestEncodeDecodeValue extends TestCase2 {
     * length string. Therefore this test verifies that we decode a zero length
     * string into a <code>null</code>.
     * 
-    * @see com.bigdata.rdf.store.BD#NULL_GRAPH
+    * @see org.embergraph.rdf.store.BD#NULL_GRAPH
     * @see <a href="http://trac.bigdata.com/ticket/1177"> Resource... contexts
     *      not encoded/decoded according to openrdf semantics (REST API) </a>
     */

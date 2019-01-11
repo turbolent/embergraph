@@ -50,7 +50,7 @@ public class QueryEngineFactory {
 	static {
 
 		instance = ClassPathUtil.classForName(//
-				"com.blazegraph.rdf.gpu.bop.engine.GpuQueryEngineFactory", // preferredClassName,
+				"org.embergraph.rdf.gpu.bop.engine.GpuQueryEngineFactory", // preferredClassName,
 				QueryEngineFactoryBase.class, // defaultClass,
 				IQueryEngineFactory.class, // sharedInterface,
 				QueryEngineFactory.class.getClassLoader() // classLoader

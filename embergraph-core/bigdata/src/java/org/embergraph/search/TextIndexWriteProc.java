@@ -155,7 +155,7 @@ public class TextIndexWriteProc extends AbstractKeyArrayIndexProcedure<Long>
 
             /*
              * Note: The value MAY be used to encoded information. While it is
-             * no longer used to encode information in the com.bigdata.search
+             * no longer used to encode information in the org.embergraph.search
              * package, the RDF specific full text indices still use the value.
              * Therefore it now MAY be null and these asserts have been removed.
              */

@@ -157,7 +157,7 @@ public class TestPredicate extends TestCase2 {
     }
     
     /**
-     * Unit tests for {@link Predicate#asBound(com.bigdata.bop.IBindingSet)}
+     * Unit tests for {@link Predicate#asBound(org.embergraph.bop.IBindingSet)}
      */
     public void test_asBound_1() {
 
@@ -256,7 +256,7 @@ public class TestPredicate extends TestCase2 {
     }
     
     /**
-     * Unit tests for {@link Predicate#asBound(int, com.bigdata.bop.IBindingSet)}
+     * Unit tests for {@link Predicate#asBound(int, org.embergraph.bop.IBindingSet)}
      */
     public void test_asBound_2() {
 

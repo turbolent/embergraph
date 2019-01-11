@@ -70,7 +70,7 @@ import org.embergraph.util.InnerCause;
  */
 abstract public class TestMROWTransactions extends ProxyBigdataSailTestCase {
 
-//    private static final Logger txLog = Logger.getLogger("com.bigdata.txLog");
+//    private static final Logger txLog = Logger.getLogger("org.embergraph.txLog");
 
     TestMROWTransactions() {
     }
@@ -632,8 +632,8 @@ abstract public class TestMROWTransactions extends ProxyBigdataSailTestCase {
              * indices. This is where the problem is reported for ticket #855.
              */
             final String name = isQuads ? "SPOC" : "SPO";
-            props.setProperty("com.bigdata.namespace.kb.spo." + name
-                    + ".com.bigdata.btree.BTree.className",
+            props.setProperty("org.embergraph.namespace.kb.spo." + name
+                    + ".org.embergraph.btree.BTree.className",
                     MyBTree.class.getName());
         }
     }

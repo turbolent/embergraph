@@ -129,7 +129,7 @@ public class InferenceEngine {
          * {@value #DEFAULT_FORWARD_CHAIN_OWL_SAMEAS_CLOSURE}) the reflexive
          * entailments for <code>owl:sameAs</code> are computed by forward
          * chaining and stored in the database unless
-         * {@link com.bigdata.rdf.store.AbstractTripleStore.Options#AXIOMS_CLASS}
+         * {@link org.embergraph.rdf.store.AbstractTripleStore.Options#AXIOMS_CLASS}
          * is used to completely disable those entailments, e.g., by specifying
          * either {@link NoAxioms} or {@link RdfsAxioms}. When
          * <code>false</code> those entailments are not computed and

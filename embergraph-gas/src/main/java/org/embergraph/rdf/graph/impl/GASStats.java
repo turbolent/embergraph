@@ -34,7 +34,7 @@ public class GASStats implements IGASStats {
     private final AtomicLong elapsedNanos = new AtomicLong();
 
     /* (non-Javadoc)
-     * @see com.bigdata.rdf.graph.impl.IFOO#add(long, long, long)
+     * @see org.embergraph.rdf.graph.impl.IFOO#add(long, long, long)
      */
     @Override
     public void add(final long frontierSize, final long nedges,
@@ -51,7 +51,7 @@ public class GASStats implements IGASStats {
     }
 
     /* (non-Javadoc)
-     * @see com.bigdata.rdf.graph.impl.IFOO#add(com.bigdata.rdf.graph.impl.IFOO)
+     * @see org.embergraph.rdf.graph.impl.IFOO#add(org.embergraph.rdf.graph.impl.IFOO)
      */
     @Override
     public void add(final IGASStats o) {
@@ -67,7 +67,7 @@ public class GASStats implements IGASStats {
     }
 
     /* (non-Javadoc)
-     * @see com.bigdata.rdf.graph.impl.IFOO#getNRounds()
+     * @see org.embergraph.rdf.graph.impl.IFOO#getNRounds()
      */
     @Override
     public long getNRounds() {
@@ -75,7 +75,7 @@ public class GASStats implements IGASStats {
     }
     
     /* (non-Javadoc)
-     * @see com.bigdata.rdf.graph.impl.IFOO#getFrontierSize()
+     * @see org.embergraph.rdf.graph.impl.IFOO#getFrontierSize()
      */
     @Override
     public long getFrontierSize() {
@@ -83,7 +83,7 @@ public class GASStats implements IGASStats {
     }
 
     /* (non-Javadoc)
-     * @see com.bigdata.rdf.graph.impl.IFOO#getNEdges()
+     * @see org.embergraph.rdf.graph.impl.IFOO#getNEdges()
      */
     @Override
     public long getNEdges() {
@@ -91,7 +91,7 @@ public class GASStats implements IGASStats {
     }
 
     /* (non-Javadoc)
-     * @see com.bigdata.rdf.graph.impl.IFOO#getElapsedNanos()
+     * @see org.embergraph.rdf.graph.impl.IFOO#getElapsedNanos()
      */
     @Override
     public long getElapsedNanos() {

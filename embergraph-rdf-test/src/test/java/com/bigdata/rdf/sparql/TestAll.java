@@ -21,7 +21,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
-package com.bigdata.rdf.sparql;
+package org.embergraph.rdf.sparql;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -58,7 +58,7 @@ public class TestAll extends TestCase {
         final TestSuite suite = new TestSuite("SPARQL");
 
         // SPARQL parser, AST, AST optimizers, and AST evaluation.
-        suite.addTest(com.bigdata.rdf.sparql.ast.TestAll.suite());
+        suite.addTest(org.embergraph.rdf.sparql.ast.TestAll.suite());
 
         return suite;
         

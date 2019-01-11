@@ -77,7 +77,7 @@ abstract public class GraphPatternGroup<E extends IGroupMemberNode> extends
     }
     
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      */
     public GraphPatternGroup(final GraphPatternGroup<E> op) {
 

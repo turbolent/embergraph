@@ -330,9 +330,9 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
      *     ?res geo:timeEnd "10" .
      *   }
      *   hint:Prior <http://www.bigdata.com/queryHints#maxParallel> "10" .
-     *   hint:Prior <http://www.bigdata.com/queryHints#com.bigdata.relation.accesspath.BlockingBuffer.chunkOfChunksCapacity> "10" .
-     *   hint:Prior <http://www.bigdata.com/queryHints#com.bigdata.relation.accesspath.IBuffer.chunkCapacity> "100" .
-     *   hint:Prior <http://www.bigdata.com/queryHints#com.bigdata.bop.join.PipelineJoin.avgDataPointsPerThread> "10" .
+     *   hint:Prior <http://www.bigdata.com/queryHints#org.embergraph.relation.accesspath.BlockingBuffer.chunkOfChunksCapacity> "10" .
+     *   hint:Prior <http://www.bigdata.com/queryHints#org.embergraph.relation.accesspath.IBuffer.chunkCapacity> "100" .
+     *   hint:Prior <http://www.bigdata.com/queryHints#org.embergraph.bop.join.PipelineJoin.avgDataPointsPerThread> "10" .
      * } 
      * 
      * which implies setup of parallel threads for data extraction.
@@ -722,9 +722,9 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
      *     ?res geo:timeEnd "5" .
      *   }
      *   hint:Prior <http://www.bigdata.com/queryHints#maxParallel> "5" .
-     *   hint:Prior <http://www.bigdata.com/queryHints#com.bigdata.relation.accesspath.BlockingBuffer.chunkOfChunksCapacity> "5" .
-     *   hint:Prior <http://www.bigdata.com/queryHints#com.bigdata.relation.accesspath.IBuffer.chunkCapacity> "10" .
-     *   hint:Prior <http://www.bigdata.com/queryHints#com.bigdata.bop.join.PipelineJoin.avgDataPointsPerThread> "3" .  
+     *   hint:Prior <http://www.bigdata.com/queryHints#org.embergraph.relation.accesspath.BlockingBuffer.chunkOfChunksCapacity> "5" .
+     *   hint:Prior <http://www.bigdata.com/queryHints#org.embergraph.relation.accesspath.IBuffer.chunkCapacity> "10" .
+     *   hint:Prior <http://www.bigdata.com/queryHints#org.embergraph.bop.join.PipelineJoin.avgDataPointsPerThread> "3" .
      * } 
      * 
      * , which is the same as circle05 just executed with parallel processing enabled.
@@ -1241,10 +1241,10 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
 
         // enable GeoSpatial index
         properties.setProperty(
-           com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL, "true");
+           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL, "true");
 
         properties.setProperty(
-                com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".0",
+                org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".0",
                 "{\"config\": "
                 + "{ \"uri\": \"http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral\", "
                 + "\"fields\": [ "
@@ -1254,7 +1254,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
                 + "]}}");
         
         properties.setProperty(
-                com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DEFAULT_DATATYPE,
+                org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DEFAULT_DATATYPE,
                 "http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral");
         
         return properties;

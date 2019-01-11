@@ -32,13 +32,13 @@ Starting with the 2.0.0 release, the Blazegraph Database is available on Maven C
 
 ```
     <dependency>
-        <groupId>com.blazegraph</groupId>
+        <groupId>org.embergraph</groupId>
         <artifactId>embergraph-core</artifactId>
         <version>2.0.0</version>
     </dependency>
     <!-- Use if Tinkerpop 2.5 support is needed ; See also Tinkerpop3 below. -->
     <dependency>
-        <groupId>com.blazegraph</groupId>
+        <groupId>org.embergraph</groupId>
         <artifactId>embergraph-blueprints</artifactId>
         <version>2.0.0</version>
     </dependency>
@@ -48,7 +48,7 @@ If you'd just link the Blazegraph Database dependencies without any of the exter
 
 ```
     <dependency>
-        <groupId>com.blazegraph</groupId>
+        <groupId>org.embergraph</groupId>
         <artifactId>embergraph-runtime</artifactId>
         <version>2.0.0</version>
     </dependency>
@@ -63,7 +63,7 @@ Tinkerpop3 supports requires Java 1.8 and is now in a separate repository.  See 
 
 ```
     <dependency>
-        <groupId>com.blazegraph</groupId>
+        <groupId>org.embergraph</groupId>
         <artifactId>blazegraph-gremlin</artifactId>
         <version>1.0.0</version>
     </dependency>
@@ -75,7 +75,7 @@ There is a [Blazegraph Triple Pattern Fragment TPF](https://github.com/blazegrap
 
 ```
     <dependency>
-        <groupId>com.blazegraph</groupId>
+        <groupId>org.embergraph</groupId>
         <artifactId>BlazegraphBasedTPFServer</artifactId>
         <version>0.1.0</version>
     </dependency>

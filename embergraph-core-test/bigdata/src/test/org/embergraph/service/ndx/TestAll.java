@@ -78,7 +78,7 @@ public class TestAll extends TestCase {
         suite.addTestSuite(TestRangeQuery.class);
 
         // unit tests for the streaming index write API.
-        suite.addTest(com.bigdata.service.ndx.pipeline.TestAll.suite());
+        suite.addTest(org.embergraph.service.ndx.pipeline.TestAll.suite());
 
         return suite;
 

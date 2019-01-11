@@ -177,12 +177,12 @@ public class RDRHistory implements IChangeLog {
 
         // turn off the lexicon since we will only use the statement indices.
         properties.setProperty(
-                com.bigdata.rdf.store.AbstractTripleStore.Options.LEXICON,
+                org.embergraph.rdf.store.AbstractTripleStore.Options.LEXICON,
                 "false");
 
         // only keep the SPO index
         properties.setProperty(
-                com.bigdata.rdf.store.AbstractTripleStore.Options.ONE_ACCESS_PATH,
+                org.embergraph.rdf.store.AbstractTripleStore.Options.ONE_ACCESS_PATH,
                 "true");
         
         /*
@@ -191,14 +191,14 @@ public class RDRHistory implements IChangeLog {
          * it substantially.
          */
         properties.setProperty(
-                com.bigdata.rdf.store.AbstractTripleStore.Options.BLOOM_FILTER,
+                org.embergraph.rdf.store.AbstractTripleStore.Options.BLOOM_FILTER,
                 "false");
         
         /*
          * Turn off history for the temp store.
          */
         properties.setProperty(
-                com.bigdata.rdf.store.AbstractTripleStore.Options.RDR_HISTORY_CLASS,
+                org.embergraph.rdf.store.AbstractTripleStore.Options.RDR_HISTORY_CLASS,
                 "");
         
         final TempTripleStore tempStore = new TempTripleStore(database

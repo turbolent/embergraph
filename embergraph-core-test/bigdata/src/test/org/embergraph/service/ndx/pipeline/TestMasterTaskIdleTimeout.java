@@ -585,7 +585,7 @@ public class TestMasterTaskIdleTimeout extends AbstractMasterTestCase {
              * Note: Rare CI failure at the next line.
              * 
              * junit.framework.AssertionFailedError: subtaskStartCount expected:<1> but was:<2>
-             *   at com.bigdata.service.ndx.pipeline.TestMasterTaskIdleTimeout.test_idleTimeout_LT_chunkTimeout2(TestMasterTaskIdleTimeout.java:572)
+             *   at org.embergraph.service.ndx.pipeline.TestMasterTaskIdleTimeout.test_idleTimeout_LT_chunkTimeout2(TestMasterTaskIdleTimeout.java:572)
              */
             assertEquals("subtaskStartCount", 1, masterStats.subtaskStartCount.get());
             assertEquals("subtaskEndCount", 1, masterStats.subtaskEndCount.get());

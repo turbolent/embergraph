@@ -79,8 +79,8 @@ import org.embergraph.rdf.sail.remote.BigdataSailRemoteRepositoryConnection;
  *           embedded tests? (BigdataSparqlTest). This would mean having a test
  *           suite class so we can use it from another maven project.
  *           
- *           FIXME *** com.bigdata.rdf.sail.webapp.TestSparqlUpdate runs against
- *           the com.bigdata.rdf.sail.webapp.client.RemoteRepository. It could
+ *           FIXME *** org.embergraph.rdf.sail.webapp.TestSparqlUpdate runs against
+ *           the org.embergraph.rdf.sail.webapp.client.RemoteRepository. It could
  *           run against the {@link BigdataSailRemoteRepository}.
  * 
  *           FIXME *** Verify that we are running the full embedded repository
@@ -402,7 +402,7 @@ public class TestBigdataSailRemoteRepository<S extends IIndexManager> extends
         
         // Load the resource into the KB.
         {
-        	final URL url = new URL("file:src/test/java/com/bigdata/rdf/sail/webapp/quads.nq");
+        	final URL url = new URL("file:src/test/java/org/embergraph/rdf/sail/webapp/quads.nq");
         	cxn.add(url, "", RDFFormat.NQUADS);
             assertEquals(7, getExactSize());
         }
@@ -470,8 +470,8 @@ public class TestBigdataSailRemoteRepository<S extends IIndexManager> extends
         
         // Load the resource into the KB.
         {
-        	cxn.add( this.getClass().getClassLoader().getResource("com/bigdata/rdf/rio/small.rdf"), "", RDFFormat.RDFXML);
-            //cxn.add(new URL("file:bigdata-rdf/src/test/com/bigdata/rdf/rio/small.rdf"), "", RDFFormat.RDFXML);
+        	cxn.add( this.getClass().getClassLoader().getResource("org/embergraph/rdf/rio/small.rdf"), "", RDFFormat.RDFXML);
+            //cxn.add(new URL("file:bigdata-rdf/src/test/org/embergraph/rdf/rio/small.rdf"), "", RDFFormat.RDFXML);
             assertEquals(expectedStatementCount, getExactSize());
         }
 

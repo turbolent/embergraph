@@ -73,7 +73,7 @@ public class TryBeforeMaterializationConstraint extends BOpBase implements
     }
 
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      */
     public TryBeforeMaterializationConstraint(
             final TryBeforeMaterializationConstraint op) {

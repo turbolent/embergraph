@@ -25,7 +25,7 @@ package org.embergraph.rdf.sail.model;
 import java.util.UUID;
 
 /**
- * Metadata about running {@link com.bigdata.rdf.sail.webapp.BigdataRDFContext.AbstractQueryTask}s (this includes both
+ * Metadata about running {@link org.embergraph.rdf.sail.webapp.BigdataRDFContext.AbstractQueryTask}s (this includes both
  * queries and update requests).
  * 
  * Used to serialize the results for the REST interface in JSON, XML, etc.
@@ -35,15 +35,15 @@ public class RunningQuery {
 
 	/**
 	 * The unique identifier for this query as assigned by the Embedded
-	 * Graph implementation end point (rather than the {@link com.bigdata.bop.engine.QueryEngine}).
+	 * Graph implementation end point (rather than the {@link org.embergraph.bop.engine.QueryEngine}).
 	 */
 	private String extQueryId;
 
 	/**
-	 * The unique identifier for this query for the {@link com.bigdata.bop.engine.QueryEngine}
+	 * The unique identifier for this query for the {@link org.embergraph.bop.engine.QueryEngine}
 	 * (non-<code>null</code>).
 	 * 
-	 * @see com.bigdata.bop.engine.QueryEngine#getRunningQuery(UUID)
+	 * @see org.embergraph.bop.engine.QueryEngine#getRunningQuery(UUID)
 	 */
 	private UUID queryUuid;
 

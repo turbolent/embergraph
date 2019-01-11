@@ -803,7 +803,7 @@ public class TestTicket1893 extends
 		cxn.getTripleStore().getLexiconRelation().addTerms(values, values.length, true /* readOnly */);
         
 		// Note, that all literals got inlined according to code of:
-		// com.bigdata.rdf.internal.LexiconConfiguration.createInlineLiteralIV(Literal)
+		// org.embergraph.rdf.internal.LexiconConfiguration.createInlineLiteralIV(Literal)
 		// as INLINE_TEXT_LITERALS is true and MAX_INLINE_TEXT_LENGTH != 0
         assertTrue(values[0].getIV().isInline()); //    	http://s
         assertTrue(values[1].getIV().isInline()); //    	1
@@ -854,7 +854,7 @@ public class TestTicket1893 extends
 		cxn.getTripleStore().getLexiconRelation().addTerms(values, values.length, true /* readOnly */);
         
 		// Note, that all literals got inlined according to code of:
-		// com.bigdata.rdf.internal.LexiconConfiguration.createInlineLiteralIV(Literal)
+		// org.embergraph.rdf.internal.LexiconConfiguration.createInlineLiteralIV(Literal)
 		// as INLINE_TEXT_LITERALS is true and MAX_INLINE_TEXT_LENGTH != 0
         assertTrue(values[0].getIV().isInline()); //    	http://s
         assertTrue(values[1].getIV().isInline()); //    	1
@@ -982,19 +982,19 @@ public class TestTicket1893 extends
         
         {
             
-            properties.setProperty(com.bigdata.rdf.sail.BigdataSail.Options.NAMESPACE, namespace);
+            properties.setProperty(org.embergraph.rdf.sail.BigdataSail.Options.NAMESPACE, namespace);
             
-            properties.setProperty("com.bigdata.namespace."+namespace+".lex."+Options.INLINE_TEXT_LITERALS, Boolean.toString(inlineTextLiterals));
+            properties.setProperty("org.embergraph.namespace."+namespace+".lex."+Options.INLINE_TEXT_LITERALS, Boolean.toString(inlineTextLiterals));
 
             if (inlineTextLiterals) {
-            	properties.setProperty("com.bigdata.namespace."+namespace+".lex."+Options.MAX_INLINE_TEXT_LENGTH, Integer.toString(45));
+            	properties.setProperty("org.embergraph.namespace."+namespace+".lex."+Options.MAX_INLINE_TEXT_LENGTH, Integer.toString(45));
             }
 
-            properties.setProperty("com.bigdata.namespace."+namespace+".lex."+Options.INLINE_XSD_DATATYPE_LITERALS, Boolean.toString(inlineXSDDatatypeLiterals));
+            properties.setProperty("org.embergraph.namespace."+namespace+".lex."+Options.INLINE_XSD_DATATYPE_LITERALS, Boolean.toString(inlineXSDDatatypeLiterals));
 
-            properties.setProperty("com.bigdata.namespace."+namespace+".lex."+Options.TEXT_INDEX_DATATYPE_LITERALS, Boolean.toString(textIndexDatatypeLiterals));
+            properties.setProperty("org.embergraph.namespace."+namespace+".lex."+Options.TEXT_INDEX_DATATYPE_LITERALS, Boolean.toString(textIndexDatatypeLiterals));
 
-            properties.setProperty("com.bigdata.namespace."+namespace+".lex."+Options.STORE_BLANK_NODES, Boolean.toString(true));
+            properties.setProperty("org.embergraph.namespace."+namespace+".lex."+Options.STORE_BLANK_NODES, Boolean.toString(true));
 
         }
 

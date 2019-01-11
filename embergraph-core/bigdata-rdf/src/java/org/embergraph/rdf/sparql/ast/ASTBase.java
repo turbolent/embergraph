@@ -83,7 +83,7 @@ public class ASTBase extends ModifiableBOpBase {
     }
 
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      */
     public ASTBase(final ASTBase op) {
         super(op);

@@ -9,7 +9,7 @@ java\
  -cp ${CLASSPATH}\
  -Djava.security.policy=${POLICY_FILE}\
  -Dlog4j.configuration=${LOG4J_CONFIG}\
- com.bigdata.zookeeper.DumpZookeeper\
+ org.embergraph.zookeeper.DumpZookeeper\
  ${HAJOURNAL_CONFIG}
  
  

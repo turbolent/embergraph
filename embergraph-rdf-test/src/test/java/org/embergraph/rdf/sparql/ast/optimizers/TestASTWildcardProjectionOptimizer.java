@@ -477,7 +477,7 @@ public class TestASTWildcardProjectionOptimizer extends
     * <pre>
     * QueryType: SELECT
     * includeInferred=true
-    * SELECT ( com.bigdata.rdf.sparql.ast.FunctionNode(VarNode(*))[ FunctionNode.scalarVals=null, FunctionNode.functionURI=http://www.w3.org/2006/sparql-functions#count, valueExpr=com.bigdata.bop.rdf.aggregate.COUNT(*)] AS VarNode(c) )
+    * SELECT ( org.embergraph.rdf.sparql.ast.FunctionNode(VarNode(*))[ FunctionNode.scalarVals=null, FunctionNode.functionURI=http://www.w3.org/2006/sparql-functions#count, valueExpr=org.embergraph.bop.rdf.aggregate.COUNT(*)] AS VarNode(c) )
     *   JoinGroupNode {
     *     JoinGroupNode {
     *       QueryType: SELECT
@@ -503,7 +503,7 @@ public class TestASTWildcardProjectionOptimizer extends
     * <pre>
     * QueryType: SELECT
     * includeInferred=true
-    * SELECT ( com.bigdata.rdf.sparql.ast.FunctionNode(VarNode(*))[ FunctionNode.scalarVals=null, FunctionNode.functionURI=http://www.w3.org/2006/sparql-functions#count, valueExpr=com.bigdata.bop.rdf.aggregate.COUNT(*)] AS VarNode(c) )
+    * SELECT ( org.embergraph.rdf.sparql.ast.FunctionNode(VarNode(*))[ FunctionNode.scalarVals=null, FunctionNode.functionURI=http://www.w3.org/2006/sparql-functions#count, valueExpr=org.embergraph.bop.rdf.aggregate.COUNT(*)] AS VarNode(c) )
     *   JoinGroupNode {
     *     JoinGroupNode {
     *       QueryType: SELECT
@@ -543,7 +543,7 @@ public class TestASTWildcardProjectionOptimizer extends
        * <pre>
        * QueryType: SELECT
        * includeInferred=true
-       * SELECT ( com.bigdata.rdf.sparql.ast.FunctionNode(VarNode(*))[ FunctionNode.scalarVals=null, FunctionNode.functionURI=http://www.w3.org/2006/sparql-functions#count, valueExpr=com.bigdata.bop.rdf.aggregate.COUNT(*)] AS VarNode(c) )
+       * SELECT ( org.embergraph.rdf.sparql.ast.FunctionNode(VarNode(*))[ FunctionNode.scalarVals=null, FunctionNode.functionURI=http://www.w3.org/2006/sparql-functions#count, valueExpr=org.embergraph.bop.rdf.aggregate.COUNT(*)] AS VarNode(c) )
        *   JoinGroupNode {
        *     JoinGroupNode {
        *       QueryType: SELECT // [sliceQuery]
@@ -572,7 +572,7 @@ public class TestASTWildcardProjectionOptimizer extends
           * <pre>
           * QueryType: SELECT
           * includeInferred=true
-          * SELECT ( com.bigdata.rdf.sparql.ast.FunctionNode(VarNode(*))[ FunctionNode.scalarVals=null, FunctionNode.functionURI=http://www.w3.org/2006/sparql-functions#count, valueExpr=com.bigdata.bop.rdf.aggregate.COUNT(*)] AS VarNode(c) )
+          * SELECT ( org.embergraph.rdf.sparql.ast.FunctionNode(VarNode(*))[ FunctionNode.scalarVals=null, FunctionNode.functionURI=http://www.w3.org/2006/sparql-functions#count, valueExpr=org.embergraph.bop.rdf.aggregate.COUNT(*)] AS VarNode(c) )
           *   JoinGroupNode {
           *     JoinGroupNode {
           *       // [sliceQuery]

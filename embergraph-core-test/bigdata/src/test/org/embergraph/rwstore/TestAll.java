@@ -61,9 +61,9 @@ public class TestAll extends TestCase {
 
         final TestSuite suite = new TestSuite("r/w store");
 
-        suite.addTest(com.bigdata.rwstore.TestRWJournal.suite());
+        suite.addTest(org.embergraph.rwstore.TestRWJournal.suite());
 
-        suite.addTest(com.bigdata.rwstore.sector.TestAll.suite());
+        suite.addTest(org.embergraph.rwstore.sector.TestAll.suite());
 
         return suite;
 

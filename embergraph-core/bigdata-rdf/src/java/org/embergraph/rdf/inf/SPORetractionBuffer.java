@@ -68,7 +68,7 @@ public class SPORetractionBuffer extends AbstractSPOBuffer {
      *            The capacity of the retraction buffer.
      * @param computeClosureForStatementIdentifiers
      *            See
-     *            {@link AbstractTripleStore#removeStatements(com.bigdata.rdf.spo.ISPOIterator, boolean)}
+     *            {@link AbstractTripleStore#removeStatements(org.embergraph.rdf.spo.ISPOIterator, boolean)}
      */
     public SPORetractionBuffer(AbstractTripleStore store, int capacity,
             boolean computeClosureForStatementIdentifiers) {
@@ -86,7 +86,7 @@ public class SPORetractionBuffer extends AbstractSPOBuffer {
      *            The capacity of the retraction buffer.
      * @param computeClosureForStatementIdentifiers
      *            See
-     *            {@link AbstractTripleStore#removeStatements(com.bigdata.rdf.spo.ISPOIterator, boolean)}
+     *            {@link AbstractTripleStore#removeStatements(org.embergraph.rdf.spo.ISPOIterator, boolean)}
      * @param changeLog
      *            optional change log for change notification
      */

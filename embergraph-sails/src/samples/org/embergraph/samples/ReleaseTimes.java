@@ -1,4 +1,4 @@
-package com.bigdata.samples;
+package org.embergraph.samples;
 
 import java.io.File;
 import java.io.IOException;

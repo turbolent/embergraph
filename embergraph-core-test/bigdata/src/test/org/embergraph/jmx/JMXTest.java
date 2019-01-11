@@ -216,9 +216,9 @@ public class JMXTest {
 
             // register the mbean.
             testMBeanServer.registerMBean(fooMBean, new ObjectName(
-                    "com.bigdata", "name", "Foo"));
+                    "org.embergraph", "name", "Foo"));
 
-            cmon.addObservedObject(new ObjectName("com.bigdata:name=Clock"));
+            cmon.addObservedObject(new ObjectName("org.embergraph:name=Clock"));
 
             cmon.setObservedAttribute("Time");
 
@@ -237,11 +237,11 @@ public class JMXTest {
 
             // register clock
             testMBeanServer.registerMBean(clockMBean, new ObjectName(
-                    "com.bigdata:name=Clock"));
+                    "org.embergraph:name=Clock"));
 
             // register the monitor.
             testMBeanServer.registerMBean(cmon, new ObjectName(
-                    "com.bigdata:name=ClockMonitor"));
+                    "org.embergraph:name=ClockMonitor"));
 
             // start the monitor (you can do this via jconsole as well).
             cmon.start();

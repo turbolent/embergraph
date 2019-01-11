@@ -81,7 +81,7 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
 
 	private static final Logger log = Logger.getLogger(MemoryManager.class);
 
-    private static final Logger txLog = Logger.getLogger("com.bigdata.txLog");
+    private static final Logger txLog = Logger.getLogger("org.embergraph.txLog");
 
     /**
      * Debug array. Should be [null] unless actively debugging this code.

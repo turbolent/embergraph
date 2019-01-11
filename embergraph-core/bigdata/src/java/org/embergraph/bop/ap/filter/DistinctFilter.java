@@ -32,9 +32,9 @@ import cutthecrap.utils.striterators.IPropertySet;
  *       map).
  * 
  * @todo Reconcile with {@link IChunkConverter},
- *       {@link com.bigdata.striterator.DistinctFilter} (handles solutions) and
+ *       {@link org.embergraph.striterator.DistinctFilter} (handles solutions) and
  *       {@link MergeFilter} (handles comparables),
- *       {@link com.bigdata.rdf.spo.DistinctSPOIterator}, etc.
+ *       {@link org.embergraph.rdf.spo.DistinctSPOIterator}, etc.
  */
 public class DistinctFilter extends BOpFilterBase {
 
@@ -58,7 +58,7 @@ public class DistinctFilter extends BOpFilterBase {
     }
     
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      */
     public DistinctFilter(final DistinctFilter op) {
         super(op);

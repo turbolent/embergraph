@@ -141,7 +141,7 @@ public class LexPredicate extends Predicate<BigdataValue> {
     }
 
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      */
     public LexPredicate(final LexPredicate op) {
         super(op);

@@ -35,7 +35,7 @@ public class InferenceBVE extends BOpBase implements BooleanValueExpression {
     }
 
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      */
     public InferenceBVE(final InferenceBVE op) {
         super(op);

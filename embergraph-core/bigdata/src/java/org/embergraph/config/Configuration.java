@@ -79,7 +79,7 @@ public class Configuration {
     /**
      * The prefix for namespace specific property value overrides.
      */
-    public static final transient String NAMESPACE = "com.bigdata.namespace";
+    public static final transient String NAMESPACE = "org.embergraph.namespace";
 
     /**
      * The namespace separator character.
@@ -109,14 +109,14 @@ public class Configuration {
      * be formed by chopping off the namespace at a {@link #DOT}). For example,
      * you can override the branching factor property for an index named
      * <code>foo.myIndex</code> by specifying a value for the property name
-     * <code>com.bigdata.namespace.foo.myIndex.com.bigdata.btree.BTree.branchingFactor</code> ({@value #NAMESPACE}
+     * <code>org.embergraph.namespace.foo.myIndex.org.embergraph.btree.BTree.branchingFactor</code> ({@value #NAMESPACE}
      * is the {@link #NAMESPACE} prefix for overrides, <code>foo.myIndex</code>
      * is the name of the index, and
      * {@value IndexMetadata.Options#BTREE_BRANCHING_FACTOR} is the name of the
      * property that will be overridden for that index). Alternatively you can
      * override the branching factor for all indices in the "foo" relation by
      * specifying a value for the property name
-     * <code>com.bigdata.namespace.foo.com.bigdata.btree.BTree.branchingFactor</code>.
+     * <code>org.embergraph.namespace.foo.org.embergraph.btree.BTree.branchingFactor</code>.
      * Note: You can use {@link #getOverrideProperty(String, String)} to form
      * these property names automatically, including from within a Jini
      * configuration file.</li>

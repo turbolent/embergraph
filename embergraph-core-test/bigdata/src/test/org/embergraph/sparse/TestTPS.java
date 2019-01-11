@@ -45,7 +45,7 @@ import org.embergraph.sparse.TPS.TPV;
  * 
  * @todo write tests for {@link TPS#iterator()}
  * 
- * @todo write tests for {@link TPS#asMap(long, com.bigdata.sparse.TPS.INameFilter)}
+ * @todo write tests for {@link TPS#asMap(long, org.embergraph.sparse.TPS.INameFilter)}
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

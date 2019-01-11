@@ -40,7 +40,7 @@ import org.embergraph.util.BytesUtil;
  * An aggregate iterator view of the one or more source {@link ITupleIterator}s.
  * </p>
  * 
- * @see FusedView#rangeIterator(byte[], byte[], int, int, com.bigdata.btree.filter.IFilterConstructor)
+ * @see FusedView#rangeIterator(byte[], byte[], int, int, org.embergraph.btree.filter.IFilterConstructor)
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -502,7 +502,7 @@ public class FusedTupleIterator<I extends ITupleIterator<E>, E> implements
      * <p>
      * Note: Remove is not supported at this level. Instead you must use a
      * {@link FusedTupleCursor}. This is handled automatically by
-     * {@link FusedView#rangeIterator(byte[], byte[], int, int, com.bigdata.btree.filter.IFilterConstructor)}.
+     * {@link FusedView#rangeIterator(byte[], byte[], int, int, org.embergraph.btree.filter.IFilterConstructor)}.
      * 
      * @throws UnsupportedOperationException
      *             always.

@@ -24,5 +24,5 @@ CLASSPATH=`find ${LIB_DIR} -name '*.jar' -print0 | tr '\0' ':'`:${CLASSPATH}
 java ${JAVA_OPTS} \
     -cp ${CLASSPATH} \
     -Djava.security.policy=${POLICY_FILE}\
-    com.bigdata.journal.DumpJournal \
+    org.embergraph.journal.DumpJournal \
     $*

@@ -69,7 +69,7 @@ import cutthecrap.utils.striterators.Striterator;
  * SELECT expressions do not involve aggregates then you should not be using an
  * aggregation operator to compute the select expressions).
  * <p>
- * Note: This is a port of {@link com.bigdata.bop.solutions.GroupByState} that
+ * Note: This is a port of {@link org.embergraph.bop.solutions.GroupByState} that
  * does not depend on the blazegraph operator model. It was developed as part of
  * BLZG-1176 to decouple the SPARQL parser from the database.
  * 
@@ -107,7 +107,7 @@ public class VerifyAggregates {
         this.groupBy = groupBy == null || groupBy.arity() == 0 ? null : groupBy.getValueExpressions();
         
         // Replacing unresolvedFunctionNodes with specific AggregateBase to be able
-        // to check for aggregates in com.bigdata.bop.solutions.GroupByState.isAggregate
+        // to check for aggregates in org.embergraph.bop.solutions.GroupByState.isAggregate
         if (projection!=null) {
             final IValueExpression<?>[] exprs = new IValueExpression[projection.arity()];
             int i = 0;
@@ -414,7 +414,7 @@ public class VerifyAggregates {
         if (op == null) {
             // BOp is not prepared yet, but it is not an Aggregate,
             // otherwise dummy aggregate BOp provided
-            // by com.bigdata.rdf.sparql.ast.ProjectionNode.getValueExpressions() 
+            // by org.embergraph.rdf.sparql.ast.ProjectionNode.getValueExpressions()
             return false;
         }
 

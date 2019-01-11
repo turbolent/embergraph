@@ -41,7 +41,7 @@ import com.ibm.icu.text.CollationKey;
 
 /**
  * Test suite for round trip of keys as encoded by
- * {@link Schema#fromKey(com.bigdata.btree.keys.IKeyBuilder, Object)}, by
+ * {@link Schema#fromKey(org.embergraph.btree.keys.IKeyBuilder, Object)}, by
  * {@link AtomicRowWriteRead}, and as decoded by the {@link KeyDecoder}.
  * <p>
  * Note: Not all information can be fully decoded. In particular, the exact
@@ -169,7 +169,7 @@ public class TestKeyEncodeDecode extends TestCase2 {
 
         final Schema schema = new MySchema();
         final String primaryKey = "U100.lex";
-        final String column = "com.bigdata.btree.keys.KeyBuilder.collator";
+        final String column = "org.embergraph.btree.keys.KeyBuilder.collator";
         final long writeTime = 1279133923566L;
 
         final byte[] key = schema.getKey(keyBuilder, primaryKey, column, writeTime);

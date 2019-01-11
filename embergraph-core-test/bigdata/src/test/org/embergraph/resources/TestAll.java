@@ -124,7 +124,7 @@ public class TestAll extends TestCase {
         suite.addTestSuite(TestMergeTask.class);
 
         /*
-         * Note: split, join, and move are tested in the com.bigdata.services
+         * Note: split, join, and move are tested in the org.embergraph.services
          * package.
          */
 

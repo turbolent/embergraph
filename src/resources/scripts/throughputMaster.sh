@@ -9,5 +9,5 @@ source `dirname $0`/bigdataenv
 
 java ${JAVA_OPTS} \
 	-cp ${CLASSPATH} \
-    com.bigdata.service.jini.benchmark.ThroughputMaster \
+    org.embergraph.service.jini.benchmark.ThroughputMaster \
     ${BIGDATA_CONFIG} ${BIGDATA_CONFIG_OVERRIDES}

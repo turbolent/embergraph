@@ -99,14 +99,14 @@ public class TestGeoSpatialCustomSerializer extends AbstractDataDrivenSPARQLTest
 
         // enable GeoSpatial index
         properties.setProperty(
-           com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL, "true");
+           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL, "true");
 
         // set up a datatype containing everything, including a dummy literal serializer
         properties.setProperty(
-           com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".0",
+           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".0",
            "{\"config\": "
            + "{ \"uri\": \"http://my.custom.datatype/x-y-z-lat-lon-time-coord\", "
-           + "\"literalSerializer\": \"com.bigdata.rdf.sparql.ast.eval.service.GeoSpatialDummyLiteralSerializer\",  "
+           + "\"literalSerializer\": \"org.embergraph.rdf.sparql.ast.eval.service.GeoSpatialDummyLiteralSerializer\",  "
            + "\"fields\": [ "
            + "{ \"valueType\": \"DOUBLE\", \"minVal\" : \"-1000\", \"multiplier\": \"10\", \"serviceMapping\": \"x\" }, "
            + "{ \"valueType\": \"DOUBLE\", \"minVal\" : \"-10\", \"multiplier\": \"100\", \"serviceMapping\": \"y\" }, "
@@ -118,8 +118,8 @@ public class TestGeoSpatialCustomSerializer extends AbstractDataDrivenSPARQLTest
            + "]}}");
         
         properties.setProperty(
-           com.bigdata.rdf.store.AbstractLocalTripleStore.Options.VOCABULARY_CLASS,
-           "com.bigdata.rdf.sparql.ast.eval.service.GeoSpatialTestVocabulary");
+           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.VOCABULARY_CLASS,
+           "org.embergraph.rdf.sparql.ast.eval.service.GeoSpatialTestVocabulary");
         
         return properties;
 

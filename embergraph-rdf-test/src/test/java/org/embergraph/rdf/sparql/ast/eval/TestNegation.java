@@ -447,31 +447,31 @@ public class TestNegation extends AbstractDataDrivenSPARQLTestCase {
          *     SELECT VarNode(ar) VarNode(-exists-2)[anonymous]
          *       JoinGroupNode {
          *         StatementPatternNode(VarNode(ar), ConstantNode(TermId(8U)[os:prop/analysis/refEntity]), ConstantNode(TermId(7U)[os:elem/loc/Kriterion]), DEFAULT_CONTEXTS)
-         *           com.bigdata.rdf.sparql.ast.eval.AST2BOpBase.estimatedCardinality=1
-         *           com.bigdata.rdf.sparql.ast.eval.AST2BOpBase.originalIndex=POCS
+         *           org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.estimatedCardinality=1
+         *           org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.originalIndex=POCS
          *       }
          *     @askVar=-exists-2
          *     
          *     JoinGroupNode {
          *       
          *       StatementPatternNode(VarNode(ar), ConstantNode(Vocab(14)[http://www.w3.org/1999/02/22-rdf-syntax-ns#type]), ConstantNode(TermId(5U)[os:class/AnalysisResults]), DEFAULT_CONTEXTS)
-         *         com.bigdata.rdf.sparql.ast.eval.AST2BOpBase.estimatedCardinality=3
-         *         com.bigdata.rdf.sparql.ast.eval.AST2BOpBase.originalIndex=POCS
+         *         org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.estimatedCardinality=3
+         *         org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.originalIndex=POCS
          *       
          *       QueryType: ASK
          *       SELECT VarNode(ar) VarNode(-exists-1)[anonymous]
          *         JoinGroupNode {
          *           StatementPatternNode(VarNode(ar), ConstantNode(TermId(8U)[os:prop/analysis/refEntity]), ConstantNode(TermId(6U)[os:elem/loc/Artis]), DEFAULT_CONTEXTS)
-         *             com.bigdata.rdf.sparql.ast.eval.AST2BOpBase.estimatedCardinality=2
-         *             com.bigdata.rdf.sparql.ast.eval.AST2BOpBase.originalIndex=POCS
+         *             org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.estimatedCardinality=2
+         *             org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.originalIndex=POCS
          *         }
          *       @askVar=-exists-1
          *       
-         *       FILTER( com.bigdata.rdf.sparql.ast.NotExistsNode(VarNode(-exists-1))[ com.bigdata.rdf.sparql.ast.FunctionNode.functionURI=http://www.bigdata.com/sparql-1.1-undefined-functionsnot-exists, graphPattern=JoinGroupNode, valueExpr=com.bigdata.rdf.internal.constraints.NotBOp(com.bigdata.rdf.internal.constraints.EBVBOp(-exists-1))] )
+         *       FILTER( org.embergraph.rdf.sparql.ast.NotExistsNode(VarNode(-exists-1))[ org.embergraph.rdf.sparql.ast.FunctionNode.functionURI=http://www.bigdata.com/sparql-1.1-undefined-functionsnot-exists, graphPattern=JoinGroupNode, valueExpr=org.embergraph.rdf.internal.constraints.NotBOp(org.embergraph.rdf.internal.constraints.EBVBOp(-exists-1))] )
          * 
          *     } JOIN ON (ar)
          *     
-         *     FILTER( com.bigdata.rdf.sparql.ast.NotExistsNode(VarNode(-exists-2))[ com.bigdata.rdf.sparql.ast.FunctionNode.functionURI=http://www.bigdata.com/sparql-1.1-undefined-functionsnot-exists, graphPattern=JoinGroupNode, valueExpr=com.bigdata.rdf.internal.constraints.NotBOp(com.bigdata.rdf.internal.constraints.EBVBOp(-exists-2))] )
+         *     FILTER( org.embergraph.rdf.sparql.ast.NotExistsNode(VarNode(-exists-2))[ org.embergraph.rdf.sparql.ast.FunctionNode.functionURI=http://www.bigdata.com/sparql-1.1-undefined-functionsnot-exists, graphPattern=JoinGroupNode, valueExpr=org.embergraph.rdf.internal.constraints.NotBOp(org.embergraph.rdf.internal.constraints.EBVBOp(-exists-2))] )
          *     
          *   }
          * </pre>
@@ -535,10 +535,10 @@ public class TestNegation extends AbstractDataDrivenSPARQLTestCase {
                group.addChild(sp1);
    
                sp1.setProperty(
-                     "com.bigdata.rdf.sparql.ast.eval.AST2BOpBase.estimatedCardinality",
+                     "org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.estimatedCardinality",
                      3L);
                sp1.setProperty(
-                     "com.bigdata.rdf.sparql.ast.eval.AST2BOpBase.originalIndex",
+                     "org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.originalIndex",
                      SPOKeyOrder.POCS);
             }
             
@@ -548,8 +548,8 @@ public class TestNegation extends AbstractDataDrivenSPARQLTestCase {
              *     SELECT VarNode(ar) VarNode(-exists-2)[anonymous]
              *       JoinGroupNode {
              *         StatementPatternNode(VarNode(ar), ConstantNode(TermId(8U)[os:prop/analysis/refEntity]), ConstantNode(TermId(7U)[os:elem/loc/Kriterion]), DEFAULT_CONTEXTS)
-             *           com.bigdata.rdf.sparql.ast.eval.AST2BOpBase.estimatedCardinality=1
-             *           com.bigdata.rdf.sparql.ast.eval.AST2BOpBase.originalIndex=POCS
+             *           org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.estimatedCardinality=1
+             *           org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.originalIndex=POCS
              *       }
              *     @askVar=-exists-2
              * </pre>
@@ -584,14 +584,14 @@ public class TestNegation extends AbstractDataDrivenSPARQLTestCase {
                     whereClause2.addChild(sp2);
                     
                     sp2.setProperty(
-                            "com.bigdata.rdf.sparql.ast.eval.AST2BOpBase.estimatedCardinality",
+                            "org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.estimatedCardinality",
                             1L);
                     sp2.setProperty(
-                            "com.bigdata.rdf.sparql.ast.eval.AST2BOpBase.originalIndex",
+                            "org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.originalIndex",
                             SPOKeyOrder.POCS);
 
                     whereClause2.setProperty(
-                            "com.bigdata.rdf.sparql.ast.eval.AST2BOpBase.estimatedCardinality",
+                            "org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.estimatedCardinality",
                             1L);
                 }
                 
@@ -605,19 +605,19 @@ public class TestNegation extends AbstractDataDrivenSPARQLTestCase {
              *     JoinGroupNode {
              *       
              *       StatementPatternNode(VarNode(ar), ConstantNode(Vocab(14)[http://www.w3.org/1999/02/22-rdf-syntax-ns#type]), ConstantNode(TermId(5U)[os:class/AnalysisResults]), DEFAULT_CONTEXTS)
-             *         com.bigdata.rdf.sparql.ast.eval.AST2BOpBase.estimatedCardinality=3
-             *         com.bigdata.rdf.sparql.ast.eval.AST2BOpBase.originalIndex=POCS
+             *         org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.estimatedCardinality=3
+             *         org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.originalIndex=POCS
              *       
              *       QueryType: ASK
              *       SELECT VarNode(ar) VarNode(-exists-1)[anonymous]
              *         JoinGroupNode {
              *           StatementPatternNode(VarNode(ar), ConstantNode(TermId(8U)[os:prop/analysis/refEntity]), ConstantNode(TermId(6U)[os:elem/loc/Artis]), DEFAULT_CONTEXTS)
-             *             com.bigdata.rdf.sparql.ast.eval.AST2BOpBase.estimatedCardinality=2
-             *             com.bigdata.rdf.sparql.ast.eval.AST2BOpBase.originalIndex=POCS
+             *             org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.estimatedCardinality=2
+             *             org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.originalIndex=POCS
              *         }
              *       @askVar=-exists-1
              *       
-             *       FILTER( com.bigdata.rdf.sparql.ast.NotExistsNode(VarNode(-exists-1))[ com.bigdata.rdf.sparql.ast.FunctionNode.functionURI=http://www.bigdata.com/sparql-1.1-undefined-functionsnot-exists, graphPattern=JoinGroupNode, valueExpr=com.bigdata.rdf.internal.constraints.NotBOp(com.bigdata.rdf.internal.constraints.EBVBOp(-exists-1))] )
+             *       FILTER( org.embergraph.rdf.sparql.ast.NotExistsNode(VarNode(-exists-1))[ org.embergraph.rdf.sparql.ast.FunctionNode.functionURI=http://www.bigdata.com/sparql-1.1-undefined-functionsnot-exists, graphPattern=JoinGroupNode, valueExpr=org.embergraph.rdf.internal.constraints.NotBOp(org.embergraph.rdf.internal.constraints.EBVBOp(-exists-1))] )
              * 
              *     } JOIN ON (ar)
              * </pre>
@@ -633,8 +633,8 @@ public class TestNegation extends AbstractDataDrivenSPARQLTestCase {
                  *       SELECT VarNode(ar) VarNode(-exists-1)[anonymous]
                  *         JoinGroupNode {
                  *           StatementPatternNode(VarNode(ar), ConstantNode(TermId(8U)[os:prop/analysis/refEntity]), ConstantNode(TermId(6U)[os:elem/loc/Artis]), DEFAULT_CONTEXTS)
-                 *             com.bigdata.rdf.sparql.ast.eval.AST2BOpBase.estimatedCardinality=2
-                 *             com.bigdata.rdf.sparql.ast.eval.AST2BOpBase.originalIndex=POCS
+                 *             org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.estimatedCardinality=2
+                 *             org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.originalIndex=POCS
                  *         }
                  *       @askVar=-exists-1
                  * </pre>
@@ -664,14 +664,14 @@ public class TestNegation extends AbstractDataDrivenSPARQLTestCase {
                         whereClause1.addChild(sp3);
                         
                         sp3.setProperty(
-                                "com.bigdata.rdf.sparql.ast.eval.AST2BOpBase.estimatedCardinality",
+                                "org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.estimatedCardinality",
                                 2L);
                         sp3.setProperty(
-                                "com.bigdata.rdf.sparql.ast.eval.AST2BOpBase.originalIndex",
+                                "org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.originalIndex",
                                 SPOKeyOrder.POCS);
 
                         whereClause1.setProperty(
-                                "com.bigdata.rdf.sparql.ast.eval.AST2BOpBase.estimatedCardinality",
+                                "org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.estimatedCardinality",
                                 2L);
                     }
                     
@@ -686,10 +686,10 @@ public class TestNegation extends AbstractDataDrivenSPARQLTestCase {
             
             /**
              * <pre>
-             *       FILTER( com.bigdata.rdf.sparql.ast.NotExistsNode(VarNode(-exists-1))[
-             *       com.bigdata.rdf.sparql.ast.FunctionNode.functionURI=http://www.bigdata.com/sparql-1.1-undefined-functionsnot-exists,
+             *       FILTER( org.embergraph.rdf.sparql.ast.NotExistsNode(VarNode(-exists-1))[
+             *       org.embergraph.rdf.sparql.ast.FunctionNode.functionURI=http://www.bigdata.com/sparql-1.1-undefined-functionsnot-exists,
              *       graphPattern=JoinGroupNode,
-             *       valueExpr=com.bigdata.rdf.internal.constraints.NotBOp(com.bigdata.rdf.internal.constraints.EBVBOp(-exists-1))
+             *       valueExpr=org.embergraph.rdf.internal.constraints.NotBOp(org.embergraph.rdf.internal.constraints.EBVBOp(-exists-1))
              *       ] )
              * </pre>
              */
@@ -713,10 +713,10 @@ public class TestNegation extends AbstractDataDrivenSPARQLTestCase {
 
             /**
              * <pre>
-             *     FILTER( com.bigdata.rdf.sparql.ast.NotExistsNode(VarNode(-exists-2))[
-             *     com.bigdata.rdf.sparql.ast.FunctionNode.functionURI=http://www.bigdata.com/sparql-1.1-undefined-functionsnot-exists,
+             *     FILTER( org.embergraph.rdf.sparql.ast.NotExistsNode(VarNode(-exists-2))[
+             *     org.embergraph.rdf.sparql.ast.FunctionNode.functionURI=http://www.bigdata.com/sparql-1.1-undefined-functionsnot-exists,
              *     graphPattern=JoinGroupNode,
-             *     valueExpr=com.bigdata.rdf.internal.constraints.NotBOp(com.bigdata.rdf.internal.constraints.EBVBOp(-exists-2))
+             *     valueExpr=org.embergraph.rdf.internal.constraints.NotBOp(org.embergraph.rdf.internal.constraints.EBVBOp(-exists-2))
              *     ] )
              * </pre>
              */

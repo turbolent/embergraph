@@ -63,7 +63,7 @@ import org.embergraph.service.ScaleOutClientFactory;
  * example:
  * <pre>
  * -Dbigdata.configuration=/nas/bigdata/benchmark/config/bigdataStandalone.config
- * -Dcom.bigdata.counters.linux.sysstat.path=/usr/local/bin
+ * -Dorg.embergraph.counters.linux.sysstat.path=/usr/local/bin
  * </pre>
  * 
  * @author <a href="mailto:dmacgbr@users.sourceforge.net">David MacMillan</a>
@@ -314,7 +314,7 @@ extends SPARQLQueryTest
 		 * This is more expensive in key creation during loading, but allows key
 		 * comparison and sorting in the specified locale in queries.
 		 * 
-		 * @see com.bigdata.btree.keys.CollatorEnum
+		 * @see org.embergraph.btree.keys.CollatorEnum
 		 */
 		_properties.put(KeyBuilder.Options.COLLATOR, "ICU");
 		_properties.put(KeyBuilder.Options.USER_LANGUAGE, "en");

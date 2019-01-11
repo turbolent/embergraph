@@ -399,10 +399,10 @@ public class TestGeoSpatialCustomFields extends AbstractDataDrivenSPARQLTestCase
 
         // enable GeoSpatial index
         properties.setProperty(
-           com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL, "true");
+           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL, "true");
         
         properties.setProperty(
-           com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".0",
+           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".0",
            "{\"config\": "
            + "{ \"uri\": \"http://my.custom.datatype/x-y-z\", "
            + "\"fields\": [ "
@@ -412,7 +412,7 @@ public class TestGeoSpatialCustomFields extends AbstractDataDrivenSPARQLTestCase
            + "]}}");
 
         properties.setProperty(
-           com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".1",
+           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".1",
            "{\"config\": "
            + "{ \"uri\": \"http://my.custom.datatype/time-x-y-z\", "
            + "\"fields\": [ "
@@ -424,7 +424,7 @@ public class TestGeoSpatialCustomFields extends AbstractDataDrivenSPARQLTestCase
 
         
         properties.setProperty(
-           com.bigdata.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".2",
+           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".2",
            "{\"config\": "
            + "{ \"uri\": \"http://my.custom.datatype/x-y-z-lat-lon-time\", "
            + "\"fields\": [ "
@@ -437,8 +437,8 @@ public class TestGeoSpatialCustomFields extends AbstractDataDrivenSPARQLTestCase
            + "]}}");
 
         properties.setProperty(
-                com.bigdata.rdf.store.AbstractLocalTripleStore.Options.VOCABULARY_CLASS,
-                "com.bigdata.rdf.sparql.ast.eval.service.GeoSpatialTestVocabulary");
+                org.embergraph.rdf.store.AbstractLocalTripleStore.Options.VOCABULARY_CLASS,
+                "org.embergraph.rdf.sparql.ast.eval.service.GeoSpatialTestVocabulary");
 
         return properties;
 

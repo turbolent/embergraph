@@ -58,7 +58,7 @@ public class AND extends BOpBase implements BooleanValueExpression {
     }
 
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      */
     public AND(final AND op) {
         super(op);

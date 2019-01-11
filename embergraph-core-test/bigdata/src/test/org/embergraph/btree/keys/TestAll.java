@@ -57,7 +57,7 @@ public class TestAll extends TestCase {
     public static Test suite()
     {
 
-        final TestSuite suite = new TestSuite("com.bigdata.btree.keys");
+        final TestSuite suite = new TestSuite("org.embergraph.btree.keys");
         
         /*
          * test key encoding and comparison support.

@@ -16,7 +16,7 @@ public class PropertyPathUnionNode extends UnionNode {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      */
     public PropertyPathUnionNode(PropertyPathUnionNode op) {
 

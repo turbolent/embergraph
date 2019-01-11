@@ -2749,8 +2749,8 @@ abstract public class AbstractBTreeTestCase extends TestCase2 {
      * @return The random key-value data, sorted in ascending order by key.
      * 
      * @see ClientIndexView#submit(int, byte[][], byte[][],
-     *      com.bigdata.btree.IIndexProcedure.IIndexProcedureConstructor,
-     *      com.bigdata.btree.IResultHandler)
+     *      org.embergraph.btree.IIndexProcedure.IIndexProcedureConstructor,
+     *      org.embergraph.btree.IResultHandler)
      * 
      * @todo parameter for random deletes, in which case we need to reframe the
      *       batch operation since a batch insert won't work. Perhaps a

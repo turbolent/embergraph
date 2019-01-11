@@ -37,14 +37,14 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #
 # cd bigdata
 # javac src/java/com/bigdata/btree/BytesUtil.java
-# javah -classpath src/java com.bigdata.btree.BytesUtil
+# javah -classpath src/java org.embergraph.btree.BytesUtil
 
 # The easiest thing to do is "ant jar" first to generate the class files.
 # Then you can do something like:
 #
 ant bundleJar # generate the class files, the jar, and colocate the dependency jars.
 cd bigdata
-javah -classpath ../ant-build/classes com.bigdata.btree.BytesUtil
+javah -classpath ../ant-build/classes org.embergraph.btree.BytesUtil
 
 This places the .h files in the bigdata directory.
 
@@ -82,7 +82,7 @@ gcc -shared -W1,-soname,libBytesUtil.so -o libBytesUtil.so BytesUtil.o -lc
 export LD_LIBRARY_PATH=.
 
 # Execute the test program:
-java -Dcom.bigdata.btree.BytesUtil.jni=true -classpath ../ant-build/classes:../ant-build/lib/log4j-1.2.17.jar com.bigdata.btree.BytesUtil
+java -Dorg.embergraph.btree.BytesUtil.jni=true -classpath ../ant-build/classes:../ant-build/lib/log4j-1.2.17.jar org.embergraph.btree.BytesUtil
 
 ----
 

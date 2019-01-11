@@ -55,7 +55,7 @@ import org.embergraph.service.IService;
  *          TODO The SPARQL layer needs to be separated from the core bigdata
  *          layer, with the BigdataContext moving into a servlet package in the
  *          bigdata module and the CountersServlet moving into a servlet package
- *          in the com.bigdata.counters package namespace.
+ *          in the org.embergraph.counters package namespace.
  *          <p>
  *          The flot resources need to be retrievable.
  *          <p>

@@ -109,7 +109,7 @@ public class InHashBOp extends InBOp {
     }
 
     /**
-     * Extends {@link com.bigdata.bop.CoreBaseBOp#mutation() CoreBaseBOp.mutation} method to reflect args changes in cached IVs set.
+     * Extends {@link org.embergraph.bop.CoreBaseBOp#mutation() CoreBaseBOp.mutation} method to reflect args changes in cached IVs set.
      */
     @Override
     public void mutation() {

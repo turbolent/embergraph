@@ -17,4 +17,4 @@ java \
  -Djava.net.preferIPv4Stack=true\
  -Dbigdata.fedname=${FEDNAME}\
  -Ddefault.nic=`hostname`\
- com.bigdata.service.jini.util.LookupStarter 
+ org.embergraph.service.jini.util.LookupStarter

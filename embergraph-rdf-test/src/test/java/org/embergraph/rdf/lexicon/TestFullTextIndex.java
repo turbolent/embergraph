@@ -28,7 +28,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.lexicon;
 
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.Properties;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -42,7 +41,6 @@ import org.openrdf.model.impl.LiteralImpl;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.model.vocabulary.XMLSchema;
-import org.openrdf.util.iterators.Iterators;
 
 import org.embergraph.btree.ChunkedLocalRangeIterator;
 import org.embergraph.btree.IIndex;
@@ -50,7 +48,6 @@ import org.embergraph.btree.IRangeQuery;
 import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleIterator;
 import org.embergraph.btree.filter.TupleFilter;
-import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.XSD;
 import org.embergraph.rdf.lexicon.ITextIndexer.FullTextQuery;
@@ -58,7 +55,6 @@ import org.embergraph.rdf.model.BigdataValue;
 import org.embergraph.rdf.model.BigdataValueFactory;
 import org.embergraph.rdf.rio.IStatementBuffer;
 import org.embergraph.rdf.rio.StatementBuffer;
-import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.TestSPOKeyOrder;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.AbstractTripleStoreTestCase;

@@ -40,7 +40,7 @@ import java.util.logging.SimpleFormatter;
  * The Log4jLoggingHandler is initialized using the following LogManager
  * configuration properties:
  * <ul>
- * <li> com.bigdata.util.config.Log4jLoggingHandler.loggername
+ * <li> org.embergraph.util.config.Log4jLoggingHandler.loggername
  *      specifies the name of a Log4j Logger that will be used to find
  *      the Log4j Appenders used for actually logging the message. This
  *      property is optional and defaults to the log4j root logger.
@@ -53,7 +53,7 @@ public class Log4jLoggingHandler extends Handler {
     public Log4jLoggingHandler() {
         String log4jLoggerName = 
             LogManager.getLogManager().getProperty
-                ("com.bigdata.util.config.Log4jLoggingHandler.loggername");
+                ("org.embergraph.util.config.Log4jLoggingHandler.loggername");
         if((log4jLoggerName != null) && !log4jLoggerName.equals("")) {
             this.log4jLogger = LogUtil.getLog4jLogger(log4jLoggerName);
         } else {

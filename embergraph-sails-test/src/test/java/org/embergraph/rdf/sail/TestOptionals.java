@@ -202,11 +202,11 @@ public class TestOptionals extends QuadsTestCase {
     public void testOptional() throws Exception {
 
         Properties properties = getProperties();
-//        properties.put("com.bigdata.rdf.sail.isolatableIndices", "true");
-        properties.put("com.bigdata.rdf.store.AbstractTripleStore.axiomsClass", "com.bigdata.rdf.axioms.NoAxioms");
-        properties.put("com.bigdata.rdf.sail.truthMaintenance", "false");
-        properties.put("com.bigdata.rdf.store.AbstractTripleStore.vocabularyClass", "com.bigdata.rdf.vocab.NoVocabulary");
-        properties.put("com.bigdata.rdf.store.AbstractTripleStore.justify", "false");
+//        properties.put("org.embergraph.rdf.sail.isolatableIndices", "true");
+        properties.put("org.embergraph.rdf.store.AbstractTripleStore.axiomsClass", "org.embergraph.rdf.axioms.NoAxioms");
+        properties.put("org.embergraph.rdf.sail.truthMaintenance", "false");
+        properties.put("org.embergraph.rdf.store.AbstractTripleStore.vocabularyClass", "org.embergraph.rdf.vocab.NoVocabulary");
+        properties.put("org.embergraph.rdf.store.AbstractTripleStore.justify", "false");
         
         final BigdataSail sail = getSail(properties);
         sail.initialize();

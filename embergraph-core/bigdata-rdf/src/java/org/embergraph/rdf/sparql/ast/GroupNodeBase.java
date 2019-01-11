@@ -51,7 +51,7 @@ public abstract class GroupNodeBase<E extends IGroupMemberNode> extends
     }
 
     /**
-     * Constructor required for {@link com.bigdata.bop.BOpUtility#deepCopy(FilterNode)}.
+     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      */
     public GroupNodeBase(final GroupNodeBase<E> op) {
 

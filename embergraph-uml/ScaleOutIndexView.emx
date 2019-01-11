@@ -52,7 +52,7 @@
     <ownedMember xmi:type="uml:PrimitiveType" xmi:id="_KkMxMSUOEd6HR7eKuzA7Lw" name="IR"/>
   </ownedMember>
   <ownedMember xmi:type="uml:Interface" xmi:id="_yLfBoB4BEd6BSe4b3C_q6g" name="java.util.concurrent.ExecutorService"/>
-  <ownedMember xmi:type="uml:Package" xmi:id="_-WrFYCUCEd6HR7eKuzA7Lw" name="com.bigdata.relation">
+  <ownedMember xmi:type="uml:Package" xmi:id="_-WrFYCUCEd6HR7eKuzA7Lw" name="org.embergraph.relation">
     <eAnnotations xmi:id="_-WrFYSUCEd6HR7eKuzA7Lw" source="uml2.diagrams" references="_-WrFYiUCEd6HR7eKuzA7Lw">
       <contents xmi:type="notation:Diagram" xmi:id="_-WrFYiUCEd6HR7eKuzA7Lw" type="Class" element="_-WrFYCUCEd6HR7eKuzA7Lw" name="Main">
         <children xmi:id="_EJtJECUFEd6HR7eKuzA7Lw" sourceEdges="_hQXWMSUFEd6HR7eKuzA7Lw _X51PMCUGEd6HR7eKuzA7Lw" targetEdges="_EKJ1DiUFEd6HR7eKuzA7Lw _enFm0SUFEd6HR7eKuzA7Lw _PB-WUiUJEd6HR7eKuzA7Lw" element="_wNRhwCUCEd6HR7eKuzA7Lw">
@@ -632,7 +632,7 @@
       <generalization xmi:id="_H0678CUYEd6HR7eKuzA7Lw" general="_hzlS0CUXEd6HR7eKuzA7Lw"/>
     </ownedMember>
   </ownedMember>
-  <ownedMember xmi:type="uml:Package" xmi:id="_BjkfMCUDEd6HR7eKuzA7Lw" name="com.bigdata.relation.locator">
+  <ownedMember xmi:type="uml:Package" xmi:id="_BjkfMCUDEd6HR7eKuzA7Lw" name="org.embergraph.relation.locator">
     <eAnnotations xmi:id="_BjkfMSUDEd6HR7eKuzA7Lw" source="uml2.diagrams" references="_BjkfMiUDEd6HR7eKuzA7Lw">
       <contents xmi:type="notation:Diagram" xmi:id="_BjkfMiUDEd6HR7eKuzA7Lw" type="Class" element="_BjkfMCUDEd6HR7eKuzA7Lw" name="Main">
         <children xmi:id="_VYxgUCUJEd6HR7eKuzA7Lw" targetEdges="_mwtcgSUJEd6HR7eKuzA7Lw _vhcScCUJEd6HR7eKuzA7Lw _vhmDWiUJEd6HR7eKuzA7Lw" element="_5FA-gCUCEd6HR7eKuzA7Lw">
@@ -868,7 +868,7 @@
       <ownedEnd xmi:id="_mwjrgiUJEd6HR7eKuzA7Lw" visibility="private" type="_e6-2YCUJEd6HR7eKuzA7Lw" association="_mwjrgCUJEd6HR7eKuzA7Lw"/>
     </ownedMember>
   </ownedMember>
-  <ownedMember xmi:type="uml:Package" xmi:id="_C7CocCUDEd6HR7eKuzA7Lw" name="com.bigdata.relation.rule">
+  <ownedMember xmi:type="uml:Package" xmi:id="_C7CocCUDEd6HR7eKuzA7Lw" name="org.embergraph.relation.rule">
     <eAnnotations xmi:id="_C7CocSUDEd6HR7eKuzA7Lw" source="uml2.diagrams" references="_C7CociUDEd6HR7eKuzA7Lw">
       <contents xmi:type="notation:Diagram" xmi:id="_C7CociUDEd6HR7eKuzA7Lw" type="Class" element="_C7CocCUDEd6HR7eKuzA7Lw" name="Main">
         <children xmi:id="_dIREICUgEd6HR7eKuzA7Lw" targetEdges="_dLPfoCUgEd6HR7eKuzA7Lw _dLPfxSUgEd6HR7eKuzA7Lw" element="_CU8KYCUGEd6HR7eKuzA7Lw">
@@ -1908,7 +1908,7 @@
       <ownedEnd xmi:id="_W6P4IiUfEd6HR7eKuzA7Lw" visibility="private" type="_xx258CUCEd6HR7eKuzA7Lw" association="_W6P4ICUfEd6HR7eKuzA7Lw"/>
     </ownedMember>
   </ownedMember>
-  <ownedMember xmi:type="uml:Package" xmi:id="_FdA18CUDEd6HR7eKuzA7Lw" name="com.bigdata.relation.accesspath">
+  <ownedMember xmi:type="uml:Package" xmi:id="_FdA18CUDEd6HR7eKuzA7Lw" name="org.embergraph.relation.accesspath">
     <eAnnotations xmi:id="_FdKm8CUDEd6HR7eKuzA7Lw" source="uml2.diagrams" references="_FdKm8SUDEd6HR7eKuzA7Lw">
       <contents xmi:type="notation:Diagram" xmi:id="_FdKm8SUDEd6HR7eKuzA7Lw" type="Class" element="_FdA18CUDEd6HR7eKuzA7Lw" name="Main">
         <children xmi:id="_TZqvUCUJEd6HR7eKuzA7Lw" sourceEdges="_NDNuISUKEd6HR7eKuzA7Lw _cwA-MCUKEd6HR7eKuzA7Lw _freCtCUKEd6HR7eKuzA7Lw _sTaaoCUKEd6HR7eKuzA7Lw" element="_yT1loCUCEd6HR7eKuzA7Lw">
@@ -2608,7 +2608,7 @@
       <ownedEnd xmi:id="_sS9usCUKEd6HR7eKuzA7Lw" visibility="private" type="_yT1loCUCEd6HR7eKuzA7Lw" association="_sS0kwCUKEd6HR7eKuzA7Lw"/>
     </ownedMember>
   </ownedMember>
-  <ownedMember xmi:type="uml:Package" xmi:id="_m4PPkCUDEd6HR7eKuzA7Lw" name="com.bigdata.relation.rule.eval">
+  <ownedMember xmi:type="uml:Package" xmi:id="_m4PPkCUDEd6HR7eKuzA7Lw" name="org.embergraph.relation.rule.eval">
     <eAnnotations xmi:id="_m4PPkSUDEd6HR7eKuzA7Lw" source="uml2.diagrams" references="_m4PPkiUDEd6HR7eKuzA7Lw">
       <contents xmi:type="notation:Diagram" xmi:id="_m4PPkiUDEd6HR7eKuzA7Lw" type="Class" element="_m4PPkCUDEd6HR7eKuzA7Lw" name="Main">
         <children xmi:id="_GObq0CUOEd6HR7eKuzA7Lw" sourceEdges="_T3N0sSUOEd6HR7eKuzA7Lw _UWWnwCUOEd6HR7eKuzA7Lw" element="_GOSg4CUOEd6HR7eKuzA7Lw">
@@ -2947,7 +2947,7 @@
       </ownedLiteral>
     </ownedMember>
   </ownedMember>
-  <ownedMember xmi:type="uml:Package" xmi:id="_uKNBUCUDEd6HR7eKuzA7Lw" name="com.bigdata.striterator">
+  <ownedMember xmi:type="uml:Package" xmi:id="_uKNBUCUDEd6HR7eKuzA7Lw" name="org.embergraph.striterator">
     <eAnnotations xmi:id="_uKNBUSUDEd6HR7eKuzA7Lw" source="uml2.diagrams" references="_uKNBUiUDEd6HR7eKuzA7Lw">
       <contents xmi:type="notation:Diagram" xmi:id="_uKNBUiUDEd6HR7eKuzA7Lw" type="Class" element="_uKNBUCUDEd6HR7eKuzA7Lw" name="Main">
         <children xmi:id="_zHI1YCUDEd6HR7eKuzA7Lw" sourceEdges="_-Ksv0CULEd6HR7eKuzA7Lw" targetEdges="_0CviACUDEd6HR7eKuzA7Lw" element="_yy-YsCUCEd6HR7eKuzA7Lw">
@@ -3458,7 +3458,7 @@
   <ownedMember xmi:type="uml:Association" xmi:id="_Au2nQCUPEd6HR7eKuzA7Lw" memberEnd="_Au2nQSUPEd6HR7eKuzA7Lw _Au2nQiUPEd6HR7eKuzA7Lw">
     <ownedEnd xmi:id="_Au2nQiUPEd6HR7eKuzA7Lw" visibility="private" type="_-hyvQCUNEd6HR7eKuzA7Lw" association="_Au2nQCUPEd6HR7eKuzA7Lw"/>
   </ownedMember>
-  <ownedMember xmi:type="uml:Package" xmi:id="_rlLskCUTEd6HR7eKuzA7Lw" name="com.bigdata.rdf.store">
+  <ownedMember xmi:type="uml:Package" xmi:id="_rlLskCUTEd6HR7eKuzA7Lw" name="org.embergraph.rdf.store">
     <eAnnotations xmi:id="_rlLskSUTEd6HR7eKuzA7Lw" source="uml2.diagrams" references="_rlLskiUTEd6HR7eKuzA7Lw">
       <contents xmi:type="notation:Diagram" xmi:id="_rlLskiUTEd6HR7eKuzA7Lw" type="Class" element="_rlLskCUTEd6HR7eKuzA7Lw" name="Main">
         <children xmi:id="_uSV2YSUTEd6HR7eKuzA7Lw" sourceEdges="_wfTdMSUTEd6HR7eKuzA7Lw" element="_uSV2YCUTEd6HR7eKuzA7Lw">
@@ -4236,7 +4236,7 @@
       </implementation>
     </ownedMember>
   </ownedMember>
-  <ownedMember xmi:type="uml:Package" xmi:id="_7KiQ0CUTEd6HR7eKuzA7Lw" name="com.bigdata.btree">
+  <ownedMember xmi:type="uml:Package" xmi:id="_7KiQ0CUTEd6HR7eKuzA7Lw" name="org.embergraph.btree">
     <eAnnotations xmi:id="_7KiQ0SUTEd6HR7eKuzA7Lw" source="uml2.diagrams" references="_7KiQ0iUTEd6HR7eKuzA7Lw">
       <contents xmi:type="notation:Diagram" xmi:id="_7KiQ0iUTEd6HR7eKuzA7Lw" type="Class" element="_7KiQ0CUTEd6HR7eKuzA7Lw" name="Main">
         <children xmi:id="_MS-YcCUUEd6HR7eKuzA7Lw" sourceEdges="_Nta9MCUUEd6HR7eKuzA7Lw _Nta9NyUUEd6HR7eKuzA7Lw _Nta9PiUUEd6HR7eKuzA7Lw _WxiCACUUEd6HR7eKuzA7Lw" element="_gVtaQB3-Ed6BSe4b3C_q6g">
@@ -4481,7 +4481,7 @@
     <ownedMember xmi:type="uml:Class" xmi:id="_1F1WEB4FEd6BSe4b3C_q6g" name="IndexMetadata"/>
     <ownedMember xmi:type="uml:Dependency" xmi:id="_Ww8MICUUEd6HR7eKuzA7Lw" client="_gVtaQB3-Ed6BSe4b3C_q6g" supplier="_1F1WEB4FEd6BSe4b3C_q6g"/>
   </ownedMember>
-  <ownedMember xmi:type="uml:Package" xmi:id="_B2pjgCUUEd6HR7eKuzA7Lw" name="com.bigdata.service">
+  <ownedMember xmi:type="uml:Package" xmi:id="_B2pjgCUUEd6HR7eKuzA7Lw" name="org.embergraph.service">
     <eAnnotations xmi:id="_B2pjgSUUEd6HR7eKuzA7Lw" source="uml2.diagrams" references="_B2pjgiUUEd6HR7eKuzA7Lw">
       <contents xmi:type="notation:Diagram" xmi:id="_B2pjgiUUEd6HR7eKuzA7Lw" type="Class" element="_B2pjgCUUEd6HR7eKuzA7Lw" name="Main">
         <styles xmi:type="umlnotation:UMLDiagramStyle" xmi:id="_B2pjgyUUEd6HR7eKuzA7Lw"/>
@@ -5624,7 +5624,7 @@
       <ownedEnd xmi:id="_dxe4Eh4AEd6BSe4b3C_q6g" visibility="private" type="_LTl14B3_Ed6BSe4b3C_q6g" association="_dxe4EB4AEd6BSe4b3C_q6g"/>
     </ownedMember>
   </ownedMember>
-  <ownedMember xmi:type="uml:Package" xmi:id="_j0ZbYCUUEd6HR7eKuzA7Lw" name="com.bigdata.service.jini">
+  <ownedMember xmi:type="uml:Package" xmi:id="_j0ZbYCUUEd6HR7eKuzA7Lw" name="org.embergraph.service.jini">
     <eAnnotations xmi:id="_j0ZbYSUUEd6HR7eKuzA7Lw" source="uml2.diagrams" references="_j0ZbYiUUEd6HR7eKuzA7Lw">
       <contents xmi:type="notation:Diagram" xmi:id="_j0ZbYiUUEd6HR7eKuzA7Lw" type="Class" element="_j0ZbYCUUEd6HR7eKuzA7Lw" name="Main">
         <styles xmi:type="umlnotation:UMLDiagramStyle" xmi:id="_j0ZbYyUUEd6HR7eKuzA7Lw"/>
@@ -5637,7 +5637,7 @@
       <generalization xmi:id="_odY2kB3_Ed6BSe4b3C_q6g" general="_XgkwIB3_Ed6BSe4b3C_q6g"/>
     </ownedMember>
   </ownedMember>
-  <ownedMember xmi:type="uml:Package" xmi:id="_pBGJwCUUEd6HR7eKuzA7Lw" name="com.bigdata.mdi">
+  <ownedMember xmi:type="uml:Package" xmi:id="_pBGJwCUUEd6HR7eKuzA7Lw" name="org.embergraph.mdi">
     <eAnnotations xmi:id="_pBGJwSUUEd6HR7eKuzA7Lw" source="uml2.diagrams" references="_pBGJwiUUEd6HR7eKuzA7Lw">
       <contents xmi:type="notation:Diagram" xmi:id="_pBGJwiUUEd6HR7eKuzA7Lw" type="Class" element="_pBGJwCUUEd6HR7eKuzA7Lw" name="Main">
         <children xmi:id="_xM8w4CUUEd6HR7eKuzA7Lw" sourceEdges="_xNF63iUUEd6HR7eKuzA7Lw" element="_CyBZQB4GEd6BSe4b3C_q6g">
@@ -5824,7 +5824,7 @@
   <ownedMember xmi:type="uml:Association" xmi:id="_EqNa0CUVEd6HR7eKuzA7Lw" memberEnd="_EqNa0SUVEd6HR7eKuzA7Lw _EqNa0iUVEd6HR7eKuzA7Lw">
     <ownedEnd xmi:id="_EqNa0iUVEd6HR7eKuzA7Lw" visibility="private" type="_yRvrMCUTEd6HR7eKuzA7Lw" association="_EqNa0CUVEd6HR7eKuzA7Lw"/>
   </ownedMember>
-  <ownedMember xmi:type="uml:Package" xmi:id="_deHucCUXEd6HR7eKuzA7Lw" name="com.bigdata.btree.proc">
+  <ownedMember xmi:type="uml:Package" xmi:id="_deHucCUXEd6HR7eKuzA7Lw" name="org.embergraph.btree.proc">
     <eAnnotations xmi:id="_deHucSUXEd6HR7eKuzA7Lw" source="uml2.diagrams" references="_deHuciUXEd6HR7eKuzA7Lw">
       <contents xmi:type="notation:Diagram" xmi:id="_deHuciUXEd6HR7eKuzA7Lw" type="Class" element="_deHucCUXEd6HR7eKuzA7Lw" name="Main">
         <children xmi:id="_hzucwCUXEd6HR7eKuzA7Lw" targetEdges="_4Gqd4SUYEd6HR7eKuzA7Lw _4ooigSUYEd6HR7eKuzA7Lw _5Qa7QSUYEd6HR7eKuzA7Lw _6f_swSUYEd6HR7eKuzA7Lw _-sEPIiUZEd6HR7eKuzA7Lw" element="_hzlS0CUXEd6HR7eKuzA7Lw">
@@ -6160,7 +6160,7 @@
       </implementation>
     </ownedMember>
   </ownedMember>
-  <ownedMember xmi:type="uml:Package" xmi:id="_39SC8CUZEd6HR7eKuzA7Lw" name="com.bigdata.btree.keys">
+  <ownedMember xmi:type="uml:Package" xmi:id="_39SC8CUZEd6HR7eKuzA7Lw" name="org.embergraph.btree.keys">
     <eAnnotations xmi:id="_39bM4CUZEd6HR7eKuzA7Lw" source="uml2.diagrams" references="_39bM4SUZEd6HR7eKuzA7Lw">
       <contents xmi:type="notation:Diagram" xmi:id="_39bM4SUZEd6HR7eKuzA7Lw" type="Class" element="_39SC8CUZEd6HR7eKuzA7Lw" name="Main">
         <children xmi:id="_6lW4cCUZEd6HR7eKuzA7Lw" element="_6lNugCUZEd6HR7eKuzA7Lw">

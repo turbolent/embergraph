@@ -93,7 +93,7 @@
     <graphs>
         <graph>
             <graph-name>bigdata</graph-name>
-            <graph-type>com.bigdata.blueprints.BigdataGraphConfiguration</graph-type>
+            <graph-type>org.embergraph.blueprints.BigdataGraphConfiguration</graph-type>
             <properties>
 <!--
                 <type>embedded</type>
