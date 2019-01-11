@@ -30,23 +30,23 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 /*
  * Compile the Java class and then generate the C header file from that class.
- * From the bigdata directory, do:
+ * From the embergraph directory, do:
 
 # Note: This approach no longer works as executed due to new imports that
 # can not be trivially resolved by javac.
 #
-# cd bigdata
-# javac src/java/com/bigdata/btree/BytesUtil.java
+# cd embergraph
+# javac src/java/com/embergraph/btree/BytesUtil.java
 # javah -classpath src/java org.embergraph.btree.BytesUtil
 
 # The easiest thing to do is "ant jar" first to generate the class files.
 # Then you can do something like:
 #
 ant bundleJar # generate the class files, the jar, and colocate the dependency jars.
-cd bigdata
+cd embergraph
 javah -classpath ../ant-build/classes org.embergraph.btree.BytesUtil
 
-This places the .h files in the bigdata directory.
+This places the .h files in the embergraph directory.
 
 Now compile the C file. You can compile this under linux as follows:
 
@@ -61,18 +61,18 @@ export JAVA_INCLUDE=/System/Library/Frameworks/JavaVM.framework/Versions/Current
 export PATH=$JAVA_HOME/bin:$PATH
 
 # For linux.
-gcc -fPIC -g -I$JAVA_INCLUDE -I$JAVA_INCLUDE/linux -c src/java/com/bigdata/btree/BytesUtil.c
+gcc -fPIC -g -I$JAVA_INCLUDE -I$JAVA_INCLUDE/linux -c src/java/com/embergraph/btree/BytesUtil.c
 #
 # For OSX
-gcc -fPIC -g -I. -I$JAVA_INCLUDE -c src/java/com/bigdata/btree/BytesUtil.c
+gcc -fPIC -g -I. -I$JAVA_INCLUDE -c src/java/com/embergraph/btree/BytesUtil.c
 
 # Works for linux/OSX.
 gcc -shared -W1,-soname,libBytesUtil.so -o libBytesUtil.so BytesUtil.o -lc
 
 ## At this point you have something like the following in the cwd:
 # header files from javac.
-# com_bigdata_btree_BytesUtil.h
-# com_bigdata_btree_BytesUtil_UnsignedByteArrayComparator.h
+# org_embergraph_btree_BytesUtil.h
+# org_embergraph_btree_BytesUtil_UnsignedByteArrayComparator.h
 # Compiled version of BytesUtil.c
 # BytesUtil.o
 # Shared library for BytesUtil.o
@@ -89,7 +89,7 @@ java -Dorg.embergraph.btree.BytesUtil.jni=true -classpath ../ant-build/classes:.
  * On Win32, the following command builds a dynamic link library (DLL)
  * using the Microsoft Visual C++ compiler:
 
-cl -I. "-I%JAVA_HOME%\include" "-I%JAVA_HOME%\include\win32" -LD src/java/com/bigdata/btree/BytesUtil.c -FeBytesUtil.dll
+cl -I. "-I%JAVA_HOME%\include" "-I%JAVA_HOME%\include\win32" -LD src/java/com/embergraph/btree/BytesUtil.c -FeBytesUtil.dll
 
 other things tried, some of which may work or have useful optimizations:
 
@@ -142,7 +142,7 @@ See http://weblogs.java.net/blog/kellyohair/archive/2006/01/index.html for this 
  * @return a negative integer, zero, or a positive integer as the
  * first argument is less than, equal to, or greater than the second.
  */
-JNIEXPORT jint JNICALL Java_com_bigdata_btree_BytesUtil__1compareBytes
+JNIEXPORT jint JNICALL Java_org_embergraph_btree_BytesUtil__1compareBytes
   (JNIEnv *env, jclass cl, jint alen, jbyteArray a, jint blen, jbyteArray b)
 {
 
@@ -237,7 +237,7 @@ JNIEXPORT jint JNICALL Java_com_bigdata_btree_BytesUtil__1compareBytes
  * @return a negative integer, zero, or a positive integer as the
  * first argument is less than, equal to, or greater than the second.
  */
-JNIEXPORT jint JNICALL Java_com_bigdata_btree_BytesUtil__1compareBytesWithOffsetAndLen
+JNIEXPORT jint JNICALL Java_org_embergraph_btree_BytesUtil__1compareBytesWithOffsetAndLen
   (JNIEnv *env, jclass cl,
    jint aoff, jint alen, jbyteArray a, 
    jint boff, jint blen, jbyteArray b

@@ -14,7 +14,7 @@ and licensed under Apache 2.0 (see attached LICENSE file).
 It is hooked in into CI as follows:
 
 - Call "mvn jetty:stop; mvn clean; mvn jetty:run" before running the tests starts the server (stop and clean redundantly, in case there were problems in prior run)
-- Call "curl 'http://localhost:8983/solr/update?commit=true' --data-binary @/bigdata-rdf/src/test/com/bigdata/rdf/sparql/ast/eval/fts-solr-collection.xml -H 'Content-type:application/xml'" loads the test data into Solr
+- Call "curl 'http://localhost:8983/solr/update?commit=true' --data-binary @/bigdata-rdf/src/test/org/embergraph/rdf/sparql/ast/eval/fts-solr-collection.xml -H 'Content-type:application/xml'" loads the test data into Solr
 - Call "mvn jetty:stop; mvn clean" cleans up
 
 --------------------------------------------------
