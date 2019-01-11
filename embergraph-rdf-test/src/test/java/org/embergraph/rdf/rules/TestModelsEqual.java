@@ -77,10 +77,10 @@ public class TestModelsEqual extends AbstractRuleTestCase {
             {
                 final BigdataValueFactory f = store1.getValueFactory();
                 
-                final BigdataURI A = f.createURI("http://www.bigdata.com/a");
-                final BigdataURI B = f.createURI("http://www.bigdata.com/b");
-                final BigdataURI C = f.createURI("http://www.bigdata.com/c");
-                final BigdataURI D = f.createURI("http://www.bigdata.com/d");
+                final BigdataURI A = f.createURI("http://www.embergraph.org/a");
+                final BigdataURI B = f.createURI("http://www.embergraph.org/b");
+                final BigdataURI C = f.createURI("http://www.embergraph.org/c");
+                final BigdataURI D = f.createURI("http://www.embergraph.org/d");
                 final BigdataURI SCO = f.asValue(RDFS.SUBCLASSOF);
 
                 StatementBuffer buf = new StatementBuffer(store1, 10);
@@ -96,10 +96,10 @@ public class TestModelsEqual extends AbstractRuleTestCase {
             {
                 final BigdataValueFactory f = store1.getValueFactory();
                 
-                final BigdataURI A = f.createURI("http://www.bigdata.com/a");
-                final BigdataURI B = f.createURI("http://www.bigdata.com/b");
-                final BigdataURI C = f.createURI("http://www.bigdata.com/c");
-                final BigdataURI D = f.createURI("http://www.bigdata.com/d");
+                final BigdataURI A = f.createURI("http://www.embergraph.org/a");
+                final BigdataURI B = f.createURI("http://www.embergraph.org/b");
+                final BigdataURI C = f.createURI("http://www.embergraph.org/c");
+                final BigdataURI D = f.createURI("http://www.embergraph.org/d");
                 final BigdataURI SCO = f.asValue(RDFS.SUBCLASSOF);
 
                 StatementBuffer buf = new StatementBuffer(store2, 10);
@@ -142,8 +142,8 @@ public class TestModelsEqual extends AbstractRuleTestCase {
                 
                 final BigdataValueFactory f = store1.getValueFactory();
                 
-                final BigdataURI A = f.createURI("http://www.bigdata.com/a");
-                final BigdataURI B = f.createURI("http://www.bigdata.com/b");
+                final BigdataURI A = f.createURI("http://www.embergraph.org/a");
+                final BigdataURI B = f.createURI("http://www.embergraph.org/b");
                 final BigdataURI SCO = f.asValue(RDFS.SUBCLASSOF);
                 
                 assertEquals(1L, store2.removeStatements(A, SCO, B));

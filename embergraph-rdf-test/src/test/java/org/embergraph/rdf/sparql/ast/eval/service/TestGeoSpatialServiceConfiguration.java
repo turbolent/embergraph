@@ -215,7 +215,7 @@ public class TestGeoSpatialServiceConfiguration extends AbstractDataDrivenSPARQL
 
         properties.setProperty(
            org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DEFAULT_DATATYPE,
-           "http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral");
+           "http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral");
         
         // set GeoSpatial configuration: use a higher precision and range shifts; 
         // the test accounts for this higher precision (and assert that range shifts
@@ -223,7 +223,7 @@ public class TestGeoSpatialServiceConfiguration extends AbstractDataDrivenSPARQL
         properties.setProperty(
            org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".0",
            "{\"config\": "
-           + "{ \"uri\": \"http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral\", "
+           + "{ \"uri\": \"http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral\", "
            + "\"fields\": [ "
            + "{ \"valueType\": \"DOUBLE\", \"minVal\" : \"0\", \"multiplier\": \"1000000\", \"serviceMapping\": \"LATITUDE\" }, "
            + "{ \"valueType\": \"DOUBLE\", \"minVal\" : \"0\", \"multiplier\": \"100000\", \"serviceMapping\": \"LONGITUDE\" }, "

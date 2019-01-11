@@ -5,7 +5,7 @@ BLZG_LOG=/var/log/${NAME}
 BLZG_DATA=/var/lib/${NAME}
 JOURNAL_FILE=embergraph.jnl
 JOURNAL="${BLZG_DATA}"/"${JOURNAL_FILE}"
-# Run Blazegraph as this user ID and group ID
+# Run Embergraph as this user ID and group ID
 BLZG_USER=blzg
 BLZG_GROUP=blzg
 JETTY_XML="${BLZG_CONF}"/jetty.xml

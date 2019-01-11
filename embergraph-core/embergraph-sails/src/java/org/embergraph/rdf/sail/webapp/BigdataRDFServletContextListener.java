@@ -718,7 +718,7 @@ public class BigdataRDFServletContextListener implements
         }
 
         if (log.isInfoEnabled())
-            log.info("bigdata configuration: propertyFile=" + propertyFile
+            log.info("embergraph configuration: propertyFile=" + propertyFile
                     + ", propertyFileUrl=" + propertyFileUrl);
 
         if (propertyFileUrl == null) {

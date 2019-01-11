@@ -14,7 +14,7 @@ public class BigdataConfigSchema {
      * (<tt>http://www.bigdata.com/config/sail/bigdata#</tt>). 
      */
 	public static final String NAMESPACE = 
-            "http://www.bigdata.com/config/sail/bigdata#";
+            "http://www.embergraph.org/config/sail/embergraph#";
 
 	/** <tt>http://www.bigdata.com/config/sail/bigdata#properties</tt> */
 	public final static URI PROPERTIES;

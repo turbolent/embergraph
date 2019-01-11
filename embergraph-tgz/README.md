@@ -1,5 +1,5 @@
-# Blazegraph Tarball Artifact #
-This artifact builds the tgz, bz2 (if installed), and zip distribution for Blazegraph.
+# Embergraph Tarball Artifact #
+This artifact builds the tgz, bz2 (if installed), and zip distribution for Embergraph.
 
 ## Building ##
 

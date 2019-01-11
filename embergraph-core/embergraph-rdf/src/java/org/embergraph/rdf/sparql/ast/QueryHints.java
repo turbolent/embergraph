@@ -79,7 +79,7 @@ public interface QueryHints {
     /**
      * The namespace for the bigdata query hints.
      */
-    String NAMESPACE = "http://www.bigdata.com/queryHints#";
+    String NAMESPACE = "http://www.embergraph.org/queryHints#";
 
     /**
      * Specify the join order optimizer. For example, you can disable the query

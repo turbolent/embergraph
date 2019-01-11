@@ -302,7 +302,7 @@ public class TestGeoSpatialServiceEvaluationQuads extends AbstractDataDrivenSPAR
         properties.setProperty(
             org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".0",
             "{\"config\": "
-            + "{ \"uri\": \"http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral\", "
+            + "{ \"uri\": \"http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral\", "
             + "\"fields\": [ "
             + "{ \"valueType\": \"DOUBLE\", \"multiplier\": \"100000\", \"serviceMapping\": \"LATITUDE\" }, "
             + "{ \"valueType\": \"DOUBLE\", \"multiplier\": \"100000\", \"serviceMapping\": \"LONGITUDE\" }, "
@@ -311,7 +311,7 @@ public class TestGeoSpatialServiceEvaluationQuads extends AbstractDataDrivenSPAR
         
         properties.setProperty(
                 org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DEFAULT_DATATYPE,
-                "http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral");
+                "http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral");
         
         return properties;
 

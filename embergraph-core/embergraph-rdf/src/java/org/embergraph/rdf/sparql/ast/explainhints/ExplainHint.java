@@ -45,7 +45,7 @@ public abstract class ExplainHint implements IExplainHint {
     * a respective subsection in the Wiki.
     */
    private final String LINK_BASE = 
-      "https://wiki.blazegraph.com/wiki/index.php/Explain#";
+      "https://wiki.embergraph.org/wiki/index.php/Explain#";
    
    private final String explainHintDescription;
    

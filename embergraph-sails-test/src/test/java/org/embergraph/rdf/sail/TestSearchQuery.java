@@ -322,12 +322,12 @@ public class TestSearchQuery extends ProxyBigdataSailTestCase {
         
         final URI SYSTAP =
             new URIImpl(
-                        "http://bigdata.com/elm#a479c37c-407e-4f4a-be30-5a643a54561f");
+                        "http://embergraph.org/elm#a479c37c-407e-4f4a-be30-5a643a54561f");
         
         final URI ORGANIZATION = new URIImpl(
-                "http://bigdata.com/domain#Organization");
+                "http://embergraph.org/domain#Organization");
         
-        final URI ENTITY = new URIImpl("http://bigdata.com/system#Entity");
+        final URI ENTITY = new URIImpl("http://embergraph.org/system#Entity");
         
         final String query = "construct {"+//
 		"?s <" + RDF.TYPE + "> <" + ENTITY + "> ."+//

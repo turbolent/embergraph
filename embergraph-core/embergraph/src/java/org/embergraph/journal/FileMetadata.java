@@ -1365,7 +1365,7 @@ public class FileMetadata {
 
 				try {
 
-					fname = File.createTempFile("bigdata-" + bufferMode + "-",
+					fname = File.createTempFile("embergraph-" + bufferMode + "-",
 							Options.JNL, tmpDir).toString();
 
 				} catch (IOException ex) {

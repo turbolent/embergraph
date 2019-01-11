@@ -83,7 +83,7 @@ public class TestCustomFunction extends AbstractDataDrivenSPARQLTestCase {
     public void test_custom_function_1() throws Exception {
 
         final URI myFunctionUri = new URIImpl(
-                "http://www.bigdata.com/myFunction");
+                "http://www.embergraph.org/myFunction");
         
         final FunctionRegistry.Factory myFactory = new FunctionRegistry.Factory() {
 
@@ -127,7 +127,7 @@ public class TestCustomFunction extends AbstractDataDrivenSPARQLTestCase {
     public void test_custom_function_2() throws Exception {
 
         final URI myFunctionUri = new URIImpl(
-                "http://www.bigdata.com/myFunction2");
+                "http://www.embergraph.org/myFunction2");
         
         final FunctionRegistry.Factory myFactory = new MyFilterFactory();
 
@@ -175,7 +175,7 @@ public class TestCustomFunction extends AbstractDataDrivenSPARQLTestCase {
     public void test_custom_function_3() throws Exception {
 
         final URI myFunctionUri = new URIImpl(
-                "http://www.bigdata.com/myFunction");
+                "http://www.embergraph.org/myFunction");
         
         final FunctionRegistry.Factory myFactory = new MyFunctionFactory();
 

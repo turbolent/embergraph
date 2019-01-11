@@ -311,7 +311,7 @@ public class TestBigdataGraphEmbeddedTransactional extends AbstractTestBigdataGr
             
         }
         
-        final File jnl = File.createTempFile("bigdata", ".jnl");
+        final File jnl = File.createTempFile("embergraph", ".jnl");
         
         { // create a persistent instance
             

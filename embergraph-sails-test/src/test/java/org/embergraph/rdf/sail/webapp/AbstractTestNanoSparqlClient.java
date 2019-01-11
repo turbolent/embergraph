@@ -764,14 +764,14 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager> exte
 
 		final ValueFactory f = new ValueFactoryImpl();
 
-		final URI s = f.createURI("http://www.bigdata.org/b");
+		final URI s = f.createURI("http://www.embergraph.org/b");
 
 		final URI rdfType = f
 				.createURI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type");
 
 		for (int i = 0; i < ntriples; i++) {
 
-			final URI o = f.createURI("http://www.bigdata.org/c#" + i);
+			final URI o = f.createURI("http://www.embergraph.org/c#" + i);
 
 			g.add(s, rdfType, o);
 

@@ -1,9 +1,9 @@
 #!/bin/sh
 #
-# /etc/init.d/embergraph -- startup script for Blazegraph
+# /etc/init.d/embergraph -- startup script for Embergraph
 #
 # chkconfig: 2345 65 25
-# description:  Blazegraph High Performance Graph Database
+# description:  Embergraph High Performance Graph Database
 #
 # processname: embergraph
 # config: /etc/embergraph/embergraph
@@ -16,7 +16,7 @@
 # Modified for Tomcat6 by Thierry Carrez <thierry.carrez@ubuntu.com>.
 # Modified for Tomcat7 by Ernesto Hernandez-Novich <emhn@itverx.com.ve>.
 # Additional improvements by Jason Brittain <jason.brittain@mulesoft.com>.
-# Modified for Blazegraph by Brad Bebee <beebs@systap.com>
+# Modified for Embergraph by Brad Bebee <beebs@systap.com>
 #
 ### BEGIN INIT INFO
 # Provides:          embergraph
@@ -26,8 +26,8 @@
 # Should-Stop:       $named
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
-# Short-Description: Start Blazegraph
-# Description:       Start the Blazegraph High Performance Database.
+# Short-Description: Start Embergraph
+# Description:       Start the Embergraph High Performance Database.
 ### END INIT INFO
 
 # source function library
@@ -50,7 +50,7 @@ fi
 NAME="$(basename $0)"
 
 NAME=embergraph
-DESC="Blazegraph High Performance Database"
+DESC="Embergraph High Performance Database"
 
 #Modify this value to the current location of your conf/embergraph.
 #You may also create a symbolic link to to /etc/embergraph/embergraph.
@@ -108,7 +108,7 @@ for jdir in $JDK_DIRS; do
 done
 export JAVA_HOME
 
-# Directory where the Blazegraph distribution resides
+# Directory where the Embergraph distribution resides
 if [ -z "$BLZG_HOME" ] ; then
 	BLZG_HOME=/usr/local/$NAME
 fi

@@ -16,7 +16,7 @@ if [ -z "$JAVA" ] ; then
 	echo "*                                                                                     *"
 	echo "* However, to run with openjdk use:  yum install -y java-1.7.0-openjdk-devel          *"
 	echo "*                                                                                     *"
-	echo "* You must install JAVA to start Blazegraph.                                          *"
+	echo "* You must install JAVA to start Embergraph.                                          *"
 	echo "*                                                                                     *"
 	echo "* Once java is installed run:  service embergraph start                               *"
 	echo "***************************************************************************************"

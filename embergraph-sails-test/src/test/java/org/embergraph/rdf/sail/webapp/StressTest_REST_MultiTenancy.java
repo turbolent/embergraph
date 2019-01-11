@@ -372,7 +372,7 @@ public class StressTest_REST_MultiTenancy<S extends IIndexManager> extends
 
    }
 
-   private static final String URI_PREFIX = "http://bigdata.test/";
+   private static final String URI_PREFIX = "http://embergraph.test/";
 
    private static Statement generateTriple() {
 

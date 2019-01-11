@@ -79,14 +79,14 @@ public class Test_REST_HASSTMT<S extends IIndexManager> extends
       doInsertbyURL("POST", packagePath + "test_estcard.ttl");
 
       assertTrue(m_repo.hasStatement(new URIImpl(
-            "http://www.bigdata.com/Mike"),// s
+            "http://www.embergraph.org/Mike"),// s
             null,// p
             null,// o
             false// includeInferred
             ));
 
       assertFalse(m_repo.hasStatement(new URIImpl(
-            "http://www.bigdata.com/Fred"),// s
+            "http://www.embergraph.org/Fred"),// s
             null,// p
             null,// o
             false// includeInferred
@@ -139,7 +139,7 @@ public class Test_REST_HASSTMT<S extends IIndexManager> extends
       doInsertbyURL("POST", packagePath + "test_estcard.ttl");
 
       assertTrue( m_repo.hasStatement(new URIImpl(
-            "http://www.bigdata.com/Mike"),// s,
+            "http://www.embergraph.org/Mike"),// s,
             RDF.TYPE,// p
             null,// o
             false // includeInferred
@@ -147,7 +147,7 @@ public class Test_REST_HASSTMT<S extends IIndexManager> extends
             ));
 
       assertFalse( m_repo.hasStatement(new URIImpl(
-            "http://www.bigdata.com/Fred"),// s,
+            "http://www.embergraph.org/Fred"),// s,
             RDF.TYPE,// p
             null,// o
             false // includeInferred
@@ -155,7 +155,7 @@ public class Test_REST_HASSTMT<S extends IIndexManager> extends
             ));
 
       assertFalse( m_repo.hasStatement(new URIImpl(
-            "http://www.bigdata.com/Mike"),// s,
+            "http://www.embergraph.org/Mike"),// s,
             RDF.BAG,// p
             null,// o
             false // includeInferred
@@ -196,14 +196,14 @@ public class Test_REST_HASSTMT<S extends IIndexManager> extends
       doInsertbyURL("POST", packagePath + "test_estcard.ttl");
 
       assertTrue(m_repo.hasStatement(new URIImpl(
-            "http://www.bigdata.com/Mike"),// s
+            "http://www.embergraph.org/Mike"),// s
             RDFS.LABEL,// p
             null,// o
             false// includeInferred
             ));
 
       assertFalse(m_repo.hasStatement(new URIImpl(
-            "http://www.bigdata.com/Mike"),// s
+            "http://www.embergraph.org/Mike"),// s
             RDF.BAG,// p
             null,// o
             false// includeInferred

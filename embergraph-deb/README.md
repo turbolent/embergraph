@@ -1,4 +1,4 @@
-Blazegraph Debian Deployer
+Embergraph Debian Deployer
 -----------------
 
 To build a version, use `mvn package`.  
@@ -15,7 +15,7 @@ apt-get install -f -y #force install of dependencies without prompting for updat
 ```
 
 
-This will start a Blazegraph instance running on port 9999 on localhost host.
+This will start a Embergraph instance running on port 9999 on localhost host.
 
 `http://localhost:9999/`
 

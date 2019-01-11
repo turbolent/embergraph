@@ -91,7 +91,7 @@ public class TestOpenrdfNativeServiceEvaluation extends
         }
    
         final URI serviceURI = new URIImpl(
-                "http://www.bigdata.com/mockService/" + getName());
+                "http://www.embergraph.org/mockService/" + getName());
 
         ServiceRegistry.getInstance().add(serviceURI,
                 new OpenrdfNativeMockServiceFactory(serviceSolutions));
@@ -157,7 +157,7 @@ public class TestOpenrdfNativeServiceEvaluation extends
         }
    
         final URI serviceURI = new URIImpl(
-                "http://www.bigdata.com/mockService/" + getName());
+                "http://www.embergraph.org/mockService/" + getName());
 
         ServiceRegistry.getInstance().add(serviceURI,
                 new OpenrdfNativeMockServiceFactory(serviceSolutions));

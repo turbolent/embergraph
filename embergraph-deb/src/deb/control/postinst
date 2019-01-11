@@ -3,7 +3,7 @@ set -e
 
 [ -f /etc/default/embergraph ] && . /etc/default/embergraph
 
-startBlazegraph() {
+startEmbergraph() {
     service embergraph start || true
 }
 
@@ -30,7 +30,7 @@ case "$1" in
 
         # if $2 is set, this is an upgrade
         if ( [ -n $2 ] && [ "$RESTART_ON_UPGRADE" != "false" ] ) ; then
-            startBlazegraph
+            startEmbergraph
             # this is a fresh installation
         elif [ -z $2 ] ; then
             echo "### NOT starting embergraph after install, please execute"

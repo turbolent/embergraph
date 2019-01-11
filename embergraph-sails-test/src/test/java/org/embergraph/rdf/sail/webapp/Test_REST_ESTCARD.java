@@ -95,7 +95,7 @@ public class Test_REST_ESTCARD<S extends IIndexManager> extends
 		doInsertbyURL("POST", packagePath + "test_estcard.ttl");
 
 		final long rangeCount = m_repo.rangeCount(new URIImpl(
-				"http://www.bigdata.com/Mike"),// s
+				"http://www.embergraph.org/Mike"),// s
 				null,// p
 				null// o
 				);
@@ -150,7 +150,7 @@ public class Test_REST_ESTCARD<S extends IIndexManager> extends
 		doInsertbyURL("POST", packagePath + "test_estcard.ttl");
 
 		final long rangeCount = m_repo.rangeCount(new URIImpl(
-				"http://www.bigdata.com/Mike"),// s,
+				"http://www.embergraph.org/Mike"),// s,
 				RDF.TYPE,// p
 				null// ,// o
 				// null // c
@@ -189,7 +189,7 @@ public class Test_REST_ESTCARD<S extends IIndexManager> extends
 		final long rangeCount = m_repo.rangeCount(null,// s,
 				null,// p
 				null,// o
-				new URIImpl("http://www.bigdata.com/")// c
+				new URIImpl("http://www.embergraph.org/")// c
 				);
 
 		assertEquals(3, rangeCount);
@@ -206,7 +206,7 @@ public class Test_REST_ESTCARD<S extends IIndexManager> extends
 		final long rangeCount = m_repo.rangeCount(null,// s,
 				null,// p
 				null,// o
-				new URIImpl("http://www.bigdata.com/c1")// c
+				new URIImpl("http://www.embergraph.org/c1")// c
 				);
 
 		assertEquals(2, rangeCount);
@@ -221,10 +221,10 @@ public class Test_REST_ESTCARD<S extends IIndexManager> extends
 		doInsertbyURL("POST", packagePath + "test_estcard.trig");
 
 		final long rangeCount = m_repo.rangeCount(new URIImpl(
-				"http://www.bigdata.com/Mike"),// s,
+				"http://www.embergraph.org/Mike"),// s,
 				null,// p
 				null,// o
-				new URIImpl("http://www.bigdata.com/c1")// c
+				new URIImpl("http://www.embergraph.org/c1")// c
 				);
 
 		assertEquals(1, rangeCount);

@@ -237,7 +237,7 @@ public class TestMillisecondPrecisionForInlineDateTimes extends QuadsTestCase {
             	
 	            if (log.isInfoEnabled()) {
 		            final TupleQueryResult result = tupleQuery.evaluate();
-            		log.info("bigdata results:");
+            		log.info("embergraph results:");
             		if (!result.hasNext()) {
             			log.info("no results.");
             		}

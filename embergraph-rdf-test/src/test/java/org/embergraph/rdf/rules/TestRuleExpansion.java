@@ -102,17 +102,17 @@ public class TestRuleExpansion extends AbstractInferenceEngineTestCase {
 
             final Map<Value, IV> termIds = new HashMap<Value, IV>();
             
-            final URI A = new URIImpl("http://www.bigdata.com/A");
-            final URI B = new URIImpl("http://www.bigdata.com/B");
+            final URI A = new URIImpl("http://www.embergraph.org/A");
+            final URI B = new URIImpl("http://www.embergraph.org/B");
 //            final URI C = new URIImpl("http://www.bigdata.com/C");
 //            final URI D = new URIImpl("http://www.bigdata.com/D");
 //            final URI E = new URIImpl("http://www.bigdata.com/E");
 
 //            final URI V = new URIImpl("http://www.bigdata.com/V");
-            final URI W = new URIImpl("http://www.bigdata.com/W");
-            final URI X = new URIImpl("http://www.bigdata.com/X");
-            final URI Y = new URIImpl("http://www.bigdata.com/Y");
-            final URI Z = new URIImpl("http://www.bigdata.com/Z");
+            final URI W = new URIImpl("http://www.embergraph.org/W");
+            final URI X = new URIImpl("http://www.embergraph.org/X");
+            final URI Y = new URIImpl("http://www.embergraph.org/Y");
+            final URI Z = new URIImpl("http://www.embergraph.org/Z");
 
             {
 //                TMStatementBuffer buffer = new TMStatementBuffer

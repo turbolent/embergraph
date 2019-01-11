@@ -124,9 +124,9 @@ public class TestJustifications extends AbstractRuleTestCase {
              * the explicit statement that is the support for the rule.
              */
 
-            final IV U = store.addTerm(new URIImpl("http://www.bigdata.com/U"));
-            final IV A = store.addTerm(new URIImpl("http://www.bigdata.com/A"));
-            final IV Y = store.addTerm(new URIImpl("http://www.bigdata.com/Y"));
+            final IV U = store.addTerm(new URIImpl("http://www.embergraph.org/U"));
+            final IV A = store.addTerm(new URIImpl("http://www.embergraph.org/A"));
+            final IV Y = store.addTerm(new URIImpl("http://www.embergraph.org/Y"));
 
             store.addStatements(new SPO[] {//
                     new SPO(U, A, Y, StatementEnum.Explicit) //

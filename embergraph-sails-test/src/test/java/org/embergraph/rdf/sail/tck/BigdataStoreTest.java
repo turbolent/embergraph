@@ -105,7 +105,7 @@ public class BigdataStoreTest extends RDFStoreTest {
     static File createTempFile() {
         
         try {
-            return File.createTempFile("bigdata-tck", ".jnl");
+            return File.createTempFile("embergraph-tck", ".jnl");
             
         } catch (IOException e) {
             
@@ -227,7 +227,7 @@ public class BigdataStoreTest extends RDFStoreTest {
     public void testDualConnections()
         throws Exception
     {
-        log.warn("Test overridden since bigdata uses full snapshot tx isolation.");
+        log.warn("Test overridden since embergraph uses full snapshot tx isolation.");
 //    	super.testDualConnections();
 		SailConnection con2 = sail.getConnection();
 		try {

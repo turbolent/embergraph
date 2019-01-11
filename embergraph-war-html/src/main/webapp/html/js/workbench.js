@@ -84,10 +84,10 @@ var NAMESPACE_PARAMS = {
 
 var NAMESPACE_SHORTCUTS = {
    'Bigdata': {
-      'bd': 'http://www.bigdata.com/rdf#',
-      'bds': 'http://www.bigdata.com/rdf/search#',
-      'gas': 'http://www.bigdata.com/rdf/gas#',
-      'hint': 'http://www.bigdata.com/queryHints#'
+      'bd': 'http://www.embergraph.org/rdf#',
+      'bds': 'http://www.embergraph.org/rdf/search#',
+      'gas': 'http://www.embergraph.org/rdf/gas#',
+      'hint': 'http://www.embergraph.org/queryHints#'
    },
    'W3C': {
       'rdf': 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',

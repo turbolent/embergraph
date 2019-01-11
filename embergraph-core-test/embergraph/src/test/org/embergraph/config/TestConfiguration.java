@@ -70,7 +70,7 @@ public class TestConfiguration extends TestCase {
         final String namespace = "foo.bar";
 
         // global property name.
-        final String globalName = "bigdata.bar";
+        final String globalName = "embergraph.bar";
         
         final String defaultValue = "goo";
         
@@ -102,7 +102,7 @@ public class TestConfiguration extends TestCase {
 //        final String localName = "bar";
 
         // global property name.
-        final String globalName = "bigdata.bar";
+        final String globalName = "embergraph.bar";
         
         final String defaultValue = "goo";
         
@@ -137,7 +137,7 @@ public class TestConfiguration extends TestCase {
 //        final String localName = "bar";
 
         // global property name.
-        final String globalName = "bigdata.bar";
+        final String globalName = "embergraph.bar";
 
         final String defaultValue = "goo";
 

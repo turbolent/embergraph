@@ -106,10 +106,10 @@ public class AbstractRAMGraphTestCase extends AbstractGraphTestCase {
             rdfsLabel = vf.createURI(RDFS.LABEL.stringValue());
             foafKnows = vf.createURI("http://xmlns.com/foaf/0.1/knows");
             foafPerson = vf.createURI("http://xmlns.com/foaf/0.1/Person");
-            mike = vf.createURI("http://www.bigdata.com/Mike");
-            bryan = vf.createURI("http://www.bigdata.com/Bryan");
-            martyn = vf.createURI("http://www.bigdata.com/Martyn");
-            dc = vf.createURI("http://www.bigdata.com/DC");
+            mike = vf.createURI("http://www.embergraph.org/Mike");
+            bryan = vf.createURI("http://www.embergraph.org/Bryan");
+            martyn = vf.createURI("http://www.embergraph.org/Martyn");
+            dc = vf.createURI("http://www.embergraph.org/DC");
             
             g.add(vf.createStatement(mike, rdfType, foafPerson));
             g.add(vf.createStatement(bryan, rdfType, foafPerson));

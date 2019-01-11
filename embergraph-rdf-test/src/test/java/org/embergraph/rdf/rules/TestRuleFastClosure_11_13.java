@@ -72,11 +72,11 @@ public class TestRuleFastClosure_11_13 extends AbstractRuleTestCase {
 
             final BigdataValueFactory f = store.getValueFactory();
             
-            final IV a = store.addTerm(f.createURI("http://www.bigdata.com/a"));
-            final IV b = store.addTerm(f.createURI("http://www.bigdata.com/b"));
-            final IV y = store.addTerm(f.createURI("http://www.bigdata.com/y"));
-            final IV x = store.addTerm(f.createURI("http://www.bigdata.com/x"));
-            final IV z = store.addTerm(f.createURI("http://www.bigdata.com/z"));
+            final IV a = store.addTerm(f.createURI("http://www.embergraph.org/a"));
+            final IV b = store.addTerm(f.createURI("http://www.embergraph.org/b"));
+            final IV y = store.addTerm(f.createURI("http://www.embergraph.org/y"));
+            final IV x = store.addTerm(f.createURI("http://www.embergraph.org/x"));
+            final IV z = store.addTerm(f.createURI("http://www.embergraph.org/z"));
 
             final Vocabulary vocab = store.getVocabulary();
 
@@ -144,11 +144,11 @@ public class TestRuleFastClosure_11_13 extends AbstractRuleTestCase {
 
             final BigdataValueFactory f = store.getValueFactory();
             
-            final IV a = store.addTerm(f.createURI("http://www.bigdata.com/a"));
-            final IV b = store.addTerm(f.createURI("http://www.bigdata.com/b"));
-            final IV y = store.addTerm(f.createURI("http://www.bigdata.com/y"));
-            final IV x = store.addTerm(f.createURI("http://www.bigdata.com/x"));
-            final IV z = store.addTerm(f.createURI("http://www.bigdata.com/z"));
+            final IV a = store.addTerm(f.createURI("http://www.embergraph.org/a"));
+            final IV b = store.addTerm(f.createURI("http://www.embergraph.org/b"));
+            final IV y = store.addTerm(f.createURI("http://www.embergraph.org/y"));
+            final IV x = store.addTerm(f.createURI("http://www.embergraph.org/x"));
+            final IV z = store.addTerm(f.createURI("http://www.embergraph.org/z"));
 
             final Vocabulary vocab = store.getVocabulary();
 

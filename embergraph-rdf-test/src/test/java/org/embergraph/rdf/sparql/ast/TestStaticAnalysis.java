@@ -1011,7 +1011,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
     public void test_static_analysis_serviceCall() throws MalformedQueryException {
 
         final String queryStr = "" + //
-                "PREFIX bd: <http://www.bigdata.com/rdf/search#>\n" + //
+                "PREFIX bd: <http://www.embergraph.org/rdf/search#>\n" + //
                 "SELECT ?subj ?score\n" + //
                 "WHERE {\n" + //
                 "   ?lit bd:search \"mike\" .\n" + //
@@ -1313,7 +1313,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
     public void test_static_analysis_filters() throws MalformedQueryException {
         
         final String queryStr = ""+//
-        "PREFIX : <http://www.bigdata.com/>\n" +//
+        "PREFIX : <http://www.embergraph.org/>\n" +//
         "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \n"+//
         "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"+//
         "PREFIX foaf: <http://xmlns.com/foaf/0.1/> \n"+//

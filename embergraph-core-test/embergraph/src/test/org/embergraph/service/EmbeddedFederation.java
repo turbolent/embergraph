@@ -324,7 +324,7 @@ public class EmbeddedFederation<T> extends AbstractScaleOutFederation<T> {
                 try {
 
                     // create temp file.
-                    dataDir = File.createTempFile("bigdata", ".fed", tmpDir);
+                    dataDir = File.createTempFile("embergraph", ".fed", tmpDir);
                     
                     // delete temp file.
                     dataDir.delete();

@@ -374,7 +374,7 @@ public class TestDataLoader extends AbstractTripleStoreTestCase {
 			{
 
 				final String goodData = ""+//
-				"@prefix bd: <http://www.bigdata.com/> .\n"+//
+				"@prefix bd: <http://www.embergraph.org/> .\n"+//
 				"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n"+//
 				"@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n"+//
 				"@prefix foaf: <http://xmlns.com/foaf/0.1/> .\n"+//
@@ -394,7 +394,7 @@ public class TestDataLoader extends AbstractTripleStoreTestCase {
 				
 				// Note: has a Literal in the Subject position.
 				final String failData = ""+//
-				"@prefix bd: <http://www.bigdata.com/> .\n"+//
+				"@prefix bd: <http://www.embergraph.org/> .\n"+//
 				"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n"+//
 				"@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n"+//
 				"@prefix foaf: <http://xmlns.com/foaf/0.1/> .\n"+//

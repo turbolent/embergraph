@@ -74,8 +74,8 @@ public class TestEncodeDecodeValue extends TestCase2 {
     
     public void test_encodeDecode_URI() {
         
-        doTest("<http://www.bigdata.com>",
-                new URIImpl("http://www.bigdata.com"));
+        doTest("<http://www.embergraph.org>",
+                new URIImpl("http://www.embergraph.org"));
 
         doTest("<" + RDF.TYPE.stringValue() + ">", RDF.TYPE);
 
@@ -137,14 +137,14 @@ public class TestEncodeDecodeValue extends TestCase2 {
 
     public void test_encodeDecode_Literal_datatype() {
         
-        doTest("\"abc\"^^<http://www.bigdata.com/dt1>", new LiteralImpl("abc",
-                new URIImpl("http://www.bigdata.com/dt1")));
+        doTest("\"abc\"^^<http://www.embergraph.org/dt1>", new LiteralImpl("abc",
+                new URIImpl("http://www.embergraph.org/dt1")));
 
-        doTest("\"\"^^<http://www.bigdata.com/dt1>", new LiteralImpl("",
-                new URIImpl("http://www.bigdata.com/dt1")));
+        doTest("\"\"^^<http://www.embergraph.org/dt1>", new LiteralImpl("",
+                new URIImpl("http://www.embergraph.org/dt1")));
 
-        doTest("\"'ab'c'\"^^<http://www.bigdata.com/dt1>", new LiteralImpl("'ab\'c'",
-                new URIImpl("http://www.bigdata.com/dt1")));
+        doTest("\"'ab'c'\"^^<http://www.embergraph.org/dt1>", new LiteralImpl("'ab\'c'",
+                new URIImpl("http://www.embergraph.org/dt1")));
 
     }
 
@@ -153,8 +153,8 @@ public class TestEncodeDecodeValue extends TestCase2 {
      */
     public void test_encodeDecode_URI_escapeCodeSequence() {
         
-        doTest("<http://www.bigdata.com/<>/foo>",
-                new URIImpl("http://www.bigdata.com/<>/foo"));
+        doTest("<http://www.embergraph.org/<>/foo>",
+                new URIImpl("http://www.embergraph.org/<>/foo"));
         
          
     }

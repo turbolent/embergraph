@@ -25,19 +25,19 @@ public class TestNamespaceMultiURIHandler extends InlineURIFactory {
 		// http://blazegraph.com/Data#Position_010072F0000038090100000000D56C9E_WashSale
 		
 		InlineNamespaceMultiURIHandler mHandler = new InlineNamespaceMultiURIHandler(
-				"http://blazegraph.com/Data#Position_");
+				"http://embergraph.org/Data#Position_");
 
 		mHandler.addHandler(new InlineSuffixedHexUUIDURIHandler(
-				"http://blazegraph.com/Data#Position_", "_TaxCost"));
+				"http://embergraph.org/Data#Position_", "_TaxCost"));
 
 		mHandler.addHandler(new InlineSuffixedHexUUIDURIHandler(
-				"http://blazegraph.com/Data#Position_", "_UnrealizedGain"));
+				"http://embergraph.org/Data#Position_", "_UnrealizedGain"));
 
 		mHandler.addHandler(new InlineSuffixedHexUUIDURIHandler(
-				"http://blazegraph.com/Data#Position_", "_WashSale"));
+				"http://embergraph.org/Data#Position_", "_WashSale"));
 
 		mHandler.addHandler(new InlineHexUUIDURIHandler(
-				"http://blazegraph.com/Data#Position_"));
+				"http://embergraph.org/Data#Position_"));
 
 
 		this.addHandler(mHandler);

@@ -55,7 +55,7 @@ public class TestIVUnicode extends TestCase2 {
 
     public void test_encodeDecode1() throws IOException {
 
-        doEncodeDecodeTest("bigdata");
+        doEncodeDecodeTest("embergraph");
 
     }
 
@@ -144,7 +144,7 @@ public class TestIVUnicode extends TestCase2 {
     public void test_encodeDecode2() throws IOException {
 
         doEncodeDecodeTest(new String[] { //
-        "en", "bigdata" //
+        "en", "embergraph" //
         });
 
     }

@@ -59,7 +59,7 @@ public class Test_Ticket_1893 extends AbstractProtocolTest {
 				);
 	}
 	
-	private final static String QUERY = "prefix bds: <http://www.bigdata.com/rdf/search#>\n" + 
+	private final static String QUERY = "prefix bds: <http://www.embergraph.org/rdf/search#>\n" +
 			"select ?s \n" + 
 			"where {\n" + 
 			"  ?o bds:search \"Test*\" .\n" + 

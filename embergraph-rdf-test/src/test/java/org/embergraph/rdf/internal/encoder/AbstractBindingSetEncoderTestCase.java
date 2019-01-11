@@ -437,7 +437,7 @@ abstract public class AbstractBindingSetEncoderTestCase extends TestCase2 {
                 new XSDNumericIV<BigdataLiteral>(12)));
         expected.set(Var.var("y"), new Constant<IV>(
                 new FullyInlineURIIV<BigdataURI>(new URIImpl(
-                        "http://www.bigdata.com"))));
+                        "http://www.embergraph.org"))));
 
         doEncodeDecodeTest(expected);
 
@@ -455,7 +455,7 @@ abstract public class AbstractBindingSetEncoderTestCase extends TestCase2 {
                     new XSDNumericIV<BigdataLiteral>(12)));
             expected.set(Var.var("y"), new Constant<IV>(
                     new FullyInlineURIIV<BigdataURI>(new URIImpl(
-                            "http://www.bigdata.com"))));
+                            "http://www.embergraph.org"))));
 
             doEncodeDecodeTest(expected);
         }
@@ -490,7 +490,7 @@ abstract public class AbstractBindingSetEncoderTestCase extends TestCase2 {
                     new XSDNumericIV<BigdataLiteral>(99)));
             expected.set(Var.var("y"), new Constant<IV>(
                     new FullyInlineURIIV<BigdataURI>(new URIImpl(
-                            "http://www.bigdata.com"))));
+                            "http://www.embergraph.org"))));
 
             doEncodeDecodeTest(expected);
         }
@@ -524,7 +524,7 @@ abstract public class AbstractBindingSetEncoderTestCase extends TestCase2 {
                     new XSDNumericIV<BigdataLiteral>(99)));
             expected.set(Var.var("y"), new Constant<IV>(
                     new FullyInlineURIIV<BigdataURI>(new URIImpl(
-                            "http://www.bigdata.com"))));
+                            "http://www.embergraph.org"))));
 
             doEncodeDecodeTest(expected);
         }
@@ -557,7 +557,7 @@ abstract public class AbstractBindingSetEncoderTestCase extends TestCase2 {
                     new XSDNumericIV<BigdataLiteral>(99)));
             expected.set(Var.var("y"), new Constant<IV>(
                     new FullyInlineURIIV<BigdataURI>(new URIImpl(
-                            "http://www.bigdata.com"))));
+                            "http://www.embergraph.org"))));
 
             doEncodeDecodeTest(expected);
         }
@@ -584,7 +584,7 @@ abstract public class AbstractBindingSetEncoderTestCase extends TestCase2 {
                     new XSDNumericIV<BigdataLiteral>(99)));
             expected.set(Var.var("y"), new Constant<IV>(
                     new FullyInlineURIIV<BigdataURI>(new URIImpl(
-                            "http://www.bigdata.com"))));
+                            "http://www.embergraph.org"))));
 
             doEncodeDecodeTest(expected);
         }

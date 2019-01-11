@@ -104,7 +104,7 @@ public class TestNativeDistinctFilter extends TestCase2 {
             // Setup the vocabulary.
             {
                 final BigdataValueFactory vf = kb.getValueFactory();
-                final String uriString = "http://bigdata.com/";
+                final String uriString = "http://embergraph.org/";
                 final BigdataURI _knows = vf.asValue(FOAFVocabularyDecl.knows);
                 final BigdataURI _brad = vf.createURI(uriString+"brad");
                 final BigdataURI _john = vf.createURI(uriString+"john");

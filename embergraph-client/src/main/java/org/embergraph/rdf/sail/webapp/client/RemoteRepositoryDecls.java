@@ -41,7 +41,7 @@ public class RemoteRepositoryDecls {
    /**
     * The namespace used for bigdata specific extensions.
     */
-   private static final String BD_NAMESPACE = "http://www.bigdata.com/rdf#";
+   private static final String BD_NAMESPACE = "http://www.embergraph.org/rdf#";
 
    protected static final URI BD_NULL_GRAPH = new URIImpl(BD_NAMESPACE + "nullGraph");
    

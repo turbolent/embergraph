@@ -466,9 +466,9 @@ public class TestBackchainTypeResourceIterator extends AbstractRuleTestCase {
             
             final BigdataValueFactory f = store.getValueFactory();
             
-            final BigdataURI S = f.createURI("http://www.bigdata.com/s");
-            final BigdataURI P = f.createURI("http://www.bigdata.com/p");
-            final BigdataURI O = f.createURI("http://www.bigdata.com/o");
+            final BigdataURI S = f.createURI("http://www.embergraph.org/s");
+            final BigdataURI P = f.createURI("http://www.embergraph.org/p");
+            final BigdataURI O = f.createURI("http://www.embergraph.org/o");
             
             final IV s = store.addTerm(S);
             final IV p = store.addTerm(P);

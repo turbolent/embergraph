@@ -53,7 +53,7 @@ ${GIT_CMD} commit -a -m "POM version updates for $RELEASE_BRANCH"
 
 echo "Creating Release Tag"
 
-${GIT_CMD} tag -a $RELEASE_BRANCH  -m "Blazegraph Release ${CURRENT_VERSION}"
+${GIT_CMD} tag -a $RELEASE_BRANCH  -m "Embergraph Release ${CURRENT_VERSION}"
 
 #Actually build and publish the release to maven central
 
@@ -97,7 +97,7 @@ ${BASE_DIR}/updateVersions.sh "${NEW_VERSION}-master-SNAPSHOT"
 
 echo "Committing new POM versions"
 
-${GIT_CMD} commit -a -m "Blazegraph release $CURRENT_VERSION reverse merge"
+${GIT_CMD} commit -a -m "Embergraph release $CURRENT_VERSION reverse merge"
 
 echo "Pushing merge branch to origin."
 

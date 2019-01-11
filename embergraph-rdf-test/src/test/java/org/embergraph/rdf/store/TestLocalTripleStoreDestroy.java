@@ -199,7 +199,7 @@ public class TestLocalTripleStoreDestroy extends ProxyTestCase {
         try {
 
             // make the tripleStore dirty so commit() will do something.
-            store.addTerm(store.getValueFactory().createLiteral("bigdata"));
+            store.addTerm(store.getValueFactory().createLiteral("embergraph"));
             
             // Note: Will be in lexical order for Unicode.
             final String[] namespaces = getNamespaces(indexManager,
@@ -399,8 +399,8 @@ public class TestLocalTripleStoreDestroy extends ProxyTestCase {
             kb1.create();
 
             // make the tripleStore dirty so commit() will do something.
-            kb.addTerm(kb.getValueFactory().createLiteral("bigdata"));
-            kb1.addTerm(kb.getValueFactory().createLiteral("bigdata"));
+            kb.addTerm(kb.getValueFactory().createLiteral("embergraph"));
+            kb1.addTerm(kb.getValueFactory().createLiteral("embergraph"));
 
             // Verify post-conditions of the created KBs.
             {

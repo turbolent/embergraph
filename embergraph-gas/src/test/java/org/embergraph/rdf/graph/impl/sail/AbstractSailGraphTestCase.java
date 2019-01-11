@@ -114,16 +114,16 @@ public class AbstractSailGraphTestCase extends AbstractGraphTestCase {
                     "http://xmlns.com/foaf/0.1/Person");
 
             mike = sail.getValueFactory().createURI(
-                    "http://www.bigdata.com/Mike");
+                    "http://www.embergraph.org/Mike");
 
             bryan = sail.getValueFactory().createURI(
-                    "http://www.bigdata.com/Bryan");
+                    "http://www.embergraph.org/Bryan");
 
             martyn = sail.getValueFactory().createURI(
-                    "http://www.bigdata.com/Martyn");
+                    "http://www.embergraph.org/Martyn");
 
             dc = sail.getValueFactory().createURI(
-                    "http://www.bigdata.com/DC");
+                    "http://www.embergraph.org/DC");
 
             vertices = new LinkedHashSet<Value>(Arrays.asList(new Value[] {
                     foafPerson, mike, bryan, martyn, dc }));
@@ -233,13 +233,13 @@ public class AbstractSailGraphTestCase extends AbstractGraphTestCase {
             final Sail sail = graphFixture.getSail();
 
             link = sail.getValueFactory().createURI(
-                    "http://www.bigdata.com/ssspGraph/link");
+                    "http://www.embergraph.org/ssspGraph/link");
 
-            v1 = sail.getValueFactory().createURI("http://www.bigdata.com/ssspGraph/1");
-            v2 = sail.getValueFactory().createURI("http://www.bigdata.com/ssspGraph/2");
-            v3 = sail.getValueFactory().createURI("http://www.bigdata.com/ssspGraph/3");
-            v4 = sail.getValueFactory().createURI("http://www.bigdata.com/ssspGraph/4");
-            v5 = sail.getValueFactory().createURI("http://www.bigdata.com/ssspGraph/5");
+            v1 = sail.getValueFactory().createURI("http://www.embergraph.org/ssspGraph/1");
+            v2 = sail.getValueFactory().createURI("http://www.embergraph.org/ssspGraph/2");
+            v3 = sail.getValueFactory().createURI("http://www.embergraph.org/ssspGraph/3");
+            v4 = sail.getValueFactory().createURI("http://www.embergraph.org/ssspGraph/4");
+            v5 = sail.getValueFactory().createURI("http://www.embergraph.org/ssspGraph/5");
 
             vertices = new LinkedHashSet<Value>(Arrays.asList(new Value[] {
                     v1, v2, v3, v4, v5 }));

@@ -361,7 +361,7 @@ public class TestSubqueryPatterns extends
         final String sparql//
               = "select ?s" +//
         		" where {" +//
-        		"   bind( <http://www.bigdata.com> as ?o )" +//
+        		"   bind( <http://www.embergraph.org> as ?o )" +//
         		"   {" +//
         		"     select ?s where { ?s ?p ?o  }" +//
         		"   }" +//
@@ -387,7 +387,7 @@ public class TestSubqueryPatterns extends
 
                 whereClause.addChild(new AssignmentNode(new VarNode("o"),
                         new ConstantNode(makeIV(valueFactory
-                                .createURI("http://www.bigdata.com")))));
+                                .createURI("http://www.embergraph.org")))));
 
                 final JoinGroupNode wrapperGroup = new JoinGroupNode();
                 whereClause.addChild(wrapperGroup);
@@ -429,7 +429,7 @@ public class TestSubqueryPatterns extends
         final String sparql//
               = "select ?s \n" +//
                 " where { \n" +//
-                "   bind( <http://www.bigdata.com> as ?o ) \n" +//
+                "   bind( <http://www.embergraph.org> as ?o ) \n" +//
                 "   { \n" +//
                 "     select ?s \n" +//
                 "      where { \n" +//
@@ -449,7 +449,7 @@ public class TestSubqueryPatterns extends
             final VarNode o = new VarNode("o");
             
             final ConstantNode const1 = new ConstantNode(
-                    makeIV(valueFactory.createURI("http://www.bigdata.com")));
+                    makeIV(valueFactory.createURI("http://www.embergraph.org")));
             
             final ConstantNode const2 = new ConstantNode(
                     makeIV(valueFactory.createLiteral("12", XSD.INTEGER)));

@@ -102,12 +102,12 @@ public class TestContextAdvancer extends TestCase2 {
 
             final BigdataValueFactory f = db.getValueFactory();
             
-            final BigdataURI u1 = f.createURI("http://www.bigdata.com/u1");
-            final BigdataURI u2 = f.createURI("http://www.bigdata.com/u2");
-            final BigdataURI v1 = f.createURI("http://www.bigdata.com/v1");
-            final BigdataURI v2 = f.createURI("http://www.bigdata.com/v2");
-            final BigdataURI c1 = f.createURI("http://www.bigdata.com/c1");
-            final BigdataURI c2 = f.createURI("http://www.bigdata.com/c2");
+            final BigdataURI u1 = f.createURI("http://www.embergraph.org/u1");
+            final BigdataURI u2 = f.createURI("http://www.embergraph.org/u2");
+            final BigdataURI v1 = f.createURI("http://www.embergraph.org/v1");
+            final BigdataURI v2 = f.createURI("http://www.embergraph.org/v2");
+            final BigdataURI c1 = f.createURI("http://www.embergraph.org/c1");
+            final BigdataURI c2 = f.createURI("http://www.embergraph.org/c2");
             final BigdataURI rdfType = f.createURI(RDF.TYPE.stringValue());
 
             final BigdataValue[] terms = new BigdataValue[] {

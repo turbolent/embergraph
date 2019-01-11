@@ -79,7 +79,7 @@ public class TestUnicodeHelper extends TestCase2 {
     
     public void test_encodeDecode1() throws IOException {
 
-        doEncodeDecodeTest(new UnicodeHelper(getUnicodeCompressor()), "bigdata");
+        doEncodeDecodeTest(new UnicodeHelper(getUnicodeCompressor()), "embergraph");
 
     }
 
@@ -153,7 +153,7 @@ public class TestUnicodeHelper extends TestCase2 {
         
         doEncodeDecodeTest(new UnicodeHelper(getUnicodeCompressor()),
                 new String[] { //
-            "en", "bigdata" //
+            "en", "embergraph" //
             });
 
     }

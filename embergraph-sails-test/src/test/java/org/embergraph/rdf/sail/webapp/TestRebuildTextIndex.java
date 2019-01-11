@@ -102,7 +102,7 @@ public class TestRebuildTextIndex<S extends IIndexManager> extends
 
         repo.add(addOp);
 
-        final String sparql = "select ?s where { ?s ?p ?o . ?o <http://www.bigdata.com/rdf/search#search> \"" + o.stringValue() + "\" .}";
+        final String sparql = "select ?s where { ?s ?p ?o . ?o <http://www.embergraph.org/rdf/search#search> \"" + o.stringValue() + "\" .}";
 
         try {
 

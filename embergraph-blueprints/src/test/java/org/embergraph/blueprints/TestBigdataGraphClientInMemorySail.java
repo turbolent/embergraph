@@ -181,7 +181,7 @@ public class TestBigdataGraphClientInMemorySail extends AbstractTestBigdataGraph
 
     public static final void main(final String[] args) throws Exception {
         
-        final String url = "http://localhost:9999/bigdata/sparql";
+        final String url = "http://localhost:9999/embergraph/sparql";
         
         final BigdataGraph graph = BigdataGraphFactory.connect(url);
         

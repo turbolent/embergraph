@@ -26,10 +26,10 @@ public class TestFullyInlineURIIV extends TestCase2 {
 
 	public void test_InlineURIIV() {
 
-        doTest(new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.bigdata.com")));
-        doTest(new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.bigdata.com/")));
-        doTest(new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.bigdata.com/foo")));
-        doTest(new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.bigdata.com:80/foo")));
+        doTest(new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.embergraph.org")));
+        doTest(new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.embergraph.org/")));
+        doTest(new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.embergraph.org/foo")));
+        doTest(new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.embergraph.org:80/foo")));
 
 	}
 
@@ -64,10 +64,10 @@ public class TestFullyInlineURIIV extends TestCase2 {
         final List<IV<?,?>> ivs = new LinkedList<IV<?,?>>();
         {
 
-            ivs.add(new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.bigdata.com")));
-            ivs.add(new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.bigdata.com/")));
-            ivs.add(new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.bigdata.com/foo")));
-            ivs.add(new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.bigdata.com:80/foo")));
+            ivs.add(new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.embergraph.org")));
+            ivs.add(new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.embergraph.org/")));
+            ivs.add(new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.embergraph.org/foo")));
+            ivs.add(new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.embergraph.org:80/foo")));
 
         }
         

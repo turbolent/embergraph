@@ -518,7 +518,7 @@ public class TestAddTerms extends AbstractTripleStoreTestCase {
 
         final StringBuilder sb = new StringBuilder(len + 20);
 
-        sb.append("http://www.bigdata.com/");
+        sb.append("http://www.embergraph.org/");
         
         for (int i = 0; i < len; i++) {
 

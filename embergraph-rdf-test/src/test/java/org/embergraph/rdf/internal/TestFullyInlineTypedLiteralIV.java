@@ -48,7 +48,7 @@ public class TestFullyInlineTypedLiteralIV extends TestCase2 {
 
 	public void test_InlineLiteralIV_datatypeURI() {
 
-		final URI datatype = new URIImpl("http://www.bigdata.com");
+		final URI datatype = new URIImpl("http://www.embergraph.org");
 
 		doTest(new FullyInlineTypedLiteralIV<BigdataLiteral>("", null, datatype));
 		doTest(new FullyInlineTypedLiteralIV<BigdataLiteral>(" ", null, datatype));
@@ -89,7 +89,7 @@ public class TestFullyInlineTypedLiteralIV extends TestCase2 {
 	    final List<IV<?,?>> ivs = new LinkedList<IV<?,?>>();
         {
 
-            final URI datatype = new URIImpl("http://www.bigdata.com");
+            final URI datatype = new URIImpl("http://www.embergraph.org");
             
             ivs.add(new FullyInlineTypedLiteralIV<BigdataLiteral>(""));
             ivs.add(new FullyInlineTypedLiteralIV<BigdataLiteral>(" "));

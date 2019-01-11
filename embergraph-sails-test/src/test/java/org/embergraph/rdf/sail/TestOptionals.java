@@ -123,10 +123,10 @@ public class TestOptionals extends QuadsTestCase {
         
         try {
     
-            final URI book1 = new URIImpl("http://www.bigdata.com/rdf#book1");
-            final URI book2 = new URIImpl("http://www.bigdata.com/rdf#book2");
-            final URI book3 = new URIImpl("http://www.bigdata.com/rdf#book3");
-            final URI price = new URIImpl("http://www.bigdata.com/rdf#price");
+            final URI book1 = new URIImpl("http://www.embergraph.org/rdf#book1");
+            final URI book2 = new URIImpl("http://www.embergraph.org/rdf#book2");
+            final URI book3 = new URIImpl("http://www.embergraph.org/rdf#book3");
+            final URI price = new URIImpl("http://www.embergraph.org/rdf#price");
             final URI XSD_INTEGER = new URIImpl("http://www.w3.org/2001/XMLSchema#integer");
 /**/            
             cxn.add(

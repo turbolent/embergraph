@@ -66,7 +66,7 @@ public class TestTicket632 extends QuadsTestCase {
     }
 
     public void testServiceWithBindingArg() throws Exception {
-        final URI serviceURI = new URIImpl("http://www.bigdata.com/mockService/" + getName());
+        final URI serviceURI = new URIImpl("http://www.embergraph.org/mockService/" + getName());
         //the service solutions don't matter cause the error is from before computing the service solutions
         final List<BindingSet> serviceSolutions = new LinkedList<BindingSet>();
         ServiceRegistry.getInstance().add(serviceURI, new OpenrdfNativeMockServiceFactory(serviceSolutions));

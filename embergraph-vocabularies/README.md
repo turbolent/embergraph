@@ -38,7 +38,7 @@ Download the core Pubchem subset based on the [examples](https://pubchem.ncbi.nl
 
 ```
 
-Install and start your local Blazegraph instance.  See [Deploying](https://wiki.blazegraph.com/wiki/index.php/NanoSparqlServer#Deploying_NanoSparqlServer).
+Install and start your local Embergraph instance.  See [Deploying](https://wiki.blazegraph.com/wiki/index.php/NanoSparqlServer#Deploying_NanoSparqlServer).
 
 Use the BulkLoader with the example [pubchem properties](src/main/resources/namespace/pubchem/pubchem.properties), customized for your local environment.   Here is the example for using the [BulkLoader](https://wiki.blazegraph.com/wiki/index.php/REST_API#Bulk_Load_Configuration).
 

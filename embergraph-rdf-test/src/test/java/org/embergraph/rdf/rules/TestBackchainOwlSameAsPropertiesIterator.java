@@ -80,12 +80,12 @@ public class TestBackchainOwlSameAsPropertiesIterator extends AbstractInferenceE
         
         try {
 
-            final URI A = new URIImpl("http://www.bigdata.com/A");
-            final URI B = new URIImpl("http://www.bigdata.com/B");
-            final URI W = new URIImpl("http://www.bigdata.com/W");
-            final URI X = new URIImpl("http://www.bigdata.com/X");
-            final URI Y = new URIImpl("http://www.bigdata.com/Y");
-            final URI Z = new URIImpl("http://www.bigdata.com/Z");
+            final URI A = new URIImpl("http://www.embergraph.org/A");
+            final URI B = new URIImpl("http://www.embergraph.org/B");
+            final URI W = new URIImpl("http://www.embergraph.org/W");
+            final URI X = new URIImpl("http://www.embergraph.org/X");
+            final URI Y = new URIImpl("http://www.embergraph.org/Y");
+            final URI Z = new URIImpl("http://www.embergraph.org/Z");
 
             {
                 StatementBuffer buffer = new StatementBuffer

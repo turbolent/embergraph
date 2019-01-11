@@ -60,7 +60,7 @@ public class TestAll extends TestCase {
     public static Test suite()
     {
 
-        final TestSuite suite = new TestSuite("bigdata operators");
+        final TestSuite suite = new TestSuite("embergraph operators");
 
         // test variable and constant impls.
         suite.addTestSuite(TestVar.class);

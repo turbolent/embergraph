@@ -612,7 +612,7 @@ public class TestMultiTenancyAPI<S extends IIndexManager> extends
                 // Test a SPARQL 1.1 Update against the data set.
                 {
                     tmp.prepareUpdate(
-                            "PREFIX : <http://www.bigdata.com> \n"
+                            "PREFIX : <http://www.embergraph.org> \n"
                                     + "INSERT DATA {:a :b :c}").evaluate();
                 }
 
@@ -701,7 +701,7 @@ public class TestMultiTenancyAPI<S extends IIndexManager> extends
             {
                 try {
                     tmp.prepareUpdate(
-                            "PREFIX : <http://www.bigdata.com> \n"
+                            "PREFIX : <http://www.embergraph.org> \n"
                                     + "INSERT DATA {:a :b :c}").evaluate();
 
                     fail("Expecting " + BigdataServlet.HTTP_NOTFOUND);

@@ -1756,7 +1756,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends
 
         final String update = "LOAD <" + url.toExternalForm() + ">";
         
-        final String ns = "http://bigdata.com/test/data#";
+        final String ns = "http://embergraph.org/test/data#";
         
         m_repo.prepareUpdate(update).evaluate();
         
@@ -1771,7 +1771,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends
     {
         final String update = "LOAD SILENT <file:src/test/org/embergraph/rdf/rio/NOT-FOUND.rdf>";
         
-        final String ns = "http://bigdata.com/test/data#";
+        final String ns = "http://embergraph.org/test/data#";
         
         m_repo.prepareUpdate(update).evaluate();
 
@@ -1788,13 +1788,13 @@ public class TestSparqlUpdate<S extends IIndexManager> extends
           "org/embergraph/rdf/rio/small.rdf");
 
 
-        final URI g1 = f.createURI("http://www.bigdata.com/g1");
-        final URI g2 = f.createURI("http://www.bigdata.com/g2");
+        final URI g1 = f.createURI("http://www.embergraph.org/g1");
+        final URI g2 = f.createURI("http://www.embergraph.org/g2");
 
         final String update = "LOAD <" + url.toExternalForm() + "> "
                 + "INTO GRAPH <" + g1.stringValue() + ">";
         
-        final String ns = "http://bigdata.com/test/data#";
+        final String ns = "http://embergraph.org/test/data#";
         
         m_repo.prepareUpdate(update).evaluate();
 
@@ -1818,7 +1818,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends
     	
         final String update = "LOAD <" + url.toExternalForm() + ">";
         
-        final String ns = "http://bigdata.com/test/data#";
+        final String ns = "http://embergraph.org/test/data#";
         
         m_repo.prepareUpdate(update).evaluate();
         

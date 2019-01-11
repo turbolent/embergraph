@@ -117,7 +117,7 @@ public class TestBigdataNativeServiceEvaluation extends
         }
    
         final URI serviceURI = new URIImpl(
-                "http://www.bigdata.com/mockService/" + getName());
+                "http://www.embergraph.org/mockService/" + getName());
 
         ServiceRegistry.getInstance().add(serviceURI,
                 new BigdataNativeMockServiceFactory(serviceSolutions));
@@ -194,7 +194,7 @@ public class TestBigdataNativeServiceEvaluation extends
         }
    
         final URI serviceURI = new URIImpl(
-                "http://www.bigdata.com/mockService/" + getName());
+                "http://www.embergraph.org/mockService/" + getName());
 
         ServiceRegistry.getInstance().add(serviceURI,
                 new BigdataNativeMockServiceFactory(serviceSolutions));

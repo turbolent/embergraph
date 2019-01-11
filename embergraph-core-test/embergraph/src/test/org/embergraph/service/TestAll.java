@@ -61,7 +61,7 @@ public class TestAll extends TestCase {
      */
     public static Test suite() {
 
-        final TestSuite suite = new TestSuite("bigdata services");
+        final TestSuite suite = new TestSuite("embergraph services");
 
         // event handling
         suite.addTestSuite(TestEventParser.class);

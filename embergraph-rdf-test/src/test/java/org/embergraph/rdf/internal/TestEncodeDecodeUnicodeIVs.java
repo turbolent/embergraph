@@ -124,7 +124,7 @@ public class TestEncodeDecodeUnicodeIVs extends
     public void test_encodeDecode_Inline_URI() {
         
         final IV<?, ?>[] e = {//
-                new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.bigdata.com")),//
+                new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.embergraph.org")),//
                 new FullyInlineURIIV<BigdataURI>(RDF.TYPE),//
                 new FullyInlineURIIV<BigdataURI>(RDF.SUBJECT),//
                 new FullyInlineURIIV<BigdataURI>(RDF.BAG),//
@@ -296,8 +296,8 @@ public class TestEncodeDecodeUnicodeIVs extends
      */
     public void test_encodeDecode_Inline_Literal_datatypeLiteral() {
         
-        final URI dt1 = new URIImpl("http://www.bigdata.com/mock-datatype-1");
-        final URI dt2 = new URIImpl("http://www.bigdata.com/mock-datatype-2");
+        final URI dt1 = new URIImpl("http://www.embergraph.org/mock-datatype-1");
+        final URI dt2 = new URIImpl("http://www.embergraph.org/mock-datatype-2");
         
         final IV<?, ?>[] e = {//
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("foo", null/* language */,
@@ -344,8 +344,8 @@ public class TestEncodeDecodeUnicodeIVs extends
      */
     public void test_encodeDecode_Inline_Literals_All_Types() {
         
-        final URI dt1 = new URIImpl("http://www.bigdata.com/mock-datatype-1");
-        final URI dt2 = new URIImpl("http://www.bigdata.com/mock-datatype-2");
+        final URI dt1 = new URIImpl("http://www.embergraph.org/mock-datatype-1");
+        final URI dt2 = new URIImpl("http://www.embergraph.org/mock-datatype-2");
         
         final IV<?, ?>[] e = {//
                 /*

@@ -10,7 +10,7 @@ public class TestInlineLocalNameIntegerURIHandler extends TestCase2 {
 	
 	public TestInlineLocalNameIntegerURIHandler(final String name) {
 		super(name);
-		handler = new MyInlineLocalNameIntegerURIHandler("http://www.blazegraph.com/",packedId);
+		handler = new MyInlineLocalNameIntegerURIHandler("http://www.embergraph.org/",packedId);
 	}
 	
 
@@ -30,7 +30,7 @@ public class TestInlineLocalNameIntegerURIHandler extends TestCase2 {
 		for(int i = 0; i < 32; i++) {
 
 			final MyInlineLocalNameIntegerURIHandler h = new MyInlineLocalNameIntegerURIHandler(
-					"www.blazegraph.com", i);
+					"www.embergraph.org", i);
 			
 			check(h, value, i);
 			
@@ -59,7 +59,7 @@ public class TestInlineLocalNameIntegerURIHandler extends TestCase2 {
 		try {
 			@SuppressWarnings("unused")
 			MyInlineLocalNameIntegerURIHandler h = new MyInlineLocalNameIntegerURIHandler(
-					"www.blazegraph.com", 33);
+					"www.embergraph.org", 33);
 		} catch (RuntimeException e) {
 			// This should throw an exception
 			assertTrue(true);
@@ -79,7 +79,7 @@ public class TestInlineLocalNameIntegerURIHandler extends TestCase2 {
 		final int id = 16;
 
 		MyInlineLocalNameIntegerURIHandler h = new MyInlineLocalNameIntegerURIHandler(
-				"www.blazegraph.com", id);
+				"www.embergraph.org", id);
 
 		check(h,edge,id);
 	}
@@ -91,7 +91,7 @@ public class TestInlineLocalNameIntegerURIHandler extends TestCase2 {
 		final int id = 16;
 
 	    MyInlineLocalNameIntegerURIHandler h = new MyInlineLocalNameIntegerURIHandler(
-					"www.blazegraph.com", id);
+					"www.embergraph.org", id);
 
 		try {
 			@SuppressWarnings("unused")
@@ -111,7 +111,7 @@ public class TestInlineLocalNameIntegerURIHandler extends TestCase2 {
 		final int id = 16;
 
 	    MyInlineLocalNameIntegerURIHandler h = new MyInlineLocalNameIntegerURIHandler(
-					"www.blazegraph.com", id);
+					"www.embergraph.org", id);
 
 		try {
 			@SuppressWarnings(value = { "unused" })
@@ -131,7 +131,7 @@ public class TestInlineLocalNameIntegerURIHandler extends TestCase2 {
 		final int id = 16;
 
 	    MyInlineLocalNameIntegerURIHandler h = new MyInlineLocalNameIntegerURIHandler(
-					"www.blazegraph.com", id);
+					"www.embergraph.org", id);
 
 		try {
 			@SuppressWarnings(value = { "unused" })
@@ -157,10 +157,10 @@ public class TestInlineLocalNameIntegerURIHandler extends TestCase2 {
 		final int id2 = 31;
 		
 		MyInlineLocalNameIntegerURIHandler h1 = new MyInlineLocalNameIntegerURIHandler(
-					"www.blazegraph.com", id1);
+					"www.embergraph.org", id1);
 
 		MyInlineLocalNameIntegerURIHandler h2 = new MyInlineLocalNameIntegerURIHandler(
-					"www.blazegraph.com", id2);
+					"www.embergraph.org", id2);
 		
 		final long packed1 = h1.packValue(value);
 		final long packed2 = h2.packValue(value);

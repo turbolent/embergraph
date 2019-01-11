@@ -882,10 +882,10 @@ public class TestDatabaseAtOnceClosure extends AbstractRuleTestCase {
             
             final BigdataValueFactory f = store.getValueFactory();
             
-            final BigdataURI A = f.createURI("http://www.bigdata.com/a");
-            final BigdataURI B = f.createURI("http://www.bigdata.com/b");
-            final BigdataURI C = f.createURI("http://www.bigdata.com/c");
-            final BigdataURI D = f.createURI("http://www.bigdata.com/d");
+            final BigdataURI A = f.createURI("http://www.embergraph.org/a");
+            final BigdataURI B = f.createURI("http://www.embergraph.org/b");
+            final BigdataURI C = f.createURI("http://www.embergraph.org/c");
+            final BigdataURI D = f.createURI("http://www.embergraph.org/d");
             final BigdataURI SCO = f.asValue(RDFS.SUBCLASSOF);
             
             final Vocabulary vocab = store.getVocabulary();

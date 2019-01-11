@@ -103,7 +103,7 @@ public class TestRemoteGOM extends TestCase {
         final Properties properties = new Properties();
 
         // create a backing file for the database
-        final File journal = File.createTempFile("bigdata", ".jnl");
+        final File journal = File.createTempFile("embergraph", ".jnl");
         properties.setProperty(BigdataSail.Options.FILE, journal
                 .getAbsolutePath());
         properties.setProperty(Options.BUFFER_MODE, BufferMode.DiskRW

@@ -45,7 +45,7 @@ public class TestMultiVocabulary extends BigdataCoreVocabulary_v20151210 {
 	class TestVocabularyDecl implements VocabularyDecl {
 
 		private final URI[] uris = new URI[] { new URIImpl(
-				"http://blazegraph.com/Data#Position_") };
+				"http://embergraph.org/Data#Position_") };
 
 		public TestVocabularyDecl() {
 		}

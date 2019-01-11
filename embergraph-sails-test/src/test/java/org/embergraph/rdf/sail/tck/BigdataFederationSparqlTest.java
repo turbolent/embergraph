@@ -365,7 +365,7 @@ extends SPARQLQueryTest
 	/**
 	 * The name of the jini configuration file for the federation.
 	 */
-	public static final String CONFIG_PROPERTY = "bigdata.configuration";
+	public static final String CONFIG_PROPERTY = "embergraph.configuration";
 	
     private static final Logger _logger = Logger.getLogger ( BigdataFederationSparqlTest.class ) ;
 

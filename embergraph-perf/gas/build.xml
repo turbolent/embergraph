@@ -8,13 +8,13 @@
 
 	<path id="runtime.classpath">
 		<!-- The bigdata dependencies (for the nano-server). -->
-		<fileset dir="${bigdata.build.dir}/lib">
+		<fileset dir="${embergraph.build.dir}/lib">
 			<include name="**/*.jar" />
 		</fileset>
 	</path>
 
 	<target name="start-sparql-server"
-		    description="Start a small http server fronting for a bigdata database instance.">
+		    description="Start a small http server fronting for a embergraph database instance.">
 		<java classname="org.embergraph.rdf.sail.webapp.NanoSparqlServer"
 		      fork="true" failonerror="true"
 		      >

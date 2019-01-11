@@ -84,7 +84,7 @@ public class TestLexAccessPatternEnum extends TestCase2 {
                 .getInstance(getName());
 
         final IConstant<?> value = new Constant<BigdataURI>(vf
-                .createURI("http://www.bigdata.com"));
+                .createURI("http://www.embergraph.org"));
 
         final IVariableOrConstant<?>[] args = new IVariableOrConstant[] {
                 value, // value
@@ -108,7 +108,7 @@ public class TestLexAccessPatternEnum extends TestCase2 {
                 .getInstance(getName());
 
         final IConstant<?> value = new Constant<BigdataURI>(vf
-                .createURI("http://www.bigdata.com"));
+                .createURI("http://www.embergraph.org"));
 
         final IVariableOrConstant<?>[] args = new IVariableOrConstant[] {
                 value, // value

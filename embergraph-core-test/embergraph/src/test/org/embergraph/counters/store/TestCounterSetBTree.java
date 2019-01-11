@@ -83,7 +83,7 @@ public class TestCounterSetBTree extends TestCase2 {
         final CounterSet root = new CounterSet();
 
         // make a child.
-        final CounterSet bigdata = root.makePath("www.bigdata.com");
+        final CounterSet bigdata = root.makePath("www.embergraph.org");
 
         // make a child of a child using a relative path
         final ICounter memory = bigdata.addCounter("memory",
@@ -94,7 +94,7 @@ public class TestCounterSetBTree extends TestCase2 {
                 });
         
         // make a child of a child using an absolute path.
-        final ICounter disk = root.addCounter("/www.bigdata.com/disk",
+        final ICounter disk = root.addCounter("/www.embergraph.org/disk",
                 new Instrument<Long>() {
                     public void sample() {
                         setValue(new File(".").getUsableSpace());

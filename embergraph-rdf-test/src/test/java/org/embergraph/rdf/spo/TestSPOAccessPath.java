@@ -206,12 +206,12 @@ public class TestSPOAccessPath extends AbstractTripleStoreTestCase {
 
             final BigdataValueFactory f = store.getValueFactory();
             
-            final BigdataURI s1 = f.createURI("http://www.bigdata.com/rdf#s1");
-            final BigdataURI s2 = f.createURI("http://www.bigdata.com/rdf#s2");
-            final BigdataURI p1 = f.createURI("http://www.bigdata.com/rdf#p1");
-            final BigdataURI o1 = f.createURI("http://www.bigdata.com/rdf#o1");
-            final BigdataURI p2 = f.createURI("http://www.bigdata.com/rdf#p2");
-            final BigdataURI o2 = f.createURI("http://www.bigdata.com/rdf#o2");
+            final BigdataURI s1 = f.createURI("http://www.embergraph.org/rdf#s1");
+            final BigdataURI s2 = f.createURI("http://www.embergraph.org/rdf#s2");
+            final BigdataURI p1 = f.createURI("http://www.embergraph.org/rdf#p1");
+            final BigdataURI o1 = f.createURI("http://www.embergraph.org/rdf#o1");
+            final BigdataURI p2 = f.createURI("http://www.embergraph.org/rdf#p2");
+            final BigdataURI o2 = f.createURI("http://www.embergraph.org/rdf#o2");
 
             {
 
@@ -313,13 +313,13 @@ public class TestSPOAccessPath extends AbstractTripleStoreTestCase {
             
             final BigdataValueFactory f = store.getValueFactory();
             
-            final BigdataURI graphA = f.createURI("http://www.bigdata.com/graphA");
-            final BigdataURI graphB = f.createURI("http://www.bigdata.com/graphB");
-            final BigdataURI s = f.createURI("http://www.bigdata.com/rdf#s");
-            final BigdataURI p1 = f.createURI("http://www.bigdata.com/rdf#p1");
-            final BigdataURI o1 = f.createURI("http://www.bigdata.com/rdf#o1");
-            final BigdataURI p2 = f.createURI("http://www.bigdata.com/rdf#p2");
-            final BigdataURI o2 = f.createURI("http://www.bigdata.com/rdf#o2");
+            final BigdataURI graphA = f.createURI("http://www.embergraph.org/graphA");
+            final BigdataURI graphB = f.createURI("http://www.embergraph.org/graphB");
+            final BigdataURI s = f.createURI("http://www.embergraph.org/rdf#s");
+            final BigdataURI p1 = f.createURI("http://www.embergraph.org/rdf#p1");
+            final BigdataURI o1 = f.createURI("http://www.embergraph.org/rdf#o1");
+            final BigdataURI p2 = f.createURI("http://www.embergraph.org/rdf#p2");
+            final BigdataURI o2 = f.createURI("http://www.embergraph.org/rdf#o2");
 
             {
 

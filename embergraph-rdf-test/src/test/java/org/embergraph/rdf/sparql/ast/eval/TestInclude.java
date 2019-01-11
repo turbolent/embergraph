@@ -298,9 +298,9 @@ public class TestInclude extends AbstractDataDrivenSPARQLTestCase {
         final IVariable<?> y = Var.var("y");
 
         // Resolve terms pre-loaded into the kb.
-        final BigdataURI Mike = vf.createURI("http://www.bigdata.com/Mike"); 
-        final BigdataURI Bryan = vf.createURI("http://www.bigdata.com/Bryan");
-        final BigdataURI DC = vf.createURI("http://www.bigdata.com/DC");
+        final BigdataURI Mike = vf.createURI("http://www.embergraph.org/Mike");
+        final BigdataURI Bryan = vf.createURI("http://www.embergraph.org/Bryan");
+        final BigdataURI DC = vf.createURI("http://www.embergraph.org/DC");
         {
             tripleStore.addTerms(new BigdataValue[] { Mike, Bryan, DC });
             assertNotNull(Mike.getIV());
@@ -447,9 +447,9 @@ public class TestInclude extends AbstractDataDrivenSPARQLTestCase {
         final IVariable<?> y = Var.var("y");
 
         // Resolve terms pre-loaded into the kb.
-        final BigdataURI Mike = vf.createURI("http://www.bigdata.com/Mike"); 
-        final BigdataURI Bryan = vf.createURI("http://www.bigdata.com/Bryan");
-        final BigdataURI DC = vf.createURI("http://www.bigdata.com/DC");
+        final BigdataURI Mike = vf.createURI("http://www.embergraph.org/Mike");
+        final BigdataURI Bryan = vf.createURI("http://www.embergraph.org/Bryan");
+        final BigdataURI DC = vf.createURI("http://www.embergraph.org/DC");
 		{
 			tripleStore.addTerms(new BigdataValue[] { Mike, Bryan, DC });
 			assertNotNull(Mike.getIV());

@@ -43,7 +43,7 @@ import org.embergraph.util.BytesUtil;
 public class DumpLexicon {
 	
 	private final static String REMOTE_ERR_MSG = "Remote Lexicon dumping is not supported by this class."
-			+ "\nPlease use DumpRemoteLexicon in bigdata-jini."
+			+ "\nPlease use DumpRemoteLexicon in embergraph-jini."
 			+ "See BLZG-1370 \n";
 	
 	private final static String CONFIG_EXT = ".config";

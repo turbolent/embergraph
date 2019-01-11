@@ -758,7 +758,7 @@ public class BigdataSPARQLUpdateTest extends SPARQLUpdateTest {
     	
         final String update = "LOAD <" + url.toExternalForm() + ">";
         
-        final String ns = "http://bigdata.com/test/data#";
+        final String ns = "http://embergraph.org/test/data#";
         
         con.prepareUpdate(QueryLanguage.SPARQL, update).execute();
 

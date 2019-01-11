@@ -132,7 +132,7 @@ public class TestRemoteSparqlBuilderFactory extends
     public void test_service_001() throws Exception {
         
         final BigdataURI serviceURI = valueFactory
-                .createURI("http://www.bigdata.com/myService");
+                .createURI("http://www.embergraph.org/myService");
 
         final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
         {
@@ -144,7 +144,7 @@ public class TestRemoteSparqlBuilderFactory extends
         
         final Map<String,String> prefixDecls = new LinkedHashMap<String, String>();
         {
-            prefixDecls.put("foo", "http://www.bigdata.com/foo");
+            prefixDecls.put("foo", "http://www.embergraph.org/foo");
         }
 
         final ServiceNode serviceNode = new ServiceNode(new ConstantNode(
@@ -197,7 +197,7 @@ public class TestRemoteSparqlBuilderFactory extends
     public void test_service_001b() throws Exception {
         
         final BigdataURI serviceURI = valueFactory
-                .createURI("http://www.bigdata.com/myService");
+                .createURI("http://www.embergraph.org/myService");
 
         final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
         {
@@ -209,7 +209,7 @@ public class TestRemoteSparqlBuilderFactory extends
         
         final Map<String,String> prefixDecls = new LinkedHashMap<String, String>();
         {
-            prefixDecls.put("foo", "http://www.bigdata.com/foo");
+            prefixDecls.put("foo", "http://www.embergraph.org/foo");
         }
 
         final ServiceNode serviceNode = new ServiceNode(new ConstantNode(
@@ -275,7 +275,7 @@ public class TestRemoteSparqlBuilderFactory extends
         addResolveIVs(dcCreator, book1, book2, author1, author2);
 
         final BigdataURI serviceURI = valueFactory
-                .createURI("http://www.bigdata.com/myService");
+                .createURI("http://www.embergraph.org/myService");
 
         final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
         {
@@ -287,7 +287,7 @@ public class TestRemoteSparqlBuilderFactory extends
         
         final Map<String,String> prefixDecls = new LinkedHashMap<String, String>();
         {
-            prefixDecls.put("foo", "http://www.bigdata.com/foo");
+            prefixDecls.put("foo", "http://www.embergraph.org/foo");
         }
 
         final ServiceNode serviceNode = new ServiceNode(new ConstantNode(
@@ -369,7 +369,7 @@ public class TestRemoteSparqlBuilderFactory extends
         addResolveIVs(dcCreator, book1, book2, book3, book4, book5, book6);
 
         final BigdataURI serviceURI = valueFactory
-                .createURI("http://www.bigdata.com/myService");
+                .createURI("http://www.embergraph.org/myService");
 
         final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
         {
@@ -465,7 +465,7 @@ public class TestRemoteSparqlBuilderFactory extends
     public void test_service_004() throws Exception {
         
         final BigdataURI serviceURI = valueFactory
-                .createURI("http://www.bigdata.com/myService");
+                .createURI("http://www.embergraph.org/myService");
 
         final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
         {
@@ -539,7 +539,7 @@ public class TestRemoteSparqlBuilderFactory extends
     public void test_service_005() throws Exception {
         
         final BigdataURI serviceURI = valueFactory
-                .createURI("http://www.bigdata.com/myService");
+                .createURI("http://www.embergraph.org/myService");
 
         final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
         {
@@ -625,7 +625,7 @@ public class TestRemoteSparqlBuilderFactory extends
     public void test_service_006() throws Exception {
         
         final BigdataURI serviceURI = valueFactory
-                .createURI("http://www.bigdata.com/myService");
+                .createURI("http://www.embergraph.org/myService");
 
         final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
         {
@@ -713,7 +713,7 @@ public class TestRemoteSparqlBuilderFactory extends
     public void test_service_007() throws Exception {
 
         final BigdataURI serviceURI = valueFactory
-                .createURI("http://www.bigdata.com/myService");
+                .createURI("http://www.embergraph.org/myService");
 
         final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
         {
@@ -814,7 +814,7 @@ public class TestRemoteSparqlBuilderFactory extends
     public void test_service_008() throws Exception {
         
         final BigdataURI serviceURI = valueFactory
-                .createURI("http://www.bigdata.com/myService");
+                .createURI("http://www.embergraph.org/myService");
 
         final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
         {
@@ -905,7 +905,7 @@ public class TestRemoteSparqlBuilderFactory extends
     public void test_service_009() throws Exception {
         
         final BigdataURI serviceURI = valueFactory
-                .createURI("http://www.bigdata.com/myService");
+                .createURI("http://www.embergraph.org/myService");
         
         final String exprImage = "SERVICE <" + serviceURI + "> { ?s ?p ?o }";
         

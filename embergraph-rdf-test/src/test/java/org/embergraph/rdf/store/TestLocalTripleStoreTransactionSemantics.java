@@ -50,9 +50,9 @@ public class TestLocalTripleStoreTransactionSemantics extends ProxyTestCase {
             
             final BigdataValueFactory f = store.getValueFactory();
 
-            final BigdataValue s = f.createURI("http://www.bigdata.com/s");
-            final BigdataValue p = f.createURI("http://www.bigdata.com/p");
-            final BigdataValue o = f.createURI("http://www.bigdata.com/o");
+            final BigdataValue s = f.createURI("http://www.embergraph.org/s");
+            final BigdataValue p = f.createURI("http://www.embergraph.org/p");
+            final BigdataValue o = f.createURI("http://www.embergraph.org/o");
 
             final BigdataValue[] values = new BigdataValue[]{s,p,o};
             
@@ -162,9 +162,9 @@ public class TestLocalTripleStoreTransactionSemantics extends ProxyTestCase {
 
             final BigdataValueFactory f = store.getValueFactory();
 
-            s = f.createURI("http://www.bigdata.com/s"); 
-            p = f.createURI("http://www.bigdata.com/p"); 
-            o = f.createURI("http://www.bigdata.com/o"); 
+            s = f.createURI("http://www.embergraph.org/s");
+            p = f.createURI("http://www.embergraph.org/p");
+            o = f.createURI("http://www.embergraph.org/o");
             
             final BigdataValue[] values = new BigdataValue[]{s,p,o};
             
@@ -306,10 +306,10 @@ public class TestLocalTripleStoreTransactionSemantics extends ProxyTestCase {
             
             final BigdataValueFactory f = unisolatedStore.getValueFactory();
 
-            final BigdataURI john = f.createURI("http://www.bigdata.com/john");
+            final BigdataURI john = f.createURI("http://www.embergraph.org/john");
             final BigdataURI loves = f
-                    .createURI("http://www.bigdata.com/loves");
-            final BigdataURI mary = f.createURI("http://www.bigdata.com/mary");
+                    .createURI("http://www.embergraph.org/loves");
+            final BigdataURI mary = f.createURI("http://www.embergraph.org/mary");
 
             final BigdataValue[] terms = new BigdataValue[] {
 

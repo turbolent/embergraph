@@ -91,13 +91,13 @@ public class TestBlobsIndex extends TestCase2 {
 		{
 		
 			final BigdataURI uri1 = vf
-					.createURI("http://www.bigdata.com/testTerm");
+					.createURI("http://www.embergraph.org/testTerm");
 
-			final BigdataLiteral lit1 = vf.createLiteral("bigdata");
+			final BigdataLiteral lit1 = vf.createLiteral("embergraph");
 
-			final BigdataLiteral lit2 = vf.createLiteral("bigdata", "en");
+			final BigdataLiteral lit2 = vf.createLiteral("embergraph", "en");
 
-			final BigdataLiteral lit3 = vf.createLiteral("bigdata",
+			final BigdataLiteral lit3 = vf.createLiteral("embergraph",
 					XMLSchema.STRING);
 
 			final BigdataBNode bnode1 = vf.createBNode();
@@ -370,15 +370,15 @@ public class TestBlobsIndex extends TestCase2 {
 			{
 			
 				final BigdataURI uri1 = vf
-						.createURI("http://www.bigdata.com/testTerm");
+						.createURI("http://www.embergraph.org/testTerm");
 
                 // Note: These three literals wind up with the same hash code.
                 // The hash code of the literal is based only on its label.
-				final BigdataLiteral lit1 = vf.createLiteral("bigdata");
+				final BigdataLiteral lit1 = vf.createLiteral("embergraph");
 
-				final BigdataLiteral lit2 = vf.createLiteral("bigdata", "en");
+				final BigdataLiteral lit2 = vf.createLiteral("embergraph", "en");
 
-				final BigdataLiteral lit3 = vf.createLiteral("bigdata",
+				final BigdataLiteral lit3 = vf.createLiteral("embergraph",
 						XMLSchema.STRING);
 
 				final BigdataBNode bnode1 = vf.createBNode();
@@ -973,13 +973,13 @@ public class TestBlobsIndex extends TestCase2 {
             {
 
                 final BigdataURI uri1 = vf
-                        .createURI("http://www.bigdata.com/testTerm");
+                        .createURI("http://www.embergraph.org/testTerm");
 
-                final BigdataLiteral lit1 = vf.createLiteral("bigdata");
+                final BigdataLiteral lit1 = vf.createLiteral("embergraph");
 
-                final BigdataLiteral lit2 = vf.createLiteral("bigdata", "en");
+                final BigdataLiteral lit2 = vf.createLiteral("embergraph", "en");
 
-                final BigdataLiteral lit3 = vf.createLiteral("bigdata",
+                final BigdataLiteral lit3 = vf.createLiteral("embergraph",
                         XMLSchema.STRING);
 
                 final BigdataBNode bnode1 = vf.createBNode();

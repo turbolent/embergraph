@@ -172,7 +172,7 @@ public class XHTMLRenderer implements IRenderer {
     
     protected void writeTitle(final Writer w)  throws IOException {
         
-        w.write("<title>bigdata(tm) telemetry : "+cdata(model.path)+"</title\n>");
+        w.write("<title>embergraph(tm) telemetry : "+cdata(model.path)+"</title\n>");
         
     }
 

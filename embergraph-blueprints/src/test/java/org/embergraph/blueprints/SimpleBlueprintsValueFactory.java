@@ -40,13 +40,13 @@ public class SimpleBlueprintsValueFactory extends DefaultBlueprintsValueFactory 
 
     public static final String ID = "id:";
     
-    public static final URI VERTEX = new URIImpl("bigdata:Vertex");
+    public static final URI VERTEX = new URIImpl("embergraph:Vertex");
     
-    public static final URI EDGE = new URIImpl("bigdata:Edge");
+    public static final URI EDGE = new URIImpl("embergraph:Edge");
     
-    public static final URI TYPE = new URIImpl("bigdata:type");
+    public static final URI TYPE = new URIImpl("embergraph:type");
     
-    public static final URI LABEL = new URIImpl("bigdata:label");
+    public static final URI LABEL = new URIImpl("embergraph:label");
     
     public static final SimpleBlueprintsValueFactory INSTANCE =
             new SimpleBlueprintsValueFactory();

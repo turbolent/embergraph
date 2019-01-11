@@ -127,8 +127,8 @@ public class TestQuadsAPI extends QuadsTestCase {
             
             final BNode a = new BNodeImpl("_:a");
             final BNode b = new BNodeImpl("_:b");
-            final URI graphA = new URIImpl("http://www.bigdata.com/graphA");
-            final URI graphB = new URIImpl("http://www.bigdata.com/graphB");
+            final URI graphA = new URIImpl("http://www.embergraph.org/graphA");
+            final URI graphB = new URIImpl("http://www.embergraph.org/graphB");
 /**/            
             cxn.add(
                     a,
@@ -209,13 +209,13 @@ public class TestQuadsAPI extends QuadsTestCase {
             
 //            final BNode a = new BNodeImpl("_:a");
 //            final BNode b = new BNodeImpl("_:b");
-            final URI graphA = new URIImpl("http://www.bigdata.com/rdf#graphA");
-            final URI graphB = new URIImpl("http://www.bigdata.com/rdf#graphB");
-            final URI s = new URIImpl("http://www.bigdata.com/rdf#s");
-            final URI p1 = new URIImpl("http://www.bigdata.com/rdf#p1");
-            final URI o1 = new URIImpl("http://www.bigdata.com/rdf#o1");
-            final URI p2 = new URIImpl("http://www.bigdata.com/rdf#p2");
-            final URI o2 = new URIImpl("http://www.bigdata.com/rdf#o2");
+            final URI graphA = new URIImpl("http://www.embergraph.org/rdf#graphA");
+            final URI graphB = new URIImpl("http://www.embergraph.org/rdf#graphB");
+            final URI s = new URIImpl("http://www.embergraph.org/rdf#s");
+            final URI p1 = new URIImpl("http://www.embergraph.org/rdf#p1");
+            final URI o1 = new URIImpl("http://www.embergraph.org/rdf#o1");
+            final URI p2 = new URIImpl("http://www.embergraph.org/rdf#p2");
+            final URI o2 = new URIImpl("http://www.embergraph.org/rdf#o2");
 
             cxn.add(graphA, p1, o1, graphA);
 

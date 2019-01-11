@@ -94,17 +94,17 @@ public class TestMatch extends AbstractTripleStoreTestCase {
 
 //        LocalTripleStore store = new LocalTripleStore(getProperties());
 
-        final URI bryan = new URIImpl("http://www.bigdata.com/bryan");
+        final URI bryan = new URIImpl("http://www.embergraph.org/bryan");
         
-        final URI mike = new URIImpl("http://www.bigdata.com/mike");
+        final URI mike = new URIImpl("http://www.embergraph.org/mike");
 
-        final URI paul = new URIImpl("http://www.bigdata.com/paul");
+        final URI paul = new URIImpl("http://www.embergraph.org/paul");
 
-        final URI person = new URIImpl("http://www.bigdata.com/person");
+        final URI person = new URIImpl("http://www.embergraph.org/person");
 
-        final URI chiefScientist = new URIImpl("http://www.bigdata.com/chiefScientist");
+        final URI chiefScientist = new URIImpl("http://www.embergraph.org/chiefScientist");
 
-        final URI chiefEngineer = new URIImpl("http://www.bigdata.com/chiefEngineer");
+        final URI chiefEngineer = new URIImpl("http://www.embergraph.org/chiefEngineer");
 
         final AbstractTripleStore store = getStore();
 

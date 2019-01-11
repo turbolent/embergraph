@@ -77,11 +77,11 @@ public class TestMultiInlineURIHandlersSingleNamespace extends
 	
 	public void test_TwoNamespaceCreation() {
 		
-		final InlineNamespaceMultiURIHandler mHandler = new InlineNamespaceMultiURIHandler("http://blazegraph.com/data/");
+		final InlineNamespaceMultiURIHandler mHandler = new InlineNamespaceMultiURIHandler("http://embergraph.org/data/");
 		boolean noException = true;
 		
 		try {
-			InlineSignedIntegerURIHandler i = new InlineSignedIntegerURIHandler("http://www.bigdata.com/");
+			InlineSignedIntegerURIHandler i = new InlineSignedIntegerURIHandler("http://www.embergraph.org/");
 			mHandler.addHandler(i);
 		} catch (RuntimeException e) {
 			noException = false;
@@ -106,7 +106,7 @@ public class TestMultiInlineURIHandlersSingleNamespace extends
 					store, 4 /* capacity */);
 
 			BigdataURI pred = vf
-					.createURI("http://blazegraph.com/Position#hasMarketValue");
+					.createURI("http://embergraph.org/Position#hasMarketValue");
 			BigdataValue obj = vf.createLiteral("100.00");
 
 			// http://blazegraph.com/Data#Position_010072F0000038090100000000D56C9E
@@ -115,10 +115,10 @@ public class TestMultiInlineURIHandlersSingleNamespace extends
 			// http://blazegraph.com/Data#Position_010072F0000038090100000000D56C9E_WashSale
 
 			final BigdataURI[] uris = new BigdataURI[] {
-					vf.createURI("http://blazegraph.com/Data#Position_010072F0000038090100000000D56C9E_TaxCost"),
-					vf.createURI("http://blazegraph.com/Data#Position_010072F0000038090100000000D56C9E_UnrealizedGain"),
-					vf.createURI("http://blazegraph.com/Data#Position_010072F0000038090100000000D56C9E"),
-					vf.createURI("http://blazegraph.com/Data#Position_010072F0000038090100000000D56C9E_WashSale") };
+					vf.createURI("http://embergraph.org/Data#Position_010072F0000038090100000000D56C9E_TaxCost"),
+					vf.createURI("http://embergraph.org/Data#Position_010072F0000038090100000000D56C9E_UnrealizedGain"),
+					vf.createURI("http://embergraph.org/Data#Position_010072F0000038090100000000D56C9E"),
+					vf.createURI("http://embergraph.org/Data#Position_010072F0000038090100000000D56C9E_WashSale") };
 
 			final String[] localNames = new String[] {
 					"Position_010072F0000038090100000000D56C9E_TaxCost",

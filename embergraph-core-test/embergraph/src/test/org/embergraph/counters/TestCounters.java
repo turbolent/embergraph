@@ -89,7 +89,7 @@ public class TestCounters extends TestCase {
         assertEquals(0,root.getDepth());
 
         // make a child.
-        final CounterSet bigdata = root.makePath("www.bigdata.com");
+        final CounterSet bigdata = root.makePath("www.embergraph.org");
 
         assertNotNull(bigdata);
         assertFalse(root == bigdata);
@@ -98,9 +98,9 @@ public class TestCounters extends TestCase {
         assertTrue(root == bigdata.getParent());
         assertEquals(1,bigdata.getDepth());
 
-        assertEquals("www.bigdata.com",bigdata.getName());
+        assertEquals("www.embergraph.org",bigdata.getName());
         
-        assertEquals("/www.bigdata.com",bigdata.getPath());
+        assertEquals("/www.embergraph.org",bigdata.getPath());
         
         // make a child of a child using a relative path
         final CounterSet memory = bigdata.makePath("memory");
@@ -111,16 +111,16 @@ public class TestCounters extends TestCase {
 
         assertEquals("memory",memory.getName());
         
-        assertEquals("/www.bigdata.com/memory",memory.getPath());
+        assertEquals("/www.embergraph.org/memory",memory.getPath());
 
         // make a child of a child using an absolute path.
-        final CounterSet disk = root.makePath("/www.bigdata.com/disk");
+        final CounterSet disk = root.makePath("/www.embergraph.org/disk");
         
         assertTrue(bigdata == disk.getParent());
 
         assertEquals("disk",disk.getName());
         
-        assertEquals("/www.bigdata.com/disk",disk.getPath());
+        assertEquals("/www.embergraph.org/disk",disk.getPath());
 
         /*
          * verify makePath recognizes existing nodes with absolute
@@ -129,11 +129,11 @@ public class TestCounters extends TestCase {
         
         assertTrue(root == root.makePath("/"));
         
-        assertTrue(bigdata == root.makePath("/www.bigdata.com"));
+        assertTrue(bigdata == root.makePath("/www.embergraph.org"));
         
-        assertTrue(memory == root.makePath("/www.bigdata.com/memory"));
+        assertTrue(memory == root.makePath("/www.embergraph.org/memory"));
 
-        assertTrue(disk == root.makePath("/www.bigdata.com/disk"));
+        assertTrue(disk == root.makePath("/www.embergraph.org/disk"));
 
         // illegal.
         try {
@@ -148,9 +148,9 @@ public class TestCounters extends TestCase {
          * paths.
          */
         
-        assertTrue(bigdata == root.makePath("www.bigdata.com"));
+        assertTrue(bigdata == root.makePath("www.embergraph.org"));
         
-        assertTrue(memory == root.makePath("www.bigdata.com/memory"));
+        assertTrue(memory == root.makePath("www.embergraph.org/memory"));
 
         assertTrue(memory == bigdata.makePath("memory"));
                 
@@ -160,9 +160,9 @@ public class TestCounters extends TestCase {
         
         assertTrue(root == root.getPath("/"));
 
-        assertTrue(bigdata == root.getPath("/www.bigdata.com"));
+        assertTrue(bigdata == root.getPath("/www.embergraph.org"));
 
-        assertTrue(memory == root.getPath("/www.bigdata.com/memory"));
+        assertTrue(memory == root.getPath("/www.embergraph.org/memory"));
 
         /*
          * Test lookup with relative paths.
@@ -175,9 +175,9 @@ public class TestCounters extends TestCase {
             System.err.println("Ignoring expected exception: " + ex);
         }
 
-        assertTrue(bigdata == root.getPath("www.bigdata.com"));
+        assertTrue(bigdata == root.getPath("www.embergraph.org"));
 
-        assertTrue(memory == root.getPath("www.bigdata.com/memory"));
+        assertTrue(memory == root.getPath("www.embergraph.org/memory"));
 
         assertTrue(memory == bigdata.getPath("memory"));
         
@@ -412,7 +412,7 @@ public class TestCounters extends TestCase {
                 }
             });
 
-        final CounterSet cpu = root.makePath("www.bigdata.com/cpu");
+        final CounterSet cpu = root.makePath("www.embergraph.org/cpu");
 
         final ICounter availableProcessors = cpu.addCounter("availableProcessors", new Instrument<Integer>() {
             public void sample(){
@@ -420,7 +420,7 @@ public class TestCounters extends TestCase {
                 }
             });
 
-        final CounterSet memory = root.makePath("www.bigdata.com/memory");
+        final CounterSet memory = root.makePath("www.embergraph.org/memory");
 
         final ICounter maxMemory = memory.addCounter("maxMemory", new Instrument<Long>() {
             public void sample(){
@@ -428,7 +428,7 @@ public class TestCounters extends TestCase {
                 }
             });
 
-        CounterSet disk = root.makePath("www.bigdata.com/disk");
+        CounterSet disk = root.makePath("www.embergraph.org/disk");
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         

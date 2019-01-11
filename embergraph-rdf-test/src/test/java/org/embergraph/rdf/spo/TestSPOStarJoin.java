@@ -93,7 +93,7 @@ public class TestSPOStarJoin extends AbstractTripleStoreTestCase {
             {fc2,class1,fp1}        
             {fc2,class1,fp2}        
 */            
-            final String ns = "http://www.bigdata.com/rdf#";
+            final String ns = "http://www.embergraph.org/rdf#";
             
             final ValueFactory vf = store.getValueFactory();
             
@@ -239,7 +239,7 @@ public class TestSPOStarJoin extends AbstractTripleStoreTestCase {
             {fp2,v2,mv2,r1}
             {fp2,v2,mv2,r2}
 */            
-            final String ns = "http://www.bigdata.com/rdf#";
+            final String ns = "http://www.embergraph.org/rdf#";
             
             final ValueFactory vf = store.getValueFactory();
             

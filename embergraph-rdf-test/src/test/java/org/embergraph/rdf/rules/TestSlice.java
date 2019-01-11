@@ -117,20 +117,20 @@ public class TestSlice extends AbstractRuleTestCase {
 
             final BigdataValueFactory f = store.getValueFactory();
             
-            final BigdataURI foo = f.createURI("http://www.bigdata.com/foo");
-            final BigdataURI bar = f.createURI("http://www.bigdata.com/bar");
+            final BigdataURI foo = f.createURI("http://www.embergraph.org/foo");
+            final BigdataURI bar = f.createURI("http://www.embergraph.org/bar");
 
-            final BigdataURI x0 = f.createURI("http://www.bigdata.com/x0");
-            final BigdataURI x1 = f.createURI("http://www.bigdata.com/x1");
-            final BigdataURI x2 = f.createURI("http://www.bigdata.com/x2");
+            final BigdataURI x0 = f.createURI("http://www.embergraph.org/x0");
+            final BigdataURI x1 = f.createURI("http://www.embergraph.org/x1");
+            final BigdataURI x2 = f.createURI("http://www.embergraph.org/x2");
 
-            final BigdataURI y0 = f.createURI("http://www.bigdata.com/y0");
-            final BigdataURI y1 = f.createURI("http://www.bigdata.com/y1");
-            final BigdataURI y2 = f.createURI("http://www.bigdata.com/y2");
+            final BigdataURI y0 = f.createURI("http://www.embergraph.org/y0");
+            final BigdataURI y1 = f.createURI("http://www.embergraph.org/y1");
+            final BigdataURI y2 = f.createURI("http://www.embergraph.org/y2");
             
-            final BigdataURI z0 = f.createURI("http://www.bigdata.com/z0");
-            final BigdataURI z1 = f.createURI("http://www.bigdata.com/z1");
-            final BigdataURI z2 = f.createURI("http://www.bigdata.com/z2");
+            final BigdataURI z0 = f.createURI("http://www.embergraph.org/z0");
+            final BigdataURI z1 = f.createURI("http://www.embergraph.org/z1");
+            final BigdataURI z2 = f.createURI("http://www.embergraph.org/z2");
             
             /*
              * Define the terms that we will be using.

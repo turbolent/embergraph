@@ -143,7 +143,7 @@ public class TestVirtualGraphs extends AbstractBigdataExprBuilderTestCase {
                 .createURI("http://example.org/vg");
 
         final BigdataURI context = valueFactory
-                .createURI("http://www.bigdata.com/context");
+                .createURI("http://www.embergraph.org/context");
 
         final BigdataURI uri1 = valueFactory
                 .createURI("http://example.org/dft.ttl");
@@ -297,7 +297,7 @@ public class TestVirtualGraphs extends AbstractBigdataExprBuilderTestCase {
                 .createURI("http://example.org/vg");
 
         final BigdataURI context = valueFactory
-                .createURI("http://www.bigdata.com/context");
+                .createURI("http://www.embergraph.org/context");
 
         final BigdataURI uri1 = valueFactory
                 .createURI("http://example.org/dft.ttl");

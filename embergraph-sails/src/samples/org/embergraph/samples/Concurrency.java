@@ -70,7 +70,7 @@ public class Concurrency {
             Properties properties = new Properties();
             
             // create a backing file
-            File journal = File.createTempFile("bigdata", ".jnl");
+            File journal = File.createTempFile("embergraph", ".jnl");
             log.info(journal.getAbsolutePath());
             journal.deleteOnExit();
             properties.setProperty(

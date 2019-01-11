@@ -59,7 +59,7 @@ public class CompressedTimestampExtension<V extends BigdataValue> implements IEx
     private final BigdataURI datatype;
     
     public static final URI COMPRESSED_TIMESTAMP = 
-        new URIImpl("http://www.bigdata.com/rdf/datatype#compressedTimestamp");
+        new URIImpl("http://www.embergraph.org/rdf/datatype#compressedTimestamp");
 
     
     public CompressedTimestampExtension(final IDatatypeURIResolver resolver) {

@@ -103,12 +103,12 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
         // Add some data.
         {
 
-            final BigdataURI g = f.createURI("http://www.bigdata.com");
+            final BigdataURI g = f.createURI("http://www.embergraph.org");
 
             final BigdataStatement[] stmts = new BigdataStatement[] {//
 
                     new BigdataStatementImpl(
-                            f.createURI("http://www.bigdata.com/Mike"),
+                            f.createURI("http://www.embergraph.org/Mike"),
                             f.createURI(RDF.TYPE.toString()),
                             f.createURI(FOAFVocabularyDecl.Person.toString()),//
                             g, // context
@@ -117,7 +117,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                     ),
 
                     new BigdataStatementImpl(
-                            f.createURI("http://www.bigdata.com/Bryan"),
+                            f.createURI("http://www.embergraph.org/Bryan"),
                             f.createURI(RDF.TYPE.toString()),
                             f.createURI(FOAFVocabularyDecl.Person
                                     .toString()),//
@@ -127,7 +127,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                     ),
 
                     new BigdataStatementImpl(
-                            f.createURI("http://www.bigdata.com/Mike"),
+                            f.createURI("http://www.embergraph.org/Mike"),
                             f.createURI(RDFS.LABEL.toString()),
                             f.createLiteral("Mike"),//
                             g, // context
@@ -136,7 +136,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                     ),
 
                     new BigdataStatementImpl(
-                            f.createURI("http://www.bigdata.com/Bryan"),
+                            f.createURI("http://www.embergraph.org/Bryan"),
                             f.createURI(RDFS.LABEL.toString()),
                             f.createLiteral("Bryan"),//
                             g, // context
@@ -145,7 +145,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                     ),
 
                     new BigdataStatementImpl(
-                            f.createURI("http://www.bigdata.com/DC"),
+                            f.createURI("http://www.embergraph.org/DC"),
                             f.createURI(RDFS.LABEL.toString()),
                             f.createLiteral("DC"),//
                             g, // context
@@ -177,16 +177,16 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                 .toString());
 
         final BigdataURI mikeURI = f
-                .createURI("http://www.bigdata.com/Mike");
+                .createURI("http://www.embergraph.org/Mike");
 
         final BigdataURI bryanURI = f
-                .createURI("http://www.bigdata.com/Bryan");
+                .createURI("http://www.embergraph.org/Bryan");
 
         final BigdataLiteral mikeLabel = f.createLiteral("Mike");
 
         final BigdataLiteral bryanLabel = f.createLiteral("Bryan");
 
-        final BigdataURI dcURI = f.createURI("http://www.bigdata.com/DC");
+        final BigdataURI dcURI = f.createURI("http://www.embergraph.org/DC");
 
         final BigdataValue[] values = new BigdataValue[] { rdfType,
                 rdfsLabel, foafPerson, mikeURI, bryanURI, mikeLabel,
@@ -411,12 +411,12 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
         // Add some data.
         {
 
-            final BigdataURI g = f.createURI("http://www.bigdata.com");
+            final BigdataURI g = f.createURI("http://www.embergraph.org");
 
             final BigdataStatement[] stmts = new BigdataStatement[] {//
 
                     new BigdataStatementImpl(
-                            f.createURI("http://www.bigdata.com/Mike"),
+                            f.createURI("http://www.embergraph.org/Mike"),
                             f.createURI(RDF.TYPE.toString()),
                             f.createURI(FOAFVocabularyDecl.Person
                                     .toString()),//
@@ -426,7 +426,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                     ),
 
                     new BigdataStatementImpl(
-                            f.createURI("http://www.bigdata.com/Bryan"),
+                            f.createURI("http://www.embergraph.org/Bryan"),
                             f.createURI(RDF.TYPE.toString()),
                             f.createURI(FOAFVocabularyDecl.Person
                                     .toString()),//
@@ -436,7 +436,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                     ),
 
                     new BigdataStatementImpl(
-                            f.createURI("http://www.bigdata.com/Mike"),
+                            f.createURI("http://www.embergraph.org/Mike"),
                             f.createURI(RDFS.LABEL.toString()),
                             f.createLiteral("Mike"),//
                             g, // context
@@ -445,7 +445,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                     ),
 
                     new BigdataStatementImpl(
-                            f.createURI("http://www.bigdata.com/Bryan"),
+                            f.createURI("http://www.embergraph.org/Bryan"),
                             f.createURI(RDFS.LABEL.toString()),
                             f.createLiteral("Bryan"),//
                             g, // context
@@ -454,7 +454,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                     ),
 
                     new BigdataStatementImpl(
-                            f.createURI("http://www.bigdata.com/DC"),
+                            f.createURI("http://www.embergraph.org/DC"),
                             f.createURI(RDFS.LABEL.toString()),
                             f.createLiteral("DC"),//
                             g, // context
@@ -486,16 +486,16 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                 .toString());
 
         final BigdataURI mikeURI = f
-                .createURI("http://www.bigdata.com/Mike");
+                .createURI("http://www.embergraph.org/Mike");
 
         final BigdataURI bryanURI = f
-                .createURI("http://www.bigdata.com/Bryan");
+                .createURI("http://www.embergraph.org/Bryan");
 
         final BigdataLiteral mikeLabel = f.createLiteral("Mike");
 
         final BigdataLiteral bryanLabel = f.createLiteral("Bryan");
 
-        final BigdataURI dcURI = f.createURI("http://www.bigdata.com/DC");
+        final BigdataURI dcURI = f.createURI("http://www.embergraph.org/DC");
 
         final BigdataValue[] values = new BigdataValue[] { rdfType,
                 rdfsLabel, foafPerson, mikeURI, bryanURI, mikeLabel,
@@ -651,12 +651,12 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
         // Add some data.
         {
 
-            final BigdataURI g = f.createURI("http://www.bigdata.com");
+            final BigdataURI g = f.createURI("http://www.embergraph.org");
 
             final BigdataStatement[] stmts = new BigdataStatement[] {//
 
                     new BigdataStatementImpl(
-                            f.createURI("http://www.bigdata.com/Mike"),
+                            f.createURI("http://www.embergraph.org/Mike"),
                             f.createURI(RDF.TYPE.toString()),
                             f.createURI(FOAFVocabularyDecl.Person
                                     .toString()),//
@@ -666,7 +666,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                     ),
 
                     new BigdataStatementImpl(
-                            f.createURI("http://www.bigdata.com/Bryan"),
+                            f.createURI("http://www.embergraph.org/Bryan"),
                             f.createURI(RDF.TYPE.toString()),
                             f.createURI(FOAFVocabularyDecl.Person
                                     .toString()),//
@@ -676,7 +676,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                     ),
 
                     new BigdataStatementImpl(
-                            f.createURI("http://www.bigdata.com/Mike"),
+                            f.createURI("http://www.embergraph.org/Mike"),
                             f.createURI(RDFS.LABEL.toString()),
                             f.createLiteral("Mike"),//
                             g, // context
@@ -685,7 +685,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                     ),
 
                     new BigdataStatementImpl(
-                            f.createURI("http://www.bigdata.com/Bryan"),
+                            f.createURI("http://www.embergraph.org/Bryan"),
                             f.createURI(RDFS.LABEL.toString()),
                             f.createLiteral("Bryan"),//
                             g, // context
@@ -694,7 +694,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                     ),
 
                     new BigdataStatementImpl(
-                            f.createURI("http://www.bigdata.com/DC"),
+                            f.createURI("http://www.embergraph.org/DC"),
                             f.createURI(RDFS.LABEL.toString()),
                             f.createLiteral("DC"),//
                             g, // context
@@ -726,16 +726,16 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                 .toString());
 
         final BigdataURI mikeURI = f
-                .createURI("http://www.bigdata.com/Mike");
+                .createURI("http://www.embergraph.org/Mike");
 
         final BigdataURI bryanURI = f
-                .createURI("http://www.bigdata.com/Bryan");
+                .createURI("http://www.embergraph.org/Bryan");
 
         final BigdataLiteral mikeLabel = f.createLiteral("Mike");
 
         final BigdataLiteral bryanLabel = f.createLiteral("Bryan");
 
-        final BigdataURI dcURI = f.createURI("http://www.bigdata.com/DC");
+        final BigdataURI dcURI = f.createURI("http://www.embergraph.org/DC");
 
         final BigdataValue[] values = new BigdataValue[] { rdfType,
                 rdfsLabel, foafPerson, mikeURI, bryanURI, mikeLabel,
@@ -932,12 +932,12 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
         // Add some data.
         {
 
-            final BigdataURI g = f.createURI("http://www.bigdata.com");
+            final BigdataURI g = f.createURI("http://www.embergraph.org");
 
             final BigdataStatement[] stmts = new BigdataStatement[] {//
 
                     new BigdataStatementImpl(
-                            f.createURI("http://www.bigdata.com/Mike"),
+                            f.createURI("http://www.embergraph.org/Mike"),
                             f.createURI(RDF.TYPE.toString()),
                             f.createURI(FOAFVocabularyDecl.Person
                                     .toString()),//
@@ -947,7 +947,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                     ),
 
                     new BigdataStatementImpl(
-                            f.createURI("http://www.bigdata.com/Bryan"),
+                            f.createURI("http://www.embergraph.org/Bryan"),
                             f.createURI(RDF.TYPE.toString()),
                             f.createURI(FOAFVocabularyDecl.Person
                                     .toString()),//
@@ -957,7 +957,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                     ),
 
                     new BigdataStatementImpl(
-                            f.createURI("http://www.bigdata.com/Mike"),
+                            f.createURI("http://www.embergraph.org/Mike"),
                             f.createURI(RDFS.LABEL.toString()),
                             f.createLiteral("Mike"),//
                             g, // context
@@ -966,7 +966,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                     ),
 
                     new BigdataStatementImpl(
-                            f.createURI("http://www.bigdata.com/Bryan"),
+                            f.createURI("http://www.embergraph.org/Bryan"),
                             f.createURI(RDFS.LABEL.toString()),
                             f.createLiteral("Bryan"),//
                             g, // context
@@ -975,7 +975,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                     ),
 
                     new BigdataStatementImpl(
-                            f.createURI("http://www.bigdata.com/DC"),
+                            f.createURI("http://www.embergraph.org/DC"),
                             f.createURI(RDFS.LABEL.toString()),
                             f.createLiteral("DC"),//
                             g, // context
@@ -1007,16 +1007,16 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                 .toString());
 
         final BigdataURI mikeURI = f
-                .createURI("http://www.bigdata.com/Mike");
+                .createURI("http://www.embergraph.org/Mike");
 
         final BigdataURI bryanURI = f
-                .createURI("http://www.bigdata.com/Bryan");
+                .createURI("http://www.embergraph.org/Bryan");
 
         final BigdataLiteral mikeLabel = f.createLiteral("Mike");
 
         final BigdataLiteral bryanLabel = f.createLiteral("Bryan");
 
-        final BigdataURI dcURI = f.createURI("http://www.bigdata.com/DC");
+        final BigdataURI dcURI = f.createURI("http://www.embergraph.org/DC");
 
         final BigdataValue[] values = new BigdataValue[] { rdfType,
                 rdfsLabel, foafPerson, mikeURI, bryanURI, mikeLabel,
@@ -1221,12 +1221,12 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
         // Add some data.
         {
 
-            final BigdataURI g = f.createURI("http://www.bigdata.com");
+            final BigdataURI g = f.createURI("http://www.embergraph.org");
 
             final BigdataStatement[] stmts = new BigdataStatement[] {//
 
                     new BigdataStatementImpl(
-                            f.createURI("http://www.bigdata.com/Mike"),
+                            f.createURI("http://www.embergraph.org/Mike"),
                             f.createURI(RDF.TYPE.toString()),
                             f.createURI(FOAFVocabularyDecl.Person
                                     .toString()),//
@@ -1236,7 +1236,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                     ),
 
                     new BigdataStatementImpl(
-                            f.createURI("http://www.bigdata.com/Bryan"),
+                            f.createURI("http://www.embergraph.org/Bryan"),
                             f.createURI(RDF.TYPE.toString()),
                             f.createURI(FOAFVocabularyDecl.Person
                                     .toString()),//
@@ -1246,7 +1246,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                     ),
 
                     new BigdataStatementImpl(
-                            f.createURI("http://www.bigdata.com/Mike"),
+                            f.createURI("http://www.embergraph.org/Mike"),
                             f.createURI(RDFS.LABEL.toString()),
                             f.createLiteral("Mike"),//
                             g, // context
@@ -1255,7 +1255,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                     ),
 
                     new BigdataStatementImpl(
-                            f.createURI("http://www.bigdata.com/Bryan"),
+                            f.createURI("http://www.embergraph.org/Bryan"),
                             f.createURI(RDFS.LABEL.toString()),
                             f.createLiteral("Bryan"),//
                             g, // context
@@ -1264,7 +1264,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                     ),
 
                     new BigdataStatementImpl(
-                            f.createURI("http://www.bigdata.com/DC"),
+                            f.createURI("http://www.embergraph.org/DC"),
                             f.createURI(RDFS.LABEL.toString()),
                             f.createLiteral("DC"),//
                             g, // context
@@ -1296,16 +1296,16 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                 .toString());
 
         final BigdataURI mikeURI = f
-                .createURI("http://www.bigdata.com/Mike");
+                .createURI("http://www.embergraph.org/Mike");
 
         final BigdataURI bryanURI = f
-                .createURI("http://www.bigdata.com/Bryan");
+                .createURI("http://www.embergraph.org/Bryan");
 
         final BigdataLiteral mikeLabel = f.createLiteral("Mike");
 
         final BigdataLiteral bryanLabel = f.createLiteral("Bryan");
 
-        final BigdataURI dcURI = f.createURI("http://www.bigdata.com/DC");
+        final BigdataURI dcURI = f.createURI("http://www.embergraph.org/DC");
 
         final BigdataValue[] values = new BigdataValue[] { rdfType,
                 rdfsLabel, foafPerson, mikeURI, bryanURI, mikeLabel,

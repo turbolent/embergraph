@@ -80,7 +80,7 @@ public class TestVocabulary extends TestCase2 {
         assertEquals(RDF.TYPE, vocab.asValue(vocab.get(RDF.TYPE)));
 
         // point test for an unknown value.
-        assertNull(vocab.get(new URIImpl("http://www.bigdata.com/unknown-uri")));
+        assertNull(vocab.get(new URIImpl("http://www.embergraph.org/unknown-uri")));
 
         /*
          * Verify self-consistent for all declared values.
@@ -152,7 +152,7 @@ public class TestVocabulary extends TestCase2 {
         doRoundTripTest(vocab);
 
         // point test for an unknown value.
-        assertNull(vocab.get(new URIImpl("http://www.bigdata.com/unknown-uri")));
+        assertNull(vocab.get(new URIImpl("http://www.embergraph.org/unknown-uri")));
 
     }
 
@@ -176,7 +176,7 @@ public class TestVocabulary extends TestCase2 {
         assertEquals(RDF.TYPE, vocab.asValue(vocab.get(RDF.TYPE)));
 
         // point test for an unknown value.
-        assertNull(vocab.get(new URIImpl("http://www.bigdata.com/unknown-uri")));
+        assertNull(vocab.get(new URIImpl("http://www.embergraph.org/unknown-uri")));
 
         /*
          * Verify self-consistent for all declared values.

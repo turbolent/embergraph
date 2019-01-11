@@ -132,11 +132,11 @@ public class AbstractBigdataGraphTestCase extends AbstractGraphTestCase {
             foafPerson = (BigdataURI) vf
                     .createURI("http://xmlns.com/foaf/0.1/Person");
     
-            mike = (BigdataURI) vf.createURI("http://www.bigdata.com/Mike");
+            mike = (BigdataURI) vf.createURI("http://www.embergraph.org/Mike");
     
-            bryan = (BigdataURI) vf.createURI("http://www.bigdata.com/Bryan");
+            bryan = (BigdataURI) vf.createURI("http://www.embergraph.org/Bryan");
     
-            martyn = (BigdataURI) vf.createURI("http://www.bigdata.com/Martyn");
+            martyn = (BigdataURI) vf.createURI("http://www.embergraph.org/Martyn");
     
             final BigdataValue[] terms = new BigdataValue[] { rdfType,
                     foafKnows, foafPerson, mike, bryan, martyn };
@@ -229,13 +229,13 @@ public class AbstractBigdataGraphTestCase extends AbstractGraphTestCase {
                     .createURI("http://xmlns.com/foaf/0.1/knows");
             
             linkWeight = (BigdataURI) vf
-                    .createURI("http://www.bigdata.com/weight");
+                    .createURI("http://www.embergraph.org/weight");
     
-            v1 = (BigdataURI) vf.createURI("http://www.bigdata.com/1");
-            v2 = (BigdataURI) vf.createURI("http://www.bigdata.com/2");
-            v3 = (BigdataURI) vf.createURI("http://www.bigdata.com/3");
-            v4 = (BigdataURI) vf.createURI("http://www.bigdata.com/4");
-            v5 = (BigdataURI) vf.createURI("http://www.bigdata.com/5");
+            v1 = (BigdataURI) vf.createURI("http://www.embergraph.org/1");
+            v2 = (BigdataURI) vf.createURI("http://www.embergraph.org/2");
+            v3 = (BigdataURI) vf.createURI("http://www.embergraph.org/3");
+            v4 = (BigdataURI) vf.createURI("http://www.embergraph.org/4");
+            v5 = (BigdataURI) vf.createURI("http://www.embergraph.org/5");
     
             final BigdataValue[] terms = new BigdataValue[] { foafKnows,
                     linkWeight, v1, v2, v3, v4, v5 };

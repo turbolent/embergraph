@@ -594,7 +594,7 @@ public class TestFileChannelUtility extends TestCase {
 	public void no_testAsyncReadersCancelled() throws IOException, InterruptedException {
 		final Random r = new Random();
 
-		final File sourceFile = new File("/Volumes/NonSSD/bigdata/interrupted.jnl"); // External non-SSD drive
+		final File sourceFile = new File("/Volumes/NonSSD/embergraph/interrupted.jnl"); // External non-SSD drive
 		
 
 		final RandomAccessFile raf = new RandomAccessFile(sourceFile, "rw");
@@ -651,7 +651,7 @@ public class TestFileChannelUtility extends TestCase {
 	public void no_testAsyncReadersCloseChannel() throws IOException, InterruptedException {
 		final Random r = new Random();
 
-		final File sourceFile = new File("/Volumes/NonSSD/bigdata/interrupted.jnl"); // External non-SSD drive
+		final File sourceFile = new File("/Volumes/NonSSD/embergraph/interrupted.jnl"); // External non-SSD drive
 		
 		final int rdlen = 1 * 4096;
 

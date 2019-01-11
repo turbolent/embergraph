@@ -125,7 +125,7 @@ public class AbstractASTEvaluationTestCase extends AbstractQueryEngineTestCase {
          * Note: This needs to be an absolute URI.
          */
         
-        baseURI = "http://www.bigdata.com";
+        baseURI = "http://www.embergraph.org";
     }
     
     @Override

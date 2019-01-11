@@ -217,7 +217,7 @@ public class NanoSparqlServer {
          * the command line.
          */
         
-        String BIGDATA_PROPERTY_FILE = "bigdata.propertyFile";
+        String BIGDATA_PROPERTY_FILE = "embergraph.propertyFile";
         
         /**
          * The jetty.home property.
@@ -829,7 +829,7 @@ public class NanoSparqlServer {
 		// If it is running as maven surefire execution the target/bigdata.war
 		// will exist.
 
-		final File warFile = new File("target/bigdata.war");
+		final File warFile = new File("target/embergraph.war");
 
 		if (jettyXmlUrl == null && warFile.exists()) {
 			// This is the maven surefire plugin case.

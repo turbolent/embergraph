@@ -217,11 +217,11 @@ public class TestHistoryIndex extends ProxyBigdataSailTestCase  {
                             .getValueFactory();
 
                     final BigdataURI A = f
-                            .createURI("http://www.bigdata.com/A");
+                            .createURI("http://www.embergraph.org/A");
                     final BigdataURI B = f
-                            .createURI("http://www.bigdata.com/B");
+                            .createURI("http://www.embergraph.org/B");
                     final BigdataURI C = f
-                            .createURI("http://www.bigdata.com/C");
+                            .createURI("http://www.embergraph.org/C");
                     final BigdataURI rdfType = f.asValue(RDF.TYPE);
 
                     conn.addStatement(A, rdfType, B);
@@ -302,9 +302,9 @@ public class TestHistoryIndex extends ProxyBigdataSailTestCase  {
                             .getValueFactory();
 
                     final BigdataURI A = f
-                            .createURI("http://www.bigdata.com/A");
+                            .createURI("http://www.embergraph.org/A");
                     final BigdataURI B = f
-                            .createURI("http://www.bigdata.com/B");
+                            .createURI("http://www.embergraph.org/B");
 //                    final BigdataURI C = f
 //                            .createURI("http://www.bigdata.com/C");
                     final BigdataURI rdfType = f.asValue(RDF.TYPE);
@@ -426,11 +426,11 @@ public class TestHistoryIndex extends ProxyBigdataSailTestCase  {
                             .getValueFactory();
 
                     final BigdataURI A = f
-                            .createURI("http://www.bigdata.com/A");
+                            .createURI("http://www.embergraph.org/A");
                     final BigdataURI B = f
-                            .createURI("http://www.bigdata.com/B");
+                            .createURI("http://www.embergraph.org/B");
                     final BigdataURI C = f
-                            .createURI("http://www.bigdata.com/C");
+                            .createURI("http://www.embergraph.org/C");
                     final BigdataURI rdfType = f.asValue(RDF.TYPE);
 
                     conn.addStatement(A, rdfType, B);
@@ -511,9 +511,9 @@ public class TestHistoryIndex extends ProxyBigdataSailTestCase  {
                             .getValueFactory();
 
                     final BigdataURI A = f
-                            .createURI("http://www.bigdata.com/A");
+                            .createURI("http://www.embergraph.org/A");
                     final BigdataURI B = f
-                            .createURI("http://www.bigdata.com/B");
+                            .createURI("http://www.embergraph.org/B");
 //                    final BigdataURI C = f
 //                            .createURI("http://www.bigdata.com/C");
                     final BigdataURI rdfType = f.asValue(RDF.TYPE);

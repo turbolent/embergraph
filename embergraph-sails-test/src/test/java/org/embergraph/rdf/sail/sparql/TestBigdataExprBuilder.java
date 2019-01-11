@@ -727,7 +727,7 @@ public class TestBigdataExprBuilder extends AbstractBigdataExprBuilderTestCase {
     public void test_describe_iri() throws MalformedQueryException,
             TokenMgrError, ParseException {
 
-        final String sparql = "describe <http://www.bigdata.com>";
+        final String sparql = "describe <http://www.embergraph.org>";
 
         final QueryRoot expected = new QueryRoot(QueryType.DESCRIBE);
         {
@@ -744,7 +744,7 @@ public class TestBigdataExprBuilder extends AbstractBigdataExprBuilderTestCase {
             anonvar.setAnonymous(true);
             projection.addProjectionExpression(new AssignmentNode(anonvar,
                     new ConstantNode(makeIV(valueFactory
-                            .createURI("http://www.bigdata.com")))));
+                            .createURI("http://www.embergraph.org")))));
 
         }
         
@@ -770,7 +770,7 @@ public class TestBigdataExprBuilder extends AbstractBigdataExprBuilderTestCase {
     public void test_describe_vars_and_iris() throws MalformedQueryException,
             TokenMgrError, ParseException {
 
-        final String sparql = "describe ?s <http://www.bigdata.com> where {?s ?p ?o}";
+        final String sparql = "describe ?s <http://www.embergraph.org> where {?s ?p ?o}";
 
         final QueryRoot expected = new QueryRoot(QueryType.DESCRIBE);
         {
@@ -787,7 +787,7 @@ public class TestBigdataExprBuilder extends AbstractBigdataExprBuilderTestCase {
             anonvar.setAnonymous(true);
             projection.addProjectionExpression(new AssignmentNode(anonvar,
                     new ConstantNode(makeIV(valueFactory
-                            .createURI("http://www.bigdata.com")))));
+                            .createURI("http://www.embergraph.org")))));
             
             final JoinGroupNode whereClause = new JoinGroupNode();
             whereClause.addChild(new StatementPatternNode(new VarNode("s"),

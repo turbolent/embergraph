@@ -143,7 +143,7 @@ public class TestGeoSpatialDefaults extends AbstractDataDrivenSPARQLTestCase {
 
         properties.setProperty(
             org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DEFAULT_DATATYPE,
-            "http://www.bigdata.com/rdf/geospatial/literals/v1#lat-lon");
+            "http://www.embergraph.org/rdf/geospatial/literals/v1#lat-lon");
         
         return properties;
 

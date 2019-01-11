@@ -61,7 +61,7 @@ public interface BDS {
      * @see #RANK
      * @see #NUM_MATCHED_TOKENS
      */
-    final String NAMESPACE = "http://www.bigdata.com/rdf/search#";
+    final String NAMESPACE = "http://www.embergraph.org/rdf/search#";
 
     /**
      * The name of a magic predicate recognized in SPARQL queries when it occurs

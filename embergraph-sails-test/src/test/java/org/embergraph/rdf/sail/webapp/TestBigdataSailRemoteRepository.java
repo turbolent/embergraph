@@ -159,7 +159,7 @@ public class TestBigdataSailRemoteRepository<S extends IIndexManager> extends
    /**
     * The URI for the default prefix (":") in SPARQL QUERY and UPDATE requests.
     */
-   protected static final String DEFAULT_PREFIX = "http://bigdata.com/";
+   protected static final String DEFAULT_PREFIX = "http://embergraph.org/";
    
    /**
     * A bunch of namespace declarations to be used by the tests.
@@ -425,7 +425,7 @@ public class TestBigdataSailRemoteRepository<S extends IIndexManager> extends
 
         final Graph g = new LinkedHashModel();
         
-        final URI s = new URIImpl("http://www.bigdata.com/");
+        final URI s = new URIImpl("http://www.embergraph.org/");
         final URI p = RDFS.LABEL;
         final Literal o = getVeryLargeLiteral();
         final Statement stmt = new StatementImpl(s, p, o);
@@ -539,7 +539,7 @@ public class TestBigdataSailRemoteRepository<S extends IIndexManager> extends
 
         final long mutationResult = doDeleteWithAccessPath(//
 //                requestPath,//
-                new URIImpl("http://www.bigdata.com/Mike"),// s
+                new URIImpl("http://www.embergraph.org/Mike"),// s
                 null,// p
                 null
         );
@@ -598,7 +598,7 @@ public class TestBigdataSailRemoteRepository<S extends IIndexManager> extends
 //                requestPath,//
                 null,// s
                 null,// p
-                new URIImpl("http://www.bigdata.com/Bryan")// o
+                new URIImpl("http://www.embergraph.org/Bryan")// o
         );
 
         assertEquals(1, mutationResult);
@@ -678,7 +678,7 @@ public class TestBigdataSailRemoteRepository<S extends IIndexManager> extends
                 null,// s
                 null,// p
                 null,// o
-                new URIImpl("http://www.bigdata.com/") // c
+                new URIImpl("http://www.embergraph.org/") // c
         );
 
         assertEquals(3, mutationResult);
@@ -701,7 +701,7 @@ public class TestBigdataSailRemoteRepository<S extends IIndexManager> extends
                 null,// s
                 null,// p
                 null,// o
-                new URIImpl("http://www.bigdata.com/c1") // c
+                new URIImpl("http://www.embergraph.org/c1") // c
         );
 
         assertEquals(2, mutationResult);
@@ -760,7 +760,7 @@ public class TestBigdataSailRemoteRepository<S extends IIndexManager> extends
 
         final long result = countResults(doGetWithAccessPath(//
 //                requestPath,//
-                new URIImpl("http://www.bigdata.com/Mike"),// s
+                new URIImpl("http://www.embergraph.org/Mike"),// s
                 null,// p
                 null
         ));
@@ -819,7 +819,7 @@ public class TestBigdataSailRemoteRepository<S extends IIndexManager> extends
 //                requestPath,//
                 null,// s
                 null,// p
-                new URIImpl("http://www.bigdata.com/Bryan")// o
+                new URIImpl("http://www.embergraph.org/Bryan")// o
         ));
 
         assertEquals(1, result);
@@ -899,7 +899,7 @@ public class TestBigdataSailRemoteRepository<S extends IIndexManager> extends
                 null,// s
                 null,// p
                 null,// o
-                new URIImpl("http://www.bigdata.com/") // c
+                new URIImpl("http://www.embergraph.org/") // c
         ));
 
         assertEquals(3, result);
@@ -922,7 +922,7 @@ public class TestBigdataSailRemoteRepository<S extends IIndexManager> extends
                 null,// s
                 null,// p
                 null,// o
-                new URIImpl("http://www.bigdata.com/c1") // c
+                new URIImpl("http://www.embergraph.org/c1") // c
         ));
 
         assertEquals(2, result);

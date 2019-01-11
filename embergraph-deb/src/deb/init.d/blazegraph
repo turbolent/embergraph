@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# /etc/init.d/embergraph -- startup script for Blazegraph
+# /etc/init.d/embergraph -- startup script for Embergraph
 #
 # Modified from the tomcat7 script
 # Written by Miquel van Smoorenburg <miquels@cistron.nl>.
@@ -18,15 +18,15 @@
 # Should-Stop:       $named
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
-# Short-Description: Start Blazegraph
-# Description:       Start the Blazegraph High Performance Database.
+# Short-Description: Start Embergraph
+# Description:       Start the Embergraph High Performance Database.
 ### END INIT INFO
 
 set -e
 
 PATH=/bin:/usr/bin:/sbin:/usr/sbin
 NAME=embergraph
-DESC="Blazegraph High Performance Database"
+DESC="Embergraph High Performance Database"
 DEFAULT=/etc/default/$NAME
 JVM_TMP=/tmp/embergraph-$NAME-tmp
 

@@ -1279,17 +1279,17 @@ public class TestQueryHints extends AbstractDataDrivenSPARQLTestCase {
          */
         assertTrue(PipelineOp.Annotations.DEFAULT_PIPELINED);
 
-        final URI serviceURI = new URIImpl("http://www.bigdata.com/mockService");
+        final URI serviceURI = new URIImpl("http://www.embergraph.org/mockService");
         
         final List<BindingSet> serviceSolutions = new LinkedList<BindingSet>();
         {
             final MapBindingSet bset = new MapBindingSet();
-            bset.addBinding("x",new URIImpl("http://www.bigdata.com/Mike"));
+            bset.addBinding("x",new URIImpl("http://www.embergraph.org/Mike"));
             serviceSolutions.add(bset);
         }
         {
             final MapBindingSet bset = new MapBindingSet();
-            bset.addBinding("x",new URIImpl("http://www.bigdata.com/Bryan"));
+            bset.addBinding("x",new URIImpl("http://www.embergraph.org/Bryan"));
             serviceSolutions.add(bset);
         }
         
@@ -1358,17 +1358,17 @@ public class TestQueryHints extends AbstractDataDrivenSPARQLTestCase {
          */
         assertTrue(PipelineOp.Annotations.DEFAULT_PIPELINED);
 
-        final URI serviceURI = new URIImpl("http://www.bigdata.com/mockService");
+        final URI serviceURI = new URIImpl("http://www.embergraph.org/mockService");
         
         final List<BindingSet> serviceSolutions = new LinkedList<BindingSet>();
         {
             final MapBindingSet bset = new MapBindingSet();
-            bset.addBinding("x",new URIImpl("http://www.bigdata.com/Mike"));
+            bset.addBinding("x",new URIImpl("http://www.embergraph.org/Mike"));
             serviceSolutions.add(bset);
         }
         {
             final MapBindingSet bset = new MapBindingSet();
-            bset.addBinding("x",new URIImpl("http://www.bigdata.com/Bryan"));
+            bset.addBinding("x",new URIImpl("http://www.embergraph.org/Bryan"));
             serviceSolutions.add(bset);
         }
         
@@ -1429,17 +1429,17 @@ public class TestQueryHints extends AbstractDataDrivenSPARQLTestCase {
      */
     public void test_query_hints_09() throws Exception {
 
-        final URI serviceURI = new URIImpl("http://www.bigdata.com/mockService");
+        final URI serviceURI = new URIImpl("http://www.embergraph.org/mockService");
         
         final List<BindingSet> serviceSolutions = new LinkedList<BindingSet>();
         {
             final MapBindingSet bset = new MapBindingSet();
-            bset.addBinding("x",new URIImpl("http://www.bigdata.com/Mike"));
+            bset.addBinding("x",new URIImpl("http://www.embergraph.org/Mike"));
             serviceSolutions.add(bset);
         }
         {
             final MapBindingSet bset = new MapBindingSet();
-            bset.addBinding("x",new URIImpl("http://www.bigdata.com/Bryan"));
+            bset.addBinding("x",new URIImpl("http://www.embergraph.org/Bryan"));
             serviceSolutions.add(bset);
         }
         
@@ -1501,17 +1501,17 @@ public class TestQueryHints extends AbstractDataDrivenSPARQLTestCase {
      */
     public void test_query_hints_10() throws Exception {
 
-        final URI serviceURI = new URIImpl("http://www.bigdata.com/mockService");
+        final URI serviceURI = new URIImpl("http://www.embergraph.org/mockService");
         
         final List<BindingSet> serviceSolutions = new LinkedList<BindingSet>();
         {
             final MapBindingSet bset = new MapBindingSet();
-            bset.addBinding("x",new URIImpl("http://www.bigdata.com/Mike"));
+            bset.addBinding("x",new URIImpl("http://www.embergraph.org/Mike"));
             serviceSolutions.add(bset);
         }
         {
             final MapBindingSet bset = new MapBindingSet();
-            bset.addBinding("x",new URIImpl("http://www.bigdata.com/Bryan"));
+            bset.addBinding("x",new URIImpl("http://www.embergraph.org/Bryan"));
             serviceSolutions.add(bset);
         }
         

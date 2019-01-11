@@ -59,7 +59,7 @@ public class TestPathConstraints extends TestCase {
                         "  service bd:alp { " +
                         "    <id:0> ?eid ?to . " +
                         "    hint:Prior hint:alp.pathExpr \"true\" . " +
-                        "    ?eid <bigdata:type> <test:foo> . " +
+                        "    ?eid <embergraph:type> <test:foo> . " +
                         "    ?eid <some:prop> \"someVal\" . " +
                         "    hint:Group hint:alp.lowerBound 1 . " +
                         "    hint:Group hint:alp.upperBound ?upper . " + 
@@ -188,7 +188,7 @@ public class TestPathConstraints extends TestCase {
                         "  service bd:alp { " +
                         "    <id:0> ?eid ?to . " +
                         "    hint:Prior hint:alp.pathExpr \"true\" . " +
-                        "    ?eid <bigdata:type> <test:foo> . " +
+                        "    ?eid <embergraph:type> <test:foo> . " +
                         "    ?eid <some:prop> ?val . " +
                         "    filter(?val < 3) . " +
                         "    hint:Group hint:alp.lowerBound 0 . " +
@@ -230,7 +230,7 @@ public class TestPathConstraints extends TestCase {
                         "  service bd:alp { " +
                         "    <id:0> ?eid ?to . " +
                         "    hint:Prior hint:alp.pathExpr \"true\" . " +
-                        "    ?eid <bigdata:type> <test:foo> . " +
+                        "    ?eid <embergraph:type> <test:foo> . " +
                         "    ?eid <some:prop> ?val . " +
                         "    filter(?val < ?max) . " +
                         "    hint:Group hint:alp.lowerBound 0 . " +
@@ -312,7 +312,7 @@ public class TestPathConstraints extends TestCase {
                         "  service bd:alp { " +
                         "    <id:v0> ?e ?to . " +
                         "    hint:Prior hint:alp.pathExpr \"true\" . " +
-                        "    filter(?e != <bigdata:type>) . " +
+                        "    filter(?e != <embergraph:type>) . " +
                         "    hint:Group hint:alp.lowerBound 0 . " +
                         "    hint:Group hint:alp.upperBound 10 . " + 
                         "    hint:Group hint:alp.edgeVar ?edge . " + 
@@ -360,7 +360,7 @@ public class TestPathConstraints extends TestCase {
                         "  service bd:alp { " +
                         "    ?id ?e ?to . " +
                         "    hint:Prior hint:alp.pathExpr \"true\" . " +
-                        "    filter(?e != <bigdata:type>) . " +
+                        "    filter(?e != <embergraph:type>) . " +
                         "    hint:Group hint:alp.lowerBound 0 . " +
                         "    hint:Group hint:alp.upperBound 1 . " + 
                         "    hint:Group hint:alp.edgeVar ?edge . " + 
@@ -463,13 +463,13 @@ public class TestPathConstraints extends TestCase {
                         "  service bd:alp { " +
                         "    ?id ?e ?to . " +
                         "    hint:Prior hint:alp.pathExpr \"true\" . " +
-                        "    filter(?e != <bigdata:type>) . " +
+                        "    filter(?e != <embergraph:type>) . " +
                         "    hint:Group hint:alp.lowerBound 0 . " +
                         "    hint:Group hint:alp.upperBound 10 . " + 
                         "    hint:Group hint:alp.edgeVar ?edge . " + 
                         "  } " +
                         "  ?from ?edge ?to . " +
-                        "  ?from <bigdata:type> <bigdata:Vertex> . " +
+                        "  ?from <embergraph:type> <embergraph:Vertex> . " +
                         "}";
                 
                 final BigdataSailRepositoryConnection cxn = graph.cxn();

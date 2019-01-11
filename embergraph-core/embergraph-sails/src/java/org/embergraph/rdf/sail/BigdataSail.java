@@ -260,7 +260,7 @@ import info.aduna.iteration.CloseableIteration;
 public class BigdataSail extends SailBase implements Sail {
 
     private static final String ERR_OPENRDF_QUERY_MODEL = 
-            "Support is no longer provided for UpdateExpr or TupleExpr evaluation. Please make sure you are using a BigdataSailRepository.  It will use the bigdata native evaluation model.";
+            "Support is no longer provided for UpdateExpr or TupleExpr evaluation. Please make sure you are using a BigdataSailRepository.  It will use the embergraph native evaluation model.";
     
     /**
      * Additional parameters understood by the Sesame 2.x SAIL implementation.
@@ -435,7 +435,7 @@ public class BigdataSail extends SailBase implements Sail {
          * 
          * @see BigdataSail#BigdataSail()
          */
-        public static final String DEFAULT_FILE = "bigdata" + JNL;
+        public static final String DEFAULT_FILE = "embergraph" + JNL;
         
         /**
          * This optional boolean property may be used to specify whether quads

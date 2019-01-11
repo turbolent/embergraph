@@ -155,7 +155,7 @@ public class TestAll extends TestCase {
             ExperimentDriver
                     .doMain(
                             new File(
-                                    "bigdata/src/test/org/embergraph/cache/StressTestGlobalLRU.xml"),
+                                    "embergraph/src/test/org/embergraph/cache/StressTestGlobalLRU.xml"),
                             1/* nruns */, true/* randomize */);
         }
     }

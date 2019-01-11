@@ -18,7 +18,7 @@ public class BigdataSailFactory implements SailFactory {
 	/**
 	 * The type of sails that are created by this factory.
 	 */
-	public static final String TYPE = "bigdata:BigdataSail";
+	public static final String TYPE = "embergraph:BigdataSail";
 
 	public String getSailType() {
 		return TYPE;

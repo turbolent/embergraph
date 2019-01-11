@@ -311,7 +311,7 @@ public class SD {
 
     // RDR specific extension of TURTLE.
     static public final URI TURTLE_RDR = new URIImpl(
-            "http://www.bigdata.com/ns/formats/Turtle-RDR");
+            "http://www.embergraph.org/ns/formats/Turtle-RDR");
 
     /**
      * Unique URI for N3.
@@ -356,7 +356,7 @@ public class SD {
 
     // RDR specific extension of N-Triples.
     static public final URI NTRIPLES_RDR = new URIImpl(
-            "http://www.bigdata.com/ns/formats/N-Triples-RDR");
+            "http://www.embergraph.org/ns/formats/N-Triples-RDR");
 
     /*
      * SPARQL results

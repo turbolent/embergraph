@@ -114,7 +114,7 @@ public class TemporaryRawStore extends AbstractRawWormStore implements IMRMW {
 
         try {
 
-            final File file = File.createTempFile("bigdata", ".tmp");
+            final File file = File.createTempFile("embergraph", ".tmp");
 
             file.deleteOnExit();
 
@@ -157,7 +157,7 @@ public class TemporaryRawStore extends AbstractRawWormStore implements IMRMW {
 
             }
             
-            final File file = File.createTempFile("bigdata", ".tmp", tmpDir);
+            final File file = File.createTempFile("embergraph", ".tmp", tmpDir);
             
             file.deleteOnExit();
             

@@ -107,10 +107,10 @@ public class TestCounterSetHTTPDServer extends TestCase {
         
         {
             
-            final CounterSet cset = root.makePath("www.bigdata.com");
+            final CounterSet cset = root.makePath("www.embergraph.org");
 
             cset.addCounter("ipaddr", new OneShotInstrument<String>(
-                    InetAddress.getByName("www.bigdata.com").getHostAddress()));
+                    InetAddress.getByName("www.embergraph.org").getHostAddress()));
 
             cset.makePath("foo").addCounter("bar",
                     new OneShotInstrument<String>("baz"));

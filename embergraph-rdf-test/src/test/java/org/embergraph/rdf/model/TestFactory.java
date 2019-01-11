@@ -158,7 +158,7 @@ public class TestFactory extends TestCase2 {
 	 */
     public void test_asValue_mockIV() {
     	
-    	final BigdataValue v1 = vf.createURI("http://www.bigdata.com");
+    	final BigdataValue v1 = vf.createURI("http://www.embergraph.org");
     	
     	final BigdataValue v2 = vf.asValue(v1);
     	

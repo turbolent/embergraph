@@ -58,10 +58,10 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
                 <phase>generate-sources</phase>
                 <configuration>
                   <target name="run javcc">
-                    <exec executable="${javacc.home}/bin/jjtree" dir="src/main/java/com/bigdata/rdf/sail/sparql/ast/" osfamily="unix" failonerror="true">
+                    <exec executable="${javacc.home}/bin/jjtree" dir="src/main/java/com/embergraph/rdf/sail/sparql/ast/" osfamily="unix" failonerror="true">
                       <arg line="sparql.jjt"/>
                     </exec>
-                    <exec executable="${javacc.home}/bin/javacc" dir="src/main/java/com/bigdata/rdf/sail/sparql/ast/" osfamily="unix" failonerror="true">
+                    <exec executable="${javacc.home}/bin/javacc" dir="src/main/java/com/embergraph/rdf/sail/sparql/ast/" osfamily="unix" failonerror="true">
                       <arg line="sparql.jj"/>
                     </exec>
                   </target>

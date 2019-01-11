@@ -97,7 +97,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
 
         //LOAD ( SILENT )? IRIref_from ( INTO GRAPH IRIref_to )?
-        final String sparql = "load <http://www.bigdata.com/data>";
+        final String sparql = "load <http://www.embergraph.org/data>";
 
         final UpdateRoot expected = new UpdateRoot();
         {
@@ -109,7 +109,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             final RDFParserOptions options = new RDFParserOptions();
             
             op.setSourceGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/data"))));
+                    .createURI("http://www.embergraph.org/data"))));
            
         }
         
@@ -130,7 +130,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
 
         //LOAD ( SILENT )? IRIref_from ( INTO GRAPH IRIref_to )?
-        final String sparql = "load silent <http://www.bigdata.com/data>";
+        final String sparql = "load silent <http://www.embergraph.org/data>";
 
         final UpdateRoot expected = new UpdateRoot();
         {
@@ -144,7 +144,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             final RDFParserOptions options = new RDFParserOptions();
             
             op.setSourceGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/data"))));
+                    .createURI("http://www.embergraph.org/data"))));
            
         }
         
@@ -165,7 +165,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
 
         //LOAD ( SILENT )? IRIref_from ( INTO GRAPH IRIref_to )?
-        final String sparql = "load silent <http://www.bigdata.com/data> into graph <http://www.bigdata.com/graph1>";
+        final String sparql = "load silent <http://www.embergraph.org/data> into graph <http://www.embergraph.org/graph1>";
 
         final UpdateRoot expected = new UpdateRoot();
         {
@@ -179,10 +179,10 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             final RDFParserOptions options = new RDFParserOptions();
             
             op.setSourceGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/data"))));
+                    .createURI("http://www.embergraph.org/data"))));
 
             op.setTargetGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/graph1"))));
+                    .createURI("http://www.embergraph.org/graph1"))));
 
         }
         
@@ -199,9 +199,9 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
 
         // LOAD ( SILENT )? IRIref_from ( INTO GRAPH IRIref_to )?
-        final String sparql = "load <http://www.bigdata.com/data>;\n" +
-        		"load <http://www.bigdata.com/data1>;" +
-        		"load <http://www.bigdata.com/data2>";
+        final String sparql = "load <http://www.embergraph.org/data>;\n" +
+        		"load <http://www.embergraph.org/data1>;" +
+        		"load <http://www.embergraph.org/data2>";
 
         final UpdateRoot expected = new UpdateRoot();
         {
@@ -213,7 +213,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             final RDFParserOptions options = new RDFParserOptions();
             
             op.setSourceGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/data"))));
+                    .createURI("http://www.embergraph.org/data"))));
 
         }
         {
@@ -225,7 +225,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             final RDFParserOptions options = new RDFParserOptions();
             
             op.setSourceGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/data1"))));
+                    .createURI("http://www.embergraph.org/data1"))));
 
         }
         {
@@ -237,7 +237,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             final RDFParserOptions options = new RDFParserOptions();
             
             op.setSourceGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/data2"))));
+                    .createURI("http://www.embergraph.org/data2"))));
 
         }
 
@@ -258,7 +258,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
 
         //LOAD ( SILENT )? IRIref_from ( INTO GRAPH IRIref_to )?
-        final String sparql = "load verifyData=true <http://www.bigdata.com/data>";
+        final String sparql = "load verifyData=true <http://www.embergraph.org/data>";
 
         final UpdateRoot expected = new UpdateRoot();
         {
@@ -274,7 +274,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             options.setVerifyData(true);
             
             op.setSourceGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/data"))));
+                    .createURI("http://www.embergraph.org/data"))));
            
         }
         
@@ -295,7 +295,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
 
         //LOAD ( SILENT )? IRIref_from ( INTO GRAPH IRIref_to )?
-        final String sparql = "load verifyData=false <http://www.bigdata.com/data>";
+        final String sparql = "load verifyData=false <http://www.embergraph.org/data>";
 
         final UpdateRoot expected = new UpdateRoot();
         {
@@ -311,7 +311,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             options.setVerifyData(false);
             
             op.setSourceGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/data"))));
+                    .createURI("http://www.embergraph.org/data"))));
            
         }
         
@@ -331,7 +331,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
 
         //LOAD ( SILENT )? IRIref_from ( INTO GRAPH IRIref_to )?
-        final String sparql = "load stopAtFirstError=true <http://www.bigdata.com/data>";
+        final String sparql = "load stopAtFirstError=true <http://www.embergraph.org/data>";
 
         final UpdateRoot expected = new UpdateRoot();
         {
@@ -347,7 +347,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             options.setStopAtFirstError(true);
             
             op.setSourceGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/data"))));
+                    .createURI("http://www.embergraph.org/data"))));
            
         }
         
@@ -367,7 +367,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
 
         //LOAD ( SILENT )? IRIref_from ( INTO GRAPH IRIref_to )?
-        final String sparql = "load stopAtFirstError=false <http://www.bigdata.com/data>";
+        final String sparql = "load stopAtFirstError=false <http://www.embergraph.org/data>";
 
         final UpdateRoot expected = new UpdateRoot();
         {
@@ -383,7 +383,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             options.setStopAtFirstError(false);
             
             op.setSourceGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/data"))));
+                    .createURI("http://www.embergraph.org/data"))));
            
         }
         
@@ -403,7 +403,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
 
         //LOAD ( SILENT )? IRIref_from ( INTO GRAPH IRIref_to )?
-        final String sparql = "load preserveBNodeIDs=true <http://www.bigdata.com/data>";
+        final String sparql = "load preserveBNodeIDs=true <http://www.embergraph.org/data>";
 
         final UpdateRoot expected = new UpdateRoot();
         {
@@ -419,7 +419,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             options.setPreserveBNodeIDs(true);
             
             op.setSourceGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/data"))));
+                    .createURI("http://www.embergraph.org/data"))));
            
         }
         
@@ -439,7 +439,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
 
         //LOAD ( SILENT )? IRIref_from ( INTO GRAPH IRIref_to )?
-        final String sparql = "load preserveBNodeIDs=false <http://www.bigdata.com/data>";
+        final String sparql = "load preserveBNodeIDs=false <http://www.embergraph.org/data>";
 
         final UpdateRoot expected = new UpdateRoot();
         {
@@ -455,7 +455,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             options.setPreserveBNodeIDs(false);
             
             op.setSourceGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/data"))));
+                    .createURI("http://www.embergraph.org/data"))));
            
         }
         
@@ -475,7 +475,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
 
         //LOAD ( SILENT )? IRIref_from ( INTO GRAPH IRIref_to )?
-        final String sparql = "load datatypeHandling=ignore <http://www.bigdata.com/data>";
+        final String sparql = "load datatypeHandling=ignore <http://www.embergraph.org/data>";
 
         final UpdateRoot expected = new UpdateRoot();
         {
@@ -491,7 +491,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             options.setDatatypeHandling(DatatypeHandling.IGNORE);
             
             op.setSourceGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/data"))));
+                    .createURI("http://www.embergraph.org/data"))));
            
         }
         
@@ -511,7 +511,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
 
         //LOAD ( SILENT )? IRIref_from ( INTO GRAPH IRIref_to )?
-        final String sparql = "load datatypeHandling=verify <http://www.bigdata.com/data>";
+        final String sparql = "load datatypeHandling=verify <http://www.embergraph.org/data>";
 
         final UpdateRoot expected = new UpdateRoot();
         {
@@ -527,7 +527,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             options.setDatatypeHandling(DatatypeHandling.VERIFY);
             
             op.setSourceGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/data"))));
+                    .createURI("http://www.embergraph.org/data"))));
            
         }
         
@@ -547,7 +547,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
 
         //LOAD ( SILENT )? IRIref_from ( INTO GRAPH IRIref_to )?
-        final String sparql = "load datatypeHandling=normalize <http://www.bigdata.com/data>";
+        final String sparql = "load datatypeHandling=normalize <http://www.embergraph.org/data>";
 
         final UpdateRoot expected = new UpdateRoot();
         {
@@ -563,7 +563,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             options.setDatatypeHandling(DatatypeHandling.VERIFY);
             
             op.setSourceGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/data"))));
+                    .createURI("http://www.embergraph.org/data"))));
            
         }
         
@@ -583,7 +583,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             throws MalformedQueryException, TokenMgrError, ParseException {
 
         // LOAD ( SILENT )? IRIref_from ( INTO GRAPH IRIref_to )?
-        final String sparql = "load verifyData=true silent datatypeHandling=normalize <http://www.bigdata.com/data>";
+        final String sparql = "load verifyData=true silent datatypeHandling=normalize <http://www.embergraph.org/data>";
 
         final UpdateRoot expected = new UpdateRoot();
         {
@@ -601,7 +601,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             options.setDatatypeHandling(DatatypeHandling.VERIFY);
 
             op.setSourceGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/data"))));
+                    .createURI("http://www.embergraph.org/data"))));
 
         }
 
@@ -622,7 +622,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
 
         //CLEAR  ( SILENT )? (GRAPH IRIref | DEFAULT | NAMED | ALL )
-        final String sparql = "clear graph <http://www.bigdata.com/data>";
+        final String sparql = "clear graph <http://www.embergraph.org/data>";
 
         final UpdateRoot expected = new UpdateRoot();
         {
@@ -632,7 +632,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             expected.addChild(op);
             
             op.setTargetGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/data"))));
+                    .createURI("http://www.embergraph.org/data"))));
            
         }
         
@@ -769,7 +769,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
 
         //drop  ( SILENT )? (GRAPH IRIref | DEFAULT | NAMED | ALL )
-        final String sparql = "drop graph <http://www.bigdata.com/data>";
+        final String sparql = "drop graph <http://www.embergraph.org/data>";
 
         final UpdateRoot expected = new UpdateRoot();
         {
@@ -779,7 +779,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             expected.addChild(op);
             
             op.setTargetGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/data"))));
+                    .createURI("http://www.embergraph.org/data"))));
            
         }
         
@@ -916,7 +916,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
 
         //CREATE ( SILENT )? GRAPH IRIref
-        final String sparql = "create graph <http://www.bigdata.com/graph1>";
+        final String sparql = "create graph <http://www.embergraph.org/graph1>";
 
         final UpdateRoot expected = new UpdateRoot();
         {
@@ -926,7 +926,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             expected.addChild(op);
             
             op.setTargetGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/graph1"))));
+                    .createURI("http://www.embergraph.org/graph1"))));
 
         }
         
@@ -945,7 +945,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
 
         //CREATE ( SILENT )? GRAPH IRIref
-        final String sparql = "create silent graph <http://www.bigdata.com/graph1>";
+        final String sparql = "create silent graph <http://www.embergraph.org/graph1>";
 
         final UpdateRoot expected = new UpdateRoot();
         {
@@ -957,7 +957,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             op.setSilent(true);
             
             op.setTargetGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/graph1"))));
+                    .createURI("http://www.embergraph.org/graph1"))));
 
         }
         
@@ -976,7 +976,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
 
         //COPY ( SILENT )? ( ( GRAPH )? IRIref_from | DEFAULT) TO ( ( GRAPH )? IRIref_to | DEFAULT )
-        final String sparql = "copy <http://www.bigdata.com/graph1> to <http://www.bigdata.com/graph2>";
+        final String sparql = "copy <http://www.embergraph.org/graph1> to <http://www.embergraph.org/graph2>";
 
         final UpdateRoot expected = new UpdateRoot();
         {
@@ -986,10 +986,10 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             expected.addChild(op);
             
             op.setSourceGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/graph1"))));
+                    .createURI("http://www.embergraph.org/graph1"))));
 
             op.setTargetGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/graph2"))));
+                    .createURI("http://www.embergraph.org/graph2"))));
 
         }
         
@@ -1008,7 +1008,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
 
         //COPY ( SILENT )? ( ( GRAPH )? IRIref_from | DEFAULT) TO ( ( GRAPH )? IRIref_to | DEFAULT )
-        final String sparql = "copy silent <http://www.bigdata.com/graph1> to <http://www.bigdata.com/graph2>";
+        final String sparql = "copy silent <http://www.embergraph.org/graph1> to <http://www.embergraph.org/graph2>";
 
         final UpdateRoot expected = new UpdateRoot();
         {
@@ -1020,10 +1020,10 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             op.setSilent(true);
             
             op.setSourceGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/graph1"))));
+                    .createURI("http://www.embergraph.org/graph1"))));
 
             op.setTargetGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/graph2"))));
+                    .createURI("http://www.embergraph.org/graph2"))));
 
         }
         
@@ -1042,7 +1042,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
 
         //COPY ( SILENT )? ( ( GRAPH )? IRIref_from | DEFAULT) TO ( ( GRAPH )? IRIref_to | DEFAULT )
-        final String sparql = "copy silent <http://www.bigdata.com/graph1> to default";
+        final String sparql = "copy silent <http://www.embergraph.org/graph1> to default";
 
         final UpdateRoot expected = new UpdateRoot();
         {
@@ -1054,7 +1054,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             op.setSilent(true);
             
             op.setSourceGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/graph1"))));
+                    .createURI("http://www.embergraph.org/graph1"))));
 
         }
         
@@ -1073,7 +1073,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
 
         //COPY ( SILENT )? ( ( GRAPH )? IRIref_from | DEFAULT) TO ( ( GRAPH )? IRIref_to | DEFAULT )
-        final String sparql = "copy silent default to <http://www.bigdata.com/graph2>";
+        final String sparql = "copy silent default to <http://www.embergraph.org/graph2>";
 
         final UpdateRoot expected = new UpdateRoot();
         {
@@ -1085,7 +1085,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             op.setSilent(true);
             
             op.setTargetGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/graph2"))));
+                    .createURI("http://www.embergraph.org/graph2"))));
 
         }
         
@@ -1108,7 +1108,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
 
         //COPY ( SILENT )? ( ( GRAPH )? IRIref_from | DEFAULT) TO ( ( GRAPH )? IRIref_to | DEFAULT )
-        final String sparql = "move <http://www.bigdata.com/graph1> to <http://www.bigdata.com/graph2>";
+        final String sparql = "move <http://www.embergraph.org/graph1> to <http://www.embergraph.org/graph2>";
 
         final UpdateRoot expected = new UpdateRoot();
         {
@@ -1118,10 +1118,10 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             expected.addChild(op);
             
             op.setSourceGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/graph1"))));
+                    .createURI("http://www.embergraph.org/graph1"))));
 
             op.setTargetGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/graph2"))));
+                    .createURI("http://www.embergraph.org/graph2"))));
 
         }
         
@@ -1140,7 +1140,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
 
         //COPY ( SILENT )? ( ( GRAPH )? IRIref_from | DEFAULT) TO ( ( GRAPH )? IRIref_to | DEFAULT )
-        final String sparql = "move silent <http://www.bigdata.com/graph1> to <http://www.bigdata.com/graph2>";
+        final String sparql = "move silent <http://www.embergraph.org/graph1> to <http://www.embergraph.org/graph2>";
 
         final UpdateRoot expected = new UpdateRoot();
         {
@@ -1152,10 +1152,10 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             op.setSilent(true);
             
             op.setSourceGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/graph1"))));
+                    .createURI("http://www.embergraph.org/graph1"))));
 
             op.setTargetGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/graph2"))));
+                    .createURI("http://www.embergraph.org/graph2"))));
 
         }
         
@@ -1174,7 +1174,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
 
         //COPY ( SILENT )? ( ( GRAPH )? IRIref_from | DEFAULT) TO ( ( GRAPH )? IRIref_to | DEFAULT )
-        final String sparql = "move silent <http://www.bigdata.com/graph1> to default";
+        final String sparql = "move silent <http://www.embergraph.org/graph1> to default";
 
         final UpdateRoot expected = new UpdateRoot();
         {
@@ -1186,7 +1186,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             op.setSilent(true);
             
             op.setSourceGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/graph1"))));
+                    .createURI("http://www.embergraph.org/graph1"))));
 
         }
         
@@ -1205,7 +1205,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
 
         //COPY ( SILENT )? ( ( GRAPH )? IRIref_from | DEFAULT) TO ( ( GRAPH )? IRIref_to | DEFAULT )
-        final String sparql = "move silent default to <http://www.bigdata.com/graph2>";
+        final String sparql = "move silent default to <http://www.embergraph.org/graph2>";
 
         final UpdateRoot expected = new UpdateRoot();
         {
@@ -1217,7 +1217,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             op.setSilent(true);
             
             op.setTargetGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/graph2"))));
+                    .createURI("http://www.embergraph.org/graph2"))));
 
         }
         
@@ -1240,7 +1240,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
 
         //COPY ( SILENT )? ( ( GRAPH )? IRIref_from | DEFAULT) TO ( ( GRAPH )? IRIref_to | DEFAULT )
-        final String sparql = "add <http://www.bigdata.com/graph1> to <http://www.bigdata.com/graph2>";
+        final String sparql = "add <http://www.embergraph.org/graph1> to <http://www.embergraph.org/graph2>";
 
         final UpdateRoot expected = new UpdateRoot();
         {
@@ -1250,10 +1250,10 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             expected.addChild(op);
             
             op.setSourceGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/graph1"))));
+                    .createURI("http://www.embergraph.org/graph1"))));
 
             op.setTargetGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/graph2"))));
+                    .createURI("http://www.embergraph.org/graph2"))));
 
         }
         
@@ -1272,7 +1272,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
 
         //COPY ( SILENT )? ( ( GRAPH )? IRIref_from | DEFAULT) TO ( ( GRAPH )? IRIref_to | DEFAULT )
-        final String sparql = "add silent <http://www.bigdata.com/graph1> to <http://www.bigdata.com/graph2>";
+        final String sparql = "add silent <http://www.embergraph.org/graph1> to <http://www.embergraph.org/graph2>";
 
         final UpdateRoot expected = new UpdateRoot();
         {
@@ -1284,10 +1284,10 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             op.setSilent(true);
             
             op.setSourceGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/graph1"))));
+                    .createURI("http://www.embergraph.org/graph1"))));
 
             op.setTargetGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/graph2"))));
+                    .createURI("http://www.embergraph.org/graph2"))));
 
         }
         
@@ -1306,7 +1306,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
 
         //COPY ( SILENT )? ( ( GRAPH )? IRIref_from | DEFAULT) TO ( ( GRAPH )? IRIref_to | DEFAULT )
-        final String sparql = "add silent <http://www.bigdata.com/graph1> to default";
+        final String sparql = "add silent <http://www.embergraph.org/graph1> to default";
 
         final UpdateRoot expected = new UpdateRoot();
         {
@@ -1318,7 +1318,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             op.setSilent(true);
             
             op.setSourceGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/graph1"))));
+                    .createURI("http://www.embergraph.org/graph1"))));
 
         }
         
@@ -1337,7 +1337,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
 
         //COPY ( SILENT )? ( ( GRAPH )? IRIref_from | DEFAULT) TO ( ( GRAPH )? IRIref_to | DEFAULT )
-        final String sparql = "add silent default to <http://www.bigdata.com/graph2>";
+        final String sparql = "add silent default to <http://www.embergraph.org/graph2>";
 
         final UpdateRoot expected = new UpdateRoot();
         {
@@ -1349,7 +1349,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             op.setSilent(true);
             
             op.setTargetGraph(new ConstantNode(makeIV(valueFactory
-                    .createURI("http://www.bigdata.com/graph2"))));
+                    .createURI("http://www.embergraph.org/graph2"))));
 
         }
         

@@ -97,9 +97,9 @@ public class SampleCode {
         
         cxn.setAutoCommit(false);
         try {
-            Resource s = new URIImpl("http://www.bigdata.com/rdf#Mike");
-            URI p = new URIImpl("http://www.bigdata.com/rdf#loves");
-            Value o = new URIImpl("http://www.bigdata.com/rdf#RDF");
+            Resource s = new URIImpl("http://www.embergraph.org/rdf#Mike");
+            URI p = new URIImpl("http://www.embergraph.org/rdf#loves");
+            Value o = new URIImpl("http://www.embergraph.org/rdf#RDF");
             Statement stmt = new StatementImpl(s, p, o);
             cxn.add(stmt);
             cxn.commit();
@@ -296,13 +296,13 @@ public class SampleCode {
         RepositoryConnection cxn = repo.getConnection();
         cxn.setAutoCommit(false);
         try {
-            cxn.add(new URIImpl("http://www.bigdata.com/A"), RDFS.LABEL,
+            cxn.add(new URIImpl("http://www.embergraph.org/A"), RDFS.LABEL,
                     new LiteralImpl("Yellow Rose"));
-            cxn.add(new URIImpl("http://www.bigdata.com/B"), RDFS.LABEL,
+            cxn.add(new URIImpl("http://www.embergraph.org/B"), RDFS.LABEL,
                     new LiteralImpl("Red Rose"));
-            cxn.add(new URIImpl("http://www.bigdata.com/C"), RDFS.LABEL,
+            cxn.add(new URIImpl("http://www.embergraph.org/C"), RDFS.LABEL,
                     new LiteralImpl("Old Yellow House"));
-            cxn.add(new URIImpl("http://www.bigdata.com/D"), RDFS.LABEL,
+            cxn.add(new URIImpl("http://www.embergraph.org/D"), RDFS.LABEL,
                     new LiteralImpl("Loud Yell"));
             cxn.commit();
         } catch (Exception ex) {
@@ -379,7 +379,7 @@ public class SampleCode {
             cxn.close();
         }
         
-        String NS = "http://www.bigdata.com/rdf#";
+        String NS = "http://www.embergraph.org/rdf#";
         String MIKE = NS + "Mike";
         String LOVES = NS + "loves";
         String RDF = NS + "RDF";
@@ -532,7 +532,7 @@ public class SampleCode {
              * Create a backing temporary file iff none was specified in the
              * properties file.
              */
-            final File journal = File.createTempFile("bigdata", ".jnl");
+            final File journal = File.createTempFile("embergraph", ".jnl");
             journal.deleteOnExit();
             properties.setProperty(BigdataSail.Options.FILE, journal
                     .getAbsolutePath());
@@ -694,7 +694,7 @@ public class SampleCode {
                  * Create a backing file iff none was specified in the
                  * properties file.
                  */
-                final File journal = File.createTempFile("bigdata", ".jnl");
+                final File journal = File.createTempFile("embergraph", ".jnl");
                 log.info(journal.getAbsolutePath());
                 properties.setProperty(BigdataSail.Options.FILE, journal
                         .getAbsolutePath());
@@ -716,7 +716,7 @@ public class SampleCode {
 
                 // demonstrate some basic functionality
                 final URI MIKE = new URIImpl(
-                        "http://www.bigdata.com/rdf#Mike");
+                        "http://www.embergraph.org/rdf#Mike");
                 sampleCode.loadSomeData(repo);
                 System.out.println("Loaded sample data.");
                 sampleCode.readSomeData(repo, MIKE);

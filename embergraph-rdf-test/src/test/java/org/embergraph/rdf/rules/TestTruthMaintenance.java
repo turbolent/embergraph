@@ -244,9 +244,9 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
             
             final BigdataValueFactory f = store.getValueFactory();
             
-            final BigdataURI U = f.createURI("http://www.bigdata.com/U");
-            final BigdataURI V = f.createURI("http://www.bigdata.com/V");
-            final BigdataURI X = f.createURI("http://www.bigdata.com/X");
+            final BigdataURI U = f.createURI("http://www.embergraph.org/U");
+            final BigdataURI V = f.createURI("http://www.embergraph.org/V");
+            final BigdataURI X = f.createURI("http://www.embergraph.org/X");
 
             final BigdataURI rdfsSubClassOf = f.asValue(RDFS.SUBCLASSOF);
 
@@ -320,9 +320,9 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
 
             final BigdataValueFactory f = store.getValueFactory();
             
-            final BigdataURI U = f.createURI("http://www.bigdata.com/U");
-            final BigdataURI V = f.createURI("http://www.bigdata.com/V");
-            final BigdataURI X = f.createURI("http://www.bigdata.com/X");
+            final BigdataURI U = f.createURI("http://www.embergraph.org/U");
+            final BigdataURI V = f.createURI("http://www.embergraph.org/V");
+            final BigdataURI X = f.createURI("http://www.embergraph.org/X");
 
             final BigdataURI rdfsSubClassOf = f.asValue(RDFS.SUBCLASSOF);
 
@@ -463,9 +463,9 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
 
             final BigdataValueFactory f = store.getValueFactory();
 
-            final BigdataURI U = f.createURI("http://www.bigdata.com/U");
-            final BigdataURI V = f.createURI("http://www.bigdata.com/V");
-            final BigdataURI X = f.createURI("http://www.bigdata.com/X");
+            final BigdataURI U = f.createURI("http://www.embergraph.org/U");
+            final BigdataURI V = f.createURI("http://www.embergraph.org/V");
+            final BigdataURI X = f.createURI("http://www.embergraph.org/X");
 
             final BigdataURI rdfsSubClassOf = f.asValue(RDFS.SUBCLASSOF);
 
@@ -607,10 +607,10 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
      */
     public void test_retractWhenStatementSupportsExplicitStatement() {
      
-        URI user = new URIImpl("http://www.bigdata.com/user");
-        URI currentGraph = new URIImpl("http://www.bigdata.com/currentGraph");
-        URI foo = new URIImpl("http://www.bigdata.com/foo");
-        URI graph = new URIImpl("http://www.bigdata.com/Graph");
+        URI user = new URIImpl("http://www.embergraph.org/user");
+        URI currentGraph = new URIImpl("http://www.embergraph.org/currentGraph");
+        URI foo = new URIImpl("http://www.embergraph.org/foo");
+        URI graph = new URIImpl("http://www.embergraph.org/Graph");
         URI rdftype = RDF.TYPE;
         URI rdfsRange = RDFS.RANGE;
 
@@ -720,9 +720,9 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
      */
     public void test_closurecorrectness() {
         
-        final URI a = new URIImpl("http://www.bigdata.com/a");
-        final URI b = new URIImpl("http://www.bigdata.com/b");
-        final URI c = new URIImpl("http://www.bigdata.com/c");
+        final URI a = new URIImpl("http://www.embergraph.org/a");
+        final URI b = new URIImpl("http://www.embergraph.org/b");
+        final URI c = new URIImpl("http://www.embergraph.org/c");
 //        final URI d = new URIImpl("http://www.bigdata.com/d");
         final URI sco = RDFS.SUBCLASSOF;
 
@@ -835,9 +835,9 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
      
 //        if(true) fail("re-enable this test");
         
-        final URI a = new URIImpl("http://www.bigdata.com/a");
-        final URI b = new URIImpl("http://www.bigdata.com/b");
-        final URI entity = new URIImpl("http://www.bigdata.com/Entity");
+        final URI a = new URIImpl("http://www.embergraph.org/a");
+        final URI b = new URIImpl("http://www.embergraph.org/b");
+        final URI entity = new URIImpl("http://www.embergraph.org/Entity");
         final URI sameAs = OWL.SAMEAS;
 //        /*
 //         * Note: not using rdf:type to avoid entailments about (x rdf:type

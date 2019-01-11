@@ -27,7 +27,7 @@ public class TestInlineURIHandlers extends TestCase2 {
 	@Test	
 	public void testPrefixedIntegerURIHandler() {
 	
-		final String nameSpace = "http://blazegraph.com/";
+		final String nameSpace = "http://embergraph.org/";
 		final String localName = "DB1234";
 		final String fixture = "DB";
 		final int intValue = 1234;
@@ -50,7 +50,7 @@ public class TestInlineURIHandlers extends TestCase2 {
 	@Test	
 	public void testSuffixedIntegerURIHandler() {
 	
-		final String nameSpace = "http://blazegraph.com/";
+		final String nameSpace = "http://embergraph.org/";
 		final String localName = "1234DB";
 		final String fixture = "DB";
 		final int intValue = 1234;
@@ -73,7 +73,7 @@ public class TestInlineURIHandlers extends TestCase2 {
 	@Test	
 	public void testFixedWidthIntegerURIHandler() {
 	
-		final String nameSpace = "http://blazegraph.com/";
+		final String nameSpace = "http://embergraph.org/";
 		final String localName = "001234";
 		final int intValue = 1234;
 		final int width = 6;
@@ -96,7 +96,7 @@ public class TestInlineURIHandlers extends TestCase2 {
 	@Test	
 	public void testFixedWidthIntegerURIHandlerFail() {
 	
-		final String nameSpace = "http://blazegraph.com/";
+		final String nameSpace = "http://embergraph.org/";
 		final String localName = "001234";
 		final int intValue = 1234;
 		final int width = 7;
@@ -122,7 +122,7 @@ public class TestInlineURIHandlers extends TestCase2 {
 	@Test	
 	public void testPrefixFixedWidthIntegerURIHandler() {
 	
-		final String nameSpace = "http://blazegraph.com/";
+		final String nameSpace = "http://embergraph.org/";
 		final String localName = "PREFIX_001234";
 		final String fixture = "PREFIX_";
 		final int intValue = 1234;
@@ -146,7 +146,7 @@ public class TestInlineURIHandlers extends TestCase2 {
 	@Test	
 	public void testSuffixFixedWidthIntegerURIHandler() {
 	
-		final String nameSpace = "http://blazegraph.com/";
+		final String nameSpace = "http://embergraph.org/";
 		final String localName = "001234_SUFFIX";
 		final String fixture = "_SUFFIX";
 		final int intValue = 1234;
@@ -172,7 +172,7 @@ public class TestInlineURIHandlers extends TestCase2 {
 	@Test	
 	public void testPrefixedSuffixFixedWidthIntegerURIHandler() {
 	
-		final String nameSpace = "http://blazegraph.com/";
+		final String nameSpace = "http://embergraph.org/";
 		final String localName = "PRE_001234_SUFFIX";
 		final String pre = "PRE_";
 		final String fixture = "_SUFFIX";
@@ -199,7 +199,7 @@ public class TestInlineURIHandlers extends TestCase2 {
 	@Test	
 	public void testPrefixedSuffixIntegerURIHandler() {
 	
-		final String nameSpace = "http://blazegraph.com/";
+		final String nameSpace = "http://embergraph.org/";
 		final String localName = "PRE_1234_SUFFIX";
 		final String pre = "PRE_";
 		final String fixture = "_SUFFIX";
@@ -225,7 +225,7 @@ public class TestInlineURIHandlers extends TestCase2 {
 	@Test	
 	public void testHexUUIDURIHandler() {
 	
-		final String nameSpace = "http://blazegraph.com/hex_uuid/";
+		final String nameSpace = "http://embergraph.org/hex_uuid/";
 		final String localName = "010072F0000038090100000000D56C9E";
 		
 		InlineHexUUIDURIHandler handler = new InlineHexUUIDURIHandler(nameSpace);
@@ -247,7 +247,7 @@ public class TestInlineURIHandlers extends TestCase2 {
 	
 	public void testSuffixedHexUUIDURIHandler() {
 	
-		final String nameSpace = "http://blazegraph.com/hex_uuid/";
+		final String nameSpace = "http://embergraph.org/hex_uuid/";
 		final String suffix = "suffix";
 		final String localName = "010072F0000038090100000000D56C9E"+suffix;
 		
@@ -269,7 +269,7 @@ public class TestInlineURIHandlers extends TestCase2 {
 	@Test	
 	public void testSuffixedUUIDURIHandler() {
 	
-		final String nameSpace = "http://blazegraph.com/uuid/";
+		final String nameSpace = "http://embergraph.org/uuid/";
 		final UUID uuid = UUID.randomUUID();
 		final String suffix = "suffix";
 		final String localName = uuid.toString()+suffix;
@@ -293,7 +293,7 @@ public class TestInlineURIHandlers extends TestCase2 {
 	
 	public void testPrefixedSuffixedHexUUIDURIHandler() {
 	
-		final String nameSpace = "http://blazegraph.com/hex_uuid/";
+		final String nameSpace = "http://embergraph.org/hex_uuid/";
 		final String prefix = "prefix";
 		final String suffix = "suffix";
 		final String localName = prefix+"010072F0000038090100000000D56C9E"+suffix;
@@ -316,7 +316,7 @@ public class TestInlineURIHandlers extends TestCase2 {
 	@Test	
 	public void testPrefixedSuffixedUUIDURIHandler() {
 	
-		final String nameSpace = "http://blazegraph.com/uuid/";
+		final String nameSpace = "http://embergraph.org/uuid/";
 		final UUID uuid = UUID.randomUUID();
 		final String prefix = "prefix";
 		final String suffix = "suffix";

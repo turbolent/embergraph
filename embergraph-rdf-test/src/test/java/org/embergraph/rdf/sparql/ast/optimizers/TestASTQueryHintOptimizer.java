@@ -982,7 +982,7 @@ public class TestASTQueryHintOptimizer extends
         @SuppressWarnings("rawtypes")
         final IV mike = makeIV(new LiteralImpl("mike"));
         @SuppressWarnings("rawtypes")
-        final IV serviceURI = makeIV(new URIImpl("http://www.bigdata.com/rdf/search#search"));
+        final IV serviceURI = makeIV(new URIImpl("http://www.embergraph.org/rdf/search#search"));
 
         @SuppressWarnings("rawtypes")
         final IV scopePrior = makeIV(new URIImpl(QueryHints.NAMESPACE

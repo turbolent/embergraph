@@ -192,7 +192,7 @@ public class Depends {
      * the other bigdata modules.
      */
     private final static Dep bigdataGanglia = new ApacheDep("embergraph-ganglia",
-            "https://sourceforge.net/projects/bigdata/");
+            "https://sourceforge.net/projects/embergraph/");
 
     private final static Dep colt = new Dep("colt",
             "http://acs.lbl.gov/software/colt/",

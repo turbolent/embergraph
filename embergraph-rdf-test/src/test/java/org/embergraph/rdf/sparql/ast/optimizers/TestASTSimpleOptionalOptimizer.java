@@ -88,7 +88,7 @@ public class TestASTSimpleOptionalOptimizer extends
         final String queryStr = "" + //
                 "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \n"+//
                 "PREFIX dc: <http://purl.org/dc/terms/> \n"+//
-                "PREFIX p1: <http://www.bigdata.com/> \n"+//
+                "PREFIX p1: <http://www.embergraph.org/> \n"+//
                 "SELECT * \n" + //
                 "WHERE { \n" + //
                 "  ?_var1 rdf:type <http://suawa.org/mediadb#Album>. \n" + //

@@ -115,12 +115,12 @@ public class FunctionRegistry {
 	/**
      * Functions in SPARQL 1.0 for which there is not yet any official URI.
      */
-    public static final String SPARQL10_UNDEFINED_FUNCTIONS = "http://www.bigdata.com/sparql-1.0-undefined-functions";
+    public static final String SPARQL10_UNDEFINED_FUNCTIONS = "http://www.embergraph.org/sparql-1.0-undefined-functions";
 
     /**
      * Functions in SPARQL 1.1 for which there is not yet any official URI.
      */
-    public static final String SPARQL11_UNDEFINED_FUNCTIONS = "http://www.bigdata.com/sparql-1.1-undefined-functions";
+    public static final String SPARQL11_UNDEFINED_FUNCTIONS = "http://www.embergraph.org/sparql-1.1-undefined-functions";
 
     public static final URI BOUND = new URIImpl(SPARQL_FUNCTIONS+"bound");
     public static final URI IS_LITERAL = new URIImpl(SPARQL_FUNCTIONS+"isLiteral");

@@ -91,7 +91,7 @@ public class RandomURIGenerator implements IRabaGenerator {
 
         final byte[][] data = new byte[n][];
 
-        final String ns = "http://www.bigdata.com/rdf#";
+        final String ns = "http://www.embergraph.org/rdf#";
 
         long lastCounter = r.nextInt();
 

@@ -192,7 +192,7 @@ public interface FTS {
    /**
     * The namespace used for magic search predicates.
     */
-   final String NAMESPACE = "http://www.bigdata.com/rdf/fts#";
+   final String NAMESPACE = "http://www.embergraph.org/rdf/fts#";
 
    /**
     * The type of the FTS. For now, only Solr is implemented/supported.

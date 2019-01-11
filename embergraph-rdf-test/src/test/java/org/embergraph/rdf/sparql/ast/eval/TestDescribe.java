@@ -233,7 +233,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
 
         final BigdataValueFactory f = h.getTripleStore().getValueFactory();
 
-        final BigdataURI dc = f.createURI("http://www.bigdata.com/DC");
+        final BigdataURI dc = f.createURI("http://www.embergraph.org/DC");
 
         final BigdataValue[] values = new BigdataValue[] { dc };
 
@@ -309,8 +309,8 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
 
         final BigdataValueFactory f = h.getTripleStore().getValueFactory();
 
-        final BigdataURI mike = f.createURI("http://www.bigdata.com/Mike");
-        final BigdataURI bryan = f.createURI("http://www.bigdata.com/Bryan");
+        final BigdataURI mike = f.createURI("http://www.embergraph.org/Mike");
+        final BigdataURI bryan = f.createURI("http://www.embergraph.org/Bryan");
 
         final BigdataValue[] values = new BigdataValue[] { mike, bryan};
 
@@ -372,9 +372,9 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
 
         final BigdataValueFactory f = h.getTripleStore().getValueFactory();
 
-        final BigdataURI dc = f.createURI("http://www.bigdata.com/DC");
-        final BigdataURI mike = f.createURI("http://www.bigdata.com/Mike");
-        final BigdataURI bryan = f.createURI("http://www.bigdata.com/Bryan");
+        final BigdataURI dc = f.createURI("http://www.embergraph.org/DC");
+        final BigdataURI mike = f.createURI("http://www.embergraph.org/Mike");
+        final BigdataURI bryan = f.createURI("http://www.embergraph.org/Bryan");
 
         final BigdataValue[] values = new BigdataValue[] { dc, mike, bryan};
 
@@ -439,7 +439,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
 
         final BigdataValueFactory f = h.getTripleStore().getValueFactory();
 
-        final BigdataURI mike = f.createURI("http://www.bigdata.com/mike");
+        final BigdataURI mike = f.createURI("http://www.embergraph.org/mike");
 
         final BigdataValue[] values = new BigdataValue[] { mike };
 
@@ -497,8 +497,8 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
 
         final BigdataValueFactory f = h.getTripleStore().getValueFactory();
 
-        final BigdataURI mike = f.createURI("http://www.bigdata.com/mike");
-        final BigdataURI rdf = f.createURI("http://www.bigdata.com/rdf");
+        final BigdataURI mike = f.createURI("http://www.embergraph.org/mike");
+        final BigdataURI rdf = f.createURI("http://www.embergraph.org/rdf");
 
         final BigdataValue[] values = new BigdataValue[] { mike, rdf };
 
@@ -557,7 +557,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
 
         final BigdataValueFactory f = h.getTripleStore().getValueFactory();
 
-        final BigdataURI dc = f.createURI("http://www.bigdata.com/DC");
+        final BigdataURI dc = f.createURI("http://www.embergraph.org/DC");
 
         final BigdataURI foafPerson = f.asValue(FOAFVocabularyDecl.Person);
 
@@ -660,7 +660,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
 
         final BigdataValueFactory f = h.getTripleStore().getValueFactory();
 
-        final BigdataURI dc = f.createURI("http://www.bigdata.com/DC");
+        final BigdataURI dc = f.createURI("http://www.embergraph.org/DC");
 
         final BigdataValue[] values = new BigdataValue[] { dc };
 
@@ -741,7 +741,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
 
         final BigdataValueFactory f = h.getTripleStore().getValueFactory();
 
-        final BigdataURI dc = f.createURI("http://www.bigdata.com/DC");
+        final BigdataURI dc = f.createURI("http://www.embergraph.org/DC");
 
         final BigdataValue[] values = new BigdataValue[] { dc };
 

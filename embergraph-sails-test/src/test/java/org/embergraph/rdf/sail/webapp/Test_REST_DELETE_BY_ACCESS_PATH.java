@@ -92,7 +92,7 @@ public class Test_REST_DELETE_BY_ACCESS_PATH<S extends IIndexManager> extends
 
       final long mutationResult = doDeleteWithAccessPath(//
             // requestPath,//
-            new URIImpl("http://www.bigdata.com/Mike"),// s
+            new URIImpl("http://www.embergraph.org/Mike"),// s
             null,// p
             null);
 
@@ -147,7 +147,7 @@ public class Test_REST_DELETE_BY_ACCESS_PATH<S extends IIndexManager> extends
             // requestPath,//
             null,// s
             null,// p
-            new URIImpl("http://www.bigdata.com/Bryan")// o
+            new URIImpl("http://www.embergraph.org/Bryan")// o
       );
 
       assertEquals(1, mutationResult);
@@ -218,9 +218,9 @@ public class Test_REST_DELETE_BY_ACCESS_PATH<S extends IIndexManager> extends
 
       doInsertbyURL("POST", packagePath + "test_delete_by_access_path.trig");
 
-      final URI base = new URIImpl("http://www.bigdata.com/");
-      final URI c1 = new URIImpl("http://www.bigdata.com/c1");
-      final URI c2 = new URIImpl("http://www.bigdata.com/c2");
+      final URI base = new URIImpl("http://www.embergraph.org/");
+      final URI c1 = new URIImpl("http://www.embergraph.org/c1");
+      final URI c2 = new URIImpl("http://www.embergraph.org/c2");
       
       // This is the named graph that we will delete.
       assertEquals(3,m_repo.rangeCount(null,// s,
@@ -296,7 +296,7 @@ public class Test_REST_DELETE_BY_ACCESS_PATH<S extends IIndexManager> extends
             null,// s
             null,// p
             null,// o
-            new URIImpl("http://www.bigdata.com/c1") // c
+            new URIImpl("http://www.embergraph.org/c1") // c
       );
 
       assertEquals(2, mutationResult);
@@ -314,9 +314,9 @@ public class Test_REST_DELETE_BY_ACCESS_PATH<S extends IIndexManager> extends
 
       doInsertbyURL("POST", packagePath + "test_delete_by_access_path.trig");
 
-      final URI base = new URIImpl("http://www.bigdata.com/");
-      final URI c1 = new URIImpl("http://www.bigdata.com/c1");
-      final URI c2 = new URIImpl("http://www.bigdata.com/c2");
+      final URI base = new URIImpl("http://www.embergraph.org/");
+      final URI c1 = new URIImpl("http://www.embergraph.org/c1");
+      final URI c2 = new URIImpl("http://www.embergraph.org/c2");
       
       // This named graph will not be deleted.
       assertEquals(3, m_repo.rangeCount(null,// s,

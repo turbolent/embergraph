@@ -127,10 +127,10 @@ public class TestUpdateBootstrap extends AbstractASTEvaluationTestCase {
 
             updateRoot.addChild(op);
 
-            final IV g1 = makeIV(valueFactory.createURI("http://www.bigdata.com/g1"));
-            final IV mike = makeIV(valueFactory.createURI("http://www.bigdata.com/Mike"));
-            final IV bryan = makeIV(valueFactory.createURI("http://www.bigdata.com/Bryan"));
-            final IV dc = makeIV(valueFactory.createURI("http://www.bigdata.com/DC"));
+            final IV g1 = makeIV(valueFactory.createURI("http://www.embergraph.org/g1"));
+            final IV mike = makeIV(valueFactory.createURI("http://www.embergraph.org/Mike"));
+            final IV bryan = makeIV(valueFactory.createURI("http://www.embergraph.org/Bryan"));
+            final IV dc = makeIV(valueFactory.createURI("http://www.embergraph.org/DC"));
             final IV rdfType = makeIV(valueFactory.asValue(RDF.TYPE));
             final IV rdfsLabel = makeIV(valueFactory.asValue(RDFS.LABEL));
             final IV foafPerson = makeIV(valueFactory.createURI("http://xmlns.com/foaf/0.1/Person"));
@@ -257,10 +257,10 @@ public class TestUpdateBootstrap extends AbstractASTEvaluationTestCase {
         
         {
             final BigdataValueFactory f = store.getValueFactory();
-            final BigdataURI mike = f.createURI("http://www.bigdata.com/Mike");
-            final BigdataURI bryan = f.createURI("http://www.bigdata.com/Bryan");
-            final BigdataURI dc = f.createURI("http://www.bigdata.com/DC");
-            final BigdataURI g1 = f.createURI("http://www.bigdata.com/g1");
+            final BigdataURI mike = f.createURI("http://www.embergraph.org/Mike");
+            final BigdataURI bryan = f.createURI("http://www.embergraph.org/Bryan");
+            final BigdataURI dc = f.createURI("http://www.embergraph.org/DC");
+            final BigdataURI g1 = f.createURI("http://www.embergraph.org/g1");
             final BigdataURI rdfType = f.asValue(RDF.TYPE);
             final BigdataURI rdfsLabel = f.asValue(RDFS.LABEL);
             final BigdataURI foafPerson = f.createURI("http://xmlns.com/foaf/0.1/Person");
@@ -458,10 +458,10 @@ public class TestUpdateBootstrap extends AbstractASTEvaluationTestCase {
         
         {
             final BigdataValueFactory f = store.getValueFactory();
-            final BigdataURI mike = f.createURI("http://www.bigdata.com/Mike");
-            final BigdataURI bryan = f.createURI("http://www.bigdata.com/Bryan");
-            final BigdataURI dc = f.createURI("http://www.bigdata.com/DC");
-            final BigdataURI g1 = f.createURI("http://www.bigdata.com/g1");
+            final BigdataURI mike = f.createURI("http://www.embergraph.org/Mike");
+            final BigdataURI bryan = f.createURI("http://www.embergraph.org/Bryan");
+            final BigdataURI dc = f.createURI("http://www.embergraph.org/DC");
+            final BigdataURI g1 = f.createURI("http://www.embergraph.org/g1");
             final BigdataURI rdfType = f.asValue(RDF.TYPE);
             final BigdataURI rdfsLabel = f.asValue(RDFS.LABEL);
             final BigdataURI foafPerson = f.createURI("http://xmlns.com/foaf/0.1/Person");

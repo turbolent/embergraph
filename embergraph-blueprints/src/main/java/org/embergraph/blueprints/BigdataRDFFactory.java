@@ -43,17 +43,17 @@ public class BigdataRDFFactory extends DefaultBlueprintsValueFactory {
 	/**
 	 * Namespace for non vertex and edge data (property names).
 	 */
-	public static final String GRAPH_NAMESPACE = "http://www.bigdata.com/rdf/graph/";
+	public static final String GRAPH_NAMESPACE = "http://www.embergraph.org/rdf/graph/";
 	
 	/**
 	 * Namesace for vertices.
 	 */
-	public static final String VERTEX_NAMESPACE = "http://www.bigdata.com/rdf/graph/vertex/";
+	public static final String VERTEX_NAMESPACE = "http://www.embergraph.org/rdf/graph/vertex/";
 	
     /**
      * Namesace for edges.
      */
-	public static final String EDGE_NAMESPACE = "http://www.bigdata.com/rdf/graph/edge/";
+	public static final String EDGE_NAMESPACE = "http://www.embergraph.org/rdf/graph/edge/";
 	
     /**
      * URI used to represent a Vertex.

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xmlspysamplexml C:\Documents and Settings\bthompson\workspace\bigdata\src\resources\xml\counterset-example1.xml?>
+<?xmlspysamplexml C:\Documents and Settings\bthompson\workspace\embergraph\src\resources\xml\counterset-example1.xml?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<xsl:output method="html" version="4.01" encoding="UTF-8" indent="yes"/>
 	<!-- Whenever you match any node or any attribute -->

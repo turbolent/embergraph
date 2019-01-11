@@ -141,17 +141,17 @@ public class TestIVComparator extends TestCase2 {
             dtExt.createIV(f.createLiteral("2001-10-26", XSD.DATE));
             dtExt.createIV(f.createLiteral("21:32:52.126Z", XSD.TIME));
 
-            noninline_plain_lit1.setValue(f.createLiteral("bigdata"));
+            noninline_plain_lit1.setValue(f.createLiteral("embergraph"));
             noninline_plain_lit2.setValue(f.createLiteral("systap"));
-            noninline_languageCode_en_lit1.setValue(f.createLiteral("bigdata","en"));
+            noninline_languageCode_en_lit1.setValue(f.createLiteral("embergraph","en"));
             noninline_languageCode_en_lit2.setValue(f.createLiteral("systap","en"));
-            noninline_languageCode_de_lit1.setValue(f.createLiteral("bigdata","de"));
+            noninline_languageCode_de_lit1.setValue(f.createLiteral("embergraph","de"));
             noninline_languageCode_de_lit2.setValue(f.createLiteral("systap","de"));
-            noninline_xsd_string_lit1.setValue(f.createLiteral("bigdata",XSD.STRING));
+            noninline_xsd_string_lit1.setValue(f.createLiteral("embergraph",XSD.STRING));
             noninline_xsd_string_lit2.setValue(f.createLiteral("systap",XSD.STRING));
             
-            noninline_uri1.setValue(f.createURI("http://www.bigdata.com/"));
-            noninline_uri2.setValue(f.createURI("http://www.bigdata.com/blog/"));
+            noninline_uri1.setValue(f.createURI("http://www.embergraph.org/"));
+            noninline_uri2.setValue(f.createURI("http://www.embergraph.org/blog/"));
 
         }
         

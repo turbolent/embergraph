@@ -579,7 +579,7 @@ public class BigdataSPARQLUpdateTest2 extends TestCase2 {
             sb.append("DELETE FROM %namedSet1\n");
             sb.append("SELECT * \n");
             sb.append("WHERE { \n");
-            sb.append("   BIND(<http://www.bigdata.com/Mike> as ?x)\n");
+            sb.append("   BIND(<http://www.embergraph.org/Mike> as ?x)\n");
             sb.append("   BIND(\"Mike\" as ?name)\n");
             sb.append("}\n");
 
@@ -660,7 +660,7 @@ public class BigdataSPARQLUpdateTest2 extends TestCase2 {
             sb.append("SELECT ?x ?name\n");
 			sb.append("WHERE { \n");
 			sb.append("  ?x rdfs:label ?name .\n");
-			sb.append("  FILTER (?x = <http://www.bigdata.com/Mike> ) .\n");
+			sb.append("  FILTER (?x = <http://www.embergraph.org/Mike> ) .\n");
 			sb.append("}\n");
             
             con.prepareUpdate(QueryLanguage.SPARQL,sb.toString()).execute();
@@ -740,7 +740,7 @@ public class BigdataSPARQLUpdateTest2 extends TestCase2 {
             sb.append("SELECT ?x ?name\n");
 			sb.append("WHERE { \n");
 			sb.append("  ?x rdfs:label ?name .\n");
-			sb.append("  FILTER (?x = <http://www.bigdata.com/Bryan> ) .\n");
+			sb.append("  FILTER (?x = <http://www.embergraph.org/Bryan> ) .\n");
 			sb.append("}\n");
             
             con.prepareUpdate(QueryLanguage.SPARQL,sb.toString()).execute();
@@ -831,7 +831,7 @@ public class BigdataSPARQLUpdateTest2 extends TestCase2 {
             sb.append("  SELECT ?x ?name\n"); // TODO Variant with different projection.
 			sb.append("WHERE { \n");
 			sb.append("  ?x rdfs:label ?name .\n");
-			sb.append("  FILTER (?x = <http://www.bigdata.com/Bryan> ) .\n");
+			sb.append("  FILTER (?x = <http://www.embergraph.org/Bryan> ) .\n");
 			sb.append("}\n");
             
             con.prepareUpdate(QueryLanguage.SPARQL, sb.toString()).execute();

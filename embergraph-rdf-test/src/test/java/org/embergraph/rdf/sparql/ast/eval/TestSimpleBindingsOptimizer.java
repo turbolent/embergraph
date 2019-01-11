@@ -184,7 +184,7 @@ public class TestSimpleBindingsOptimizer extends
       TermId tId = (TermId)c.get();
 
       assertEquals("type",c.getVar().getName());
-      assertEquals("http://bigdata.com#Person", tId.getValue().toString());	   
+      assertEquals("http://embergraph.org#Person", tId.getValue().toString());
 	}
 	
    /**

@@ -691,9 +691,9 @@ public class TestBootstrapBigdataSail extends TestCase2 {
 			// a read-only transaction.
 			readConn = sail.getReadOnlyConnection();
 
-            final URI s = new URIImpl("http://www.bigdata.com/s");
+            final URI s = new URIImpl("http://www.embergraph.org/s");
 
-            final URI p = new URIImpl("http://www.bigdata.com/p");
+            final URI p = new URIImpl("http://www.embergraph.org/p");
 
             final Value o = new LiteralImpl("o");
 

@@ -125,13 +125,13 @@ public class TestTriplePatternBuilder extends
     public void test_triple_pattern_const_var_var() throws MalformedQueryException,
             TokenMgrError, ParseException {
 
-        final String sparql = "select ?p where {<http://www.bigdata.com/s> ?p ?o}";
+        final String sparql = "select ?p where {<http://www.embergraph.org/s> ?p ?o}";
 
         final QueryRoot expected = new QueryRoot(QueryType.SELECT);
         {
 
             final ConstantNode s = new ConstantNode(
-                    makeIV(valueFactory.createURI("http://www.bigdata.com/s")));
+                    makeIV(valueFactory.createURI("http://www.embergraph.org/s")));
 
             final VarNode p = new VarNode("p");
             
@@ -169,7 +169,7 @@ public class TestTriplePatternBuilder extends
     public void test_triple_pattern_var_const_var() throws MalformedQueryException,
             TokenMgrError, ParseException {
 
-        final String sparql = "select ?s where {?s <http://www.bigdata.com/p> ?o}";
+        final String sparql = "select ?s where {?s <http://www.embergraph.org/p> ?o}";
 
         final QueryRoot expected = new QueryRoot(QueryType.SELECT);
         {
@@ -177,7 +177,7 @@ public class TestTriplePatternBuilder extends
             final VarNode s = new VarNode("s");
             
             final ConstantNode p = new ConstantNode(
-                    makeIV(valueFactory.createURI("http://www.bigdata.com/p")));
+                    makeIV(valueFactory.createURI("http://www.embergraph.org/p")));
 
             final VarNode o = new VarNode("o");
 
@@ -213,7 +213,7 @@ public class TestTriplePatternBuilder extends
     public void test_triple_pattern_var_var_const() throws MalformedQueryException,
             TokenMgrError, ParseException {
 
-        final String sparql = "select ?s where {?s ?p <http://www.bigdata.com/o> }";
+        final String sparql = "select ?s where {?s ?p <http://www.embergraph.org/o> }";
 
         final QueryRoot expected = new QueryRoot(QueryType.SELECT);
         {
@@ -223,7 +223,7 @@ public class TestTriplePatternBuilder extends
             final VarNode p = new VarNode("p");
             
             final ConstantNode o = new ConstantNode(
-                    makeIV(valueFactory.createURI("http://www.bigdata.com/o")));
+                    makeIV(valueFactory.createURI("http://www.embergraph.org/o")));
 
             {
                 final Map<String, String> prefixDecls = new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
@@ -257,18 +257,18 @@ public class TestTriplePatternBuilder extends
     public void test_triple_pattern_const_var_const() throws MalformedQueryException,
             TokenMgrError, ParseException {
 
-        final String sparql = "select ?p where { <http://www.bigdata.com/s> ?p <http://www.bigdata.com/o> }";
+        final String sparql = "select ?p where { <http://www.embergraph.org/s> ?p <http://www.embergraph.org/o> }";
 
         final QueryRoot expected = new QueryRoot(QueryType.SELECT);
         {
 
             final ConstantNode s = new ConstantNode(
-                    makeIV(valueFactory.createURI("http://www.bigdata.com/s")));
+                    makeIV(valueFactory.createURI("http://www.embergraph.org/s")));
             
             final VarNode p = new VarNode("p");
             
             final ConstantNode o = new ConstantNode(
-                    makeIV(valueFactory.createURI("http://www.bigdata.com/o")));
+                    makeIV(valueFactory.createURI("http://www.embergraph.org/o")));
 
             {
                 final Map<String, String> prefixDecls = new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
@@ -302,16 +302,16 @@ public class TestTriplePatternBuilder extends
     public void test_triple_pattern_const_const_var() throws MalformedQueryException,
             TokenMgrError, ParseException {
 
-        final String sparql = "select ?o where { <http://www.bigdata.com/s> <http://www.bigdata.com/p> ?o }";
+        final String sparql = "select ?o where { <http://www.embergraph.org/s> <http://www.embergraph.org/p> ?o }";
 
         final QueryRoot expected = new QueryRoot(QueryType.SELECT);
         {
 
             final ConstantNode s = new ConstantNode(
-                    makeIV(valueFactory.createURI("http://www.bigdata.com/s")));
+                    makeIV(valueFactory.createURI("http://www.embergraph.org/s")));
             
             final ConstantNode p = new ConstantNode(
-                    makeIV(valueFactory.createURI("http://www.bigdata.com/p")));
+                    makeIV(valueFactory.createURI("http://www.embergraph.org/p")));
 
             final VarNode o = new VarNode("o");
 
@@ -347,19 +347,19 @@ public class TestTriplePatternBuilder extends
     public void test_triple_pattern_const_const_const() throws MalformedQueryException,
             TokenMgrError, ParseException {
 
-        final String sparql = "select ?x where { <http://www.bigdata.com/s> <http://www.bigdata.com/p> <http://www.bigdata.com/o> }";
+        final String sparql = "select ?x where { <http://www.embergraph.org/s> <http://www.embergraph.org/p> <http://www.embergraph.org/o> }";
 
         final QueryRoot expected = new QueryRoot(QueryType.SELECT);
         {
 
             final ConstantNode s = new ConstantNode(
-                    makeIV(valueFactory.createURI("http://www.bigdata.com/s")));
+                    makeIV(valueFactory.createURI("http://www.embergraph.org/s")));
             
             final ConstantNode p = new ConstantNode(
-                    makeIV(valueFactory.createURI("http://www.bigdata.com/p")));
+                    makeIV(valueFactory.createURI("http://www.embergraph.org/p")));
             
             final ConstantNode o = new ConstantNode(
-                    makeIV(valueFactory.createURI("http://www.bigdata.com/o")));
+                    makeIV(valueFactory.createURI("http://www.embergraph.org/o")));
 
             final VarNode x = new VarNode("x");
 
@@ -481,8 +481,8 @@ public class TestTriplePatternBuilder extends
         final String sparql //
                 = "select ?s \n"//
                 + " where { \n"//
-                + "  ?s <http://www.bigdata.com/foo> ?o "//
-                + "   ; <http://www.bigdata.com/bar> ?o2"//
+                + "  ?s <http://www.embergraph.org/foo> ?o "//
+                + "   ; <http://www.embergraph.org/bar> ?o2"//
                 + " }"//
         ;
 
@@ -490,10 +490,10 @@ public class TestTriplePatternBuilder extends
         {
 
             final ConstantNode foo = new ConstantNode(
-                    makeIV(valueFactory.createURI("http://www.bigdata.com/foo")));
+                    makeIV(valueFactory.createURI("http://www.embergraph.org/foo")));
 
             final ConstantNode bar = new ConstantNode(
-                    makeIV(valueFactory.createURI("http://www.bigdata.com/bar")));
+                    makeIV(valueFactory.createURI("http://www.embergraph.org/bar")));
 
             {
                 final Map<String, String> prefixDecls = new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
@@ -582,19 +582,19 @@ public class TestTriplePatternBuilder extends
     public void test_object_list_where_objects_are_constants()
             throws MalformedQueryException, TokenMgrError, ParseException {
 
-        final String sparql = "select ?s where {?s ?p <http://www.bigdata.com/foo> , <http://www.bigdata.com/bar> , <http://www.bigdata.com/goo> . }";
+        final String sparql = "select ?s where {?s ?p <http://www.embergraph.org/foo> , <http://www.embergraph.org/bar> , <http://www.embergraph.org/goo> . }";
 
         final QueryRoot expected = new QueryRoot(QueryType.SELECT);
         {
 
             final ConstantNode foo = new ConstantNode(
-                    makeIV(valueFactory.createURI("http://www.bigdata.com/foo")));
+                    makeIV(valueFactory.createURI("http://www.embergraph.org/foo")));
 
             final ConstantNode bar = new ConstantNode(
-                    makeIV(valueFactory.createURI("http://www.bigdata.com/bar")));
+                    makeIV(valueFactory.createURI("http://www.embergraph.org/bar")));
 
             final ConstantNode goo = new ConstantNode(
-                    makeIV(valueFactory.createURI("http://www.bigdata.com/goo")));
+                    makeIV(valueFactory.createURI("http://www.embergraph.org/goo")));
 
             {
                 final Map<String, String> prefixDecls = new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);

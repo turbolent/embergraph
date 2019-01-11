@@ -242,7 +242,7 @@ public class TestSubjectCentricFullTextIndex extends AbstractTripleStoreTestCase
                     f.createLiteral("tag team", "en"),//
                     f.createLiteral("the first day", "en"),// // 'the' is a stopword.
 
-                    f.createURI("http://www.bigdata.com"),//
+                    f.createURI("http://www.embergraph.org"),//
                     f.asValue(RDF.TYPE),//
                     f.asValue(RDFS.SUBCLASSOF),//
                     f.asValue(XMLSchema.DECIMAL),//
@@ -408,7 +408,7 @@ public class TestSubjectCentricFullTextIndex extends AbstractTripleStoreTestCase
                     f.createLiteral("tag team", "en"),//
                     f.createLiteral("the first day", "en"),// // 'the' is a stopword.
 
-                    f.createURI("http://www.bigdata.com"),//
+                    f.createURI("http://www.embergraph.org"),//
                     f.asValue(RDF.TYPE),//
                     f.asValue(RDFS.SUBCLASSOF),//
                     f.asValue(XMLSchema.DECIMAL),//

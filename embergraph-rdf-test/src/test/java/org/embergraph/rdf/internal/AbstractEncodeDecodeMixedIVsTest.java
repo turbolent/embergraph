@@ -115,9 +115,9 @@ public abstract class AbstractEncodeDecodeMixedIVsTest extends AbstractEncodeDec
 
         final BigdataValueFactory vf = BigdataValueFactoryImpl.getInstance(getName());
         
-        final URI datatype = new URIImpl("http://www.bigdata.com");
-        final URI dt1 = new URIImpl("http://www.bigdata.com/mock-datatype-1");
-        final URI dt2 = new URIImpl("http://www.bigdata.com/mock-datatype-2");
+        final URI datatype = new URIImpl("http://www.embergraph.org");
+        final URI dt1 = new URIImpl("http://www.embergraph.org/mock-datatype-1");
+        final URI dt2 = new URIImpl("http://www.embergraph.org/mock-datatype-2");
 
         final IV<?, ?> namespaceIV = newTermId(VTE.URI);
         final IV<?, ?> datatypeIV = newTermId(VTE.URI);
@@ -204,11 +204,11 @@ public abstract class AbstractEncodeDecodeMixedIVsTest extends AbstractEncodeDec
                 /*
                  * URIs
                  */
-                ivs.add(new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.bigdata.com")));
-                ivs.add(new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.bigdata.com/")));
-                ivs.add(new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.bigdata.com/foo")));
-                ivs.add(new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.bigdata.com:80/foo")));
-                ivs.add(new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.bigdata.com")));
+                ivs.add(new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.embergraph.org")));
+                ivs.add(new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.embergraph.org/")));
+                ivs.add(new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.embergraph.org/foo")));
+                ivs.add(new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.embergraph.org:80/foo")));
+                ivs.add(new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.embergraph.org")));
                 if (fullyInlineUnicode) {
                     ivs.add(new FullyInlineURIIV<BigdataURI>(RDF.TYPE));
                     ivs.add(new FullyInlineURIIV<BigdataURI>(RDF.SUBJECT));

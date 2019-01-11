@@ -130,7 +130,7 @@ See http://weblogs.java.net/blog/kellyohair/archive/2006/01/index.html for this 
 
 #include <jni.h>
 #include <stdio.h>
-#include "com_bigdata_btree_BytesUtil.h"
+#include "com_embergraph_btree_BytesUtil.h"
 
 /**
  * Bit-wise comparison of unsigned byte[]s.

@@ -60,7 +60,7 @@ public class TestStoredQueryService extends AbstractDataDrivenSPARQLTestCase {
         super(name);
     }
 
-    static private final String NAMESPACE = "http://www.bigdata.com/rdf/stored-query#";
+    static private final String NAMESPACE = "http://www.embergraph.org/rdf/stored-query#";
 
     /**
      * Simple stored query test. Note that this test also verifies that the

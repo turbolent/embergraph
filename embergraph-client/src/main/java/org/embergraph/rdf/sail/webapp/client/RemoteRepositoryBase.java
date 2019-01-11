@@ -78,7 +78,7 @@ public class RemoteRepositoryBase extends RemoteRepositoryDecls {
     */
    protected static final String getContextPath() {
 
-       return "/bigdata";
+       return "/embergraph";
        
    }
 

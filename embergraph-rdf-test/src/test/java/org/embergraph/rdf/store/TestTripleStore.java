@@ -214,7 +214,7 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
             doAddTermTest(store, new LiteralImpl("abc", XMLSchema.STRING));
             doAddTermTest(store, new LiteralImpl("abc", "en"));
     
-            doAddTermTest(store, new URIImpl("http://www.bigdata.com"));
+            doAddTermTest(store, new URIImpl("http://www.embergraph.org"));
             doAddTermTest(store, RDF.TYPE);
             doAddTermTest(store, RDFS.SUBCLASSOF);
             doAddTermTest(store, XMLSchema.DECIMAL);
@@ -239,7 +239,7 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
             
             assertTrue(store.getIV(new LiteralImpl("abc", "en")).isLiteral());
 
-            assertFalse(store.getIV(new URIImpl("http://www.bigdata.com")).isLiteral());
+            assertFalse(store.getIV(new URIImpl("http://www.embergraph.org")).isLiteral());
 
             assertFalse(store.getIV(RDF.TYPE).isLiteral());
 
@@ -317,7 +317,7 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
             
             final BigdataValue[] terms = new BigdataValue[] {//
     
-                valueFactory.createURI("http://www.bigdata.com"),//
+                valueFactory.createURI("http://www.embergraph.org"),//
 
                 valueFactory.createURI(RDF.TYPE.stringValue()),//
                 valueFactory.createURI(RDFS.SUBCLASSOF.stringValue()),//
@@ -387,7 +387,7 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
             
             assertTrue(store.getIV(new LiteralImpl("abc", "en")).isLiteral());
 
-            assertFalse(store.getIV(new URIImpl("http://www.bigdata.com")).isLiteral());
+            assertFalse(store.getIV(new URIImpl("http://www.embergraph.org")).isLiteral());
 
             assertFalse(store.getIV(RDF.TYPE).isLiteral());
 
@@ -985,9 +985,9 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
                     store.getAccessPath(NULL,NULL,NULL).iterator());
             
             final BigdataValueFactory valueFactory = store.getValueFactory();
-            final BigdataURI A = valueFactory.createURI("http://www.bigdata.com/A");
-            final BigdataURI B = valueFactory.createURI("http://www.bigdata.com/B");
-            final BigdataURI C = valueFactory.createURI("http://www.bigdata.com/C");
+            final BigdataURI A = valueFactory.createURI("http://www.embergraph.org/A");
+            final BigdataURI B = valueFactory.createURI("http://www.embergraph.org/B");
+            final BigdataURI C = valueFactory.createURI("http://www.embergraph.org/C");
             final BigdataURI rdfType = valueFactory.createURI(RDF.TYPE.stringValue());
 
             store.addTerms(new BigdataValue[] { A, B, C, rdfType });
@@ -1196,9 +1196,9 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
 
             final BigdataValueFactory f = store.getValueFactory();
             
-            final BigdataURI A = f.createURI("http://www.bigdata.com/A");
-            final BigdataURI B = f.createURI("http://www.bigdata.com/B");
-            final BigdataURI C = f.createURI("http://www.bigdata.com/C");
+            final BigdataURI A = f.createURI("http://www.embergraph.org/A");
+            final BigdataURI B = f.createURI("http://www.embergraph.org/B");
+            final BigdataURI C = f.createURI("http://www.embergraph.org/C");
             final BigdataURI rdfType = f.asValue(RDF.TYPE);
             
             // assign term identifiers for reuse below.
@@ -1273,9 +1273,9 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
             
             final BigdataValueFactory f = store.getValueFactory();
 
-            final BigdataURI v1 = f.createURI("http://www.bigdata.com/1"); 
-            final BigdataURI v2 = f.createURI("http://www.bigdata.com/2"); 
-            final BigdataURI v3 = f.createURI("http://www.bigdata.com/3"); 
+            final BigdataURI v1 = f.createURI("http://www.embergraph.org/1");
+            final BigdataURI v2 = f.createURI("http://www.embergraph.org/2");
+            final BigdataURI v3 = f.createURI("http://www.embergraph.org/3");
             
             // assign term identifiers.
             store.addTerms(new BigdataValue[]{v1,v2,v3});
@@ -1331,9 +1331,9 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
 
             final BigdataValueFactory f = store.getValueFactory();
 
-            final BigdataURI A = f.createURI("http://www.bigdata.com/A");
-            final BigdataURI B = f.createURI("http://www.bigdata.com/B");
-            final BigdataURI C = f.createURI("http://www.bigdata.com/C");
+            final BigdataURI A = f.createURI("http://www.embergraph.org/A");
+            final BigdataURI B = f.createURI("http://www.embergraph.org/B");
+            final BigdataURI C = f.createURI("http://www.embergraph.org/C");
             final BigdataURI rdfType = f.asValue(RDF.TYPE);
 
             {
@@ -1481,9 +1481,9 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
 
             final BigdataValueFactory f = store.getValueFactory();
 
-            final BigdataURI A = f.createURI("http://www.bigdata.com/A");
-            final BigdataURI B = f.createURI("http://www.bigdata.com/B");
-            final BigdataURI C = f.createURI("http://www.bigdata.com/C");
+            final BigdataURI A = f.createURI("http://www.embergraph.org/A");
+            final BigdataURI B = f.createURI("http://www.embergraph.org/B");
+            final BigdataURI C = f.createURI("http://www.embergraph.org/C");
             final BigdataURI Person = f.asValue(FOAF.PERSON);
             final BigdataURI rdfType = f.asValue(RDF.TYPE);
             final BigdataURI foafKnows = f.asValue(FOAF.KNOWS);
@@ -1593,7 +1593,7 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
 
         final StringBuilder sb = new StringBuilder(len + 20);
 
-        sb.append("http://www.bigdata.com/");
+        sb.append("http://www.embergraph.org/");
         
         for (int i = 0; i < len; i++) {
 

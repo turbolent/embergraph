@@ -73,7 +73,7 @@ public class TestURIExtensionIV extends TestCase2 {
     private static class MockVocabularyDecl implements VocabularyDecl {
 
         static private final URI[] uris = new URI[]{//
-            new URIImpl("http://www.bigdata.com/"), //
+            new URIImpl("http://www.embergraph.org/"), //
             new URIImpl(RDFS.NAMESPACE), //
             new URIImpl("http://www.Department0.University0.edu/"),//
         };
@@ -136,8 +136,8 @@ public class TestURIExtensionIV extends TestCase2 {
 	public void test_InlineURIIV() {
 
 //        doTest(new URIImpl("http://www.bigdata.com"));
-        doTest(new URIImpl("http://www.bigdata.com/"));
-        doTest(new URIImpl("http://www.bigdata.com/foo"));
+        doTest(new URIImpl("http://www.embergraph.org/"));
+        doTest(new URIImpl("http://www.embergraph.org/foo"));
         doTest(RDFS.CLASS);
         doTest(RDFS.SUBPROPERTYOF);
         doTest(new URIImpl("http://www.Department0.University0.edu/UndergraduateStudent488"));
@@ -180,8 +180,8 @@ public class TestURIExtensionIV extends TestCase2 {
         {
 
 //            ivs.add(newFixture(new URIImpl("http://www.bigdata.com")));
-            ivs.add(newFixture(new URIImpl("http://www.bigdata.com/")));
-            ivs.add(newFixture(new URIImpl("http://www.bigdata.com/foo")));
+            ivs.add(newFixture(new URIImpl("http://www.embergraph.org/")));
+            ivs.add(newFixture(new URIImpl("http://www.embergraph.org/foo")));
             ivs.add(newFixture(RDFS.CLASS));
             ivs.add(newFixture(RDFS.SUBPROPERTYOF));
             ivs.add(newFixture(new URIImpl("http://www.Department0.University0.edu/UndergraduateStudent488")));

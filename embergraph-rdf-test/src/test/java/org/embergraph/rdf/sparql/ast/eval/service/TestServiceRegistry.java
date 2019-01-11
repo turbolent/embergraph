@@ -108,11 +108,11 @@ public class TestServiceRegistry extends AbstractBigdataExprBuilderTestCase {
      */
     public void test_addGetRemove() {
 
-        final URI serviceURI1 = new URIImpl("http://www.bigdata.com/myService/"
+        final URI serviceURI1 = new URIImpl("http://www.embergraph.org/myService/"
                 + getName() + "/" + UUID.randomUUID());
 
         final URI serviceURI2 = new URIImpl(
-                "http://www.bigdata.com/myService2/" + getName() + "/"
+                "http://www.embergraph.org/myService2/" + getName() + "/"
                         + UUID.randomUUID());
 
         final RemoteServiceOptions options = new RemoteServiceOptions();
@@ -160,11 +160,11 @@ public class TestServiceRegistry extends AbstractBigdataExprBuilderTestCase {
          * using a UUID to make these URIs distinct from others that might be in
          * the ServiceRegistry.
          */
-        final URI serviceURI1 = new URIImpl("http://www.bigdata.com/myService/"
+        final URI serviceURI1 = new URIImpl("http://www.embergraph.org/myService/"
                 + getName() + "/" + UUID.randomUUID());
 
         final URI serviceURI2 = new URIImpl(
-                "http://www.bigdata.com/myService2/" + getName() + "/"
+                "http://www.embergraph.org/myService2/" + getName() + "/"
                         + UUID.randomUUID());
 
         final RemoteServiceOptions options = new RemoteServiceOptions();
@@ -273,11 +273,11 @@ public class TestServiceRegistry extends AbstractBigdataExprBuilderTestCase {
             final BigdataValueFactory f = store.getValueFactory();
 
             final BigdataURI serviceURI1 = f
-                    .createURI("http://www.bigdata.com/myService/" + getName()
+                    .createURI("http://www.embergraph.org/myService/" + getName()
                             + "/" + UUID.randomUUID());
 
             final BigdataURI serviceURI2 = f
-                    .createURI("http://www.bigdata.com/myService2/" + getName()
+                    .createURI("http://www.embergraph.org/myService2/" + getName()
                             + "/" + UUID.randomUUID());
 
             final BigdataValue[] values = new BigdataValue[] { //
@@ -364,7 +364,7 @@ public class TestServiceRegistry extends AbstractBigdataExprBuilderTestCase {
      */
     public void test_customService() throws SailException {
 
-        final URI serviceURI1 = new URIImpl("http://www.bigdata.com/myService/"
+        final URI serviceURI1 = new URIImpl("http://www.embergraph.org/myService/"
                 + getName() + "/" + UUID.randomUUID());
 
         final MyCustomServiceFactory serviceFactory = new MyCustomServiceFactory(

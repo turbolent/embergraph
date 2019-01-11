@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<project name="bigdata">
+<project name="embergraph">
 
   <!--                                                           -->
   <!-- This navigation model is merged into the generated site.  -->
@@ -29,12 +29,12 @@
     </links>
 
    <!-- A top-level, hierarchical menu -->
-   <menu name="bigdata">
-     <item name="bigdata"
-           href="http://www.bigdata.com" 
+   <menu name="embergraph">
+     <item name="embergraph"
+           href="http://www.embergraph.org"
 	    />
      <item name="sourceforge"
-           href="http://sourceforge.net/projects/bigdata/"
+           href="http://sourceforge.net/projects/embergraph/"
            img="http://sourceforge.net/sflogo.php?group_id=95673&amp;type=1"
 	    />
    </menu>
@@ -42,7 +42,7 @@
    <!-- Architecture. -->
    <menu name="Architecture">
      <item name="Web-published UML (zipped)"
-           href="/architecture/bigdata-published-model.zip"
+           href="/architecture/embergraph-published-model.zip"
 	    />
    </menu>
 

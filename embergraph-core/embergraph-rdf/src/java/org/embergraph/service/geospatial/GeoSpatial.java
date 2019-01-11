@@ -134,7 +134,7 @@ public interface GeoSpatial {
    /**
     * The namespace used for magic search predicates.
     */
-   final String NAMESPACE = "http://www.bigdata.com/rdf/geospatial#";
+   final String NAMESPACE = "http://www.embergraph.org/rdf/geospatial#";
 
 
    // do not use anymore -- need to be retained because it is linked by old vocabulary class
@@ -145,7 +145,7 @@ public interface GeoSpatial {
    /**
     * The default datatype to be used for GeoSpatial literals.
     */
-   final String GEOSPATIAL_LITERAL_PREFIX_V1  = "http://www.bigdata.com/rdf/geospatial/literals/v1#";
+   final String GEOSPATIAL_LITERAL_PREFIX_V1  = "http://www.embergraph.org/rdf/geospatial/literals/v1#";
    final String GEOSPATIAL_LITERAL_V1_LAT_LON = GEOSPATIAL_LITERAL_PREFIX_V1 + "lat-lon";
    final String GEOSPATIAL_LITERAL_V1_LAT_LON_TIME = GEOSPATIAL_LITERAL_PREFIX_V1 + "lat-lon-time";
    

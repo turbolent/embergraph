@@ -147,7 +147,7 @@ public class TestGeoSpatialDisableBuiltinDatatypes extends AbstractDataDrivenSPA
 
         properties.setProperty(
            org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DEFAULT_DATATYPE,
-           "http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral");
+           "http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral");
 
         // NOTE: this is the crux of the test: we disable the built-in datatypes
         properties.setProperty(
@@ -158,7 +158,7 @@ public class TestGeoSpatialDisableBuiltinDatatypes extends AbstractDataDrivenSPA
         properties.setProperty(
            org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".0",
            "{\"config\": "
-           + "{ \"uri\": \"http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral\", "
+           + "{ \"uri\": \"http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral\", "
            + "\"fields\": [ "
            + "{ \"valueType\": \"DOUBLE\", \"minVal\" : \"0\", \"multiplier\": \"1000000\", \"serviceMapping\": \"LATITUDE\" }, "
            + "{ \"valueType\": \"DOUBLE\", \"minVal\" : \"0\", \"multiplier\": \"100000\", \"serviceMapping\": \"LONGITUDE\" }, "

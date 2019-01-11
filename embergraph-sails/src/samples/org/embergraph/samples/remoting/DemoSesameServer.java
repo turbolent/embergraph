@@ -18,7 +18,7 @@ public class DemoSesameServer {
     
     private static final String sesameURL = "http://localhost:9999/openrdf-sesame";
     
-    private static final String repoID = "bigdata";
+    private static final String repoID = "embergraph";
     
     /**
      * @param args

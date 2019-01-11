@@ -39,13 +39,13 @@ public class TestEquals extends TestCase {
 	
 	    final BigdataValueFactory vf2 = BigdataValueFactoryImpl.getInstance(getName()+"2");
 		
-	    final BigdataURI v1 = vf.createURI("http://www.bigdata.com");
+	    final BigdataURI v1 = vf.createURI("http://www.embergraph.org");
 	    
-	    final BigdataURI v2 = vf.createURI("http://www.bigdata.com");
+	    final BigdataURI v2 = vf.createURI("http://www.embergraph.org");
 	    
-	    final URI v3 = new URIImpl("http://www.bigdata.com");
+	    final URI v3 = new URIImpl("http://www.embergraph.org");
 
-	    final BigdataURI v4 = vf2.createURI("http://www.bigdata.com");
+	    final BigdataURI v4 = vf2.createURI("http://www.embergraph.org");
 
 	    assertTrue( v1 != v2 );
 	    
@@ -96,11 +96,11 @@ public class TestEquals extends TestCase {
 
 	public void test_equalsLiteral() {
 
-		doLiteralTest("bigdata", null/* datatype */, null/* languageCode */);
+		doLiteralTest("embergraph", null/* datatype */, null/* languageCode */);
 
-		doLiteralTest("bigdata", XMLSchema.STRING/* datatype */, null/* languageCode */);
+		doLiteralTest("embergraph", XMLSchema.STRING/* datatype */, null/* languageCode */);
 
-		doLiteralTest("bigdata", null/* datatype */, "en"/* languageCode */);
+		doLiteralTest("embergraph", null/* datatype */, "en"/* languageCode */);
 
 	}
 
@@ -191,13 +191,13 @@ public class TestEquals extends TestCase {
 
 	    final BigdataValueFactory vf2 = BigdataValueFactoryImpl.getInstance(getName()+"2");
 		
-	    final BigdataBNode v1 = vf.createBNode("bigdata");
+	    final BigdataBNode v1 = vf.createBNode("embergraph");
 	    
-	    final BigdataBNode v2 = vf.createBNode("bigdata");
+	    final BigdataBNode v2 = vf.createBNode("embergraph");
 
-	    final BNode v3 = new BNodeImpl("bigdata");
+	    final BNode v3 = new BNodeImpl("embergraph");
 
-	    final BigdataBNode v4 = vf2.createBNode("bigdata");
+	    final BigdataBNode v4 = vf2.createBNode("embergraph");
 
 	    assertTrue( v1 != v2 );
 	    

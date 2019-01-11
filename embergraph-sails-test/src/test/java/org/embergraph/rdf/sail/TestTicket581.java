@@ -163,7 +163,7 @@ public class TestTicket581 extends QuadsTestCase {
             	
 	            if (log.isInfoEnabled()) {
 		            final GraphQueryResult result = graphQuery.evaluate();
-            		log.info("bigdata results:");
+            		log.info("embergraph results:");
             		if (!result.hasNext()) {
             			log.info("no results.");
             		}

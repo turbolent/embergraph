@@ -261,7 +261,7 @@ public class TestLexiconKeyBuilder extends TestCase2 {
      */
     public void test_datatype_unknown() {
 
-        fixture.datatypeLiteral2key(new URIImpl("http://www.bigdata.com/foo"),
+        fixture.datatypeLiteral2key(new URIImpl("http://www.embergraph.org/foo"),
                 "foo");
         
     }

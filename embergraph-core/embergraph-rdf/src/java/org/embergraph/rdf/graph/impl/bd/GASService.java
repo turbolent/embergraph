@@ -140,7 +140,7 @@ public class GASService extends CustomServiceFactoryBase {
         /**
          * The namespace used for bigdata GAS API.
          */
-        String NAMESPACE = "http://www.bigdata.com/rdf/gas#";
+        String NAMESPACE = "http://www.embergraph.org/rdf/gas#";
 
         /**
          * The URL at which the {@link GASService} will respond.

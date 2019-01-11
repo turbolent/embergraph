@@ -178,10 +178,10 @@ public class TestGroupGraphPatternBuilder extends
     public void test_named_graph_pattern_graphConstant() throws MalformedQueryException,
             TokenMgrError, ParseException {
        
-        final String sparql = "select ?s where {GRAPH <http://www.bigdata.com> {?s ?p ?o}}";
+        final String sparql = "select ?s where {GRAPH <http://www.embergraph.org> {?s ?p ?o}}";
 
         final IV<BigdataValue, ?> graphConst = makeIV(valueFactory
-                .createURI("http://www.bigdata.com"));
+                .createURI("http://www.embergraph.org"));
 
         final QueryRoot expected = new QueryRoot(QueryType.SELECT);
         {
@@ -1139,12 +1139,12 @@ public class TestGroupGraphPatternBuilder extends
     public void test_service_001()
             throws MalformedQueryException, TokenMgrError, ParseException {
 
-        final String serviceExpr = "SERVICE <http://bigdata.com/myService> {?s ?p ?o}";
+        final String serviceExpr = "SERVICE <http://embergraph.org/myService> {?s ?p ?o}";
 
         final String sparql = "SELECT ?s where {?s ?p ?o. "+serviceExpr+"}";
 
         final IV<?, ?> serviceRefIV = makeIV(valueFactory
-                .createURI("http://bigdata.com/myService"));
+                .createURI("http://embergraph.org/myService"));
 
         final QueryRoot expected = new QueryRoot(QueryType.SELECT);
         {
@@ -1193,12 +1193,12 @@ public class TestGroupGraphPatternBuilder extends
     public void test_service_002()
             throws MalformedQueryException, TokenMgrError, ParseException {
 
-        final String serviceExpr = "SERVICE SILENT <http://bigdata.com/myService> {?s ?p ?o}";
+        final String serviceExpr = "SERVICE SILENT <http://embergraph.org/myService> {?s ?p ?o}";
         
         final String sparql = "SELECT ?s where {?s ?p ?o. " + serviceExpr + "}";
 
         final IV<?, ?> serviceRefIV = makeIV(valueFactory
-                .createURI("http://bigdata.com/myService"));
+                .createURI("http://embergraph.org/myService"));
         
         final QueryRoot expected = new QueryRoot(QueryType.SELECT);
         {
@@ -1311,7 +1311,7 @@ public class TestGroupGraphPatternBuilder extends
 
         final String serviceExpr = "SERVICE ?o {?s ?p ?o}";
 
-        final String sparql = "PREFIX : <http://www.bigdata.com/>\n"
+        final String sparql = "PREFIX : <http://www.embergraph.org/>\n"
                 + "SELECT ?s where {?s ?p ?o. " + serviceExpr + "}";
 
         final QueryRoot expected = new QueryRoot(QueryType.SELECT);
@@ -1319,7 +1319,7 @@ public class TestGroupGraphPatternBuilder extends
 
             final Map<String, String> prefixDecls = new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
             {
-                prefixDecls.put("", "http://www.bigdata.com/");
+                prefixDecls.put("", "http://www.embergraph.org/");
                 expected.setPrefixDecls(prefixDecls);
             }
 

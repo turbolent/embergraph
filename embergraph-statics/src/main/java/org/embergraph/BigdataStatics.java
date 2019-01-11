@@ -112,7 +112,7 @@ public class BigdataStatics {
      */
     public static final String getContextPath() {
 
-        return "/bigdata";
+        return "/embergraph";
         
     }
     

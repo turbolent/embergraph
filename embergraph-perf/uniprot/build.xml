@@ -9,7 +9,7 @@
 	<!-- runtime classpath w/o install. -->
 	<path id="runtime.classpath">
 		<!-- The bigdata dependencies. -->
-		<fileset dir="${bigdata.build.dir}/lib">
+		<fileset dir="${embergraph.build.dir}/lib">
 			<include name="**/*.jar" />
 		</fileset>
 	</path>
@@ -39,7 +39,7 @@
 		</java>
 	</target>
 
-	<target name="start-nano-server" depends="prepare" description="Start a small http server fronting for a bigdata database instance.">
+	<target name="start-nano-server" depends="prepare" description="Start a small http server fronting for a embergraph database instance.">
 		<java classname="org.embergraph.rdf.sail.webapp.NanoSparqlServer" fork="true" failonerror="true">
 			<arg line="${nanoServerPort} ${namespace} ${journalPropertyFile}" />
 			<!-- specify/override the journal file name. -->

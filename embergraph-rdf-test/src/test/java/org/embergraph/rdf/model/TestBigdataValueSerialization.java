@@ -75,7 +75,7 @@ public class TestBigdataValueSerialization extends TestCase2 {
      */
     public void test_URIs() {
 
-        final URI a = new URIImpl("http://www.bigdata.com");
+        final URI a = new URIImpl("http://www.embergraph.org");
         
         assertEquals(a, roundTrip_tuned(a));
         
@@ -86,7 +86,7 @@ public class TestBigdataValueSerialization extends TestCase2 {
      */
     public void test_plainLiterals() {
 
-        final Literal a = new LiteralImpl("bigdata");
+        final Literal a = new LiteralImpl("embergraph");
         
         assertEquals(a, roundTrip_tuned(a));
         
@@ -97,7 +97,7 @@ public class TestBigdataValueSerialization extends TestCase2 {
      */
     public void test_langCodeLiterals() {
 
-        final Literal a = new LiteralImpl("bigdata","en");
+        final Literal a = new LiteralImpl("embergraph","en");
         
         assertEquals(a, roundTrip_tuned(a));
         
@@ -108,7 +108,7 @@ public class TestBigdataValueSerialization extends TestCase2 {
      */
     public void test_dataTypeLiterals() {
 
-        final Literal a = new LiteralImpl("bigdata", XMLSchema.INT);
+        final Literal a = new LiteralImpl("embergraph", XMLSchema.INT);
         
         assertEquals(a, roundTrip_tuned(a));
         
@@ -131,7 +131,7 @@ public class TestBigdataValueSerialization extends TestCase2 {
 
 	public void test_roundTrip_URI() {
 
-		doRoundTripTest(new URIImpl("http://www.bigdata.com"));
+		doRoundTripTest(new URIImpl("http://www.embergraph.org"));
 		
 	}
 
@@ -145,19 +145,19 @@ public class TestBigdataValueSerialization extends TestCase2 {
 
 	public void test_roundTrip_plainLiteral() {
 
-		doRoundTripTest(new LiteralImpl("bigdata"));
+		doRoundTripTest(new LiteralImpl("embergraph"));
 		
 	}
 
     public void test_roundTrip_langCodeLiterals() {
 
-        doRoundTripTest(new LiteralImpl("bigdata", "en"));
+        doRoundTripTest(new LiteralImpl("embergraph", "en"));
 
     }
 	
 	public void test_roundTrip_xsd_string() {
 
-		doRoundTripTest(new LiteralImpl("bigdata", XMLSchema.STRING));
+		doRoundTripTest(new LiteralImpl("embergraph", XMLSchema.STRING));
 
 	}
 

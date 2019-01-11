@@ -19,7 +19,7 @@ public class BigdataRepositoryFactory implements RepositoryFactory {
 	/**
 	 * The type of repositories that are created by this factory.
 	 */
-	public static final String TYPE = "bigdata:BigdataRepository";
+	public static final String TYPE = "embergraph:BigdataRepository";
 
 	public String getRepositoryType() {
 		return TYPE;

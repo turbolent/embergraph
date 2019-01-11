@@ -259,7 +259,7 @@ public class TestFullTextIndex extends AbstractTripleStoreTestCase {
                     f.createLiteral("tag team", "en"),//
                     f.createLiteral("the first day", "en"),// // 'the' is a stopword.
 
-                    f.createURI("http://www.bigdata.com"),//
+                    f.createURI("http://www.embergraph.org"),//
                     f.asValue(RDF.TYPE),//
                     f.asValue(RDFS.SUBCLASSOF),//
                     f.asValue(XMLSchema.DECIMAL),//
@@ -432,7 +432,7 @@ public class TestFullTextIndex extends AbstractTripleStoreTestCase {
                     f.createLiteral("slow brown dog", f
                             .asValue(XMLSchema.STRING)),//
                     
-                    f.createLiteral("http://www.bigdata.com/mangy/yellow/cat",
+                    f.createLiteral("http://www.embergraph.org/mangy/yellow/cat",
                             f.asValue(XMLSchema.ANYURI)),//
                             
                     f.createLiteral("10.128.1.2",
@@ -454,7 +454,7 @@ public class TestFullTextIndex extends AbstractTripleStoreTestCase {
             assertExpectedHits(store, "cat", "en", //
 //                    0f, // minCosine,
                     new BigdataValue[] {//
-                    f.createLiteral("http://www.bigdata.com/mangy/yellow/cat",
+                    f.createLiteral("http://www.embergraph.org/mangy/yellow/cat",
                             f.asValue(XMLSchema.ANYURI))//
                     });
             
@@ -483,7 +483,7 @@ public class TestFullTextIndex extends AbstractTripleStoreTestCase {
                 assertExpectedHits(store, "cat", "en", //
 //                        0f, // minCosine,
                         new BigdataValue[] {//
-                        f.createLiteral("http://www.bigdata.com/mangy/yellow/cat",
+                        f.createLiteral("http://www.embergraph.org/mangy/yellow/cat",
                                 f.asValue(XMLSchema.ANYURI))//
                         });
                 
@@ -560,7 +560,7 @@ public class TestFullTextIndex extends AbstractTripleStoreTestCase {
                     f.createLiteral("slow brown dog", f
                             .asValue(XMLSchema.STRING)),//
                     
-                    f.createLiteral("http://www.bigdata.com/mangy/yellow/cat",
+                    f.createLiteral("http://www.embergraph.org/mangy/yellow/cat",
                             f.asValue(XMLSchema.ANYURI)),//
             };
 
@@ -576,7 +576,7 @@ public class TestFullTextIndex extends AbstractTripleStoreTestCase {
             assertExpectedHits(store, "cat", "en", //
 //                    0f, // minCosine,
                     new BigdataValue[] {//
-                    f.createLiteral("http://www.bigdata.com/mangy/yellow/cat",
+                    f.createLiteral("http://www.embergraph.org/mangy/yellow/cat",
                             f.asValue(XMLSchema.ANYURI))//
                     });
             
@@ -598,7 +598,7 @@ public class TestFullTextIndex extends AbstractTripleStoreTestCase {
                 assertExpectedHits(store, "cat", "en", //
 //                        0f, // minCosine,
                         new BigdataValue[] {//
-                        f.createLiteral("http://www.bigdata.com/mangy/yellow/cat",
+                        f.createLiteral("http://www.embergraph.org/mangy/yellow/cat",
                                 f.asValue(XMLSchema.ANYURI))//
                         });
                 
@@ -637,7 +637,7 @@ public class TestFullTextIndex extends AbstractTripleStoreTestCase {
 	                    f.createLiteral("tag team", "en"),//
 	                    f.createLiteral("the first day", "en"),// // 'the' is a stopword.
 	
-	                    f.createURI("http://www.bigdata.com"),//
+	                    f.createURI("http://www.embergraph.org"),//
 	                    f.asValue(RDF.TYPE),//
 	                    f.asValue(RDFS.SUBCLASSOF),//
 	                    f.asValue(XMLSchema.DECIMAL),//

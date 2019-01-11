@@ -114,7 +114,7 @@ public class TestAxioms extends AbstractTripleStoreTestCase {
 
             final BigdataURI rdfType = f.asValue(RDF.TYPE);
             final BigdataURI rdfProperty = f.asValue(RDF.PROPERTY);
-            final BigdataURI unknownURI = f.createURI("http://www.bigdata.com/unknown");
+            final BigdataURI unknownURI = f.createURI("http://www.embergraph.org/unknown");
             
             // resolve term ids.
             store.addTerms(new BigdataValue[] { rdfType, rdfProperty, unknownURI });
@@ -200,7 +200,7 @@ public class TestAxioms extends AbstractTripleStoreTestCase {
 
             final BigdataURI rdfType = f.asValue(RDF.TYPE);
             final BigdataURI rdfProperty = f.asValue(RDF.PROPERTY);
-            final BigdataURI unknownURI = f.createURI("http://www.bigdata.com/unknown");
+            final BigdataURI unknownURI = f.createURI("http://www.embergraph.org/unknown");
             
             // resolve term ids.
             store.addTerms(new BigdataValue[] { rdfType, rdfProperty, unknownURI });
@@ -280,7 +280,7 @@ public class TestAxioms extends AbstractTripleStoreTestCase {
             final BigdataURI rdfType = f.asValue(RDF.TYPE);
             final BigdataURI rdfProperty = f.asValue(RDF.PROPERTY);
             final BigdataURI owlEquivalentClass = f.asValue(OWL.EQUIVALENTCLASS);
-            final BigdataURI unknownURI = f.createURI("http://www.bigdata.com/unknown");
+            final BigdataURI unknownURI = f.createURI("http://www.embergraph.org/unknown");
             
             // resolve term ids.
             store.addTerms(new BigdataValue[] { rdfType, rdfProperty,

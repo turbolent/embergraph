@@ -52,7 +52,7 @@ public class PackedLongIV<V extends BigdataLiteral>
 
 //  private static final transient Logger log = Logger.getLogger(CompressedTimestampIV.class);
 
-    public static final URI PACKED_LONG = new URIImpl("http://www.bigdata.com/rdf/datatype#packedLong");
+    public static final URI PACKED_LONG = new URIImpl("http://www.embergraph.org/rdf/datatype#packedLong");
 
 
     /**

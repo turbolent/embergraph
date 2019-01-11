@@ -49,7 +49,7 @@ public interface BD {
     /**
      * The namespace used for bigdata specific extensions.
      */
-    String NAMESPACE = "http://www.bigdata.com/rdf#";
+    String NAMESPACE = "http://www.embergraph.org/rdf#";
     
     /**
      * The name of a per-statement attribute whose value is recognized in

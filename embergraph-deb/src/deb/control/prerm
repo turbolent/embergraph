@@ -3,19 +3,19 @@ set -e
 
 [ -f /etc/default/embergraph ] && . /etc/default/embergraph
 
-stopBlazegraph() {
+stopEmbergraph() {
     service embergraph stop || true
 }
 
 case "$1" in
     upgrade)
         if [ "$RESTART_ON_UPGRADE" = "false" ] ; then
-            stopBlazegraph
+            stopEmbergraph
         fi
     ;;
 
     remove)
-        stopBlazegraph
+        stopEmbergraph
     ;;
 
     deconfigure|failed-upgrade)

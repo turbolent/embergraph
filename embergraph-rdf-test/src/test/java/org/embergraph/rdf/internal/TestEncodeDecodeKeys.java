@@ -85,7 +85,7 @@ import org.embergraph.service.geospatial.GeoSpatialDatatypeConfiguration;
  */
 public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
 
-    final String GEO_SPATIAL_DATATYPE = "http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral";
+    final String GEO_SPATIAL_DATATYPE = "http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral";
     
     final URI GEO_SPATIAL_DATATYPE_URI = new URIImpl(GEO_SPATIAL_DATATYPE);
     
