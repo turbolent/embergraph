@@ -1,5 +1,6 @@
-/**
-   Copyright (C) SYSTAP, LLC DBA Blazegraph 2006-2016.  All rights reserved.
+/*
+Copyright (C) SYSTAP, LLC DBA Blazegraph 2006-2018. All rights reserved.
+Copyright (C) Embergraph contributors 2019. All rights reserved.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.

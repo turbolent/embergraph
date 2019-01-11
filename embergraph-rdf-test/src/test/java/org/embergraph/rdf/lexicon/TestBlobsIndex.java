@@ -1,6 +1,6 @@
-/**
-
- Copyright (C) SYSTAP, LLC DBA Blazegraph 2006-2016.  All rights reserved.
+/*
+Copyright (C) SYSTAP, LLC DBA Blazegraph 2006-2018. All rights reserved.
+Copyright (C) Embergraph contributors 2019. All rights reserved.
 
  Contact:
  SYSTAP, LLC DBA Blazegraph

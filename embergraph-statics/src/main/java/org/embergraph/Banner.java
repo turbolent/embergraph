@@ -1,12 +1,7 @@
 /*
 
-Copyright (C) SYSTAP, LLC DBA Blazegraph 2006-2016.  All rights reserved.
-
-Contact:
-     SYSTAP, LLC DBA Blazegraph
-     2501 Calvert ST NW #106
-     Washington, DC 20008
-     licenses@blazegraph.com
+Copyright (C) SYSTAP, LLC DBA Blazegraph 2006-2018. All rights reserved.
+Copyright (C) Embergraph contributors 2019. All rights reserved.
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -510,14 +505,10 @@ public class Banner {
         setDefaultLogLevel(quiet);
         
     	banner = 
-        "\nBlazeGraph(TM) Graph Engine"+//
+        "\nEmbergraph"+//
         "\n"+//
-        "\n                   Flexible"+//
-        "\n                   Reliable"+//
-        "\n                  Affordable"+//
-        "\n      Web-Scale Computing for the Enterprise"+//
-        "\n"+//
-        "\nCopyright SYSTAP, LLC DBA Blazegraph 2006-2016.  All rights reserved."+//
+        "\nCopyright (C) SYSTAP, LLC DBA Blazegraph 2006-2018.  All rights reserved."+//
+        "\nCopyright (C) Embergraph contributors 2019.  All rights reserved."+//
         "\n"+//
         "\n"+fullyQualifiedHostName+//
         "\n"+new Date()+//
