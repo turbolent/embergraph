@@ -27,7 +27,7 @@ import java.io.Reader;
 import java.io.Serializable;
 
 /*
-* An interface providing methods to break the input from a reader into words.
+ * An interface providing methods to break the input from a reader into words.
  *
  * <p>The intended implementations of this interface should decorate a given reader (see, for
  * instance, {@link it.unimi.dsi.io.FastBufferedReader}). The reader can be changed at any time

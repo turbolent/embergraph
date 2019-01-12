@@ -5,14 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.embergraph.btree.AbstractBTree;
-import org.embergraph.btree.BTree;
 import org.embergraph.btree.ILocalBTreeView;
 import org.embergraph.btree.IndexSegment;
 import org.embergraph.btree.view.FusedView;
 import org.embergraph.service.Event;
 
 /*
-* Helper class examines an index partition view and returns a view for which we can quickly do an
+ * Helper class examines an index partition view and returns a view for which we can quickly do an
  * incremental build. The given view is always the real index partition view. The identified view
  * will include one or more of the sources in the given view. The first component of the given view
  * is always included in the identified view and will be the {@link BTree} from a journal.
@@ -125,16 +124,16 @@ class BuildViewMetadata {
       long sumSegBytes = 0L;
       for (int i = 1; i < sources.length; i++) {
 
-      /*
-       * Values for this source (2nd+ source only).
+        /*
+         * Values for this source (2nd+ source only).
          */
         final AbstractBTree s = sources[i];
         final long entryCount = s.getEntryCount();
         final boolean isJournal = !(s instanceof IndexSegment);
         final long segBytes = (isJournal ? 0L : s.getStore().size());
 
-      /*
-       * Terminate if too much data to include in an incremental
+        /*
+         * Terminate if too much data to include in an incremental
          * build.
          */
         // final int BUILD_MAX_JOURNAL_COUNT = 3;
@@ -145,8 +144,8 @@ class BuildViewMetadata {
         // break;
         if (sumSegBytes + segBytes > maxSumSegBytes) break;
 
-      /*
-       * Update the running totals.
+        /*
+         * Update the running totals.
          */
         sumEntryCount += entryCount;
 

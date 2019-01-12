@@ -51,7 +51,7 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
 /*
-* @author <a href="mailto:mpersonick@users.sourceforge.net">Mike Personick</a>
+ * @author <a href="mailto:mpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
  */
 public class TestOptionals extends AbstractInferenceEngineTestCase {

@@ -1,7 +1,7 @@
 package org.embergraph.rdf.rio;
 
 /*
-* An instance of this exception is thrown when the same blank node appears in the context position
+ * An instance of this exception is thrown when the same blank node appears in the context position
  * of two or more statements having a distinct subject predicate, and object. This is an error
  * because it implies that two statements with different bindings are the same statement.
  *

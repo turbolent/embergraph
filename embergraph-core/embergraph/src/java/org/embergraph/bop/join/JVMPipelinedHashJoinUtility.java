@@ -50,7 +50,7 @@ import org.embergraph.relation.accesspath.UnsyncLocalOutputBuffer;
 import org.embergraph.util.InnerCause;
 
 /*
-* Utility class supporting a pipelined hash join. This is a variant of the JVMHashJoinUtility. See
+ * Utility class supporting a pipelined hash join. This is a variant of the JVMHashJoinUtility. See
  * {@link PipelinedHashIndexAndSolutionSetJoinOp} for a documentation of this functionality.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
@@ -159,8 +159,8 @@ public class JVMPipelinedHashJoinUtility extends JVMHashJoinUtility
 
       for (int i = 0; i < chunk.length; i++) {
 
-      /*
-       * fast path: if we don't have a subquery but a join against mappings passed in via binding
+        /*
+         * fast path: if we don't have a subquery but a join against mappings passed in via binding
          * set annotation, these mappings can be processed immediately (the latter,
          * bsFromBindingsSetSource, have been added to the index right in the beginning of this
          * method already).
@@ -173,15 +173,15 @@ public class JVMPipelinedHashJoinUtility extends JVMHashJoinUtility
         // Take a distinct projection of the join variables.
         final IBindingSet bsetDistinct = chunk[i].copy(projectInVars);
 
-      /*
-       * Find bucket in hash index for that distinct projection (bucket of solutions with the same
+        /*
+         * Find bucket in hash index for that distinct projection (bucket of solutions with the same
          * join vars from the subquery - basically a JOIN).
          */
         final Bucket b = rightSolutions.getBucket(bsetDistinct);
 
         if (b != null || distinctProjectionsWithoutSubqueryResult.contains(bsetDistinct)) {
-        /*
-       * Either a match in the bucket or subquery was already
+          /*
+           * Either a match in the bucket or subquery was already
            * computed for this distinct projection but did not produce
            * any results. Either way, it will take a fast path that
            * avoids the subquery.
@@ -266,8 +266,8 @@ public class JVMPipelinedHashJoinUtility extends JVMHashJoinUtility
             // add solutions to the subquery into the hash index.
             rightSolutions.add(solution);
 
-          /*
-       * we remove all mappings that generated at least one
+            /*
+             * we remove all mappings that generated at least one
              * result from distinct set (which will be further
              * processed later on); This is how we discover the set
              * of distinct projections that did not join.
@@ -278,8 +278,8 @@ public class JVMPipelinedHashJoinUtility extends JVMHashJoinUtility
           }
         }
 
-      /*
-       * register the distinct keys for which the subquery did not yield any result as "keys
+        /*
+         * register the distinct keys for which the subquery did not yield any result as "keys
          * without match" at the index; this is an improvement (though not necessarily required) in
          * order to avoid unnecessary re-computation of the subqueries for these keys
          */
@@ -454,8 +454,8 @@ public class JVMPipelinedHashJoinUtility extends JVMHashJoinUtility
             outputSolution(outputBuffer, left);
           }
           break;
-        /*
-       * Semantics of EXISTS is defined as follows: it only takes effect if the ASK var is not
+          /*
+           * Semantics of EXISTS is defined as follows: it only takes effect if the ASK var is not
            * null; in that case, it has the same semantics as OPTIONAL, but binds the askVar to true
            * or false depending on whether a match exists.
            */

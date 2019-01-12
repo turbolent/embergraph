@@ -13,7 +13,7 @@ import cern.colt.matrix.DoubleMatrix2D;
 import cern.jet.math.Functions;
 
 /*
-* For a symmetric, positive definite matrix <tt>A</tt>, the Cholesky decomposition is a lower
+ * For a symmetric, positive definite matrix <tt>A</tt>, the Cholesky decomposition is a lower
  * triangular matrix <tt>L</tt> so that <tt>A = L*L'</tt>; If the matrix is not symmetric or
  * positive definite, the constructor returns a partial decomposition and sets an internal flag that
  * may be queried by the <tt>isSymmetricPositiveDefinite()</tt> method.
@@ -225,8 +225,7 @@ public class CholeskyDecomposition implements java.io.Serializable {
 
     buf.append("\n\ninverse(A) = ");
     try {
-      buf.append(
-          this.solve(cern.colt.matrix.DoubleFactory2D.dense.identity(L.rows())));
+      buf.append(this.solve(cern.colt.matrix.DoubleFactory2D.dense.identity(L.rows())));
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }

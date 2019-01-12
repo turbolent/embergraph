@@ -48,7 +48,7 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
 /*
-* Embergraph integration for the {@link ComplexSPARQLQueryTest}.
+ * Embergraph integration for the {@link ComplexSPARQLQueryTest}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

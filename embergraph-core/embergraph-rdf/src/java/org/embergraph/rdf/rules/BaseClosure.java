@@ -8,7 +8,7 @@ import org.embergraph.rdf.vocab.Vocabulary;
 import org.embergraph.relation.rule.Rule;
 
 /*
-* Base class for classes that provide closure programs.
+ * Base class for classes that provide closure programs.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

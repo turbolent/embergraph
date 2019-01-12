@@ -23,7 +23,7 @@ import com.tinkerpop.rexster.config.GraphConfigurationException;
 import org.apache.commons.configuration.Configuration;
 
 /*
-* Create and configure a EmbergraphGraph for Rexster.
+ * Create and configure a EmbergraphGraph for Rexster.
  *
  * @author mikepersonick
  */

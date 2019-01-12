@@ -12,7 +12,7 @@ import org.openrdf.rio.RDFParserFactory;
 import org.openrdf.rio.turtle.TurtleParser;
 
 /*
-* An RDR-aware {@link RDFParserFactory} for Turtle parsers.
+ * An RDR-aware {@link RDFParserFactory} for Turtle parsers.
  *
  * @author Arjohn Kampman
  * @openrdf

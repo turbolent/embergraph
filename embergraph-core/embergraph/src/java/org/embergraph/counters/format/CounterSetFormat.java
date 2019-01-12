@@ -57,10 +57,9 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArraySet;
-import org.embergraph.counters.ICounterSet;
 
 /*
-* Formats for {@link ICounterSet}s.
+ * Formats for {@link ICounterSet}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

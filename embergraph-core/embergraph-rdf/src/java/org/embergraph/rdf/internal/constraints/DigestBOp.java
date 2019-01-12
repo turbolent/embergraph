@@ -32,7 +32,7 @@ import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 import org.openrdf.model.Literal;
 
 /*
-* A Digest expression involving a {@link IValueExpression} operand. The operation to be applied to
+ * A Digest expression involving a {@link IValueExpression} operand. The operation to be applied to
  * the operands is specified by the {@link DigestBOp.Annotations#OP} annotation.
  */
 public class DigestBOp extends IVValueExpression<IV> implements INeedsMaterialization {

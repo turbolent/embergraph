@@ -22,7 +22,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /*
-* Test suite for {@link CoordinateDMS}.
+ * Test suite for {@link CoordinateDMS}.
  *
  * @todo write tests for normalization @ +/-180 east/west.
  * @todo write correct rejection tests for the constructor.
@@ -406,7 +406,7 @@ public class TestCoordinateDMS extends AbstractCoordinateTestCase {
   }
 
   // /*
-// * Test for the regular expression {@link
+  // * Test for the regular expression {@link
   // CoordinateDMS#regex_latLong_minutes}.
   // */
   // public void test_regex_latLong_minutes() {
@@ -464,7 +464,7 @@ public class TestCoordinateDMS extends AbstractCoordinateTestCase {
   // }
   //
   // /*
-// * Test for the regular expression {@link
+  // * Test for the regular expression {@link
   // CoordinateDMS#regex_latLong_seconds}.
   // */
   // public void test_regex_latLong_seconds() {
@@ -621,7 +621,7 @@ public class TestCoordinateDMS extends AbstractCoordinateTestCase {
     assertEquals(-79.79194d, round5(dd.eastWest));
   }
   // /*
-// * Verify that 180W (-18000000) is normalized to 180E by the constructor.
+  // * Verify that 180W (-18000000) is normalized to 180E by the constructor.
   // */
   // public void test_ctor_180W() {
 
@@ -632,7 +632,7 @@ public class TestCoordinateDMS extends AbstractCoordinateTestCase {
   // }
 
   // /*
-// * Test for correct rejection of decimal degrees that are out of range.
+  // * Test for correct rejection of decimal degrees that are out of range.
   // */
   // public void test_ctor_correctRejection() {
 

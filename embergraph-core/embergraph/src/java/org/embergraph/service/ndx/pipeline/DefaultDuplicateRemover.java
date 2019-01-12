@@ -4,7 +4,7 @@ import org.embergraph.btree.keys.KVO;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Implementation which retains one instance of each tuple having the same unsigned byte[] key and
+ * Implementation which retains one instance of each tuple having the same unsigned byte[] key and
  * the same byte[] value. For efficiency, you may specify that the presence of the same non-<code>
  * null</code> object reference may be used to detect duplicates without requiring the comparison of
  * the byte[] values.

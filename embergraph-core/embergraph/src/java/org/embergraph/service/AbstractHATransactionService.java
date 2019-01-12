@@ -22,21 +22,17 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.service;
 
-import java.io.IOException;
 import java.util.Properties;
 import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 import org.embergraph.ha.HAGlue;
 import org.embergraph.ha.HATXSGlue;
 import org.embergraph.ha.msg.IHAGatherReleaseTimeRequest;
 import org.embergraph.ha.msg.IHANotifyReleaseTimeResponse;
-import org.embergraph.journal.AbstractJournal;
-import org.embergraph.journal.ITransactionService;
 
 /*
-* Adds local methods to support an HA aware {@link ITransactionService}.
+ * Adds local methods to support an HA aware {@link ITransactionService}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

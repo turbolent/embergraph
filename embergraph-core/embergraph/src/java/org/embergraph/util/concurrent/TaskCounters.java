@@ -4,12 +4,10 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.Instrument;
-import org.embergraph.journal.AbstractTask;
-import org.embergraph.journal.ConcurrencyManager;
 import org.embergraph.util.concurrent.IQueueCounters.ITaskCounters;
 
 /*
-* Class captures various data about the execution of {@link AbstractTask}s. These data are
+ * Class captures various data about the execution of {@link AbstractTask}s. These data are
  * collected by the {@link ConcurrencyManager} in groups the different services on which the tasks
  * are run.
  *

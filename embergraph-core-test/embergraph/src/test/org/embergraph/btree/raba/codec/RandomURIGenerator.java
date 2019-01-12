@@ -28,7 +28,7 @@ import org.embergraph.btree.keys.TestKeyBuilder;
 import org.embergraph.util.BytesUtil.UnsignedByteArrayComparator;
 
 /*
-* Generate <i>n</i> random and distinct URIs. This distribution has a shared prefix followed by
+ * Generate <i>n</i> random and distinct URIs. This distribution has a shared prefix followed by
  * some random bytes representing an integer value. There are no <code>null</code>s, even for the
  * B+Tree values.
  *

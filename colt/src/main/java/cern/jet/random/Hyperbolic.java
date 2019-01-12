@@ -10,7 +10,7 @@ package cern.jet.random;
 
 import cern.jet.random.engine.RandomEngine;
 /*
-* Hyperbolic distribution.
+ * Hyperbolic distribution.
  *
  * <p>Valid parameter ranges: <tt>alpha &gt; 0</tt> and <tt>beta &gt; 0</tt>.
  *

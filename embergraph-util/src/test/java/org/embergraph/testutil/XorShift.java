@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /*
-* XorShift - provides a pseudo random number generator without synchronization which is used for
+ * XorShift - provides a pseudo random number generator without synchronization which is used for
  * unit tests in which we do not want to introduce side effects from synchronization by the test
  * harness on the object under test.
  *

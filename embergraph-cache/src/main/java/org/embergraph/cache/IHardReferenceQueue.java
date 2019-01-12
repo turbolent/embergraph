@@ -26,7 +26,7 @@ Copyright (C) Embergraph contributors 2019. All rights reserved.
 package org.embergraph.cache;
 
 /*
-* Interface for a hard reference queue.
+ * Interface for a hard reference queue.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

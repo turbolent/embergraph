@@ -25,7 +25,7 @@ import java.util.Map;
 import org.embergraph.bop.BOp;
 
 /*
-* The CLEAR operation removes all the triples in the specified graph(s) in the Graph Store.
+ * The CLEAR operation removes all the triples in the specified graph(s) in the Graph Store.
  *
  * <pre>
  * CLEAR ( SILENT )? (GRAPH IRIref | DEFAULT | NAMED | ALL | GRAPHS | SOLUTIONS | SOLUTIONS %VARNAME)

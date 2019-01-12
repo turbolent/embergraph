@@ -13,29 +13,19 @@ import org.embergraph.bop.IPredicate;
 import org.embergraph.journal.ITx;
 import org.embergraph.journal.TimestampUtility;
 import org.embergraph.mdi.PartitionLocator;
-import org.embergraph.relation.IMutableRelation;
-import org.embergraph.relation.accesspath.BlockingBuffer;
-import org.embergraph.relation.accesspath.IAccessPath;
-import org.embergraph.relation.accesspath.IAsynchronousIterator;
-import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.IBuffer;
 import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
-import org.embergraph.relation.rule.IAccessPathExpander;
-import org.embergraph.relation.rule.IQueryOptions;
 import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.eval.IJoinNexus;
 import org.embergraph.relation.rule.eval.ISolution;
 import org.embergraph.service.AbstractDistributedFederation;
 import org.embergraph.service.AbstractScaleOutFederation;
-import org.embergraph.service.DataService;
 import org.embergraph.service.IDataService;
 import org.embergraph.service.IEmbergraphFederation;
-import org.embergraph.service.ndx.IClientIndex;
-import org.embergraph.service.proxy.RemoteBuffer;
 import org.embergraph.util.concurrent.ExecutionExceptions;
 
 /*
-* Implementation for distributed join execution.
+ * Implementation for distributed join execution.
  *
  * <p>Note: For query, this object MUST be executed locally on the client. This ensures that all
  * data flows back to the client directly. For mutation, it is possible to submit this object to any
@@ -130,8 +120,8 @@ public class DistributedJoinMasterTask extends JoinMasterTask implements Seriali
 
       if (!TimestampUtility.isReadOnly(joinNexus.getReadTimestamp())) {
 
-      /*
-       * Must use a read-consistent view and advance the
+        /*
+         * Must use a read-consistent view and advance the
          * readTimestamp before each mutation operation.
          */
 
@@ -142,8 +132,8 @@ public class DistributedJoinMasterTask extends JoinMasterTask implements Seriali
 
       if (joinNexus.getReadTimestamp() == ITx.UNISOLATED) {
 
-      /*
-       * Note: While you probably can run a query against the
+        /*
+         * Note: While you probably can run a query against the
          * unisolated indices it will prevent overflow processing
          * since there will exclusive locks and is a bad idea.
          */
@@ -404,8 +394,8 @@ public class DistributedJoinMasterTask extends JoinMasterTask implements Seriali
 
         if (!causes.isEmpty()) {
 
-        /*
-       * We have to abort, so cancel the factory task in case
+          /*
+           * We have to abort, so cancel the factory task in case
            * it is still running but fall through and try to get
            * its future in case it has already created the join
            * task.
@@ -422,8 +412,8 @@ public class DistributedJoinMasterTask extends JoinMasterTask implements Seriali
 
         causes.add(ex);
 
-      /*
-       * Note: This is here because the ExecutionExceptions that
+        /*
+         * Note: This is here because the ExecutionExceptions that
          * we throw does not print out all of its stack traces.
          *
          * @todo log iff unexpected exception class or get all

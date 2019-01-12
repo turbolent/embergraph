@@ -43,7 +43,7 @@ import java.nio.charset.Charset;
 import org.apache.log4j.Logger;
 
 /*
-* A string map based on a function signed using the original list of strings.
+ * A string map based on a function signed using the original list of strings.
  *
  * <p>A minimal perfect hash function maps a set of string to an initial segment of the natural
  * numbers, but will actually map <em>any</em> string to that segment. We can check that a string is

@@ -22,17 +22,13 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.lexicon;
 
 import java.io.Serializable;
-import java.util.Locale;
 import java.util.concurrent.TimeUnit;
-import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.BDS;
-import org.embergraph.search.FullTextIndex;
 import org.embergraph.search.Hiterator;
 import org.embergraph.search.IHit;
-import org.openrdf.model.Value;
 
 /*
-* Abstraction for the text indexer for RDF {@link Value}s allowing either the built-in embergraph
+ * Abstraction for the text indexer for RDF {@link Value}s allowing either the built-in embergraph
  * {@link FullTextIndex} or support for Lucene, etc.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -49,7 +45,7 @@ public interface ITextIndexer<A extends IHit> {
    * Moved to IValueCentricTextIndexer
    */
   //    /*
-//     * <p>
+  //     * <p>
   //     * Add the terms to the full text index so that we can do fast lookup of the
   //     * corresponding term identifiers. Only literals are tokenized. Literals
   //     * that have a language code property are parsed using a tokenizer
@@ -333,8 +329,7 @@ public interface ITextIndexer<A extends IHit> {
       } else if (!query.equals(other.query)) return false;
       if (matchRegex == null) {
         return other.matchRegex == null;
-      } else
-        return matchRegex.equals(other.matchRegex);
+      } else return matchRegex.equals(other.matchRegex);
     }
   }
 }

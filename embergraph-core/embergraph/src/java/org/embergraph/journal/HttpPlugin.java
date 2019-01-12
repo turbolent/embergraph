@@ -22,11 +22,10 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import org.apache.log4j.Logger;
 import org.embergraph.counters.AbstractStatisticsCollector;
-import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.httpd.CounterSetHTTPD;
 
 /*
-* {@link CounterSetHTTPD} plug-in.
+ * {@link CounterSetHTTPD} plug-in.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

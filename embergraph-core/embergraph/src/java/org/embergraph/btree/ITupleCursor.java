@@ -23,11 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree;
 
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-
 /*
-* Interface for sequential and random-access cursor-based {@link ITuple} operations on an index or
+ * Interface for sequential and random-access cursor-based {@link ITuple} operations on an index or
  * index partition. The interface extends the standard {@link Iterator} for forward sequential scans
  * and also provides symmetric methods for reverse sequential scans using {@link #hasPrior()} and
  * {@link #prior()}. Random access is supported using {@link #seek(byte[])}. This interface is

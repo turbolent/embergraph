@@ -29,7 +29,7 @@ import org.embergraph.bop.Var;
 import org.embergraph.bop.controller.INamedSolutionSetRef;
 
 /*
-* Test suite for {@link HTreeSolutionSetHashJoinOp}.
+ * Test suite for {@link HTreeSolutionSetHashJoinOp}.
  *
  * @see TestHTreeHashIndexOp
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -3,17 +3,12 @@ package org.embergraph.rdf.lexicon;
 import java.io.ObjectStreamException;
 import java.util.Comparator;
 import org.embergraph.btree.keys.IKeyBuilder;
-import org.embergraph.journal.Journal;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.internal.VTE;
-import org.embergraph.rdf.internal.impl.BlobIV;
-import org.embergraph.rdf.internal.impl.TermId;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.striterator.AbstractKeyOrder;
-import org.openrdf.model.Value;
 
 /*
-* Natural index orders for the {@link LexiconRelation}.
+ * Natural index orders for the {@link LexiconRelation}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

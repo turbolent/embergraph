@@ -9,7 +9,7 @@ import org.embergraph.rawstore.SimpleMemoryRawStore;
 import org.embergraph.util.BytesUtil;
 
 /*
-* A stress test which inserts a series of integer keys and then verifies the state of the index.
+ * A stress test which inserts a series of integer keys and then verifies the state of the index.
  *
  * <p>TODO Test with int32 keys (versus single byte keys).
  *

@@ -42,7 +42,7 @@ import org.embergraph.relation.rule.eval.RuleStats;
 import org.embergraph.striterator.IChunkedIterator;
 
 /*
-* Base class for rules having a single predicate that is none bound in the tail and a single
+ * Base class for rules having a single predicate that is none bound in the tail and a single
  * variable in the head. These rules can be evaluated using a distinctTermScan rather than a full
  * index scan. For example:
  *
@@ -278,8 +278,8 @@ public abstract class AbstractRuleDistinctTermScan extends Rule {
             // [id] is a distinct term identifier for the selected
             // access path.
 
-          /*
-       * bind the unbound variable in the head of the rule.
+            /*
+             * bind the unbound variable in the head of the rule.
              *
              * Note: This explicitly leaves the other variables in
              * the head unbound so that the justifications will be

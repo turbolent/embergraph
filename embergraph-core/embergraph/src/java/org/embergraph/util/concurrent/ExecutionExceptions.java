@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 /*
-* Class enumerates all exceptions thrown for a set of tasks.
+ * Class enumerates all exceptions thrown for a set of tasks.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

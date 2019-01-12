@@ -22,15 +22,13 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.hints;
 
 import org.embergraph.rdf.sparql.ast.ASTBase;
-import org.embergraph.rdf.sparql.ast.NamedSubqueryRoot;
 import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.SubqueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTSparql11SubqueryOptimizer;
 
 /*
-* Query hint indicating whether or not a Sub-Select should be transformed into a named subquery,
+ * Query hint indicating whether or not a Sub-Select should be transformed into a named subquery,
  * lifting its evaluation out of the main body of the query and replacing the subquery with an
  * INCLUDE. When <code>true</code>, the subquery will be lifted out. When <code>false</code>, the
  * subquery will not be lifted unless other semantics require that it be lifted out regardless. This

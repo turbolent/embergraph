@@ -14,10 +14,7 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IVariable;
 import org.embergraph.bop.engine.SolutionsLog;
-import org.embergraph.bop.rdf.join.ChunkedMaterializationOp;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.internal.impl.BlobIV;
-import org.embergraph.rdf.internal.impl.TermId;
 import org.embergraph.rdf.internal.impl.bnode.SidIV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.model.EmbergraphValue;
@@ -25,10 +22,9 @@ import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.striterator.AbstractChunkedResolverator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
-import org.openrdf.model.Value;
 
 /*
-* Efficiently resolve term identifiers in Embergraph {@link IBindingSet}s to RDF {@link
+ * Efficiently resolve term identifiers in Embergraph {@link IBindingSet}s to RDF {@link
  * EmbergraphValue}s.
  *
  * @see ChunkedMaterializationOp

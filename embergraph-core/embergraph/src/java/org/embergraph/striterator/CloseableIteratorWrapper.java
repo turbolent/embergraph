@@ -27,7 +27,7 @@ import cutthecrap.utils.striterators.ICloseableIterator;
 import java.util.Iterator;
 
 /*
-* Wraps a normal {@link Iterator} as an {@link ICloseableIterator}.
+ * Wraps a normal {@link Iterator} as an {@link ICloseableIterator}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

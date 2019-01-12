@@ -26,7 +26,7 @@ import org.embergraph.rdf.internal.gis.ICoordinate.UNITS;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 
 /*
-* Interface for serialization and deserialization of GeoSpatial datatypes, defining how a given
+ * Interface for serialization and deserialization of GeoSpatial datatypes, defining how a given
  * geospatial datatype is translated from literal string into its component array and back.
  *
  * @author msc
@@ -113,8 +113,7 @@ public interface IGeoSpatialLiteralSerializer extends Serializable {
    * @param vf
    * @param coordinateSystem
    */
-  IV<?, ?> serializeCoordSystem(
-      final EmbergraphValueFactory vf, final Object coordinateSystem);
+  IV<?, ?> serializeCoordSystem(final EmbergraphValueFactory vf, final Object coordinateSystem);
 
   /*
    * Serialize a custom fields value contained in a geospatial datatype. The parameter is either a
@@ -123,8 +122,7 @@ public interface IGeoSpatialLiteralSerializer extends Serializable {
    *
    * @param coordSystem
    */
-  IV<?, ?> serializeCustomFields(
-      final EmbergraphValueFactory vf, final Object... customFields);
+  IV<?, ?> serializeCustomFields(final EmbergraphValueFactory vf, final Object... customFields);
 
   /*
    * Serialize a distance value. The two parameters reflect the distance value (as Double) and the

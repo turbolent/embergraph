@@ -3,13 +3,11 @@ package org.embergraph.btree.filter;
 import cutthecrap.utils.striterators.FilterBase;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import org.embergraph.btree.IIndex;
-import org.embergraph.btree.IRangeQuery;
 import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleIterator;
 
 /*
-* Visits all elements visited by the source iterator and removes those matching the filter.
+ * Visits all elements visited by the source iterator and removes those matching the filter.
  *
  * <p>Note: If you want to only visit those elements that are being removed, then apply a {@link
  * TupleFilter} first and then stack the {@link TupleRemover} on top and make {@link

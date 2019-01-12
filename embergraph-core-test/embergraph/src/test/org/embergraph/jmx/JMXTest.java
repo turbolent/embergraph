@@ -34,7 +34,7 @@ import javax.management.StandardMBean;
 import javax.management.monitor.CounterMonitor;
 
 /*
-* Class demonstrates the ability to declare get/set and get methods on the the {@link IFoo}
+ * Class demonstrates the ability to declare get/set and get methods on the the {@link IFoo}
  * interface and expose a {@link Foo} implementation of that interface as a {@link StandardMBean}.
  * You can run {@link #main(String[])} and start <code>jconsole</code> and inspect/set the "foo"
  * attribute and see the change on the read-only "bar" attribute. No fuss, no muss.

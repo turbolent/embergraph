@@ -49,7 +49,7 @@ import org.openrdf.rio.RDFWriterRegistry;
 import org.openrdf.sail.SailConnection;
 
 /*
-* Test suite for high-level query against a graph containing statements about statements.
+ * Test suite for high-level query against a graph containing statements about statements.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -179,8 +179,8 @@ public class TestProvenanceQuery extends ProxyEmbergraphSailTestCase {
 
         final Literal mike = new LiteralImpl("mike", XMLSchema.STRING);
 
-      /*
-       * This is a hand-coded query.
+        /*
+         * This is a hand-coded query.
          *
          * Note: When statement identifiers are enabled, the only way to
          * bind the context position is to already have a statement on hand -
@@ -216,8 +216,8 @@ public class TestProvenanceQuery extends ProxyEmbergraphSailTestCase {
                 + dcCreator
                 + "> ?Y . }";
 
-      /*
-       * Create a data set consisting of the contexts to be queried.
+        /*
+         * Create a data set consisting of the contexts to be queried.
          *
          * Note: a [null] DataSet will cause context to be ignored when the
          * query is processed.
@@ -239,8 +239,8 @@ public class TestProvenanceQuery extends ProxyEmbergraphSailTestCase {
 
         if (log.isInfoEnabled()) log.info("Verifying query.");
 
-      /*
-       * These are the expected results for the query (the bindings for Y).
+        /*
+         * These are the expected results for the query (the bindings for Y).
          */
 
         final Set<Value> expected = new HashSet<Value>();
@@ -249,8 +249,8 @@ public class TestProvenanceQuery extends ProxyEmbergraphSailTestCase {
 
         expected.add(mike);
 
-      /*
-       * Verify that the query results is the correct solutions.
+        /*
+         * Verify that the query results is the correct solutions.
          */
 
         final int nresults = expected.size();

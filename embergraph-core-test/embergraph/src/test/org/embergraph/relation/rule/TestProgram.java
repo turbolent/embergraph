@@ -26,7 +26,7 @@ package org.embergraph.relation.rule;
 import java.util.Iterator;
 
 /*
-* Test suite for {@link Program} and common rule/program re-writes.
+ * Test suite for {@link Program} and common rule/program re-writes.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

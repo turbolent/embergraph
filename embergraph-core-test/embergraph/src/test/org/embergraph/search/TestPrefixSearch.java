@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit;
 import org.embergraph.rdf.lexicon.ITextIndexer.FullTextQuery;
 
 /*
-* Unit test for prefix and exact match searches. Prefix search allows a query "bro" to match
+ * Unit test for prefix and exact match searches. Prefix search allows a query "bro" to match
  * "brown" rather than requiring an exact match on the search term(s). Exact match searches should
  * only visit tuples which match the full length of the token (once encoded as a Unicode sort key).
  *

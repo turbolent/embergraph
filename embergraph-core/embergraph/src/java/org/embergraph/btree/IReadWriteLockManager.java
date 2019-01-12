@@ -20,7 +20,7 @@ package org.embergraph.btree;
 import java.util.concurrent.locks.Lock;
 
 /*
-* Interface for managing read/write locks on persistence capable data structures.
+ * Interface for managing read/write locks on persistence capable data structures.
  *
  * @see <a href="http://trac.blazegraph.com/ticket/855">AssertionError: Child does not have
  *     persistent identity </a>

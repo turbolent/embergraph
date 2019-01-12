@@ -46,15 +46,13 @@ import org.embergraph.rdf.vocab.NoVocabulary;
 import org.embergraph.service.AbstractTransactionService;
 import org.embergraph.util.DaemonThreadFactory;
 import org.embergraph.util.InnerCause;
-import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
-import org.openrdf.model.Value;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.sail.SailException;
 
 /*
-* TestCase to test single writer/mutiple transaction committed readers with SAIL interface.
+ * TestCase to test single writer/mutiple transaction committed readers with SAIL interface.
  *
  * @author Martyn Cutcher
  */
@@ -231,8 +229,8 @@ public abstract class TestMROWTransactions extends ProxyEmbergraphSailTestCase {
           Thread.sleep(250 /* ms */);
         }
         if (failex.get() == null) {
-        /*
-       * Note whether or not there are failures before we
+          /*
+           * Note whether or not there are failures before we
            * interrupt the running tasks.
            */
           success.set(true);
@@ -275,8 +273,8 @@ public abstract class TestMROWTransactions extends ProxyEmbergraphSailTestCase {
         try {
           sail.__tearDownUnitTest();
         } catch (Throwable t) {
-        /*
-       * FIXME The test helper tear down should not throw anything,
+          /*
+           * FIXME The test helper tear down should not throw anything,
            * but it can do so if a tx has been asynchronously closed. This
            * has to do with the logic that openrdf uses to close open
            * transactions when the sail is shutdown by the caller.
@@ -413,8 +411,8 @@ public abstract class TestMROWTransactions extends ProxyEmbergraphSailTestCase {
       EmbergraphSailConnection con = null;
       try {
         con = sail.getReadOnlyConnection();
-      /*
-       * Note: This sleep makes it much easier to hit the bug
+        /*
+         * Note: This sleep makes it much easier to hit the bug
          * documented here. However, the sleep can also cause the test
          * to really stretch out. So the sleep is only used until the
          * writers are done.
@@ -756,11 +754,7 @@ public abstract class TestMROWTransactions extends ProxyEmbergraphSailTestCase {
     for (int i = 0; i < nruns; i++) {
       try {
         domultiple_csem_transaction2(
-            sail.get(),
-            nreaderThreads,
-            (int) nwriters,
-            (int) nreaders,
-            false /*no tear down*/);
+            sail.get(), nreaderThreads, (int) nwriters, (int) nreaders, false /*no tear down*/);
 
         // reopen for second run - should be open if !teardown
         if (sail.get().isOpen()) sail.get().shutDown();
@@ -768,7 +762,7 @@ public abstract class TestMROWTransactions extends ProxyEmbergraphSailTestCase {
         log.warn(
             "OOPS",
             e); // There will be a number of expected causes, eg IllegalStateException - service not
-                // available
+        // available
       }
 
       sail.set(new EmbergraphSail(props));

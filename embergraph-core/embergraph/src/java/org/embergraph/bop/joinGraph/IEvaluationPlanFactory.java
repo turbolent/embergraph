@@ -28,7 +28,7 @@ import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.eval.IJoinNexus;
 
 /*
-* A factory for evaluation plans.
+ * A factory for evaluation plans.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

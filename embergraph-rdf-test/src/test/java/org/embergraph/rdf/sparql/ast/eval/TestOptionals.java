@@ -21,7 +21,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.eval;
 
 /*
-* Test suite for OPTIONAL groups. Unlike the TCK, this test suite is focused on the semantics of
+ * Test suite for OPTIONAL groups. Unlike the TCK, this test suite is focused on the semantics of
  * well-formed OPTIONAL groups.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

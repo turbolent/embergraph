@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
 import org.apache.system.SystemUtil;
 
 /*
-* Reports on the kernel version for a linux (or OSX) host.
+ * Reports on the kernel version for a linux (or OSX) host.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -70,8 +70,8 @@ public class KernelVersion {
 
       } else {
 
-      /*
-       * Attempt uname -r at with this path, but this is an unknown
+        /*
+         * Attempt uname -r at with this path, but this is an unknown
          * OS.
          */
         commands.add("/bin/uname");

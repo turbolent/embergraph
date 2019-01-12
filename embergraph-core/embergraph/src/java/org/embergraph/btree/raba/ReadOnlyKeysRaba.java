@@ -22,11 +22,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree.raba;
 
-import org.embergraph.btree.proc.IKeyArrayIndexProcedure;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Immutable implementation does not allow <code>null</code>s but supports search.
+ * Immutable implementation does not allow <code>null</code>s but supports search.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -24,14 +24,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.io;
 
 import java.io.IOException;
-import java.nio.channels.AsynchronousCloseException;
 import java.nio.channels.Channel;
-import java.nio.channels.ClosedByInterruptException;
-import java.nio.channels.ClosedChannelException;
-import java.nio.channels.FileLock;
 
 /*
-* Interface for objects which know how to re-open a {@link Channel} for some resource and also
+ * Interface for objects which know how to re-open a {@link Channel} for some resource and also
  * understand when the resource has been closed and therefore should not be reopened. This is used
  * in combination with {@link FileChannelUtility} to support the transparent re-opening of a file
  * whose channel was closed asynchronously by an interrupt in another thread during an NIO

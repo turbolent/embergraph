@@ -26,7 +26,7 @@ package org.embergraph.btree.keys;
 import java.io.Serializable;
 
 /*
-* A factory for objects that generate unsigned byte[] sort keys.
+ * A factory for objects that generate unsigned byte[] sort keys.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

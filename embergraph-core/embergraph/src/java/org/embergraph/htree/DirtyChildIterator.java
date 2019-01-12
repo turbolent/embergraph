@@ -25,7 +25,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /*
-* Visits the direct dirty children of a {@link DirectoryPage} in the index ordering. Since dirty
+ * Visits the direct dirty children of a {@link DirectoryPage} in the index ordering. Since dirty
  * nodes are always resident this iterator never forces a child to be loaded from the store.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -111,8 +111,8 @@ class DirtyChildIterator implements Iterator<AbstractPage> {
       for (; (index + 1) < slotsPerPage; index++) {
 
         if (node.childRefs[index + 1] != childRef) {
-        /*
-       * Skip over all references to the same child until we are
+          /*
+           * Skip over all references to the same child until we are
            * on the last directory slot which a reference to this
            * child. This way, when hasNext() is called again to
            * advance to the next distinct child, the visited child

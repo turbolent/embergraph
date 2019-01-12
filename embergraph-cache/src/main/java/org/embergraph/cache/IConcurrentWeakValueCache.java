@@ -30,7 +30,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 /*
-* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  * @param <K>
  * @param <V>

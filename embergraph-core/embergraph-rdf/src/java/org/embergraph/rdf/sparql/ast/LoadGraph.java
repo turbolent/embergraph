@@ -23,13 +23,9 @@ package org.embergraph.rdf.sparql.ast;
 
 import java.util.Map;
 import org.embergraph.bop.BOp;
-import org.embergraph.rdf.rio.RDFParserOptions;
-import org.openrdf.model.URI;
-import org.openrdf.rio.RDFParser;
-import org.openrdf.rio.helpers.RDFParserBase;
 
 /*
-* The LOAD operation reads an RDF document from a IRI and inserts its triples into the specified
+ * The LOAD operation reads an RDF document from a IRI and inserts its triples into the specified
  * graph in the Graph Store.
  *
  * <pre>

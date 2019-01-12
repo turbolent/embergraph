@@ -51,7 +51,7 @@ import org.embergraph.service.EventResource;
 import org.embergraph.util.Bytes;
 
 /*
-* Basic test of building an index segment from an index partition on overflow.
+ * Basic test of building an index segment from an index partition on overflow.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -191,13 +191,13 @@ public class TestBuildTask2 extends AbstractResourceManagerTestCase {
 
       try {
 
-      /*
-       * Write more data on the index, updating ground truth as we go.
+        /*
+         * Write more data on the index, updating ground truth as we go.
          */
         {
 
-        /*
-       * Add some tuples.
+          /*
+           * Add some tuples.
            */
 
           final int nentries = r.nextInt(maxtuples) + 1;
@@ -238,8 +238,8 @@ public class TestBuildTask2 extends AbstractResourceManagerTestCase {
 
         if (percentRemove > 0) {
 
-        /*
-       * Delete some randomly selected tuples.
+          /*
+           * Delete some randomly selected tuples.
            */
 
           // #of tuples actually deleted.
@@ -281,8 +281,8 @@ public class TestBuildTask2 extends AbstractResourceManagerTestCase {
             log.info("groundTruth: entryCount now " + groundTruth.getEntryCount());
         }
 
-      /*
-       * Force overflow causing an empty btree to be created for that
+        /*
+         * Force overflow causing an empty btree to be created for that
          * index on a new journal and the view definition in the new
          * btree to be updated.
          */
@@ -318,8 +318,8 @@ public class TestBuildTask2 extends AbstractResourceManagerTestCase {
           assertNotSame("closeTime", 0L, oldJournal.getRootBlockView().getCloseTime());
         }
 
-      /*
-       * Tally up the view as of the lastCommitTime on the oldJournal.
+        /*
+         * Tally up the view as of the lastCommitTime on the oldJournal.
          */
         final BuildViewMetadata acceptedView;
         {
@@ -343,8 +343,8 @@ public class TestBuildTask2 extends AbstractResourceManagerTestCase {
           assertEquals(actual.getSourceCount(), acceptedView.nsources);
         }
 
-      /*
-       * Run build task.
+        /*
+         * Run build task.
          *
          * Note: The task start time is a historical read on the final
          * committed state of the old journal. This means that the
@@ -354,8 +354,8 @@ public class TestBuildTask2 extends AbstractResourceManagerTestCase {
         final BuildResult buildResult;
         {
 
-        /*
-       * Metadata about the index partition generated during sync
+          /*
+           * Metadata about the index partition generated during sync
            * overflow.
            *
            * Note: This reflects the state of the index partition
@@ -373,8 +373,8 @@ public class TestBuildTask2 extends AbstractResourceManagerTestCase {
             // overflow must be disallowed as a task pre-condition.
             resourceManager.overflowAllowed.compareAndSet(true, false);
 
-          /*
-       * Submit task and await result (metadata describing the
+            /*
+             * Submit task and await result (metadata describing the
              * new index segment).
              */
             buildResult = concurrencyManager.submit(new IncrementalBuildTask(vmd)).get();
@@ -385,14 +385,14 @@ public class TestBuildTask2 extends AbstractResourceManagerTestCase {
             resourceManager.overflowAllowed.set(true);
           }
 
-        /*
-       * Verify that the BuildResult reports that the anticipated
+          /*
+           * Verify that the BuildResult reports that the anticipated
            * #of sources were incorporated into the index segment.
            */
           assertEquals(acceptedView.naccepted, buildResult.sourceCount);
 
-        /*
-       * Verify that the ordered sources in the BuildResult are
+          /*
+           * Verify that the ordered sources in the BuildResult are
            * the first N ordered sources from the view of the index
            * partition as of the lastCommitTime on the old journal
            * that were accepted into the build's view.
@@ -413,8 +413,8 @@ public class TestBuildTask2 extends AbstractResourceManagerTestCase {
             }
           }
 
-        /*
-       * Spot check access to the new index segment and its
+          /*
+           * Spot check access to the new index segment and its
            * createTime.
            */
 
@@ -435,8 +435,8 @@ public class TestBuildTask2 extends AbstractResourceManagerTestCase {
         // verify unisolated index view against groundTruth.
         {
 
-        /*
-       * Note: The groundTruth index reflects the total write set
+          /*
+           * Note: The groundTruth index reflects the total write set
            * to date. The index segment after a compacting merge
            * reflects only those historical writes before the last
            * overflow. Therefore this will fail if you write on the
@@ -445,14 +445,14 @@ public class TestBuildTask2 extends AbstractResourceManagerTestCase {
            */
           final ILocalBTreeView actual = resourceManager.getIndex(name, ITx.UNISOLATED);
 
-        /*
-       * There should be no writes on the mutable btree on the
+          /*
+           * There should be no writes on the mutable btree on the
            * live journal.
            */
           assertEquals("entryCount", 0, actual.getMutableBTree().getEntryCount());
 
-        /*
-       * Verify same data from ground truth and the new view
+          /*
+           * Verify same data from ground truth and the new view
            * (using btree helper classes for this).
            */
           AbstractBTreeTestCase.assertSameBTree(groundTruth, actual);
@@ -460,8 +460,8 @@ public class TestBuildTask2 extends AbstractResourceManagerTestCase {
 
         if (acceptedView.compactingMerge) {
 
-        /*
-       * Verify segment has all data in the groundTruth btree.
+          /*
+           * Verify segment has all data in the groundTruth btree.
            */
 
           final IndexSegmentStore segStore =

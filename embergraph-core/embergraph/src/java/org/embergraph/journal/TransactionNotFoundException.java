@@ -18,7 +18,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.journal;
 
 /*
-* Typed exception thrown when a transaction identifier can not be resolved.
+ * Typed exception thrown when a transaction identifier can not be resolved.
  *
  * @author bryan
  */

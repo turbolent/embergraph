@@ -26,11 +26,9 @@ import java.util.Properties;
 import java.util.concurrent.atomic.AtomicLong;
 import junit.framework.TestCase;
 import org.apache.log4j.Logger;
-import org.embergraph.btree.BTree;
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.lexicon.Id2TermWriteProc;
 import org.embergraph.rdf.sail.EmbergraphSail.EmbergraphSailConnection;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.service.AbstractTransactionService;
@@ -47,7 +45,7 @@ import org.openrdf.rio.helpers.RDFHandlerBase;
 import org.openrdf.sail.SailException;
 
 /*
-* Test suite for <a href="https://sourceforge.net/apps/trac/bigdata/ticket/473">
+ * Test suite for <a href="https://sourceforge.net/apps/trac/bigdata/ticket/473">
  * PhysicalAddressResolutionException after reopen using RWStore and recycler</a>. The root cause
  * for this exception was traced to recycling the root not when it was not direct in the BTree
  * writeCheckpoint() code. The BTree was dirty because {@link Id2TermWriteProc} was having a

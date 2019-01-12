@@ -60,7 +60,7 @@ import org.embergraph.rdf.properties.PropertiesFormat;
 import org.embergraph.rdf.properties.PropertiesWriter;
 
 /*
-* {@link PropertiesFormat#TEXT} writer.
+ * {@link PropertiesFormat#TEXT} writer.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

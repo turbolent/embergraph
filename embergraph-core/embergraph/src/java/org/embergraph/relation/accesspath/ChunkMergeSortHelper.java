@@ -28,7 +28,7 @@ import cern.colt.Swapper;
 import cern.colt.function.IntComparator;
 
 /*
-* Utility for merge sort of chunks. Merge sorts are used when two or more ordered chunks have been
+ * Utility for merge sort of chunks. Merge sorts are used when two or more ordered chunks have been
  * combined into a single chunk. Since the source chunks were already ordered, the merge sort is
  * less expensive than performing a full sort on the combined chunk.
  *

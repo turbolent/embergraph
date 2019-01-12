@@ -23,7 +23,7 @@ import org.embergraph.journal.IIndexManager;
 import org.openrdf.rio.RDFFormat;
 
 /*
-* Proxied test suite.
+ * Proxied test suite.
  *
  * @param <S>
  */

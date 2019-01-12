@@ -21,7 +21,7 @@ import it.unimi.dsi.bits.BitVector;
 import java.nio.ByteBuffer;
 
 /*
-* Simple helper class to work with bits inside a byte. Useful for classes that have a lot of
+ * Simple helper class to work with bits inside a byte. Useful for classes that have a lot of
  * boolean properties or pointers to enums that can be more compactly represented as a series of bit
  * flags. See SPO.
  *

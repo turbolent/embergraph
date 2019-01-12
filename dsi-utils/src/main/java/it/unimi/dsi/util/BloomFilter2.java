@@ -30,7 +30,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 /*
-* A Bloom filter derived directly from <code>it.unimi.dsi.mg4j.util.BloomFilter</code> in the mg4j
+ * A Bloom filter derived directly from <code>it.unimi.dsi.mg4j.util.BloomFilter</code> in the mg4j
  * project. The primary changes are:
  *
  * <ul>

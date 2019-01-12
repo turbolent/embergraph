@@ -25,7 +25,6 @@ import java.util.List;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpUtility;
 import org.embergraph.bop.Var;
-import org.embergraph.rdf.internal.NotMaterializedException;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
 import org.embergraph.rdf.sparql.ast.GraphPatternGroup;
@@ -35,7 +34,7 @@ import org.embergraph.rdf.sparql.ast.TermNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
 
 /*
-* Test suite for tickets at <href a="http://sourceforge.net/apps/trac/embergraph"> trac </a>.
+ * Test suite for tickets at <href a="http://sourceforge.net/apps/trac/embergraph"> trac </a>.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>

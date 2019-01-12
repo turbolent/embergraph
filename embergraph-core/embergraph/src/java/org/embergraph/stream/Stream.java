@@ -37,10 +37,6 @@ import org.apache.log4j.Logger;
 import org.embergraph.Banner;
 import org.embergraph.EmbergraphStatics;
 import org.embergraph.bop.solutions.SolutionSetStream;
-import org.embergraph.btree.AbstractBTree;
-import org.embergraph.btree.AbstractNode;
-import org.embergraph.btree.BTree;
-import org.embergraph.btree.BTreeCounters;
 import org.embergraph.btree.Checkpoint;
 import org.embergraph.btree.ICheckpointProtocol;
 import org.embergraph.btree.IDirtyListener;
@@ -48,20 +44,16 @@ import org.embergraph.btree.IReadWriteLockManager;
 import org.embergraph.btree.IndexInconsistentError;
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.btree.IndexTypeEnum;
-import org.embergraph.btree.Node;
 import org.embergraph.btree.ReadWriteLockManager;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.OneShotInstrument;
-import org.embergraph.htree.HTree;
 import org.embergraph.io.LongPacker;
 import org.embergraph.journal.AbstractJournal;
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.rawstore.IPSOutputStream;
 import org.embergraph.rawstore.IRawStore;
-import org.embergraph.service.IEmbergraphFederation;
 
 /*
-* A persistence capable stream of "index" entries. The stream maintains the order in which the
+ * A persistence capable stream of "index" entries. The stream maintains the order in which the
  * entries were written.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -80,12 +72,12 @@ public abstract class Stream implements ICheckpointProtocol {
   protected static final String ERROR_CLOSED = "Closed";
 
   // /*
-// * A parameter was less than zero.
+  // * A parameter was less than zero.
   // */
   // protected static final String ERROR_LESS_THAN_ZERO = "Less than zero";
 
   // /*
-// * A parameter was too large.
+  // * A parameter was too large.
   // */
   // protected static final String ERROR_TOO_LARGE = "Too large";
 
@@ -168,9 +160,7 @@ public abstract class Stream implements ICheckpointProtocol {
     this.metadata = (StreamIndexMetadata) metadata;
 
     this.store =
-        (store instanceof AbstractJournal)
-            ? ((AbstractJournal) store).getBufferStrategy()
-            : store;
+        (store instanceof AbstractJournal) ? ((AbstractJournal) store).getBufferStrategy() : store;
 
     this.readOnly = readOnly;
 
@@ -543,8 +533,7 @@ public abstract class Stream implements ICheckpointProtocol {
        */
       @SuppressWarnings("rawtypes")
       final Constructor ctor =
-          cl.getConstructor(
-              IRawStore.class, Checkpoint.class, IndexMetadata.class, Boolean.TYPE);
+          cl.getConstructor(IRawStore.class, Checkpoint.class, IndexMetadata.class, Boolean.TYPE);
 
       final SolutionSetStream solutions =
           (SolutionSetStream)
@@ -751,8 +740,8 @@ public abstract class Stream implements ICheckpointProtocol {
       if (
       /* autoCommit && */ needsCheckpoint()) {
 
-      /*
-       * Flush the btree, write a checkpoint record, and return the
+        /*
+         * Flush the btree, write a checkpoint record, and return the
          * address of that checkpoint record. The [checkpoint] reference
          * is also updated.
          */

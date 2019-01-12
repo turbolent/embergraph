@@ -18,11 +18,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree;
 
 import java.util.Stack;
-import junit.framework.AssertionFailedError;
 import org.embergraph.cache.HardReferenceQueue;
 
 /*
-* Extends {@link DefaultEvictionListener} to explicitly control when an eviction notice is expected
+ * Extends {@link DefaultEvictionListener} to explicitly control when an eviction notice is expected
  * and to verify that eviction notices are received as expected.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

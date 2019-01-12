@@ -8,7 +8,7 @@ import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 
 /*
-* An access path that is known to be empty.
+ * An access path that is known to be empty.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -110,7 +110,7 @@ public class EmptyAccessPath<E> implements IAccessPath<E> {
   }
 
   //    /*
-//     * Visits nothing.
+  //     * Visits nothing.
   //     */
   //    @SuppressWarnings("unchecked")
   //    @Override
@@ -128,7 +128,7 @@ public class EmptyAccessPath<E> implements IAccessPath<E> {
   }
 
   //    /*
-//     * Visits nothing.
+  //     * Visits nothing.
   //     */
   //    public IChunkedOrderedIterator<E> iterator(int limit, int capacity) {
   //

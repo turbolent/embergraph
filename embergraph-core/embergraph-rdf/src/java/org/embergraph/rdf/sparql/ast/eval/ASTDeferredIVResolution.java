@@ -85,7 +85,7 @@ import org.openrdf.query.impl.DatasetImpl;
 import org.openrdf.query.impl.MapBindingSet;
 
 /*
-* This class provides batch resolution of internal values, which were left unresolved during
+ * This class provides batch resolution of internal values, which were left unresolved during
  * query/update preparation. Values, which are processed: any BOp arguments, ValueExpressions, and
  * specific values stored in annotations (for example, SERVICE_REF in ServiceNode).
  *
@@ -110,7 +110,7 @@ public class ASTDeferredIVResolution {
   }
 
   //    /*
-//     * The target triple store.
+  //     * The target triple store.
   //     */
   //    private final AbstractTripleStore store;
 
@@ -492,8 +492,8 @@ public class ASTDeferredIVResolution {
               "NAMED clauses in queries are not supported in" + " triples mode.");
         }
 
-      /*
-       * Lazily instantiated sets for the default and named graphs.
+        /*
+         * Lazily instantiated sets for the default and named graphs.
          */
 
         final Set<IV<?, ?>> defaultGraphs = new LinkedHashSet<>();
@@ -518,8 +518,8 @@ public class ASTDeferredIVResolution {
                   if (dc.isVirtual()) {
 
                     if (uri.getIV().isNullIV()) {
-                    /*
-       * A virtual graph was referenced which is not
+                      /*
+                       * A virtual graph was referenced which is not
                        * declared in the database. This virtual graph will
                        * not have any members.
                        */
@@ -585,8 +585,8 @@ public class ASTDeferredIVResolution {
                     final DatasetNode datasetNode =
                         new DatasetNode((Set) defaultGraphs, (Set) namedGraphs, update);
 
-                  /*
-       * Set the data set on the QueryRoot or
+                    /*
+                     * Set the data set on the QueryRoot or
                      * DeleteInsertGraph node.
                      */
                     dcList.getKey().setDataset(datasetNode);
@@ -691,8 +691,8 @@ public class ASTDeferredIVResolution {
 
         final NamedSubqueriesNode namedSubqueries = ((QueryRoot) queryRoot).getNamedSubqueries();
 
-      /*
-       * Note: This loop uses the current size() and get(i) to avoid
+        /*
+         * Note: This loop uses the current size() and get(i) to avoid
          * problems with concurrent modification during visitation.
          */
         for (int i = 0; i < namedSubqueries.size(); i++) {
@@ -828,8 +828,8 @@ public class ASTDeferredIVResolution {
 
       final EmbergraphValue value = ((ConstantNode) bop).getValue();
       if (value != null) {
-      /*
-       * Even if iv is already filled in we should try to resolve it
+        /*
+         * Even if iv is already filled in we should try to resolve it
          * against triplestore, as previously resolved IV may be
          * inlined, but expected to be term from lexicon relation on
          * evaluation.
@@ -1176,8 +1176,8 @@ public class ASTDeferredIVResolution {
 
           if (log.isDebugEnabled()) log.debug("RESOLVED: " + v + " => " + v.getIV());
 
-        /*
-       * Note: If the constant is an effective constant
+          /*
+           * Note: If the constant is an effective constant
            * because it was given in the binding sets then we also
            * need to capture the variable name associated with
            * that constant.
@@ -1186,8 +1186,8 @@ public class ASTDeferredIVResolution {
           iv = v.getIV();
         } else {
           if (v instanceof Literal) {
-          /*
-       * This code path handles IVs not resolved by
+            /*
+             * This code path handles IVs not resolved by
              * ASTDeferredIVResolutionInitializer, for example
              * bindings, nor resolved by LexiconRelation, so we
              * could not provide Term IV for a literal from a triple
@@ -1262,8 +1262,8 @@ public class ASTDeferredIVResolution {
 
           final List<Handler> deferredHandlers = deferred.get(v);
           if (deferredHandlers != null) {
-          /*
-       * No handlers are usually defined for vocab values
+            /*
+             * No handlers are usually defined for vocab values
              * (see above).
              */
             for (final Handler handler : deferredHandlers) {

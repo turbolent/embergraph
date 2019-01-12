@@ -27,7 +27,7 @@ import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Test suite for low-level operations on variable length byte[]s.
+ * Test suite for low-level operations on variable length byte[]s.
  *
  * @see BytesUtil
  * @todo test with JNI integration.

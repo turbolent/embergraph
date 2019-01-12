@@ -34,14 +34,13 @@ import org.embergraph.counters.AbstractProcessReader;
 import org.embergraph.counters.ActiveProcess;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.ICounterHierarchy;
-import org.embergraph.counters.ICounterSet;
 import org.embergraph.counters.IHostCounters;
 import org.embergraph.counters.IInstrument;
 import org.embergraph.counters.IRequiredHostCounters;
 import org.embergraph.counters.ProcessReaderHelper;
 
 /*
-* Collects some counters using <code>vmstat</code>.
+ * Collects some counters using <code>vmstat</code>.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -392,8 +391,8 @@ public class VMStatCollector extends AbstractProcessCollector
 
         } catch (Exception ex) {
 
-        /*
-       * Issue warning for parsing problems.
+          /*
+           * Issue warning for parsing problems.
            */
 
           log.warn(ex.getMessage() + "\nheader: " + header + "\n  data: " + data, ex);

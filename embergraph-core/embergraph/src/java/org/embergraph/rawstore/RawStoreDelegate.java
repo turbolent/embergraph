@@ -25,7 +25,7 @@ import org.embergraph.counters.CounterSet;
 import org.embergraph.mdi.IResourceMetadata;
 
 /*
-* Simple delegation pattern.
+ * Simple delegation pattern.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

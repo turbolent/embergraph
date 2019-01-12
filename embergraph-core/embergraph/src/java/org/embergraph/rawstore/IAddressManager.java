@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rawstore;
 
 /*
-* An interface that encapsulates operations on opaque identifiers used to locate data within an
+ * An interface that encapsulates operations on opaque identifiers used to locate data within an
  * {@link IRawStore}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -71,7 +71,7 @@ public interface IAddressManager {
   int getByteCount(long addr);
 
   //    /*
-//     * Pack the address onto the output stream.
+  //     * Pack the address onto the output stream.
   //     *
   //     * @param out
   //     *            The output stream.
@@ -92,7 +92,7 @@ public interface IAddressManager {
   //    public void packAddr(DataOutput out, long addr) throws IOException;
   //
   //    /*
-//     * Unpack the address from the input stream.
+  //     * Unpack the address from the input stream.
   //     *
   //     * @param in
   //     *            The input stream.

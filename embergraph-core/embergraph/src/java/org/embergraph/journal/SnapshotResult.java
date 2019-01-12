@@ -20,7 +20,7 @@ package org.embergraph.journal;
 import java.io.File;
 
 /*
-* Default {@link ISnapshotResult} implementation.
+ * Default {@link ISnapshotResult} implementation.
  *
  * @author bryan
  * @see <a href="http://trac.bigdata.com/ticket/1172">Online backup for Journal </a>

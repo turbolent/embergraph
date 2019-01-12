@@ -38,7 +38,7 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.bop.aggregate.IAggregate;
 
 /*
-* An object which encapsulates the validation and state of an aggregation operation with an
+ * An object which encapsulates the validation and state of an aggregation operation with an
  * optional GROUP BY clause, SELECT expressions, and an optional HAVING clause. The SELECT
  * expressions MUST be aggregates (if the SELECT expressions do not involve aggregates then you
  * should not be using an aggregation operator to compute the select expressions).
@@ -208,8 +208,8 @@ public class GroupByState implements IGroupByState, Serializable {
       // aggregate expression in the select clause.
       final AtomicBoolean selectDependency = new AtomicBoolean(false);
       for (IValueExpression<?> expr : select) {
-      /*
-       * Each SELECT value expression must be either a top-level
+        /*
+         * Each SELECT value expression must be either a top-level
          * IVariable in the GROUP BY clause or an IBind wrapping a value
          * expression consisting solely of aggregates (which may of
          * course wrap bare variables) and constants.
@@ -222,8 +222,8 @@ public class GroupByState implements IGroupByState, Serializable {
           }
           selectVars.add(var);
         } else if (expr instanceof IBind<?>) {
-        /*
-       * Child of IBind must be a valid aggregate expression
+          /*
+           * Child of IBind must be a valid aggregate expression
            * consisting solely of aggregates (which may wrap bare
            * variables declared in the GROUP_BY clause) and constants.
            *
@@ -266,8 +266,8 @@ public class GroupByState implements IGroupByState, Serializable {
 
       for (IConstraint c : having) {
 
-      /*
-       * The constraint must be an aggregate expression.
+        /*
+         * The constraint must be an aggregate expression.
          *
          * Note: Top-level variables already declared in a GROUP_BY or
          * SELECT clause MAY appear within value expressions in the
@@ -287,8 +287,8 @@ public class GroupByState implements IGroupByState, Serializable {
             anyDistinct)) throw new IllegalArgumentException("Not an aggregate: " + c);
 
         if (simpleHaving) {
-        /*
-       * Inspect the value expression for each constraint.
+          /*
+           * Inspect the value expression for each constraint.
            * Typically the constraint will be a SPARQLConstraint,
            * which reports the EBV of a value expression. If that
            * value expression uses an IAggregate function then we set
@@ -407,8 +407,8 @@ public class GroupByState implements IGroupByState, Serializable {
       if (t instanceof IVariable<?>) {
         final IVariable<?> v = (IVariable<?>) t;
         if (aggregationContext) {
-        /*
-       * Decide if a variable appearing in within an aggregation
+          /*
+           * Decide if a variable appearing in within an aggregation
            * context is a reference to a previously observed
            * aggregate. If not, then we presume it to be a variable in
            * the detail records and aggregation will (at least logically)
@@ -429,8 +429,8 @@ public class GroupByState implements IGroupByState, Serializable {
           return true;
         }
         if (isSelectClause) {
-        /*
-       * Note: This is also thrown when there is a forward
+          /*
+           * Note: This is also thrown when there is a forward
            * reference to a variable in the select expression which we
            * have not yet seen.
            *

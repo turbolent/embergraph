@@ -22,7 +22,7 @@ import java.util.concurrent.Callable;
 import org.embergraph.journal.IIndexManager;
 
 /*
-* Interface allows arbitrary tasks to be submitted to an {@link HAGlue} service for evaluation.
+ * Interface allows arbitrary tasks to be submitted to an {@link HAGlue} service for evaluation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @param <T>

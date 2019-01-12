@@ -1,9 +1,7 @@
 package org.embergraph.btree;
 
-import org.embergraph.sparse.SparseRowStore;
-
 /*
-* Interface allows an application to constrain the choice of the separator key when an index
+ * Interface allows an application to constrain the choice of the separator key when an index
  * partition is split.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

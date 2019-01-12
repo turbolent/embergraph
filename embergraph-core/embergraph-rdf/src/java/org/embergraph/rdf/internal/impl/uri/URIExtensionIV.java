@@ -1,6 +1,5 @@
 package org.embergraph.rdf.internal.impl.uri;
 
-import org.embergraph.rdf.internal.ILexiconConfiguration;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.AbstractInlineExtensionIV;
@@ -10,12 +9,11 @@ import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
-import org.embergraph.rdf.vocab.Vocabulary;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
 /*
-* Class provides support for fully inline {@link URI}s for which a {@link Vocabulary} item was
+ * Class provides support for fully inline {@link URI}s for which a {@link Vocabulary} item was
  * registered for the {@link URI} <em>namespace</em> . An {@link URIExtensionIV}
  * <strong>always</strong> has the <em>inline</em> and <em>extension</em> bits set. {@link
  * URIExtensionIV} are fully inline since the <code>namespace</code> can be materialized from the

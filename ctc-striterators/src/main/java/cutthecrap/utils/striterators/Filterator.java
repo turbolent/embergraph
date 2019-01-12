@@ -18,7 +18,7 @@ package cutthecrap.utils.striterators;
 import java.util.Iterator;
 
 /*
-* Example usage
+ * Example usage
  *
  * <pre>
  * Iterator src = new Filterator(old, new Filter(state)) {

@@ -16,17 +16,13 @@ import java.util.Properties;
 import java.util.TreeMap;
 import org.embergraph.btree.IIndex;
 import org.embergraph.btree.IndexMetadata;
-import org.embergraph.config.ConfigurationException;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.IJournal;
 import org.embergraph.journal.ITx;
 import org.embergraph.journal.Journal;
 import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.sail.EmbergraphSail.EmbergraphSailConnection;
 import org.embergraph.rdf.sail.EmbergraphSail.Options;
-import org.embergraph.rdf.spo.SPORelation;
-import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.DataLoader;
 import org.embergraph.rdf.store.LocalTripleStore;
 import org.embergraph.rdf.store.ScaleOutTripleStore;
@@ -38,7 +34,7 @@ import org.embergraph.util.Bytes;
 import org.openrdf.sail.SailException;
 
 /*
-* Class provides guidance on parameter setup a data set and queries.
+ * Class provides guidance on parameter setup a data set and queries.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @deprecated The workbench provides configuration guidance. This class also provides some support

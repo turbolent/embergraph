@@ -30,7 +30,7 @@ import org.embergraph.relation.rule.Rule;
 import org.openrdf.model.vocabulary.OWL;
 
 /*
-* owl:sameAs1
+ * owl:sameAs1
  *
  * <pre>
  * (x owl:sameAs y) -&gt; (y owl:sameAs x)

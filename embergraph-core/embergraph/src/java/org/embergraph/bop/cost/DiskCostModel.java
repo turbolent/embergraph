@@ -23,7 +23,7 @@ package org.embergraph.bop.cost;
 import java.io.Serializable;
 
 /*
-* A cost model of the disk.
+ * A cost model of the disk.
  *
  * @todo Develop disk models for SAS,SATA,SSD and various RAID configurations, including the #of
  *     spindles in the RAID array.

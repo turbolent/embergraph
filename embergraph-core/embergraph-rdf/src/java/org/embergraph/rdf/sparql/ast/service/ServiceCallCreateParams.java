@@ -28,7 +28,7 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.model.URI;
 
 /*
-* Interface for the parameters used by a {@link ServiceFactory} to create a {@link ServiceCall}
+ * Interface for the parameters used by a {@link ServiceFactory} to create a {@link ServiceCall}
  * instance.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

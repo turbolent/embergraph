@@ -31,7 +31,6 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.relation.IMutableRelation;
 import org.embergraph.relation.IRelation;
 import org.embergraph.relation.accesspath.FlushBufferTask;
 import org.embergraph.relation.accesspath.IBuffer;
@@ -41,7 +40,7 @@ import org.embergraph.relation.rule.IStep;
 import org.embergraph.service.DataService;
 
 /*
-* A task that executes a mutation operation.
+ * A task that executes a mutation operation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -357,8 +356,8 @@ public class MutationTask extends AbstractStepTask {
 
         if (!parallel || joinNexus.forceSerialExecution()) {
 
-        /*
-       * Tasks for sequential mutation steps are always wrapped to
+          /*
+           * Tasks for sequential mutation steps are always wrapped to
            * ensure that the thread-safe buffer is flushed onto the
            * mutable relation after each rule executes. This is
            * necessary in order for the results of one rule in a
@@ -370,8 +369,8 @@ public class MutationTask extends AbstractStepTask {
 
         } else {
 
-        /*
-       * Add the task.
+          /*
+           * Add the task.
            */
 
           tasks.add(task);

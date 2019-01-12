@@ -28,7 +28,6 @@ import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
-import org.embergraph.btree.MutableNodeData;
 import org.embergraph.btree.raba.IRaba;
 import org.embergraph.btree.raba.codec.ICodedRaba;
 import org.embergraph.btree.raba.codec.IRabaCoder;
@@ -39,7 +38,7 @@ import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Default implementation for immutable {@link INodeData} records.
+ * Default implementation for immutable {@link INodeData} records.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -237,8 +236,8 @@ public class DefaultNodeCoder implements IAbstractNodeDataCoder<INodeData>, Exte
         final long nchildren = node.getChildEntryCount(i);
         sum += nchildren;
         if (nchildren < 0) {
-        /*
-       * Note: ZERO is permitted for a test case, but is not legal
+          /*
+           * Note: ZERO is permitted for a test case, but is not legal
            * in live data.
            */
           throw new RuntimeException();
@@ -270,8 +269,8 @@ public class DefaultNodeCoder implements IAbstractNodeDataCoder<INodeData>, Exte
       //            buf.putLong(max);
 
       if (nbits > 0) {
-      /*
-       * Note: We only write the deltas if
+        /*
+         * Note: We only write the deltas if
          * (min!=max). When min==max, the
          * deltas are coded in zero bits, so this would be a NOP anyway.
          */
@@ -432,8 +431,8 @@ public class DefaultNodeCoder implements IAbstractNodeDataCoder<INodeData>, Exte
         pos += Bytes.SIZEOF_LONG;
       }
       if (nentries < 0) {
-      /*
-       * Note: ZERO (0) is permitted for a test case but is not legal
+        /*
+         * Note: ZERO (0) is permitted for a test case but is not legal
          * in live data.
          */
         throw new RuntimeException();
@@ -518,8 +517,8 @@ public class DefaultNodeCoder implements IAbstractNodeDataCoder<INodeData>, Exte
         pos += Bytes.SIZEOF_LONG;
       }
       if (nentries < 0) {
-      /*
-       * Note: ZERO (0) is allowed for a unit test, but it is not
+        /*
+         * Note: ZERO (0) is allowed for a unit test, but it is not
          * legal in live data.
          */
         throw new RuntimeException();

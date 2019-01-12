@@ -23,16 +23,14 @@ package org.embergraph.rdf.store;
 
 import java.util.Properties;
 import org.apache.log4j.Logger;
-import org.embergraph.btree.BTree;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.IJournal;
 import org.embergraph.journal.ITx;
 import org.embergraph.journal.Journal;
 import org.embergraph.journal.TimestampUtility;
-import org.embergraph.relation.locator.DefaultResourceLocator;
 
 /*
-* A triple store based on the <em>embergraph</em> architecture. This class offers extremely low
+ * A triple store based on the <em>embergraph</em> architecture. This class offers extremely low
  * latency for index operations. All indices are local (in-process) objects and there are no
  * concurrency controls, so point tests on the indices are extremely efficient. Significant
  * parallelism is achieved by paying careful attention to the concurrency constraints imposed by the
@@ -249,8 +247,8 @@ public class LocalTripleStore extends AbstractLocalTripleStore {
 
         if (lts == null) {
 
-        /*
-       * This should only occur if there is a concurrent destroy,
+          /*
+           * This should only occur if there is a concurrent destroy,
            * which is highly unlikely to say the least.
            */
           throw new RuntimeException("Concurrent create/destroy: " + namespace);

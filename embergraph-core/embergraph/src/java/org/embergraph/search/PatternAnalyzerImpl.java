@@ -9,7 +9,7 @@ import org.apache.lucene.analysis.pattern.PatternTokenizer;
 import org.apache.lucene.analysis.util.CharArraySet;
 
 /*
-* Helper class created for Lucene 5.1.0 migration.
+ * Helper class created for Lucene 5.1.0 migration.
  *
  * @author beebs
  */

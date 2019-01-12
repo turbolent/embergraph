@@ -9,7 +9,7 @@ It is provided "as is" without expressed or implied warranty.
 package cern.colt;
 
 /*
-* Interface for an object that knows how to swap elements at two positions (a,b).
+ * Interface for an object that knows how to swap elements at two positions (a,b).
  *
  * @see cern.colt.GenericSorting
  * @author wolfgang.hoschek@cern.ch

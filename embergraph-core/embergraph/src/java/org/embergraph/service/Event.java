@@ -28,19 +28,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 import org.apache.log4j.Logger;
 import org.embergraph.counters.AbstractStatisticsCollector;
-import org.embergraph.journal.ITransactionService;
 
 /*
-* An event. Events are queued by the {@link IEmbergraphClient} and self-reported periodically to
+ * An event. Events are queued by the {@link IEmbergraphClient} and self-reported periodically to
  * the {@link ILoadBalancerService}. The event is assigned a {@link UUID} when it is created and the
  * {@link ILoadBalancerService} assigned start and end event times based on its local clock as the
  * events are received (this helps to reduce the demand on the {@link ITransactionService} for
@@ -491,7 +488,7 @@ public class Event implements Serializable {
   }
 
   //    /*
-//     * A class that knows how to render events in a stable tab-delimited format.
+  //     * A class that knows how to render events in a stable tab-delimited format.
   //     * Known detail columns are predeclared and will be written out in the order
   //     * in which they were declared. Additional detail columns are recognized the
   //     * first time they are used and will always be written out at the column
@@ -513,7 +510,7 @@ public class Event implements Serializable {
   //    }
   //
   //    /*
-//     * Class which parses events written by the {@link EventRenderer}.
+  //     * Class which parses events written by the {@link EventRenderer}.
   //     *
   //     * @todo we can't really reverse the {@link EventRenderer} when there are
   //     *       columns that are not predeclared since their values will never be

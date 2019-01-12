@@ -25,7 +25,7 @@ import java.util.concurrent.Callable;
 import org.embergraph.journal.IIndexManager;
 
 /*
-* A task that can be run either with direct index access or using the concurrency manager
+ * A task that can be run either with direct index access or using the concurrency manager
  * (compatible with group commit).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

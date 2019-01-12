@@ -31,7 +31,7 @@ import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.query.TupleQueryResult;
 
 /*
-* An implementation of the {@link TupleQueryResult} interface that stores the complete query result
+ * An implementation of the {@link TupleQueryResult} interface that stores the complete query result
  * in memory. The query results in a MutableTupleQueryResult can be iterated over multiple times and
  * can also be iterated over in reverse order.
  *

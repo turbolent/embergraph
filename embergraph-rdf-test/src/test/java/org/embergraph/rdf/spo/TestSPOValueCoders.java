@@ -21,7 +21,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.spo;
 
-import java.io.IOException;
 import java.util.Random;
 import junit.framework.TestCase2;
 import org.embergraph.btree.AbstractBTreeTestCase;
@@ -39,7 +38,7 @@ import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.test.MockTermIdFactory;
 
 /*
-* Test suite for approaches to value compression for statement indices. The values exist if either
+ * Test suite for approaches to value compression for statement indices. The values exist if either
  * statement identifiers or truth maintenance is being used, otherwise NO values are associated with
  * the keys in the statement indices. For statement identifiers, the value is the SID (int64). For
  * truth maintenance, the value is the {@link StatementEnum}. If statement identifiers and truth

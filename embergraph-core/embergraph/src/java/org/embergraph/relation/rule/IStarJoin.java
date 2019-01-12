@@ -26,7 +26,7 @@ import org.embergraph.bop.IPredicate;
 import org.embergraph.bop.IVariable;
 
 /*
-* Interface for a special type of {@link IPredicate} - the star join predicate. This type of
+ * Interface for a special type of {@link IPredicate} - the star join predicate. This type of
  * predicate bypasses the normal join operation and does a binding set join of the matches to its
  * star constraints from within the access path operation.
  *

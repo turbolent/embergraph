@@ -25,7 +25,6 @@ package org.embergraph.service;
 
 import java.io.IOException;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -56,7 +55,7 @@ import org.embergraph.util.DaemonThreadFactory;
 import org.embergraph.util.httpd.AbstractHTTPD;
 
 /*
-* Unit tests for the {@link EventReceiver}.
+ * Unit tests for the {@link EventReceiver}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -301,8 +300,8 @@ public class TestEventReceiver extends TestCase2 {
 
       } else {
 
-      /*
-       * event with duration.
+        /*
+         * event with duration.
          */
         e.start();
 
@@ -411,8 +410,8 @@ public class TestEventReceiver extends TestCase2 {
 
         } else {
 
-        /*
-       * event with duration.
+          /*
+           * event with duration.
            */
           e.start();
 

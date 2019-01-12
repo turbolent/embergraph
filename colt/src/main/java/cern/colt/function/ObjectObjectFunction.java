@@ -9,7 +9,7 @@ CERN makes no representations about the suitability of this software for any pur
 It is provided "as is" without expressed or implied warranty.
 */
 /*
-* Interface that represents a function object: a function that takes two arguments and returns a
+ * Interface that represents a function object: a function that takes two arguments and returns a
  * single value.
  */
 public interface ObjectObjectFunction {

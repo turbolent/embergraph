@@ -21,18 +21,15 @@ import java.util.Arrays;
 import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.rdf.internal.DTE;
 import org.embergraph.rdf.internal.DTEExtension;
-import org.embergraph.rdf.internal.IExtension;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.InlineLiteralIV;
-import org.embergraph.rdf.internal.InlineURIHandler;
-import org.embergraph.rdf.internal.impl.uri.URIExtensionIV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.util.BytesUtil;
 import org.openrdf.model.Literal;
 
 /*
-* An inline literal IV composed of an array of other inline literal IVs. This IV is meant to be
+ * An inline literal IV composed of an array of other inline literal IVs. This IV is meant to be
  * used with LiteralExtensionIV and URIExtensionIV as the delegate for an inline literal extension
  * or an inline URI. This IV is not directly materializable into a Literal outside the context of a
  * literal extension factory or an inline URI handler.

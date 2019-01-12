@@ -1,7 +1,7 @@
 package org.embergraph.config;
 
 /*
-* Interface for validating property values.
+ * Interface for validating property values.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -33,7 +33,7 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
 /*
-* This test case covers 2 ArrayIndexOutOfBoundsException occurrences: 1. Overflow of values array
+ * This test case covers 2 ArrayIndexOutOfBoundsException occurrences: 1. Overflow of values array
  * in StatementBuffer due to blank nodes are not cleared on flush; 2. Overflow of values array in
  * MergeUtility due to its capacity computed without reference to blank nodes.
  *

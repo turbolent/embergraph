@@ -26,7 +26,7 @@ import org.embergraph.bop.BOp;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /*
-* The DROP operation removes the specified graph(s) from the Graph Store.
+ * The DROP operation removes the specified graph(s) from the Graph Store.
  *
  * <pre>
  * DROP  ( SILENT )? (GRAPH IRIref | DEFAULT | NAMED | ALL | GRAPHS | SOLUTIONS | SOLUTIONS %VARNAME)

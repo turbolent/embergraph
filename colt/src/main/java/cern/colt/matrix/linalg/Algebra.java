@@ -12,7 +12,7 @@ import cern.colt.matrix.DoubleFactory2D;
 import cern.colt.matrix.DoubleMatrix1D;
 import cern.colt.matrix.DoubleMatrix2D;
 /*
-* Linear algebraic matrix operations operating on {@link DoubleMatrix2D}; concentrates most
+ * Linear algebraic matrix operations operating on {@link DoubleMatrix2D}; concentrates most
  * functionality of this package.
  *
  * @author wolfgang.hoschek@cern.ch

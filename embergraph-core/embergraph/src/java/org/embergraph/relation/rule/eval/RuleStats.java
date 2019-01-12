@@ -27,19 +27,12 @@ import java.util.Vector;
 import java.util.concurrent.atomic.AtomicLong;
 import org.embergraph.bop.IPredicate;
 import org.embergraph.bop.joinGraph.IEvaluationPlan;
-import org.embergraph.bop.joinGraph.IRangeCountFactory;
-import org.embergraph.relation.IMutableRelation;
-import org.embergraph.relation.accesspath.IBuffer;
-import org.embergraph.relation.rule.IProgram;
 import org.embergraph.relation.rule.IRule;
-import org.embergraph.relation.rule.ISlice;
 import org.embergraph.relation.rule.IStep;
-import org.embergraph.relation.rule.Rule;
-import org.embergraph.service.ILoadBalancerService;
 import org.embergraph.striterator.IKeyOrder;
 
 /*
-* Statistics about what an {@link IStep} did when it was executed.
+ * Statistics about what an {@link IStep} did when it was executed.
  *
  * <p>Program execution has the general form of either a set of {@link IStep}s executed, at least
  * logically, in parallel, or a sequence of {@link IStep}s executed in sequence. An {@link IStep}

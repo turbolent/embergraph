@@ -28,7 +28,7 @@ import org.embergraph.service.AbstractFederation;
 import org.embergraph.service.AbstractTransactionService;
 
 /*
-* Mock implementation supporting only those features required to bootstrap the resource manager
+ * Mock implementation supporting only those features required to bootstrap the resource manager
  * test suites.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

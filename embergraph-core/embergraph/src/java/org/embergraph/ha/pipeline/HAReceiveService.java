@@ -31,7 +31,6 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.Callable;
-import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -44,21 +43,14 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.zip.Adler32;
 import org.apache.log4j.Logger;
-import org.embergraph.ha.QuorumPipelineImpl;
 import org.embergraph.ha.msg.HAMessageWrapper;
 import org.embergraph.ha.msg.HASendState;
-import org.embergraph.ha.msg.IHAMessage;
-import org.embergraph.ha.msg.IHASyncRequest;
-import org.embergraph.ha.msg.IHAWriteMessage;
 import org.embergraph.ha.msg.IHAWriteMessageBase;
-import org.embergraph.ha.pipeline.HASendService.IncSendTask;
-import org.embergraph.io.writecache.WriteCache;
-import org.embergraph.io.writecache.WriteCacheService;
 import org.embergraph.util.BytesUtil;
 import org.embergraph.util.ChecksumError;
 
 /*
-* Receives data from an {@link HASendService}.
+ * Receives data from an {@link HASendService}.
  *
  * <p>The non-blocking processing of the data cannot proceed until the message parameters and an
  * output buffer have been set. So an accept results in a task to be run. The Future from this task
@@ -89,7 +81,7 @@ public class HAReceiveService<M extends HAMessageWrapper> extends Thread {
   private final InetSocketAddress addrSelf;
 
   //    /*
-//     * The Internet socket address of a downstream service to which each data
+  //     * The Internet socket address of a downstream service to which each data
   //     * transfer will be relayed as it is received (optional and may be
   //     * <code>null</code>).
   //     */
@@ -387,8 +379,8 @@ public class HAReceiveService<M extends HAMessageWrapper> extends Thread {
        */
       server = ServerSocketChannel.open();
       {
-      /*
-       * Robustly attempt to bind the address and port where this
+        /*
+         * Robustly attempt to bind the address and port where this
          * service will listen.
          *
          * Note: The retry is here because the port is not freed up
@@ -513,8 +505,8 @@ public class HAReceiveService<M extends HAMessageWrapper> extends Thread {
           lock.unlock();
         }
 
-      /*
-       * The ReadTask now listens for the accept, ensuring that a
+        /*
+         * The ReadTask now listens for the accept, ensuring that a
          * future is available as soon as a message is present.
          */
         try {
@@ -524,8 +516,8 @@ public class HAReceiveService<M extends HAMessageWrapper> extends Thread {
           log.error(ex);
         }
 
-      /*
-       * Note: We might have to wait for the Future to avoid having
+        /*
+         * Note: We might have to wait for the Future to avoid having
          * more than one ReadTask at a time, but we should log and
          * ignore any exception and restart the loop.
          *
@@ -598,8 +590,8 @@ public class HAReceiveService<M extends HAMessageWrapper> extends Thread {
 
       try {
 
-      /*
-       * Note: This binds a port for a specific upstream HASendService
+        /*
+         * Note: This binds a port for a specific upstream HASendService
          * that will be talking to this HAReceiveService.
          */
         client = server.accept();
@@ -866,8 +858,8 @@ public class HAReceiveService<M extends HAMessageWrapper> extends Thread {
 
       } catch (Throwable t) {
 
-      /*
-       * Log anything thrown out of this task. We check the Future of
+        /*
+         * Log anything thrown out of this task. We check the Future of
          * this task, but that does not tell us what exception is thrown
          * in the Thread executing the task when the Future is cancelled
          * and that thread is interrupted. In particular, we are looking
@@ -945,8 +937,8 @@ public class HAReceiveService<M extends HAMessageWrapper> extends Thread {
           tmp.close();
         }
 
-      /*
-       * Accept and the initialize a connection from the upstream
+        /*
+         * Accept and the initialize a connection from the upstream
          * HASendService.
          */
 
@@ -984,7 +976,7 @@ public class HAReceiveService<M extends HAMessageWrapper> extends Thread {
     private void doReceiveAndReplicate(final Client client) throws Exception {
 
       //            /*
-//             * The first cause if downstream replication fails. We make a note
+      //             * The first cause if downstream replication fails. We make a note
       //             * of this first cause, continue to drain the payload, and then
       //             * rethrow the first cause once the payload has been fully drained.
       //             * This is necessary to ensure that the socket channel does not have
@@ -1034,8 +1026,8 @@ public class HAReceiveService<M extends HAMessageWrapper> extends Thread {
 
         if (nkeys == 0) {
 
-        /*
-       * Nothing available.
+          /*
+           * Nothing available.
            */
 
           // time since last mark.
@@ -1050,8 +1042,8 @@ public class HAReceiveService<M extends HAMessageWrapper> extends Thread {
 
           if (!client.client.isOpen() || !client.clientSelector.isOpen()) {
 
-          /*
-       * The channel has been closed. The request must be
+            /*
+             * The channel has been closed. The request must be
              * failed. TODO Or set EOF:=true?
              *
              * Note: The [callback] is NOT notified. The service
@@ -1156,8 +1148,8 @@ public class HAReceiveService<M extends HAMessageWrapper> extends Thread {
 
       if (callback != null) {
 
-      /*
-       * The message was received and (if there is a downstream
+        /*
+         * The message was received and (if there is a downstream
          * service) successfully replicated to the downstream service.
          * We now invoke the callback to given this service an
          * opportunity to handle the message and the fully received
@@ -1200,16 +1192,16 @@ public class HAReceiveService<M extends HAMessageWrapper> extends Thread {
           out.position(localBuffer.position() - rdlen);
           out.limit(localBuffer.position());
           synchronized (sendService) {
-          /*
-       * Note: Code block is synchronized on [downstream] to
+            /*
+             * Note: Code block is synchronized on [downstream] to
              * make the decision to start the HASendService that
              * relays to [addrNext] atomic. The HASendService uses
              * [synchronized] for its public methods so we can
              * coordinate this lock with its synchronization API.
              */
             if (!sendService.isRunning()) {
-            /*
-       * Prepare send service for incremental transfers to
+              /*
+               * Prepare send service for incremental transfers to
                * the specified address.
                */
               // Check for termination.
@@ -1221,8 +1213,8 @@ public class HAReceiveService<M extends HAMessageWrapper> extends Thread {
           }
           // Check for termination.
           client.checkFirstCause();
-        /*
-       * Send and await Future. If this is the first chunk of a
+          /*
+           * Send and await Future. If this is the first chunk of a
            * payload and a marker exists, then send the marker as
            * well.
            */
@@ -1307,8 +1299,8 @@ public class HAReceiveService<M extends HAMessageWrapper> extends Thread {
         for (int i = 0; i < rdLen; i++) {
           if (markerBuffer[i] != marker[markerIndex]) {
             if (foundMarkerInInitialPosition) {
-            /*
-       * The marker was not found in the initial position
+              /*
+               * The marker was not found in the initial position
                * in the stream. We are going to drain data until
                * we can match the marker.
                */
@@ -1332,8 +1324,8 @@ public class HAReceiveService<M extends HAMessageWrapper> extends Thread {
       }
 
       if (markerIndex != marker.length) {
-      /*
-       * Partial marker has been read, but we do not have enough data
+        /*
+         * Partial marker has been read, but we do not have enough data
          * for a full match yet.
          */
         if (log.isDebugEnabled()) log.debug("Not found token yet!");
@@ -1473,8 +1465,8 @@ public class HAReceiveService<M extends HAMessageWrapper> extends Thread {
 
       if (c != null && readFuture != null) {
 
-      /*
-       * Set firstCause. doReceiveAndReplicate() will notice this and
+        /*
+         * Set firstCause. doReceiveAndReplicate() will notice this and
          * throw the (wrapped) exception back to the caller. This allows
          * retrySend() on the leader to differentiate between normal
          * termination of a downstream service and a pipeline change
@@ -1510,8 +1502,8 @@ public class HAReceiveService<M extends HAMessageWrapper> extends Thread {
           sendService.terminate();
         }
 
-      /*
-       * Save the new addr.
+        /*
+         * Save the new addr.
          *
          * Note: We need to do this while holding the monitor for the
          * [sendService] since the update must be visible if we restart
@@ -1559,8 +1551,8 @@ public class HAReceiveService<M extends HAMessageWrapper> extends Thread {
 
       if (oldClient != null && readFuture != null) {
 
-      /*
-       * Set firstCause. doReceiveAndReplicate() will notice this and
+        /*
+         * Set firstCause. doReceiveAndReplicate() will notice this and
          * throw the (wrapped) exception back to the caller. This allows
          * retrySend() on the leader to differentiate between normal
          * termination of a downstream service and a pipeline change

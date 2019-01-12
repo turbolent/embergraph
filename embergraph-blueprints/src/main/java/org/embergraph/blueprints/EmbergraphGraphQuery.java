@@ -30,7 +30,7 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 
 /*
-* Translate a low-performance Blueprints GraphQuery into a high-performance SPARQL query.
+ * Translate a low-performance Blueprints GraphQuery into a high-performance SPARQL query.
  *
  * @author mikepersonick
  */
@@ -439,8 +439,8 @@ public class EmbergraphGraphQuery implements GraphQuery {
 
       if (pred == EmbergraphPredicate.IN && ((Collection<?>) val).size() == 1) {
 
-      /*
-       * Simple optimization to replace a single value IN with
+        /*
+         * Simple optimization to replace a single value IN with
          * a simple EQ.
          */
         this.val = ((Collection<?>) val).iterator().next();

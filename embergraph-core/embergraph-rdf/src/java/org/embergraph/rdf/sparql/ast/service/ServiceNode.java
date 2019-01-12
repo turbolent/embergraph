@@ -37,16 +37,12 @@ import org.embergraph.rdf.sparql.ast.GroupMemberNodeBase;
 import org.embergraph.rdf.sparql.ast.IGraphPatternContainer;
 import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
 import org.embergraph.rdf.sparql.ast.IJoinNode;
-import org.embergraph.rdf.sparql.ast.JoinGroupNode;
-import org.embergraph.rdf.sparql.ast.QueryBase;
 import org.embergraph.rdf.sparql.ast.StaticAnalysis;
 import org.embergraph.rdf.sparql.ast.TermNode;
-import org.embergraph.rdf.sparql.ast.UnionNode;
-import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.model.URI;
 
 /*
-* An extension point for external service calls which produce solution multisets (a SPARQL <code>
+ * An extension point for external service calls which produce solution multisets (a SPARQL <code>
  * SERVICE</code>).
  *
  * <p>TODO It would make the internal APIs significantly easier if we modeled this as a type of

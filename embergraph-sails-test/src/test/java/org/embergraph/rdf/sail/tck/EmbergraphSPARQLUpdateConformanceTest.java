@@ -53,7 +53,7 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
 
 /*
-* Harness for running the SPARQL 1.1 UPDATE compliance tests (DAWG).
+ * Harness for running the SPARQL 1.1 UPDATE compliance tests (DAWG).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -84,8 +84,8 @@ public class EmbergraphSPARQLUpdateConformanceTest extends SPARQLUpdateConforman
    */
   static final Collection<String> knownBadTests =
       Arrays.asList(
-        /*
-       * These three test fail because either we don't understand the
+          /*
+           * These three test fail because either we don't understand the
            * default graph semantics for SPARQL Update or the DAWG doesn't.
            * Either way, these tests are incompatible with the semantics
            * assumed by the Sesame test suite SPARQLUpdateTest.
@@ -93,8 +93,8 @@ public class EmbergraphSPARQLUpdateConformanceTest extends SPARQLUpdateConforman
           "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/delete-data/manifest#dawg-delete-data-05",
           "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/delete-where/manifest#dawg-delete-where-05",
           "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/delete/manifest#dawg-delete-05",
-        /*
-       * These tests fail because we are not properly respecting the
+          /*
+           * These tests fail because we are not properly respecting the
            * USING clause.
            */
           "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/delete/manifest#dawg-delete-using-01",

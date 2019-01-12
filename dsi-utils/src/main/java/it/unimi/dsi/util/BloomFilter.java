@@ -44,7 +44,7 @@ import java.nio.charset.Charset;
 import java.util.Random;
 
 /*
-* A Bloom filter.
+ * A Bloom filter.
  *
  * <p>Instances of this class represent a set of character sequences or primitive-type arrays (with
  * false positives) using a Bloom filter. Because of the way Bloom filters work, you cannot remove

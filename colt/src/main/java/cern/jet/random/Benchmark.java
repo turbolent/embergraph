@@ -12,7 +12,7 @@ import cern.colt.list.DoubleArrayList;
 import cern.colt.list.IntArrayList;
 import cern.jet.random.engine.RandomEngine;
 /*
-* Benchmarks random number generation from various distributions as well as PDF and CDF lookups.
+ * Benchmarks random number generation from various distributions as well as PDF and CDF lookups.
  *
  * @author wolfgang.hoschek@cern.ch
  * @version 1.0, 09/24/99

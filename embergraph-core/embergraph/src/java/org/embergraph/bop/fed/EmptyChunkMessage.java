@@ -31,7 +31,7 @@ import org.embergraph.bop.engine.IQueryClient;
 import org.embergraph.relation.accesspath.EmptyCloseableIterator;
 
 /*
-* An empty {@link IChunkMessage}. This is used to kick off the optional last evaluation phase for
+ * An empty {@link IChunkMessage}. This is used to kick off the optional last evaluation phase for
  * an operator.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -1,6 +1,5 @@
 package org.embergraph.rdf.vocab;
 
-import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.vocab.decls.DCAllVocabularyDecl;
 import org.embergraph.rdf.vocab.decls.OPVocabularyDecl;
 import org.embergraph.rdf.vocab.decls.RDFSVocabularyDecl;

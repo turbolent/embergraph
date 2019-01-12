@@ -36,7 +36,7 @@ import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.resources.StaleLocatorException;
 
 /*
-* Abstract base class providing statistics for the {@link AbstractMasterTask} and a factory for the
+ * Abstract base class providing statistics for the {@link AbstractMasterTask} and a factory for the
  * statistics for the subtasks.
  *
  * <p>Note: Since there are concurrent threads which need to write on the counters on this class the
@@ -458,7 +458,7 @@ public abstract class AbstractMasterStats<L, HS extends AbstractSubtaskStats> {
   }
 
   //    /*
-//     * The average #of nanoseconds waiting for a chunk to become ready so that
+  //     * The average #of nanoseconds waiting for a chunk to become ready so that
   //     * it can be written on an output sink.
   //     */
   //    public double getAverageNanosPerWait() {
@@ -469,7 +469,7 @@ public abstract class AbstractMasterStats<L, HS extends AbstractSubtaskStats> {
   //    }
   //
   //    /*
-//     * The average #of nanoseconds per chunk written on an output sink.
+  //     * The average #of nanoseconds per chunk written on an output sink.
   //     */
   //    public double getAverageNanosPerWrite() {
   //
@@ -479,7 +479,7 @@ public abstract class AbstractMasterStats<L, HS extends AbstractSubtaskStats> {
   //    }
   //
   //    /*
-//     * The average #of elements (tuples) per chunk written on an output sink.
+  //     * The average #of elements (tuples) per chunk written on an output sink.
   //     */
   //    public double getAverageElementsPerWrite() {
   //

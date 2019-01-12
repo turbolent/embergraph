@@ -32,7 +32,7 @@ import org.embergraph.btree.IndexSegment;
 import org.embergraph.util.BytesUtil;
 
 /*
-* This class imposes the constraint that the separator key must not split a logical. This
+ * This class imposes the constraint that the separator key must not split a logical. This
  * constraint is required in order for the logical row store to retain its row-wise ACID semantics
  * when there is more than one shard for that row store. This is done using a linear scan forward
  * from the recommended splitAt index until the first tuple is identified which would be part of a
@@ -75,8 +75,8 @@ public class LogicalRowSplitHandler implements ISimpleSplitHandler, Externalizab
 
       if (cmp < 0) {
 
-      /*
-       * The N byte prefix has changed. Clone the first N bytes of the
+        /*
+         * The N byte prefix has changed. Clone the first N bytes of the
          * current key and return them to the caller. This is the
          * minimum length first successor of the recommended key which
          * can serve as a separator key without breaking the logical

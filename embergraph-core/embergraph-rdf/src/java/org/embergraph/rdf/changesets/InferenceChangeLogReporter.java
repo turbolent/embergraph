@@ -1,11 +1,7 @@
 package org.embergraph.rdf.changesets;
 
-import cutthecrap.utils.striterators.ICloseable;
-import java.beans.Statement;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import org.embergraph.bop.rdf.filter.NativeDistinctFilter;
-import org.embergraph.htree.HTree;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.store.AbstractTripleStore;
@@ -16,7 +12,7 @@ import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.openrdf.model.Value;
 
 /*
-* {@link IChangeLog} implementation reports inferences as RDF {@link Statement} s. You install this
+ * {@link IChangeLog} implementation reports inferences as RDF {@link Statement} s. You install this
  * change listener before writing on the sail connection. After the commit, you use {@link
  * #addedIterator()} ( {@link #removedIterator()}) to visit the inferences that were added to
  * (removed from) the KB by the transaction. If the transaction is aborted, simply discard the

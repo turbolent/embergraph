@@ -1,9 +1,7 @@
 package org.embergraph.search;
 
-import java.util.concurrent.ConcurrentHashMap;
-
 /*
-* Interface used to collect {@link Hit}s from the {@link ReadIndexTask}. Switched over to this
+ * Interface used to collect {@link Hit}s from the {@link ReadIndexTask}. Switched over to this
  * interface to allow for an optimization when only one token is presented for search - in this case
  * we now use a simple array of hits rather than a heavyweight ConcurrentHashMap.
  *

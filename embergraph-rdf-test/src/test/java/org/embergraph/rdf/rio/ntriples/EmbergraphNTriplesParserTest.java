@@ -10,7 +10,7 @@ import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.openrdf.rio.RDFParser;
 
 /*
-* JUnit test for the N-Triples parser.
+ * JUnit test for the N-Triples parser.
  *
  * @author Arjohn Kampman
  */

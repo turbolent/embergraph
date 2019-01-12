@@ -22,12 +22,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.mutation;
 
 import junit.framework.TestCase2;
-import org.embergraph.btree.UnisolatedReadWriteIndex;
-import org.embergraph.concurrent.LockManager;
-import org.embergraph.journal.ConcurrencyManager;
 
 /*
-* Test suite for {@link InsertOp}.
+ * Test suite for {@link InsertOp}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

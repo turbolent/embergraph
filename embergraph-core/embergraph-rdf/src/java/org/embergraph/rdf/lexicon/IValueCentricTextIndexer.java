@@ -22,15 +22,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.lexicon;
 
 import java.util.Iterator;
-import java.util.Locale;
 import org.embergraph.rdf.model.EmbergraphValue;
-import org.embergraph.rdf.store.AbstractTripleStore;
-import org.embergraph.search.FullTextIndex;
 import org.embergraph.search.IHit;
-import org.openrdf.model.Value;
 
 /*
-* Abstraction for the text indexer for RDF {@link Value}s allowing either the built-in embergraph
+ * Abstraction for the text indexer for RDF {@link Value}s allowing either the built-in embergraph
  * {@link FullTextIndex} or support for Lucene, etc.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

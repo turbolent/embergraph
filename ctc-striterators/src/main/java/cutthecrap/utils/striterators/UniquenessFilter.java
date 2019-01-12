@@ -19,7 +19,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /*
-* **************************************************************************** UniquenessFilter
+ * **************************************************************************** UniquenessFilter
  *
  * <p>Derived from Filter, and ensures no duplication, not to be used with large sets!
  *

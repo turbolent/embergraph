@@ -23,12 +23,11 @@ package it.unimi.dsi.util;
 
 import it.unimi.dsi.fastutil.longs.AbstractLongList;
 import it.unimi.dsi.io.InputBitStream;
-import it.unimi.dsi.io.OutputBitStream;
 import java.io.EOFException;
 import java.io.IOException;
 
 /*
-* Provides semi-external random access to a list of {@linkplain OutputBitStream#writeGamma(int)
+ * Provides semi-external random access to a list of {@linkplain OutputBitStream#writeGamma(int)
  * &gamma;-encoded} integers.
  *
  * <p>This class is a semi-external {@link it.unimi.dsi.fastutil.longs.LongList} that MG4J uses to

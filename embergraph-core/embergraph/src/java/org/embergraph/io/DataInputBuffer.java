@@ -29,7 +29,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /*
-* A fast implementation of DataInput designed to read from a byte[].
+ * A fast implementation of DataInput designed to read from a byte[].
  *
  * @see DataOutputBuffer
  * @see DataInputStream

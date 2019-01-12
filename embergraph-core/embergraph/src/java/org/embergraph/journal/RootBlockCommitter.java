@@ -22,7 +22,7 @@ import java.nio.ByteBuffer;
 import org.embergraph.btree.IndexInconsistentError;
 
 /*
-* Provides the callback to save the previous root block and store the address with the current
+ * Provides the callback to save the previous root block and store the address with the current
  * CommitRecord. This enables access to historical root blocks since the next CommitRecord is
  * accessible from the CommitRecordIndex. This is effective if slightly circuitous.
  *

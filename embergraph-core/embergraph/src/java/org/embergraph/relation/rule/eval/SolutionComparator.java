@@ -27,7 +27,7 @@ import java.util.Comparator;
 import org.embergraph.striterator.IKeyOrder;
 
 /*
-* Wraps the {@link Comparator} obtained from a {@link IKeyOrder} such that it will ordered {@link
+ * Wraps the {@link Comparator} obtained from a {@link IKeyOrder} such that it will ordered {@link
  * ISolution}s by the elements reported by {@link ISolution#get()}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

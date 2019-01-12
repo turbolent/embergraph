@@ -11,7 +11,7 @@ package cern.colt.matrix.linalg;
 import cern.colt.matrix.DoubleMatrix1D;
 import cern.colt.matrix.DoubleMatrix2D;
 /*
-* A low level version of {@link LUDecomposition}, avoiding unnecessary memory allocation and
+ * A low level version of {@link LUDecomposition}, avoiding unnecessary memory allocation and
  * copying. The input to <tt>decompose</tt> methods is overriden with the result (LU). The input to
  * <tt>solve</tt> methods is overriden with the result (X). In addition to <tt>LUDecomposition</tt>,
  * this class also includes a faster variant of the decomposition, specialized for tridiagonal (and

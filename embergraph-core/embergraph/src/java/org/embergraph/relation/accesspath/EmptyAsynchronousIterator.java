@@ -24,7 +24,7 @@ package org.embergraph.relation.accesspath;
 import java.util.concurrent.TimeUnit;
 
 /*
-* An empty {@link IAsynchronousIterator}.
+ * An empty {@link IAsynchronousIterator}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

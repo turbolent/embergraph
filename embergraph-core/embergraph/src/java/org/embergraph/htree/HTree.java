@@ -22,7 +22,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.htree;
 
 import java.lang.ref.Reference;
-import java.lang.ref.WeakReference;
 import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
@@ -30,9 +29,6 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.locks.Lock;
 import org.embergraph.EmbergraphStatics;
 import org.embergraph.btree.AbstractBTree;
-import org.embergraph.btree.AbstractNode;
-import org.embergraph.btree.BTree;
-import org.embergraph.btree.BTreeCounters;
 import org.embergraph.btree.BaseIndexStats;
 import org.embergraph.btree.Checkpoint;
 import org.embergraph.btree.HTreeIndexMetadata;
@@ -43,10 +39,7 @@ import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleIterator;
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.btree.IndexTypeEnum;
-import org.embergraph.btree.Leaf;
-import org.embergraph.btree.Node;
 import org.embergraph.btree.ReadOnlyCounter;
-import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.io.ByteArrayBuffer;
 import org.embergraph.io.SerializerUtil;
 import org.embergraph.mdi.LocalPartitionMetadata;
@@ -55,7 +48,7 @@ import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
 /*
-* An mutable persistence capable extensible hash tree.
+ * An mutable persistence capable extensible hash tree.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @see <a href="A robust scheme for multilevel extendible hashing (2003)"> A Robust Scheme for
@@ -313,7 +306,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
   }
 
   //    /*
-//     * Handle request for a commit by {@link #writeCheckpoint()}ing dirty nodes
+  //     * Handle request for a commit by {@link #writeCheckpoint()}ing dirty nodes
   //     * and leaves onto the store, writing a new metadata record, and returning
   //     * the address of that metadata record.
   //     * <p>
@@ -820,8 +813,8 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
       if (
       /* autoCommit && */ needsCheckpoint()) {
 
-      /*
-       * Flush the btree, write a checkpoint record, and return the
+        /*
+         * Flush the btree, write a checkpoint record, and return the
          * address of that checkpoint record. The [checkpoint] reference
          * is also updated.
          */
@@ -1071,8 +1064,8 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
       if (child == null) return false;
 
       if (child.isLeaf()) {
-      /*
-       * Found the bucket page, update it.
+        /*
+         * Found the bucket page, update it.
          */
         final BucketPage bucketPage = (BucketPage) child;
         return bucketPage.contains(key, buddyOffset);
@@ -1128,8 +1121,8 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
       if (child == null) return null;
 
       if (child.isLeaf()) {
-      /*
-       * Found the bucket page, search it for a match.
+        /*
+         * Found the bucket page, search it for a match.
          */
         final BucketPage bucketPage = (BucketPage) child;
         return bucketPage.lookupFirst(key, buddyOffset);
@@ -1177,8 +1170,8 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
       if (child == null) return emptyTupleIterator();
 
       if (child.isLeaf()) {
-      /*
-       * Found the bucket page, search it for a match.
+        /*
+         * Found the bucket page, search it for a match.
          */
         final BucketPage bucketPage = (BucketPage) child;
         return bucketPage.lookupAll(key); // , buddyOffset);
@@ -1285,8 +1278,8 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
 
       if (child.isLeaf()) {
 
-      /*
-       * Found the bucket page, update it.
+        /*
+         * Found the bucket page, update it.
          *
          * We must copyOnWrite now since the insert will otherwise call it
          * and potentially invalidate the bucketPage reference.
@@ -1297,8 +1290,8 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
         if (!bucketPage.insert(key, value)) {
           if (current.globalDepth == child.globalDepth) {
 
-          /*
-       * The child is at the same depth as the parent. Either
+            /*
+             * The child is at the same depth as the parent. Either
              * we can split a directory page which is a parent of
              * that bucket or we have to add a new level below the
              * root on the path to that bucket.
@@ -1386,8 +1379,8 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
 
       if (child.isLeaf()) {
 
-      /*
-       * Found the bucket page, update it.
+        /*
+         * Found the bucket page, update it.
          *
          * Must ensure we have copyOnWriteVersion since otherwise the bucketPage
          * later referenced will not be valid
@@ -1400,8 +1393,8 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
 
           if (current.globalDepth == child.globalDepth) {
 
-          /*
-       * The child is at the same depth as the parent. Either
+            /*
+             * The child is at the same depth as the parent. Either
              * we can split a directory page which is a parent of
              * that bucket or we have to add a new level below the
              * root on the path to that bucket.
@@ -1656,8 +1649,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
        * BTree.
        */
       final Constructor ctor =
-          cl.getConstructor(
-              IRawStore.class, Checkpoint.class, IndexMetadata.class, Boolean.TYPE);
+          cl.getConstructor(IRawStore.class, Checkpoint.class, IndexMetadata.class, Boolean.TYPE);
 
       final HTree htree =
           (HTree)
@@ -1754,8 +1746,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
        * BTree.
        */
       final Constructor ctor =
-          cl.getConstructor(
-              IRawStore.class, Checkpoint.class, IndexMetadata.class, Boolean.TYPE);
+          cl.getConstructor(IRawStore.class, Checkpoint.class, IndexMetadata.class, Boolean.TYPE);
 
       final HTree htree =
           (HTree) ctor.newInstance(new Object[] {store, checkpoint, metadata, readOnly});

@@ -23,7 +23,7 @@ import org.embergraph.rdf.graph.impl.sail.AbstractSailGraphTestCase;
 import org.openrdf.sail.SailConnection;
 
 /*
-* Test class for SSP traversal.
+ * Test class for SSP traversal.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

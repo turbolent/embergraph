@@ -20,7 +20,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.util;
 
 /*
-* Collection of some utility methods for HTML.
+ * Collection of some utility methods for HTML.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -113,7 +113,7 @@ public class HTMLUtility {
   }
 
   //    /*
-//     * Same as escapeForXHTML but respects the encoding
+  //     * Same as escapeForXHTML but respects the encoding
   //     * parameter.
   //     */
   //    public static String escapeForXHTML(String s, String enc)

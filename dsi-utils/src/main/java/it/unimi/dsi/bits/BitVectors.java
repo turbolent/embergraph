@@ -27,7 +27,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 /*
-* A class providing static methods and objects that do useful things with bit vectors.
+ * A class providing static methods and objects that do useful things with bit vectors.
  *
  * @see BitVector
  */

@@ -26,7 +26,7 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.rdf.internal.constraints.INeedsMaterialization;
 
 /*
-* Abstract base class for AST nodes which embed value expressions and hence must be able to report
+ * Abstract base class for AST nodes which embed value expressions and hence must be able to report
  * certain metadata about those value expressions to the query planner.
  */
 public interface IValueExpressionMetadata {
@@ -45,7 +45,7 @@ public interface IValueExpressionMetadata {
   INeedsMaterialization getMaterializationRequirement();
 
   //    /*
-//     * Return the materialization requirement for this filter. Many filters
+  //     * Return the materialization requirement for this filter. Many filters
   //     * require materialized variables to do their filtering. Some filters can
   //     * work on both materialized terms and internal values (a good example of
   //     * this is CompareBOp).
@@ -53,7 +53,7 @@ public interface IValueExpressionMetadata {
   //    abstract public INeedsMaterialization.Requirement getRequirement();
   //
   //    /*
-//     * Return the set of variables that will need to be materialized in the
+  //     * Return the set of variables that will need to be materialized in the
   //     * binding set in order for this filter to be evaluated.
   //     */
   //    abstract public Set<IVariable<IV>> getVarsToMaterialize();

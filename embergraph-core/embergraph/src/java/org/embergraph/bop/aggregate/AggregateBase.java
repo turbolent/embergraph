@@ -14,7 +14,7 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.impl.LiteralImpl;
 
 /*
-* Abstract base class for aggregate functions.
+ * Abstract base class for aggregate functions.
  *
  * @author thompsonbry
  * @param <E>
@@ -25,12 +25,12 @@ public abstract class AggregateBase<E> extends ImmutableBOp implements IAggregat
   private static final long serialVersionUID = 1L;
 
   //	/*
-//	 * A type safe enumeration of well known aggregate functions.
+  //	 * A type safe enumeration of well known aggregate functions.
   //	 */
   //	static public enum FunctionCode {
   //
   //		/*
-//		 * The count of the #of computed value expressions within the solution
+  //		 * The count of the #of computed value expressions within the solution
   //		 * group. In combination with the special keyword DISTINCT, this is the
   //		 * #of distinct values from the computed value expression within the
   //		 * solution group. When given with the special variable <code>*</code>,
@@ -40,7 +40,7 @@ public abstract class AggregateBase<E> extends ImmutableBOp implements IAggregat
   //		COUNT(0),
   //
   //		/*
-//		 * The sum of the computed value expressions within the solution group.
+  //		 * The sum of the computed value expressions within the solution group.
   //		 * In combination with the special keyword DISTINCT, this is the sum of
   //		 * the distinct values from the computed value expressions within the
   //		 * solution group.
@@ -48,7 +48,7 @@ public abstract class AggregateBase<E> extends ImmutableBOp implements IAggregat
   //		SUM(1),
   //
   //		/*
-//		 * The average is defined as
+  //		 * The average is defined as
   //		 * <code>AVG(expr) := SUM(expr)/COUNT(expr)</code>. Note that both SUM
   //		 * and COUNT can be hash partitioned over a cluster, so it often makes
   //		 * sense to rewrite AVG(expr) internally in terms of COUNT and SUM. This
@@ -57,27 +57,27 @@ public abstract class AggregateBase<E> extends ImmutableBOp implements IAggregat
   //		AVG(2),
   //
   //		/*
-//		 * MIN(expr) is the minimum observed value for the computed value
+  //		 * MIN(expr) is the minimum observed value for the computed value
   //		 * expressions according to the ordering semantics of
   //		 * <code>ORDER BY expr ASC</code>. This may be combined with DISTINCT.
   //		 */
   //		MIN(3),
   //
   //		/*
-//		 * MAX(expr) is the maximum observed value for the computed value
+  //		 * MAX(expr) is the maximum observed value for the computed value
   //		 * expressions according to the ordering semantics of
   //		 * <code>ORDER BY expr ASC</code>. This may be combined with DISTINCT.
   //		 */
   //		MAX(4),
   //
   //		/*
-//		 * The combined values of the computed value expressions as a string.
+  //		 * The combined values of the computed value expressions as a string.
   //		 * This may be combined with DISTINCT.
   //		 */
   //		GROUP_CONCAT(5),
   //
   //		/*
-//		 * This evaluates to an arbitrary value of the computed value
+  //		 * This evaluates to an arbitrary value of the computed value
   //		 * expressions. This may be combined with DISTINCT to sample from the
   //		 * distinct computed values. While the implementation is not required to
   //		 * choose randomly among the values to be sampled, random sampling may
@@ -100,7 +100,7 @@ public abstract class AggregateBase<E> extends ImmutableBOp implements IAggregat
   public interface Annotations extends ImmutableBOp.Annotations {
 
     //        /*
-//         * The aggregate function identifier ({@link FunctionCode#COUNT},
+    //         * The aggregate function identifier ({@link FunctionCode#COUNT},
     //         * {@link FunctionCode#SUM}, etc).
     //         */
     //        String FUNCTION_CODE = AggregateBase.class.getName() + ".functionCode";

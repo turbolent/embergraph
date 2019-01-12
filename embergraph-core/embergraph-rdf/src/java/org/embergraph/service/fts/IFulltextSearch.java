@@ -23,7 +23,7 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.service.fts.FTS.SearchResultType;
 
 /*
-* Abstraction for search interface against external Solr index.
+ * Abstraction for search interface against external Solr index.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$

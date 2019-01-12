@@ -25,7 +25,7 @@ import java.util.Formatter;
 import junit.framework.TestCase2;
 
 /*
-* Unit tests for {@link HTreeUtil}.
+ * Unit tests for {@link HTreeUtil}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -158,8 +158,8 @@ public class TestHTreeUtil extends TestCase2 {
           nfail++;
         }
 
-      /*
-       * Find the buddy offset for a sequence of relevant hash bits
+        /*
+         * Find the buddy offset for a sequence of relevant hash bits
          * having a 1 in each of the bit positions to which the buddy
          * indexing is sensitive given the globalDepth of the parent and
          * the localDepth of the child. This gives us an overview of the

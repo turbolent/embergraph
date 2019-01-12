@@ -26,7 +26,7 @@ import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.eval.IJoinNexus;
 
 /*
-* Useful for testing - will not reorder the join predicates.
+ * Useful for testing - will not reorder the join predicates.
  *
  * @author mike
  */
@@ -89,8 +89,8 @@ public class NoReorderEvaluationPlan implements IEvaluationPlan {
 
       if (expander != null && expander.runFirst()) {
 
-      /*
-       * Note: runFirst() essentially indicates that the cardinality
+        /*
+         * Note: runFirst() essentially indicates that the cardinality
          * of the predicate in the data is to be ignored. Therefore we
          * do not request the actual range count and just return -1L as
          * a marker indicating that the range count is not available.

@@ -22,13 +22,12 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.counters.striped;
 
 import java.lang.reflect.Constructor;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.locks.ReentrantLock;
 import org.apache.system.SystemUtil;
 import org.embergraph.counters.CounterSet;
 
 /*
-* Abstract base class and template for striped counters designed for high concurrency with eventual
+ * Abstract base class and template for striped counters designed for high concurrency with eventual
  * consistency and approximate read back without CAS contention.
  *
  * <p>Each instance of this class in use by the application is backed by an array of N instances

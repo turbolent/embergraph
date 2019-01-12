@@ -10,7 +10,7 @@ import org.embergraph.btree.IIndex;
 import org.embergraph.btree.keys.IKeyBuilder;
 
 /*
-* Atomic delete of a logical row. All property values written will have the same timestamp. An
+ * Atomic delete of a logical row. All property values written will have the same timestamp. An
  * atomic read is performed as part of the procedure so that the caller may obtain a consistent view
  * of the post-update state of the logical row. The server-assigned timestamp written may be
  * obtained from the returned {@link ITPS} object.
@@ -135,8 +135,8 @@ public class AtomicRowDelete extends AbstractAtomicRowReadOrWrite {
         // encode the key.
         final byte[] key = schema.getKey(keyBuilder, primaryKey, col, writeTime);
 
-      /*
-       * Insert into the index.
+        /*
+         * Insert into the index.
          *
          * Note: storing a null under the key causes the property value
          * to be interpreted as "deleted" on a subsequent read.

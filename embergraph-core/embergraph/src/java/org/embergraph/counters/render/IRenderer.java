@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.Writer;
 
 /*
-* Interface for rendering some data.
+ * Interface for rendering some data.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -23,7 +23,7 @@ package org.embergraph.btree.proc;
 import org.embergraph.service.Split;
 
 /*
-* An interface for handling results obtained when an {@link IIndexProcedure} is parallelized across
+ * An interface for handling results obtained when an {@link IIndexProcedure} is parallelized across
  * either a local index or partitions of a scale-out index.
  *
  * @param <R> The type of the result from applying the procedure to a single key-range (or {@link

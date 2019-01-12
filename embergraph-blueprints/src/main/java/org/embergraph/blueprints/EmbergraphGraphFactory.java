@@ -18,12 +18,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.blueprints;
 
 import java.util.Properties;
-import org.embergraph.EmbergraphStatics;
 import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sail.remote.EmbergraphSailFactory;
 
 /*
-* Helper class to create EmbergraphGraph instances.
+ * Helper class to create EmbergraphGraph instances.
  *
  * @author mikepersonick
  */
@@ -101,7 +100,7 @@ public class EmbergraphGraphFactory {
   }
 
   //    /*
-//     * Create a new persistent local embergraph instance.
+  //     * Create a new persistent local embergraph instance.
   //     */
   //    public static EmbergraphGraph create(final String file)
   //            throws Exception {

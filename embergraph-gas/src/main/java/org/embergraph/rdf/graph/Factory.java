@@ -16,7 +16,7 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 package org.embergraph.rdf.graph;
 
 /*
-* Singleton pattern for initializing a vertex state or edge state object given the vertex or edge.
+ * Singleton pattern for initializing a vertex state or edge state object given the vertex or edge.
  *
  * @param <V> The vertex or the edge.
  * @param <T> The object that will model the state of that vertex or edge in the computation.

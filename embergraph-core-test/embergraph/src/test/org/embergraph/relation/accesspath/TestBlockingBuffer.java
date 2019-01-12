@@ -39,7 +39,7 @@ import org.embergraph.util.DaemonThreadFactory;
 import org.embergraph.util.InnerCause;
 
 /*
-* Test suite for {@link BlockingBuffer} and its {@link IAsynchronousIterator}.
+ * Test suite for {@link BlockingBuffer} and its {@link IAsynchronousIterator}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -123,14 +123,14 @@ public class TestBlockingBuffer extends TestCase2 {
             new Runnable() {
               public void run() {
 
-              /*
-       * add another element - should block until we take an element
+                /*
+                 * add another element - should block until we take an element
                  * using the iterator.
                  */
                 buffer.add(e2);
 
-              /*
-       * itr.hasNext() will block until the buffer is closed.
+                /*
+                 * itr.hasNext() will block until the buffer is closed.
                  */
                 buffer.close();
               }
@@ -233,8 +233,8 @@ public class TestBlockingBuffer extends TestCase2 {
 
         if (!InnerCause.isInnerCause(ex, BufferClosedException.class)) {
 
-        /*
-       * Should have thrown a BufferClosedException.
+          /*
+           * Should have thrown a BufferClosedException.
            */
 
           fail("Unexpected cause: " + ex, ex);
@@ -526,8 +526,8 @@ public class TestBlockingBuffer extends TestCase2 {
       service.shutdownNow();
 
       if (!consumerFuture.isDone() || !producerFuture.isDone()) {
-      /*
-       * Note: If the service does not terminate after a timeout then
+        /*
+         * Note: If the service does not terminate after a timeout then
          * we have a hung thread on add().
          */
         service.awaitTermination(5 /* timeout */, TimeUnit.SECONDS);

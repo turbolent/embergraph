@@ -35,7 +35,6 @@ import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IVariable;
 import org.embergraph.bop.Var;
 import org.embergraph.bop.bindingSet.ListBindingSet;
-import org.embergraph.rdf.internal.IVCache;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
@@ -43,7 +42,7 @@ import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 // import org.semanticweb.yars.nx.namespace.XSD;
 
 /*
-* Test suite for {@link ISolutionSetStats}.
+ * Test suite for {@link ISolutionSetStats}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestSolutionSetStats.java 6099 2012-03-09 16:35:55Z thompsonbry $

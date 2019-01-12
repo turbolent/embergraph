@@ -35,7 +35,7 @@ import org.openrdf.query.resultio.TupleQueryResultFormat;
 import org.openrdf.rio.RDFFormat;
 
 /*
-* Helper class for content negotiation.
+ * Helper class for content negotiation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

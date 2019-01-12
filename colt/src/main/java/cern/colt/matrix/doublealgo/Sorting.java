@@ -16,7 +16,7 @@ import cern.colt.matrix.DoubleMatrix2D;
 import cern.colt.matrix.DoubleMatrix3D;
 import cern.colt.matrix.impl.DenseDoubleMatrix1D;
 /*
-* Matrix quicksorts and mergesorts. Use idioms like <tt>Sorting.quickSort.sort(...)</tt> and
+ * Matrix quicksorts and mergesorts. Use idioms like <tt>Sorting.quickSort.sort(...)</tt> and
  * <tt>Sorting.mergeSort.sort(...)</tt>.
  *
  * <p>This is another case demonstrating one primary goal of this library: Delivering easy to use,

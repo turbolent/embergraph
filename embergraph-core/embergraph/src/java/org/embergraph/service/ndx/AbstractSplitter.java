@@ -23,18 +23,16 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.service.ndx;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import org.apache.log4j.Logger;
 import org.embergraph.btree.keys.KVO;
 import org.embergraph.mdi.IMetadataIndex;
 import org.embergraph.mdi.PartitionLocator;
-import org.embergraph.service.IMetadataService;
 import org.embergraph.service.Split;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Basic implementation - you only need to provide resolution for the {@link IMetadataIndex}.
+ * Basic implementation - you only need to provide resolution for the {@link IMetadataIndex}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -121,8 +119,8 @@ public abstract class AbstractSplitter implements ISplitter {
 
       if (lastKey != null && BytesUtil.compareBytes(lastKey, key) > 0) {
 
-      /*
-       * Make sure that the keys are ordered.
+        /*
+         * Make sure that the keys are ordered.
          *
          * Note: We do allow duplicate keys since that is common when
          * writes are combined on an asynchronous write pipeline but
@@ -155,8 +153,8 @@ public abstract class AbstractSplitter implements ISplitter {
 
       if (rightSeparatorKey == null) {
 
-      /*
-       * The last index partition does not have an upper bound and
+        /*
+         * The last index partition does not have an upper bound and
          * will absorb any keys that order GTE to its left separator
          * key.
          */
@@ -170,8 +168,8 @@ public abstract class AbstractSplitter implements ISplitter {
 
       } else {
 
-      /*
-       * Otherwise this partition has an upper bound, so figure out
+        /*
+         * Otherwise this partition has an upper bound, so figure out
          * the index of the last key that would go into this partition.
          *
          * We do this by searching for the rightSeparator of the index
@@ -183,8 +181,8 @@ public abstract class AbstractSplitter implements ISplitter {
 
         if (pos >= 0) {
 
-        /*
-       * There is a hit on the rightSeparator key. The index
+          /*
+           * There is a hit on the rightSeparator key. The index
            * returned by the binarySearch is the exclusive upper bound
            * for the split. The key at that index is excluded from the
            * split - it will be the first key in the next split.
@@ -225,8 +223,8 @@ public abstract class AbstractSplitter implements ISplitter {
 
         } else if (pos < 0) {
 
-        /*
-       * There is a miss on the rightSeparator key (it is not
+          /*
+           * There is a miss on the rightSeparator key (it is not
            * present in the keys that are being split). In this case
            * the binary search returns the insertion point. We then
            * compute the exclusive upper bound from the insertion
@@ -239,8 +237,8 @@ public abstract class AbstractSplitter implements ISplitter {
               : "Expected pos in [" + currentIndex + ":" + toIndex + ") but pos=" + pos;
         }
 
-      /*
-       * Note: this test can be enabled if you are having problems
+        /*
+         * Note: this test can be enabled if you are having problems
          * with KeyAfterPartition or KeyBeforePartition. It will go
          * through more effort to validate the constraints on the split.
          * However, due to the additional byte[] comparisons, this

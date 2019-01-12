@@ -49,7 +49,6 @@ import org.openrdf.query.TupleQuery;
 import org.openrdf.query.TupleQueryResult;
 import org.openrdf.query.TupleQueryResultHandlerBase;
 import org.openrdf.query.impl.DatasetImpl;
-import org.openrdf.query.parser.sparql.manifest.SPARQL11ManifestTest;
 import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
@@ -59,7 +58,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /*
-* A set of compliance tests on SPARQL query functionality which can not be easily executed using
+ * A set of compliance tests on SPARQL query functionality which can not be easily executed using
  * the {@link SPARQL11ManifestTest} format. This includes tests on queries with non-deterministic
  * output (e.g. GROUP_CONCAT).
  *

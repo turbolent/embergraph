@@ -23,7 +23,7 @@ package org.embergraph.btree;
 import org.embergraph.cache.IHardReferenceQueue;
 
 /*
-* Hard reference cache eviction listener for leaves always throws an exception. This is used for
+ * Hard reference cache eviction listener for leaves always throws an exception. This is used for
  * some unit tests to ensure that cache evictions are not occurring and that copy on write
  * situations are therefore never triggered (except that they will of course be triggered following
  * a commit).

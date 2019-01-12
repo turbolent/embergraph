@@ -27,21 +27,18 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Set;
-import java.util.concurrent.FutureTask;
 import org.apache.log4j.Level;
 import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleIterator;
 import org.embergraph.btree.Node;
-import org.embergraph.htree.AbstractHTree.ChildMemoizer;
 import org.embergraph.htree.AbstractHTree.LoadChildRequest;
 import org.embergraph.htree.data.IDirectoryData;
 import org.embergraph.io.AbstractFixedByteArrayBuffer;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.util.BytesUtil;
-import org.embergraph.util.concurrent.Memoizer;
 
 /*
-* An {@link HTree} directory page (node). Each directory page will hold one or more "buddy" hash
+ * An {@link HTree} directory page (node). Each directory page will hold one or more "buddy" hash
  * tables. The #of buddy hash tables on the page depends on the globalDepth of the page and the
  * addressBits as computed by {@link DirectoryPage#getNumBuddies()}.
  */
@@ -608,8 +605,8 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
 
         if (data.getChildAddr(i) == addr) {
 
-        /*
-       * Since the childRefs[index] element has not been updated we do so
+          /*
+           * Since the childRefs[index] element has not been updated we do so
            * now while we are synchronized.
            *
            * Note: This paranoia test could be tripped if the caller allowed
@@ -916,8 +913,8 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
        */
       if (child != null && (htree.store == null || child.getIdentity() != triggeredByChildId)) {
 
-      /*
-       * Copy on write should never trigger for a dirty node and only
+        /*
+         * Copy on write should never trigger for a dirty node and only
          * a dirty node can have dirty children.
          */
         assert !child.isDirty();
@@ -984,21 +981,21 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
 
               private static final long serialVersionUID = 1L;
 
-            /*
-       * Expand each child in turn.
+              /*
+               * Expand each child in turn.
                */
               protected Iterator expand(final Object childObj) {
 
-              /*
-       * A child of this node.
+                /*
+                 * A child of this node.
                  */
 
                 final AbstractPage child = (AbstractPage) childObj;
 
                 if (!child.isLeaf()) {
 
-                /*
-       * The child is a Node (has children).
+                  /*
+                   * The child is a Node (has children).
                    *
                    * Visit the children (recursive post-order traversal).
                    */
@@ -1014,8 +1011,8 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
 
                 } else {
 
-                /*
-       * The child is a leaf.
+                  /*
+                   * The child is a leaf.
                    */
 
                   // BTree.log.debug("child is leaf: " + child);
@@ -1190,13 +1187,13 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
 
               private static final long serialVersionUID = 1L;
 
-            /*
-       * Expand each child in turn.
+              /*
+               * Expand each child in turn.
                */
               protected Iterator expand(final Object childObj) {
 
-              /*
-       * A child of this node.
+                /*
+                 * A child of this node.
                  */
 
                 final AbstractPage child = (AbstractPage) childObj;
@@ -1208,8 +1205,8 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
 
                 if (child instanceof DirectoryPage) {
 
-                /*
-       * The child is a Node (has children).
+                  /*
+                   * The child is a Node (has children).
                    */
 
                   // visit the children (recursive post-order
@@ -1225,8 +1222,8 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
 
                 } else {
 
-                /*
-       * The child is a leaf.
+                  /*
+                   * The child is a leaf.
                    */
 
                   // Visit the leaf itself.
@@ -1338,8 +1335,8 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
       if (child != null) {
 
         if (child.parent == null || child.parent.get() == null) {
-        /*
-       * the reference to the parent MUST exist since the we are
+          /*
+           * the reference to the parent MUST exist since the we are
            * the parent and therefore the parent is strongly
            * reachable.
            */
@@ -1353,8 +1350,8 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
         }
 
         if (child.isDirty()) {
-        /*
-       * Dirty child. The parent of a dirty child MUST also be
+          /*
+           * Dirty child. The parent of a dirty child MUST also be
            * dirty.
            */
           if (!isDirty()) {
@@ -1380,8 +1377,8 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
             ok = false;
           }
         } else {
-        /*
-       * Clean child (ie, persistent). The parent of a clean child
+          /*
+           * Clean child (ie, persistent). The parent of a clean child
            * may be either clear or dirty.
            */
           if (getChildAddr(i) == NULL) {
@@ -1419,8 +1416,8 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
             && !isReadOnly()
             && ((MutableDirectoryPageData) data).childAddr[i] == 0) {
 
-        /*
-       * This let's us dump a tree with some kinds of structural
+          /*
+           * This let's us dump a tree with some kinds of structural
            * problems (missing child reference or key).
            */
 
@@ -1435,8 +1432,8 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
           continue;
         }
 
-      /*
-       * Note: this works around the assert test for the index in
+        /*
+         * Note: this works around the assert test for the index in
          * getChild(index) but is not able/willing to follow a childKey
          * to a child that is not memory resident.
          */
@@ -1499,8 +1496,8 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
 
       if (!visitLeaves && child instanceof BucketPage) {
 
-      /*
-       * Note: This always reads the child and then filters out leaves.
+        /*
+         * Note: This always reads the child and then filters out leaves.
          *
          * Note: It might not be possible to lift this constraint into the
          * childIterator() due to the HTree design (per Martyn's

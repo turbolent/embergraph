@@ -21,7 +21,7 @@ import java.util.Set;
 import java.util.UUID;
 
 /*
-* Interface providing an atomic snapshot of the services that are joined with a met quorum (and the
+ * Interface providing an atomic snapshot of the services that are joined with a met quorum (and the
  * services that are not joined with a met quorum) as of some point in the GATHER or PREPARE
  * protocol.
  *

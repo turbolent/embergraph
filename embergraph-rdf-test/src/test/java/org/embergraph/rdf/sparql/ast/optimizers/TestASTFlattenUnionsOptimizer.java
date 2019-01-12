@@ -38,7 +38,7 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /*
-* Test suite for {@link ASTFlattenUnionsOptimizer}.
+ * Test suite for {@link ASTFlattenUnionsOptimizer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

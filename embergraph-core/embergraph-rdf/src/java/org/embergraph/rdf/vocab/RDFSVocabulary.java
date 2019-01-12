@@ -21,7 +21,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.vocab;
 
-import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.vocab.decls.DCAllVocabularyDecl;
 import org.embergraph.rdf.vocab.decls.FOAFVocabularyDecl;
 import org.embergraph.rdf.vocab.decls.OWLVocabularyDecl;
@@ -30,15 +29,9 @@ import org.embergraph.rdf.vocab.decls.RDFVocabularyDecl;
 import org.embergraph.rdf.vocab.decls.SKOSVocabularyDecl;
 import org.embergraph.rdf.vocab.decls.SesameVocabularyDecl;
 import org.embergraph.rdf.vocab.decls.XMLSchemaVocabularyDecl;
-import org.openrdf.Sesame;
-import org.openrdf.model.Value;
-import org.openrdf.model.vocabulary.OWL;
-import org.openrdf.model.vocabulary.RDF;
-import org.openrdf.model.vocabulary.RDFS;
-import org.openrdf.model.vocabulary.XMLSchema;
 
 /*
-* A {@link Vocabulary} including well-known {@link Value}s for {@link RDF}, {@link RDFS}, {@link
+ * A {@link Vocabulary} including well-known {@link Value}s for {@link RDF}, {@link RDFS}, {@link
  * OWL}, {@link DCAllVocabularyDecl Dublin Core}, {@link SKOSVocabularyDecl SKOS}, {@link
  * FOAFVocabularyDecl FOAF}, {@link XMLSchema}, and {@link Sesame}.
  *

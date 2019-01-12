@@ -33,7 +33,7 @@ import org.embergraph.rawstore.IBlock;
 import org.embergraph.rawstore.IRawStore;
 
 /*
-* Abstract base class with much of the functionality of {@link ITuple}.
+ * Abstract base class with much of the functionality of {@link ITuple}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

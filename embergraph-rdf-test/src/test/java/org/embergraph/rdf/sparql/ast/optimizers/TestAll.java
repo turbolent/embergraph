@@ -23,7 +23,7 @@ import junit.framework.TestSuite;
 import org.embergraph.rdf.sparql.ast.QueryHints;
 
 /*
-* Aggregates test suites into increasing dependency order.
+ * Aggregates test suites into increasing dependency order.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -27,7 +27,7 @@ import java.nio.ByteBuffer;
 import junit.framework.TestCase2;
 
 /*
-* Test suite for {@link ByteBufferBitVector}.
+ * Test suite for {@link ByteBufferBitVector}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

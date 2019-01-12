@@ -8,7 +8,7 @@ import org.embergraph.io.IStreamSerializer;
 import org.embergraph.striterator.IKeyOrder;
 
 /*
-* A chunk of elements materialized from a remote iterator together with some metadata about the
+ * A chunk of elements materialized from a remote iterator together with some metadata about the
  * state of the remote iterator (whether or not it is exhausted, what its {@link IKeyOrder} is (if
  * any)).
  *

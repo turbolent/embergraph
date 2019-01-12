@@ -20,11 +20,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.service.geospatial;
 
-import org.embergraph.rdf.internal.impl.extensions.GeoSpatialLiteralExtension;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Class providing utility functions for efficient zOrder-based multi-dimensional range scans, such
+ * Class providing utility functions for efficient zOrder-based multi-dimensional range scans, such
  * as efficient range checks and functionality for BigMin calculation. The latter follows the logics
  * defined in the BIGMIN decision table as provided in
  * http://www.vision-tools.com/h-tropf/multidimensionalrangequery.pdf, page 76.

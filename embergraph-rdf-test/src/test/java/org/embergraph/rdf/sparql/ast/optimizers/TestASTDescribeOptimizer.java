@@ -52,7 +52,7 @@ import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /*
-* Test suite for the {@link ASTDescribeOptimizer}.
+ * Test suite for the {@link ASTDescribeOptimizer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

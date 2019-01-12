@@ -24,13 +24,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.relation.accesspath;
 
 import java.util.concurrent.Future;
-import java.util.concurrent.FutureTask;
-import org.embergraph.relation.IMutableRelation;
-import org.embergraph.relation.IRelation;
-import org.embergraph.striterator.IChunkedIterator;
 
 /*
-* Interface provides an iterator to drain chunks from an {@link IBuffer}.
+ * Interface provides an iterator to drain chunks from an {@link IBuffer}.
  *
  * <h2>CONOPS</h2>
  *

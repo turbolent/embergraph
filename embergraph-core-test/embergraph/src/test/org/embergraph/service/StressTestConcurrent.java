@@ -56,17 +56,14 @@ import org.embergraph.btree.proc.BatchRemove.BatchRemoveConstructor;
 import org.embergraph.counters.AbstractStatisticsCollector;
 import org.embergraph.journal.BasicExperimentConditions;
 import org.embergraph.journal.BufferMode;
-import org.embergraph.journal.DiskOnlyStrategy;
 import org.embergraph.journal.ITx;
 import org.embergraph.journal.TemporaryRawStore;
-import org.embergraph.journal.TemporaryStore;
 import org.embergraph.journal.ValidationError;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.WormAddressManager;
 import org.embergraph.resources.OverflowCounters;
 import org.embergraph.resources.ResourceManager;
 import org.embergraph.service.DataService.Options;
-import org.embergraph.service.ndx.ClientIndexView;
 import org.embergraph.testutil.ExperimentDriver;
 import org.embergraph.testutil.ExperimentDriver.IComparisonTest;
 import org.embergraph.testutil.ExperimentDriver.Result;
@@ -76,7 +73,7 @@ import org.embergraph.util.NV;
 import org.embergraph.util.concurrent.ThreadPoolExecutorStatisticsTask;
 
 /*
-* Test suite for concurrent operations on a {@link DataService}. A federation consisting of a
+ * Test suite for concurrent operations on a {@link DataService}. A federation consisting of a
  * {@link MetadataService} and a single {@link DataService} is started. A client is created,
  * connects to the federation, and registers an index the federation. A pool of threads is created
  * for that client and populated with a number of operations. The threads then write and read
@@ -328,8 +325,8 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
 
           if (testCorrectness) {
 
-          /*
-       * Setup a distinct backing store for the ground truth
+            /*
+             * Setup a distinct backing store for the ground truth
              * for each index and a lock to serialize access to that
              * index. This allows concurrency if you start with more
              * than one index or after an index has been split.
@@ -534,8 +531,8 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
 
       if (testCorrectness) {
 
-      /*
-       * @todo config parameter.
+        /*
+         * @todo config parameter.
          *
          * Note: there may be differences when we have forced overflow
          * and when we have not since forcing overflow will trigger
@@ -553,8 +550,8 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
           log.warn("Forced  overflow: " + new Date());
         }
 
-      /*
-       * For each index, verify its state against the corresponding
+        /*
+         * For each index, verify its state against the corresponding
          * ground truth index.
          */
 
@@ -573,8 +570,8 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
                     + ", #partitions="
                     + federation.getMetadataIndex(name, ITx.READ_COMMITTED).rangeCount());
 
-        /*
-       * Note: This uses an iterator based comparison so that we
+          /*
+           * Note: This uses an iterator based comparison so that we
            * can compare a local index without delete markers and a
            * key-range partitioned index with delete markers.
            *
@@ -624,8 +621,8 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
             federation.getTransactionService().abort(tx);
           }
 
-        /*
-       * Verify against the unisolated views (this might be Ok if
+          /*
+           * Verify against the unisolated views (this might be Ok if
            * all tasks ran to completion, but if there is ongoing
            * asynchronous overflow activity then that could mess this
            * up since the UNISOLATED index views do not have
@@ -633,8 +630,8 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
            */
           assertSameEntryIterator(expected, federation.getIndex(name, ITx.UNISOLATED));
 
-        /*
-       * Release the ground truth index and the backing store.
+          /*
+           * Release the ground truth index and the backing store.
            */
 
           groundTruth[i].close();
@@ -684,8 +681,7 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
     LoadBalancerService.log.setLevel(Level.INFO);
 
     final AbstractEmbeddedLoadBalancerService lbs =
-        ((AbstractEmbeddedLoadBalancerService)
-            fed.getLoadBalancerService());
+        ((AbstractEmbeddedLoadBalancerService) fed.getLoadBalancerService());
 
     final ServiceScore[] fakeServiceScores = new ServiceScore[2];
 
@@ -851,8 +847,8 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
 
       if (r.nextDouble() <= insertRate) {
 
-      /*
-       * Insert
+        /*
+         * Insert
          */
 
         //                log.info("insert: nops=" + nops);
@@ -866,8 +862,8 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
           r.nextBytes(vals[i]);
         }
 
-      /*
-       * Note: Lock is forcing the same serialization order on the
+        /*
+         * Note: Lock is forcing the same serialization order on the
          * test and ground truth index writes.
          */
         lock.lock();
@@ -885,8 +881,8 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
 
           if (groundTruth != null) {
 
-          /*
-       * Note: Even though we write on the groundTruth after
+            /*
+             * Note: Even though we write on the groundTruth after
              * the scale-out index, it is possible that the mutation
              * on the ground truth will be interrupted if the task
              * is cancelled such that the groundTruth and the
@@ -910,8 +906,8 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
 
       } else {
 
-      /*
-       * Remove.
+        /*
+         * Remove.
          */
 
         //                log.info("remove: nops=" + nops);
@@ -921,8 +917,8 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
           keys[i] = nextKey();
         }
 
-      /*
-       * Note: Lock is forcing the same serialization order on the
+        /*
+         * Note: Lock is forcing the same serialization order on the
          * test and ground truth index writes.
          */
         lock.lock();
@@ -940,8 +936,8 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
 
           if (groundTruth != null) {
 
-          /*
-       * Note: Even though we write on the groundTruth after
+            /*
+             * Note: Even though we write on the groundTruth after
              * the scale-out index, it is possible that the mutation
              * on the ground truth will be interrupted if the task
              * is cancelled such that the groundTruth and the

@@ -8,11 +8,10 @@ import org.embergraph.bop.BOp;
 import org.embergraph.bop.Constant;
 import org.embergraph.bop.IVariable;
 import org.embergraph.bop.NV;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTGraphGroupOptimizer;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /*
-* A node in the AST representing a triple pattern with a property path. The predicate for this
+ * A node in the AST representing a triple pattern with a property path. The predicate for this
  * triple pattern will be a {@link PathNode} instead of a {@link TermNode} as in a normal statement
  * pattern. This is modeled closely after StatementPatternNode.
  */

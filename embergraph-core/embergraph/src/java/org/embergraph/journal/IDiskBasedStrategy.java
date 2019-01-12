@@ -26,7 +26,7 @@ import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
 
 /*
-* An interface for implementations backed by a file on disk.
+ * An interface for implementations backed by a file on disk.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

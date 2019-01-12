@@ -26,7 +26,7 @@ import org.embergraph.bop.BOp;
 import org.openrdf.model.URI;
 
 /*
-* A special function node for modeling value expression nodes which are evaluated against an inner
+ * A special function node for modeling value expression nodes which are evaluated against an inner
  * graph expression, such as EXISTS and NOT EXISTS. Another possibility is IN(subSelect), where IN
  * is evaluated against the subquery result.
  *

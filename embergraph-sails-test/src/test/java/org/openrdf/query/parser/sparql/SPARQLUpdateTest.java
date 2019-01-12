@@ -53,7 +53,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /*
-* Tests for SPARQL 1.1 Update functionality.
+ * Tests for SPARQL 1.1 Update functionality.
  *
  * @author Jeen Broekstra
  */

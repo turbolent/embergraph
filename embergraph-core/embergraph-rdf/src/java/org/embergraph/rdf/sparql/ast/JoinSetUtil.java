@@ -28,12 +28,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import org.apache.log4j.Logger;
-import org.embergraph.bop.BOp;
 import org.embergraph.bop.IVariable;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTHashJoinOptimizer;
 
 /*
-* Utility class for join analysis.
+ * Utility class for join analysis.
  *
  * <p>TODO Surely we can do some bit math which would be slimmer and faster than managing the
  * IVariable sets?
@@ -199,8 +198,7 @@ public class JoinSetUtil {
       for (int i = 0; i < requiredJoinCount; i++) {
         final IJoinNode j = requiredJoins[i];
         // anything bound by this join.
-        final Set<IVariable<?>> tmp =
-            sa.getSpannedVariables(j, new LinkedHashSet<IVariable<?>>());
+        final Set<IVariable<?>> tmp = sa.getSpannedVariables(j, new LinkedHashSet<IVariable<?>>());
         tmp.addAll(knownBound); // plus anything bound on entry to the group.
         eventuallyBoundVars.addAll(vars[i] = tmp);
       }
@@ -220,23 +218,23 @@ public class JoinSetUtil {
         if (m instanceof FilterNode) {
           final FilterNode f = (FilterNode) m;
           if (sa.isFullyBound(f, knownBound)) {
-          /*
-       * The variables for this filter are already bound on
+            /*
+             * The variables for this filter are already bound on
              * entry.
              */
             preFilters.add(f);
             continue;
           }
           if (sa.isFullyBound(f, eventuallyBoundVars)) {
-          /*
-       * The variables for this filter will be fully bound by
+            /*
+             * The variables for this filter will be fully bound by
              * the time we are done with the required joins.
              */
             joinFilters.add(f);
             continue;
           }
-        /*
-       * The variables for this filter will not be bound by the
+          /*
+           * The variables for this filter will not be bound by the
            * end of the required joins. If there are optional joins,
            * then the filter might be able to succeed if it is run
            * after the last optional join which could bind a variable

@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /*
-* Type safe enumeration of the Ganglia 3.1 wire format <code>Ganglia_msg_formats</code> from <code>
+ * Type safe enumeration of the Ganglia 3.1 wire format <code>Ganglia_msg_formats</code> from <code>
  * lib/gm_protocol.h</code> (generated when you build ganglia from the source).
  *
  * <p>Note: The Ganglia 3.1 wire format packets begin at 128 to avoid confusion with the previous
@@ -148,7 +148,7 @@ public enum GangliaMessageTypeEnum {
   }
 
   //	/*
-//	 * Return the Java data type which corresponds to the ganglia metric type.
+  //	 * Return the Java data type which corresponds to the ganglia metric type.
   //	 *
   //	 * @return The data type -or- <code>null</code> if this is NOT a metric type
   //	 *         (i.e., return <code>null</code> if it is either a

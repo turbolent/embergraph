@@ -32,13 +32,10 @@ import org.embergraph.counters.CounterSet;
 import org.embergraph.journal.AbstractJournal;
 import org.embergraph.journal.ICommitRecord;
 import org.embergraph.journal.IResourceManager;
-import org.embergraph.journal.Journal;
 import org.embergraph.mdi.IResourceMetadata;
-import org.embergraph.resources.IndexManager;
-import org.embergraph.resources.StoreManager.ManagedJournal;
 
 /*
-* A view of a named index that replaces its view for each high-level request if there has been an
+ * A view of a named index that replaces its view for each high-level request if there has been an
  * intervening commit on the backing store. Each request, including each iterator request, will be
  * <strong>read-consistent</strong> as of the commit point resolved for that request. However,
  * subsequent requests will, of course, be read-consistent against then then current lastCommitTime.

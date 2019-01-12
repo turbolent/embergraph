@@ -22,12 +22,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.util;
 
-import cern.colt.bitvector.BitVector;
 import it.unimi.dsi.bits.AbstractBitVector;
 import java.nio.ByteBuffer;
 
 /*
-* Wraps a {@link ByteBuffer} as a read-only {@link BitVector}.
+ * Wraps a {@link ByteBuffer} as a read-only {@link BitVector}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -21,7 +21,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast;
 
 /*
-* Type-safe enumeration of the different ways in which we can evaluate a DESCRIBE query.
+ * Type-safe enumeration of the different ways in which we can evaluate a DESCRIBE query.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/578">Concise Bounded Description
@@ -114,7 +114,7 @@ public enum DescribeModeEnum {
    */
   SCBD(true /* forward */, true /* reverse */, true /* reifiedStatements */, true /* recursive */);
   //    /*
-//     * Concise Bounded Description without Reification.
+  //     * Concise Bounded Description without Reification.
   //     * <p>
   //     * This is the same as {@link #CBD} except that the source graph is NOT
   //     * probed for reifications of statements in the subgraph thus far (step 3).
@@ -125,7 +125,7 @@ public enum DescribeModeEnum {
   //    CBDNR(true/* forward */, false/* reverse */, false/* reifiedStatements */,
   //            true/* recursive */),
   //    /*
-//     * Symmetric Concise Bounded Description without Reification.
+  //     * Symmetric Concise Bounded Description without Reification.
   //     * <p>
   //     * This is the same as {@link #SCBD} except that the source graph is NOT
   //     * probed for reifications of statements in the subgraph thus far (step 3).

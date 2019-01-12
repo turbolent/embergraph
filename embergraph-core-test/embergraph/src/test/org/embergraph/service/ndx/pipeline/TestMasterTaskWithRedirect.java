@@ -42,7 +42,7 @@ import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 
 /*
-* Test ability to handle a redirect (subtask learns that the target service no longer accepts data
+ * Test ability to handle a redirect (subtask learns that the target service no longer accepts data
  * for some locator and instead must send the data somewhere else).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -226,8 +226,8 @@ public class TestMasterTaskWithRedirect extends AbstractMasterTestCase {
 
             if (locator.locator == 14) {
 
-            /*
-       * Signal when L(14) is removed. That should happen in
+              /*
+               * Signal when L(14) is removed. That should happen in
                * master.awaitAll() when it closes the output buffers for
                * the existing sinks.
                */
@@ -247,8 +247,8 @@ public class TestMasterTaskWithRedirect extends AbstractMasterTestCase {
 
             if (locator.locator == 13) {
 
-            /*
-       * The L(13) sink will wait until it is signaled before
+              /*
+               * The L(13) sink will wait until it is signaled before
                * issuing an L(13) => L(14) redirect.
                */
 
@@ -681,8 +681,8 @@ public class TestMasterTaskWithRedirect extends AbstractMasterTestCase {
       final long begin = System.nanoTime();
       while (true) {
 
-      /*
-       * verify no errors.
+        /*
+         * verify no errors.
          */
 
         // check master.
@@ -705,8 +705,8 @@ public class TestMasterTaskWithRedirect extends AbstractMasterTestCase {
           }
         }
 
-      /*
-       * Check termination conditions.
+        /*
+         * Check termination conditions.
          */
 
         final long elapsed = System.nanoTime() - begin;
@@ -730,8 +730,8 @@ public class TestMasterTaskWithRedirect extends AbstractMasterTestCase {
 
       if (!done) {
 
-      /*
-       * Something did not end normally. We will stop all the tasks and
+        /*
+         * Something did not end normally. We will stop all the tasks and
          * check their futures and something will throw an exception.
          */
 

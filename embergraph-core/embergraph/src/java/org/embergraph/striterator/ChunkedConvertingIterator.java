@@ -3,10 +3,9 @@ package org.embergraph.striterator;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 import org.apache.log4j.Logger;
-import org.embergraph.btree.IIndex;
 
 /*
-* Supports the chunk-at-a-time filter and conversion operations. Chunk-at-a-time operations are
+ * Supports the chunk-at-a-time filter and conversion operations. Chunk-at-a-time operations are
  * potentially much more efficient as they allow for ordered reads and ordered writes on {@link
  * IIndex}s.
  *

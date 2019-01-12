@@ -17,7 +17,7 @@ import org.embergraph.rdf.vocab.TestMultiVocabulary;
 import org.embergraph.rdf.vocab.TestNamespaceMultiURIHandler;
 
 /*
-* Test case for multiple InlineURIHandlers at a single namespace.
+ * Test case for multiple InlineURIHandlers at a single namespace.
  *
  * <pre>
  *

@@ -22,7 +22,7 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 
 /*
-* Factory for converting blueprints data to RDF and back again.
+ * Factory for converting blueprints data to RDF and back again.
  *
  * @author mikepersonick
  */
@@ -53,17 +53,17 @@ public interface BlueprintsValueFactory {
   URI toPropertyURI(String property);
 
   //    /*
-//     * Create a blueprints vertex id from a vertex URI.
+  //     * Create a blueprints vertex id from a vertex URI.
   //     */
   //	String fromVertexURI(URI uri);
   //
   //    /*
-//     * Create a blueprints edge id from an edge URI.
+  //     * Create a blueprints edge id from an edge URI.
   //     */
   //	String fromEdgeURI(URI uri);
   //
   //    /*
-//     * Create a blueprints property name from a property URI.
+  //     * Create a blueprints property name from a property URI.
   //     */
   //	String fromPropertyURI(URI uri);
 
@@ -76,17 +76,17 @@ public interface BlueprintsValueFactory {
   Object fromLiteral(Literal lit);
 
   //	/*
-//	 * Is the URI a vertex?
+  //	 * Is the URI a vertex?
   //	 */
   //	boolean isVertex(URI uri);
   //
   //    /*
-//     * Is the URI an edge?
+  //     * Is the URI an edge?
   //     */
   //	boolean isEdge(URI uri);
   //
   //    /*
-//     * Is the URI an edge?
+  //     * Is the URI an edge?
   //     */
   //    boolean isProperty(URI uri);
 

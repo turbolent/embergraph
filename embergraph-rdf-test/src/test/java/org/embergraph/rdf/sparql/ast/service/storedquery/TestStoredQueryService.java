@@ -32,7 +32,7 @@ import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQueryResult;
 
 /*
-* Test suite for stored query evaluation.
+ * Test suite for stored query evaluation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @see <a href="http://trac.blazegraph.com/ticket/989">Stored Query Service</a>

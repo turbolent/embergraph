@@ -2,10 +2,8 @@ package org.embergraph.bfs;
 
 import org.embergraph.btree.IIndex;
 import org.embergraph.btree.ITuple;
-import org.embergraph.btree.filter.Advancer;
 import org.embergraph.btree.filter.TupleUpdater;
 import org.embergraph.btree.keys.KeyBuilder;
-import org.embergraph.sparse.IRowStoreConstants;
 import org.embergraph.sparse.KeyDecoder;
 import org.embergraph.sparse.TPS.TPV;
 import org.embergraph.sparse.TimestampChooser;
@@ -13,7 +11,7 @@ import org.embergraph.sparse.ValueType;
 import org.embergraph.util.Bytes;
 
 /*
-* A procedure that performs a key range scan, marking all non-deleted versions within the key range
+ * A procedure that performs a key range scan, marking all non-deleted versions within the key range
  * as deleted (by storing a null property value for the {@link FileMetadataSchema#VERSION}).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

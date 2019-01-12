@@ -26,7 +26,7 @@ package org.embergraph.service;
 import java.util.Map;
 
 /*
-* An interface designed to expose select fields for {@link Event} reporting.
+ * An interface designed to expose select fields for {@link Event} reporting.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

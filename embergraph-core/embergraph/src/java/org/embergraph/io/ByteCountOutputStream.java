@@ -26,7 +26,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /*
-* Output stream which reports the #of bytes read from the underlying stream.
+ * Output stream which reports the #of bytes read from the underlying stream.
  *
  * <p>Note: All <em>write</em> methods MUST be overridden if you subclass this filter as it
  * overrides them all for better performance.

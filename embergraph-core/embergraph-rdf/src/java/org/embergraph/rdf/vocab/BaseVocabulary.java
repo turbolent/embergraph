@@ -42,12 +42,11 @@ import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
-import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
 /*
-* Base class for {@link Vocabulary} implementations.
+ * Base class for {@link Vocabulary} implementations.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -168,7 +167,7 @@ public abstract class BaseVocabulary implements Vocabulary, Externalizable {
   }
 
   //    /*
-//     * Adds a {@link Value} into the internal collection.
+  //     * Adds a {@link Value} into the internal collection.
   //     *
   //     * @param value
   //     *            The value.
@@ -201,8 +200,8 @@ public abstract class BaseVocabulary implements Vocabulary, Externalizable {
         // Add to the collection.
         if (val2iv.put(value, value) != null) {
 
-        /*
-       * This has already been declared by some vocabulary. There
+          /*
+           * This has already been declared by some vocabulary. There
            * is no harm in this, but the vocabularies should be
            * distinct.
            */
@@ -328,7 +327,7 @@ public abstract class BaseVocabulary implements Vocabulary, Externalizable {
   }
 
   //    /*
-//     * The initial version. This version is no longer supported. The manner in
+  //     * The initial version. This version is no longer supported. The manner in
   //     * which the lexicon is encoded has fundamentally changed with the
   //     * replacement of the TERM2ID and ID2TERM indices with a single TERMS index
   //     * and additional inlining of values into the statement indices.
@@ -336,7 +335,7 @@ public abstract class BaseVocabulary implements Vocabulary, Externalizable {
   //    private static final transient short VERSION0 = 0;
   //
   //    /*
-//     * This version modified the serialization to include the namespace of the
+  //     * This version modified the serialization to include the namespace of the
   //     * KB instance and to pack the byte length values (this version was never
   //     * deployed).
   //     */
@@ -388,7 +387,7 @@ public abstract class BaseVocabulary implements Vocabulary, Externalizable {
   }
 
   //    /*
-//     * The old code for {@link #VERSION0}. This is here for historical purposes
+  //     * The old code for {@link #VERSION0}. This is here for historical purposes
   //     * only.
   //     *
   //     * @param in
@@ -630,7 +629,7 @@ public abstract class BaseVocabulary implements Vocabulary, Externalizable {
   }
 
   //    /*
-//     * The old code for {@link #VERSION0}. This is here for historical purposes
+  //     * The old code for {@link #VERSION0}. This is here for historical purposes
   //     * only.
   //     *
   //     * @param out

@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree;
 
 /*
-* Interface for methods that return or accept an ordinal index into the entries in the B+-Tree. The
+ * Interface for methods that return or accept an ordinal index into the entries in the B+-Tree. The
  * semantics of this interface are build over the #of spanned tuples for each child as recorded
  * within each node of the B+Tree. This provides a fast means to compute the linear index into the
  * B+Tree of any given tuple. However, this interface is only available for a local B+Tree object

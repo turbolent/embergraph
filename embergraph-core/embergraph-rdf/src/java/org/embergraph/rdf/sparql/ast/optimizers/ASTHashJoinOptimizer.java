@@ -45,7 +45,7 @@ import org.embergraph.rdf.sparql.ast.eval.IEvaluationContext;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 
 /*
-* Rewrites join groups having one or more joins which would involve a full cross product as hash
+ * Rewrites join groups having one or more joins which would involve a full cross product as hash
  * joins of sub-groups where there is a constraint imposed indirectly via a FILTER operating across
  * the variables bound by the joins. This handles queries such as BSBM Q5.
  *
@@ -107,8 +107,8 @@ public class ASTHashJoinOptimizer implements IASTOptimizer {
 
       if (child instanceof GraphPatternGroup<?>) {
 
-      /*
-       * Note: Do recursion *before* we do the rewrite.
+        /*
+         * Note: Do recursion *before* we do the rewrite.
          */
         optimizeJoinGroups(context, sa, ((GraphPatternGroup<IGroupMemberNode>) child));
 
@@ -199,8 +199,8 @@ public class ASTHashJoinOptimizer implements IASTOptimizer {
             }
 
             if (sa.isFullyBound(f, joinvars)) {
-            /*
-       * This join filter does not run with either of
+              /*
+               * This join filter does not run with either of
                * those join sets which considered by themselves,
                * but it can run when we consider those join sets
                * together. Thus the filter implicitly shares some

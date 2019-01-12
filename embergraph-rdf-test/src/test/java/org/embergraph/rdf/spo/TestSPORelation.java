@@ -62,7 +62,7 @@ import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.test.MockTermIdFactory;
 
 /*
-* Test ability to insert, update, or remove elements from a relation and the ability to select the
+ * Test ability to insert, update, or remove elements from a relation and the ability to select the
  * right access path given a predicate for that relation and query for those elements (we have to
  * test all this stuff together since testing query requires us to have some data in the relation).
  *
@@ -119,7 +119,7 @@ public class TestSPORelation extends AbstractTripleStoreTestCase {
   }
 
   //    /*
-//     * This method was introduced to make the assigned identifiers conform with
+  //     * This method was introduced to make the assigned identifiers conform with
   //     * the expectations for identifiers as assigned by the lexicon. This was
   //     * necessitated by the change to {@link ISPO#hasStatementIdentifier()} to
   //     * test the term id bits.
@@ -499,8 +499,8 @@ public class TestSPORelation extends AbstractTripleStoreTestCase {
 
         assertTrue(rule.isFullyBound(0, bindings));
 
-      /*
-       * Now bind the last variable.
+        /*
+         * Now bind the last variable.
          */
         bindings.set(Var.var("v"), V1);
 

@@ -34,7 +34,7 @@ import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.repository.RepositoryConnection;
 
 /*
-* To run this test case, specify the following JVM property: <code>
+ * To run this test case, specify the following JVM property: <code>
  * -DtestClass=org.embergraph.rdf.sail.TestEmbergraphSailWithoutSids</code>
  *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>

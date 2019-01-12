@@ -26,7 +26,7 @@ package org.embergraph.sparse;
 import org.apache.log4j.Logger;
 
 /*
-* {@link IPrecondition} succeeds iff there are no property values for the logical row (it
+ * {@link IPrecondition} succeeds iff there are no property values for the logical row (it
  * recognizes a <code>null</code>, indicating no property values, and an empty logical row,
  * indicating that an {@link INameFilter} was applied and that there were no property values which
  * satisified that filter, and a deleted property value for the primary key, which is often used as

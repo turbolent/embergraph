@@ -25,7 +25,7 @@ import org.openrdf.model.Graph;
 import org.openrdf.model.ValueFactory;
 
 /*
-* Proxied test suite.
+ * Proxied test suite.
  *
  * @param <S>
  */

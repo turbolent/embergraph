@@ -28,7 +28,7 @@ import org.embergraph.bop.BOp;
 import org.embergraph.bop.IVariable;
 
 /*
-* Recursive container for ground {@link StatementPatternNode}s. This is used for {@link InsertData}
+ * Recursive container for ground {@link StatementPatternNode}s. This is used for {@link InsertData}
  * and {@link DeleteData}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

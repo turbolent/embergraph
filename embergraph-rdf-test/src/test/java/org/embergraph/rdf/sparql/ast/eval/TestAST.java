@@ -21,10 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.eval;
 
-import org.embergraph.rdf.internal.constraints.INeedsMaterialization;
-
 /*
-* Port of unit tests originally written at the AST layer.
+ * Port of unit tests originally written at the AST layer.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

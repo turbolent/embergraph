@@ -23,17 +23,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.store;
 
-import org.embergraph.rdf.sparql.ast.cache.DescribeServiceFactory;
-import org.embergraph.rdf.sparql.ast.eval.ServiceParams;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTALPServiceOptimizer;
-import org.openrdf.model.Resource;
 import org.openrdf.model.URI;
-import org.openrdf.model.Value;
 import org.openrdf.model.impl.URIImpl;
-import org.openrdf.model.vocabulary.SESAME;
 
 /*
-* A vocabulary for embergraph specific extensions.
+ * A vocabulary for embergraph specific extensions.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -168,7 +162,7 @@ public interface BD {
   URI VIRTUAL_GRAPH = new URIImpl(NAMESPACE + "virtualGraph");
 
   //    /*
-//     * We need the ability to do atomic add+drop in one operation via the
+  //     * We need the ability to do atomic add+drop in one operation via the
   //     * remoting interface.  Thus we need the ability to place
   //     * statements to add and to delete in the same serialized document sent
   //     * across the wire.  This separator key, when included in a comment, will

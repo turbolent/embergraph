@@ -24,7 +24,7 @@ import java.util.UUID;
 import org.embergraph.journal.IJournal;
 
 /*
-* Convenience interface created in BLZG-1370 to factor out embergraph-jini artifact dependencies.
+ * Convenience interface created in BLZG-1370 to factor out embergraph-jini artifact dependencies.
  */
 public interface IHAJournal extends IJournal {
 

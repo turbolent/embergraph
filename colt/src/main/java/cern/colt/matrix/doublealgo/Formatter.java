@@ -17,7 +17,7 @@ import cern.colt.matrix.impl.AbstractMatrix2D;
 import cern.colt.matrix.impl.DenseDoubleMatrix1D;
 import cern.colt.matrix.impl.Former;
 /*
-* Flexible, well human readable matrix print formatting; By default decimal point aligned. Build on
+ * Flexible, well human readable matrix print formatting; By default decimal point aligned. Build on
  * top of the C-like <i>sprintf</i> functionality provided by the {@link corejava.Format} class
  * written by Cay Horstmann. Currenly works on 1-d, 2-d and 3-d matrices. Note that in most cases
  * you will not need to get familiar with this class; just call <tt>matrix.toString()</tt> and be

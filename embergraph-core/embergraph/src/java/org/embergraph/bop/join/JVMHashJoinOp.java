@@ -26,14 +26,12 @@ import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpContext;
 import org.embergraph.bop.HashMapAnnotations;
 import org.embergraph.bop.IBindingSet;
-import org.embergraph.bop.IPredicate;
 import org.embergraph.bop.ISingleThreadedOp;
 import org.embergraph.bop.NV;
 import org.embergraph.bop.controller.INamedSolutionSetRef;
-import org.embergraph.relation.accesspath.IAccessPath;
 
 /*
-* A hash join against an {@link IAccessPath} based on the Java collections classes. Source
+ * A hash join against an {@link IAccessPath} based on the Java collections classes. Source
  * solutions are buffered on the Java collection on each evaluation pass. Once ALL source solutions
  * have been buffered, the hash join will run a single pass over the {@link IAccessPath} for the
  * target {@link IPredicate}. For some queries, this can be more efficient than probing as-bound

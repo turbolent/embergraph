@@ -22,11 +22,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree.data;
 
 import org.embergraph.btree.raba.IRaba;
-import org.embergraph.btree.raba.codec.IRabaCoder;
-import org.embergraph.rawstore.IRawStore;
 
 /*
-* Interface for low-level data access for the leaves of a B+-Tree.
+ * Interface for low-level data access for the leaves of a B+-Tree.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

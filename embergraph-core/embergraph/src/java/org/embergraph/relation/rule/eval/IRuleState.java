@@ -26,15 +26,13 @@ Copyright (C) Embergraph contributors 2019. All rights reserved.
 package org.embergraph.relation.rule.eval;
 
 import org.embergraph.bop.IBindingSet;
-import org.embergraph.bop.IPredicate;
 import org.embergraph.bop.IVariable;
 import org.embergraph.bop.joinGraph.IEvaluationPlan;
 import org.embergraph.relation.rule.IRule;
-import org.embergraph.relation.rule.Rule;
 import org.embergraph.striterator.IKeyOrder;
 
 /*
-* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IRuleState {

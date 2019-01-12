@@ -41,7 +41,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 /*
-* Ternary interval search trees.
+ * Ternary interval search trees.
  *
  * <p><em>Ternary search trees</em> are a data structure used to store words over an alphabet; they
  * are a useful alternatives to tries when the alphabet is large.

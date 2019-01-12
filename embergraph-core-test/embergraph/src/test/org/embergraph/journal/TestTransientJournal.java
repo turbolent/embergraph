@@ -25,11 +25,10 @@ import java.io.IOException;
 import java.util.Properties;
 import junit.extensions.proxy.ProxyTestSuite;
 import junit.framework.Test;
-import org.embergraph.rawstore.AbstractRawStoreTestCase;
 import org.embergraph.rawstore.IRawStore;
 
 /*
-* Test suite for {@link BufferMode#Transient} journals.
+ * Test suite for {@link BufferMode#Transient} journals.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

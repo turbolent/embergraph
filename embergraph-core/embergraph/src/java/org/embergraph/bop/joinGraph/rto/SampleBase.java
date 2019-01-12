@@ -24,11 +24,9 @@ package org.embergraph.bop.joinGraph.rto;
 import java.util.concurrent.atomic.AtomicReference;
 import org.apache.log4j.Logger;
 import org.embergraph.bop.IBindingSet;
-import org.embergraph.bop.engine.IChunkMessage;
-import org.embergraph.rwstore.sector.IMemoryManager;
 
 /*
-* Base class for a sample taken from a vertex (access path) or edge (cutoff join).
+ * Base class for a sample taken from a vertex (access path) or edge (cutoff join).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

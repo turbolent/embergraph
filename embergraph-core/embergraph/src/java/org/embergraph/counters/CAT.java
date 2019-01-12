@@ -25,11 +25,10 @@ import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
-import java.util.concurrent.atomic.AtomicLong;
 import org.cliffc.high_scale_lib.ConcurrentAutoTable;
 
 /*
-* An alias for the high-scale-lib counter implementation. {@link CAT}s are useful when a counter is
+ * An alias for the high-scale-lib counter implementation. {@link CAT}s are useful when a counter is
  * extremely hot for updates and adaptively expand their internal state to minimize thread
  * contention. However, they can do more work than an {@link AtomicLong} on read since they must
  * scan an internal table to aggregate updates from various threads.

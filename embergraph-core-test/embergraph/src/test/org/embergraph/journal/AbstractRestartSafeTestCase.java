@@ -30,7 +30,7 @@ import org.embergraph.rwstore.IRWStrategy;
 import org.embergraph.util.InnerCause;
 
 /*
-* Test suite for restart-safe (data survives commit and reopen of the store).
+ * Test suite for restart-safe (data survives commit and reopen of the store).
  *
  * @todo verify {@link ICommitter} protocol.
  * @todo verify nextOffset after restart and other metadata preserved by the root blocks.
@@ -49,7 +49,7 @@ public abstract class AbstractRestartSafeTestCase extends AbstractBufferStrategy
   }
 
   //    /*
-//     * override to disable deletion of the store on close.
+  //     * override to disable deletion of the store on close.
   //     */
   //    public Properties getProperties() {
   //

@@ -24,11 +24,9 @@ package org.embergraph.relation.accesspath;
 import java.util.LinkedList;
 import java.util.concurrent.ConcurrentHashMap;
 import org.apache.log4j.Logger;
-import org.embergraph.relation.rule.eval.pipeline.JoinTask;
-import org.embergraph.util.concurrent.Haltable;
 
 /*
-* A factory pattern for per-thread objects whose life cycle is tied to some container. The pool can
+ * A factory pattern for per-thread objects whose life cycle is tied to some container. The pool can
  * be torn down when the container is torn down, which prevents its thread-local references from
  * escaping.
  *
@@ -97,8 +95,8 @@ public abstract class ThreadLocalBufferFactory<T extends IBuffer<E>, E> {
     T tmp = map.get(t);
     if (tmp == null) {
       if (map.put(t, tmp = initialValue()) != null) {
-      /*
-       * Note: Since the key is the thread it is not possible for
+        /*
+         * Note: Since the key is the thread it is not possible for
          * there to be a concurrent put of an entry under the same key
          * so we do not have to use putIfAbsent().
          */

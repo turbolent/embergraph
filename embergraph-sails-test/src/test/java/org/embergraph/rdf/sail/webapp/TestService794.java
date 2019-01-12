@@ -21,7 +21,7 @@ import java.io.IOException;
 import junit.framework.Test;
 
 /*
-* While writing this comment, early January 2014, the status is that the two interesting tests both
+ * While writing this comment, early January 2014, the status is that the two interesting tests both
  * fail and are disabled {@link #xtestMassageServiceCall()} and {@link
  * #xtestMassageServiceNested1Call()}
  *

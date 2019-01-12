@@ -23,7 +23,7 @@ import org.embergraph.counters.CAT;
 import org.embergraph.rdf.inf.ClosureStats;
 
 /*
-* Used to report statistics when loading data.
+ * Used to report statistics when loading data.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

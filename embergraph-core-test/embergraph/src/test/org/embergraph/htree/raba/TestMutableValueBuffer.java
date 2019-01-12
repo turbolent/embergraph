@@ -25,11 +25,10 @@ import java.io.IOException;
 import junit.framework.TestCase2;
 import org.embergraph.btree.raba.IRaba;
 import org.embergraph.btree.raba.ReadOnlyValuesRaba;
-import org.embergraph.htree.HTree;
 import org.embergraph.io.DataInputBuffer;
 
 /*
-* Test suite for {@link MutableValuesBuffer}.
+ * Test suite for {@link MutableValuesBuffer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

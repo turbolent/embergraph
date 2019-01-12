@@ -25,7 +25,7 @@ import java.util.Map;
 import java.util.Properties;
 
 /*
-* Utility method for use with a {@link SparseRowStore}.
+ * Utility method for use with a {@link SparseRowStore}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

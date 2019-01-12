@@ -35,7 +35,7 @@ import java.util.NoSuchElementException;
 import org.apache.log4j.Logger;
 
 /*
-* An iterable that offers elements that were previously stored offline using specialized
+ * An iterable that offers elements that were previously stored offline using specialized
  * serialization methods. At construction, you provide a {@linkplain
  * #OfflineIterable(it.unimi.dsi.io.OfflineIterable.Serializer, Object) serializer} that establishes
  * how elements are written offline; after that, you can {@linkplain #add(Object) add elements} one

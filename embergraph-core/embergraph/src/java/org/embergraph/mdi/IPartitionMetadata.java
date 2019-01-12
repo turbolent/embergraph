@@ -21,14 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.mdi;
 
-import org.embergraph.btree.ICounter;
-import org.embergraph.btree.IndexMetadata;
-import org.embergraph.service.DataService;
-import org.embergraph.service.IDataService;
-import org.embergraph.service.IMetadataService;
-
 /*
-* A description of the metadata state for a partition of a scale-out index.
+ * A description of the metadata state for a partition of a scale-out index.
  *
  * <p>Each index partition has a distinct partitionId. This partitionId is assigned by a centralized
  * service - the {@link IMetadataService} for the scale-out index for that index partition. A

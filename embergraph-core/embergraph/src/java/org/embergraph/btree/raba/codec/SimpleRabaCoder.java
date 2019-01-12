@@ -27,7 +27,6 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.io.OutputStream;
-import java.nio.ByteBuffer;
 import org.embergraph.btree.raba.IRaba;
 import org.embergraph.io.AbstractFixedByteArrayBuffer;
 import org.embergraph.io.DataOutputBuffer;
@@ -35,7 +34,7 @@ import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
 /*
-* This class does not offer any compression. It merely stores the byte[][] in a {@link ByteBuffer}
+ * This class does not offer any compression. It merely stores the byte[][] in a {@link ByteBuffer}
  * together with offset information required to extract the original byte[]s using a random access
  * pattern. It supports both B+Tree keys and B+Tree values.
  *

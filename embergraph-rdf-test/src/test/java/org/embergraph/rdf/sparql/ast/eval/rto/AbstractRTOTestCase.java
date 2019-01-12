@@ -34,17 +34,15 @@ import org.embergraph.bop.engine.IRunningQuery;
 import org.embergraph.bop.engine.QueryEngine;
 import org.embergraph.bop.engine.QueryEngine.IRunningQueryListener;
 import org.embergraph.bop.fed.QueryEngineFactory;
-import org.embergraph.bop.joinGraph.rto.JGraph;
 import org.embergraph.bop.joinGraph.rto.JoinGraph;
 import org.embergraph.bop.joinGraph.rto.Path;
 import org.embergraph.journal.IBTreeManager;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
-import org.embergraph.rdf.sparql.ast.optimizers.IASTOptimizer;
 
 /*
-* Data driven test suite for the Runtime Query Optimizer (RTO).
+ * Data driven test suite for the Runtime Query Optimizer (RTO).
  *
  * <p>Note: We reduce the stochastic behavior of the algorithm by using non-random sampling
  * techniques. However, the main correctness issues for the RTO are the handling of different kinds

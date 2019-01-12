@@ -26,7 +26,7 @@ import org.embergraph.bop.BOp;
 import org.embergraph.rdf.model.EmbergraphStatement;
 
 /*
-* This operation creates a graph in the Graph Store (this operation is a NOP for embergraph).
+ * This operation creates a graph in the Graph Store (this operation is a NOP for embergraph).
  *
  * <pre>
  * CREATE ( SILENT )? GRAPH IRIref

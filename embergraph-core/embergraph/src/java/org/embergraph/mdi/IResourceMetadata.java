@@ -19,14 +19,9 @@ package org.embergraph.mdi;
 
 import java.io.Serializable;
 import java.util.UUID;
-import org.embergraph.btree.ILocalBTreeView;
-import org.embergraph.btree.IndexSegment;
-import org.embergraph.journal.AbstractJournal;
-import org.embergraph.journal.Journal;
-import org.embergraph.resources.ResourceManager;
 
 /*
-* Interface for metadata about a {@link Journal} or {@link IndexSegment}.
+ * Interface for metadata about a {@link Journal} or {@link IndexSegment}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -64,7 +59,7 @@ public interface IResourceMetadata extends Serializable, Cloneable {
    * the file in the file system and the UUID in our code.
    */
   //    /*
-//     * The #of bytes in the store file.
+  //     * The #of bytes in the store file.
   //     */
   //    public long size();
 

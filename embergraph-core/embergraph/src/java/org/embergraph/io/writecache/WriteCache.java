@@ -45,7 +45,6 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import org.apache.log4j.Logger;
-import org.embergraph.btree.IndexSegmentBuilder;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.ha.msg.HAWriteMessage;
 import org.embergraph.ha.msg.IHAWriteMessage;
@@ -58,14 +57,11 @@ import org.embergraph.io.compression.CompressorRegistry;
 import org.embergraph.io.compression.IRecordCompressor;
 import org.embergraph.journal.AbstractBufferStrategy;
 import org.embergraph.journal.StoreTypeEnum;
-import org.embergraph.journal.WORMStrategy;
-import org.embergraph.rawstore.IRawStore;
-import org.embergraph.rwstore.RWStore;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.ChecksumError;
 
 /*
-* This class provides a write cache with read-through for NIO writes on a {@link FileChannel} (and
+ * This class provides a write cache with read-through for NIO writes on a {@link FileChannel} (and
  * potentially on a remote service). This class is designed to maximize the opportunity for
  * efficient NIO by combining many writes onto a single direct {@link ByteBuffer} and then
  * efficiently transferring those writes onto the backing channel in a channel dependent manner. In
@@ -203,7 +199,7 @@ public abstract class WriteCache implements IWriteCache {
   }
 
   // /*
-// * Return the buffer. No other thread will have access to the buffer. No
+  // * Return the buffer. No other thread will have access to the buffer. No
   // * latch is established and there is no protocol for releasing the buffer
   // * back. Instead, the buffer will become available again if the caller
   // * releases the write lock.
@@ -401,14 +397,14 @@ public abstract class WriteCache implements IWriteCache {
   private volatile boolean m_closedForWrites = false;
 
   //    /*
-//     * The sequence must be set when the cache is ready to be flushed.  In HA this
+  //     * The sequence must be set when the cache is ready to be flushed.  In HA this
   //     * is sent down the pipeline to ensure correct synchronization when processing
   //     * logged messages.
   //     */
   //    private long sequence = -1;
   //
   //    /*
-//     * The sequence #of this {@link WriteCache} block within the current write
+  //     * The sequence #of this {@link WriteCache} block within the current write
   //     * set (origin ZERO(0)). This must be set when the cache is ready to be
   //     * flushed. In HA this is sent down the pipeline to ensure correct
   //     * synchronization when processing logged messages. This also winds up in
@@ -420,7 +416,7 @@ public abstract class WriteCache implements IWriteCache {
   //    }
   //
   //    /*
-//     * The sequence #of this {@link WriteCache} block within the current write
+  //     * The sequence #of this {@link WriteCache} block within the current write
   //     * set (origin ZERO(0)).
   //     */
   //    long getSequence() {
@@ -824,8 +820,8 @@ public abstract class WriteCache implements IWriteCache {
 
         if (spos + nwrite > capacity) {
 
-        /*
-       * There is not enough room left in the write cache for this
+          /*
+           * There is not enough room left in the write cache for this
            * record.
            */
 
@@ -844,8 +840,8 @@ public abstract class WriteCache implements IWriteCache {
 
         tmp.put(data);
 
-      /*
-       * Copy the record into the cache, updating position() as we go.
+        /*
+         * Copy the record into the cache, updating position() as we go.
          *
          * Note that the checker must be invalidated if a RWCache
          * "deletes" an entry by zeroing an address. Hence, the code no
@@ -875,16 +871,16 @@ public abstract class WriteCache implements IWriteCache {
         counters.naccept++;
         counters.bytesAccepted += nwrite;
 
-      /*
-       * Add metadata for the record so it can be read back from the
+        /*
+         * Add metadata for the record so it can be read back from the
          * cache.
          */
 
         final RecordMetadata md = new RecordMetadata(offset, pos, datalen, latchedAddr);
 
         if (recordMap.put(Long.valueOf(offset), md) != null) {
-        /*
-       * Note: This exception indicates that the abort protocol
+          /*
+           * Note: This exception indicates that the abort protocol
            * did not reset() the current write cache before new writes
            * were laid down onto the buffer.
            */
@@ -893,8 +889,8 @@ public abstract class WriteCache implements IWriteCache {
 
         if (orderedRecords != null) {
 
-        /*
-       * Note: insert into this collection is guarded by the
+          /*
+           * Note: insert into this collection is guarded by the
            * object monitor for the ByteBuffer. This ensures that the
            * LinkedList data structure remains coherent when it is
            * updated by multiple threads. It also ensures that the
@@ -1411,7 +1407,7 @@ public abstract class WriteCache implements IWriteCache {
   }
 
   //    /*
-//     * Return the RMI message object that will accompany the payload from the
+  //     * Return the RMI message object that will accompany the payload from the
   //     * {@link WriteCache} when it is replicated along the write pipeline.
   //     *
   //     * @return cache A {@link WriteCache} to be replicated.
@@ -1837,8 +1833,8 @@ public abstract class WriteCache implements IWriteCache {
             // Should have been removed already.
             throw new AssertionError();
           }
-        /*
-       * Make sure that the address is declared. This covers the
+          /*
+           * Make sure that the address is declared. This covers the
            * case where a record is allocated and then recycled before
            * the WriteCache in which it was recorded is evicted from
            * the dirtyList. This can happen when we are not
@@ -1857,13 +1853,13 @@ public abstract class WriteCache implements IWriteCache {
             removeAddress(latchedAddr);
           }
         } else {
-        /*
-       * Note: Do not enter things into [orderedRecords] on the
+          /*
+           * Note: Do not enter things into [orderedRecords] on the
            * follower.
            */
           if (recordLength < 0) {
-          /*
-       * Notice of allocation.
+            /*
+             * Notice of allocation.
              *
              * Note: recordLength is always negative for this code
              * path. The RWS will interpret the -recordLength as
@@ -1873,8 +1869,8 @@ public abstract class WriteCache implements IWriteCache {
              */
             addAddress(latchedAddr, recordLength);
           } else {
-          /*
-       * Actual allocation with data.
+            /*
+             * Actual allocation with data.
              */
             final RecordMetadata md =
                 new RecordMetadata(
@@ -2030,8 +2026,8 @@ public abstract class WriteCache implements IWriteCache {
     try {
 
       if (m_closedForWrites) {
-      /*
-       * Neither the buffer nor the record map may be modified. The
+        /*
+         * Neither the buffer nor the record map may be modified. The
          * WriteCacheService is in the process of writing this buffer to
          * the disk and replicating it to the downstream nodes (HA).
          *
@@ -2044,8 +2040,8 @@ public abstract class WriteCache implements IWriteCache {
       final RecordMetadata removed = recordMap.remove(addr);
 
       if (removed == null) {
-      /*
-       * Must be present.
+        /*
+         * Must be present.
          *
          * Buffer not closed for writes, but record moved. Mayhaps
          * compacted to another?
@@ -2056,8 +2052,8 @@ public abstract class WriteCache implements IWriteCache {
       removed.deleted = true;
 
       if (!prefixWrites) {
-      /*
-       * We will not record a deleted record. We are not in HA mode.
+        /*
+         * We will not record a deleted record. We are not in HA mode.
          */
         m_removed += removed.recordLength;
         return true;
@@ -2121,8 +2117,8 @@ public abstract class WriteCache implements IWriteCache {
 
           final Long fileOffset = entries.next();
 
-        /*
-       * We need to guard against the possibility that the entry in
+          /*
+           * We need to guard against the possibility that the entry in
            * the service record map has been updated concurrently such
            * that it now points to a different WriteCache instance. This
            * is possible (for the RWStore) if a recently freed record has
@@ -2166,7 +2162,7 @@ public abstract class WriteCache implements IWriteCache {
   private static class ChecksumHelper extends ChecksumUtility {
 
     // /*
-// * Private helper object.
+    // * Private helper object.
     // */
     // private final Adler32 chk = new Adler32();
 
@@ -2201,7 +2197,7 @@ public abstract class WriteCache implements IWriteCache {
     }
 
     // /*
-// * Update the {@link Adler32} checksum from the data in the buffer.
+    // * Update the {@link Adler32} checksum from the data in the buffer.
     // The
     // * position, mark, and limit are unchanged by this operation. The
     // * operation is optimized when the buffer is backed by an array.
@@ -2480,8 +2476,8 @@ public abstract class WriteCache implements IWriteCache {
                     : "dst.remaining(): " + dst.remaining() + " expected: " + dstremaining;
               }
             }
-          /*
-       * Insert record into destination.
+            /*
+             * Insert record into destination.
              *
              * Note: The [orderedList] on the target buffer is not
              * updated because we handle the propagation of the
@@ -2499,8 +2495,8 @@ public abstract class WriteCache implements IWriteCache {
             }
 
             if (serviceRecordMap != null) {
-            /*
-       * Note: As soon as we update the service record map
+              /*
+               * Note: As soon as we update the service record map
                * it is possible that
                * WriteCacheService.clearWrite() will clear the
                * record from [dst]. We can not rely on the record
@@ -2591,16 +2587,16 @@ public abstract class WriteCache implements IWriteCache {
         for (RecordMetadata md : orderedRecords) {
 
           if (md.deleted) {
-          /*
-       * Entry is address of deleted record. No application
+            /*
+             * Entry is address of deleted record. No application
              * data follows the entry (the next thing in the buffer
              * will be another entry).
              */
             tmp.putLong(-md.fileOffset);
             tmp.putInt(-md.recordLength);
           } else {
-          /*
-       * Entry is notice of non-deleted address. No
+            /*
+             * Entry is notice of non-deleted address. No
              * application data follows the entry (the next thing in
              * the buffer will be another entry).
              */

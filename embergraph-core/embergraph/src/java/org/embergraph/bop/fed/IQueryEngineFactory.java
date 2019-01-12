@@ -3,13 +3,10 @@ package org.embergraph.bop.fed;
 import org.embergraph.bop.engine.QueryEngine;
 import org.embergraph.journal.IBTreeManager;
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.journal.Journal;
-import org.embergraph.journal.TemporaryStore;
-import org.embergraph.service.DataService;
 import org.embergraph.service.IEmbergraphFederation;
 
 /*
-* Factory for a {@link QueryEngine} or derived class.
+ * Factory for a {@link QueryEngine} or derived class.
  *
  * @author bryan
  * @see QueryEngineFactory#getInstance()

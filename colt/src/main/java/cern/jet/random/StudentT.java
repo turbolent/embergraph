@@ -11,7 +11,7 @@ package cern.jet.random;
 import cern.jet.random.engine.RandomEngine;
 import cern.jet.stat.Probability;
 /*
-* StudentT distribution (aka T-distribution); See the <A
+ * StudentT distribution (aka T-distribution); See the <A
  * HREF="http://www.cern.ch/RD11/rkb/AN16pp/node279.html#SECTION0002790000000000000000"> math
  * definition</A> and <A HREF="http://www.statsoft.com/textbook/gloss.html#Student's t
  * Distribution"> animated definition</A>.

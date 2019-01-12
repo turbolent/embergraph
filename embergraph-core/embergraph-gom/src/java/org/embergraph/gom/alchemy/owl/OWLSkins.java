@@ -20,7 +20,7 @@ package org.embergraph.gom.alchemy.owl;
 import org.embergraph.gom.skin.GenericSkinRegistry;
 
 /*
-* This is just a hook class to register the OWL GPO skins.
+ * This is just a hook class to register the OWL GPO skins.
  *
  * @author Martyn Cutcher
  */

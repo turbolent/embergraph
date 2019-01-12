@@ -20,7 +20,7 @@
 package corejava;
 
 /*
-* A class for formatting numbers that follows <tt>printf</tt> conventions.
+ * A class for formatting numbers that follows <tt>printf</tt> conventions.
  *
  * <p>Also implements C-like <tt>atoi</tt> and <tt>atof</tt> functions
  *

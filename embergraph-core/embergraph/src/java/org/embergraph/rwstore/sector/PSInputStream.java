@@ -6,7 +6,7 @@ import java.nio.ByteBuffer;
 import org.apache.log4j.Logger;
 
 /*
-* ********************************************************************** PSInputStream
+ * ********************************************************************** PSInputStream
  *
  * <p>Unlike the original PSInputStream this does not incrementally read from the store but rather
  * immediate maps the ByteBuffers to the in-memory storage.

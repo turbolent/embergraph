@@ -25,7 +25,6 @@ import java.util.HashMap;
 import java.util.Map;
 import junit.framework.TestCase2;
 import org.embergraph.bop.aggregate.AggregateBase.Annotations;
-import org.embergraph.bop.aggregate.IAggregate;
 import org.embergraph.journal.ITx;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
 import org.embergraph.rdf.sparql.ast.AssignmentNode;
@@ -40,7 +39,7 @@ import org.embergraph.rdf.sparql.ast.ProjectionNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
 
 /*
-* Test suite for {@link VerifyAggregates}.
+ * Test suite for {@link VerifyAggregates}.
  *
  * <p>Note: This is a port of {@link org.embergraph.bop.solutions.TestGroupByState} that does not
  * depend on the embergraph operator model. It was developed as part of BLZG-1176 to decouple the

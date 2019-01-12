@@ -25,7 +25,7 @@ import java.util.NoSuchElementException;
 import org.embergraph.rdf.model.EmbergraphStatement;
 
 /*
-* Empty iterator.
+ * Empty iterator.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

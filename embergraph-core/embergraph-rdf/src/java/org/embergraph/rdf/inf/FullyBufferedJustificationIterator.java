@@ -30,7 +30,7 @@ import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /*
-* Fully buffers and then visits all {@link Justification}s for a given statement.
+ * Fully buffers and then visits all {@link Justification}s for a given statement.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

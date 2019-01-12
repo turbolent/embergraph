@@ -25,14 +25,13 @@ import java.util.UUID;
 import org.apache.log4j.Level;
 import org.embergraph.btree.data.ILeafData;
 import org.embergraph.btree.keys.KeyBuilder;
-import org.embergraph.journal.TestRestartSafe;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.RawStoreDelegate;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 import org.embergraph.util.Bytes;
 
 /*
-* Test suite for {@link BTree#removeAll()}.
+ * Test suite for {@link BTree#removeAll()}.
  *
  * @see TestRestartSafe#test_restartSafe01()
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

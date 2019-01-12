@@ -10,7 +10,7 @@ It is provided "as is" without expressed or implied warranty.
 */
 import java.util.Date;
 /*
-* MersenneTwister (MT19937) is one of the strongest uniform pseudo-random number generators known
+ * MersenneTwister (MT19937) is one of the strongest uniform pseudo-random number generators known
  * so far; at the same time it is quick. Produces uniformly distributed <tt>int</tt>'s and
  * <tt>long</tt>'s in the closed intervals <tt>[Integer.MIN_VALUE,Integer.MAX_VALUE]</tt> and
  * <tt>[Long.MIN_VALUE,Long.MAX_VALUE]</tt>, respectively, as well as <tt>float</tt>'s and

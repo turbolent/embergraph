@@ -51,7 +51,7 @@ import org.openrdf.rio.helpers.RDFHandlerBase;
 import org.openrdf.sail.SailException;
 
 /*
-* Handler for DELETE by query (DELETE verb) and DELETE by data (POST).
+ * Handler for DELETE by query (DELETE verb) and DELETE by data (POST).
  *
  * @author martyncutcher
  */
@@ -126,8 +126,8 @@ public class DeleteServlet extends EmbergraphRDFServlet {
 
       if (getIndexManager().isGroupCommit()) {
 
-      /*
-       * When group commit is enabled we must fully materialize the
+        /*
+         * When group commit is enabled we must fully materialize the
          * solutions from the query and then delete them. This is because
          * intermediate checkpoints of the indices would otherwise not be
          * visible if we were reading on the last commit time rather than
@@ -148,8 +148,8 @@ public class DeleteServlet extends EmbergraphRDFServlet {
 
       } else {
 
-      /*
-       * When group commit is NOT enabled we can use an approach that
+        /*
+         * When group commit is NOT enabled we can use an approach that
          * streams solutions from the last commit point into the DELETE
          * operation. This is more scalable since it is a streaming
          * operation.
@@ -266,8 +266,8 @@ public class DeleteServlet extends EmbergraphRDFServlet {
           final EmbergraphRDFContext context =
               EmbergraphServlet.getEmbergraphRDFContext(req.getServletContext());
 
-        /*
-       * Note: pipe is drained by this thread to consume the query
+          /*
+           * Note: pipe is drained by this thread to consume the query
            * results, which are the statements to be deleted.
            */
           final PipedOutputStream os = new PipedOutputStream();
@@ -465,8 +465,8 @@ public class DeleteServlet extends EmbergraphRDFServlet {
           final EmbergraphRDFContext context =
               EmbergraphServlet.getEmbergraphRDFContext(req.getServletContext());
 
-        /*
-       * Note: pipe is drained by this thread to consume the query
+          /*
+           * Note: pipe is drained by this thread to consume the query
            * results, which are the statements to be deleted.
            */
           final PipedOutputStream os = new PipedOutputStream();
@@ -765,8 +765,8 @@ public class DeleteServlet extends EmbergraphRDFServlet {
 
         rdfParser.setRDFHandler(new RemoveStatementHandler(conn, nmodified, defaultContext));
 
-      /*
-       * Run the parser, which will cause statements to be deleted.
+        /*
+         * Run the parser, which will cause statements to be deleted.
          */
         rdfParser.parse(req.getInputStream(), baseURI);
 

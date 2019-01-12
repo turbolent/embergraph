@@ -26,33 +26,22 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
-import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpContextBase;
-import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IVariable;
 import org.embergraph.bop.IdFactory;
 import org.embergraph.bop.NamedSolutionSetRefUtility;
-import org.embergraph.bop.PipelineOp;
 import org.embergraph.bop.SimpleIdFactory;
 import org.embergraph.bop.engine.IChunkHandler;
-import org.embergraph.bop.engine.IRunningQuery;
 import org.embergraph.bop.engine.QueryEngine;
 import org.embergraph.bop.engine.StaticAnalysisStats;
 import org.embergraph.bop.fed.QueryEngineFactory;
-import org.embergraph.bop.join.HTreeSolutionSetHashJoinOp;
-import org.embergraph.bop.join.JVMSolutionSetHashJoinOp;
-import org.embergraph.bop.rdf.join.ChunkedMaterializationOp;
-import org.embergraph.htree.HTree;
 import org.embergraph.journal.IBTreeManager;
-import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.ITx;
 import org.embergraph.journal.TimestampUtility;
 import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.DescribeModeEnum;
 import org.embergraph.rdf.sparql.ast.EmptySolutionSetStats;
-import org.embergraph.rdf.sparql.ast.FunctionNode;
-import org.embergraph.rdf.sparql.ast.FunctionRegistry;
 import org.embergraph.rdf.sparql.ast.ISolutionSetStats;
 import org.embergraph.rdf.sparql.ast.ProjectionNode;
 import org.embergraph.rdf.sparql.ast.QueryHints;
@@ -60,11 +49,8 @@ import org.embergraph.rdf.sparql.ast.StaticAnalysis;
 import org.embergraph.rdf.sparql.ast.cache.CacheConnectionFactory;
 import org.embergraph.rdf.sparql.ast.cache.ICacheConnection;
 import org.embergraph.rdf.sparql.ast.cache.IDescribeCache;
-import org.embergraph.rdf.sparql.ast.hints.IQueryHint;
-import org.embergraph.rdf.sparql.ast.hints.QueryHintRegistry;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTBottomUpOptimizer;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTOptimizerList;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTQueryHintOptimizer;
 import org.embergraph.rdf.sparql.ast.optimizers.IASTOptimizer;
 import org.embergraph.rdf.sparql.ast.ssets.ISolutionSetManager;
 import org.embergraph.rdf.sparql.ast.ssets.SolutionSetManager;
@@ -73,7 +59,7 @@ import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.util.ClassPathUtil;
 
 /*
-* Convenience class for passing around the various pieces of context necessary to construct the bop
+ * Convenience class for passing around the various pieces of context necessary to construct the bop
  * pipeline.
  */
 public class AST2BOpContext implements IdFactory, IEvaluationContext {

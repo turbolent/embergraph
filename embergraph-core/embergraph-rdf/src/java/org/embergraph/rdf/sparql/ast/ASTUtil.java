@@ -24,7 +24,7 @@ package org.embergraph.rdf.sparql.ast;
 import org.embergraph.bop.IVariable;
 
 /*
-* Some utility methods for AST/IV conversions.
+ * Some utility methods for AST/IV conversions.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

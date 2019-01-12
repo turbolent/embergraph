@@ -22,7 +22,7 @@ package org.embergraph.sparse;
 import org.embergraph.util.Bytes;
 
 /*
-* A type safe enumeration of key types and the byte values that are used to encode that key type
+ * A type safe enumeration of key types and the byte values that are used to encode that key type
  * within the encoded {@link Schema} name.
  *
  * @see Schema#getSchemaBytes()

@@ -20,7 +20,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree.proc;
 
 /*
-* Interface for procedures that are mapped across one or more index partitions based on a key range
+ * Interface for procedures that are mapped across one or more index partitions based on a key range
  * (fromKey, toKey). The keys are interpreted as variable length unsigned byte[]s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -20,7 +20,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.btree;
 
-import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
 import org.embergraph.EmbergraphStatics;
 import org.embergraph.btree.data.AbstractReadOnlyNodeData;
@@ -33,15 +32,13 @@ import org.embergraph.btree.data.INodeData;
 import org.embergraph.io.AbstractFixedByteArrayBuffer;
 import org.embergraph.io.DataOutputBuffer;
 import org.embergraph.io.FixedByteArrayBuffer;
-import org.embergraph.io.IDataRecord;
 import org.embergraph.io.compression.IRecordCompressor;
 import org.embergraph.io.compression.IRecordCompressorFactory;
 import org.embergraph.io.compression.NOPRecordCompressor;
 import org.embergraph.rawstore.IAddressManager;
-import org.embergraph.rawstore.IRawStore;
 
 /*
-* An instance of this class is used to serialize and de-serialize the {@link INodeData}s and {@link
+ * An instance of this class is used to serialize and de-serialize the {@link INodeData}s and {@link
  * ILeafData}s of an {@link AbstractBTree}. Leaf and non-leaf records have different serialization
  * formats, but their leading bytes use the same format so that you can tell by inspection whether a
  * buffer contains a leaf or a non-leaf node. The header of the record uses a fixed length format so

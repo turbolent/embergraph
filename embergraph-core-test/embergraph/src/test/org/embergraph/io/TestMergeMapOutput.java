@@ -10,7 +10,7 @@ import org.embergraph.journal.AbstractJournal.ISnapshotData;
 import org.junit.Test;
 
 /*
-* Tests the utility to merge an input stream with a sorted set of <Long, ByteBuffer>
+ * Tests the utility to merge an input stream with a sorted set of <Long, ByteBuffer>
  *
  * @author Martyn Cutcher
  */

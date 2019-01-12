@@ -24,7 +24,6 @@ import org.apache.log4j.Logger;
 import org.embergraph.journal.ITx;
 import org.embergraph.journal.TimestampUtility;
 import org.embergraph.rdf.changesets.IChangeLog;
-import org.embergraph.rdf.changesets.IChangeRecord;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.sail.EmbergraphSail.EmbergraphSailConnection;
 import org.embergraph.rdf.sail.sparql.Embergraph2ASTSPARQLParser;
@@ -44,7 +43,7 @@ import org.openrdf.sail.SailConnection;
 import org.openrdf.sail.SailException;
 
 /*
-* Class with support for a variety of embergraph specific extensions,
+ * Class with support for a variety of embergraph specific extensions,
  *
  * <p>{@inheritDoc}
  *

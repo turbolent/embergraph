@@ -30,17 +30,15 @@ import org.apache.log4j.Level;
 import org.embergraph.btree.data.DefaultLeafCoder;
 import org.embergraph.btree.data.ILeafData;
 import org.embergraph.btree.filter.EmptyTupleIterator;
-import org.embergraph.btree.isolation.IsolatedFusedView;
 import org.embergraph.btree.raba.IRaba;
 import org.embergraph.btree.raba.MutableKeyBuffer;
 import org.embergraph.btree.raba.MutableValueBuffer;
 import org.embergraph.io.AbstractFixedByteArrayBuffer;
-import org.embergraph.journal.ITransactionService;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.util.BytesUtil;
 
 /*
-* A B+-Tree leaf.
+ * A B+-Tree leaf.
  *
  * <h2>Tuple revision timestamps</h2>
  *
@@ -534,8 +532,8 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
 
         if (!hasDeleteMarkers() || !getDeleteMarker(entryIndex)) {
 
-        /*
-       * Found an existing (non-deleted) entry under the key.
+          /*
+           * Found an existing (non-deleted) entry under the key.
            *
            * Do NOT mutate the leaf.
            */
@@ -603,8 +601,8 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
 
       if (tuple != null) {
 
-      /*
-       * Copy data and metadata for the old value stored under the
+        /*
+         * Copy data and metadata for the old value stored under the
          * search key.
          */
 
@@ -619,8 +617,8 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
        */
       if (hasRawRecords()) {
 
-      /*
-       * Note: If the old value was a raw record, we need to delete
+        /*
+         * Note: If the old value was a raw record, we need to delete
          * that raw record now.
          *
          * Note: If the new value will be a raw record, we need to write
@@ -663,16 +661,16 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
 
         if (!data.deleteMarkers[entryIndex] && delete) {
 
-        /*
-       * Changing from a non-deleted to a deleted tuple (we don't
+          /*
+           * Changing from a non-deleted to a deleted tuple (we don't
            * count re-deletes of an already deleted tuple).
            */
           btree.getBtreeCounters().ntupleUpdateDelete++;
 
         } else if (!delete) {
 
-        /*
-       * Either changing from a deleted to a non-deleted tuple or
+          /*
+           * Either changing from a deleted to a non-deleted tuple or
            * just overwriting an existing non-deleted tuple.
            */
           btree.getBtreeCounters().ntupleUpdateValue++;
@@ -682,8 +680,8 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
 
       } else {
 
-      /*
-       * Update value for existing tuple (delete markers are not in
+        /*
+         * Update value for existing tuple (delete markers are not in
          * use).
          */
         btree.getBtreeCounters().ntupleUpdateValue++;
@@ -963,8 +961,8 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
 
       if (separatorIndex >= 0) {
 
-      /*
-       * The separator key should not be pre-existing in the parent.
+        /*
+         * The separator key should not be pre-existing in the parent.
          */
 
         throw new AssertionError(
@@ -1081,8 +1079,8 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
 
       if (p != btree.root && p.isRightMostNode()) {
 
-      /*
-       * If the leaf that is split is a child of the right most node
+        /*
+         * If the leaf that is split is a child of the right most node
          * in the tree then that is counted as a "tail split".
          *
          * Note: We DO NOT count tail splits when the leaf is the root
@@ -1099,8 +1097,8 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
 
       } else if (p != btree.root && p.isLeftMostNode()) {
 
-      /*
-       * If the leaf that is split is a child of the left-most node in
+        /*
+         * If the leaf that is split is a child of the left-most node in
          * the tree then that is counted as a "head split".
          *
          * Note: We DO NOT count head splits when the leaf is the root
@@ -1366,11 +1364,7 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
     final Node p = getParent();
 
     // children of the same node.
-    assert s.getParent() == p
-        : "this.parent="
-            + (p)
-            + " != s.parent="
-            + (s.getParent());
+    assert s.getParent() == p : "this.parent=" + (p) + " != s.parent=" + (s.getParent());
 
     if (DEBUG) {
       log.debug("this=" + this + ", sibling=" + sibling + ", rightSibling=" + isRightSibling);
@@ -1766,8 +1760,8 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
       btree.getBtreeCounters().ntupleRemove++;
 
       if (data.versionTimestamps != null) {
-      /*
-       * If the tuple with the min/max version timestamp was removed
+        /*
+         * If the tuple with the min/max version timestamp was removed
          * then we need to recalculate the min/max version timestamp.
          * This needs to happen after we update nkeys/nvalues (so the
          * new min/max considers only the valid tuples) and before we
@@ -1792,8 +1786,8 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
 
       if (data.getKeyCount() < minKeys()) {
 
-      /*
-       * The leaf is deficient. Join it with a sibling, causing their
+        /*
+         * The leaf is deficient. Join it with a sibling, causing their
          * keys to be redistributed such that neither leaf is deficient.
          * If there is only one other sibling and it has only the
          * minimum #of values then the two siblings will be merged into
@@ -1999,7 +1993,7 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
   }
 
   //    /*
-//     * Formats the data into a {@link String}.
+  //     * Formats the data into a {@link String}.
   //     *
   //     * @param data
   //     *            An array of <em>signed</em> byte arrays.
@@ -2100,7 +2094,7 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
     void invalidateLeaf();
 
     //        /*
-//         * Notice that the state of a tuple in the leaf has been changed (the
+    //         * Notice that the state of a tuple in the leaf has been changed (the
     //         * tuple is still known to be located within the leaf).
     //         *
     //         * @param index
@@ -2167,7 +2161,7 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
   }
 
   //    /*
-//     * Fire an {@link ILeafListener#invalidateTuple(int)} event to any
+  //     * Fire an {@link ILeafListener#invalidateTuple(int)} event to any
   //     * registered listeners.
   //     *
   //     * @param index

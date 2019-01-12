@@ -27,11 +27,9 @@ import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Future;
 import java.util.concurrent.locks.ReentrantLock;
 import org.apache.log4j.Logger;
 import org.embergraph.blueprints.EmbergraphGraphEdit.Action;
-import org.embergraph.bop.engine.IRunningQuery;
 import org.embergraph.bop.engine.QueryEngine;
 import org.embergraph.bop.fed.QueryEngineFactory;
 import org.embergraph.journal.IIndexManager;
@@ -45,8 +43,6 @@ import org.embergraph.rdf.sail.EmbergraphSailRepository;
 import org.embergraph.rdf.sail.EmbergraphSailRepositoryConnection;
 import org.embergraph.rdf.sail.QueryCancellationHelper;
 import org.embergraph.rdf.sail.model.RunningQuery;
-import org.embergraph.rdf.sail.webapp.EmbergraphRDFContext.AbstractQueryTask;
-import org.embergraph.rdf.sail.webapp.StatusServlet;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.embergraph.rdf.sparql.ast.QueryType;
@@ -57,7 +53,7 @@ import org.embergraph.striterator.ChunkedArrayIterator;
 import org.openrdf.model.BNode;
 
 /*
-* This is the most basic possible implementation of the Blueprints Graph API. It wraps an embedded
+ * This is the most basic possible implementation of the Blueprints Graph API. It wraps an embedded
  * {@link EmbergraphSailRepository} and holds open an unisolated connection to the database for the
  * lifespan of the Graph (until {@link #shutdown()} is called.
  *
@@ -233,8 +229,8 @@ public class EmbergraphGraphEmbedded extends EmbergraphGraph
     try {
       try {
         if (autocommitOnShutdown) {
-        /*
-       * Auto-commit on close.
+          /*
+           * Auto-commit on close.
            */
           commit();
         }

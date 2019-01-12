@@ -13,7 +13,7 @@ import cern.jet.math.Arithmetic;
 import cern.jet.random.engine.RandomEngine;
 import cern.jet.random.sampling.RandomSamplingAssistant;
 /*
-* Approximate quantile finding algorithm for known <tt>N</tt> requiring only one pass and little
+ * Approximate quantile finding algorithm for known <tt>N</tt> requiring only one pass and little
  * main memory; computes quantiles over a sequence of <tt>double</tt> elements.
  *
  * <p>Needs as input the following parameters:

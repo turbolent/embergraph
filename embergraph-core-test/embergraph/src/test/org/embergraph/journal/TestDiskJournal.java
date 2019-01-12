@@ -30,7 +30,7 @@ import org.embergraph.io.DirectBufferPool;
 import org.embergraph.rawstore.IRawStore;
 
 /*
-* Test suite for {@link BufferMode#Disk} journals.
+ * Test suite for {@link BufferMode#Disk} journals.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -319,7 +319,7 @@ public class TestDiskJournal extends AbstractJournalTestCase {
    * unit test which is not tearing down its {@link Journal} correctly.
    */
   //    /*
-//     * Note: Since the write cache is a direct ByteBuffer we have to make it
+  //     * Note: Since the write cache is a direct ByteBuffer we have to make it
   //     * very small (or disable it entirely) when running the test suite or the
   //     * JVM will run out of memory - this is exactly the same (Sun) bug which
   //     * motivates us to reuse the same ByteBuffer when we overflow a journal

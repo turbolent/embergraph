@@ -31,11 +31,10 @@ import org.embergraph.btree.IIndex;
 import org.embergraph.btree.IRangeQuery;
 import org.embergraph.btree.ITupleIterator;
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.relation.accesspath.IElementFilter;
 import org.embergraph.util.Bytes;
 
 /*
-* Iterator visits {@link Justification}s reading from the justification index. The iterator
+ * Iterator visits {@link Justification}s reading from the justification index. The iterator
  * optionally supports asynchronous read ahead.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -78,7 +77,7 @@ public class JustificationIterator implements IJustificationIterator {
   private ITupleIterator<?> src;
 
   //    /*
-//     * The executor service for the {@link Reader} (iff the {@link Reader} runs
+  //     * The executor service for the {@link Reader} (iff the {@link Reader} runs
   //     * asynchronously).
   //     */
   //    private final ExecutorService readService;
@@ -98,7 +97,7 @@ public class JustificationIterator implements IJustificationIterator {
   private static final int MIN_CHUNK_SIZE = 100;
 
   //    /*
-//     * If NO results show up within this timeout then {@link #nextChunk()} will
+  //     * If NO results show up within this timeout then {@link #nextChunk()} will
   //     * throw a {@link RuntimeException} to abort the reader - the probably cause
   //     * is a network outage.
   //     */
@@ -140,8 +139,8 @@ public class JustificationIterator implements IJustificationIterator {
 
       if (capacity > MAXIMUM_CAPACITY || rangeCount > MAXIMUM_CAPACITY) {
 
-      /*
-       * If the capacity would exceed the maximum then we limit
+        /*
+         * If the capacity would exceed the maximum then we limit
          * the capacity to the maximum.
          */
 
@@ -157,8 +156,8 @@ public class JustificationIterator implements IJustificationIterator {
 
       if (capacity > rangeCount) {
 
-      /*
-       * If the caller has over-estimated the actual range count for
+        /*
+         * If the caller has over-estimated the actual range count for
          * the index then reduce the capacity to the real range count.
          * This makes it safe for the caller to request a capacity of 1M
          * SPOs and only a "right-sized" buffer will be allocated.
@@ -169,8 +168,8 @@ public class JustificationIterator implements IJustificationIterator {
 
         capacity = (int) rangeCount;
 
-      /*
-       * Note: If the caller is making a best effort attempt to read
+        /*
+         * Note: If the caller is making a best effort attempt to read
          * everything into memory AND the data will fit within the
          * caller's specified capacity, then we disable asynchronous
          * reads so that they will get everything in one chunk.
@@ -247,8 +246,8 @@ public class JustificationIterator implements IJustificationIterator {
 
         try {
 
-        /*
-       * Note: This will block if the buffer is at capacity.
+          /*
+           * Note: This will block if the buffer is at capacity.
            */
 
           buffer.put(t);
@@ -450,8 +449,8 @@ public class JustificationIterator implements IJustificationIterator {
 
       try {
 
-      /*
-       * TODO This uses a Thread.sleep() to avoid a lock ordering
+        /*
+         * TODO This uses a Thread.sleep() to avoid a lock ordering
          * problem because we did not have access to the lock used
          * internally by the blocking queue when this code was written.
          * However, we now have incorporated at least one JSR166

@@ -36,7 +36,6 @@ import it.unimi.dsi.compression.Decoder;
 import it.unimi.dsi.compression.HuTuckerCodec;
 import it.unimi.dsi.compression.PrefixCodec;
 import it.unimi.dsi.compression.PrefixCoder;
-import it.unimi.dsi.fastutil.booleans.BooleanIterator;
 import it.unimi.dsi.fastutil.chars.Char2IntOpenHashMap;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.io.BinIO;
@@ -69,7 +68,7 @@ import org.apache.commons.io.IOUtils;
 // TODO: implement interfaces correctly (e.g., using the iterator)
 
 /*
-* An immutable prefix map mostly stored in external memory.
+ * An immutable prefix map mostly stored in external memory.
  *
  * <p>An {@link it.unimi.dsi.util.ImmutableExternalPrefixMap} compresses words using a {@link
  * it.unimi.dsi.compression.HuTuckerCodec} and approximates intervals using an {@link

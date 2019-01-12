@@ -34,13 +34,11 @@ import org.embergraph.rdf.spo.JustificationWriter;
 import org.embergraph.rdf.spo.SPO;
 import org.embergraph.rdf.spo.StatementWriter;
 import org.embergraph.rdf.store.AbstractTripleStore;
-import org.embergraph.relation.accesspath.AbstractElementBuffer.InsertBuffer;
 import org.embergraph.relation.accesspath.IElementFilter;
-import org.embergraph.relation.rule.eval.AbstractSolutionBuffer.InsertSolutionBuffer;
 import org.embergraph.striterator.ChunkedArrayIterator;
 
 /*
-* A buffer for {@link ISPO}s and optional {@link Justification}s that is flushed on overflow into a
+ * A buffer for {@link ISPO}s and optional {@link Justification}s that is flushed on overflow into a
  * backing {@link AbstractTripleStore}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -164,7 +162,6 @@ public class SPOAssertionBuffer extends AbstractSPOBuffer implements ISPOAsserti
 
     // would overflow the justification[].
     return numJustifications + 1 > capacity;
-
   }
 
   public int flush() {
@@ -341,8 +338,8 @@ public class SPOAssertionBuffer extends AbstractSPOBuffer implements ISPOAsserti
 
       if (DEBUG) {
 
-      /*
-       * Note: If [focusStore] is a TempTripleStore then this will NOT be able
+        /*
+         * Note: If [focusStore] is a TempTripleStore then this will NOT be able
          * to resolve the terms from the ids (since the lexicon is only in
          * the database).
          */

@@ -11,7 +11,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 /*
-* Flyweight document implementation.
+ * Flyweight document implementation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -9,7 +9,7 @@ It is provided "as is" without expressed or implied warranty.
 package cern.colt.matrix;
 
 /*
-* Interface that represents a condition or procedure object: takes a single argument and returns a
+ * Interface that represents a condition or procedure object: takes a single argument and returns a
  * boolean value.
  */
 public interface DoubleMatrix3DProcedure {

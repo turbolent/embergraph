@@ -30,7 +30,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 /*
-* A decoder that follows 0/1 labelled paths in a tree.
+ * A decoder that follows 0/1 labelled paths in a tree.
  *
  * <p>Additional, the {@link #buildCodes()} method returns a vector of codewords corresponding to
  * the paths of an instance of this class. Conversely, the {@linkplain #TreeDecoder(BitVector[],

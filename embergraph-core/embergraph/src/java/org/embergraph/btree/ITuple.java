@@ -25,14 +25,12 @@ Copyright (C) Embergraph contributors 2019. All rights reserved.
 
 package org.embergraph.btree;
 
-import org.embergraph.btree.view.FusedView;
 import org.embergraph.io.ByteArrayBuffer;
 import org.embergraph.io.DataInputBuffer;
 import org.embergraph.rawstore.IBlock;
-import org.embergraph.rawstore.IRawStore;
 
 /*
-* Interface exposes more direct access to keys and values visited by an {@link ITupleIterator}.
+ * Interface exposes more direct access to keys and values visited by an {@link ITupleIterator}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

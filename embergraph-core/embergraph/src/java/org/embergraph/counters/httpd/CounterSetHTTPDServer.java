@@ -24,7 +24,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.counters.httpd;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.regex.Pattern;
@@ -36,7 +35,6 @@ import org.embergraph.counters.ICounterSetAccess;
 import org.embergraph.counters.PeriodEnum;
 import org.embergraph.counters.query.QueryUtil;
 import org.embergraph.counters.render.XHTMLRenderer;
-import org.embergraph.service.Event;
 import org.embergraph.service.IService;
 import org.embergraph.util.InnerCause;
 import org.embergraph.util.httpd.AbstractHTTPD;
@@ -44,7 +42,7 @@ import org.embergraph.util.httpd.Config;
 import org.embergraph.util.httpd.NanoHTTPD;
 
 /*
-* An httpd server exposing a {@link CounterSet}. This may be used either for testing the {@link
+ * An httpd server exposing a {@link CounterSet}. This may be used either for testing the {@link
  * CounterSetHTTPD} class or for post-mortem analysis of a saved {@link CounterSet}.
  *
  * @see #main(String[])
@@ -145,8 +143,8 @@ public class CounterSetHTTPDServer implements Runnable {
             Logger.getLogger(NanoHTTPD.class).setLevel(level);
 
           } catch (Throwable t) {
-          /*
-       * Note: The SLF4J logging bridge can cause a
+            /*
+             * Note: The SLF4J logging bridge can cause a
              * NoSuchMethodException to be thrown here.
              *
              * @see https://sourceforge.net/apps/trac/bigdata/ticket/362
@@ -180,14 +178,14 @@ public class CounterSetHTTPDServer implements Runnable {
 
       } else {
 
-      /*
-       * Compute the optional filter to be applied when reading this
+        /*
+         * Compute the optional filter to be applied when reading this
          * file.
          */
         final Pattern pattern = QueryUtil.getPattern(filter, regex);
 
-      /*
-       * Read counters accepted by the optional filter into the
+        /*
+         * Read counters accepted by the optional filter into the
          * counter set to be served.
          */
         QueryUtil.readCountersFromFile(new File(arg), counterSet, pattern, unitsToRetain, unit);
@@ -278,8 +276,8 @@ public class CounterSetHTTPDServer implements Runnable {
 
         if (log.isInfoEnabled()) log.info("Running shutdown.");
 
-      /*
-       * Note: This is the "server" shutdown.
+        /*
+         * Note: This is the "server" shutdown.
          */
 
         server.shutdownNow();

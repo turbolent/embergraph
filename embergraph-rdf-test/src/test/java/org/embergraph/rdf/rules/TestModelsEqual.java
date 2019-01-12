@@ -32,7 +32,7 @@ import org.embergraph.rdf.store.TripleStoreUtility;
 import org.openrdf.model.vocabulary.RDFS;
 
 /*
-* Test suite for {@link TripleStoreUtility#modelsEqual(AbstractTripleStore, AbstractTripleStore)}
+ * Test suite for {@link TripleStoreUtility#modelsEqual(AbstractTripleStore, AbstractTripleStore)}
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

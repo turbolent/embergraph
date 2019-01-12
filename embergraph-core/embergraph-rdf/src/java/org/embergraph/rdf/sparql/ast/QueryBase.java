@@ -23,7 +23,7 @@ import org.embergraph.bop.BOp;
 import org.embergraph.bop.IVariable;
 
 /*
-* Contains the projection clause, where clause, and solution modified clauses.
+ * Contains the projection clause, where clause, and solution modified clauses.
  *
  * @see IGroupNode
  * @see ProjectionNode
@@ -50,7 +50,7 @@ public abstract class QueryBase extends QueryNodeBase
     String CONSTRUCT = "construct";
 
     //        /*
-//         * The {@link ProjectionNode} (optional). This is also used for DESCRIBE
+    //         * The {@link ProjectionNode} (optional). This is also used for DESCRIBE
     //         * queries to capture the list of variables and IRIs which are then used
     //         * to rewrite the DESCRIBE query into what amounts to a CONSTRUCT query.
     //         * The resulting CONSTRUCT query will have a different

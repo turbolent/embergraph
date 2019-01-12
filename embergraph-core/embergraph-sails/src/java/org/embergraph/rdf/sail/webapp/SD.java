@@ -34,7 +34,6 @@ import org.embergraph.rdf.axioms.RdfsAxioms;
 import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.BD;
-import org.embergraph.rdf.vocab.decls.VoidVocabularyDecl;
 import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.util.ClassPathUtil;
 import org.openrdf.model.BNode;
@@ -45,7 +44,7 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDF;
 
 /*
-* SPARQL 1.1 Service Description vocabulary class.
+ * SPARQL 1.1 Service Description vocabulary class.
  *
  * @see <a href="http://www.w3.org/TR/sparql11-service-description/">SPARQL 1.1 Service Description
  *     </a>
@@ -281,7 +280,7 @@ public class SD {
   public static final URI N3 = new URIImpl("http://www.w3.org/ns/formats/N3");
 
   // /*
-// * TODO The TriX file format.
+  // * TODO The TriX file format.
   // */
   // public static final RDFFormat TRIX = new RDFFormat("TriX",
   // "application/trix", Charset.forName("UTF-8"),
@@ -292,7 +291,7 @@ public class SD {
       new URIImpl("http://www.wiwiss.fu-berlin.de/suhl/bizer/TriG/Spec/");
 
   // /*
-// * TODO A binary RDF format (openrdf)
+  // * TODO A binary RDF format (openrdf)
   // *
   // * @see http://www.openrdf.org/issues/browse/RIO-79 (Request for unique
   // URI)
@@ -352,7 +351,7 @@ public class SD {
 
   // TODO openrdf binary format.
   //    /*
-//     * Unique URI for SPARQL Results in TSV
+  //     * Unique URI for SPARQL Results in TSV
   //     *
   //     * @see TupleQueryResultFormat#BINARY
   //     *
@@ -380,7 +379,7 @@ public class SD {
   protected final BNode aDefaultDataset;
 
   //    /*
-//     * The resource which models the default graph in the default data set for
+  //     * The resource which models the default graph in the default data set for
   //     * the service.
   //     */
   //    protected final BNode aDefaultGraph;

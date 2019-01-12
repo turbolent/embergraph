@@ -30,7 +30,6 @@ import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.axioms.OwlAxioms;
 import org.embergraph.rdf.changesets.ChangeAction;
 import org.embergraph.rdf.changesets.ChangeRecord;
-import org.embergraph.rdf.changesets.IChangeLog;
 import org.embergraph.rdf.changesets.IChangeRecord;
 import org.embergraph.rdf.changesets.InMemChangeLog;
 import org.embergraph.rdf.changesets.InferenceChangeLogReporter;
@@ -47,7 +46,7 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
 /*
-* Test suite for the {@link IChangeLog} feature.
+ * Test suite for the {@link IChangeLog} feature.
  *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$

@@ -21,7 +21,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.journal;
 
-import java.io.Writer;
 import java.nio.channels.ClosedByInterruptException;
 import java.util.Arrays;
 import java.util.Collection;
@@ -43,7 +42,7 @@ import org.embergraph.btree.UnisolatedReadWriteIndex;
 import org.embergraph.testutil.ExperimentDriver.Result;
 
 /*
-* Stress tests for concurrent processing of operations on named unisolated indices where the
+ * Stress tests for concurrent processing of operations on named unisolated indices where the
  * concurrency is managed by an {@link UnisolatedReadWriteIndex} rather than the {@link
  * ConcurrencyManager}.
  *
@@ -127,7 +126,7 @@ public class StressTestUnisolatedReadWriteIndex extends ProxyTestCase<Journal> {
           1, // minLocks
           2, // 5 // maxLocks // 3
           500, // ntrials // Note: fails in CI @ 1000 (java.lang.OutOfMemoryError: unable to create
-               // new native thread)
+          // new native thread)
           3, // keyLen
           1000, // nops
           0.02d, // failureRate
@@ -288,8 +287,8 @@ public class StressTestUnisolatedReadWriteIndex extends ProxyTestCase<Journal> {
         if (isInnerCause(ex, InterruptedException.class)
             || isInnerCause(ex, ClosedByInterruptException.class)) {
 
-        /*
-       * Note: Tasks will be interrupted if a timeout occurs when
+          /*
+           * Note: Tasks will be interrupted if a timeout occurs when
            * attempting to run the submitted tasks - this is normal.
            */
 
@@ -414,8 +413,8 @@ public class StressTestUnisolatedReadWriteIndex extends ProxyTestCase<Journal> {
 
       try {
 
-      /*
-       * Get the index objects. This will create the ReadWriteLock if
+        /*
+         * Get the index objects. This will create the ReadWriteLock if
          * it does not exist, but it will not acquire either the
          * ReadLock or the WriteLock.
          */
@@ -428,8 +427,8 @@ public class StressTestUnisolatedReadWriteIndex extends ProxyTestCase<Journal> {
           indices[i] = new UnisolatedReadWriteIndex(btree);
         }
 
-      /*
-       * Random write operations on the named index(s).
+        /*
+         * Random write operations on the named index(s).
          */
         for (int i = 0; i < nops; i++) {
 
@@ -451,8 +450,8 @@ public class StressTestUnisolatedReadWriteIndex extends ProxyTestCase<Journal> {
 
             ndx.remove(key);
           }
-        /*
-       * FIXME Add a probability of a read-only operation, e.g., lookup() or
+          /*
+           * FIXME Add a probability of a read-only operation, e.g., lookup() or
            * rangeIterator(key,val). The latter can also do chunked resolution. This will provide
            * test coverage for the case where the close() of the iterator interrupts the producer.
            * This happens especially in the case where a range iterator is used and the iterator is
@@ -473,8 +472,8 @@ public class StressTestUnisolatedReadWriteIndex extends ProxyTestCase<Journal> {
 
         } else if (r.nextDouble() < commitRate) {
 
-        /*
-       * Checkpoint the indices.
+          /*
+           * Checkpoint the indices.
            *
            * Note: writeCheckpoint() will also acquire the writeLock.
            * Thus, it contends with the other operations on the
@@ -488,8 +487,8 @@ public class StressTestUnisolatedReadWriteIndex extends ProxyTestCase<Journal> {
             btree.writeCheckpoint();
           }
 
-        /*
-       * Note: This can not be safely done since we do not have
+          /*
+           * Note: This can not be safely done since we do not have
            * any protocol to either (a) ensure that the Thread is
            * executing in a WriteTask by the time we do
            * Thread.interrupt() for that thread; (b) ensure that the

@@ -28,7 +28,7 @@ import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sail.EmbergraphSail.Options;
 
 /*
-* A variant of the test suite using {@link BufferMode#DiskWORM}.
+ * A variant of the test suite using {@link BufferMode#DiskWORM}.
  *
  * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/531">SPARQL UPDATE Extensions
  *     (Trac) </a>

@@ -43,7 +43,6 @@ import org.embergraph.btree.data.INodeData;
 import org.embergraph.btree.raba.IRaba;
 import org.embergraph.btree.raba.MutableKeyBuffer;
 import org.embergraph.btree.raba.MutableValueBuffer;
-import org.embergraph.btree.view.FusedView;
 import org.embergraph.io.AbstractFixedByteArrayBuffer;
 import org.embergraph.io.ByteArrayBuffer;
 import org.embergraph.io.ChecksumUtility;
@@ -58,7 +57,6 @@ import org.embergraph.journal.TemporaryRawStore;
 import org.embergraph.mdi.IResourceMetadata;
 import org.embergraph.mdi.LocalPartitionMetadata;
 import org.embergraph.mdi.SegmentMetadata;
-import org.embergraph.rawstore.IAddressManager;
 import org.embergraph.rawstore.IBlock;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.WormAddressManager;
@@ -66,7 +64,7 @@ import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Builds an {@link IndexSegment} given a source btree and a target branching factor. There are two
+ * Builds an {@link IndexSegment} given a source btree and a target branching factor. There are two
  * main use cases:
  *
  * <ol>
@@ -358,7 +356,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
   }
 
   //    /*
-//     * The buffer used to hold leaves so that they can be evicted en mass onto a
+  //     * The buffer used to hold leaves so that they can be evicted en mass onto a
   //     * region of the {@link #outFile}.
   //     *
   //     * @deprecated This forces us to do IO twice for the leaves. They should be
@@ -439,14 +437,14 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
   private long addrLastLeaf = 0L;
 
   //    /*
-//     * The offset in the output file of the last leaf written onto that file.
+  //     * The offset in the output file of the last leaf written onto that file.
   //     * Together with {@link #lastLeafSize} this is used to compute the
   //     * address of the prior leaf.
   //     */
   //    long lastLeafOffset = -1L;
   //
   //    /*
-//     * The size in bytes of the last leaf written onto the output file (the size
+  //     * The size in bytes of the last leaf written onto the output file (the size
   //     * of the compressed record that is actually written onto the output file
   //     * NOT the size of the serialized leaf before it is compressed). Together
   //     * with {@link #lastLeafOffset} this is used to compute the address of the
@@ -864,8 +862,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
       if (hasDeleteMarkers && tuple.isDeletedVersion()) {
 
-      /*
-       * Note: When delete markers are used, the array will be
+        /*
+         * Note: When delete markers are used, the array will be
          * pre-populated with [false] so we only have to set the flag on
          * the tuples that are actually deleted.
          */
@@ -873,8 +871,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
       } else {
 
-      /*
-       * Note: If the source has raw records for some values, then
+        /*
+         * Note: If the source has raw records for some values, then
          * this will cause those records to be materialized within the
          * single massive root leaf. From there, the data will be
          * written onto the index segment file.
@@ -1304,8 +1302,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
       if (pmd != null) {
 
-      /*
-       * Copy the local partition metadata, but do not include the
+        /*
+         * Copy the local partition metadata, but do not include the
          * resource metadata identifying the resources that comprise the
          * index partition view. that information is only stored on the
          * BTree, not on the IndexSegment.
@@ -1473,8 +1471,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
        */
       nodeSer =
           new NodeSerializer(
-            /*
-       * Note: it does not seem like there should be any
+              /*
+               * Note: it does not seem like there should be any
                * interaction between various IAddressSerializer strategies
                * and the manner in which we encode the region (BASE, NODE,
                * or BLOB) into the offset of addresses for the index
@@ -1801,8 +1799,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
         if (i > 0 && j == 0) {
 
-        /*
-       * Every time (after the first) that we enter a new leaf we
+          /*
+           * Every time (after the first) that we enter a new leaf we
            * need to record its first key as a separatorKey in the
            * appropriate parent.
            *
@@ -1890,8 +1888,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
       if (overflowHandler != null) {
 
-      /*
-       * Provide the handler with the opportunity to copy
+        /*
+         * Provide the handler with the opportunity to copy
          * the blob's data onto the buffer and re-write the
          * value, which is presumably the blob reference.
          */
@@ -1900,8 +1898,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
       } else {
 
-      /*
-       * Note: If the source index uses raw records then this will
+        /*
+         * Note: If the source index uses raw records then this will
          * return the materialized value from the raw record.
          */
 
@@ -2404,8 +2402,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
       if (nleavesWritten > 0) {
 
-      /*
-       * Update the previous leaf, but only for the 2nd+ leaf.
+        /*
+         * Update the previous leaf, but only for the 2nd+ leaf.
          */
 
         if (log.isDebugEnabled())
@@ -2430,8 +2428,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
         // view onto the coded record for the prior leaf.
         final ByteBuffer bufLastLeaf = lastLeafData.data().asByteBuffer();
 
-      /*
-       * Patch representation of the previous leaf.
+        /*
+         * Patch representation of the previous leaf.
          *
          * Note: This patches the coded record using the ByteBuffer view
          * of that record. However, the change is made to the backing
@@ -2450,8 +2448,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
         if (storeCache != null) {
 
-        /*
-       * Insert the coded, patched record for the prior leaf into
+          /*
+           * Insert the coded, patched record for the prior leaf into
            * cache.
            */
 
@@ -2529,8 +2527,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
       if (storeCache != null) {
 
-      /*
-       * Insert the coded, patched record for the prior leaf into
+        /*
+         * Insert the coded, patched record for the prior leaf into
          * cache.
          */
 
@@ -2583,8 +2581,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
         // write leaf on the cache.
         if (!leafWriteCache.write(offset, data, chk)) {
 
-        /*
-       * The leaf is larger than the write cache, so we will write
+          /*
+           * The leaf is larger than the write cache, so we will write
            * it directly onto the output file.
            *
            * @todo This is tested by the larger random builds, but we
@@ -2678,7 +2676,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
   private long bufLastLeafAddr = 0L;
 
   //    /*
-//     * Buffer holds a copy of the serialized representation of the last leaf.
+  //     * Buffer holds a copy of the serialized representation of the last leaf.
   //     * This buffer is reset and written by {@link #writeLeaf(SimpleLeafData)}.
   //     * The contents of this buffer are used by {@link #writePriorLeaf(long)} to
   //     * write out the serialized representation of the previous leaf in key order
@@ -2922,8 +2920,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
        */
       if (nodeBuffer != null) {
 
-      /*
-       * Seek to the start of the nodes region (the write cache does
+        /*
+         * Seek to the start of the nodes region (the write cache does
          * not change the file position when it writes onto the file so
          * we need to explicitly seek to the desired location).
          */
@@ -2944,8 +2942,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
       } else if (nodeList != null) {
 
-      /*
-       * Write the nodes onto the output file.
+        /*
+         * Write the nodes onto the output file.
          *
          * Note: The addresses are relative to the start of the nodes
          * region, so we adjust the write cache using the offset to the
@@ -3026,8 +3024,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
       } else {
 
-      /*
-       * The tree consists of just a root leaf.
+        /*
+         * The tree consists of just a root leaf.
          */
 
         // This MUST be 0L if there are no leaves.
@@ -3101,8 +3099,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
       if (storeCache != null) {
 
-      /*
-       * Insert the record into the cache.
+        /*
+         * Insert the record into the cache.
          */
 
         storeCache.putIfAbsent(addrBloom, bloomFilter);
@@ -3135,8 +3133,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
       if (storeCache != null) {
 
-      /*
-       * Insert the record into the cache.
+        /*
+         * Insert the record into the cache.
          */
 
         storeCache.putIfAbsent(addrMetadata, metadata);
@@ -3808,8 +3806,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
       for (; i >= fromIndex && i < toIndex; i++) {
 
-      /*
-       * Skip deleted entries unless specifically requested.
+        /*
+         * Skip deleted entries unless specifically requested.
          */
         if (hasDeleteMarkers && !visitDeleted && leaf.getDeleteMarker(i)) {
 
@@ -4182,8 +4180,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
         if (verify) {
 
-        /*
-       * Verify the generated index segment against the source
+          /*
+           * Verify the generated index segment against the source
            * B+Tree.
            */
 

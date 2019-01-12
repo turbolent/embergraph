@@ -15,7 +15,7 @@ import org.openrdf.rio.RDFParser;
 import org.openrdf.rio.helpers.RDFHandlerBase;
 
 /*
-* JUnit test for the N-Triples parser.
+ * JUnit test for the N-Triples parser.
  *
  * @author Arjohn Kampman
  */

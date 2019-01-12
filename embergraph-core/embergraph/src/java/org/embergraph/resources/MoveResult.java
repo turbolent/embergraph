@@ -7,7 +7,7 @@ import org.embergraph.mdi.PartitionLocator;
 import org.embergraph.service.DataService;
 
 /*
-* The object returned by {@link MoveIndexPartitionTask}.
+ * The object returned by {@link MoveIndexPartitionTask}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

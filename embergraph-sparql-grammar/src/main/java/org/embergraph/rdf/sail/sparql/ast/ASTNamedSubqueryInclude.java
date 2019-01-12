@@ -31,14 +31,14 @@ public class ASTNamedSubqueryInclude extends SimpleNode {
   }
 
   //    /*
-//     * Set flag indicating the join variable query hint.
+  //     * Set flag indicating the join variable query hint.
   //     */
   //    public void setQueryHint(boolean queryHint) {
   //        this.queryHint = queryHint;
   //    }
   //
   //    /*
-//     * Return query hint flag.
+  //     * Return query hint flag.
   //     */
   //    public boolean isQueryHint() {
   //        return queryHint;

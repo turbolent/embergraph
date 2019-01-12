@@ -3,7 +3,7 @@ package org.embergraph.bop.cost;
 import java.io.Serializable;
 
 /*
-* A report on the expected cost of an index key range scan.
+ * A report on the expected cost of an index key range scan.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

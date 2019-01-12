@@ -22,12 +22,9 @@ package org.embergraph.journal;
 import java.util.UUID;
 import org.embergraph.btree.IIndex;
 import org.embergraph.btree.IndexMetadata;
-import org.embergraph.mdi.IResourceMetadata;
-import org.embergraph.mdi.LocalPartitionMetadata;
-import org.embergraph.service.IDataService;
 
 /*
-* Register a named index (unisolated write operation).
+ * Register a named index (unisolated write operation).
  *
  * <p>Note: The return value of {@link #doTask()} is the {@link UUID} of the named index. You can
  * test this value to determine whether the index was created based on the supplied {@link IIndex}

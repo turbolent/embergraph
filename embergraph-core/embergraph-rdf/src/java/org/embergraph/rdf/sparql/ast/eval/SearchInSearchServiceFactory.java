@@ -22,7 +22,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.eval;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
-import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -40,7 +39,6 @@ import org.embergraph.cache.ConcurrentWeakValueCacheWithTimeout;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.lexicon.ITextIndexer;
 import org.embergraph.rdf.lexicon.ITextIndexer.FullTextQuery;
-import org.embergraph.rdf.sparql.ast.ConstantNode;
 import org.embergraph.rdf.sparql.ast.GroupNodeBase;
 import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
 import org.embergraph.rdf.sparql.ast.StatementPatternNode;
@@ -54,7 +52,6 @@ import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.SPOKeyOrder;
 import org.embergraph.rdf.store.AbstractTripleStore;
-import org.embergraph.rdf.store.BD;
 import org.embergraph.rdf.store.BDS;
 import org.embergraph.relation.accesspath.EmptyCloseableIterator;
 import org.embergraph.relation.accesspath.ThickCloseableIterator;
@@ -64,7 +61,7 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 
 /*
-* A factory for a "search in search" service. It accepts a group that have a single triple pattern
+ * A factory for a "search in search" service. It accepts a group that have a single triple pattern
  * in it:
  *
  * <p>service bd:searchInSearch { ?s bd:searchInSearch "search" . }
@@ -175,8 +172,8 @@ public class SearchInSearchServiceFactory extends AbstractServiceFactoryBase {
         if (!uri.stringValue().startsWith(BDS.NAMESPACE))
           throw new RuntimeException("Expecting search predicate: " + sp);
 
-      /*
-       * Some search predicate.
+        /*
+         * Some search predicate.
          */
 
         if (!ASTSearchOptimizer.searchUris.contains(uri) && !BDS.SEARCH_IN_SEARCH.equals(uri)) {
@@ -491,7 +488,7 @@ public class SearchInSearchServiceFactory extends AbstractServiceFactoryBase {
 
         final IV o = (IV) src.next().getDocId();
 
-        final Iterator<ISPO> it = store.getAccessPath((IV) null,null, o).iterator();
+        final Iterator<ISPO> it = store.getAccessPath((IV) null, null, o).iterator();
 
         while (it.hasNext()) {
 
@@ -631,8 +628,8 @@ public class SearchInSearchServiceFactory extends AbstractServiceFactoryBase {
 
       for (int i = 0; i < bindingsClause.length; i++) {
 
-      /*
-       * We know it's bound.  If it weren't it would have been
+        /*
+         * We know it's bound.  If it weren't it would have been
          * filtered out above.
          */
         final IV s = (IV) bindingsClause[i].get(searchVar).get();

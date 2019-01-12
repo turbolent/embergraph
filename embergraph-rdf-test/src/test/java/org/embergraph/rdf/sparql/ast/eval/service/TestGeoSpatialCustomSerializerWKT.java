@@ -28,7 +28,7 @@ import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /*
-* Data driven test suite for custom serializer, testing basic feasibility for WKT literals (not
+ * Data driven test suite for custom serializer, testing basic feasibility for WKT literals (not
  * strictly following the standard).
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>

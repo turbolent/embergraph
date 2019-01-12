@@ -70,7 +70,7 @@ public class EmbergraphStoreTest extends RDFStoreTest {
   private static final Logger log = Logger.getLogger(EmbergraphStoreTest.class);
 
   //    /*
-//     * Return a test suite using the {@link LocalTripleStore} and pipeline
+  //     * Return a test suite using the {@link LocalTripleStore} and pipeline
   //     * joins.
   //     */
   //    public static class LTSWithPipelineJoins extends EmbergraphStoreTest {

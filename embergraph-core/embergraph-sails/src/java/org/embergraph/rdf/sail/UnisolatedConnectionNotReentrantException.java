@@ -21,7 +21,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sail;
 
 /*
-* An instance of this is thrown if a thread already owning the unisolated connection for a Sail
+ * An instance of this is thrown if a thread already owning the unisolated connection for a Sail
  * attempts to acquire a 2nd unisolated connection for the same Sail.
  *
  * @author bryan

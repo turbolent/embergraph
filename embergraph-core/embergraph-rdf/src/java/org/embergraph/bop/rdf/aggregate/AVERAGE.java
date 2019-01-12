@@ -35,7 +35,7 @@ import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.openrdf.model.Literal;
 
 /*
-* Operator computes the running sum over the presented binding sets for the given variable. A
+ * Operator computes the running sum over the presented binding sets for the given variable. A
  * missing value does not contribute towards the sum.
  *
  * @author thompsonbry

@@ -16,7 +16,7 @@ import org.embergraph.relation.rule.Rule;
 import org.openrdf.model.vocabulary.OWL;
 
 /*
-* Fast forward closure of the store based on <a
+ * Fast forward closure of the store based on <a
  * href="http://www.cs.iastate.edu/~tukw/waim05.pdf">"An approach to RDF(S) Query, Manipulation and
  * Inference on Databases" by Lu, Yu, Tu, Lin, and Zhang</a>.
  *
@@ -191,8 +191,8 @@ public class FastClosure extends BaseClosure {
     if (!rdfsOnly) {
 
       {
-      /*
-       * Combines the rules into a set and computes the closure of
+        /*
+         * Combines the rules into a set and computes the closure of
          * that set.
          */
 
@@ -235,8 +235,8 @@ public class FastClosure extends BaseClosure {
 
         if (!tmp.isEmpty()) {
 
-        /*
-       * Fix point whatever set of rules were selected above.
+          /*
+           * Fix point whatever set of rules were selected above.
            */
 
           program.addClosureOf(tmp.toArray(new IRule[] {}));
@@ -256,8 +256,8 @@ public class FastClosure extends BaseClosure {
 
         if (forwardChainOwlSameAsProperties) {
 
-        /*
-       * Apply properties.
+          /*
+           * Apply properties.
            *
            * Note: owl:sameAs2,3 should exclude matches where the
            * predicate in the head is owl:sameAs. This case is already

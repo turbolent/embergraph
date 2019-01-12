@@ -26,18 +26,14 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.util.UUID;
 import org.apache.log4j.Logger;
-import org.embergraph.btree.IndexMetadata;
 import org.embergraph.io.ChecksumUtility;
-import org.embergraph.io.writecache.WriteCache;
 import org.embergraph.quorum.Quorum;
 import org.embergraph.rawstore.IAddressManager;
 import org.embergraph.rawstore.WormAddressManager;
-import org.embergraph.resources.ResourceManager;
-import org.embergraph.rwstore.RWStore;
 import org.embergraph.util.Bytes;
 
 /*
-* A view onto a root block of the {@link Journal}.
+ * A view onto a root block of the {@link Journal}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

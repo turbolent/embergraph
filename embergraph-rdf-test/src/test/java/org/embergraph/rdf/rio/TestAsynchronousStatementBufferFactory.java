@@ -38,7 +38,6 @@ import org.embergraph.rdf.model.EmbergraphStatement;
 import org.embergraph.rdf.spo.SPOKeyOrder;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.ScaleOutTripleStore;
-import org.embergraph.rdf.store.TestScaleOutTripleStoreWithEmbeddedFederation;
 import org.embergraph.rdf.util.DumpLexicon;
 import org.embergraph.service.AbstractScaleOutFederation;
 import org.embergraph.service.EmbeddedClient;
@@ -46,7 +45,7 @@ import org.embergraph.service.IEmbergraphClient;
 import org.openrdf.rio.RDFFormat;
 
 /*
-* Test suite for {@link AsynchronousStatementBufferFactory}. To run this test by itself specify
+ * Test suite for {@link AsynchronousStatementBufferFactory}. To run this test by itself specify
  * <code>-DtestClass=org.embergraph.rdf.store.TestScaleOutTripleStoreWithEmbeddedFederation</code> .
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -324,7 +323,7 @@ public class TestAsynchronousStatementBufferFactory extends AbstractRIOTestCase 
   }
 
   //	/*
-//	 * LUBM U(1).
+  //	 * LUBM U(1).
   //	 * <p>
   //	 * Note: This unit test can hang under JDK 1.6.0_17 if you have been running
   //	 * the entire test suite and you do not specify <code>-XX:+UseMembar</code>
@@ -341,7 +340,7 @@ public class TestAsynchronousStatementBufferFactory extends AbstractRIOTestCase 
   //    }
 
   //    /*
-//     * Do not leave this unit test in -- it takes too long to validate the
+  //     * Do not leave this unit test in -- it takes too long to validate the
   //     * loaded data: LUBM U(10)
   //     */
   //    public void test_loadAndVerify_U10() throws Exception {

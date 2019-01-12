@@ -38,12 +38,11 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.vocab.NoVocabulary;
 import org.embergraph.service.AbstractDistributedFederation;
 import org.embergraph.service.AbstractScaleOutClient;
-import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.ScaleOutClientFactory;
 import org.embergraph.util.Bytes;
 
 /*
-* A version of the test suite that is intended for local debugging and is NOT run in CI. This is
+ * A version of the test suite that is intended for local debugging and is NOT run in CI. This is
  * intended just to make it easier to run specific proxied test suites.
  *
  * @see TestNanoSparqlServerWithProxyIndexManager
@@ -258,8 +257,8 @@ public class TestNanoSparqlServerWithProxyIndexManager2<S extends IIndexManager>
 
       if (isJini) {
 
-      /*
-       * A embergraph federation.
+        /*
+         * A embergraph federation.
          */
 
         @SuppressWarnings("rawtypes")
@@ -270,8 +269,8 @@ public class TestNanoSparqlServerWithProxyIndexManager2<S extends IIndexManager>
 
       } else {
 
-      /*
-       * Note: we only need to specify the FILE when re-opening a
+        /*
+         * Note: we only need to specify the FILE when re-opening a
          * journal containing a pre-existing KB.
          */
         final Properties properties = new Properties();

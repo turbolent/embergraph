@@ -22,7 +22,7 @@ package org.embergraph.rdf.inf;
 import org.embergraph.counters.CAT;
 
 /*
-* Statistics collected when performing inference.
+ * Statistics collected when performing inference.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

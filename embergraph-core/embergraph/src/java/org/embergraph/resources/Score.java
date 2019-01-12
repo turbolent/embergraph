@@ -27,7 +27,7 @@ import java.util.Comparator;
 import org.embergraph.btree.BTreeCounters;
 
 /*
-* Helper class assigns a raw and a normalized score to each index based on its per-index {@link
+ * Helper class assigns a raw and a normalized score to each index based on its per-index {@link
  * BTreeCounters} and on the global (non-restart safe) {@link BTreeCounters} for the data service
  * during the life cycle of the last journal.
  *

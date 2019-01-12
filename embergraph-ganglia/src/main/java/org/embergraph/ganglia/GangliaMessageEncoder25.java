@@ -18,7 +18,7 @@ package org.embergraph.ganglia;
 import org.embergraph.ganglia.xdr.XDROutputBuffer;
 
 /*
-* An earlier version of the Ganglia protocol.
+ * An earlier version of the Ganglia protocol.
  *
  * <p>TODO Is 3.0 or 2.5 the previous format and which one is this?
  */

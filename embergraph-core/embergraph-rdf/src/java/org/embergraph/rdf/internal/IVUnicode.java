@@ -32,7 +32,7 @@ import org.embergraph.io.compression.NoCompressor;
 import org.embergraph.util.Bytes;
 
 /*
-* Utility class supporting {@link IV}s having inline Unicode data.
+ * Utility class supporting {@link IV}s having inline Unicode data.
  *
  * <p>IVs must be able to report their correct mutual order. This means that the Java {@link String}
  * must be given the same order as the encoded Unicode representation. Since we must include the #of
@@ -65,7 +65,7 @@ public class IVUnicode {
   private static IUnicodeCompressor uc = new NoCompressor();
 
   //    /*
-//     * Helper instance for compression/decompression of Unicode string data.
+  //     * Helper instance for compression/decompression of Unicode string data.
   //     */
   //    private static UnicodeHelper un = new UnicodeHelper(uc);
 

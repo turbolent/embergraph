@@ -20,7 +20,6 @@ package org.embergraph.bop.joinGraph.rto;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpUtility;
 import org.embergraph.bop.IConstraint;
 import org.embergraph.bop.IPredicate;
@@ -28,7 +27,7 @@ import org.embergraph.bop.engine.QueryEngine;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpRTO;
 
 /*
-* A join path is an ordered sequence of N {@link Vertex vertices} and represents an ordered series
+ * A join path is an ordered sequence of N {@link Vertex vertices} and represents an ordered series
  * of N-1 joins.
  *
  * <p>During exploration, the {@link Path} is used to develop an estimate of the cost of different
@@ -189,7 +188,7 @@ public class Path {
   }
 
   //    /*
-//     * Create an empty path.
+  //     * Create an empty path.
   //     */
   //    public Path() {
   ////        this.edges = Collections.emptyList();

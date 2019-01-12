@@ -26,7 +26,7 @@ package org.embergraph.bop.solutions;
 import org.embergraph.bop.IValueExpression;
 
 /*
-* Default impl.
+ * Default impl.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -32,7 +32,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 /*
-* Some utility methods related to integration with <code>sysstat</code>.
+ * Some utility methods related to integration with <code>sysstat</code>.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -37,7 +37,7 @@ import org.embergraph.rwstore.IRawTx;
 import org.embergraph.rwstore.PSOutputStream;
 
 /*
-* The {@link AllocationContext} is used to maintain a handle on allocations made within some
+ * The {@link AllocationContext} is used to maintain a handle on allocations made within some
  * specific environment (context).
  *
  * <p>In this way, clearing a context will return all allocations to the more general pool.
@@ -469,7 +469,7 @@ public class AllocationContext implements IAllocationContext, IMemoryManager { /
   //	private SectorAllocation m_head = null;
   //
   //	/*
-//	 * Return the index of {@link SectorAllocator} for the given address.
+  //	 * Return the index of {@link SectorAllocator} for the given address.
   //	 *
   //	 * @param addr
   //	 *            The given address.
@@ -482,7 +482,7 @@ public class AllocationContext implements IAllocationContext, IMemoryManager { /
   //	}
   //
   //	/*
-//	 * Return the bit offset into the bit map of {@link SectorAllocator} for the
+  //	 * Return the bit offset into the bit map of {@link SectorAllocator} for the
   //	 * given address.
   //	 *
   //	 * @param addr

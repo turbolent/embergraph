@@ -32,7 +32,7 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.RepositoryResult;
 
 /*
-* Test suite for ticket #1086: when loading quads data into a triples store, there now is a config
+ * Test suite for ticket #1086: when loading quads data into a triples store, there now is a config
  * option EmbergraphSail.Options.REJECT_QUADS_IN_TRIPLE_MODE. When this option is not set, the quads
  * shall be simply loaded will stripping the context away; otherwise, an exception shall be thrown.
  * This test case tests both situations.

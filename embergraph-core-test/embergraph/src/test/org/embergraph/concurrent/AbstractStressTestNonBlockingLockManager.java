@@ -46,7 +46,6 @@ import java.util.concurrent.TimeoutException;
 import junit.framework.TestCase;
 import org.apache.log4j.Logger;
 import org.embergraph.counters.CounterSet;
-import org.embergraph.service.DataService;
 import org.embergraph.testutil.ExperimentDriver;
 import org.embergraph.testutil.ExperimentDriver.Result;
 import org.embergraph.util.DaemonThreadFactory;
@@ -54,7 +53,7 @@ import org.embergraph.util.NV;
 import org.embergraph.util.concurrent.ThreadPoolExecutorStatisticsTask;
 
 /*
-* Suite of stress tests of the concurrency control mechanisms (without the database implementation)
+ * Suite of stress tests of the concurrency control mechanisms (without the database implementation)
  * - See {@link NonBlockingLockManager}.
  *
  * <p>Goals:
@@ -393,8 +392,8 @@ public abstract class AbstractStressTestNonBlockingLockManager extends TestCase 
           resource[j] = resources[t];
         }
 
-      /*
-       * Create all tasks.  They will be submitted below.
+        /*
+         * Create all tasks.  They will be submitted below.
          */
 
         final LockCallableImpl<String, Object> task;

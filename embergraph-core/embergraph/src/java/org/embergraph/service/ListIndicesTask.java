@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 import org.embergraph.journal.AbstractJournal;
 
 /*
-* Task returns an array of the named indices on the {@link DataService} to which it is submitted.
+ * Task returns an array of the named indices on the {@link DataService} to which it is submitted.
  * The array is in the visitation order for the index names (alpha, given the collator choices in
  * force).
  *

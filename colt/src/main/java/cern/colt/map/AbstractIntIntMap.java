@@ -12,7 +12,7 @@ import cern.colt.function.IntIntProcedure;
 import cern.colt.function.IntProcedure;
 import cern.colt.list.IntArrayList;
 /*
-* Abstract base class for hash maps holding (key,value) associations of type <tt>(int-->int)</tt>.
+ * Abstract base class for hash maps holding (key,value) associations of type <tt>(int-->int)</tt>.
  * First see the <a href="package-summary.html">package summary</a> and javadoc <a
  * href="package-tree.html">tree view</a> to get the broad picture.
  *

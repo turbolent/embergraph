@@ -37,7 +37,7 @@ import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Class manages the encoding and decoding of keys for the full text index. You can override this
+ * Class manages the encoding and decoding of keys for the full text index. You can override this
  * class to change the way in which the keys and/or values of the index are stored. For example, the
  * RDF database does this to use variable length document identifiers.
  *
@@ -61,7 +61,7 @@ public class FullTextIndexTupleSerializer<V extends Comparable<V>>
   //    }
 
   //    /*
-//     * Used to serialize the values for the tuples in the index.
+  //     * Used to serialize the values for the tuples in the index.
   //     * <p>
   //     * Note: While this object is not thread-safe, the mutable B+Tree is
   //     * restricted to a single writer so it does not have to be thread-safe.

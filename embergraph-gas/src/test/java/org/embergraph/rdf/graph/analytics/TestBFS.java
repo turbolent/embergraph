@@ -24,7 +24,7 @@ import org.embergraph.rdf.graph.impl.sail.AbstractSailGraphTestCase;
 import org.openrdf.sail.SailConnection;
 
 /*
-* Test class for Breadth First Search (BFS) traversal.
+ * Test class for Breadth First Search (BFS) traversal.
  *
  * @see BFS
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

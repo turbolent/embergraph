@@ -27,7 +27,7 @@ import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.relation.accesspath.IElementFilter;
 
 /*
-* Filter matches only {@link StatementEnum#Explicit} {@link ISPO}s.
+ * Filter matches only {@link StatementEnum#Explicit} {@link ISPO}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

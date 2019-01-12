@@ -45,7 +45,7 @@ import org.embergraph.util.config.LogUtil;
 import org.embergraph.util.config.NicUtil;
 
 /*
-* Class has a static method which writes a copyright banner on stdout once per JVM. This method is
+ * Class has a static method which writes a copyright banner on stdout once per JVM. This method is
  * invoked from several core classes in order to ensure that the copyright banner is always written
  * out on embergraph startup.
  *
@@ -104,8 +104,8 @@ public class Banner {
       log.warn("Hostname override: hostname=" + s);
     } else {
       try {
-      /*
-       * Note: This should be the host *name* NOT an IP address of a
+        /*
+         * Note: This should be the host *name* NOT an IP address of a
          * preferred Ethernet adaptor.
          */
         s = InetAddress.getLocalHost().getCanonicalHostName();
@@ -129,8 +129,8 @@ public class Banner {
       final boolean nocatch = Boolean.getBoolean(Options.NOCATCH);
 
       if (!nocatch) {
-      /*
-       * Set a logger for any uncaught exceptions.
+        /*
+         * Set a logger for any uncaught exceptions.
          */
         Thread.setDefaultUncaughtExceptionHandler(
             new UncaughtExceptionHandler() {
@@ -237,8 +237,8 @@ public class Banner {
 
       } catch (Throwable t) {
 
-      /*
-       * Note: The SLF4J bridge can cause a NoSuchMethodException to
+        /*
+         * Note: The SLF4J bridge can cause a NoSuchMethodException to
          * be thrown out of Logger.setLevel(). We trap this exception
          * and log a message @ ERROR. It is critical that embergraph
          * logging is properly configured as logging at INFO for

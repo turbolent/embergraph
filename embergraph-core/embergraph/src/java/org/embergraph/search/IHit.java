@@ -26,7 +26,7 @@ Copyright (C) Embergraph contributors 2019. All rights reserved.
 package org.embergraph.search;
 
 /*
-* Metadata about a search result.
+ * Metadata about a search result.
  *
  * @param <V> The generic type of the document identifier.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

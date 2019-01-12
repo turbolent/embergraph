@@ -24,7 +24,7 @@ import org.embergraph.btree.proc.SplitValuePair.PairComparator;
 import org.embergraph.service.Split;
 
 /*
-* Aggregator base class collects the individual results in an internal ordered map and assembles
+ * Aggregator base class collects the individual results in an internal ordered map and assembles
  * the final result when it is requested from the individual results. With this approach there is no
  * overhead or contention when the results are being produced in parallel and they can be combined
  * efficiently within a single thread in {@link #getResult()}.

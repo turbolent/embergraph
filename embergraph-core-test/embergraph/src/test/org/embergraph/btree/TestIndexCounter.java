@@ -25,7 +25,7 @@ import org.embergraph.btree.BTree.PartitionedCounter;
 import org.embergraph.rdf.lexicon.TermIdEncoder;
 
 /*
-* Test suite for the {@link IIndex#getCounter()} interface.
+ * Test suite for the {@link IIndex#getCounter()} interface.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -22,7 +22,7 @@ import java.io.IOException;
 import junit.framework.Test;
 
 /*
-* This class tests whether its superclass is working (at least a little) The superclass provides
+ * This class tests whether its superclass is working (at least a little) The superclass provides
  * capability to check the request/response protocol, without actually starting a server.
  *
  * @author jeremycarroll

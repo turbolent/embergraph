@@ -61,7 +61,7 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpJoins;
 import org.embergraph.striterator.IKeyOrder;
 
 /*
-* Class defines the log on which summary operator execution statistics are written.
+ * Class defines the log on which summary operator execution statistics are written.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -90,7 +90,7 @@ public class QueryLog {
   }
 
   //    /*
-//     * A single buffer is reused to keep down the heap churn.
+  //     * A single buffer is reused to keep down the heap churn.
   //     */
   //    final private static StringBuilder sb = new StringBuilder(
   //            Bytes.kilobyte32 * 4);
@@ -161,7 +161,7 @@ public class QueryLog {
   }
 
   //  /*
-//   * Log the query.
+  //   * Log the query.
   //   *
   //   * @param q
   //   *            The query.
@@ -1115,8 +1115,8 @@ public class QueryLog {
         w.write(cdata(")"));
       }
       if (bop.getProperty(NamedSetAnnotations.NAMED_SET_REF) != null) {
-      /*
-       * Named Solution Set(s) summary.
+        /*
+         * Named Solution Set(s) summary.
          */
         final Object namedSetRef = bop.getProperty(NamedSetAnnotations.NAMED_SET_REF);
         if (namedSetRef instanceof INamedSolutionSetRef) {

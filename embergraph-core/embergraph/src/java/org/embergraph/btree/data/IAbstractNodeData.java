@@ -25,7 +25,7 @@ import org.embergraph.io.AbstractFixedByteArrayBuffer;
 import org.embergraph.io.IDataRecordAccess;
 
 /*
-* Interface for low-level data access.
+ * Interface for low-level data access.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

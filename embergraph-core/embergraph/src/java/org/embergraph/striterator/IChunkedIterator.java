@@ -22,12 +22,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.striterator;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import org.embergraph.btree.IRangeQuery;
 
 /*
-* An iterator that is able visit items in chunks. The elements in the chunk will be in the same
+ * An iterator that is able visit items in chunks. The elements in the chunk will be in the same
  * order that they would be visited by {@link Iterator#next()}. The size of the chunk is up to the
  * implementation.
  *

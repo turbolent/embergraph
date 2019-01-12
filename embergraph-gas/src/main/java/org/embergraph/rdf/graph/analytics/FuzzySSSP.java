@@ -30,7 +30,7 @@ import org.embergraph.rdf.graph.analytics.FuzzySSSP.FuzzySSSPResult;
 import org.openrdf.model.Value;
 
 /*
-* This algorithm provides a fuzzy implementation of the shortest paths between a set of source
+ * This algorithm provides a fuzzy implementation of the shortest paths between a set of source
  * vertices and a set of target vertices. This can be used to identify a set of vertices that are
  * close to the shortest paths between those source and target vertices. For some domains, the
  * resulting set of vertices can be understood as an "interesting subgraph".
@@ -278,8 +278,8 @@ public class FuzzySSSP implements Callable<FuzzySSSPResult> {
                   while (itr.hasNext()) {
                     final Value v = itr.next();
                     if (result.addVisited(v) && result.getVisitedCount() >= N) {
-                    /*
-       * We have reached our threshold during the
+                      /*
+                       * We have reached our threshold during the
                        * BFS expansion.
                        *
                        * Note: Since we are expanding in a breadth

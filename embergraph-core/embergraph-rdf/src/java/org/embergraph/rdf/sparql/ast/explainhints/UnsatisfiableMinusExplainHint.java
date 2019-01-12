@@ -23,7 +23,7 @@ package org.embergraph.rdf.sparql.ast.explainhints;
 import org.embergraph.bop.BOp;
 
 /*
-* Explain hint indicating a MINUS expression that is unsatisfiable, i.e. does not have any effect
+ * Explain hint indicating a MINUS expression that is unsatisfiable, i.e. does not have any effect
  * at all. This happens if the left- and right-hand side of the minus have no variables in common.
  * In such cases, the minus is optimized away, and there's most likely a problem in the query.
  *

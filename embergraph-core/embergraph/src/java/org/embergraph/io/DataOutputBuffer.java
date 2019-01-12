@@ -24,13 +24,12 @@ package org.embergraph.io;
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.DataOutputStream;
-import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInput;
 
 /*
-* Fast special purpose serialization onto a managed byte[] buffer conforming to the {@link
+ * Fast special purpose serialization onto a managed byte[] buffer conforming to the {@link
  * DataOutput} API.
  *
  * <p>Note: The base classes provide all of the same functionality without declaring {@link
@@ -244,7 +243,7 @@ public class DataOutputBuffer extends ByteArrayBuffer implements DataOutput {
 
   // This inefficiency has been fixed.
   //    /*
-//     * @todo This is not wildly efficient (it would be fine if
+  //     * @todo This is not wildly efficient (it would be fine if
   //     *       DataOutputStream#writeUTF(String str, DataOutput out)} was public)
   //     *       but the use cases for serializing the nodes and leaves of a btree
   //     *       do not suggest any requirement for Unicode (if you assume that the

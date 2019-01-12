@@ -24,10 +24,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.journal;
 
 import java.util.concurrent.TimeoutException;
-import org.embergraph.relation.AbstractResource;
 
 /*
-* Interface named synchronous distributed locks without deadlock detection.
+ * Interface named synchronous distributed locks without deadlock detection.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

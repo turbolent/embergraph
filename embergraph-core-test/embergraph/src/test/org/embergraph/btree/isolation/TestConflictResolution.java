@@ -35,7 +35,7 @@ import org.embergraph.journal.Options;
 import org.embergraph.journal.ValidationError;
 
 /*
-* Tests of write-write conflict resolution.
+ * Tests of write-write conflict resolution.
  *
  * <p>Write-write conflicts either result in successful reconcilation via state-based conflict
  * resolution or an abort of the transaction that is validating. The tests in this suite verify that
@@ -111,8 +111,8 @@ public class TestConflictResolution extends TestCase2 {
 
       {
 
-      /*
-       * register an index and commit the journal.
+        /*
+         * register an index and commit the journal.
          */
 
         IndexMetadata metadata = new IndexMetadata(name, UUID.randomUUID());
@@ -191,8 +191,8 @@ public class TestConflictResolution extends TestCase2 {
 
       {
 
-      /*
-       * register an index with a conflict resolver and commit the
+        /*
+         * register an index with a conflict resolver and commit the
          * journal.
          */
 
@@ -247,7 +247,7 @@ public class TestConflictResolution extends TestCase2 {
   }
 
   //    /*
-//     * The concurrency control algorithm must not permit two transactions to
+  //     * The concurrency control algorithm must not permit two transactions to
   //     * prepare at the same time since that violates the basic rules of
   //     * serializability.
   //     *

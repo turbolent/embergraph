@@ -26,7 +26,7 @@ import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.sail.EmbergraphSail;
 
 /*
-* Data driven test suite for the Runtime Query Optimizer (RTO) using LUBM data and queries based on
+ * Data driven test suite for the Runtime Query Optimizer (RTO) using LUBM data and queries based on
  * LUBM.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -24,7 +24,7 @@ import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /*
-* Unit tests for the close/checkpoint/reopen protocol designed to manage the resource burden of
+ * Unit tests for the close/checkpoint/reopen protocol designed to manage the resource burden of
  * indices without invalidating the index objects (indices opens can be reopened as long as their
  * backing store remains available).
  *

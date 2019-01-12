@@ -22,7 +22,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Properties;
 import java.util.UUID;
 import org.embergraph.btree.keys.TestKeyBuilder;
@@ -33,7 +32,7 @@ import org.embergraph.rawstore.SimpleMemoryRawStore;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Test build trees on the journal, evicts them into an {@link IndexSegment}, and then compares the
+ * Test build trees on the journal, evicts them into an {@link IndexSegment}, and then compares the
  * performance and correctness of index point tests with and without the use of the bloom filter.
  *
  * @todo compare performance with and without the bloom filter.
@@ -311,8 +310,8 @@ public class TestIndexSegmentWithBloomFilter extends AbstractBTreeTestCase {
 
     try {
       if (btree.getEntryCount() > Integer.MAX_VALUE) {
-      /*
-       * This code can not validate a B+Tree with more than MAX_INT keys
+        /*
+         * This code can not validate a B+Tree with more than MAX_INT keys
          * since it relies on materialization of the data in RAM within
          * arrays and Java does not support int64 array indices.
          */
@@ -320,7 +319,7 @@ public class TestIndexSegmentWithBloomFilter extends AbstractBTreeTestCase {
       }
 
       // branching factors used for the index segment.
-      final int[] branchingFactors = new int[]{3, 4, 5, 10, 20, 60, 100, 256, 1024, 4096, 8192};
+      final int[] branchingFactors = new int[] {3, 4, 5, 10, 20, 60, 100, 256, 1024, 4096, 8192};
 
       for (int i = 0; i < branchingFactors.length; i++) {
 
@@ -339,8 +338,8 @@ public class TestIndexSegmentWithBloomFilter extends AbstractBTreeTestCase {
 
         final File tmpDir = outFile.getAbsoluteFile().getParentFile();
 
-      /*
-       * Build the index segment.
+        /*
+         * Build the index segment.
          */
 
         final long commitTime = System.currentTimeMillis();
@@ -390,8 +389,8 @@ public class TestIndexSegmentWithBloomFilter extends AbstractBTreeTestCase {
 
           final IndexMetadata metadata = btree.getIndexMetadata().clone();
 
-        /*
-       * Note: Since we know the exact #of index entries in an index
+          /*
+           * Note: Since we know the exact #of index entries in an index
            * segment, both [n] and [maxP] will be ignored when it comes
            * time to create the bloom filter for the index segment.
            */
@@ -417,8 +416,8 @@ public class TestIndexSegmentWithBloomFilter extends AbstractBTreeTestCase {
 
         }
 
-      /*
-       * Verify can load the index file and that the metadata
+        /*
+         * Verify can load the index file and that the metadata
          * associated with the index file is correct (we are only
          * checking those aspects that are easily defined by the test
          * case and not, for example, those aspects that depend on the
@@ -427,8 +426,8 @@ public class TestIndexSegmentWithBloomFilter extends AbstractBTreeTestCase {
         if (log.isInfoEnabled()) log.info("Opening index segment w/o bloom filter.");
         final IndexSegment seg = new IndexSegmentStore(outFile).loadIndexSegment();
 
-      /*
-       * Verify can load the index file and that the metadata
+        /*
+         * Verify can load the index file and that the metadata
          * associated with the index file is correct (we are only
          * checking those aspects that are easily defined by the test
          * case and not, for example, those aspects that depend on the
@@ -437,8 +436,8 @@ public class TestIndexSegmentWithBloomFilter extends AbstractBTreeTestCase {
         if (log.isInfoEnabled()) log.info("Opening index segment w/ bloom filter.");
         final IndexSegment seg2 = new IndexSegmentStore(outFile2).loadIndexSegment();
 
-      /*
-       * Explicitly test the bloom filter against ground truth.
+        /*
+         * Explicitly test the bloom filter against ground truth.
          */
 
         // Note: cast is safe - we check entryCount above.
@@ -447,20 +446,20 @@ public class TestIndexSegmentWithBloomFilter extends AbstractBTreeTestCase {
 
         getKeysAndValues(btree, keys, vals);
 
-      /*
-       * vet the bloom filter on the index segment builder
+        /*
+         * vet the bloom filter on the index segment builder
          * (pre-serialization).
          */
         doBloomFilterTest("pre-serialization", builder2.bloomFilter, keys);
 
-      /*
-       * vet the bloom filter on the loaded index segment
+        /*
+         * vet the bloom filter on the loaded index segment
          * (post-serialization).
          */
         doBloomFilterTest("pre-serialization", seg2.getBloomFilter(), keys);
 
-      /*
-       * Verify index segments against the source btree and against one
+        /*
+         * Verify index segments against the source btree and against one
          * another.
          */
         if (log.isInfoEnabled()) log.info("Verifying index segments.");

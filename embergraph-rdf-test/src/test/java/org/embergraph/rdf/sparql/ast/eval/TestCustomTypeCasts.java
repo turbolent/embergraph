@@ -21,11 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.eval;
 
-import org.embergraph.rdf.internal.constraints.XsdLongBOp;
-import org.embergraph.rdf.internal.constraints.XsdUnsignedLongBOp;
-
 /*
-* Test suite for standard type cast function such as {@link XsdLongBOp} and {@link
+ * Test suite for standard type cast function such as {@link XsdLongBOp} and {@link
  * XsdUnsignedLongBOp}.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>

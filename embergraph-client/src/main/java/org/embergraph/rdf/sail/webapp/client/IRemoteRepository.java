@@ -24,7 +24,7 @@ import org.openrdf.query.GraphQueryResult;
 import org.openrdf.query.TupleQueryResult;
 
 /*
-* Interface for the Java API to the NanoSparqlServer. See <a
+ * Interface for the Java API to the NanoSparqlServer. See <a
  * href="https://sourceforge.net/apps/mediawiki/bigdata/index.php?title=NanoSparqlServer" this
  * page</a> for more information on the HTTP API. The instance will be constructed with the endpoint
  * URL for the NSS and the namespace for the kb. It will then issue a query to learn some basic

@@ -24,12 +24,10 @@ package org.embergraph.relation.accesspath;
 import cutthecrap.utils.striterators.IFilter;
 import cutthecrap.utils.striterators.IFilterTest;
 import org.embergraph.btree.ITuple;
-import org.embergraph.btree.ITupleIterator;
-import org.embergraph.btree.filter.ITupleFilter;
 import org.embergraph.btree.filter.TupleFilter;
 
 /*
-* Align the predicate's {@link IElementFilter} constraint with {@link ITupleFilter} so that the
+ * Align the predicate's {@link IElementFilter} constraint with {@link ITupleFilter} so that the
  * {@link IElementFilter} can be evaluated close to the data by an {@link ITupleIterator}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

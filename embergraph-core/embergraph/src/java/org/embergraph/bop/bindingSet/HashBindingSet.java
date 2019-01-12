@@ -34,7 +34,7 @@ import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IVariable;
 
 /*
-* {@link IBindingSet} backed by a {@link LinkedHashMap}.
+ * {@link IBindingSet} backed by a {@link LinkedHashMap}.
  *
  * <p>Note: A {@link LinkedHashMap} provides a fast iterator, which we use a bunch. However, {@link
  * IBindingSet}s are inherently unordered collections of bindings so the order preservation aspect
@@ -48,13 +48,13 @@ public class HashBindingSet implements IBindingSet {
   private static final long serialVersionUID = -2989802566387532422L;
 
   //	/*
-//  * Note: A {@link LinkedHashMap} provides a fast iterator, which we use a
+  //  * Note: A {@link LinkedHashMap} provides a fast iterator, which we use a
   //  * bunch.
   //  */
   // private final LinkedHashMap<IVariable, IConstant> map;
 
   //	/*
-//	 * The stack of symbol tables. Each symbol table is a mapping from an
+  //	 * The stack of symbol tables. Each symbol table is a mapping from an
   //	 * {@link IVariable} onto its non-<code>null</code> bound {@link IConstant}.
   //	 * The stack is initialized with an empty symbol table. Symbol tables may be
   //	 * pushed onto the stack or popped off of the stack, but the stack MAY NOT

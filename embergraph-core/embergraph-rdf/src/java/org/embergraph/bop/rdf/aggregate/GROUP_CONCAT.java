@@ -23,7 +23,6 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IValueExpression;
 import org.embergraph.bop.NV;
 import org.embergraph.bop.aggregate.AggregateBase;
-import org.embergraph.bop.solutions.PipelinedAggregationOp;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.constraints.INeedsMaterialization;
 import org.embergraph.rdf.internal.constraints.IVValueExpression;
@@ -32,7 +31,7 @@ import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.rdf.sparql.ast.DummyConstantNode;
 
 /*
-* Operator combines the string values over the presented binding sets for the given variable.
+ * Operator combines the string values over the presented binding sets for the given variable.
  * Missing values are ignored. The initial value is an empty plain literal.
  *
  * @author thompsonbry

@@ -25,7 +25,7 @@ import java.io.Reader;
 import java.io.Serializable;
 
 /*
-* End-of-stream-only reader.
+ * End-of-stream-only reader.
  *
  * <p>This reader will always return end-of-file on any read attempt.
  *

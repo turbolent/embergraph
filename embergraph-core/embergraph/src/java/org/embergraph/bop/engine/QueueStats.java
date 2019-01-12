@@ -25,7 +25,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /*
-* Statistics summary for a work queue feeding a specific operator for a query.
+ * Statistics summary for a work queue feeding a specific operator for a query.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

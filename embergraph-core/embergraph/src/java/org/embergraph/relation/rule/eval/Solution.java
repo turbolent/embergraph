@@ -30,7 +30,7 @@ import org.embergraph.relation.IRelation;
 import org.embergraph.relation.rule.IRule;
 
 /*
-* Flyweight implementation.
+ * Flyweight implementation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

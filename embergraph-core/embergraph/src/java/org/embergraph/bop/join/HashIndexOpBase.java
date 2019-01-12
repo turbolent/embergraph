@@ -38,10 +38,9 @@ import org.embergraph.bop.PipelineOp;
 import org.embergraph.bop.controller.INamedSolutionSetRef;
 import org.embergraph.bop.controller.NamedSetAnnotations;
 import org.embergraph.bop.engine.BOpStats;
-import org.embergraph.htree.HTree;
 
 /*
-* Base class for operators that use a hash index.
+ * Base class for operators that use a hash index.
  *
  * @see BLZG-1438
  * @author <a href="http://olafhartig.de">Olaf Hartig</a>
@@ -217,15 +216,15 @@ public abstract class HashIndexOpBase extends PipelineOp implements ISingleThrea
 
       {
 
-      /*
-       * First, see if the map already exists.
+        /*
+         * First, see if the map already exists.
          *
          * Note: Since the operator is not thread-safe, we do not need
          * to use a putIfAbsent pattern here.
          */
 
-      /*
-       * Lookup the attributes for the query on which we will hang the
+        /*
+         * Lookup the attributes for the query on which we will hang the
          * solution set. See BLZG-1493 (if queryId is null, use the query
          * attributes for this running query).
          */
@@ -278,8 +277,8 @@ public abstract class HashIndexOpBase extends PipelineOp implements ISingleThrea
 
       } else if (op.getProperty(Annotations.NAMED_SET_SOURCE_REF) != null) {
 
-      /*
-       * Metadata to identify the optional *source* solution set. When
+        /*
+         * Metadata to identify the optional *source* solution set. When
          * <code>null</code>, the hash index is built from the solutions flowing
          * through the pipeline. When non-<code>null</code>, the hash index is
          * built from the solutions in the identifier solution set.
@@ -291,8 +290,8 @@ public abstract class HashIndexOpBase extends PipelineOp implements ISingleThrea
 
       } else if (op.getProperty(Annotations.BINDING_SETS_SOURCE) != null) {
 
-      /*
-       * The IBindingSet[] is directly given. Just wrap it up as an
+        /*
+         * The IBindingSet[] is directly given. Just wrap it up as an
          * iterator. It will visit a single chunk of solutions.
          */
         final IBindingSet[] bindingSets =

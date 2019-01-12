@@ -24,7 +24,7 @@ package org.embergraph.rdf.sparql.ast.explainhints;
 import org.embergraph.bop.BOp;
 
 /*
-* Hint to be interpreted by EXPLAIN, containing information to be exposed to the user. Such
+ * Hint to be interpreted by EXPLAIN, containing information to be exposed to the user. Such
  * information could be potential performance bottlenecks identified throughout the query
  * optimization phase, or potential problems due to SPARQL's bottom-up semantics.
  *

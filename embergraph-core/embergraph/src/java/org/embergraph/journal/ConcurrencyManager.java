@@ -41,8 +41,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import org.apache.log4j.Logger;
 import org.embergraph.EmbergraphStatics;
-import org.embergraph.btree.BTree;
-import org.embergraph.concurrent.NonBlockingLockManager;
 import org.embergraph.concurrent.NonBlockingLockManagerWithNewDesign;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.ICounterSet;
@@ -57,7 +55,7 @@ import org.embergraph.util.concurrent.ThreadPoolExecutorStatisticsTask;
 import org.embergraph.util.concurrent.WriteTaskCounters;
 
 /*
-* Supports concurrent operations against named indices. Historical read and read-committed tasks
+ * Supports concurrent operations against named indices. Historical read and read-committed tasks
  * run with full concurrency. For unisolated tasks, the {@link ConcurrencyManager} uses a {@link
  * NonBlockingLockManager} to identify a schedule of operations such that access to an unisolated
  * named index is always single threaded while access to distinct unisolated named indices MAY be
@@ -98,12 +96,12 @@ public class ConcurrencyManager implements IConcurrencyManager {
   private static final Logger log = Logger.getLogger(ConcurrencyManager.class);
 
   //    /*
-//     * True iff the {@link #log} level is INFO or less.
+  //     * True iff the {@link #log} level is INFO or less.
   //     */
   //    final protected static boolean INFO = log.isInfoEnabled();
   //
   //    /*
-//     * True iff the {@link #log} level is DEBUG or less.
+  //     * True iff the {@link #log} level is DEBUG or less.
   //     */
   //    final private static boolean DEBUG = log.isDebugEnabled();
 
@@ -334,7 +332,7 @@ public class ConcurrencyManager implements IConcurrencyManager {
   private final long shutdownTimeout;
 
   //    /*
-//     * An object wrapping the properties specified to the ctor.
+  //     * An object wrapping the properties specified to the ctor.
   //     */
   //    public Properties getProperties() {
   //
@@ -941,8 +939,8 @@ public class ConcurrencyManager implements IConcurrencyManager {
             .makePath(IConcurrencyManagerCounters.writeService)
             .attach(writeServiceQueueStatisticsTask.getCounters());
 
-      /*
-       * The lock manager for the write service.
+        /*
+         * The lock manager for the write service.
          */
         countersRoot
             .makePath(
@@ -1038,8 +1036,8 @@ public class ConcurrencyManager implements IConcurrencyManager {
 
       if (task.isReadWriteTx) {
 
-      /*
-       * A task that reads from historical data and writes on isolated
+        /*
+         * A task that reads from historical data and writes on isolated
          * indices backed by a temporary store. Concurrency control is
          * required for the isolated indices on the temporary store, but
          * not for the reads against the historical data.
@@ -1056,8 +1054,8 @@ public class ConcurrencyManager implements IConcurrencyManager {
 
       } else {
 
-      /*
-       * A task that reads from and writes on "live" indices. The live
+        /*
+         * A task that reads from and writes on "live" indices. The live
          * indices are NOT thread-safe. Concurrency control provides a
          * partial order over the executing tasks such that there is
          * never more than one task with access to a given live index.
@@ -1189,8 +1187,8 @@ public class ConcurrencyManager implements IConcurrencyManager {
 
       if (!(queue instanceof SynchronousQueue)) {
 
-      /*
-       * Note: SynchronousQueue is used when there is no limit on the
+        /*
+         * Note: SynchronousQueue is used when there is no limit on the
          * #of workers, e.g., when using
          * Executors.newCachedThreadPool(). The SynchronousQueue has a
          * ZERO capacity. Therefore the logic to test the remaining
@@ -1206,8 +1204,8 @@ public class ConcurrencyManager implements IConcurrencyManager {
 
           try {
 
-          /*
-       * Note: Any delay here what so ever causes the #of
+            /*
+             * Note: Any delay here what so ever causes the #of
              * tasks in a commit group to be governed primarily by
              * the CORE pool size.
              */
@@ -1246,7 +1244,7 @@ public class ConcurrencyManager implements IConcurrencyManager {
   }
 
   //   /*
-//    * Actively running for the {@link WriteExecutorService}.
+  //    * Actively running for the {@link WriteExecutorService}.
   //    *
   //    * FIXME This is really just the same as those tasks actively executing on
   //    * the {@link WriteExecutorService}. It does not include tasks that are

@@ -39,12 +39,11 @@ import org.embergraph.journal.RWStrategy;
 import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.service.AbstractDistributedFederation;
 import org.embergraph.service.AbstractScaleOutClient;
-import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.ScaleOutClientFactory;
 import org.embergraph.util.Bytes;
 
 /*
-* Test suite for {@link RESTServlet} (SPARQL end point and REST API for RDF data).
+ * Test suite for {@link RESTServlet} (SPARQL end point and REST API for RDF data).
  *
  * <p>TODO Add unit tests which exercise the full text index.
  *
@@ -271,8 +270,8 @@ public class TestNanoSparqlServerWithProxyIndexManager<S extends IIndexManager>
       }
 
       if (testMode == TestMode.quads) {
-      /*
-       * Tests that require quads mode.
+        /*
+         * Tests that require quads mode.
          *
          * TODO The SPARQL UPDATE test suite is quads-mode only at this
          * time.
@@ -376,8 +375,8 @@ public class TestNanoSparqlServerWithProxyIndexManager<S extends IIndexManager>
 
       if (isJini) {
 
-      /*
-       * A embergraph federation.
+        /*
+         * A embergraph federation.
          */
 
         @SuppressWarnings("rawtypes")
@@ -388,8 +387,8 @@ public class TestNanoSparqlServerWithProxyIndexManager<S extends IIndexManager>
 
       } else {
 
-      /*
-       * Note: we only need to specify the FILE when re-opening a
+        /*
+         * Note: we only need to specify the FILE when re-opening a
          * journal containing a pre-existing KB.
          */
         final Properties properties = new Properties();

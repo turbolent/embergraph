@@ -26,7 +26,7 @@ import java.io.IOException;
 import junit.framework.TestCase2;
 
 /*
-* Test suite for the {@link CommitCounterUtility}.
+ * Test suite for the {@link CommitCounterUtility}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

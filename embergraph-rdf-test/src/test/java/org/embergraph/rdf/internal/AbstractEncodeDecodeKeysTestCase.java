@@ -31,7 +31,7 @@ import org.embergraph.test.MockTermIdFactory;
 import org.embergraph.util.BytesUtil.UnsignedByteArrayComparator;
 
 /*
-* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public abstract class AbstractEncodeDecodeKeysTestCase extends TestCase2 {
@@ -100,13 +100,7 @@ public abstract class AbstractEncodeDecodeKeysTestCase extends TestCase2 {
 
         if (!expected.equals(actual)) {
 
-          fail(
-              "values differ @ index="
-                  + i
-                  + " : expected="
-                  + expected
-                  + ", actual="
-                  + actual);
+          fail("values differ @ index=" + i + " : expected=" + expected + ", actual=" + actual);
         }
 
         if (expected.hashCode() != actual.hashCode()) {
@@ -303,8 +297,8 @@ public abstract class AbstractEncodeDecodeKeysTestCase extends TestCase2 {
 
       if (!expectedIV.equals(actualIV)) {
 
-      /*
-       * The IV's Comparable does not agree with the required unsigned
+        /*
+         * The IV's Comparable does not agree with the required unsigned
          * byte[] ordering semantics.
          */
 

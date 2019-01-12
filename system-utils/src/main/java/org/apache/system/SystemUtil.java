@@ -21,7 +21,7 @@ package org.apache.system;
 import org.apache.log4j.Logger;
 
 /*
-* A set of utility operations that provide necessary information about the architecture of the
+ * A set of utility operations that provide necessary information about the architecture of the
  * machine that the system is running on. The values provided are automatically determined at JVM
  * startup. The SystemUtils uses a plugin architecture so that it can be extended for more than just
  * Linux / Windows support.

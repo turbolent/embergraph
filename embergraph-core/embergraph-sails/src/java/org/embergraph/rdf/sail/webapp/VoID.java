@@ -49,7 +49,7 @@ import org.openrdf.model.ValueFactory;
 import org.openrdf.model.vocabulary.RDF;
 
 /*
-* Helper class for VoID descriptions.
+ * Helper class for VoID descriptions.
  *
  * @see <a href="http://www.w3.org/TR/void/" > Describing Linked Datasets with the VoID Vocabulary
  *     </a>
@@ -70,7 +70,7 @@ public class VoID {
   private final ValueFactory f;
 
   //    /*
-//     * The resource which models the service.
+  //     * The resource which models the service.
   //     */
   //    protected final BNode aService;
 
@@ -223,8 +223,8 @@ public class VoID {
 
         while (itr2.hasNext()) {
 
-        /*
-       * Describe this named graph.
+          /*
+           * Describe this named graph.
            *
            * Note: This is using the predicate and class partition
            * statistics from the default graph (RDF merge) to identify

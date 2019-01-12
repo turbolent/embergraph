@@ -28,7 +28,7 @@ import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /*
-* For a pipelined operator, this is the maximum number of messages that will be assigned to a
+ * For a pipelined operator, this is the maximum number of messages that will be assigned to a
  * single invocation of the evaluation task for that operator.
  *
  * @see PipelineOp.Annotations#MAX_MESSAGES_PER_TASK

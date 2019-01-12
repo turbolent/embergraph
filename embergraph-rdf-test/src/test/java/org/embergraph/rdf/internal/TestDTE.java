@@ -28,7 +28,7 @@ import junit.framework.TestCase;
 import org.embergraph.util.Bytes;
 
 /*
-* Test suite for {@link DTE}
+ * Test suite for {@link DTE}
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

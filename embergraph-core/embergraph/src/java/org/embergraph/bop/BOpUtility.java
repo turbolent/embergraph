@@ -40,7 +40,6 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import org.apache.log4j.Logger;
 import org.embergraph.bop.BOp.Annotations;
-import org.embergraph.bop.aggregate.IAggregate;
 import org.embergraph.bop.engine.BOpStats;
 import org.embergraph.bop.solutions.GroupByOp;
 import org.embergraph.bop.solutions.GroupByRewriter;
@@ -52,7 +51,7 @@ import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.striterator.CloseableIteratorWrapper;
 
 /*
-* Operator utility class.
+ * Operator utility class.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -90,26 +89,26 @@ public class BOpUtility {
 
               private static final long serialVersionUID = 1L;
 
-            /*
-       * Expand each child in turn.
+              /*
+               * Expand each child in turn.
                */
               protected Iterator expand(final Object childObj) {
 
-              /*
-       * A child of this node.
+                /*
+                 * A child of this node.
                  */
 
                 final BOp child = (BOp) childObj;
 
-              /*
-       * TODO The null child reference which can occur here is the [c]
+                /*
+                 * TODO The null child reference which can occur here is the [c]
                  * of the StatementPatternNode. We might want to make [c] an
                  * anonymous variable instead of having a [null].
                  */
                 if (child != null && child.arity() > 0) {
 
-                /*
-       * The child is a Node (has children).
+                  /*
+                   * The child is a Node (has children).
                    *
                    * Visit the children (recursive pre-order traversal).
                    */
@@ -124,8 +123,8 @@ public class BOpUtility {
 
                 } else {
 
-                /*
-       * The child is a leaf.
+                  /*
+                   * The child is a leaf.
                    */
 
                   // Visit the leaf itself.
@@ -163,26 +162,26 @@ public class BOpUtility {
 
               private static final long serialVersionUID = 1L;
 
-            /*
-       * Expand each child in turn.
+              /*
+               * Expand each child in turn.
                */
               protected Iterator expand(final Object childObj) {
 
-              /*
-       * A child of this node.
+                /*
+                 * A child of this node.
                  */
 
                 final BOp child = (BOp) childObj;
 
-              /*
-       * TODO The null child reference which can occur here is the [c]
+                /*
+                 * TODO The null child reference which can occur here is the [c]
                  * of the StatementPatternNode. We might want to make [c] an
                  * anonymous variable instead of having a [null].
                  */
                 if (child != null && child.arity() > 0) {
 
-                /*
-       * The child is a Node (has children).
+                  /*
+                   * The child is a Node (has children).
                    *
                    * Visit the children (recursive post-order traversal).
                    */
@@ -197,8 +196,8 @@ public class BOpUtility {
 
                 } else {
 
-                /*
-       * The child is a leaf.
+                  /*
+                   * The child is a leaf.
                    */
 
                   // Visit the leaf itself.
@@ -255,8 +254,8 @@ public class BOpUtility {
                 // visit the node.
                 final Striterator itr = new Striterator(new SingleValueIterator(op));
 
-              /*
-       * FIXME In order to visit the annotations as NV pairs
+                /*
+                 * FIXME In order to visit the annotations as NV pairs
                  * we need to modify this part of the expander pattern,
                  * perhaps just by pushing the appropriate NV object
                  * onto the stack? Or maybe just push the attribute name
@@ -515,7 +514,7 @@ public class BOpUtility {
   }
 
   //    /*
-//     * Return the variables from the operator's arguments.
+  //     * Return the variables from the operator's arguments.
   //     *
   //     * @param op
   //     *            The operator.
@@ -600,8 +599,8 @@ public class BOpUtility {
       final Integer id = (Integer) t.getProperty(Annotations.BOP_ID);
       final BOp conflict = map.put(id, t);
       if (conflict != null) {
-      /*
-       * BOp appears more than once. This is not allowed for
+        /*
+         * BOp appears more than once. This is not allowed for
          * pipeline operators. If you are getting this exception for
          * a non-pipeline operator, you should remove the bopId.
          */
@@ -634,7 +633,7 @@ public class BOpUtility {
   }
 
   //    /*
-//     * Lookup the first operator in the specified conditional binding group and
+  //     * Lookup the first operator in the specified conditional binding group and
   //     * return its bopId.
   //     *
   //     * @param query
@@ -1022,7 +1021,7 @@ public class BOpUtility {
   }
 
   //    /*
-//     * Verify that all bops from the identified <i>startId</i> to the root are
+  //     * Verify that all bops from the identified <i>startId</i> to the root are
   //     * {@link PipelineOp}s and have an assigned {@link BOp.Annotations#BOP_ID}.
   //     * This is required in order for us to be able to target messages to those
   //     * operators.
@@ -1209,8 +1208,8 @@ public class BOpUtility {
           final IConstant oval = bindingSet.get(var);
 
           if (oval != null) {
-          /*
-       * This is a paranoia assertion. We should never be in a
+            /*
+             * This is a paranoia assertion. We should never be in a
              * position where merging in a binding could overwrite
              * an existing binding with an inconsistent value.
              */
@@ -1251,7 +1250,7 @@ public class BOpUtility {
   }
 
   //	/*
-//	 * Inject (or replace) an {@link Integer} "rowId" column. This does not have
+  //	 * Inject (or replace) an {@link Integer} "rowId" column. This does not have
   //	 * a side-effect on the source {@link IBindingSet}s.
   //	 *
   //	 * @param var
@@ -1537,8 +1536,8 @@ public class BOpUtility {
 
       if (copy instanceof GroupNodeBase<?>) {
 
-      /*
-       * Patch up the parent references.
+        /*
+         * Patch up the parent references.
          */
 
         for (int i = 0; i < arity; i++) {

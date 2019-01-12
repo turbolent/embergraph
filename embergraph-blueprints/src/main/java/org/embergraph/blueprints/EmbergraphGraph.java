@@ -58,7 +58,6 @@ import org.embergraph.rdf.sail.model.RunningQuery;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.embergraph.rdf.sparql.ast.QueryType;
-import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.OpenRDFException;
 import org.openrdf.model.Literal;
 import org.openrdf.model.Statement;
@@ -76,7 +75,7 @@ import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryResult;
 
 /*
-* A base class for a Blueprints wrapper around a embergraph back-end.
+ * A base class for a Blueprints wrapper around a embergraph back-end.
  *
  * @author mikepersonick
  */
@@ -197,15 +196,15 @@ public abstract class EmbergraphGraph implements Graph {
 
           if (!result.hasNext()) {
 
-          /*
-       * Single value.
+            /*
+             * Single value.
              */
             return getProperty(stmt.getObject());
 
           } else {
 
-          /*
-       * Multi-value, use a list.
+            /*
+             * Multi-value, use a list.
              */
             final List<Object> list = new LinkedList<Object>();
 
@@ -248,7 +247,7 @@ public abstract class EmbergraphGraph implements Graph {
   }
 
   //    /*
-//     * Return a multi-valued property for an edge or vertex.
+  //     * Return a multi-valued property for an edge or vertex.
   //     *
   //     * TODO get rid of me
   //     *
@@ -261,7 +260,7 @@ public abstract class EmbergraphGraph implements Graph {
   //    }
   //
   //    /*
-//     * Return a multi-valued property for an edge or vertex.
+  //     * Return a multi-valued property for an edge or vertex.
   //     *
   //     * TODO get rid of me
   //     *
@@ -420,7 +419,7 @@ public abstract class EmbergraphGraph implements Graph {
   }
 
   //    /*
-//     * Set a single-value property on an edge or vertex (remove the old
+  //     * Set a single-value property on an edge or vertex (remove the old
   //     * value first).
   //     *
   //     * @see {@link EmbergraphElement}
@@ -491,7 +490,7 @@ public abstract class EmbergraphGraph implements Graph {
   }
 
   //    /*
-//     * ADD a property on an edge or vertex (multi-value property extension).
+  //     * ADD a property on an edge or vertex (multi-value property extension).
   //     *
   //     * @see {@link EmbergraphElement}
   //     */
@@ -502,7 +501,7 @@ public abstract class EmbergraphGraph implements Graph {
   //    }
   //
   //    /*
-//     * ADD a property on an edge or vertex (multi-value property extension).
+  //     * ADD a property on an edge or vertex (multi-value property extension).
   //     *
   //     * @see {@link EmbergraphElement}
   //     */
@@ -1246,8 +1245,8 @@ public abstract class EmbergraphGraph implements Graph {
 
     } catch (Exception ex) {
       if (queryId != null) {
-      /*
-       * In case the exception happens during evaluate().
+        /*
+         * In case the exception happens during evaluate().
          */
         finalizeQuery(queryId);
       }
@@ -1307,8 +1306,8 @@ public abstract class EmbergraphGraph implements Graph {
       if (p.equals(factory.getTypeURI())
           && (o.equals(factory.getVertexURI()) || o.equals(factory.getEdgeURI()))) {
 
-      /*
-       * Element type.
+        /*
+         * Element type.
          */
         if (o.equals(factory.getVertexURI())) {
           atom = new ExistenceAtom(sid, ElementType.VERTEX);
@@ -1318,8 +1317,8 @@ public abstract class EmbergraphGraph implements Graph {
 
       } else {
 
-      /*
-       * Edge.
+        /*
+         * Edge.
          */
         final String oid = factory.fromURI((URI) o);
         atom = new EdgeAtom(pid, sid, oid);
@@ -1332,16 +1331,16 @@ public abstract class EmbergraphGraph implements Graph {
        */
       if (p.equals(factory.getLabelURI())) {
 
-      /*
-       * Edge label.
+        /*
+         * Edge label.
          */
         final String label = factory.fromLiteral((Literal) o).toString();
         atom = new EdgeLabelAtom(sid, label);
 
       } else {
 
-      /*
-       * Property.
+        /*
+         * Property.
          */
         final Object oval = factory.fromLiteral((Literal) o);
         atom = new PropertyAtom(sid, pid, oval);
@@ -1412,8 +1411,8 @@ public abstract class EmbergraphGraph implements Graph {
 
     } catch (Exception ex) {
       if (queryId != null) {
-      /*
-       * In case the exception happens during evaluate().
+        /*
+         * In case the exception happens during evaluate().
          */
         finalizeQuery(queryId);
       }
@@ -1473,8 +1472,7 @@ public abstract class EmbergraphGraph implements Graph {
 
     try {
 
-      final BooleanQuery query =
-          cxn.prepareBooleanQuery(QueryLanguage.SPARQL, queryStr);
+      final BooleanQuery query = cxn.prepareBooleanQuery(QueryLanguage.SPARQL, queryStr);
 
       setMaxQueryTime(query);
 
@@ -1498,8 +1496,8 @@ public abstract class EmbergraphGraph implements Graph {
 
     } finally {
       if (queryId != null) {
-      /*
-       * In case the exception happens during evaluate().
+        /*
+         * In case the exception happens during evaluate().
          */
         finalizeQuery(queryId);
       }
@@ -1614,8 +1612,8 @@ public abstract class EmbergraphGraph implements Graph {
 
     } catch (Exception ex) {
       if (queryId != null) {
-      /*
-       * In case the exception happens during evaluate().
+        /*
+         * In case the exception happens during evaluate().
          */
         finalizeQuery(queryId);
       }
@@ -1702,12 +1700,12 @@ public abstract class EmbergraphGraph implements Graph {
   }
 
   //    /*
-//     * You MUST close this iterator when finished with it.
+  //     * You MUST close this iterator when finished with it.
   //     */
   //    public static interface CloseableIterator<T> extends Iterator<T> {
   //
   //        /*
-//         * Release any resources associated with this iterator.
+  //         * Release any resources associated with this iterator.
   //         */
   //        void close();
   //

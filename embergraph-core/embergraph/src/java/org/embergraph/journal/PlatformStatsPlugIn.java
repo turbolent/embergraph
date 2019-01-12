@@ -23,7 +23,7 @@ import org.embergraph.counters.AbstractStatisticsCollector;
 import org.embergraph.counters.ICounterSet;
 
 /*
-* {@link IPlugin} for collecting statistics from the operating system.
+ * {@link IPlugin} for collecting statistics from the operating system.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

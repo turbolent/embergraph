@@ -23,18 +23,13 @@ package org.embergraph.rdf.internal;
 
 import java.io.Serializable;
 import org.embergraph.btree.keys.IKeyBuilder;
-import org.embergraph.rdf.internal.impl.TermId;
-import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.model.EmbergraphValue;
-import org.embergraph.rdf.store.AbstractTripleStore.Options;
 import org.embergraph.rdf.vocab.Vocabulary;
-import org.openrdf.model.BNode;
-import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
 /*
-* Interface for the internal representation of an RDF {@link Value} (the representation which is
+ * Interface for the internal representation of an RDF {@link Value} (the representation which is
  * encoded within the statement indices).
  *
  * @param <V> The generic type for the RDF {@link Value} implementation.
@@ -174,7 +169,7 @@ public interface IV<V extends EmbergraphValue, T>
   boolean isFloatingPointNumeric();
   //
   //    /*
-//     * Return the blank node ID for this {@link IV}.
+  //     * Return the blank node ID for this {@link IV}.
   //     *
   //     * @throws UnsupportedOperationException
   //     *             if this {@link IV} does not represent a blank node.

@@ -24,7 +24,7 @@ package it.unimi.dsi.bits;
 import java.io.Serializable;
 
 /*
-* A generic transformation from objects of a given type to bit vector. Most useful when adding
+ * A generic transformation from objects of a given type to bit vector. Most useful when adding
  * strings, etc. to a trie.
  */
 public interface TransformationStrategy<T> extends Serializable {

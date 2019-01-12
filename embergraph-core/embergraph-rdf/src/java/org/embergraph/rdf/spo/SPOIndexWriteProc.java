@@ -37,7 +37,7 @@ import org.embergraph.relation.IMutableRelationIndexWriteProcedure;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Procedure for batch insert on a single statement index (or index partition).
+ * Procedure for batch insert on a single statement index (or index partition).
  *
  * <p>The key for each statement encodes the {s:p:o} of the statement in the order that is
  * appropriate for the index (SPO, POS, OSP, etc). The key is written unchanged on the index.
@@ -216,8 +216,8 @@ public class SPOIndexWriteProc extends AbstractKeyArrayIndexProcedure<Object>
 
       if (oldval == null) {
 
-      /*
-       * Statement is NOT pre-existing.
+        /*
+         * Statement is NOT pre-existing.
          */
 
         ndx.insert(key, tupleSer.serializeVal(/*tmp,*/ false /* override */, userFlag, newType));
@@ -232,8 +232,8 @@ public class SPOIndexWriteProc extends AbstractKeyArrayIndexProcedure<Object>
 
       } else {
 
-      /*
-       * Statement is pre-existing.
+        /*
+         * Statement is pre-existing.
          */
 
         // old statement type.
@@ -266,8 +266,8 @@ public class SPOIndexWriteProc extends AbstractKeyArrayIndexProcedure<Object>
 
           if (oldType != newType) {
 
-          /*
-       * We are downgrading a statement from explicit to
+            /*
+             * We are downgrading a statement from explicit to
              * inferred during TM.
              */
 
@@ -355,7 +355,7 @@ public class SPOIndexWriteProc extends AbstractKeyArrayIndexProcedure<Object>
   }
 
   //    /*
-//     * Used by {@link #decodeStatementIdentifier(StatementEnum, byte[])}
+  //     * Used by {@link #decodeStatementIdentifier(StatementEnum, byte[])}
   //     */
   //    private transient final DataInputBuffer vbuf = new DataInputBuffer(
   //            new byte[] {});

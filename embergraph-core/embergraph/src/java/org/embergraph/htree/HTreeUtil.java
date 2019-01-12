@@ -25,7 +25,7 @@ import it.unimi.dsi.bits.Fast;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Static utility methods and data for an {@link HTree}.
+ * Static utility methods and data for an {@link HTree}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -27,7 +27,7 @@ import java.util.Set;
 import junit.framework.TestCase2;
 
 /*
-* Test suite for bloom filter functionality.
+ * Test suite for bloom filter functionality.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -50,20 +50,17 @@ import org.embergraph.bop.engine.AbstractQueryEngineTestCase;
 import org.embergraph.bop.engine.BOpStats;
 import org.embergraph.bop.engine.IRunningQuery;
 import org.embergraph.bop.engine.QueryEngine;
-import org.embergraph.bop.engine.TestQueryEngine;
 import org.embergraph.bop.join.PipelineJoin;
 import org.embergraph.bop.solutions.SliceOp;
-import org.embergraph.bop.solutions.SortOp;
 import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.journal.ITx;
 import org.embergraph.service.AbstractEmbeddedFederationTestCase;
 import org.embergraph.service.DataService;
 import org.embergraph.service.EmbeddedClient;
-import org.embergraph.service.EmbeddedFederation;
 import org.embergraph.striterator.ChunkedArrayIterator;
 
 /*
-* Unit tests for {@link FederatedQueryEngine} running against an {@link EmbeddedFederation} having
+ * Unit tests for {@link FederatedQueryEngine} running against an {@link EmbeddedFederation} having
  * a single {@link DataService}. The data may be partitioned, but the partitions will live on the
  * same {@link DataService}.
  *
@@ -1084,16 +1081,16 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
                   new Constant<String>("Leon"),
                   new Constant<String>("Paul")
                 }),
-          /*
-       * No. The CONSTRAINT on the 2nd join [x == y] filters all
-                         * solutions. For solutions where the optional join fails, [y] is
-                         * not bound. Since [y] is part of the constraint on that join we DO
-                         * NOT observe those solutions which only join on the first access
-                         * path.
-                         *
-            //             * Plus anything we read from the first access path which
-            //             * did not pass the 2nd join.
-                         */
+            /*
+            * No. The CONSTRAINT on the 2nd join [x == y] filters all
+                              * solutions. For solutions where the optional join fails, [y] is
+                              * not bound. Since [y] is part of the constraint on that join we DO
+                              * NOT observe those solutions which only join on the first access
+                              * path.
+                              *
+                 //             * Plus anything we read from the first access path which
+                 //             * did not pass the 2nd join.
+                              */
             //            new ListBindingSet(
             //                    new IVariable[] { Var.var("x"), Var.var("y") },
             //                    new IConstant[] { new Constant<String>("Mary"),

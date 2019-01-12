@@ -31,7 +31,7 @@ import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
 
 /*
-* Operator used to impose a key-range constraint on a variable on access path.
+ * Operator used to impose a key-range constraint on a variable on access path.
  *
  * @see https://sourceforge.net/apps/trac/bigdata/ticket/238 (Lift range constraints onto AP).
  * @author mrpersonick
@@ -47,7 +47,7 @@ public final class RangeBOp extends ModifiableBOpBase { // implements IVariable<
   public interface Annotations extends ImmutableBOp.Annotations {
 
     //        /*
-//         * The variable whose range is restricted by the associated
+    //         * The variable whose range is restricted by the associated
     //         * {@link #FROM} and/or {@link #TO} filters.
     //         */
     //		String VAR = RangeBOp.class.getName() + ".var";
@@ -287,7 +287,7 @@ public final class RangeBOp extends ModifiableBOpBase { // implements IVariable<
   ////    }
   //
   //	/*
-//	 * Caches the hash code.
+  //	 * Caches the hash code.
   //	 */
   ////	private int hash = 0;
   //	public int hashCode() {

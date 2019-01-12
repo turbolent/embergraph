@@ -13,7 +13,7 @@ import org.embergraph.ganglia.IGangliaDefaults;
 import org.embergraph.ganglia.IGangliaMetadataFactory;
 
 /*
-* A utility class which may be used to run the embergraph performance counter collection system
+ * A utility class which may be used to run the embergraph performance counter collection system
  * within an embedded {@link GangliaService}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

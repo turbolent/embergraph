@@ -22,13 +22,12 @@ import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.AbstractInlineIV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.model.EmbergraphBNode;
-import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.model.BNode;
 import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 
 /*
-* Class for inline RDF blank nodes.
+ * Class for inline RDF blank nodes.
  *
  * <p>{@inheritDoc}
  *

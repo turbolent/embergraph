@@ -37,7 +37,7 @@ import org.embergraph.rdf.graph.impl.scheduler.CHMScheduler;
 import org.openrdf.model.Value;
 
 /*
-* {@link IGASEngine} for dynamic activation of vertices. This implementation maintains a frontier
+ * {@link IGASEngine} for dynamic activation of vertices. This implementation maintains a frontier
  * and lazily initializes the vertex state when the vertex is visited for the first time. This is
  * appropriate for algorithms, such as BFS, that use a dynamic frontier.
  *

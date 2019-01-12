@@ -27,7 +27,6 @@ package org.embergraph.relation;
 
 import java.util.Properties;
 import java.util.UUID;
-import org.embergraph.bop.BOpContextBase;
 import org.embergraph.bop.IPredicate;
 import org.embergraph.bop.ap.Predicate;
 import org.embergraph.btree.BTree;
@@ -35,22 +34,18 @@ import org.embergraph.btree.IIndex;
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.btree.IndexTypeEnum;
 import org.embergraph.btree.UnisolatedReadWriteIndex;
-import org.embergraph.journal.ConcurrencyManager;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.IJournal;
 import org.embergraph.journal.ITx;
-import org.embergraph.journal.Journal;
-import org.embergraph.journal.TemporaryRawStore;
 import org.embergraph.journal.TemporaryStore;
 import org.embergraph.relation.accesspath.AccessPath;
 import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.relation.locator.ILocatableResource;
 import org.embergraph.relation.rule.IAccessPathExpander;
-import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.striterator.IKeyOrder;
 
 /*
-* Base class for {@link IRelation} and {@link IMutableRelation} impls.
+ * Base class for {@link IRelation} and {@link IMutableRelation} impls.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -311,7 +306,7 @@ public abstract class AbstractRelation<E> extends AbstractResource<IRelation<E>>
   }
 
   //    /*
-//     * {@inheritDoc}
+  //     * {@inheritDoc}
   //     * <p>
   //     * Note: Since the relation may materialize the index views for its various
   //     * access paths, and since we are restricted to a single index partition and

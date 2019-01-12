@@ -26,7 +26,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /*
-* Runs all tests in this package.
+ * Runs all tests in this package.
  *
  * @version $Id$
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -11,7 +11,7 @@ package cern.jet.random;
 import cern.jet.random.engine.RandomEngine;
 import cern.jet.stat.Probability;
 /*
-* Gamma distribution; <A HREF="http://wwwinfo.cern.ch/asdoc/shortwrupsdir/g106/top.html"> math
+ * Gamma distribution; <A HREF="http://wwwinfo.cern.ch/asdoc/shortwrupsdir/g106/top.html"> math
  * definition</A>, <A
  * HREF="http://www.cern.ch/RD11/rkb/AN16pp/node96.html#SECTION000960000000000000000"> definition of
  * gamma function</A> and <A HREF="http://www.statsoft.com/textbook/glosf.html#Gamma Distribution">
@@ -150,7 +150,7 @@ public class Gamma extends AbstractContinousDistribution {
         }
       }
     } else { // CASE B: Acceptance complement algorithm gd (gaussian distribution, box muller
-             // transformation)
+      // transformation)
       if (a != aa) { // Step 1. Preparations
         aa = a;
         ss = a - 0.5;

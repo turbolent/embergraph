@@ -11,7 +11,7 @@ package cern.jet.stat;
 import cern.colt.list.DoubleArrayList;
 import cern.colt.list.IntArrayList;
 /*
-* Basic descriptive statistics.
+ * Basic descriptive statistics.
  *
  * @author peter.gedeck@pharma.Novartis.com
  * @author wolfgang.hoschek@cern.ch

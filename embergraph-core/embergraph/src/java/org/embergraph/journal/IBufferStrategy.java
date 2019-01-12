@@ -26,7 +26,7 @@ import org.embergraph.rawstore.IMRMW;
 import org.embergraph.rawstore.IRawStore;
 
 /*
-* Interface for implementations of a buffer strategy as identified by a {@link BufferMode}. This
+ * Interface for implementations of a buffer strategy as identified by a {@link BufferMode}. This
  * interface is designed to encapsulate the specifics of reading and writing slots and performing
  * operations to make an atomic commit.
  *
@@ -116,7 +116,7 @@ public interface IBufferStrategy extends IRawStore, IMRMW {
   void writeRootBlock(IRootBlockView rootBlock, ForceEnum forceOnCommitEnum);
 
   //    /*
-//     * Rolls back the store to the prior commit point by restoring the last
+  //     * Rolls back the store to the prior commit point by restoring the last
   //     * written root block.
   //     *
   //     * @throws IllegalStateException
@@ -231,7 +231,7 @@ public interface IBufferStrategy extends IRawStore, IMRMW {
   boolean useChecksums();
 
   //    /*
-//     * Determines whether there are outstanding writes to the underlying store
+  //     * Determines whether there are outstanding writes to the underlying store
   //     */
   //	public boolean isFlushed();
 

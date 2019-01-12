@@ -18,7 +18,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.cache;
 
 /*
-* Interface for an abstraction used to support application specific local caches, remote caches,
+ * Interface for an abstraction used to support application specific local caches, remote caches,
  * and cache fabrics.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -39,7 +39,7 @@ public interface ICacheConnection {
   void destroyCaches(final String namespace, final long timestamp);
 
   //    /*
-//     * Return a view of the named SOLUTIONS cache.
+  //     * Return a view of the named SOLUTIONS cache.
   //     *
   //     * @param namespace
   //     *            The KB namespace.

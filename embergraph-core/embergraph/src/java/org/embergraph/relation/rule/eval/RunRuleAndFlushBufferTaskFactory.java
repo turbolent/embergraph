@@ -4,7 +4,7 @@ import org.embergraph.relation.accesspath.IBuffer;
 import org.embergraph.relation.rule.IRule;
 
 /*
-* Factory class is used for sequential {@link IRule} step execution. It wraps the selected {@link
+ * Factory class is used for sequential {@link IRule} step execution. It wraps the selected {@link
  * IStepTask} inside of a {@link RunRuleAndFlushBufferTask} to ensure that the {@link IBuffer} on
  * which the {@link IStepTask} wrote its {@link ISolution}s gets {@link IBuffer#flush()}ed after the
  * {@link IStepTask} is executed.

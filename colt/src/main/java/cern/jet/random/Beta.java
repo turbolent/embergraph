@@ -11,7 +11,7 @@ package cern.jet.random;
 import cern.jet.random.engine.RandomEngine;
 import cern.jet.stat.Probability;
 /*
-* Beta distribution; <A
+ * Beta distribution; <A
  * HREF="http://www.cern.ch/RD11/rkb/AN16pp/node15.html#SECTION000150000000000000000"> math
  * definition</A> and <A HREF="http://www.statsoft.com/textbook/glosb.html#Beta Distribution">
  * animated definition</A>.

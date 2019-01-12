@@ -26,7 +26,7 @@ import java.text.NumberFormat;
 import org.embergraph.btree.IndexSegmentAddressManager;
 
 /*
-* Encapsulates logic for operations on an opaque long integer comprising an byte offset and a byte
+ * Encapsulates logic for operations on an opaque long integer comprising an byte offset and a byte
  * count suitable for use in a WORM (Write Once, Read Many) {@link IRawStore}. Both the byte offset
  * and the byte count of the record are stored directly in the opaque identifier. Note that the
  * maximum byte offset only indirectly governs the maximum #of records that can be written on a
@@ -193,7 +193,7 @@ public class WormAddressManager implements IAddressManager {
   }
 
   //    /*
-//     * Allows byte offsets of up to 4T and record lengths of up to 4M (it
+  //     * Allows byte offsets of up to 4T and record lengths of up to 4M (it
   //     * allocates {@link #DEFAULT_OFFSET_BITS} to the offset).
   //     */
   //    protected WormAddressManager() {
@@ -341,7 +341,7 @@ public class WormAddressManager implements IAddressManager {
   }
 
   //    /*
-//     * Breaks an address into its offset and size and packs each component
+  //     * Breaks an address into its offset and size and packs each component
   //     * separately. This provides much better packing then writing the entire
   //     * address as a long integer since each component tends to be a small
   //     * positive integer value. When the byte count will fit into a non-negative

@@ -29,7 +29,7 @@ import org.embergraph.service.TestEmbeddedClient;
 import org.embergraph.service.TestRangeQuery;
 
 /*
-* Aggregates test suites in increasing dependency order.
+ * Aggregates test suites in increasing dependency order.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

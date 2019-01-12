@@ -3,7 +3,7 @@ package org.embergraph.rawstore;
 import java.io.OutputStream;
 
 /*
-* This class provides a stream-based allocation mechanism.
+ * This class provides a stream-based allocation mechanism.
  *
  * <p>The intention is that an IPSOutputStream (PS for PerSistent) is returned by a storage service
  * to which data can be written. When all data has been written the address from which to retriev an

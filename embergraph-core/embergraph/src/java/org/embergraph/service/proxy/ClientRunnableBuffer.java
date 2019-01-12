@@ -24,12 +24,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.service.proxy;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.concurrent.Future;
 import org.embergraph.relation.accesspath.IRunnableBuffer;
 
 /*
-* {@link Serializable} class wraps a {@link RemoteRunnableBuffer} delegating methods through to the
+ * {@link Serializable} class wraps a {@link RemoteRunnableBuffer} delegating methods through to the
  * {@link IRunnableBuffer} on the remote service while masquerading {@link IOException}s so that we
  * can implement the {@link IRunnableBuffer} API.
  *

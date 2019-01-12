@@ -40,7 +40,6 @@ import org.embergraph.btree.IndexMetadata;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.relation.AbstractRelation;
-import org.embergraph.relation.locator.ILocatableResource;
 import org.embergraph.service.AbstractScaleOutFederation;
 import org.embergraph.striterator.AbstractKeyOrder;
 import org.embergraph.striterator.IChunkedOrderedIterator;
@@ -48,7 +47,7 @@ import org.embergraph.striterator.IKeyOrder;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Test relation composed of {@link E} elements with a single primary index.
+ * Test relation composed of {@link E} elements with a single primary index.
  *
  * <p>Note: This has to be public in order to be an {@link ILocatableResource}.
  */
@@ -205,8 +204,8 @@ public class R extends AbstractRelation<E> {
 
       if (!ndx.contains(key)) {
 
-      /*
-       * Note: The key is formed from both the name and the value.
+        /*
+         * Note: The key is formed from both the name and the value.
          * This makes it possible to have a many-to-many association
          * pattern.
          *

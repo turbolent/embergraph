@@ -28,12 +28,10 @@ import java.util.WeakHashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock;
 
 /*
-* A factory for named {@link ReadWriteLock}s. A simple {@link ReadWriteLock} manages access to a
+ * A factory for named {@link ReadWriteLock}s. A simple {@link ReadWriteLock} manages access to a
  * single resource. However, a {@link NamedReadWriteLock} manages access to the members of a set of
  * named resources. This is more efficient when the latency of the operation once the lock is
  * acquired is significant, e.g., an RMI call or a disk IO.

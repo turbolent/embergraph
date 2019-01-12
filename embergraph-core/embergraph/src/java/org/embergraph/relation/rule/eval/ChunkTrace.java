@@ -23,11 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation.rule.eval;
 
-import org.embergraph.relation.rule.eval.pipeline.JoinMasterTask;
-import org.embergraph.relation.rule.eval.pipeline.JoinTask;
-
 /*
-* Utility class that may be used to trace the chunks accepted for join processing for each
+ * Utility class that may be used to trace the chunks accepted for join processing for each
  * predicate. The output has the form
  *
  * <pre>

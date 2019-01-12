@@ -25,7 +25,7 @@ import org.embergraph.bop.BOp;
 import org.embergraph.rdf.sparql.ast.optimizers.StaticOptimizer;
 
 /*
-* Interface for things which can be re-ordered by the static join optimizer. Currently limited to
+ * Interface for things which can be re-ordered by the static join optimizer. Currently limited to
  * StatementPatternNodes and some instances of ArbitraryLengthPathNodes (those with a single
  * statement pattern inside).
  */

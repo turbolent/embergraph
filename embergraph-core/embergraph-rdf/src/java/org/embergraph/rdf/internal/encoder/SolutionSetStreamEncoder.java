@@ -31,7 +31,7 @@ import org.embergraph.rdf.sparql.ast.SolutionSetStatserator;
 import org.embergraph.util.Bytes;
 
 /*
-* Stream encoder for solution sets (chunk oriented).
+ * Stream encoder for solution sets (chunk oriented).
  *
  * @see SolutionSetStreamDecoder
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

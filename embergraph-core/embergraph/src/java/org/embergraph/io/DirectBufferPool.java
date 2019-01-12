@@ -15,13 +15,10 @@ import org.apache.log4j.Logger;
 import org.embergraph.counters.CAT;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.OneShotInstrument;
-import org.embergraph.journal.IBufferStrategy;
-import org.embergraph.journal.TemporaryRawStore;
-import org.embergraph.journal.TransientBufferStrategy;
 import org.embergraph.util.Bytes;
 
 /*
-* An instance of this class manages a JVM-wide pool of direct (aka native) {@link ByteBuffer}s.
+ * An instance of this class manages a JVM-wide pool of direct (aka native) {@link ByteBuffer}s.
  * Methods are provided to acquire a {@link ByteBuffer} from the pool and to release a {@link
  * ByteBuffer} back to the pool.
  *
@@ -123,8 +120,8 @@ public class DirectBufferPool {
         return false;
       }
       if (this.buf == ((BufferState) o).buf) {
-      /*
-       * We have two distinct BufferState references for the same
+        /*
+         * We have two distinct BufferState references for the same
          * ByteBuffer reference. This is an error. There should be a
          * one-to-one correspondence.
          */
@@ -170,8 +167,8 @@ public class DirectBufferPool {
       synchronized (this) {
         if (buf == null) {
           if (releasedByFinalizer) {
-          /*
-       * This situation can arise.  Just return quietly.
+            /*
+             * This situation can arise.  Just return quietly.
              */
             return;
           }
@@ -187,8 +184,8 @@ public class DirectBufferPool {
         DirectBufferPool.this.release(buf, timeout, units);
         buf = null;
         if (DEBUG) {
-        /*
-       * The stack frame where the ByteBuffer was released.
+          /*
+           * The stack frame where the ByteBuffer was released.
            */
           releaseStack = new RuntimeException("ReleaseTrace");
         }
@@ -243,8 +240,8 @@ public class DirectBufferPool {
       }
       if (buf == null) return;
       if (DEBUG) {
-      /*
-       * Note: This code path WILL NOT return the buffer to the pool.
+        /*
+         * Note: This code path WILL NOT return the buffer to the pool.
          * This is deliberate. When DEBUG is true we do not permit a
          * buffer which was not correctly release to be reused.
          *
@@ -272,8 +269,8 @@ public class DirectBufferPool {
             allocationStack);
       } else {
         //                log.error("Buffer release on finalize."); // NB: NOT an error.
-      /*
-       * TODO We do not currently set this.buf = buf if we are
+        /*
+         * TODO We do not currently set this.buf = buf if we are
          * interrupted in release(buf) here, so this is not acid. But
          * maybe we should accept the memory leak on that code path?
          */
@@ -447,7 +444,7 @@ public class DirectBufferPool {
   public static final DirectBufferPool INSTANCE;
 
   //    /*
-//     * A JVM-wide pool of direct {@link ByteBuffer}s with a default
+  //     * A JVM-wide pool of direct {@link ByteBuffer}s with a default
   //     * {@link Options#BUFFER_CAPACITY} of <code>10 MB</code>. The main use case
   //     * for the 10M buffers are multi-block IOs for the {@link IndexSegment}s.
   //     */
@@ -708,8 +705,8 @@ public class DirectBufferPool {
 
       if (size >= poolCapacity) {
 
-      /*
-       * Wait for a free buffer since the pool is at its capacity.
+        /*
+         * Wait for a free buffer since the pool is at its capacity.
          */
 
         log.error("Pool is at capacity - waiting for a free buffer");

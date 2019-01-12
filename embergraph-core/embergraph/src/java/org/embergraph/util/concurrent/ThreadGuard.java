@@ -26,7 +26,7 @@ import java.util.concurrent.locks.Condition;
 import org.apache.log4j.Logger;
 
 /*
-* Pattern used to guard critical regions that await {@link Condition}s when a concurrent event may
+ * Pattern used to guard critical regions that await {@link Condition}s when a concurrent event may
  * cause the {@link Condition} to become unsatisfiable.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

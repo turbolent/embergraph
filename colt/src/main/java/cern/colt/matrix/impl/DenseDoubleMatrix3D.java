@@ -11,7 +11,7 @@ package cern.colt.matrix.impl;
 import cern.colt.matrix.DoubleMatrix2D;
 import cern.colt.matrix.DoubleMatrix3D;
 /*
-* Dense 3-d matrix holding <tt>double</tt> elements. First see the <a
+ * Dense 3-d matrix holding <tt>double</tt> elements. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
  * view</a> to get the broad picture.
  *

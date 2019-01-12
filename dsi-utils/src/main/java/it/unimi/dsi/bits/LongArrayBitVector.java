@@ -29,7 +29,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 /*
-* A bit vector implementation based on arrays of longs.
+ * A bit vector implementation based on arrays of longs.
  *
  * <p>The main goal of this class is to be fast and flexible. It implements a lightweight, fast,
  * open, optimized, reuse-oriented version of bit vectors. Instances of this class represent a bit
@@ -745,9 +745,10 @@ public class LongArrayBitVector extends AbstractBitVector implements Cloneable, 
         bits[endWord] &= -(1L << width - BITS_PER_WORD + startBit);
         bits[endWord] |= value >>> BITS_PER_WORD - startBit;
 
-        assert !ASSERTS || value
-            == (bits[startWord] >>> startBit
-            | bits[endWord] << (BITS_PER_WORD - startBit) & fullMask);
+        assert !ASSERTS
+            || value
+                == (bits[startWord] >>> startBit
+                    | bits[endWord] << (BITS_PER_WORD - startBit) & fullMask);
       }
       return oldValue;
     }

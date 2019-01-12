@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree;
 
 /*
-* An interface defining non-batch methods for inserting, removing, lookup, and containment tests
+ * An interface defining non-batch methods for inserting, removing, lookup, and containment tests
  * where keys and values are implicitly converted to and from <code>byte[]</code>s using the {@link
  * ITupleSerializer} configured on the {@link IndexMetadata} object for the {@link IIndex}.
  *

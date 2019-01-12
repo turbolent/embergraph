@@ -22,14 +22,12 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.Properties;
 import java.util.UUID;
-import org.embergraph.btree.raba.codec.IRabaCoder;
 import org.embergraph.htree.HTree;
 import org.embergraph.io.LongPacker;
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.service.IEmbergraphFederation;
 
 /*
-* HTree specific implementation.
+ * HTree specific implementation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

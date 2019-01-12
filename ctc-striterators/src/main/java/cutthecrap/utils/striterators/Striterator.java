@@ -24,7 +24,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /*
-* Striterator - transformation and mapping patterns over java {@link Iterator} s.
+ * Striterator - transformation and mapping patterns over java {@link Iterator} s.
  *
  * <p>Allows wrapping of an iterator so that extensions may add type specific next<Type> methods.
  *
@@ -119,8 +119,8 @@ public class Striterator implements IStriterator, ITailOp, ICloseableIterator {
   public IStriterator addFilter(final IFilter filter) {
     if (filters == null) {
       synchronized (this) {
-      /*
-       * Note: double-checked locking pattern and volatile field are
+        /*
+         * Note: double-checked locking pattern and volatile field are
          * used to ensure visibility in combination with lazy create of
          * the backing list.
          */

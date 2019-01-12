@@ -27,7 +27,7 @@ import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.SubqueryRoot;
 
 /*
-* @see <a href="https://jira.blazegraph.com/browse/BLZG-4323">hint:runFirst not considered for
+ * @see <a href="https://jira.blazegraph.com/browse/BLZG-4323">hint:runFirst not considered for
  *     Subqueries and Named Subquery Includes</a>
  * @author <a href="mailto:ms@blazegraph.com">Michael Schmidt</a>
  */

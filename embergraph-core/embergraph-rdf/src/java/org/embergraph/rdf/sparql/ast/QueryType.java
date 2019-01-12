@@ -1,7 +1,7 @@
 package org.embergraph.rdf.sparql.ast;
 
 /*
-* Type safe enumeration reporting the high level type of the query. This provides access to
+ * Type safe enumeration reporting the high level type of the query. This provides access to
  * information which may otherwise be difficult to determine by inspecting the generated AST or
  * query plan.
  */

@@ -30,11 +30,10 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.bop.IVariableOrConstant;
 import org.embergraph.bop.Var;
 import org.embergraph.bop.bindingSet.EmptyBindingSet;
-import org.embergraph.relation.rule.eval.ActionEnum;
 import org.embergraph.relation.rule.eval.IRuleTaskFactory;
 
 /*
-* Default impl.
+ * Default impl.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -76,7 +75,7 @@ public class Rule<E> implements IRule<E> {
   private final IPredicate[] tail;
 
   //    /*
-//     * <code>true</code> iff a DISTINCT constraint will be imposed when the
+  //     * <code>true</code> iff a DISTINCT constraint will be imposed when the
   //     * rule is evaluated as a query.
   //     */
   //    final private boolean distinct;

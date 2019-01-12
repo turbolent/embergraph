@@ -26,11 +26,9 @@ import junit.framework.TestSuite;
 import org.apache.log4j.Logger;
 import org.embergraph.EmbergraphStatics;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTBottomUpOptimizer;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTSimpleOptionalOptimizer;
 
 /*
-* Test driver for debugging Sesame or DAWG manifest tests.
+ * Test driver for debugging Sesame or DAWG manifest tests.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -156,7 +154,7 @@ public class TestTCK extends AbstractDataDrivenSPARQLTestCase {
   }
 
   //    /*
-//     * TODO I can not figure out why these "dataset" tests fail.
+  //     * TODO I can not figure out why these "dataset" tests fail.
   //     */
   //    public void test_dataset_01() throws Exception {
   //
@@ -803,7 +801,7 @@ public class TestTCK extends AbstractDataDrivenSPARQLTestCase {
   }
 
   //    /*
-//     * This is BSBM BI query 05 on the PC100 data set. We picked this up with
+  //     * This is BSBM BI query 05 on the PC100 data set. We picked this up with
   //     * Sesame 2.6.3. It is failing with a "solution set not found" error in the
   //     * TCK. The problem is reproduced by this test. However, the test is a bit
   //     * long running, so take it out of this test suite once we get to the bottom

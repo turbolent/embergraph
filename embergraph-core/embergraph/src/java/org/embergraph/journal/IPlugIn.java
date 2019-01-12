@@ -18,7 +18,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.journal;
 
 /*
-* Interface for a "plug in" that can be registered with a {@link Journal}.
+ * Interface for a "plug in" that can be registered with a {@link Journal}.
  *
  * <p>TODO Support at {@link IIndexManager} interface? E.g., for the federation as well as the
  * journal.

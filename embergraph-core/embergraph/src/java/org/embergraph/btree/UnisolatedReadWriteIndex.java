@@ -25,7 +25,6 @@ package org.embergraph.btree;
 import cutthecrap.utils.striterators.IFilter;
 import java.util.Iterator;
 import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReadWriteLock;
 import org.embergraph.bop.cost.BTreeCostModel;
 import org.embergraph.bop.cost.DiskCostModel;
 import org.embergraph.bop.cost.ScanCostReport;
@@ -36,14 +35,12 @@ import org.embergraph.btree.proc.IResultHandler;
 import org.embergraph.btree.proc.ISimpleIndexProcedure;
 import org.embergraph.btree.view.FusedView;
 import org.embergraph.counters.CounterSet;
-import org.embergraph.journal.ConcurrencyManager;
-import org.embergraph.journal.IConcurrencyManager;
 import org.embergraph.mdi.IResourceMetadata;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.service.Split;
 
 /*
-* A view onto an unisolated index partition which enforces the constraint that either concurrent
+ * A view onto an unisolated index partition which enforces the constraint that either concurrent
  * readers -or- a single writer may have access to the unisolated index at any given time. This
  * provides the maximum possible concurrency for an unisolated index using an internal {@link
  * ReadWriteLock} to coordinate threads.
@@ -714,7 +711,7 @@ public class UnisolatedReadWriteIndex implements IIndex, ILinearList, IReadWrite
   //	}
   //
   //	/*
-//	 * @throws UnsupportedOperationException
+  //	 * @throws UnsupportedOperationException
   //	 *             It is not possible to return the backing indices without
   //	 *             breaking the thread-safety pattern imposed by the
   //	 *             {@link UnisolatedReadWriteIndex}.
@@ -726,7 +723,7 @@ public class UnisolatedReadWriteIndex implements IIndex, ILinearList, IReadWrite
   //	}
   //
   //	/*
-//	 * @throws UnsupportedOperationException
+  //	 * @throws UnsupportedOperationException
   //	 *             It is not possible to return the backing index without
   //	 *             breaking the thread-safety pattern imposed by the
   //	 *             {@link UnisolatedReadWriteIndex}.

@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.util.Random;
 
 /*
-* Test atomic append operations on the file data index for the {@link EmbergraphFileSystem}. This
+ * Test atomic append operations on the file data index for the {@link EmbergraphFileSystem}. This
  * also tests the correct assignment of block identifiers, the ability to count the #of blocks in a
  * file version, the ability to visit the block identifiers for a file version, the ability to read
  * a specific block for a file version, and the ability to read all data for a file version from an

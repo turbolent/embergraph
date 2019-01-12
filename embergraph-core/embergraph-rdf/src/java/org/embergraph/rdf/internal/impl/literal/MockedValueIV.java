@@ -30,7 +30,7 @@ import org.embergraph.util.BytesUtil;
 import org.openrdf.model.Literal;
 
 /*
-* Internally used IV representing a mocked value. The IV contains a delegate, which typically would
+ * Internally used IV representing a mocked value. The IV contains a delegate, which typically would
  * be something like a fully inlined URI iv (or a fully inlined literal/blank node, respectively).
  * It is just a wrapper to indicate that the delegate is to be translated back into a mocked value.
  *

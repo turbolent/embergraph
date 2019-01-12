@@ -27,7 +27,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.embergraph.counters.CounterSet;
-import org.embergraph.counters.ICounterSetAccess;
 import org.embergraph.counters.format.CounterSetFormat;
 import org.embergraph.counters.query.CounterSetSelector;
 import org.embergraph.counters.query.URLQueryModel;
@@ -35,11 +34,10 @@ import org.embergraph.counters.render.IRenderer;
 import org.embergraph.counters.render.RendererFactory;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.service.IEmbergraphFederation;
-import org.embergraph.service.IEventReceivingService;
 import org.embergraph.service.IService;
 
 /*
-* Servlet for exposing performance counters.
+ * Servlet for exposing performance counters.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  *     <p>TODO The SPARQL layer needs to be separated from the core embergraph layer, with the

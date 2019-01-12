@@ -3,11 +3,10 @@ package org.embergraph.service.ndx;
 import org.embergraph.btree.proc.IResultHandler;
 import org.embergraph.btree.proc.ISimpleIndexProcedure;
 import org.embergraph.mdi.PartitionLocator;
-import org.embergraph.service.IDataService;
 import org.embergraph.service.Split;
 
 /*
-* Class handles stale locators by finding the current locator for the <i>key</i> and redirecting
+ * Class handles stale locators by finding the current locator for the <i>key</i> and redirecting
  * the request to execute the procedure on the {@link IDataService} identified by that locator.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

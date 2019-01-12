@@ -30,7 +30,7 @@ import java.io.ObjectOutput;
 import java.math.BigInteger;
 
 /*
-* Default implementation.
+ * Default implementation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

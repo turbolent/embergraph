@@ -6,14 +6,12 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpContext;
-import org.embergraph.bop.BOpEvaluationContext;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.PipelineOp;
-import org.embergraph.bop.solutions.SliceOp;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 
 /*
-* A operator which may be used at the end of query pipelines when there is a requirement to marshal
+ * A operator which may be used at the end of query pipelines when there is a requirement to marshal
  * solutions back to the query controller but no requirement to {@link SliceOp slice} solutions. The
  * primary use case for {@link EndOp} is on a cluster, where it is evaluated on the query controller
  * so the results will be streamed back to the query controller from the nodes of the cluster. You

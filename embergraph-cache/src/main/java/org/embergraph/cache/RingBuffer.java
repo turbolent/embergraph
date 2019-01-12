@@ -25,10 +25,9 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Queue;
-import java.util.concurrent.ArrayBlockingQueue;
 
 /*
-* A unsynchronized fixed capacity ring buffer. The buffer does not accept <code>null</code>
+ * A unsynchronized fixed capacity ring buffer. The buffer does not accept <code>null</code>
  * elements. If you want a thread-safe {@link Queue} consider {@link ArrayBlockingQueue} instead.
  *
  * <p>Note: The "head" of the ring buffer is the insertion point, NOT the MRU element which is

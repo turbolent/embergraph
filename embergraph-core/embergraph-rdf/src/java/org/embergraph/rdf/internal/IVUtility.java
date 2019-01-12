@@ -66,7 +66,6 @@ import org.embergraph.rdf.internal.impl.uri.VocabURIByteIV;
 import org.embergraph.rdf.internal.impl.uri.VocabURIShortIV;
 import org.embergraph.rdf.lexicon.BlobsIndexHelper;
 import org.embergraph.rdf.lexicon.ITermIndexCodes;
-import org.embergraph.rdf.lexicon.TermIdEncoder;
 import org.embergraph.rdf.model.EmbergraphBNode;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.model.EmbergraphURI;
@@ -76,7 +75,7 @@ import org.embergraph.rdf.spo.SPOKeyOrder;
 import org.openrdf.model.impl.URIImpl;
 
 /*
-* Helper class for {@link IV}s.
+ * Helper class for {@link IV}s.
  *
  * @openrdf
  */
@@ -284,8 +283,8 @@ public class IVUtility {
 
       if (AbstractIV.isExtension(flags)) {
 
-      /*
-       * Handle non-inline URI or Literal.
+        /*
+         * Handle non-inline URI or Literal.
          */
 
         final byte extensionByte = KeyBuilder.decodeByte(key[o++]);
@@ -313,8 +312,8 @@ public class IVUtility {
 
         } else {
 
-        /*
-       * Handle a BlobIV.
+          /*
+           * Handle a BlobIV.
            *
            * Note: This MUST be consistent with
            * TermsIndexHelper#makeKey() and BlobIV.
@@ -335,8 +334,8 @@ public class IVUtility {
 
       } else {
 
-      /*
-       * Handle a TermId, including a NullIV.
+        /*
+         * Handle a TermId, including a NullIV.
          */
 
         // decode the term identifier.
@@ -371,8 +370,8 @@ public class IVUtility {
     switch (vte) {
       case STATEMENT:
         {
-        /*
-       * Handle inline sids.
+          /*
+           * Handle inline sids.
            */
           // spo is directly decodable from key
           final ISPO spo = SPOKeyOrder.SPO.decodeKey(key, o);
@@ -660,8 +659,8 @@ public class IVUtility {
         }
       case Extension:
         {
-        /*
-       * Handle an extension of the intrinsic data types.
+          /*
+           * Handle an extension of the intrinsic data types.
            *
            * @see BLZG-1507 (Implement support for DTE extension types for URIs)
            * @see BLZG-1595 (DTEExtension for compressed timestamp)
@@ -716,7 +715,7 @@ public class IVUtility {
   }
 
   //	/*
-//	 * Handle an extension of the intrinsic data types.
+  //	 * Handle an extension of the intrinsic data types.
   //	 *
   //	 * @see BLZG-1507 (Implement support for DTE extension types for URIs)
   //	 */
@@ -843,7 +842,7 @@ public class IVUtility {
   }
 
   //    /*
-//     * Decode an IV from its string representation as encoded by
+  //     * Decode an IV from its string representation as encoded by
   //     * {@link BlobIV#toString()} and {@link AbstractInlineIV#toString()} (this
   //     * is used by the prototype IRIS integration.)
   //     *

@@ -27,26 +27,20 @@ import cutthecrap.utils.striterators.Striterator;
 import org.embergraph.bop.BOpContextBase;
 import org.embergraph.bop.BOpUtility;
 import org.embergraph.bop.IBindingSet;
-import org.embergraph.rdf.sparql.ast.AssignmentNode;
-import org.embergraph.rdf.sparql.ast.ConstantNode;
-import org.embergraph.rdf.sparql.ast.FilterNode;
-import org.embergraph.rdf.sparql.ast.FunctionNode;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 import org.embergraph.rdf.sparql.ast.HavingNode;
 import org.embergraph.rdf.sparql.ast.IQueryNode;
 import org.embergraph.rdf.sparql.ast.IValueExpressionNode;
 import org.embergraph.rdf.sparql.ast.IValueExpressionNodeContainer;
-import org.embergraph.rdf.sparql.ast.OrderByExpr;
 import org.embergraph.rdf.sparql.ast.QueryNodeWithBindingSet;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.RangeNode;
 import org.embergraph.rdf.sparql.ast.StatementPatternNode;
-import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpUtility;
 
 /*
-* Visit all the value expression nodes and convert them into value expressions using {@link
+ * Visit all the value expression nodes and convert them into value expressions using {@link
  * AST2BOpUtility#toVE(String, IValueExpressionNode)}. If a value expression can be evaluated to a
  * constant, then it is replaced by that constant.
  *
@@ -85,7 +79,7 @@ public class ASTSetValueExpressionsOptimizer implements IASTOptimizer {
   }
 
   //    /*
-//     * Original version caches to avoid side-effects and visits all VENs both
+  //     * Original version caches to avoid side-effects and visits all VENs both
   //     * explicitly and recursively through toVE().
   //     */
   //    private void convert1(final String lex, final QueryRoot query) {

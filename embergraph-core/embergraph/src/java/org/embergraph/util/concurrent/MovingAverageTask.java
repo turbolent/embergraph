@@ -4,7 +4,7 @@ import java.util.concurrent.Callable;
 import org.apache.log4j.Logger;
 
 /*
-* Class tracks a the moving average of some sampled datum.
+ * Class tracks a the moving average of some sampled datum.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -35,7 +35,7 @@ public class MovingAverageTask implements Runnable {
   }
 
   //    /*
-//     * Scaling factor converts nanoseconds to milliseconds.
+  //     * Scaling factor converts nanoseconds to milliseconds.
   //     */
   //    static protected final double scalingFactor = 1d / TimeUnit.NANOSECONDS
   //            .convert(1, TimeUnit.MILLISECONDS);

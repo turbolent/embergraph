@@ -4,7 +4,7 @@ import junit.framework.TestCase;
 import org.junit.Test;
 
 /*
-* Test case for the {@link PrefixDeclProcessor}
+ * Test case for the {@link PrefixDeclProcessor}
  *
  * @author beebs
  */

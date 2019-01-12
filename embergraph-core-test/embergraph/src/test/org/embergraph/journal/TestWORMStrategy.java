@@ -30,7 +30,7 @@ import org.embergraph.io.DirectBufferPool;
 import org.embergraph.rawstore.IRawStore;
 
 /*
-* Test suite for {@link WORMStrategy} journal.
+ * Test suite for {@link WORMStrategy} journal.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @see TestWORMStrategyNoCache

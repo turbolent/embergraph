@@ -30,7 +30,7 @@ import junit.framework.TestSuite;
 import org.apache.log4j.Logger;
 
 /*
-* The tests in this class are responsible for verifying some assumptions about the default behavior
+ * The tests in this class are responsible for verifying some assumptions about the default behavior
  * of junit when creating hierarchical tests from classes and suites and verifying the correct
  * behavior of the {@link ProxyTestSuite}, which must flowdown the delegate to all tests (added to
  * itself or to any nested test suite) that implement the {@link IProxyTest}interface.

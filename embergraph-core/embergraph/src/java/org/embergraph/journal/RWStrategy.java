@@ -56,7 +56,7 @@ import org.embergraph.rwstore.RWStore.StoreCounters;
 import org.embergraph.util.ChecksumError;
 
 /*
-* A highly scalable persistent {@link IBufferStrategy} wrapping the {@link RWStore} which may be
+ * A highly scalable persistent {@link IBufferStrategy} wrapping the {@link RWStore} which may be
  * used as the backing store for a {@link Journal}.
  *
  * <p>The {@link RWStore} manages allocation slots. This can translate into an enormous space
@@ -531,7 +531,7 @@ public class RWStrategy extends AbstractRawStore
   }
 
   //	/*
-//	 * Used for unit tests, could also be used to access raw statistics.
+  //	 * Used for unit tests, could also be used to access raw statistics.
   //	 *
   //	 * @return the associated RWStore
   //	 */
@@ -668,7 +668,7 @@ public class RWStrategy extends AbstractRawStore
   }
 
   //	/*
-//	 * If history is retained this returns the time for which
+  //	 * If history is retained this returns the time for which
   //	 * data was most recently released.  No request can be made for data
   //	 * earlier than this.
   //	 * @return latest data release time

@@ -10,7 +10,7 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
 /*
-* Class provides a document-scoped context for generating blank node identifiers (IDs). This class
+ * Class provides a document-scoped context for generating blank node identifiers (IDs). This class
  * is intended for use to generate blank node identifiers (IDs) for a source document within a
  * shared prefix. When that prefix is mapped onto the term2id index, all blank nodes for the same
  * source document will tend to be mapped onto the same index partition (this is more efficient

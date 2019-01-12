@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.io.Serializable;
 
 /*
-* A fast table-based decoder for canonical Huffman codes supporting only codes with limited (less
+ * A fast table-based decoder for canonical Huffman codes supporting only codes with limited (less
  * than 64 bits) codewords. We use the technique described by Daniel S. Hirschberg and Debra A.
  * Lelewer, &ldquo;Efficient Decoding of Prefix Codes&rdquo;, <i>Comm. ACM</i>, 33(4):
  * 449&minus;459, 1990.

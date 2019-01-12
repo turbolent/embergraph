@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /*
-* Base class provides NOP implementations of the {@link IServletDelegate} interface.
+ * Base class provides NOP implementations of the {@link IServletDelegate} interface.
  *
  * @author bryan
  */

@@ -40,7 +40,7 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.util.Bytes;
 
 /*
-* Test suite for {@link JVMHashJoinOp}.
+ * Test suite for {@link JVMHashJoinOp}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -235,7 +235,7 @@ public class TestJVMHashJoinOp extends AbstractHashJoinOpTestCase {
               new NV(PipelineOp.Annotations.PIPELINED, false),
               new NV(PipelineOp.Annotations.MAX_PARALLEL, 1)
               //                            namedSet,
-          ));
+              ));
       fail("Expecting: " + IllegalStateException.class);
     } catch (IllegalStateException ex) {
       if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);

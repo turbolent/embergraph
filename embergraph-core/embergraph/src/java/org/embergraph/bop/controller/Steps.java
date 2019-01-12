@@ -23,12 +23,10 @@ package org.embergraph.bop.controller;
 
 import java.util.Map;
 import org.embergraph.bop.BOp;
-import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.NV;
-import org.embergraph.bop.PipelineOp;
 
 /*
-* STEPS(ops)
+ * STEPS(ops)
  *
  * <pre>
  * STEPS([],{subqueries=[a,b,c]})

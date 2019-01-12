@@ -21,10 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.hints;
 
-import java.util.Properties;
 import org.embergraph.rdf.sparql.ast.ASTBase;
 import org.embergraph.rdf.sparql.ast.eval.IEvaluationContext;
-import org.embergraph.rdf.sparql.ast.optimizers.IASTOptimizer;
 
 /** Base class for query hints. */
 public abstract class AbstractQueryHint<T> implements IQueryHint<T> {
@@ -121,7 +119,7 @@ public abstract class AbstractQueryHint<T> implements IQueryHint<T> {
    * those of the appropriate type).
    */
   //    /*
-//     * Conditionally set the property in the global scope.
+  //     * Conditionally set the property in the global scope.
   //     *
   //     * @param context
   //     *            The evaluation context.

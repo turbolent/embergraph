@@ -227,8 +227,8 @@ public class HALogFile {
        */
       m_raf.seek(0L);
       try {
-      /*
-       * Note: this next line will throw IOException if there is a
+        /*
+         * Note: this next line will throw IOException if there is a
          * file lock contention.
          */
         m_magic = m_raf.readInt();
@@ -259,8 +259,8 @@ public class HALogFile {
       final long cc1 = m_closeRootBlock.getCommitCounter();
 
       if ((cc0 + 1) != cc1 && (cc0 != cc1)) {
-      /*
-       * Counters are inconsistent with either an empty log file or a
+        /*
+         * Counters are inconsistent with either an empty log file or a
          * single transaction scope.
          */
         throw new IllegalStateException("Incompatible rootblocks: cc0=" + cc0 + ", cc1=" + cc1);
@@ -330,8 +330,8 @@ public class HALogFile {
       switch (m_openRootBlock.getStoreType()) {
         case RW:
           {
-          /*
-       * Write the WriteCache block on the channel.
+            /*
+             * Write the WriteCache block on the channel.
              */
             final int nbytes = msg.getSize();
             assert data.position() == 0;
@@ -343,8 +343,8 @@ public class HALogFile {
           }
         case WORM:
           {
-          /*
-       * We will use the HA failover read API to recover the block
+            /*
+             * We will use the HA failover read API to recover the block
              * from a node in the quorum when we need to replay the HA log.
              */
             break;
@@ -549,8 +549,8 @@ public class HALogFile {
           }
         case WORM:
           {
-          /*
-       * Note: The WriteCache block needs to be recovered from the
+            /*
+             * Note: The WriteCache block needs to be recovered from the
              * WORMStrategy by the caller. The clientBuffer, if supplied, is
              * ignored and untouched.
              *
@@ -663,7 +663,7 @@ public class HALogFile {
     }
 
     //		/*
-//		 * The {@link IRootBlockView} for the committed state BEFORE the write
+    //		 * The {@link IRootBlockView} for the committed state BEFORE the write
     //		 * set contained in the HA log file.
     //		 */
     //		public HALogFile getHALogFile() {

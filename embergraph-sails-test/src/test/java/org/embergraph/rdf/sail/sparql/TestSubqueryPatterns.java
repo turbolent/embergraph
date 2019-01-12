@@ -52,7 +52,7 @@ import org.openrdf.query.algebra.StatementPattern;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /*
-* Test suite for translating queries which use subquery constructions, including {@link
+ * Test suite for translating queries which use subquery constructions, including {@link
  * SubqueryRoot}, {@link NamedSubqueryRoot} and {@link NamedSubqueryInclude} and {@link ExistsNode}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -738,7 +738,7 @@ public class TestSubqueryPatterns extends AbstractEmbergraphExprBuilderTestCase 
   }
 
   //    /*
-//     * Unit test for WITH {subquery} AS "name" and INCLUDE. The WITH must be in
+  //     * Unit test for WITH {subquery} AS "name" and INCLUDE. The WITH must be in
   //     * the top-level query. This example tests the use of the JOIN ON query
   //     * hint. For example:
   //     *
@@ -847,7 +847,7 @@ public class TestSubqueryPatterns extends AbstractEmbergraphExprBuilderTestCase 
   //    }
   //
   //    /*
-//     * Unit test for WITH {subquery} AS "name" and INCLUDE. The WITH must be in
+  //     * Unit test for WITH {subquery} AS "name" and INCLUDE. The WITH must be in
   //     * the top-level query. This example tests the use of the JOIN ON query
   //     * hint, but explicitly specifies an empty join variable list. For example:
   //     *

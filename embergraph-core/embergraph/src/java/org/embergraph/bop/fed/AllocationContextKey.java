@@ -1,11 +1,7 @@
 package org.embergraph.bop.fed;
 
-import java.nio.ByteBuffer;
-import org.embergraph.bop.BOp;
-import org.embergraph.io.DirectBufferPoolAllocator.IAllocationContext;
-
 /*
-* The allocation context key groups together allocations onto the same direct {@link ByteBuffer}s.
+ * The allocation context key groups together allocations onto the same direct {@link ByteBuffer}s.
  * There are different implementations depending on how it makes sense to group data data for a
  * given query.
  *

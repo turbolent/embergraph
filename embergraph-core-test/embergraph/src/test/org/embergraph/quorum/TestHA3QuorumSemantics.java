@@ -27,7 +27,7 @@ import java.util.UUID;
 import org.embergraph.quorum.MockQuorumFixture.MockQuorumMember;
 
 /*
-* Test the quorum semantics for a highly available quorum of 3 services. The main points to test
+ * Test the quorum semantics for a highly available quorum of 3 services. The main points to test
  * here are the particulars of events not observable with a singleton quorum, including that all
  * events are perceived by all clients via the watcher for their quorum, that a service join which
  * does not trigger a quorum meet, that a service leave which does not trigger a quorum break, a
@@ -596,8 +596,8 @@ public class TestHA3QuorumSemantics extends AbstractQuorumTestCase {
               assertEquals(lastCommitTime, client1.lastConsensusValue);
               assertEquals(lastCommitTime, client2.lastConsensusValue);
 
-            /*
-       * Service join in the same order in which they cast their
+              /*
+               * Service join in the same order in which they cast their
                * votes.
                */
               assertEquals(new UUID[] {serviceId0, serviceId1}, quorum0.getJoined());
@@ -689,8 +689,8 @@ public class TestHA3QuorumSemantics extends AbstractQuorumTestCase {
               assertEquals(lastCommitTime, client1.lastConsensusValue);
               assertEquals(lastCommitTime, client2.lastConsensusValue);
 
-            /*
-       * Service join in the same order in which they cast their
+              /*
+               * Service join in the same order in which they cast their
                * votes.
                */
               assertEquals(new UUID[] {serviceId0, serviceId2}, quorum0.getJoined());
@@ -878,8 +878,8 @@ public class TestHA3QuorumSemantics extends AbstractQuorumTestCase {
               assertEquals(lastCommitTime, client1.lastConsensusValue);
               assertEquals(lastCommitTime, client2.lastConsensusValue);
 
-            /*
-       * Service join in the same order in which they cast their
+              /*
+               * Service join in the same order in which they cast their
                * votes.
                */
               assertEquals(new UUID[] {serviceId0, serviceId1, serviceId2}, quorum0.getJoined());
@@ -989,8 +989,8 @@ public class TestHA3QuorumSemantics extends AbstractQuorumTestCase {
             public void run() {
               // Services have voted for a single lastCommitTime.
               assertEquals(0, quorum0.getVotes().size());
-            /*
-       * TODO The assert above occasionally fails with this trace.
+              /*
+               * TODO The assert above occasionally fails with this trace.
                *
                * <pre>
                * junit.framework.AssertionFailedError: expected:<0> but was:<1>
@@ -1141,8 +1141,8 @@ public class TestHA3QuorumSemantics extends AbstractQuorumTestCase {
               assertEquals(lastCommitTime, client1.lastConsensusValue);
               assertEquals(lastCommitTime, client2.lastConsensusValue);
 
-            /*
-       * Service join in the same order in which they cast their
+              /*
+               * Service join in the same order in which they cast their
                * votes.
                */
               assertEquals(new UUID[] {serviceId0, serviceId1}, quorum0.getJoined());
@@ -1235,8 +1235,8 @@ public class TestHA3QuorumSemantics extends AbstractQuorumTestCase {
               assertEquals(lastCommitTime, client1.lastConsensusValue);
               assertEquals(lastCommitTime, client2.lastConsensusValue);
 
-            /*
-       * Service join in the same order in which they cast their
+              /*
+               * Service join in the same order in which they cast their
                * votes.
                */
               assertEquals(new UUID[] {serviceId0, serviceId2}, quorum0.getJoined());
@@ -1426,8 +1426,8 @@ public class TestHA3QuorumSemantics extends AbstractQuorumTestCase {
               assertEquals(lastCommitTime, client1.lastConsensusValue);
               assertEquals(lastCommitTime, client2.lastConsensusValue);
 
-            /*
-       * Service join in the same order in which they cast their
+              /*
+               * Service join in the same order in which they cast their
                * votes.
                */
               assertEquals(new UUID[] {serviceId0, serviceId1, serviceId2}, quorum0.getJoined());
@@ -1539,8 +1539,8 @@ public class TestHA3QuorumSemantics extends AbstractQuorumTestCase {
             public void run() {
               // Services have voted for a single lastCommitTime.
               assertEquals(0, quorum0.getVotes().size());
-            /*
-       * TODO The assert above occasionally fails with this trace.
+              /*
+               * TODO The assert above occasionally fails with this trace.
                *
                * <pre>
                * junit.framework.AssertionFailedError: expected:<0> but was:<1>
@@ -1702,8 +1702,8 @@ public class TestHA3QuorumSemantics extends AbstractQuorumTestCase {
               assertEquals(lastCommitTime, client1.lastConsensusValue);
               assertEquals(lastCommitTime, client2.lastConsensusValue);
 
-            /*
-       * Service join in the same order in which they cast their
+              /*
+               * Service join in the same order in which they cast their
                * votes.
                */
               assertEquals(new UUID[] {serviceId0, serviceId1}, quorum0.getJoined());
@@ -1760,8 +1760,8 @@ public class TestHA3QuorumSemantics extends AbstractQuorumTestCase {
     assertCondition(
         new Runnable() {
           public void run() {
-          /*
-       * The service which we will cause to vote first (and hence will
+            /*
+             * The service which we will cause to vote first (and hence will
              * become the leader) is NOT at the head of the pipeline.
              */
             assertEquals(new UUID[] {serviceId2, serviceId1, serviceId0}, quorum0.getPipeline());
@@ -1820,8 +1820,8 @@ public class TestHA3QuorumSemantics extends AbstractQuorumTestCase {
               assertEquals(lastCommitTime, client1.lastConsensusValue);
               assertEquals(lastCommitTime, client2.lastConsensusValue);
 
-            /*
-       * Service join in the same order in which they cast their
+              /*
+               * Service join in the same order in which they cast their
                * votes.
                */
               assertEquals(new UUID[] {serviceId1, serviceId0}, quorum0.getJoined());

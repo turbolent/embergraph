@@ -25,10 +25,9 @@ import java.util.LinkedHashSet;
 import org.embergraph.bop.IConstraint;
 import org.embergraph.bop.IValueExpression;
 import org.embergraph.bop.IVariable;
-import org.embergraph.bop.aggregate.IAggregate;
 
 /*
-* The state associated with a validated aggregation operator.
+ * The state associated with a validated aggregation operator.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -65,7 +64,7 @@ public interface IGroupByState {
   LinkedHashSet<IVariable<?>> getColumnVars();
 
   //    /*
-//     * Variables for which we will need column projections of the distinct
+  //     * Variables for which we will need column projections of the distinct
   //     * values. For example, given <code>SELECT SUM(DISTINCT ?x), SUM(?y)</code>,
   //     * this would report <code>{?x}</code>. The variables will be reported in
   //     * the order they were encountered during a left-to-right scan of the SELECT

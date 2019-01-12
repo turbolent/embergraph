@@ -31,7 +31,7 @@ import org.embergraph.btree.keys.ISortKeyBuilder;
 import org.embergraph.rdf.internal.IV;
 
 /*
-* Builds unsigned byte[] sort keys from {@link IBindingSet}s.
+ * Builds unsigned byte[] sort keys from {@link IBindingSet}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

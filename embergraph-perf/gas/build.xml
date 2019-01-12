@@ -4,67 +4,70 @@
 <!--                                                        -->
 <project name="gas" basedir=".">
 
-	<property file="build.properties" />
+  <property file="build.properties"/>
 
-	<path id="runtime.classpath">
-		<!-- The embergraph dependencies (for the nano-server). -->
-		<fileset dir="${embergraph.build.dir}/lib">
-			<include name="**/*.jar" />
-		</fileset>
-	</path>
+  <path id="runtime.classpath">
+    <!-- The embergraph dependencies (for the nano-server). -->
+    <fileset dir="${embergraph.build.dir}/lib">
+      <include name="**/*.jar"/>
+    </fileset>
+  </path>
 
-	<target name="start-sparql-server"
-		    description="Start a small http server fronting for a embergraph database instance.">
-		<java classname="org.embergraph.rdf.sail.webapp.NanoSparqlServer"
-		      fork="true" failonerror="true"
-		      >
-			<arg line="${nanoServerPort} ${namespace} ${journalPropertyFile}" />
-			<!-- specify/override the journal file name. -->
-			<jvmarg line="${jvmArgs}" />
-			<classpath>
-				<path refid="runtime.classpath" />
-			</classpath>
-		</java>
-	</target>
-	
-   <target name="run-gas-engine"
-          description="Run a Embergraph GAS Engine performance test.">
-      <java classname="org.embergraph.rdf.graph.impl.bd.EmbergraphGASRunner"
-            fork="true" failonerror="true"
-            >
-         <arg line="-bufferMode ${bufferMode} -namespace ${namespace} -seed ${seed} -nsamples ${nsamples} -nthreads ${nthreads} ${scheduler} ${load} org.embergraph.rdf.graph.analytics.${analytic} ${journalPropertyFile}" />
-         <!-- specify/override the journal file name. -->
-         <jvmarg line="${jvmArgs}" />
-         <classpath>
-            <path refid="runtime.classpath" />
-         </classpath>
-      </java>
-   </target>
+  <target name="start-sparql-server"
+    description="Start a small http server fronting for a embergraph database instance.">
+    <java classname="org.embergraph.rdf.sail.webapp.NanoSparqlServer"
+      fork="true" failonerror="true"
+    >
+      <arg line="${nanoServerPort} ${namespace} ${journalPropertyFile}"/>
+      <!-- specify/override the journal file name. -->
+      <jvmarg line="${jvmArgs}"/>
+      <classpath>
+        <path refid="runtime.classpath"/>
+      </classpath>
+    </java>
+  </target>
 
-   <target name="run-sail-gas-engine"
-          description="Run a SAIL GAS Engine performance test.">
-      <java classname="org.embergraph.rdf.graph.impl.sail.SAILGASRunner"
-            fork="true" failonerror="true"
-            >
-         <arg line="-seed ${seed} -nsamples ${nsamples} -nthreads ${nthreads} ${scheduler} ${load} org.embergraph.rdf.graph.analytics.${analytic} ${journalPropertyFile}" />
-         <jvmarg line="${jvmArgs}" />
-         <classpath>
-            <path refid="runtime.classpath" />
-         </classpath>
-      </java>
-   </target>
+  <target name="run-gas-engine"
+    description="Run a Embergraph GAS Engine performance test.">
+    <java classname="org.embergraph.rdf.graph.impl.bd.EmbergraphGASRunner"
+      fork="true" failonerror="true"
+    >
+      <arg
+        line="-bufferMode ${bufferMode} -namespace ${namespace} -seed ${seed} -nsamples ${nsamples} -nthreads ${nthreads} ${scheduler} ${load} org.embergraph.rdf.graph.analytics.${analytic} ${journalPropertyFile}"/>
+      <!-- specify/override the journal file name. -->
+      <jvmarg line="${jvmArgs}"/>
+      <classpath>
+        <path refid="runtime.classpath"/>
+      </classpath>
+    </java>
+  </target>
 
-   <target name="run-ram-gas-engine"
-          description="Run a RAM GAS Engine performance test.">
-      <java classname="org.embergraph.rdf.graph.impl.ram.RAMGASRunner"
-            fork="true" failonerror="true"
-            >
-         <arg line="-seed ${seed} -nsamples ${nsamples} -nthreads ${nthreads} ${scheduler} ${load} org.embergraph.rdf.graph.analytics.${analytic} ${journalPropertyFile}" />
-         <jvmarg line="${jvmArgs}" />
-         <classpath>
-            <path refid="runtime.classpath" />
-         </classpath>
-      </java>
-   </target>
+  <target name="run-sail-gas-engine"
+    description="Run a SAIL GAS Engine performance test.">
+    <java classname="org.embergraph.rdf.graph.impl.sail.SAILGASRunner"
+      fork="true" failonerror="true"
+    >
+      <arg
+        line="-seed ${seed} -nsamples ${nsamples} -nthreads ${nthreads} ${scheduler} ${load} org.embergraph.rdf.graph.analytics.${analytic} ${journalPropertyFile}"/>
+      <jvmarg line="${jvmArgs}"/>
+      <classpath>
+        <path refid="runtime.classpath"/>
+      </classpath>
+    </java>
+  </target>
+
+  <target name="run-ram-gas-engine"
+    description="Run a RAM GAS Engine performance test.">
+    <java classname="org.embergraph.rdf.graph.impl.ram.RAMGASRunner"
+      fork="true" failonerror="true"
+    >
+      <arg
+        line="-seed ${seed} -nsamples ${nsamples} -nthreads ${nthreads} ${scheduler} ${load} org.embergraph.rdf.graph.analytics.${analytic} ${journalPropertyFile}"/>
+      <jvmarg line="${jvmArgs}"/>
+      <classpath>
+        <path refid="runtime.classpath"/>
+      </classpath>
+    </java>
+  </target>
 
 </project>

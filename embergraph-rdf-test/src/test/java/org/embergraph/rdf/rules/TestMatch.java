@@ -1,5 +1,5 @@
 /*
-* The Notice below must appear in each file of the Source Code of any copy you distribute of the
+ * The Notice below must appear in each file of the Source Code of any copy you distribute of the
  * Licensed Product. Contributors to any Modifications may add their own copyright notices to
  * identify their own contributions.
  *
@@ -57,7 +57,7 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
 /*
-* Unit tests for {@link AbstractTripleStore#match(Literal[], URI[], URI)}.
+ * Unit tests for {@link AbstractTripleStore#match(Literal[], URI[], URI)}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

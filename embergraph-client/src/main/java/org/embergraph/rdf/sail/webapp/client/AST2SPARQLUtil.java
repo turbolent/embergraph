@@ -30,7 +30,7 @@ import org.openrdf.model.Value;
 import org.openrdf.query.parser.sparql.SPARQLUtil;
 
 /*
-* Utility class for externalizing SPARQL prefix declaration management.
+ * Utility class for externalizing SPARQL prefix declaration management.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

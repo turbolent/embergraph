@@ -1,11 +1,9 @@
 package org.embergraph.rdf.rio;
 
-import org.openrdf.rio.RDFParser;
 import org.openrdf.rio.RDFParser.DatatypeHandling;
-import org.openrdf.rio.helpers.RDFParserBase;
 
 /*
-* Instances of this interface may be used to configure options on an {@link RDFParser}. The options
+ * Instances of this interface may be used to configure options on an {@link RDFParser}. The options
  * all have the defaults specified by {@link RDFParserBase}.
  */
 public interface IRDFParserOptions {

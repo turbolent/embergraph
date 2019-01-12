@@ -24,7 +24,7 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
 /*
-* rdfs3:
+ * rdfs3:
  *
  * <pre>
  *    triple(v rdf:type x) :-

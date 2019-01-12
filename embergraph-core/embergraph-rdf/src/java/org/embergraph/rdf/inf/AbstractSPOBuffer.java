@@ -23,14 +23,11 @@ package org.embergraph.rdf.inf;
 
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.ISPOBuffer;
-import org.embergraph.rdf.spo.SPO;
 import org.embergraph.rdf.store.AbstractTripleStore;
-import org.embergraph.relation.accesspath.AbstractArrayBuffer;
 import org.embergraph.relation.accesspath.IElementFilter;
-import org.openrdf.model.Value;
 
 /*
-* Abtract base class for buffering {@link SPO}s for some batch api operation.
+ * Abtract base class for buffering {@link SPO}s for some batch api operation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -125,8 +122,7 @@ public abstract class AbstractSPOBuffer implements ISPOBuffer {
    */
   protected boolean nearCapacity() {
 
-    return numStmts >= capacity;// would overflow the statement[].
-
+    return numStmts >= capacity; // would overflow the statement[].
   }
 
   public String toString() {

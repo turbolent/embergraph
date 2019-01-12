@@ -32,7 +32,7 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
 /*
-* Abstract base class for {@link IV}s which CAN NOT be fully materialized from their inline
+ * Abstract base class for {@link IV}s which CAN NOT be fully materialized from their inline
  * representation.
  */
 public abstract class AbstractNonInlineIV<V extends EmbergraphValue, T> extends AbstractIV<V, T>
@@ -52,7 +52,7 @@ public abstract class AbstractNonInlineIV<V extends EmbergraphValue, T> extends 
   }
 
   //    /*
-//     * Callers must explicitly populate the value cache.
+  //     * Callers must explicitly populate the value cache.
   //     * <p>
   //     * {@inheritDoc}
   //     */

@@ -23,17 +23,14 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.spo;
 
 import org.embergraph.btree.ITuple;
-import org.embergraph.btree.ITupleCursor;
 import org.embergraph.btree.filter.Advancer;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.btree.keys.SuccessorUtil;
 import org.embergraph.rdf.internal.IVUtility;
-import org.embergraph.rdf.store.IRawTripleStore;
-import org.embergraph.relation.accesspath.AccessPath;
 
 /*
-* Advances the source {@link ITupleCursor} through the distinct term identifiers for some {@link
+ * Advances the source {@link ITupleCursor} through the distinct term identifiers for some {@link
  * AccessPath}. Each time a new {@link ITuple} is visited, the term identifier for the first
  * position in that tuple is decoded and its successor is formed. The source {@link ITupleCursor} is
  * then advanced to the key having that term identifier in its first position and {@link

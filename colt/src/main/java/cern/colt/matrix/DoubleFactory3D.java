@@ -13,7 +13,7 @@ import cern.colt.matrix.impl.SparseDoubleMatrix3D;
 import cern.jet.math.Functions;
 
 /*
-* Factory for convenient construction of 3-d matrices holding <tt>double</tt> cells. Use idioms
+ * Factory for convenient construction of 3-d matrices holding <tt>double</tt> cells. Use idioms
  * like <tt>DoubleFactory3D.dense.make(4,4,4)</tt> to construct dense matrices,
  * <tt>DoubleFactory3D.sparse.make(4,4,4)</tt> to construct sparse matrices.
  *

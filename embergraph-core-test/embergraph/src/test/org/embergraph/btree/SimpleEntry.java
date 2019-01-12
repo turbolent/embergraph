@@ -24,7 +24,7 @@ import java.io.Serializable;
 import org.embergraph.io.SerializerUtil;
 
 /*
-* Test helper provides an entry (aka value) for a {@link Leaf}.
+ * Test helper provides an entry (aka value) for a {@link Leaf}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

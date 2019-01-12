@@ -37,46 +37,33 @@ import org.apache.log4j.Logger;
 import org.embergraph.btree.AbstractBTree;
 import org.embergraph.btree.BTree;
 import org.embergraph.btree.BTreeCounters;
-import org.embergraph.btree.IIndex;
 import org.embergraph.btree.ILocalBTreeView;
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.btree.IndexSegment;
 import org.embergraph.btree.IndexSegmentBuilder;
-import org.embergraph.btree.IndexSegmentCheckpoint;
 import org.embergraph.btree.IndexSegmentStore;
-import org.embergraph.btree.ReadCommittedView;
 import org.embergraph.btree.view.FusedView;
 import org.embergraph.cache.ConcurrentWeakValueCacheWithTimeout;
-import org.embergraph.cache.HardReferenceQueue;
 import org.embergraph.cache.LRUCache;
 import org.embergraph.concurrent.NamedLock;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.ICounterSet;
 import org.embergraph.journal.AbstractJournal;
-import org.embergraph.journal.AbstractTask;
-import org.embergraph.journal.ConcurrencyManager;
 import org.embergraph.journal.ICommitRecord;
 import org.embergraph.journal.IJournal;
 import org.embergraph.journal.ITx;
-import org.embergraph.journal.Journal;
-import org.embergraph.journal.Name2Addr;
-import org.embergraph.journal.NoSuchIndexException;
 import org.embergraph.journal.TimestampUtility;
-import org.embergraph.journal.Tx;
 import org.embergraph.mdi.IResourceMetadata;
 import org.embergraph.mdi.LocalPartitionMetadata;
 import org.embergraph.mdi.SegmentMetadata;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.service.Event;
 import org.embergraph.service.EventType;
-import org.embergraph.service.IDataService;
-import org.embergraph.service.IEmbergraphClient;
-import org.embergraph.service.ndx.IClientIndex;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.NT;
 
 /*
-* Class encapsulates logic and handshaking for tracking which indices (and their backing stores)
+ * Class encapsulates logic and handshaking for tracking which indices (and their backing stores)
  * are recently and currently referenced. This information is used to coordinate the close out of
  * index resources (and their backing stores) on an LRU basis by the {@link ResourceManager}.
  *
@@ -406,7 +393,7 @@ public abstract class IndexManager extends StoreManager {
   }
 
   //    /*
-//     * The approximate #of {@link IndexSegment} leaves in memory.
+  //     * The approximate #of {@link IndexSegment} leaves in memory.
   //     */
   //    public int getIndexSegmentOpenLeafCount() {
   //
@@ -432,7 +419,7 @@ public abstract class IndexManager extends StoreManager {
   //    }
   //
   //    /*
-//     * The #of bytes on disk occupied by the {@link IndexSegment} leaves which
+  //     * The #of bytes on disk occupied by the {@link IndexSegment} leaves which
   //     * are currently loaded into memory (their in-memory profile can not be
   //     * directly captured by the java runtime, but you can get it from a heap
   //     * dump). Likewise, you can directly obtain the #of bytes on disk per leaf
@@ -911,8 +898,8 @@ public abstract class IndexManager extends StoreManager {
 
         } catch (NoSuchStoreException ex) {
 
-        /*
-       * There is dependency for that index that is on a resource
+          /*
+           * There is dependency for that index that is on a resource
            * (a ManagedJournal or IndexSegment) that is no longer
            * available.
            */
@@ -943,8 +930,8 @@ public abstract class IndexManager extends StoreManager {
 
           } else if (resource.getCommitTime() == 0L) {
 
-          /*
-       * Interpret for a historical store as the last
+            /*
+             * Interpret for a historical store as the last
              * committed data on that store.
              */
 
@@ -1027,8 +1014,8 @@ public abstract class IndexManager extends StoreManager {
 
       if (timestamp == ITx.READ_COMMITTED) {
 
-      /*
-       * @todo experimental alternative gives a view based on the most
+        /*
+         * @todo experimental alternative gives a view based on the most
          * recent commit time. The only drawback about this approach is that
          * each request by the same operation will return the then most
          * recently committed view, well and the IIndex will report the
@@ -1077,8 +1064,8 @@ public abstract class IndexManager extends StoreManager {
 
         if (isReadWriteTx) {
 
-        /*
-       * Handle fully isolated (read-write) transactional views.
+          /*
+           * Handle fully isolated (read-write) transactional views.
            */
 
           if (tx == null) {
@@ -1110,8 +1097,8 @@ public abstract class IndexManager extends StoreManager {
 
         if (isReadWriteTx && tx == null) {
 
-        /*
-       * Note: This will happen both if you attempt to use a
+          /*
+           * Note: This will happen both if you attempt to use a
            * transaction identified that has not been registered or if you
            * attempt to use a transaction manager after the transaction
            * has been either committed or aborted.
@@ -1129,8 +1116,8 @@ public abstract class IndexManager extends StoreManager {
 
         if (isReadWriteTx) {
 
-        /*
-       * Isolated operation.
+          /*
+           * Isolated operation.
            *
            * Note: The backing index is always a historical state of the
            * named index.
@@ -1156,20 +1143,20 @@ public abstract class IndexManager extends StoreManager {
 
         } else {
 
-        /*
-       * Non-transactional view.
+          /*
+           * Non-transactional view.
            */
 
           if (readOnly) {
 
-          /*
-       * historical read -or- read-committed operation.
+            /*
+             * historical read -or- read-committed operation.
              */
 
             if (timestamp == ITx.READ_COMMITTED) {
 
-            /*
-       * Check to see if an index partition was split, joined
+              /*
+               * Check to see if an index partition was split, joined
                * or moved.
                */
               final StaleLocatorReason reason = getIndexPartitionGone(name);
@@ -1209,8 +1196,8 @@ public abstract class IndexManager extends StoreManager {
 
           } else {
 
-          /*
-       * Writable unisolated index.
+            /*
+             * Writable unisolated index.
              *
              * Note: This is the "live" mutable index. This index is NOT
              * thread-safe. A lock manager is used to ensure that at
@@ -1219,8 +1206,8 @@ public abstract class IndexManager extends StoreManager {
 
             assert timestamp == ITx.UNISOLATED : "timestamp=" + timestamp;
 
-          /*
-       * Check to see if an index partition was split, joined or
+            /*
+             * Check to see if an index partition was split, joined or
              * moved.
              */
             final StaleLocatorReason reason = getIndexPartitionGone(name);
@@ -1233,8 +1220,8 @@ public abstract class IndexManager extends StoreManager {
 
             if (isDisabledWrites(name)) {
 
-            /*
-       * Writes on the index have been disabled. This
+              /*
+               * Writes on the index have been disabled. This
                * occurs when the index refuses to split and is at
                * least two times larger than the nominal shard
                * size. In this case writes are disabled to push
@@ -1517,8 +1504,8 @@ public abstract class IndexManager extends StoreManager {
           else concurrentBuildTaskCount.decrementAndGet();
         }
 
-      /*
-       * Report on a bulk merge/build of an {@link IndexSegment}.
+        /*
+         * Report on a bulk merge/build of an {@link IndexSegment}.
          */
         {
           final long nbytes = builder.getCheckpoint().length;
@@ -1543,14 +1530,14 @@ public abstract class IndexManager extends StoreManager {
         // Describe the index segment.
         segmentMetadata = new SegmentMetadata(outFile, builder.segmentUUID, commitTime);
 
-      /*
-       * Add to the retention set so the newly built index segment
+        /*
+         * Add to the retention set so the newly built index segment
          * will not be deleted before it is put to use.
          */
         retentionSetAdd(segmentMetadata.getUUID());
 
-      /*
-       * Now that the file is protected from release, notify the
+        /*
+         * Now that the file is protected from release, notify the
          * resource manager so that it can find this file.
          */
         addResource(segmentMetadata, outFile);

@@ -11,7 +11,7 @@ package cern.colt.matrix.linalg;
 import cern.colt.matrix.DoubleMatrix1D;
 import cern.colt.matrix.DoubleMatrix2D;
 /*
-* Subset of the <A HREF="http://netlib2.cs.utk.edu/blas/faq.html">BLAS</A> (Basic Linear Algebra
+ * Subset of the <A HREF="http://netlib2.cs.utk.edu/blas/faq.html">BLAS</A> (Basic Linear Algebra
  * System); High quality "building block" routines for performing basic vector and matrix
  * operations. Because the BLAS are efficient, portable, and widely available, they're commonly used
  * in the development of high quality linear algebra software.
@@ -78,8 +78,7 @@ public interface Blas {
    * @throws IllegalArgumentException if <tt>x.columns() != y.columns() || x.rows() != y.rows()</tt>
    * @see cern.jet.math.Functions
    */
-  void assign(
-      DoubleMatrix2D x, DoubleMatrix2D y, cern.colt.function.DoubleDoubleFunction function);
+  void assign(DoubleMatrix2D x, DoubleMatrix2D y, cern.colt.function.DoubleDoubleFunction function);
   /*
    * Returns the sum of absolute values; <tt>|x[0]| + |x[1]| + ... </tt>. In fact equivalent to
    * <tt>x.aggregate(cern.jet.math.Functions.plus, cern.jet.math.Functions.abs)</tt>.

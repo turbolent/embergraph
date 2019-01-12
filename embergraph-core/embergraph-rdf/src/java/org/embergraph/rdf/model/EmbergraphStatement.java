@@ -1,5 +1,5 @@
 /*
-* The Notice below must appear in each file of the Source Code of any copy you distribute of the
+ * The Notice below must appear in each file of the Source Code of any copy you distribute of the
  * Licensed Product. Contributors to any Modifications may add their own copyright notices to
  * identify their own contributions.
  *
@@ -44,7 +44,7 @@ import org.embergraph.rdf.spo.ISPO;
 import org.openrdf.model.Statement;
 
 /*
-* Also reports whether the statement is explicit, inferred or an axiom.
+ * Also reports whether the statement is explicit, inferred or an axiom.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

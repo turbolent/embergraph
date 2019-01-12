@@ -21,7 +21,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop;
 
-import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
@@ -31,7 +30,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 /*
-* Abstract base class for copy-on-write {@link BOp}s. The {@link BOpBase} class is used for query
+ * Abstract base class for copy-on-write {@link BOp}s. The {@link BOpBase} class is used for query
  * evaluation operators. The copy-on-write contract provides a safety margin during concurrent
  * evaluation of query plans by ensuring that all references are fully published.
  *
@@ -324,7 +323,7 @@ public class BOpBase extends CoreBaseBOp {
   }
 
   //    /*
-//     * Deep copy of a {@link BOpBase}.
+  //     * Deep copy of a {@link BOpBase}.
   //     *
   //     * @return The deep copy.
   //     */

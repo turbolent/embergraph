@@ -22,14 +22,12 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.rdf.join;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
-import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpContext;
-import org.embergraph.bop.BOpEvaluationContext;
 import org.embergraph.bop.Constant;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IConstant;
@@ -42,7 +40,7 @@ import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.UnsynchronizedArrayBuffer;
 
 /*
-* DataSetJoin(left)[var=g; graphs={graphIds}]
+ * DataSetJoin(left)[var=g; graphs={graphIds}]
  *
  * <p>SPARQL specific join of the source binding sets with an inline access path allowing <i>var</i>
  * to take on the given graphIds values. This join operator is useful when the multiplicity of the
@@ -198,8 +196,8 @@ public class DataSetJoin extends PipelineOp {
 
         if (val == null) {
 
-        /*
-       * When the value is unbound, we output the cross product.
+          /*
+           * When the value is unbound, we output the cross product.
            */
 
           for (IV c : graphs) {
@@ -213,8 +211,8 @@ public class DataSetJoin extends PipelineOp {
 
         } else {
 
-        /*
-       * When the value is bound the binding set will be output
+          /*
+           * When the value is bound the binding set will be output
            * iff the bound value for the variable is found in the
            * specified graphs.
            */

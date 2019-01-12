@@ -27,7 +27,6 @@ package org.embergraph.rdf.sail.sparql;
 import java.util.LinkedList;
 import java.util.List;
 import org.apache.log4j.Logger;
-import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpUtility;
 import org.embergraph.rdf.sparql.ast.FilterNode;
 import org.embergraph.rdf.sparql.ast.GroupNodeBase;
@@ -44,7 +43,7 @@ import org.openrdf.query.algebra.StatementPattern;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /*
-* A group graph pattern consisting of (required and optional) tuple expressions, binding
+ * A group graph pattern consisting of (required and optional) tuple expressions, binding
  * assignments and boolean constraints.
  *
  * @author Arjohn Kampman
@@ -101,7 +100,7 @@ class GroupGraphPattern {
   }
 
   //    /*
-//     * The #of things in the group.
+  //     * The #of things in the group.
   //     */
   //    public int size() {
   //
@@ -110,7 +109,7 @@ class GroupGraphPattern {
   //    }
   //
   //    /*
-//     * Return the child at that index.
+  //     * Return the child at that index.
   //     *
   //     * @param index
   //     *            The index.
@@ -226,8 +225,8 @@ class GroupGraphPattern {
 
         } else if (child instanceof UnionNode) {
 
-        /*
-       * Lift children out of the child UNION.
+          /*
+           * Lift children out of the child UNION.
            */
           final UnionNode childUnion = (UnionNode) child;
 
@@ -248,8 +247,8 @@ class GroupGraphPattern {
 
         if (child instanceof QuadData && groupNode instanceof JoinGroupNode) {
 
-        /*
-       * We need to flatten out the QuadData when it appears
+          /*
+           * We need to flatten out the QuadData when it appears
            * within a WHERE clause for a DELETE WHERE shortcut.
            *
            * @see https://sourceforge.net/apps/trac/bigdata/ticket/568

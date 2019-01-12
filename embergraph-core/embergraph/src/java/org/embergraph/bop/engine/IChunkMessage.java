@@ -1,13 +1,10 @@
 package org.embergraph.bop.engine;
 
 import java.util.UUID;
-import org.embergraph.bop.BOpEvaluationContext;
-import org.embergraph.bop.PipelineOp;
 import org.embergraph.bop.fed.FederatedRunningQuery;
-import org.embergraph.service.ResourceService;
 
 /*
-* A message describing a chunk of intermediate results which are available for processing. There
+ * A message describing a chunk of intermediate results which are available for processing. There
  * are several implementations of this interface supporting same-JVM messages, thick RMI messages,
  * and RMI messages where the payload is materialized using NIO transfers from the {@link
  * ResourceService}.

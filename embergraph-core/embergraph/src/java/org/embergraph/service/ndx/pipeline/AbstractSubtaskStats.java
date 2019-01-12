@@ -26,7 +26,7 @@ package org.embergraph.service.ndx.pipeline;
 import java.util.concurrent.atomic.AtomicLong;
 
 /*
-* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class AbstractSubtaskStats {

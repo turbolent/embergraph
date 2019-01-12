@@ -30,7 +30,7 @@ import org.embergraph.bop.Var;
 import org.embergraph.bop.bindingSet.ListBindingSet;
 
 /*
-* Test suite for {@link EQ}.
+ * Test suite for {@link EQ}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

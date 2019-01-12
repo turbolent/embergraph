@@ -25,11 +25,9 @@ package org.embergraph.relation.accesspath;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 import java.util.concurrent.TimeUnit;
-import org.embergraph.relation.rule.IQueryOptions;
-import org.embergraph.relation.rule.IRule;
 
 /*
-* Interface for iterators that are running asynchronously. Such iterators are the consumer side of
+ * Interface for iterators that are running asynchronously. Such iterators are the consumer side of
  * a producer - consumer pattern. The producer writes on an {@link IBlockingBuffer} which is drained
  * by the {@link IAsynchronousIterator}.
  *
@@ -40,7 +38,7 @@ import org.embergraph.relation.rule.IRule;
 public interface IAsynchronousIterator<E> extends ICloseableIterator<E> {
 
   //    /*
-//     * Return <code>true</code> if the {@link Future} that is writing on the
+  //     * Return <code>true</code> if the {@link Future} that is writing on the
   //     * {@link IBlockingBuffer} has been set and is done. This indicates that all
   //     * results are materialized on the queue and will be visited without waiting
   //     * on the {@link Future}. It does NOT indicate whether or not the

@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.counters;
 
 /*
-* Additional counters that hosts can report.
+ * Additional counters that hosts can report.
  *
  * @todo pageFaultsPerSec (majflt/s)
  * @todo os diskCache (dis|en)abled

@@ -28,7 +28,7 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.bop.NV;
 
 /*
-* An AST node which models either {@link QuadData} or a named solution set in support of the INSERT
+ * An AST node which models either {@link QuadData} or a named solution set in support of the INSERT
  * clause and DELETE clause of a {@link DeleteInsertGraph} operations. Use {@link #isQuads()} or
  * {@link #isSolutions()} to identify how this AST node should be interpreted.
  *

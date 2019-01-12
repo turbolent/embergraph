@@ -27,7 +27,7 @@ import java.util.concurrent.TimeUnit;
 import org.embergraph.cache.ConcurrentWeakValueCacheWithTimeout;
 
 /*
-* An {@link IRecordCompressorFactory} with thread-local semantics based on an internal weak value
+ * An {@link IRecordCompressorFactory} with thread-local semantics based on an internal weak value
  * cache and providing instances based on a delegate {@link IRecordCompressorFactory}. This is
  * designed to work well when the application is single-threaded as well as when there are
  * concurrent threads demanding instances from the delegate factory.
@@ -84,8 +84,8 @@ public class ThreadLocalRecordCompressorFactory<A extends RecordCompressor>
       // add to the cache.
       if (cache.put(t, a) != null) {
 
-      /*
-       * Per above, this should not be possible.
+        /*
+         * Per above, this should not be possible.
          */
 
         throw new AssertionError();

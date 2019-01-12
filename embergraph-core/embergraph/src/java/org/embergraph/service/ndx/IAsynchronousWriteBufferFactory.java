@@ -23,27 +23,15 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.service.ndx;
 
-import java.util.concurrent.Future;
-import org.embergraph.btree.IndexMetadata;
-import org.embergraph.btree.UnisolatedReadWriteIndex;
 import org.embergraph.btree.keys.KVO;
 import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedureConstructor;
 import org.embergraph.btree.proc.IKeyArrayIndexProcedure;
 import org.embergraph.btree.proc.IResultHandler;
-import org.embergraph.relation.accesspath.BlockingBuffer;
-import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.IRunnableBuffer;
-import org.embergraph.service.AbstractFederation;
-import org.embergraph.service.IEmbergraphFederation;
-import org.embergraph.service.ILoadBalancerService;
-import org.embergraph.service.Split;
 import org.embergraph.service.ndx.pipeline.IDuplicateRemover;
-import org.embergraph.service.ndx.pipeline.IndexAsyncWriteStats;
-import org.embergraph.service.ndx.pipeline.KVOC;
-import org.embergraph.service.ndx.pipeline.KVOLatch;
 
 /*
-* Interface for asynchronous writes on scale-out indices.
+ * Interface for asynchronous writes on scale-out indices.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

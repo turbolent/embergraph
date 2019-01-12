@@ -9,7 +9,7 @@ It is provided "as is" without expressed or implied warranty.
 package cern.jet.random.engine;
 
 /*
-* Abstract base class for uniform pseudo-random number generating engines.
+ * Abstract base class for uniform pseudo-random number generating engines.
  *
  * <p>Most probability distributions are obtained by using a <b>uniform</b> pseudo-random number
  * generation engine followed by a transformation to the desired distribution. Thus, subclasses of

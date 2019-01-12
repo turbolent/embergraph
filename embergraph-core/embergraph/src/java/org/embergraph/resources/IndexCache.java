@@ -21,21 +21,18 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.resources;
 
-import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
-import org.embergraph.btree.IIndex;
 import org.embergraph.btree.ILocalBTreeView;
-import org.embergraph.cache.ConcurrentWeakValueCache;
 import org.embergraph.cache.ConcurrentWeakValueCacheWithTimeout;
 import org.embergraph.journal.ITx;
 import org.embergraph.util.NT;
 
 /*
-* Extends the {@link ConcurrentWeakValueCache} to track the earliest timestamp from which any local
+ * Extends the {@link ConcurrentWeakValueCache} to track the earliest timestamp from which any local
  * {@link IIndex} view is reading. This timestamp is reported by {@link #getRetentionTime()}. The
  * {@link StoreManager} uses this in {@link StoreManager#purgeOldResources()} to provide a "read
  * lock" such that resources for in use views are not released.
@@ -198,8 +195,8 @@ public class IndexCache<H extends ILocalBTreeView>
     synchronized (retentionTime) {
       if (retentionTime.get() == k.getTimestamp()) {
 
-      /*
-       * Removed the earliest timestamp so we will need to
+        /*
+         * Removed the earliest timestamp so we will need to
          * explicitly search for the new minimum timestamp.
          */
 

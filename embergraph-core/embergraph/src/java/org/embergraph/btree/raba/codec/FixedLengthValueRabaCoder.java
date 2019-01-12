@@ -34,7 +34,7 @@ import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
 /*
-* This class does not offer any compression. It merely stores byte[][] whose individual elements
+ * This class does not offer any compression. It merely stores byte[][] whose individual elements
  * have a fixed length specified in the constructor in a manner suitable for fast random access.
  * This is useful if the values are a fixed length, application specific coding is either not
  * obvious or not desired, and you wish to emphasize speed of data access over compression. This
@@ -205,8 +205,8 @@ public class FixedLengthValueRabaCoder implements IRabaCoder, Externalizable {
 
           } else if (raba.length(i) != len) {
 
-          /*
-       * All non-null values must have the length specified to
+            /*
+             * All non-null values must have the length specified to
              * the constructor, so this is a runtime error.
              */
 

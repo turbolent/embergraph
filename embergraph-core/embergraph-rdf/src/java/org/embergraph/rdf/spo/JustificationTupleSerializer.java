@@ -29,14 +29,13 @@ import java.io.ObjectOutput;
 import org.embergraph.btree.DefaultTupleSerializer;
 import org.embergraph.btree.ITuple;
 import org.embergraph.btree.keys.ASCIIKeyBuilderFactory;
-import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.raba.codec.EmptyRabaValueCoder;
 import org.embergraph.rdf.inf.Justification;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVUtility;
 
 /*
-* (De-)serializes {@link Justification}s.
+ * (De-)serializes {@link Justification}s.
  *
  * <p>Note: the encoded key for a {@link Justification} is formed from the 64-bit <code>long</code>
  * term identifier for the head of the rule (the entailment) followed by the term identifier

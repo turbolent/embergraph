@@ -1,5 +1,5 @@
 /*
-* The Notice below must appear in each file of the Source Code of any copy you distribute of the
+ * The Notice below must appear in each file of the Source Code of any copy you distribute of the
  * Licensed Product. Contributors to any Modifications may add their own copyright notices to
  * identify their own contributions.
  *
@@ -40,7 +40,6 @@
 
 package org.embergraph.rdf.rules;
 
-import java.io.IOException;
 import java.util.Properties;
 import org.embergraph.rdf.rio.LoadStats;
 import org.embergraph.rdf.store.AbstractTripleStore;
@@ -50,7 +49,7 @@ import org.embergraph.rdf.store.TripleStoreUtility;
 import org.openrdf.rio.RDFFormat;
 
 /*
-* Test suite comparing full fix point closure of RDFS entailments against the fast closure program
+ * Test suite comparing full fix point closure of RDFS entailments against the fast closure program
  * for some known data sets (does not test truth maintenance under assertion and retraction or the
  * justifications).
  *
@@ -104,8 +103,8 @@ public class TestCompareFullAndFastClosure extends AbstractRuleTestCase {
         final Properties tmp = new Properties(properties);
 
         tmp.setProperty(Options.CLOSURE_CLASS, FullClosure.class.getName());
-      /*
-       * tmp.setProperty(DataLoader.Options.CLOSURE, ClosureEnum.None.toString());
+        /*
+         * tmp.setProperty(DataLoader.Options.CLOSURE, ClosureEnum.None.toString());
          */
         store1 = getStore(tmp);
       }

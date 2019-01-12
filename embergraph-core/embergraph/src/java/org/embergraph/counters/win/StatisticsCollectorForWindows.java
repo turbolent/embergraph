@@ -4,7 +4,7 @@ import org.embergraph.counters.AbstractStatisticsCollector;
 import org.embergraph.counters.CounterSet;
 
 /*
-* Collects per-host performance counters on a Windows platform.
+ * Collects per-host performance counters on a Windows platform.
  *
  * <p>Note: The concept of a PID exists for Windows, but it is not relevant to collection of
  * performance counters since Windows does not appear to support collection by PID, only by the

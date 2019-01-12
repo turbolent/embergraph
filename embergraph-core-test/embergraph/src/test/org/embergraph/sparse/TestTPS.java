@@ -34,7 +34,7 @@ import junit.framework.TestCase2;
 import org.embergraph.sparse.TPS.TPV;
 
 /*
-* Test of {@link TPS} (property timestamp set implementation).
+ * Test of {@link TPS} (property timestamp set implementation).
  *
  * @todo write tests for {@link TPS#iterator()}
  * @todo write tests for {@link TPS#asMap(long, org.embergraph.sparse.TPS.INameFilter)}

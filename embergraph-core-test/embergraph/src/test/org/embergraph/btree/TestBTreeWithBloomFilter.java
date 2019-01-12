@@ -29,7 +29,7 @@ import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /*
-* Unit tests for a {@link BTree} with its bloom filter enabled. This class is mostly focused on the
+ * Unit tests for a {@link BTree} with its bloom filter enabled. This class is mostly focused on the
  * basic bloom filter mechanics. Also see {@link TestIndexSegmentWithBloomFilter} which was
  * originally written to test the {@link IndexSegment} behavior with a bloom filter, but which also
  * tests the {@link BTree} to some extent now that the {@link BTree} also maintains a bloom filter.
@@ -163,7 +163,7 @@ public class TestBTreeWithBloomFilter extends AbstractBTreeTestCase {
    * the iterator is a point test as toKey is the exclusive upper bound.
    */
   //    /*
-//     * Test verifies that the BTree will automatically apply the bloom filter to
+  //     * Test verifies that the BTree will automatically apply the bloom filter to
   //     * reject range iterator requests that correspond to a point test, but only
   //     * when the iterator was not requested with any options that would permit
   //     * concurrent modification of the index.

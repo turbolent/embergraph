@@ -38,7 +38,7 @@ import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.ITx;
 
 /*
-* Test suite for the ability to re-open an {@link EmbeddedFederation}.
+ * Test suite for the ability to re-open an {@link EmbeddedFederation}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

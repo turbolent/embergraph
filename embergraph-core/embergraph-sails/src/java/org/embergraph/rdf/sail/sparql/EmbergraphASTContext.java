@@ -35,10 +35,9 @@ import org.embergraph.rdf.sail.sparql.ast.VisitorException;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
 import org.openrdf.model.Value;
-import org.openrdf.model.vocabulary.RDF;
 
 /*
-* Object provides context required in various stages of parsing queries or updates.
+ * Object provides context required in various stages of parsing queries or updates.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @openrdf

@@ -40,7 +40,7 @@ import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.UnsyncLocalOutputBuffer;
 
 /*
-* This operator performs a nested loop join for solutions. Intermediate solutions read from the
+ * This operator performs a nested loop join for solutions. Intermediate solutions read from the
  * pipeline are joined against a scan of some other solution set. This operator is useful when the
  * cardinality of the source solutions in the pipeline is low (typically one empty source solution
  * which is exogenous to the query, but it is also cost efficient when there is a small set of
@@ -73,7 +73,7 @@ public class NestedLoopJoinOp extends PipelineOp {
   public interface Annotations extends JoinAnnotations, NamedSetAnnotations {
 
     //        /*
-//		 * The name of the pre-existing named solution set to be scanned.
+    //		 * The name of the pre-existing named solution set to be scanned.
     //		 */
     //		String NAME = NestedLoopJoinOp.class.getName() + ".name";
 
@@ -109,7 +109,7 @@ public class NestedLoopJoinOp extends PipelineOp {
   }
 
   //	/*
-//	 * @see Annotations#NAME
+  //	 * @see Annotations#NAME
   //	 */
   //	protected String getName() {
   //

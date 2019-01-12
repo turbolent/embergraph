@@ -43,7 +43,7 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.sail.SailException;
 
 /*
-* Test suite for the concurrent create and discovery of a KB instance.
+ * Test suite for the concurrent create and discovery of a KB instance.
  *
  * <p>Note: There is a data race when creating the a KB (especially the default KB) and verifying
  * that the KB exists. If we find the KB in the row store cache but we do not find the axioms, then
@@ -759,7 +759,7 @@ public abstract class TestConcurrentKBCreate extends ProxyEmbergraphSailTestCase
   }
 
   //    /*
-//     * Return an UNISOLATED connection.
+  //     * Return an UNISOLATED connection.
   //     *
   //     * @param namespace
   //     *            The namespace.

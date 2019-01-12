@@ -22,8 +22,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree.raba.codec;
 
-import it.unimi.dsi.compression.CanonicalFast64CodeWordDecoder;
-import it.unimi.dsi.compression.HuffmanCodec;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
@@ -49,7 +47,7 @@ import org.embergraph.util.BytesUtil;
 import org.embergraph.util.BytesUtil.UnsignedByteArrayComparator;
 
 /*
-* Abstract test suite for {@link IRabaCoder} implementations.
+ * Abstract test suite for {@link IRabaCoder} implementations.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -101,8 +99,8 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
       doRoundTripTest(rabaCoder, expected);
 
       {
-      /*
-       * Spot check the correct computation of the insertion point for
+        /*
+         * Spot check the correct computation of the insertion point for
          * a variety of search keys.
          */
 
@@ -602,8 +600,8 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
 
       {
 
-      /*
-       * Verify that we can read the byte[] out of [data]. This is
+        /*
+         * Verify that we can read the byte[] out of [data]. This is
          * really a test of the data.getDataInput() and the returned
          * DataInputBuffer.
          */
@@ -934,8 +932,8 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
           }
         case Op.COPY:
           {
-          /*
-       * Note: We reuse the same output buffer all the time for this.
+            /*
+             * Note: We reuse the same output buffer all the time for this.
              * This is not a problem since we are not overwriting the data
              * backing the raba.
              */
@@ -959,8 +957,8 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
           }
         case Op.SEARCH:
           {
-          /*
-       * Search with a key chosen randomly from the original data.
+            /*
+             * Search with a key chosen randomly from the original data.
              */
             if (!expected.isKeys()) {
               // method not defined for values.
@@ -1021,8 +1019,8 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
         case Op.RECODE:
           {
 
-          /*
-       * Note: this uses a new buffer instance so we do not stomp on
+            /*
+             * Note: this uses a new buffer instance so we do not stomp on
              * the existing coded representation backing the raba. The
              * backing array for the buffer is preallocated to a modest size
              * and filled with random data. When we setup the buffer, we
@@ -1037,8 +1035,8 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
             // fill it with random data.
             r.nextBytes(tmp);
 
-          /*
-       * Start at random (but small) offset into the buffer with a
+            /*
+             * Start at random (but small) offset into the buffer with a
              * bias to start at zero.
              *
              * Note: A lot of re-coding errors are linked to a non-zero

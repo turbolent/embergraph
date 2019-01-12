@@ -28,7 +28,7 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
 /*
-* Rule for step 13 of {@link InferenceEngine#fastForwardClosure()}.
+ * Rule for step 13 of {@link InferenceEngine#fastForwardClosure()}.
  *
  * <pre>
  * (?z, rdf:type, ?b ) :-

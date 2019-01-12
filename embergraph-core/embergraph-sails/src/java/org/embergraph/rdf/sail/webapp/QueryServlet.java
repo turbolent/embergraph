@@ -51,17 +51,13 @@ import org.embergraph.bop.engine.StaticAnalysisStat;
 import org.embergraph.bop.engine.StaticAnalysisStats;
 import org.embergraph.bop.fed.QueryEngineFactory;
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.journal.ITransactionService;
 import org.embergraph.journal.ITx;
 import org.embergraph.journal.TimestampUtility;
 import org.embergraph.mdi.PartitionLocator;
-import org.embergraph.rdf.sail.EmbergraphSail;
-import org.embergraph.rdf.sail.EmbergraphSailQuery;
 import org.embergraph.rdf.sail.EmbergraphSailRepositoryConnection;
 import org.embergraph.rdf.sail.sparql.Embergraph2ASTSPARQLParser;
 import org.embergraph.rdf.sail.sparql.ast.SimpleNode;
 import org.embergraph.rdf.sail.webapp.EmbergraphRDFContext.AbstractQueryTask;
-import org.embergraph.rdf.sail.webapp.EmbergraphRDFContext.RunningQuery;
 import org.embergraph.rdf.sail.webapp.EmbergraphRDFContext.UpdateTask;
 import org.embergraph.rdf.sail.webapp.client.ConnectOptions;
 import org.embergraph.rdf.sail.webapp.client.EncodeDecodeValue;
@@ -88,7 +84,7 @@ import org.openrdf.rio.RDFWriter;
 import org.openrdf.rio.RDFWriterRegistry;
 
 /*
-* SPARQL Query (GET/POST) and SPARQL UPDATE handler (POST).
+ * SPARQL Query (GET/POST) and SPARQL UPDATE handler (POST).
  *
  * @author martyncutcher
  * @author thompsonbry
@@ -190,7 +186,7 @@ public class QueryServlet extends EmbergraphRDFServlet {
   static final transient String ATTR_TIMESTAMP = "timestamp";
 
   //    /*
-//     * The name of the request attribute for the {@link AbstractQueryTask}.
+  //     * The name of the request attribute for the {@link AbstractQueryTask}.
   //     */
   //    static private final transient String ATTR_QUERY_TASK = "QueryTask";
 
@@ -321,8 +317,8 @@ public class QueryServlet extends EmbergraphRDFServlet {
           getEmbergraphRDFContext().getTripleStore(getNamespace(req), tx);
 
       if (tripleStore == null) {
-      /*
-       * There is no such triple/quad store instance.
+        /*
+         * There is no such triple/quad store instance.
          */
         buildAndCommitNamespaceNotFoundResponse(req, resp);
         return;
@@ -490,8 +486,8 @@ public class QueryServlet extends EmbergraphRDFServlet {
 
         {
 
-        /*
-       * Attempt to construct a task which we can use to evaluate
+          /*
+           * Attempt to construct a task which we can use to evaluate
            * the query.
            */
 
@@ -513,8 +509,8 @@ public class QueryServlet extends EmbergraphRDFServlet {
 
           updateTask.updateFuture = ft;
 
-        /*
-       * Begin executing the query (asynchronous).
+          /*
+           * Begin executing the query (asynchronous).
            *
            * Note: UPDATEs currently contend with QUERYs against the
            * same thread pool.
@@ -527,8 +523,8 @@ public class QueryServlet extends EmbergraphRDFServlet {
           success = true;
         }
 
-      /*
-       * Note: The SPARQL UPDATE is already committed. This is done in the UpdateTask class when
+        /*
+         * Note: The SPARQL UPDATE is already committed. This is done in the UpdateTask class when
          * we execute the following code
          *
          * <pre>
@@ -678,8 +674,8 @@ public class QueryServlet extends EmbergraphRDFServlet {
         conn = getQueryConnection();
 
         {
-        /*
-       * Setup task to execute the query. The task is executed on
+          /*
+           * Setup task to execute the query. The task is executed on
            * a thread pool. This bounds the possible concurrency of
            * query execution (as opposed to queries accepted for
            * eventual execution).
@@ -692,8 +688,8 @@ public class QueryServlet extends EmbergraphRDFServlet {
 
           final OutputStream os = resp.getOutputStream();
 
-        /*
-       * Attempt to construct a task which we can use to evaluate
+          /*
+           * Attempt to construct a task which we can use to evaluate
            * the query.
            */
 
@@ -732,16 +728,16 @@ public class QueryServlet extends EmbergraphRDFServlet {
 
           if (log.isTraceEnabled()) log.trace("Will run query: " + queryStr);
 
-        /*
-       * Setup the response headers.
+          /*
+           * Setup the response headers.
            */
 
           resp.setStatus(HTTP_OK);
 
           if (queryTask.explain) {
 
-          /*
-       * Send back an explanation of the query execution, not
+            /*
+             * Send back an explanation of the query execution, not
              * the query results.
              */
 
@@ -761,8 +757,8 @@ public class QueryServlet extends EmbergraphRDFServlet {
 
           } else {
 
-          /*
-       * Send back the query results.
+            /*
+             * Send back the query results.
              */
 
             resp.setContentType(queryTask.mimeType);
@@ -774,8 +770,8 @@ public class QueryServlet extends EmbergraphRDFServlet {
             }
 
             if (isAttachment(queryTask.mimeType)) {
-            /*
-       * Mark this as an attachment (rather than inline).
+              /*
+               * Mark this as an attachment (rather than inline).
                * This is just a hint to the user agent. How the
                * user agent handles this hint is up to it.
                */
@@ -786,8 +782,8 @@ public class QueryServlet extends EmbergraphRDFServlet {
 
             if (TimestampUtility.isCommitTime(queryTask.timestamp)) {
 
-            /*
-       * A read against a commit time or a read-only tx.
+              /*
+               * A read against a commit time or a read-only tx.
                * Such results SHOULD be cached because the data
                * from which the response was constructed have
                * snapshot isolation. (Note: It is possible that
@@ -938,8 +934,8 @@ public class QueryServlet extends EmbergraphRDFServlet {
         // Check once more.
         queryId2 = queryTask.queryId2;
         if (queryId2 == null) {
-        /*
-       * This should have been assigned unless the query failed
+          /*
+           * This should have been assigned unless the query failed
            * during the setup.
            */
           throw new AssertionError();
@@ -1215,16 +1211,16 @@ public class QueryServlet extends EmbergraphRDFServlet {
 
       try {
 
-      /*
-       * Wait for the Future. If the query fails, then note the
+        /*
+         * Wait for the Future. If the query fails, then note the
          * exception but do NOT rethrow it. The exception will get
          * painted into the page.
          */
 
         ft.get();
 
-      /*
-       * Note: An InterruptedException here is NOT caught. It means
+        /*
+         * Note: An InterruptedException here is NOT caught. It means
          * that this Thread was interrupted rather than the Query.
          */
 
@@ -1251,8 +1247,8 @@ public class QueryServlet extends EmbergraphRDFServlet {
 
       if (q == null) {
 
-      /*
-       * This can happen if we fail to get the IRunningQuery reference
+        /*
+         * This can happen if we fail to get the IRunningQuery reference
          * before the query terminates. E.g., if the query runs too
          * quickly there is a data race and the reference may not be
          * available anymore.
@@ -1282,8 +1278,8 @@ public class QueryServlet extends EmbergraphRDFServlet {
             .text(q.isCancelled() ? ", CANCELLED." : ".")
             .close();
 
-      /*
-       * Format query statistics as a table.
+        /*
+         * Format query statistics as a table.
          *
          * Note: This is writing on the Writer so it goes directly into
          * the HTML document we are building for the client.
@@ -2021,7 +2017,7 @@ public class QueryServlet extends EmbergraphRDFServlet {
   }
 
   //    /*
-//     * Test the SPARQL cache.
+  //     * Test the SPARQL cache.
   //     */
   //    private void doCache(final HttpServletRequest req,
   //            final HttpServletResponse resp) throws IOException {

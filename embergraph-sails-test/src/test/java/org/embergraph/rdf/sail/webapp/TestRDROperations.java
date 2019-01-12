@@ -27,7 +27,7 @@ import org.embergraph.rdf.ServiceProviderHook;
 import org.embergraph.rdf.sail.webapp.client.RemoteRepository.AddOp;
 
 /*
-* Test of RDR specific data interchange and query.
+ * Test of RDR specific data interchange and query.
  *
  * @author bryan
  * @param <S>

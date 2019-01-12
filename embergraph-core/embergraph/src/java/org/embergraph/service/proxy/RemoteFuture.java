@@ -3,12 +3,11 @@ package org.embergraph.service.proxy;
 import java.io.IOException;
 import java.rmi.Remote;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 /*
-* {@link Remote} interface declaring the API of {@link Future} but also declaring that each methods
+ * {@link Remote} interface declaring the API of {@link Future} but also declaring that each methods
  * throws {@link IOException} in order to be compatible with {@link Remote} and {@link Exporter}. Of
  * course, this means that this interface can not extend {@link Future}!
  *

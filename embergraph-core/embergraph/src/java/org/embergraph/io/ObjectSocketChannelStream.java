@@ -30,7 +30,7 @@ import java.nio.channels.Channels;
 import org.apache.log4j.Logger;
 
 /*
-* Utility class that provides dual Channel/ObjectStream access.
+ * Utility class that provides dual Channel/ObjectStream access.
  *
  * @author Martyn Cutcher
  */

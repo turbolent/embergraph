@@ -25,16 +25,14 @@ package org.embergraph.btree.view;
 
 import java.util.NoSuchElementException;
 import org.embergraph.btree.IIndex;
-import org.embergraph.btree.IRangeQuery;
 import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleCursor;
 import org.embergraph.btree.ITupleCursor2;
-import org.embergraph.btree.ITupleIterator;
 import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Layers on the additional methods from the {@link ITupleCursor} interface.
+ * Layers on the additional methods from the {@link ITupleCursor} interface.
  *
  * <p>Note: Both the public methods and the internal fields are strongly typed as {@link
  * ITupleCursor}s rather than {@link ITupleIterator}s.
@@ -130,8 +128,8 @@ public class FusedTupleCursor<E> extends FusedTupleIterator<ITupleCursor<E>, E>
 
       for (int i = 0; i < n; i++) {
 
-      /*
-       * Recover the _current_ tuple for each source iterator.
+        /*
+         * Recover the _current_ tuple for each source iterator.
          */
 
         // current tuple for the source iterator.
@@ -141,8 +139,8 @@ public class FusedTupleCursor<E> extends FusedTupleIterator<ITupleCursor<E>, E>
 
         if (lastKeyVisited != null) {
 
-        /*
-       * When we are changing to [forward == true] (visiting the
+          /*
+           * When we are changing to [forward == true] (visiting the
            * next tuples in the index order), then we advance the
            * source iterator zero or more tuples until it is
            * positioned GT the lastVisitedKey.
@@ -161,8 +159,8 @@ public class FusedTupleCursor<E> extends FusedTupleIterator<ITupleCursor<E>, E>
 
             if (ok) break;
 
-          /*
-       * If the source iterator is currently positioned on the
+            /*
+             * If the source iterator is currently positioned on the
              * same key as the last tuple that we visited then we
              * need to move it off of that key - either to the
              * previous or the next visitable tuple depending on the
@@ -319,8 +317,8 @@ public class FusedTupleCursor<E> extends FusedTupleIterator<ITupleCursor<E>, E>
             //                        if (reverseScan ? ret < 0 : ret > 0) {
             if (ret > 0) {
 
-            /*
-       * This key orders GT the current key.
+              /*
+               * This key orders GT the current key.
                *
                * Note: This test MUST be strictly GT since GTE
                * would break the precedence in which we are
@@ -341,8 +339,8 @@ public class FusedTupleCursor<E> extends FusedTupleIterator<ITupleCursor<E>, E>
 
       if (sourceTuple[current].isDeletedVersion() && !deleted) {
 
-      /*
-       * The tuple is marked as "deleted" and the caller did not
+        /*
+         * The tuple is marked as "deleted" and the caller did not
          * request deleted tuples so we skip this key and begin again
          * with the next key visible under the fused iterator view.
          */
@@ -352,8 +350,8 @@ public class FusedTupleCursor<E> extends FusedTupleIterator<ITupleCursor<E>, E>
           log.info("Skipping deleted: source=" + current + ", tuple=" + sourceTuple[current]);
         }
 
-      /*
-       * Clear tuples from other sources having the same key as the
+        /*
+         * Clear tuples from other sources having the same key as the
          * current tuple.
          */
 
@@ -395,8 +393,8 @@ public class FusedTupleCursor<E> extends FusedTupleIterator<ITupleCursor<E>, E>
 
       if (sourceTuple[i] != null && current == -1) {
 
-      /*
-       * Choose the tuple reported by the first source iterator in the
+        /*
+         * Choose the tuple reported by the first source iterator in the
          * order in which the source iterators are processed. Any
          * iterator that does not have a tuple for the seek key will
          * report a null. The first non-null will therefore be the first
@@ -421,16 +419,16 @@ public class FusedTupleCursor<E> extends FusedTupleIterator<ITupleCursor<E>, E>
 
         if (sourceTuple[i] != null && sourceTuple[i].isDeletedVersion()) {
 
-        /*
-       * The tuple is marked as "deleted" and the caller did not
+          /*
+           * The tuple is marked as "deleted" and the caller did not
            * request deleted tuples. In this case seek(byte[]) must
            * return null.
            */
           if (INFO)
             log.info("Skipping deleted: source=" + current + ", tuple=" + sourceTuple[current]);
 
-        /*
-       * Clear tuples from other sources having the same key as the
+          /*
+           * Clear tuples from other sources having the same key as the
            * current tuple.
            */
 

@@ -22,11 +22,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop;
 
 import java.util.Map;
-import org.embergraph.relation.accesspath.IAccessPath;
-import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /*
-* Interface for evaluating operations producing chunks of elements (tuples materialized from some
+ * Interface for evaluating operations producing chunks of elements (tuples materialized from some
  * index of a relation).
  *
  * @see IAccessPath
@@ -62,7 +60,7 @@ public abstract class AbstractAccessPathOp<E> extends BOpBase {
   }
 
   //    /*
-//     * @see BufferAnnotations#CHUNK_CAPACITY
+  //     * @see BufferAnnotations#CHUNK_CAPACITY
   //     */
   //    protected int getChunkCapacity() {
   //
@@ -72,7 +70,7 @@ public abstract class AbstractAccessPathOp<E> extends BOpBase {
   //    }
   //
   //    /*
-//     * @see BufferAnnotations#CHUNK_OF_CHUNKS_CAPACITY
+  //     * @see BufferAnnotations#CHUNK_OF_CHUNKS_CAPACITY
   //     */
   //    protected int getChunkOfChunksCapacity() {
   //
@@ -89,7 +87,7 @@ public abstract class AbstractAccessPathOp<E> extends BOpBase {
   //    }
 
   //    /*
-//     * @see BufferAnnotations#CHUNK_TIMEOUT
+  //     * @see BufferAnnotations#CHUNK_TIMEOUT
   //     */
   //    protected long getChunkTimeout() {
   //

@@ -39,7 +39,7 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFParseException;
 
 /*
-* Test suite for an issue where IV resolution of vocabulary terms interferes with query parsing and
+ * Test suite for an issue where IV resolution of vocabulary terms interferes with query parsing and
  * deferred IV resolution ({@link ASTDeferredIVResolution}.
  *
  * @see <a href="https://jira.blazegraph.com/browse/BLZG-1747">Persistent "Unknown extension" issue

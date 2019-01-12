@@ -36,7 +36,7 @@ import org.embergraph.bop.join.JoinAnnotations;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 
 /*
-* Operator projects only the identified variables.
+ * Operator projects only the identified variables.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

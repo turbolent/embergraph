@@ -25,7 +25,7 @@ import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IVariable;
 
 /*
-* Unit tests for {@link INHashMap}.
+ * Unit tests for {@link INHashMap}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

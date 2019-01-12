@@ -28,7 +28,7 @@ import org.embergraph.rawstore.RawStoreDelegate;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /*
-* Unit tests for a B+Tree with raw record support enabled (this is where a large <code>byte[]
+ * Unit tests for a B+Tree with raw record support enabled (this is where a large <code>byte[]
  * </code> value is written directly onto the backing store rather than being stored within the
  * leaf).
  *

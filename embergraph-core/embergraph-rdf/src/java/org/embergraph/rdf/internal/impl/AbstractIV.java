@@ -54,11 +54,9 @@ import org.embergraph.rdf.internal.impl.uri.VocabURIShortIV;
 import org.embergraph.rdf.lexicon.ITermIndexCodes;
 import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.EmbergraphValue;
-import org.openrdf.model.Literal;
-import org.openrdf.model.Value;
 
 /*
-* Abstract base class for the inline representation of an RDF Value (the representation which is
+ * Abstract base class for the inline representation of an RDF Value (the representation which is
  * encoded in to the keys of the statement indices). This class is responsible for combining the
  * {@link VTE} and the {@link DTE} together into the flags byte used as a common prefix for all keys
  * formed from RDF Values regardless of whether they are based on an assigned term identifier or the
@@ -598,8 +596,8 @@ public abstract class AbstractIV<V extends EmbergraphValue, T> implements IV<V, 
        * The IV is not 100% inline.
        */
       if (isExtension()) {
-      /*
-       * The IV uses the "extension" bit. We have two different use
+        /*
+         * The IV uses the "extension" bit. We have two different use
          * cases here. One is URIs in which we have factored out the
          * namespaceIV for the URI. The other is data type literals in
          * which we have factored out the datatypeIV for the literal
@@ -799,8 +797,8 @@ public abstract class AbstractIV<V extends EmbergraphValue, T> implements IV<V, 
       case XSDString:
         {
           if (this instanceof FullyInlineTypedLiteralIV<?>) {
-          /*
-       * A fully inline Literal
+            /*
+             * A fully inline Literal
              */
             final FullyInlineTypedLiteralIV<?> iv = (FullyInlineTypedLiteralIV<?>) this;
             // notice the current key length.
@@ -823,8 +821,8 @@ public abstract class AbstractIV<V extends EmbergraphValue, T> implements IV<V, 
             iv.setByteLength(1 /* flags */ + len);
             return keyBuilder;
           }
-        /*
-       * Optimized code path for xsd:string when using in combination with
+          /*
+           * Optimized code path for xsd:string when using in combination with
            * ExternalIV.
            */
           // append the term code (note: plain literal!!!)
@@ -858,15 +856,15 @@ public abstract class AbstractIV<V extends EmbergraphValue, T> implements IV<V, 
             case ARRAY:
               {
                 final InlineLiteralIV[] ivs = ((LiteralArrayIV) t).getIVs();
-              /*
-       * Append the length of the array as a byte. InlineLiteralIV
+                /*
+                 * Append the length of the array as a byte. InlineLiteralIV
                  * only supports arrays of length (1...256).
                  */
                 // int(1...256) --> byte(0...255)
                 final byte len = (byte) (ivs.length - 1);
                 keyBuilder.append(len);
-              /*
-       * Then append the ivs one by one.
+                /*
+                 * Then append the ivs one by one.
                  */
                 for (InlineLiteralIV<?, ?> iv : ivs) {
                   iv.encode(keyBuilder);

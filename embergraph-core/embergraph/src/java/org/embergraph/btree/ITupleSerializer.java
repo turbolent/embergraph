@@ -24,19 +24,12 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree;
 
 import java.io.Serializable;
-import java.util.Locale;
-import org.embergraph.btree.data.ILeafData;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.IKeyBuilderFactory;
-import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.btree.raba.codec.IRabaCoder;
-import org.embergraph.journal.AbstractJournal;
-import org.embergraph.journal.CommitRecordIndex;
-import org.embergraph.journal.Journal;
-import org.embergraph.service.IMetadataService;
 
 /*
-* An interface that provides for the (de)-serialization of the value of a tuple stored in an index
+ * An interface that provides for the (de)-serialization of the value of a tuple stored in an index
  * and, when possible, the key under which that value is stored.
  *
  * <p>The encoded key is always a variable length unsigned byte[]s. The purpose of the encoded key

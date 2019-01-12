@@ -20,7 +20,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.concurrent;
 
 /*
-* An instance of this class is thrown when a lock could not be obtained within a specified timeout.
+ * An instance of this class is thrown when a lock could not be obtained within a specified timeout.
  *
  * @author thompsonbry
  * @see org.CognitiveWeb.concurrent.locking.Queue#lock(Object, short, long, int)

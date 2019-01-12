@@ -30,7 +30,7 @@ import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.relation.rule.eval.IJoinNexus;
 
 /*
-* Default implementation.
+ * Default implementation.
  *
  * @todo use a cache per relation and timestamp. Track the actual range counts for a predicate as
  *     bound in a query vs those predicated for the predicate. The actual counts can also vary if

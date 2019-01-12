@@ -1,5 +1,5 @@
 /*
-* 1Copyright (C) SYSTAP, LLC DBA Blazegraph 2006-2018. All rights reserved. Copyright (C)
+ * 1Copyright (C) SYSTAP, LLC DBA Blazegraph 2006-2018. All rights reserved. Copyright (C)
  * Embergraph contributors 2019. All rights reserved.
  *
  * <p>This program is free software; you can redistribute it and/or modify it under the terms of the
@@ -21,7 +21,7 @@ import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 
 /*
-* This implementation:
+ * This implementation:
  *
  * <ul>
  *   <li>Creates an {@link AutoCloseHttpClient}.
@@ -44,14 +44,12 @@ public final class DefaultHttpClientFactory implements IHttpClientFactory {
      * This is the name of an optional System property that may be used to override the {@link
      * IHttpClientFactory} implementation class (default {@value #DEFAULT_SSL_KEYSTORE_PATH}).
      */
-    String SSL_KEYSTORE_PATH =
-        DefaultHttpClientFactory.class.getName() + ".SSLKeystorePath";
+    String SSL_KEYSTORE_PATH = DefaultHttpClientFactory.class.getName() + ".SSLKeystorePath";
 
     /** There is no default SSL keystore. When not specified, all SSL end points will be trusted. */
     String DEFAULT_SSL_KEYSTORE_PATH = null;
 
-    String FOLLOW_REDIRECTS =
-        DefaultHttpClientFactory.class.getName() + ".followRedirects";
+    String FOLLOW_REDIRECTS = DefaultHttpClientFactory.class.getName() + ".followRedirects";
 
     String DEFAULT_FOLLOW_REDIRECTS = "true";
 
@@ -63,8 +61,7 @@ public final class DefaultHttpClientFactory implements IHttpClientFactory {
      *     length on jetty response listener</a>
      * @see <a href="http://trac.blazegraph.com/ticket/1096">Set jetty request buffer size</a>
      */
-    String RESPONSE_BUFFER_SIZE =
-        DefaultHttpClientFactory.class.getName() + ".responseBufferSize";
+    String RESPONSE_BUFFER_SIZE = DefaultHttpClientFactory.class.getName() + ".responseBufferSize";
 
     /*
      * The default maximum size of the jetty response buffer (@value {@value
@@ -80,8 +77,7 @@ public final class DefaultHttpClientFactory implements IHttpClientFactory {
      *
      * @see <a href="http://trac.blazegraph.com/ticket/1096">Set jetty request buffer size</a>
      */
-    String REQUEST_BUFFER_SIZE =
-        DefaultHttpClientFactory.class.getName() + ".requestBufferSize";
+    String REQUEST_BUFFER_SIZE = DefaultHttpClientFactory.class.getName() + ".requestBufferSize";
 
     /*
      * The default maximum size of the jetty request buffer (@value {@value

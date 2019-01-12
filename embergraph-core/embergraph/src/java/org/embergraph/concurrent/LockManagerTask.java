@@ -26,7 +26,7 @@ import java.util.concurrent.Callable;
 import org.apache.log4j.Logger;
 
 /*
-* Class encapsulates handshaking with the {@link LockManager} for an operation requiring exclusive
+ * Class encapsulates handshaking with the {@link LockManager} for an operation requiring exclusive
  * access to one or more resources and that are willing to pre-declare their resource requirements.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -181,8 +181,8 @@ public class LockManagerTask<R extends Comparable<R>, T> implements Callable<T> 
           lockManager.ntimeout.incrementAndGet();
         }
 
-      /*
-       * Release any locks granted since we did not get all of the
+        /*
+         * Release any locks granted since we did not get all of the
          * locks that we were seeking.
          */
 

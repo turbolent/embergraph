@@ -31,11 +31,10 @@ import java.util.List;
 import java.util.Set;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpUtility;
-import org.embergraph.rdf.sparql.ast.ASTBase;
 import org.embergraph.rdf.sparql.ast.ASTBase.Annotations;
 
 /*
-* A list of {@link IExplainHint}s, to be attached as an annotation to an {@link ASTBase} node. See
+ * A list of {@link IExplainHint}s, to be attached as an annotation to an {@link ASTBase} node. See
  * {@link IExplainHint} interface for description of explain hints. This class is merely a wrapper
  * allowing to add a set of explain hints to a single node.
  *

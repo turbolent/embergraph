@@ -9,7 +9,7 @@ It is provided "as is" without expressed or implied warranty.
 package cern.colt.matrix.impl;
 
 /*
-* Abstract base class for flexible, well human readable matrix print formatting. Value type
+ * Abstract base class for flexible, well human readable matrix print formatting. Value type
  * independent. A single cell is formatted via a format string. Columns can be aligned left,
  * centered, right and by decimal point.
  *

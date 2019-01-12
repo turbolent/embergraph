@@ -45,7 +45,7 @@ import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Test suite for {@link FileChannelUtility}.
+ * Test suite for {@link FileChannelUtility}.
  *
  * @todo this test suite does not test the behavior under concurrent IO requests. readAll() and
  *     writeAll() should be ok, but can not offer atomic guarentees since at least write operations
@@ -219,8 +219,8 @@ public class TestFileChannelUtility extends TestCase {
 
         if (trial + 1 < ntrials) {
 
-        /*
-       * If we will do another trial we first purturb the ground
+          /*
+           * If we will do another trial we first purturb the ground
            * truth and write the updated region on the file before we
            * test again.
            */
@@ -384,8 +384,8 @@ public class TestFileChannelUtility extends TestCase {
 
         if (log.isInfoEnabled()) log.info("fromPosition=" + fromPosition + ", count=" + count);
 
-      /*
-       * Transfer some number of bytes from the source channel to the
+        /*
+         * Transfer some number of bytes from the source channel to the
          * target channel.
          *
          * Note: The source channel position is modified as a side
@@ -410,8 +410,8 @@ public class TestFileChannelUtility extends TestCase {
         // changed : new position is [toPosition + count].
         assertEquals("targetPosition", toPosition + count, target.getChannel().position());
 
-      /*
-       * Read the data back from the target channel.
+        /*
+         * Read the data back from the target channel.
          */
 
         final ByteBuffer actual = ByteBuffer.wrap(new byte[count]);
@@ -425,8 +425,8 @@ public class TestFileChannelUtility extends TestCase {
         // Note: used to provoke a test failure.
         //                actual.array()[0]++;
 
-      /*
-       * Verify that the transferred data agrees with the ground truth.
+        /*
+         * Verify that the transferred data agrees with the ground truth.
          */
         if (0
             != BytesUtil.compareBytesWithLenAndOffset(
@@ -753,8 +753,8 @@ public class TestFileChannelUtility extends TestCase {
         if (raf != null) {
           final FileChannel channel = raf.getChannel();
           if (channel.isOpen()) {
-          /*
-       * The channel is still open. If you are allowing
+            /*
+             * The channel is still open. If you are allowing
              * concurrent reads on the channel, then this could
              * indicate that two readers each found the channel
              * closed and that one was able to re-open the channel

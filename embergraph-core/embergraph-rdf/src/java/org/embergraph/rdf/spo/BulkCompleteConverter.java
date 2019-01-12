@@ -1,5 +1,5 @@
 /*
-* The Notice below must appear in each file of the Source Code of any copy you distribute of the
+ * The Notice below must appear in each file of the Source Code of any copy you distribute of the
  * Licensed Product. Contributors to any Modifications may add their own copyright notices to
  * identify their own contributions.
  *
@@ -50,7 +50,7 @@ import org.embergraph.striterator.IChunkConverter;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /*
-* Bulk completes the {@link StatementEnum} and/or statement identifier (SID) for {@link ISPO}s
+ * Bulk completes the {@link StatementEnum} and/or statement identifier (SID) for {@link ISPO}s
  * using the given statement {@link IIndex}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

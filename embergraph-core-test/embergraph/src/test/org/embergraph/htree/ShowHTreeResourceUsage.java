@@ -17,7 +17,7 @@ import org.embergraph.rwstore.sector.MemStore;
 import org.embergraph.util.Bytes;
 
 /*
-* The purpose of this class is to show that adding a large number of entries into a MemStore backed
+ * The purpose of this class is to show that adding a large number of entries into a MemStore backed
  * HTree provides much less load of the Java heap, reducing GC cost at the same time.
  *
  * @author Martyn Cutcher

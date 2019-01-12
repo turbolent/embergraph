@@ -58,7 +58,7 @@ import org.embergraph.rdf.spo.SPOKeyOrder;
 import org.embergraph.striterator.IKeyOrder;
 
 /*
-* Optimizes <code>SELECT (DISTINCT|REDUCED) ?property WHERE { ?x ?property ?y . }</code> and
+ * Optimizes <code>SELECT (DISTINCT|REDUCED) ?property WHERE { ?x ?property ?y . }</code> and
  * similar patterns using an O(N) algorithm, where N is the number of distinct solutions.
  *
  * <p>The main advantage here is to turn an access path that is fully unbound into a distinct-term
@@ -94,8 +94,8 @@ public class ASTDistinctTermScanOptimizer implements IASTOptimizer {
     if (context.getAbstractTripleStore().isQuads()) {
       boolean ok = false;
       if (dataset == null || dataset.getNamedGraphs() == null) {
-      /*
-       * The dataset is all graphs.
+        /*
+         * The dataset is all graphs.
          */
         ok = true;
       }

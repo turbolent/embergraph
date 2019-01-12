@@ -21,7 +21,7 @@ import org.apache.log4j.Logger;
 import org.embergraph.btree.IndexMetadata.Options;
 
 /*
-* A plan for building a B+-Tree based on an input branching factor and #of entries.
+ * A plan for building a B+-Tree based on an input branching factor and #of entries.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -238,8 +238,8 @@ public class IndexSegmentPlan {
 
       if (d >= nleaves) {
 
-      /*
-       * h is the smallest height tree of the specified branching
+        /*
+         * h is the smallest height tree of the specified branching
          * factor m capable of addressing the specified #of leaves.
          */
         return h;

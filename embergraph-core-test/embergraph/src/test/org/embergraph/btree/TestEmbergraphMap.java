@@ -32,12 +32,11 @@ import java.util.UUID;
 import junit.framework.TestCase;
 import org.embergraph.btree.keys.DefaultKeyBuilderFactory;
 import org.embergraph.btree.keys.IKeyBuilderFactory;
-import org.embergraph.btree.keys.TestKeyBuilder;
 import org.embergraph.io.SerializerUtil;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /*
-* Test suite for {@link EmbergraphMap}.
+ * Test suite for {@link EmbergraphMap}.
  *
  * @todo write tests where delete markers are and are not enabled or make these tests run against
  *     all variants.

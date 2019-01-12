@@ -47,19 +47,15 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.apache.log4j.Logger;
 import org.embergraph.Banner;
 import org.embergraph.counters.CounterSet;
-import org.embergraph.counters.IHostCounters;
-import org.embergraph.counters.IRequiredHostCounters;
 import org.embergraph.counters.PeriodEnum;
-import org.embergraph.counters.XMLUtility;
 import org.embergraph.counters.httpd.DummyEventReportingService;
 import org.embergraph.counters.render.IRenderer;
 import org.embergraph.counters.render.RendererFactory;
-import org.embergraph.service.Event;
 import org.embergraph.util.httpd.NanoHTTPD;
 import org.xml.sax.SAXException;
 
 /*
-* Utility to extract a batch of performance counters from a collection of logged XML counter set
+ * Utility to extract a batch of performance counters from a collection of logged XML counter set
  * files. This utility accepts file(s) giving the URLs which would be used to demand the
  * corresponding performance counters against the live embergraph federation. The URLs listed in
  * that file are parsed. The host and port information are ignored, but the URL query parameters are
@@ -256,8 +252,8 @@ public class CounterSetQuery {
         future.get();
       } catch (ExecutionException ex) {
         if (ex.getCause() instanceof SAXException) {
-        /*
-       * Sometimes you can get a partial XML file if the LBS was
+          /*
+           * Sometimes you can get a partial XML file if the LBS was
            * in the process of generating the file when it was copied.
            * This shows up as a SAXException.  Rather than dying, this
            * just logs a warning and continues.
@@ -465,8 +461,8 @@ public class CounterSetQuery {
         final IRenderer renderer =
             RendererFactory.get(model, new CounterSetSelector(counterSet), defaultMimeType);
 
-      /*
-       * Render on a file. The file can be specified by a URL query
+        /*
+         * Render on a file. The file can be specified by a URL query
          * parameter.
          *
          * @todo Use the munged counter path / counter name (when one

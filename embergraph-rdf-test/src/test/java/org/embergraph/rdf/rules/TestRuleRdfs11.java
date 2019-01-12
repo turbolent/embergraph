@@ -30,7 +30,7 @@ import org.openrdf.model.URI;
 import org.openrdf.model.vocabulary.RDFS;
 
 /*
-* Note: rdfs 5 and 11 use the same base class.
+ * Note: rdfs 5 and 11 use the same base class.
  *
  * @see RuleRdfs05
  * @see RuleRdfs11

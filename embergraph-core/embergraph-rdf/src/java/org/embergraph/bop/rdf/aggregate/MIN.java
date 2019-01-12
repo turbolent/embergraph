@@ -24,11 +24,10 @@ import org.embergraph.bop.IValueExpression;
 import org.embergraph.bop.aggregate.AggregateBase;
 import org.embergraph.bop.solutions.IVComparator;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.internal.constraints.CompareBOp;
 import org.embergraph.rdf.internal.constraints.INeedsMaterialization;
 
 /*
-* Operator reports the minimum observed value over the presented binding sets for the given
+ * Operator reports the minimum observed value over the presented binding sets for the given
  * variable using SPARQL ORDER_BY semantics. Missing values are ignored.
  *
  * <p>Note: MIN (and MAX) are defined in terms of the ORDER_BY semantics for SPARQL. Therefore, this
@@ -100,8 +99,8 @@ public class MIN extends AggregateBase<IV> implements INeedsMaterialization {
 
       if (iv != null) {
 
-      /*
-       * Aggregate non-null values.
+        /*
+         * Aggregate non-null values.
          */
 
         if (min == null) {

@@ -32,12 +32,10 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.SortedMap;
 import org.embergraph.btree.filter.TupleFilter;
-import org.embergraph.btree.keys.KeyBuilder;
-import org.embergraph.journal.ConcurrencyManager;
 import org.embergraph.util.BytesUtil;
 
 /*
-* A flyweight {@link SortedMap} wrapping an {@link IIndex}.
+ * A flyweight {@link SortedMap} wrapping an {@link IIndex}.
  *
  * <p>Note: The {@link EmbergraphMap} has the same concurrency constraints as the {@link BTree} - it
  * is single-threaded for writes and allows concurrent readers. When wrapping a scale-out index, the
@@ -552,7 +550,7 @@ public class EmbergraphMap<K, V> extends AbstractMap<K, V> implements SortedMap<
   }
 
   //    /*
-//     * The <strong>unsigned byte[]</strong> representation of the first key.
+  //     * The <strong>unsigned byte[]</strong> representation of the first key.
   //     *
   //     * @return The first key or <code>null</code> if there are no keys. (More
   //     *         precisely, if there are no undeleted tuples within the current
@@ -574,7 +572,7 @@ public class EmbergraphMap<K, V> extends AbstractMap<K, V> implements SortedMap<
   //    }
   //
   //    /*
-//     * The <strong>unsigned byte[]</strong> representation of the last key.
+  //     * The <strong>unsigned byte[]</strong> representation of the last key.
   //     *
   //     * @return The last key or <code>null</code> if there are no keys. (More
   //     *         precisely, if there are no undeleted tuples within the current

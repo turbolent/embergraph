@@ -18,14 +18,13 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree;
 
 import java.io.File;
-import java.io.IOException;
 import org.apache.log4j.Level;
 import org.embergraph.btree.IndexSegment.ImmutableLeafCursor;
 import org.embergraph.btree.IndexSegment.ImmutableNodeFactory.ImmutableLeaf;
 import org.embergraph.btree.keys.TestKeyBuilder;
 
 /*
-* Test suite based on a small btree with known keys and values.
+ * Test suite based on a small btree with known keys and values.
  *
  * @see src/architecture/btree.xls, which has the detailed examples.
  */

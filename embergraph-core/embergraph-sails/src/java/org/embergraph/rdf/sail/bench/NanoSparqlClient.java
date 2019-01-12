@@ -65,7 +65,7 @@ import org.openrdf.rio.RDFParserRegistry;
 import org.openrdf.rio.helpers.StatementCollector;
 
 /*
-* A flyweight utility for issuing queries to an http SPARQL endpoint.
+ * A flyweight utility for issuing queries to an http SPARQL endpoint.
  *
  * @author thompsonbry@users.sourceforge.net
  */
@@ -82,7 +82,7 @@ public class NanoSparqlClient {
   private static final int DEFAULT_TIMEOUT = 0;
 
   //	/*
-//	 * Helper class to figure out the type of a query.
+  //	 * Helper class to figure out the type of a query.
   //	 */
   //	private static enum QueryType {
   //
@@ -113,7 +113,7 @@ public class NanoSparqlClient {
   //		}
   //
   //		/*
-//		 * Used to note the offset at which a keyword was found.
+  //		 * Used to note the offset at which a keyword was found.
   //		 */
   //		static private class P implements Comparable<P> {
   //
@@ -131,7 +131,7 @@ public class NanoSparqlClient {
   //		}
   //
   //		/*
-//		 * Hack returns the query type based on the first occurrence of the
+  //		 * Hack returns the query type based on the first occurrence of the
   //		 * keyword for any known query type in the query.
   //		 *
   //		 * @param queryStr
@@ -258,8 +258,8 @@ public class NanoSparqlClient {
       HttpURLConnection conn = null;
       try {
 
-      /*
-       * Setup connection properties.
+        /*
+         * Setup connection properties.
          *
          * Note:In general GET caches but is more transparent while POST
          * does not cache.
@@ -270,19 +270,19 @@ public class NanoSparqlClient {
         conn.setUseCaches(opts.useCaches);
         conn.setReadTimeout(opts.timeout);
 
-      /*
-       * Set an appropriate Accept header for the query.
-        //                 *
-        //                 * Note: We have to parse the query to really get this right.
-        //                 *
-        //                 * TODO The query parser requires a KB reference for Value to IV
-        //                 * resolution. This is just passing in an empty KB backed by a
-        //                 * temporary store since we not really interested in resolving
-        //                 * anything here, just figuring out the type of the query. It
-        //                 * would be nice if we could not bother to pass in a KB instance
-        //                 * at all, but I have not yet looked at modifying the parser to
-        //                 * accept a null KB reference for this use case.
-                         */
+        /*
+        * Set an appropriate Accept header for the query.
+         //                 *
+         //                 * Note: We have to parse the query to really get this right.
+         //                 *
+         //                 * TODO The query parser requires a KB reference for Value to IV
+         //                 * resolution. This is just passing in an empty KB backed by a
+         //                 * temporary store since we not really interested in resolving
+         //                 * anything here, just figuring out the type of the query. It
+         //                 * would be nice if we could not bother to pass in a KB instance
+         //                 * at all, but I have not yet looked at modifying the parser to
+         //                 * accept a null KB reference for this use case.
+                          */
         //                final ASTContainer astContainer = new Embergraph2ASTSPARQLParser(
         //                        opts.tmpKb).parseQuery2(opts.queryStr, opts.baseURI);
         //
@@ -328,8 +328,8 @@ public class NanoSparqlClient {
         }
 
         if (log.isDebugEnabled()) {
-        /*
-       * write out the response headers
+          /*
+           * write out the response headers
            *
            * @todo options to show the headers (in/out),
            */
@@ -347,8 +347,8 @@ public class NanoSparqlClient {
 
         } else {
 
-        /*
-       * Write the #of solutions onto stdout.
+          /*
+           * Write the #of solutions onto stdout.
            */
           final long nresults;
           switch (queryType) {
@@ -926,7 +926,7 @@ public class NanoSparqlClient {
   }
 
   //	/*
-//	 * Runs the queries in the evaluation order.
+  //	 * Runs the queries in the evaluation order.
   //	 *
   //	 * @param order
   //	 *            The evaluation order. This is an array of indices into the
@@ -1531,7 +1531,7 @@ public class NanoSparqlClient {
   }
 
   //	/*
-//	 * A model of the query workload to be imposed on the SPARQL end point. The
+  //	 * A model of the query workload to be imposed on the SPARQL end point. The
   //	 * model allows you to group queries from the same "source" into a batch, to
   //	 * specify the latency between queries within a batch, and to specify the
   //	 * latency between one batch and the next. You can also specify the number

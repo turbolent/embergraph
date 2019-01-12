@@ -37,7 +37,6 @@ import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
-import org.openrdf.query.Binding;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.query.QueryLanguage;
@@ -52,7 +51,7 @@ import org.openrdf.sail.SailConnection;
 import org.openrdf.sail.SailException;
 
 /*
-* @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
+ * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
  */
 public class TestSingleTailRule extends ProxyEmbergraphSailTestCase {
@@ -201,9 +200,7 @@ public class TestSingleTailRule extends ProxyEmbergraphSailTestCase {
         //                }
 
         final Collection<BindingSet> solution = new LinkedList<BindingSet>();
-        solution.add(
-            createBindingSet(
-                new BindingImpl("s", l1)));
+        solution.add(createBindingSet(new BindingImpl("s", l1)));
 
         compare(result, solution);
       }
@@ -309,9 +306,7 @@ public class TestSingleTailRule extends ProxyEmbergraphSailTestCase {
       solution.add(
           createBindingSet(
               new BindingImpl("s", s), new BindingImpl("v1", v1), new BindingImpl("v2", v2)));
-      solution.add(
-          createBindingSet(
-              new BindingImpl("s", s), new BindingImpl("v1", v3)));
+      solution.add(createBindingSet(new BindingImpl("s", s), new BindingImpl("v1", v3)));
 
       compare(result, solution);
 

@@ -57,7 +57,7 @@ import org.embergraph.util.InnerCause;
 import org.embergraph.util.config.NicUtil;
 
 /*
-* Utility test suite provides a health check for a deployed instance.
+ * Utility test suite provides a health check for a deployed instance.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -404,7 +404,7 @@ public class TestNSSHealthCheck extends TestCase2 {
   }
 
   // /*
-// * The <code>/namespace/</code> servlet responds (multi-tenancy API).
+  // * The <code>/namespace/</code> servlet responds (multi-tenancy API).
   // */
   // public void test_webapp_structure_namespace() throws Exception {
 

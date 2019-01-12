@@ -31,7 +31,7 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
 /*
-* Proxied test suite for the <code>HASSTMT</code> REST API method.
+ * Proxied test suite for the <code>HASSTMT</code> REST API method.
  *
  * @param <S>
  * @see <a href="http://trac.bigdata.com/ticket/1109" >hasStatements can overestimate and ignores

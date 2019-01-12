@@ -25,13 +25,11 @@ package org.embergraph.service;
 
 import java.io.IOException;
 import java.util.UUID;
-import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.ICounterSetAccess;
-import org.embergraph.counters.httpd.CounterSetHTTPD;
 import org.embergraph.util.httpd.AbstractHTTPD;
 
 /*
-* Interface allowing services to take over handling of events normally handled by the {@link
+ * Interface allowing services to take over handling of events normally handled by the {@link
  * AbstractFederation}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -118,6 +116,5 @@ public interface IFederationDelegate<T> {
    * @return The httpd daemon.
    * @throws IOException
    */
-  AbstractHTTPD newHttpd(final int httpdPort, final ICounterSetAccess access)
-      throws IOException;
+  AbstractHTTPD newHttpd(final int httpdPort, final ICounterSetAccess access) throws IOException;
 }

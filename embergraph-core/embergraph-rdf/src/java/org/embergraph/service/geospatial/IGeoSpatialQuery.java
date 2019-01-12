@@ -32,7 +32,7 @@ import org.embergraph.service.geospatial.impl.GeoSpatialUtility.PointLatLon;
 import org.openrdf.model.URI;
 
 /*
-* Interface representing (the configuration of) a geospatial query.
+ * Interface representing (the configuration of) a geospatial query.
  *
  * <p>See also {@link GeoSpatial} for the vocabulary that can be used to define such a query as
  * SERVICE (or inline).

@@ -6,17 +6,14 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.apache.log4j.Logger;
 import org.embergraph.btree.BTree;
 import org.embergraph.btree.BTreeCounters;
-import org.embergraph.btree.ILocalBTreeView;
 import org.embergraph.btree.IndexMetadata;
-import org.embergraph.btree.IndexSegment;
 import org.embergraph.journal.AbstractJournal;
 import org.embergraph.mdi.IResourceMetadata;
 import org.embergraph.mdi.LocalPartitionMetadata;
 import org.embergraph.rawstore.IRawStore;
-import org.embergraph.resources.StoreManager.ManagedJournal;
 
 /*
-* Class encapsulates a bunch of metadata used to make decisions about how to handle an index
+ * Class encapsulates a bunch of metadata used to make decisions about how to handle an index
  * partition during asynchronous overflow.
  *
  * <p>Note: This class uses {@link SoftReference}s to hold onto the mutable {@link BTree}. The
@@ -64,8 +61,8 @@ class BTreeMetadata {
       synchronized (this) {
         btree = ref == null ? null : ref.get();
 
-      /*
-       * The mutable btree on the journal associated with the
+        /*
+         * The mutable btree on the journal associated with the
          * commitTime, not the full view of that index.
          */
 
@@ -130,7 +127,7 @@ class BTreeMetadata {
   public final double mergePriority;
 
   //    /*
-//     * The split priority is based solely on {@link #sumSegBytes} (it is the
+  //     * The split priority is based solely on {@link #sumSegBytes} (it is the
   //     * ratio of that value to the nominal shard size) and is ZERO (0) until
   //     * {@link #sumSegBytes} is GTE the {@link OverflowManager#nominalShardSize}.
   //     *
@@ -285,8 +282,8 @@ class BTreeMetadata {
           sourceJournalCount++;
         } else {
           sourceSegmentCount++;
-        /*
-       * Note: This opens the backing segment store in order to
+          /*
+           * Note: This opens the backing segment store in order to
            * determine its size on the disk. This is a fairly light
            * weight operation (the nodes region is not read, just the
            * checkpoint record and the IndexMetadata record).

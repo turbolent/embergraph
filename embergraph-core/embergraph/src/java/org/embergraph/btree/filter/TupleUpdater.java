@@ -7,7 +7,7 @@ import org.embergraph.btree.ITupleCursor;
 import org.embergraph.btree.ITupleIterator;
 
 /*
-* Filter allows mutation of the visited {@link ITuple}s.
+ * Filter allows mutation of the visited {@link ITuple}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

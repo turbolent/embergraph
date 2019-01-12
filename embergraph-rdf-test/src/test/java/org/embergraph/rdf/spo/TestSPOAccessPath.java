@@ -34,8 +34,6 @@ import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.rio.StatementBuffer;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.AbstractTripleStoreTestCase;
-import org.embergraph.rdf.store.TestTripleStore;
-import org.embergraph.relation.accesspath.AccessPath;
 import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.test.MockTermIdFactory;
 import org.openrdf.model.Statement;

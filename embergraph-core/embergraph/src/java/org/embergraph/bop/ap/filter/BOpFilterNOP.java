@@ -26,7 +26,7 @@ import java.util.Map;
 import org.embergraph.bop.BOp;
 
 /*
-* A filter which does nothing. This may be used to stack existing {@link BOpFilterBase} operators.
+ * A filter which does nothing. This may be used to stack existing {@link BOpFilterBase} operators.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -37,7 +37,7 @@ public class BOpFilterNOP extends BOpFilterBase {
   private static final long serialVersionUID = 1L;
 
   //    /*
-//     * Deserialization.
+  //     * Deserialization.
   //     */
   //    public BOpFilterNOP() {
   //        super();

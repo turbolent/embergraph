@@ -28,7 +28,7 @@ import org.embergraph.journal.ISnapshotResult;
 import org.embergraph.journal.Journal;
 
 /*
-* Request an online backup of the journal (non-HA Mode). The backup will be
+ * Request an online backup of the journal (non-HA Mode). The backup will be
  * written to the backup file specified as the value of the Request Parameter,
  * i.e.
  *

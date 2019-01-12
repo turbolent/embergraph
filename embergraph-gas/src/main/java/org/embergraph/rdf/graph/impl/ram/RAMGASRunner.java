@@ -9,7 +9,7 @@ import org.embergraph.rdf.graph.impl.ram.RAMGASEngine.RAMGraphAccessor;
 import org.embergraph.rdf.graph.impl.util.GASRunnerBase;
 
 /*
-* Class for running GAS performance tests against the SAIL.
+ * Class for running GAS performance tests against the SAIL.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -27,8 +27,8 @@ public class RAMGASRunner<VS, ES, ST> extends GASRunnerBase<VS, ES, ST> {
 
     public RAMGraph getGraph() {
       synchronized (g) {
-      /*
-       * Note: Synchronization pattern is intended to provide
+        /*
+         * Note: Synchronization pattern is intended to provide
          * visibility for graph traversal following a load of data into
          * the graph.
          */

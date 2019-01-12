@@ -23,10 +23,8 @@ package org.embergraph.rdf.sail.sparql;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.XSD;
 import org.embergraph.rdf.model.EmbergraphLiteral;
-import org.embergraph.rdf.model.EmbergraphResource;
 import org.embergraph.rdf.model.EmbergraphStatement;
 import org.embergraph.rdf.model.EmbergraphURI;
-import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.sail.sparql.ast.ParseException;
 import org.embergraph.rdf.sail.sparql.ast.TokenMgrError;
@@ -50,7 +48,7 @@ import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /*
-* Test suite for embergraph specific extensions in {@link UpdateExprBuilder}.
+ * Test suite for embergraph specific extensions in {@link UpdateExprBuilder}.
  *
  * @see https://sourceforge.net/apps/mediawiki/bigdata/index.php?title=SPARQL_Update
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

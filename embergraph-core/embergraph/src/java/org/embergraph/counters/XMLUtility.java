@@ -40,7 +40,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 /*
-* XML (de-)serialization of {@link CounterSet}s.
+ * XML (de-)serialization of {@link CounterSet}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -78,8 +78,8 @@ public class XMLUtility {
 
       if (!itr2.hasNext()) {
 
-      /*
-       * do not emit counter sets that do not have directly attached
+        /*
+         * do not emit counter sets that do not have directly attached
          * counters.
          */
 
@@ -100,8 +100,8 @@ public class XMLUtility {
         try {
           value = counter.getValue();
         } catch (Throwable t) {
-        /*
-       * Log an error if we can't obtain the value of a counter
+          /*
+           * Log an error if we can't obtain the value of a counter
            * and continue processing the remaining counters.
            *
            * Note: Counter#getValue() typically invokes
@@ -116,8 +116,8 @@ public class XMLUtility {
 
         if (time == 0L || value == null) {
 
-        /*
-       * Zero timestamps and null values are generally an
+          /*
+           * Zero timestamps and null values are generally an
            * indicator that the counter value is not yet defined.
            */
 
@@ -131,8 +131,8 @@ public class XMLUtility {
 
         if (time < 0L) {
 
-        /*
-       * Negative timestamps are not expected.
+          /*
+           * Negative timestamps are not expected.
            */
 
           log.warn(
@@ -374,8 +374,8 @@ public class XMLUtility {
           setValue(counter, typ, value, time);
         }
 
-      /*
-       * Set in case we need to read the counter's history also.
+        /*
+         * Set in case we need to read the counter's history also.
          *
          * Note: this will be [null] if we could not find/create the
          * counter above.
@@ -383,8 +383,8 @@ public class XMLUtility {
 
         this.counter = counter;
 
-      /*
-       * clear history reference - set when we see the [h] element and
+        /*
+         * clear history reference - set when we see the [h] element and
          * know the units for the history to be read.
          */
 
@@ -403,8 +403,8 @@ public class XMLUtility {
 
         if (!(counter.getInstrument() instanceof HistoryInstrument)) {
 
-        /*
-       * Counter does not support history (either the factory is
+          /*
+           * Counter does not support history (either the factory is
            * wrong or the counter pre-existed but was created without
            * history support).
            */
@@ -504,8 +504,8 @@ public class XMLUtility {
       // atomic makePath + counter create iff necessary.
       synchronized (root) {
 
-      /*
-       * Note: use just the name when the path is '/' to avoid
+        /*
+         * Note: use just the name when the path is '/' to avoid
          * forming a path that begins '//'.
          */
         node =
@@ -576,8 +576,8 @@ public class XMLUtility {
 
       if (inst instanceof OneShotInstrument) {
 
-      /*
-       * This instrument can not be updated. However, new values for a
+        /*
+         * This instrument can not be updated. However, new values for a
          * variety of one-shot counters will be reported by each client
          * that starts on the same host. E.g., the #of CPUs and that
          * sort of thing. We just ignore the redundent updates.

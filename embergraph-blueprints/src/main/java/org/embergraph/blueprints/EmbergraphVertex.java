@@ -28,7 +28,7 @@ import org.apache.log4j.Logger;
 import org.openrdf.model.URI;
 
 /*
-* Vertex implementation that wraps a Vertex URI and points to a {@link EmbergraphGraph} instance.
+ * Vertex implementation that wraps a Vertex URI and points to a {@link EmbergraphGraph} instance.
  *
  * @author mikepersonick
  */

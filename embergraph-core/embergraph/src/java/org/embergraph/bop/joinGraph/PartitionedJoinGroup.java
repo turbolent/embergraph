@@ -9,17 +9,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.apache.log4j.Logger;
-import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpUtility;
-import org.embergraph.bop.Bind;
 import org.embergraph.bop.IConstraint;
 import org.embergraph.bop.IPredicate;
 import org.embergraph.bop.IVariable;
-import org.embergraph.bop.joinGraph.rto.JoinGraph;
-import org.embergraph.rdf.sparql.ast.StaticAnalysis_CanJoin;
 
 /*
-* Class accepts a join group and partitions it into a join graph and a tail plan.
+ * Class accepts a join group and partitions it into a join graph and a tail plan.
  *
  * <p>A join group consists of an ordered collection of {@link IPredicate}s and an unordered
  * collection of {@link IConstraint}s. {@link IPredicate} representing non-optional joins are
@@ -250,8 +246,8 @@ public class PartitionedJoinGroup {
       final List<IConstraint> constraints = new LinkedList<IConstraint>();
 
       {
-      /*
-       * Visit the variables used by the predicate (and bound by it
+        /*
+         * Visit the variables used by the predicate (and bound by it
          * since it is not an optional predicate) and add them into the
          * total set of variables which are bound at this point in the
          * join path.
@@ -274,8 +270,8 @@ public class PartitionedJoinGroup {
           if (c == null) throw new IllegalArgumentException();
 
           if (used.contains(c)) {
-          /*
-       * Skip constraints which were already assigned to
+            /*
+             * Skip constraints which were already assigned to
              * predicates before this one in the join path.
              */
             continue;
@@ -290,8 +286,8 @@ public class PartitionedJoinGroup {
 
           } else {
 
-          /*
-       * true iff all variables used by this constraint are bound
+            /*
+             * true iff all variables used by this constraint are bound
              * at this point in the join path.
              */
             boolean allVarsBound = true;
@@ -316,8 +312,8 @@ public class PartitionedJoinGroup {
 
           if (attach) {
 
-          /*
-       * All variables have become bound for this constraint,
+            /*
+             * All variables have become bound for this constraint,
              * so add it to the set of "used" constraints.
              */
 
@@ -686,8 +682,8 @@ public class PartitionedJoinGroup {
           // part of the join graph.
           joinGraph.add(p);
         }
-      /*
-       * Add to the set of variables which will be bound by the time
+        /*
+         * Add to the set of variables which will be bound by the time
          * the join graph is done executing.
          */
         final Iterator<IVariable<?>> vitr = BOpUtility.getArgumentVariables(p);
@@ -706,16 +702,16 @@ public class PartitionedJoinGroup {
       boolean allFound = true;
       final Iterator<IVariable<?>> vitr = BOpUtility.getSpannedVariables(c);
       if (!vitr.hasNext()) {
-      /*
-       * All constraints should have at least one variable.
+        /*
+         * All constraints should have at least one variable.
          */
         throw new RuntimeException("No variables in constraint: " + c);
       }
       while (vitr.hasNext()) {
         final IVariable<?> var = vitr.next();
         if (!joinGraphVars.contains(var)) {
-        /*
-       * This constraint will be evaluated against the tail plan.
+          /*
+           * This constraint will be evaluated against the tail plan.
            */
           allFound = false;
           tailPlanConstraints.add(c);
@@ -723,8 +719,8 @@ public class PartitionedJoinGroup {
         }
       }
       if (allFound) {
-      /*
-       * This constraint will be evaluated by the join graph for the
+        /*
+         * This constraint will be evaluated by the join graph for the
          * first join in in which all of the variables used by the
          * constraint are known to be bound.
          */
@@ -781,19 +777,19 @@ public class PartitionedJoinGroup {
           // A logic error.
           throw new AssertionError("maxLastIndexOf is undefined: " + c);
         }
-      /*
-       * Add the constraint to the last predicate at which any of its
+        /*
+         * Add the constraint to the last predicate at which any of its
          * variables MIGHT have become bound.
          */
         {
-        /*
-       * The bopId for the predicate in the tail plan for which,
+          /*
+           * The bopId for the predicate in the tail plan for which,
            * when that predicate is evaluated, we will run this
            * constraint.
            */
           final int predId = tailPlan.get(maxLastIndexOf).getId();
-        /*
-       * The constraint(s) (if any) already associated with that
+          /*
+           * The constraint(s) (if any) already associated with that
            * predicate.
            */
           List<IConstraint> tmp = tailPlanConstraintMap.get(predId);
@@ -808,7 +804,7 @@ public class PartitionedJoinGroup {
   }
 
   //	/*
-//	 * Generate a query plan from an ordered collection of predicates.
+  //	 * Generate a query plan from an ordered collection of predicates.
   //	 *
   //	 * @param distinct
   //	 *            <code>true</code> iff only the distinct solutions are desired.

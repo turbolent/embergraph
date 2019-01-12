@@ -46,7 +46,7 @@ import org.openrdf.rio.RDFParseException;
 import org.openrdf.sail.SailException;
 
 /*
-* A test suite developed for some bits and pieces of SPARQL 1.0 coverage.
+ * A test suite developed for some bits and pieces of SPARQL 1.0 coverage.
  *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
@@ -87,8 +87,8 @@ public class DavidsTestBOps extends ProxyEmbergraphSailTestCase {
       final String qs = String.format("select ?p ?o where { <%ss> ?p ?o .}", ns);
 
       final Resource[] graphs =
-          new Resource[]{
-              vf.createURI(String.format("%sg1", ns)), vf.createURI(String.format("%sg2", ns))
+          new Resource[] {
+            vf.createURI(String.format("%sg1", ns)), vf.createURI(String.format("%sg2", ns))
           };
 
       final Collection<BindingSet> expected =
@@ -113,8 +113,8 @@ public class DavidsTestBOps extends ProxyEmbergraphSailTestCase {
           String.format("select ?p ?o from <%sg1> from <%sg2> where { <%ss> ?p ?o .}", ns, ns, ns);
 
       Resource[] graphs =
-          new Resource[]{
-              vf.createURI(String.format("%sg1", ns)), vf.createURI(String.format("%sg2", ns))
+          new Resource[] {
+            vf.createURI(String.format("%sg1", ns)), vf.createURI(String.format("%sg2", ns))
           };
 
       Collection<BindingSet> expected =
@@ -138,8 +138,8 @@ public class DavidsTestBOps extends ProxyEmbergraphSailTestCase {
       String qs = String.format("select ?s from named <%sg2> where { ?s ?p ?o .}", ns);
 
       Resource[] graphs =
-          new Resource[]{
-              vf.createURI(String.format("%sg1", ns)), vf.createURI(String.format("%sg2", ns))
+          new Resource[] {
+            vf.createURI(String.format("%sg1", ns)), vf.createURI(String.format("%sg2", ns))
           };
 
       Collection<BindingSet> expected = getExpected();
@@ -162,8 +162,8 @@ public class DavidsTestBOps extends ProxyEmbergraphSailTestCase {
               "select ?s from named <%sg1> from named <%sg2> where { ?s ?p ?o .}", ns, ns);
 
       Resource[] graphs =
-          new Resource[]{
-              vf.createURI(String.format("%sg1", ns)), vf.createURI(String.format("%sg2", ns))
+          new Resource[] {
+            vf.createURI(String.format("%sg1", ns)), vf.createURI(String.format("%sg2", ns))
           };
 
       Collection<BindingSet> expected = getExpected();
@@ -185,8 +185,8 @@ public class DavidsTestBOps extends ProxyEmbergraphSailTestCase {
           String.format("select ?s from <%sg1> from named <%sg2> where { ?s ?p ?o .}", ns, ns);
 
       Resource[] graphs =
-          new Resource[]{
-              vf.createURI(String.format("%sg1", ns)), vf.createURI(String.format("%sg2", ns))
+          new Resource[] {
+            vf.createURI(String.format("%sg1", ns)), vf.createURI(String.format("%sg2", ns))
           };
 
       Collection<BindingSet> expected =
@@ -208,8 +208,7 @@ public class DavidsTestBOps extends ProxyEmbergraphSailTestCase {
   private RepositoryConnection getRepositoryConnection(final EmbergraphSail sail)
       throws RepositoryException {
     final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-    final EmbergraphSailRepositoryConnection cxn =
-        repo.getConnection();
+    final EmbergraphSailRepositoryConnection cxn = repo.getConnection();
     cxn.setAutoCommit(false);
     return cxn;
   }

@@ -25,7 +25,7 @@ import cutthecrap.utils.striterators.ICloseableIterator;
 import org.embergraph.rdf.model.EmbergraphStatement;
 
 /*
-* Iterator visiting {@link EmbergraphStatement}s.
+ * Iterator visiting {@link EmbergraphStatement}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

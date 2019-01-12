@@ -24,21 +24,13 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.spo;
 
 import org.embergraph.bop.IElement;
-import org.embergraph.rdf.inf.Justification;
-import org.embergraph.rdf.inf.TruthMaintenance;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.EmbergraphStatement;
-import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.StatementEnum;
-import org.embergraph.rdf.rio.StatementBuffer;
-import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.IRawTripleStore;
-import org.embergraph.relation.accesspath.IElementFilter;
-import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.openrdf.model.Statement;
 
 /*
-* A interface representing an RDF triple, an RDF triple with a statement identifier, or an RDF
+ * A interface representing an RDF triple, an RDF triple with a statement identifier, or an RDF
  * quad. The slots are 64-bit <code>long</code> term identifiers assigned by a lexicon. The 4th
  * position is either unused (triples), the statement identifier (triples with the provenance mode
  * enabled), or the context/named graph position of a quad. This interface treats all four positions
@@ -145,7 +137,7 @@ public interface ISPO extends IElement, Statement {
   boolean isAxiom();
 
   //    /*
-//     * Mark whether or not the {@link SPO} will permit the statement identifier
+  //     * Mark whether or not the {@link SPO} will permit the statement identifier
   //     * to be lazily materialized (default <code>false</code>).
   //     *
   //     * @param sid

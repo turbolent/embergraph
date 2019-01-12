@@ -123,7 +123,7 @@ import org.openrdf.model.URI;
 import org.openrdf.model.vocabulary.FN;
 
 /*
-* Visitor pattern builds {@link IValueExpressionNode}s.
+ * Visitor pattern builds {@link IValueExpressionNode}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -169,16 +169,14 @@ public class ValueExprBuilder extends EmbergraphASTVisitorBase {
   protected FunctionNode unary(final SimpleNode node, final URI functionURI)
       throws VisitorException {
 
-    return new FunctionNode(
-        functionURI, null /* scalarValues */, left(node));
+    return new FunctionNode(functionURI, null /* scalarValues */, left(node));
   }
 
   /** Handle a simple binary function (both children of the node are arguments to the function). */
   protected FunctionNode binary(final SimpleNode node, final URI functionURI)
       throws VisitorException {
 
-    return new FunctionNode(
-        functionURI, null /* scalarValues */, left(node), right(node));
+    return new FunctionNode(functionURI, null /* scalarValues */, left(node), right(node));
   }
 
   /*
@@ -191,7 +189,9 @@ public class ValueExprBuilder extends EmbergraphASTVisitorBase {
     return new FunctionNode(
         functionURI,
         null /* scalarValues */,
-        left(node), right(node), (ValueExpressionNode) node.jjtGetChild(2).jjtAccept(this, null));
+        left(node),
+        right(node),
+        (ValueExpressionNode) node.jjtGetChild(2).jjtAccept(this, null));
   }
 
   /*
@@ -250,8 +250,7 @@ public class ValueExprBuilder extends EmbergraphASTVisitorBase {
 
     if (node.isDistinct()) {
 
-      scalarValues =
-          Collections.singletonMap(AggregateBase.Annotations.DISTINCT, Boolean.TRUE);
+      scalarValues = Collections.singletonMap(AggregateBase.Annotations.DISTINCT, Boolean.TRUE);
     }
 
     if (node instanceof ASTCount && ((ASTCount) node).isWildcard()) {
@@ -260,8 +259,7 @@ public class ValueExprBuilder extends EmbergraphASTVisitorBase {
        * Note: The wildcard is dropped by openrdf.
        */
 
-      return new FunctionNode(
-          functionURI, scalarValues, new VarNode("*"));
+      return new FunctionNode(functionURI, scalarValues, new VarNode("*"));
     }
 
     return new FunctionNode(functionURI, scalarValues, left(node));
@@ -937,7 +935,6 @@ public class ValueExprBuilder extends EmbergraphASTVisitorBase {
       scalarValues.put(GROUP_CONCAT.Annotations.SEPARATOR, separator.getValue().stringValue());
     }
 
-    return new FunctionNode(
-        FunctionRegistry.GROUP_CONCAT, scalarValues, left(node));
+    return new FunctionNode(FunctionRegistry.GROUP_CONCAT, scalarValues, left(node));
   }
 }

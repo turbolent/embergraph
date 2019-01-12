@@ -17,12 +17,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.internal;
 
-import org.embergraph.rdf.internal.impl.AbstractIV;
 import org.embergraph.rdf.internal.impl.literal.PackedLongIV;
 import org.openrdf.model.URI;
 
 /*
-* An extension of the intrinsic types defined by {@link DTE}.
+ * An extension of the intrinsic types defined by {@link DTE}.
  *
  * @author bryan
  * @see BLZG-1507 (Implement support for DTE extension types for URIs)

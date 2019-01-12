@@ -25,7 +25,7 @@ import junit.framework.TestCase;
 import org.embergraph.rdf.model.StatementEnum;
 
 /*
-* Test suite for {@link StatementEnum}.
+ * Test suite for {@link StatementEnum}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

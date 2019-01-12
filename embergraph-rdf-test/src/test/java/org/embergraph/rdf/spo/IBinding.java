@@ -28,7 +28,7 @@ import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IVariable;
 
 /*
-* Interface for a binding.
+ * Interface for a binding.
  *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  */

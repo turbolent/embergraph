@@ -26,7 +26,7 @@ Copyright (C) Embergraph contributors 2019. All rights reserved.
 package org.embergraph.counters;
 
 /*
-* Interface for collecting performance counters for a host or a process.
+ * Interface for collecting performance counters for a host or a process.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -37,7 +37,7 @@ public interface IStatisticsCollector extends ICounterSetAccess {
   int getInterval();
 
   //    /*
-//     * Return the counter hierarchy.
+  //     * Return the counter hierarchy.
   //     */
   //    public CounterSet getCounters();
 

@@ -30,7 +30,7 @@ import org.embergraph.relation.accesspath.IBuffer;
 import org.embergraph.relation.rule.eval.ISolution;
 
 /*
-* Interface exported by the {@link JoinMasterTask}.
+ * Interface exported by the {@link JoinMasterTask}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

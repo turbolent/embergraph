@@ -25,7 +25,7 @@ import junit.framework.TestCase;
 import org.apache.log4j.Logger;
 
 /*
-* This test case demonstrates a state-based validation technique described in
+ * This test case demonstrates a state-based validation technique described in
  * http://www.cs.brown.edu/~mph/Herlihy90a/p96-herlihy.pdf for a "bank account" data type.
  *
  * @todo There are several things that are different about this approach from my preconceptions.<br>
@@ -127,8 +127,8 @@ public class TestAccount extends TestCase {
 
       } else {
 
-      /*
-       * overdraft.
+        /*
+         * overdraft.
          */
 
         high = Math.min(high, cents - change);
@@ -154,7 +154,6 @@ public class TestAccount extends TestCase {
 
       // valid.
       return low <= account.bal && account.bal < high;
-
     }
 
     /*

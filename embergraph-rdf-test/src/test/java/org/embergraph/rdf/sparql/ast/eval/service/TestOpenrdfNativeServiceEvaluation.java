@@ -31,7 +31,7 @@ import org.openrdf.query.BindingSet;
 import org.openrdf.query.impl.MapBindingSet;
 
 /*
-* Data driven test suite for SPARQL 1.1 Federated Query against an openrdf aware SERVICE
+ * Data driven test suite for SPARQL 1.1 Federated Query against an openrdf aware SERVICE
  * implementation running in the same JVM.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

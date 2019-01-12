@@ -30,11 +30,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.ObjectStreamException;
-import java.io.Serializable;
 import java.nio.ByteBuffer;
 
 /*
-* Helper utilities for (de-)serialization of {@link Serializable} objects using the Java
+ * Helper utilities for (de-)serialization of {@link Serializable} objects using the Java
  * serialization mechanisms.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

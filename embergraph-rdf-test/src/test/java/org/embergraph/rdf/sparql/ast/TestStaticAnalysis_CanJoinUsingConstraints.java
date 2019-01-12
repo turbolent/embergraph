@@ -32,7 +32,7 @@ import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.TermId;
 
 /*
-* This test suite is built around around BSBM Q5. Each test has an existing join path and a new
+ * This test suite is built around around BSBM Q5. Each test has an existing join path and a new
  * vertex to be added to the join path. The question is whether or not the vertex <em>can join</em>
  * with the join path using one or more shared variable(s). This tests a method used to
  * incrementally grow a join path when it is dynamically decided that an {@link IJoinNode} may be
@@ -190,8 +190,8 @@ public class TestStaticAnalysis_CanJoinUsingConstraints extends AbstractASTEvalu
         assertTrue(sa.canJoin(t0, t1));
         assertTrue(sa.canJoin(t1, t0));
         if (t0 != t1) {
-        /*
-       * Test join path extension, but not when the vertex used to
+          /*
+           * Test join path extension, but not when the vertex used to
            * extend the path is already present in the join path.
            */
           assertTrue(

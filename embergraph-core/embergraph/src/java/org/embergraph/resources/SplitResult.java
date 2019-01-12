@@ -2,12 +2,11 @@ package org.embergraph.resources;
 
 import java.util.Arrays;
 import org.embergraph.btree.IndexMetadata;
-import org.embergraph.btree.IndexSegment;
 import org.embergraph.mdi.LocalPartitionMetadata;
 import org.embergraph.service.Split;
 
 /*
-* The result of a {@link SplitIndexPartitionTask} including enough metadata to identify the index
+ * The result of a {@link SplitIndexPartitionTask} including enough metadata to identify the index
  * partitions to be created and the index partition to be deleted.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -28,7 +28,7 @@ import junit.framework.TestCase;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /*
-* Test suite for {@link EmbergraphSet}.
+ * Test suite for {@link EmbergraphSet}.
  *
  * <p>Note: The behavior of the sub-set methods is determined by the behavior of the sub-map methods
  * on {@link EmbergraphMap}. Write your tests there.

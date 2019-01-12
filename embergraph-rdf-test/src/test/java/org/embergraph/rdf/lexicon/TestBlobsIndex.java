@@ -50,7 +50,7 @@ import org.embergraph.util.BytesUtil;
 import org.openrdf.model.vocabulary.XMLSchema;
 
 /*
-* Test suite for low-level operations on the BLOBS index.
+ * Test suite for low-level operations on the BLOBS index.
  *
  * @author thompsonbry
  */
@@ -140,7 +140,7 @@ public class TestBlobsIndex extends TestCase2 {
   }
 
   //	/*
-//	 * Unit test for creating the TERMS index.
+  //	 * Unit test for creating the TERMS index.
   //	 */
   //	public void test_termsIndex_create() {
   //
@@ -395,8 +395,8 @@ public class TestBlobsIndex extends TestCase2 {
         // Note: [nunknown] is only set on read.
         assertEquals(0, stats.nunknown.get());
 
-      /*
-       * Verify that the IV is a fully qualified key for the TERMS
+        /*
+         * Verify that the IV is a fully qualified key for the TERMS
          * index.
          */
         final IKeyBuilder keyBuilder = h.newKeyBuilder();
@@ -465,8 +465,8 @@ public class TestBlobsIndex extends TestCase2 {
       // Finally, verify that the assigned IVs are discovered on lookup.
       {
 
-      /*
-       * Setup an array of the expected IVs and clear out the old IVs
+        /*
+         * Setup an array of the expected IVs and clear out the old IVs
          * on the EmbergraphValue objects.
          *
          * Note: Since we can not clear the IV once it has been set, this
@@ -566,8 +566,8 @@ public class TestBlobsIndex extends TestCase2 {
       final IV[] ivs1;
       {
 
-      /*
-       * Generate Values that we will use to read and write on the
+        /*
+         * Generate Values that we will use to read and write on the
          * TERMS index.
          */
         final EmbergraphValue[] values;
@@ -616,8 +616,8 @@ public class TestBlobsIndex extends TestCase2 {
       final IV[] ivs2;
       {
 
-      /*
-       * Generate Values that we will use to read and write on the
+        /*
+         * Generate Values that we will use to read and write on the
          * TERMS index (we need distinct instances since the IV once
          * set can not be cleared from the EmbergraphValue).
          */
@@ -703,7 +703,7 @@ public class TestBlobsIndex extends TestCase2 {
    */
 
   //    /*
-//     * Unit test with a no collisions.
+  //     * Unit test with a no collisions.
   //     */
   //    public void test_noCollisions() {
   //
@@ -712,7 +712,7 @@ public class TestBlobsIndex extends TestCase2 {
   //    }
   //
   //    /*
-//     * Unit test with a small number of collisions.
+  //     * Unit test with a small number of collisions.
   //     */
   //    public void test_someCollisions() {
   //
@@ -721,7 +721,7 @@ public class TestBlobsIndex extends TestCase2 {
   //    }
   //
   //    /*
-//     * Unit test with a the maximum number of collisions.
+  //     * Unit test with a the maximum number of collisions.
   //     */
   //    public void test_lotsOfCollisions() {
   //
@@ -730,7 +730,7 @@ public class TestBlobsIndex extends TestCase2 {
   //	}
   //
   //	/*
-//	 * Unit test with a too many collisions.
+  //	 * Unit test with a too many collisions.
   //	 */
   //	public void test_tooManyCollisions() {
   //
@@ -745,7 +745,7 @@ public class TestBlobsIndex extends TestCase2 {
   //	}
   //
   //	/*
-//	 * Test helper attempts to insert the given number of {@link EmbergraphValue}s
+  //	 * Test helper attempts to insert the given number of {@link EmbergraphValue}s
   //	 * into the terms index. If the maximum collision bucket size is reached,
   //	 * then the exception is thrown back to the caller.
   //	 * <p>
@@ -991,8 +991,8 @@ public class TestBlobsIndex extends TestCase2 {
 
           assertEquals(value, actualValue);
 
-        /*
-       * TODO It should be possible to test more of the tupleSer
+          /*
+           * TODO It should be possible to test more of the tupleSer
            * directly. E.g., by running an iterator over the tuples
            * and visiting them.
            */
@@ -1007,7 +1007,7 @@ public class TestBlobsIndex extends TestCase2 {
   }
 
   //	/*
-//	 * Mock variant of
+  //	 * Mock variant of
   //	 * {@link TermsIndexHelper#generateKVOs(EmbergraphValueSerializer, EmbergraphValue[], int)}
   //	 * which uses a constant value for the assigned hash codes.
   //	 *

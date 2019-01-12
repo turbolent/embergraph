@@ -7,14 +7,13 @@ import org.embergraph.btree.IndexMetadata;
 import org.embergraph.btree.proc.IIndexProcedure;
 import org.embergraph.btree.proc.RangeCountProcedure;
 import org.embergraph.journal.ITx;
-import org.embergraph.journal.WriteExecutorService;
 import org.embergraph.mdi.IMetadataIndex;
 import org.embergraph.mdi.MetadataIndex.MetadataIndexMetadata;
 import org.embergraph.mdi.PartitionLocator;
 import org.embergraph.service.ndx.RawDataServiceTupleIterator;
 
 /*
-* An implementation that performs NO caching. All methods read through to the remote metadata
+ * An implementation that performs NO caching. All methods read through to the remote metadata
  * index. Basically, this hides the RMI requests.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

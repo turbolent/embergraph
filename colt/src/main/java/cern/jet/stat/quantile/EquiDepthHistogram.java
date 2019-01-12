@@ -9,7 +9,7 @@ It is provided "as is" without expressed or implied warranty.
 package cern.jet.stat.quantile;
 
 /*
-* Read-only equi-depth histogram for selectivity estimation. Assume you have collected statistics
+ * Read-only equi-depth histogram for selectivity estimation. Assume you have collected statistics
  * over a data set, among them a one-dimensional equi-depth histogram (quantiles). Then an
  * applications or DBMS might want to estimate the <i>selectivity</i> of some range query
  * <tt>[from,to]</tt>, i.e. the percentage of data set elements contained in the query range. This

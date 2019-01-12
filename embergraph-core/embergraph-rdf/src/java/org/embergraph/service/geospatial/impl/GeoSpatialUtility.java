@@ -23,7 +23,7 @@ package org.embergraph.service.geospatial.impl;
 import org.embergraph.rdf.internal.gis.CoordinateDD;
 
 /*
-* GeoSpatial utility functions.
+ * GeoSpatial utility functions.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$

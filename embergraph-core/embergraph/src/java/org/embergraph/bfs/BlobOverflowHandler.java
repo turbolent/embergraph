@@ -13,7 +13,7 @@ import org.embergraph.rawstore.IRawStore;
 import org.embergraph.util.Bytes;
 
 /*
-* Copies blocks onto the target store during overflow handling. Blocks that are no longer
+ * Copies blocks onto the target store during overflow handling. Blocks that are no longer
  * referenced by the file data index will be left behind on the journal and eventually discarded
  * with the journal.
  *

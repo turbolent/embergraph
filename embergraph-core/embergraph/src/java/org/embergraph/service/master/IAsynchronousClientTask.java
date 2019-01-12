@@ -24,11 +24,10 @@ package org.embergraph.service.master;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 
 /*
-* Interface for remote {@link Callable}s which process chunks of resources as assigned by the
+ * Interface for remote {@link Callable}s which process chunks of resources as assigned by the
  * MappedTaskMaster. This interface extends {@link Remote} since its methods are invoked using RMI.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -42,7 +41,7 @@ public interface IAsynchronousClientTask<U, V> extends Remote {
 
   // Not a remote method.
   //    /*
-//     * This is the main thread for the client. It should setup operations and
+  //     * This is the main thread for the client. It should setup operations and
   //     * then block. The master will interrupt the main thread using
   //     * {@link Future#cancel(boolean)} once (a) all pending work is done; or (b)
   //     * the job is interrupted.

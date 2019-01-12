@@ -30,7 +30,7 @@ import org.embergraph.rdf.spo.SPOPredicate;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /*
-* SPARQL level test suite for the {@link ASTSimpleBindingsOptimizer}.
+ * SPARQL level test suite for the {@link ASTSimpleBindingsOptimizer}.
  *
  * @see <a href="http://trac.blazegraph.com/ticket/653">Slow query with bind</a>
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>

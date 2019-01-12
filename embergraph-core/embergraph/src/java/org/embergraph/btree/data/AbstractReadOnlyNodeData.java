@@ -22,14 +22,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree.data;
 
-import java.nio.ByteBuffer;
-import org.embergraph.btree.IndexSegment;
-import org.embergraph.btree.Leaf;
-import org.embergraph.btree.Node;
 import org.embergraph.util.Bytes;
 
 /*
-* Abstract base class for a read-only view of the data for B+Tree node or leaf. The data are stored
+ * Abstract base class for a read-only view of the data for B+Tree node or leaf. The data are stored
  * in a {@link ByteBuffer}. Access to the keys, values and other metadata are via operations on that
  * {@link ByteBuffer}.
  *
@@ -138,7 +134,7 @@ public abstract class AbstractReadOnlyNodeData<U extends IAbstractNodeData> {
   public static final short FLAG_OVERFLOW_DIRECTORY = 1 << 3;
 
   //    /*
-//     * Bit flag indicating that the tuple revision timestamps have been written
+  //     * Bit flag indicating that the tuple revision timestamps have been written
   //     * out using an array n-bit deltas computed as
   //     * <code>maxTimestamp - minTimestamp</code>, where n is the number of bits
   //     * required to code (maxTimestamp - minTimestamp). This is a relatively
@@ -147,7 +143,7 @@ public abstract class AbstractReadOnlyNodeData<U extends IAbstractNodeData> {
   //    protected static final short DELTA_VERSION_TIMESTAMPS = 1 << 2;
 
   //	/*
-//	 * Bit flag indicating that the int32 hash of the key should be stored in
+  //	 * Bit flag indicating that the int32 hash of the key should be stored in
   //	 * the leaf data record. The function used to compute hash code will be
   //	 * known to the owning data structure. This is primarily intended for use
   //	 * with hash trees.
@@ -191,7 +187,7 @@ public abstract class AbstractReadOnlyNodeData<U extends IAbstractNodeData> {
   // variable length coding is used when it is written out so this field is
   // no longer a constant.
   //    /*
-//     * The size of the field in the data record which encodes the #of tuples
+  //     * The size of the field in the data record which encodes the #of tuples
   //     * spanned by a node.
   //     */
   //    static protected final int SIZEOF_ENTRY_COUNT = Bytes.SIZEOF_INT;

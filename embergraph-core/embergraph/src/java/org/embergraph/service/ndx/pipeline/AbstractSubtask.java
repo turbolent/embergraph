@@ -24,7 +24,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.service.ndx.pipeline;
 
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 import java.util.concurrent.Callable;
@@ -35,7 +34,7 @@ import org.embergraph.relation.accesspath.ChunkMergeSortHelper;
 import org.embergraph.relation.accesspath.IAsynchronousIterator;
 
 /*
-* Abstract implementation of a subtask for the {@link AbstractMasterTask} handles the protocol for
+ * Abstract implementation of a subtask for the {@link AbstractMasterTask} handles the protocol for
  * startup and termination of the subtask. A concrete implementation must handle the chunks of
  * elements being drained from the subtask's {@link #buffer} via {@link #handleChunk(Object[])}.
  *
@@ -317,8 +316,8 @@ public abstract class AbstractSubtask<
 
         if ((idle || master.src.isExhausted()) && buffer.isOpen()) {
           if (buffer.isEmpty()) {
-          /*
-       * Close out buffer. Since the buffer is empty the
+            /*
+             * Close out buffer. Since the buffer is empty the
              * iterator will be quickly be exhausted (it is possible
              * there is one chunk waiting in the iterator) and the
              * subtask will quit the next time through the loop.
@@ -328,15 +327,15 @@ public abstract class AbstractSubtask<
              */
             if (log.isInfoEnabled()) log.info("Closing buffer: idle=" + idle + " : " + this);
             if (idle) {
-            /*
-       * An idle timeout is a conditional close and the
+              /*
+               * An idle timeout is a conditional close and the
                * sink MAY be reopened.
                */
               buffer.abort(new IdleTimeoutException());
               master.stats.subtaskIdleTimeoutCount.incrementAndGet();
             } else {
-            /*
-       * Since redirects of outstanding writes can cause
+              /*
+               * Since redirects of outstanding writes can cause
                * the master to (re-)process redirected chunks,
                * this is treated as a conditional close and the
                * sink MAY be reopened.
@@ -344,8 +343,8 @@ public abstract class AbstractSubtask<
               buffer.abort(new MasterExhaustedException());
             }
             if (chunkSize == 0 && !src.hasNext()) {
-            /*
-       * The iterator is already exhausted so we break out
+              /*
+               * The iterator is already exhausted so we break out
                * of the loop now.
                */
               if (log.isInfoEnabled()) log.info("No more data: " + this);
@@ -355,8 +354,8 @@ public abstract class AbstractSubtask<
         }
 
         if (chunkSize >= buffer.getMinimumChunkSize()) {
-        /*
-       * We have a full chunk worth of data so do not wait longer.
+          /*
+           * We have a full chunk worth of data so do not wait longer.
            */
           if (log.isInfoEnabled())
             log.info(
@@ -372,8 +371,8 @@ public abstract class AbstractSubtask<
         if (chunkSize > 0
             && ((elapsedNanos > buffer.getChunkTimeout())
                 || (!buffer.isOpen() && !src.hasNext()))) {
-        /*
-       * We have SOME data and either (a) the chunk timeout has
+          /*
+           * We have SOME data and either (a) the chunk timeout has
            * expired -or- (b) the buffer is closed and there is
            * nothing more to be read from the iterator. Note that the
            * sink was closed above if the master's buffer was closed.
@@ -393,8 +392,8 @@ public abstract class AbstractSubtask<
           return true;
         }
 
-      /*
-       * Poll the source iterator for another chunk.
+        /*
+         * Poll the source iterator for another chunk.
          *
          * @todo I need to review the logic for choosing a short poll
          * duration here. I believe that this choice is leading to high
@@ -424,8 +423,8 @@ public abstract class AbstractSubtask<
          */
         if (src.hasNext(master.sinkPollTimeoutNanos, TimeUnit.NANOSECONDS)) {
 
-        /*
-       * Take whatever is already buffered but do not allow the
+          /*
+           * Take whatever is already buffered but do not allow the
            * source iterator to combine chunks since that would
            * increase our blocking time by whatever the chunkTimeout
            * is.

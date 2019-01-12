@@ -34,11 +34,10 @@ import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.IResourceLockService;
 import org.embergraph.journal.ITransactionService;
 import org.embergraph.journal.ResourceLockService;
-import org.embergraph.journal.WriteExecutorService;
 import org.embergraph.service.EmbeddedClient.Options;
 
 /*
-* An implementation that uses an embedded database rather than a distributed database. An embedded
+ * An implementation that uses an embedded database rather than a distributed database. An embedded
  * federation runs entirely in process, but uses the same {@link DataService} and {@link
  * MetadataService} implementations as a distributed federation. All services reference the {@link
  * EmbeddedFederation} and use the same thread pool for most operations. However, the {@link
@@ -215,7 +214,7 @@ public class EmbeddedFederation<T> extends AbstractScaleOutFederation<T> {
   }
 
   //    /*
-//     * There are no preconditions for a service start.
+  //     * There are no preconditions for a service start.
   //     */
   //    @Override
   //    protected boolean awaitPreconditions(long timeout, TimeUnit unit)
@@ -427,15 +426,15 @@ public class EmbeddedFederation<T> extends AbstractScaleOutFederation<T> {
 
       if (serviceDirs.length == 0) {
 
-      /*
-       * First time startup.
+        /*
+         * First time startup.
          */
         ndataServices = createFederation(properties, isTransient);
 
       } else {
 
-      /*
-       * Reload services from disk.
+        /*
+         * Reload services from disk.
          */
 
         // expected #of data services.
@@ -449,8 +448,8 @@ public class EmbeddedFederation<T> extends AbstractScaleOutFederation<T> {
 
           final Properties p = new Properties(properties);
 
-        /*
-       * Note: Use DATA_DIR if the metadata service is using a
+          /*
+           * Note: Use DATA_DIR if the metadata service is using a
            * ResourceManager and FILE if it is using a simple Journal.
            */
           p.setProperty(MetadataService.Options.DATA_DIR, serviceDir.toString());
@@ -473,8 +472,8 @@ public class EmbeddedFederation<T> extends AbstractScaleOutFederation<T> {
 
           } else {
 
-          /*
-       * data service.
+            /*
+             * data service.
              */
 
             final DataService dataService = new EmbeddedDataServiceImpl(serviceUUID, p).start();
@@ -576,8 +575,8 @@ public class EmbeddedFederation<T> extends AbstractScaleOutFederation<T> {
 
         serviceDir.mkdirs();
 
-      /*
-       * Create ".mds" file to mark this as the metadata service
+        /*
+         * Create ".mds" file to mark this as the metadata service
          * directory.
          */
         try {

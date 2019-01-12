@@ -29,7 +29,7 @@ import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Unit tests for {@link BlobIV}.
+ * Unit tests for {@link BlobIV}.
  *
  * @author thompsonbry
  */

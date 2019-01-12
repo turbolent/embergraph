@@ -23,10 +23,8 @@ Copyright (C) Embergraph contributors 2019. All rights reserved.
 
 package org.embergraph.btree.isolation;
 
-import java.util.concurrent.atomic.AtomicInteger;
 import org.embergraph.btree.AbstractBTree;
 import org.embergraph.btree.BTree;
-import org.embergraph.btree.Checkpoint;
 import org.embergraph.btree.ICounter;
 import org.embergraph.btree.IIndex;
 import org.embergraph.btree.ILocalBTreeView;
@@ -35,13 +33,10 @@ import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleIterator;
 import org.embergraph.btree.Tuple;
 import org.embergraph.btree.view.FusedView;
-import org.embergraph.journal.AbstractTask;
-import org.embergraph.journal.ITx;
 import org.embergraph.journal.TimestampUtility;
-import org.embergraph.service.IEmbergraphFederation;
 
 /*
-* An index (or index partition) that has been isolated by a transaction. Isolation is achieved by
+ * An index (or index partition) that has been isolated by a transaction. Isolation is achieved by
  * the following mechanisms:
  *
  * <ol>
@@ -324,15 +319,15 @@ public class IsolatedFusedView extends FusedView {
 
       if (tuple.isDeletedVersion() && timestamp == this.startTime) {
 
-      /*
-       * Note: Avoid double-delete when the delete was performed by
+        /*
+         * Note: Avoid double-delete when the delete was performed by
          * this transaction.
          */
 
       } else {
 
-      /*
-       * Write a delete marker whose timestamp is copied from the
+        /*
+         * Write a delete marker whose timestamp is copied from the
          * groundState.
          */
 
@@ -501,8 +496,8 @@ public class IsolatedFusedView extends FusedView {
 
       if (baseEntry != null) {
 
-      /*
-       * If the version counters do not agree then we need to perform
+        /*
+         * If the version counters do not agree then we need to perform
          * write-write conflict resolution.
          */
 
@@ -517,8 +512,8 @@ public class IsolatedFusedView extends FusedView {
             return false;
           }
 
-        /*
-       * Create a temporary index to buffer the conflict
+          /*
+           * Create a temporary index to buffer the conflict
            * resolver's decisions. Once the write set has been
            * validated the versions written (or deleted) by the
            * conflict resolver must be written on the isolated index
@@ -539,8 +534,8 @@ public class IsolatedFusedView extends FusedView {
                     );
           }
 
-        /*
-       * Apply the conflict resolver in an attempt to resolve the
+          /*
+           * Apply the conflict resolver in an attempt to resolve the
            * conflict.
            */
 
@@ -680,8 +675,8 @@ public class IsolatedFusedView extends FusedView {
 
       if (entry.isDeletedVersion()) {
 
-      /*
-       * IFF there was a pre-existing version in the global scope then
+        /*
+         * IFF there was a pre-existing version in the global scope then
          * we remove the key from the global scope so that it will now
          * have a "delete marker" for this key.
          */
@@ -699,8 +694,8 @@ public class IsolatedFusedView extends FusedView {
 
         } else {
 
-        /*
-       * The deleted version never existed in the unisolated index
+          /*
+           * The deleted version never existed in the unisolated index
            * so we do not need to record the entry.
            */
 
@@ -708,8 +703,8 @@ public class IsolatedFusedView extends FusedView {
 
       } else {
 
-      /*
-       * Copy the entry down onto the global scope.
+        /*
+         * Copy the entry down onto the global scope.
          *
          * Note: This writes the [revisionTime] of the transaction on
          * the unisolated index entry.

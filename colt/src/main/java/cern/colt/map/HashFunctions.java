@@ -9,7 +9,7 @@ It is provided "as is" without expressed or implied warranty.
 package cern.colt.map;
 
 /*
-* Provides various hash functions.
+ * Provides various hash functions.
  *
  * @author wolfgang.hoschek@cern.ch
  * @version 1.0, 09/24/99

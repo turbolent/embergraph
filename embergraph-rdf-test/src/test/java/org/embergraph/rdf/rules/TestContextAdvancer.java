@@ -49,7 +49,7 @@ import org.embergraph.relation.accesspath.IAccessPath;
 import org.openrdf.model.vocabulary.RDF;
 
 /*
-* Test suite for the {@link ContextAdvancer}.
+ * Test suite for the {@link ContextAdvancer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

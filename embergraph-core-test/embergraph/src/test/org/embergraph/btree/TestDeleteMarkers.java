@@ -28,7 +28,7 @@ import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /*
-* Test of basic btree operations when delete markers are maintained.
+ * Test of basic btree operations when delete markers are maintained.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

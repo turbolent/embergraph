@@ -38,7 +38,7 @@ import org.embergraph.btree.IndexMetadata;
 import org.embergraph.btree.keys.KV;
 
 /*
-* Test suite for {@link WarmUpTask}.
+ * Test suite for {@link WarmUpTask}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @see <a href="http://trac.bigdata.com/ticket/1050" > pre-heat the journal on startup </a>
@@ -328,8 +328,8 @@ public class TestWarmupJournal extends ProxyTestCase<Journal> {
         // commit the journal (!)
         src.commit();
 
-      /*
-       * Submit task for concurrent writes. Note that this task does not
+        /*
+         * Submit task for concurrent writes. Note that this task does not
          * do a commit, but it does write modifications onto the live
          * indices. Those changes should not be visible in the snapshot.
          * Since the task does not do a commit, the snapshot should have

@@ -23,7 +23,7 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IValueExpression;
 
 /*
-* Interface for boolean value expression BOps. Value expressions perform some evaluation on one or
+ * Interface for boolean value expression BOps. Value expressions perform some evaluation on one or
  * more value expressions as input and produce one boolean as output.
  */
 public interface BooleanValueExpression extends IValueExpression<Boolean> {

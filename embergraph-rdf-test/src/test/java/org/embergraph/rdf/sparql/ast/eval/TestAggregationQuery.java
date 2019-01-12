@@ -21,12 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.eval;
 
-import org.embergraph.bop.solutions.AbstractAggregationTestCase;
-import org.embergraph.bop.solutions.GroupByRewriter;
-import org.embergraph.bop.solutions.GroupByState;
-
 /*
-* Data driven test suite for aggregation queries.
+ * Data driven test suite for aggregation queries.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

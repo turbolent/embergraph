@@ -49,14 +49,13 @@ import org.embergraph.journal.ITx;
 import org.embergraph.journal.Journal;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.relation.accesspath.IAccessPath;
-import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
 import org.embergraph.striterator.ChunkedArrayIterator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /*
-* Unit test for reading on an access path using a {@link Predicate}. This unit test works through
+ * Unit test for reading on an access path using a {@link Predicate}. This unit test works through
  * the create and population of a test relation with some data and verifies the ability to access
  * that data using some different access paths. This sets the ground for testing the evaluation of
  * {@link Predicate}s with various constraints, filters, etc.

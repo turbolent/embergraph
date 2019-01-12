@@ -25,7 +25,7 @@ import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 
 /*
-* The top-level Query.
+ * The top-level Query.
  *
  * @see DatasetNode
  * @see IGroupNode
@@ -96,7 +96,7 @@ public class QueryRoot extends QueryBase implements IPrefixDecls, IDataSetNode {
   }
 
   //    /*
-//     * Return the optional query hints.
+  //     * Return the optional query hints.
   //     *
   //     * @see QueryHints
   //     */
@@ -107,7 +107,7 @@ public class QueryRoot extends QueryBase implements IPrefixDecls, IDataSetNode {
   //    }
   //
   //    /*
-//     * Set the query hints.
+  //     * Set the query hints.
   //     *
   //     * @param queryHints
   //     *            The query hints (may be <code>null</code>).

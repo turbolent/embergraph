@@ -17,10 +17,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.ha.msg;
 
-import org.embergraph.ha.HACommitGlue;
-
 /*
-* Message used for commit in 2-phase commit protocol. The receiver should Commit using the root
+ * Message used for commit in 2-phase commit protocol. The receiver should Commit using the root
  * block from the corresponding prepare message. It is an error if a commit message is observed
  * without the corresponding prepare message.
  *

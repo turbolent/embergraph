@@ -6,9 +6,7 @@ import java.util.concurrent.Callable;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.embergraph.btree.proc.IIndexProcedure;
-import org.embergraph.btree.proc.IKeyArrayIndexProcedure;
 import org.embergraph.btree.proc.IResultHandler;
-import org.embergraph.btree.proc.ISimpleIndexProcedure;
 import org.embergraph.mdi.PartitionLocator;
 import org.embergraph.resources.StaleLocatorException;
 import org.embergraph.service.DataService;
@@ -18,7 +16,7 @@ import org.embergraph.util.InnerCause;
 import org.embergraph.util.concurrent.TaskCounters;
 
 /*
-* Helper class for submitting an {@link IIndexProcedure} to run on an {@link IDataService}. The
+ * Helper class for submitting an {@link IIndexProcedure} to run on an {@link IDataService}. The
  * class traps {@link StaleLocatorException}s and handles the redirection of requests to the
  * appropriate {@link IDataService}. When necessary, the data for an {@link IKeyArrayIndexProcedure}
  * will be re-split in order to distribute the requests to the new index partitions following a

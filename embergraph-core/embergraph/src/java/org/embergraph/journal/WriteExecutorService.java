@@ -18,19 +18,13 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.journal;
 
 import java.lang.ref.WeakReference;
-import java.nio.channels.Channel;
-import java.nio.channels.FileChannel;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.AbstractExecutorService;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Future;
-import java.util.concurrent.FutureTask;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadFactory;
@@ -44,18 +38,15 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 import org.apache.log4j.Logger;
 import org.apache.log4j.MDC;
-import org.embergraph.btree.BTree;
 import org.embergraph.concurrent.NonBlockingLockManagerWithNewDesign;
-import org.embergraph.rawstore.IRawStore;
 import org.embergraph.resources.OverflowManager;
-import org.embergraph.resources.ResourceManager;
 import org.embergraph.resources.StaleLocatorException;
 import org.embergraph.service.DataService;
 import org.embergraph.util.InnerCause;
 import org.embergraph.util.concurrent.WriteTaskCounters;
 
 /*
-* A custom {@link ThreadPoolExecutor} used by the {@link ConcurrencyManager} to execute concurrent
+ * A custom {@link ThreadPoolExecutor} used by the {@link ConcurrencyManager} to execute concurrent
  * unisolated write tasks and perform group commits. Tasks extend {@link AbstractTask}. The caller
  * receives a {@link Future} when they submit a task to the write service. That {@link Future} is
  * NOT available until the next group commit following the successful execution of the write task.
@@ -764,8 +755,8 @@ public class WriteExecutorService extends ThreadPoolExecutor {
 
       if (t == null /*&& ! Thread.interrupted()*/) {
 
-      /*
-       * A write task succeeded.
+        /*
+         * A write task succeeded.
          *
          * Note: if the commit fails, then we need to interrupt all
          * write tasks that are awaiting commit. This means that we can
@@ -776,8 +767,8 @@ public class WriteExecutorService extends ThreadPoolExecutor {
 
         assert nwrites > 0;
 
-      /*
-       *  If an IsolatedActionJournal then we want to unravel any
+        /*
+         *  If an IsolatedActionJournal then we want to unravel any
          *  updates.
          *
          *  So should we even be here doing a group commit?
@@ -798,8 +789,8 @@ public class WriteExecutorService extends ThreadPoolExecutor {
 
         if (!groupCommit()) {
 
-        /*
-       * The task executed fine, but the commit group was aborted.
+          /*
+           * The task executed fine, but the commit group was aborted.
            *
            * @todo what circumstances can cause this other than the
            * journal being shutdown (interrupted) while tasks are
@@ -826,8 +817,8 @@ public class WriteExecutorService extends ThreadPoolExecutor {
 
       } else {
 
-      /*
-       * A write task failed. Its write set has already been
+        /*
+         * A write task failed. Its write set has already been
          * discarded. We log some messages based on the cause and then
          * just return immediately
          */
@@ -838,8 +829,8 @@ public class WriteExecutorService extends ThreadPoolExecutor {
 
         if (InnerCause.isInnerCause(t, ValidationError.class)) {
 
-        /*
-       * ValidationError.
+          /*
+           * ValidationError.
            *
            * The task was a commit for a transaction but the
            * transaction's write set could not be validated. Log a
@@ -850,8 +841,8 @@ public class WriteExecutorService extends ThreadPoolExecutor {
 
         } else if (InnerCause.isInnerCause(t, InterruptedException.class)) {
 
-        /*
-       * InterruptedException.
+          /*
+           * InterruptedException.
            *
            * The task was interrupted, noticed the interrupt, and threw
            * out an InterruptedException.
@@ -861,8 +852,8 @@ public class WriteExecutorService extends ThreadPoolExecutor {
 
         } else if (InnerCause.isInnerCause(t, NoSuchIndexException.class)) {
 
-        /*
-       * NoSuchIndexException.
+          /*
+           * NoSuchIndexException.
            *
            * The task attempted to access an index that does not
            * exist. This is pretty common and often occurs when an
@@ -874,8 +865,8 @@ public class WriteExecutorService extends ThreadPoolExecutor {
 
         } else if (InnerCause.isInnerCause(t, StaleLocatorException.class)) {
 
-        /*
-       * StaleLocatorException.
+          /*
+           * StaleLocatorException.
            *
            * The task attempted to access an index partition that was
            * split, joined or moved since the client obtain the
@@ -890,8 +881,8 @@ public class WriteExecutorService extends ThreadPoolExecutor {
 
         } else {
 
-        /*
-       * The task threw some other kind of exception.
+          /*
+           * The task threw some other kind of exception.
            */
 
           log.warn("Task failed: task=" + r); // , t);
@@ -1205,14 +1196,14 @@ public class WriteExecutorService extends ThreadPoolExecutor {
         // begins.
         final long beginWait = System.currentTimeMillis();
         if (shouldOverflow) {
-        /*
-       * Try to acquire the exclusive write lock so that we can do
+          /*
+           * Try to acquire the exclusive write lock so that we can do
            * synchronous overflow processing.
            */
           try {
             if (!(locked = tryLock(overflowLockRequestTimeout, TimeUnit.MILLISECONDS))) {
-            /*
-       * Note: This can cause serious problem if it
+              /*
+               * Note: This can cause serious problem if it
                * persists since the service will be unable to
                * release old resources on the disk and the live
                * journal extent will continue to grow without
@@ -1242,8 +1233,8 @@ public class WriteExecutorService extends ThreadPoolExecutor {
             return false;
           }
         } else {
-        /*
-       * Wait for some or all running tasks to join the commit
+          /*
+           * Wait for some or all running tasks to join the commit
            * group for greater efficiency (packs more tasks into a
            * commit group by trading off some latency against the size
            * of the commit group).
@@ -1615,7 +1606,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
   //        }
 
   //    /*
-//     * Flag may be set to force overflow processing during the next group
+  //     * Flag may be set to force overflow processing during the next group
   //     * commit. The flag is cleared once an overflow has occurred.
   //     */
   //    public final AtomicBoolean forceOverflow = new AtomicBoolean(false);
@@ -1768,8 +1759,8 @@ public class WriteExecutorService extends ThreadPoolExecutor {
 
       try {
 
-      /*
-       * Do not permit new tasks to start.
+        /*
+         * Do not permit new tasks to start.
          *
          * Note: New tasks can't start while we hold the [lock], but
          * this also ensures that new tasks will not start if we have to
@@ -1781,8 +1772,8 @@ public class WriteExecutorService extends ThreadPoolExecutor {
          */
         pause();
 
-      /*
-       * Wait up to the remaining time for the write service to
+        /*
+         * Wait up to the remaining time for the write service to
          * quiesce.
          */
         granted = quiesce(nanos, TimeUnit.NANOSECONDS);
@@ -1796,16 +1787,16 @@ public class WriteExecutorService extends ThreadPoolExecutor {
 
       } finally {
 
-      /*
-       * Note: If the write service quiesed during the specified
+        /*
+         * Note: If the write service quiesed during the specified
          * timeout then the exclusiveLock is granted and we return
          * without calling exclusiveLock.unlock().
          */
 
         if (!granted) {
 
-        /*
-       * Since the write service did not quiesce the exclusiveLock
+          /*
+           * Since the write service did not quiesce the exclusiveLock
            * WILL NOT be granted so we resume() the write service and
            * release the exclusiveLock.
            */
@@ -2043,7 +2034,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
   }
 
   //    /*
-//     * Orders the tasks by their submit time, which permits a stable sort and is
+  //     * Orders the tasks by their submit time, which permits a stable sort and is
   //     * correlated with their run time since we are only logging the running
   //     * tasks.
   //     *
@@ -2161,8 +2152,8 @@ public class WriteExecutorService extends ThreadPoolExecutor {
 
       if (locked) {
 
-      /*
-       * Note: an exclusive lock is obtained before overflow
+        /*
+         * Note: an exclusive lock is obtained before overflow
          * processing so this is the last commit before we overflow the
          * journal.
          */
@@ -2230,8 +2221,8 @@ public class WriteExecutorService extends ThreadPoolExecutor {
 
       if (locked) {
 
-      /*
-       * Note: an exclusive lock is obtained before overflow
+        /*
+         * Note: an exclusive lock is obtained before overflow
          * processing so this is the last commit before we overflow the
          * journal.
          */
@@ -2368,8 +2359,8 @@ public class WriteExecutorService extends ThreadPoolExecutor {
 
         } catch (InterruptedException ex) {
 
-        /*
-       * The current thread was interrupted waiting for the active
+          /*
+           * The current thread was interrupted waiting for the active
            * tasks to complete so that we can do the abort. At this
            * point:
            *  - All write tasks that are awaiting commit have been

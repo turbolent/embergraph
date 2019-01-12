@@ -29,16 +29,13 @@ import java.io.ObjectOutput;
 import org.embergraph.btree.DefaultTupleSerializer;
 import org.embergraph.btree.IRangeQuery;
 import org.embergraph.btree.ITuple;
-import org.embergraph.btree.ITupleSerializer;
 import org.embergraph.btree.keys.ASCIIKeyBuilderFactory;
-import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.raba.codec.IRabaCoder;
 import org.embergraph.io.ByteArrayBuffer;
-import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.model.StatementEnum;
 
 /*
-* (De-)serializes {@link SPO}s for statement indices.
+ * (De-)serializes {@link SPO}s for statement indices.
  *
  * <p>Note: the encoded key for a statement is formed from the 64-bit <code>long</code> term
  * identifier for the subject, predicate, and object positions of the statement. Each statement
@@ -68,7 +65,7 @@ public class SPOTupleSerializer extends DefaultTupleSerializer<SPO, SPO> {
   private boolean sids;
 
   //    /*
-//     * Used to format the value.
+  //     * Used to format the value.
   //     */
   //    private final transient ByteArrayBuffer buf = new ByteArrayBuffer(0);
 
@@ -271,8 +268,8 @@ public class SPOTupleSerializer extends DefaultTupleSerializer<SPO, SPO> {
     switch (version) {
       case VERSION0:
         keyOrder = SPOKeyOrder.valueOf(in.readByte());
-      /*
-       * New version is not backwards compatible with old journals that
+        /*
+         * New version is not backwards compatible with old journals that
          * used sids.
          */
         sids = false;

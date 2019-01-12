@@ -21,7 +21,7 @@ import java.util.Comparator;
 import org.embergraph.counters.AbstractStatisticsCollector;
 
 /*
-* Helper class pairs a hostname and the normalized availabilty for that host. The availability is
+ * Helper class pairs a hostname and the normalized availabilty for that host. The availability is
  * based on (normalized) <code>1 - LOAD</code> for the host. The <code>LOAD</code> is computed using
  * the {@link IHostMetrics} and an {@link IHostScoringRule} for computing the workload of a host
  * from those metrics. The availability is then computed from the LOAD and normalized.

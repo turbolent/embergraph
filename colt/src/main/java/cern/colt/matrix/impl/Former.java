@@ -9,7 +9,7 @@ It is provided "as is" without expressed or implied warranty.
 package cern.colt.matrix.impl;
 
 /*
-* Formats a double into a string (like sprintf in C).
+ * Formats a double into a string (like sprintf in C).
  *
  * @author wolfgang.hoschek@cern.ch
  * @version 1.0, 21/07/00

@@ -18,13 +18,12 @@ package org.embergraph.rdf.rio.json;
 
 import org.embergraph.rdf.ServiceProviderHook;
 import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
-import org.openrdf.query.resultio.TupleQueryResultParserFactory;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParser;
 import org.openrdf.rio.RDFParserFactory;
 
 /*
-* A {@link TupleQueryResultParserFactory} for parsers of SPARQL-1.1 JSON Tuple Query Results.
+ * A {@link TupleQueryResultParserFactory} for parsers of SPARQL-1.1 JSON Tuple Query Results.
  *
  * @author Peter Ansell
  */

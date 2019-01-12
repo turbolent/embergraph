@@ -69,7 +69,7 @@ import org.openrdf.rio.RDFHandlerException;
 import org.openrdf.rio.RDFParseException;
 
 /*
-* An implementation of Sesame's RepositoryConnection interface that wraps a embergraph {@link
+ * An implementation of Sesame's RepositoryConnection interface that wraps a embergraph {@link
  * RemoteRepository}. This provides SAIL API based client access to a embergraph remote
  * NanoSparqlServer.
  *
@@ -858,8 +858,8 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
               new Runnable() {
                 @Override
                 public void run() {
-                /*
-       * Note: This invokes the tx.abort() without regard to whether or
+                  /*
+                   * Note: This invokes the tx.abort() without regard to whether or
                    * not the connection is open (it will be closed since we closed
                    * it before submitting this for execution).
                    */
@@ -904,7 +904,7 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
       assertOpen();
       final IRemoteTx tx = remoteTx.get();
       // no transaction is active.
-      return tx != null;/*
+      return tx != null; /*
        * The client has an active transaction.
        *
        * Note: This DOES NOT indicate that the transaction is still active on

@@ -9,7 +9,7 @@ It is provided "as is" without expressed or implied warranty.
 package cern.colt.bitvector;
 
 /*
-* Implements quick non polymorphic non bounds checking low level bitvector operations. Includes
+ * Implements quick non polymorphic non bounds checking low level bitvector operations. Includes
  * some operations that interpret sub-bitstrings as long integers.
  *
  * <p><b>WARNING: Methods of this class do not check preconditions.</b> Provided with invalid
@@ -103,7 +103,7 @@ public class QuickBitVector extends Object {
     long mask;
     if (fromIndex
         == toIndex) { // range does not cross unit boundaries; value to retrieve is contained in one
-                      // single long value.
+      // single long value.
       mask = bitMaskWithBitsSetFromTo(fromOffset, toOffset);
       return (bits[fromIndex] & mask) >>> fromOffset;
     }

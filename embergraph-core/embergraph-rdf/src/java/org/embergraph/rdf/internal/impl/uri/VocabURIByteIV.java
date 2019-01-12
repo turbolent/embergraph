@@ -28,12 +28,11 @@ import org.embergraph.rdf.internal.impl.AbstractInlineIV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
-import org.embergraph.rdf.vocab.Vocabulary;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
 /*
-* A fully inlined representation of a URI based on a <code>byte</code> code. The flags byte looks
+ * A fully inlined representation of a URI based on a <code>byte</code> code. The flags byte looks
  * like: <code>VTE=URI, inline=true, extension=false,
  * DTE=XSDByte</code>. It is followed by an <code>unsigned byte</code> value which is the index of
  * the URI in the {@link Vocabulary} class for the triple store.
@@ -138,10 +137,7 @@ public class VocabURIByteIV<V extends EmbergraphURI> extends AbstractInlineIV<V,
 
   public String toString() {
 
-    return "Vocab("
-        + value
-        + ")"
-        + (hasValue() ? "[" + getValue().stringValue() + "]" : "");
+    return "Vocab(" + value + ")" + (hasValue() ? "[" + getValue().stringValue() + "]" : "");
   }
 
   /*

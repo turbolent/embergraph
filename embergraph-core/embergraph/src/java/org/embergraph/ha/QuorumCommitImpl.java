@@ -163,8 +163,8 @@ public class QuorumCommitImpl<S extends HACommitGlue> extends QuorumStateChangeL
 
             final UUID serviceId = joinedServiceIds[i];
 
-          /*
-       * Figure out if this service participated in the
+            /*
+             * Figure out if this service participated in the
              * GATHER.
              */
             final boolean isGatherService;
@@ -189,8 +189,8 @@ public class QuorumCommitImpl<S extends HACommitGlue> extends QuorumStateChangeL
                     timeout,
                     unit);
 
-          /*
-       * Submit task which will execute this message on the
+            /*
+             * Submit task which will execute this message on the
              * remote service.  We will await this task below.
              */
             final Future<Boolean> rf =
@@ -202,8 +202,8 @@ public class QuorumCommitImpl<S extends HACommitGlue> extends QuorumStateChangeL
           }
         }
 
-      /*
-       * Finally, run the operation on the leader using local method
+        /*
+         * Finally, run the operation on the leader using local method
          * call (non-RMI) in the caller's thread to avoid deadlock.
          *
          * Note: Because we are running this in the caller's thread on
@@ -254,8 +254,8 @@ public class QuorumCommitImpl<S extends HACommitGlue> extends QuorumStateChangeL
           // Timeout on this Future.
           log.error(ex, ex);
         } catch (ExecutionException ex) {
-        /*
-       * Note: prepare2Phase() is throwing exceptions if
+          /*
+           * Note: prepare2Phase() is throwing exceptions if
            * preconditions are violated. These thrown exceptions are
            * interpreted as a "NO" vote. An exception can also appear
            * here if there is an RMI failure or even a failure on this
@@ -263,8 +263,8 @@ public class QuorumCommitImpl<S extends HACommitGlue> extends QuorumStateChangeL
            */
           log.error(ex, ex);
         } catch (RuntimeException ex) {
-        /*
-       * Note: ClientFuture.get() can throw a RuntimeException if
+          /*
+           * Note: ClientFuture.get() can throw a RuntimeException if
            * there is a problem with the RMI call. In this case we do
            * not know whether the Future is done.
            */
@@ -376,8 +376,8 @@ public class QuorumCommitImpl<S extends HACommitGlue> extends QuorumStateChangeL
 
         final UUID serviceId = joinedServiceIds[i];
 
-      /*
-       * Submit task on local executor. The task will do an RMI to the
+        /*
+         * Submit task on local executor. The task will do an RMI to the
          * remote service.
          */
         final Future<Void> rf =
@@ -388,8 +388,8 @@ public class QuorumCommitImpl<S extends HACommitGlue> extends QuorumStateChangeL
       }
 
       {
-      /*
-       * Run the operation on the leader using local method call in
+        /*
+         * Run the operation on the leader using local method call in
          * the caller's thread to avoid deadlock.
          */
 
@@ -420,8 +420,8 @@ public class QuorumCommitImpl<S extends HACommitGlue> extends QuorumStateChangeL
           log.error(ex, ex);
           causes.set(i, ex);
         } catch (RuntimeException ex) {
-        /*
-       * Note: ClientFuture.get() can throw a RuntimeException if
+          /*
+           * Note: ClientFuture.get() can throw a RuntimeException if
            * there is a problem with the RMI call. In this case we do
            * not know whether the Future is done.
            */
@@ -478,8 +478,8 @@ public class QuorumCommitImpl<S extends HACommitGlue> extends QuorumStateChangeL
 
         final UUID serviceId = joinedServiceIds[i];
 
-      /*
-       * Submit task on local executor. The task will do an RMI to the
+        /*
+         * Submit task on local executor. The task will do an RMI to the
          * remote service.
          */
         final Future<Void> rf = executorService.submit(new AbortMessageTask(this, serviceId, msg));
@@ -489,8 +489,8 @@ public class QuorumCommitImpl<S extends HACommitGlue> extends QuorumStateChangeL
       }
 
       {
-      /*
-       * Run the operation on the leader using a local method call
+        /*
+         * Run the operation on the leader using a local method call
          * (non-RMI) in the caller's thread to avoid deadlock.
          */
         member.assertLeader(token);
@@ -513,8 +513,8 @@ public class QuorumCommitImpl<S extends HACommitGlue> extends QuorumStateChangeL
           log.error(ex, ex);
           causes.add(ex);
         } catch (RuntimeException ex) {
-        /*
-       * Note: ClientFuture.get() can throw a RuntimeException
+          /*
+           * Note: ClientFuture.get() can throw a RuntimeException
            * if there is a problem with the RMI call. In this case
            * we do not know whether the Future is done.
            */

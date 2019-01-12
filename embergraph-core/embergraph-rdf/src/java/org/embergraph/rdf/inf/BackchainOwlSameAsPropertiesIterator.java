@@ -26,14 +26,13 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import org.apache.log4j.Logger;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.rules.InferenceEngine;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 
 /*
-* Provides backward chaining for property collection and reverse property collection on owl:sameAs
+ * Provides backward chaining for property collection and reverse property collection on owl:sameAs
  * for all access paths.
  *
  * <p>Note:

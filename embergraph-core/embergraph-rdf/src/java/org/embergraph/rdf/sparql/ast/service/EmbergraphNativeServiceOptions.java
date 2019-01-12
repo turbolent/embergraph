@@ -21,11 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.service;
 
-import org.embergraph.bop.IBindingSet;
-import org.embergraph.rdf.internal.IV;
-
 /*
-* Service options base class for embergraph aware services. Such services are expected to
+ * Service options base class for embergraph aware services. Such services are expected to
  * interchange {@link IBindingSet}s containing {@link IV}s. The {@link IV}s are NOT guaranteed to be
  * materialized.
  *

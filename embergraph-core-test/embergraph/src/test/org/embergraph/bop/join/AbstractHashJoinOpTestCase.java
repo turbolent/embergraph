@@ -66,7 +66,7 @@ import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
 
 /*
-* Common base class for hash join with access path unit tests.
+ * Common base class for hash join with access path unit tests.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: AbstractHashJoinOpTestCase.java 5499 2011-11-03 19:49:10Z thompsonbry $

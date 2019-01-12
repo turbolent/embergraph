@@ -6,12 +6,11 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.mdi.PartitionLocator;
 import org.embergraph.relation.accesspath.IBuffer;
 import org.embergraph.service.Split;
-import org.embergraph.service.ndx.AbstractSplitter;
 import org.embergraph.service.ndx.ISplitter;
 import org.embergraph.striterator.IKeyOrder;
 
 /*
-* When the asBound predicates are known to be fully bound, then the {@link AbstractSplitter} can be
+ * When the asBound predicates are known to be fully bound, then the {@link AbstractSplitter} can be
  * used. This approach is quite efficient.
  */
 class Algorithm_FullyBoundPredicate<E extends IBindingSet, F> implements IShardMapper<E, F> {

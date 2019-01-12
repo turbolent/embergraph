@@ -26,7 +26,7 @@ import it.unimi.dsi.fastutil.objects.ObjectList;
 import java.io.Serializable;
 
 /*
-* A map from strings to numbers (and possibly <i>vice versa</i>).
+ * A map from strings to numbers (and possibly <i>vice versa</i>).
  *
  * <p>String maps represent mappings from strings (actually, any subclass of {@link CharSequence})
  * to numbers; they can support {@linkplain #list() reverse mapping}, too. The latter has usually

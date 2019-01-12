@@ -24,7 +24,7 @@ package org.embergraph.util;
 import org.apache.log4j.Logger;
 
 /*
-* A timestamp factory based on {@link System#currentTimeMillis()}. Timestamps reported by this
+ * A timestamp factory based on {@link System#currentTimeMillis()}. Timestamps reported by this
  * factory are guarenteed to be distinct and strictly increasing during the life cycle of the JVM.
  * No guarentee is made if across JVMs or system reboots. A means is available to inform the factory
  * of the earliest timestamp that it may serve. This may be used on restart to ensure that time goes

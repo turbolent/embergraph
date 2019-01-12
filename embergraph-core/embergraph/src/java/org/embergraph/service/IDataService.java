@@ -23,31 +23,15 @@ import java.rmi.RemoteException;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
-import java.util.concurrent.RejectedExecutionException;
-import org.embergraph.bfs.EmbergraphFileSystem;
 import org.embergraph.bop.engine.IQueryPeer;
-import org.embergraph.btree.IIndex;
-import org.embergraph.btree.IRangeQuery;
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.btree.ResultSet;
 import org.embergraph.btree.proc.IIndexProcedure;
-import org.embergraph.journal.IConcurrencyManager;
-import org.embergraph.journal.ITx;
-import org.embergraph.journal.NoSuchIndexException;
-import org.embergraph.journal.Options;
 import org.embergraph.mdi.IResourceMetadata;
-import org.embergraph.mdi.LocalPartitionMetadata;
-import org.embergraph.mdi.PartitionLocator;
 import org.embergraph.rawstore.IBlock;
-import org.embergraph.rawstore.IRawStore;
-import org.embergraph.resources.StaleLocatorException;
-import org.embergraph.resources.StoreManager;
-import org.embergraph.service.ndx.ClientIndexView;
-import org.embergraph.service.ndx.DataServiceTupleIterator;
-import org.embergraph.sparse.SparseRowStore;
 
 /*
-* The data service interface provides remote access to named indices, provides for both unisolated
+ * The data service interface provides remote access to named indices, provides for both unisolated
  * and isolated operations on those indices, and exposes the {@link ITxCommitProtocol} interface to
  * the {@link ITransactionManagerService} service for the coordination of distributed transactions.
  * Clients normally write to the {@link IIndex} interface. The {@link ClientIndexView} provides an
@@ -408,7 +392,7 @@ public interface IDataService extends ITxCommitProtocol, IService, IRemoteExecut
   IQueryPeer getQueryEngine() throws IOException;
 
   //    /*
-//     * Shutdown the service immediately and destroy any persistent data
+  //     * Shutdown the service immediately and destroy any persistent data
   //     * associated with the service.
   //     *
   //     * moved to {@link IService}?

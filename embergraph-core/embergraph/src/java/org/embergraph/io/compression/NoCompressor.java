@@ -34,7 +34,7 @@ import org.embergraph.io.ByteCountInputStream;
 import org.embergraph.io.ByteCountOutputStream;
 
 /*
-* No compression version.
+ * No compression version.
  *
  * @see http://userguide.icu-project.org/conversion/compression
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -28,7 +28,7 @@ import org.embergraph.bop.BOp;
 import org.embergraph.bop.IVariable;
 
 /*
-* Any of the operations which has a FROM and/or TO graph.
+ * Any of the operations which has a FROM and/or TO graph.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

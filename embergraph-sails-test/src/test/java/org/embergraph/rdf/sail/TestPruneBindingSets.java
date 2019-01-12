@@ -28,7 +28,6 @@ import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.vocab.NoVocabulary;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
-import org.openrdf.query.Binding;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQuery;
@@ -36,7 +35,7 @@ import org.openrdf.query.TupleQueryResult;
 import org.openrdf.query.impl.BindingImpl;
 
 /*
-* @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
+ * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
  */
 public class TestPruneBindingSets extends ProxyEmbergraphSailTestCase {
@@ -76,8 +75,7 @@ public class TestPruneBindingSets extends ProxyEmbergraphSailTestCase {
 
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      final EmbergraphSailRepositoryConnection cxn =
-          repo.getConnection();
+      final EmbergraphSailRepositoryConnection cxn = repo.getConnection();
       try {
         cxn.setAutoCommit(false);
 
@@ -94,8 +92,8 @@ public class TestPruneBindingSets extends ProxyEmbergraphSailTestCase {
         cxn.add(d, x, e);
         /**/
 
-      /*
-       * Note: The either flush() or commit() is required to flush the
+        /*
+         * Note: The either flush() or commit() is required to flush the
          * statement buffers to the database before executing any operations
          * that go around the sail.
          */

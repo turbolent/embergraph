@@ -5,7 +5,7 @@ import java.util.UUID;
 import org.embergraph.util.config.NicUtil;
 
 /*
-* Embedded {@link LoadBalancerService}.
+ * Embedded {@link LoadBalancerService}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

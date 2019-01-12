@@ -3,7 +3,7 @@ package org.embergraph.util;
 import java.io.Serializable;
 
 /*
-* A name-value pair.
+ * A name-value pair.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

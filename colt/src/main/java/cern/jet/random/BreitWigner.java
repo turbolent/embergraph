@@ -10,7 +10,7 @@ package cern.jet.random;
 
 import cern.jet.random.engine.RandomEngine;
 /*
-* BreitWigner (aka Lorentz) distribution; See the <A
+ * BreitWigner (aka Lorentz) distribution; See the <A
  * HREF="http://www.cern.ch/RD11/rkb/AN16pp/node23.html#SECTION000230000000000000000"> math
  * definition</A>. A more general form of the Cauchy distribution.
  *

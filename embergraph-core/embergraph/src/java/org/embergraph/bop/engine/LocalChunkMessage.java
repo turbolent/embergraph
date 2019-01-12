@@ -9,7 +9,7 @@ import org.embergraph.bop.fed.FederatedRunningQuery;
 import org.embergraph.relation.accesspath.ThickCloseableIterator;
 
 /*
-* A chunk of intermediate results which are ready to be consumed by some {@link BOp} in a specific
+ * A chunk of intermediate results which are ready to be consumed by some {@link BOp} in a specific
  * query.
  *
  * <p>Note: This class is only used in query evaluation for the standalone database.

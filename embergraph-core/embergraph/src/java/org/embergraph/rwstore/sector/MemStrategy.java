@@ -44,7 +44,7 @@ import org.embergraph.rwstore.IRWStrategy;
 import org.embergraph.rwstore.IRawTx;
 
 /*
-* A buffer implementation backed by an {@link IMemoryManager}.
+ * A buffer implementation backed by an {@link IMemoryManager}.
  *
  * @author <a href="mailto:matyncutcher@users.sourceforge.net">Martyn Cutcher</a>
  * @version $Id$

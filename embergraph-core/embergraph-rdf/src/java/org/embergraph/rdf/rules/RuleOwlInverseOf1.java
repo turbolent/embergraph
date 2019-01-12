@@ -30,7 +30,7 @@ import org.embergraph.relation.rule.Rule;
 import org.openrdf.model.vocabulary.OWL;
 
 /*
-* owl:inverseOf1
+ * owl:inverseOf1
  *
  * <pre>
  *   owl:inverseOf1 : (a owl:inverseOf b) -&gt; (b owl:inverseOf a)

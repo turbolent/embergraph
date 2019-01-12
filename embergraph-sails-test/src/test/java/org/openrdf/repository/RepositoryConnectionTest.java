@@ -690,12 +690,10 @@ public abstract class RepositoryConnectionTest extends TestCase {
       while (result.hasNext()) {
         Statement st = result.next();
         if (name.equals(st.getPredicate())) {
-          assertThat(
-              st.getObject(), anyOf(is(equalTo(nameAlice)), is(equalTo(nameBob))));
+          assertThat(st.getObject(), anyOf(is(equalTo(nameAlice)), is(equalTo(nameBob))));
         } else {
           assertThat(st.getPredicate(), is(equalTo(mbox)));
-          assertThat(
-              st.getObject(), anyOf(is(equalTo(mboxAlice)), is(equalTo(mboxBob))));
+          assertThat(st.getObject(), anyOf(is(equalTo(mboxAlice)), is(equalTo(mboxBob))));
         }
       }
     } finally {
@@ -984,9 +982,7 @@ public abstract class RepositoryConnectionTest extends TestCase {
       while (iter.hasNext()) {
         count++;
         Statement st = iter.next();
-        assertThat(
-            st.getContext(),
-            anyOf(is(nullValue(Resource.class)), is(equalTo(context2))));
+        assertThat(st.getContext(), anyOf(is(nullValue(Resource.class)), is(equalTo(context2))));
       }
 
       assertEquals("there should be three statements", 3, count);
@@ -1053,9 +1049,7 @@ public abstract class RepositoryConnectionTest extends TestCase {
         Statement st = iter.next();
         // we should have _only_ statements from context2, or without
         // context
-        assertThat(
-            st.getContext(),
-            anyOf(is(nullValue(Resource.class)), is(equalTo(context2))));
+        assertThat(st.getContext(), anyOf(is(nullValue(Resource.class)), is(equalTo(context2))));
       }
       assertEquals("there should be four statements", 4, count);
     } finally {
@@ -1070,9 +1064,7 @@ public abstract class RepositoryConnectionTest extends TestCase {
       while (iter.hasNext()) {
         count++;
         Statement st = iter.next();
-        assertThat(
-            st.getContext(),
-            anyOf(is(equalTo(context1)), is(equalTo(context2))));
+        assertThat(st.getContext(), anyOf(is(equalTo(context1)), is(equalTo(context2))));
       }
       assertEquals("there should be four statements", 4, count);
     } finally {

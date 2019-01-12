@@ -74,7 +74,7 @@ import org.embergraph.relation.rule.EmptyAccessPathExpander;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /*
-* Class handles join patterns.
+ * Class handles join patterns.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -817,8 +817,8 @@ public class AST2BOpJoins extends AST2BOpFilters {
 
       if (estimateCosts) {
 
-      /*
-       * Estimate cost of SCAN with C unbound.
+        /*
+         * Estimate cost of SCAN with C unbound.
          *
          * Note: We need to use the global index view in order to estimate
          * the cost of the scan regardless of whether the query runs with
@@ -835,8 +835,8 @@ public class AST2BOpJoins extends AST2BOpFilters {
 
         anns.add(new NV(Annotations.COST_SCAN, scanCostReport));
 
-      /*
-       * Estimate cost of SUBQUERY with C bound (sampling).
+        /*
+         * Estimate cost of SUBQUERY with C bound (sampling).
          *
          * Note: We need to use the global index view in order to estimate
          * the cost of the scan regardless of whether the query runs with
@@ -892,8 +892,8 @@ public class AST2BOpJoins extends AST2BOpFilters {
       //            pred = pred.addAccessPathFilter(newDistinctFilter(pred, summary));
 
       if (scaleOut) {
-      /*
-       * Use the global index view so we can impose the distinct
+        /*
+         * Use the global index view so we can impose the distinct
          * filter.
          */
         anns.add(new NV(Predicate.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.ANY));
@@ -922,8 +922,8 @@ public class AST2BOpJoins extends AST2BOpFilters {
 
       if (dataSetJoin) {
 
-      /*
-       * Setup the data set join (aka parallel subquery).
+        /*
+         * Setup the data set join (aka parallel subquery).
          *
          * TODO This code path can not be made to work correctly. The
          * problem is that we wind up with duplicate SPOs, even after
@@ -948,8 +948,8 @@ public class AST2BOpJoins extends AST2BOpFilters {
 
       } else {
 
-      /*
-       * Parallel subquery using the DGExpander.
+        /*
+         * Parallel subquery using the DGExpander.
          *
          * NOte: See the notes on the DataSetJoin code path for why we
          * can not use that approach for parallel subquery for default
@@ -977,8 +977,8 @@ public class AST2BOpJoins extends AST2BOpFilters {
       //            pred = pred.addAccessPathFilter(newDistinctFilter(pred, summary));
 
       if (scaleOut) {
-      /*
-       * Use the global index view so we can impose the distinct
+        /*
+         * Use the global index view so we can impose the distinct
          * filter.
          */
         anns.add(new NV(Predicate.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.ANY));
@@ -1149,8 +1149,8 @@ public class AST2BOpJoins extends AST2BOpFilters {
         //                map.put(PipelineJoin.Annotations.COALESCE_DUPLICATE_ACCESS_PATHS,
         //                        Boolean.FALSE);
 
-      /*
-       * Note: We need to annotation the JOIN operator to eliminate
+        /*
+         * Note: We need to annotation the JOIN operator to eliminate
          * parallelism, eliminate access path coalescing, and limit the
          * output of the join.
          */
@@ -1158,8 +1158,8 @@ public class AST2BOpJoins extends AST2BOpFilters {
         // cutoff join.
         map.put(PipelineJoin.Annotations.LIMIT, Long.valueOf(cutoffLimit));
 
-      /*
-       * Note: In order to have an accurate estimate of the join hit
+        /*
+         * Note: In order to have an accurate estimate of the join hit
          * ratio we need to make sure that the join operator runs using
          * a single PipelineJoinStats instance which will be visible to
          * us when the query is cutoff. In turn, this implies that the
@@ -1186,8 +1186,8 @@ public class AST2BOpJoins extends AST2BOpFilters {
 
       } else {
 
-      /*
-       * Complex join.
+        /*
+         * Complex join.
          *
          * Note: Complex joins may include operators to materialize of
          * IVs as RDF Values and evaluate FILTERs that must (or might)
@@ -1198,8 +1198,8 @@ public class AST2BOpJoins extends AST2BOpFilters {
          * evaluate the cutoff JOIN?
          */
 
-      /*
-       * FIXME RTO: This appears to be necessary to get reliable
+        /*
+         * FIXME RTO: This appears to be necessary to get reliable
          * reporting for the sum of the fast range counters over the APs
          * and the #of tuples read. Why? If we need to use shared state
          * for reliable computation of cutoff joins then we must use

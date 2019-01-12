@@ -53,7 +53,6 @@ import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.spo.SPO;
-import org.embergraph.rdf.vocab.Vocabulary;
 import org.embergraph.service.geospatial.GeoSpatialConfig;
 import org.embergraph.service.geospatial.GeoSpatialDatatypeConfiguration;
 import org.openrdf.model.Literal;
@@ -62,7 +61,7 @@ import org.openrdf.model.impl.LiteralImpl;
 import org.openrdf.model.impl.URIImpl;
 
 /*
-* Unit tests for encoding and decoding compound keys (such as are used by the statement indices) in
+ * Unit tests for encoding and decoding compound keys (such as are used by the statement indices) in
  * which some of the key components are inline values having variable component lengths while others
  * are term identifiers.
  *

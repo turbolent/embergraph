@@ -11,7 +11,7 @@ package cern.colt.list;
 import cern.colt.function.IntComparator;
 import cern.colt.function.IntProcedure;
 /*
-* Abstract base class for resizable lists holding <code>int</code> elements; abstract. First see
+ * Abstract base class for resizable lists holding <code>int</code> elements; abstract. First see
  * the <a href="package-summary.html">package summary</a> and javadoc <a
  * href="package-tree.html">tree view</a> to get the broad picture.
  */

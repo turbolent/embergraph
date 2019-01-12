@@ -23,8 +23,6 @@ package org.embergraph.rdf.sparql.ast.service;
 
 import java.util.Set;
 import org.embergraph.bop.IVariable;
-import org.embergraph.rdf.sparql.ast.IVariableBindingRequirements;
-import org.embergraph.rdf.sparql.ast.StaticAnalysis;
 
 /** Factory for creating objects which can talk to SPARQL service end points. */
 public interface ServiceFactory {

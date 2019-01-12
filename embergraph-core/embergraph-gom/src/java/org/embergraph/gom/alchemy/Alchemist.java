@@ -18,7 +18,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.gom.alchemy;
 
 /*
-* The RDF Alchemist will generate interface and implementation files to provide a typed interface
+ * The RDF Alchemist will generate interface and implementation files to provide a typed interface
  * to the underlying GPO representations.
  *
  * <p>The pattern generated will exploit the Skin pattern to enable multiple typed interfaces to the

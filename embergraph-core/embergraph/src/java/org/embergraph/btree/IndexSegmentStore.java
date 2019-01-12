@@ -18,7 +18,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.lang.ref.WeakReference;
@@ -40,21 +39,16 @@ import org.embergraph.io.FileChannelUtility;
 import org.embergraph.io.IBufferAccess;
 import org.embergraph.io.IReopenChannel;
 import org.embergraph.io.SerializerUtil;
-import org.embergraph.journal.AbstractJournal;
-import org.embergraph.journal.RootBlockException;
 import org.embergraph.mdi.IResourceMetadata;
-import org.embergraph.mdi.LocalPartitionMetadata;
 import org.embergraph.mdi.SegmentMetadata;
 import org.embergraph.rawstore.AbstractRawStore;
-import org.embergraph.resources.StoreManager;
 import org.embergraph.service.Event;
 import org.embergraph.service.EventResource;
 import org.embergraph.service.EventType;
 import org.embergraph.service.IEmbergraphFederation;
-import org.embergraph.service.ResourceService;
 
 /*
-* A read-only store backed by a file containing a single {@link IndexSegment}.
+ * A read-only store backed by a file containing a single {@link IndexSegment}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -350,8 +344,8 @@ public class IndexSegmentStore extends AbstractRawStore {
     try {
 
       if (open) {
-      /*
-       * The store was already open by the time we got the lock.
+        /*
+         * The store was already open by the time we got the lock.
          *
          * Note: IndexSegment#readNodeOrLeaf() does not have a lock
          * before it invokes this method so the backing store can easily
@@ -364,8 +358,8 @@ public class IndexSegmentStore extends AbstractRawStore {
 
       try {
 
-      /*
-       * Mark as open so that we can use read(long addr) to read other
+        /*
+         * Mark as open so that we can use read(long addr) to read other
          * data (the root node/leaf).
          */
         this.open = true;
@@ -455,8 +449,8 @@ public class IndexSegmentStore extends AbstractRawStore {
 
           seg = (IndexSegment) ctor.newInstance(new Object[] {this});
 
-        /*
-       * Attach the counters maintained by AbstractBTree to those
+          /*
+           * Attach the counters maintained by AbstractBTree to those
            * reported for the IndexSegmentStore.
            *
            * Note: These counters are only allocated when the
@@ -1088,8 +1082,8 @@ public class IndexSegmentStore extends AbstractRawStore {
 
       if (raf != null && raf.getChannel().isOpen()) {
 
-      /*
-       * The channel is still open. If you are allowing concurrent reads
+        /*
+         * The channel is still open. If you are allowing concurrent reads
          * on the channel, then this could indicate that two readers each
          * found the channel closed and that one was able to re-open the
          * channel before the other such that the channel was open again by
@@ -1106,15 +1100,15 @@ public class IndexSegmentStore extends AbstractRawStore {
 
       try {
 
-      /*
-       * Request a shared file lock.
+        /*
+         * Request a shared file lock.
          */
         final FileLock fileLock = raf.getChannel().tryLock(0, Long.MAX_VALUE, true /* shared */);
 
         if (fileLock == null) {
 
-        /*
-       * Note: A null return indicates that someone else holds the
+          /*
+           * Note: A null return indicates that someone else holds the
            * lock. This can happen if the platform does not support shared
            * locks or if someone requested an exclusive file lock.
            */
@@ -1130,8 +1124,8 @@ public class IndexSegmentStore extends AbstractRawStore {
 
         if (!fileLock.isShared()) {
 
-        /*
-       * DO NOT hold an exclusive lock for an index segment store
+          /*
+           * DO NOT hold an exclusive lock for an index segment store
            * file!
            *
            * Note: On platforms where shared locks are not support the JDK
@@ -1146,8 +1140,8 @@ public class IndexSegmentStore extends AbstractRawStore {
 
       } catch (OverlappingFileLockException ex) {
 
-      /*
-       * Note: OverlappingFileLockException can be thrown when there are
+        /*
+         * Note: OverlappingFileLockException can be thrown when there are
          * concurrent requests to obtain the same shared lock. I consider
          * this a JDK bug. It should be possible to service both requests
          * without deadlock.
@@ -1164,8 +1158,8 @@ public class IndexSegmentStore extends AbstractRawStore {
 
       } catch (IOException ex) {
 
-      /*
-       * Note: This is true of NFS volumes. This is Ok and should be
+        /*
+         * Note: This is true of NFS volumes. This is Ok and should be
          * ignored. However the backing file is not protected against
          * accidental deletes or overwrites.
          */

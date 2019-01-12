@@ -33,7 +33,7 @@ import org.embergraph.journal.Journal;
 import org.embergraph.journal.TimestampUtility;
 
 /*
-* Commit the operation. If the operation is isolated by a transaction, then the transaction is
+ * Commit the operation. If the operation is isolated by a transaction, then the transaction is
  * committed. Otherwise an unisolated commit is performed.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -88,8 +88,8 @@ public final class CommitOp extends PipelineOp {
 
       if (TimestampUtility.isReadOnly(timestamp)) {
 
-      /*
-       * Must be read-write tx or unisolated operation.
+        /*
+         * Must be read-write tx or unisolated operation.
          */
 
         throw new UnsupportedOperationException();
@@ -110,16 +110,16 @@ public final class CommitOp extends PipelineOp {
 
       if (TimestampUtility.isUnisolated(timestamp)) {
 
-      /*
-       * Unisolated commit.
+        /*
+         * Unisolated commit.
          */
 
         commitTime = store.commit();
 
       } else {
 
-      /*
-       * Commit transaction.
+        /*
+         * Commit transaction.
          */
 
         commitTime = store.commit(timestamp);

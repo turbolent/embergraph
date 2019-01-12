@@ -31,7 +31,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
@@ -64,13 +63,12 @@ import org.embergraph.journal.ITx;
 import org.embergraph.journal.TimestampUtility;
 import org.embergraph.rdf.lexicon.ITextIndexer.FullTextQuery;
 import org.embergraph.relation.AbstractRelation;
-import org.embergraph.relation.locator.DefaultResourceLocator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 import org.embergraph.util.concurrent.ExecutionHelper;
 
 /*
-* Full text indexing and search support.
+ * Full text indexing and search support.
  *
  * <p>The basic data model consists of documents, fields in documents, and tokens extracted by an
  * analyzer from those fields.
@@ -277,7 +275,7 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
     String DEFAULT_FIELDS_ENABLED = "false";
 
     //        /*
-//         * When <code>true</code>, the <code>localTermWeight</code> is stored
+    //         * When <code>true</code>, the <code>localTermWeight</code> is stored
     //         * using double-precision. When <code>false</code>, it is stored using
     //         * single-precision.
     //         */
@@ -332,17 +330,17 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
   private final long timeout;
 
   //    /*
-//     * @see Options#FIELDS_ENABLED
+  //     * @see Options#FIELDS_ENABLED
   //     */
   //    private final boolean fieldsEnabled;
   //
   //    /*
-//     * @see Options#DOUBLE_PRECISION
+  //     * @see Options#DOUBLE_PRECISION
   //     */
   //    private final boolean doublePrecision;
   //
   //    /*
-//     * Return the value configured by the {@link Options#FIELDS_ENABLED}
+  //     * Return the value configured by the {@link Options#FIELDS_ENABLED}
   //     * property.
   //     */
   //    public boolean isFieldsEnabled() {
@@ -364,17 +362,17 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
   private final ConcurrentWeakValueCacheWithTimeout<FullTextQuery, Hit<V>[]> cache;
 
   //    /*
-//     * @see Options#DOCID_FACTORY_CLASS
+  //     * @see Options#DOCID_FACTORY_CLASS
   //     */
   //    private final IKeyBuilderExtension<V> docIdFactory;
 
   //    /*
-//     * The concrete {@link IRecordBuilder} instance.
+  //     * The concrete {@link IRecordBuilder} instance.
   //     */
   //    private final IRecordBuilder<V> recordBuilder;
   //
   //    /*
-//     * Return the object responsible for encoding and decoding the tuples
+  //     * Return the object responsible for encoding and decoding the tuples
   //     * in the full text index.
   //     */
   //    public final IRecordBuilder<V> getRecordBuilder() {
@@ -892,8 +890,8 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
 
       if (buffer.size() == 0) {
 
-      /*
-       * There were no terms after stopword extration.
+        /*
+         * There were no terms after stopword extration.
          */
 
         log.warn("No terms after stopword extraction: query=" + query);
@@ -1344,8 +1342,8 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
           log.info("Interrupted - only partial results will be returned.");
         }
 
-      /*
-       * Yes, let's toss it.  We were getting into a situation
+        /*
+         * Yes, let's toss it.  We were getting into a situation
          * where the ExecutionHelper above received an interrupt
          * but we still went through the heavy-weight filtering
          * operations below (matchExact or matchRegex).

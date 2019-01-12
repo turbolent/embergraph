@@ -41,7 +41,6 @@ import java.util.concurrent.Future;
 import org.apache.log4j.Logger;
 import org.embergraph.bop.IPredicate;
 import org.embergraph.journal.AbstractTask;
-import org.embergraph.journal.ConcurrencyManager;
 import org.embergraph.journal.IConcurrencyManager;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.ITx;
@@ -53,12 +52,9 @@ import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.IStep;
 import org.embergraph.service.DataService;
 import org.embergraph.service.DataServiceCallable;
-import org.embergraph.service.IDataServiceCallable;
-import org.embergraph.service.ndx.ClientIndexView;
-import org.embergraph.service.ndx.IClientIndex;
 
 /*
-* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public abstract class AbstractStepTask extends DataServiceCallable<RuleStats>
@@ -324,8 +320,8 @@ public abstract class AbstractStepTask extends DataServiceCallable<RuleStats>
     {
       if (util.isClosureProgram(step)) {
 
-      /*
-       * If this is not a rule, and it is not a closure of a flat rule
+        /*
+         * If this is not a rule, and it is not a closure of a flat rule
          * set, and there is a buried closure operation inside of the
          * program then we have a problem since the steps above the
          * closure should have been flattened out by the caller and run
@@ -514,8 +510,8 @@ public abstract class AbstractStepTask extends DataServiceCallable<RuleStats>
 
             if (log.isInfoEnabled()) log.info("Executing inner task: " + this);
 
-          /*
-       * Override to use the IJournal exposed by the AbstractTask.
+            /*
+             * Override to use the IJournal exposed by the AbstractTask.
              * This IJournal imposes the correct isolation control and
              * allows access to the unisolated indices (if you have declared
              * them and are running an UNISOLATED AbstractTask).

@@ -13,7 +13,7 @@ import cern.colt.matrix.DoubleMatrix2D;
 import cern.jet.math.Functions;
 
 /*
-* Sequential implementation of the Basic Linear Algebra System.
+ * Sequential implementation of the Basic Linear Algebra System.
  *
  * @author wolfgang.hoschek@cern.ch
  * @version 0.9, 16/04/2000

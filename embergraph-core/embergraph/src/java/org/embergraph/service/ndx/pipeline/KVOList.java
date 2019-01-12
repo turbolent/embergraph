@@ -1,11 +1,10 @@
 package org.embergraph.service.ndx.pipeline;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.atomic.AtomicReference;
 import org.embergraph.btree.keys.KVO;
 
 /*
-* Extends {@link KVO} to allow duplicates to be gathered together in a doubly-linked list. This is
+ * Extends {@link KVO} to allow duplicates to be gathered together in a doubly-linked list. This is
  * used to facilitate duplicate removal where the goal is to eliminate the index write for the
  * duplicate instance(s) but where we still want to take some after action for each distinct
  * instance.

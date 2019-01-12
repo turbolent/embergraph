@@ -54,7 +54,7 @@ import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /*
-* Test suite for the {@link ASTConstructOptimizer}. This is applied for both DESCRIBE and CONSTRUCT
+ * Test suite for the {@link ASTConstructOptimizer}. This is applied for both DESCRIBE and CONSTRUCT
  * queries. It generates the {@link ProjectionNode}, populating it with all of the variables in the
  * {@link ConstructNode}.
  *
@@ -773,13 +773,13 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                 null /* c */,
                 Scope.DEFAULT_CONTEXTS));
 
-      /*
-       * The OFFSET/LIMIT.
+        /*
+         * The OFFSET/LIMIT.
          */
         subqueryRoot.setSlice(new SliceNode(1L /* offset */, 1L /* limit */));
 
-      /*
-       * Projection for the sub-SELECT is the same as for the
+        /*
+         * Projection for the sub-SELECT is the same as for the
          * top-level query.
          */
         {
@@ -1053,13 +1053,13 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                 null /* c */,
                 Scope.DEFAULT_CONTEXTS));
 
-      /*
-       * The OFFSET/LIMIT.
+        /*
+         * The OFFSET/LIMIT.
          */
         subqueryRoot.setSlice(new SliceNode(1L /* offset */, 1L /* limit */));
 
-      /*
-       * The ORDER_BY clause.
+        /*
+         * The ORDER_BY clause.
          */
         {
           final OrderByNode orderBy = new OrderByNode();
@@ -1069,8 +1069,8 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
           subqueryRoot.setOrderBy(orderBy);
         }
 
-      /*
-       * Projection for the sub-SELECT is the same as for the
+        /*
+         * Projection for the sub-SELECT is the same as for the
          * top-level query.
          */
         {

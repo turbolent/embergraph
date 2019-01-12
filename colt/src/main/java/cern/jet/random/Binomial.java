@@ -12,7 +12,7 @@ import cern.jet.math.Arithmetic;
 import cern.jet.random.engine.RandomEngine;
 import cern.jet.stat.Probability;
 /*
-* Binomial distribution; See the <A
+ * Binomial distribution; See the <A
  * HREF="http://www.cern.ch/RD11/rkb/AN16pp/node19.html#SECTION000190000000000000000"> math
  * definition</A> and <A HREF="http://www.statsoft.com/textbook/glosb.html#Binomial Distribution">
  * animated definition</A>.

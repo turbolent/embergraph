@@ -4,7 +4,7 @@ import java.util.UUID;
 import java.util.concurrent.TimeoutException;
 
 /*
-* Interface for decision making about the load imposed on services.
+ * Interface for decision making about the load imposed on services.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -27,7 +27,7 @@ import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.eval.IJoinNexus;
 
 /*
-* A factory for {@link IEvaluationPlan}s that do not reorder the predicates in the tail.
+ * A factory for {@link IEvaluationPlan}s that do not reorder the predicates in the tail.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

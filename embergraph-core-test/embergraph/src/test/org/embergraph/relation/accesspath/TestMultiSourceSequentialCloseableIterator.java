@@ -32,7 +32,7 @@ import java.util.concurrent.TimeUnit;
 import junit.framework.TestCase2;
 
 /*
-* Test suite for the {@link MultiSourceSequentialCloseableIterator}.
+ * Test suite for the {@link MultiSourceSequentialCloseableIterator}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

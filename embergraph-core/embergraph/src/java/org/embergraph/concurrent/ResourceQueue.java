@@ -30,7 +30,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.apache.log4j.Logger;
 
 /*
-* Unbounded queue of operations waiting to gain an exclusive lock on a resource. By default, the
+ * Unbounded queue of operations waiting to gain an exclusive lock on a resource. By default, the
  * queue imposes a "fair" schedule for access to the resource. Deadlocks among resources are
  * detected using a <code>WAITS_FOR</code> graph that is shared by all resources and transactions
  * for a given database instance.
@@ -305,8 +305,8 @@ public class ResourceQueue<R, T> {
 
         try {
 
-        /*
-       * Note: this operation is atomic.  If it fails, then none
+          /*
+           * Note: this operation is atomic.  If it fails, then none
            * of the edges were added.
            */
 
@@ -314,8 +314,8 @@ public class ResourceQueue<R, T> {
 
         } catch (DeadlockException ex) {
 
-        /*
-       * Reject the lock request since it would cause a deadlock.
+          /*
+           * Reject the lock request since it would cause a deadlock.
            */
 
           log.warn("Deadlock: tx=" + tx + ", queue=" + this /*, ex*/);
@@ -364,8 +364,8 @@ public class ResourceQueue<R, T> {
             }
           }
 
-        /*
-       * Note: We can continue here either because the Condition
+          /*
+           * Note: We can continue here either because the Condition
            * that we were awaiting has been signalled -or- because of
            * a timeout (handled above) -or- for no reason.
            */
@@ -379,8 +379,8 @@ public class ResourceQueue<R, T> {
 
           if (queue.peek() == tx) {
 
-          /*
-       * Note: tx is at the head of the queue while it holds
+            /*
+             * Note: tx is at the head of the queue while it holds
              * the lock.
              */
 
@@ -392,8 +392,8 @@ public class ResourceQueue<R, T> {
 
       } catch (Throwable t) {
 
-      /*
-       * At this point there are edges in the WAITS_FOR graph and the
+        /*
+         * At this point there are edges in the WAITS_FOR graph and the
          * tx is on the queue. While we appended it to the end of the
          * queue above it can have "moved" since both due to locks that
          * have been granted to other transactions and due to other
@@ -422,16 +422,16 @@ public class ResourceQueue<R, T> {
 
           synchronized (waitsFor) {
 
-          /*
-       * Note: If the transaction is at the head of the queue
+            /*
+             * Note: If the transaction is at the head of the queue
              * then it is probably NOT waiting. However, this case
              * should be quite rare in lock().
              */
 
             try {
 
-            /*
-       * Note: Assume that tx is waiting on something
+              /*
+               * Note: Assume that tx is waiting on something
                * unless we have absolute proof to the contrary.
                */
 
@@ -514,8 +514,8 @@ public class ResourceQueue<R, T> {
 
             } catch (Throwable t) {
 
-            /*
-       * Note: log the error but continue otherwise we
+              /*
+               * Note: log the error but continue otherwise we
                * will deadlock other tasks waiting on this
                * resource since throwing the exception will mean
                * that we do not invoke [available.signalAll()] and

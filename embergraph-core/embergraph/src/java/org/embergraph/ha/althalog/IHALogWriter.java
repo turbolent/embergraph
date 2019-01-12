@@ -24,7 +24,7 @@ import org.embergraph.ha.msg.IHAWriteMessage;
 import org.embergraph.journal.IRootBlockView;
 
 /*
-* A constrained interface to a new HALogFile to allow writing.
+ * A constrained interface to a new HALogFile to allow writing.
  *
  * <p>In order to write to an HALogFile, a writer must be requested. The implementation is private
  * to the HALogFile.

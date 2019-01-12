@@ -27,7 +27,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -38,7 +37,7 @@ import org.embergraph.util.BytesUtil;
 import org.embergraph.util.BytesUtil.UnsignedByteArrayComparator;
 
 /*
-* Test suite for high level operations that build variable length _unsigned_ byte[] keys from
+ * Test suite for high level operations that build variable length _unsigned_ byte[] keys from
  * various data types and unicode strings.
  *
  * @see <a href="http://docs.hp.com/en/B3906-90004/ch02s02.html#d0e1095>ranges on negative float and
@@ -750,7 +749,7 @@ public class TestKeyBuilder extends TestCase2 {
    * Moved to TestKeyBuilderCollation.  bbt 7/15/2010.
    */
   //    /*
-//     * Test of the ability to normalize trailing pad characters.
+  //     * Test of the ability to normalize trailing pad characters.
   //     */
   //    public void test_keyBuilder_normalizeTrailingPadCharacters() {
   //
@@ -788,7 +787,7 @@ public class TestKeyBuilder extends TestCase2 {
   //    }
   //
   //    /*
-//     * Test verifies that very long strings are truncated.
+  //     * Test verifies that very long strings are truncated.
   //     *
   //     * @todo verify that trailing whitespace is removed after truncation rather
   //     *       than before truncation.
@@ -807,7 +806,7 @@ public class TestKeyBuilder extends TestCase2 {
   //    }
   //
   //    /*
-//     * Test verifies the order among unicode sort keys, including verifying that
+  //     * Test verifies the order among unicode sort keys, including verifying that
   //     * the pad byte causes a prefix such as "bro" to sort before a term which
   //     * extends that prefix, such as "brown".
   //     */
@@ -839,7 +838,7 @@ public class TestKeyBuilder extends TestCase2 {
   //    }
   //
   //    /*
-//     * <p>
+  //     * <p>
   //     * Test that lexiographic order is maintain when a variable length Unicode
   //     * field is followed by another field. This test works by comparing the
   //     * original multi-field key with the multi-field key formed from the
@@ -2369,7 +2368,7 @@ public class TestKeyBuilder extends TestCase2 {
   }
   //
   //    /*
-//     * Note: must have normalized representation of the BigDecimal to do
+  //     * Note: must have normalized representation of the BigDecimal to do
   //     * equals(). BigDecimal#equals(foo) compares both value and scale, while we
   //     * can only test on value here.
   //     */

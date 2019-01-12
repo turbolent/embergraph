@@ -31,7 +31,7 @@ import org.embergraph.btree.keys.KVO;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 
 /*
-* Unit tests for the control logic used by {@link AbstractMasterTask} and friends.
+ * Unit tests for the control logic used by {@link AbstractMasterTask} and friends.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

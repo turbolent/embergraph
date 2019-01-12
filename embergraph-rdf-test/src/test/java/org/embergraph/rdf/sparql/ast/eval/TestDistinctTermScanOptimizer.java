@@ -23,12 +23,10 @@ import junit.framework.TestSuite;
 import org.embergraph.bop.BOpUtility;
 import org.embergraph.bop.join.DistinctTermScanOp;
 import org.embergraph.rdf.sparql.ast.NamedSubqueryInclude;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTDistinctTermScanOptimizer;
-import org.embergraph.rdf.spo.SPOKeyOrder;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /*
-* SPARQL level test suite for the {@link ASTDistinctTermScanOptimizer} and its physical operator
+ * SPARQL level test suite for the {@link ASTDistinctTermScanOptimizer} and its physical operator
  * {@link DistinctTermScanOp}.
  *
  * @see <a href="http://trac.blazegraph.com/ticket/1035" > DISTINCT PREDICATEs query is slow </a>

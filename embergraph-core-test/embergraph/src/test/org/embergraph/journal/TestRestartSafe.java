@@ -34,7 +34,7 @@ import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.WormAddressManager;
 
 /*
-* Test suite for restart-safety of {@link BTree}s backed by an {@link IJournal}.
+ * Test suite for restart-safety of {@link BTree}s backed by an {@link IJournal}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -72,7 +72,7 @@ public class TestRestartSafe extends ProxyTestCase<Journal> {
   //    private Properties properties;
 
   //    /*
-//     * Re-open the same backing store.
+  //     * Re-open the same backing store.
   //     *
   //     * @param store
   //     *            the existing store.
@@ -212,8 +212,8 @@ public class TestRestartSafe extends ProxyTestCase<Journal> {
           journal.commit();
         }
 
-      /*
-       * restart, re-opening the same file.
+        /*
+         * restart, re-opening the same file.
          */
         {
           journal = reopenStore(journal);
@@ -328,8 +328,8 @@ public class TestRestartSafe extends ProxyTestCase<Journal> {
           journal.commit();
         }
 
-      /*
-       * restart, re-opening the same file.
+        /*
+         * restart, re-opening the same file.
          */
         {
           journal = reopenStore(journal);

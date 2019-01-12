@@ -23,7 +23,7 @@ package org.embergraph.rdf.sail;
 import java.util.Random;
 
 /*
-* TestCase to test single writer/mutiple transaction committed readers with SAIL interface.
+ * TestCase to test single writer/mutiple transaction committed readers with SAIL interface.
  *
  * @author Martyn Cutcher
  */

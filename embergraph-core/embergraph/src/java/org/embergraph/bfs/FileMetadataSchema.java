@@ -2,10 +2,9 @@ package org.embergraph.bfs;
 
 import org.embergraph.sparse.KeyType;
 import org.embergraph.sparse.Schema;
-import org.embergraph.sparse.SparseRowStore;
 
 /*
-* The schema for metadata about file versions stored in the {@link EmbergraphFileSystem}. Some well
+ * The schema for metadata about file versions stored in the {@link EmbergraphFileSystem}. Some well
  * known properties are always defined, but any property may be stored - ideally within their own
  * namespace!
  *

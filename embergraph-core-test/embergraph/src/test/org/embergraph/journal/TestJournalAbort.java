@@ -15,7 +15,7 @@ import org.embergraph.util.Bytes;
 import org.embergraph.util.InnerCause;
 
 /*
-* Test suite for a failure to handle errors inside of abort() by marking the journal as requiring
+ * Test suite for a failure to handle errors inside of abort() by marking the journal as requiring
  * abort().
  *
  * @see #1021 (Add critical section protection to AbstractJournal.abort() and

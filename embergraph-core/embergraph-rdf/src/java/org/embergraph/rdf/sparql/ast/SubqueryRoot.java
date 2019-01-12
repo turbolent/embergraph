@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IVariable;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTSparql11SubqueryOptimizer;
 
 /** A SPARQL 1.1 style subquery. */
 public class SubqueryRoot extends SubqueryBase implements IJoinNode {

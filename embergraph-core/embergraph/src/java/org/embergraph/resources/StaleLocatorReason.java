@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.resources;
 
 /*
-* Typesafe enumeration of the possible reasons why an index partition locator is stale.
+ * Typesafe enumeration of the possible reasons why an index partition locator is stale.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -37,7 +37,7 @@ import org.embergraph.rdf.sparql.ast.SubqueryRoot;
 import org.embergraph.rdf.sparql.ast.VarNode;
 
 /*
-* Information about FILTER (NOT) EXISTS patterns within a given join group. A FILTER (NOT) EXIST
+ * Information about FILTER (NOT) EXISTS patterns within a given join group. A FILTER (NOT) EXIST
  * pattern is internally represented through an ASK subquery (testing the inner statement pattern
  * and binding a variable --exists-i) and a subsequent FILTER expression guaranteeing that the
  * variable is true (FILTER EXISTS) or false (FILTER NOT EXISTS).

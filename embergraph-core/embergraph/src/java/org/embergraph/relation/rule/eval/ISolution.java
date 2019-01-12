@@ -27,7 +27,7 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.relation.rule.IRule;
 
 /*
-* A solution bundles together any of (a) the materialized element corresponding to the bindings on
+ * A solution bundles together any of (a) the materialized element corresponding to the bindings on
  * the head of an {@link IRule}; (b) the {@link IBindingSet} used to generate that solution; and (c)
  * the {@link IRule} from which those bindings were computed. All data are optional. Which data are
  * included depends on a set of bit flags known to the {@link IJoinNexus} implementation and the

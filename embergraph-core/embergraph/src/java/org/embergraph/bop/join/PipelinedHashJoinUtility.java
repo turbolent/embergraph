@@ -29,7 +29,7 @@ import org.embergraph.bop.PipelineOp;
 import org.embergraph.relation.accesspath.UnsyncLocalOutputBuffer;
 
 /*
-* Special interface for pipelines hash join implementations, offering a method that combines
+ * Special interface for pipelines hash join implementations, offering a method that combines
  * acceptance and outputting of solutions.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>

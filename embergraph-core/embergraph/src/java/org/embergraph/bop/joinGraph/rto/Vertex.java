@@ -20,7 +20,6 @@ package org.embergraph.bop.joinGraph.rto;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import org.apache.log4j.Logger;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpContext;
@@ -33,14 +32,12 @@ import org.embergraph.bop.ap.SampleIndex;
 import org.embergraph.bop.ap.SampleIndex.SampleType;
 import org.embergraph.bop.bindingSet.ListBindingSet;
 import org.embergraph.bop.engine.QueryEngine;
-import org.embergraph.htree.HTree;
 import org.embergraph.relation.IRelation;
 import org.embergraph.relation.accesspath.IAccessPath;
-import org.embergraph.relation.accesspath.IBindingSetAccessPath;
 import org.embergraph.striterator.IChunkedIterator;
 
 /*
-* A vertex of the join graph is an annotated relation (this corresponds to an {@link IPredicate}
+ * A vertex of the join graph is an annotated relation (this corresponds to an {@link IPredicate}
  * with additional annotations to support the adaptive query optimization algorithm).
  *
  * <p>The unique identifier for a {@link Vertex} (within a given join graph) is the {@link

@@ -21,14 +21,12 @@ Copyright (C) Embergraph contributors 2019. All rights reserved.
  */
 package org.embergraph.rdf.task;
 
-import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.atomic.AtomicReference;
 import org.embergraph.counters.CAT;
 import org.embergraph.journal.IConcurrencyManager;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.IReadOnly;
-import org.embergraph.journal.ITx;
 import org.embergraph.journal.Journal;
 import org.embergraph.journal.TimestampUtility;
 import org.embergraph.rdf.changesets.IChangeLog;
@@ -37,15 +35,13 @@ import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sail.EmbergraphSail.EmbergraphSailConnection;
 import org.embergraph.rdf.sail.EmbergraphSailRepository;
 import org.embergraph.rdf.sail.EmbergraphSailRepositoryConnection;
-import org.embergraph.rdf.sail.webapp.DatasetNotFoundException;
-import org.embergraph.resources.IndexManager;
 import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.sparse.GlobalRowStoreHelper;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.sail.SailException;
 
 /*
-* Base class for task-oriented concurrency. Directly derived classes are suitable for internal
+ * Base class for task-oriented concurrency. Directly derived classes are suitable for internal
  * tasks (stored queries, stored procedures, etc) while REST API tasks are based on a specialized
  * subclass that also provides for access to the HTTP request and response.
  *
@@ -144,7 +140,7 @@ public abstract class AbstractApiTask<T> implements IApiTask<T>, IReadOnly {
   }
 
   //    /*
-//    * Return a view of the {@link AbstractTripleStore} for the namespace and
+  //    * Return a view of the {@link AbstractTripleStore} for the namespace and
   //    * timestamp associated with this task.
   //    *
   //    * @return The {@link AbstractTripleStore} -or- <code>null</code> if none is
@@ -157,7 +153,7 @@ public abstract class AbstractApiTask<T> implements IApiTask<T>, IReadOnly {
   //   }
   //
   //    /*
-//     * Return a view of the {@link AbstractTripleStore} for the given namespace
+  //     * Return a view of the {@link AbstractTripleStore} for the given namespace
   //     * that will read on the commit point associated with the given timestamp.
   //     *
   //     * @param namespace

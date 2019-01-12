@@ -23,7 +23,7 @@ import org.embergraph.io.AbstractFixedByteArrayBuffer;
 import org.embergraph.io.DataOutputBuffer;
 
 /*
-* Interface for coding (compressing) a logical <code>byte[][]</code> and for accessing the coded
+ * Interface for coding (compressing) a logical <code>byte[][]</code> and for accessing the coded
  * data in place.
  *
  * @see IRaba

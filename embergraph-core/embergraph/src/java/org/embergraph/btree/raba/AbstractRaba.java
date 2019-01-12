@@ -32,7 +32,7 @@ import java.util.NoSuchElementException;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Abstract base class implements mutation operators and search. A concrete subclass need only
+ * Abstract base class implements mutation operators and search. A concrete subclass need only
  * indicate if it is mutable, searchable, or allows nulls by overriding the appropriate methods.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -412,8 +412,7 @@ public abstract class AbstractRaba implements IRaba {
 
     try {
 
-      final Constructor<? extends AbstractRaba> ctor =
-          getClass().getConstructor(byte[].class);
+      final Constructor<? extends AbstractRaba> ctor = getClass().getConstructor(byte[].class);
 
       return ctor.newInstance(new Object[] {a});
 

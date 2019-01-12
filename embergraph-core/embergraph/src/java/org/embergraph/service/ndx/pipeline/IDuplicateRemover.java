@@ -26,7 +26,7 @@ package org.embergraph.service.ndx.pipeline;
 import org.embergraph.btree.keys.KVO;
 
 /*
-* Interface allowing application specific elimination of duplicates.
+ * Interface allowing application specific elimination of duplicates.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

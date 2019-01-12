@@ -1,11 +1,10 @@
 package org.embergraph.rdf.load;
 
 import org.embergraph.rdf.rio.IStatementBuffer;
-import org.embergraph.rdf.rio.StatementBuffer;
 import org.openrdf.model.Statement;
 
 /*
-* A factory for {@link StatementBuffer}s.
+ * A factory for {@link StatementBuffer}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

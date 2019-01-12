@@ -44,7 +44,7 @@ import org.embergraph.rdf.sparql.ast.StaticAnalysis;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /*
-* Optimizer assigns join variables to sub-groups.
+ * Optimizer assigns join variables to sub-groups.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -108,8 +108,7 @@ public class ASTSubGroupJoinVarOptimizer implements IASTOptimizer {
        * time the group is evaluated.
        */
       final Set<IVariable<?>> incomingBindings =
-          sa.getDefinitelyIncomingBindings(
-              group, new LinkedHashSet<IVariable<?>>());
+          sa.getDefinitelyIncomingBindings(group, new LinkedHashSet<IVariable<?>>());
 
       /*
        * This is only those variables which are bound on entry into the group
@@ -134,8 +133,7 @@ public class ASTSubGroupJoinVarOptimizer implements IASTOptimizer {
        * may be bound by the time the group is evaluated.
        */
       final Set<IVariable<?>> maybeIncomingBindings =
-          sa.getMaybeIncomingBindings(
-              group, new LinkedHashSet<IVariable<?>>());
+          sa.getMaybeIncomingBindings(group, new LinkedHashSet<IVariable<?>>());
 
       /*
        * Add the variables that are used inside filters in the OPTIONAL, since the SPARQL 1.1

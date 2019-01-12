@@ -26,25 +26,21 @@ package org.embergraph.service.ndx;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
-import org.embergraph.btree.IndexMetadata;
 import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedureConstructor;
 import org.embergraph.btree.proc.IKeyArrayIndexProcedure;
 import org.embergraph.btree.proc.IKeyRangeIndexProcedure;
 import org.embergraph.btree.proc.IParallelizableIndexProcedure;
 import org.embergraph.btree.proc.IResultHandler;
 import org.embergraph.btree.proc.ISimpleIndexProcedure;
-import org.embergraph.journal.ITx;
 import org.embergraph.mdi.IMetadataIndex;
 import org.embergraph.mdi.PartitionLocator;
-import org.embergraph.resources.StaleLocatorException;
 import org.embergraph.service.AbstractScaleOutFederation;
 import org.embergraph.service.Split;
 
 /*
-* Abstract class encapsulating MOST of the logic for executing tasks corresponding to client index
+ * Abstract class encapsulating MOST of the logic for executing tasks corresponding to client index
  * operations. {@link StaleLocatorException}s are handled by the recursive application of the
  * various <code>submit()</code> methods.
  *

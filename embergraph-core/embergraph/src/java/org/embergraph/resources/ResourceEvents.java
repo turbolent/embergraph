@@ -25,18 +25,11 @@ package org.embergraph.resources;
 
 import java.text.NumberFormat;
 import org.apache.log4j.Logger;
-import org.apache.log4j.MDC;
-import org.embergraph.btree.AbstractBTree;
-import org.embergraph.btree.IndexSegment;
-import org.embergraph.counters.CounterSet;
 import org.embergraph.journal.BufferMode;
-import org.embergraph.journal.IJournal;
-import org.embergraph.journal.Journal;
-import org.embergraph.journal.TemporaryRawStore;
 import org.embergraph.journal.TimestampUtility;
 
 /*
-* Class encapsulates reporting API for resource (index and store files) events.
+ * Class encapsulates reporting API for resource (index and store files) events.
  *
  * <p>Resource consumption events include
  *
@@ -86,12 +79,12 @@ public class ResourceEvents {
   private static final Logger log = Logger.getLogger(ResourceEvents.class);
 
   //    /*
-//     * True iff the {@link #log} level is DEBUG or less.
+  //     * True iff the {@link #log} level is DEBUG or less.
   //     */
   //    final protected static boolean DEBUG = log.isDebugEnabled();
   //
   //    /*
-//     * True iff the {@link #log} level is log.isInfoEnabled() or less.
+  //     * True iff the {@link #log} level is log.isInfoEnabled() or less.
   //     */
   //    final protected static boolean log.isInfoEnabled() = log.isInfoEnabled();
 
@@ -162,7 +155,7 @@ public class ResourceEvents {
    */
 
   //    /*
-//     * Report that an {@link IndexSegment} has been opened.
+  //     * Report that an {@link IndexSegment} has been opened.
   //     *
   //     * @param name
   //     *            The index name or null if this is not a named index.
@@ -189,7 +182,7 @@ public class ResourceEvents {
   //    }
   //
   //    /*
-//     * Report that an {@link IndexSegment} has been closed.
+  //     * Report that an {@link IndexSegment} has been closed.
   //     *
   //     * @param filename
   //     *

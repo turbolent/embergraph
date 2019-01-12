@@ -43,7 +43,7 @@ import org.embergraph.rawstore.SimpleMemoryRawStore;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Test suite for the {@link PrefixFilter}.
+ * Test suite for the {@link PrefixFilter}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

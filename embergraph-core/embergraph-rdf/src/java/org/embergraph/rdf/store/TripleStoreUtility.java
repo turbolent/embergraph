@@ -27,12 +27,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Properties;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 import org.apache.log4j.Logger;
 import org.embergraph.journal.Journal;
 import org.embergraph.journal.TimestampUtility;
-import org.embergraph.rdf.axioms.Axioms;
 import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.model.EmbergraphStatement;
@@ -40,7 +38,6 @@ import org.embergraph.rdf.rio.AbstractStatementBuffer.StatementBuffer2;
 import org.embergraph.rdf.rio.StatementBuffer;
 import org.embergraph.rdf.rules.BackchainAccessPath;
 import org.embergraph.rdf.spo.ISPO;
-import org.embergraph.rdf.spo.SPO;
 import org.embergraph.rdf.store.AbstractTripleStore.Options;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.relation.accesspath.IAccessPath;
@@ -48,7 +45,7 @@ import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.openrdf.model.Statement;
 
 /*
-* Utility class for comparing graphs for equality, bulk export, etc.
+ * Utility class for comparing graphs for equality, bulk export, etc.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -205,8 +202,7 @@ public class TripleStoreUtility {
     /*
      * The source access path is a full scan of the SPO index.
      */
-    final IAccessPath<ISPO> expectedAccessPath =
-        expected.getAccessPath((IV) null, null, null);
+    final IAccessPath<ISPO> expectedAccessPath = expected.getAccessPath((IV) null, null, null);
 
     /*
      * Efficiently convert SPOs to EmbergraphStatements (externalizes
@@ -224,8 +220,8 @@ public class TripleStoreUtility {
         new StatementBuffer2<Statement, EmbergraphStatement>(
             actual, true /* readOnly */, capacity) {
 
-        /*
-       * Statements not found in [actual] are written on the BlockingBuffer.
+          /*
+           * Statements not found in [actual] are written on the BlockingBuffer.
            *
            * @return The #of statements that were not found.
            */
@@ -294,8 +290,8 @@ public class TripleStoreUtility {
               itr2.close();
             }
 
-          /*
-       * Flush everything in the StatementBuffer so that it
+            /*
+             * Flush everything in the StatementBuffer so that it
              * shows up in the BlockingBuffer's iterator().
              */
 

@@ -33,15 +33,12 @@ import org.embergraph.ha.msg.IHASendState;
 import org.embergraph.ha.msg.IHASyncRequest;
 import org.embergraph.ha.msg.IHAWriteMessage;
 import org.embergraph.journal.AbstractJournal;
-import org.embergraph.journal.IResourceManager;
 import org.embergraph.journal.IRootBlockView;
-import org.embergraph.journal.Journal;
 import org.embergraph.quorum.AbstractQuorumMember;
-import org.embergraph.service.proxy.ThickFuture;
 import org.embergraph.util.InnerCause;
 
 /*
-* Abstract implementation provides the logic for distributing messages for the quorum 2-phase
+ * Abstract implementation provides the logic for distributing messages for the quorum 2-phase
  * commit protocol, failover reads, etc.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

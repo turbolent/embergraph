@@ -18,7 +18,6 @@ package org.embergraph.rdf.rio.json;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 import java.io.IOException;
@@ -38,7 +37,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /*
-* Abstract base class for SPARQL Results JSON Parsers. Provides a common implementation of both
+ * Abstract base class for SPARQL Results JSON Parsers. Provides a common implementation of both
  * boolean and tuple parsing.
  *
  * <p>Embergraph Changes:
@@ -260,8 +259,8 @@ public abstract class SPARQLJSONParserBase extends QueryResultParserBase {
                       jp.getCurrentLocation().getColumnNr());
                 }
 
-              /*
-       * ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Start Embergraph Changes ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                /*
+                 * ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Start Embergraph Changes ~~~~~~~~~~~~~~~~~~~~~~~~~~~
                  */
                 final Value value = parseValue(bindingStr, jp);
 
@@ -310,8 +309,8 @@ public abstract class SPARQLJSONParserBase extends QueryResultParserBase {
                 //								nextBindingSet.addBinding(bindingStr, parseValue(type, value, lang,
                 // datatype));
 
-              /*
-       * ~~~~~~~~~~~~~~~~~~~~~~~~~~~ End Embergraph Changes ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                /*
+                 * ~~~~~~~~~~~~~~~~~~~~~~~~~~~ End Embergraph Changes ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                  */
 
               }

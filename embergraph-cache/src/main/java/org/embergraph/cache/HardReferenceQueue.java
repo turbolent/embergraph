@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.cache;
 
 /*
-* A cache for hard references using an LRU policy. References are simply cached, but objects are
+ * A cache for hard references using an LRU policy. References are simply cached, but objects are
  * not recoverable from their reference. In order to make an object recoverable, this cache must be
  * wrapped by a weak reference cache that implements a hash map for discovery of objects using their
  * persistent identifier. The {@link HardReferenceQueue} has a capacity that determines the #of hard

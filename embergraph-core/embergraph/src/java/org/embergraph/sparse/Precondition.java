@@ -28,7 +28,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 /*
-* Base class may be used for combining {@link IPrecondition}. The base class by itself always
+ * Base class may be used for combining {@link IPrecondition}. The base class by itself always
  * succeeds, but you can add additional preconditions to be tested.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.relation.accesspath;
 
 /*
-* An unsynchronized buffer backed by a fixed capacity array that migrates references onto the
+ * An unsynchronized buffer backed by a fixed capacity array that migrates references onto the
  * caller's buffer (which is normally thread-safe) using {@link IBuffer#add(int)}.
  *
  * <p><strong>This implementation is NOT thread-safe.</strong>

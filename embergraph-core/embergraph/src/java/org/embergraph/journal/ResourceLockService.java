@@ -29,7 +29,7 @@ import java.util.concurrent.locks.Lock;
 import org.embergraph.concurrent.NamedLock;
 
 /*
-* An implementation using {@link NamedLock}s suitable for within JVM locking.
+ * An implementation using {@link NamedLock}s suitable for within JVM locking.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

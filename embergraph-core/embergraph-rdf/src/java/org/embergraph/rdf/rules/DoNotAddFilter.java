@@ -30,7 +30,7 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
 /*
-* Filter keeps matched triple patterns generated OUT of the database.
+ * Filter keeps matched triple patterns generated OUT of the database.
  *
  * <p>Note: {@link StatementEnum#Explicit} triples are always rejected by this filter so that
  * explicitly asserted triples will always be stored in the database.
@@ -160,7 +160,6 @@ public class DoNotAddFilter<E extends ISPO> extends SPOFilter<E> {
     // reject (?x, rdf:type, rdfs:Resource )
     return forwardChainRdfTypeRdfsResource
         || !IVUtility.equals(spo.p(), rdfType)
-        || !IVUtility.equals(spo.o(), rdfsResource);// Accept everything else.
-
+        || !IVUtility.equals(spo.o(), rdfsResource); // Accept everything else.
   }
 }

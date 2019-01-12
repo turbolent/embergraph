@@ -21,18 +21,14 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.hints;
 
-import java.util.Properties;
 import java.util.UUID;
-import org.embergraph.rdf.sail.sparql.Embergraph2ASTSPARQLParser;
 import org.embergraph.rdf.sparql.ast.ASTBase;
-import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTQueryHintOptimizer;
 
 /*
-* This just strips the {@link QueryHints#QUERYID} out of the AST. The {@link
+ * This just strips the {@link QueryHints#QUERYID} out of the AST. The {@link
  * Embergraph2ASTSPARQLParser} is responsible for traversing the AST and, if it finds the {@link
  * QueryHints#QUERYID}, attaching it to the {@link ASTContainer}'s query hints {@link Properties}
  * object.

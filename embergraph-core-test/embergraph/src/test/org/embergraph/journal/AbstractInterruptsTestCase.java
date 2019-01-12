@@ -21,18 +21,15 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.journal;
 
-import java.awt.image.BufferStrategy;
 import java.nio.ByteBuffer;
-import java.nio.channels.Channel;
 import java.nio.channels.ClosedByInterruptException;
-import java.nio.channels.FileChannel;
 import org.embergraph.btree.BTree;
 import org.embergraph.rawstore.AbstractRawStoreTestCase;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rwstore.IRWStrategy;
 
 /*
-* Test suite for correct handling of {@link ClosedByInterruptException}s. When a commit group is
+ * Test suite for correct handling of {@link ClosedByInterruptException}s. When a commit group is
  * aborted, the {@link Thread}s for the tasks in that commit group are interrupted. If a task was in
  * the midst of an IO operation on a {@link Channel} then the channel will be asynchronously closed
  * by the JDK.
@@ -66,7 +63,7 @@ public abstract class AbstractInterruptsTestCase extends AbstractRawStoreTestCas
    * See https://sourceforge.net/apps/trac/bigdata/ticket/310
    */
   //    /*
-//     * Runs {@link #doChannelOpenAfterInterrupt()} N times.
+  //     * Runs {@link #doChannelOpenAfterInterrupt()} N times.
   //     *
   //     * @throws InterruptedException
   //     * @throws ExecutionException
@@ -83,7 +80,7 @@ public abstract class AbstractInterruptsTestCase extends AbstractRawStoreTestCas
   //    }
   //
   //    /*
-//     * Verifies that the backing {@link Channel} is re-opened after an abort.
+  //     * Verifies that the backing {@link Channel} is re-opened after an abort.
   //     * The test is designed to provoke a {@link ClosedByInterruptException} that
   //     * causes the backing channel to be closed. This in turn causes an abort to
   //     * discard the commit group. Afterwards we verify that the {@link Channel}
@@ -445,7 +442,7 @@ public abstract class AbstractInterruptsTestCase extends AbstractRawStoreTestCas
   }
 
   // /*
-// * Runs the test a bunch of times to see if it fails.
+  // * Runs the test a bunch of times to see if it fails.
   // *
   // * @param args
   // * @throws InterruptedException

@@ -25,7 +25,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.UUID;
-import org.embergraph.bfs.EmbergraphFileSystem;
 import org.embergraph.bfs.EmbergraphFileSystem.Options;
 import org.embergraph.btree.AbstractBTreeTestCase;
 import org.embergraph.btree.IRangeQuery;
@@ -35,14 +34,12 @@ import org.embergraph.btree.IndexMetadata;
 import org.embergraph.io.SerializerUtil;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.ITx;
-import org.embergraph.mdi.MetadataIndex;
 import org.embergraph.resources.ResourceManager;
-import org.embergraph.search.FullTextIndex;
 import org.embergraph.service.ndx.RawDataServiceTupleIterator;
 import org.embergraph.util.BytesUtil;
 
 /*
-* An abstract test harness that sets up (and tears down) the metadata and data services required
+ * An abstract test harness that sets up (and tears down) the metadata and data services required
  * for a embergraph federation using in-process services rather than service discovery (which means
  * that there is no network IO).
  *

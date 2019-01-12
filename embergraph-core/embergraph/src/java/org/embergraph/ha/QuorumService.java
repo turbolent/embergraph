@@ -23,11 +23,10 @@ package org.embergraph.ha;
 
 import java.io.File;
 import org.embergraph.journal.IRootBlockView;
-import org.embergraph.quorum.Quorum;
 import org.embergraph.quorum.QuorumMember;
 
 /*
-* A non-remote interface for a member service in a {@link Quorum} defining methods to support
+ * A non-remote interface for a member service in a {@link Quorum} defining methods to support
  * service specific high availability operations such as reading on another member of the quorum,
  * the 2-phase quorum commit protocol, replicating writes, etc.
  *
@@ -64,7 +63,7 @@ public interface QuorumService<S extends HAGlue>
   File getServiceDir();
 
   //    /*
-//     * Return the directory in which we are logging the write blocks.
+  //     * Return the directory in which we are logging the write blocks.
   //     */
   //    File getHALogDir();
 

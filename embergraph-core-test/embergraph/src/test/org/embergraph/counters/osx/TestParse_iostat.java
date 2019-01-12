@@ -10,7 +10,7 @@ import org.embergraph.counters.ICounter;
 import org.embergraph.counters.IProcessCounters;
 
 /*
-* OSX does have an <code>iostat</code>. This is not the same as the utility we support under linux.
+ * OSX does have an <code>iostat</code>. This is not the same as the utility we support under linux.
  * <code>iostat -d -C -n 999 -w 60</code> provides an update every 60 seconds. The -d tells it to
  * report just device statistics (it will report CPU and load average statistics as well by
  * default). The "-C" option tells it that you want the CPU stats anyway (this includes IOWait). (A

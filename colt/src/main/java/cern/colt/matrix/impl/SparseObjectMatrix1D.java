@@ -13,7 +13,7 @@ import cern.colt.map.OpenIntObjectHashMap;
 import cern.colt.matrix.ObjectMatrix1D;
 import cern.colt.matrix.ObjectMatrix2D;
 /*
-* Sparse hashed 1-d matrix (aka <i>vector</i>) holding <tt>Object</tt> elements. First see the <a
+ * Sparse hashed 1-d matrix (aka <i>vector</i>) holding <tt>Object</tt> elements. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
  * view</a> to get the broad picture.
  *

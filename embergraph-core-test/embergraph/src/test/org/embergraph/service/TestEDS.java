@@ -28,7 +28,7 @@ import org.embergraph.journal.ProxyTestCase;
 import org.embergraph.resources.OverflowManager;
 
 /*
-* Delegate for {@link ProxyTestCase}s for services running against an {@link EmbeddedFederation}.
+ * Delegate for {@link ProxyTestCase}s for services running against an {@link EmbeddedFederation}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

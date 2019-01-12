@@ -33,7 +33,7 @@ import org.embergraph.search.FullTextIndex.Options;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Unit tests for key formation for the {@link FullTextIndex}.
+ * Unit tests for key formation for the {@link FullTextIndex}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

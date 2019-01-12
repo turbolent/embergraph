@@ -23,9 +23,8 @@ package org.embergraph.search;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import org.apache.lucene.analysis.Analyzer;
-import org.embergraph.search.ConfigurableAnalyzerFactory.AnalyzerOptions;
 /*
-* This comment describes the implementation of {@link ConfiguredAnalyzerFactory}. The only method
+ * This comment describes the implementation of {@link ConfiguredAnalyzerFactory}. The only method
  * in the interface is {@link ConfiguredAnalyzerFactory#getAnalyzer(String, boolean)}, a map is used
  * from language tag to {@link AnalyzerPair}, where the pair contains an {@link Analyzer} both with
  * and without stopwords configured (some times these two analyzers are identical, if, for example,

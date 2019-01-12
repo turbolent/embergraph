@@ -20,7 +20,7 @@ package org.embergraph.rdf.sail.webapp;
 import java.io.IOException;
 
 /*
-* Well-known exception is used to convey a non-success response from inside of an {@link
+ * Well-known exception is used to convey a non-success response from inside of an {@link
  * AbstractRestApiTask} to {@link EmbergraphRDFServlet#launderThrowable(Throwable,
  * javax.servlet.http.HttpServletResponse, String)} .
  *

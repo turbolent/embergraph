@@ -27,7 +27,7 @@ import java.io.OutputStream;
 import java.nio.ByteBuffer;
 
 /*
-* Interface for record-level compression.
+ * Interface for record-level compression.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

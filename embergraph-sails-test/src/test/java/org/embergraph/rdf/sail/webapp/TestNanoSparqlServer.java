@@ -25,7 +25,6 @@ import java.util.UUID;
 import junit.framework.TestCase2;
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.webapp.WebAppContext;
 import org.embergraph.EmbergraphStatics;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.ITx;
@@ -40,7 +39,7 @@ import org.embergraph.rdf.task.AbstractApiTask;
 import org.embergraph.util.config.NicUtil;
 
 /*
-* Unit tests for the {@link NanoSparqlServer} with a focus on the ability to override the init
+ * Unit tests for the {@link NanoSparqlServer} with a focus on the ability to override the init
  * parameters, the default http port, etc. This test suite is written without the proxy mechanisms
  * to make this easier to debug.
  *

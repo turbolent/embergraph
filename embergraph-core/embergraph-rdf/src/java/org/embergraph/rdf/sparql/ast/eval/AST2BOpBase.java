@@ -21,21 +21,16 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.eval;
 
-import java.io.Serializable;
 import java.util.Enumeration;
 import java.util.Properties;
 import org.apache.log4j.Logger;
 import org.embergraph.bop.BOp;
-import org.embergraph.bop.IPredicate;
 import org.embergraph.bop.PipelineOp;
-import org.embergraph.bop.cost.SubqueryCostReport;
 import org.embergraph.rdf.sparql.ast.ASTBase;
-import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.openrdf.query.Dataset;
-import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /*
-* Base class provides support for triples, sids, and quads mode joins which was refactored from the
+ * Base class provides support for triples, sids, and quads mode joins which was refactored from the
  * old Rule2BOpUtility class.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -144,7 +139,7 @@ public class AST2BOpBase {
   }
 
   //    /*
-//     * Apply any query hints to the operator as annotations of that operator.
+  //     * Apply any query hints to the operator as annotations of that operator.
   //     * <p>
   //     * Note: This method is responsible for transferring query hints from
   //     * {@link ASTBase#getQueryHints()} onto a generated {@link PipelineOp}.

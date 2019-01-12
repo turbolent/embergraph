@@ -31,25 +31,20 @@ import org.apache.log4j.Logger;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IVariable;
-import org.embergraph.bop.bindingSet.ListBindingSet;
 import org.embergraph.btree.keys.ASCIIKeyBuilderFactory;
 import org.embergraph.btree.keys.IKeyBuilder;
-import org.embergraph.htree.HTree;
 import org.embergraph.io.ByteArrayBuffer;
 import org.embergraph.io.DataOutputBuffer;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVCache;
 import org.embergraph.rdf.internal.IVUtility;
-import org.embergraph.rdf.internal.impl.TermId;
 import org.embergraph.rdf.model.EmbergraphValue;
-import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.rdf.model.EmbergraphValueSerializer;
 import org.embergraph.util.BytesUtil;
-import org.openrdf.model.Value;
 
 /*
-* This class provides fast, efficient serialization for solution sets. Each solution must be an
+ * This class provides fast, efficient serialization for solution sets. Each solution must be an
  * {@link IBindingSet}s whose bound values are {@link IV}s and their cached {@link
  * EmbergraphValue}s. The {@link IV}s and the cached {@link EmbergraphValue}s are efficiently and
  * compactly represented in format suitable for chunked messages or streaming. Decode is a fast
@@ -333,8 +328,8 @@ public class IVSolutionSetEncoder implements IBindingSetEncoder {
             discoveredNamespace = true;
           }
           if (!iv.isNullIV()) {
-          /*
-       * We can not lookup Null IVs in the cache on the
+            /*
+             * We can not lookup Null IVs in the cache on the
              * decoder side since ties are broken by comparing the
              * IVCache association, which is what we are trying to
              * resolve. Therefore we always inline the IVCache

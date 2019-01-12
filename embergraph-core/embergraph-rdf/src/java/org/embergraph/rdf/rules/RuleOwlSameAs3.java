@@ -31,7 +31,7 @@ import org.embergraph.relation.rule.Rule;
 import org.openrdf.model.vocabulary.OWL;
 
 /*
-* owl:sameAs3
+ * owl:sameAs3
  *
  * <pre>
  * (x owl:sameAs y), (z a x) -&gt; (z a y).
@@ -55,8 +55,8 @@ public class RuleOwlSameAs3 extends Rule {
           new SPOPredicate(relationName, var("z"), var("a"), var("x"))
         },
         new IConstraint[] {
-        /*
-       * Reject (z sameAs y) as the head.
+          /*
+           * Reject (z sameAs y) as the head.
            */
           //                    new
           // RejectAnythingSameAsItself(var("z"),var("a"),var("y"),vocab.getConstant(OWL.SAMEAS))

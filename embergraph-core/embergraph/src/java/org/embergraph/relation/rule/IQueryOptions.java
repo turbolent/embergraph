@@ -25,11 +25,9 @@ package org.embergraph.relation.rule;
 
 import java.io.Serializable;
 import org.embergraph.bop.solutions.ISortOrder;
-import org.embergraph.relation.rule.eval.IStepTask;
-import org.embergraph.striterator.DistinctFilter;
 
 /*
-* A collection of constraints that may be imposed on an {@link IStep} when evaluated as a query.
+ * A collection of constraints that may be imposed on an {@link IStep} when evaluated as a query.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

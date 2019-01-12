@@ -21,7 +21,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.eval;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -29,7 +28,6 @@ import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -59,13 +57,9 @@ import org.embergraph.bop.join.PipelineJoinStats;
 import org.embergraph.bop.joinGraph.PartitionedJoinGroup;
 import org.embergraph.bop.joinGraph.rto.EdgeSample;
 import org.embergraph.bop.joinGraph.rto.EstimateEnum;
-import org.embergraph.bop.joinGraph.rto.JGraph;
 import org.embergraph.bop.joinGraph.rto.JoinGraph;
 import org.embergraph.bop.joinGraph.rto.Path;
 import org.embergraph.bop.joinGraph.rto.SampleBase;
-import org.embergraph.bop.joinGraph.rto.VertexSample;
-import org.embergraph.bop.rdf.join.ChunkedMaterializationOp;
-import org.embergraph.bop.rdf.join.DataSetJoin;
 import org.embergraph.bop.solutions.SliceOp;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.rdf.internal.IV;
@@ -80,7 +74,7 @@ import org.embergraph.striterator.Dechunkerator;
 import org.embergraph.util.NT;
 
 /*
-* Integration with the Runtime Optimizer (RTO).
+ * Integration with the Runtime Optimizer (RTO).
  *
  * <p>Note: The RTO currently uses bottom-up evaluation to solve the join graph and generate a
  * sub-query plan with an optimized join ordering. It uses left-to-right evaluation to pass pipeline
@@ -300,8 +294,8 @@ public class AST2BOpRTO extends AST2BOpJoins {
           getJoinConstraints(attachedConstraints, needsMaterialization);
 
           if (onlySimpleJoins && !needsMaterialization.isEmpty()) {
-          /*
-       * At least one variable requires (or might require)
+            /*
+             * At least one variable requires (or might require)
              * materialization.
              */
             break;
@@ -311,8 +305,8 @@ public class AST2BOpRTO extends AST2BOpJoins {
           sp = (StatementPatternNode) sp.clone(); // TODO Use destructive move.
           rtoJoinGroup.addChild(sp); // add to group.
           naccepted++;
-        /*
-       * Note: This assigns ids to the predicates as a
+          /*
+           * Note: This assigns ids to the predicates as a
            * side-effect. Those ids are assigned by the
            * AST2BOpContext's BOpIdFactory. You can not rely on
            * specific ID values being assigned, so you need to build a
@@ -324,8 +318,8 @@ public class AST2BOpRTO extends AST2BOpJoins {
           // tag the SP with predicate's ID.
           sp.setProperty(Annotations.PREDICATE_ID, pred.getId());
           if (attachedConstraints != null) {
-          /*
-       * The RTO will figure out where to attach these
+            /*
+             * The RTO will figure out where to attach these
              * constraints.
              */
             constraints.addAll(attachedConstraints);
@@ -334,8 +328,8 @@ public class AST2BOpRTO extends AST2BOpJoins {
         } else {
           // Non-SP.
           if (onlySPs) break;
-        /*
-       * TODO Handle non-SPs in the RTO. See convertJoinGroup()
+          /*
+           * TODO Handle non-SPs in the RTO. See convertJoinGroup()
            * for how we handle non-SPs during normal query plan
            * conversion. All of that would also have to be handled
            * here for the RTO to allow in non-SPs.
@@ -565,8 +559,8 @@ public class AST2BOpRTO extends AST2BOpJoins {
       final Integer id = (Integer) x;
       final BOp conflict = map.put(id, sp);
       if (conflict != null) {
-      /*
-       * BOp appears more than once. This is not allowed for
+        /*
+         * BOp appears more than once. This is not allowed for
          * pipeline operators. If you are getting this exception for
          * a non-pipeline operator, you should remove the bopId.
          */
@@ -642,8 +636,8 @@ public class AST2BOpRTO extends AST2BOpJoins {
 
       if (!runAllJoinsAsComplexJoins && (query instanceof PipelineJoin) && query.arity() == 0) {
 
-      /*
-       * Simple JOIN.
+        /*
+         * Simple JOIN.
          *
          * Old logic for query execution. Relies on the ability of
          * the PipelineJoin
@@ -652,8 +646,8 @@ public class AST2BOpRTO extends AST2BOpJoins {
 
       } else {
 
-      /*
-       * Complex JOIN involving variable materialization, conditional
+        /*
+         * Complex JOIN involving variable materialization, conditional
          * routing operators, filters, and a SLICE to limit the output.
          */
 
@@ -1121,8 +1115,8 @@ public class AST2BOpRTO extends AST2BOpJoins {
         IBindingSet bset = null;
         // Figure out the #of source samples consumed.
         final Iterator<IBindingSet> itr = new Dechunkerator<IBindingSet>(runningQuery.iterator());
-      /*
-       * Injected row id variable.
+        /*
+         * Injected row id variable.
          *
          * Note: Starts at ZERO in case NO solutions out.
          */
@@ -1132,8 +1126,8 @@ public class AST2BOpRTO extends AST2BOpJoins {
           final int rowid = ((XSDNumericIV) bset.get(rtoVar).get()).intValue();
           // log.warn("rowId="+rowid+",lastRowId="+lastRowId+",bset="+bset);
           if (rowid < lastRowId && failOutOfOrderEvaluation) {
-          /*
-       * Out of order evaluation makes it impossible to
+            /*
+             * Out of order evaluation makes it impossible to
              * accurately determine the estimated cardinality of the
              * join since we can not compute the join hit ratio
              * without knowing the #of solutions in required to

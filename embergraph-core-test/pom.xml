@@ -19,7 +19,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.embergraph</groupId>
@@ -57,7 +59,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
         <artifactId>maven-antrun-plugin</artifactId>
         <version>1.6</version>
         <executions>
-           </executions>
+        </executions>
       </plugin>
       <!--
 TODO:  Break out into separate test class project.
@@ -131,7 +133,9 @@ See https://maven.apache.org/plugins/maven-jar-plugin/examples/create-test-jar.h
           <reuseForks>true</reuseForks>
           <printSummary>false</printSummary>
           <disableXmlReport>false</disableXmlReport>
-          <argLine>-server -ea -Xms512m -Xmx4g -Dlog4j.configuration=file:embergraph/src/resources/logging/log4j.properties</argLine>
+          <argLine>-server -ea -Xms512m -Xmx4g
+            -Dlog4j.configuration=file:embergraph/src/resources/logging/log4j.properties
+          </argLine>
           <rerunFailingTestsCount>2</rerunFailingTestsCount>
         </configuration>
       </plugin>

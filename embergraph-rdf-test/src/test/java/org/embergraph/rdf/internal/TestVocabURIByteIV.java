@@ -24,11 +24,10 @@ package org.embergraph.rdf.internal;
 import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.rdf.internal.impl.uri.VocabURIByteIV;
 import org.embergraph.rdf.model.EmbergraphURI;
-import org.embergraph.rdf.vocab.Vocabulary;
 import org.embergraph.util.BytesUtil;
 
 /*
-* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestVocabURIByteIV extends AbstractEncodeDecodeKeysTestCase {

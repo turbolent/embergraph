@@ -1,7 +1,7 @@
 package org.embergraph.sparse;
 
 /*
-* a Timestamped Property Value is a single {property, timestamp, value} tuple for some schema as
+ * a Timestamped Property Value is a single {property, timestamp, value} tuple for some schema as
  * read from the {@link SparseRowStore}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -23,22 +23,17 @@ package org.embergraph.rdf.sparql.ast.eval;
 
 import java.util.Set;
 import org.embergraph.bop.BOpContextBase;
-import org.embergraph.bop.ContextBindingSet;
-import org.embergraph.bop.IBindingSet;
-import org.embergraph.bop.IValueExpression;
 import org.embergraph.bop.IVariable;
 import org.embergraph.bop.engine.StaticAnalysisStats;
 import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.sparql.ast.ISolutionSetStats;
-import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.embergraph.rdf.sparql.ast.cache.IDescribeCache;
-import org.embergraph.rdf.sparql.ast.optimizers.IASTOptimizer;
 import org.embergraph.rdf.sparql.ast.ssets.ISolutionSetManager;
 import org.embergraph.rdf.spo.SPORelation;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /*
-* Interface providing access to various things of interest when preparing and evaluating a query or
+ * Interface providing access to various things of interest when preparing and evaluating a query or
  * update operation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -128,7 +123,7 @@ public interface IEvaluationContext {
   ISolutionSetStats getSolutionSetStats(String name);
 
   //    /*
-//     * Resolve a pre-existing named solution set.
+  //     * Resolve a pre-existing named solution set.
   //     *
   //     * @param localName
   //     *            The local name of the named solution set.

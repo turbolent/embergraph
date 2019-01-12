@@ -31,7 +31,7 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.OWL;
 
 /*
-* Test suite for owl:inverseOf processing.
+ * Test suite for owl:inverseOf processing.
  *
  * <pre>
  *   owl:inverseOf1 : (a owl:inverseOf b) -&gt; (b owl:inverseOf a)

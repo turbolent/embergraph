@@ -24,14 +24,11 @@ package org.embergraph.rawstore;
 import java.io.File;
 import java.nio.ByteBuffer;
 import java.util.UUID;
-import org.embergraph.btree.BTree;
 import org.embergraph.counters.ICounterSetAccess;
-import org.embergraph.io.IByteArrayBuffer;
-import org.embergraph.journal.AbstractJournal;
 import org.embergraph.mdi.IResourceMetadata;
 
 /*
-* A low-level interface for reading and writing data. This interface is not isolated and operations
+ * A low-level interface for reading and writing data. This interface is not isolated and operations
  * do not possess ACID semantics. Implementations may or may not be durable. All operations are
  * expressed in terms of long integers that are often called "addresses" but which should be
  * understood as opaque identifiers.
@@ -87,7 +84,7 @@ public interface IRawStore extends IAddressManager, ICounterSetAccess, IStreamSt
   long write(ByteBuffer data);
 
   // 	/*
-//     *
+  //     *
   //     * @param data
   //     *            The data. The bytes from the current
   //     *            {@link ByteBuffer#position()} to the
@@ -220,7 +217,7 @@ public interface IRawStore extends IAddressManager, ICounterSetAccess, IStreamSt
   long size();
 
   //    /*
-//     * Reports performance counters.
+  //     * Reports performance counters.
   //     */
   //    public CounterSet getCounters();
 

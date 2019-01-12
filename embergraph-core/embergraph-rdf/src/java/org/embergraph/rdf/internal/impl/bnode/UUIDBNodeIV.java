@@ -21,12 +21,11 @@ import java.util.UUID;
 import org.embergraph.rdf.internal.DTE;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.model.EmbergraphBNode;
-import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.util.Bytes;
 import org.openrdf.model.BNode;
 
 /*
-* Class for inline RDF blank nodes. Blank nodes MUST be based on UUIDs in order to be lined.
+ * Class for inline RDF blank nodes. Blank nodes MUST be based on UUIDs in order to be lined.
  *
  * <p>{@inheritDoc}
  *

@@ -32,7 +32,7 @@ import org.openrdf.model.vocabulary.OWL;
 import org.openrdf.model.vocabulary.RDF;
 
 /*
-* Test suite for owl:transtitiveProperty processing.
+ * Test suite for owl:transtitiveProperty processing.
  *
  * <pre>
  * (a rdf:type owl:TransitiveProperty), (x a y), (y a z) -&gt; (x a z)

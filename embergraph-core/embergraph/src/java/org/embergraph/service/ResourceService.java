@@ -37,15 +37,12 @@ import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 import java.nio.channels.OverlappingFileLockException;
-import java.nio.channels.SocketChannel;
 import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.locks.Condition;
@@ -54,7 +51,6 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.zip.Adler32;
 import java.util.zip.CheckedInputStream;
 import org.apache.log4j.Logger;
-import org.embergraph.btree.IndexSegmentStore;
 import org.embergraph.counters.CAT;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.Instrument;
@@ -65,7 +61,7 @@ import org.embergraph.util.DaemonThreadFactory;
 import org.embergraph.util.concurrent.ShutdownHelper;
 
 /*
-* A service which permits resources (managed files or buffers) identified by a {@link UUID} to be
+ * A service which permits resources (managed files or buffers) identified by a {@link UUID} to be
  * read by a remote service. This class runs one thread to accept connections and thread pool to
  * send data.
  *
@@ -117,7 +113,7 @@ public abstract class ResourceService {
   private final InetSocketAddress addr;
 
   //    /*
-//     * The port on which the service is accepting connections.
+  //     * The port on which the service is accepting connections.
   //     */
   //    public final int port;
 
@@ -137,7 +133,7 @@ public abstract class ResourceService {
   }
 
   //    /*
-//     * Constructor uses the default nic, any free port, and the default request
+  //     * Constructor uses the default nic, any free port, and the default request
   //     * service pool size.
   //     *
   //     * @throws IOException
@@ -149,7 +145,7 @@ public abstract class ResourceService {
   //    }
   //
   //    /*
-//     * Constructor uses the default nic and request service pool size.
+  //     * Constructor uses the default nic and request service pool size.
   //     *
   //     * @param port
   //     *            The port on which to start the service or ZERO (0) to use any
@@ -164,7 +160,7 @@ public abstract class ResourceService {
   //    }
   //
   //    /*
-//     * Constructor uses a non-loopback address on the default nic.
+  //     * Constructor uses a non-loopback address on the default nic.
   //     *
   //     * @param port
   //     *            The port on which to start the service or ZERO (0) to use any
@@ -237,7 +233,7 @@ public abstract class ResourceService {
   }
 
   //    /*
-//     * Return an unused port.
+  //     * Return an unused port.
   //     *
   //     * @param suggestedPort
   //     *            The suggested port.
@@ -344,8 +340,8 @@ public abstract class ResourceService {
 
         while (open) {
 
-        /*
-       * Hand off request to a pool of worker threads.
+          /*
+           * Hand off request to a pool of worker threads.
            *
            * Note: The Future of this task is ignored. If there is a
            * problem a message is logged, the client socket is closed,
@@ -651,15 +647,15 @@ public abstract class ResourceService {
 
       } catch (SentErrorException ex) {
 
-      /*
-       * This exception is thrown by sendError(). We don't have to do
+        /*
+         * This exception is thrown by sendError(). We don't have to do
          * anything since an error response was already sent.
          */
 
       } catch (Throwable t) {
 
-      /*
-       * Something unexpected. If possible we will send an error
+        /*
+         * Something unexpected. If possible we will send an error
          * response. Otherwise we just close the client socket.
          */
 
@@ -791,8 +787,8 @@ public abstract class ResourceService {
       final FileLock fileLock;
       try {
 
-      /*
-       * Seek a shared lock on the file. This will prevent it from
+        /*
+         * Seek a shared lock on the file. This will prevent it from
          * being deleted while we are sending its data and it will also
          * prevent us from sending a file on which someone else has a
          * write lock. If we can't get a shared lock then no worries.
@@ -811,8 +807,8 @@ public abstract class ResourceService {
 
           if (!fileLock.isShared()) {
 
-          /*
-       * Do NOT hold the file lock if it is exclusive
+            /*
+             * Do NOT hold the file lock if it is exclusive
              * (shared lock requests convert to exclusive lock
              * requests on some platforms). We do not want to
              * prevent others from accessing this resource,
@@ -824,8 +820,8 @@ public abstract class ResourceService {
 
         } catch (OverlappingFileLockException ex) {
 
-        /*
-       * Note: OverlappingFileLockException can be thrown when
+          /*
+           * Note: OverlappingFileLockException can be thrown when
            * there are concurrent requests to obtain the same
            * shared lock. I consider this a JDK bug. It should be
            * possible to service both requests without deadlock.
@@ -860,8 +856,8 @@ public abstract class ResourceService {
 
         try {
 
-        /*
-       * Close the FileChannel.
+          /*
+           * Close the FileChannel.
            *
            * Note: This will release the FileLock if one was acquired.
            */
@@ -1484,8 +1480,8 @@ public abstract class ResourceService {
 
         root = new CounterSet();
 
-      /*
-       * #of requests and their status outcome counters.
+        /*
+         * #of requests and their status outcome counters.
          */
         {
           final CounterSet tmp = root.makePath("status");
@@ -1523,8 +1519,8 @@ public abstract class ResourceService {
               });
         }
 
-      /*
-       * writes (A write is a response where we try to write the file
+        /*
+         * writes (A write is a response where we try to write the file
          * on the socket).
          */
         {

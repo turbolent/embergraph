@@ -21,7 +21,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.cache;
 
 /*
-* Tests suite for the {@link WeakValueCache}. This class tests the weak cache and its integration
+ * Tests suite for the {@link WeakValueCache}. This class tests the weak cache and its integration
  * with a delegate hard reference cache policy.
  *
  * @todo verify entries cleared once weakly reachable, but not before.

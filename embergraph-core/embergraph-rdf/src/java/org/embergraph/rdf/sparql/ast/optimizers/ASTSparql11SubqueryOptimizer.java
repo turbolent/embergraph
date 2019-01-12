@@ -28,7 +28,6 @@ import java.util.Properties;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpUtility;
 import org.embergraph.bop.IBindingSet;
-import org.embergraph.bop.aggregate.IAggregate;
 import org.embergraph.rdf.sparql.ast.ASTBase;
 import org.embergraph.rdf.sparql.ast.GraphPatternGroup;
 import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
@@ -48,7 +47,7 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 
 /*
-* Lift {@link SubqueryRoot}s into named subqueries when appropriate. This includes the following
+ * Lift {@link SubqueryRoot}s into named subqueries when appropriate. This includes the following
  * cases:
  *
  * <ul>
@@ -138,8 +137,8 @@ public class ASTSparql11SubqueryOptimizer implements IASTOptimizer {
 
       if (child instanceof GraphPatternGroup<?>) {
 
-      /*
-       * Note: Do recursion *before* we do the rewrite so we will
+        /*
+         * Note: Do recursion *before* we do the rewrite so we will
          * rewrite Sub-Sub-Selects.
          *
          * FIXME Unit test for sub-sub-select optimization.
@@ -168,8 +167,8 @@ public class ASTSparql11SubqueryOptimizer implements IASTOptimizer {
 
       if (subqueryRoot.getQueryType() == QueryType.ASK) {
 
-      /*
-       * FIXME Look at what would be involved in lifting an ASK
+        /*
+         * FIXME Look at what would be involved in lifting an ASK
          * sub-query. There are going to be at least two cases. If there
          * is no join variable, then we always want to lift the ASK
          * sub-query as it is completely independent of the parent
@@ -350,8 +349,7 @@ public class ASTSparql11SubqueryOptimizer implements IASTOptimizer {
     } else {
 
       // Replace the sub-select with the include.
-      if (((ASTBase) parent).replaceWith(subqueryRoot, include) == 0)
-        throw new AssertionError();
+      if (((ASTBase) parent).replaceWith(subqueryRoot, include) == 0) throw new AssertionError();
     }
 
     final NamedSubqueryRoot nsr = new NamedSubqueryRoot(subqueryRoot.getQueryType(), newName);

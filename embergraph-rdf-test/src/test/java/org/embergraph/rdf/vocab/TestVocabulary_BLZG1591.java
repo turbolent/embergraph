@@ -21,7 +21,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.vocab;
 
-import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.vocab.decls.BSBMVocabularyDecl;
 import org.embergraph.rdf.vocab.decls.DCAllVocabularyDecl;
 import org.embergraph.rdf.vocab.decls.RDFSVocabularyDecl;
@@ -29,7 +28,7 @@ import org.embergraph.rdf.vocab.decls.RDFVocabularyDecl;
 import org.embergraph.rdf.vocab.decls.XMLSchemaVocabularyDecl;
 
 /*
-* A {@link Vocabulary} covering the ontologies used by LUBM.
+ * A {@link Vocabulary} covering the ontologies used by LUBM.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

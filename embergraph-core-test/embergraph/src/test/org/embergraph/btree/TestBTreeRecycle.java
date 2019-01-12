@@ -29,7 +29,7 @@ import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /*
-* Test suite for recycling of B+Tree records.
+ * Test suite for recycling of B+Tree records.
  *
  * <p>Note: Due to the pattern by which a {@link BTree} is created, it is always loaded from an
  * existing checkpoint.
@@ -50,7 +50,7 @@ public class TestBTreeRecycle extends TestCase2 {
   }
 
   //    /*
-//     * Helper class overrides {@link #recycle(long)} in order to observe
+  //     * Helper class overrides {@link #recycle(long)} in order to observe
   //     * recycling events.
   //     */
   //    private static class RecycleListenerBTree extends BTree {

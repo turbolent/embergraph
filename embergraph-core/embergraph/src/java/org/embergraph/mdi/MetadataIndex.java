@@ -27,15 +27,12 @@ import org.embergraph.btree.Checkpoint;
 import org.embergraph.btree.DefaultTupleSerializer;
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.btree.keys.IKeyBuilderFactory;
-import org.embergraph.btree.view.FusedView;
 import org.embergraph.io.LongPacker;
-import org.embergraph.journal.ICommitter;
-import org.embergraph.journal.IResourceManager;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.service.MetadataService;
 
 /*
-* A metadata index for the partitions of a distributed index. There is one metadata index for each
+ * A metadata index for the partitions of a distributed index. There is one metadata index for each
  * distributed index. The keys of the metadata index are the first key that would be directed into
  * the corresponding index segment, e.g., a <em>separator key</em> (this is just the standard btree
  * semantics). The values are serialized {@link PartitionLocator} objects.

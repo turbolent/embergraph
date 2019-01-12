@@ -26,12 +26,11 @@ package org.embergraph.service;
 import java.util.UUID;
 import org.embergraph.btree.IIndex;
 import org.embergraph.btree.IndexMetadata;
-import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure.ResultBuffer;
 import org.embergraph.btree.proc.BatchLookup.BatchLookupConstructor;
 import org.embergraph.journal.ITx;
 
 /*
-* Test of basic index operations.
+ * Test of basic index operations.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -47,7 +46,7 @@ public class TestBasicIndexStuff extends AbstractEmbeddedFederationTestCase {
   }
 
   //    /*
-//     * Test verifies the behavior of the {@link IDataService} when requesting an
+  //     * Test verifies the behavior of the {@link IDataService} when requesting an
   //     * operation for an index that is not registered on that data service.
   //     * <p>
   //     * Note: This test is very important. Clients depends on

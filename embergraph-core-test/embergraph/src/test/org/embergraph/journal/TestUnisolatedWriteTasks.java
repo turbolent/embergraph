@@ -31,7 +31,7 @@ import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.util.BytesUtil.UnsignedByteArrayComparator;
 
 /*
-* Correctness test suite for unisolated writes on one or more indices. The tests in this suite
+ * Correctness test suite for unisolated writes on one or more indices. The tests in this suite
  * validate that the unisolated writes result in a commit and that the committed data may be read
  * back by an unisolated read task. Some tests write on more than one index in order to verify that
  * the writes and reads are performed against the expected index. The stress test additionally
@@ -165,8 +165,8 @@ public class TestUnisolatedWriteTasks extends ProxyTestCase<Journal> {
                     System.err.println("Ignoring expected exception: " + ex);
                   }
 
-                /*
-       * verify the written data from the prior task.
+                  /*
+                   * verify the written data from the prior task.
                    */
 
                   //                        byte[][] actualValues = new byte[ninserts][];
@@ -315,8 +315,8 @@ public class TestUnisolatedWriteTasks extends ProxyTestCase<Journal> {
                       System.err.println("Ignoring expected exception: " + ex);
                     }
 
-                  /*
-       * verify the written data from the prior task.
+                    /*
+                     * verify the written data from the prior task.
                      */
 
                     //                            byte[][] actualValues = new byte[ninserts][];
@@ -351,8 +351,8 @@ public class TestUnisolatedWriteTasks extends ProxyTestCase<Journal> {
                       System.err.println("Ignoring expected exception: " + ex);
                     }
 
-                  /*
-       * verify the written data from the prior task.
+                    /*
+                     * verify the written data from the prior task.
                      */
                     //
                     //                            byte[][] actualValues = new byte[ninserts][];
@@ -526,8 +526,8 @@ public class TestUnisolatedWriteTasks extends ProxyTestCase<Journal> {
                     assertEquals(
                         "indexUUID", stuff.indexUUID, ndx.getIndexMetadata().getIndexUUID());
 
-                  /*
-       * verify the written data from the prior task.
+                    /*
+                     * verify the written data from the prior task.
                      */
 
                     //                            byte[][] actualValues = new

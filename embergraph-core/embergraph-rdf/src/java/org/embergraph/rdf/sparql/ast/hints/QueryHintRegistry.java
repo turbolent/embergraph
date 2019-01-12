@@ -23,11 +23,9 @@ package org.embergraph.rdf.sparql.ast.hints;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import org.embergraph.bop.join.IHashJoinUtility;
-import org.embergraph.rdf.sparql.ast.FunctionRegistry.Factory;
 
 /*
-* A factory which is used to register and resolve query hints.
+ * A factory which is used to register and resolve query hints.
  *
  * <p>TODO Query hints for includeInferred, timeout/deadline, the "noJoinVarsLimit" at which we
  * break an unconstrained hash join (see the {@link IHashJoinUtility} implementation classes).

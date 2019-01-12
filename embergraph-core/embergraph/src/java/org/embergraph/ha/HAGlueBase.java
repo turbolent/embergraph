@@ -26,7 +26,7 @@ import java.rmi.Remote;
 import java.util.UUID;
 
 /*
-* A {@link Remote} interface for methods supporting high availability. This interface hierarchy
+ * A {@link Remote} interface for methods supporting high availability. This interface hierarchy
  * mirrors the {@link QuorumService} hierarchy and is broken down by the various facets of the high
  * availability functionality such as the write pipeline, quorum reads, the quorum commit protocol,
  * etc.

@@ -31,7 +31,7 @@ import org.embergraph.quorum.QuorumStateChangeListenerBase;
 import org.embergraph.rawstore.IRawStore;
 
 /*
-* {@link QuorumRead} implementation.
+ * {@link QuorumRead} implementation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

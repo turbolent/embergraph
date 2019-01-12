@@ -28,11 +28,10 @@ import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.Instrument;
 import org.embergraph.resources.OverflowManager.IIndexPartitionTaskCounters;
 import org.embergraph.resources.OverflowManager.IOverflowManagerCounters;
-import org.embergraph.resources.OverflowManager.Options;
 import org.embergraph.resources.ResourceManager.IResourceManagerCounters;
 
 /*
-* Utility class exposes some counter values while protecting the actual counters on the service
+ * Utility class exposes some counter values while protecting the actual counters on the service
  * from modification.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

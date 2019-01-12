@@ -26,7 +26,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /*
-* Runs all tests for all journal implementations.
+ * Runs all tests for all journal implementations.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestAll.java 4069 2011-01-09 20:58:02Z thompsonbry $

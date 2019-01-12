@@ -22,14 +22,13 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.rio;
 
 import java.util.Properties;
-import org.embergraph.btree.UnisolatedReadWriteIndex;
 import org.embergraph.rdf.load.IStatementBufferFactory;
 import org.embergraph.rdf.model.EmbergraphStatement;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.model.Statement;
 
 /*
-* Test loads an RDF/XML resource into a database and then verifies by re-parse that all expected
+ * Test loads an RDF/XML resource into a database and then verifies by re-parse that all expected
  * statements were made persistent in the database.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -212,7 +211,7 @@ public class TestLoadAndVerify extends AbstractRIOTestCase {
   }
 
   //    /*
-//     * Load the file using the {@link DataLoader}.
+  //     * Load the file using the {@link DataLoader}.
   //     * <p>
   //     * Note: Normally we disable closure for this test, but that is not
   //     * critical. If you compute the closure of the data set then there will

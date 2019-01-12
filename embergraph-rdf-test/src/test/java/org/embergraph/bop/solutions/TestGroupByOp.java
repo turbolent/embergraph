@@ -21,7 +21,7 @@ package org.embergraph.bop.solutions;
 import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
 
 /*
-* A collection of tests for various implementations of GroupByOp. Unlike the unit tests in {@link
+ * A collection of tests for various implementations of GroupByOp. Unlike the unit tests in {@link
  * AbstractAggregationTestCase }, this test suite provides higher coverage in terms of the covered
  * feature combinations, but weaker focus because it simply parses and runs the test queries from
  * files, so interference from other modules is likely. Also, the choice of the particular {@link

@@ -25,7 +25,7 @@ import org.apache.log4j.Level;
 import org.embergraph.btree.keys.TestKeyBuilder;
 
 /*
-* Test split of the root leaf.
+ * Test split of the root leaf.
  *
  * @see src/architecture/btree.xls for the examples used in this suite.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

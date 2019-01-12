@@ -10,7 +10,7 @@ package cern.jet.random;
 
 import cern.jet.random.engine.RandomEngine;
 /*
-* Abstract base class for all random distributions.
+ * Abstract base class for all random distributions.
  *
  * <p>A subclass of this class need to override method <tt>nextDouble()</tt> and, in rare cases,
  * also <tt>nextInt()</tt>.

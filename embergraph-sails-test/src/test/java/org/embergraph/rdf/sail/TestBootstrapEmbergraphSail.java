@@ -54,7 +54,7 @@ import org.openrdf.sail.SailConnection;
 import org.openrdf.sail.SailException;
 
 /*
-* Bootstrap test case for bringing up the {@link EmbergraphSail}.
+ * Bootstrap test case for bringing up the {@link EmbergraphSail}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -343,8 +343,8 @@ public class TestBootstrapEmbergraphSail extends TestCase2 {
               }
             };
 
-      /*
-       * Run task. It should obtain the unisolated connection and THEN
+        /*
+         * Run task. It should obtain the unisolated connection and THEN
          * block wait on our signal.
          */
         f = service.submit(task1);
@@ -465,8 +465,8 @@ public class TestBootstrapEmbergraphSail extends TestCase2 {
       } catch (ExecutionException e) {
 
         if (InnerCause.isInnerCause(e, AccessSemaphoreNotReentrantException.class)) {
-        /*
-       * This is the expected outcome.
+          /*
+           * This is the expected outcome.
            */
           log.info(e);
         } else {
@@ -566,8 +566,8 @@ public class TestBootstrapEmbergraphSail extends TestCase2 {
         try {
           f2.get(250, TimeUnit.MILLISECONDS);
         } catch (TimeoutException e) {
-        /*
-       * This is the expected outcome.
+          /*
+           * This is the expected outcome.
            */
           log.info("timeout");
         }
@@ -739,7 +739,7 @@ public class TestBootstrapEmbergraphSail extends TestCase2 {
   }
 
   //	/*
-//	 * Unit test verifies that we can mix read/write transactions and the use
+  //	 * Unit test verifies that we can mix read/write transactions and the use
   //	 * of the unisolated connection.
   //	 */
   //	public void test_readWriteTxAndUnisolatedConnection() {

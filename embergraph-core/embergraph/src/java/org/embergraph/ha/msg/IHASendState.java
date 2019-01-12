@@ -21,7 +21,7 @@ import java.io.Serializable;
 import java.util.UUID;
 
 /*
-* Interface for the state of the sender of an {@link IHAMessage}.
+ * Interface for the state of the sender of an {@link IHAMessage}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

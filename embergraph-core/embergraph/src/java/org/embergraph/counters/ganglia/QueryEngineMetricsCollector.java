@@ -19,7 +19,7 @@ public class QueryEngineMetricsCollector implements IGangliaMetricsCollector {
   private static Logger log = Logger.getLogger(QueryEngineMetricsCollector.class);
 
   //    /*
-//     * Match anything which does NOT include <code>.service.</code> in the
+  //     * Match anything which does NOT include <code>.service.</code> in the
   //     * counter path.
   //     *
   //     * @see <a href="http://www.regular-expressions.info/lookaround.html">

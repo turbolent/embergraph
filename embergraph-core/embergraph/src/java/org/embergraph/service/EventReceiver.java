@@ -47,7 +47,7 @@ import org.embergraph.relation.accesspath.TupleObjectResolver;
 import org.embergraph.util.Bytes;
 
 /*
-* Class capable of receiving {@link Event}s from remote services. Start events are maintained in a
+ * Class capable of receiving {@link Event}s from remote services. Start events are maintained in a
  * cache until their corresponding end event is received at which point they are propagated to an
  * {@link EventBTree} which is used for reporting purposes.
  *
@@ -259,8 +259,8 @@ public class EventReceiver implements IEventReceivingService, IEventReportingSer
 
       if (t == null) {
 
-      /*
-       * Add to the cache (prevents retriggering if end() was called
+        /*
+         * Add to the cache (prevents retriggering if end() was called
          * before the start() event was sent by the client.
          */
         eventCache.put(e.eventUUID, e);
@@ -276,8 +276,8 @@ public class EventReceiver implements IEventReceivingService, IEventReportingSer
 
       } else {
 
-      /*
-       * There is a event in the cache which has not yet been flagged
+        /*
+         * There is a event in the cache which has not yet been flagged
          * as [complete]. We update the event's endTime and the details
          * with from the new event and flag it as [complete], log it,
          * and record it on the B+Tree.
@@ -334,8 +334,8 @@ public class EventReceiver implements IEventReceivingService, IEventReportingSer
 
       if (!t.isComplete()) {
 
-      /*
-       * This presumes that events should complete within the
+        /*
+         * This presumes that events should complete within the
          * event history retention period. A failure to receive the
          * end() event most likely indicates that the client has a
          * code path where end() is not invoked for the event.

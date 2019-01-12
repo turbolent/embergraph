@@ -25,7 +25,7 @@ import java.util.Map;
 import org.embergraph.bop.BOp;
 
 /*
-* Graph management operation inserts all data from one graph into another. Data from the source
+ * Graph management operation inserts all data from one graph into another. Data from the source
  * graph is not effected. Data already present in the target graph is not effected.
  *
  * <pre>

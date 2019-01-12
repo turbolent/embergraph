@@ -22,7 +22,7 @@ import java.util.regex.Matcher;
 import org.embergraph.rdf.internal.gis.ICoordinate.UNITS;
 
 /*
-* Test suite for {@link CoordinateDDM}.
+ * Test suite for {@link CoordinateDDM}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

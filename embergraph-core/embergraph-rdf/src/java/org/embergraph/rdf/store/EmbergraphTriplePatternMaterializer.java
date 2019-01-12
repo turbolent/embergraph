@@ -40,7 +40,7 @@ import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.util.concurrent.LatchedExecutor;
 
 /*
-* Efficient batched, streaming resolution of triple patterns to statements spanned by those triple
+ * Efficient batched, streaming resolution of triple patterns to statements spanned by those triple
  * patterns that are present in the data.
  *
  * <p>Note: If the input contains triple patterns that have a high cardinality in the data, then a
@@ -130,14 +130,14 @@ public class EmbergraphTriplePatternMaterializer
        */
       for (EmbergraphTriplePattern stmt : chunk) {
 
-      /*
-       * Task runs subquery and cancels all subqueries in [tasks] if
+        /*
+         * Task runs subquery and cancels all subqueries in [tasks] if
          * it fails.
          */
         final FutureTask<Long> ft =
             new FutureTask<Long>(new ResolveTriplePatternTask(stmt, out)) {
-            /*
-       * Hook future to count down the latch when the task is
+              /*
+               * Hook future to count down the latch when the task is
                * done.
                */
               @Override
@@ -256,8 +256,8 @@ public class EmbergraphTriplePatternMaterializer
           //                                throw new AssertionError(Arrays.toString(a));
           //                        }
           //                    }
-        /*
-       * This will never fail for a ConcurrentLinkedQueue.
+          /*
+           * This will never fail for a ConcurrentLinkedQueue.
            *
            * @see <a href="http://trac.blazegraph.com/ticket/985" > Deadlock in
            *     EmbergraphTriplePatternMaterializer </a>

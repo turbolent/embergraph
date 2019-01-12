@@ -27,7 +27,7 @@ import java.io.Reader;
 import java.io.Serializable;
 
 /*
-* A trivial {@link it.unimi.dsi.io.WordReader} that considers each line of a document a single
+ * A trivial {@link it.unimi.dsi.io.WordReader} that considers each line of a document a single
  * word.
  *
  * <p>The intended usage of this class is that of indexing stuff like lists of document identifiers:

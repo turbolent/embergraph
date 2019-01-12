@@ -29,7 +29,6 @@ import org.embergraph.bop.IConstraint;
 import org.embergraph.bop.IValueExpression;
 import org.embergraph.bop.IVariable;
 import org.embergraph.bop.Var;
-import org.embergraph.bop.aggregate.IAggregate;
 import org.embergraph.bop.rdf.aggregate.MIN;
 import org.embergraph.bop.rdf.aggregate.SUM;
 import org.embergraph.journal.ITx;
@@ -45,7 +44,7 @@ import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 import org.openrdf.query.algebra.Compare.CompareOp;
 
 /*
-* Test suite for {@link GroupByState}.
+ * Test suite for {@link GroupByState}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

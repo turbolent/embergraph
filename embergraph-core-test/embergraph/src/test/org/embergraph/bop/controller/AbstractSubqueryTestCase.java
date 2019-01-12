@@ -2,11 +2,10 @@ package org.embergraph.bop.controller;
 
 import junit.framework.TestCase2;
 import org.embergraph.bop.IBindingSet;
-import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
 
 /*
-* Abstract base class for subquery join test suites.
+ * Abstract base class for subquery join test suites.
  *
  * @author thompsonbry
  */
@@ -55,7 +54,7 @@ public abstract class AbstractSubqueryTestCase extends TestCase2 {
   }
 
   //    /*
-//     * Verify the expected solutions.
+  //     * Verify the expected solutions.
   //     *
   //     * @param expected
   //     * @param itr
@@ -89,7 +88,7 @@ public abstract class AbstractSubqueryTestCase extends TestCase2 {
   //    }
   //
   //    /*
-//     * Verifies that the iterator visits the specified objects in some arbitrary
+  //     * Verifies that the iterator visits the specified objects in some arbitrary
   //     * ordering and that the iterator is exhausted once all expected objects
   //     * have been visited. The implementation uses a selection without
   //     * replacement "pattern".
@@ -106,7 +105,7 @@ public abstract class AbstractSubqueryTestCase extends TestCase2 {
   //    }
   //
   //    /*
-//     * Verifies that the iterator visits the specified objects in some arbitrary
+  //     * Verifies that the iterator visits the specified objects in some arbitrary
   //     * ordering and that the iterator is exhausted once all expected objects
   //     * have been visited. The implementation uses a selection without
   //     * replacement "pattern".

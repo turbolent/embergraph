@@ -54,7 +54,7 @@ import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
 import org.embergraph.striterator.ChunkedArrayIterator;
 
 /*
-* Unit tests for the {@link FastRangeCountOp} operator.
+ * Unit tests for the {@link FastRangeCountOp} operator.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

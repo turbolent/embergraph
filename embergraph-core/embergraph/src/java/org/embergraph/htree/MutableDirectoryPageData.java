@@ -1,12 +1,10 @@
 package org.embergraph.htree;
 
-import org.embergraph.btree.BTree;
 import org.embergraph.htree.data.IDirectoryData;
 import org.embergraph.io.AbstractFixedByteArrayBuffer;
-import org.embergraph.rawstore.IRawStore;
 
 /*
-* Implementation maintains Java objects corresponding to the persistent data and defines methods
+ * Implementation maintains Java objects corresponding to the persistent data and defines methods
  * for a variety of mutations on the {@link IDirectoryData} record which operate by direct
  * manipulation of the Java objects.
  *
@@ -33,7 +31,7 @@ public class MutableDirectoryPageData implements IDirectoryData {
   final long[] childAddr;
 
   //	/*
-//	 * The #of entries spanned by this node. This value should always be equal
+  //	 * The #of entries spanned by this node. This value should always be equal
   //	 * to the sum of the defined values in {@link #childEntryCounts}.
   //	 * <p>
   //	 * When a node is split, the value is updated by subtracting off the counts
@@ -51,7 +49,7 @@ public class MutableDirectoryPageData implements IDirectoryData {
   //	int nentries;
 
   //	/*
-//	 * The #of entries spanned by each direct child of this node.
+  //	 * The #of entries spanned by each direct child of this node.
   //	 * <p>
   //	 * The appropriate element in this array is incremented on all ancestor
   //	 * nodes by {@link Leaf#insert(Object, Object)} and decremented on all

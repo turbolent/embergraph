@@ -39,14 +39,13 @@ import org.embergraph.rdf.sparql.ast.ProjectionNode;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.QueryType;
 import org.embergraph.rdf.sparql.ast.VarNode;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTDescribeOptimizer;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.query.algebra.evaluation.iterator.CollectionIteration;
 
 /*
-* Utility class for computing the Concise Bounded Description.
+ * Utility class for computing the Concise Bounded Description.
  *
  * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/578">Concise Bounded Description
  *     </a>
@@ -362,8 +361,8 @@ public class CBD {
 
         if (stmts.add(stmt)) {
 
-        /*
-       * New blank node IVs can only be encountered for new
+          /*
+           * New blank node IVs can only be encountered for new
            * statements.
            *
            * TODO Consider using an ISPO => EmbergraphStatement map for

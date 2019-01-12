@@ -1,5 +1,5 @@
 /*
-* The Notice below must appear in each file of the Source Code of any copy you distribute of the
+ * The Notice below must appear in each file of the Source Code of any copy you distribute of the
  * Licensed Product. Contributors to any Modifications may add their own copyright notices to
  * identify their own contributions.
  *
@@ -36,13 +36,12 @@
  */
 package org.embergraph.util.httpd;
 
-import java.util.regex.Pattern;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /*
-* Test suite for {@link HTTPHeaderUtility}.
+ * Test suite for {@link HTTPHeaderUtility}.
  *
  * @todo Add explicit tests for the {@link Pattern} objects used to match an HTTP <code>token</code>
  *     and HTTP <code>quoted-string</code>. These tests should ensure that the pattern objects

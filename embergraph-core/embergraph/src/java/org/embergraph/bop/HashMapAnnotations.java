@@ -21,10 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop;
 
-import java.util.concurrent.ConcurrentHashMap;
-
 /*
-* Annotations for an operator using an internal hash map.
+ * Annotations for an operator using an internal hash map.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -65,7 +65,6 @@ import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
-import junit.framework.AssertionFailedError;
 import junit.framework.TestCase2;
 import org.apache.log4j.Logger;
 import org.embergraph.bop.BOp;
@@ -84,7 +83,7 @@ import org.openrdf.query.TupleQueryResult;
 import org.openrdf.query.impl.MutableTupleQueryResult;
 
 /*
-* Base class adds some static methods used with unit tests of the {@link QueryEngine}.
+ * Base class adds some static methods used with unit tests of the {@link QueryEngine}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

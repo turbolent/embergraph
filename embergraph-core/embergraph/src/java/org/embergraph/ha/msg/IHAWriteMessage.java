@@ -23,7 +23,7 @@ import org.embergraph.io.compression.IRecordCompressor;
 import org.embergraph.journal.StoreTypeEnum;
 
 /*
-* A message carrying RMI metadata about a payload which will be replicated using a socket-level
+ * A message carrying RMI metadata about a payload which will be replicated using a socket-level
  * transfer facility.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

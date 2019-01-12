@@ -34,7 +34,7 @@ import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.util.Bytes;
 
 /*
-* Test suite for {@link TermId}.
+ * Test suite for {@link TermId}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

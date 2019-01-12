@@ -29,7 +29,7 @@ import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
 /*
-* Vocabulary and namespace for the Dublin Core "elements".
+ * Vocabulary and namespace for the Dublin Core "elements".
  *
  * @see http://purl.org/dc/elements/1.1/
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

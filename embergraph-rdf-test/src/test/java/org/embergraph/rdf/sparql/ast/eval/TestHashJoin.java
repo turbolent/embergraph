@@ -36,7 +36,7 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
 /*
-* Test suite for queries designed to exercise a hash join against an access path.
+ * Test suite for queries designed to exercise a hash join against an access path.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

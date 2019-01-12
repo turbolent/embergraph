@@ -27,7 +27,7 @@ import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IVariable;
 
 /*
-* Implementation of a binding.
+ * Implementation of a binding.
  *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  */

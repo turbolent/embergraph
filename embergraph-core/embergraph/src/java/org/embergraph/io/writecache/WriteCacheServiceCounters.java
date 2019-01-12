@@ -22,12 +22,10 @@ import org.embergraph.counters.CAT;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.Instrument;
 import org.embergraph.counters.OneShotInstrument;
-import org.embergraph.io.writecache.WriteCache.ReadCache;
-import org.embergraph.io.writecache.WriteCacheService.WriteTask;
 import org.embergraph.util.Bytes;
 
 /*
-* Performance counters for the {@link WriteCacheService}.
+ * Performance counters for the {@link WriteCacheService}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -252,8 +250,8 @@ public class WriteCacheServiceCounters extends WriteCacheCounters
           @Override
           public void sample() {
             if (nrecordsEvictedToChannel > 0) {
-            /*
-       * Note: records are evicted a buffer at a time. Therefore
+              /*
+               * Note: records are evicted a buffer at a time. Therefore
                * we use the same divisor here as we do for the
                * AVERAGE_BUFFER_EVICTED_TO_CHANNEL_NANOS.
                */
@@ -269,8 +267,8 @@ public class WriteCacheServiceCounters extends WriteCacheCounters
           @Override
           public void sample() {
             if (nrecordsEvictedToChannel > 0) {
-            /*
-       * Note: records are evicted a buffer at a time. Therefore
+              /*
+               * Note: records are evicted a buffer at a time. Therefore
                * we use the same divisor here as we do for the
                * AVERAGE_BUFFER_EVICTED_TO_CHANNEL_NANOS.
                */

@@ -3,7 +3,7 @@ package org.embergraph.rawstore;
 import java.io.InputStream;
 
 /*
-* An object that may be used to read or write a block from a store. In general, an instance of this
+ * An object that may be used to read or write a block from a store. In general, an instance of this
  * interface either supports read or write but not both.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -27,7 +27,7 @@ public interface IBlock {
   InputStream inputStream();
 
   //        /*
-//         * The sink on which the block's data may be written.
+  //         * The sink on which the block's data may be written.
   //         * <p>
   //         * Note: It is important to flush() and close() this output stream.
   //         *

@@ -39,7 +39,7 @@ import org.embergraph.util.InnerCause;
 import org.embergraph.util.concurrent.LatchedExecutor;
 
 /*
-* Helper class to warm up the indices associated with various namespaces on the journal.
+ * Helper class to warm up the indices associated with various namespaces on the journal.
  *
  * @author bryan
  * @see <a href="http://trac.bigdata.com/ticket/1050" > pre-heat the journal on startup </a>
@@ -195,8 +195,8 @@ public class WarmUpTask implements Callable<Map<String, BaseIndexStats>> {
         for (FutureTask<BaseIndexStats> ft : tasks) {
           // The statistics from scanning a single index.
           final BaseIndexStats stats = ft.get();
-        /*
-       * Add those statistics to our collection.
+          /*
+           * Add those statistics to our collection.
            *
            * Note: collection is not thread safe, but this logic is single
            * threaded.
@@ -215,8 +215,8 @@ public class WarmUpTask implements Callable<Map<String, BaseIndexStats>> {
       final long elapsed = System.nanoTime() - begin;
 
       if (log.isInfoEnabled()) {
-      /*
-       * Write out warmup statistics (summary and detail).
+        /*
+         * Write out warmup statistics (summary and detail).
          */
         final StringWriter strw = new StringWriter(statsMap.size() * Bytes.kilobyte32);
         strw.append(
@@ -260,8 +260,8 @@ public class WarmUpTask implements Callable<Map<String, BaseIndexStats>> {
 
       if (InnerCause.isInnerCause(t, ClassNotFoundException.class)) {
 
-      /*
-       * This is typically a tuple serializer that has a dependency on an
+        /*
+         * This is typically a tuple serializer that has a dependency on an
          * application class that is not present in the CLASSPATH. Add the
          * necessary dependency(s) and you should no longer see this
          * message.

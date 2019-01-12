@@ -45,7 +45,7 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.Value;
 
 /*
-* Special encoding for GeoSpatial datatypes. We encode literals of the form <int_i>#...#<int_n> as
+ * Special encoding for GeoSpatial datatypes. We encode literals of the form <int_i>#...#<int_n> as
  * BigInteger using the xsd:integer type. The conversion into BigInteger is based on a calculation
  * of the z-order string for the n components.
  *

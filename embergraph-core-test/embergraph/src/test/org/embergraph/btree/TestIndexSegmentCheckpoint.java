@@ -31,7 +31,7 @@ import org.embergraph.rawstore.WormAddressManager;
 import org.embergraph.util.Bytes;
 
 /*
-* Test suite for {@link IndexSegmentCheckpoint}.
+ * Test suite for {@link IndexSegmentCheckpoint}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

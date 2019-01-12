@@ -21,11 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree.keys;
 
-import org.embergraph.rdf.internal.IV;
-import org.embergraph.striterator.IKeyOrder;
-
 /*
-* An extension interface for encoding and decoding unsigned byte[] keys.
+ * An extension interface for encoding and decoding unsigned byte[] keys.
  *
  * <p>Note: This was developed to provide backwards compatibility for the full text index with the
  * change of term identifiers from simple <code>long</code> values to variable length {@link IV}s.

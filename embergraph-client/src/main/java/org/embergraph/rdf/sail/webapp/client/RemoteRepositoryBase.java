@@ -41,7 +41,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.ext.DefaultHandler2;
 
 /*
-* Base class providing some common functionality.
+ * Base class providing some common functionality.
  *
  * @author bryan
  */

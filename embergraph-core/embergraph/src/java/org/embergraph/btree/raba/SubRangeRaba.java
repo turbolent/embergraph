@@ -25,7 +25,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /*
-* A read-only {@link IRaba} that exposes a limited sub-range of a backing {@link IRaba}.
+ * A read-only {@link IRaba} that exposes a limited sub-range of a backing {@link IRaba}.
  *
  * @author bryan
  * @see BLZG-1537 (Schedule more IOs when loading data)
@@ -198,7 +198,7 @@ public class SubRangeRaba implements IRaba {
   }
 
   //	/*
-//	 * {@inheritDoc}
+  //	 * {@inheritDoc}
   //	 *
   //	 * @return The adjusted search position into this key range.
   //	 *

@@ -48,7 +48,7 @@ import org.embergraph.util.DaemonThreadFactory;
 import org.embergraph.util.NV;
 
 /*
-* Test suite for {@link HardReferenceQueueWithBatchingUpdates}. The class under test provides a
+ * Test suite for {@link HardReferenceQueueWithBatchingUpdates}. The class under test provides a
  * thread-local buffer for updates
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -221,7 +221,8 @@ public class TestHardReferenceQueueWithBatchingUpdates extends TestCase2
             concurrencyLevel,
             new HardReferenceQueue<Object>(
                 null, // listener
-                capacity, 0 // nscan
+                capacity,
+                0 // nscan
                 ),
             //                null/* listener */, capacity,
             threadLocalNScan,

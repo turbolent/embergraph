@@ -18,10 +18,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.lexicon;
 
 import org.embergraph.btree.BTree;
-import org.embergraph.btree.BTree.PartitionedCounter;
 
 /*
-* An encoder/decoder for long values formed from a partition identifier in the high word and a
+ * An encoder/decoder for long values formed from a partition identifier in the high word and a
  * local counter in the low word where the low N bits of the long value are reversed and rotated
  * into the high N bits of the long value.
  *

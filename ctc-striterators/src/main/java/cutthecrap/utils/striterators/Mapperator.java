@@ -18,7 +18,7 @@ package cutthecrap.utils.striterators;
 import java.util.Iterator;
 
 /*
-* Mapperator
+ * Mapperator
  *
  * <p>Initialized with a Mapper object, wraps a standard iterator and calls apply on each object as
  * it is iterated

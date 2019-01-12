@@ -33,13 +33,11 @@ import org.embergraph.bop.NV;
 import org.embergraph.bop.PipelineOp;
 import org.embergraph.bop.controller.INamedSolutionSetRef;
 import org.embergraph.bop.controller.SubqueryAnnotations;
-import org.embergraph.rdf.sparql.ast.QueryHints;
-import org.embergraph.rdf.sparql.ast.eval.AST2BOpUtility;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.UnsyncLocalOutputBuffer;
 
 /*
-* Operator for pipelined hash index construction and subsequent join. Note that this operator needs
+ * Operator for pipelined hash index construction and subsequent join. Note that this operator needs
  * not to be combined with a solution set hash join, but instead gets the subquery/subgroup passed
  * as a parameter and thus can be considered as an "all-in-one" build-hash-index-and-join operation.
  *
@@ -368,8 +366,8 @@ public class PipelinedHashIndexAndSolutionSetJoinOp extends HashIndexOp {
 
       } else if (op.getProperty(Annotations.NAMED_SET_SOURCE_REF) != null) {
 
-      /*
-       * Metadata to identify the optional *source* solution set. When
+        /*
+         * Metadata to identify the optional *source* solution set. When
          * <code>null</code>, the hash index is built from the solutions flowing
          * through the pipeline. When non-<code>null</code>, the hash index is
          * built from the solutions in the identifier solution set.
@@ -381,8 +379,8 @@ public class PipelinedHashIndexAndSolutionSetJoinOp extends HashIndexOp {
 
       } else if (bsFromBindingsSetSource != null) {
 
-      /*
-       * We handle the BINDINGS_SETS_SOURCE case as follows: the binding sets on the source are
+        /*
+         * We handle the BINDINGS_SETS_SOURCE case as follows: the binding sets on the source are
          * treated as input. Given that in this case no inner query is set, we consider the
          * BINDINGS_SETS_SOURCE as the result of the query instead. It is extracted here and passed
          * in as a parameter.

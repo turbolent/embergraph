@@ -49,7 +49,7 @@ import org.embergraph.stream.Stream;
 import org.embergraph.striterator.Chunkerator;
 
 /*
-* A persistence capable solution set stored using a stream oriented API. The order of the solutions
+ * A persistence capable solution set stored using a stream oriented API. The order of the solutions
  * on playback is their write order. This data structure provides fast read/write performance, but
  * does not provide key-based access into the solution sets.
  *
@@ -344,7 +344,6 @@ public final class SolutionSetStream extends Stream implements ISolutionSet {
 
     // The statistics field was cleared.
     return solutionSetStats == null && getCheckpoint().getBloomFilterAddr() != IRawStore.NULL;
-
   }
 
   @Override
@@ -421,7 +420,7 @@ public final class SolutionSetStream extends Stream implements ISolutionSet {
    */
 
   //    /*
-//     * Return an access path that can be used to scan the solutions.
+  //     * Return an access path that can be used to scan the solutions.
   //     *
   //     * @param pred
   //     *            ignored.
@@ -442,7 +441,7 @@ public final class SolutionSetStream extends Stream implements ISolutionSet {
   //    }
   //
   //    /*
-//     * Class provides basic access path suitable for full scans.
+  //     * Class provides basic access path suitable for full scans.
   //     *
   //     * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan
   //     *         Thompson</a>
@@ -522,7 +521,7 @@ public final class SolutionSetStream extends Stream implements ISolutionSet {
   //    }
   //
   //    /*
-//     * A predicate that can be used with an {@link ISolutionSet} without having
+  //     * A predicate that can be used with an {@link ISolutionSet} without having
   //     * to resolve the {@link ISolutionSet} as an {@link IRelation}.
   //     *
   //     * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan
@@ -533,7 +532,7 @@ public final class SolutionSetStream extends Stream implements ISolutionSet {
   //            Predicate<E> {
   //
   //        /*
-//         *
+  //         *
   //         */
   //        private static final long serialVersionUID = 1L;
   //
@@ -551,7 +550,7 @@ public final class SolutionSetStream extends Stream implements ISolutionSet {
   //        }
   //
   //        /*
-//         *
+  //         *
   //         * @param attributeName
   //         *            The name of the query attribute that will be used to
   //         *            resolve this solution set.

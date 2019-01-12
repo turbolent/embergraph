@@ -20,12 +20,11 @@ package org.embergraph.rdf.internal.impl.bnode;
 import org.embergraph.rdf.internal.DTE;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.model.EmbergraphBNode;
-import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.util.Bytes;
 import org.openrdf.model.BNode;
 
 /*
-* Class for inline RDF blank nodes. Blank nodes MUST be based on a numeric value to be inlined with
+ * Class for inline RDF blank nodes. Blank nodes MUST be based on a numeric value to be inlined with
  * this class.
  *
  * <p>{@inheritDoc}

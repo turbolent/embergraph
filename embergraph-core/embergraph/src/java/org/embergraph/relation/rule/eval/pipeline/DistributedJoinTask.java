@@ -12,7 +12,6 @@ import java.util.Vector;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
-import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 import org.embergraph.bop.IBindingSet;
@@ -21,7 +20,6 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.mdi.PartitionLocator;
 import org.embergraph.relation.IMutableRelation;
 import org.embergraph.relation.accesspath.AbstractUnsynchronizedArrayBuffer;
-import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.IBuffer;
 import org.embergraph.relation.rule.IRule;
@@ -34,13 +32,12 @@ import org.embergraph.service.AbstractScaleOutFederation;
 import org.embergraph.service.DataService;
 import org.embergraph.service.IDataService;
 import org.embergraph.service.IEmbergraphFederation;
-import org.embergraph.service.Session;
 import org.embergraph.striterator.IKeyOrder;
 import org.embergraph.util.concurrent.Computable;
 import org.embergraph.util.concurrent.Memoizer;
 
 /*
-* Implementation used by scale-out deployments. There will be one instance of this task per index
+ * Implementation used by scale-out deployments. There will be one instance of this task per index
  * partition on which the rule will read. Those instances will be in-process on the {@link
  * DataService} hosting that index partition. Instances are created on the {@link DataService} using
  * the {@link JoinTaskFactoryTask} helper class.
@@ -107,7 +104,7 @@ public class DistributedJoinTask extends JoinTask {
   private final DataService dataService;
 
   //    /*
-//     * The {@link JoinTaskSink}s for the downstream
+  //     * The {@link JoinTaskSink}s for the downstream
   //     * {@link DistributedJoinTask}s onto which the generated
   //     * {@link IBindingSet}s will be written. This is <code>null</code>
   //     * for the last join since we will write solutions onto the
@@ -173,8 +170,8 @@ public class DistributedJoinTask extends JoinTask {
 
       if (action.isMutation()) {
 
-      /*
-       * Note: The solution buffer for mutation operations
+        /*
+         * Note: The solution buffer for mutation operations
          * is obtained locally from a joinNexus that is
          * backed by the federation NOT the local index
          * manager. (This is because the solution buffer
@@ -183,8 +180,8 @@ public class DistributedJoinTask extends JoinTask {
 
         final IJoinNexus tmp = fedJoinNexus;
 
-      /*
-       * The view of the mutable relation for the _head_ of the
+        /*
+         * The view of the mutable relation for the _head_ of the
          * rule.
          */
 
@@ -212,8 +209,8 @@ public class DistributedJoinTask extends JoinTask {
 
       } else {
 
-      /*
-       * The solution buffer for queries is obtained from the
+        /*
+         * The solution buffer for queries is obtained from the
          * master.
          */
 
@@ -466,8 +463,8 @@ public class DistributedJoinTask extends JoinTask {
           // if there is something to read on that source.
           if (src.hasNext(1L, TimeUnit.MILLISECONDS)) {
 
-          /*
-       * Read the chunk, waiting up to the timeout for
+            /*
+             * Read the chunk, waiting up to the timeout for
              * additional chunks from this source which can be
              * combined together by the iterator into a single
              * chunk.
@@ -477,8 +474,8 @@ public class DistributedJoinTask extends JoinTask {
              */
             final IBindingSet[] chunk = src.next(10L, TimeUnit.MILLISECONDS);
 
-          /*
-       * Note: Since hasNext() returned [true] for this source
+            /*
+             * Note: Since hasNext() returned [true] for this source
              * we SHOULD get a chunk back since it is known to be
              * there waiting for us. The timeout should only give
              * the iterator an opportunity to combine multiple
@@ -523,8 +520,8 @@ public class DistributedJoinTask extends JoinTask {
 
         if (nexhausted == sources.length) {
 
-        /*
-       * All sources on which we were reading in this loop have
+          /*
+           * All sources on which we were reading in this loop have
            * been exhausted.
            *
            * Note: we may have buffered some data, which is checked
@@ -550,8 +547,8 @@ public class DistributedJoinTask extends JoinTask {
 
               sourcesExhausted = true;
 
-            /*
-       * Remove ourselves from the Session since we will
+              /*
+               * Remove ourselves from the Session since we will
                * no longer accept any new sources.
                */
 
@@ -747,8 +744,8 @@ public class DistributedJoinTask extends JoinTask {
 
       if (joinNexus.getAction().isMutation()) {
 
-      /*
-       * Apply mutationCount to the JoinStats so that it will be
+        /*
+         * Apply mutationCount to the JoinStats so that it will be
          * reported back to the JoinMasterTask.
          */
 
@@ -1027,8 +1024,8 @@ public class DistributedJoinTask extends JoinTask {
 
                 @Override
                 public boolean isValid(final Object e) {
-                /*
-       * Filter out any tasks which are not done or which had an
+                  /*
+                   * Filter out any tasks which are not done or which had an
                    * error.
                    */
                   final Future<JoinTaskSink> f = (Future<JoinTaskSink>) e;
@@ -1051,8 +1048,8 @@ public class DistributedJoinTask extends JoinTask {
 
                 @Override
                 protected Object resolve(final Object arg0) {
-                /*
-       * We filtered out any tasks which were not done and any
+                  /*
+                   * We filtered out any tasks which were not done and any
                    * tasks which had errors.  The future should be immediately
                    * available and Future.get() should not throw an error.
                    */
@@ -1069,7 +1066,7 @@ public class DistributedJoinTask extends JoinTask {
     }
 
     //        /*
-//         * Called by the thread which atomically sets the
+    //         * Called by the thread which atomically sets the
     //         * {@link AbstractNode#childRefs} element to the computed
     //         * {@link AbstractNode}. At that point a reference exists to the child
     //         * on the parent.
@@ -1088,7 +1085,7 @@ public class DistributedJoinTask extends JoinTask {
     //        }
 
     //        /*
-//         * Called from {@link AbstractBTree#close()}.
+    //         * Called from {@link AbstractBTree#close()}.
     //         *
     //         * @todo should we do this?  There should not be any reads against the
     //         * the B+Tree when it is close()d.  Therefore I do not believe there

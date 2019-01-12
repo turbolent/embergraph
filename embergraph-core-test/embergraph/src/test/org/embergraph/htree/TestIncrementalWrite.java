@@ -22,7 +22,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.htree;
 
 import java.util.UUID;
-import org.embergraph.btree.AbstractNode;
 import org.embergraph.btree.Checkpoint;
 import org.embergraph.btree.DefaultTupleSerializer;
 import org.embergraph.btree.HTreeIndexMetadata;
@@ -39,7 +38,7 @@ import org.embergraph.rawstore.SimpleMemoryRawStore;
 import org.embergraph.util.Bytes;
 
 /*
-* Test suite for the logic performing incremental writes of nodes and leaves onto the store. The
+ * Test suite for the logic performing incremental writes of nodes and leaves onto the store. The
  * actual timing of evictions from the {@link HardReferenceQueue} is essentially unpredictable since
  * evictions are driven by {@link AbstractHTree#touch(AbstractNode)} and nodes and leaves are both
  * touched frequently and in a data and code path dependent manner.
@@ -180,7 +179,7 @@ public class TestIncrementalWrite extends AbstractHTreeTestCase {
   }
 
   //    /*
-//     * Test verifies that an incremental write of a leaf may be performed, that
+  //     * Test verifies that an incremental write of a leaf may be performed, that
   //     * identity is assigned to the written leaf, and that the childKey[] on the
   //     * parent node is updated to reflect the identity assigned to the leaf.
   //     */
@@ -292,7 +291,7 @@ public class TestIncrementalWrite extends AbstractHTreeTestCase {
   //
   //
   //    /*
-//     * Test verifies that an incremental write of a node may be performed, that
+  //     * Test verifies that an incremental write of a node may be performed, that
   //     * identity is assigned to the written node, and that the childKey[] on the
   //     * node are updated to reflect the identity assigned to its children (the
   //     * dirty children are written out when the node is evicted so that the

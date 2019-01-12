@@ -55,7 +55,7 @@ import org.embergraph.rdf.vocab.VocabularyDecl;
 import org.openrdf.model.URI;
 
 /*
-* Test suite for adding terms to the lexicon.
+ * Test suite for adding terms to the lexicon.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -327,8 +327,8 @@ public class TestInlining extends AbstractTripleStoreTestCase {
 
       if (!store.isStable()) {
 
-      /*
-       * We need a restart safe store to test this since otherwise a
+        /*
+         * We need a restart safe store to test this since otherwise a
          * term cache could give us a false positive.
          */
 
@@ -417,8 +417,8 @@ public class TestInlining extends AbstractTripleStoreTestCase {
 
       if (!store.isStable()) {
 
-      /*
-       * We need a restart safe store to test this since otherwise a
+        /*
+         * We need a restart safe store to test this since otherwise a
          * term cache could give us a false positive.
          */
 
@@ -542,8 +542,8 @@ public class TestInlining extends AbstractTripleStoreTestCase {
 
       if (!store.isStable()) {
 
-      /*
-       * We need a restart safe store to test this since otherwise a
+        /*
+         * We need a restart safe store to test this since otherwise a
          * term cache could give us a false positive.
          */
 

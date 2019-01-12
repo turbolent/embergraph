@@ -34,7 +34,7 @@ import org.embergraph.bop.bindingSet.HashBindingSet;
 import org.embergraph.striterator.Dechunkerator;
 
 /*
-* Test suite for {@link LocalChunkMessage}.
+ * Test suite for {@link LocalChunkMessage}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

@@ -3,7 +3,7 @@ package org.embergraph.bop.engine;
 import java.lang.ref.WeakReference;
 
 /*
-* Class pairs together the immutable deadline associated with a query and the {@link
+ * Class pairs together the immutable deadline associated with a query and the {@link
  * AbstractRunningQuery}. The natural ordering places instances of this class into ascending
  * deadline order. The deadline is simply the timestamp at which the query deadline is expired.
  * Therefore, the instances are simply ordered by the time when their deadline will expire. The

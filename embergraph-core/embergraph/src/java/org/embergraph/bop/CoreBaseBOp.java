@@ -30,7 +30,7 @@ import org.embergraph.btree.Tuple;
 import org.embergraph.rdf.sparql.ast.IValueExpressionNode;
 
 /*
-* Base class with some common methods for mutable and copy-on-write {@link BOp} s.
+ * Base class with some common methods for mutable and copy-on-write {@link BOp} s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

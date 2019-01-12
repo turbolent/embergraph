@@ -18,11 +18,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.eval;
 
 import java.util.Properties;
-import org.embergraph.rdf.internal.NotMaterializedException;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /*
-* Test case for https://jira.blazegraph.com/browse/BLZG-1591: {@link NotMaterializedException} with
+ * Test case for https://jira.blazegraph.com/browse/BLZG-1591: {@link NotMaterializedException} with
  * ORDER BY clause (for InlineURIIvs).
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>

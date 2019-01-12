@@ -42,7 +42,7 @@ import org.embergraph.rwstore.sector.MemoryManager;
 import org.embergraph.striterator.Dechunkerator;
 
 /*
-* Test suite for {@link LocalNativeChunkMessage}.
+ * Test suite for {@link LocalNativeChunkMessage}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

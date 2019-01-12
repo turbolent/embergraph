@@ -28,7 +28,7 @@ import java.net.UnknownHostException;
 import junit.framework.TestCase2;
 
 /*
-* Test suite for {@link InetAddressUtil}.
+ * Test suite for {@link InetAddressUtil}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -33,7 +33,7 @@ import org.embergraph.relation.accesspath.BufferClosedException;
 import org.embergraph.util.InnerCause;
 
 /*
-* Abstract base class for tasks whose processing may be halted asynchronously.
+ * Abstract base class for tasks whose processing may be halted asynchronously.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -93,8 +93,8 @@ public abstract class AbstractHaltableProcess {
             && !InnerCause.isInnerCause(cause, RejectedExecutionException.class)
             && !InnerCause.isInnerCause(cause, BufferClosedException.class)) {
 
-        /*
-       * This logs all unexpected causes, not just the first one
+          /*
+           * This logs all unexpected causes, not just the first one
            * to be reported for this join task.
            *
            * Note: The master will log the firstCause that it receives

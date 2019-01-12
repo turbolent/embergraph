@@ -22,11 +22,9 @@ import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
-import org.embergraph.ha.pipeline.HAReceiveService;
-import org.embergraph.ha.pipeline.HASendService;
 
 /*
-* Base class for RMI messages used to communicate metadata about a raw data transfer occurring on a
+ * Base class for RMI messages used to communicate metadata about a raw data transfer occurring on a
  * socket channel.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

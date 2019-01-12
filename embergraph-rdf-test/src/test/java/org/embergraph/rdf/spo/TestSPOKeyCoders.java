@@ -21,7 +21,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.spo;
 
-import java.io.IOException;
 import java.util.Arrays;
 import junit.framework.TestCase2;
 import org.embergraph.btree.AbstractBTreeTestCase;
@@ -39,7 +38,7 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.test.MockTermIdFactory;
 
 /*
-* Test suite for approaches to key compression for statement indices (keys are permutations on
+ * Test suite for approaches to key compression for statement indices (keys are permutations on
  * SPOC, logically comprised of long[4] and encoded as byte[]), the terms index (key is byte[]
  * encoding the URI, literal, or bnode ID), or the ids index (key is byte[] encoding a long term
  * identifier). Key compression can be used (a) before sorting the data; (b) when serializing the

@@ -7,7 +7,6 @@ import java.util.concurrent.ConcurrentMap;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpContextBase;
 import org.embergraph.bop.Constant;
-import org.embergraph.bop.ContextBindingSet;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IValueExpression;
@@ -16,9 +15,7 @@ import org.embergraph.bop.IVariableOrConstant;
 import org.embergraph.bop.ImmutableBOp;
 import org.embergraph.bop.NV;
 import org.embergraph.bop.aggregate.AggregateBase;
-import org.embergraph.bop.aggregate.IAggregate;
 import org.embergraph.bop.rdf.aggregate.GROUP_CONCAT;
-import org.embergraph.rdf.internal.ILexiconConfiguration;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.constraints.AndBOp;
 import org.embergraph.rdf.internal.constraints.BNodeBOp;
@@ -73,11 +70,7 @@ import org.embergraph.rdf.internal.constraints.UcaseBOp;
 import org.embergraph.rdf.internal.constraints.XsdLongBOp;
 import org.embergraph.rdf.internal.constraints.XsdStrBOp;
 import org.embergraph.rdf.internal.constraints.XsdUnsignedLongBOp;
-import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpUtility;
-import org.embergraph.rdf.sparql.ast.eval.ASTSearchInSearchOptimizer;
-import org.embergraph.rdf.sparql.ast.optimizers.IASTOptimizer;
-import org.embergraph.rdf.store.BD;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.FN;
@@ -85,7 +78,7 @@ import org.openrdf.model.vocabulary.XMLSchema;
 import org.openrdf.query.algebra.Compare.CompareOp;
 
 /*
-* Registry for built-in and external SPARQL functions.
+ * Registry for built-in and external SPARQL functions.
  *
  * <p>Note: Use an alternative namespace for functions which do not have official namespaces.
  *
@@ -1634,8 +1627,8 @@ public class FunctionRegistry {
         final ValueExpressionNode... args) {
 
       if (args.length == 0) {
-      /*
-       * The first argument is the left hand side of the infix IN
+        /*
+         * The first argument is the left hand side of the infix IN
          * operator.
          */
         throw new IllegalArgumentException();
@@ -1643,8 +1636,8 @@ public class FunctionRegistry {
 
       if (args.length == 1) {
 
-      /*
-       * "foo IN()" is always false.
+        /*
+         * "foo IN()" is always false.
          *
          * "foo NOT IN()" is always true.
          */
@@ -1663,8 +1656,8 @@ public class FunctionRegistry {
 
       if (args.length == 2) {
 
-      /*
-       * "foo IN(bar)" is SameTerm(foo,bar) if bar is a URI, otherwise CompareBOp.
+        /*
+         * "foo IN(bar)" is SameTerm(foo,bar) if bar is a URI, otherwise CompareBOp.
          */
 
         //            	final IValueExpression<? extends IV> val =
@@ -1673,8 +1666,8 @@ public class FunctionRegistry {
         //                final IValueExpression ret = SameTermFactory.INSTANCE.create(
         //                        globals, scalarValues, args);
 
-      /*
-       * MP: Changed this to check for allowLiterals.  When we are allowing
+        /*
+         * MP: Changed this to check for allowLiterals.  When we are allowing
          * literals, chances are we want to bypass the CompareOp logic
          * for literal comparison.
          */
@@ -1699,8 +1692,8 @@ public class FunctionRegistry {
 
       try {
 
-      /*
-       * First, attempt to use an optimized variant. The args MUST be
+        /*
+         * First, attempt to use an optimized variant. The args MUST be
          * [var,constant(s)].
          */
 
@@ -1752,8 +1745,8 @@ public class FunctionRegistry {
 
       } catch (IllegalArgumentException iae) {
 
-      /*
-       * Use a variant which handles value expressions for the members
+        /*
+         * Use a variant which handles value expressions for the members
          * of the set. The first member of the list is taken to be the
          * valueExpr which is then tested against each other member of
          * the list.

@@ -24,7 +24,6 @@ package org.embergraph.rdf.sparql.ast.eval;
 import cutthecrap.utils.striterators.ICloseableIterator;
 import cutthecrap.utils.striterators.Resolver;
 import cutthecrap.utils.striterators.Striterator;
-import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -39,7 +38,6 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.bop.Var;
 import org.embergraph.bop.bindingSet.ListBindingSet;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.internal.constraints.RangeBOp;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
 import org.embergraph.rdf.lexicon.ITextIndexer;
 import org.embergraph.rdf.lexicon.ITextIndexer.FullTextQuery;
@@ -56,7 +54,6 @@ import org.embergraph.rdf.sparql.ast.service.IServiceOptions;
 import org.embergraph.rdf.sparql.ast.service.ServiceCallCreateParams;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 import org.embergraph.rdf.store.AbstractTripleStore;
-import org.embergraph.rdf.store.BD;
 import org.embergraph.rdf.store.BDS;
 import org.embergraph.search.Hiterator;
 import org.embergraph.search.IHit;
@@ -66,7 +63,7 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 
 /*
-* A factory for a search service. It accepts a group consisting of search magic predicates. See
+ * A factory for a search service. It accepts a group consisting of search magic predicates. See
  * {@link BD#SEARCH}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -178,8 +175,8 @@ public class SearchServiceFactory extends AbstractServiceFactoryBase {
         if (!uri.stringValue().startsWith(BDS.NAMESPACE))
           throw new RuntimeException("Expecting search predicate: " + sp);
 
-      /*
-       * Some search predicate.
+        /*
+         * Some search predicate.
          */
 
         if (!ASTSearchOptimizer.searchUris.contains(uri))
@@ -561,13 +558,13 @@ public class SearchServiceFactory extends AbstractServiceFactoryBase {
 
       if (bindingsClause.length > 1) {
 
-      /*
-       * FIXME This case is not supported.  We need to run
+        /*
+         * FIXME This case is not supported.  We need to run
          * the search engine for each of the source solutions.
          */
 
-      /*
-       * Fixed this to allow an incoming binding stream that does not
+        /*
+         * Fixed this to allow an incoming binding stream that does not
          * include any of the search variables.
          */
         //                throw new UnsupportedOperationException();
@@ -575,8 +572,8 @@ public class SearchServiceFactory extends AbstractServiceFactoryBase {
         for (IBindingSet bs : bindingsClause) {
           if (rangeCountVar != null) {
             if (bs.isBound(rangeCountVar)) {
-            /*
-       * FIXME This case is not supported.  We need to run
+              /*
+               * FIXME This case is not supported.  We need to run
                * the search engine for each of the source solutions.
                */
               throw new UnsupportedOperationException();
@@ -584,8 +581,8 @@ public class SearchServiceFactory extends AbstractServiceFactoryBase {
           } else {
             for (int i = 0; i < vars.length; i++) {
               if (bs.isBound(vars[i])) {
-              /*
-       * FIXME This case is not supported.  We need to run
+                /*
+                 * FIXME This case is not supported.  We need to run
                  * the search engine for each of the source solutions.
                  */
                 throw new UnsupportedOperationException();
@@ -597,8 +594,8 @@ public class SearchServiceFactory extends AbstractServiceFactoryBase {
 
       if (bindingsClause.length == 1 && !bindingsClause[0].isEmpty()) {
 
-      /*
-       * Fixed this by putting the ASTBindingAssigner before the
+        /*
+         * Fixed this by putting the ASTBindingAssigner before the
          * ASTSearchOptimizer in the DefaultOptimizerList.
          */
 

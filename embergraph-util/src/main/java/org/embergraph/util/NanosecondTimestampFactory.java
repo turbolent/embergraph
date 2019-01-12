@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.util;
 
 /*
-* Timestamp factory class with no more than nanosecond resolution - values produced by this class
+ * Timestamp factory class with no more than nanosecond resolution - values produced by this class
  * MUST NOT be persisted.
  *
  * <p>Note: There are several problems with {@link System#nanoTime()} to date and the values MUST

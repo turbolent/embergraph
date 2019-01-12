@@ -30,7 +30,7 @@ import org.embergraph.journal.Journal;
 import org.embergraph.util.Bytes;
 
 /*
-* Stress test for correct shutdown of query controllers as allocated by the {@link
+ * Stress test for correct shutdown of query controllers as allocated by the {@link
  * QueryEngineFactory}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

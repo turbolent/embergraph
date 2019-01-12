@@ -22,7 +22,7 @@ package it.unimi.dsi.bits;
  */
 
 /*
-* All-purpose optimised bit-fiddling static-method container class.
+ * All-purpose optimised bit-fiddling static-method container class.
  *
  * <p>This class contains static optimised utility methods that are used by all classes manipulating
  * bits. They include:

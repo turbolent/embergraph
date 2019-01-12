@@ -14,7 +14,6 @@ import org.embergraph.journal.TimestampUtility;
 import org.embergraph.mdi.IResourceMetadata;
 import org.embergraph.mdi.IndexPartitionCause;
 import org.embergraph.mdi.LocalPartitionMetadata;
-import org.embergraph.mdi.MetadataIndex;
 import org.embergraph.mdi.PartitionLocator;
 import org.embergraph.service.DataService;
 import org.embergraph.service.Event;
@@ -22,7 +21,7 @@ import org.embergraph.service.EventResource;
 import org.embergraph.service.Split;
 
 /*
-* Task splits an index partition which is a compact view (no more than one journal and one index
+ * Task splits an index partition which is a compact view (no more than one journal and one index
  * segment) and should be invoked when the size of the index segment on the disk exceeds the nominal
  * size of an index partition. The index partition is the result of a compacting merge, which could
  * have been created by {@link IncrementalBuildTask} or {@link CompactingMergeTask}. The index
@@ -164,8 +163,8 @@ public class SplitIndexPartitionTask extends AbstractPrepareTask<AbstractResult>
         // Note: fused view for the source index partition.
         final ILocalBTreeView src = vmd.getView();
 
-      /*
-       * Get the split points for the index. Each split point
+        /*
+         * Get the split points for the index. Each split point
          * describes a new index partition. Together the split points
          * MUST exactly span the source index partitions key range.
          * There MUST NOT be any overlap in the key ranges for the
@@ -179,8 +178,8 @@ public class SplitIndexPartitionTask extends AbstractPrepareTask<AbstractResult>
           // FIXME This operation should verify that the shard is compact as a precondition.
           if (vmd.compactView) {
 
-          /*
-       * Choose splits using the linear-list API based on the
+            /*
+             * Choose splits using the linear-list API based on the
              * index segment data only.
              */
 
@@ -197,8 +196,8 @@ public class SplitIndexPartitionTask extends AbstractPrepareTask<AbstractResult>
 
           if (AsynchronousOverflowTask.isNormalShutdown(resourceManager, t)) {
 
-          /*
-       * This looks like an exception arising from the normal
+            /*
+             * This looks like an exception arising from the normal
              * shutdown of the data service so we return
              * immediately. As of this point we have not had any
              * side effects on the data service.
@@ -209,8 +208,8 @@ public class SplitIndexPartitionTask extends AbstractPrepareTask<AbstractResult>
             return null;
           }
 
-        /*
-       * Note: this makes the asynchronous overflow more robust to
+          /*
+           * Note: this makes the asynchronous overflow more robust to
            * a failure in the split handler. However, if the split
            * handler never succeeds then the index will never get
            * split and it will eventually dominate the data service on
@@ -230,8 +229,8 @@ public class SplitIndexPartitionTask extends AbstractPrepareTask<AbstractResult>
           if (overextension > resourceManager.shardOverextensionLimit
               && !resourceManager.isDisabledWrites(vmd.name)) {
 
-          /*
-       * The shard is overextended (it is at least two times
+            /*
+             * The shard is overextended (it is at least two times
              * its nominal maximum size) and is refusing a split.
              * Continuing to do incremental builds here will mask
              * the problem and cause the cost of a merge on the
@@ -265,8 +264,8 @@ public class SplitIndexPartitionTask extends AbstractPrepareTask<AbstractResult>
             // Disable writes on the index partition.
             resourceManager.disableWrites(vmd.name);
           }
-        /*
-       * No splits were chosen so the index will not be split at
+          /*
+           * No splits were chosen so the index will not be split at
            * this time.
            */
 
@@ -315,8 +314,8 @@ public class SplitIndexPartitionTask extends AbstractPrepareTask<AbstractResult>
 
       } finally {
 
-      /*
-       * We are done building index segments from the source index
+        /*
+         * We are done building index segments from the source index
          * partition view so we clear our references for that view.
          */
 
@@ -336,8 +335,8 @@ public class SplitIndexPartitionTask extends AbstractPrepareTask<AbstractResult>
 
       if (moveTargets != null) {
 
-      /*
-       * Note: Unlike a normal move where there are writes on the old
+        /*
+         * Note: Unlike a normal move where there are writes on the old
          * journal, all the historical data for the each of the index
          * partitions is in an index segment that we just built (new
          * writes MAY be buffered on the live journal, so we still have
@@ -349,15 +348,15 @@ public class SplitIndexPartitionTask extends AbstractPrepareTask<AbstractResult>
 
         if (moveTargets.length == 1) {
 
-        /*
-       * This handles the case where only one move target was
+          /*
+           * This handles the case where only one move target was
            * specified.  In this case it is NOT permitted for the
            * move target to be this data service (this condition
            * is checked by the ctor).
            */
 
-        /*
-       * Find the split whose newly built index partition has the
+          /*
+           * Find the split whose newly built index partition has the
            * smallest size.
            */
           final int bestMoveIndex;
@@ -378,15 +377,15 @@ public class SplitIndexPartitionTask extends AbstractPrepareTask<AbstractResult>
             if (INFO) log.info("Best split to move: " + splitResult.splits[bestMoveIndex]);
           }
 
-        /*
-       * Obtain a new partition identifier for the partition that
+          /*
+           * Obtain a new partition identifier for the partition that
            * will be created when we move the index partition to the
            * target data service.
            */
           final int newPartitionId = resourceManager.nextPartitionId(vmd.indexMetadata.getName());
 
-        /*
-       * The name of the post-split index partition that is the
+          /*
+           * The name of the post-split index partition that is the
            * source for the move operation.
            */
           final String nameOfPartitionToMove =
@@ -394,8 +393,8 @@ public class SplitIndexPartitionTask extends AbstractPrepareTask<AbstractResult>
                   vmd.indexMetadata.getName(),
                   splitResult.splits[bestMoveIndex].pmd.getPartitionId());
 
-        /*
-       * Move.
+          /*
+           * Move.
            *
            * Note: We do not explicitly delete the source index
            * segment for the source index partition after the move. It
@@ -416,8 +415,8 @@ public class SplitIndexPartitionTask extends AbstractPrepareTask<AbstractResult>
 
         } else {
 
-        /*
-       * This handles the case where multiple move targets were
+          /*
+           * This handles the case where multiple move targets were
            * specified. For this case, it is allowable for one of the
            * move targets to be this data service, in which case we
            * simply leaf the corresponding index partition in place.
@@ -436,23 +435,23 @@ public class SplitIndexPartitionTask extends AbstractPrepareTask<AbstractResult>
               continue;
             }
 
-          /*
-       * Obtain a new partition identifier for the partition
+            /*
+             * Obtain a new partition identifier for the partition
              * that will be created when we move the index partition
              * to the target data service.
              */
             final int newPartitionId = resourceManager.nextPartitionId(vmd.indexMetadata.getName());
 
-          /*
-       * The name of the post-split index partition that is
+            /*
+             * The name of the post-split index partition that is
              * the source for the move operation.
              */
             final String nameOfPartitionToMove =
                 DataService.getIndexPartitionName(
                     vmd.indexMetadata.getName(), splitResult.splits[i].pmd.getPartitionId());
 
-          /*
-       * Move.
+            /*
+             * Move.
              *
              * Note: We do not explicitly delete the source index
              * segment for the source index partition after the
@@ -485,8 +484,8 @@ public class SplitIndexPartitionTask extends AbstractPrepareTask<AbstractResult>
 
           if (buildResult != null) {
 
-          /*
-       * At this point the index segment was either incorporated into
+            /*
+             * At this point the index segment was either incorporated into
              * the new view in a restart safe manner or there was an error.
              * Either way, we now remove the index segment store's UUID from
              * the retentionSet so it will be subject to the release policy
@@ -679,8 +678,8 @@ public class SplitIndexPartitionTask extends AbstractPrepareTask<AbstractResult>
         // the name of the source index.
         final String name = splitResult.name;
 
-      /*
-       * Note: the source index is the BTree on the live journal that
+        /*
+         * Note: the source index is the BTree on the live journal that
          * has been absorbing writes since the last overflow (while the
          * split was running asynchronously).
          *
@@ -708,12 +707,11 @@ public class SplitIndexPartitionTask extends AbstractPrepareTask<AbstractResult>
         // the value of the counter on the source BTree.
         final long oldCounter = src.getCounter().get();
 
-      /*
-       * Locators for the new index partitions.
+        /*
+         * Locators for the new index partitions.
          */
 
-        final LocalPartitionMetadata oldpmd =
-            src.getIndexMetadata().getPartitionMetadata();
+        final LocalPartitionMetadata oldpmd = src.getIndexMetadata().getPartitionMetadata();
 
         if (oldpmd.getSourcePartitionId() != -1) {
 
@@ -740,14 +738,14 @@ public class SplitIndexPartitionTask extends AbstractPrepareTask<AbstractResult>
           // name of the new index partition.
           final String name2 = DataService.getIndexPartitionName(scaleOutIndexName, partitionId);
 
-        /*
-       * form locator for the new index partition for this split..
+          /*
+           * form locator for the new index partition for this split..
            */
           final PartitionLocator locator =
               new PartitionLocator(
                   pmd.getPartitionId(),
-                /*
-       * The (logical) data service.
+                  /*
+                   * The (logical) data service.
                    *
                    * @todo The index partition data will be replicated
                    * at the byte image level for the live journal.
@@ -766,8 +764,8 @@ public class SplitIndexPartitionTask extends AbstractPrepareTask<AbstractResult>
 
           final String summary = action + "(" + name + "->" + name2 + ")";
 
-        /*
-       * Update the view definition.
+          /*
+           * Update the view definition.
            */
           md.setPartitionMetadata(
               new LocalPartitionMetadata(
@@ -776,8 +774,8 @@ public class SplitIndexPartitionTask extends AbstractPrepareTask<AbstractResult>
                   pmd.getLeftSeparatorKey(),
                   pmd.getRightSeparatorKey(),
                   new IResourceMetadata[] {
-                  /*
-       * Resources are (a) the new btree;
+                    /*
+                     * Resources are (a) the new btree;
                      * and (b) the new index segment.
                      */
                     resourceManager.getLiveJournal().getResourceMetadata(),
@@ -790,8 +788,8 @@ public class SplitIndexPartitionTask extends AbstractPrepareTask<AbstractResult>
                   //                                    , pmd.getHistory() + summary + " "
                   ));
 
-        /*
-       * create new btree.
+          /*
+           * create new btree.
            *
            * Note: the lower 32-bits of the counter will be zero. The
            * high 32-bits will be the partition identifier assigned to
@@ -804,8 +802,8 @@ public class SplitIndexPartitionTask extends AbstractPrepareTask<AbstractResult>
 
           final long newCounter = btree.getCounter().get();
 
-        /*
-       * Note: this is true because partition identifiers always
+          /*
+           * Note: this is true because partition identifiers always
            * increase and the partition identifier is placed into the
            * high word of the counter value for an index partition.
            */
@@ -822,8 +820,8 @@ public class SplitIndexPartitionTask extends AbstractPrepareTask<AbstractResult>
           if (INFO)
             log.info("Copying data to new btree: index=" + scaleOutIndexName + ", pmd=" + pmd);
 
-        /*
-       * Copy all data in this split from the source index.
+          /*
+           * Copy all data in this split from the source index.
            *
            * Note: [overflow := false] since the btrees are on the
            * same backing store.
@@ -852,8 +850,8 @@ public class SplitIndexPartitionTask extends AbstractPrepareTask<AbstractResult>
 
         getJournal().dropIndex(name);
 
-      /*
-       * Notify the metadata service that the index partition has been
+        /*
+         * Notify the metadata service that the index partition has been
          * split.
          */
         resourceManager

@@ -58,14 +58,13 @@ import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.QueryType;
 import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.SubqueryRoot;
-import org.embergraph.rdf.sparql.ast.ValueExpressionNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /*
-* Test suite for the {@link ASTStaticBindingsOptimizer} class.
+ * Test suite for the {@link ASTStaticBindingsOptimizer} class.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  */
@@ -1040,8 +1039,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
       whereClause.addChild(
           new FilterNode(
               FunctionNode.sameTerm(
-                  new ConstantNode(new Constant(Var.var("o"), c12)),
-                  new ConstantNode(c12))));
+                  new ConstantNode(new Constant(Var.var("o"), c12)), new ConstantNode(c12))));
     }
 
     final IASTOptimizer rewriter = new ASTStaticBindingsOptimizer();
@@ -1131,8 +1129,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
       whereClause.addChild(
           new FilterNode(
               FunctionNode.EQ(
-                  new ConstantNode(new Constant(Var.var("o"), foo)),
-                  new ConstantNode(foo))));
+                  new ConstantNode(new Constant(Var.var("o"), foo)), new ConstantNode(foo))));
     }
 
     final IASTOptimizer rewriter = new ASTStaticBindingsOptimizer();
@@ -1201,7 +1198,8 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
               new FunctionNode(
                   FunctionRegistry.IN,
                   null /* scalarValues */,
-                  new VarNode("o"), new ConstantNode(foo))));
+                  new VarNode("o"),
+                  new ConstantNode(foo))));
     }
 
     // The expected AST after the rewrite.
@@ -1298,8 +1296,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
       whereClause.addChild(
           new FilterNode(
               FunctionNode.EQ(
-                  new ConstantNode(foo),
-                  new ConstantNode(new Constant(Var.var("o"), foo)))));
+                  new ConstantNode(foo), new ConstantNode(new Constant(Var.var("o"), foo)))));
     }
 
     final IASTOptimizer rewriter = new ASTStaticBindingsOptimizer();

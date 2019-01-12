@@ -30,7 +30,7 @@ import it.unimi.dsi.lang.MutableString;
 import java.io.Serializable;
 
 /*
-* An abstract implementation of a prefix map.
+ * An abstract implementation of a prefix map.
  *
  * <p>This class provides the full serives of a {@link PrefixMap} by implementing just {@link
  * #getInterval(CharSequence)} and {@link #getTerm(int, MutableString)}

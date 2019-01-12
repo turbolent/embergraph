@@ -30,7 +30,7 @@ import org.apache.log4j.Logger;
 import org.embergraph.btree.keys.KeyBuilder.Options;
 
 /*
-* Default factory for Unicode {@link IKeyBuilder}s. This does NOT generate thread-local instances.
+ * Default factory for Unicode {@link IKeyBuilder}s. This does NOT generate thread-local instances.
  * The factory serializes all properties that were required to generate a configuration so that the
  * same configuration may be materialized on another JVM or host by de-serializing an instance of
  * this factory.
@@ -214,8 +214,8 @@ public class DefaultKeyBuilderFactory implements IKeyBuilderFactory, Serializabl
 
       if (!explicitCollatorChoice) {
 
-      /*
-       * Choice was made by default rather than explicitly specified
+        /*
+         * Choice was made by default rather than explicitly specified
          * by a property.
          */
 

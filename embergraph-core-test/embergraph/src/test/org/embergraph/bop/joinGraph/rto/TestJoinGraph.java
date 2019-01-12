@@ -34,7 +34,7 @@ import org.embergraph.bop.constraint.Constraint;
 import org.embergraph.bop.constraint.NEConstant;
 
 /*
-* Unit tests for the {@link JoinGraph} operator.
+ * Unit tests for the {@link JoinGraph} operator.
  *
  * <p>Note: A lot of the guts the {@link JoinGraph} operator evaluation are tested by {@link
  * TestJGraph}. There is also an RDF specific test suite which runs against various RDF data sets.

@@ -28,7 +28,7 @@ import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.rio.RDFFormat;
 
 /*
-* This class demonstrates concurrent reading and writing with the U10 data set on the scale-out
+ * This class demonstrates concurrent reading and writing with the U10 data set on the scale-out
  * architecture. One thread writes the U10 data files, doing a commit after every file (this is not
  * the fastest way to perform load, as it simulates incremental updates vs bulk load). Another
  * thread asks for the number of "FullProfessors" every three seconds. You can watch the number of

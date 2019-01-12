@@ -2,11 +2,10 @@ package org.embergraph.service;
 
 import org.embergraph.mdi.IMetadataIndex;
 import org.embergraph.service.ndx.ClientIndexView;
-import org.embergraph.service.ndx.IClientIndex;
 import org.embergraph.service.ndx.IScaleOutClientIndex;
 
 /*
-* Concrete implementation for {@link IClientIndex} views.
+ * Concrete implementation for {@link IClientIndex} views.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

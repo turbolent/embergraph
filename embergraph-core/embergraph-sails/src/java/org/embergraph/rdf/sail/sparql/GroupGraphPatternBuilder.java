@@ -34,16 +34,12 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IVariable;
-import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.EmbergraphValue;
-import org.embergraph.rdf.sail.sparql.ast.ASTBasicGraphPattern;
 import org.embergraph.rdf.sail.sparql.ast.ASTBind;
 import org.embergraph.rdf.sail.sparql.ast.ASTBindingSet;
 import org.embergraph.rdf.sail.sparql.ast.ASTConstraint;
 import org.embergraph.rdf.sail.sparql.ast.ASTConstruct;
 import org.embergraph.rdf.sail.sparql.ast.ASTGraphGraphPattern;
 import org.embergraph.rdf.sail.sparql.ast.ASTGraphPatternGroup;
-import org.embergraph.rdf.sail.sparql.ast.ASTHavingClause;
 import org.embergraph.rdf.sail.sparql.ast.ASTInlineData;
 import org.embergraph.rdf.sail.sparql.ast.ASTLet;
 import org.embergraph.rdf.sail.sparql.ast.ASTMinusGraphPattern;
@@ -71,7 +67,7 @@ import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /*
-* Visitor handles the <code>GroupGraphPattern</code> production (aka the "WHERE" clause). This
+ * Visitor handles the <code>GroupGraphPattern</code> production (aka the "WHERE" clause). This
  * includes <code>SubSelect</code> and <code>GraphPatternNotTriples</code>. ASTWhereClause has
  * GroupGraphPattern child which is a (SelectQuery (aka subquery)), GraphPattern (BasicGraphPattern
  * aka JoinGroup or GraphPatternNotTriples). The <code>TriplesBlock</code> is handled by the {@link
@@ -151,8 +147,8 @@ public class GroupGraphPatternBuilder extends TriplePatternExprBuilder {
 
       if (node.jjtGetParent() instanceof ASTWhereClause) {
 
-      /*
-       * SubSelect as the WHERE clause. In this case the outer graph pattern group is a
+        /*
+         * SubSelect as the WHERE clause. In this case the outer graph pattern group is a
          * JoinGroupNode the SubSelect is embedded within an inner JoinGroupNode.
          *
          * <pre>
@@ -170,8 +166,8 @@ public class GroupGraphPatternBuilder extends TriplePatternExprBuilder {
 
       } else {
 
-      /*
-       * SubSelect embedded under the WHERE clause within its own graph pattern group by the {
+        /*
+         * SubSelect embedded under the WHERE clause within its own graph pattern group by the {
          * SELECT ... } syntax. For example
          *
          * <pre>

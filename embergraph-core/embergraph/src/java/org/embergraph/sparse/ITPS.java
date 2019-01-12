@@ -27,7 +27,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 /*
-* A Timestamp Property Set is a property set with {@link ITPV timestamp property values}
+ * A Timestamp Property Set is a property set with {@link ITPV timestamp property values}
  * representing data for a specific {@link Schema}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

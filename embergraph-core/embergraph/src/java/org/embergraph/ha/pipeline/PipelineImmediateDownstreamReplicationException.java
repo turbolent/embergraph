@@ -21,7 +21,7 @@ package org.embergraph.ha.pipeline;
 import java.util.UUID;
 
 /*
-* Exception thrown when there is a problem with write replication from a service to its downstream
+ * Exception thrown when there is a problem with write replication from a service to its downstream
  * service, including a problem with RMI to the downstream service or socket level write replication
  * to the downstream service. This typed exception enables the leader is then able to take action
  * intended to cure the pipeline by forcing the problem service from the quorum. The problem service

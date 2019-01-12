@@ -23,7 +23,6 @@ package org.embergraph.rdf.spo;
 
 import java.io.Serializable;
 import org.apache.log4j.Logger;
-import org.embergraph.btree.ILinearList;
 import org.embergraph.btree.ISimpleSplitHandler;
 import org.embergraph.btree.IndexSegment;
 import org.embergraph.btree.keys.IKeyBuilder;
@@ -33,7 +32,7 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVUtility;
 
 /*
-* A split handler for the xxxC quads indices which ensures that all quads for the same "triple" are
+ * A split handler for the xxxC quads indices which ensures that all quads for the same "triple" are
  * in the same shard. The use of this split handler allows optimizations for default graph queries
  * in scale-out. Since all quads for a given triple are known to be on the same shard, we can use
  * the {@link ContextAdvancer} to skip to the next possible triple without imposing a "DISTINCT"

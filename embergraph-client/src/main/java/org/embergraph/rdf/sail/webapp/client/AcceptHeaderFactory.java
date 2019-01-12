@@ -40,7 +40,7 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParserRegistry;
 
 /*
-* Utility class for generating accept heades modeled on {@link RDFFormat#getAcceptParams(Iterable,
+ * Utility class for generating accept heades modeled on {@link RDFFormat#getAcceptParams(Iterable,
  * boolean, RDFFormat)}, but extended to handle {@link TupleQueryResultFormat} using the same base
  * quality value.
  *
@@ -166,8 +166,8 @@ public class AcceptHeaderFactory {
 
       if (registry.get(format) == null) {
 
-      /*
-       * Remove any format for which there is no registered parser.
+        /*
+         * Remove any format for which there is no registered parser.
          */
 
         itr.remove();
@@ -203,8 +203,8 @@ public class AcceptHeaderFactory {
 
       if (registry.get(format) == null) {
 
-      /*
-       * Remove any format for which there is no registered parser.
+        /*
+         * Remove any format for which there is no registered parser.
          *
          * Note: For example, the JSON parser does not exist for openrdf
          * 2.6.3.
@@ -241,8 +241,8 @@ public class AcceptHeaderFactory {
 
       if (registry.get(format) == null) {
 
-      /*
-       * Remove any format for which there is no registered parser.
+        /*
+         * Remove any format for which there is no registered parser.
          */
 
         itr.remove();

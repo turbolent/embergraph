@@ -23,7 +23,7 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.XMLSchema;
 
 /*
-* Collects various XSD URIs as constants.
+ * Collects various XSD URIs as constants.
  *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @see XMLSchema

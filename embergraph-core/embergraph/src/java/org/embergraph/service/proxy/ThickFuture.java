@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 /*
-* A thick {@link Future}. This is used to communicate the state of a {@link Future} to a remote
+ * A thick {@link Future}. This is used to communicate the state of a {@link Future} to a remote
  * client. The constructor blocks until the {@link Future} is done and then makes a record of the
  * {@link Future}'s state. That state is serializable as the object returned by the {@link Future}
  * is serializable.

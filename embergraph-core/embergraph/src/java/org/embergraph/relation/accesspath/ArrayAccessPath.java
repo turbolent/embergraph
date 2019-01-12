@@ -119,7 +119,7 @@ public class ArrayAccessPath<E> implements IAccessPath<E> {
   }
 
   //    /*
-//     * @throws UnsupportedOperationException
+  //     * @throws UnsupportedOperationException
   //     *             since no index is associated with this array
   //     */
   //    @Override
@@ -141,7 +141,7 @@ public class ArrayAccessPath<E> implements IAccessPath<E> {
   }
 
   //    /*
-//     * Visits the array of elements up to the specified limit.
+  //     * Visits the array of elements up to the specified limit.
   //     */
   //    public IChunkedOrderedIterator<E> iterator(final int limit,
   //    		final int capacity) {

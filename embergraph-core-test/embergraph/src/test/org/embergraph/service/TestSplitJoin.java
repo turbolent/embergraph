@@ -45,7 +45,7 @@ import org.embergraph.service.ndx.ClientIndexView;
 import org.embergraph.util.Bytes;
 
 /*
-* Test suite verifies that inserts eventually split an index and that deletes eventually cause the
+ * Test suite verifies that inserts eventually split an index and that deletes eventually cause the
  * index partitions to be joined.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

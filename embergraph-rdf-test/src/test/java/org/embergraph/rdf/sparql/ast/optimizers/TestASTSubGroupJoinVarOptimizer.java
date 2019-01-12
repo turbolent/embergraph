@@ -43,7 +43,6 @@ import org.embergraph.rdf.sparql.ast.QueryNodeWithBindingSet;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.QueryType;
 import org.embergraph.rdf.sparql.ast.StatementPatternNode;
-import org.embergraph.rdf.sparql.ast.ValueExpressionNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.openrdf.model.impl.LiteralImpl;
@@ -53,7 +52,7 @@ import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /*
-* Test suite for the {@link ASTSubGroupJoinVarOptimizer}.
+ * Test suite for the {@link ASTSubGroupJoinVarOptimizer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -186,8 +185,7 @@ public class TestASTSubGroupJoinVarOptimizer extends AbstractASTEvaluationTestCa
                     // expr
                     FunctionRegistry.SAMPLE,
                     Collections.singletonMap(
-                        AggregateBase.Annotations.DISTINCT,
-                        Boolean.FALSE) /* scalarValues */,
+                        AggregateBase.Annotations.DISTINCT, Boolean.FALSE) /* scalarValues */,
                     new VarNode("_var9"))));
         projection.addProjectionVar(new VarNode("_var2"));
         projection.addProjectionVar(new VarNode("_var3"));
@@ -288,8 +286,7 @@ public class TestASTSubGroupJoinVarOptimizer extends AbstractASTEvaluationTestCa
                   // expr
                   FunctionRegistry.SAMPLE,
                   Collections.singletonMap(
-                      AggregateBase.Annotations.DISTINCT,
-                      Boolean.FALSE) /* scalarValues */,
+                      AggregateBase.Annotations.DISTINCT, Boolean.FALSE) /* scalarValues */,
                   new VarNode("_var9"))));
       projection.addProjectionVar(new VarNode("_var2"));
       projection.addProjectionVar(new VarNode("_var3"));

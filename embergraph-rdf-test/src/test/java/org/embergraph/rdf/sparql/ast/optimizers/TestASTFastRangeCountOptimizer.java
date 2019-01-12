@@ -35,7 +35,7 @@ import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /*
-* Test suite for {@link ASTFastRangeCountOptimizer}. This needs to handle a variety of things
+ * Test suite for {@link ASTFastRangeCountOptimizer}. This needs to handle a variety of things
  * related to the following, including where variables are projected into a sub-select (in which
  * case we run the fast range count using the as-bound variables for the triple pattern).
  *
@@ -95,8 +95,8 @@ public class TestASTFastRangeCountOptimizer extends AbstractOptimizerTestCase {
                           varNode(w))),
                   where(newStatementPatternNode(new VarNode(s), new VarNode(p), new VarNode(o))));
 
-        /*
-       * We need to convert:
+          /*
+           * We need to convert:
            *
            * <pre>
            * SELECT (COUNT(*) as ?w) {?s ?p ?o}
@@ -266,7 +266,7 @@ public class TestASTFastRangeCountOptimizer extends AbstractOptimizerTestCase {
     }
 
     //		/*
-//		 * TODO Do a test to make sure that this optimizer is disabled if the KB
+    //		 * TODO Do a test to make sure that this optimizer is disabled if the KB
     //		 * uses full read/write transactions AND the evaluation context is SPARQL
     //		 * UPDATE (vs SPARQL QUERY).
     //		 */
@@ -330,8 +330,8 @@ public class TestASTFastRangeCountOptimizer extends AbstractOptimizerTestCase {
                           )),
                   where(newStatementPatternNode(new VarNode(s), new VarNode(p), new VarNode(o))));
 
-        /*
-       * We need to convert:
+          /*
+           * We need to convert:
            *
            * <pre>
            * SELECT (COUNT(?s ?p ?o) as ?w) {?s ?p ?o}
@@ -354,8 +354,8 @@ public class TestASTFastRangeCountOptimizer extends AbstractOptimizerTestCase {
           // the triple pattern.
           final StatementPatternNode sp1 =
               newStatementPatternNode(new VarNode(s), new VarNode(p), new VarNode(o));
-        /*
-       * annotate with the name of the variable to become bound to
+          /*
+           * annotate with the name of the variable to become bound to
            * the fast range count of that triple pattern.
            */
           sp1.setFastRangeCount(new VarNode(w));

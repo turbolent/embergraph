@@ -31,7 +31,7 @@ import it.unimi.dsi.parser.callback.Callback;
 import it.unimi.dsi.util.TextPattern;
 
 /*
-* A fast, lightweight, on-demand (X)HTML parser.
+ * A fast, lightweight, on-demand (X)HTML parser.
  *
  * <p>The bullet parser has been written with two specific goals in mind: web crawling and targeted
  * data extraction from massive web data sets. To be usable in such environments, a parser must obey

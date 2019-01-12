@@ -23,7 +23,7 @@ package org.embergraph.service;
 import java.util.concurrent.Callable;
 
 /*
-* Interface for post-constructor initialization.
+ * Interface for post-constructor initialization.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @param <T> The generic type of the object to which the initialization task will be evaluated.

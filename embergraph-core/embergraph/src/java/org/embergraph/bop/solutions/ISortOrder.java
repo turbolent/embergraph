@@ -24,13 +24,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.solutions;
 
 import java.io.Serializable;
-import org.embergraph.bop.IBind;
-import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IValueExpression;
-import org.embergraph.bop.IVariable;
 
 /*
-* A value expression and a direction flag for the ordering of the computed values.
+ * A value expression and a direction flag for the ordering of the computed values.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

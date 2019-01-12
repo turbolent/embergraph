@@ -23,7 +23,7 @@ package org.embergraph.rdf.sparql.ast.explainhints;
 import org.embergraph.bop.BOp;
 
 /*
-* Abstract base class for explain hints, providing a common base implementations, to be reused in
+ * Abstract base class for explain hints, providing a common base implementations, to be reused in
  * concrete subclasses.
  *
  * @author <a href="ms@metaphacts.com">Michael Schmidt</a>

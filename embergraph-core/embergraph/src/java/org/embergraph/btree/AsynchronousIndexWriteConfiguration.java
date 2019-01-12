@@ -5,14 +5,9 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import org.embergraph.io.LongPacker;
-import org.embergraph.relation.accesspath.IAsynchronousIterator;
-import org.embergraph.resources.StaleLocatorException;
-import org.embergraph.service.ndx.IAsynchronousWriteBufferFactory;
-import org.embergraph.service.ndx.pipeline.AbstractMasterTask;
-import org.embergraph.service.ndx.pipeline.AbstractSubtask;
 
 /*
-* Configuration for the asynchronous index write API.
+ * Configuration for the asynchronous index write API.
  *
  * @see IAsynchronousWriteBufferFactory
  * @see AbstractMasterTask

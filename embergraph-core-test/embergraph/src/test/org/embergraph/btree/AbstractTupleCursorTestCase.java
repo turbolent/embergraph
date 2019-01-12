@@ -31,7 +31,7 @@ import org.embergraph.btree.raba.ReadOnlyKeysRaba;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /*
-* Abstract base class for {@link ITupleCursor} test suites.
+ * Abstract base class for {@link ITupleCursor} test suites.
  *
  * @todo also run tests against the FusedView and the scale-out federation variant (progressive
  *     forward or reverse scan against a partitioned index).

@@ -29,7 +29,7 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 
 /*
-* Superclass for the inline numerics - {@link XSDNumericIV}, {@link XSDIntegerIV}, and {@link
+ * Superclass for the inline numerics - {@link XSDNumericIV}, {@link XSDIntegerIV}, and {@link
  * XSDDecimalIV}.
  */
 public abstract class NumericIV<V extends EmbergraphLiteral, T> extends AbstractLiteralIV<V, T>

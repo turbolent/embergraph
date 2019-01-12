@@ -13,7 +13,7 @@ import cern.colt.matrix.DoubleMatrix2DProcedure;
 import cern.colt.matrix.DoubleMatrix3D;
 import cern.colt.matrix.DoubleMatrix3DProcedure;
 /*
-* Stencil operations. For efficient finite difference operations. Applies a function to a moving
+ * Stencil operations. For efficient finite difference operations. Applies a function to a moving
  * <tt>3 x 3</tt> or <tt>3 x 3 x 3</tt> window. Build on top of
  * <tt>matrix.zAssignXXXNeighbors(...)</tt>. You can specify how many iterations shall at most be
  * done, a convergence condition when iteration shall be terminated, and how many iterations shall

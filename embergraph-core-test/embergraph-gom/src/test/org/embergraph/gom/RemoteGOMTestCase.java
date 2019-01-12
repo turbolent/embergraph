@@ -57,7 +57,7 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
 /*
-* Similar to TestGOM but is setup to connect to the NanoSparqlServer using a RemoteRepository
+ * Similar to TestGOM but is setup to connect to the NanoSparqlServer using a RemoteRepository
  *
  * @author Martyn Cutcher
  */

@@ -31,7 +31,7 @@ import org.openrdf.model.Literal;
 import org.openrdf.query.algebra.evaluation.util.QueryEvaluationUtil;
 
 /*
-* Implements the <a href="http://www.w3.org/TR/sparql11-query/#func-langMatches" >langMatches</a>
+ * Implements the <a href="http://www.w3.org/TR/sparql11-query/#func-langMatches" >langMatches</a>
  * SPARQL operator.
  *
  * @see http://www.w3.org/TR/sparql11-query/#func-langMatches

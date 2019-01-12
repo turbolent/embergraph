@@ -29,7 +29,7 @@ import org.embergraph.rdf.internal.impl.literal.XSDIntegerIV;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 
 /*
-* Unit tests for {@link XSDIntegerIV}.
+ * Unit tests for {@link XSDIntegerIV}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

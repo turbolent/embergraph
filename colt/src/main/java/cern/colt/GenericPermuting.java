@@ -9,7 +9,7 @@ It is provided "as is" without expressed or implied warranty.
 package cern.colt;
 
 /*
-* Generically reorders (permutes) arbitrary shaped data (for example, an array, three arrays, a 2-d
+ * Generically reorders (permutes) arbitrary shaped data (for example, an array, three arrays, a 2-d
  * matrix, two linked lists) using an <i>in-place</i> swapping algorithm. Imagine having a couple of
  * apples. For some reason you decide to reorder them. The green one before the red one. The pale
  * one after the shiny one, etc. This class helps to do the job.

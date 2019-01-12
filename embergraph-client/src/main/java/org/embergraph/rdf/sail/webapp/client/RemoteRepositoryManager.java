@@ -37,7 +37,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.apache.http.entity.ByteArrayEntity;
 import org.apache.log4j.Logger;
 import org.eclipse.jetty.client.HttpClient;
-import org.eclipse.jetty.client.HttpRequest;
 import org.eclipse.jetty.client.api.Request;
 import org.eclipse.jetty.http.HttpMethod;
 import org.embergraph.rdf.ServiceProviderHook;
@@ -72,7 +71,7 @@ import org.openrdf.rio.RDFParserFactory;
 import org.openrdf.rio.RDFParserRegistry;
 
 /*
-* A manager for connections to one or more REST API / SPARQL end points for the same embergraph
+ * A manager for connections to one or more REST API / SPARQL end points for the same embergraph
  * service.
  *
  * @author bryan
@@ -539,7 +538,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
   }
 
   // /*
-// * Obtain a flyweight {@link RemoteRepository} for the data set having the
+  // * Obtain a flyweight {@link RemoteRepository} for the data set having the
   // specified
   // * SPARQL end point.
   // *
@@ -1494,7 +1493,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
   }
 
   // /*
-// * Return the {@link ConnectOptions} which will be used by default for the
+  // * Return the {@link ConnectOptions} which will be used by default for the
   // * SPARQL end point.
   // */
   // final protected ConnectOptions newConnectOptions() {
@@ -1544,8 +1543,8 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
 
       if (tx.isReadOnly()) {
 
-      /*
-       * A read-only transaction.
+        /*
+         * A read-only transaction.
          *
          * FIXME This will not work for scale-out. We need to specify
          * the txId itself.
@@ -1554,8 +1553,8 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
 
       } else {
 
-      /*
-       * A read/write transaction. We must use the txId to have the
+        /*
+         * A read/write transaction. We must use the txId to have the
          * correct isolation.
          */
 
@@ -1714,16 +1713,16 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     } finally {
 
       if (response != null && result == null) {
-      /*
-       * This code path only handles errors. We have a response, but
+        /*
+         * This code path only handles errors. We have a response, but
          * we were not able to generate the asynchronous [result]
          * object.
          */
         response.abort();
 
         try {
-        /*
-       * POST back to the server in an attempt to cancel the
+          /*
+           * POST back to the server in an attempt to cancel the
            * request if already executing on the server.
            */
           cancel(queryId);
@@ -1766,8 +1765,8 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
 
       if (response == null) {
         try {
-        /*
-       * Some error prevented our obtaining a response.
+          /*
+           * Some error prevented our obtaining a response.
            *
            * POST back to the server in an attempt to cancel the
            * request if already executing on the server.
@@ -1777,8 +1776,8 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
           log.warn(ex);
         }
       } else {
-      /*
-       * Note: We are not reading anything from the response so I
+        /*
+         * Note: We are not reading anything from the response so I
          * THINK that we do not need to call listener.abort(). If we do
          * need to call this, then we might need to distinguish between
          * a normal response and when we read the response entity.
@@ -1992,8 +1991,8 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
                   }
                 }
 
-              /*
-       * Notify the listener.
+                /*
+                 * Notify the listener.
                  */
                 if (listener != null) {
                   listener.closed(queryId);
@@ -2013,14 +2012,14 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     } finally {
 
       if (response != null && tqrImpl == null) {
-      /*
-       * Error handling code path. We have an http response listener
+        /*
+         * Error handling code path. We have an http response listener
          * but we were not able to setup the tuple query result
          * listener.
          */
         if (ft != null) {
-        /*
-       * We submitted the task to parse the response. Since the
+          /*
+           * We submitted the task to parse the response. Since the
            * code is not returning normally (tqrImpl:=null) we cancel
            * the FutureTask for the background parse of that response.
            */
@@ -2029,8 +2028,8 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
         // Abort the http response handling.
         response.abort();
         try {
-        /*
-       * POST back to the server to cancel the request in case it
+          /*
+           * POST back to the server to cancel the request in case it
            * is still running on the server.
            */
           cancel(queryId);
@@ -2100,8 +2099,8 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     } finally {
 
       if (result == null) {
-      /*
-       * Error handling path. We issued the request, but were not able
+        /*
+         * Error handling path. We issued the request, but were not able
          * to parse out the response.
          */
         if (response != null) {
@@ -2109,8 +2108,8 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
           response.abort();
         }
         try {
-        /*
-       * POST request to server to cancel query in case it is
+          /*
+           * POST request to server to cancel query in case it is
            * still running.
            */
           cancel(queryId);
@@ -2126,7 +2125,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
   }
 
   // /*
-// * Counts the #of results in a SPARQL result set.
+  // * Counts the #of results in a SPARQL result set.
   // *
   // * @param response
   // * The connection from which to read the results.

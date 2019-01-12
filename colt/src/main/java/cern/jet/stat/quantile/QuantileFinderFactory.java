@@ -12,7 +12,7 @@ package cern.jet.stat.quantile;
 import cern.jet.math.Arithmetic;
 import cern.jet.random.engine.RandomEngine;
 /*
-* Factory constructing exact and approximate quantile finders for both known and unknown
+ * Factory constructing exact and approximate quantile finders for both known and unknown
  * <tt>N</tt>. Also see {@link hep.aida.bin.QuantileBin1D}, demonstrating how this package can be
  * used.
  *

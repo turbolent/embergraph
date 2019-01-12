@@ -41,7 +41,7 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.util.Bytes;
 
 /*
-* Unit tests for the {@link HTreeHashJoinOp} operator.
+ * Unit tests for the {@link HTreeHashJoinOp} operator.
  *
  * <p>Note: The logic to map binding sets over shards is tested independently.
  *
@@ -272,7 +272,7 @@ public class TestHTreeHashJoinOp extends AbstractHashJoinOpTestCase {
               new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
               new NV(PipelineOp.Annotations.MAX_MEMORY, Bytes.megabyte)
               //                            namedSet,
-          ));
+              ));
       fail("Expecting: " + IllegalStateException.class);
     } catch (IllegalStateException ex) {
       if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);

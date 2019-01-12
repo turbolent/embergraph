@@ -35,7 +35,7 @@ import org.embergraph.journal.Options;
 import org.embergraph.journal.ValidationError;
 
 /*
-* This is a test suite for mixing full transactions with unisolated operations on the same indices.
+ * This is a test suite for mixing full transactions with unisolated operations on the same indices.
  * These two classes of operations can be interleaved as long as the unisolated operations make
  * appropriate assignment of revision timestamps to the tuples in the B+Tree.
  *

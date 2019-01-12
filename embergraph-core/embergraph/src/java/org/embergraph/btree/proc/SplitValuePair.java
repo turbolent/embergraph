@@ -21,7 +21,7 @@ import java.util.Comparator;
 import org.embergraph.service.Split;
 
 /*
-* A key/value pair where the key is a Split.
+ * A key/value pair where the key is a Split.
  *
  * @param <K>
  * @param <V>

@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Map;
 
 /*
-* An operator, such as a constant, variable, join, sort, filter, etc. Abstract operations, such as
+ * An operator, such as a constant, variable, join, sort, filter, etc. Abstract operations, such as
  * the AST, are also described with this data structure.
  *
  * <p>Operators are organized in a tree of operators. The <i>arity</i> of an operator is the number
@@ -111,7 +111,7 @@ public interface BOp extends Cloneable, Serializable, IPropertySet {
   // <T> T getProperty(final String name);
 
   //    /*
-//     * Return the value of the named annotation.
+  //     * Return the value of the named annotation.
   //     *
   //     * @param name
   //     *            The name of the annotation.

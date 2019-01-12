@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.service.ndx.pipeline;
 
 /*
-* An instance of this exception is thrown when a sink closes it's input queue due to the master
+ * An instance of this exception is thrown when a sink closes it's input queue due to the master
  * being exhausted. Since redirects of outstanding writes can cause the master to (re-)process
  * redirected chunks, this is treated as a conditional close and the sink MAY be re-opened.
  *

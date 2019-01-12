@@ -32,7 +32,7 @@ import junit.framework.TestCase2;
 import org.embergraph.util.CSVReader.Header;
 
 /*
-* Test suite for {@link CSVReader}.
+ * Test suite for {@link CSVReader}.
  *
  * @todo test "correct" default intepretation of more kinds of formats by {@link
  *     Header#parseValue(String)}.

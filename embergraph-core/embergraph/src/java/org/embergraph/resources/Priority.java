@@ -1,7 +1,7 @@
 package org.embergraph.resources;
 
 /*
-* Class used to place {@link ViewMetadata} objects into a total order based on a formula used to
+ * Class used to place {@link ViewMetadata} objects into a total order based on a formula used to
  * prioritize them for some kind of operation such as a compacting merge.
  *
  * <p><strong> The natural order of [Priority] is DESCENDING (largest numerical value to smallest
@@ -31,7 +31,7 @@ class Priority<T> implements Comparable<Priority<T>> {
   }
 
   //    /*
-//     * Comparator places {@link Priority}s into ascending order (smallest
+  //     * Comparator places {@link Priority}s into ascending order (smallest
   //     * numerical value to largest numerical value).
   //     */
   //    public Comparator<Priority<T>> asc() {
@@ -49,7 +49,7 @@ class Priority<T> implements Comparable<Priority<T>> {
   //    }
   //
   //    /*
-//     * Comparator places {@link Priority}s into descending order (largest
+  //     * Comparator places {@link Priority}s into descending order (largest
   //     * numerical value to smallest numerical value).
   //     */
   //    public Comparator<Priority<T>> dsc() {

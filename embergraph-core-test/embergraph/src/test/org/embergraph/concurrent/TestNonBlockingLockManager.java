@@ -33,7 +33,7 @@ import org.apache.log4j.Logger;
 import org.embergraph.util.DaemonThreadFactory;
 
 /*
-* basic unit tests.
+ * basic unit tests.
  *
  * <p>FIXME Verify interaction with the writeService. The runnable target should not complete until
  * after the commit (should be ok).
@@ -199,7 +199,7 @@ public class TestNonBlockingLockManager extends TestCase {
   }
 
   //    /*
-//     * Test startup that runs the service for a bit so you can verify that it is
+  //     * Test startup that runs the service for a bit so you can verify that it is
   //     * not sucking down the CPU.
   //     *
   //     * @throws InterruptedException
@@ -310,7 +310,7 @@ public class TestNonBlockingLockManager extends TestCase {
   }
 
   //    /*
-//     * Unit test verifies that {@link TxDag} can resolve a
+  //     * Unit test verifies that {@link TxDag} can resolve a
   //     * {@link LockFutureTask} in its internal "mapping" table. This is designed
   //     * to detect problems with hashCode() and equals() as they relate to
   //     * {@link TxDag}.
@@ -360,7 +360,7 @@ public class TestNonBlockingLockManager extends TestCase {
   //    }
   //
   //    /*
-//     * Class exposes a factory for {@link LockFutureTask} objects.
+  //     * Class exposes a factory for {@link LockFutureTask} objects.
   //     *
   //     * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
   //     * @version $Id$

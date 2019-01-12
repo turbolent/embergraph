@@ -29,7 +29,7 @@ import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
 
 /*
-* A constraint that a value expression which may only take on the bindings enumerated by some set
+ * A constraint that a value expression which may only take on the bindings enumerated by some set
  * of constants.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

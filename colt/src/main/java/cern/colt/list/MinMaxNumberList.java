@@ -11,7 +11,7 @@ package cern.colt.list;
 import cern.colt.bitvector.BitVector;
 import cern.colt.bitvector.QuickBitVector;
 /*
-* Resizable compressed list holding numbers; based on the fact that a value in a given interval
+ * Resizable compressed list holding numbers; based on the fact that a value in a given interval
  * need not take more than <tt>log(max-min+1)</tt> bits; implemented with a
  * <tt>cern.colt.bitvector.BitVector</tt>. First see the <a href="package-summary.html">package
  * summary</a> and javadoc <a href="package-tree.html">tree view</a> to get the broad picture.

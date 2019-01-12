@@ -50,7 +50,7 @@ import org.embergraph.io.DataOutputBuffer;
 import org.embergraph.util.BytesUtil;
 
 /*
-* This class provides (de-)compression for logical byte[][]s based on canonical Huffman codes.
+ * This class provides (de-)compression for logical byte[][]s based on canonical Huffman codes.
  * Canonical huffman codes preserve the alphabetic order of the original values. However, they are
  * often used because it is possible to transmit the dictionary using fewer bits by sending only the
  * bitLength[] for the code words. The {@link CanonicalHuffmanRabaCoder} can be used for keys or
@@ -830,8 +830,8 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
 
       {
 
-      /*
-       * Array of frequency counts for all possible byte values.
+        /*
+         * Array of frequency counts for all possible byte values.
          */
         final int[] frequency = new int[256];
 
@@ -857,8 +857,8 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
         }
 
         if (nsymbols == 1) {
-        /*
-       * FIXME This is a hack to workaround a ctor bug in the
+          /*
+           * FIXME This is a hack to workaround a ctor bug in the
            * HuffmanCodec when nsymbols==1 (a bug in the
            * CanonicalFast64CodeWordDecoder ctor has since been fixed,
            * but one remains in the HuffmanCodec ctor).
@@ -879,8 +879,8 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
 
         this.nsymbols = nsymbols;
 
-      /*
-       * Remap the used bytes, building at the same time maps from
+        /*
+         * Remap the used bytes, building at the same time maps from
          * symbols to bytes and from bytes to symbols.
          */
 
@@ -912,8 +912,8 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
 
       if (nsymbols > 0) {
 
-      /*
-       * Generate a canonical huffman code. The input is the packed
+        /*
+         * Generate a canonical huffman code. The input is the packed
          * frequency data (only symbols which occur at least once). The
          * packed frequency counts appear in non-increasing frequency order.
          * Therefore the assigned canonical codeWord[] will already be in
@@ -930,8 +930,8 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
 
       } else {
 
-      /*
-       * Don't bother to generate the codec.
+        /*
+         * Don't bother to generate the codec.
          */
 
         decoderInputs = null;
@@ -963,9 +963,7 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
     // Total #of bits in the coded values.
     // FIXME this codes the data twice.
     final long sumCodedValueBitLengths =
-        nsymbols == 0
-            ? 0
-            : getSumCodedValueBitLengths(setup.codec().codeWords(), raba, setup);
+        nsymbols == 0 ? 0 : getSumCodedValueBitLengths(setup.codec().codeWords(), raba, setup);
 
     /*
      * The #of bits per element in the codedValueOffset[]
@@ -1093,8 +1091,7 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
         //            assert O_codedValues == O_nulls + (raba.isKeys() ? 0 : size);
         final long[] codedValueOffset = (codedValueOffsetBits == 0 ? null : new long[size + 1]);
         final long sumCodedValueBitLengths2 =
-            writeCodedValues(
-                setup.codec().coder(), raba, setup, codedValueOffset, obs);
+            writeCodedValues(setup.codec().coder(), raba, setup, codedValueOffset, obs);
         assert sumCodedValueBitLengths == sumCodedValueBitLengths2
             : "sumCodedValueBitLengths="
                 + sumCodedValueBitLengths
@@ -1186,7 +1183,7 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
     private final AbstractFixedByteArrayBuffer data;
 
     //        /*
-//         * A reference to the backing byte array. Offsets into this array MUST
+    //         * A reference to the backing byte array. Offsets into this array MUST
     //         * be adjusted for the starting offset of the slice. Direct access to
     //         * this byte[] is used to reduce the cost of operations such lookup in
     //         * the packed symbol2byte table.
@@ -1367,8 +1364,8 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
 
         if (nsymbols == 0) {
 
-        /*
-       * The rest of the record is empty.
+          /*
+           * The rest of the record is empty.
            */
 
           this.decoder = null;
@@ -1378,8 +1375,8 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
           return;
         }
 
-      /*
-       * Setup the decoder.
+        /*
+         * Setup the decoder.
          */
         final long O_decoderInputs = ibs.readBits();
         if (debug) sb.append("O_decoderInputs=" + O_decoderInputs + "\n");
@@ -1389,15 +1386,15 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
         final DecoderInputs decoderInputs = readDecoderInputs(nsymbols, ibs, sb);
 
         if (decoder == null) {
-        /*
-       * Reconstruct the decoder.
+          /*
+           * Reconstruct the decoder.
            */
           this.decoder =
               new CanonicalFast64CodeWordDecoder(
                   decoderInputs.getLengths(), decoderInputs.getSymbols());
         } else {
-        /*
-       * There is a minor cost savings if given, but we still need
+          /*
+           * There is a minor cost savings if given, but we still need
            * to read the 'decoderInputs' to know where we are in the
            * bit stream.
            */
@@ -1480,7 +1477,7 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
     }
 
     //        /*
-//         * Lookup a symbol, returning the byte value for that symbol.
+    //         * Lookup a symbol, returning the byte value for that symbol.
     //         *
     //         * @param symbol
     //         *            The symbol.
@@ -1525,8 +1522,8 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
 
       if (isKeys) {
 
-      /*
-       * nulls are not allowed for keys and we do not code the
+        /*
+         * nulls are not allowed for keys and we do not code the
          * presence of nulls when we are coding keys.
          */
 
@@ -1547,8 +1544,8 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
 
       if (!isKeys) {
 
-      /*
-       * Figure out whether or not this index is a null.
+        /*
+         * Figure out whether or not this index is a null.
          */
         final boolean isNull = data.getBit(O_nulls + index);
 
@@ -1561,8 +1558,8 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
 
       if (nsymbols == 0) {
 
-      /*
-       * The offset[] is not stored if there are no symbols. Since we
+        /*
+         * The offset[] is not stored if there are no symbols. Since we
          * know that the value is not a null, this implies that the
          * coded value was an empty byte[]. We have to handle this case
          * explicitly.
@@ -1595,8 +1592,8 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
         // the total length of this code in bits.
         final long codeLength = O_to - O_from;
 
-      /*
-       * Figure out how many symbols are in the coded byte[].
+        /*
+         * Figure out how many symbols are in the coded byte[].
          */
         // position at the start of the coded byte[].
         ibs.position(O_from + O_codedValues);
@@ -1641,8 +1638,8 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
 
       if (!isKeys) {
 
-      /*
-       * Figure out whether or not this index is a null.
+        /*
+         * Figure out whether or not this index is a null.
          */
         final boolean isNull = data.getBit(O_nulls + index);
 
@@ -1655,8 +1652,8 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
 
       if (nsymbols == 0) {
 
-      /*
-       * The offset[] is not stored if there are no symbols. Since
+        /*
+         * The offset[] is not stored if there are no symbols. Since
          * we know that the value is not a null, this implies that
          * the coded value was an empty byte[]. We have to handle
          * this case explicitly.
@@ -1669,8 +1666,8 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
 
       try {
 
-      /*
-       * Figure out the bit length of the coded byte[].
+        /*
+         * Figure out the bit length of the coded byte[].
          *
          * Note: When we are allocating the byte[] for the caller we
          * will scan the coded byte[] once to get the length of the
@@ -1692,8 +1689,8 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
 
         assert codeLength >= 0 : "index=" + index + ", codeLength=" + codeLength;
 
-      /*
-       * Figure out how many symbols are in the coded byte[].
+        /*
+         * Figure out how many symbols are in the coded byte[].
          */
         // position at the start of the coded byte[].
         ibs.position(O_from + O_codedValues);
@@ -1708,8 +1705,8 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
           nsymbols++;
         }
 
-      /*
-       * Allocate an exact fit byte[] and decode into that byte[]. We
+        /*
+         * Allocate an exact fit byte[] and decode into that byte[]. We
          * decode to symbol indices and then convert symbol indices to
          * bytes, which are stored in that exact fit byte[].
          */
@@ -1793,8 +1790,8 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
 
       if (!isKeys) {
 
-      /*
-       * Figure out whether or not this index is a null.
+        /*
+         * Figure out whether or not this index is a null.
          */
         final boolean isNull = data.getBit(O_nulls + index);
 
@@ -1807,8 +1804,8 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
 
       if (nsymbols == 0) {
 
-      /*
-       * The offset[] is not stored if there are no symbols. Since we
+        /*
+         * The offset[] is not stored if there are no symbols. Since we
          * know that the value is not a null, this implies that the
          * coded value was an empty byte[]. We have to handle this case
          * explicitly.
@@ -1821,8 +1818,8 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
 
       try {
 
-      /*
-       * Figure out the bit length of the coded byte[].
+        /*
+         * Figure out the bit length of the coded byte[].
          *
          * Note: When we are allocating the byte[] for the caller we
          * will scan the coded byte[] once to get the length of the
@@ -1844,8 +1841,8 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
 
         assert codeLength >= 0 : "codeLength=" + codeLength;
 
-      /*
-       * Copy the decoded symbols into the buffer.
+        /*
+         * Copy the decoded symbols into the buffer.
          */
 
         // position at the start of the coded byte[].
@@ -1964,8 +1961,8 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
 
             if (!isKeys) {
 
-            /*
-       * Figure out whether or not this index is a null.
+              /*
+               * Figure out whether or not this index is a null.
                */
               final boolean isNull = data.getBit(O_nulls + i);
 
@@ -2114,8 +2111,8 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
 
       if (nsymbols == 0) {
 
-      /*
-       * The offset[] is not stored if there are no symbols. Since we
+        /*
+         * The offset[] is not stored if there are no symbols. Since we
          * know that the value is not a null (keys do not permit nulls),
          * this implies that the coded value was an empty byte[]. We
          * have to handle this case explicitly.
@@ -2166,8 +2163,8 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
 
         } else {
 
-        /*
-       * Note: This uses direct indexing into the backing byte[] to
+          /*
+           * Note: This uses direct indexing into the backing byte[] to
            * avoid method call and parameter check overhead associated
            * with data.getByte().
            */
@@ -2187,8 +2184,8 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
 
       if (nsymbols == key.length) {
 
-      /*
-       * Note: When the search key is [] we but the coded symbol is
+        /*
+         * Note: When the search key is [] we but the coded symbol is
          * non-empty, we need to indicate that the coded symbol is
          * longer.
          */

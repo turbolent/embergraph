@@ -28,7 +28,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /*
-* Appender pattern tacks on another iterator when the source iterator is exhausted.
+ * Appender pattern tacks on another iterator when the source iterator is exhausted.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -176,8 +176,8 @@ public class Appender<I extends Iterator<E>, E> implements IFilter<I, E, E> {
 
         if (chunk == null) {
 
-        /*
-       * Dynamically instantiation an array of the same component
+          /*
+           * Dynamically instantiation an array of the same component
            * type as the objects that we are visiting.
            */
 

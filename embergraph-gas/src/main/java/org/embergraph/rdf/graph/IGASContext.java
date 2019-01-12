@@ -17,12 +17,11 @@ package org.embergraph.rdf.graph;
 
 import java.util.Set;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
 /*
-* Execution context for an {@link IGASProgram}. This is distinct from the {@link IGASEngine} so we
+ * Execution context for an {@link IGASProgram}. This is distinct from the {@link IGASEngine} so we
  * can support distributed evaluation and concurrent evaluation of multiple {@link IGASProgram}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -153,7 +152,7 @@ public interface IGASContext<VS, ES, ST> extends Callable<IGASStats> {
   <T> IReducer<VS, ES, ST, T> getRunAfterOp();
 
   //    /*
-//     * Hook to impose a constraint on the visited edges and/or property values.
+  //     * Hook to impose a constraint on the visited edges and/or property values.
   //     *
   //     * @param itr
   //     *            The iterator visiting those edges and/or property values.

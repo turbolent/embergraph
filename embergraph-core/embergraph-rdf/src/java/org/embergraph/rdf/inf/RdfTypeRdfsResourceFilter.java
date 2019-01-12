@@ -12,7 +12,7 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
 /*
-* Filter matches <code>(x rdf:type rdfs:Resource).
+ * Filter matches <code>(x rdf:type rdfs:Resource).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

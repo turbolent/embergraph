@@ -34,7 +34,7 @@ import org.embergraph.bop.Var;
 import org.embergraph.bop.ap.Predicate;
 
 /*
-* Unit tests for {@link BOpUtility#getSharedVars(BOp, BOp)}.
+ * Unit tests for {@link BOpUtility#getSharedVars(BOp, BOp)}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

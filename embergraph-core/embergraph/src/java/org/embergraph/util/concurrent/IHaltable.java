@@ -3,7 +3,7 @@ package org.embergraph.util.concurrent;
 import java.util.concurrent.Future;
 
 /*
-* Interface extends {@link Future} and provides an interface for managing the termination of a
+ * Interface extends {@link Future} and provides an interface for managing the termination of a
  * process from within that process.
  *
  * @param <V> The generic type of the computation to which the {@link Future} evaluates.

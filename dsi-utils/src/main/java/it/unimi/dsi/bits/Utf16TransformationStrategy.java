@@ -24,7 +24,7 @@ package it.unimi.dsi.bits;
 import java.io.Serializable;
 
 /*
-* @deprecated Use {@link TransformationStrategies#utf16()} and {@link
+ * @deprecated Use {@link TransformationStrategies#utf16()} and {@link
  *     TransformationStrategies#prefixFreeUtf16()}.
  */
 @Deprecated

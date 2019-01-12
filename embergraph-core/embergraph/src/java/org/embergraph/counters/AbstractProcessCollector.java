@@ -28,7 +28,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 /*
-* Base class for collection of performance counters as reported by a native process.
+ * Base class for collection of performance counters as reported by a native process.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

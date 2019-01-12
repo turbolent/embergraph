@@ -3,10 +3,9 @@ package org.embergraph.bop;
 import java.io.ObjectStreamException;
 import java.util.UUID;
 import org.embergraph.cache.ConcurrentWeakValueCache;
-import org.embergraph.relation.rule.Rule;
 
 /*
-* A variable.
+ * A variable.
  *
  * <p>Note: This implementation provides reference testing for equality. The rest of the package
  * <em>assumes</em> that it can use reference testing for equality when comparing variables.

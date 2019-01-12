@@ -21,14 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.join;
 
-import org.embergraph.bop.IBindingSet;
-import org.embergraph.bop.IConstraint;
-import org.embergraph.bop.IPredicate;
-import org.embergraph.bop.IVariable;
-import org.embergraph.bop.joinGraph.rto.JoinGraph;
-
 /*
-* Common annotations for various join operators.
+ * Common annotations for various join operators.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -36,7 +30,7 @@ import org.embergraph.bop.joinGraph.rto.JoinGraph;
 public interface JoinAnnotations extends org.embergraph.bop.PipelineOp.Annotations {
 
   //    /*
-//     * Boolean annotation is <code>true</code> iff the solutions will be
+  //     * Boolean annotation is <code>true</code> iff the solutions will be
   //     * re-integrated into the query plan using an OPTIONAL join.
   //     * <p>
   //     * Note: Constraints on the join ARE NOT applied to the "optional" path.

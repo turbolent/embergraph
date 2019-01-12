@@ -9,7 +9,7 @@ import java.util.Random;
 import junit.framework.TestCase;
 
 /*
-* Investigates the benefits (if any) of managed concurrent reads with the aim of developing metrics
+ * Investigates the benefits (if any) of managed concurrent reads with the aim of developing metrics
  * on which to base a ConcurrentReadManager for use by the Disk based strategies.
  *
  * <p>At present this does not test any BigData components so should not be included in the test

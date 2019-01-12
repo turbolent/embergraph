@@ -30,7 +30,7 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.bop.Var;
 
 /*
-* Unit tests for {@link HashBindingSet}.
+ * Unit tests for {@link HashBindingSet}.
  *
  * <p>Note: a) these tests assume that the values held for a given key are not cloned, i.e.
  * comparison is done by '==' and not '.equals' b) keys with the same 'name' are a unique object.
@@ -64,8 +64,8 @@ public class TestHashBindingSet extends TestIBindingSet {
     Var<?> var2 = Var.var("b");
     Constant<Integer> val1 = new Constant<Integer>(1);
     Constant<Integer> val2 = new Constant<Integer>(2);
-    IVariable<?>[] vars = new IVariable[]{var1, var2};
-    IConstant<?>[] vals = new IConstant[]{val1, val2};
+    IVariable<?>[] vars = new IVariable[] {var1, var2};
+    IConstant<?>[] vals = new IConstant[] {val1, val2};
 
     assertEqual(new HashBindingSet(new HashBindingSet(vars, vals)), vars, vals);
   }
@@ -81,8 +81,8 @@ public class TestHashBindingSet extends TestIBindingSet {
     Var<?> var2 = Var.var("b");
     Constant<Integer> val1 = new Constant<Integer>(1);
     Constant<Integer> val2 = new Constant<Integer>(2);
-    IVariable<?>[] vars = new IVariable[]{var1, var2};
-    IConstant<?>[] vals = new IConstant[]{val1, val2};
+    IVariable<?>[] vars = new IVariable[] {var1, var2};
+    IConstant<?>[] vals = new IConstant[] {val1, val2};
 
     assertEqual(new HashBindingSet(new ListBindingSet(vars, vals)), vars, vals);
   }
@@ -93,8 +93,8 @@ public class TestHashBindingSet extends TestIBindingSet {
     Var<?> var2 = Var.var("b");
     Constant<Integer> val1 = new Constant<Integer>(1);
     Constant<Integer> val2 = new Constant<Integer>(2);
-    IVariable<?>[] vars = new IVariable[]{var1, var2};
-    IConstant<?>[] vals = new IConstant[]{val1, val2};
+    IVariable<?>[] vars = new IVariable[] {var1, var2};
+    IConstant<?>[] vals = new IConstant[] {val1, val2};
 
     try {
       assertTrue(null != new HashBindingSet(null, vals));

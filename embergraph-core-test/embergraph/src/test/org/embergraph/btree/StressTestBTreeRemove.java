@@ -258,8 +258,8 @@ public class StressTestBTreeRemove extends TestCase2 { // AbstractBTreeTestCase 
 
       if (i % 4 == 0) {
 
-      /*
-       * Populate every Nth tuple for the starting condition.
+        /*
+         * Populate every Nth tuple for the starting condition.
          */
 
         expected.put(keys[i], vals[i]);
@@ -277,15 +277,15 @@ public class StressTestBTreeRemove extends TestCase2 { // AbstractBTreeTestCase 
 
         final boolean insert = r.nextBoolean();
 
-      /*
-       * Choose the starting index at random, leaving at least one
+        /*
+         * Choose the starting index at random, leaving at least one
          * index before the end of the original range.
          */
 
         final int fromIndex = r.nextInt(nkeys - 2);
 
-      /*
-       * Choose final index from the remaining range.
+        /*
+         * Choose final index from the remaining range.
          */
         final int toIndex = fromIndex + ((nkeys - fromIndex) / (r.nextInt(1000) + 1));
 
@@ -340,8 +340,8 @@ public class StressTestBTreeRemove extends TestCase2 { // AbstractBTreeTestCase 
 
         if (trial % 100 == 0) {
 
-        /*
-       * Validate the keys and entries.
+          /*
+           * Validate the keys and entries.
            */
 
           assertEquals("#entries", expected.size(), btree.getEntryCount());

@@ -2,10 +2,9 @@ package org.embergraph.search;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-import org.apache.lucene.analysis.Token;
 
 /*
-* Models the term-frequency data associated with a single field of some document.
+ * Models the term-frequency data associated with a single field of some document.
  *
  * @param <V> The generic type of the document identifier.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

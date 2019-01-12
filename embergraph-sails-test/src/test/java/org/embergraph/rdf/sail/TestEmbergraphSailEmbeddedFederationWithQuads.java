@@ -36,12 +36,11 @@ import org.embergraph.resources.ResourceManager;
 import org.embergraph.service.AbstractClient;
 import org.embergraph.service.DistributedTransactionService;
 import org.embergraph.service.EmbeddedClient;
-import org.embergraph.service.EmbeddedFederation;
 import org.embergraph.service.IEmbergraphClient;
 import org.embergraph.service.IEmbergraphFederation;
 
 /*
-* Test suite for the {@link EmbergraphSail} with quads enabled running against an {@link
+ * Test suite for the {@link EmbergraphSail} with quads enabled running against an {@link
  * EmbeddedFederation} with a single data service. The provenance mode is disabled. Inference is
  * disabled. This version of the test suite uses the pipeline join algorithm.
  *
@@ -115,8 +114,8 @@ public class TestEmbergraphSailEmbeddedFederationWithQuads extends AbstractEmber
 
       try {
 
-      /*
-       * suite() will call suiteLTSWithPipelineJoins() and then
+        /*
+         * suite() will call suiteLTSWithPipelineJoins() and then
          * filter out the dataset tests, which we don't need right now
          */
         //                tckSuite.addTest(EmbergraphSparqlTest.suiteLTSWithPipelineJoins());

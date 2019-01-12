@@ -30,7 +30,7 @@ import java.util.Properties;
 import java.util.TreeMap;
 
 /*
-* This utility class provides helper methods designed to fuse two configurations in which at least
+ * This utility class provides helper methods designed to fuse two configurations in which at least
  * one of the configuration is represented as a {@link Properties} object, which may have a system
  * of inherited defaults. When a {@link Map} and a {@link Properties} object or two {@link
  * Properties} objects must be combined in a "fused" configuration, it may be necessary to "flatten"
@@ -300,7 +300,7 @@ public class PropertyUtil {
   }
 
   //     /*
-//      * Helper class wraps an existing {@link Properties} object and
+  //      * Helper class wraps an existing {@link Properties} object and
   //      * exposes its {@link Properties#defaults} field.
   //      */
 

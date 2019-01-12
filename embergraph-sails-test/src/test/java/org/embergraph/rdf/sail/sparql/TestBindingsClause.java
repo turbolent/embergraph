@@ -49,7 +49,7 @@ import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /*
-* Test suite for the BINDINGS clause.
+ * Test suite for the BINDINGS clause.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestEmbergraphExprBuilder.java 5073 2011-08-23 00:33:54Z thompsonbry $

@@ -48,7 +48,6 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.relation.RelationSchema;
 import org.embergraph.relation.locator.ILocatableResource;
 import org.embergraph.sparse.ITPS;
-import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFHandlerException;
@@ -57,7 +56,7 @@ import org.openrdf.rio.RDFWriterRegistry;
 import org.openrdf.sail.SailException;
 
 /*
-* Utility class for exporting the configuration properties and data associated with one or more KBs
+ * Utility class for exporting the configuration properties and data associated with one or more KBs
  * on a {@link Journal}.
  *
  * @see <a href="https://sourceforge.net/apps/mediawiki/bigdata/index.php?title=DataMigration">Data
@@ -72,7 +71,7 @@ public class ExportKB {
   private final EmbergraphSailConnection conn;
 
   //    /*
-//     * The KB to be exported.
+  //     * The KB to be exported.
   //     */
   //    private final AbstractTripleStore kb;
 
@@ -225,11 +224,8 @@ public class ExportKB {
     //            try {
     final CloseableIteration<? extends Statement, SailException> itr =
         conn.getStatements(
-            null /* s */,
-            null /* p */,
-            null /* o */,
-            includeInferred
-            /* contexts */);
+            null /* s */, null /* p */, null /* o */, includeInferred
+            /* contexts */ );
     try {
       final File file = new File(kbdir, "data." + format.getDefaultFileExtension() + ".gz");
       System.out.println("Writing " + file);

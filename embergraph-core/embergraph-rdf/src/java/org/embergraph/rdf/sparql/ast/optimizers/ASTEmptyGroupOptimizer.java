@@ -45,7 +45,7 @@ import org.embergraph.rdf.sparql.ast.UnionNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /*
-* Eliminate semantically empty join group nodes which are the sole child of another join groups.
+ * Eliminate semantically empty join group nodes which are the sole child of another join groups.
  * Such nodes either do not specify a context or they specify the same context as the parent.
  *
  * <pre>
@@ -159,8 +159,8 @@ public class ASTEmptyGroupOptimizer implements IASTOptimizer {
 
         eliminateEmptyGroups(queryBase, childGroup);
 
-      /*
-       * If we pruned the child, then we need to decrement the index
+        /*
+         * If we pruned the child, then we need to decrement the index
          * so that we don't skip one.
          */
         if (i < op.arity() && op.get(i) != child) {
@@ -178,8 +178,8 @@ public class ASTEmptyGroupOptimizer implements IASTOptimizer {
 
         eliminateEmptyGroups(subquery, childGroup);
 
-      /*
-       * If we pruned the child, then we need to decrement the index
+        /*
+         * If we pruned the child, then we need to decrement the index
          * so that we don't skip one.
          */
         if (i < op.arity() && op.get(i) != child) {
@@ -224,8 +224,8 @@ public class ASTEmptyGroupOptimizer implements IASTOptimizer {
           //  fix for trac 712
           && (parent.isOptional() || !child.isOptional())) {
 
-      /*
-       * We can always merge two JoinGroupNodes into one, but we have
+        /*
+         * We can always merge two JoinGroupNodes into one, but we have
          * to make sure we get the optionality right.
          *
          * Note: This is not true for MINUS. MINUS can only be combined
@@ -341,7 +341,7 @@ public class ASTEmptyGroupOptimizer implements IASTOptimizer {
   }
 
   //    /*
-//     * Return true if the operator is an OPTIONAL node.
+  //     * Return true if the operator is an OPTIONAL node.
   //     *
   //     * @param op
   //     *            The operator.

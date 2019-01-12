@@ -23,10 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation.locator;
 
-import org.embergraph.btree.IIndex;
-
 /*
-* A locatable resource. Resources have a unique namespace and can be resolved and a view
+ * A locatable resource. Resources have a unique namespace and can be resolved and a view
  * materialized using an {@link IResourceLocator}. There is a timestamp associated with the resource
  * - the timestamp is used to request {@link IIndex} views for the resource. There is a presumption
  * that resources are essentially logical "index containers".

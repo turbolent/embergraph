@@ -29,7 +29,7 @@ import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQueryResult;
 
 /*
-* This test checks if constants in projection expressions are properly resolved.
+ * This test checks if constants in projection expressions are properly resolved.
  *
  * @see https://jira.blazegraph.com/browse/BLZG-2091
  */

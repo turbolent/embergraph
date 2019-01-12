@@ -45,7 +45,6 @@ import org.embergraph.rdf.sparql.ast.QueryOptimizerEnum;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.QueryType;
 import org.embergraph.rdf.sparql.ast.StatementPatternNode;
-import org.embergraph.rdf.sparql.ast.ValueExpressionNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.hints.QueryHintScope;
@@ -58,7 +57,7 @@ import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /*
-* Test suite for the {@link ASTQueryHintOptimizer}.
+ * Test suite for the {@link ASTQueryHintOptimizer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -200,8 +199,7 @@ public class TestASTQueryHintOptimizer extends AbstractASTEvaluationTestCase {
                     // expr
                     FunctionRegistry.SAMPLE,
                     Collections.singletonMap(
-                        AggregateBase.Annotations.DISTINCT,
-                        Boolean.FALSE) /* scalarValues */,
+                        AggregateBase.Annotations.DISTINCT, Boolean.FALSE) /* scalarValues */,
                     new VarNode("_var9"))));
         projection.addProjectionVar(new VarNode("_var2"));
         projection.addProjectionVar(new VarNode("_var3"));
@@ -310,8 +308,7 @@ public class TestASTQueryHintOptimizer extends AbstractASTEvaluationTestCase {
                   // expr
                   FunctionRegistry.SAMPLE,
                   Collections.singletonMap(
-                      AggregateBase.Annotations.DISTINCT,
-                      Boolean.FALSE) /* scalarValues */,
+                      AggregateBase.Annotations.DISTINCT, Boolean.FALSE) /* scalarValues */,
                   new VarNode("_var9"))));
       projection.addProjectionVar(new VarNode("_var2"));
       projection.addProjectionVar(new VarNode("_var3"));
@@ -437,8 +434,7 @@ public class TestASTQueryHintOptimizer extends AbstractASTEvaluationTestCase {
                     // expr
                     FunctionRegistry.COUNT,
                     Collections.singletonMap(
-                        AggregateBase.Annotations.DISTINCT,
-                        Boolean.FALSE) /* scalarValues */,
+                        AggregateBase.Annotations.DISTINCT, Boolean.FALSE) /* scalarValues */,
                     new VarNode("_var3"))));
 
         final JoinGroupNode whereClause = new JoinGroupNode();
@@ -509,8 +505,7 @@ public class TestASTQueryHintOptimizer extends AbstractASTEvaluationTestCase {
                     // expr
                     FunctionRegistry.COUNT,
                     Collections.singletonMap(
-                        AggregateBase.Annotations.DISTINCT,
-                        Boolean.FALSE) /* scalarValues */,
+                        AggregateBase.Annotations.DISTINCT, Boolean.FALSE) /* scalarValues */,
                     new VarNode("_var3"))));
 
         final JoinGroupNode whereClause = new JoinGroupNode();
@@ -609,8 +604,7 @@ public class TestASTQueryHintOptimizer extends AbstractASTEvaluationTestCase {
                     // expr
                     FunctionRegistry.COUNT,
                     Collections.singletonMap(
-                        AggregateBase.Annotations.DISTINCT,
-                        Boolean.FALSE) /* scalarValues */,
+                        AggregateBase.Annotations.DISTINCT, Boolean.FALSE) /* scalarValues */,
                     new VarNode("_var3"))));
 
         final JoinGroupNode whereClause = new JoinGroupNode();
@@ -656,8 +650,7 @@ public class TestASTQueryHintOptimizer extends AbstractASTEvaluationTestCase {
                     // expr
                     FunctionRegistry.COUNT,
                     Collections.singletonMap(
-                        AggregateBase.Annotations.DISTINCT,
-                        Boolean.FALSE) /* scalarValues */,
+                        AggregateBase.Annotations.DISTINCT, Boolean.FALSE) /* scalarValues */,
                     new VarNode("_var3"))));
 
         final JoinGroupNode whereClause = new JoinGroupNode();
@@ -758,8 +751,7 @@ public class TestASTQueryHintOptimizer extends AbstractASTEvaluationTestCase {
                     // expr
                     FunctionRegistry.COUNT,
                     Collections.singletonMap(
-                        AggregateBase.Annotations.DISTINCT,
-                        Boolean.FALSE) /* scalarValues */,
+                        AggregateBase.Annotations.DISTINCT, Boolean.FALSE) /* scalarValues */,
                     new VarNode("_var3"))));
 
         final JoinGroupNode whereClause = new JoinGroupNode();
@@ -821,8 +813,7 @@ public class TestASTQueryHintOptimizer extends AbstractASTEvaluationTestCase {
                     // expr
                     FunctionRegistry.COUNT,
                     Collections.singletonMap(
-                        AggregateBase.Annotations.DISTINCT,
-                        Boolean.FALSE) /* scalarValues */,
+                        AggregateBase.Annotations.DISTINCT, Boolean.FALSE) /* scalarValues */,
                     new VarNode("_var3"))));
 
         final JoinGroupNode whereClause = new JoinGroupNode();

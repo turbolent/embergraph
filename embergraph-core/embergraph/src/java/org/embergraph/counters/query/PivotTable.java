@@ -8,11 +8,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
 import org.apache.log4j.Logger;
 import org.embergraph.counters.ICounter;
-import org.embergraph.counters.ICounterNode;
 import org.embergraph.counters.IHistoryEntry;
 
 /*
-* Aggregates data from a table by grouping the cells in the table into sets ({@link CSet}s) of
+ * Aggregates data from a table by grouping the cells in the table into sets ({@link CSet}s) of
  * category columns. The values for cells belonging to the same {@link CSet} are aggregated for each
  * distinct {@link ICounterNode#getName()}.
  */
@@ -141,8 +140,8 @@ public class PivotTable {
                 + "category names: "
                 + Arrays.toString(cnames);
 
-      /*
-       * Aggregate values for counters in this cset having a value for
+        /*
+         * Aggregate values for counters in this cset having a value for
          * each value column in turn.
          *
          * If none of the counters in the cset have a value for the row
@@ -200,8 +199,8 @@ public class PivotTable {
 
               valueCountForColumn++;
 
-            /*
-       * The counter appears just once in the data table
+              /*
+               * The counter appears just once in the data table
                * so we can stop once we find its index.
                */
               break;
@@ -210,8 +209,8 @@ public class PivotTable {
 
           if (valueCountForColumn > 0) {
 
-          /*
-       * There was at least one sample for the current value
+            /*
+             * There was at least one sample for the current value
              * column.
              */
 
@@ -347,8 +346,8 @@ public class PivotTable {
 
       if (n > 0 && c.getName().equals(groups[n - 1])) {
 
-      /*
-       * We drop the last capturing group since it captures the
+        /*
+         * We drop the last capturing group since it captures the
          * counter name. This is a common query design when building a
          * normal table view, but using a capturing group for the
          * counter name for a pivot table will result in a single

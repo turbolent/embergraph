@@ -39,7 +39,7 @@ import org.openrdf.rio.RDFParseException;
 import org.openrdf.sail.memory.MemoryStore;
 
 /*
-* Unit test template for use in submission of bugs.
+ * Unit test template for use in submission of bugs.
  *
  * <p>This test case will delegate to an underlying backing store. You can specify this store via a
  * JVM property as follows: <code>-DtestClass=org.embergraph.rdf.sail.TestEmbergraphSailWithQuads
@@ -102,9 +102,8 @@ public class TestTicket348 extends QuadsTestCase {
         } finally {
           stats.close();
         }
-        conn
-            .rollback(); // discard the result (or commit, but do something to avoid a logged
-                         // warning from Sesame).
+        conn.rollback(); // discard the result (or commit, but do something to avoid a logged
+        // warning from Sesame).
       } finally {
         conn.close();
       }

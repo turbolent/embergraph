@@ -32,7 +32,7 @@ import org.openrdf.rio.RDFParser;
 import org.openrdf.rio.Rio;
 
 /*
-* Parses data but does not load it into the indices.
+ * Parses data but does not load it into the indices.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

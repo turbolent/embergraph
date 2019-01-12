@@ -27,7 +27,7 @@ import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
 
 /*
-* A constraint that a variable may only take on the bindings enumerated by some set.
+ * A constraint that a variable may only take on the bindings enumerated by some set.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: INBinarySearch.java 4357 2011-03-31 17:11:26Z thompsonbry $

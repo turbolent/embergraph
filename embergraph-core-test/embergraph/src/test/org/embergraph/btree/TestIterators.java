@@ -27,7 +27,7 @@ import org.embergraph.btree.keys.TestKeyBuilder;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Test suite for iterators. The tests are presented from the least dependencies to the most
+ * Test suite for iterators. The tests are presented from the least dependencies to the most
  * dependencies ((traversal of the entries for a single leaf, then children of a node, then dirty
  * child of a node, then post-order traversal, then post-order traversal of dirty nodes).
  *

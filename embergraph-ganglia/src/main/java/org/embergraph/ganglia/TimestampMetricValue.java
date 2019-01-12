@@ -15,11 +15,10 @@
 */
 package org.embergraph.ganglia;
 
-import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
 /*
-* A reported or observed metric value with a timestamp. This is used to report metric values which
+ * A reported or observed metric value with a timestamp. This is used to report metric values which
  * are unchanged no more frequently than tmax seconds.
  *
  * <p>Note: This class deliberately does not use a generic for the data type. The data type of the

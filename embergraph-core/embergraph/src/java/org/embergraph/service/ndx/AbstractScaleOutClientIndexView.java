@@ -25,7 +25,6 @@ package org.embergraph.service.ndx;
 
 import cutthecrap.utils.striterators.IFilter;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -37,11 +36,9 @@ import org.apache.log4j.Logger;
 import org.embergraph.btree.AsynchronousIndexWriteConfiguration;
 import org.embergraph.btree.ICounter;
 import org.embergraph.btree.IRangeQuery;
-import org.embergraph.btree.ITupleCursor;
 import org.embergraph.btree.ITupleIterator;
 import org.embergraph.btree.ITupleSerializer;
 import org.embergraph.btree.IndexMetadata;
-import org.embergraph.btree.ResultSet;
 import org.embergraph.btree.keys.KVO;
 import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure.ResultBitBuffer;
 import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure.ResultBuffer;
@@ -51,10 +48,8 @@ import org.embergraph.btree.proc.BatchInsert.BatchInsertConstructor;
 import org.embergraph.btree.proc.BatchLookup.BatchLookupConstructor;
 import org.embergraph.btree.proc.BatchPutIfAbsent.BatchPutIfAbsentConstructor;
 import org.embergraph.btree.proc.BatchRemove.BatchRemoveConstructor;
-import org.embergraph.btree.proc.IIndexProcedure;
 import org.embergraph.btree.proc.IKeyArrayIndexProcedure;
 import org.embergraph.btree.proc.IKeyRangeIndexProcedure;
-import org.embergraph.btree.proc.IParallelizableIndexProcedure;
 import org.embergraph.btree.proc.IResultHandler;
 import org.embergraph.btree.proc.ISimpleIndexProcedure;
 import org.embergraph.btree.proc.LongAggregator;
@@ -73,7 +68,6 @@ import org.embergraph.service.AbstractClient;
 import org.embergraph.service.AbstractScaleOutFederation;
 import org.embergraph.service.IDataService;
 import org.embergraph.service.IEmbergraphClient;
-import org.embergraph.service.IEmbergraphClient.Options;
 import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.IMetadataService;
 import org.embergraph.service.Split;
@@ -82,7 +76,7 @@ import org.embergraph.service.ndx.pipeline.IndexWriteTask;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Abstract base class for the {@link IScaleOutClientIndex} implementation(s).
+ * Abstract base class for the {@link IScaleOutClientIndex} implementation(s).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -707,8 +701,8 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
 
       if (rightSeparatorKey == null) {
 
-      /*
-       * The last index partition does not have an upper bound and
+        /*
+         * The last index partition does not have an upper bound and
          * will absorb any keys that order GTE to its left separator
          * key.
          */
@@ -722,8 +716,8 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
 
       } else {
 
-      /*
-       * Otherwise this partition has an upper bound, so figure out
+        /*
+         * Otherwise this partition has an upper bound, so figure out
          * the index of the last key that would go into this partition.
          *
          * We do this by searching for the rightSeparator of the index
@@ -735,8 +729,8 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
 
         if (pos >= 0) {
 
-        /*
-       * There is a hit on the rightSeparator key. The index
+          /*
+           * There is a hit on the rightSeparator key. The index
            * returned by the binarySearch is the exclusive upper bound
            * for the split. The key at that index is excluded from the
            * split - it will be the first key in the next split.
@@ -777,8 +771,8 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
 
         } else if (pos < 0) {
 
-        /*
-       * There is a miss on the rightSeparator key (it is not
+          /*
+           * There is a miss on the rightSeparator key (it is not
            * present in the keys that are being split). In this case
            * the binary search returns the insertion point. We then
            * compute the exclusive upper bound from the insertion
@@ -791,8 +785,8 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
               : "Expected pos in [" + currentIndex + ":" + toIndex + ") but pos=" + pos;
         }
 
-      /*
-       * Note: this test can be enabled if you are having problems
+        /*
+         * Note: this test can be enabled if you are having problems
          * with KeyAfterPartition or KeyBeforePartition. It will go
          * through more effort to validate the constraints on the split.
          * However, due to the additional byte[] comparisons, this
@@ -1075,8 +1069,8 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
           && proc.isReadOnly()
           && TimestampUtility.isReadCommittedOrUnisolated(getTimestamp())) {
 
-      /*
-       * Create a read-historical transaction from the last commit
+        /*
+         * Create a read-historical transaction from the last commit
          * point of the federation in order to provide consistent
          * reads for the mapped procedure.
          */
@@ -1115,8 +1109,8 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
 
         } catch (IOException e) {
 
-        /*
-       * log error but do not rethrow since operation is over
+          /*
+           * log error but do not rethrow since operation is over
            * anyway.
            */
 

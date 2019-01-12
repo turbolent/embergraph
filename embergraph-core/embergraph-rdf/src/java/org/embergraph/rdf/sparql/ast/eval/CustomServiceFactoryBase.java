@@ -24,11 +24,10 @@ import java.util.HashSet;
 import java.util.Set;
 import org.embergraph.bop.IVariable;
 import org.embergraph.rdf.sparql.ast.service.CustomServiceFactory;
-import org.embergraph.rdf.sparql.ast.service.ServiceFactory;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 
 /*
-* Base class for abstract services, providing base implementation for getRequiredBound and
+ * Base class for abstract services, providing base implementation for getRequiredBound and
  * getDesiredBound methods (which can be overridden by subclasses).
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>

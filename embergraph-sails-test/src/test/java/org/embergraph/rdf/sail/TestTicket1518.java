@@ -32,7 +32,7 @@ import org.openrdf.query.TupleQueryResult;
 import org.openrdf.query.Update;
 
 /*
-* Test suite for ticket #1518: tests for quad-mode SPARQL features with triplestore not supporting
+ * Test suite for ticket #1518: tests for quad-mode SPARQL features with triplestore not supporting
  * quads
  */
 public class TestTicket1518 extends ProxyEmbergraphSailTestCase {

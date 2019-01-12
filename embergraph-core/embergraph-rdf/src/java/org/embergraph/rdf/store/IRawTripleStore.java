@@ -22,13 +22,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.store;
 
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.model.EmbergraphValue;
-import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.spo.ISPO;
-import org.embergraph.rdf.spo.SPO;
-import org.embergraph.rdf.spo.SPOKeyOrder;
-import org.embergraph.rdf.spo.SPORelation;
 import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.relation.accesspath.IElementFilter;
 import org.embergraph.striterator.IChunkedOrderedIterator;
@@ -36,7 +31,7 @@ import org.embergraph.striterator.IKeyOrder;
 import org.openrdf.model.Value;
 
 /*
-* Low-level API directly using long term identifiers rather than an RDF Value object model.
+ * Low-level API directly using long term identifiers rather than an RDF Value object model.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -198,8 +193,7 @@ public interface IRawTripleStore extends ITripleStore {
    *     statements that do not exist
    * @return an iteration over the filtered set of statements
    */
-  IChunkedOrderedIterator<ISPO> bulkFilterStatements(
-      ISPO[] stmts, int numStmts, boolean present);
+  IChunkedOrderedIterator<ISPO> bulkFilterStatements(ISPO[] stmts, int numStmts, boolean present);
 
   /*
    * Efficiently filter the supplied set of {@link SPO} objects for whether they are "present" or
@@ -221,8 +215,7 @@ public interface IRawTripleStore extends ITripleStore {
    * @return An iterator visiting the completed {@link ISPO}s. Any {@link ISPO}s that were not found
    *     will be present but their statement metadata (type and sid) will be unchanged.
    */
-  IChunkedOrderedIterator<ISPO> bulkCompleteStatements(
-      final IChunkedOrderedIterator<ISPO> itr);
+  IChunkedOrderedIterator<ISPO> bulkCompleteStatements(final IChunkedOrderedIterator<ISPO> itr);
 
   /** Externalizes a quad or a triple with a statement identifier using an abbreviated syntax. */
   String toString(IV s, IV p, IV o, IV c);

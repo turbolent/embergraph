@@ -12,7 +12,7 @@ import org.embergraph.service.AbstractFederation;
 import org.embergraph.util.concurrent.MovingAverageTask;
 
 /*
-* Extended to report the moving average of the pending set size for the master and the sinks and to
+ * Extended to report the moving average of the pending set size for the master and the sinks and to
  * report the maximum pending set size for the sinks.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

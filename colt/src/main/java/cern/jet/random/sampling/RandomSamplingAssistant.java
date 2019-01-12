@@ -11,7 +11,7 @@ package cern.jet.random.sampling;
 import cern.colt.list.BooleanArrayList;
 import cern.jet.random.engine.RandomEngine;
 /*
-* Conveniently computes a stable <i>Simple Random Sample Without Replacement (SRSWOR)</i>
+ * Conveniently computes a stable <i>Simple Random Sample Without Replacement (SRSWOR)</i>
  * subsequence of <tt>n</tt> elements from a given input sequence of <tt>N</tt> elements; Example:
  * Computing a sublist of <tt>n=3</tt> random elements from a list <tt>(1,...,50)</tt> may yield the
  * sublist <tt>(7,13,47)</tt>. The subsequence is guaranteed to be <i>stable</i>, i.e. elements

@@ -23,10 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.counters;
 
-import java.net.InetAddress;
-
 /*
-* The set of core (required) counters that must be reported for all platforms. The items declared
+ * The set of core (required) counters that must be reported for all platforms. The items declared
  * on this interface are relative path names for {@link ICounterSet}s and {@link ICounter}s. The
  * root for the path is generally the fully qualified domain name of a host (as reported by {@link
  * InetAddress#getCanonicalHostName()}, a federation, or a service.

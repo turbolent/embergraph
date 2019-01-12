@@ -57,7 +57,6 @@ import junit.framework.Test;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.rdf.sail.webapp.client.IPreparedTupleQuery;
-import org.embergraph.rdf.sail.webapp.client.RemoteRepository;
 import org.embergraph.rdf.sail.webapp.client.RemoteRepository.AddOp;
 import org.openrdf.model.Literal;
 import org.openrdf.model.Resource;
@@ -71,12 +70,11 @@ import org.openrdf.model.vocabulary.FOAF;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.model.vocabulary.XMLSchema;
-import org.openrdf.query.parser.sparql.SPARQLUpdateTest;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
 
 /*
-* Proxied test suite.
+ * Proxied test suite.
  *
  * <p>Note: Also see {@link SPARQLUpdateTest}. These two test suites SHOULD be kept synchronized.
  * {@link SPARQLUpdateTest} runs against a local kb instance while this class runs against the NSS.
@@ -228,7 +226,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   }
 
   //    /*
-//     * TODO Requires BINDINGS support for {@link RemoteRepository}
+  //     * TODO Requires BINDINGS support for {@link RemoteRepository}
   //     *
   //     * @since openrdf 2.6.3
   //     */
@@ -256,7 +254,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   //    }
   //
   //    /*
-//     * TODO Requires BINDINGS support for {@link RemoteRepository}
+  //     * TODO Requires BINDINGS support for {@link RemoteRepository}
   //     *
   //     * @since openrdf 2.6.6
   //     */
@@ -299,7 +297,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   }
 
   //    /*
-//     * TODO Requires BINDINGS support for {@link RemoteRepository}
+  //     * TODO Requires BINDINGS support for {@link RemoteRepository}
   //     *
   //     * @since openrdf 2.6.3
   //     */
@@ -341,7 +339,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   }
 
   //    /*
-//  * TODO Requires BINDINGS support for {@link RemoteRepository}
+  //  * TODO Requires BINDINGS support for {@link RemoteRepository}
   //  *
   //     * @since openrdf 2.6.3
   //     */
@@ -368,7 +366,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   //    }
 
   //    /*
-//  * TODO Requires BINDINGS support for {@link RemoteRepository}
+  //  * TODO Requires BINDINGS support for {@link RemoteRepository}
   //  *
   //     * @since openrdf 2.6.3
   //     */
@@ -459,7 +457,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   }
 
   //    /*
-//  * TODO Requires BINDINGS support for {@link RemoteRepository}
+  //  * TODO Requires BINDINGS support for {@link RemoteRepository}
   //  *
   //       * @since OPENRDF 2.6.6. */
   ////  @Test
@@ -694,7 +692,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   }
 
   //    /*
-//     * Note: blank nodes are not permitted in the DELETE clause template.
+  //     * Note: blank nodes are not permitted in the DELETE clause template.
   //     *
   //     * <a href="https://sourceforge.net/apps/trac/bigdata/ticket/571">
   //     * DELETE/INSERT WHERE handling of blank nodes </a>
@@ -1374,7 +1372,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   }
 
   //  /*
-//  * Note: blank nodes are not permitted in the DELETE clause template.
+  //  * Note: blank nodes are not permitted in the DELETE clause template.
   //  *
   //  * <a href="https://sourceforge.net/apps/trac/bigdata/ticket/571">
   //  * DELETE/INSERT WHERE handling of blank nodes </a>
@@ -1410,7 +1408,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   //    }
 
   //  /*
-//  * Note: blank nodes are not permitted in the DELETE clause template.
+  //  * Note: blank nodes are not permitted in the DELETE clause template.
   //  *
   //  * <a href="https://sourceforge.net/apps/trac/bigdata/ticket/571">
   //  * DELETE/INSERT WHERE handling of blank nodes </a>
@@ -1688,7 +1686,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   }
 
   //    /*
-//     * Verify ability to load data from a gzip resource.
+  //     * Verify ability to load data from a gzip resource.
   //     */
   //    public void testLoadZip()
   //            throws Exception

@@ -24,11 +24,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree.keys;
 
 import java.util.Arrays;
-import org.embergraph.service.ndx.pipeline.KVOC;
 import org.embergraph.util.BytesUtil;
 
 /*
-* A key-value-object tuple. Comparison places the {@link KVO} tuples into an order based on the
+ * A key-value-object tuple. Comparison places the {@link KVO} tuples into an order based on the
  * interpretation of their {@link #key}s as unsigned byte[]s. This may be used to perform a
  * correlated sort of keys and values. This class may also be used to pair an optional unserialized
  * representation of the value {@link Object} with the unsigned byte[] key and the serialized byte[]

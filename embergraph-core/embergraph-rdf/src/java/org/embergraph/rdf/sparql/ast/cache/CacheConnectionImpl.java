@@ -29,7 +29,6 @@ import java.util.concurrent.TimeUnit;
 import org.embergraph.bfs.EmbergraphFileSystem;
 import org.embergraph.bop.engine.QueryEngine;
 import org.embergraph.btree.HTreeIndexMetadata;
-import org.embergraph.btree.view.FusedView;
 import org.embergraph.htree.HTree;
 import org.embergraph.journal.AbstractJournal;
 import org.embergraph.journal.AbstractLocalTransactionManager;
@@ -39,18 +38,15 @@ import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.IJournal;
 import org.embergraph.journal.IResourceLockService;
 import org.embergraph.journal.IRootBlockView;
-import org.embergraph.journal.Journal;
 import org.embergraph.journal.TemporaryStore;
 import org.embergraph.journal.TimestampUtility;
 import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.embergraph.relation.locator.DefaultResourceLocator;
-import org.embergraph.resources.IndexManager;
-import org.embergraph.service.IDataService;
 import org.embergraph.sparse.SparseRowStore;
 import org.embergraph.util.Bytes;
 
 /*
-* A connection to a local, remote, or distributed caching layer.
+ * A connection to a local, remote, or distributed caching layer.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -63,7 +59,7 @@ public class CacheConnectionImpl implements ICacheConnection {
   //    public interface Options {
   //
   //        /*
-//         * The maximum amount of native memory which will be used to cache
+  //         * The maximum amount of native memory which will be used to cache
   //         * solution sets (default is 1/2 of the value reported by
   //         * {@link Runtime#maxMemory()}).
   //         * <p>
@@ -340,7 +336,7 @@ public class CacheConnectionImpl implements ICacheConnection {
     }
 
     //        /*
-//         * Note: Exposed for the {@link DataService} which needs this for its
+    //         * Note: Exposed for the {@link DataService} which needs this for its
     //         * 2-phase commit protocol.
     //         */
     //        public long commitNow(final long commitTime) {
@@ -350,7 +346,7 @@ public class CacheConnectionImpl implements ICacheConnection {
     //        }
 
     //        /*
-//         * Exposed for {@link StoreManger#getResourcesForTimestamp(long)} which
+    //         * Exposed for {@link StoreManger#getResourcesForTimestamp(long)} which
     //         * requires access to the {@link CommitRecordIndex} for the
     //         * lastCommitTime on the historical journals.
     //         * <p>

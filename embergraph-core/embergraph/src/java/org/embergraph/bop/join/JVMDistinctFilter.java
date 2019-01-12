@@ -32,7 +32,7 @@ import org.embergraph.bop.engine.BOpStats;
 import org.embergraph.relation.accesspath.IBuffer;
 
 /*
-* Utility class for imposing a DISTINCT filter on {@link IBindingSet}. This class is thread-safe.
+ * Utility class for imposing a DISTINCT filter on {@link IBindingSet}. This class is thread-safe.
  * It is based on a {@link ConcurrentHashMap}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -207,8 +207,8 @@ public class JVMDistinctFilter implements IDistinctFilter {
 
       for (IBindingSet bset : a) {
 
-      /*
-       * Test to see if this solution is distinct from those already
+        /*
+         * Test to see if this solution is distinct from those already
          * seen.
          */
         if ((bset = accept(bset)) == null) {
@@ -217,8 +217,8 @@ public class JVMDistinctFilter implements IDistinctFilter {
           continue;
         }
 
-      /*
-       * This is a distinct solution.
+        /*
+         * This is a distinct solution.
          */
 
         sink.add(bset);

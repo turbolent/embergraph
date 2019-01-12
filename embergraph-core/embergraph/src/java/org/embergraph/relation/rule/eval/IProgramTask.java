@@ -24,10 +24,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.relation.rule.eval;
 
 import java.util.concurrent.Callable;
-import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /*
-* Interface for a task that executes a (complex) program (vs a single rule).
+ * Interface for a task that executes a (complex) program (vs a single rule).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

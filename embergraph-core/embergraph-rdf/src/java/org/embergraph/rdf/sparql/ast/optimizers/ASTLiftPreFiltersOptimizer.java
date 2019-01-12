@@ -23,13 +23,11 @@ package org.embergraph.rdf.sparql.ast.optimizers;
 
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.rdf.sparql.ast.IQueryNode;
-import org.embergraph.rdf.sparql.ast.JoinGroupNode;
 import org.embergraph.rdf.sparql.ast.QueryNodeWithBindingSet;
-import org.embergraph.rdf.sparql.ast.StaticAnalysis;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /*
-* Lift FILTERs which can be evaluated based solely on the bindings in the parent group out of a
+ * Lift FILTERs which can be evaluated based solely on the bindings in the parent group out of a
  * child group. This helps because we will issue the subquery for the child group less often
  * (assuming that the filter rejects any solutions). This optimizer is based on {@link
  * StaticAnalysis#getPreFilters(JoinGroupNode)}. Anything reported by that method can be lifted out

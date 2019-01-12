@@ -29,7 +29,7 @@ import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
 /*
-* Vocabulary and namespace for BSBM.
+ * Vocabulary and namespace for BSBM.
  *
  * <p>Note: the benchmark also makes use of some dublin core vocabulary, including:
  *

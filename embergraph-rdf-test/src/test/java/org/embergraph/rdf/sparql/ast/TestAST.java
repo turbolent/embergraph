@@ -37,7 +37,7 @@ import org.embergraph.rdf.internal.impl.TermId;
 import org.openrdf.query.algebra.Compare.CompareOp;
 
 /*
-* TODO This does not really "test" much, just exercises some basic aspects of the API. You need to
+ * TODO This does not really "test" much, just exercises some basic aspects of the API. You need to
  * verify the "pretty print" of the AST by hand. It is just written onto the log.
  *
  * @author <a href="mailto:mpersonick@users.sourceforge.net">Mike Personick</a>

@@ -16,7 +16,7 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 package org.embergraph.rdf.graph.impl.util;
 
 /*
-* Interface for a slice of a backing array.
+ * Interface for a slice of a backing array.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: IByteArraySlice.java 4548 2011-05-25 19:36:34Z thompsonbry $

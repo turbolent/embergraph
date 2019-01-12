@@ -26,7 +26,6 @@ import java.util.Map;
 import org.embergraph.rdf.internal.ILexiconConfiguration;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.XSD;
-import org.embergraph.rdf.internal.constraints.ComputedIN;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.sail.sparql.ast.ParseException;
 import org.embergraph.rdf.sail.sparql.ast.TokenMgrError;
@@ -50,7 +49,7 @@ import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /*
-* Test suite for translating the openrdf SPARQL AST nodes for <code>GroupGraphPattern</code> into
+ * Test suite for translating the openrdf SPARQL AST nodes for <code>GroupGraphPattern</code> into
  * the embergraph AST (join groups, union, etc).
  *
  * @see TestSubqueryPatterns
@@ -807,9 +806,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
 
       final ValueExpressionNode ve =
           new FunctionNode(
-              FunctionRegistry.EQ,
-              null /* scalarValues */,
-              new VarNode("s"), new VarNode("o"));
+              FunctionRegistry.EQ, null /* scalarValues */, new VarNode("s"), new VarNode("o"));
 
       whereClause.addChild(new FilterNode(ve));
     }
@@ -918,9 +915,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
 
       final ValueExpressionNode ve =
           new FunctionNode(
-              FunctionRegistry.EQ,
-              null /* scalarValues */,
-              new VarNode("s"), new VarNode("o"));
+              FunctionRegistry.EQ, null /* scalarValues */, new VarNode("s"), new VarNode("o"));
 
       whereClause.addChild(new FilterNode(ve));
     }
@@ -970,9 +965,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
 
       final ValueExpressionNode ve =
           new FunctionNode(
-              FunctionRegistry.EQ,
-              null /* scalarValues */,
-              new VarNode("s"), new VarNode("o"));
+              FunctionRegistry.EQ, null /* scalarValues */, new VarNode("s"), new VarNode("o"));
 
       whereClause.addChild(new FilterNode(ve));
     }
@@ -1075,7 +1068,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
                   // args
                   new VarNode("s"), // variable
                   new VarNode("o") // other arg
-              )));
+                  )));
     }
 
     final QueryRoot actual = parse(sparql, baseURI);
@@ -1128,7 +1121,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
                   new VarNode("s"), // // variable
                   new VarNode("p"),
                   new VarNode("o") // other args.
-              )));
+                  )));
     }
 
     final QueryRoot actual = parse(sparql, baseURI);
@@ -1176,7 +1169,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
           new FilterNode(
               new FunctionNode(
                   FunctionRegistry.IN,
-                  null,// scalarValues
+                  null, // scalarValues
                   // args
                   new VarNode("s"), // var
                   // other args to IN()

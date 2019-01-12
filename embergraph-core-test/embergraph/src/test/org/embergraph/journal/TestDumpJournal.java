@@ -40,12 +40,11 @@ import org.embergraph.btree.IndexMetadata;
 import org.embergraph.btree.keys.KV;
 import org.embergraph.concurrent.FutureTaskMon;
 import org.embergraph.htree.HTree;
-import org.embergraph.rwstore.IRWStrategy;
 import org.embergraph.stream.Stream.StreamIndexMetadata;
 import org.embergraph.util.concurrent.LatchedExecutor;
 
 /*
-* Test suite for {@link DumpJournal}.
+ * Test suite for {@link DumpJournal}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -254,8 +253,8 @@ public class TestDumpJournal extends ProxyTestCase<Journal> {
 
       {
         final StreamIndexMetadata md = new StreamIndexMetadata(NAME, UUID.randomUUID());
-      /*
-       * TODO GIST : We should not have to do this here. See Checkpoint.create() and
+        /*
+         * TODO GIST : We should not have to do this here. See Checkpoint.create() and
          * SolutionSetStream.create() for why this is necessary.
          *
          * @see https://sourceforge.net/apps/trac/bigdata/ticket/585 (GIST)
@@ -566,8 +565,8 @@ public class TestDumpJournal extends ProxyTestCase<Journal> {
         @Override
         public Void call() throws Exception {
 
-        /*
-       * Now write some more data, going through a series of commit
+          /*
+           * Now write some more data, going through a series of commit
            * points. This let's us check access to historical commit points.
            */
           for (int j = 0; j < 10; j++) {
@@ -643,8 +642,8 @@ public class TestDumpJournal extends ProxyTestCase<Journal> {
         int ndone = 0;
         for (FutureTask<Void> ft : tasksAll) {
 
-        /*
-       * Check Future.
+          /*
+           * Check Future.
            *
            * Note: sanity check for test termination w/ timeout.
            */

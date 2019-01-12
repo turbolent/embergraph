@@ -24,7 +24,7 @@ package org.embergraph.btree;
 import org.embergraph.rawstore.IRawStore;
 
 /*
-* Test suite for the {@link IDirtyListener} protocol.
+ * Test suite for the {@link IDirtyListener} protocol.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

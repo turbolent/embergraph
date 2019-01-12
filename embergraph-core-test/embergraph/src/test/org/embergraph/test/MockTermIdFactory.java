@@ -27,7 +27,7 @@ import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.TermId;
 
 /*
-* A factory for mock {@link IV}s.
+ * A factory for mock {@link IV}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -17,9 +17,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.ha;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.rmi.Remote;
 import java.security.DigestException;
 import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.Future;
@@ -38,14 +36,11 @@ import org.embergraph.ha.msg.IHASnapshotDigestRequest;
 import org.embergraph.ha.msg.IHASnapshotDigestResponse;
 import org.embergraph.ha.msg.IHASnapshotRequest;
 import org.embergraph.ha.msg.IHASnapshotResponse;
-import org.embergraph.journal.AbstractJournal;
-import org.embergraph.quorum.AsynchronousQuorumCloseException;
 import org.embergraph.quorum.QuorumException;
-import org.embergraph.rdf.task.IApiTask;
 import org.embergraph.service.IService;
 
 /*
-* A {@link Remote} interface for methods supporting high availability for a set of journals or data
+ * A {@link Remote} interface for methods supporting high availability for a set of journals or data
  * services having shared persistent state.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -180,7 +175,7 @@ public interface HAGlue
       throws IOException, NoSuchAlgorithmException, DigestException;
 
   //    /*
-//     * Obtain a global write lock on the leader. The lock only blocks writers.
+  //     * Obtain a global write lock on the leader. The lock only blocks writers.
   //     * Readers may continue to execute without delay.
   //     * <p>
   //     * You can not obtain a coherent backup of the {@link Journal} while there
@@ -261,6 +256,5 @@ public interface HAGlue
    *     computation. <code>false</code> if the task will execute synchronously and return a thick
    *     {@link Future}.
    */
-  <T> Future<T> submit(IIndexManagerCallable<T> callable, boolean asyncFuture)
-      throws IOException;
+  <T> Future<T> submit(IIndexManagerCallable<T> callable, boolean asyncFuture) throws IOException;
 }

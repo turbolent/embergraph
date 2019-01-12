@@ -23,10 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.joinGraph;
 
-import org.embergraph.relation.rule.IRule;
-
 /*
-* Interface for evaluation orders.
+ * Interface for evaluation orders.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

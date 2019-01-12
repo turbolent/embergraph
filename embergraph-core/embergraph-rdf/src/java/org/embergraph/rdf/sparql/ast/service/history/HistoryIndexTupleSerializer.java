@@ -29,13 +29,11 @@ import java.io.ObjectOutput;
 import org.embergraph.btree.DefaultTupleSerializer;
 import org.embergraph.btree.IRangeQuery;
 import org.embergraph.btree.ITuple;
-import org.embergraph.btree.ITupleSerializer;
 import org.embergraph.btree.keys.ASCIIKeyBuilderFactory;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.btree.raba.codec.IRabaCoder;
 import org.embergraph.rdf.changesets.ChangeAction;
-import org.embergraph.rdf.changesets.IChangeRecord;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.SPO;
@@ -43,7 +41,7 @@ import org.embergraph.rdf.spo.SPOKeyOrder;
 import org.embergraph.util.Bytes;
 
 /*
-* (De-)serializes {@link IChangeRecord}s for the history index.
+ * (De-)serializes {@link IChangeRecord}s for the history index.
  *
  * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/607">History Service</a>
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

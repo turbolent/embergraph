@@ -25,7 +25,6 @@ package org.embergraph.service.proxy;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.rmi.Remote;
 import java.util.Arrays;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
@@ -37,13 +36,10 @@ import org.apache.log4j.Logger;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.relation.accesspath.BufferClosedException;
 import org.embergraph.relation.accesspath.IAsynchronousIterator;
-import org.embergraph.relation.accesspath.IBlockingBuffer;
-import org.embergraph.service.DataService;
-import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.util.DaemonThreadFactory;
 
 /*
-* Wraps an {@link RemoteAsynchronousIterator} so that it looks like an {@link
+ * Wraps an {@link RemoteAsynchronousIterator} so that it looks like an {@link
  * IAsynchronousIterator} again.
  *
  * <p>This implementation uses the caller's {@link ExecutorService} to run a task that migrates data
@@ -237,8 +233,8 @@ public class ClientAsynchronousIterator<E> implements IAsynchronousIterator<E>, 
 
       try {
 
-      /*
-       * Note: remoteIterator#hasNext() is an RMI call. Therefore it
+        /*
+         * Note: remoteIterator#hasNext() is an RMI call. Therefore it
          * is NOT interruptable.
          *
          * In order to make this loop terminate in a timely fashion if
@@ -281,8 +277,8 @@ public class ClientAsynchronousIterator<E> implements IAsynchronousIterator<E>, 
               break;
             }
 
-          /*
-       * continue polling until source proven to be exhausted,
+            /*
+             * continue polling until source proven to be exhausted,
              * this thread is interrupted, or the source is known to
              * have an element available for transfer to the local
              * buffer.
@@ -291,8 +287,8 @@ public class ClientAsynchronousIterator<E> implements IAsynchronousIterator<E>, 
             continue;
           }
 
-        /*
-       * read an element from the remote iterator. while this is a
+          /*
+           * read an element from the remote iterator. while this is a
            * blocking operation we have already proven that there is
            * an element waiting for us so the operation should have
            * the minimum possible latency, which depends of course on
@@ -322,8 +318,8 @@ public class ClientAsynchronousIterator<E> implements IAsynchronousIterator<E>, 
 
           try {
 
-          /*
-       * Add the element to the local buffer (blocking, but it
+            /*
+             * Add the element to the local buffer (blocking, but it
              * monitors the caller's thread and will notice if it is
              * interrupted).
              */
@@ -332,8 +328,8 @@ public class ClientAsynchronousIterator<E> implements IAsynchronousIterator<E>, 
 
           } catch (BufferClosedException ex) {
 
-          /*
-       * The local buffer has been closed so we ignore the
+            /*
+             * The local buffer has been closed so we ignore the
              * exception and break out of the loop.
              */
 
@@ -350,8 +346,8 @@ public class ClientAsynchronousIterator<E> implements IAsynchronousIterator<E>, 
 
       } finally {
 
-      /*
-       * Close the local buffer. It will no longer accept new elements
+        /*
+         * Close the local buffer. It will no longer accept new elements
          * and none will be placed into the buffer by this reader. Once
          * the buffer is drained via the localIterator the localIterator
          * will report that it is exhausted.
@@ -359,8 +355,8 @@ public class ClientAsynchronousIterator<E> implements IAsynchronousIterator<E>, 
 
         localBuffer.close();
 
-      /*
-       * Make sure that the remote iterator is closed.
+        /*
+         * Make sure that the remote iterator is closed.
          *
          * Note: There are several reasons why the reader may be done.
          * It may be that the remote iterator has been exhausted.
@@ -376,8 +372,8 @@ public class ClientAsynchronousIterator<E> implements IAsynchronousIterator<E>, 
 
         } catch (Throwable ex) {
 
-        /*
-       * Note: try-catch is here in case there is an IOException.
+          /*
+           * Note: try-catch is here in case there is an IOException.
            */
 
           log.warn(ex.getLocalizedMessage());
@@ -385,8 +381,8 @@ public class ClientAsynchronousIterator<E> implements IAsynchronousIterator<E>, 
 
         if (executorService != null) {
 
-        /*
-       * We created our own service on which to the ReaderTask. Therefore
+          /*
+           * We created our own service on which to the ReaderTask. Therefore
            * we also need to make sure that it gets shutdown!
            */
 
@@ -407,8 +403,8 @@ public class ClientAsynchronousIterator<E> implements IAsynchronousIterator<E>, 
 
       try {
 
-      /*
-       * Directly close the remote iterator (RMI).
+        /*
+         * Directly close the remote iterator (RMI).
          */
 
         remoteIterator.close();

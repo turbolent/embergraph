@@ -1,7 +1,7 @@
 package org.infinispan.eviction;
 
 /*
-* Supported eviction strategies
+ * Supported eviction strategies
  *
  * @author Manik Surtani
  * @since 4.0

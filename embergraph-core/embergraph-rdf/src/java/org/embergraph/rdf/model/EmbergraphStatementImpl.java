@@ -22,13 +22,11 @@ package org.embergraph.rdf.model;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.impl.bnode.SidIV;
 import org.embergraph.rdf.spo.ModifiedEnum;
-import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.IRawTripleStore;
 import org.openrdf.model.Statement;
-import org.openrdf.model.Value;
 
 /*
-* Implementation reveals whether a statement is explicit, inferred, or an axiom and the internal
+ * Implementation reveals whether a statement is explicit, inferred, or an axiom and the internal
  * term identifiers for the subject, predicate, object, the context bound on that statement (when
  * present). When statement identifiers are enabled, the context position (if bound) will be a blank
  * node that represents the statement having that subject, predicate, and object and its term

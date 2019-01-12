@@ -24,7 +24,7 @@ import org.embergraph.rdf.sparql.ast.QuadsOperationInTriplesModeException;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /*
-* Test suite asserting that queries containint quads constructs (named graphs) are rejected in
+ * Test suite asserting that queries containint quads constructs (named graphs) are rejected in
  * triples mode (at parsing phase), but go through in quads mode.
  *
  * @see <a href="http://trac.blazegraph.com/ticket/1105">SPARQL UPDATE should have nice error

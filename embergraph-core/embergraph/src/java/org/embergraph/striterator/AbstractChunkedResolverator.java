@@ -32,7 +32,7 @@ import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.util.InnerCause;
 
 /*
-* Wraps an {@link IChunkedIterator} and asynchronously resolves chunks.
+ * Wraps an {@link IChunkedIterator} and asynchronously resolves chunks.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -45,7 +45,7 @@ public abstract class AbstractChunkedResolverator<E, F, S> implements ICloseable
   private static final Logger log = Logger.getLogger(AbstractChunkedResolverator.class);
 
   //    /*
-//     * True iff the {@link #log} level is DEBUG or less.
+  //     * True iff the {@link #log} level is DEBUG or less.
   //     */
   //    final protected static boolean DEBUG = log.isDebugEnabled();
 
@@ -67,7 +67,7 @@ public abstract class AbstractChunkedResolverator<E, F, S> implements ICloseable
   private volatile boolean open = true;
 
   //    /*
-//     * Total elapsed time for the iterator instance.
+  //     * Total elapsed time for the iterator instance.
   //     */
   //    private long elapsed = 0L;
 
@@ -181,8 +181,8 @@ public abstract class AbstractChunkedResolverator<E, F, S> implements ICloseable
           final E[] chunk = src.nextChunk();
 
           if (!buffer.isOpen()) {
-          /*
-       * Asynchronous close of the sink. By checking
+            /*
+             * Asynchronous close of the sink. By checking
              * buffer.isOpen() here and in the while() clause, we
              * will notice a closed sink more rapidly and close
              * the source in a more timely manner.
@@ -196,8 +196,8 @@ public abstract class AbstractChunkedResolverator<E, F, S> implements ICloseable
           try {
             converted = resolveChunk(chunk);
           } catch (Throwable t) {
-          /*
-       * If the root cause of the throwable was an interrupt,
+            /*
+             * If the root cause of the throwable was an interrupt,
              * then close the buffer (aka the sink) and break out of
              * the loop (we will not read anything more from the
              * source).
@@ -214,8 +214,8 @@ public abstract class AbstractChunkedResolverator<E, F, S> implements ICloseable
             throw new RuntimeException(t);
           }
 
-        /*
-       * Note: This is no longer true. Some conversions can now expand or reduce the size of the
+          /*
+           * Note: This is no longer true. Some conversions can now expand or reduce the size of the
            * chunk.
            *
            * @see <a href="http://trac.blazegraph.com/ticket/866" > Efficient batch remove of a
@@ -252,8 +252,8 @@ public abstract class AbstractChunkedResolverator<E, F, S> implements ICloseable
         try {
           src.close();
         } finally {
-        /*
-       * Note: Close the buffer since nothing more will be written
+          /*
+           * Note: Close the buffer since nothing more will be written
            * on it, but DO NOT close the iterator draining the buffer
            * (aka [resolvedItr]) since the consumer will use that to
            * drain the buffer.

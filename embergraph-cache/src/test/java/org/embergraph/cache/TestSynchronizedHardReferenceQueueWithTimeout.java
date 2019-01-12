@@ -22,12 +22,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.cache;
 
 import java.util.Stack;
-import junit.framework.AssertionFailedError;
 import junit.framework.TestCase2;
 import org.embergraph.cache.SynchronizedHardReferenceQueueWithTimeout.IRef;
 
 /*
-* Test suite for {@link SynchronizedHardReferenceQueueWithTimeout}.
+ * Test suite for {@link SynchronizedHardReferenceQueueWithTimeout}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -585,8 +584,8 @@ public class TestSynchronizedHardReferenceQueueWithTimeout extends TestCase2 {
 
       if (expectedRef == null && expectedRefs.size() > 0) {
 
-      /*
-       * There is no current expectation, but there is one on the
+        /*
+         * There is no current expectation, but there is one on the
          * stack, so we pop it off the stack and continue.
          *
          * Note: We pop the expectation off of the stack lazily so that

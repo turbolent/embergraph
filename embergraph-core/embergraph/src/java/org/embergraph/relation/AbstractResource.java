@@ -28,10 +28,7 @@ package org.embergraph.relation;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
-import java.util.UUID;
-import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.SynchronousQueue;
 import org.apache.log4j.Logger;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.engine.QueryEngine;
@@ -43,31 +40,21 @@ import org.embergraph.config.LongValidator;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.IJournal;
 import org.embergraph.journal.IResourceLock;
-import org.embergraph.journal.IResourceLockService;
 import org.embergraph.journal.NoSuchIndexException;
 import org.embergraph.journal.TimestampUtility;
-import org.embergraph.rdf.rules.FastClosure;
-import org.embergraph.rdf.rules.FullClosure;
-import org.embergraph.rdf.rules.RuleFastClosure5;
-import org.embergraph.rdf.rules.RuleFastClosure6;
 import org.embergraph.rdf.sparql.ast.cache.CacheConnectionFactory;
 import org.embergraph.rdf.sparql.ast.cache.ICacheConnection;
-import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.relation.accesspath.AccessPath;
 import org.embergraph.relation.accesspath.BlockingBuffer;
-import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.relation.accesspath.IBuffer;
 import org.embergraph.relation.locator.DefaultResourceLocator;
 import org.embergraph.relation.locator.ILocatableResource;
-import org.embergraph.relation.rule.eval.IJoinNexus;
-import org.embergraph.relation.rule.eval.IJoinNexusFactory;
-import org.embergraph.relation.rule.eval.ISolution;
 import org.embergraph.relation.rule.eval.ProgramTask;
 import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.sparse.GlobalRowStoreUtil;
 
 /*
-* Base class for locatable resources.
+ * Base class for locatable resources.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -629,8 +616,8 @@ public abstract class AbstractResource<E> implements IMutableResource<E> {
     {
       if (indexManager instanceof IJournal || indexManager instanceof IEmbergraphFederation) {
 
-      /*
-       * Note: No cache associated with a TemporaryStore (since no
+        /*
+         * Note: No cache associated with a TemporaryStore (since no
          * QueryEngine is associated with a TemporaryStore).
          *
          * Note: If the cache is remote, then we need to create the
@@ -644,8 +631,8 @@ public abstract class AbstractResource<E> implements IMutableResource<E> {
         final QueryEngine queryEngine =
             QueryEngineFactory.getInstance().getQueryController(indexManager);
 
-      /*
-       * Connect to the cache provider.
+        /*
+         * Connect to the cache provider.
          *
          * Note: This will create the cache if it does not exist. At all
          * other places in the code we use getExistingSparqlCache() to
@@ -718,7 +705,7 @@ public abstract class AbstractResource<E> implements IMutableResource<E> {
   }
 
   //    /*
-//     * Sets the property on the underlying properties object but DOES NOT set
+  //     * Sets the property on the underlying properties object but DOES NOT set
   //     * the property on the global row store (GRS). This method may be used when
   //     * a resource is newly created in order to cache objects which are persisted
   //     * on the GRS.

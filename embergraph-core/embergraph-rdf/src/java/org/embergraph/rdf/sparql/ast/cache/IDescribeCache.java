@@ -3,10 +3,9 @@ package org.embergraph.rdf.sparql.ast.cache;
 import java.util.Set;
 import org.embergraph.rdf.internal.IV;
 import org.openrdf.model.Graph;
-import org.openrdf.query.GraphQueryResult;
 
 /*
-* A maintained cache for the DESCRIBE of RDF resources.
+ * A maintained cache for the DESCRIBE of RDF resources.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  *     <p>TODO When has partitioned, each NSS instance (or DESCRIBE cache partition) should directly

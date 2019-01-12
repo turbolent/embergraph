@@ -29,7 +29,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.apache.log4j.Logger;
 
 /*
-* Class allows new sources to be attached dynamically. If the existing sources are drained then the
+ * Class allows new sources to be attached dynamically. If the existing sources are drained then the
  * iterator will {@link #close()} itself so that new sources can no longer be attached.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

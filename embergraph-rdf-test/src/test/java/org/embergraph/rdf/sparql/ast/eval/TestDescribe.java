@@ -39,7 +39,7 @@ import org.openrdf.model.Statement;
 import org.openrdf.model.vocabulary.RDF;
 
 /*
-* Data driven test suite for DESCRIBE queries, including the interaction with the optional DESCRIBE
+ * Data driven test suite for DESCRIBE queries, including the interaction with the optional DESCRIBE
  * cache.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

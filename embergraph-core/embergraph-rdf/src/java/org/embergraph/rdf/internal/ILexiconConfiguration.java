@@ -20,22 +20,18 @@ package org.embergraph.rdf.internal;
 
 import java.util.TimeZone;
 import org.embergraph.rdf.internal.constraints.IMathOpHandler;
-import org.embergraph.rdf.internal.impl.AbstractInlineExtensionIV;
-import org.embergraph.rdf.internal.impl.extensions.XSDStringExtension;
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
-import org.embergraph.rdf.lexicon.LexiconKeyOrder;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.store.AbstractTripleStore;
-import org.embergraph.rdf.vocab.Vocabulary;
 import org.embergraph.service.geospatial.GeoSpatialConfig;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
 /*
-* Configuration determines which RDF Values are inlined into the statement indices rather than
+ * Configuration determines which RDF Values are inlined into the statement indices rather than
  * being assigned term identifiers by the lexicon.
  */
 public interface ILexiconConfiguration<V extends EmbergraphValue> {

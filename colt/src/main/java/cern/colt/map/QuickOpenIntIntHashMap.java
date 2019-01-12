@@ -9,7 +9,7 @@ It is provided "as is" without expressed or implied warranty.
 package cern.colt.map;
 
 /*
-* Status: Experimental; Do not use for production yet. Hash map holding (key,value) associations of
+ * Status: Experimental; Do not use for production yet. Hash map holding (key,value) associations of
  * type <tt>(int-->int)</tt>; Automatically grows and shrinks as needed; Implemented using open
  * addressing with double hashing. First see the <a href="package-summary.html">package summary</a>
  * and javadoc <a href="package-tree.html">tree view</a> to get the broad picture.

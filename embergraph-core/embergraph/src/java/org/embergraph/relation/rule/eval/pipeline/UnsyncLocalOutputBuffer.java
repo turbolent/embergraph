@@ -5,7 +5,7 @@ import org.embergraph.relation.accesspath.AbstractUnsynchronizedArrayBuffer;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 
 /*
-* Keeps track of the chunks of binding sets that are generated on the caller's {@link JoinStats}.
+ * Keeps track of the chunks of binding sets that are generated on the caller's {@link JoinStats}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: UnsyncLocalOutputBuffer.java 3448 2010-08-18 20:55:58Z thompsonbry $

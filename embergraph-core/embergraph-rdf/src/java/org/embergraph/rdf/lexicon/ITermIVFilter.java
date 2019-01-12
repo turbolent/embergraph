@@ -4,7 +4,7 @@ import java.io.Serializable;
 import org.embergraph.rdf.internal.IV;
 
 /*
-* Interface for filtering internal values.
+ * Interface for filtering internal values.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

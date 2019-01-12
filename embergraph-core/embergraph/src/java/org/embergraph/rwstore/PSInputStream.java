@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /*
-* ********************************************************************** PSInputStream
+ * ********************************************************************** PSInputStream
  *
  * <p>Unlike the original PSInputStream this does not incrementally read from the store but rather
  * immediate maps the ByteBuffers to the in-memory storage.

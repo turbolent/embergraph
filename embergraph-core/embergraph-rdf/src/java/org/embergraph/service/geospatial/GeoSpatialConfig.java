@@ -34,7 +34,7 @@ import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
 /*
-* Class providing access to the GeoSpatial index configuration, including datatype definition and
+ * Class providing access to the GeoSpatial index configuration, including datatype definition and
  * default datatype for querying. Initialized and used only if geospatial subsytem is used.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>

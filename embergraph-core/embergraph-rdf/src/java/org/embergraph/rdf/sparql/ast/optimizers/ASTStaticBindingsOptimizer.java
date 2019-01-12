@@ -66,11 +66,10 @@ import org.embergraph.rdf.sparql.ast.TermNode;
 import org.embergraph.rdf.sparql.ast.UnionNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
-import org.embergraph.rdf.sparql.ast.eval.IEvaluationContext;
 import org.openrdf.model.URI;
 
 /*
-* Optimizer that aims at the optimization of SPARQL 1.1 pattern detecting static (i.e., non runtime
+ * Optimizer that aims at the optimization of SPARQL 1.1 pattern detecting static (i.e., non runtime
  * dependent) binding for variables, moving them to the top-level of the query where possible, and
  * attaching them with occurrences of the variable.
  *
@@ -350,8 +349,8 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
         final AssignmentNode an = (AssignmentNode) child;
         final IValueExpression<?> ve = an.getValueExpression();
 
-      /*
-       * We can optimize cases where (i) the value expression is a constant that is (ii)
+        /*
+         * We can optimize cases where (i) the value expression is a constant that is (ii)
          * represented through a ConstantNode. Note that value expressions not represented through
          * ConstantNodes (such as, e.g., CONCAT("a", "b") in principle are amenable to the
          * optimization as well, but their constructed values have not yet been joined against the
@@ -420,8 +419,8 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
               VariableUsageInfo.merge(ancOrSelfVarUsageInfo, childVarUsageInfo);
         }
 
-      /*
-       * In the following, we set up inline tasks for vars with unique
+        /*
+         * In the following, we set up inline tasks for vars with unique
          * value in the specified binding set.
          */
         final VariableUsageInfo usageInfo =
@@ -483,8 +482,8 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
             bs.set((IVariable) right.getValueExpression(), (IConstant) left.getValueExpression());
           }
 
-        /*
-       * In case the filter describes a single static mapping, we also
+          /*
+           * In case the filter describes a single static mapping, we also
            * schedule an inline task.
            */
           if (!bs.isEmpty() && bs.size() == 1) {
@@ -563,8 +562,8 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
 
       } else if (child instanceof SubqueryRoot) {
 
-      /*
-       * Apply to subquery, voiding all collected information to account for the new scope induced
+        /*
+         * Apply to subquery, voiding all collected information to account for the new scope induced
          * by the subquery.
          */
         optimize(

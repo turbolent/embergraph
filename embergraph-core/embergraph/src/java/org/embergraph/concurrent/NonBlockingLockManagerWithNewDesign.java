@@ -36,16 +36,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Callable;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.RejectedExecutionException;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.SynchronousQueue;
-import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Condition;
@@ -62,7 +57,7 @@ import org.embergraph.util.concurrent.QueueSizeMovingAverageTask;
 import org.embergraph.util.concurrent.WriteTaskCounters;
 
 /*
-* This class coordinates a schedule among concurrent operations requiring exclusive access to
+ * This class coordinates a schedule among concurrent operations requiring exclusive access to
  * shared resources. Whenever possible, the result is a concurrent schedule - that is, operations
  * having non-overlapping lock requirements run concurrently while operations that have lock
  * contentions are queued behind operations that currently have locks on the relevant resources. A
@@ -244,8 +239,7 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
      * @param tasksCancelled <code>true</code> iff tasks (whether accepted, waiting for their locks,
      *     or executed) are cancelled while in this run state.
      */
-    ServiceRunState(
-        final int val, final boolean tasksAccepted, final boolean tasksCancelled) {
+    ServiceRunState(final int val, final boolean tasksAccepted, final boolean tasksCancelled) {
 
       this.val = val;
 
@@ -962,8 +956,8 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
 
       if (task == null) {
 
-      /*
-       * There is no task holding all of these locks.
+        /*
+         * There is no task holding all of these locks.
          */
 
         throw new IllegalStateException("Task does not hold all required locks");
@@ -1006,8 +1000,8 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
 
         if (resourceQueue == null) {
 
-        /*
-       * There is no ResourceQueue for this resource so there can
+          /*
+           * There is no ResourceQueue for this resource so there can
            * not be any task holding the lock for that resource.
            */
 
@@ -1018,8 +1012,8 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
 
         if (task == null) {
 
-        /*
-       * Find the task by checking the resource queue for any of
+          /*
+           * Find the task by checking the resource queue for any of
            * its declared locks.
            */
 
@@ -1034,8 +1028,8 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
 
         } else {
 
-        /*
-       * verify that the task holds the rest of its declared
+          /*
+           * verify that the task holds the rest of its declared
            * locks.
            */
 
@@ -1271,8 +1265,8 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
 
         if (oldval.isLockRequestsPosted() && !newval.isLockRequestsPosted()) {
 
-        /*
-       * The task has posted lock requests but the new run state
+          /*
+           * The task has posted lock requests but the new run state
            * does not have posted lock requests so we clear the posted
            * lock requests now.
            *
@@ -1301,8 +1295,8 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
 
         if (!lockService.retryQueue.isEmpty()) {
 
-        /*
-       * The purpose of the retryQueue is to automatically retry
+          /*
+           * The purpose of the retryQueue is to automatically retry
            * tasks which would have created a deadlock -or- which
            * would have exceeded the maximum multi-programming
            * capacity of the TxDag when the task was first submitted.
@@ -1392,20 +1386,20 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
 
       switch (lockService.serviceRunState) {
         case Shutdown:
-        /*
-       * Any task that has been accepted will be eventually run.
+          /*
+           * Any task that has been accepted will be eventually run.
            */
           // fall through.
         case Running:
-        /*
-       * As an optimization, we immediately request the locks. If they
+          /*
+           * As an optimization, we immediately request the locks. If they
            * can be granted then the new run state was already set for the
            * task. Otherwise we verify that the task was not cancelled and
            * leave the task in the accept queue.
            */
           if (requestLocks()) {
-          /*
-       * The task is either waiting on its locks or holding its
+            /*
+             * The task is either waiting on its locks or holding its
              * locks.
              *
              * It should not be possible for it to have been cancelled
@@ -1420,8 +1414,8 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
              */
             return this;
           }
-        /*
-       * Note: this case can arise if there is a deadlock (in which
+          /*
+           * Note: this case can arise if there is a deadlock (in which
            * case the lock requests were already backed out) -or- if the
            * maximum multi-programming capacity of the TxDag would be
            * exceeded.
@@ -1469,8 +1463,8 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
 
       if (lockService.serviceRunState.tasksCancelled()) {
 
-      /*
-       * Tasks are cancelled in this run state. mayInterruptIfRunning
+        /*
+         * Tasks are cancelled in this run state. mayInterruptIfRunning
          * is true so the interrupt can be propagated if necessary even
          * though the task is not running.
          */
@@ -1488,8 +1482,8 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
 
         if (lockService.waitsFor != null && lockService.waitsFor.isFull()) {
 
-        /*
-       * Note: When TxDag is used we MUST NOT add the lock
+          /*
+           * Note: When TxDag is used we MUST NOT add the lock
            * requests if it would exceed the configured
            * multi-programming capacity (an exception would be
            * thrown by TxDag). Therefore we stop processing
@@ -1509,8 +1503,8 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
 
         if (lockService.waitsFor != null) {
 
-        /*
-       * Declare the vertex.
+          /*
+           * Declare the vertex.
            *
            * Note: The problem here is twofold.
            *
@@ -1534,8 +1528,8 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
           lockService.waitsFor.lookup(this, true /* insert */);
         }
 
-      /*
-       * Post the lock requests.
+        /*
+         * Post the lock requests.
          *
          * Note: This method has no side-effects if it fails.
          */
@@ -1558,8 +1552,8 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
 
         if (t2 instanceof DeadlockException) {
 
-        /*
-       * Note: DeadlockException is the ONLY expected exception
+          /*
+           * Note: DeadlockException is the ONLY expected exception
            * when we issue the lock requests, and then IFF TxDag is in
            * use. Anything else is an internal error.
            */
@@ -1585,8 +1579,8 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
         setException(t2);
 
         if (lockService.waitsFor != null) {
-        /*
-       * Paranoia check to make sure that we did not leave
+          /*
+           * Paranoia check to make sure that we did not leave
            * anything in the WAITS_FOR graph.
            */
           final int nafter = lockService.waitsFor.size();
@@ -1670,8 +1664,8 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
       lockService.lock.lock();
       try {
         if (taskRunState == TaskRunState.LocksReady) {
-        /*
-       * Note: run() can be invoked on tasks which have been
+          /*
+           * Note: run() can be invoked on tasks which have been
            * cancelled so we don't want to do this for those tasks.
            */
           setTaskRunState(TaskRunState.RunningWithLocks);
@@ -1691,8 +1685,8 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
       try {
         super.run();
       } finally {
-      /*
-       * Note: FutureTask asynchronously reports the result back to
+        /*
+         * Note: FutureTask asynchronously reports the result back to
          * get() when super.run() completes. Therefore the locks and the
          * run state MIGHT NOT have been updated before the Future#get()
          * returns to the caller (in fact, this is quite common).
@@ -1718,7 +1712,7 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
     }
 
     //        /*
-//         * Releases the locks and changes to {@link TaskRunState#Halted}.
+    //         * Releases the locks and changes to {@link TaskRunState#Halted}.
     //         */
     //        @Override
     //        protected void done() {
@@ -1768,8 +1762,8 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
               lockManager.lock.lock();
               try {
                 while (processRetryQueue()) {
-                /*
-       * Do work.
+                  /*
+                   * Do work.
                    *
                    * Note: will run anything already accepted. That is
                    * intentional. Once the lock manager is shutdown it will no
@@ -1778,8 +1772,8 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
                    */
                 }
                 if (lockManager.retryQueue.isEmpty()) {
-                /*
-       * There is no more work to be performed so we can
+                  /*
+                   * There is no more work to be performed so we can
                    * change the runState.
                    */
                   if (INFO) log.info("No more work.");
@@ -1796,8 +1790,8 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
             }
           case ShutdownNow:
             {
-            /*
-       * Cancel all tasks, clearing all queues.
+              /*
+               * Cancel all tasks, clearing all queues.
                *
                * Note that even tasks on the retryQueue need to be
                * interrupted so the interrupt can be propagated out of the
@@ -1846,8 +1840,8 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
     private void awaitStateChange(final ServiceRunState expected) {
       lockManager.lock.lock();
       try {
-      /*
-       * While we hold the lock we verify that there really is no work
+        /*
+         * While we hold the lock we verify that there really is no work
          * to be done and that we are in the expected run state. Then
          * and only then do we wait on [stateChanged].
          */
@@ -1910,8 +1904,8 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
         final LockFutureTask<R, ? extends Object> t = itr.next();
 
         if (t.requestLocks()) {
-        /*
-       * Note: a [true] return means that we will remove the task
+          /*
+           * Note: a [true] return means that we will remove the task
            * from the [retryQueue]. It does NOT mean that the task was
            * granted its locks.
            */
@@ -1920,8 +1914,8 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
           nchanged++;
           continue;
         }
-      /*
-       * Note: Merely stopping as soon as we find a task that can not
+        /*
+         * Note: Merely stopping as soon as we find a task that can not
          * run provides a HUGE (order of magnitude) improvement in
          * throughput when retries are common.
          *
@@ -1995,8 +1989,8 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
     switch (serviceRunState) {
       case ShutdownNow:
       case Halted:
-      /*
-       * No new lock requests are permitted once we reach ShutdownNow.
+        /*
+         * No new lock requests are permitted once we reach ShutdownNow.
          */
         throw new IllegalStateException("runState=" + serviceRunState);
     }
@@ -2012,8 +2006,8 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
       // verify that no locks are held for this operation.
       if (!task.lockedResources.isEmpty()) {
 
-      /*
-       * The operation has already declared some locks. Since
+        /*
+         * The operation has already declared some locks. Since
          * [predeclareLocks] is true it is not permitted to grow the set
          * of declared locks, so we throw an exception.
          */
@@ -2060,8 +2054,8 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
 
       if (!predecessors.isEmpty()) {
 
-      /*
-       * Add edges to the WAITS_FOR graph for each task on which this
+        /*
+         * Add edges to the WAITS_FOR graph for each task on which this
          * task must wait.
          *
          * Note: throws DeadlockException if the lock requests would
@@ -2087,13 +2081,13 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
         final ResourceQueue<R, LockFutureTask<R, ? extends Object>> resourceQueue =
             declareResource(r);
 
-      /*
-       * Add a lock request for this resource.
+        /*
+         * Add a lock request for this resource.
          */
         resourceQueue.queue.add(task);
 
-      /*
-       * Add the resource queue to the set of queues whose locks are
+        /*
+         * Add the resource queue to the set of queues whose locks are
          * held by this task.
          */
         task.lockedResources.add(resourceQueue);
@@ -2123,8 +2117,8 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
         final ResourceQueue<R, LockFutureTask<R, ? extends Object>> resourceQueue =
             declareResource(r);
 
-      /*
-       * Add a lock request for this resource.
+        /*
+         * Add a lock request for this resource.
          */
         resourceQueue.queue.add(task);
 
@@ -2133,8 +2127,8 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
           waitingLockCount++;
         }
 
-      /*
-       * Add the resource queue to the set of queues whose locks are held
+        /*
+         * Add the resource queue to the set of queues whose locks are held
          * by this task.
          */
         task.lockedResources.add(resourceQueue);
@@ -2187,8 +2181,8 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
           resourceQueues.add(resourceQueue);
         }
 
-      /*
-       * Remove lock request from resource queue
+        /*
+         * Remove lock request from resource queue
          */
         if (!resourceQueue.queue.remove(t)) {
 
@@ -2222,8 +2216,8 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
 
           waitsFor.removeEdges(t, waiting);
 
-        /*
-       * Release the vertex (if any) in the WAITS_FOR graph.
+          /*
+           * Release the vertex (if any) in the WAITS_FOR graph.
            *
            * Note: Since we always declare a vertex before we request
            * the locks for a task this method SHOULD NOT return
@@ -2270,8 +2264,8 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
           try {
             ready(task);
           } catch (Throwable t2) {
-          /*
-       * Note: If the implementation of ready(task) submits
+            /*
+             * Note: If the implementation of ready(task) submits
              * the task to an Executor, that Executor can throw a
              * RejectedExecutionException here (e.g., because it was
              * shutdown). We set the exception (whatever it is) on
@@ -2298,7 +2292,6 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
         resourceQueues.get(lock);
 
     return resourceQueue.queue.peek() == task;
-
   }
 
   /*

@@ -23,11 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation.accesspath;
 
-import org.embergraph.relation.IMutableRelation;
-import org.embergraph.relation.IRelation;
-
 /*
-* A buffer abstraction.
+ * A buffer abstraction.
  *
  * <p>An {@link AbstractArrayBuffer} is generally used to write on an {@link IRelation} while {@link
  * BlockingBuffer} may be used to feed an iterator on which another process will read

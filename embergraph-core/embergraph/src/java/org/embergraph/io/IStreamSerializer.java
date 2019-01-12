@@ -28,7 +28,7 @@ import java.io.ObjectOutput;
 import java.io.Serializable;
 
 /*
-* An abstraction for serializing and de-serializing objects on streams.
+ * An abstraction for serializing and de-serializing objects on streams.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

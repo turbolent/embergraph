@@ -33,7 +33,7 @@ import org.embergraph.bop.Var;
 import org.embergraph.bop.controller.INamedSolutionSetRef;
 
 /*
-* Test suite for {@link HashIndexOp} that uses a {@link HTreeHashJoinUtility}.
+ * Test suite for {@link HashIndexOp} that uses a {@link HTreeHashJoinUtility}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

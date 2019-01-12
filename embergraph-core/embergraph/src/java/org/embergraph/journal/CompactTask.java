@@ -27,19 +27,15 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import org.apache.log4j.Logger;
-import org.embergraph.bfs.EmbergraphFileSystem;
 import org.embergraph.btree.BTree;
 import org.embergraph.btree.Checkpoint;
-import org.embergraph.btree.IOverflowHandler;
 import org.embergraph.btree.IndexMetadata;
-import org.embergraph.btree.IndexSegmentBuilder;
 import org.embergraph.journal.Journal.Options;
-import org.embergraph.resources.OverflowManager;
 import org.embergraph.util.DaemonThreadFactory;
 import org.embergraph.util.concurrent.ShutdownHelper;
 
 /*
-* Task compacts the journal state onto a caller specified file. This may be used to compact a
+ * Task compacts the journal state onto a caller specified file. This may be used to compact a
  * journal, to create backups, or to convert an in-memory journal into a disk-based journal. The
  * task reads the state of each named index as of the selected commit point, writing the index
  * entries in index order onto the output journal. This process will typically both reduce the the
@@ -196,8 +192,8 @@ public class CompactTask implements Callable<Journal> {
 
       if (!bufferMode.isStable()) {
 
-      /*
-       * Force the disk-only mode if the source journal was not
+        /*
+         * Force the disk-only mode if the source journal was not
          * stable.
          */
         p.setProperty(Options.BUFFER_MODE, BufferMode.Disk.toString());
@@ -308,7 +304,7 @@ public class CompactTask implements Callable<Journal> {
     protected final Journal newJournal;
 
     //        /*
-//         * An {@link Entry} from the {@link Name2Addr} index for an index
+    //         * An {@link Entry} from the {@link Name2Addr} index for an index
     //         * defined on the {@link #oldJournal}.
     //         */
     //        protected final Entry entry;
@@ -346,8 +342,8 @@ public class CompactTask implements Callable<Journal> {
         //                final BTree oldBTree = (BTree) oldJournal
         //                        .getIndexWithCheckpointAddr(entry.checkpointAddr);
 
-      /*
-       * This only supports the BTree class.
+        /*
+         * This only supports the BTree class.
          *
          * @see https://sourceforge.net/apps/trac/bigdata/ticket/585
          * (GIST)
@@ -360,16 +356,16 @@ public class CompactTask implements Callable<Journal> {
         // clone index metadata.
         final IndexMetadata indexMetadata = oldBTree.getIndexMetadata().clone();
 
-      /*
-       * Create and register the index on the new journal.
+        /*
+         * Create and register the index on the new journal.
          *
          * Note: This is essentially a variant of BTree#create() where
          * we need to propagate the counter from the old BTree to the
          * new BTree.
          */
 
-      /*
-       * Write metadata record on store. The address of that record is
+        /*
+         * Write metadata record on store. The address of that record is
          * set as a side-effect on the metadata object.
          */
         indexMetadata.write(newJournal);
@@ -390,14 +386,14 @@ public class CompactTask implements Callable<Journal> {
         final Checkpoint overflowCheckpoint =
             indexMetadata.overflowCheckpoint(oldBTree.getCheckpoint());
 
-      /*
-       * Write the checkpoint record on the store. The address of the
+        /*
+         * Write the checkpoint record on the store. The address of the
          * checkpoint record is set on the object as a side effect.
          */
         overflowCheckpoint.write(newJournal);
 
-      /*
-       * Load the B+Tree from the store using that checkpoint record.
+        /*
+         * Load the B+Tree from the store using that checkpoint record.
          */
         final BTree newBTree =
             BTree.load(newJournal, overflowCheckpoint.getCheckpointAddr(), false /* readOnly */);
@@ -409,8 +405,8 @@ public class CompactTask implements Callable<Journal> {
         assert newCounter == oldCounter
             : "expected oldCounter=" + oldCounter + ", but found newCounter=" + newCounter;
 
-      /*
-       * Copy the data from the B+Tree on the old journal into the
+        /*
+         * Copy the data from the B+Tree on the old journal into the
          * B+Tree on the new journal.
          *
          * Note: [overflow := true] since we are copying from the old
@@ -422,8 +418,8 @@ public class CompactTask implements Callable<Journal> {
 
         newBTree.rangeCopy(oldBTree, null, null, true /* overflow */);
 
-      /*
-       * Register the new B+Tree on the new journal.
+        /*
+         * Register the new B+Tree on the new journal.
          */
         newJournal.registerIndex(name, newBTree);
 

@@ -21,14 +21,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import org.embergraph.bfs.EmbergraphFileSystem;
-import org.embergraph.btree.AbstractBTree;
-import org.embergraph.rawstore.IRawStore;
 import org.embergraph.relation.locator.IResourceLocator;
-import org.embergraph.sparse.GlobalRowStoreSchema;
 import org.embergraph.sparse.SparseRowStore;
 
 /*
-* Collection of methods that are shared by both local and distributed stores.
+ * Collection of methods that are shared by both local and distributed stores.
  *
  * <p>Note: Historically, this was class was named for the ability to manage index objects in both
  * local and distributed contexts. However, the introduction of GIST support has necessitated a

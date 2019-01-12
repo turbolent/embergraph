@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop;
 
 /*
-* This exception is throw when a bop which is required to have a bopId does not have its bopId
+ * This exception is throw when a bop which is required to have a bopId does not have its bopId
  * property defined. All {@link PipelineOp}s are required to have bopIds since the bopId will be
  * used for routing decisions and is also used to detect loops in the bop plan.
  *

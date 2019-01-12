@@ -24,15 +24,11 @@ package org.embergraph.rdf.internal;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.UUID;
-import org.embergraph.rdf.internal.impl.BlobIV;
-import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.util.Bytes;
 import org.openrdf.model.URI;
-import org.openrdf.model.Value;
 
 /*
-* Data Type Enumeration (DTE) is a class which declares the known intrinsic data types, provides
+ * Data Type Enumeration (DTE) is a class which declares the known intrinsic data types, provides
  * for extensibility to new data types, and provides for data types which either can not be inlined
  * or are not being inlined. The intrinsic data types are those having natural orders which can be
  * encoded into an unsigned byte[] key and decoded without loss. Whether or not a given data type is
@@ -203,8 +199,7 @@ public enum DTE {
    * @param datatype The well-known URI for the data type.
    * @param flags Some bit flags. See {@link #NUMERIC}, {@link #UNSIGNED_NUMERIC}, etc.
    */
-  DTE(
-      final byte v, final int len, final Class<?> cls, final URI datatypeURI, final int flags) {
+  DTE(final byte v, final int len, final Class<?> cls, final URI datatypeURI, final int flags) {
     this.v = v;
     this.len = len;
     this.cls = cls;

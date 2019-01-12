@@ -50,7 +50,7 @@ import org.embergraph.relation.rule.IRule;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /*
-* @author <a href="mailto:mpersonick@users.sourceforge.net">Mike Personick</a>
+ * @author <a href="mailto:mpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id: TestOptionals.java 3149 2010-07-07 01:19:11Z mrpersonick $
  */
 public class TestInlineConstraints extends AbstractDataDrivenSPARQLTestCase {

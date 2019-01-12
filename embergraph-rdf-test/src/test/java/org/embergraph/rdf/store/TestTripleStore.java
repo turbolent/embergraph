@@ -29,9 +29,6 @@ import java.util.UUID;
 import org.apache.log4j.Logger;
 import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.lexicon.Id2TermWriteProc;
-import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.lexicon.Term2IdWriteProc;
 import org.embergraph.rdf.model.EmbergraphBNode;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.model.EmbergraphURI;
@@ -48,7 +45,6 @@ import org.embergraph.rdf.vocab.NoVocabulary;
 import org.embergraph.striterator.ChunkedArrayIterator;
 import org.openrdf.model.BNode;
 import org.openrdf.model.Literal;
-import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
@@ -62,7 +58,7 @@ import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.model.vocabulary.XMLSchema;
 
 /*
-* Test basic features of the {@link ITripleStore} API.
+ * Test basic features of the {@link ITripleStore} API.
  *
  * @todo Add tests of race condition where two threads attempt to: (1) add the same term(s); (2)
  *     resolve the same term(s). While the {@link Term2IdWriteProc} and {@link Id2TermWriteProc}
@@ -87,7 +83,7 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
   }
 
   //    /*
-//     * Verify that {@link AbstractTripleStore#isLiteral(long)} and friends all
+  //     * Verify that {@link AbstractTripleStore#isLiteral(long)} and friends all
   //     * reported <code>false</code> for {@link IRawTripleStore#NULL}.
   //     */
   //    public void test_bitFlagsReportFalseForNULL() {
@@ -506,7 +502,7 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
    * needs to be resolved.
    */
   //    /*
-//     * FIXME AbstractTripleStore#getBNodeCount() is not well behaved. For at
+  //     * FIXME AbstractTripleStore#getBNodeCount() is not well behaved. For at
   //     * least the BLOBS index we will have lots of bnode values in the index if a
   //     * lot of bnodes have been inserted (this can only occur for large bnode IDs
   //     * so it is a bit of an odd case). However, getBNodeCount() is documented as
@@ -680,8 +676,8 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
 
         assertEquals("#lits", nliterals, store.getLiteralCount());
 
-      /*
-       * Note: Even when we are not using told bnodes, we still insert
+        /*
+         * Note: Even when we are not using told bnodes, we still insert
          * the blank nodes into the lexicon and they should be reported
          * back here? With the standard bnodes semantics, inserting the
          * same BNode object multiple times will cause a new BNode to be
@@ -755,8 +751,8 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
       final IV x_termId;
       {
 
-      /*
-       * Make sure that lookup with a different instance succeeds (this
+        /*
+         * Make sure that lookup with a different instance succeeds (this
          * defeats the caching of the termId on the _Value).
          */
 

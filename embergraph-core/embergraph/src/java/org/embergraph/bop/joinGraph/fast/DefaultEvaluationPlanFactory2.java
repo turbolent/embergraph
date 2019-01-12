@@ -6,7 +6,7 @@ import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.eval.IJoinNexus;
 
 /*
-* Factory for {@link DefaultEvaluationPlan2}s.
+ * Factory for {@link DefaultEvaluationPlan2}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

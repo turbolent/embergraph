@@ -30,7 +30,7 @@ import org.embergraph.btree.Tuple;
 import org.embergraph.btree.UnisolatedReadWriteIndex;
 
 /*
-* Abstract {@link BTree} mapping <em>commitTime</em> (long integers) to {@link ICommitTimeEntry}
+ * Abstract {@link BTree} mapping <em>commitTime</em> (long integers) to {@link ICommitTimeEntry}
  * objects.
  *
  * <p>This class is thread-safe for concurrent readers and writers.
@@ -45,7 +45,7 @@ public class AbstractCommitTimeIndex<T extends ICommitTimeEntry> extends Delegat
   private final BTree btree;
 
   //    /*
-//     * The {@link ReadWriteLock} used by the {@link UnisolatedReadWriteIndex} to
+  //     * The {@link ReadWriteLock} used by the {@link UnisolatedReadWriteIndex} to
   //     * make operations on the underlying {@link #btree} thread-safe.
   //     */
   //    private final ReadWriteLock readWriteLock;
@@ -57,7 +57,7 @@ public class AbstractCommitTimeIndex<T extends ICommitTimeEntry> extends Delegat
   }
 
   //    /*
-//     * Instance used to encode the timestamp into the key.
+  //     * Instance used to encode the timestamp into the key.
   //     */
   //    final private IKeyBuilder keyBuilder = new KeyBuilder(Bytes.SIZEOF_LONG);
 

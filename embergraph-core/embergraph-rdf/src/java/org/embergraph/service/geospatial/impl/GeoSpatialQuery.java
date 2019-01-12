@@ -45,7 +45,7 @@ import org.embergraph.service.geospatial.impl.GeoSpatialUtility.PointLatLon;
 import org.openrdf.model.URI;
 
 /*
-* Implementation of the {@link IGeoSpatialQuery} interface.
+ * Implementation of the {@link IGeoSpatialQuery} interface.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$

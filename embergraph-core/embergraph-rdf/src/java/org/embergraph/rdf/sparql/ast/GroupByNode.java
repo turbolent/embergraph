@@ -27,7 +27,7 @@ import org.embergraph.bop.Bind;
 import org.embergraph.bop.IValueExpression;
 
 /*
-* AST node for a GROUP BY clause.
+ * AST node for a GROUP BY clause.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -26,19 +26,17 @@ import org.embergraph.bop.BOpContext;
 import org.embergraph.bop.Constant;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IConstant;
-import org.embergraph.bop.IConstraint;
 import org.embergraph.bop.IVariable;
 import org.embergraph.bop.Var;
 import org.embergraph.bop.bindingSet.ListBindingSet;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
 import org.embergraph.rdf.model.EmbergraphLiteral;
-import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 
 /*
-* Test suite for logic which "joins" two solutions, propagating bindings, verifying constraints,
+ * Test suite for logic which "joins" two solutions, propagating bindings, verifying constraints,
  * and dropping bindings which are not to be kept.
  *
  * @see BOpContext#bind(IBindingSet, IBindingSet, boolean, IConstraint[], IVariable[])

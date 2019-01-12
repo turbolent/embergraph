@@ -55,7 +55,7 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
 /*
-* Integration test suite for {@link InlineURIFactory} (the inline IVs are also tested in their own
+ * Integration test suite for {@link InlineURIFactory} (the inline IVs are also tested in their own
  * package without the triple store integration).
  *
  * @author <a href="mailto:mpersonick@users.sourceforge.net">Mike Personick</a>

@@ -52,10 +52,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package org.embergraph.rdf.properties;
 
 import info.aduna.lang.service.FileFormatServiceRegistry;
-import org.openrdf.rio.RDFParserFactory;
 
 /*
-* A registry that keeps track of the available {@link RDFParserFactory}s.
+ * A registry that keeps track of the available {@link RDFParserFactory}s.
  *
  * @author Bryan Thompson
  */

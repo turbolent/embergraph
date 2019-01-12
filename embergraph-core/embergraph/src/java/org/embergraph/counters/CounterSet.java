@@ -31,7 +31,6 @@ import cutthecrap.utils.striterators.Sorter;
 import cutthecrap.utils.striterators.Striterator;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.Writer;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -45,7 +44,7 @@ import org.embergraph.util.StackInfoReport;
 import org.xml.sax.SAXException;
 
 /*
-* A set of counters arranged in a hierarchy, much like a file system. Each node has a name and a
+ * A set of counters arranged in a hierarchy, much like a file system. Each node has a name and a
  * path. The name is a local and immutable label. The path is the {separator, name} sequence reading
  * down from the root to a given node. The "root" is the top-most node in the hierarchy - it always
  * has an empty name and its path is <code>/</code>. The direct children of a root are typically
@@ -97,7 +96,7 @@ public class CounterSet extends AbstractCounterSet implements ICounterSet {
   }
 
   //    /*
-//     * Updates the {@link #path} on this {@link CounterSet} and then recursively
+  //     * Updates the {@link #path} on this {@link CounterSet} and then recursively
   //     * on all of its children.
   //     */
   //    private void updatePath() {
@@ -208,8 +207,8 @@ public class CounterSet extends AbstractCounterSet implements ICounterSet {
 
       } else if (src.isCounterSet()) {
 
-      /*
-       * If the [src] is a counter set, then attach its children
+        /*
+         * If the [src] is a counter set, then attach its children
          * instead.
          */
 
@@ -490,15 +489,15 @@ public class CounterSet extends AbstractCounterSet implements ICounterSet {
 
               private static final long serialVersionUID = 1L;
 
-            /*
-       * Expand each child in turn.
+              /*
+               * Expand each child in turn.
                */
               @Override
               @SuppressWarnings("rawtypes")
               protected Iterator expand(final Object childObj) {
 
-              /*
-       * A child of this node.
+                /*
+                 * A child of this node.
                  */
 
                 final ICounterSet child = (ICounterSet) childObj;
@@ -532,15 +531,15 @@ public class CounterSet extends AbstractCounterSet implements ICounterSet {
 
               private static final long serialVersionUID = 1L;
 
-            /*
-       * Expand each child in turn.
+              /*
+               * Expand each child in turn.
                */
               @Override
               @SuppressWarnings("rawtypes")
               protected Iterator expand(final Object childObj) {
 
-              /*
-       * A child of this node.
+                /*
+                 * A child of this node.
                  */
 
                 final ICounterSet child = (ICounterSet) childObj;

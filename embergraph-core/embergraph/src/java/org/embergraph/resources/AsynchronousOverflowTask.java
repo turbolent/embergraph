@@ -36,28 +36,23 @@ import org.embergraph.btree.IIndex;
 import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleIterator;
 import org.embergraph.btree.IndexMetadata;
-import org.embergraph.btree.IndexSegment;
 import org.embergraph.btree.ScatterSplitConfiguration;
 import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure.ResultBuffer;
 import org.embergraph.btree.proc.BatchLookup;
 import org.embergraph.btree.proc.BatchLookup.BatchLookupConstructor;
-import org.embergraph.btree.view.FusedView;
 import org.embergraph.io.SerializerUtil;
 import org.embergraph.journal.AbstractJournal;
 import org.embergraph.journal.AbstractTask;
 import org.embergraph.journal.ConcurrencyManager;
-import org.embergraph.journal.IConcurrencyManager;
 import org.embergraph.journal.ITx;
 import org.embergraph.journal.TimestampUtility;
 import org.embergraph.mdi.LocalPartitionMetadata;
-import org.embergraph.mdi.MetadataIndex;
 import org.embergraph.mdi.PartitionLocator;
 import org.embergraph.resources.OverflowManager.ResourceScores;
 import org.embergraph.service.DataService;
 import org.embergraph.service.Event;
 import org.embergraph.service.EventResource;
 import org.embergraph.service.EventType;
-import org.embergraph.service.IDataService;
 import org.embergraph.service.ILoadBalancerService;
 import org.embergraph.service.MetadataService;
 import org.embergraph.util.Bytes;
@@ -66,7 +61,7 @@ import org.embergraph.util.InnerCause;
 import org.embergraph.util.concurrent.LatchedExecutor;
 
 /*
-* This class examines the named indices defined on the journal identified by the
+ * This class examines the named indices defined on the journal identified by the
  * <i>lastCommitTime</i> and, for each named index registered on that journal, determines which of
  * the following conditions applies and then schedules any necessary tasks based on that decision:
  *
@@ -299,8 +294,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
 
         if (vmd.getAction() != null) {
 
-        /*
-       * The task has already been started by some worker thread
+          /*
+           * The task has already been started by some worker thread
            * so we will not run it here.
            */
 
@@ -311,8 +306,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
           return null;
         }
 
-      /*
-       * Set the action and then drop through so that we release the
+        /*
+         * Set the action and then drop through so that we release the
          * lock before running the task.
          */
 
@@ -328,8 +323,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
         if (((ConcurrencyManager) resourceManager.getConcurrencyManager()).getJournalOverextended()
             > resourceManager.overflowThreshold) {
 
-        /*
-       * Do not let new merges task start once the journal is
+          /*
+           * Do not let new merges task start once the journal is
            * nearing its maximum extent.
            */
 
@@ -466,8 +461,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
       // @todo could just skip any shard with an assigned action.
       if (overflowMetadata.isCopied(name)) {
 
-      /*
-       * The write set from the old journal was already copied to the
+        /*
+         * The write set from the old journal was already copied to the
          * new journal so we do not need to do a build.
          */
 
@@ -480,8 +475,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
 
       if (vmd.mergePriority > 0d || (forceCompactingMerges && vmd.sourceCount > 1)) {
 
-      /*
-       * Schedule a merge if the priority is non-zero or if compacting
+        /*
+         * Schedule a merge if the priority is non-zero or if compacting
          * merges are being forced (but not if there is only one source
          * in the view since there would be nothing to compact).
          */
@@ -715,8 +710,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
           // trigger scatter split before too much data builds up in one place.
           && vmd.getPercentOfSplit() >= ssc.getPercentOfSplitThreshold()) {
 
-      /*
-       * Do a scatter split task.
+        /*
+         * Do a scatter split task.
          *
          * @todo For a system which has been up and running for a while
          * we would be better off using the LBS reported move targets
@@ -728,8 +723,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
         // Target data services for the new index partitions.
         if (moveTargets == null) {
 
-        /*
-       * Identify the target data services for the new index
+          /*
+           * Identify the target data services for the new index
            * partitions.
            *
            * Note that when maxCount is ZERO (0) ALL joined data
@@ -850,8 +845,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
 
         final String name = vmd.name;
 
-      /*
-       * Open the historical view of that index at that time (not just
+        /*
+         * Open the historical view of that index at that time (not just
          * the mutable BTree but the full view).
          */
         final IIndex view = vmd.getView();
@@ -870,8 +865,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
 
         if (pmd.getSourcePartitionId() != -1) {
 
-        /*
-       * This index is currently being moved onto this data
+          /*
+           * This index is currently being moved onto this data
            * service so it is NOT a candidate for a split, join, or
            * move.
            */
@@ -897,8 +892,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
 
         if (pmd.getRightSeparatorKey() != null && vmd.getPercentOfSplit() < .5) {
 
-        /*
-       * Add to the set of index partitions that are candidates
+          /*
+           * Add to the set of index partitions that are candidates
            * for join operations.
            *
            * Note: joins are only considered when the rightSibling of
@@ -994,8 +989,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
         final BTree tmp = entry.getValue();
 
         if (tmp.getEntryCount() > Integer.MAX_VALUE) {
-        /*
-       * This should never happen....
+          /*
+           * This should never happen....
            */
           log.error("Rediculous size for temp index.");
           continue;
@@ -1008,8 +1003,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
 
         final ITupleIterator titr = tmp.rangeIterator();
 
-      /*
-       * Setup a BatchLookup query designed to locate the rightSibling
+        /*
+         * Setup a BatchLookup query designed to locate the rightSibling
          * of each underutilized index partition for the current
          * scale-out index.
          *
@@ -1043,8 +1038,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
 
           underUtilizedPartitions[i] = pmd;
 
-        /*
-       * Note: the right separator key is also the key under which
+          /*
+           * Note: the right separator key is also the key under which
            * we will find the rightSibling.
            */
 
@@ -1069,8 +1064,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
                   + ", #underutilized="
                   + ncandidates);
 
-      /*
-       * Submit a single batch request to identify rightSiblings for
+        /*
+         * Submit a single batch request to identify rightSiblings for
          * all of the undercapacity index partitions for this scale-out
          * index.
          *
@@ -1097,8 +1092,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
           continue;
         }
 
-      /*
-       * Now that we know where the rightSiblings are, examine the
+        /*
+         * Now that we know where the rightSiblings are, examine the
          * join candidates for the current scale-out index once and
          * decide whether the rightSibling is local (we can do a join)
          * or remote (we will move the underutilized index partition to
@@ -1131,8 +1126,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
 
           if (sourceDataService.equals(targetDataServiceUUID)) {
 
-          /*
-       * JOIN underutilized index partition with its local
+            /*
+             * JOIN underutilized index partition with its local
              * rightSibling.
              *
              * Note: This is only joining two index partitions at a
@@ -1176,8 +1171,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
 
           } else {
 
-          /*
-       * MOVE underutilized index partition to data service
+            /*
+             * MOVE underutilized index partition to data service
              * hosting the right sibling.
              */
 
@@ -1204,8 +1199,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
 
             tasks.add(task);
 
-          /*
-       * FIXME If both this data service and the target data
+            /*
+             * FIXME If both this data service and the target data
              * service decide to JOIN these index partitions at the
              * same time then we will have a problem. They need to
              * establish a mutex for this decision. To avoid the
@@ -1515,8 +1510,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
 
       if (overflowMetadata.isCopied(name)) {
 
-      /*
-       * The write set from the old journal was already copied to the
+        /*
+         * The write set from the old journal was already copied to the
          * new journal so we do not need to do a build.
          */
 
@@ -1530,8 +1525,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
 
       if (reason != null) {
 
-      /*
-       * Note: The counters are accumulated over the life of the
+        /*
+         * Note: The counters are accumulated over the life of the
          * journal. This tells us that the named index was moved, split,
          * or joined sometimes during the live of that old journal.
          * Since it is gone we skip over it here.
@@ -1548,8 +1543,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
 
       if (vmd == null) {
 
-      /*
-       * Note: The counters are accumulated over the live of the
+        /*
+         * Note: The counters are accumulated over the live of the
          * journal. This tells us that the named index was dropped
          * sometimes during the life cycle of that old journal. Since it
          * is gone we skip over it here.
@@ -1562,8 +1557,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
 
       if (vmd.pmd.getSourcePartitionId() != -1) {
 
-      /*
-       * This index is currently being moved onto this data service so
+        /*
+         * This index is currently being moved onto this data service so
          * it is NOT a candidate for a split, join, or move.
          */
 
@@ -1582,8 +1577,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
 
       if (vmd.getPercentOfSplit() > resourceManager.maximumMovePercentOfSplit) {
 
-      /*
-       * This avoids moving index partitions that are large, and hence
+        /*
+         * This avoids moving index partitions that are large, and hence
          * would be slow to move. If we elect to move an index
          * partition, then we will do a merge first to product a compact
          * view and then move that view.
@@ -1724,8 +1719,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
        */
       final double moveMinScore = .1;
       final boolean moveCandidate =
-        /*
-       * Note: barely active indices are not moved since moving them
+          /*
+           * Note: barely active indices are not moved since moving them
            * does not change the load on the data service.
            */
           score.drank >= moveMinScore
@@ -1768,8 +1763,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
 
       if (!moveCandidate) {
 
-      /*
-       * Don't attempt moves for indices with larger range counts.
+        /*
+         * Don't attempt moves for indices with larger range counts.
          */
 
         continue;
@@ -1812,8 +1807,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
                 + ", targets="
                 + Arrays.toString(underUtilizedDataServiceUUIDs));
 
-      /*
-       * Note: by continuing here we will not do a move for this index
+        /*
+         * Note: by continuing here we will not do a move for this index
          * partition (it would throw an exception) but we will at least
          * consider the next index partition for a move.
          */
@@ -1832,8 +1827,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
 
       if (vmd.isTailSplit()) {
 
-      /*
-       * tailSplit
+        /*
+         * tailSplit
          *
          * Note: One ideal candidate for a move is an index partition
          * where most writes are on the tail of the index. In this case
@@ -1885,8 +1880,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
         //                    vmd.getRangeCount())) {
       } else if (vmd.getPercentOfSplit() > .5) {
 
-      /*
-       * Split the index partition and then move the smallest of the
+        /*
+         * Split the index partition and then move the smallest of the
          * post-split index partitions.
          *
          * Note: This uses a more eager criteria for selecting a split
@@ -1922,8 +1917,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
 
       } else {
 
-      /*
-       * Normal move (does not split first).
+        /*
+         * Normal move (does not split first).
          */
 
         if (log.isInfoEnabled())
@@ -1955,7 +1950,7 @@ public class AsynchronousOverflowTask implements Callable<Object> {
   }
 
   //    /*
-//     * Return tasks which will split "hot" index partitions.
+  //     * Return tasks which will split "hot" index partitions.
   //     * <p>
   //     * Note: This method should not be invoked: (a) unless the LBS deems that
   //     * this service is heavily utilized; and (b) if the local host and service
@@ -2468,8 +2463,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
 
       if (overflowMetadata.isCopied(name)) {
 
-      /*
-       * The write set from the old journal was already copied to the
+        /*
+         * The write set from the old journal was already copied to the
          * new journal so we do not need to do a build.
          */
 
@@ -2487,8 +2482,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
       // Mandatory merge.
       if (compactingMerge || vmd.mandatoryMerge) {
 
-      /*
-       * Mandatory compacting merge.
+        /*
+         * Mandatory compacting merge.
          */
 
         final AbstractTask task = new CompactingMergeTask(vmd);
@@ -2529,8 +2524,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
           // satisfies tail split criteria
           && vmd.isTailSplit()) {
 
-      /*
-       * Do an index (tail) split task.
+        /*
+         * Do an index (tail) split task.
          */
 
         final AbstractTask task = new SplitTailTask(vmd, null /* moveTarget */);
@@ -2572,8 +2567,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
       ////                    (vmd.sourceSegmentCount == 1 && vmd.getPercentOfSplit() > .9)
       ) {
 
-      /*
-       * Do an index split task.
+        /*
+         * Do an index split task.
          */
 
         final AbstractTask task = new SplitIndexPartitionTask(vmd, (UUID) null /* moveTarget */);
@@ -2611,8 +2606,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
       // optional merge.
       if (nmerge < resourceManager.maximumOptionalMergesPerOverflow) {
 
-      /*
-       * Select an optional compacting merge.
+        /*
+         * Select an optional compacting merge.
          */
 
         final AbstractTask task = new CompactingMergeTask(vmd);
@@ -2632,8 +2627,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
 
       } else {
 
-      /*
-       * Incremental build.
+        /*
+         * Incremental build.
          */
 
         final AbstractTask task = new IncrementalBuildTask(vmd);
@@ -2738,8 +2733,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
         // schedule and await all tasks.
         final List<Future<?>> futures = scheduleAndAwaitTasks(forceCompactingMerges);
 
-      /*
-       * Log any errors.
+        /*
+         * Log any errors.
          *
          * Note: An error here MAY be ignored. The index partition will
          * remain coherent and valid but its view will continue to have
@@ -2861,7 +2856,7 @@ public class AsynchronousOverflowTask implements Callable<Object> {
   }
 
   //    /*
-//     * Helper task used to purge resources <strong>after</strong> asynchronous
+  //     * Helper task used to purge resources <strong>after</strong> asynchronous
   //     * overflow is complete.
   //     *
   //     * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -2878,7 +2873,7 @@ public class AsynchronousOverflowTask implements Callable<Object> {
   //        }
   //
   //        /*
-//         * Sleeps for a few seconds to give asynchronous overflow processing a
+  //         * Sleeps for a few seconds to give asynchronous overflow processing a
   //         * chance to quit and release its hard reference on the old journal and
   //         * then invokes {@link OverflowManager#purgeOldResources(long, boolean)}.
   //         */
@@ -3077,8 +3072,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
         // the task for that future.
         final AbstractTask<T> task = titr.next();
 
-      /*
-       * Non-blocking: all tasks have already either completed or been
+        /*
+         * Non-blocking: all tasks have already either completed or been
          * canceled.
          */
 
@@ -3182,7 +3177,6 @@ public class AsynchronousOverflowTask implements Callable<Object> {
         || InnerCause.isInnerCause(t, ClosedByInterruptException.class)
         || InnerCause.isInnerCause(t, ClosedChannelException.class)
         || InnerCause.isInnerCause(t, AsynchronousCloseException.class);
-
   }
 
   @SuppressWarnings("unchecked")

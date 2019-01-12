@@ -12,13 +12,11 @@ import org.embergraph.btree.raba.codec.ICodedRaba;
 import org.embergraph.btree.raba.codec.IRabaCoder;
 import org.embergraph.io.AbstractFixedByteArrayBuffer;
 import org.embergraph.io.DataOutputBuffer;
-import org.embergraph.rdf.model.StatementEnum;
-import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Coder for values in statement index with inference enabled but without SIDS. We encode the value
+ * Coder for values in statement index with inference enabled but without SIDS. We encode the value
  * in 4 bits per statement. The 1st bit is the override flag. The remaining next two bits are the
  * statement type {inferred, explicit, or axiom}. The last bit is not used. The bit sequence <code>
  * 0111</code> is used as a place holder for a <code>null</code> value and de-serializes to a

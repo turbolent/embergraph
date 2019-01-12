@@ -20,7 +20,7 @@ package org.embergraph.ha.msg;
 import java.util.UUID;
 
 /*
-* Message used to request information about the earliest commit point that is pinned on a follower.
+ * Message used to request information about the earliest commit point that is pinned on a follower.
  * This is used by the leader to make a decision about the new release time for the replication
  * cluster. The message causes the follower to send an {@link IHANotifyReleaseTimeRequest} back to
  * the leader. That message is sent from within the thread on the follower that is handling the RMI

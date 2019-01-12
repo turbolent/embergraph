@@ -29,7 +29,7 @@ import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 
 /*
-* Data driven test suite for CONSTRUCT queries.
+ * Data driven test suite for CONSTRUCT queries.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestBasicQuery.java 6387 2012-07-21 18:37:51Z thompsonbry $
@@ -259,8 +259,8 @@ public class TestConstruct extends AbstractDataDrivenSPARQLTestCase {
 
       if (!pat.isGround()) {
 
-      /*
-       * A statement pattern that we will process for each solution.
+        /*
+         * A statement pattern that we will process for each solution.
          */
 
         templates.add(pat);

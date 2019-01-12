@@ -24,7 +24,7 @@ package it.unimi.dsi.util;
 import java.util.Comparator;
 
 /*
-* A class providing static methods and objects that do useful things with intervals.
+ * A class providing static methods and objects that do useful things with intervals.
  *
  * @see Interval
  */

@@ -46,12 +46,11 @@ import org.embergraph.rdf.sparql.ast.TermNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.optimizers.IASTOptimizer;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
-import org.embergraph.service.fts.FTS;
 import org.openrdf.model.URI;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /*
-* Translate {@link FTS#SEARCH} and related magic predicates into a {@link ServiceNode} which will
+ * Translate {@link FTS#SEARCH} and related magic predicates into a {@link ServiceNode} which will
  * invoke the embergraph search engine.
  *
  * <pre>
@@ -174,8 +173,8 @@ public abstract class ASTSearchOptimizerBase implements IASTOptimizer {
 
           final TermNode p = sp.p();
 
-        /*
-       * This test only allows a binding for the predicate to be a URI.
+          /*
+           * This test only allows a binding for the predicate to be a URI.
            *
            * @see <a href= "https://sourceforge.net/apps/trac/bigdata/ticket/633" >
            *     ClassCastException when binding non-uri values to a variable that occurs in
@@ -188,8 +187,8 @@ public abstract class ASTSearchOptimizerBase implements IASTOptimizer {
             if (uri != null // Must be a known value.
                 && uri.stringValue().startsWith(namespace)) {
 
-            /*
-       * Some search predicate.
+              /*
+               * Some search predicate.
                */
 
               if (!searchUrisInternal.contains(uri))
@@ -221,8 +220,8 @@ public abstract class ASTSearchOptimizerBase implements IASTOptimizer {
 
         } else if (child instanceof GroupNodeBase<?>) {
 
-        /*
-       * Recursion.
+          /*
+           * Recursion.
            */
 
           @SuppressWarnings("unchecked")
@@ -241,13 +240,13 @@ public abstract class ASTSearchOptimizerBase implements IASTOptimizer {
 
         final Map<URI, StatementPatternNode> statementPatterns = e.getValue();
 
-      /*
-       * Remove search predicates from the group.
+        /*
+         * Remove search predicates from the group.
          */
         removeSearchPredicates(group, statementPatterns);
 
-      /*
-       * Translate search predicates into a ServiceNode and associated
+        /*
+         * Translate search predicates into a ServiceNode and associated
          * filters.
          */
         final ServiceNode serviceNode =
@@ -345,16 +344,16 @@ public abstract class ASTSearchOptimizerBase implements IASTOptimizer {
       final DatasetNode datasetNode = queryRoot.getDataset();
 
       if (datasetNode == null) {
-      /*
-       * All graphs are in the default graph so no constraint is
+        /*
+         * All graphs are in the default graph so no constraint is
          * required.
          */
         return;
       }
 
       if (datasetNode.getDefaultGraphs() == null && datasetNode.getDefaultGraphFilter() != null) {
-      /*
-       * All graphs are in the default graph so no constraint is
+        /*
+         * All graphs are in the default graph so no constraint is
          * required. (We have to check for a filter if the default
          * graphs were not specified since the filter can also restrict
          * what is visible.)

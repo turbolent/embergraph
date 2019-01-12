@@ -24,13 +24,10 @@ package org.embergraph.service.ndx;
 import cutthecrap.utils.striterators.IFilter;
 import java.util.Iterator;
 import org.embergraph.btree.proc.BatchRemove.BatchRemoveConstructor;
-import org.embergraph.journal.IIndexStore;
-import org.embergraph.journal.ITx;
-import org.embergraph.resources.StaleLocatorException;
 import org.embergraph.service.IDataService;
 
 /*
-* Class supports range query across against an unpartitioned index on an {@link IDataService}.
+ * Class supports range query across against an unpartitioned index on an {@link IDataService}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

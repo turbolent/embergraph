@@ -32,7 +32,7 @@ import org.apache.log4j.Logger;
 import org.embergraph.concurrent.TxDag.Edge;
 
 /*
-* Test suite for online transaction deadlock algorithm.
+ * Test suite for online transaction deadlock algorithm.
  *
  * @version $Id$
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -818,8 +818,8 @@ public class TestTxDag extends TestCase {
       // Random number used to choose the action to take.
       float rand = r.nextFloat();
       if ((size == capacity) || (dag.size() >= 2 && rand < pInsertEdge)) {
-      /*
-       * Insert edge. We always insert an edge if the DAG is at
+        /*
+         * Insert edge. We always insert an edge if the DAG is at
          * capacity (no more vertices may be declared). We never insert
          * an edge unless at least two vertices have been defined.
          *
@@ -842,8 +842,8 @@ public class TestTxDag extends TestCase {
           } while (tgt == src);
           // Add edge.
           try {
-          /*
-       * Attempt to add the edge. This will either succeed or
+            /*
+             * Attempt to add the edge. This will either succeed or
              * fail. There are two failure conditions: (1) the edge
              * would result in a deadlock; and (2) the edge already
              * exists.
@@ -858,8 +858,8 @@ public class TestTxDag extends TestCase {
             log.warn("edge exists: src=" + src + ", tgt=" + tgt);
             continue; // repeat inner loop.
           } catch (DeadlockException ex) {
-          /*
-       * Adding this edge results in a deadlock. Verify that
+            /*
+             * Adding this edge results in a deadlock. Verify that
              * the state of the DAG was NOT modified and then break
              * out of the additive loop so that we can start the
              * subtractive loop.
@@ -872,8 +872,8 @@ public class TestTxDag extends TestCase {
           }
         }
       } else {
-      /*
-       * Insert vertex. We always take this action if there are less
+        /*
+         * Insert vertex. We always take this action if there are less
          * than two vertices since we must have two vertices defined to
          * insert an edge.
          */

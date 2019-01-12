@@ -30,7 +30,6 @@ import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.model.EmbergraphResource;
 import org.embergraph.rdf.model.EmbergraphStatement;
 import org.embergraph.rdf.model.EmbergraphURI;
-import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.rio.RDFParserOptions;
 import org.embergraph.rdf.sail.sparql.ast.ParseException;
@@ -65,7 +64,7 @@ import org.openrdf.query.algebra.StatementPattern.Scope;
 import org.openrdf.rio.RDFParser.DatatypeHandling;
 
 /*
-* Test suite for {@link UpdateExprBuilder}.
+ * Test suite for {@link UpdateExprBuilder}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -1313,18 +1312,8 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
 
       final EmbergraphStatement[] data =
           new EmbergraphStatement[] {
-            valueFactory.createStatement(
-                book1,
-                dcTitle,
-                label1,
-                null,
-                StatementEnum.Explicit),
-            valueFactory.createStatement(
-                book1,
-                dcCreator,
-                label2,
-                null,
-                StatementEnum.Explicit),
+            valueFactory.createStatement(book1, dcTitle, label1, null, StatementEnum.Explicit),
+            valueFactory.createStatement(book1, dcCreator, label2, null, StatementEnum.Explicit),
             //                    new SPO(book1, dcTitle, label1, null,
             //                            StatementEnum.Explicit),
             //                    new SPO(book1, dcCreator, label2, null,
@@ -1371,12 +1360,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
 
       final EmbergraphStatement[] data =
           new EmbergraphStatement[] {
-            valueFactory.createStatement(
-                book1,
-                price,
-                i42,
-                bookstore,
-                StatementEnum.Explicit),
+            valueFactory.createStatement(book1, price, i42, bookstore, StatementEnum.Explicit),
           };
 
       op.setData(data);
@@ -1480,24 +1464,9 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
 
       final EmbergraphStatement[] data =
           new EmbergraphStatement[] {
-            valueFactory.createStatement(
-                book1,
-                dcTitle,
-                label1,
-                null,
-                StatementEnum.Explicit),
-            valueFactory.createStatement(
-                book1,
-                dcCreator,
-                label2,
-                null,
-                StatementEnum.Explicit),
-            valueFactory.createStatement(
-                book1,
-                price,
-                i42,
-                bookstore,
-                StatementEnum.Explicit),
+            valueFactory.createStatement(book1, dcTitle, label1, null, StatementEnum.Explicit),
+            valueFactory.createStatement(book1, dcCreator, label2, null, StatementEnum.Explicit),
+            valueFactory.createStatement(book1, price, i42, bookstore, StatementEnum.Explicit),
           };
 
       op.setData(data);
@@ -1571,24 +1540,9 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
 
       final EmbergraphStatement[] data =
           new EmbergraphStatement[] {
-            valueFactory.createStatement(
-                book1,
-                price,
-                i42,
-                bookstore,
-                StatementEnum.Explicit),
-            valueFactory.createStatement(
-                book1,
-                dcTitle,
-                label1,
-                null,
-                StatementEnum.Explicit),
-            valueFactory.createStatement(
-                book1,
-                dcCreator,
-                label2,
-                null,
-                StatementEnum.Explicit),
+            valueFactory.createStatement(book1, price, i42, bookstore, StatementEnum.Explicit),
+            valueFactory.createStatement(book1, dcTitle, label1, null, StatementEnum.Explicit),
+            valueFactory.createStatement(book1, dcCreator, label2, null, StatementEnum.Explicit),
           };
       op.setData(data);
     }
@@ -1644,18 +1598,8 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
 
       final EmbergraphStatement[] data =
           new EmbergraphStatement[] {
-            valueFactory.createStatement(
-                book1,
-                dcTitle,
-                label1,
-                null,
-                StatementEnum.Explicit),
-            valueFactory.createStatement(
-                book1,
-                price,
-                i42,
-                bookstore,
-                StatementEnum.Explicit),
+            valueFactory.createStatement(book1, dcTitle, label1, null, StatementEnum.Explicit),
+            valueFactory.createStatement(book1, price, i42, bookstore, StatementEnum.Explicit),
             valueFactory.createStatement(
                 book1,
                 dcCreator,
@@ -1936,8 +1880,8 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
 
         op.setWhereClause(whereClause);
 
-      /*
-       * Outside the GRAPH group. This is still marked as
+        /*
+         * Outside the GRAPH group. This is still marked as
          * NAMED_CONTEXTS because WITH creates an implicit top-level
          * GRAPH group wrapping the INSERT clause, DELETE clause, and
          * WHERE clause.

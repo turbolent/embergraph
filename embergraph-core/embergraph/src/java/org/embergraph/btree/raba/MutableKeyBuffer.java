@@ -23,7 +23,7 @@ import java.io.OutputStream;
 import org.embergraph.util.BytesUtil;
 
 /*
-* A flyweight mutable implementation exposing the backing byte[][] and supporting search.
+ * A flyweight mutable implementation exposing the backing byte[][] and supporting search.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -248,7 +248,7 @@ public class MutableKeyBuffer extends AbstractKeyBuffer {
   }
 
   //    /*
-//     * Set the key at the specified index to <code>null</code>. This is used
+  //     * Set the key at the specified index to <code>null</code>. This is used
   //     * to clear elements of {@link #keys} that are no longer defined. The caller
   //     * is responsible for updating {@link #nkeys} when using this method.
   //     *

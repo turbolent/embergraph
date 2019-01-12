@@ -22,7 +22,7 @@ package cutthecrap.utils.striterators;
 import java.util.Iterator;
 
 /*
-* An iterator that defines a {@link #close()} method - you MUST close instances of this interface.
+ * An iterator that defines a {@link #close()} method - you MUST close instances of this interface.
  * Many implementation depends on this in order to release resources, terminate tasks, etc.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

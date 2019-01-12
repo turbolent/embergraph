@@ -10,7 +10,7 @@ It is provided "as is" without expressed or implied warranty.
 */
 import cern.colt.matrix.ObjectMatrix2D;
 /*
-* A comparison function which imposes a <i>total ordering</i> on some collection of elements.
+ * A comparison function which imposes a <i>total ordering</i> on some collection of elements.
  * Comparators can be passed to a sort method (such as
  * <tt>cern.colt.matrix.objectalgo.Sorting.quickSort</tt>) to allow precise control over the sort
  * order.

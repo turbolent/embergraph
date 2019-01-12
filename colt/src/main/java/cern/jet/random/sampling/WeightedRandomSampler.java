@@ -12,7 +12,7 @@ import cern.colt.list.BooleanArrayList;
 import cern.jet.random.Uniform;
 import cern.jet.random.engine.RandomEngine;
 /*
-* Conveniently computes a stable subsequence of elements from a given input sequence; Picks
+ * Conveniently computes a stable subsequence of elements from a given input sequence; Picks
  * (samples) exactly one random element from successive blocks of <tt>weight</tt> input elements
  * each. For example, if weight==2 (a block is 2 elements), and the input is 5*2=10 elements long,
  * then picks 5 random elements from the 10 elements such that one element is randomly picked from

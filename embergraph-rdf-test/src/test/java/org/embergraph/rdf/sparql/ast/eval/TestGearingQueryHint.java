@@ -28,7 +28,7 @@ import org.embergraph.bop.paths.ArbitraryLengthPathOp;
 import org.embergraph.rdf.sparql.ast.QueryHints;
 
 /*
-* Test suite for https://jira.blazegraph.com/browse/BLZG-2089, which introduces a fresh query hint
+ * Test suite for https://jira.blazegraph.com/browse/BLZG-2089, which introduces a fresh query hint
  * to select the gearing choice for property paths.
  *
  * @author <a href="mailto:ms@blazegraph.com">Michael Schmidt</a>

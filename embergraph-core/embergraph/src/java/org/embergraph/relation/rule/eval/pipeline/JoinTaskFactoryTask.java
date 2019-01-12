@@ -10,12 +10,10 @@ import org.apache.log4j.Logger;
 import org.embergraph.bfs.EmbergraphFileSystem;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IVariable;
-import org.embergraph.btree.BTree;
 import org.embergraph.btree.IIndex;
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.journal.IIndexStore;
 import org.embergraph.journal.IResourceLockService;
 import org.embergraph.journal.TemporaryStore;
 import org.embergraph.relation.accesspath.IAsynchronousIterator;
@@ -23,19 +21,17 @@ import org.embergraph.relation.locator.IResourceLocator;
 import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.eval.IJoinNexusFactory;
 import org.embergraph.resources.IndexManager;
-import org.embergraph.resources.StoreManager.ManagedJournal;
 import org.embergraph.service.AbstractDistributedFederation;
 import org.embergraph.service.AbstractScaleOutFederation;
 import org.embergraph.service.DataService;
 import org.embergraph.service.DataServiceCallable;
-import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.Session;
 import org.embergraph.service.proxy.ClientAsynchronousIterator;
 import org.embergraph.sparse.SparseRowStore;
 import org.embergraph.striterator.IKeyOrder;
 
 /*
-* A factory for {@link DistributedJoinTask}s. The factory either creates a new {@link
+ * A factory for {@link DistributedJoinTask}s. The factory either creates a new {@link
  * DistributedJoinTask} or returns the pre-existing {@link DistributedJoinTask} for the given {@link
  * JoinMasterTask} instance (as identified by its {@link UUID}), <i>orderIndex</i>, and
  * <i>partitionId</i>. When the desired join task pre-exists, factory will invoke {@link
@@ -108,7 +104,7 @@ public class JoinTaskFactoryTask extends DataServiceCallable<Future> {
   final IVariable[][] requiredVars;
 
   //    /*
-//     * Set by the {@link DataService} which recognized that this class
+  //     * Set by the {@link DataService} which recognized that this class
   //     * implements the {@link IDataServiceCallable}.
   //     */
   //    private transient DataService dataService;
@@ -241,8 +237,8 @@ public class JoinTaskFactoryTask extends DataServiceCallable<Future> {
 
         } else {
 
-        /*
-       * Create a new join task (the old one has decided that it
+          /*
+           * Create a new join task (the old one has decided that it
            * will not accept any new sources).
            */
 
@@ -258,8 +254,8 @@ public class JoinTaskFactoryTask extends DataServiceCallable<Future> {
 
       } else {
 
-      /*
-       * There is no join task in the session so we create one now.
+        /*
+         * There is no join task in the session so we create one now.
          */
 
         // new task.

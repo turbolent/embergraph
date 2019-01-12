@@ -31,7 +31,7 @@ import java.util.concurrent.TimeoutException;
 import org.apache.log4j.Logger;
 
 /*
-* The default implementation used when scores are available.
+ * The default implementation used when scores are available.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

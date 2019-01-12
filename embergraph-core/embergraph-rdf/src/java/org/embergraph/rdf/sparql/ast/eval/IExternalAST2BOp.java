@@ -29,13 +29,12 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.bop.NV;
 import org.embergraph.bop.PipelineOp;
 import org.embergraph.bop.ap.Predicate;
-import org.embergraph.bop.join.FastRangeCountOp;
 import org.embergraph.rdf.sparql.ast.DatasetNode;
 import org.embergraph.rdf.sparql.ast.JoinGroupNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
 
 /*
-* Interface for an external evaluation of {@link JoinGroupNode}s.
+ * Interface for an external evaluation of {@link JoinGroupNode}s.
  *
  * @author <a href="http://olafhartig.de">Olaf Hartig</a>
  */

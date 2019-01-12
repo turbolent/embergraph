@@ -22,7 +22,7 @@ import org.embergraph.rdf.axioms.RdfsAxioms;
 import org.embergraph.rdf.vocab.RDFSVocabulary;
 
 /*
-* Concrete instance of {@link TestRollbacks} which overrides the properties to enable truth
+ * Concrete instance of {@link TestRollbacks} which overrides the properties to enable truth
  * maintenance support in the SAIL.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -9,7 +9,7 @@ import org.embergraph.btree.IIndex;
 import org.embergraph.btree.IndexMetadata;
 
 /*
-* Example of Commit History usage.
+ * Example of Commit History usage.
  *
  * <p>A series of delayed commits stores different values against a named index and stores the
  * commit time of each.

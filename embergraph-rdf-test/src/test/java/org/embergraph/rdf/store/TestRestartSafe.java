@@ -38,7 +38,7 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
 /*
-* Test restart safety for the various indices.
+ * Test restart safety for the various indices.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -232,8 +232,8 @@ public class TestRestartSafe extends AbstractTripleStoreTestCase {
         //                    assertEquals("#bnodes", 0, store.getBNodeCount());
         //                }
 
-      /*
-       * verify the terms can be recovered.
+        /*
+         * verify the terms can be recovered.
          */
         assertEquals(x, store.getTerm(x_id));
         assertEquals(y, store.getTerm(y_id));

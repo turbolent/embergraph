@@ -24,7 +24,7 @@ package org.embergraph.btree;
 import java.util.Iterator;
 
 /*
-* Interface for iterators that visit nodes and leaves rather than entries in leaves.
+ * Interface for iterators that visit nodes and leaves rather than entries in leaves.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -10,7 +10,7 @@ import java.io.OutputStream;
 import java.util.Iterator;
 
 /*
-* An immutable, empty {@link IRaba}.
+ * An immutable, empty {@link IRaba}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

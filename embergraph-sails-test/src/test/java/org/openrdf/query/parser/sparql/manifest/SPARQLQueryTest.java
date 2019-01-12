@@ -76,7 +76,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /*
-* A SPARQL query test suite, created by reading in a W3C working-group style manifest.
+ * A SPARQL query test suite, created by reading in a W3C working-group style manifest.
  *
  * @author Jeen Broekstra
  */

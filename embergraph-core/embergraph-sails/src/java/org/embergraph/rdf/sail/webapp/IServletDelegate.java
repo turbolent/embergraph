@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /*
-* Interface is used to delegate to servlets provided features that are resolved at runtime.
+ * Interface is used to delegate to servlets provided features that are resolved at runtime.
  * Additional objects can be communicated as request attributes using standard servlet techniques.
  *
  * @author bryan

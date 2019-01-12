@@ -7,13 +7,11 @@ import org.apache.log4j.Logger;
 import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleCursor;
 import org.embergraph.btree.ITupleIterator;
-import org.embergraph.btree.keys.IKeyBuilder;
-import org.embergraph.btree.keys.StrengthEnum;
 import org.embergraph.btree.keys.SuccessorUtil;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Filter visits all {@link ITuple}s whose keys begin with any of the specified prefix(s). The filer
+ * Filter visits all {@link ITuple}s whose keys begin with any of the specified prefix(s). The filer
  * accepts a key or an array of keys that define the key prefix(s) whose completions will be
  * visited. It efficiently forms the successor of each key prefix, performs a key-range scan of the
  * key prefix, and (if more than one key prefix is given), seeks to the start of the next key-range

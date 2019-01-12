@@ -26,13 +26,12 @@ import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
-import java.rmi.Remote;
 import java.util.concurrent.TimeUnit;
 import org.embergraph.io.IStreamSerializer;
 import org.embergraph.relation.accesspath.IAsynchronousIterator;
 
 /*
-* A helper object that provides the API of {@link IAsynchronousIterator} but whose methods throw
+ * A helper object that provides the API of {@link IAsynchronousIterator} but whose methods throw
  * {@link IOException} and are therefore compatible with {@link Remote} and {@link Exporter}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

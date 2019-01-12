@@ -26,7 +26,6 @@ import java.util.LinkedList;
 import org.embergraph.EmbergraphStatics;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.aggregate.AggregateBase;
-import org.embergraph.bop.aggregate.IAggregate;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.AbstractASTEvaluationTestCase;
@@ -52,13 +51,12 @@ import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.SubqueryRoot;
 import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
-import org.embergraph.rdf.sparql.ast.eval.TestSubQuery;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /*
-* Test suite for {@link ASTSparql11SubqueryOptimizer}.
+ * Test suite for {@link ASTSparql11SubqueryOptimizer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -327,8 +325,7 @@ public class TestASTSparql11SubqueryOptimizer extends AbstractASTEvaluationTestC
                 new VarNode("x"),
                 new FunctionNode(
                     FunctionRegistry.COUNT,
-                    Collections.singletonMap(
-                        AggregateBase.Annotations.DISTINCT, Boolean.TRUE),
+                    Collections.singletonMap(AggregateBase.Annotations.DISTINCT, Boolean.TRUE),
                     new VarNode("s"))));
 
         final JoinGroupNode whereClause = new JoinGroupNode();
@@ -398,8 +395,7 @@ public class TestASTSparql11SubqueryOptimizer extends AbstractASTEvaluationTestC
                 new VarNode("x"),
                 new FunctionNode(
                     FunctionRegistry.COUNT,
-                    Collections.singletonMap(
-                        AggregateBase.Annotations.DISTINCT, Boolean.TRUE),
+                    Collections.singletonMap(AggregateBase.Annotations.DISTINCT, Boolean.TRUE),
                     new VarNode("s"))));
 
         final JoinGroupNode whereClause = new JoinGroupNode();

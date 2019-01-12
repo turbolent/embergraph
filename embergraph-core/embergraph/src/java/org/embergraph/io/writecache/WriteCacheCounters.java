@@ -22,7 +22,7 @@ import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.Instrument;
 
 /*
-* Performance counters for the {@link WriteCache}.
+ * Performance counters for the {@link WriteCache}.
  *
  * <p>Note: thread-safety is required for: {@link #nhit} and {@link #nmiss}. The rest should be Ok
  * without additional synchronization, CAS operators, etc (mainly because they are updated while
@@ -57,7 +57,7 @@ public class WriteCacheCounters implements IWriteCacheCounters {
    */
 
   // /*
-// * #of times {@link IWriteCache#flush(boolean)} was called.
+  // * #of times {@link IWriteCache#flush(boolean)} was called.
   // */
   // public long nflush;
 

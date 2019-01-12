@@ -1,5 +1,5 @@
 /*
-* The Notice below must appear in each file of the Source Code of any copy you distribute of the
+ * The Notice below must appear in each file of the Source Code of any copy you distribute of the
  * Licensed Product. Contributors to any Modifications may add their own copyright notices to
  * identify their own contributions.
  *
@@ -51,7 +51,7 @@ import org.embergraph.rdf.spo.SPOPredicate;
 import org.embergraph.test.MockTermIdFactory;
 
 /*
-* Test suite for {@link SameVariableConstraint}.
+ * Test suite for {@link SameVariableConstraint}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

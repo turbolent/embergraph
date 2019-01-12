@@ -16,7 +16,7 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 /*
-* An optionally-bounded {@linkplain BlockingDeque blocking deque} based on linked nodes.
+ * An optionally-bounded {@linkplain BlockingDeque blocking deque} based on linked nodes.
  *
  * <p>The optional capacity bound constructor argument serves as a way to prevent excessive
  * expansion. The capacity, if unspecified, is equal to {@link Integer#MAX_VALUE}. Linked nodes are
@@ -758,7 +758,7 @@ public class LinkedBlockingDeque<E> extends AbstractQueue<E>
    */
 
   //     /*
-//      * Adds all of the elements in the specified collection to this
+  //      * Adds all of the elements in the specified collection to this
   //      * queue.  Attempts to addAll of a queue to itself result in
   //      * {@code IllegalArgumentException}. Further, the behavior of
   //      * this operation is undefined if the specified collection is

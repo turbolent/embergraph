@@ -40,7 +40,7 @@ import org.openrdf.rio.RDFParserRegistry;
 import org.openrdf.rio.helpers.RDFHandlerBase;
 
 /*
-* Utility to load data into a graph.
+ * Utility to load data into a graph.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -133,8 +133,8 @@ public abstract class GraphLoader {
 
           if (file.isDirectory()) {
 
-          /*
-       * Recursion.
+            /*
+             * Recursion.
              */
 
             final File[] a = file.listFiles();

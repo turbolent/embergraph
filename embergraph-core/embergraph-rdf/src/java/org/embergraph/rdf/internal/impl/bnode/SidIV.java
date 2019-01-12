@@ -28,7 +28,6 @@ import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.io.LongPacker;
 import org.embergraph.rdf.internal.DTE;
-import org.embergraph.rdf.internal.ILexiconConfiguration;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVUtility;
 import org.embergraph.rdf.internal.VTE;
@@ -38,8 +37,6 @@ import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.model.EmbergraphBNode;
 import org.embergraph.rdf.model.EmbergraphResource;
 import org.embergraph.rdf.model.EmbergraphURI;
-import org.embergraph.rdf.model.EmbergraphValue;
-import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.SPO;
@@ -49,7 +46,7 @@ import org.openrdf.model.BNode;
 import org.openrdf.model.Value;
 
 /*
-* Internal value representing an inline statement identifier. Uses the {@link ISPO} supplied in the
+ * Internal value representing an inline statement identifier. Uses the {@link ISPO} supplied in the
  * ctor as the inline value. The {@link #asValue(EmbergraphValueFactory, ILexiconConfiguration)}
  * method returns a {@link EmbergraphBNode} that is used to represent the sid in serialization
  * formats (such as the custom RDF/XML extension for sids). The bnode is guaranteed to always have

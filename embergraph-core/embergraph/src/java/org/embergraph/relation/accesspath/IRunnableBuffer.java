@@ -26,7 +26,7 @@ package org.embergraph.relation.accesspath;
 import java.util.concurrent.Future;
 
 /*
-* An {@link IBuffer} that may be closed. Instances of this interface are normally drained by a
+ * An {@link IBuffer} that may be closed. Instances of this interface are normally drained by a
  * worker thread.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

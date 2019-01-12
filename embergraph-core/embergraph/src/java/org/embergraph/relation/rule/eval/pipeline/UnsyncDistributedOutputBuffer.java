@@ -11,7 +11,7 @@ import org.embergraph.service.AbstractScaleOutFederation;
 import org.embergraph.service.IEmbergraphFederation;
 
 /*
-* Unsynchronized buffer maps the {@link IBindingSet}s across the index partition(s) for the target
+ * Unsynchronized buffer maps the {@link IBindingSet}s across the index partition(s) for the target
  * scale-out index when it overflows.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

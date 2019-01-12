@@ -24,12 +24,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.service.proxy;
 
 import java.io.IOException;
-import java.rmi.Remote;
 import java.util.concurrent.Future;
-import org.embergraph.relation.accesspath.IRunnableBuffer;
 
 /*
-* {@link Remote} interface declaring the API of {@link IRunnableBuffer} but also declaring that
+ * {@link Remote} interface declaring the API of {@link IRunnableBuffer} but also declaring that
  * each methods throws {@link IOException} in order to be compatible with {@link Remote} and
  * Exporter. Of course, this means that this interface can not extend {@link IRunnableBuffer}!
  *

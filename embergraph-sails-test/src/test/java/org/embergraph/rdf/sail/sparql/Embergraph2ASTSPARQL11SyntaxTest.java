@@ -38,10 +38,9 @@ import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.parser.ParsedOperation;
 import org.openrdf.query.parser.QueryParserUtil;
 import org.openrdf.query.parser.sparql.manifest.SPARQL11SyntaxTest;
-import org.openrdf.query.parser.sparql.manifest.SPARQLSyntaxTest;
 
 /*
-* Embergraph integration for the {@link SPARQLSyntaxTest}. This appears to be a manifest driven
+ * Embergraph integration for the {@link SPARQLSyntaxTest}. This appears to be a manifest driven
  * test suite for both correct acceptance and correct rejection tests of the SPARQL parser. There is
  * also an Earl report for this test suite which provides a W3C markup for the test results. The
  * Earl report is part of the Sesame compliance packages.
@@ -224,5 +223,5 @@ public class Embergraph2ASTSPARQL11SyntaxTest extends SPARQL11SyntaxTest {
           // syntax-update-31.ru
           "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/syntax-update-1/manifest#test_54"
           // syntax-update-54.ru
-      );
+          );
 }

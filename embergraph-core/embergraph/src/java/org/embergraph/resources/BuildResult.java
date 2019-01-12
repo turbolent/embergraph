@@ -3,7 +3,6 @@ package org.embergraph.resources;
 import java.util.HashMap;
 import java.util.Map;
 import org.embergraph.btree.AbstractBTree;
-import org.embergraph.btree.BTree;
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.btree.IndexSegment;
 import org.embergraph.btree.IndexSegmentBuilder;
@@ -12,7 +11,7 @@ import org.embergraph.mdi.SegmentMetadata;
 import org.embergraph.service.Params;
 
 /*
-* The result of an {@link CompactingMergeTask}.
+ * The result of an {@link CompactingMergeTask}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

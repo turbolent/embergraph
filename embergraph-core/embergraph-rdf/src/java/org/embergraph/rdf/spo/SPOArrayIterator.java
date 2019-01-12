@@ -23,16 +23,14 @@ package org.embergraph.rdf.spo;
 
 import java.util.Arrays;
 import java.util.NoSuchElementException;
-import org.embergraph.rdf.inf.TruthMaintenance;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.relation.accesspath.IElementFilter;
-import org.embergraph.striterator.ChunkedArrayIterator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 
 /*
-* Iterator visits {@link SPO}s and supports removal (fully buffered).
+ * Iterator visits {@link SPO}s and supports removal (fully buffered).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -111,7 +109,7 @@ public class SPOArrayIterator implements IChunkedOrderedIterator<ISPO> {
   }
 
   //    /*
-//     * An iterator that visits the {@link SPO}s in the given array and
+  //     * An iterator that visits the {@link SPO}s in the given array and
   //     * optionally supports {@link #remove()}.
   //     *
   //     * @param db

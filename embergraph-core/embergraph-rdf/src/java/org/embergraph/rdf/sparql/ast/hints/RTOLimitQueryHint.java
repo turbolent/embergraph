@@ -21,7 +21,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.hints;
 
-import org.embergraph.bop.joinGraph.rto.JGraph;
 import org.embergraph.rdf.sparql.ast.ASTBase;
 import org.embergraph.rdf.sparql.ast.JoinGroupNode;
 import org.embergraph.rdf.sparql.ast.QueryHints;
@@ -29,7 +28,7 @@ import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /*
-* The query hint governing the initial sample size for the RTO optimizer.
+ * The query hint governing the initial sample size for the RTO optimizer.
  *
  * @see JGraph
  * @see QueryHints#RTO_LIMIT

@@ -16,7 +16,6 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 package org.embergraph.rdf.graph.impl.bd;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
@@ -36,7 +35,7 @@ import org.embergraph.rdf.graph.util.GASUtil;
 import org.openrdf.model.Value;
 
 /*
-* This scheduler uses thread-local buffers ({@link LinkedHashSet}) to track the distinct vertices
+ * This scheduler uses thread-local buffers ({@link LinkedHashSet}) to track the distinct vertices
  * scheduled by each execution thread. After the computation round, those per-thread segments of the
  * frontier are combined into a single global, compact, and ordered frontier. To maximize the
  * parallel activity, the per-thread frontiers are sorted using N threads (one per segment).
@@ -102,8 +101,8 @@ public class TLScheduler2 implements IGASSchedulerImpl {
 
       if (old != null) {
 
-      /*
-       * We should not have a key collision since this is based on the
+        /*
+         * We should not have a key collision since this is based on the
          * threadId.
          */
 
@@ -205,9 +204,8 @@ public class TLScheduler2 implements IGASSchedulerImpl {
 
       int i = 0;
       for (MySTScheduler s :
-          map
-              .values()) { // TODO Paranoia suggests to put these into an [] so we know that we have
-                           // the same traversal order as above. That might not be guaranteed.
+          map.values()) { // TODO Paranoia suggests to put these into an [] so we know that we have
+        // the same traversal order as above. That might not be guaranteed.
         final MySTScheduler t = s;
         final int index = i++;
         tasks.add(
@@ -251,7 +249,7 @@ public class TLScheduler2 implements IGASSchedulerImpl {
   }
 
   //    /*
-//     * Now merge sort the ordered frontier segments and populate the new
+  //     * Now merge sort the ordered frontier segments and populate the new
   //     * frontier.
   //     *
   //     * @param nsources

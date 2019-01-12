@@ -27,7 +27,7 @@ import org.embergraph.relation.rule.Rule;
 import org.openrdf.model.vocabulary.OWL;
 
 /*
-* owl:equivalentClass
+ * owl:equivalentClass
  *
  * <pre>
  *  (a owl:equivalentClass b) -&gt; (b owl:equivalentClass a)

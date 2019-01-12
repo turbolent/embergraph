@@ -46,7 +46,7 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /*
-* Unit tests for {@link ASTWildcardProjectionOptimizer}.
+ * Unit tests for {@link ASTWildcardProjectionOptimizer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -617,8 +617,7 @@ public class TestASTWildcardProjectionOptimizer extends AbstractASTEvaluationTes
         given.setIncludeInferred(true);
 
         final FunctionNode countNode =
-            new FunctionNode(
-                FunctionRegistry.COUNT, Collections.emptyMap(), new VarNode("*"));
+            new FunctionNode(FunctionRegistry.COUNT, Collections.emptyMap(), new VarNode("*"));
 
         final ProjectionNode countProjection = new ProjectionNode();
         given.setProjection(countProjection);
@@ -700,8 +699,7 @@ public class TestASTWildcardProjectionOptimizer extends AbstractASTEvaluationTes
         expected.setIncludeInferred(true);
 
         final FunctionNode countNode =
-            new FunctionNode(
-                FunctionRegistry.COUNT, Collections.emptyMap(), new VarNode("*"));
+            new FunctionNode(FunctionRegistry.COUNT, Collections.emptyMap(), new VarNode("*"));
 
         final ProjectionNode countProjection = new ProjectionNode();
         expected.setProjection(countProjection);

@@ -57,8 +57,7 @@ public class TwoStrings {
     } else if (!b.equals(other.b)) return false;
     if (context == null) {
       return other.context == null;
-    } else
-      return context.equals(other.context);
+    } else return context.equals(other.context);
   }
 
   public String toString() {

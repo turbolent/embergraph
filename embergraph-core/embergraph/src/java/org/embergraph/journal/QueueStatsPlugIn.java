@@ -17,7 +17,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.journal;
 
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -25,7 +24,7 @@ import org.apache.log4j.Logger;
 import org.embergraph.util.concurrent.ThreadPoolExecutorBaseStatisticsTask;
 
 /*
-* Plugin for sampling the {@link ExecutorService}. This collects interesting statistics about the
+ * Plugin for sampling the {@link ExecutorService}. This collects interesting statistics about the
  * thread pool for reporting to the load balancer service.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

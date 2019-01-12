@@ -56,7 +56,7 @@ import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
 import org.embergraph.striterator.ChunkedArrayIterator;
 
 /*
-* Unit tests for the {@link PipelineJoin} operator.
+ * Unit tests for the {@link PipelineJoin} operator.
  *
  * <p>Note: The logic to map binding sets over shards is tested independently.
  *

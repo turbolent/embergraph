@@ -28,7 +28,7 @@ import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /*
-* Test suite for the logic performing incremental writes of nodes and leaves onto the store. The
+ * Test suite for the logic performing incremental writes of nodes and leaves onto the store. The
  * actual timing of evictions from the {@link HardReferenceQueue} is essentially unpredictable since
  * evictions are driven by {@link AbstractBTree#touch(AbstractNode)} and nodes and leaves are both
  * touched frequently and in a data and code path dependent manner.

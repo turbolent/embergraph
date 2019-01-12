@@ -22,11 +22,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree;
 
 import java.util.Iterator;
-import java.util.NoSuchElementException;
-import org.embergraph.btree.filter.TupleFilter;
 
 /*
-* Interface visits {@link ITuple}s populated with the data and metadata for visited index entries.
+ * Interface visits {@link ITuple}s populated with the data and metadata for visited index entries.
  *
  * @see IRangeQuery
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

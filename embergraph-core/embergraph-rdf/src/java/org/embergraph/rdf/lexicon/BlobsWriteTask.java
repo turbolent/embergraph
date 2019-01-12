@@ -7,7 +7,6 @@ import org.embergraph.btree.IIndex;
 import org.embergraph.btree.keys.KVO;
 import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedureConstructor;
 import org.embergraph.btree.proc.IResultHandler;
-import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.BlobIV;
 import org.embergraph.rdf.lexicon.BlobsWriteProc.BlobsWriteProcConstructor;
@@ -17,7 +16,7 @@ import org.embergraph.service.Split;
 import org.embergraph.service.ndx.pipeline.KVOList;
 
 /*
-* Synchronous RPC write on the TERMS index.
+ * Synchronous RPC write on the TERMS index.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -145,8 +144,8 @@ public class BlobsWriteTask implements Callable<KVO<EmbergraphValue>[]> {
       {
         final long _begin = System.currentTimeMillis();
 
-      /*
-       * Create a key buffer holding the sort keys. This does not
+        /*
+         * Create a key buffer holding the sort keys. This does not
          * allocate new storage for the sort keys, but rather aligns the
          * data structures for the call to splitKeys(). This also makes
          * a[] into a dense copy of the references in b[], but without
@@ -194,8 +193,8 @@ public class BlobsWriteTask implements Callable<KVO<EmbergraphValue>[]> {
 
         if (ndistinct == 0) {
 
-        /*
-       * Nothing to be written.
+          /*
+           * Nothing to be written.
            */
 
           return new KVO[0];

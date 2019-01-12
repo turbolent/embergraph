@@ -24,7 +24,7 @@ package org.embergraph.sparse;
 import org.embergraph.btree.IIndex;
 
 /*
-* Atomic read of the logical row associated with some {@link Schema} and primary key.
+ * Atomic read of the logical row associated with some {@link Schema} and primary key.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

@@ -42,7 +42,7 @@ import org.embergraph.rdf.store.LocalTripleStore;
 import org.embergraph.rdf.vocab.decls.FOAFVocabularyDecl;
 
 /*
-* Unit tests for {@link NativeDistinctFilter}.
+ * Unit tests for {@link NativeDistinctFilter}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -187,8 +187,8 @@ public class TestNativeDistinctFilter extends TestCase2 {
                   new SPO(setup.john, setup.knows, setup.brad, StatementEnum.Explicit), // [3]
                   new SPO(setup.mary, setup.knows, setup.brad, StatementEnum.Explicit), // [4]
                   new SPO(setup.brad, setup.knows, setup.fred, StatementEnum.Explicit), // [5]
-                  new SPO(setup.brad, setup.knows, setup.leon, StatementEnum.Explicit)  // [6]
-              ));
+                  new SPO(setup.brad, setup.knows, setup.leon, StatementEnum.Explicit) // [6]
+                  ));
 
       // Add everything that we expect.
       final List<SPO> given = new LinkedList<SPO>(expected);
@@ -198,8 +198,8 @@ public class TestNativeDistinctFilter extends TestCase2 {
           Arrays.asList(
               new SPO(setup.john, setup.knows, setup.brad, StatementEnum.Explicit), // [3]
               new SPO(setup.mary, setup.knows, setup.brad, StatementEnum.Explicit), // [4]
-              new SPO(setup.brad, setup.knows, setup.fred, StatementEnum.Explicit)  // [5]
-          ));
+              new SPO(setup.brad, setup.knows, setup.fred, StatementEnum.Explicit) // [5]
+              ));
 
       // Iterator should visit the distinct IVs.
       @SuppressWarnings("unchecked")

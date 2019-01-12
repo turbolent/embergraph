@@ -35,7 +35,7 @@ import org.embergraph.rdf.internal.IVUtility;
 import org.embergraph.relation.rule.IStarJoin;
 
 /*
-* Implementation of a star join for SPOs. See {@link IStarJoin}.
+ * Implementation of a star join for SPOs. See {@link IStarJoin}.
  *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  */
@@ -92,7 +92,7 @@ public class SPOStarJoin extends SPOPredicate implements IStarJoin<ISPO>, Serial
   }
 
   //    /*
-//     * Create an SPO star join over the given relation for the given subject.
+  //     * Create an SPO star join over the given relation for the given subject.
   //     *
   //     * @param relationName
   //     *          the name of the SPO relation to use
@@ -115,7 +115,7 @@ public class SPOStarJoin extends SPOPredicate implements IStarJoin<ISPO>, Serial
   //    }
 
   //    /*
-//     * Fully specified ctor.
+  //     * Fully specified ctor.
   //     *
   //     * @param relationName
   //     * @param partitionId
@@ -358,8 +358,8 @@ public class SPOStarJoin extends SPOPredicate implements IStarJoin<ISPO>, Serial
 
       if (optional) {
 
-      /*
-       * Something special, so do all this stuff.
+        /*
+         * Something special, so do all this stuff.
          */
 
         sb.append("[");

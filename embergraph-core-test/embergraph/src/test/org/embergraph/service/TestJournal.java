@@ -26,13 +26,11 @@ package org.embergraph.service;
 import java.util.Properties;
 import org.embergraph.journal.AbstractJournalTestCase;
 import org.embergraph.journal.BufferMode;
-import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.Journal;
 import org.embergraph.journal.Options;
-import org.embergraph.journal.ProxyTestCase;
 
 /*
-* Delegate for {@link ProxyTestCase}s for services running against a {@link Journal}.
+ * Delegate for {@link ProxyTestCase}s for services running against a {@link Journal}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

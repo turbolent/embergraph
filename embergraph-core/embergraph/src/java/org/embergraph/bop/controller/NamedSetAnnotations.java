@@ -21,14 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.controller;
 
-import org.embergraph.bop.BOpContext;
-import org.embergraph.bop.IQueryAttributes;
-import org.embergraph.bop.PipelineOp;
-import org.embergraph.bop.engine.IRunningQuery;
-import org.embergraph.bop.join.IHashJoinUtility;
-
 /*
-* Attributes for named solution set processing.
+ * Attributes for named solution set processing.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

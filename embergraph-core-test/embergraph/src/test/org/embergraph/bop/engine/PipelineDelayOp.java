@@ -10,7 +10,7 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.PipelineOp;
 
 /*
-* Operator blocks evaluation (sleeps) for the specified {@link Annotations#DELAY} and then throws
+ * Operator blocks evaluation (sleeps) for the specified {@link Annotations#DELAY} and then throws
  * an {@link PipelineDelayError}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

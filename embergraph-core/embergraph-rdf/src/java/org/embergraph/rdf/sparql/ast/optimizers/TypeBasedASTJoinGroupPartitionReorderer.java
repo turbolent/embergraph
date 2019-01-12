@@ -33,7 +33,7 @@ import org.embergraph.rdf.sparql.ast.ZeroLengthPathNode;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 
 /*
-* Reorders nodes based on their types.
+ * Reorders nodes based on their types.
  *
  * <p>The heuristics is as follows:
  *

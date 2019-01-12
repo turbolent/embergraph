@@ -27,14 +27,11 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.Properties;
-import org.embergraph.btree.keys.ASCIIKeyBuilderFactory;
 import org.embergraph.btree.keys.DefaultKeyBuilderFactory;
-import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.IKeyBuilderFactory;
-import org.embergraph.btree.keys.KeyBuilder;
 
 /*
-* Default implementation uses the {@link KeyBuilder} to format the object as a key and requires
+ * Default implementation uses the {@link KeyBuilder} to format the object as a key and requires
  * that the values are byte[]s which it passes on without change. Deserialization of the tuple value
  * always the byte[] itself.
  *

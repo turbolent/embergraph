@@ -10,7 +10,7 @@ import org.embergraph.counters.Instrument;
 import org.embergraph.util.concurrent.IQueueCounters.IThreadPoolExecutorCounters;
 
 /*
-* Class tracks a variety of information about a {@link ThreadPoolExecutor} including the moving
+ * Class tracks a variety of information about a {@link ThreadPoolExecutor} including the moving
  * average of its queue length, queue size, average active count, etc.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

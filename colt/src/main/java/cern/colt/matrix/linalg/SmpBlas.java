@@ -12,7 +12,7 @@ import cern.colt.matrix.DoubleMatrix1D;
 import cern.colt.matrix.DoubleMatrix2D;
 import java.util.concurrent.RecursiveAction;
 /*
-* Parallel implementation of the Basic Linear Algebra System for symmetric multi processing boxes.
+ * Parallel implementation of the Basic Linear Algebra System for symmetric multi processing boxes.
  * Currently only a few algorithms are parallelised; the others are fully functional, but run in
  * sequential mode. Parallelised are:
  *

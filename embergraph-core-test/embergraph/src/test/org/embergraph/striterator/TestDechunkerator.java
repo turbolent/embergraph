@@ -26,7 +26,7 @@ import java.util.Iterator;
 import junit.framework.TestCase2;
 
 /*
-* Test suite for {@link Dechunkerator}.
+ * Test suite for {@link Dechunkerator}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

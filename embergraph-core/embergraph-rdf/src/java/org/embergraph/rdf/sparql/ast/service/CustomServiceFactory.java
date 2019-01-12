@@ -21,12 +21,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.service;
 
-import org.embergraph.rdf.changesets.IChangeLog;
 import org.embergraph.rdf.sail.EmbergraphSail.EmbergraphSailConnection;
-import org.embergraph.rdf.store.AbstractTripleStore;
 
 /*
-* Interface for custom services.
+ * Interface for custom services.
  *
  * @see <a href="https://sourceforge.net/apps/mediawiki/bigdata/index.php?title=FederatedQuery">
  *     Federated Query and Custom Services</a>

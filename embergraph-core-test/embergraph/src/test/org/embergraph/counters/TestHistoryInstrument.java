@@ -27,7 +27,7 @@ import java.util.Random;
 import junit.framework.TestCase2;
 
 /*
-* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  * @todo unit tests when overwrite is disabled.
  */
@@ -173,7 +173,7 @@ public class TestHistoryInstrument extends TestCase2 {
   }
 
   //    /*
-//     * Test {@link HistoryInstrument}.
+  //     * Test {@link HistoryInstrument}.
   //     */
   //    public void test_001() {
   //

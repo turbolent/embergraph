@@ -26,12 +26,9 @@ import java.io.DataInput;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Iterator;
-import org.embergraph.btree.ResultSet;
-import org.embergraph.btree.proc.IIndexProcedure;
-import org.embergraph.io.ByteArrayBuffer;
 
 /*
-* Interface for random access to a logical byte[][]s. This is primarily used for B+Tree keys and
+ * Interface for random access to a logical byte[][]s. This is primarily used for B+Tree keys and
  * values, but is also used when serializing keys and values for {@link IIndexProcedure}s. The
  * interface defines optional operations for mutation. If mutation is supported, then {@link
  * #isReadOnly()} will return <code>false</code>. An {@link IRaba} instance either stores B+Tree
@@ -84,7 +81,7 @@ public interface IRaba extends Iterable<byte[]> {
    * The rest do not.
    */
   //    /*
-//     * When <code>true</code>, then {@link IRaba} supports duplicate keys.
+  //     * When <code>true</code>, then {@link IRaba} supports duplicate keys.
   //     *
   //     * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/763" >
   //     *      Stochastic Results With Analytic Query Mode </a>

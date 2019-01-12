@@ -1,10 +1,9 @@
 package org.embergraph.bop.fed.shards;
 
 import org.embergraph.bop.IBindingSet;
-import org.embergraph.bop.IPredicate;
 
 /*
-* Interface for mapping {@link Bundle}s over shards.
+ * Interface for mapping {@link Bundle}s over shards.
  *
  * @param <F> The generic type of the elements for the target {@link IPredicate}.
  * @todo Optimize locator lookup by caching and look at the locator scan code path.

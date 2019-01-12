@@ -24,10 +24,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.joinGraph;
 
 import org.embergraph.bop.IPredicate;
-import org.embergraph.relation.rule.IRule;
 
 /*
-* An interface used by an {@link IEvaluationPlan} to obtain range counts for the {@link
+ * An interface used by an {@link IEvaluationPlan} to obtain range counts for the {@link
  * IPredicate}s in an {@link IRule}. The use of this interface on the one hand makes it possible to
  * test {@link IEvaluationPlan}s without real data and on the other hand makes it possible to cache
  * range counts across queries evaluated against the same state of the database.

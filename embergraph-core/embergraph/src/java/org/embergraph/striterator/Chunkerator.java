@@ -28,7 +28,7 @@ import java.util.NoSuchElementException;
 import org.embergraph.relation.accesspath.IElementFilter;
 
 /*
-* Iterator "chunks" up another iterator, visiting arrays of elements at a time.
+ * Iterator "chunks" up another iterator, visiting arrays of elements at a time.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

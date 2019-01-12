@@ -49,7 +49,6 @@ import org.embergraph.rdf.sparql.ast.service.RemoteSparqlBuilderFactory;
 import org.embergraph.rdf.sparql.ast.service.SPARQLVersion;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 import org.openrdf.model.BNode;
-import org.openrdf.model.Value;
 import org.openrdf.model.impl.BNodeImpl;
 import org.openrdf.model.impl.LiteralImpl;
 import org.openrdf.model.vocabulary.DC;
@@ -57,7 +56,7 @@ import org.openrdf.query.BindingSet;
 import org.openrdf.query.impl.MapBindingSet;
 
 /*
-* Test suite the {@link RemoteSparqlBuilderFactory}
+ * Test suite the {@link RemoteSparqlBuilderFactory}
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestRemoteServiceCallImpl.java 6060 2012-03-02 16:07:38Z thompsonbry $
@@ -94,7 +93,7 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
   }
 
   //    /*
-//     * Wrap as an {@link IConstant}.
+  //     * Wrap as an {@link IConstant}.
   //     *
   //     * @param iv
   //     *            The {@link IV}.
@@ -901,12 +900,12 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
 
     final String expectedSparqlVersion_10 =
         ("SELECT  ?s "
-            + "WHERE { "
-            + "FILTER ( sameTerm( ?p, <p:p1>) ). "
-            + "FILTER ( sameTerm( ?o, \"\\\"lit1\\\"\") ). "
-            + " ?s ?p ?o "
-            + //
-            "} ")
+                + "WHERE { "
+                + "FILTER ( sameTerm( ?p, <p:p1>) ). "
+                + "FILTER ( sameTerm( ?o, \"\\\"lit1\\\"\") ). "
+                + " ?s ?p ?o "
+                + //
+                "} ")
             .replaceAll("\\s+", " ");
 
     assertEquals(expectedSparqlVersion_10, actualQueryStrVersion_10);
@@ -919,13 +918,13 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
 
     final String expectedSparqlVersion_11 =
         ("SELECT  ?s "
-            + "WHERE {"
-            + " ?s ?p ?o "
-            + //
-            "} "
-            + "VALUES ( ?p ?o) { "
-            + "( <p:p1> \"\\\"lit1\\\"\" ) "
-            + "} ")
+                + "WHERE {"
+                + " ?s ?p ?o "
+                + //
+                "} "
+                + "VALUES ( ?p ?o) { "
+                + "( <p:p1> \"\\\"lit1\\\"\" ) "
+                + "} ")
             .replaceAll("\\s+", " ");
 
     assertEquals(expectedSparqlVersion_11, actualQueryStrVersion_11);
@@ -939,13 +938,13 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
 
     final String expectedSparqlVersion_11_DRAFT_BINDINGS =
         ("SELECT  ?s "
-            + "WHERE {"
-            + " ?s ?p ?o "
-            + //
-            "} "
-            + "BINDINGS ?p ?o { "
-            + "( <p:p1> \"\\\"lit1\\\"\" ) "
-            + "} ")
+                + "WHERE {"
+                + " ?s ?p ?o "
+                + //
+                "} "
+                + "BINDINGS ?p ?o { "
+                + "( <p:p1> \"\\\"lit1\\\"\" ) "
+                + "} ")
             .replaceAll("\\s+", " ");
 
     assertEquals(actualQueryStrVersion_11_DRAFT_BINDINGS, expectedSparqlVersion_11_DRAFT_BINDINGS);

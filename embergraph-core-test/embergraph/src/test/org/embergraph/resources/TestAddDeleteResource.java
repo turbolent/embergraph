@@ -35,7 +35,7 @@ import org.embergraph.service.Event;
 import org.embergraph.service.EventResource;
 
 /*
-* Unit test of the {@link StoreManager} when adding and deleting journals and index segments.
+ * Unit test of the {@link StoreManager} when adding and deleting journals and index segments.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

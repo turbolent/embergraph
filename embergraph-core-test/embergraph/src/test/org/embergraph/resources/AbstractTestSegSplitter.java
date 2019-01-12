@@ -27,7 +27,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
 import junit.framework.TestCase2;
-import org.embergraph.btree.BTree;
 import org.embergraph.btree.ILocalBTreeView;
 import org.embergraph.btree.ISimpleSplitHandler;
 import org.embergraph.btree.IndexSegment;
@@ -38,7 +37,7 @@ import org.embergraph.journal.Options;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Unit tests for splitting an index segment based on its size on the disk, the nominal size of an
+ * Unit tests for splitting an index segment based on its size on the disk, the nominal size of an
  * index partition, and an optional application level constraint on the choice of the separator
  * keys. This approach presumes a compacting merge has been performed such that all history other
  * than the buffered writes is on a single index segment. The buffered writes are not considered

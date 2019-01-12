@@ -34,7 +34,7 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
 /*
-* This implementation of {@link IExtension} supports fully inlined <code>xsd:string</code> values.
+ * This implementation of {@link IExtension} supports fully inlined <code>xsd:string</code> values.
  */
 public class XSDStringExtension<V extends EmbergraphValue> implements IExtension<V> {
 

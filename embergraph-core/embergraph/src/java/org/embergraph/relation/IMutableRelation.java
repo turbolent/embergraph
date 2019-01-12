@@ -23,12 +23,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation;
 
-import org.embergraph.btree.BTree;
-import org.embergraph.journal.AbstractJournal;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /*
-* A mutable {@link IRelation}. The relation must maintain any secondary indices under mutation.
+ * A mutable {@link IRelation}. The relation must maintain any secondary indices under mutation.
  *
  * <p>The methods declared by this interface return a "mutation count" - the mutation count MUST be
  * exact and MUST NOT count overwrites that do not change the state of the tuple (the same key and

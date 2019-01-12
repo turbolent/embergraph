@@ -53,7 +53,7 @@ import org.embergraph.rdf.store.BD;
 import org.openrdf.model.URI;
 
 /*
-* This ALP SERVICE {@link IASTOptimizer} provides a rewrite of a SERVICE expression that makes it
+ * This ALP SERVICE {@link IASTOptimizer} provides a rewrite of a SERVICE expression that makes it
  * possible to specify limits (minimum, maximum path length), directionality of traversal, etc.
  *
  * <p>A sample query is:
@@ -122,8 +122,8 @@ public class ASTALPServiceOptimizer extends AbstractJoinGroupOptimizer implement
 
       final TermNode serviceRef = node.getServiceRef();
       if (!serviceRef.isConstant() || !serviceRef.getValue().equals(ALP)) {
-      /*
-       * Not our service.
+        /*
+         * Not our service.
          */
         continue;
       }
@@ -261,8 +261,8 @@ public class ASTALPServiceOptimizer extends AbstractJoinGroupOptimizer implement
           }
         }
 
-      /*
-       * If we've swapped any vars, also re-generate the underlying
+        /*
+         * If we've swapped any vars, also re-generate the underlying
          * value expression on the filter node.
          */
         if (swap) {
@@ -286,8 +286,8 @@ public class ASTALPServiceOptimizer extends AbstractJoinGroupOptimizer implement
       for (@SuppressWarnings("rawtypes")
       GroupMemberNodeBase child : subgroup.getChildren(GroupMemberNodeBase.class)) {
         if (!child.getQueryHintAsBoolean(PATH_EXPR, false)) {
-        /*
-       * Make all variables in the ALP service (other than the
+          /*
+           * Make all variables in the ALP service (other than the
            * left and right) anonymous, since they cannot be projected
            * out in a meaningful fashion.
            */

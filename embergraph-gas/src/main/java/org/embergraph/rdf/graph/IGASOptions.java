@@ -15,13 +15,11 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 */
 package org.embergraph.rdf.graph;
 
-import org.embergraph.rdf.graph.analytics.CC;
-import org.embergraph.rdf.graph.impl.util.GASRunnerBase;
 import org.openrdf.model.Statement;
 import org.openrdf.model.Value;
 
 /*
-* Interface for options that are understood by the {@link IGASEngine} and which may be declared by
+ * Interface for options that are understood by the {@link IGASEngine} and which may be declared by
  * the {@link IGASProgram}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -29,7 +29,7 @@ import junit.framework.TestCase2;
 import org.embergraph.util.InnerCause;
 
 /*
-* Test suite for {@link Haltable}.
+ * Test suite for {@link Haltable}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

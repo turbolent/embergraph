@@ -28,10 +28,9 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.PipelineOp;
 import org.embergraph.rdf.sail.sparql.ast.SimpleNode;
 import org.embergraph.rdf.sparql.ast.optimizers.IASTOptimizer;
-import org.openrdf.model.Value;
 
 /*
-* A super container for the AST.
+ * A super container for the AST.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -307,8 +306,8 @@ public class ASTContainer extends ASTBase {
 
       } else {
 
-      /*
-       * Dump some other parse tree, assuming it implements toString()
+        /*
+         * Dump some other parse tree, assuming it implements toString()
          * as pretty print.
          */
         sb.append(parseTree.toString());

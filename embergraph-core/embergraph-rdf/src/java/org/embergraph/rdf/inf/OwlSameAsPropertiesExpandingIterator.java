@@ -382,8 +382,8 @@ public class OwlSameAsPropertiesExpandingIterator implements IChunkedOrderedIter
         throw new UnsupportedOperationException("s and o cannot both be variables");
       }
       if (s.isConstant() && o.isConstant() && s.get().equals(o.get()) == false) {
-      /*
-       * if s and o are both constants, then there is nothing for this
+        /*
+         * if s and o are both constants, then there is nothing for this
          * appender to append, unless they are equal to each other, in
          * which case we can append that solution
          */

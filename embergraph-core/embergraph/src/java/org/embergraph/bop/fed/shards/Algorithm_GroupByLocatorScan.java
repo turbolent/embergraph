@@ -1,10 +1,9 @@
 package org.embergraph.bop.fed.shards;
 
 import org.embergraph.bop.IBindingSet;
-import org.embergraph.mdi.PartitionLocator;
 
 /*
-* FIXME Implement {@link Algorithm_GroupByLocatorScan}.
+ * FIXME Implement {@link Algorithm_GroupByLocatorScan}.
  *
  * <p>Each asBound predicate can read on several shards and the mappings from the asBound predicate
  * onto the shards can overlap. This can happen any time the asBound predicate is not fully bound.

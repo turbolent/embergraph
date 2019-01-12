@@ -31,7 +31,7 @@ import org.embergraph.service.geospatial.GeoSpatialDatatypeFieldConfiguration.Se
 import org.embergraph.service.geospatial.GeoSpatialDatatypeFieldConfiguration.ValueType;
 
 /*
-* Test suite testing the form-JSON parsing facilities for the GeoSpatial service configuration.
+ * Test suite testing the form-JSON parsing facilities for the GeoSpatial service configuration.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$

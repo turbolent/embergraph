@@ -26,7 +26,7 @@ import java.util.Map;
 import org.embergraph.cache.ConcurrentWeakValueCache;
 
 /*
-* A pattern for a canonicalizing factory based on a map with weak values.
+ * A pattern for a canonicalizing factory based on a map with weak values.
  *
  * @param <KEY>
  * @param <VAL>

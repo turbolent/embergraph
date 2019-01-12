@@ -19,7 +19,7 @@ import org.openrdf.rio.turtle.TurtleParser;
 import org.openrdf.rio.turtle.TurtleUtil;
 
 /*
-* RDF parser for <a href="http://www.dajobe.org/2004/01/turtle/">Turtle</a> files. This parser is
+ * RDF parser for <a href="http://www.dajobe.org/2004/01/turtle/">Turtle</a> files. This parser is
  * not thread-safe, therefore its public methods are synchronized.
  *
  * <p>This implementation is based on the 2006/01/02 version of the Turtle specification, with
@@ -109,8 +109,8 @@ public class EmbergraphTurtleParser extends TurtleParser {
 
     if (i == '>' && read() == '>') {
       if (valueFactory == null || valueFactory instanceof EmbergraphValueFactory == false) {
-      /*
-       * The EmbergraphValueFactory has an extension to create a BNode
+        /*
+         * The EmbergraphValueFactory has an extension to create a BNode
          * from a Statement.  You need to specify that value factory
          * when you create the parser using setValueFactory().
          */

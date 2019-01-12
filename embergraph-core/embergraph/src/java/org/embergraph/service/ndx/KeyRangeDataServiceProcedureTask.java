@@ -7,7 +7,7 @@ import org.embergraph.btree.proc.IResultHandler;
 import org.embergraph.service.Split;
 
 /*
-* Handles stale locators for {@link IKeyRangeIndexProcedure}s.
+ * Handles stale locators for {@link IKeyRangeIndexProcedure}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

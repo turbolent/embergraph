@@ -26,7 +26,7 @@ import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.sail.EmbergraphSail;
 
 /*
-* Data driven test suite for the Runtime Query Optimizer (RTO) using quads-mode FOAF data.
+ * Data driven test suite for the Runtime Query Optimizer (RTO) using quads-mode FOAF data.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestBasicQuery.java 6440 2012-08-14 17:57:33Z thompsonbry $

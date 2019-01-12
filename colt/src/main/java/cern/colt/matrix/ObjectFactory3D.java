@@ -11,7 +11,7 @@ package cern.colt.matrix;
 import cern.colt.matrix.impl.DenseObjectMatrix3D;
 import cern.colt.matrix.impl.SparseObjectMatrix3D;
 /*
-* Factory for convenient construction of 3-d matrices holding <tt>Object</tt> cells. Use idioms
+ * Factory for convenient construction of 3-d matrices holding <tt>Object</tt> cells. Use idioms
  * like <tt>ObjectFactory3D.dense.make(4,4,4)</tt> to construct dense matrices,
  * <tt>ObjectFactory3D.sparse.make(4,4,4)</tt> to construct sparse matrices.
  *

@@ -19,7 +19,7 @@ import java.io.Serializable;
 import java.util.Iterator;
 
 /*
-* Provides the hook interface that allows use by Striterators
+ * Provides the hook interface that allows use by Striterators
  *
  * <p>TODO The {@link Striterator} protocol does not support a close() method for {@link Filter}s.
  * That method should be invoked by an {@link ICloseableIterator}.

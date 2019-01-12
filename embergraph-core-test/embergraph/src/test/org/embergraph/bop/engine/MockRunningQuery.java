@@ -37,7 +37,7 @@ import org.embergraph.rwstore.sector.IMemoryManager;
 import org.embergraph.service.IEmbergraphFederation;
 
 /*
-* Mock object.
+ * Mock object.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

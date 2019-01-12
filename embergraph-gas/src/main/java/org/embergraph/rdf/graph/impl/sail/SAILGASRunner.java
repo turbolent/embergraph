@@ -22,14 +22,13 @@ import org.embergraph.rdf.graph.IGraphAccessor;
 import org.embergraph.rdf.graph.impl.sail.SAILGASEngine.SAILGraphAccessor;
 import org.embergraph.rdf.graph.impl.util.GASRunnerBase;
 import org.embergraph.rdf.graph.util.SailGraphLoader;
-import org.openrdf.model.Resource;
 import org.openrdf.sail.Sail;
 import org.openrdf.sail.SailConnection;
 import org.openrdf.sail.SailException;
 import org.openrdf.sail.memory.MemoryStore;
 
 /*
-* Class for running GAS performance tests against the SAIL.
+ * Class for running GAS performance tests against the SAIL.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -161,7 +160,7 @@ public class SAILGASRunner<VS, ES, ST> extends GASRunnerBase<VS, ES, ST> {
   protected IGraphAccessor newGraphAccessor() {
 
     return new SAILGraphAccessor(
-        getOptionData().cxn, false /* includeInferred */  /* defaultContext */);
+        getOptionData().cxn, false /* includeInferred */ /* defaultContext */);
   }
 
   /*

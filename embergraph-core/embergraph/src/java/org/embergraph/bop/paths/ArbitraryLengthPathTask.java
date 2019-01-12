@@ -47,12 +47,11 @@ import org.embergraph.bop.engine.QueryEngine;
 import org.embergraph.bop.join.IDistinctFilter;
 import org.embergraph.bop.join.JVMDistinctFilter;
 import org.embergraph.bop.paths.ArbitraryLengthPathOp.Annotations;
-import org.embergraph.bop.solutions.JVMDistinctBindingSetsOp;
 import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.embergraph.relation.accesspath.UnsynchronizedArrayBuffer;
 
 /*
-* Execute a subquery that represents an arbitrary length path between a single input variable and a
+ * Execute a subquery that represents an arbitrary length path between a single input variable and a
  * single output variable. Continue this in rounds, using the output of the previous round as the
  * input of the next round. This has the effect of producing the transitive closure of the subquery
  * operation.
@@ -228,8 +227,7 @@ public class ArbitraryLengthPathTask implements Callable<Void> {
             controllerOp.getProperty(Annotations.LOAD_FACTOR, Annotations.DEFAULT_LOAD_FACTOR),
             ConcurrentHashMapAnnotations.DEFAULT_CONCURRENCY_LEVEL);
 
-    this.dropVars =
-        controllerOp.getProperty(Annotations.DROP_VARS, new ArrayList<IVariable<?>>());
+    this.dropVars = controllerOp.getProperty(Annotations.DROP_VARS, new ArrayList<IVariable<?>>());
 
     if (log.isDebugEnabled()) {
       log.debug("vars to drop: " + dropVars);
@@ -320,8 +318,8 @@ public class ArbitraryLengthPathTask implements Callable<Void> {
 
         childSolutionIn.set(gearing.tVarIn, seed);
 
-      /*
-       * Add a zero length path from the seed to itself. By
+        /*
+         * Add a zero length path from the seed to itself. By
          * handling this here (instead of in a separate operator) we
          * get the cardinality right. Except in the case on nested
          * arbitrary length paths, we are getting too few solutions
@@ -408,8 +406,8 @@ public class ArbitraryLengthPathTask implements Callable<Void> {
 
       try {
 
-      /*
-       * TODO Replace with code that does the PipelineJoins
+        /*
+         * TODO Replace with code that does the PipelineJoins
          * manually. Unrolling these iterations can be a major
          * performance benefit. Another possibility is to use the
          * GASEngine to expand the paths.
@@ -440,8 +438,8 @@ public class ArbitraryLengthPathTask implements Callable<Void> {
             if (Thread.interrupted()) throw new InterruptedException();
             for (IBindingSet bs : chunk) {
 
-            /*
-       * @see <a href="http://trac.blazegraph.com/ticket/865">OutOfMemoryError instead of
+              /*
+               * @see <a href="http://trac.blazegraph.com/ticket/865">OutOfMemoryError instead of
                *     Timeout for SPARQL Property Paths </a>
                */
               if (subquerySolutionsOut++ % 10 == 0 && Thread.interrupted()) {
@@ -454,8 +452,8 @@ public class ArbitraryLengthPathTask implements Callable<Void> {
 
               if (gearing.inVar != null && !bs.isBound(gearing.inVar)) {
 
-              /*
-       * Must be the first round. The first round
+                /*
+                 * Must be the first round. The first round
                  * when there are no incoming binding (from
                  * the parent or previous rounds) is the
                  * only time the inVar won't be set.
@@ -467,8 +465,8 @@ public class ArbitraryLengthPathTask implements Callable<Void> {
                 }
               }
 
-            /*
-       * If the edgeVar is bound coming in then we need
+              /*
+               * If the edgeVar is bound coming in then we need
                * to check whether it matches the value for
                * the middle transitive var.  No match, no solution.
                */
@@ -484,15 +482,15 @@ public class ArbitraryLengthPathTask implements Callable<Void> {
                 }
               }
 
-            /*
-       * Do not project any new nodes from the bonus round,
+              /*
+               * Do not project any new nodes from the bonus round,
                * only edges that connect visited nodes.
                */
               if (bonusRound) {
                 final IConstant<?> out = bs.get(gearing.tVarOut);
                 if (i + 1 == n && !visited.contains(out)) {
-                /*
-       * Bonus round + new node, skip
+                  /*
+                   * Bonus round + new node, skip
                    */
                   continue;
                 }
@@ -501,16 +499,16 @@ public class ArbitraryLengthPathTask implements Callable<Void> {
 
               storeAndEmit(bs, gearing, solutions);
 
-            /*
-       * No need to remap solutions, there is no next
+              /*
+               * No need to remap solutions, there is no next
                * round.
                */
               if (i + 1 == n) {
                 continue;
               }
 
-            /*
-       * Copy the binding set as input for next round;
+              /*
+               * Copy the binding set as input for next round;
                * this is necessary, because the storeAndEmit
                * method below modifies the binding set as a
                * side effect
@@ -553,8 +551,8 @@ public class ArbitraryLengthPathTask implements Callable<Void> {
               //                                }
               //                            }
 
-            /*
-       * Drop intermediate variables.
+              /*
+               * Drop intermediate variables.
                */
               for (IVariable<?> var : dropVars) {
                 if (!projectInVars.contains(var)
@@ -610,8 +608,8 @@ public class ArbitraryLengthPathTask implements Callable<Void> {
 
       } catch (Throwable t) {
 
-      /*
-       * If things fail before we start the subquery, or if a subquery
+        /*
+         * If things fail before we start the subquery, or if a subquery
          * fails (due to abnormal termination), then propagate the error
          * to the parent and rethrow the first cause error out of the
          * subquery.
@@ -680,8 +678,8 @@ public class ArbitraryLengthPathTask implements Callable<Void> {
 
       for (IBindingSet bs : solutions.values()) {
 
-      /*
-       * Do not handle the case where the out var is bound by the
+        /*
+         * Do not handle the case where the out var is bound by the
          * incoming solutions.
          */
         if (bs.isBound(gearing.outVar)) {

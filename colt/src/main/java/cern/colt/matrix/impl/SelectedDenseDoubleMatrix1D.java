@@ -11,7 +11,7 @@ package cern.colt.matrix.impl;
 import cern.colt.matrix.DoubleMatrix1D;
 import cern.colt.matrix.DoubleMatrix2D;
 /*
-* Selection view on dense 1-d matrices holding <tt>double</tt> elements. First see the <a
+ * Selection view on dense 1-d matrices holding <tt>double</tt> elements. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
  * view</a> to get the broad picture.
  *

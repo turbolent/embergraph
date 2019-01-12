@@ -42,7 +42,7 @@ import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
 /*
-* Unit tests for {@link GeoSpatialLiteralExtension}.
+ * Unit tests for {@link GeoSpatialLiteralExtension}.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$

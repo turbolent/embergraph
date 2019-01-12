@@ -1,7 +1,7 @@
 package org.embergraph.counters.query;
 
 /*
-* The different kinds of reports that we can generate.
+ * The different kinds of reports that we can generate.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

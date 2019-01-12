@@ -34,12 +34,11 @@ import java.util.zip.DeflaterOutputStream;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 import org.apache.log4j.Logger;
-import org.embergraph.btree.IndexSegment;
 import org.embergraph.io.ByteBufferInputStream;
 import org.embergraph.io.ByteBufferOutputStream;
 
 /*
-* Bulk data (de-)compressor used for leaves in {@link IndexSegment}s. The compression and
+ * Bulk data (de-)compressor used for leaves in {@link IndexSegment}s. The compression and
  * decompression operations of a given {@link RecordCompressor} reuse a shared instance buffer. Any
  * decompression result is valid only until the next compression or decompression operation
  * performed by that {@link RecordCompressor}. When used in a single-threaded context this reduces

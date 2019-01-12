@@ -27,13 +27,11 @@ import org.embergraph.btree.proc.IParallelizableIndexProcedure;
 import org.embergraph.btree.proc.IResultHandler;
 import org.embergraph.btree.raba.IRaba;
 import org.embergraph.btree.raba.codec.IRabaCoder;
-import org.embergraph.rdf.internal.impl.TermId;
-import org.embergraph.rdf.model.EmbergraphValueSerializer;
 import org.embergraph.relation.IMutableRelationIndexWriteProcedure;
 import org.embergraph.service.ndx.NopAggregator;
 
 /*
-* Unisolated write operation makes consistent assertions on the <em>id:term</em> index based on the
+ * Unisolated write operation makes consistent assertions on the <em>id:term</em> index based on the
  * data developed by the {@link Term2IdWriteProc} operation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

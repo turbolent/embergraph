@@ -18,7 +18,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 */
 /*
-* Licensed to the Apache Software Foundation (ASF) under one or more contributor license
+ * Licensed to the Apache Software Foundation (ASF) under one or more contributor license
  * agreements. See the NOTICE file distributed with this work for additional information regarding
  * copyright ownership. The ASF licenses this file to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance with the License. You may obtain a
@@ -48,7 +48,7 @@ import org.apache.log4j.jmx.HierarchyDynamicMBean;
 import org.apache.log4j.spi.LoggerRepository;
 
 /*
-* Utility method to register a log4j MBean.
+ * Utility method to register a log4j MBean.
  *
  * <p>Note: This class is based on ManagedUtil in the Apache zookeeper project and is therefore
  * under the Apache License.

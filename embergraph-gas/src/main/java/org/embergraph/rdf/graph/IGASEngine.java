@@ -16,7 +16,7 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 package org.embergraph.rdf.graph;
 
 /*
-* The interface used to submit an {@link IGASProgram} for evaluation.
+ * The interface used to submit an {@link IGASProgram} for evaluation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -60,7 +60,7 @@ public interface IGASEngine {
    * internally.
    */
   //    /*
-//     * Access the default graph. In platforms that support multiple graphs, the
+  //     * Access the default graph. In platforms that support multiple graphs, the
   //     * accessed graph will be platform specific. (The sense of graph here is a
   //     * triple or a quad store, not a named graph.)
   //     */

@@ -13,7 +13,7 @@ import cern.colt.list.IntArrayList;
 import cern.colt.matrix.DoubleMatrix1D;
 import cern.colt.matrix.DoubleMatrix2D;
 /*
-* Sparse row-compressed-modified 2-d matrix holding <tt>double</tt> elements.
+ * Sparse row-compressed-modified 2-d matrix holding <tt>double</tt> elements.
  *
  * @author wolfgang.hoschek@cern.ch
  * @version 0.9, 04/14/2000

@@ -46,7 +46,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /*
-* Functionality for creating a JUnit test suite out of a W3C Working Group-style manifest for
+ * Functionality for creating a JUnit test suite out of a W3C Working Group-style manifest for
  * SPARQL query and update tests.
  *
  * @author Jeen Broekstra

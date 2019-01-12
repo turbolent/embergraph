@@ -28,7 +28,6 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executor;
 import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -36,18 +35,14 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 import org.apache.log4j.Logger;
-import org.embergraph.btree.keys.KVO;
-import org.embergraph.mdi.PartitionLocator;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.relation.accesspath.BufferClosedException;
 import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.resources.StaleLocatorException;
-import org.embergraph.service.Split;
-import org.embergraph.service.ndx.ISplitter;
 import org.embergraph.util.concurrent.AbstractHaltableProcess;
 
 /*
-* Abstract base class for a master task which consumes chunks of elements written onto a {@link
+ * Abstract base class for a master task which consumes chunks of elements written onto a {@link
  * BlockingBuffer} and distributes those chunks to subtasks according to some abstraction which is
  * not defined by this class.
  *
@@ -398,14 +393,14 @@ public abstract class AbstractMasterTask<
 
           } else {
 
-          /*
-       * Nothing available right now.
+            /*
+             * Nothing available right now.
              */
 
             if (!buffer.isOpen() && buffer.isEmpty()) {
 
-            /*
-       * If the master's input buffer is closed and has
+              /*
+               * If the master's input buffer is closed and has
                * been drained then we stop polling here, but we
                * will continue to drain the redirectQueue in
                * awaitAll().
@@ -558,8 +553,8 @@ public abstract class AbstractMasterTask<
 
         if (a == null) {
 
-        /*
-       * There is nothing available from the redirect queue.
+          /*
+           * There is nothing available from the redirect queue.
            */
 
           if (finishedSubtaskQueue.isEmpty()
@@ -567,8 +562,8 @@ public abstract class AbstractMasterTask<
               && redirectQueue.isEmpty()
               && nothingPending()) {
 
-          /*
-       * We are done since there are no running sinks, and no
+            /*
+             * We are done since there are no running sinks, and no
              * sinks whose Future we still need to test, and the
              * redirectQueue is empty.
              *
@@ -581,8 +576,8 @@ public abstract class AbstractMasterTask<
             return;
           }
 
-        /*
-       * Check for sinks which have finished.
+          /*
+           * Check for sinks which have finished.
            */
 
           if (log.isDebugEnabled())
@@ -592,8 +587,8 @@ public abstract class AbstractMasterTask<
 
           if (!finishedSubtaskQueue.isEmpty()) {
 
-          /*
-       * Yield the lock and wait up to a timeout for a sink to
+            /*
+             * Yield the lock and wait up to a timeout for a sink to
              * complete. We can not wait that long because we are
              * still polling the redirect queue!
              *
@@ -611,8 +606,8 @@ public abstract class AbstractMasterTask<
 
       if (a != null) {
 
-      /*
-       * Handle a redirected chunk.
+        /*
+         * Handle a redirected chunk.
          *
          * Note: We DO NOT hold the [lock] here!
          */
@@ -663,8 +658,8 @@ public abstract class AbstractMasterTask<
       } catch (InterruptedException ex) {
         throw ex;
       } catch (ExecutionException ex) {
-      /*
-       * Ignore exceptions here since we are halting anyway and we can
+        /*
+         * Ignore exceptions here since we are halting anyway and we can
          * expect a bunch of canceled tasks because we just interrupted
          * all of the subtasks.
          */
@@ -731,8 +726,8 @@ public abstract class AbstractMasterTask<
         if (log.isInfoEnabled())
           log.info("Reopening sink (was closed): " + this + ", locator=" + locator);
 
-      /*
-       * Note: Instead of waiting for the sink here, the sink will
+        /*
+         * Note: Instead of waiting for the sink here, the sink will
          * notify the master when it is done and be placed onto the
          * [finishedSinks] queue. When it's Future#isDone(), we will
          * drain it from the queue and check it's Future for errors.
@@ -767,8 +762,8 @@ public abstract class AbstractMasterTask<
 
         // if (oldval == null) {
 
-      /*
-       * Start subtask.
+        /*
+         * Start subtask.
          *
          * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/707">
          *     BlockingBuffer.close() does not unblock threads </a>
@@ -818,7 +813,7 @@ public abstract class AbstractMasterTask<
   protected abstract S newSubtask(L locator, BlockingBuffer<E[]> out);
 
   //    /*
-//     * Submit the subtask to an {@link Executor}.
+  //     * Submit the subtask to an {@link Executor}.
   //     *
   //     * @param subtask
   //     *            The subtask.
@@ -891,8 +886,8 @@ public abstract class AbstractMasterTask<
 
       } finally {
 
-      /*
-       * Increment this counter immediately when the subtask is done
+        /*
+         * Increment this counter immediately when the subtask is done
          * regardless of the outcome. This is used by some unit tests to
          * verify idle timeouts and the like.
          */
@@ -1001,8 +996,8 @@ public abstract class AbstractMasterTask<
 
         if (added) {
 
-        /*
-       * Update timestamp of the last chunk written on that sink.
+          /*
+           * Update timestamp of the last chunk written on that sink.
            */
           sink.lastChunkNanos = now;
 
@@ -1019,8 +1014,8 @@ public abstract class AbstractMasterTask<
 
         if (ex.getCause() instanceof StaleLocatorException) {
 
-        /*
-       * Note: The sinks sets the exception when closing the
+          /*
+           * Note: The sinks sets the exception when closing the
            * buffer when handling the stale locator exception and
            * transfers the outstanding and all queued chunks to the
            * redirectQueue.
@@ -1040,8 +1035,8 @@ public abstract class AbstractMasterTask<
         } else if (ex.getCause() instanceof IdleTimeoutException
             || ex.getCause() instanceof MasterExhaustedException) {
 
-        /*
-       * Note: The sinks sets the exception if it closes the input
+          /*
+           * Note: The sinks sets the exception if it closes the input
            * queue by idle timeout or because the master was
            * exhausted.
            *

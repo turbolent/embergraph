@@ -30,7 +30,7 @@ import org.embergraph.rdf.sail.webapp.client.RemoteRepositoryManager;
 import org.openrdf.rio.RDFFormat;
 
 /*
-* Proxied test suite for {@link DataLoaderServlet}
+ * Proxied test suite for {@link DataLoaderServlet}
  *
  * @author beebs
  */

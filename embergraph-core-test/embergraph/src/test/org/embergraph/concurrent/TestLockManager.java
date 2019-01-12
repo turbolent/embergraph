@@ -37,7 +37,6 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import junit.framework.TestCase;
 import org.apache.log4j.Logger;
-import org.embergraph.service.DataService;
 import org.embergraph.testutil.ExperimentDriver;
 import org.embergraph.testutil.ExperimentDriver.IComparisonTest;
 import org.embergraph.testutil.ExperimentDriver.Result;
@@ -45,7 +44,7 @@ import org.embergraph.util.DaemonThreadFactory;
 import org.embergraph.util.NV;
 
 /*
-* Suite of stress tests of the concurrency control mechanisms (without the database implementation)
+ * Suite of stress tests of the concurrency control mechanisms (without the database implementation)
  * - See {@link LockManager}.
  *
  * <p>Goals:

@@ -22,10 +22,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.io;
 
-import org.embergraph.btree.keys.KeyBuilder;
-
 /*
-* Interface for a slice of a backing byte[].
+ * Interface for a slice of a backing byte[].
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

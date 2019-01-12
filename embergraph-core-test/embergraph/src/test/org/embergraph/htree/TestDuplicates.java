@@ -23,7 +23,7 @@ import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /*
-* Test {@link HTree} with duplicate keys.
+ * Test {@link HTree} with duplicate keys.
  *
  * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/763" > Stochastic Results With
  *     Analytic Query Mode </a>

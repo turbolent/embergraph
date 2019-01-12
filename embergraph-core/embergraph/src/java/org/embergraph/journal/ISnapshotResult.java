@@ -20,7 +20,7 @@ package org.embergraph.journal;
 import java.io.File;
 
 /*
-* Interface for the outcome of a snapshot task.,
+ * Interface for the outcome of a snapshot task.,
  *
  * @author bryan
  * @see <a href="http://trac.bigdata.com/ticket/1172">Online backup for Journal </a>

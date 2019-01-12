@@ -17,10 +17,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.sail.webapp;
 
-import org.embergraph.journal.IIndexManager;
-
 /*
-* Interface declaring the <code>config-param</code>s understood by the {@link
+ * Interface declaring the <code>config-param</code>s understood by the {@link
  * EmbergraphRDFServletContextListener}.
  *
  * <p>Note: When used in a jini/River configuration, the name of the component for those
@@ -150,8 +148,7 @@ public interface ConfigParams {
    */
   String BLUEPRINTS_SERVLET_PROVIDER = "blueprintsServletProvider";
 
-  String DEFAULT_BLUEPRINTS_SERVLET_PROVIDER =
-      BlueprintsServletProxy.getDefaultProvider();
+  String DEFAULT_BLUEPRINTS_SERVLET_PROVIDER = BlueprintsServletProxy.getDefaultProvider();
 
   /** A class that implements the {@link MapgraphServletProxy}. */
   String MAPGRAPH_SERVLET_PROVIDER = "mapgraphServletProvider";

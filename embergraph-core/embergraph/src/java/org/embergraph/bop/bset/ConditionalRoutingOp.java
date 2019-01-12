@@ -36,7 +36,7 @@ import org.embergraph.bop.engine.BOpStats;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 
 /*
-* An operator for conditional routing of binding sets in a pipeline. The operator will copy binding
+ * An operator for conditional routing of binding sets in a pipeline. The operator will copy binding
  * sets either to the default sink (if a condition is satisfied) and otherwise to the alternate sink
  * (iff one is specified). If a solution fails the constraint and the alternate sink is not
  * specified, then the solution is dropped.

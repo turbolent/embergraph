@@ -24,10 +24,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.service;
 
 import java.io.Serializable;
-import java.util.concurrent.Callable;
 
 /*
-* Interface for {@link Callable}s which require access to the {@link IEmbergraphFederation} when
+ * Interface for {@link Callable}s which require access to the {@link IEmbergraphFederation} when
  * running on an {@link IRemoteExecutor}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

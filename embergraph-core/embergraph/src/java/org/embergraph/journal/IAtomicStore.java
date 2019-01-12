@@ -24,7 +24,7 @@ package org.embergraph.journal;
 import org.embergraph.rawstore.IRawStore;
 
 /*
-* Interface for low-level operations on a store supporting an atomic commit. Persistent
+ * Interface for low-level operations on a store supporting an atomic commit. Persistent
  * implementations of this interface are restart-safe.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -102,7 +102,7 @@ public interface IAtomicStore extends IRawStore {
    */
 
   //	/*
-//	 * Return the root block view associated with the commitRecord for the
+  //	 * Return the root block view associated with the commitRecord for the
   //	 * provided commit time.  This requires accessing the next commit record
   //	 * since it is the previous root block that is referenced from each record.
   //	 *
@@ -115,7 +115,7 @@ public interface IAtomicStore extends IRawStore {
   //	public IRootBlockView getRootBlock(final long commitTime);
   //
   //	/*
-//	 *
+  //	 *
   //	 * @param startTime from which to begin iteration
   //	 *
   //	 * @return an iterator over the committed root blocks

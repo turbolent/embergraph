@@ -27,7 +27,7 @@ import java.io.IOException;
 import junit.framework.TestCase;
 
 /*
-* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestInnerCause extends TestCase {

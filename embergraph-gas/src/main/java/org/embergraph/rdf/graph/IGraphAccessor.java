@@ -22,7 +22,7 @@ import org.openrdf.model.Statement;
 import org.openrdf.model.Value;
 
 /*
-* Interface abstracts access to a backend graph implementation.
+ * Interface abstracts access to a backend graph implementation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

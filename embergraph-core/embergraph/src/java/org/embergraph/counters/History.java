@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 import org.apache.log4j.Logger;
 
 /*
-* Retains history for N periods, where the period is expressed in milliseconds.
+ * Retains history for N periods, where the period is expressed in milliseconds.
  *
  * <p>This class is thread-safe.
  *
@@ -326,7 +326,7 @@ public class History<T> {
     }
 
     //        /*
-//         * Return the current sample (the one which was last visited by
+    //         * Return the current sample (the one which was last visited by
     //         * {@link #next()}).
     //         *
     //         * @throws IllegalStateException
@@ -648,8 +648,8 @@ public class History<T> {
 
       if ((lastLogicalSlot - logicalSlot) >= capacity) {
 
-      /*
-       * Note: OneShot counters will trigger this response. The
+        /*
+         * Note: OneShot counters will trigger this response. The
          * problem is that the counter value initially arrives for a
          * host when the first service starts on that host. If hours or
          * days later you then run a task on that service, perhaps an
@@ -762,8 +762,8 @@ public class History<T> {
 
         if (ps == 0 && sink != null) {
 
-        /*
-       * Overflow.
+          /*
+           * Overflow.
            *
            * Note: The overflow point is designed to be on an even
            * period boundary for the next level of aggregation.
@@ -781,8 +781,8 @@ public class History<T> {
         if (data[ps] != null) {
 
           if (!overwrite) {
-          /*
-       * Note: Overwrite is not always desirable - there is a
+            /*
+             * Note: Overwrite is not always desirable - there is a
              * ctor option to disable it.
              */
             throw new RuntimeException(
@@ -828,29 +828,29 @@ public class History<T> {
 
       if (size > capacity) {
 
-      /*
-       * FIXME I am seeing this exception after a few days of run
-                     * time. The [size] appears to grow by one every minute.
-                     * 2/22/09. The stack trace is emerging out of the LBS update
-                     * task, but the problem is clearly in the History class itself:
-                     *
-                     * java.lang.AssertionError: size=1000, capacity=24
-        at org.embergraph.counters.History.add(History.java:938)
-        at org.embergraph.counters.History.add(History.java:894)
-        at org.embergraph.counters.HistoryInstrument.add(HistoryInstrument.java:130)
-        at org.embergraph.service.LoadBalancerService$UpdateTask.setupCounters(LoadBalancerService.java:1668)
-        at org.embergraph.service.LoadBalancerService$UpdateTask.run(LoadBalancerService.java:843)
-        at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:441)
-        at java.util.concurrent.FutureTask$Sync.innerRunAndReset(FutureTask.java:317)
-        at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:150)
-        at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$101(ScheduledThreadPoolExecutor.java:98)
-        at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.runPeriodic(ScheduledThreadPoolExecutor.java:181)
-        at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:205)
-        at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:885)
-        at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:907)
-        at java.lang.Thread.run(Thread.java:619)
+        /*
+        * FIXME I am seeing this exception after a few days of run
+                      * time. The [size] appears to grow by one every minute.
+                      * 2/22/09. The stack trace is emerging out of the LBS update
+                      * task, but the problem is clearly in the History class itself:
+                      *
+                      * java.lang.AssertionError: size=1000, capacity=24
+         at org.embergraph.counters.History.add(History.java:938)
+         at org.embergraph.counters.History.add(History.java:894)
+         at org.embergraph.counters.HistoryInstrument.add(HistoryInstrument.java:130)
+         at org.embergraph.service.LoadBalancerService$UpdateTask.setupCounters(LoadBalancerService.java:1668)
+         at org.embergraph.service.LoadBalancerService$UpdateTask.run(LoadBalancerService.java:843)
+         at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:441)
+         at java.util.concurrent.FutureTask$Sync.innerRunAndReset(FutureTask.java:317)
+         at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:150)
+         at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$101(ScheduledThreadPoolExecutor.java:98)
+         at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.runPeriodic(ScheduledThreadPoolExecutor.java:181)
+         at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:205)
+         at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:885)
+         at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:907)
+         at java.lang.Thread.run(Thread.java:619)
 
-                     */
+                      */
 
         // log assertion but do not throw the execption.
         log.warn("size=" + size + ", capacity=" + capacity);

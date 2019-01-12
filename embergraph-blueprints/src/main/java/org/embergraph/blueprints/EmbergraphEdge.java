@@ -28,7 +28,7 @@ import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
 
 /*
-* Edge implementation that wraps an Edge statement and points to a {@link EmbergraphGraph}
+ * Edge implementation that wraps an Edge statement and points to a {@link EmbergraphGraph}
  * instance.
  *
  * @author mikepersonick

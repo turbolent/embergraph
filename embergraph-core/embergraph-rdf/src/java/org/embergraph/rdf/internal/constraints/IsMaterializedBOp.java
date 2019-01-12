@@ -27,7 +27,6 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.bop.NV;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.EmbergraphValue;
 
 /** Imposes the constraint <code>isMaterialized(x)</code>. */
 public class IsMaterializedBOp extends XSDBooleanIVValueExpression {

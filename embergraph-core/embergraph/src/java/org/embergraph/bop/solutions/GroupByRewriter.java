@@ -28,7 +28,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpBase;
-import org.embergraph.bop.Bind;
 import org.embergraph.bop.IBind;
 import org.embergraph.bop.IConstraint;
 import org.embergraph.bop.IValueExpression;
@@ -39,7 +38,7 @@ import org.embergraph.bop.Var;
 import org.embergraph.bop.aggregate.IAggregate;
 
 /*
-* Utility class simplifies an aggregation operator through a rewrite.
+ * Utility class simplifies an aggregation operator through a rewrite.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -106,7 +105,7 @@ public class GroupByRewriter implements IGroupByRewriteState, IVariableFactory, 
   }
 
   //    /*
-//     * Metadata flags reporting whether the column projection of a value
+  //     * Metadata flags reporting whether the column projection of a value
   //     * expression will include all values or only the distinct values. If both
   //     * flags are set, then both the projection of all values and the projection
   //     * of all distinct values are required.
@@ -114,12 +113,12 @@ public class GroupByRewriter implements IGroupByRewriteState, IVariableFactory, 
   //    public static class ProjectionType {
   //
   //        /*
-//         * The column projection of the all observed values is required.
+  //         * The column projection of the all observed values is required.
   //         */
   //        static final int AllValues = 1 << 0;
   //
   //        /*
-//         * The column projection of the observed distinct values is required.
+  //         * The column projection of the observed distinct values is required.
   //         */
   //        static final int DistinctValues = 1 << 1;
   //
@@ -158,7 +157,7 @@ public class GroupByRewriter implements IGroupByRewriteState, IVariableFactory, 
   //    }
   //
   //    /*
-//     * The distinct {@link IValueExpression}s whose column projections are used
+  //     * The distinct {@link IValueExpression}s whose column projections are used
   //     * by the {@link #getAggExpr() aggregate expressions}. The variables appear
   //     * in the order in which they are first used by the aggregate expressions.
   //     * For example, given
@@ -409,8 +408,8 @@ public class GroupByRewriter implements IGroupByRewriteState, IVariableFactory, 
 
       if (anonVar == null) {
 
-      /*
-       * This is the first time we have encountered this aggregate
+        /*
+         * This is the first time we have encountered this aggregate
          * expression.
          */
 

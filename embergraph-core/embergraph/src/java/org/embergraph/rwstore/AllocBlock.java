@@ -20,11 +20,10 @@ package org.embergraph.rwstore;
 
 import java.util.ArrayList;
 import org.apache.log4j.Logger;
-import org.embergraph.io.writecache.WriteCacheService;
 import org.embergraph.rwstore.RWStore.AllocationStats;
 
 /*
-* Bit maps for an allocator. The allocator is a bit map managed as int[]s.
+ * Bit maps for an allocator. The allocator is a bit map managed as int[]s.
  *
  * @todo change to make {@link #m_transients}, {@link #m_live}, and {@link #m_commit} final fields
  *     and then modify {@link FixedAllocator} to use {@link System#arraycopy(Object, int, Object,
@@ -79,7 +78,7 @@ public class AllocBlock {
    */
   int[] m_transients;
   //	/*
-//	 * Used to clear an address on the {@link WriteCacheService} if it has been
+  //	 * Used to clear an address on the {@link WriteCacheService} if it has been
   //	 * freed.
   //	 */
   //	private final RWWriteCacheService m_writeCache;
@@ -387,8 +386,8 @@ public class AllocBlock {
     for (int i = 0; i < m_live.length; i++) {
       final int startBit = i * 32;
       if (m_saveCommit == null) {
-      /*
-       * Simply set live and transients to the commit bits
+        /*
+         * Simply set live and transients to the commit bits
          *
          * But remember to clear out any buffered writes in the cache
          * first!  New allocations determined by comparing
@@ -400,8 +399,8 @@ public class AllocBlock {
         m_live[i] = m_commit[i];
         m_transients[i] = m_commit[i];
       } else {
-      /*
-       * Example
+        /*
+         * Example
          *
          * C1: 1100
          * T1: 1110 (single unisolated allocation)

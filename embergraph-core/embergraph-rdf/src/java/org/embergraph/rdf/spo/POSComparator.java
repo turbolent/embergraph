@@ -20,7 +20,7 @@ package org.embergraph.rdf.spo;
 import java.util.Comparator;
 
 /*
-* Imposes p:o:s ordering based on termIds only.
+ * Imposes p:o:s ordering based on termIds only.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

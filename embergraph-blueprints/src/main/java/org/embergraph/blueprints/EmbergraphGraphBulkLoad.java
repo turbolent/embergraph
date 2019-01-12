@@ -35,7 +35,7 @@ import org.openrdf.model.impl.StatementImpl;
 import org.openrdf.repository.RepositoryConnection;
 
 /*
-* Simple bulk loader that will insert graph data without any consistency checking (won't check for
+ * Simple bulk loader that will insert graph data without any consistency checking (won't check for
  * duplicate vertex or edge identifiers). Currently does not overwrite old property values, but we
  * may need to change this.
  *
@@ -170,7 +170,7 @@ public class EmbergraphGraphBulkLoad extends EmbergraphGraph
   }
 
   //	/*
-//	 * Set a single-value property on an edge or vertex (remove the old value
+  //	 * Set a single-value property on an edge or vertex (remove the old value
   //	 * first).
   //	 *
   //	 * @see {@link EmbergraphElement}

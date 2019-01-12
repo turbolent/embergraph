@@ -31,7 +31,7 @@ import org.apache.log4j.Logger;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 
 /*
-* Abstract base class for the scanner for a mapped master job. The {@link Callable} should return
+ * Abstract base class for the scanner for a mapped master job. The {@link Callable} should return
  * the #of resources which were accepted for processing.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

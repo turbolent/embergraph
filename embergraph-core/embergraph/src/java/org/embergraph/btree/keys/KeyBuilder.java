@@ -21,22 +21,18 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree.keys;
 
-import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
-import java.text.Collator;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.UUID;
 import org.apache.log4j.Logger;
-import org.embergraph.btree.ITuple;
-import org.embergraph.btree.ITupleSerializer;
 import org.embergraph.io.LongPacker;
 import org.embergraph.util.BytesUtil;
 
 /*
-* A class that may be used to form multi-component keys but which does not support Unicode. An
+ * A class that may be used to form multi-component keys but which does not support Unicode. An
  * instance of this class is quite light-weight and SHOULD be used when Unicode support is not
  * required.
  *
@@ -251,7 +247,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
    * that we donate the key buffer to the btree.
    */
   //    /*
-//     * Copy the key from the internal buffer into the supplied buffer.
+  //     * Copy the key from the internal buffer into the supplied buffer.
   //     *
   //     * @param b
   //     *            A byte[].
@@ -373,7 +369,6 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
     }
 
     return new String(b, StandardCharsets.US_ASCII);
-
   }
 
   /*
@@ -470,8 +465,8 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
 
       if (encoded_len == 0) {
 
-      /*
-       * Note: The successor of an empty string is not defined since
+        /*
+         * Note: The successor of an empty string is not defined since
          * it maps to an empty byte[] (an empty value space). However an
          * empty string is semantically equivalent to all pad characters
          * so we use the successor of a string containing a single pad
@@ -485,8 +480,8 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
 
       } else {
 
-      /*
-       * Note: This generates the successor of the encoded text by
+        /*
+         * Note: This generates the successor of the encoded text by
          * treading the encoded byte[] as a fixed length bit string and
          * finding the successor of that bit-string. The bytes in the
          * buffer are modified as a side-effect. A runtime exception is
@@ -694,7 +689,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
   private final byte[] pbuf = new byte[8];
 
   //    /*
-//     * Unpack a long value from the current buffer position.
+  //     * Unpack a long value from the current buffer position.
   //     *
   //     * @param buf
   //     *            The buffer containing the data to be decoded.
@@ -840,7 +835,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
   }
 
   //    /*
-//     * Return the value that will impose the lexiographic ordering as an
+  //     * Return the value that will impose the lexiographic ordering as an
   //     * unsigned byte.
   //     *
   //     * @param v

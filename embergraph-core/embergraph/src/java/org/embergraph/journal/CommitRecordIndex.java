@@ -38,7 +38,7 @@ import org.embergraph.rawstore.IRawStore;
 import org.embergraph.util.Bytes;
 
 /*
-* BTree mapping commit times to {@link ICommitRecord}s. The keys are the long integers
+ * BTree mapping commit times to {@link ICommitRecord}s. The keys are the long integers
  * corresponding to the timestamps assigned to commit points in the store. The values are {@link
  * Entry} objects recording the commit time of the index and the address of the {@link
  * ICommitRecord} for that commit time. A canonicalizing cache is maintained such that the caller

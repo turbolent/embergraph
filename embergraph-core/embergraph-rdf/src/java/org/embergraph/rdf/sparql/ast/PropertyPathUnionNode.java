@@ -4,7 +4,7 @@ import java.util.Map;
 import org.embergraph.bop.BOp;
 
 /*
-* This node is purely to trick the ASTJoinOrderByTypeOptimizer - we need to keep the property path
+ * This node is purely to trick the ASTJoinOrderByTypeOptimizer - we need to keep the property path
  * stuff in the right order, even the UNIONs.
  */
 public class PropertyPathUnionNode extends UnionNode {

@@ -33,7 +33,7 @@ import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.util.InnerCause;
 
 /*
-* Atomic write on a logical row. All property values written will have the same timestamp. An
+ * Atomic write on a logical row. All property values written will have the same timestamp. An
  * atomic read is performed as part of the procedure so that the caller may obtain a consistent view
  * of the post-update state of the logical row. The server-assigned timestamp written may be
  * obtained from the returned {@link ITPS} object.

@@ -47,7 +47,7 @@ import org.embergraph.rdf.sparql.ast.VarNode;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /*
-* Base class for AST visitor impls.
+ * Base class for AST visitor impls.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @openrdf

@@ -25,7 +25,7 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
 /*
-* The OWLClassSkin returns Iterator<OWLPropertySkin> with the getProperties method using the
+ * The OWLClassSkin returns Iterator<OWLPropertySkin> with the getProperties method using the
  * RDFS.DOMAIN URI.
  *
  * <p>So a property has a domain, an RDF.TYPE and an RDFS.RANGE that defines the datatype of the

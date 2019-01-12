@@ -1,5 +1,5 @@
 /*
-* The Notice below must appear in each file of the Source Code of any copy you distribute of the
+ * The Notice below must appear in each file of the Source Code of any copy you distribute of the
  * Licensed Product. Contributors to any Modifications may add their own copyright notices to
  * identify their own contributions.
  *
@@ -52,7 +52,7 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.impl.LiteralImpl;
 
 /*
-* Unit tests for {@link LexiconRelation#prefixScan(org.openrdf.model.Literal[])}.
+ * Unit tests for {@link LexiconRelation#prefixScan(org.openrdf.model.Literal[])}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

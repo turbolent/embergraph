@@ -24,7 +24,7 @@ package org.embergraph.bop.joinGraph.rto;
 import java.util.Arrays;
 
 /*
-* An ordered array of bop identifiers which can be used as a signature for a join path segment.
+ * An ordered array of bop identifiers which can be used as a signature for a join path segment.
  * Unlike an <code>int[]</code>, instances of this class may be used safely in a hash map.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

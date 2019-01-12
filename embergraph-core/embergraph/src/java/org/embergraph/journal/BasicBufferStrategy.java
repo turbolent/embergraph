@@ -25,7 +25,7 @@ import org.embergraph.counters.CounterSet;
 import org.embergraph.io.FileChannelUtility;
 
 /*
-* Implements logic to read from and write on a buffer. This is sufficient for a {@link
+ * Implements logic to read from and write on a buffer. This is sufficient for a {@link
  * BufferMode#Transient} implementation or a {@link BufferMode#Mapped} implementation, but the
  * {@link BufferMode#Direct} implementation needs to also implement write through to the disk.
  *

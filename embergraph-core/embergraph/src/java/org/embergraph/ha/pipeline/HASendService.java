@@ -22,13 +22,10 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
-import java.nio.channels.WritableByteChannel;
 import java.util.concurrent.Callable;
-import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.atomic.AtomicReference;
 import org.apache.log4j.Logger;
 import org.embergraph.ha.msg.HASendState;
@@ -36,7 +33,7 @@ import org.embergraph.util.InnerCause;
 import org.embergraph.util.concurrent.Haltable;
 
 /*
-* A service for sending raw {@link ByteBuffer}s across a socket. This service supports the HA write
+ * A service for sending raw {@link ByteBuffer}s across a socket. This service supports the HA write
  * pipeline. This service is designed to be paired with an {@link HAReceiveService}, which typically
  * is running on a different host. The {@link HASendService} provides only an efficient raw data
  * transfer. The HA write pipeline coordinates the transfer of data using RMI messages which tell
@@ -145,7 +142,7 @@ public class HASendService {
   }
 
   //    /*
-//     * Return the address of the receiving service (may be <code>null</code>).
+  //     * Return the address of the receiving service (may be <code>null</code>).
   //     */
   //    InetSocketAddress getAddrNext() {
   //
@@ -219,7 +216,7 @@ public class HASendService {
   }
 
   //    /*
-//     * Close the {@link SocketChannel} to the downsteam service (blocking).
+  //     * Close the {@link SocketChannel} to the downsteam service (blocking).
   //     */
   //    public void closeChannel() {
   //        synchronized (this.socketChannel) {
@@ -352,8 +349,8 @@ public class HASendService {
 
         try {
 
-        /*
-       * (Re-)open the SocketChannel.
+          /*
+           * (Re-)open the SocketChannel.
            *
            * TODO we may have to retry or play with the timeout for
            * the socket connect request since the downstream node may
@@ -490,8 +487,8 @@ public class HASendService {
 
       } catch (Throwable t) {
 
-      /*
-       * Log anything thrown out of this task. We check the Future of
+        /*
+         * Log anything thrown out of this task. We check the Future of
          * this task, but that does not tell us what exception is thrown
          * in the Thread executing the task when the Future is cancelled
          * and that thread is interrupted. In particular, we are looking
@@ -551,8 +548,8 @@ public class HASendService {
             continue;
           }
 
-        /*
-       * Write the data. Depending on the channel, will either
+          /*
+           * Write the data. Depending on the channel, will either
            * block or write as many bytes as can be written
            * immediately (this latter is true for socket channels in a
            * non-blocking mode). IF it blocks, should block until
@@ -583,8 +580,8 @@ public class HASendService {
 
           final int nbytes;
           if (false || log.isDebugEnabled()) {
-          /*
-       * Debug only code. This breaks down the payload into
+            /*
+             * Debug only code. This breaks down the payload into
              * small packets and adds some latency between them as
              * well. This models what is otherwise a less common,
              * but more stressful, pattern.

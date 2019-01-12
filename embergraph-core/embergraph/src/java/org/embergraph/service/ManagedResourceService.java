@@ -25,13 +25,12 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.util.UUID;
-import org.embergraph.bop.BOp;
 import org.embergraph.io.DirectBufferPool;
 import org.embergraph.io.DirectBufferPoolAllocator;
 import org.embergraph.io.DirectBufferPoolAllocator.IAllocation;
 
 /*
-* This class manages a pool of direct {@link ByteBuffer}s. The application can create which are
+ * This class manages a pool of direct {@link ByteBuffer}s. The application can create which are
  * exposed for retrieval by remote services.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

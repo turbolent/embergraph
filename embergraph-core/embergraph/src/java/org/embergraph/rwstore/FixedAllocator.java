@@ -39,7 +39,7 @@ import org.embergraph.rwstore.StorageStats.Bucket;
 import org.embergraph.util.BytesUtil;
 
 /*
-* FixedAllocator
+ * FixedAllocator
  *
  * <p>Maintains List of AllocBlock(s)
  */
@@ -358,8 +358,8 @@ public class FixedAllocator implements Allocator {
           }
 
           if (!protectTransients) {
-          /*
-       * This assert will trip if any address was freed under session protection and therefore
+            /*
+             * This assert will trip if any address was freed under session protection and therefore
              * remained accessible until released. The value returned by releaseSession should be
              * zero since all "frees" should already have removed any writes to the
              * writeCacheService
@@ -445,8 +445,8 @@ public class FixedAllocator implements Allocator {
         for (int i = 0; i < m_bitSize; i++) {
           block.m_live[i] = str.readInt();
 
-        /*
-       * Need to calc how many free blocks are available, minor optimization by checking against
+          /*
+           * Need to calc how many free blocks are available, minor optimization by checking against
            * either empty or full to avoid scanning every bit unnecessarily
            */
           if (block.m_live[i] == 0) { // empty
@@ -581,8 +581,8 @@ public class FixedAllocator implements Allocator {
         for (int i = (m_allocIndex % m_bitSize); i < m_bitSize; i++) {
           // first check if transients are already full
           if (ab.m_transients[i] != 0xFFFFFFFF) {
-          /*
-       * If small slots are in a high waste scenario, then do not check for extra
+            /*
+             * If small slots are in a high waste scenario, then do not check for extra
              * locality in uncommitted state
              */
             if (m_smallSlotHighWaste || Integer.bitCount(ab.m_commit[i]) < 16) {
@@ -764,7 +764,8 @@ public class FixedAllocator implements Allocator {
       try {
         if (s_islogDebug) checkBits();
 
-        if (m_allocBlocks.get(block)
+        if (m_allocBlocks
+            .get(block)
             .freeBit(offset % nbits, m_sessionActive && !overideSession)) { // bit adjust
 
           m_freeBits++;

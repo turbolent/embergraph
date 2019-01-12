@@ -49,7 +49,7 @@ public abstract class GroupNodeBase<E extends IGroupMemberNode> extends GroupMem
   }
 
   //    /*
-//     * Note: Uses the default for the "optional" annotation.
+  //     * Note: Uses the default for the "optional" annotation.
   //     */
   protected GroupNodeBase() {}
 
@@ -72,7 +72,7 @@ public abstract class GroupNodeBase<E extends IGroupMemberNode> extends GroupMem
   }
 
   //	/*
-//	 * {@inheritDoc}
+  //	 * {@inheritDoc}
   //	 * <p>
   //	 * Force the maintenance of the parent reference on the children.
   //	 */
@@ -280,8 +280,8 @@ public abstract class GroupNodeBase<E extends IGroupMemberNode> extends GroupMem
     for (IQueryNode n : this) {
 
       if (n instanceof AssignmentNode) {
-      /*
-       * Note: Otherwise no newline before an AssignmentNode since
+        /*
+         * Note: Otherwise no newline before an AssignmentNode since
          * also used in a ProjectionNode.
          */
         sb.append("\n");

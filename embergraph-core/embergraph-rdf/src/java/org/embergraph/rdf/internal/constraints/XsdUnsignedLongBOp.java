@@ -39,7 +39,7 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.Value;
 
 /*
-* Convert the {@link IV} to a <code>xsd:unsignedLong</code>. Note that this is a non-standard
+ * Convert the {@link IV} to a <code>xsd:unsignedLong</code>. Note that this is a non-standard
  * extension.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>

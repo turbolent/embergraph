@@ -1,10 +1,9 @@
 package org.embergraph.resources;
 
 import org.embergraph.btree.IndexMetadata;
-import org.embergraph.service.DataService;
 
 /*
-* Abstract base class for results when post-processing a named index partition on the old journal
+ * Abstract base class for results when post-processing a named index partition on the old journal
  * after an overflow operation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

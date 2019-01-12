@@ -32,7 +32,7 @@ import org.embergraph.service.EventResource;
 import org.embergraph.service.EventType;
 
 /*
-* An index segment is read-only btree corresponding to some key range of a potentially distributed
+ * An index segment is read-only btree corresponding to some key range of a potentially distributed
  * index. The file format of the index segment includes a metadata record, the leaves of the segment
  * in key order, and the nodes of the segment in an arbitrary order. It is possible to map or buffer
  * the part of the file containing the index nodes or the entire file depending on application
@@ -53,7 +53,7 @@ public class IndexSegment extends AbstractBTree { // implements ILocalBTreeView 
   private volatile Event openCloseEvent = null;
 
   //    /*
-//     * An LRU for {@link ImmutableLeaf}s. This cache takes advantage of the
+  //     * An LRU for {@link ImmutableLeaf}s. This cache takes advantage of the
   //     * fact that the {@link LeafIterator} can read leaves without navigating
   //     * down the node hierarchy.  This reference is set to <code>null</code>
   //     * if the {@link IndexSegment} is {@link #close()}d.
@@ -61,7 +61,7 @@ public class IndexSegment extends AbstractBTree { // implements ILocalBTreeView 
   //    private ConcurrentWeakValueCacheWithTimeout<Long, ImmutableLeaf> leafCache;
 
   //    /*
-//     * Return the approximate #of open leaves and zero if the
+  //     * Return the approximate #of open leaves and zero if the
   //     * {@link IndexSegment} is not open.
   //     */
   //    final public int getOpenLeafCount() {
@@ -79,7 +79,7 @@ public class IndexSegment extends AbstractBTree { // implements ILocalBTreeView 
   //    }
   //
   //    /*
-//     * The approximate #of bytes in the in-memory {@link IndexSegment} leaves
+  //     * The approximate #of bytes in the in-memory {@link IndexSegment} leaves
   //     * -or- ZERO (0) if the {@link IndexSegment} is closed.
   //     */
   //    public long getOpenLeafByteCount() {
@@ -257,7 +257,7 @@ public class IndexSegment extends AbstractBTree { // implements ILocalBTreeView 
   }
 
   //    /*
-//     * Returns ZERO (0) in order to disable the read-retention queue.
+  //     * Returns ZERO (0) in order to disable the read-retention queue.
   //     * <p>
   //     * Note: The read-retention queue is <em>disabled</em> for the
   //     * {@link IndexSegment}. Instead the {@link IndexSegment} relies on the
@@ -407,8 +407,8 @@ public class IndexSegment extends AbstractBTree { // implements ILocalBTreeView 
 
         try {
 
-        /*
-       * Read the index nodes from the file into a buffer. If
+          /*
+           * Read the index nodes from the file into a buffer. If
            * there are no index nodes (that is if everything fits in
            * the root leaf of the index) then we skip this step.
            *
@@ -448,8 +448,8 @@ public class IndexSegment extends AbstractBTree { // implements ILocalBTreeView 
 
         try {
 
-        /*
-       * Read the optional bloom filter from the backing store.
+          /*
+           * Read the optional bloom filter from the backing store.
            */
           bloomFilter = fileStore.readBloomFilter();
 
@@ -470,7 +470,7 @@ public class IndexSegment extends AbstractBTree { // implements ILocalBTreeView 
   }
 
   //    /*
-//     * Extended to not place hard references to leaves into the
+  //     * Extended to not place hard references to leaves into the
   //     * {@link AbstractBTree#writeRetentionQueue} since {@link IndexSegment}
   //     * leaves are normally held by the {@link #leafCache} for iterators and
   //     * single-tuple operations do not require that we hold a hard reference to
@@ -891,8 +891,8 @@ public class IndexSegment extends AbstractBTree { // implements ILocalBTreeView 
         // Note: This creates a _mutable_ leaf.
         super(btree);
 
-      /*
-       * So we replace the data record with a special immutable leaf
+        /*
+         * So we replace the data record with a special immutable leaf
          * data object that is double-linked.  This is only used for
          * the empty, immutable root leaf of an IndexSegment.
          */
@@ -991,7 +991,7 @@ public class IndexSegment extends AbstractBTree { // implements ILocalBTreeView 
     } // class ImmutableLeaf
 
     //        /*
-//         * An immutable empty leaf used as the right-most child of an
+    //         * An immutable empty leaf used as the right-most child of an
     //         * {@link IndexSegment} {@link Node} when the right-most child was not
     //         * emitted by the {@link IndexSegmentBuilder}. Normally the builder will
     //         * assign tuples to the nodes and leaves in the {@link IndexSegmentPlan}
@@ -1015,7 +1015,7 @@ public class IndexSegment extends AbstractBTree { // implements ILocalBTreeView 
     //        static public class ImmutableEmptyLastLeaf extends ImmutableLeaf {
     //
     //            /*
-//             * @param btree
+    //             * @param btree
     //             *            The owning {@link IndexSegment}.
     //             * @param priorAddr
     //             *            The address of the previous leaf in the natural
@@ -1030,7 +1030,7 @@ public class IndexSegment extends AbstractBTree { // implements ILocalBTreeView 
     //                                btree.getIndexMetadata().getDeleteMarkers(),
     //                                btree.getIndexMetadata().getVersionTimestamps()) {
     //                            /*
-//                             * Overridden to use the priorAddr field passed to
+    //                             * Overridden to use the priorAddr field passed to
     //                             * the constructor.
     //                             */
     //                    @Override
@@ -1129,7 +1129,7 @@ public class IndexSegment extends AbstractBTree { // implements ILocalBTreeView 
      */
 
     //        /*
-//         * The {@link IndexSegmentStore} backing the {@link IndexSegment} for
+    //         * The {@link IndexSegmentStore} backing the {@link IndexSegment} for
     //         * that is being traversed by the {@link ITupleCursor}.
     //         */
     //        protected IndexSegmentStore getStore() {
@@ -1139,7 +1139,7 @@ public class IndexSegment extends AbstractBTree { // implements ILocalBTreeView 
     //        }
     //
     //        /*
-//         * Return the leaf that spans the optional {@link #getFromKey()}
+    //         * Return the leaf that spans the optional {@link #getFromKey()}
     //         * constraint and the first leaf if there is no {@link #getFromKey()}
     //         * constraint.
     //         *
@@ -1175,7 +1175,7 @@ public class IndexSegment extends AbstractBTree { // implements ILocalBTreeView 
     //        }
     //
     ////        /*
-////         * Return the leaf that spans the optional {@link #getToKey()}
+    ////         * Return the leaf that spans the optional {@link #getToKey()}
     ////         * constraint and the last leaf if there is no {@link #getFromKey()}
     ////         * constraint.
     ////         *
@@ -1211,7 +1211,7 @@ public class IndexSegment extends AbstractBTree { // implements ILocalBTreeView 
     ////        }
     //
     //        /*
-//         * Return the leaf that spans the key.  The caller must check to see
+    //         * Return the leaf that spans the key.  The caller must check to see
     //         * whether the key actually exists in the leaf.
     //         *
     //         * @param key

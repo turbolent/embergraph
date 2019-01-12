@@ -35,7 +35,6 @@ import org.embergraph.bop.PipelineOp;
 import org.embergraph.bop.engine.BOpStats;
 import org.embergraph.btree.ILocalBTreeView;
 import org.embergraph.btree.ITupleSerializer;
-import org.embergraph.btree.UnisolatedReadWriteIndex;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.relation.IRelation;
@@ -45,7 +44,7 @@ import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.striterator.IKeyOrder;
 
 /*
-* This operator writes elements constructed from binding sets and an orders list of variables and
+ * This operator writes elements constructed from binding sets and an orders list of variables and
  * constants on an index.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -245,8 +244,8 @@ public class InsertOp<E> extends PipelineOp implements IShardwisePipelineOp<E> {
         final IRelation<T> relation, final IKeyOrder<T> keyOrder, final int partitionId) {
 
       if (true) {
-      /*
-       * FIXME Concurrency control and locks. Maybe submit as an
+        /*
+         * FIXME Concurrency control and locks. Maybe submit as an
          * AbstractTask?
          */
         throw new UnsupportedOperationException();
@@ -275,8 +274,8 @@ public class InsertOp<E> extends PipelineOp implements IShardwisePipelineOp<E> {
       } else {
 
         if (fed == null) {
-        /*
-       * This is not scale-out so index partitions are not
+          /*
+           * This is not scale-out so index partitions are not
            * supported.
            */
           throw new UnsupportedOperationException();
@@ -304,7 +303,7 @@ public class InsertOp<E> extends PipelineOp implements IShardwisePipelineOp<E> {
   //  a[i] = e;
 
   //    /*
-//     * This is a shard wise operator.
+  //     * This is a shard wise operator.
   //     */
   //    @Override
   //    public BOpEvaluationContext getEvaluationContext() {

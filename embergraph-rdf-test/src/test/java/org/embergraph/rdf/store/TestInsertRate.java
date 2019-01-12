@@ -22,14 +22,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import org.embergraph.rdf.rio.StatementBuffer;
-import org.embergraph.util.BytesUtil.UnsignedByteArrayComparator;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 
 /*
-* A test for measuring the possible insert rate for a triple store based on a journal and btree
+ * A test for measuring the possible insert rate for a triple store based on a journal and btree
  * using a synthetic data generator.
  *
  * <p>The s:p:o of the statements can use random selection without replacement from a class space, a
@@ -541,7 +540,7 @@ public class TestInsertRate extends AbstractTripleStoreTestCase {
   }
 
   //        /*
-//         * This tests nearly a million triples.
+  //         * This tests nearly a million triples.
   //         *
   //         * <pre>
   //         * Sustained insert rate: #statements=880000, elapsed=7422, stmts/sec=118566

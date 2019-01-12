@@ -40,7 +40,7 @@ import junit.framework.TestCase2;
 import org.embergraph.util.DaemonThreadFactory;
 
 /*
-* Test suite for {@link BlockingBuffer} and its {@link IAsynchronousIterator} when using an array
+ * Test suite for {@link BlockingBuffer} and its {@link IAsynchronousIterator} when using an array
  * type for the elements (chunk processing).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -150,14 +150,14 @@ public class TestBlockingBufferWithChunks extends TestCase2 {
                   if (!proceedFlag.get()) {
                     cond.await();
                   }
-                /*
-       * add another element - should block until we take an
+                  /*
+                   * add another element - should block until we take an
                    * element using the iterator.
                    */
                   buffer.add(new Integer[] {e2});
 
-                /*
-       * itr.hasNext() will block until the buffer is closed.
+                  /*
+                   * itr.hasNext() will block until the buffer is closed.
                    */
                   buffer.close();
                 } finally {
@@ -185,8 +185,8 @@ public class TestBlockingBufferWithChunks extends TestCase2 {
                     assertSameArray(new Integer[] {e0, e1}, itr.next(50, TimeUnit.MILLISECONDS));
                     if (log.isInfoEnabled()) log.info("Have first chunk");
 
-                  /*
-       * Verify that we obtained the first chunk before the
+                    /*
+                     * Verify that we obtained the first chunk before the
                      * buffer was closed. Otherwise next() blocked
                      * attempting to compile a full chunk until the producer
                      * timeout, at which point the producer closed the
@@ -196,8 +196,8 @@ public class TestBlockingBufferWithChunks extends TestCase2 {
                     assertTrue(buffer.isOpen());
                     assertFalse("buffer was closed.", itr.isExhausted());
 
-                  /*
-       * Verify that nothing is available from the iterator
+                    /*
+                     * Verify that nothing is available from the iterator
                      * (non-blocking test).
                      */
                     assertFalse(itr.hasNext(1, TimeUnit.NANOSECONDS));
@@ -257,7 +257,7 @@ public class TestBlockingBufferWithChunks extends TestCase2 {
    * never be true so the two cases are in fact equivalent.
    */
   //    /*
-//	 * Test liveness with an infinite chunk timeout. The buffer is setup such
+  //	 * Test liveness with an infinite chunk timeout. The buffer is setup such
   //	 * that it contains one or two chunks, which could be combined into a single
   //	 * chunk. next(timeout) should notice as soon as the buffer is closed (a few
   //	 * ms of latency at most) and combine whatever is remaining in the buffer

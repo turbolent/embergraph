@@ -32,23 +32,17 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import org.apache.log4j.Logger;
 import org.embergraph.btree.AbstractBTree;
 import org.embergraph.btree.BTree;
 import org.embergraph.btree.ILocalBTreeView;
-import org.embergraph.btree.IndexSegment;
 import org.embergraph.btree.isolation.IsolatedFusedView;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.resources.ResourceManager;
-import org.embergraph.resources.StoreManager;
-import org.embergraph.service.DataService;
-import org.embergraph.service.IDataService;
-import org.embergraph.service.IEmbergraphFederation;
 
 /*
-* A transaction.
+ * A transaction.
  *
  * <p>A transaction is a context in which the application can access and perform operations on fully
  * named indices. Writes on the named indices accessed by the transaction are accumulated in a
@@ -114,7 +108,7 @@ public class Tx implements ITx {
   public final ReentrantLock lock = new ReentrantLock();
 
   //    /*
-//     * Used for some handshaking in the commit protocol.
+  //     * Used for some handshaking in the commit protocol.
   //     */
   //    final private AbstractLocalTransactionManager localTransactionManager;
 
@@ -181,7 +175,7 @@ public class Tx implements ITx {
   private final AtomicReference<RunState> runState = new AtomicReference<RunState>();
 
   //    /*
-//     * A temporary store used to hold write sets for read-write transactions. It
+  //     * A temporary store used to hold write sets for read-write transactions. It
   //     * is null if the transaction is read-only and will remain null in any case
   //     * until its first use.
   //     */
@@ -441,7 +435,7 @@ public class Tx implements ITx {
   }
 
   //    /*
-//     * Abort the transaction.
+  //     * Abort the transaction.
   //     *
   //     * @throws IllegalStateException
   //     *             if the transaction is already complete.
@@ -505,8 +499,8 @@ public class Tx implements ITx {
 
       try {
 
-      /*
-       * Validate against the current state of the various indices on
+        /*
+         * Validate against the current state of the various indices on
          * write the transaction has written.
          */
 
@@ -515,8 +509,8 @@ public class Tx implements ITx {
           throw new ValidationError();
         }
 
-      /*
-       * Merge each isolated index into the global scope. This also
+        /*
+         * Merge each isolated index into the global scope. This also
          * marks the tuples on which the transaction has written with
          * the [revisionTime]. This operation MUST succeed (at a logical
          * level) since we have already validated (neither read-write
@@ -799,8 +793,8 @@ public class Tx implements ITx {
 
       try {
 
-      /*
-       * Note: this is the live version of the named index. We need to
+        /*
+         * Note: this is the live version of the named index. We need to
          * merge down onto the live version of the index, not onto some
          * historical state.
          */
@@ -809,24 +803,24 @@ public class Tx implements ITx {
 
         if (sources == null) {
 
-        /*
-       * Note: This should not happen since we just validated the
+          /*
+           * Note: This should not happen since we just validated the
            * index.
            */
 
           throw new AssertionError();
         }
 
-      /*
-       * Copy the validated write set for this index down onto the
+        /*
+         * Copy the validated write set for this index down onto the
          * corresponding unisolated index, updating version counters, delete
          * markers, and values as necessary in the unisolated index.
          */
 
         isolated.mergeDown(revisionTime, sources);
 
-      /*
-       * Write a checkpoint so that everything is on the disk. This
+        /*
+         * Write a checkpoint so that everything is on the disk. This
          * reduces both the latency for the commit and the possibilities for
          * error.
          */
@@ -975,8 +969,8 @@ public class Tx implements ITx {
 
       if (sources == null) {
 
-      /*
-       * The named index was not registered as of the transaction
+        /*
+         * The named index was not registered as of the transaction
          * ground state.
          */
 

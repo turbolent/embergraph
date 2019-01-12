@@ -32,20 +32,18 @@ import org.embergraph.bop.IVariableOrConstant;
 import org.embergraph.bop.Var;
 import org.embergraph.bop.bindingSet.ListBindingSet;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.internal.IVCache;
 import org.embergraph.rdf.internal.NotMaterializedException;
 import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.sail.EmbergraphValueReplacer;
 import org.embergraph.rdf.store.AbstractTripleStore;
-import org.openrdf.model.URI;
 import org.openrdf.query.Binding;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.impl.MapBindingSet;
 
 /*
-* Helper class for {@link ServiceCall} invocations.
+ * Helper class for {@link ServiceCall} invocations.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -156,8 +154,8 @@ public class ServiceCallUtility {
 
       if (iv.isInline()) {
 
-      /*
-       * Materialize inline IV as Value.
+        /*
+         * Materialize inline IV as Value.
          *
          * @see <a href="http://sourceforge.net/apps/trac/bigdata/ticket/632">
          *     NotMaterializedException when a SERVICE call needs variables that are provided as
@@ -174,8 +172,8 @@ public class ServiceCallUtility {
 
         } catch (NotMaterializedException ex) {
 
-        /*
-       * Add the variable name to the stack trace.
+          /*
+           * Add the variable name to the stack trace.
            */
 
           throw new NotMaterializedException("var=" + name + ", val=" + iv, ex);

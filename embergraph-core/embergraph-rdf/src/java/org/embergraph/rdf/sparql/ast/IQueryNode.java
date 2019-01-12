@@ -1,12 +1,6 @@
 package org.embergraph.rdf.sparql.ast;
 
-import java.util.Properties;
 import org.embergraph.bop.BOp;
-import org.embergraph.bop.PipelineOp;
-import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
-import org.embergraph.rdf.sparql.ast.eval.AST2BOpUtility;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTQueryHintOptimizer;
-import org.embergraph.rdf.sparql.ast.optimizers.IASTOptimizer;
 
 /** This is the basic interface for any AST operator that appears in the query plan. */
 public interface IQueryNode extends BOp {

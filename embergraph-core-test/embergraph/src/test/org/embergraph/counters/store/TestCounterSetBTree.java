@@ -42,7 +42,7 @@ import org.embergraph.counters.PeriodEnum;
 import org.xml.sax.SAXException;
 
 /*
-* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestCounterSetBTree extends TestCase2 {

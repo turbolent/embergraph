@@ -28,7 +28,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 /*
-* Test suite.
+ * Test suite.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

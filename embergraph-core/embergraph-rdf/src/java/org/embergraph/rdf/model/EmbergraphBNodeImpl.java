@@ -1,5 +1,5 @@
 /*
-* The Notice below must appear in each file of the Source Code of any copy you distribute of the
+ * The Notice below must appear in each file of the Source Code of any copy you distribute of the
  * Licensed Product. Contributors to any Modifications may add their own copyright notices to
  * identify their own contributions.
  *
@@ -42,14 +42,12 @@ package org.embergraph.rdf.model;
 
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.impl.bnode.SidIV;
-import org.embergraph.rdf.rio.StatementBuffer;
 import org.embergraph.rdf.rio.UnificationException;
 import org.embergraph.rdf.spo.SPO;
-import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.model.BNode;
 
 /*
-* A blank node. Use {@link EmbergraphValueFactory} to create instances of this class.
+ * A blank node. Use {@link EmbergraphValueFactory} to create instances of this class.
  *
  * <p>Note: When {@link AbstractTripleStore.Options#STATEMENT_IDENTIFIERS} is enabled blank nodes in
  * the context position of a statement are recognized as statement identifiers by {@link

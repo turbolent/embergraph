@@ -36,7 +36,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.log4j.Logger;
-import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpUtility;
 import org.embergraph.bop.IConstraint;
 import org.embergraph.bop.IPredicate;
@@ -44,12 +43,11 @@ import org.embergraph.bop.ap.SampleIndex.SampleType;
 import org.embergraph.bop.engine.QueryEngine;
 import org.embergraph.bop.joinGraph.NoSolutionsException;
 import org.embergraph.bop.joinGraph.PartitionedJoinGroup;
-import org.embergraph.bop.rdf.join.DataSetJoin;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpRTO;
 import org.embergraph.util.concurrent.ExecutionExceptions;
 
 /*
-* A runtime optimizer for a join graph. The {@link JoinGraph} bears some similarity to ROX (Runtime
+ * A runtime optimizer for a join graph. The {@link JoinGraph} bears some similarity to ROX (Runtime
  * Optimizer for XQuery), but has several significant differences:
  *
  * <ol>
@@ -272,7 +270,7 @@ public class JGraph {
   }
 
   //    /*
-//     * Find a good join path in the data given the join graph. The join path is
+  //     * Find a good join path in the data given the join graph. The join path is
   //     * not guaranteed to be the best join path (the search performed by the
   //     * runtime optimizer is not exhaustive) but it should always be a "good"
   //     * join path and may often be the "best" join path.
@@ -435,8 +433,8 @@ public class JGraph {
           break;
         }
 
-      /*
-       * Show information about the paths and the paths that are
+        /*
+         * Show information about the paths and the paths that are
          * experiencing cardinality underflow.
          */
 
@@ -505,8 +503,8 @@ public class JGraph {
 
         if (p.edgeSample.isUnderflow()) {
 
-        /*
-       * Skip paths with cardinality estimate underflow. They are
+          /*
+           * Skip paths with cardinality estimate underflow. They are
            * not fully tested in the data since no solutions have made
            * it through all of the joins.
            */
@@ -883,8 +881,8 @@ public class JGraph {
 
         if (priorEdgeSample == null) {
 
-        /*
-       * This is the first edge in the path.
+          /*
+           * This is the first edge in the path.
            *
            * Test our local table of join path segment estimates to
            * see if we have already re-sampled that edge. If not, then
@@ -895,8 +893,8 @@ public class JGraph {
 
           if (edgeSample == null) {
 
-          /*
-       * Re-sample the 1st edge in the join path, updating the
+            /*
+             * Re-sample the 1st edge in the join path, updating the
              * sample on the edge as a side-effect. The cutoff
              * sample is based on the vertex sample for the minimum
              * cardinality vertex.
@@ -922,15 +920,15 @@ public class JGraph {
 
         } else {
 
-        /*
-       * The path segment is at least 3 vertices long.
+          /*
+           * The path segment is at least 3 vertices long.
            */
           assert ids.length() >= 3;
 
           if (edgeSample == null) {
 
-          /*
-       * This is some N-step edge in the path, where N is
+            /*
+             * This is some N-step edge in the path, where N is
              * greater than ONE (1). The source vertex is the vertex
              * which already appears in the prior edges of this join
              * path. The target vertex is the next vertex which is
@@ -1177,8 +1175,8 @@ public class JGraph {
             tVertex.pred, // vertex
             C // constraints
             )) {
-        /*
-       * Vertex does not share variables either directly
+          /*
+           * Vertex does not share variables either directly
            * or indirectly.
            */
           if (log.isTraceEnabled())
@@ -1215,16 +1213,16 @@ public class JGraph {
 
       if (tmp.isEmpty()) {
 
-      /*
-       * No constrained joins were identified as extensions of this
+        /*
+         * No constrained joins were identified as extensions of this
          * join path, so we must consider edges which represent fully
          * unconstrained joins.
          */
 
         assert !nothingShared.isEmpty();
 
-      /*
-       * Choose any vertex from the set of those which do
+        /*
+         * Choose any vertex from the set of those which do
          * not share any variables with the join path. Since
          * all of these are fully unconstrained joins we do
          * not want to expand the join path along multiple
@@ -1430,8 +1428,8 @@ public class JGraph {
 
       if (v1.sample == null) {
 
-      /*
-       * We can only estimate the cardinality of edges connecting
+        /*
+         * We can only estimate the cardinality of edges connecting
          * vertices for which samples were obtained.
          */
 
@@ -1444,16 +1442,16 @@ public class JGraph {
 
         if (v2.sample == null) {
 
-        /*
-       * We can only estimate the cardinality of edges connecting
+          /*
+           * We can only estimate the cardinality of edges connecting
            * vertices for which samples were obtained.
            */
 
           continue;
         }
 
-      /*
-       * Figure out which vertex has the smaller cardinality. The sample
+        /*
+         * Figure out which vertex has the smaller cardinality. The sample
          * of that vertex is used since it is more representative than the
          * sample of the other vertex.
          */
@@ -1469,8 +1467,8 @@ public class JGraph {
 
         if (!PartitionedJoinGroup.canJoinUsingConstraints(new IPredicate[] {v.pred}, vp.pred, C)) {
 
-        /*
-       * If there are no shared variables, either directly or
+          /*
+           * If there are no shared variables, either directly or
            * indirectly via the constraints, then we can not use this
            * as an initial edge.
            *
@@ -1604,8 +1602,8 @@ public class JGraph {
       final Path Pi = a[i];
       if (Pi.edgeSample == null) throw new RuntimeException("Not sampled: " + Pi);
       if (Pi.vertices.length < maxPathLen) {
-      /*
-       * Only the most recently generated set of paths survive to
+        /*
+         * Only the most recently generated set of paths survive to
          * the next round.
          */
         pruned.add(Pi);
@@ -1703,8 +1701,8 @@ public class JGraph {
 
         if (!found) {
 
-        /*
-       * Clear sample no longer in use.
+          /*
+           * Clear sample no longer in use.
            *
            * Note: In fact, holding onto the sample metadata is
            * relatively cheap if there was a reason to do so (it only
@@ -1927,11 +1925,11 @@ public class JGraph {
         if (sample == null) {
           f.format(
               "% 4d %10s%1s * %10s (%8s %8s %8s %8s %8s %8s) = %10s %10s%1s : %10s %10s", // %10s
-                                                                                          // %10s",
+              // %10s",
               predId, NA, "", NA, NA, NA, NA, NA, NA, NA, NA, NA, "", NA, NA); // ,NA,NA);
         } else if (sample instanceof VertexSample) {
-        /*
-       * Show the vertex sample for the initial vertex.
+          /*
+           * Show the vertex sample for the initial vertex.
            *
            * Note: we do not store all fields for a vertex sample
            * which are stored for an edge sample because so many of
@@ -1946,7 +1944,7 @@ public class JGraph {
           final long adjCard = Math.min(sample.estCard, sample.limit);
           f.format(
               "% 4d %10s%1s * %10s (%8s %8s %8s %8s %8s %8s) = % 10d % 10d%1s : %10d %10d", // %10d
-                                                                                            // %10s",
+              // %10s",
               predId,
               " ", // srcSample.estCard
               " ", // srcSample.estimateEnum

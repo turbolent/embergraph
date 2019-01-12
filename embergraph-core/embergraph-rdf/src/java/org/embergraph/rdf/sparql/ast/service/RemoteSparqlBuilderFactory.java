@@ -29,7 +29,7 @@ import org.openrdf.query.Binding;
 import org.openrdf.query.BindingSet;
 
 /*
-* Factory encapsulates the logic required to decide on the manner in which solutions will be
+ * Factory encapsulates the logic required to decide on the manner in which solutions will be
  * vectored into the remote service end point and in which the solutions flowing back from that
  * service will be interpreted.
  *
@@ -161,8 +161,8 @@ public class RemoteSparqlBuilderFactory {
         if (bnodes == null) bnodes = new HashSet<BNode>();
         final BNode t = (BNode) v;
         if (bnodes.add(t)) {
-        /*
-       * This solution has at least two variable bindings for the
+          /*
+           * This solution has at least two variable bindings for the
            * same blank node.
            */
           return true;

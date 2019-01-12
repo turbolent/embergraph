@@ -18,7 +18,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.service.fts;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -48,7 +47,6 @@ import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
-import org.embergraph.rdf.sparql.ast.ConstantNode;
 import org.embergraph.rdf.sparql.ast.DummyConstantNode;
 import org.embergraph.rdf.sparql.ast.GroupNodeBase;
 import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
@@ -72,7 +70,7 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 
 /*
-* A factory for an external fulltext search services (such as Solr). It accepts a group consisting
+ * A factory for an external fulltext search services (such as Solr). It accepts a group consisting
  * of external Solr search magic predicates.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
@@ -187,8 +185,8 @@ public class FulltextSearchServiceFactory extends AbstractServiceFactoryBase {
         if (!uri.stringValue().startsWith(FTS.NAMESPACE))
           throw new FulltextSearchException("Expecting search predicate: " + sp);
 
-      /*
-       * Some search predicate.
+        /*
+         * Some search predicate.
          */
 
         if (!ASTFulltextSearchOptimizer.searchUris.contains(uri))
@@ -533,10 +531,7 @@ public class FulltextSearchServiceFactory extends AbstractServiceFactoryBase {
         if (hit.getSnippet() != null) {
 
           final EmbergraphLiteral litSnippet = vf.createLiteral(hit.getSnippet());
-          bs.set(
-              vars[2],
-              new Constant(
-                  new Constant(DummyConstantNode.toDummyIV(litSnippet))));
+          bs.set(vars[2], new Constant(new Constant(DummyConstantNode.toDummyIV(litSnippet))));
         }
 
         final IBindingSet baseBs = hit.getIncomingBindings();
@@ -1116,8 +1111,7 @@ public class FulltextSearchServiceFactory extends AbstractServiceFactoryBase {
             || predicate.equals(FTS.SNIPPET_FIELD)
             || predicate.equals(FTS.TIMEOUT)) {
 
-          requiredBound.add(
-              (IVariable<?>) object); // the subject var is what we return
+          requiredBound.add((IVariable<?>) object); // the subject var is what we return
         }
       }
     }

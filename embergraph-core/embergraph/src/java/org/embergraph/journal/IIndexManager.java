@@ -25,7 +25,7 @@ import org.embergraph.btree.IIndex;
 import org.embergraph.counters.ICounterSetAccess;
 
 /*
-* Interface for managing named indices.
+ * Interface for managing named indices.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

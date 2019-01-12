@@ -29,7 +29,7 @@ import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Unit tests for {@link BytesUtil#getBits(byte[], int, int)}
+ * Unit tests for {@link BytesUtil#getBits(byte[], int, int)}
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

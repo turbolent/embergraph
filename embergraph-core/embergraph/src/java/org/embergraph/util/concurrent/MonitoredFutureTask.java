@@ -23,7 +23,7 @@ import java.util.concurrent.FutureTask;
 import org.apache.log4j.Logger;
 
 /*
-* Helper task for monitoring the results of otherwise unwatched tasks.
+ * Helper task for monitoring the results of otherwise unwatched tasks.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @param <T>

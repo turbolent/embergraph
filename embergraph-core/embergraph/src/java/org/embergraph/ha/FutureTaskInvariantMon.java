@@ -22,8 +22,6 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.Future;
-import java.util.concurrent.FutureTask;
 import org.apache.log4j.Logger;
 import org.embergraph.concurrent.FutureTaskMon;
 import org.embergraph.quorum.Quorum;
@@ -33,7 +31,7 @@ import org.embergraph.quorum.QuorumListener;
 import org.embergraph.util.StackInfoReport;
 
 /*
-* A {@link Future} that allows you to cancel a computation if an invariant is violated. This class
+ * A {@link Future} that allows you to cancel a computation if an invariant is violated. This class
  * is specifically designed to monitor quorum related invariants for HA.
  *
  * <p>Once an invariant is established, listening for the relevant quorum events commences and a
@@ -104,8 +102,8 @@ public abstract class FutureTaskInvariantMon<T> extends FutureTaskMon<T> impleme
     } finally {
       m_quorum.removeListener(this);
       if (!didStart) {
-      /*
-       * Guarantee cancelled unless run() invoked.
+        /*
+         * Guarantee cancelled unless run() invoked.
          */
         cancel(true /* mayInterruptIfRunning */);
       }

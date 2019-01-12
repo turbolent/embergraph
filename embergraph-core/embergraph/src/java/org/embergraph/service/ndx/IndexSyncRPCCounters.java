@@ -30,7 +30,7 @@ import org.embergraph.resources.StaleLocatorException;
 import org.embergraph.util.concurrent.TaskCounters;
 
 /*
-* Counters used for sync RPC on scale-out indices.
+ * Counters used for sync RPC on scale-out indices.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

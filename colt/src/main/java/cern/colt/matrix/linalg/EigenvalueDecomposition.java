@@ -13,7 +13,7 @@ import cern.colt.matrix.DoubleFactory2D;
 import cern.colt.matrix.DoubleMatrix1D;
 import cern.colt.matrix.DoubleMatrix2D;
 /*
-* Eigenvalues and eigenvectors of a real matrix <tt>A</tt>.
+ * Eigenvalues and eigenvectors of a real matrix <tt>A</tt>.
  *
  * <p>If <tt>A</tt> is symmetric, then <tt>A = V*D*V'</tt> where the eigenvalue matrix <tt>D</tt> is
  * diagonal and the eigenvector matrix <tt>V</tt> is orthogonal. I.e. <tt>A =

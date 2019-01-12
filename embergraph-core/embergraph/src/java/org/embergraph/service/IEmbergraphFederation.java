@@ -21,21 +21,16 @@ package org.embergraph.service;
 
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
-import org.embergraph.btree.BTree;
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.counters.CounterSet;
-import org.embergraph.counters.ICounterSet;
 import org.embergraph.counters.ICounterSetAccess;
-import org.embergraph.journal.AbstractJournal;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.ITransactionService;
-import org.embergraph.journal.ITx;
 import org.embergraph.mdi.IMetadataIndex;
-import org.embergraph.service.ndx.ClientIndexView;
 import org.embergraph.service.ndx.IClientIndex;
 
 /*
-* The client-facing interface to a embergraph federation. Note that each embergraph service has an
+ * The client-facing interface to a embergraph federation. Note that each embergraph service has an
  * {@link IEmbergraphFederation} which it uses to communicate with the other services in the
  * federation.
  *
@@ -231,8 +226,7 @@ public interface IEmbergraphFederation<T>
    * @return The UUID of the scale-out index.
    * @todo change to void return
    */
-  UUID registerIndex(
-      IndexMetadata metadata, byte[][] separatorKeys, UUID[] dataServiceUUIDs);
+  UUID registerIndex(IndexMetadata metadata, byte[][] separatorKeys, UUID[] dataServiceUUIDs);
 
   /*
    * Drop a scale-out index.
@@ -279,7 +273,7 @@ public interface IEmbergraphFederation<T>
   boolean isStable();
 
   //    /*
-//     * Return the global {@link SparseRowStore} used to store named property
+  //     * Return the global {@link SparseRowStore} used to store named property
   //     * sets in the federation.
   //     *
   //     * @see GlobalRowStoreSchema

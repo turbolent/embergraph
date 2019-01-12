@@ -10,7 +10,7 @@ package cern.colt.map;
 
 import cern.colt.Timer;
 /*
-* Benchmarks the classes of this package.
+ * Benchmarks the classes of this package.
  *
  * @author wolfgang.hoschek@cern.ch
  * @version 1.0, 09/24/99

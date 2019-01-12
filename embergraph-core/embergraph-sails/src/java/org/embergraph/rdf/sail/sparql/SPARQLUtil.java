@@ -8,7 +8,7 @@ package org.embergraph.rdf.sail.sparql;
 import info.aduna.text.StringUtil;
 
 /*
-* SPARQL-related utility methods.
+ * SPARQL-related utility methods.
  *
  * @author Arjohn Kampman
  * @openrdf

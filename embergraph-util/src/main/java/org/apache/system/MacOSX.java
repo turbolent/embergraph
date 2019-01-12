@@ -22,7 +22,7 @@ import java.lang.management.ManagementFactory;
 import java.lang.management.OperatingSystemMXBean;
 
 /*
-* Generic version based on {@link OperatingSystemMXBean}.
+ * Generic version based on {@link OperatingSystemMXBean}.
  *
  * @author <a href="mailto:dev@avalon.apache.org">Avalon Development Team</a>
  * @version $Id: Linux.java 2265 2009-10-26 12:51:06Z thompsonbry $

@@ -35,7 +35,7 @@ import org.embergraph.io.TestCase3;
 import org.embergraph.journal.Journal;
 
 /*
-* Base class for writing tests of the {@link IRawStore} interface.
+ * Base class for writing tests of the {@link IRawStore} interface.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -180,7 +180,7 @@ public abstract class AbstractRawStoreTestCase extends TestCase3 {
   }
 
   //    /*
-//     * A read with a well-formed address that was never written is an error.
+  //     * A read with a well-formed address that was never written is an error.
   //     *
   //     * @todo Support for detecting this is not present in the WORM store. We
   //     *       could detect an address beyond the end of the store, but that is
@@ -218,7 +218,7 @@ public abstract class AbstractRawStoreTestCase extends TestCase3 {
 
   //
   //    /*
-//     * A delete with a 0L address is always an error.
+  //     * A delete with a 0L address is always an error.
   //     */
   //    public void test_delete_correctRejection_0L() {
   //
@@ -241,7 +241,7 @@ public abstract class AbstractRawStoreTestCase extends TestCase3 {
   //    }
   //
   //    /*
-//     * A delete with an address encoding a zero length component is an error
+  //     * A delete with an address encoding a zero length component is an error
   //     * (the address is ill-formed since we do not allow writes of zero length
   //     * records).
   //     */
@@ -270,7 +270,7 @@ public abstract class AbstractRawStoreTestCase extends TestCase3 {
   //    }
   //
   //    /*
-//     * A delete with a well-formed address that was never written is an error.
+  //     * A delete with a well-formed address that was never written is an error.
   //     */
   //    public void test_delete_correctRejection_neverWritten() {
   //
@@ -374,8 +374,8 @@ public abstract class AbstractRawStoreTestCase extends TestCase3 {
 
         assertEquals(expected, actual);
 
-      /*
-       * verify the position and limit after the read.
+        /*
+         * verify the position and limit after the read.
          */
         assertEquals(0, actual.position());
         assertEquals(expected.length, actual.limit());
@@ -390,8 +390,8 @@ public abstract class AbstractRawStoreTestCase extends TestCase3 {
 
         assertEquals(expected, actual2);
 
-      /*
-       * verify the position and limit after the read.
+        /*
+         * verify the position and limit after the read.
          */
         assertEquals(0, actual2.position());
         assertEquals(expected.length, actual2.limit());
@@ -404,7 +404,7 @@ public abstract class AbstractRawStoreTestCase extends TestCase3 {
   }
 
   //    /*
-//     * Test verifies read behavior when the offered buffer has exactly the
+  //     * Test verifies read behavior when the offered buffer has exactly the
   //     * required #of bytes of remaining.
   //     */
   //    public void test_writeReadWith2ndBuffer_exactCapacity() {
@@ -543,7 +543,7 @@ public abstract class AbstractRawStoreTestCase extends TestCase3 {
   //    }
   //
   //    /*
-//     * Test verifies read behavior when the offered buffer does not have
+  //     * Test verifies read behavior when the offered buffer does not have
   //     * sufficient remaining capacity.
   //     */
   //    public void test_writeReadWith2ndBuffer_wouldUnderflow_nonZeroPosition() {
@@ -592,7 +592,7 @@ public abstract class AbstractRawStoreTestCase extends TestCase3 {
   //    }
   //
   //    /*
-//     * Test verifies read behavior when the offered buffer does not have
+  //     * Test verifies read behavior when the offered buffer does not have
   //     * sufficient remaining capacity.
   //     */
   //    public void test_writeReadWith2ndBuffer_wouldUnderflow_zeroPosition() {
@@ -640,7 +640,7 @@ public abstract class AbstractRawStoreTestCase extends TestCase3 {
   //    }
   //
   //    /*
-//     * Test verifies that an oversized buffer provided to
+  //     * Test verifies that an oversized buffer provided to
   //     * {@link IRawStore#read(long, ByteBuffer)} will not cause more bytes to be
   //     * read than are indicated by the {@link Addr address}.
   //     */
@@ -689,7 +689,7 @@ public abstract class AbstractRawStoreTestCase extends TestCase3 {
   //    }
   //
   //    /*
-//     * Test verifies that an oversized buffer provided to
+  //     * Test verifies that an oversized buffer provided to
   //     * {@link IRawStore#read(long, ByteBuffer)} will not cause more bytes to be
   //     * read than are indicated by the {@link Addr address}.
   //     */
@@ -1094,7 +1094,7 @@ public abstract class AbstractRawStoreTestCase extends TestCase3 {
   }
 
   //    /*
-//     * Test verifies delete of a record and the behavior of read once the
+  //     * Test verifies delete of a record and the behavior of read once the
   //     * record has been deleted.
   //     */
   //    public void test_writeReadDeleteRead() {
@@ -1144,7 +1144,7 @@ public abstract class AbstractRawStoreTestCase extends TestCase3 {
   //    }
 
   //    /*
-//     * Note: This will leave a test file around each time since we can
+  //     * Note: This will leave a test file around each time since we can
   //     * not really call closeAndDelete() when we are testing close().
   //     */
   public void test_close() {

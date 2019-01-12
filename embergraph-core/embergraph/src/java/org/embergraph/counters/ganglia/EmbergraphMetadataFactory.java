@@ -17,7 +17,6 @@ package org.embergraph.counters.ganglia;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import org.embergraph.counters.ICounter;
 import org.embergraph.counters.IHostCounters;
 import org.embergraph.counters.IProcessCounters;
 import org.embergraph.ganglia.GangliaCoreMetricDecls;
@@ -29,7 +28,7 @@ import org.embergraph.ganglia.IGangliaMetadataFactory;
 import org.embergraph.ganglia.IGangliaMetadataMessage;
 
 /*
-* A factory which integrates the embergraph hierarchical counter set model with the ganglia metric
+ * A factory which integrates the embergraph hierarchical counter set model with the ganglia metric
  * model.
  *
  * <p>The embergraph counter set model is hierarchical and collects both per-host and per-service
@@ -617,35 +616,35 @@ public class EmbergraphMetadataFactory extends GangliaCoreMetricDecls
                 "Faults that did not require loading a page from disk")));
 
     //	    /*
-//	     * The virtual memory usage of the process in bytes.
+    //	     * The virtual memory usage of the process in bytes.
     //	     */
     //	    String Memory_virtualSize = Memory + ps + "Virtual Size";
     //
     //	    /*
-//	     * The non-swapped physical memory used by the process in bytes.
+    //	     * The non-swapped physical memory used by the process in bytes.
     //	     */
     //	    String Memory_residentSetSize = Memory + ps + "Resident Set Size";
     //
     //	    /*
-//	     * The percentage of the phsyical memory used by the process.
+    //	     * The percentage of the phsyical memory used by the process.
     //	     */
     //	    String Memory_percentMemorySize = Memory + ps + "Percent Memory Size";
     //
     //	    /*
-//	     * The value reported by {@link Runtime#maxMemory()} (the maximum amount
+    //	     * The value reported by {@link Runtime#maxMemory()} (the maximum amount
     //	     * of memory that the JVM will attempt to use). This should be a
     //	     * {@link OneShotInstrument}.
     //	     */
     //	    String Memory_runtimeMaxMemory = Memory + ps + "Runtime Max Memory";
     //
     //	    /*
-//	     * The value reported by {@link Runtime#freeMemory()} (the amount of
+    //	     * The value reported by {@link Runtime#freeMemory()} (the amount of
     //	     * free memory in the JVM)).
     //	     */
     //	    String Memory_runtimeFreeMemory = Memory + ps + "Runtime Free Memory";
     //
     //	    /*
-//	     * The value reported by {@link Runtime#totalMemory()} (the amount of
+    //	     * The value reported by {@link Runtime#totalMemory()} (the amount of
     //	     * total memory in the JVM, which may vary over time).
     //	     */
     //	    String Memory_runtimeTotalMemory = Memory + ps + "Runtime Total Memory";
@@ -657,14 +656,14 @@ public class EmbergraphMetadataFactory extends GangliaCoreMetricDecls
     // TODO Service Disk metrics.
 
     //	    /*
-//	     * The rate at which the process is reading data from disk in bytes per
+    //	     * The rate at which the process is reading data from disk in bytes per
     //	     * second.
     //	     */
     //	    String PhysicalDisk_BytesReadPerSec = PhysicalDisk + ps
     //	            + "Bytes Read per Second";
     //
     //	    /*
-//	     * The rate at which the process is writing data on the disk in bytes
+    //	     * The rate at which the process is writing data on the disk in bytes
     //	     * per second (cached writes may be reported in this quantity).
     //	     */
     //	    String PhysicalDisk_BytesWrittenPerSec = PhysicalDisk + ps

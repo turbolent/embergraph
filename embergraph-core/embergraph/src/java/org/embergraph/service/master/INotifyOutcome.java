@@ -26,7 +26,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /*
-* Interface used by client tasks to notify the master about the outcome of each resource tasked to
+ * Interface used by client tasks to notify the master about the outcome of each resource tasked to
  * that client. The interface extends {@link Remote} since it is invoked from the client tasks
  * against a proxy for the master.
  *

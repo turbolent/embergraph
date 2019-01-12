@@ -28,7 +28,7 @@ import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /*
-* Test suite for {@link BTree#touch(AbstractNode)}. None of these tests cause an evicted node to be
+ * Test suite for {@link BTree#touch(AbstractNode)}. None of these tests cause an evicted node to be
  * made persistent, but they do verify the correct tracking of the {@link
  * AbstractNode#referenceCount} and the contract for touching a node.
  *

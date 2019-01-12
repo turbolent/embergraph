@@ -25,7 +25,7 @@ import java.util.Date;
 import junit.framework.TestCase;
 
 /*
-* Test suite for {@link MillisecondTimestampFactory}.
+ * Test suite for {@link MillisecondTimestampFactory}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

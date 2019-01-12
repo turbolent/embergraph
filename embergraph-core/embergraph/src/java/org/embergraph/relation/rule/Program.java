@@ -30,7 +30,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 /*
-* Mutable program may be used to create a variety of rule executions.
+ * Mutable program may be used to create a variety of rule executions.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -52,7 +52,7 @@ public class Program implements IProgram {
   private final List<IStep> steps = new LinkedList<IStep>();
 
   //    /*
-//     * De-serialization ctor.
+  //     * De-serialization ctor.
   //     */
   //    public Program() {
   //
@@ -225,8 +225,8 @@ public class Program implements IProgram {
 
         if (i > 0) {
 
-        /*
-       * Note: Do NOT use a comma here - it will break the comma
+          /*
+           * Note: Do NOT use a comma here - it will break the comma
            * delimited format written by RuleStats.
            */
           sb.append(" ");

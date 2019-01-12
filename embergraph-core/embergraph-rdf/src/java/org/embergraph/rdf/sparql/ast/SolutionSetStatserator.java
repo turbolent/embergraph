@@ -32,12 +32,9 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IVariable;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.internal.IVCache;
-import org.embergraph.rdf.internal.VTE;
-import org.embergraph.rdf.internal.impl.TermId;
 
 /*
-* Class populates an {@link ISolutionSetStats} object from a stream of solutions. The summary is
+ * Class populates an {@link ISolutionSetStats} object from a stream of solutions. The summary is
  * available from {@link #getStats()} once the source solutions have been fully consumed.
  *
  * <p>TODO Compute the distinct values for each variable for which we have a binding, or at least
@@ -149,8 +146,8 @@ public class SolutionSetStatserator implements ICloseableIterator<IBindingSet[]>
 
           if (usedVars.add(v) && nsolutions > 1) {
 
-          /*
-       * This variable was not used in solutions prior to this
+            /*
+             * This variable was not used in solutions prior to this
              * one.
              */
 
@@ -165,8 +162,8 @@ public class SolutionSetStatserator implements ICloseableIterator<IBindingSet[]>
 
           if (nsolutions == 1) {
 
-          /*
-       * Record the binding for each variable in the first
+            /*
+             * Record the binding for each variable in the first
              * solution. This is used to identify variables which
              * are effective constants (they are bound to the same
              * value in all solutions).
@@ -176,8 +173,8 @@ public class SolutionSetStatserator implements ICloseableIterator<IBindingSet[]>
 
           } else {
 
-          /*
-       * Look at the first bound value for this variable. If
+            /*
+             * Look at the first bound value for this variable. If
              * it was not bound or if the variable was not bound to
              * the same constant, then this variable is not an
              * effective constant for this set of solutions.
@@ -194,16 +191,16 @@ public class SolutionSetStatserator implements ICloseableIterator<IBindingSet[]>
             }
           }
 
-        /*
-       * Check for a variable which has a bound value but the
+          /*
+           * Check for a variable which has a bound value but the
            * bound value is not materialized.
            */
           if (!notMaterialized.contains(v)) {
 
             if (c != null) {
 
-            /*
-       * Note: ClassCastException if bound value is not an
+              /*
+               * Note: ClassCastException if bound value is not an
                * IV.
                */
               final IV<?, ?> iv = c.get();

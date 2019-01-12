@@ -23,7 +23,7 @@ import org.embergraph.rdf.graph.util.IGraphFixture;
 import org.embergraph.rdf.graph.util.IGraphFixtureFactory;
 
 /*
-* Abstract base class for graph mining tests.
+ * Abstract base class for graph mining tests.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

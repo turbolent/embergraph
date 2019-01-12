@@ -3,7 +3,7 @@ package org.embergraph.btree;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Utility class to dump an index in a variety of ways.
+ * Utility class to dump an index in a variety of ways.
  *
  * @author thompsonbry
  *     <p>FIXME GIST : Generalize this for non-B+Tree indices.

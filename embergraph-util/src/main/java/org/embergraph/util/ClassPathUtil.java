@@ -23,7 +23,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 /*
-* Utility class for returning an instance of an interface.
+ * Utility class for returning an instance of an interface.
  *
  * @author bryan
  */

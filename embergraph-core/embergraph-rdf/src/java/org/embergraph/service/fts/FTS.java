@@ -18,12 +18,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.service.fts;
 
-import org.embergraph.rdf.store.BDS;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
 /*
-* <p>
+ * <p>
  * A vocabulary for the embergraph external full text search facility.
  * The FTS search may be used to combine text search and graph search,
  * just like the {@link BDS} - the basic difference is that this search is

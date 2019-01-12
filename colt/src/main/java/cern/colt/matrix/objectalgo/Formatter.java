@@ -16,7 +16,7 @@ import cern.colt.matrix.impl.AbstractMatrix1D;
 import cern.colt.matrix.impl.AbstractMatrix2D;
 import cern.colt.matrix.impl.Former;
 /*
-* Flexible, well human readable matrix print formatting. Each cell is converted using {@link
+ * Flexible, well human readable matrix print formatting. Each cell is converted using {@link
  * Object#toString()}. For examples see {@link cern.colt.matrix.doublealgo.Formatter
  * doublealgo.Formatter} which is just the same except that it operates on doubles.
  *

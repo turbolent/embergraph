@@ -25,7 +25,7 @@ import org.embergraph.btree.raba.MutableKeyBuffer;
 import org.embergraph.btree.raba.MutableValueBuffer;
 
 /*
-* Test suite for various utility methods, both static and instance, on {@link AbstractNode}.
+ * Test suite for various utility methods, both static and instance, on {@link AbstractNode}.
  *
  * @todo review coverage now that so much has changed with respect to keys.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -58,7 +58,7 @@ public class TestUtilMethods extends AbstractBTreeTestCase {
   //    }
   //
   //    /*
-//     * @todo test routines to get and set individual keys. when stride gt 1 this
+  //     * @todo test routines to get and set individual keys. when stride gt 1 this
   //     *       requires creating an array of values. i need to determine how to
   //     *       handle stride == 1 which currently autoboxes, e.g., int to Integer
   //     *       vs int to int[0].
@@ -68,7 +68,7 @@ public class TestUtilMethods extends AbstractBTreeTestCase {
   //    }
 
   //    /*
-//     * test routines to copy a key from some index in a node or leaf to another
+  //     * test routines to copy a key from some index in a node or leaf to another
   //     * index in either the same or another node or leaf.
   //     *
   //     * @todo move this method and this test to {@link MutableKeyBuffer}?

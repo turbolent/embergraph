@@ -25,11 +25,10 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-import org.embergraph.journal.IAtomicStore;
 import org.embergraph.util.ChecksumError;
 
 /*
-* Interface for a write cache with read back and the capability to update records while they are
+ * Interface for a write cache with read back and the capability to update records while they are
  * still in the cache.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -77,8 +76,7 @@ public interface IWriteCache {
    * @throws ChecksumError if checksums are enabled and the checksum for the record could not be
    *     validated.
    */
-  ByteBuffer read(final long offset, final int nbytes)
-      throws InterruptedException, ChecksumError;
+  ByteBuffer read(final long offset, final int nbytes) throws InterruptedException, ChecksumError;
 
   /*
    * Flush the writes to the backing channel but does not force anything to the backing channel. The

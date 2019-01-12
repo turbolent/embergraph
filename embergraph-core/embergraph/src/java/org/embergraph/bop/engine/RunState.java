@@ -44,7 +44,7 @@ import org.embergraph.bop.PipelineOp;
 import org.embergraph.bop.join.PipelineJoinStats;
 
 /*
-* The run state for an {@link IRunningQuery}. This class is thread-safe.
+ * The run state for an {@link IRunningQuery}. This class is thread-safe.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -553,8 +553,8 @@ class RunState {
             if (didAdd = innerState.lastPassRequested.add(id))
               innerState.totalLastPassRemainingCount.incrementAndGet();
           if (didAdd) {
-          /*
-       * Mock an evaluation pass for this operator. It will look
+            /*
+             * Mock an evaluation pass for this operator. It will look
              * as if the operator has been evaluated (various
              * collections have entries for that bopId) but that it was
              * evaluated ZERO (0) times (various counters are zero).
@@ -742,8 +742,8 @@ class RunState {
       final Integer sinkId = BOpUtility.getEffectiveDefaultSink(bop, p);
       //            final Integer sinkId = msg.getSinkId();
       if (sinkId != null) {
-      /*
-       * Note: The sink will be null for the last operator in the
+        /*
+         * Note: The sink will be null for the last operator in the
          * query plan. That operator is understood to target the buffer
          * from which the solutions are drained on the query controller.
          */
@@ -895,8 +895,8 @@ class RunState {
 
       {
 
-      /*
-       * If the operator is running then it is, defacto, "not done."
+        /*
+         * If the operator is running then it is, defacto, "not done."
          *
          * If any descendants of the operator are running, then they
          * could cause the operator to be re-triggered and it is "not
@@ -917,8 +917,8 @@ class RunState {
 
       {
 
-      /*
-       * Any chunks available for the operator in question or any of
+        /*
+         * Any chunks available for the operator in question or any of
          * its descendants could cause that operator to be triggered.
          */
 
@@ -944,8 +944,8 @@ class RunState {
 
         if (innerState.atOnceRequired.contains(id)) {
 
-        /*
-       * Any predecessor of the operator (but not the operator
+          /*
+           * Any predecessor of the operator (but not the operator
            * itself) requires at-once evaluation and has not yet run.
            */
 
@@ -962,8 +962,8 @@ class RunState {
 
         if (innerState.lastPassRequested.contains(id)) {
 
-        /*
-       * Any predecessor of the operator (but not the operator itself)
+          /*
+           * Any predecessor of the operator (but not the operator itself)
            * requested a last pass evaluation phase and that last pass
            * evaluation phase is still in progress (as recognized by a
            * non-null entry in [doneOn] for that operator).
@@ -1036,8 +1036,8 @@ class RunState {
 
         if (DEBUG) log.debug("Operator will self-trigger last pass evaluation: op=" + op);
 
-      /*
-       * When we convert into the LastPass phase for this operator we
+        /*
+         * When we convert into the LastPass phase for this operator we
          * copy the [startedOn] set for the operator into the [doneOn]
          * set and then increment [totalLastPassRemainingCount] by the
          * size of the copied set. That sets up the criteria that we
@@ -1128,8 +1128,8 @@ class RunState {
 
       {
 
-      /*
-       * If any descendants (aka predecessors) of the operator are
+        /*
+         * If any descendants (aka predecessors) of the operator are
          * running, then they could cause produce additional solutions
          * so the operator is not ready for "at-once" evaluation.
          */
@@ -1151,8 +1151,8 @@ class RunState {
 
       {
 
-      /*
-       * Any chunks available for a descendant (aka predecessor) of
+        /*
+         * Any chunks available for a descendant (aka predecessor) of
          * the operator could produce additional solutions as inputs to
          * the operator so it is not ready for "at-once" evaluation.
          */
@@ -1160,8 +1160,8 @@ class RunState {
         final AtomicLong availableChunkCount = innerState.availableMap.get(id);
 
         if (availableChunkCount != null && availableChunkCount.get() != 0) {
-        /*
-       * We are looking at some other predecessor of the specified
+          /*
+           * We are looking at some other predecessor of the specified
            * operator.
            */
           if (DEBUG)
@@ -1252,8 +1252,8 @@ class RunState {
       final AtomicLong n = innerState.runningMap.get(bopId);
 
       if (n == null) {
-      /*
-       * I have observed this exception once. It may have been caused
+        /*
+         * I have observed this exception once. It may have been caused
          * by the interrupt of an RMI during the handling of a startOp
          * message on a cluster node.
          */
@@ -1279,8 +1279,8 @@ class RunState {
 
       if (set != null) {
 
-      /*
-       * Remove the shardId or serviceId from our doneSet.
+        /*
+         * Remove the shardId or serviceId from our doneSet.
          */
 
         if (!set.remove(msg.getPartitionId()) && !set.remove(msg.getServiceId())) {

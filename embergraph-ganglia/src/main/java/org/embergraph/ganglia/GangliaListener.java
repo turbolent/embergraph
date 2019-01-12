@@ -23,7 +23,6 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import org.apache.log4j.Logger;
-import org.embergraph.ganglia.util.BytesUtil;
 import org.embergraph.ganglia.util.DaemonThreadFactory;
 
 /*

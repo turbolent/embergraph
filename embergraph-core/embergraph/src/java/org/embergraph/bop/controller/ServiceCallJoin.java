@@ -47,7 +47,6 @@ import org.embergraph.bop.join.HashJoinAnnotations;
 import org.embergraph.bop.join.JVMHashJoinUtility;
 import org.embergraph.bop.join.JoinAnnotations;
 import org.embergraph.bop.join.JoinTypeEnum;
-import org.embergraph.htree.HTree;
 import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.sparql.ast.service.EmbergraphServiceCall;
@@ -70,7 +69,7 @@ import org.embergraph.util.concurrent.LatchedExecutor;
 import org.openrdf.query.BindingSet;
 
 /*
-* Vectored pipeline join of the source solution(s) with solutions from a a SERVICE invocation. This
+ * Vectored pipeline join of the source solution(s) with solutions from a a SERVICE invocation. This
  * operator may be used to invoke: (a) internal, embergraph-aware services; (b) internal openrdf
  * aware services; and (c) remote services.
  *
@@ -373,8 +372,8 @@ public class ServiceCallJoin extends PipelineOp {
             serviceCallChunk.addSourceSolution(bset);
           }
 
-        /*
-       * Submit vectored service calls to each target service in
+          /*
+           * Submit vectored service calls to each target service in
            * parallel.
            *
            * Note: Parallelism evaluation of multiple services can
@@ -420,8 +419,8 @@ public class ServiceCallJoin extends PipelineOp {
 
             for (FutureTask<Void> ft : tasks) {
 
-            /*
-       * Each service request is faced with the same
+              /*
+               * Each service request is faced with the same
                * timeout.
                */
 
@@ -527,8 +526,8 @@ public class ServiceCallJoin extends PipelineOp {
         ICloseableIterator<IBindingSet[]> serviceSolutionItr = null;
         try {
 
-        /*
-       * Invoke the service.
+          /*
+           * Invoke the service.
            *
            * Note: Returns [null] IFF SILENT and SERVICE ERROR.
            */
@@ -537,8 +536,8 @@ public class ServiceCallJoin extends PipelineOp {
 
           if (serviceSolutionItr != null) {
 
-          /*
-       * Do a hash join of the source solutions with the
+            /*
+             * Do a hash join of the source solutions with the
              * solutions from the service, outputting any solutions
              * which join.
              *
@@ -554,8 +553,8 @@ public class ServiceCallJoin extends PipelineOp {
           if (serviceSolutionItr != null) serviceSolutionItr.close();
         }
 
-      /*
-       * Note: This only handles Normal and Optional. Normal is used
+        /*
+         * Note: This only handles Normal and Optional. Normal is used
          * unless the SERVICE is SILENT.
          *
          * The semantics of SILENT are that it returns an "empty"
@@ -637,8 +636,8 @@ public class ServiceCallJoin extends PipelineOp {
         } catch (Throwable t) {
 
           if (silent && !InnerCause.isInnerCause(t, InterruptedException.class)) {
-          /*
-       * If the SILENT attribute was specified, then do not
+            /*
+             * If the SILENT attribute was specified, then do not
              * halt the query if there is an error.
              *
              * Note: The query must still be interruptable so we do
@@ -699,8 +698,8 @@ public class ServiceCallJoin extends PipelineOp {
         // Convert IBindingSet[] to openrdf BindingSet[].
         final BindingSet[] left2 = ServiceCallUtility.convert(lex, projectedVars, left);
 
-      /*
-       * Note: This operation is "at-once" over the service solutions.
+        /*
+         * Note: This operation is "at-once" over the service solutions.
          * It could be turned into a "chunked" operator over those
          * solutions. That would make sense if the service was capable
          * of delivering a very large number of solutions.
@@ -721,8 +720,8 @@ public class ServiceCallJoin extends PipelineOp {
           if (results != null) results.close();
         }
 
-      /*
-       * Batch resolve EmbergraphValues to IVs. This is necessary in
+        /*
+         * Batch resolve EmbergraphValues to IVs. This is necessary in
          * order to have subsequent JOINs succeed when they join on
          * variables which are bound to terms which are in the
          * lexicon.
@@ -747,8 +746,8 @@ public class ServiceCallJoin extends PipelineOp {
       private ICloseableIterator<IBindingSet> doNonEmbergraphMockIVServiceCall(
           final ServiceCall<IBindingSet> serviceCall, final IBindingSet[] left) throws Exception {
 
-      /*
-       * Note: a MockTermResolverOp will be wrapped around this service in
+        /*
+         * Note: a MockTermResolverOp will be wrapped around this service in
          * AST2BopUtitlity.addService(), so we don't need to care about dictionary resolving mocked
          * URIs here, but just call the service.
          */

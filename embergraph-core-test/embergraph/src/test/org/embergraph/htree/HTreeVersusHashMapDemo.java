@@ -23,10 +23,8 @@ package org.embergraph.htree;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Random;
-import java.util.Set;
 import java.util.UUID;
 import org.apache.log4j.Logger;
 import org.embergraph.btree.BTreeCounters;
@@ -46,7 +44,7 @@ import org.embergraph.util.Bytes;
 import org.embergraph.util.PseudoRandom;
 
 /*
-* A simple demonstration which may be used to compare the {@link HTree} performance against a Java
+ * A simple demonstration which may be used to compare the {@link HTree} performance against a Java
  * collections class such as {@link HashMap} or {@link LinkedHashMap}. This demonstration is focused
  * on the performance curve when inserting a large number of keys into a collection. The Java
  * collection classes are faster for small numbers of keys, but the {@link HTree} rapidly out

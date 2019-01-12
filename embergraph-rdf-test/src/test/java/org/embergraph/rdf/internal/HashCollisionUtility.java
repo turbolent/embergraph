@@ -26,7 +26,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -55,9 +54,6 @@ import org.embergraph.io.DirectBufferPool;
 import org.embergraph.io.compression.RecordCompressor;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.Journal;
-import org.embergraph.rdf.internal.impl.BlobIV;
-import org.embergraph.rdf.internal.impl.literal.PartlyInlineTypedLiteralIV;
-import org.embergraph.rdf.internal.impl.uri.PartlyInlineURIIV;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
@@ -69,10 +65,7 @@ import org.embergraph.rwstore.sector.MemoryManager;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 import org.embergraph.util.concurrent.Latch;
-import org.openrdf.model.BNode;
-import org.openrdf.model.Literal;
 import org.openrdf.model.Statement;
-import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFHandlerException;
@@ -83,7 +76,7 @@ import org.openrdf.rio.RDFParserRegistry;
 import org.openrdf.rio.helpers.RDFHandlerBase;
 
 /*
-* Utility class to parse some RDF resource(s) and count hash collisions using a variety of hash
+ * Utility class to parse some RDF resource(s) and count hash collisions using a variety of hash
  * codes.
  *
  * <p>TODO Various data sets:
@@ -463,7 +456,7 @@ public class HashCollisionUtility {
     private final AtomicLong totalCollisions = new AtomicLong();
 
     // /*
-// * The #of RDF {@link Value}s which were found in the {@link
+    // * The #of RDF {@link Value}s which were found in the {@link
     // #valueCache},
     // * thereby avoiding a lookup against the index.
     // */
@@ -1253,14 +1246,14 @@ public class HashCollisionUtility {
       final DefaultTupleSerializer tupleSer =
           new DefaultTupleSerializer(
               new DefaultKeyBuilderFactory(new Properties()),
-            /*
-       * leaf keys
+              /*
+               * leaf keys
                */
               //					DefaultFrontCodedRabaCoder.INSTANCE,
               new FrontCodedRabaCoder(ratio),
               //					CanonicalHuffmanRabaCoder.INSTANCE,
-            /*
-       * leaf values
+              /*
+               * leaf values
                */
               CanonicalHuffmanRabaCoder.INSTANCE
               //					new SimpleRabaCoder()
@@ -1661,8 +1654,8 @@ public class HashCollisionUtility {
 
       if (bucket == null) {
 
-      /*
-       * No match on that hash code key.
+        /*
+         * No match on that hash code key.
          */
 
         // lay the record down on the memory manager.
@@ -1675,8 +1668,8 @@ public class HashCollisionUtility {
 
       } else {
 
-      /*
-       * Either a hash collision or the value is already stored at
+        /*
+         * Either a hash collision or the value is already stored at
          * a known address.
          */
         {
@@ -1688,8 +1681,8 @@ public class HashCollisionUtility {
               continue;
             }
 
-          /*
-       * TODO It would be more efficient to compare the data
+            /*
+             * TODO It would be more efficient to compare the data
              * using the zero-copy get(addr) method.
              */
             final byte[] tmp = context.read(addr);
@@ -1701,8 +1694,8 @@ public class HashCollisionUtility {
               if (log.isDebugEnabled())
                 log.debug("Duplicate value in chunk: " + Arrays.toString(t.val));
 
-            /*
-       * FIXME This pattern does not really work out for
+              /*
+               * FIXME This pattern does not really work out for
                * building statements since we lack a reference to
                * the Value which is being inserted into the TERMS
                * index. The StatementBuffer handles this. It keeps
@@ -2034,8 +2027,8 @@ public class HashCollisionUtility {
 
       if (rangeCount >= Byte.MAX_VALUE) {
 
-      /*
-       * Impose a hard limit on the #of hash collisions we will accept
+        /*
+         * Impose a hard limit on the #of hash collisions we will accept
          * in this utility.
          *
          * @todo We do not need to have a hard limit if we use
@@ -2052,8 +2045,8 @@ public class HashCollisionUtility {
 
       if (rangeCount == 0) {
 
-      /*
-       * This is the first time we have observed a Value which
+        /*
+         * This is the first time we have observed a Value which
          * generates this hash code, so append a [short] ZERO (0) to
          * generate the actual key and then insert the Value into the
          * index. Since there is nothing in the index for this hash

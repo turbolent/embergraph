@@ -27,17 +27,13 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.UUID;
 import org.apache.log4j.Logger;
-import org.embergraph.btree.BTree;
-import org.embergraph.btree.IndexMetadata;
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.relation.RelationSchema;
-import org.embergraph.service.DataService;
 import org.embergraph.service.IDataService;
 import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.util.NV;
 
 /*
-* Base class for managing the initial configuration metadata for indices and locatable resources.
+ * Base class for managing the initial configuration metadata for indices and locatable resources.
  *
  * @todo There are some drawbacks with this approach. It remains to be seen whether this can be
  *     improved on readily.
@@ -249,7 +245,7 @@ public class Configuration {
   }
 
   //    /*
-//     * Return the last component of the globalName.
+  //     * Return the last component of the globalName.
   //     * <p>
   //     * Note: If '.' does not appear, then lastIndexOf == -1 and beginIndex :=
   //     * lastIndexOf + 1 == 0, so the localName will be the same as the

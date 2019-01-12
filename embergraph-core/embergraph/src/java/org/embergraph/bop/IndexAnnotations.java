@@ -24,7 +24,7 @@ package org.embergraph.bop;
 import org.embergraph.btree.IndexMetadata;
 
 /*
-* Annotations for operators using a persistence capable index.
+ * Annotations for operators using a persistence capable index.
  *
  * <p>TODO Annotations for key and value raba coders.
  *

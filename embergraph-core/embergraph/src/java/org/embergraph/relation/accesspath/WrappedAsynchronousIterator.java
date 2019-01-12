@@ -23,13 +23,12 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation.accesspath;
 
-import cutthecrap.utils.striterators.ICloseableIterator;
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 import org.embergraph.striterator.IChunkedIterator;
 
 /*
-* An {@link IAsynchronousIterator} that wraps an {@link IChunkedIterator} or a {@link
+ * An {@link IAsynchronousIterator} that wraps an {@link IChunkedIterator} or a {@link
  * ICloseableIterator}.
  *
  * @param E The generic type of the visited chunks.

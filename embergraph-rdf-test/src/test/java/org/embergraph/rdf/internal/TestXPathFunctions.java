@@ -22,10 +22,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.internal;
 
 import junit.framework.TestCase2;
-import org.embergraph.rdf.sparql.ast.FunctionRegistry;
 
 /*
-* Test suite for various xpath numeric functions.
+ * Test suite for various xpath numeric functions.
  *
  * <p><strong>The xpath functions are very picky. Check the specs when you work on this test
  * suite!</strong>

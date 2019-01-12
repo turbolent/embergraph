@@ -21,13 +21,12 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.store;
 
-import junit.extensions.proxy.ProxyTestSuite;
 import junit.framework.Test;
 import junit.framework.TestCase2;
 import junit.framework.TestSuite;
 
 /*
-* Aggregates test that are run for each {@link ITripleStore} implementation.
+ * Aggregates test that are run for each {@link ITripleStore} implementation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

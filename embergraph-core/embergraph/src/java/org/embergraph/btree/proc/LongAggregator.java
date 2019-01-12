@@ -27,7 +27,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import org.embergraph.service.Split;
 
 /*
-* Aggregates the value of an {@link Long} result.
+ * Aggregates the value of an {@link Long} result.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

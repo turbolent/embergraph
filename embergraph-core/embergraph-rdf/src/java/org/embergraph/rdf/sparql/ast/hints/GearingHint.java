@@ -28,7 +28,7 @@ import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /*
-* Query hint to enable users choose the gearing used for evaluating recursive property paths.
+ * Query hint to enable users choose the gearing used for evaluating recursive property paths.
  * Generally speaking, the problem with recursive property path queries is that it is inherently
  * hard to choose the gearing. This hint allows the user to take control over the gearing.
  *

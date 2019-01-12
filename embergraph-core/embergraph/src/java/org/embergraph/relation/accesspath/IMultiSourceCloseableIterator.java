@@ -24,7 +24,7 @@ package org.embergraph.relation.accesspath;
 import cutthecrap.utils.striterators.ICloseableIterator;
 
 /*
-* An interface which permits new sources to be attached dynamically. The decision to accept a new
+ * An interface which permits new sources to be attached dynamically. The decision to accept a new
  * source via {@link #add(ICloseableIterator)} or to {@link IMultiSourceCloseableIterator#close()}
  * the iterator must be atomic. In particular, it is illegal for a source to be accepted after the
  * iterator has been closed.

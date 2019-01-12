@@ -23,7 +23,7 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
 /*
-* Interface exposes access to the VS and ES that is visible during a GATHER or SCATTER operation.
+ * Interface exposes access to the VS and ES that is visible during a GATHER or SCATTER operation.
  *
  * <p>This interface is intended to be restrictive in both its API and the state that the API will
  * expose in order to facilitate scaling in multi-machine environments.

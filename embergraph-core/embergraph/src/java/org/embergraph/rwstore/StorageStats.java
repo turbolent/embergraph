@@ -29,7 +29,7 @@ import java.util.Iterator;
 import org.embergraph.rwstore.sector.SectorAllocator;
 
 /*
-* Maintains stats on the RWStore allocations, useful for tuning Allocator sizes and tracking store
+ * Maintains stats on the RWStore allocations, useful for tuning Allocator sizes and tracking store
  * efficiency.
  *
  * <p>It can also track reallocation patterns that are lost in static snapshots of current usage.
@@ -185,7 +185,7 @@ public class StorageStats {
      */
     long m_sizeAllocations;
     //		/*
-//		 * The user bytes that were in use across all allocations for this slot
+    //		 * The user bytes that were in use across all allocations for this slot
     //		 * size that have been recycled / deleted.
     //		 * <p>
     //		 * Note: Per BLZG-1551, this value is not tracked accurately!

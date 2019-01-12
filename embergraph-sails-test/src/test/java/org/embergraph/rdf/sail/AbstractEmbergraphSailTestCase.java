@@ -30,7 +30,7 @@ import org.embergraph.journal.TestHelper;
 import org.embergraph.rdf.sail.EmbergraphSail.Options;
 
 /*
-* Abstract harness for testing under a variety of configurations. In order to test a specific
+ * Abstract harness for testing under a variety of configurations. In order to test a specific
  * configuration, create a concrete instance of this class. The configuration can be described using
  * a mixture of a <code>.properties</code> file of the same name as the test class and custom code.
  *
@@ -126,8 +126,8 @@ public abstract class AbstractEmbergraphSailTestCase extends TestCase2 {
        */
       if (m_properties.get(Options.FILE) == null) {
 
-      /*
-       * Use a temporary file for the test. Such files are always deleted when
+        /*
+         * Use a temporary file for the test. Such files are always deleted when
          * the journal is closed or the VM exits.
          */
 
@@ -198,7 +198,7 @@ public abstract class AbstractEmbergraphSailTestCase extends TestCase2 {
   protected abstract EmbergraphSail reopenSail(EmbergraphSail sail);
 
   //    /*
-//     * Recursively removes any files and subdirectories and then removes the
+  //     * Recursively removes any files and subdirectories and then removes the
   //     * file (or directory) itself.
   //     *
   //     * @param f

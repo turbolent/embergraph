@@ -37,8 +37,6 @@ import org.embergraph.bop.IPredicate;
 import org.embergraph.bop.IVariable;
 import org.embergraph.bop.IVariableOrConstant;
 import org.embergraph.bop.Var;
-import org.embergraph.bop.joinGraph.IEvaluationPlanFactory;
-import org.embergraph.bop.joinGraph.IRangeCountFactory;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.ISortKeyBuilder;
 import org.embergraph.btree.keys.KeyBuilder;
@@ -47,8 +45,6 @@ import org.embergraph.rdf.inf.Justification;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.TermId;
-import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.relation.rule.BindingSetSortKeyBuilder;
 import org.embergraph.rdf.spo.SPO;
 import org.embergraph.rdf.spo.SPORelation;
@@ -57,11 +53,8 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.relation.IMutableRelation;
 import org.embergraph.relation.IRelation;
 import org.embergraph.relation.accesspath.IAccessPath;
-import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.IBuffer;
-import org.embergraph.relation.accesspath.UnsynchronizedArrayBuffer;
 import org.embergraph.relation.rule.IAccessPathExpander;
-import org.embergraph.relation.rule.IProgram;
 import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.IStep;
 import org.embergraph.relation.rule.eval.AbstractJoinNexus;
@@ -73,12 +66,11 @@ import org.embergraph.relation.rule.eval.IRuleStatisticsFactory;
 import org.embergraph.relation.rule.eval.ISolution;
 import org.embergraph.relation.rule.eval.RuleStats;
 import org.embergraph.striterator.ChunkedArrayIterator;
-import org.embergraph.striterator.IChunkedIterator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 
 /*
-* {@link IProgram} execution support for the RDF DB.
+ * {@link IProgram} execution support for the RDF DB.
  *
  * <p>The rules have potential parallelism when performing closure. Each join has potential
  * parallelism as well for subqueries. We could even define a PARALLEL iterator flag and have
@@ -135,7 +127,7 @@ public class RDFJoinNexus extends AbstractJoinNexus implements IJoinNexus {
         }
 
         //        /*
-//         * Factory will resolve term identifiers in {@link IPredicate}s in the
+        //         * Factory will resolve term identifiers in {@link IPredicate}s in the
         //         * tail of the {@link IRule} to {@link EmbergraphValue}s unless the
         //         * {@link IIndexManager} is an {@link IEmbergraphFederation}.
         //         *
@@ -230,8 +222,8 @@ public class RDFJoinNexus extends AbstractJoinNexus implements IJoinNexus {
         }
       } catch (Throwable t) {
 
-      /*
-       * @todo It appears that someone is interrupting the thread in
+        /*
+         * @todo It appears that someone is interrupting the thread in
          * which the logging data is being generated. You can see this
          * if you enable translation of term identifiers above in the
          * factory that produces instances of this class.
@@ -500,8 +492,8 @@ public class RDFJoinNexus extends AbstractJoinNexus implements IJoinNexus {
 
       try {
 
-      /*
-       * The mutation count is the #of SPOs written (there is one
+        /*
+         * The mutation count is the #of SPOs written (there is one
          * justification written per solution generated, but the
          * mutation count does not reflect duplicate justifications -
          * only duplicate statements).

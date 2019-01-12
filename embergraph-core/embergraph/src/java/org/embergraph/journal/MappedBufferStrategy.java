@@ -18,10 +18,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.journal;
 
 import java.nio.MappedByteBuffer;
-import java.nio.channels.FileLock;
 
 /*
-* Memory-mapped journal strategy (this mode is NOT recommended).
+ * Memory-mapped journal strategy (this mode is NOT recommended).
  *
  * <p>Note: the use of {@link FileLock} with a memory-mapped file is NOT recommended by the JDK as
  * this combination is not permitted on some platforms.
@@ -113,8 +112,8 @@ public class MappedBufferStrategy extends DiskBackedBufferStrategy {
       try {
         file.deleteOnExit();
       } catch (NullPointerException ex) {
-      /*
-       * Ignore NPE caused by a known Sun bug.
+        /*
+         * Ignore NPE caused by a known Sun bug.
          *
          * See http://bugs.sun.com/view_bug.do?bug_id=6526376
          */

@@ -26,7 +26,7 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTJoinGroupFilterExistsInfo;
 
 /*
-* Class summarizing the variable binding requirements for a given node (used for children in the
+ * Class summarizing the variable binding requirements for a given node (used for children in the
  * join group), thus providing easy access to its variable binding information {@link
  * IGroupMemberNode}s.
  *

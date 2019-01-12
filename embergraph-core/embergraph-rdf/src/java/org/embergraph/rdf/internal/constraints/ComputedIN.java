@@ -27,7 +27,7 @@ import org.embergraph.rdf.internal.IV;
 import org.openrdf.query.algebra.Compare.CompareOp;
 
 /*
-* "IN" and "NOT IN" operator based on testing of the enumerated value expressions.
+ * "IN" and "NOT IN" operator based on testing of the enumerated value expressions.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -11,7 +11,7 @@ package cern.jet.random;
 import cern.jet.random.engine.RandomEngine;
 import cern.jet.stat.Probability;
 /*
-* ChiSquare distribution; See the <A
+ * ChiSquare distribution; See the <A
  * HREF="http://www.cern.ch/RD11/rkb/AN16pp/node31.html#SECTION000310000000000000000"> math
  * definition</A> and <A HREF="http://www.statsoft.com/textbook/glosc.html#Chi-square Distribution">
  * animated definition</A>.

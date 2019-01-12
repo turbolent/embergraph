@@ -31,7 +31,7 @@ import org.embergraph.journal.IRootBlockView;
 import org.embergraph.journal.StoreTypeEnum;
 
 /*
-* Provides the top level control
+ * Provides the top level control
  *
  * @author Martyn Cutcher
  */
@@ -205,7 +205,7 @@ public class HALogManager {
    * of the backup integration through zookeeper.
    */
   //	/*
-//	 * Disables any current log file, then removes all log files
+  //	 * Disables any current log file, then removes all log files
   //	 * from the directory
   //	 *
   //	 * @throws IOException
@@ -222,7 +222,7 @@ public class HALogManager {
   //	}
   //
   //	/*
-//	 * Recursively removes all log files from the provided directory
+  //	 * Recursively removes all log files from the provided directory
   //	 * @param dir
   //	 */
   //	private void removeAllLogFiles(final File dir, final File preserve) {

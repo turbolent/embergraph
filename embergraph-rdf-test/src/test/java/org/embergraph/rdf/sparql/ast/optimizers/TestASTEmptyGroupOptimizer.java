@@ -37,14 +37,12 @@ import org.embergraph.rdf.sparql.ast.JoinGroupNode;
 import org.embergraph.rdf.sparql.ast.NamedSubqueryInclude;
 import org.embergraph.rdf.sparql.ast.NamedSubqueryRoot;
 import org.embergraph.rdf.sparql.ast.ProjectionNode;
-import org.embergraph.rdf.sparql.ast.QueryBase;
 import org.embergraph.rdf.sparql.ast.QueryNodeWithBindingSet;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.QueryType;
 import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.SubqueryRoot;
 import org.embergraph.rdf.sparql.ast.UnionNode;
-import org.embergraph.rdf.sparql.ast.ValueExpressionNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.store.BDS;
 import org.embergraph.rdf.vocab.decls.FOAFVocabularyDecl;
@@ -56,7 +54,7 @@ import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /*
-* Test suite for {@link ASTEmptyGroupOptimizer}.
+ * Test suite for {@link ASTEmptyGroupOptimizer}.
  *
  * <p>TODO Test for removal of empty UNIONs. Empty UNIONs can arise through pruning based on unknown
  * IVs, or filters which are provably false. However, I would expect the pruning logic to eliminate
@@ -767,7 +765,8 @@ public class TestASTEmptyGroupOptimizer extends AbstractASTEvaluationTestCase {
                 new FunctionNode(
                     FunctionRegistry.EQ,
                     null /* scalarValues */,
-                    new VarNode("v"), new ConstantNode(ONE))));
+                    new VarNode("v"),
+                    new ConstantNode(ONE))));
       }
     }
 
@@ -801,7 +800,8 @@ public class TestASTEmptyGroupOptimizer extends AbstractASTEvaluationTestCase {
                 new FunctionNode(
                     FunctionRegistry.EQ,
                     null /* scalarValues */,
-                    new VarNode("v"), new ConstantNode(ONE))));
+                    new VarNode("v"),
+                    new ConstantNode(ONE))));
       }
     }
 

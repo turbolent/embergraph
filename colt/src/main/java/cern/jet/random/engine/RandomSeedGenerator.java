@@ -9,7 +9,7 @@ It is provided "as is" without expressed or implied warranty.
 package cern.jet.random.engine;
 
 /*
-* Deterministic seed generator for pseudo-random number generators. The sole purpose of this class
+ * Deterministic seed generator for pseudo-random number generators. The sole purpose of this class
  * is to decorrelate seeds and uniform random number generators. (If a generator would be used to
  * generate seeds for itself, the result could be correlations.)
  *

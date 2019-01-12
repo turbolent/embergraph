@@ -36,7 +36,7 @@ import org.embergraph.rdf.spo.SPOPredicate;
 import org.embergraph.test.MockTermIdFactory;
 
 /*
-* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public abstract class AbstractRuleTestCase extends TestCase2 {

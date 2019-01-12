@@ -27,7 +27,7 @@ import org.embergraph.mdi.ISeparatorKeys;
 import org.embergraph.util.BytesUtil;
 
 /*
-* An exception thrown when a key lies after the half-open range of an index partition.
+ * An exception thrown when a key lies after the half-open range of an index partition.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

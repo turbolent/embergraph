@@ -10,7 +10,7 @@ package cern.colt;
 
 import cern.colt.function.IntComparator;
 /*
-* Demonstrates how to use {@link Sort}.
+ * Demonstrates how to use {@link Sort}.
  *
  * @author wolfgang.hoschek@cern.ch
  * @version 1.0, 03-Jul-99

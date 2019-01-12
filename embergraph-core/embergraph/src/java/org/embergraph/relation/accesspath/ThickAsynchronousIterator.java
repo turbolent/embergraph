@@ -30,7 +30,7 @@ import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 /*
-* An {@link IAsynchronousIterator} that may be serialized and sent to a remote JVM for consumption.
+ * An {@link IAsynchronousIterator} that may be serialized and sent to a remote JVM for consumption.
  * Since all data to be visited is supplied to the ctor, the client will be able consume the data
  * without waiting.
  *

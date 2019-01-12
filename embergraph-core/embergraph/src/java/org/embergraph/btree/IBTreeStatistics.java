@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree;
 
 /*
-* Interface used to report out some statistics about a B+Tree. These statistics may be used in
+ * Interface used to report out some statistics about a B+Tree. These statistics may be used in
  * combination with a disk cost model to predict the cost (latency) associated with a variety of
  * operations on the B+Tree. All values reported by this interface are tracked explicitly by the
  * {@link AbstractBTree} and do not require DISK IO.

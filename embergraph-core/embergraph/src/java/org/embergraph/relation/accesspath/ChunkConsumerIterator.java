@@ -8,7 +8,7 @@ import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 
 /*
-* A class that aligns a buffer of <code>E[]</code>s (a buffer of chunks) with an {@link
+ * A class that aligns a buffer of <code>E[]</code>s (a buffer of chunks) with an {@link
  * IChunkedOrderedIterator}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -43,7 +43,7 @@ public class ChunkConsumerIterator<E> implements IChunkedOrderedIterator<E> {
   private E[] chunk = null;
 
   //    /*
-//     * Total elapsed time for the iterator instance.
+  //     * Total elapsed time for the iterator instance.
   //     */
   //    private long elapsed = 0L;
 

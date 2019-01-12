@@ -27,7 +27,6 @@ import java.nio.ByteBuffer;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import org.apache.log4j.Level;
-import org.embergraph.btree.AbstractTuple;
 import org.embergraph.btree.IRangeQuery;
 import org.embergraph.btree.IRawRecordAccess;
 import org.embergraph.btree.ITuple;
@@ -42,7 +41,7 @@ import org.embergraph.rawstore.IRawStore;
 import org.embergraph.util.BytesUtil;
 
 /*
-* An {@link HTree} bucket page (leaf). The bucket page is comprised of one or more buddy hash
+ * An {@link HTree} bucket page (leaf). The bucket page is comprised of one or more buddy hash
  * buckets. The #of buddy hash buckets is determined by the address bits of the hash tree and the
  * global depth of the bucket page.
  *
@@ -1069,7 +1068,7 @@ class BucketPage extends AbstractPage implements ILeafData, IRawRecordAccess {
   }
 
   //	/*
-//	 * To insert in a BucketPage must handle split
+  //	 * To insert in a BucketPage must handle split
   //	 *
   //	 * @see org.embergraph.htree.AbstractPage#insertRawTuple(byte[], byte[], int)
   //	 */

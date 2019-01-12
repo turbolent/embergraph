@@ -55,7 +55,7 @@ import java.io.OutputStream;
 import java.io.Writer;
 
 /*
-* A {@link PropertiesWriterFactory} returns {@link PropertiesWriter}s for a specific {@link
+ * A {@link PropertiesWriterFactory} returns {@link PropertiesWriter}s for a specific {@link
  * PropertiesFormat}.
  *
  * @author Arjohn Kampman

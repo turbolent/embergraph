@@ -26,10 +26,9 @@ import java.util.List;
 import java.util.Map;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IVariable;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTSubGroupJoinVarOptimizer;
 
 /*
-* Join group or union.
+ * Join group or union.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

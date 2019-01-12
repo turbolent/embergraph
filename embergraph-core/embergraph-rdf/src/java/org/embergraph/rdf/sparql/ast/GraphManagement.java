@@ -28,7 +28,7 @@ import org.embergraph.bop.BOp;
 import org.embergraph.bop.IVariable;
 
 /*
-* A Graph Management operation.
+ * A Graph Management operation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

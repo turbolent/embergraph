@@ -22,7 +22,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.hints;
 
 import org.embergraph.bop.PipelineOp;
-import org.embergraph.bop.engine.QueryEngine;
 import org.embergraph.rdf.sparql.ast.ASTBase;
 import org.embergraph.rdf.sparql.ast.IQueryNode;
 import org.embergraph.rdf.sparql.ast.QueryHints;
@@ -30,7 +29,7 @@ import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /*
-* Query hint marks the operator as requiring "atOnce" evaluation. All solutions will be buffered by
+ * Query hint marks the operator as requiring "atOnce" evaluation. All solutions will be buffered by
  * the {@link QueryEngine} before the operator is evaluated. When it is evaluated, it will receive
  * all solutions in a single invocation of that operator. However, the solutions MAY appear in
  * multiple chunks since the {@link QueryEngine} does not guarantee that the chunk will be merged

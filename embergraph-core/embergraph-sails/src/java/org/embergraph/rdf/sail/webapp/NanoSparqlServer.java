@@ -27,7 +27,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-import javax.servlet.ServletContextListener;
 import org.apache.log4j.Logger;
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
@@ -38,14 +37,12 @@ import org.eclipse.jetty.xml.XmlConfiguration;
 import org.embergraph.Banner;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.ITx;
-import org.embergraph.journal.Journal;
 import org.embergraph.journal.TimestampUtility;
-import org.embergraph.resources.IndexManager;
 import org.embergraph.util.config.NicUtil;
 import org.embergraph.util.httpd.Config;
 
 /*
-* Utility class provides a simple SPARQL end point with a REST API.
+ * Utility class provides a simple SPARQL end point with a REST API.
  *
  * @author thompsonbry
  * @author martyncutcher
@@ -476,8 +473,8 @@ public class NanoSparqlServer {
         System.err.println(msg);
         log.fatal(msg);
         if (server != null) {
-        /*
-       * Support the jetty dump-after-start semantics.
+          /*
+           * Support the jetty dump-after-start semantics.
            */
           if (Boolean.getBoolean(SystemProperties.JETTY_DUMP_START)) {
             log.warn(server.dump());
@@ -582,7 +579,7 @@ public class NanoSparqlServer {
    * @see SystemProperties
    */
   public // synchronized to avoid having the side-effect on the port visible to concurrent jetty
-         // starts.
+  // starts.
   static synchronized Server newInstance(
       final int port,
       final String jettyXml,
@@ -806,8 +803,8 @@ public class NanoSparqlServer {
 
       } else {
 
-      /*
-       * Check the classpath.
+        /*
+         * Check the classpath.
          *
          * Note: When checking the classpath we need to test different
          * resources depending on whether we are running under the
@@ -816,8 +813,8 @@ public class NanoSparqlServer {
         URL tmp = null;
         String src = null;
         if (tmp == null) {
-        /*
-       * Eclipse IDE class path.
+          /*
+           * Eclipse IDE class path.
            *
            * <p>Note: This is what gets found when running under eclipse. The URL will be in the
            * configured build directory for the eclipse project. So, something like:
@@ -838,8 +835,8 @@ public class NanoSparqlServer {
         //                    tmp = classLoader // JAR class path.
         //                            .getResource(src = "/embergraph-war/src/WEB-INF/web.xml");
         if (tmp == null) {
-        /*
-       * JAR class path (system class loader).
+          /*
+           * JAR class path (system class loader).
            *
            * <p>Note: This is what gets located when we run from the command line (outside of
            * eclipse). The resulting JAR URL will be something like:
@@ -866,8 +863,8 @@ public class NanoSparqlServer {
 
       if (resourceBaseURL != null) {
 
-      /*
-       * We found the resource either in the file system or in the
+        /*
+         * We found the resource either in the file system or in the
          * classpath.
          *
          * Explicitly set the discovered value on the jetty.resourceBase

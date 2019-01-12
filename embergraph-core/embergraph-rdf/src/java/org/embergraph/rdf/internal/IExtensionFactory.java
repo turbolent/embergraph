@@ -19,13 +19,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.internal;
 
 import java.util.Iterator;
-import org.embergraph.rdf.internal.impl.BlobIV;
-import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.EmbergraphValue;
-import org.openrdf.model.URI;
 
 /*
-* IExtensionFactories are responsible for enumerating what extensions are supported for a
+ * IExtensionFactories are responsible for enumerating what extensions are supported for a
  * particular database configuration. Embergraph comes packaged with a {@link
  * SampleExtensionFactory} that supplies two starter extensions - the {@link EpochExtension} (for
  * representing time since the epoch as a long integer) and the {@link ColorsEnumExtension} (a

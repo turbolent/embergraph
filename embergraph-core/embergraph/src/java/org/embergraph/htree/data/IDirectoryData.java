@@ -21,10 +21,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.htree.data;
 
 import org.embergraph.btree.data.ITreeNodeData;
-import org.embergraph.rawstore.IRawStore;
 
 /*
-* Interface for the data record of a hash directory. A hash directory provides an address space. In
+ * Interface for the data record of a hash directory. A hash directory provides an address space. In
  * a hash table, all of the children are buckets. In a hash tree, children may be either buckets or
  * directories. If the hash tree is balanced, then all children on the same level are of the same
  * type (either buckets or directories). If the hash tree is unbalanced, then children may be of

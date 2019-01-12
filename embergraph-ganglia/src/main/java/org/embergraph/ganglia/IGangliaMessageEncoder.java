@@ -18,7 +18,7 @@ package org.embergraph.ganglia;
 import org.embergraph.ganglia.xdr.XDROutputBuffer;
 
 /*
-* Interface for generating Ganglia message according to some version of the ganglia wire protocol.
+ * Interface for generating Ganglia message according to some version of the ganglia wire protocol.
  */
 public interface IGangliaMessageEncoder {
 

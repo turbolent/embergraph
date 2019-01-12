@@ -29,14 +29,13 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import org.embergraph.btree.IRangeQuery;
 import org.embergraph.btree.ITupleIterator;
-import org.embergraph.btree.UnisolatedReadWriteIndex;
 import org.embergraph.journal.ITx;
 import org.embergraph.journal.TimestampUtility;
 import org.embergraph.mdi.MetadataIndex.MetadataIndexMetadata;
 import org.embergraph.mdi.PartitionLocator;
 
 /*
-* Implementation caches all locators and then updates them on demand as stale locators are
+ * Implementation caches all locators and then updates them on demand as stale locators are
  * discovered.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -24,7 +24,7 @@ import java.lang.ref.Reference;
 import java.util.NoSuchElementException;
 
 /*
-* Visits the direct dirty children of a {@link Node} in the external key ordering. Since dirty
+ * Visits the direct dirty children of a {@link Node} in the external key ordering. Since dirty
  * nodes are always resident this iterator never forces a child to be loaded from the store.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

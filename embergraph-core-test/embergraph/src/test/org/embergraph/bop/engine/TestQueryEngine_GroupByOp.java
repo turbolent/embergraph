@@ -26,11 +26,10 @@ import junit.framework.TestCase2;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.Journal;
-import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
 
 /*
-* Test suite for GROUP_BY operators when integrated with the query engine. This test suite is
+ * Test suite for GROUP_BY operators when integrated with the query engine. This test suite is
  * designed to examine cases where the GROUP_BY operator will have to buffer multiple chunks of
  * solutions before finally reporting the aggregated solutions.
  *
@@ -126,7 +125,7 @@ public class TestQueryEngine_GroupByOp extends TestCase2 {
   }
 
   //    /*
-//     *
+  //     *
   //     * @param timeout
   //     * @param ntrials
   //     * @param poolSize
@@ -210,14 +209,14 @@ public class TestQueryEngine_GroupByOp extends TestCase2 {
   //    }
   //
   //	/*
-//	 * Helper class for comparing solution sets having variables which evaluate
+  //	 * Helper class for comparing solution sets having variables which evaluate
   //	 * to {@link Integer} values.
   //	 */
   //    static private class IntegerComparatorOp extends ComparatorOp
   //    {
   //
   //    	/*
-//		 *
+  //		 *
   //		 */
   //		private static final long serialVersionUID = 1L;
   //

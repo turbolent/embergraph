@@ -43,11 +43,10 @@ import org.embergraph.journal.NoSuchIndexException;
 import org.embergraph.mdi.LocalPartitionMetadata;
 import org.embergraph.mdi.MetadataIndex;
 import org.embergraph.mdi.PartitionLocator;
-import org.embergraph.resources.ResourceManager;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Implementation of a metadata service for a named scale-out index.
+ * Implementation of a metadata service for a named scale-out index.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -141,8 +140,8 @@ public abstract class MetadataService extends DataService implements IMetadataSe
 
       if (timestamp == ITx.UNISOLATED) {
 
-      /*
-       * This is a read-only operation so run as read committed rather
+        /*
+         * This is a read-only operation so run as read committed rather
          * than unisolated.
          */
 
@@ -196,8 +195,8 @@ public abstract class MetadataService extends DataService implements IMetadataSe
 
       if (timestamp == ITx.UNISOLATED) {
 
-      /*
-       * This is a read-only operation so run as read committed rather
+        /*
+         * This is a read-only operation so run as read committed rather
          * than unisolated.
          */
 
@@ -474,8 +473,8 @@ public abstract class MetadataService extends DataService implements IMetadataSe
 
       if (!oldLocator.equals(pmd)) {
 
-      /*
-       * Sanity check failed - old locator not equal to the locator
+        /*
+         * Sanity check failed - old locator not equal to the locator
          * found under that key in the metadata index.
          */
 
@@ -661,8 +660,8 @@ public abstract class MetadataService extends DataService implements IMetadataSe
 
         if (!locator.equals(pmd)) {
 
-        /*
-       * Sanity check failed - old locator not equal to the
+          /*
+           * Sanity check failed - old locator not equal to the
            * locator found under that key in the metadata index.
            *
            * @todo differences in just the data service failover chain
@@ -672,8 +671,8 @@ public abstract class MetadataService extends DataService implements IMetadataSe
           throw new RuntimeException("Expected oldLocator=" + locator + ", but actual=" + pmd);
         }
 
-      /*
-       * FIXME validate that the newLocator is a perfect fit
+        /*
+         * FIXME validate that the newLocator is a perfect fit
          * replacement for the oldLocators in terms of the key range
          * spanned and that there are no gaps.  Add an API constaint
          * that the oldLocators are in key order by their leftSeparator
@@ -750,8 +749,8 @@ public abstract class MetadataService extends DataService implements IMetadataSe
 
       if (!oldLocator.equals(pmd)) {
 
-      /*
-       * Sanity check failed - old locator not equal to the locator
+        /*
+         * Sanity check failed - old locator not equal to the locator
          * found under that key in the metadata index.
          *
          * @todo differences in just the data service failover chain are
@@ -846,8 +845,8 @@ public abstract class MetadataService extends DataService implements IMetadataSe
 
       } else {
 
-      /*
-       * Auto-assign the index partitions to data services.
+        /*
+         * Auto-assign the index partitions to data services.
          */
 
         try {
@@ -984,8 +983,8 @@ public abstract class MetadataService extends DataService implements IMetadataSe
 
         if (log.isInfoEnabled()) log.info("name=" + scaleOutIndexName + ", pmd=" + pmd);
 
-      /*
-       * Map the initial partition onto that data service. This
+        /*
+         * Map the initial partition onto that data service. This
          * requires us to compute the left and right separator keys. The
          * right separator key is just the separator key for the next
          * partition in order and null iff this is the last partition.
@@ -1000,8 +999,8 @@ public abstract class MetadataService extends DataService implements IMetadataSe
                 -1, // we are creating a new index, not moving an index partition.
                 leftSeparator,
                 rightSeparator,
-              /*
-       * Note: By setting this to null we are indicating to
+                /*
+                 * Note: By setting this to null we are indicating to
                  * the RegisterIndexTask on the data service that it
                  * needs to set the resourceMetadata[] when the index is
                  * actually registered based on the live journal as of
@@ -1123,8 +1122,8 @@ public abstract class MetadataService extends DataService implements IMetadataSe
             (PartitionLocator) SerializerUtil.deserialize(tuple.getValue());
         //                .deserialize(tuple.getValueStream());
 
-      /*
-       * Drop the index partition.
+        /*
+         * Drop the index partition.
          */
         {
           final int partitionId = pmd.getPartitionId();

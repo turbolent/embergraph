@@ -40,7 +40,7 @@ import org.openrdf.model.Value;
 import org.openrdf.model.datatypes.XMLDatatypeUtil;
 
 /*
-* This implementation of {@link IExtension} implements inlining for literals that represent the
+ * This implementation of {@link IExtension} implements inlining for literals that represent the
  * derived numeric types:
  *
  * <ul>

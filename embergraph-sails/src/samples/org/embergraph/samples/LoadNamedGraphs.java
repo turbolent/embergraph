@@ -41,13 +41,12 @@ import org.embergraph.journal.RWStrategy;
 import org.embergraph.rdf.load.RDFFilenameFilter;
 import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sail.EmbergraphSailRepository;
-import org.embergraph.rdf.store.DataLoader;
 import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.rio.RDFFormat;
 
 /*
-* Sample code for loading RDF data using the {@link EmbergraphSail} and the openrdf API.
+ * Sample code for loading RDF data using the {@link EmbergraphSail} and the openrdf API.
  *
  * @see DataLoader
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -184,8 +183,8 @@ public class LoadNamedGraphs extends SampleCode {
 
                 cxn.add(reader, baseIRI, RDFFormat.forFileName(f.getName()));
 
-              /*
-       * Note: due to buffering, this reports stmts flushed to
+                /*
+                 * Note: due to buffering, this reports stmts flushed to
                  * the db not stmts added to the cxn.
                  *
                  * Note: cxn.size() will do a FULL SCAN of the statement

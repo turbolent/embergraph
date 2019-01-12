@@ -9,7 +9,7 @@ It is provided "as is" without expressed or implied warranty.
 package cern.jet.stat.quantile;
 
 /*
-* A set of buffers holding <tt>double</tt> elements; internally used for computing approximate
+ * A set of buffers holding <tt>double</tt> elements; internally used for computing approximate
  * quantiles.
  */
 class DoubleBufferSet extends BufferSet {

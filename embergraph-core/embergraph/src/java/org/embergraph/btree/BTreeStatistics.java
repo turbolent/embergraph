@@ -24,7 +24,7 @@ package org.embergraph.btree;
 import java.io.Serializable;
 
 /*
-* A snapshot of the B+Tree statistics.
+ * A snapshot of the B+Tree statistics.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

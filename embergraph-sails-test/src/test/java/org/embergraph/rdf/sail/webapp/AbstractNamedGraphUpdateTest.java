@@ -22,7 +22,7 @@ import java.io.IOException;
 import org.embergraph.rdf.sparql.ast.eval.ASTConstructIterator;
 
 /*
-* This class is concerning the issues raised in trac 804
+ * This class is concerning the issues raised in trac 804
  *
  * @see <a href="https://jira.blazegraph.com/browse/BLZG-885" >update bug deleting quads</a>
  * @author jeremycarroll

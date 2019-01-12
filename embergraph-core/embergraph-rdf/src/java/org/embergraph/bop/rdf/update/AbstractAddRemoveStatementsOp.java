@@ -40,7 +40,7 @@ import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.SPO;
 
 /*
-* Abstract base class for operations which add or remove statements from the statement indices.
+ * Abstract base class for operations which add or remove statements from the statement indices.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

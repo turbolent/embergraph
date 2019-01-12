@@ -10,7 +10,7 @@ package cern.colt.buffer;
 
 import cern.colt.list.DoubleArrayList;
 /*
-* Target of a streaming <tt>DoubleBuffer</tt> into which data is flushed upon buffer overflow.
+ * Target of a streaming <tt>DoubleBuffer</tt> into which data is flushed upon buffer overflow.
  *
  * @author wolfgang.hoschek@cern.ch
  * @version 1.0, 09/24/99

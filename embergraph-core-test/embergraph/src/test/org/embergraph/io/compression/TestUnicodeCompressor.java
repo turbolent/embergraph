@@ -27,7 +27,7 @@ import junit.framework.TestCase2;
 import org.embergraph.io.DataOutputBuffer;
 
 /*
-* Unit tests for Unicode schemes:
+ * Unit tests for Unicode schemes:
  *
  * <ul>
  *   <li>Standard Compression for Unicode (<a
@@ -74,7 +74,7 @@ public class TestUnicodeCompressor extends TestCase2 {
   }
 
   //    /*
-//     * BOCU-1 encoding / decoding stress test.
+  //     * BOCU-1 encoding / decoding stress test.
   //     */
   //    public void test_BOCU() {
   //
@@ -83,7 +83,7 @@ public class TestUnicodeCompressor extends TestCase2 {
   //    }
   //
   //    /*
-//     * SCSU encoding / decoding stress test.
+  //     * SCSU encoding / decoding stress test.
   //     */
   //    public void test_SCSU() {
   //

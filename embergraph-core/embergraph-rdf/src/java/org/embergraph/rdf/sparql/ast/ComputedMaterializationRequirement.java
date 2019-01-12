@@ -31,7 +31,7 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.constraints.INeedsMaterialization;
 
 /*
-* Computed {@link INeedsMaterialization} metadata for an {@link IValueExpression}.
+ * Computed {@link INeedsMaterialization} metadata for an {@link IValueExpression}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: ComputedMaterializationRequirement.java 5179 2011-09-12 20:13:25Z thompsonbry $

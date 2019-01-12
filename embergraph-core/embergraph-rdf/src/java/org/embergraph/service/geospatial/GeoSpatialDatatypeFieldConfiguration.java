@@ -27,7 +27,7 @@ import org.codehaus.jettison.json.JSONObject;
 import org.embergraph.rdf.internal.impl.extensions.InvalidGeoSpatialDatatypeConfigurationError;
 
 /*
-* Configuration of a single field/component in a given geospatial (multi-dimensional) custom data
+ * Configuration of a single field/component in a given geospatial (multi-dimensional) custom data
  * type.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>

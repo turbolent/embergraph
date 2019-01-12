@@ -22,7 +22,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.eval;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
-import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -57,11 +56,10 @@ import org.embergraph.relation.accesspath.EmptyCloseableIterator;
 import org.embergraph.relation.accesspath.ThickCloseableIterator;
 import org.openrdf.model.Resource;
 import org.openrdf.model.URI;
-import org.openrdf.model.Value;
 import org.openrdf.model.impl.URIImpl;
 
 /*
-* A factory for a statement pattern sampling service. It accepts a group with a single triple
+ * A factory for a statement pattern sampling service. It accepts a group with a single triple
  * pattern in it:
  *
  * <p>service bd:sample { ?s rdf:type ex:Foo .

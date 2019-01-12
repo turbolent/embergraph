@@ -41,7 +41,7 @@ import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.KeyBuilder;
 
 /*
-* This is the default implementation but should be regarded as legacy since it fails to use the
+ * This is the default implementation but should be regarded as legacy since it fails to use the
  * correct {@link Analyzer} for almost all languages (other than English). It uses the correct
  * natural language analyzer only for literals tagged with certain three letter ISO 639 codes:
  * "por", "deu", "ger", "zho", "chi", "jpn", "kor", "ces", "cze", "dut", "nld", "gre", "ell", "fra",

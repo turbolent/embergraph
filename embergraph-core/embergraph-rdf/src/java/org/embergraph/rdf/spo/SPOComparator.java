@@ -18,10 +18,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.spo;
 
 import java.util.Comparator;
-import org.embergraph.rdf.model.StatementEnum;
 
 /*
-* Imposes s:p:o ordering based on termIds only (ignores {@link StatementEnum}).
+ * Imposes s:p:o ordering based on termIds only (ignores {@link StatementEnum}).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

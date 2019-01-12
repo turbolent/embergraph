@@ -21,18 +21,11 @@ import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
-import java.nio.channels.AsynchronousCloseException;
-import java.nio.channels.ClosedChannelException;
 import java.nio.channels.FileChannel;
 import java.util.Map;
-import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Exchanger;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import org.embergraph.EmbergraphStatics;
-import org.embergraph.btree.BTree.Counter;
-import org.embergraph.counters.AbstractStatisticsCollector;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.Instrument;
 import org.embergraph.counters.OneShotInstrument;
@@ -41,12 +34,10 @@ import org.embergraph.io.FileChannelUtility;
 import org.embergraph.io.IBufferAccess;
 import org.embergraph.io.IReopenChannel;
 import org.embergraph.journal.WORMStrategy.StoreCounters;
-import org.embergraph.rawstore.IRawStore;
-import org.embergraph.resources.StoreManager.ManagedJournal;
 import org.embergraph.util.Bytes;
 
 /*
-* Disk-based journal strategy.
+ * Disk-based journal strategy.
  * <p>
  * Writes are buffered in a write cache. The cache is flushed when it would
  * overflow. As a result only large sequential writes are performed on the
@@ -198,7 +189,7 @@ public class DiskOnlyStrategy extends AbstractBufferStrategy implements IDiskBas
   private long userExtent;
 
   //    /*
-//     * Optional read cache.
+  //     * Optional read cache.
   //     * <p>
   //     * Note: When enabled, records are entered iff there is a miss on a read.
   //     * Written records are NOT entered into the read cache since (when the
@@ -212,7 +203,7 @@ public class DiskOnlyStrategy extends AbstractBufferStrategy implements IDiskBas
   //    private LRUCache<Long, byte[]> readCache = null;
   //
   //    /*
-//     * The maximum size of a record that may enter the {@link #readCache}.
+  //     * The maximum size of a record that may enter the {@link #readCache}.
   //     * Records larger than this are not cached.
   //     */
   //    private int readCacheMaxRecordSize = 0;
@@ -270,7 +261,7 @@ public class DiskOnlyStrategy extends AbstractBufferStrategy implements IDiskBas
     private final Map<Long, Integer> writeCacheIndex;
 
     //        /*
-//         * The starting position in the buffer for data that has not been
+    //         * The starting position in the buffer for data that has not been
     //         * written to the disk.
     //         *
     //         * @see Task
@@ -485,7 +476,7 @@ public class DiskOnlyStrategy extends AbstractBufferStrategy implements IDiskBas
   }
 
   //    /*
-//     * Counters for {@link IRawStore} access, including operations that read or
+  //     * Counters for {@link IRawStore} access, including operations that read or
   //     * write through to the underlying media.
   //     *
   //     * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -501,135 +492,135 @@ public class DiskOnlyStrategy extends AbstractBufferStrategy implements IDiskBas
   //    public static class StoreCounters {
   //
   //        /*
-//         * #of read requests.
+  //         * #of read requests.
   //         */
   //        public long nreads;
   //
   //        /*
-//         * #of read requests that are satisfied by our write cache (vs the
+  //         * #of read requests that are satisfied by our write cache (vs the
   //         * OS or disk level write cache).
   //         */
   //        public long ncacheRead;
   //
   //        /*
-//         * #of read requests that read through to the backing file.
+  //         * #of read requests that read through to the backing file.
   //         */
   //        public long ndiskRead;
   //
   //        /*
-//         * #of bytes read.
+  //         * #of bytes read.
   //         */
   //        public long bytesRead;
   //
   //        /*
-//         * #of bytes that have been read from the disk.
+  //         * #of bytes that have been read from the disk.
   //         */
   //        public long bytesReadFromDisk;
   //
   //        /*
-//         * The size of the largest record read.
+  //         * The size of the largest record read.
   //         */
   //        public long maxReadSize;
   //
   //        /*
-//         * Total elapsed time for reads.
+  //         * Total elapsed time for reads.
   //         */
   //        public long elapsedReadNanos;
   //
   //        /*
-//         * Total elapsed time checking the disk write cache for records to be
+  //         * Total elapsed time checking the disk write cache for records to be
   //         * read.
   //         */
   //        public long elapsedCacheReadNanos;
   //
   //        /*
-//         * Total elapsed time for reading on the disk.
+  //         * Total elapsed time for reading on the disk.
   //         */
   //        public long elapsedDiskReadNanos;
   //
   //        /*
-//         * #of write requests.
+  //         * #of write requests.
   //         */
   //        public long nwrites;
   //
   //        /*
-//         * #of write requests that are absorbed by our write cache (vs the OS or
+  //         * #of write requests that are absorbed by our write cache (vs the OS or
   //         * disk level write cache).
   //         */
   //        public long ncacheWrite;
   //
   //        /*
-//         * #of times the write cache was flushed to disk.
+  //         * #of times the write cache was flushed to disk.
   //         */
   //        public long ncacheFlush;
   //
   //        /*
-//         * #of write requests that write through to the backing file.
+  //         * #of write requests that write through to the backing file.
   //         */
   //        public long ndiskWrite;
   //
   //        /*
-//         * The size of the largest record written.
+  //         * The size of the largest record written.
   //         */
   //        public long maxWriteSize;
   //
   //        /*
-//         * #of bytes written.
+  //         * #of bytes written.
   //         */
   //        public long bytesWritten;
   //
   //        /*
-//         * #of bytes that have been written on the disk.
+  //         * #of bytes that have been written on the disk.
   //         */
   //        public long bytesWrittenOnDisk;
   //
   //        /*
-//         * Total elapsed time for writes.
+  //         * Total elapsed time for writes.
   //         */
   //        public long elapsedWriteNanos;
   //
   //        /*
-//         * Total elapsed time writing records into the cache (does not count
+  //         * Total elapsed time writing records into the cache (does not count
   //         * time to flush the cache when it is full or to write records that do
   //         * not fit in the cache directly to the disk).
   //         */
   //        public long elapsedCacheWriteNanos;
   //
   //        /*
-//         * Total elapsed time for writing on the disk.
+  //         * Total elapsed time for writing on the disk.
   //         */
   //        public long elapsedDiskWriteNanos;
   //
   //        /*
-//         * #of times the data were forced to the disk.
+  //         * #of times the data were forced to the disk.
   //         */
   //        public long nforce;
   //
   //        /*
-//         * #of times the length of the file was changed (typically, extended).
+  //         * #of times the length of the file was changed (typically, extended).
   //         */
   //        public long ntruncate;
   //
   //        /*
-//         * #of times the file has been reopened after it was closed by an
+  //         * #of times the file has been reopened after it was closed by an
   //         * interrupt.
   //         */
   //        public long nreopen;
   //
   //        /*
-//         * #of times one of the root blocks has been written.
+  //         * #of times one of the root blocks has been written.
   //         */
   //        public long nwriteRootBlock;
   //
   //        /*
-//         * Initialize a new set of counters.
+  //         * Initialize a new set of counters.
   //         */
   //        public StoreCounters() {
   //
   //        }
   //
   //        /*
-//         * Copy ctor.
+  //         * Copy ctor.
   //         * @param o
   //         */
   //        public StoreCounters(final StoreCounters o) {
@@ -639,7 +630,7 @@ public class DiskOnlyStrategy extends AbstractBufferStrategy implements IDiskBas
   //        }
   //
   //        /*
-//         * Adds counters to the current counters.
+  //         * Adds counters to the current counters.
   //         *
   //         * @param o
   //         */
@@ -674,7 +665,7 @@ public class DiskOnlyStrategy extends AbstractBufferStrategy implements IDiskBas
   //        }
   //
   //        /*
-//         * Returns a new {@link StoreCounters} containing the current counter values
+  //         * Returns a new {@link StoreCounters} containing the current counter values
   //         * minus the given counter values.
   //         *
   //         * @param o
@@ -1022,7 +1013,7 @@ public class DiskOnlyStrategy extends AbstractBufferStrategy implements IDiskBas
   //        private CounterSet root;
   //
   //        /*
-//         * Human readable representation of the counters.
+  //         * Human readable representation of the counters.
   //         */
   //        public String toString() {
   //
@@ -1235,8 +1226,8 @@ public class DiskOnlyStrategy extends AbstractBufferStrategy implements IDiskBas
 
       final IBufferAccess tmp;
       try {
-      /*
-       * Note: a timeout here is not such a good idea. It could be
+        /*
+         * Note: a timeout here is not such a good idea. It could be
          * triggered by a GC pause with the resulting temp store then
          * lacking a write cache.
          */
@@ -1499,8 +1490,8 @@ public class DiskOnlyStrategy extends AbstractBufferStrategy implements IDiskBas
 
         if (tmp != null) {
 
-        /*
-       * Copy the data into the newly allocated buffer.
+          /*
+           * Copy the data into the newly allocated buffer.
            */
 
           // copy the data into [dst].
@@ -1509,8 +1500,8 @@ public class DiskOnlyStrategy extends AbstractBufferStrategy implements IDiskBas
           // flip buffer for reading.
           dst.flip();
 
-        /*
-       * Update counters while synchronized.
+          /*
+           * Update counters while synchronized.
            */
           storeCounters.nreads++;
           storeCounters.bytesRead += nbytes;
@@ -1714,8 +1705,8 @@ public class DiskOnlyStrategy extends AbstractBufferStrategy implements IDiskBas
 
       if (raf.getChannel().tryLock(0, Long.MAX_VALUE, readOnly /* shared */) == null) {
 
-      /*
-       * Note: A null return indicates that someone else holds the
+        /*
+         * Note: A null return indicates that someone else holds the
          * lock. This can happen if the platform does not support shared
          * locks or if someone requested an exclusive file lock.
          */
@@ -1782,7 +1773,7 @@ public class DiskOnlyStrategy extends AbstractBufferStrategy implements IDiskBas
   }
 
   //    /*
-//     * FIXME The {@link #update(long, int, ByteBuffer)} API was introduced to
+  //     * FIXME The {@link #update(long, int, ByteBuffer)} API was introduced to
   //     * support touch ups of the leaves generated by the
   //     * {@link IndexSegmentBuilder} and the notional support for writable blocks,
   //     * which was never realized (blobs should be send to the file system). At
@@ -1954,8 +1945,8 @@ public class DiskOnlyStrategy extends AbstractBufferStrategy implements IDiskBas
 
       if (writeCache != null) {
 
-      /*
-       * Flush the writeCache if the record would cause it to
+        /*
+         * Flush the writeCache if the record would cause it to
          * overflow.
          */
 
@@ -1964,8 +1955,8 @@ public class DiskOnlyStrategy extends AbstractBufferStrategy implements IDiskBas
           flushWriteCache();
         }
 
-      /*
-       * This record is to big for the write cache so we write the
+        /*
+         * This record is to big for the write cache so we write the
          * record directly on the disk.
          */
 
@@ -1975,8 +1966,8 @@ public class DiskOnlyStrategy extends AbstractBufferStrategy implements IDiskBas
 
         } else {
 
-        /*
-       * Queue up the write in the writeCache.
+          /*
+           * Queue up the write in the writeCache.
            */
 
           final long beginCache = System.nanoTime();
@@ -1992,8 +1983,8 @@ public class DiskOnlyStrategy extends AbstractBufferStrategy implements IDiskBas
 
       } else {
 
-      /*
-       * The writeCache is disabled so just write the record directly
+        /*
+         * The writeCache is disabled so just write the record directly
          * on the disk.
          *
          * Note: for this case we might be able to move the write

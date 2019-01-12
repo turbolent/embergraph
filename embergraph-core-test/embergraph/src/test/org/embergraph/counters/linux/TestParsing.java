@@ -40,7 +40,7 @@ import org.embergraph.counters.ICounter;
 import org.embergraph.counters.IProcessCounters;
 
 /*
-* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestParsing extends TestCase2 {

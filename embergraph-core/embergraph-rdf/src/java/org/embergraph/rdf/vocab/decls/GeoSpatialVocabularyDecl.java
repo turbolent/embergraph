@@ -30,7 +30,7 @@ import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
 /*
-* Vocabulary and namespace for GeoSpatial extensions.
+ * Vocabulary and namespace for GeoSpatial extensions.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$

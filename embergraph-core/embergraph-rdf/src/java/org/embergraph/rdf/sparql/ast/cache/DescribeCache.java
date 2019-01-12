@@ -7,13 +7,10 @@ import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.htree.HTree;
 import org.embergraph.io.SerializerUtil;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.EmbergraphURI;
-import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.model.Graph;
-import org.openrdf.query.GraphQueryResult;
 
 /*
-* An interface providing a maintained DESCRIBE cache for some {@link AbstractTripleStore}.
+ * An interface providing a maintained DESCRIBE cache for some {@link AbstractTripleStore}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  *     <p>FIXME MVCC VIEWS: The same integration issue also needs to be addressed for the {@link

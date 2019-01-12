@@ -30,7 +30,7 @@ import org.apache.log4j.Logger;
 import org.embergraph.Banner;
 
 /*
-* A service for distributing application {@link Callable}s across an {@link IEmbergraphFederation}.
+ * A service for distributing application {@link Callable}s across an {@link IEmbergraphFederation}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -160,7 +160,7 @@ public abstract class ClientService extends AbstractService implements IClientSe
     }
 
     //        /*
-//         * Note: May be extended to setup service specific counters.
+    //         * Note: May be extended to setup service specific counters.
     //         *
     //         * @todo write the client URL onto a file in the service's data
     //         *       directory.
@@ -176,7 +176,7 @@ public abstract class ClientService extends AbstractService implements IClientSe
     //        }
     //
     //        /*
-//         * Sets up {@link AbstractTransactionService} specific counters.
+    //         * Sets up {@link AbstractTransactionService} specific counters.
     //         */
     //        protected void setupCounters() {
     //

@@ -42,10 +42,7 @@ import org.embergraph.bop.IValueExpression;
 import org.embergraph.bop.IVariable;
 import org.embergraph.bop.bindingSet.ListBindingSet;
 import org.embergraph.bop.solutions.GroupByState;
-import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.sail.sparql.ast.ASTAskQuery;
-import org.embergraph.rdf.sail.sparql.ast.ASTBaseDecl;
 import org.embergraph.rdf.sail.sparql.ast.ASTBindingSet;
 import org.embergraph.rdf.sail.sparql.ast.ASTBindingValue;
 import org.embergraph.rdf.sail.sparql.ast.ASTBindingsClause;
@@ -61,7 +58,6 @@ import org.embergraph.rdf.sail.sparql.ast.ASTNamedSubquery;
 import org.embergraph.rdf.sail.sparql.ast.ASTOffset;
 import org.embergraph.rdf.sail.sparql.ast.ASTOrderClause;
 import org.embergraph.rdf.sail.sparql.ast.ASTOrderCondition;
-import org.embergraph.rdf.sail.sparql.ast.ASTPrefixDecl;
 import org.embergraph.rdf.sail.sparql.ast.ASTProjectionElem;
 import org.embergraph.rdf.sail.sparql.ast.ASTQuery;
 import org.embergraph.rdf.sail.sparql.ast.ASTQueryContainer;
@@ -98,10 +94,9 @@ import org.embergraph.rdf.sparql.ast.SubqueryRoot;
 import org.embergraph.rdf.sparql.ast.TermNode;
 import org.embergraph.rdf.sparql.ast.ValueExpressionNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
-import org.embergraph.rdf.sparql.ast.optimizers.IASTOptimizer;
 
 /*
-* Top-level expression builder for SPARQL.
+ * Top-level expression builder for SPARQL.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -277,8 +272,8 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
 
       for (int i = 0; i < nchildren; i++) {
 
-      /*
-       * Note: Delegates to the ValueExprBuilder. Can visit VarNode or
+        /*
+         * Note: Delegates to the ValueExprBuilder. Can visit VarNode or
          * ConstantNode(IV<URI,_>).
          */
 
@@ -351,8 +346,8 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
               "CONSTRUCT WHERE only permits statement patterns in the WHERE clause.");
         }
 
-      /*
-       * Add a copy of each statement pattern into the CONSTRUCT node.
+        /*
+         * Add a copy of each statement pattern into the CONSTRUCT node.
          */
 
         final StatementPatternNode sp =
@@ -464,8 +459,7 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
     {
 
       // Check for any instances of this child.
-      final ASTNamedSubquery aNamedSubquery =
-          astQuery.jjtGetChild(ASTNamedSubquery.class);
+      final ASTNamedSubquery aNamedSubquery = astQuery.jjtGetChild(ASTNamedSubquery.class);
 
       if (aNamedSubquery == null) {
 
@@ -583,8 +577,8 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
 
       while (itr.hasNext()) {
 
-      /*
-       * The last argument of the children is the Var. Anything before
+        /*
+         * The last argument of the children is the Var. Anything before
          * that is an ArgList which must be interpreted in its own
          * right.
          *
@@ -856,8 +850,8 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
 
       if (ve == null) {
 
-      /*
-       * No binding for the current variable in this binding set.
+        /*
+         * No binding for the current variable in this binding set.
          */
 
         continue;
@@ -950,8 +944,8 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
 
       try {
 
-      /*
-       * Delegate logic to validate the aggregate query.
+        /*
+         * Delegate logic to validate the aggregate query.
          */
 
         new GroupByState(projectExprs, groupByExprs, havingExprs);

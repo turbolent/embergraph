@@ -27,7 +27,6 @@ package org.embergraph.io;
 
 import it.unimi.dsi.fastutil.io.RepositionableStream;
 import it.unimi.dsi.io.OutputBitStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
@@ -35,7 +34,7 @@ import org.apache.log4j.Logger;
 import org.embergraph.util.BytesUtil;
 
 /*
-* A view on a mutable byte[] that may be extended.
+ * A view on a mutable byte[] that may be extended.
  *
  * <p>Note: The backing byte[] slice always has an {@link IDataRecord#off() offset} of ZERO (0) and
  * a {@link IDataRecord#len() length} equal to the capacity of the backing byte[]. The {@link
@@ -853,7 +852,7 @@ public class ByteArrayBuffer extends OutputStream
   private final byte[] pbuf = new byte[8];
 
   //    /*
-//     * Return the #of non-zero nibbles, counting from the first non-zero nibble
+  //     * Return the #of non-zero nibbles, counting from the first non-zero nibble
   //     * in the long value. A value of <code>0L</code> is considered to be one
   //     * nibble for our purposes.
   //     *
@@ -928,7 +927,7 @@ public class ByteArrayBuffer extends OutputStream
   //     */
   //
   //    /*
-//     * Unpack a long value from the current buffer position, incrementing the
+  //     * Unpack a long value from the current buffer position, incrementing the
   //     * buffer position as a side-effect.
   //     *
   //     * @return The long value.
@@ -972,7 +971,7 @@ public class ByteArrayBuffer extends OutputStream
   //     */
   //
   //    /*
-//     * Unpack a non-negative short value from the input stream, incrementing
+  //     * Unpack a non-negative short value from the input stream, incrementing
   //     * the buffer position as a side-effect.
   //     *
   //     * @param is
@@ -1165,7 +1164,7 @@ public class ByteArrayBuffer extends OutputStream
    */
 
   //    /*
-//     */
+  //     */
   //    public DataInput getInputData() {
   //
   //        return new DataInputBuffer(buf, pos(), pos() + limit());
@@ -1173,7 +1172,7 @@ public class ByteArrayBuffer extends OutputStream
   //    }
   //
   //    /*
-//     * Return a bit stream reading on the data between the {@link #pos()} and
+  //     * Return a bit stream reading on the data between the {@link #pos()} and
   //     * the {@link #limit()}.
   //     */
   //    public InputBitStream getInputBitStream() {
@@ -1184,7 +1183,7 @@ public class ByteArrayBuffer extends OutputStream
   //    }
   //
   //    /*
-//     * Write the data between the {@link #pos()} and the {@link #limit()} onto
+  //     * Write the data between the {@link #pos()} and the {@link #limit()} onto
   //     * the stream.
   //     */
   //    final public void writeOn(final OutputStream os) throws IOException {
@@ -1194,7 +1193,7 @@ public class ByteArrayBuffer extends OutputStream
   //    }
   //
   //    /*
-//     * Write the data between the {@link #pos()} and the {@link #limit()} onto
+  //     * Write the data between the {@link #pos()} and the {@link #limit()} onto
   //     * the stream.
   //     */
   //    final public void writeOn(final DataOutput out) throws IOException {

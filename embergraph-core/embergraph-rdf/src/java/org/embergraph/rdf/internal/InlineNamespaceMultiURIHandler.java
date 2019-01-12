@@ -23,7 +23,7 @@ import java.util.List;
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 
 /*
-* A container URIHandler that handles multiple inline URI possibilities for a given namespace. The
+ * A container URIHandler that handles multiple inline URI possibilities for a given namespace. The
  * handler searches registered namespaces and finds the a match for a given URI. All of the handlers
  * must have the same namespace prefix.
  *

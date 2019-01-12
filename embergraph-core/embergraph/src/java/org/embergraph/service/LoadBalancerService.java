@@ -23,7 +23,6 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import org.apache.log4j.Logger;
-import org.embergraph.counters.AbstractStatisticsCollector;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.DefaultInstrumentFactory;
 import org.embergraph.counters.History;
@@ -34,7 +33,6 @@ import org.embergraph.counters.ICounterSet.IInstrumentFactory;
 import org.embergraph.counters.IHostCounters;
 import org.embergraph.counters.IRequiredHostCounters;
 import org.embergraph.counters.PeriodEnum;
-import org.embergraph.counters.query.QueryUtil;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.ConcurrencyManager.IConcurrencyManagerCounters;
 import org.embergraph.journal.Journal;
@@ -45,10 +43,9 @@ import org.embergraph.service.EventReceiver.EventBTree;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.DaemonThreadFactory;
 import org.embergraph.util.concurrent.IQueueCounters.IThreadPoolExecutorTaskCounters;
-import org.embergraph.util.concurrent.ThreadPoolExecutorStatisticsTask;
 
 /*
-* The {@link LoadBalancerService} collects a variety of performance counters from hosts and
+ * The {@link LoadBalancerService} collects a variety of performance counters from hosts and
  * services, identifies over- and under- utilized hosts and services based on the collected data and
  * reports those to {@link DataService} s so that they can auto-balance, and acts as a clearing
  * house for WARN and URGENT alerts for hosts and services.
@@ -499,8 +496,8 @@ public abstract class LoadBalancerService extends AbstractService
 
       if (isTransient) {
 
-      /*
-       * Use an in-memory store.
+        /*
+         * Use an in-memory store.
          */
 
         final Properties p = new Properties();
@@ -511,8 +508,8 @@ public abstract class LoadBalancerService extends AbstractService
 
       } else {
 
-      /*
-       * Use a restart-safe store.
+        /*
+         * Use a restart-safe store.
          */
 
         final Properties p = new Properties();
@@ -845,8 +842,8 @@ public abstract class LoadBalancerService extends AbstractService
           continue;
         }
 
-      /*
-       * Compute the score for that host.
+        /*
+         * Compute the score for that host.
          */
         HostScore score;
         try {
@@ -857,8 +854,8 @@ public abstract class LoadBalancerService extends AbstractService
 
           log.error("Problem computing host score: " + hostname, ex);
 
-        /*
-       * Keep the old score if we were not able to compute a new
+          /*
+           * Keep the old score if we were not able to compute a new
            * score.
            *
            * Note: if the returned value is null then the host was
@@ -874,8 +871,8 @@ public abstract class LoadBalancerService extends AbstractService
           }
         }
 
-      /*
-       * Add to collection of scores.
+        /*
+         * Add to collection of scores.
          */
         scores.add(score);
       }
@@ -966,8 +963,8 @@ public abstract class LoadBalancerService extends AbstractService
 
             final CounterSet serviceCounterSet = (CounterSet) itrs.next();
 
-          /*
-       * Note: [name] on serviceCounterSet is the serviceUUID.
+            /*
+             * Note: [name] on serviceCounterSet is the serviceUUID.
              *
              * Note: This creates a dependency on
              * AbstractFederation#getServiceCounterPathPrefix(...)
@@ -991,8 +988,8 @@ public abstract class LoadBalancerService extends AbstractService
 
             if (!activeDataServices.containsKey(serviceUUID)) {
 
-            /*
-       * Note: Only data services are entered in this map,
+              /*
+               * Note: Only data services are entered in this map,
                * so this filters out the non-dataServices from the
                * load balancer's computations.
                */
@@ -1000,8 +997,8 @@ public abstract class LoadBalancerService extends AbstractService
               continue;
             }
 
-          /*
-       * Compute the score for that service.
+            /*
+             * Compute the score for that service.
              */
             ServiceScore score;
             try {
@@ -1012,8 +1009,8 @@ public abstract class LoadBalancerService extends AbstractService
 
               log.error("Problem computing service score: " + serviceCounterSet.getPath(), ex);
 
-            /*
-       * Keep the old score if we were not able to compute
+              /*
+               * Keep the old score if we were not able to compute
                * a new score.
                *
                * Note: if the returned value is null then the
@@ -1031,8 +1028,8 @@ public abstract class LoadBalancerService extends AbstractService
               }
             }
 
-          /*
-       * Add to collection of scores.
+            /*
+             * Add to collection of scores.
              */
             scores.add(score);
           }
@@ -1523,8 +1520,8 @@ public abstract class LoadBalancerService extends AbstractService
 
         } else {
 
-        /*
-       * When the LBS is run as an embedded process it can wind up
+          /*
+           * When the LBS is run as an embedded process it can wind up
            * having the performance counters collected within its
            * process in which case it will not have histories for the
            * data and we just return the current value.
@@ -1643,8 +1640,8 @@ public abstract class LoadBalancerService extends AbstractService
         synchronized (tmpScores) {
           for (ServiceScore ss : activeDataServices.values()) {
 
-          /*
-       * @todo use serviceName, but it has embedded slashes
+            /*
+             * @todo use serviceName, but it has embedded slashes
              * (in embergraph-jini) just like a path which makes life
              * difficult.
              */
@@ -1680,8 +1677,8 @@ public abstract class LoadBalancerService extends AbstractService
         synchronized (tmpFormula) {
           for (ServiceScore ss : activeDataServices.values()) {
 
-          /*
-       * @todo use serviceName, but it has embedded slashes
+            /*
+             * @todo use serviceName, but it has embedded slashes
              * (in embergraph-jini) just like a path which makes life
              * difficult.
              */
@@ -1867,8 +1864,8 @@ public abstract class LoadBalancerService extends AbstractService
       try {
         fed = getFederation();
       } catch (IllegalStateException t) {
-      /*
-       * Note: Indicates that the federation is closed.
+        /*
+         * Note: Indicates that the federation is closed.
          */
         return;
       }
@@ -1893,8 +1890,8 @@ public abstract class LoadBalancerService extends AbstractService
 
       if (IDataService.class == serviceIface) {
 
-      /*
-       * Add to set of known services.
+        /*
+         * Add to set of known services.
          *
          * Only data services are registered as [activeServices] since
          * we only make load balancing decisions for the data services.
@@ -1910,8 +1907,8 @@ public abstract class LoadBalancerService extends AbstractService
 
       if (getServiceUUID() != null) {
 
-      /*
-       * Create node for the joined service's history in the load
+        /*
+         * Create node for the joined service's history in the load
          * balancer's counter set. This just gives eager feedback in the
          * LBS's counter set if you are using the httpd service to watch
          * for service joins.
@@ -1968,8 +1965,8 @@ public abstract class LoadBalancerService extends AbstractService
 
       if (info != null) {
 
-      /*
-       * @todo remove history from counters - path is
+        /*
+         * @todo remove history from counters - path is
          * /host/serviceUUID? Consider scheduling removal after a few
          * hours or just sweeping periodically for services with no
          * updates in the last N hours so that people have access to
@@ -2029,8 +2026,8 @@ public abstract class LoadBalancerService extends AbstractService
 
       if (!serviceUUID.equals(getServiceUUID())) {
 
-      /*
-       * Don't do this for the load balancer itself!
+        /*
+         * Don't do this for the load balancer itself!
          *
          * @todo the LBS probably should not bother to notify() itself.
          */
@@ -2346,8 +2343,8 @@ public abstract class LoadBalancerService extends AbstractService
 
       if (minCount == 0) {
 
-      /*
-       * Since there was no minimum #of services demanded by the
+        /*
+         * Since there was no minimum #of services demanded by the
          * caller, we return [null].
          */
 
@@ -2358,8 +2355,8 @@ public abstract class LoadBalancerService extends AbstractService
 
       } else {
 
-      /*
-       * We do not have ANY active and scored non-excluded services
+        /*
+         * We do not have ANY active and scored non-excluded services
          * and [minCount GT ZERO]. In this case we use a he variant that
          * does not use scores and that awaits a service join.
          */

@@ -23,7 +23,7 @@ import org.embergraph.rdf.sail.webapp.lbs.AbstractLBSPolicy;
 import org.embergraph.rdf.sail.webapp.lbs.ServiceScore;
 
 /*
-* Policy implements a round-robin over the services that are joined with the met quorum.
+ * Policy implements a round-robin over the services that are joined with the met quorum.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

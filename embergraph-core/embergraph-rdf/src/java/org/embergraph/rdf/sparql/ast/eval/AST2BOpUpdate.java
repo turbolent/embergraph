@@ -67,7 +67,6 @@ import org.embergraph.rdf.model.EmbergraphStatement;
 import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.rio.IRDFParserOptions;
 import org.embergraph.rdf.rio.RDFParserOptions;
-import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sail.EmbergraphSail.EmbergraphSailConnection;
 import org.embergraph.rdf.sail.SPARQLUpdateEvent;
 import org.embergraph.rdf.sail.SPARQLUpdateEvent.DeleteInsertWhereStats;
@@ -100,7 +99,6 @@ import org.embergraph.rdf.sparql.ast.UpdateRoot;
 import org.embergraph.rdf.sparql.ast.UpdateType;
 import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.spo.ISPO;
-import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.BD;
 import org.embergraph.rdf.store.EmbergraphOpenRDFBindingSetsResolverator;
 import org.embergraph.striterator.Chunkerator;
@@ -112,7 +110,6 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.GraphQueryResult;
 import org.openrdf.query.QueryEvaluationException;
-import org.openrdf.query.UpdateExecutionException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.RepositoryResult;
@@ -129,7 +126,7 @@ import org.openrdf.sail.SailException;
 // import org.openrdf.query.impl.MutableTupleQueryResult;
 
 /*
-* Class handles SPARQL update query plan generation.
+ * Class handles SPARQL update query plan generation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -232,12 +229,12 @@ public class AST2BOpUpdate extends AST2BOpUtility {
       long batchResolveNanos = 0L;
       if (updateIndex > 0) {
 
-      /*
-       * There is more than one update operation in this request.
+        /*
+         * There is more than one update operation in this request.
          */
 
-      /*
-       * Note: We need to flush the assertion / retraction buffers if
+        /*
+         * Note: We need to flush the assertion / retraction buffers if
          * the Sail is local since some of the code paths supporting
          * UPDATEs do not go through the EmbergraphSail and would otherwise
          * not have their updates flushed until the commit (which does
@@ -250,8 +247,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
         final long t2 = System.nanoTime();
         connectionFlushNanos = t2 - t1;
 
-      /*
-       * We need to re-resolve any RDF Values appearing in this UPDATE
+        /*
+         * We need to re-resolve any RDF Values appearing in this UPDATE
          * operation which have a 0L term identifier in case they have
          * become defined through the previous update(s).
          *
@@ -566,8 +563,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
       if (insertClause == null && op.getDeleteClause() == null) {
 
-      /*
-       * DELETE WHERE QuadPattern
+        /*
+         * DELETE WHERE QuadPattern
          *
          * We need to build the appropriate CONSTRUCT clause from the
          * WHERE clause.
@@ -622,8 +619,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
       if (isDeleteInsert) {
 
-      /*
-       * DELETE + INSERT.
+        /*
+         * DELETE + INSERT.
          *
          * Note: The semantics of DELETE + INSERT are that the WHERE
          * clause is executed once. The solutions to that need to be fed
@@ -654,8 +651,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
         final int chunkSize = 100; // TODO configure.
 
-      /*
-       * Run as a SELECT query.
+        /*
+         * Run as a SELECT query.
          *
          * Note: This *MUST* use the view of the tripleStore which is
          * associated with the SailConnection in case the view is
@@ -698,8 +695,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
             if (isSolutionSet) {
 
-            /*
-       * Target is solution set.
+              /*
+               * Target is solution set.
                *
                * @see
                * https://sourceforge.net/apps/trac/bigdata/ticket
@@ -740,8 +737,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
               try {
 
-              /*
-       * Replace WHERE clause with an join group
+                /*
+                 * Replace WHERE clause with an join group
                  * containing an INCLUDE for the solutions to be
                  * removed.
                  *
@@ -774,8 +771,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
                 // Set the projection node.
                 queryRoot.setProjection(deleteClause.getProjection());
 
-              /*
-       * Run as a SELECT query : Do NOT materialize
+                /*
+                 * Run as a SELECT query : Do NOT materialize
                  * IVs.
                  *
                  * Note: This *MUST* use the view of the
@@ -802,8 +799,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
               } finally {
 
-              /*
-       * Make sure that we do not leave this hanging
+                /*
+                 * Make sure that we do not leave this hanging
                  * around.
                  */
 
@@ -812,8 +809,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
             } else {
 
-            /*
-       * DELETE triples/quads constructed from the
+              /*
+               * DELETE triples/quads constructed from the
                * solutions.
                */
 
@@ -859,8 +856,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
             if (isSolutionSet) {
 
-            /*
-       * Target is solution set.
+              /*
+               * Target is solution set.
                *
                * @see
                * https://sourceforge.net/apps/trac/bigdata/ticket
@@ -889,8 +886,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
             } else {
 
-            /*
-       * INSERT triples/quads CONSTRUCTed from solutions.
+              /*
+               * INSERT triples/quads CONSTRUCTed from solutions.
                */
 
               final ConstructNode template =
@@ -930,8 +927,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
       } else {
 
-      /*
-       * DELETE/INSERT.
+        /*
+         * DELETE/INSERT.
          *
          * Note: For this code path, only the INSERT clause -or- the
          * DELETE clause was specified. We handle the case where BOTH
@@ -952,8 +949,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
         if (isSolutionSet) {
 
-        /*
-       * Target is solution set.
+          /*
+           * Target is solution set.
            *
            * @see https://sourceforge.net/apps/trac/bigdata/ticket/524
            * (SPARQL Cache)
@@ -967,15 +964,15 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
           if (!isInsert) {
 
-          /*
-       * Re-write the AST to handle DELETE solutions.
+            /*
+             * Re-write the AST to handle DELETE solutions.
              */
 
             convertQueryForDeleteSolutions(queryRoot, solutionSet);
           }
 
-        /*
-       * Run as a SELECT query : Do NOT materialize IVs.
+          /*
+           * Run as a SELECT query : Do NOT materialize IVs.
            *
            * Note: This *MUST* use the view of the tripleStore which
            * is associated with the SailConnection in case the view is
@@ -1000,8 +997,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
         } else {
 
-        /*
-       * Target is graph.
+          /*
+           * Target is graph.
            */
 
           final QuadData quadData =
@@ -1016,8 +1013,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
           // Set the CONSTRUCT template (quads patterns).
           queryRoot.setConstruct(template);
 
-        /*
-       * Run as a CONSTRUCT query
+          /*
+           * Run as a CONSTRUCT query
            *
            * FIXME Can we avoid IV materialization for this code path?
            * Note that we have to do Truth Maintenance. However, I
@@ -1570,8 +1567,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
       try {
 
-      /*
-       * Setup decompression.
+        /*
+         * Setup decompression.
          */
 
         if (n.endsWith(".gz")) {
@@ -1612,8 +1609,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
     } finally {
 
       if (hconn instanceof HttpURLConnection) {
-      /*
-       * Disconnect, but only after we have loaded all the
+        /*
+         * Disconnect, but only after we have loaded all the
          * URLs. Disconnect is optional for java.net. It is a
          * hint that you will not be accessing more resources on
          * the connected host. By disconnecting only after all
@@ -1810,15 +1807,15 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
       if (scope == Scope.DEFAULT_CONTEXTS) {
 
-      /*
-       * Addressing the defaultGraph (Sesame nullGraph).
+        /*
+         * Addressing the defaultGraph (Sesame nullGraph).
          */
         sailConn.removeStatements(null /* s */, null /* p */, null /* o */, BD.NULL_GRAPH);
 
       } else {
 
-      /*
-       * Addressing ALL NAMED GRAPHS.
+        /*
+         * Addressing ALL NAMED GRAPHS.
          *
          * Note: This is everything EXCEPT the nullGraph.
          */

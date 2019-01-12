@@ -29,10 +29,9 @@ import org.openrdf.model.impl.LiteralImpl;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
-import org.openrdf.repository.RepositoryConnection;
 
 /*
-* Proxied test suite for the ESTCARD method (estimated cardinality aka fast range counts) and
+ * Proxied test suite for the ESTCARD method (estimated cardinality aka fast range counts) and
  * related operations at the {@link RepositoryConnection} that tunnel through to the same REST API
  * method (getContexts(), size()).
  *

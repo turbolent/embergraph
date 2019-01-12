@@ -22,12 +22,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.striterator;
 
 import java.util.Comparator;
-import org.embergraph.bop.IElement;
 import org.embergraph.bop.IPredicate;
 import org.embergraph.btree.keys.IKeyBuilder;
 
 /*
-* An interface representing the natural traversal orders for the different indices for some class
+ * An interface representing the natural traversal orders for the different indices for some class
  * of relation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

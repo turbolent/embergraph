@@ -40,8 +40,6 @@ import org.embergraph.rdf.internal.impl.TermId;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.sail.sparql.Embergraph2ASTSPARQLParser;
-import org.embergraph.rdf.sail.sparql.EmbergraphASTContext;
-import org.embergraph.rdf.sail.sparql.EmbergraphExprBuilder;
 import org.embergraph.rdf.sail.sparql.ast.Node;
 import org.embergraph.rdf.sail.sparql.ast.SimpleNode;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
@@ -58,7 +56,7 @@ import org.embergraph.rdf.vocab.NoVocabulary;
 import org.openrdf.query.MalformedQueryException;
 
 /*
-* Abstract base class for tests of the {@link EmbergraphExprBuilder} and friends.
+ * Abstract base class for tests of the {@link EmbergraphExprBuilder} and friends.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -269,16 +267,16 @@ public class AbstractEmbergraphExprBuilderTestCase extends TestCase {
       //            ((QueryRoot) actual).setParseTree(null);
 
       if (((QueryRoot) expected).getQueryHints() == null) {
-      /*
-       * Note: Discard the query hints since the unit tests are not
+        /*
+         * Note: Discard the query hints since the unit tests are not
          * building those up from the AST at this time.
          */
         ((QueryRoot) actual).setQueryHints(null);
       }
 
       if (((QueryRoot) expected).getDataset() == null) {
-      /*
-       * Note: Discard the data set since the unit tests are not
+        /*
+         * Note: Discard the data set since the unit tests are not
          * building those up from the AST at this time.
          */
         ((QueryRoot) actual).setDataset(null);

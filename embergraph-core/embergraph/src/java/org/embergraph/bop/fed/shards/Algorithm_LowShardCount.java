@@ -1,11 +1,9 @@
 package org.embergraph.bop.fed.shards;
 
 import org.embergraph.bop.IBindingSet;
-import org.embergraph.mdi.IMetadataIndex;
-import org.embergraph.mdi.PartitionLocator;
 
 /*
-* @todo Implement {@link Algorithm_LowShardCount}.
+ * @todo Implement {@link Algorithm_LowShardCount}.
  *     <p>When the #of index partitions is small, it is efficient to locally materialize the {@link
  *     IMetadataIndex} using a locator scan and then assign the {@link Bundle}s to the partitions.
  *     <p>Rather than worrying about multiple locator scans against the remote {@link

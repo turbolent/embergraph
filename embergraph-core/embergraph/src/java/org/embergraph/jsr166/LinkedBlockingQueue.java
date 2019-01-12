@@ -17,7 +17,7 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 /*
-* An optionally-bounded {@linkplain BlockingQueue blocking queue} based on linked nodes. This queue
+ * An optionally-bounded {@linkplain BlockingQueue blocking queue} based on linked nodes. This queue
  * orders elements FIFO (first-in-first-out). The <em>head</em> of the queue is that element that
  * has been on the queue the longest time. The <em>tail</em> of the queue is that element that has
  * been on the queue the shortest time. New elements are inserted at the tail of the queue, and the
@@ -183,7 +183,7 @@ public class LinkedBlockingQueue<E> extends AbstractQueue<E>
   }
 
   //     /*
-//      * Tells whether both locks are held by current thread.
+  //      * Tells whether both locks are held by current thread.
   //      */
   //     boolean isFullyLocked() {
   //         return (putLock.isHeldByCurrentThread() &&

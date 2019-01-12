@@ -25,7 +25,7 @@ import junit.framework.TestCase2;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Unit tests for {@link IKeyBuffer#search(byte[] searchKey)}.
+ * Unit tests for {@link IKeyBuffer#search(byte[] searchKey)}.
  *
  * @todo write performance test? the existing code can no longer be used since both linear and
  *     binary searches first test the shared prefix for the keys and then search on the remainder...
@@ -390,7 +390,7 @@ public class TestKeyBufferSearch extends TestCase2 {
   //    }
 
   //    /*
-//     * Performance test to identify the tradeoff point for binary for linear
+  //     * Performance test to identify the tradeoff point for binary for linear
   //     * search.
   //     *
   //     * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -416,7 +416,7 @@ public class TestKeyBufferSearch extends TestCase2 {
   //        Random r = new Random();
   //
   //        /*
-//         * Generate a set of N random distinct byte[] keys in sorted order using
+  //         * Generate a set of N random distinct byte[] keys in sorted order using
   //         * an unsigned byte[] comparison function.
   //         *
   //         * @param nkeys The #of keys to generate.
@@ -457,7 +457,7 @@ public class TestKeyBufferSearch extends TestCase2 {
   //        }
   //
   //        /*
-//         * Performance test comparing binary vs linear search.
+  //         * Performance test comparing binary vs linear search.
   //         *
   //         * @param ntrials
   //         */
@@ -551,7 +551,7 @@ public class TestKeyBufferSearch extends TestCase2 {
   //        }
   //
   //        /*
-//         * Time a bunch of searches.
+  //         * Time a bunch of searches.
   //         *
   //         * @param linear
   //         *            use linear search when true

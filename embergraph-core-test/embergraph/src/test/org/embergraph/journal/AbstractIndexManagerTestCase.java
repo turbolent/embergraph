@@ -65,7 +65,7 @@ public abstract class AbstractIndexManagerTestCase<S extends IIndexManager> exte
   }
 
   //    /*
-//     * A random number generated - the seed is NOT fixed.
+  //     * A random number generated - the seed is NOT fixed.
   //     *
   //     * This is not required. The problem was that the base class field
   //     * of the same name was winding up not initialized because nobody was.
@@ -195,7 +195,7 @@ public abstract class AbstractIndexManagerTestCase<S extends IIndexManager> exte
   //    }
   //
   //    /*
-//     * Version of {@link #deleteTestJournalFile(String)} that obtains the name
+  //     * Version of {@link #deleteTestJournalFile(String)} that obtains the name
   //     * of the journal file from the {@link Options#FILE} property (if any) on
   //     * {@link #getProperties()}.
   //     */
@@ -212,7 +212,7 @@ public abstract class AbstractIndexManagerTestCase<S extends IIndexManager> exte
   //    }
   //
   //    /*
-//     * Delete the test file (if any). Note that test files are NOT created when
+  //     * Delete the test file (if any). Note that test files are NOT created when
   //     * testing the {@link BufferMode#Transient} journal. A warning message that
   //     * the file could not be deleted generally means that you forgot to close
   //     * the journal in your test.
@@ -242,7 +242,7 @@ public abstract class AbstractIndexManagerTestCase<S extends IIndexManager> exte
   //
   //    }
   //    /*
-//     * Helper method verifies that the contents of <i>actual</i> from
+  //     * Helper method verifies that the contents of <i>actual</i> from
   //     * position() to limit() are consistent with the expected byte[]. A
   //     * read-only view of <i>actual</i> is used to avoid side effects on the
   //     * position, mark or limit properties of the buffer.
@@ -285,7 +285,7 @@ public abstract class AbstractIndexManagerTestCase<S extends IIndexManager> exte
   //
   //    }
   //    /*
-//     * Helper method verifies that the contents of <i>actual</i> from
+  //     * Helper method verifies that the contents of <i>actual</i> from
   //     * position() to limit() are consistent with the expected byte[]. A
   //     * read-only view of <i>actual</i> is used to avoid side effects on the
   //     * position, mark or limit properties of the buffer.
@@ -377,7 +377,7 @@ public abstract class AbstractIndexManagerTestCase<S extends IIndexManager> exte
   }
 
   //    /*
-//     * Helper method verifies that the contents of <i>actual</i> from
+  //     * Helper method verifies that the contents of <i>actual</i> from
   //     * position() to limit() are consistent with the expected byte[]. A
   //     * read-only view of <i>actual</i> is used to avoid side effects on the
   //     * position, mark or limit properties of the buffer.
@@ -427,7 +427,7 @@ public abstract class AbstractIndexManagerTestCase<S extends IIndexManager> exte
   //    }
   //
   //    /*
-//     * Helper method verifies that the contents of <i>actual</i> from
+  //     * Helper method verifies that the contents of <i>actual</i> from
   //     * position() to limit() are consistent with the expected byte[]. A
   //     * read-only view of <i>actual</i> is used to avoid side effects on the
   //     * position, mark or limit properties of the buffer.

@@ -9,7 +9,7 @@ It is provided "as is" without expressed or implied warranty.
 package cern.colt.bitvector;
 
 /*
-* Fixed sized (non resizable) bitvector. Upon instance construction a bitvector is told to hold a
+ * Fixed sized (non resizable) bitvector. Upon instance construction a bitvector is told to hold a
  * fixed number of bits - it's size. The size can be any number (need not be a power of 2 or so).
  * The bits of a <tt>BitVector</tt> are indexed by nonnegative integers. Any attempt to access a bit
  * at an <tt>index&lt;0 || index&gt;=size()</tt> will throw an <tt>IndexOutOfBoundsException</tt>.

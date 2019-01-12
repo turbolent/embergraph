@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.cache;
 
 /*
-* This callback is invoked when updates are batched through from the thread-local queue to the
+ * This callback is invoked when updates are batched through from the thread-local queue to the
  * shared queue. The default implementation does nothing.
  */
 interface IBatchedUpdateListener<T> {

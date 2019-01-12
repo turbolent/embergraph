@@ -36,37 +36,27 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.apache.log4j.Logger;
 import org.embergraph.btree.BTree;
 import org.embergraph.btree.Checkpoint;
-import org.embergraph.btree.ISimpleSplitHandler;
 import org.embergraph.btree.IndexMetadata;
-import org.embergraph.btree.IndexSegment;
-import org.embergraph.btree.IndexSegmentStore;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.ICounter;
 import org.embergraph.counters.ICounterSet;
 import org.embergraph.counters.IRequiredHostCounters;
-import org.embergraph.io.DirectBufferPool;
 import org.embergraph.journal.AbstractJournal;
-import org.embergraph.journal.BufferMode;
-import org.embergraph.journal.IResourceManager;
-import org.embergraph.journal.ITx;
 import org.embergraph.journal.TimestampUtility;
-import org.embergraph.journal.WriteExecutorService;
 import org.embergraph.mdi.IResourceMetadata;
 import org.embergraph.mdi.LocalPartitionMetadata;
 import org.embergraph.resources.ResourceManager.IResourceManagerCounters;
 import org.embergraph.service.AbstractFederation;
-import org.embergraph.service.DataService;
 import org.embergraph.service.DataService.IDataServiceCounters;
 import org.embergraph.service.Event;
 import org.embergraph.service.EventResource;
 import org.embergraph.service.EventType;
-import org.embergraph.service.IDataService;
 import org.embergraph.service.IServiceShutdown;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.DaemonThreadFactory;
 
 /*
-* Class encapsulates logic for handling journal overflow events. Overflow is triggered
+ * Class encapsulates logic for handling journal overflow events. Overflow is triggered
  * automatically when the user data extent on the journal nears a configured threshold. Once the
  * preconditions for overflow are satisfied, the {@link WriteExecutorService}s for the journal are
  * paused and all running tasks on those services are allowed to complete and commit. Once no
@@ -113,7 +103,7 @@ public abstract class OverflowManager extends IndexManager {
   protected final double tailSplitThreshold;
 
   //    /*
-//     * @see Options#HOT_SPLIT_THRESHOLD
+  //     * @see Options#HOT_SPLIT_THRESHOLD
   //     */
   //    final protected double hotSplitThreshold;
 
@@ -296,12 +286,12 @@ public abstract class OverflowManager extends IndexManager {
   protected final boolean overflowCancelledWhenJournalFull;
 
   //    /*
-//     * @see Options#PURGE_RESOURCES_TIMEOUT
+  //     * @see Options#PURGE_RESOURCES_TIMEOUT
   //     */
   //    private final long purgeResourcesTimeout;
 
   //    /*
-//     * The timeout in milliseconds that we will await an exclusive write lock on
+  //     * The timeout in milliseconds that we will await an exclusive write lock on
   //     * the {@link WriteExecutorService} in order to purge unused resources.
   //     *
   //     * @see Options#PURGE_RESOURCES_TIMEOUT
@@ -631,7 +621,7 @@ public abstract class OverflowManager extends IndexManager {
     String DEFAULT_OPTIONAL_COMPACTING_MERGES_PER_OVERFLOW = "2";
 
     //        /*
-//         * The maximum #of sources for an index partition view before a
+    //         * The maximum #of sources for an index partition view before a
     //         * compacting merge of the index partition will be triggered in
     //         * preference to an incremental build (default
     //         * {@value #DEFAULT_MAXIMUM_SOURCES_PER_VIEW}). The minimum value is
@@ -781,7 +771,7 @@ public abstract class OverflowManager extends IndexManager {
     String DEFAULT_OVERFLOW_CANCELLED_WHEN_JOURNAL_FULL = "true";
 
     //        /*
-//         * The timeout in milliseconds that we will await an exclusive lock on
+    //         * The timeout in milliseconds that we will await an exclusive lock on
     //         * the {@link WriteExecutorService} in order to release unused resources
     //         * (journals and segment files).
     //         */
@@ -1696,21 +1686,21 @@ public abstract class OverflowManager extends IndexManager {
 
       if (asyncOverflowEnabled.get()) {
 
-      /*
-       * Do overflow processing if overflow is being forced OR if we
+        /*
+         * Do overflow processing if overflow is being forced OR if we
          * need to do a build for at least one index partition.
          */
 
         if (forceOverflow || overflowMetadata.postProcess) {
 
-        /*
-       * Post-processing SHOULD be performed.
+          /*
+           * Post-processing SHOULD be performed.
            */
 
           if (log.isInfoEnabled()) log.info("Will start asynchronous overflow processing.");
 
-        /*
-       * Start the asynchronous processing of the named indices on
+          /*
+           * Start the asynchronous processing of the named indices on
            * the old journal.
            */
           if (!overflowAllowed.compareAndSet(true /* expect */, false /* set */)) {
@@ -1718,8 +1708,8 @@ public abstract class OverflowManager extends IndexManager {
             throw new AssertionError();
           }
 
-        /*
-       * Submit task on private service that will run
+          /*
+           * Submit task on private service that will run
            * asynchronously and clear [overflowAllowed] when done.
            *
            * Note: No one ever checks the Future returned by this
@@ -1733,8 +1723,8 @@ public abstract class OverflowManager extends IndexManager {
 
         if (log.isInfoEnabled()) log.info("Asynchronous overflow not required");
 
-      /*
-       * Note: increment the counter now since we will not do
+        /*
+         * Note: increment the counter now since we will not do
          * asynchronous overflow processing.
          */
 
@@ -1746,8 +1736,8 @@ public abstract class OverflowManager extends IndexManager {
 
         log.warn("Asynchronous overflow processing is disabled!");
 
-      /*
-       * Note: increment the counter now since we will not do
+        /*
+         * Note: increment the counter now since we will not do
          * asynchronous overflow processing.
          */
 
@@ -1929,8 +1919,8 @@ public abstract class OverflowManager extends IndexManager {
 
       if (serviceRoot != null) {
 
-      /*
-       * The counters for the resource manager within the service's
+        /*
+         * The counters for the resource manager within the service's
          * counter hierarchy.
          *
          * Note: The [serviceRoot] is not defined by the MockFederation
@@ -1942,8 +1932,8 @@ public abstract class OverflowManager extends IndexManager {
 
         if (tmp != null) {
 
-        /*
-       * Again, the resourceManager counters are not defined for
+          /*
+           * Again, the resourceManager counters are not defined for
            * some unit tests.
            */
 
@@ -2086,8 +2076,8 @@ public abstract class OverflowManager extends IndexManager {
 
         if (oldpmd == null) {
 
-        /*
-       * A named index that is not an index partition.
+          /*
+           * A named index that is not an index partition.
            *
            * Note: In the scale-out system all named indices are
            * registered as partitioned indices so this condition
@@ -2110,8 +2100,8 @@ public abstract class OverflowManager extends IndexManager {
         // true iff an overflow handler is defined.
         final boolean hasOverflowHandler = indexMetadata.getOverflowHandler() != null;
 
-      /*
-       * When an index partition is empty we always just copy it onto
+        /*
+         * When an index partition is empty we always just copy it onto
          * the new journal (since there is no data, all that we are
          * doing is registering the index on the new journal).
          *
@@ -2148,8 +2138,8 @@ public abstract class OverflowManager extends IndexManager {
 
         if (copyIndex) {
 
-        /*
-       * We will copy the index data from the B+Tree old journal
+          /*
+           * We will copy the index data from the B+Tree old journal
            * (but not from the full index view) onto the new journal.
            * In this case the index will use a view that DOES NOT
            * include the old index on the old journal.
@@ -2188,8 +2178,8 @@ public abstract class OverflowManager extends IndexManager {
 
         } else {
 
-        /*
-       * We will only create a empty index on the new journal.
+          /*
+           * We will only create a empty index on the new journal.
            *
            * We will update the partition metadata so that the new
            * index reflects its location on the new journal. The index
@@ -2235,8 +2225,8 @@ public abstract class OverflowManager extends IndexManager {
                   ));
         }
 
-      /*
-       * Create and register the index with the new view on the new
+        /*
+         * Create and register the index with the new view on the new
          * journal.
          *
          * Note: This is essentially a variant of BTree#create() where
@@ -2245,8 +2235,8 @@ public abstract class OverflowManager extends IndexManager {
          */
         {
 
-        /*
-       * Write metadata record on store. The address of that
+          /*
+           * Write metadata record on store. The address of that
            * record is set as a side-effect on the metadata object.
            */
           indexMetadata.write(newJournal);
@@ -2274,15 +2264,15 @@ public abstract class OverflowManager extends IndexManager {
           final Checkpoint overflowCheckpoint =
               indexMetadata.overflowCheckpoint(oldBTree.getCheckpoint());
 
-        /*
-       * Write the checkpoint record on the store. The address of
+          /*
+           * Write the checkpoint record on the store. The address of
            * the checkpoint record is set on the object as a side
            * effect.
            */
           overflowCheckpoint.write(newJournal);
 
-        /*
-       * Load the B+Tree from the store using that checkpoint
+          /*
+           * Load the B+Tree from the store using that checkpoint
            * record.
            */
           final BTree newBTree =
@@ -2297,8 +2287,8 @@ public abstract class OverflowManager extends IndexManager {
 
           if (copyIndex) {
 
-          /*
-       * Copy the data from the B+Tree on the old journal into
+            /*
+             * Copy the data from the B+Tree on the old journal into
              * the B+Tree on the new journal.
              *
              * Note: [overflow := true] since we are copying from
@@ -2332,16 +2322,16 @@ public abstract class OverflowManager extends IndexManager {
 
           } else {
 
-          /*
-       * The index was not copied so its view was re-defined
+            /*
+             * The index was not copied so its view was re-defined
              * on the new journal.
              */
 
             numIndicesViewRedefined++;
           }
 
-        /*
-       * Register the new B+Tree on the new journal.
+          /*
+           * Register the new B+Tree on the new journal.
            */
           newJournal.registerIndex(bm.name, newBTree);
         }

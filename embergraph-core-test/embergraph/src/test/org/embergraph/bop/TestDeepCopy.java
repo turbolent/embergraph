@@ -52,7 +52,7 @@ import org.embergraph.rdf.spo.SPOPredicate;
 import org.embergraph.rdf.spo.SPOStarJoin;
 
 /*
-* Unit tests for the existence of the required deep copy semantics for {@link BOp}s.
+ * Unit tests for the existence of the required deep copy semantics for {@link BOp}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -109,8 +109,8 @@ public class TestDeepCopy extends TestCase2 {
   static final Set<Class<?>> noDeepCopy =
       new LinkedHashSet<Class<?>>(
           Arrays.asList(
-            /*
-       * {@link Var} does not have deep copy semantics since it imposes a canonizaling
+              /*
+               * {@link Var} does not have deep copy semantics since it imposes a canonizaling
                * mapping from names to object references.
                */
               Var.class));

@@ -23,10 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.service;
 
-import java.util.concurrent.Callable;
-
 /*
-* A service for distributing client {@link Callable}s across the resources of an {@link
+ * A service for distributing client {@link Callable}s across the resources of an {@link
  * IEmbergraphFederation}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -60,12 +60,12 @@ public class AbstractConnectOptions implements IMimeTypes {
   public static final String DEFAULT_BOOLEAN_ACCEPT_HEADER;
 
   //    /*
-//     * Used for NSS mutation operation responses.
+  //     * Used for NSS mutation operation responses.
   //     */
   //    public static final String MIME_APPLICATION_XML = "application/xml";
 
   //    /*
-//     * Used to interchange {@link Properties} objects.
+  //     * Used to interchange {@link Properties} objects.
   //     */
   //    public static final String MIME_PROPERTIES_XML = "application/xml";
 

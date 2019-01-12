@@ -37,11 +37,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-import javax.servlet.Servlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
-import org.embergraph.journal.IAtomicStore;
 import org.embergraph.rdf.properties.PropertiesFormat;
 import org.embergraph.rdf.properties.PropertiesWriter;
 import org.embergraph.rdf.properties.PropertiesWriterRegistry;
@@ -62,7 +60,7 @@ import org.openrdf.rio.RDFWriterFactory;
 import org.openrdf.rio.RDFWriterRegistry;
 
 /*
-* Abstract base class for {@link Servlet}s which interact with the embergraph RDF data and/or
+ * Abstract base class for {@link Servlet}s which interact with the embergraph RDF data and/or
  * SPARQL query layers.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -125,7 +123,7 @@ public abstract class EmbergraphRDFServlet extends EmbergraphServlet {
   public EmbergraphRDFServlet() {}
 
   //    /*
-//     * {@inheritDoc}
+  //     * {@inheritDoc}
   //     * <p>
   //     * Note: Overridden to support read-only deployments.
   //     *
@@ -195,21 +193,21 @@ public abstract class EmbergraphRDFServlet extends EmbergraphServlet {
        * headers written.
        */
       if (InnerCause.isInnerCause(t, DatasetNotFoundException.class)) {
-      /*
-       * The addressed KB does not exist.
+        /*
+         * The addressed KB does not exist.
          */
         resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
         resp.setContentType(MIME_TEXT_PLAIN);
       } else if (InnerCause.isInnerCause(t, ConstraintViolationException.class)) {
-      /*
-       * A constraint violation is a bad request (the data violates
+        /*
+         * A constraint violation is a bad request (the data violates
          * the rules) not a server error.
          */
         resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         resp.setContentType(MIME_TEXT_PLAIN);
       } else if (InnerCause.isInnerCause(t, MalformedQueryException.class)) {
-      /*
-       * Send back a BAD REQUEST (400) along with the text of the
+        /*
+         * Send back a BAD REQUEST (400) along with the text of the
          * syntax error message.
          *
          * TODO Write unit test for 400 response for bad client request.
@@ -217,8 +215,8 @@ public abstract class EmbergraphRDFServlet extends EmbergraphServlet {
         resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         resp.setContentType(MIME_TEXT_PLAIN);
       } else if (InnerCause.isInnerCause(t, QuadsOperationInTriplesModeException.class)) {
-      /*
-       * Nice error when attempting to use quads data in a triples only
+        /*
+         * Nice error when attempting to use quads data in a triples only
          * mode.
          *
          * @see #1086 Loading quads data into a triple store should strip
@@ -227,8 +225,8 @@ public abstract class EmbergraphRDFServlet extends EmbergraphServlet {
         resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         resp.setContentType(MIME_TEXT_PLAIN);
       } else if (InnerCause.isInnerCause(t, HttpOperationException.class)) {
-      /*
-       * An AbstractRestApiTask failed and throw out a typed exception to
+        /*
+         * An AbstractRestApiTask failed and throw out a typed exception to
          * avoid joining a commit group.
          *
          * TODO The queryStr is ignored on this code path. Review the places
@@ -282,14 +280,14 @@ public abstract class EmbergraphRDFServlet extends EmbergraphServlet {
           w = resp.getWriter();
         }
         if (queryStr != null) {
-        /*
-       * Write the query onto the output stream.
+          /*
+           * Write the query onto the output stream.
            */
           w.write(queryStr);
           w.write("\n");
         }
-      /*
-       * Write the stack trace onto the output stream.
+        /*
+         * Write the stack trace onto the output stream.
          */
         t.printStackTrace(w);
         w.flush(); // flush the writer.
@@ -609,8 +607,7 @@ public abstract class EmbergraphRDFServlet extends EmbergraphServlet {
       return false;
     } else if (mimeType.equals(MIME_SPARQL_RESULTS_JSON)) {
       return false;
-    } else
-      return !mimeType.equals(MIME_APPLICATION_XML);
+    } else return !mimeType.equals(MIME_APPLICATION_XML);
   }
 
   /** Convert an array of URI strings to an array of URIs. */

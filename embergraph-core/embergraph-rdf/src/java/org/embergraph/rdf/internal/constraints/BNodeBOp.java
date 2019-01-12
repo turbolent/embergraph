@@ -30,7 +30,7 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 
 /*
-* The BNODE()/BNODE(Literal) function as defined in <a
+ * The BNODE()/BNODE(Literal) function as defined in <a
  * href="http://www.w3.org/TR/sparql11-query/#SparqlOps">SPARQL 1.1 Query Language for RDF</a>.
  *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>

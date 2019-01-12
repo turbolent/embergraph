@@ -4,7 +4,7 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IValueExpression;
 
 /*
-* An aggregate operator, such as SUM, COUNT, MIN, MAX, etc.
+ * An aggregate operator, such as SUM, COUNT, MIN, MAX, etc.
  *
  * @author thompsonbry
  */

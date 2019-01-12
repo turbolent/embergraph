@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree;
 
 /*
-* B+Tree utilization report.
+ * B+Tree utilization report.
  *
  * <p>Note: The utilization numbers reported by this interface are a bit misleading. They only
  * consider the #of index positions in the node or leaf which is full, but do not take into account

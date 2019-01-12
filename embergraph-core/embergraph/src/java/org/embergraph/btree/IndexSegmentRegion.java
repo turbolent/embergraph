@@ -1,7 +1,7 @@
 package org.embergraph.btree;
 
 /*
-* Type-safe enumeration of the regions to which relative offsets may be constructed for an {@link
+ * Type-safe enumeration of the regions to which relative offsets may be constructed for an {@link
  * IndexSegmentStore}.
  *
  * @see IndexSegmentBuilder

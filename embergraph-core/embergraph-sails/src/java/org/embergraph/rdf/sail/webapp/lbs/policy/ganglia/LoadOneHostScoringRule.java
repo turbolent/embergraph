@@ -21,7 +21,7 @@ import org.embergraph.rdf.sail.webapp.lbs.IHostMetrics;
 import org.embergraph.rdf.sail.webapp.lbs.IHostScoringRule;
 
 /*
-* This {@link IHostScoringRule} uses <code>load_one</code> to score and rank the hosts. The <code>
+ * This {@link IHostScoringRule} uses <code>load_one</code> to score and rank the hosts. The <code>
  * lode_one</code> metric is available on Linux and FreeBSD platforms.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

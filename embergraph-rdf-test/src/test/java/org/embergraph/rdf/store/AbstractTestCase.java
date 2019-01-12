@@ -38,7 +38,6 @@ import junit.framework.TestCase2;
 import org.embergraph.btree.IIndex;
 import org.embergraph.btree.ITupleIterator;
 import org.embergraph.btree.ITupleSerializer;
-import org.embergraph.btree.UnisolatedReadWriteIndex;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure.ResultBitBuffer;
 import org.embergraph.btree.proc.BatchContains.BatchContainsConstructor;
@@ -73,7 +72,7 @@ import org.openrdf.rio.RDFHandler;
 import org.openrdf.rio.helpers.RDFHandlerBase;
 
 /*
-* Abstract harness for testing under a variety of configurations. In order to test a specific
+ * Abstract harness for testing under a variety of configurations. In order to test a specific
  * configuration, create a concrete instance of this class. The configuration can be described using
  * a mixture of a <code>.properties</code> file of the same name as the test class and custom code.
  *
@@ -188,8 +187,8 @@ public abstract class AbstractTestCase extends TestCase2 {
        */
       if (m_properties.get(Options.FILE) == null) {
 
-      /*
-       * Use a temporary file for the test. Such files are always deleted when
+        /*
+         * Use a temporary file for the test. Such files are always deleted when
          * the journal is closed or the VM exits.
          */
 
@@ -296,8 +295,8 @@ public abstract class AbstractTestCase extends TestCase2 {
 
       } catch (AssertionFailedError ex) {
 
-      /*
-       * Only do the message construction once the assertion is known
+        /*
+         * Only do the message construction once the assertion is known
          * to fail.
          */
 
@@ -307,7 +306,7 @@ public abstract class AbstractTestCase extends TestCase2 {
   }
 
   //    /*
-//     * Method verifies that the <i>actual</i> {@link Iterator} produces the
+  //     * Method verifies that the <i>actual</i> {@link Iterator} produces the
   //     * expected objects in the expected order. Objects are compared using
   //     * {@link Object#equals( Object other )}. Errors are reported if too few or
   //     * too many objects are produced, etc.
@@ -369,8 +368,8 @@ public abstract class AbstractTestCase extends TestCase2 {
 
       if (!expected[i].equals(g)) {
 
-      /*
-       * Only do message construction if we know that the assert will
+        /*
+         * Only do message construction if we know that the assert will
          * fail.
          */
         fail(
@@ -510,8 +509,8 @@ public abstract class AbstractTestCase extends TestCase2 {
 
       if (!expected[i].equals(g)) {
 
-      /*
-       * Only do message construction if we know that the assert will
+        /*
+         * Only do message construction if we know that the assert will
          * fail.
          */
         fail(
@@ -594,8 +593,8 @@ public abstract class AbstractTestCase extends TestCase2 {
         }
 
         if (!BytesUtil.bytesEqual(ivAsKey, encodedIV)) {
-        /*
-       * The IV that we got back by round tripping back through
+          /*
+           * The IV that we got back by round tripping back through
            * the TERMS2ID index does not agree with the IV we obtained
            * from the iterator scanning the TERMS2ID index.
            */
@@ -641,8 +640,8 @@ public abstract class AbstractTestCase extends TestCase2 {
         final IV<?, ?> decodedIV = IVUtility.decodeFromOffset(encodedIV, 0 /* offset */);
 
         if (!iv.equals(decodedIV)) {
-        /*
-       * The IV that we got back by round tripping back through
+          /*
+           * The IV that we got back by round tripping back through
            * the TERMS2ID index does not agree with the IV we obtained
            * from the iterator scanning the ID2TERMS index.
            */
@@ -739,14 +738,14 @@ public abstract class AbstractTestCase extends TestCase2 {
 
         if (nerrs.get() > 10) throw new RuntimeException("Too many errors");
 
-      /*
-       * This is a chunk of expected statements in the natural order
+        /*
+         * This is a chunk of expected statements in the natural order
          * for the "actual" access path.
          */
         final ISPO[] expectedChunk = itre.nextChunk(keyOrderActual);
 
-      /*
-       * Construct a batch contains test for those statements and
+        /*
+         * Construct a batch contains test for those statements and
          * submit it to the actual index. The aggregator will verify
          * that each expected statement exists in the actual index and
          * report an error for those that were not found.
@@ -786,8 +785,8 @@ public abstract class AbstractTestCase extends TestCase2 {
 
                   } else {
 
-                  /*
-       * This happens when the statement is not in the
+                    /*
+                     * This happens when the statement is not in the
                      * index AND there is no successor of the
                      * statement in the index.
                      */

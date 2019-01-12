@@ -24,10 +24,9 @@ package org.embergraph.rdf.rio;
 import java.io.InputStream;
 import java.io.Reader;
 import org.openrdf.rio.RDFFormat;
-import org.openrdf.rio.RDFParser;
 
 /*
-* Interface for parsing RDF data using the Sesame RIO parser.
+ * Interface for parsing RDF data using the Sesame RIO parser.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

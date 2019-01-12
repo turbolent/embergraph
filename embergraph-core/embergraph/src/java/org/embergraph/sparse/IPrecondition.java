@@ -26,7 +26,7 @@ package org.embergraph.sparse;
 import java.io.Serializable;
 
 /*
-* An inteface that may be used to impose a pre-condition on the state of a logical row for an
+ * An inteface that may be used to impose a pre-condition on the state of a logical row for an
  * atomic write operation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -30,7 +30,7 @@ import org.openrdf.repository.sail.SailGraphQuery;
 import org.openrdf.rio.RDFFormat;
 
 /*
-* Unit test template for use in submission of bugs.
+ * Unit test template for use in submission of bugs.
  *
  * <p>This test case will delegate to an underlying backing store. You can specify this store via a
  * JVM property as follows: <code>-DtestClass=org.embergraph.rdf.sail.TestEmbergraphSailWithQuads

@@ -33,7 +33,7 @@ import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IVariable;
 
 /*
-* An immutable empty binding set.
+ * An immutable empty binding set.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -109,7 +109,6 @@ public final class EmptyBindingSet implements IBindingSet, Serializable {
     final IBindingSet o = (IBindingSet) t;
 
     return o.size() == 0;
-
   }
 
   /** The hash code of an empty binding set is always zero. */

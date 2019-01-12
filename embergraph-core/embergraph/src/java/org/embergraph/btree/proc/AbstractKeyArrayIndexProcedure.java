@@ -25,8 +25,6 @@ Copyright (C) Embergraph contributors 2019. All rights reserved.
 
 package org.embergraph.btree.proc;
 
-import it.unimi.dsi.bits.BitVector;
-import it.unimi.dsi.bits.LongArrayBitVector;
 import it.unimi.dsi.io.InputBitStream;
 import it.unimi.dsi.io.OutputBitStream;
 import java.io.Externalizable;
@@ -49,19 +47,16 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import org.apache.log4j.Logger;
 import org.embergraph.btree.AbstractBTree;
-import org.embergraph.btree.BTree;
 import org.embergraph.btree.Errors;
 import org.embergraph.btree.IIndex;
 import org.embergraph.btree.ILinearList;
 import org.embergraph.btree.ILocalBTreeView;
-import org.embergraph.btree.ITupleSerializer;
 import org.embergraph.btree.UnisolatedReadWriteIndex;
 import org.embergraph.btree.raba.IRaba;
 import org.embergraph.btree.raba.ReadOnlyKeysRaba;
 import org.embergraph.btree.raba.ReadOnlyValuesRaba;
 import org.embergraph.btree.raba.SubRangeRaba;
 import org.embergraph.btree.raba.codec.IRabaCoder;
-import org.embergraph.btree.view.FusedView;
 import org.embergraph.io.AbstractFixedByteArrayBuffer;
 import org.embergraph.io.DataOutputBuffer;
 import org.embergraph.io.FixedByteArrayBuffer;
@@ -69,10 +64,9 @@ import org.embergraph.journal.IIndexManager;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.service.Split;
 import org.embergraph.service.ndx.IClientIndex;
-import org.embergraph.service.ndx.NopAggregator;
 
 /*
-* Abstract base class supports compact serialization and compression for remote {@link
+ * Abstract base class supports compact serialization and compression for remote {@link
  * IKeyArrayIndexProcedure} execution (procedures may be executed on a local index, but they are
  * only (de-)serialized when executed on a remote index).
  *
@@ -410,8 +404,8 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
 
       if (isReadOnly()) {
 
-      /*
-       * Simpler code path for parallelizing read-only operations. We
+        /*
+         * Simpler code path for parallelizing read-only operations. We
          * just split up the keys among N readers. All work is done by a
          * ReadOnlyTask for its own key-range and the results are
          * aggregated. No locking is required since no mutation is
@@ -475,8 +469,8 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
       while (!done) {
         toIndex = fromIndex + readerSize;
         if (toIndex > keysSize) {
-        /*
-       * This will be the last reader.
+          /*
+           * This will be the last reader.
            *
            * Note: toIndex is an exclusive upper bound. Allowable
            * values are in 0:rangeCount-1. Setting toIndex to nstmts
@@ -630,8 +624,8 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
     final int effectiveQueueCapacity;
     {
       if (queueCapacity <= 0) {
-      /*
-       * Note: This is MAX readers, not the actual number of readers.
+        /*
+         * Note: This is MAX readers, not the actual number of readers.
          * We need to create the queue before we create the readers.
          */
         effectiveQueueCapacity = maxReaders * 2;
@@ -668,8 +662,8 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
       while (!done) {
         toIndex = fromIndex + readerSize;
         if (toIndex > keysSize) {
-        /*
-       * This will be the last reader.
+          /*
+           * This will be the last reader.
            *
            * Note: toIndex is an exclusive upper bound. Allowable
            * values are in 0:rangeCount-1. Setting toIndex to nstmts
@@ -860,8 +854,8 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
         if (batch == Batch.POISON_PILL) break;
         if (batch.ntuples == 0) throw new AssertionError("Empty batch");
 
-      /*
-       * Setup sub-range for keys and values and invoke the index
+        /*
+         * Setup sub-range for keys and values and invoke the index
          * procedure on that sub-range.
          */
 
@@ -872,8 +866,8 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
                 ? null
                 : new SubRangeRaba(batch.vals, batch.fromIndex, batch.toIndex);
 
-      /*
-       * Acquire write lock to avoid concurrent mutation errors in the
+        /*
+         * Acquire write lock to avoid concurrent mutation errors in the
          * B+Tree.
          */
         final T aResult;
@@ -1090,8 +1084,8 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
 
         final byte[] currentKey = batch.keys.get(currentRabaIndex);
 
-      /*
-       * Advance index to the next caller's key.
+        /*
+         * Advance index to the next caller's key.
          *
          * Note: the return is an insert position. It will be negative
          * if the key is not found in the index. If it is negative it is
@@ -1102,8 +1096,8 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
         lock.readLock().lock();
         try {
           if (writerFuture.isDone()) {
-          /*
-       * If the writer hits an error condition, then the index
+            /*
+             * If the writer hits an error condition, then the index
              * can be left is an inconsistent state. At this point
              * we MUST NOT read on the index.
              */
@@ -1126,8 +1120,8 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
           firstIndex = indexOf;
         }
 
-      /*
-       * The #of tuples that lie between the first key accepted and
+        /*
+         * The #of tuples that lie between the first key accepted and
          * the current key (or the insert position for the current key).
          */
         final long spannedRange = indexOf - firstIndex;

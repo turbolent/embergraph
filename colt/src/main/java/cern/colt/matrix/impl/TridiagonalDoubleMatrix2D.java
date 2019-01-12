@@ -11,7 +11,7 @@ package cern.colt.matrix.impl;
 import cern.colt.matrix.DoubleMatrix1D;
 import cern.colt.matrix.DoubleMatrix2D;
 /*
-* Tridiagonal 2-d matrix holding <tt>double</tt> elements. First see the <a
+ * Tridiagonal 2-d matrix holding <tt>double</tt> elements. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
  * view</a> to get the broad picture.
  *
@@ -82,7 +82,7 @@ class TridiagonalDoubleMatrix2D extends WrapperDoubleMatrix2D {
     int[] dimensions = {
       0, l, l + d, l + d + u, 0, 0, 0
     }; // {lowerStart, diagonalStart, upperStart, values.length, lowerNonZeros, diagonalNonZeros,
-       // upperNonZeros}
+    // upperNonZeros}
     dims = dimensions;
 
     // diagonal = new double[d];

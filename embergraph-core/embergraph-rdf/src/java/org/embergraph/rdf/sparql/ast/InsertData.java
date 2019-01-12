@@ -25,7 +25,7 @@ import java.util.Map;
 import org.embergraph.bop.BOp;
 
 /*
-* The INSERT DATA operation adds some triples, given inline in the request, into the Graph Store:
+ * The INSERT DATA operation adds some triples, given inline in the request, into the Graph Store:
  *
  * <pre>
  * INSERT DATA  QuadData

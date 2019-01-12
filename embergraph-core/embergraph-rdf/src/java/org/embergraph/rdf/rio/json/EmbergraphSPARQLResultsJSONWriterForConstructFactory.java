@@ -19,13 +19,12 @@ package org.embergraph.rdf.rio.json;
 import java.io.OutputStream;
 import java.io.Writer;
 import org.embergraph.rdf.ServiceProviderHook;
-import org.openrdf.query.resultio.TupleQueryResultWriterFactory;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFWriter;
 import org.openrdf.rio.RDFWriterFactory;
 
 /*
-* A {@link TupleQueryResultWriterFactory} for writers of SPARQL/JSON query results.
+ * A {@link TupleQueryResultWriterFactory} for writers of SPARQL/JSON query results.
  *
  * @author Arjohn Kampman
  */

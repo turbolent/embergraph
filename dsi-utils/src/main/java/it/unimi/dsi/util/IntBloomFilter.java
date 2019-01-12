@@ -27,7 +27,7 @@ import java.io.Serializable;
 import java.util.Random;
 
 /*
-* A Bloom filter for integers.
+ * A Bloom filter for integers.
  *
  * <p>Instances of this class represent a set of integers (with false positives) using a Bloom
  * filter. Because of the way Bloom filters work, you cannot remove elements.

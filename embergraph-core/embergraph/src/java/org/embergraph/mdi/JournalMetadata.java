@@ -21,10 +21,9 @@ import java.io.File;
 import java.util.UUID;
 import org.embergraph.journal.AbstractJournal;
 import org.embergraph.journal.IJournal;
-import org.embergraph.journal.Journal;
 
 /*
-* Metadata required to locate a {@link Journal} resource.
+ * Metadata required to locate a {@link Journal} resource.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

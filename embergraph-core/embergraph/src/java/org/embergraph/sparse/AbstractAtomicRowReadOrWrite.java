@@ -40,7 +40,7 @@ import org.embergraph.btree.proc.ISimpleIndexProcedure;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Abstract class implements the atomic read operation. However, it does NOT declare itself to be a
+ * Abstract class implements the atomic read operation. However, it does NOT declare itself to be a
  * read-only operation since this class is extended by both {@link AtomicRowRead} and {@link
  * AtomicRowWriteRead}.
  *
@@ -52,12 +52,12 @@ public abstract class AbstractAtomicRowReadOrWrite extends AbstractIndexProcedur
   private static final Logger log = Logger.getLogger(AbstractAtomicRowReadOrWrite.class);
 
   //    /*
-//     * True iff the {@link #log} level is INFO or less.
+  //     * True iff the {@link #log} level is INFO or less.
   //     */
   //    protected final static boolean INFO = log.isInfoEnabled();
   //
   //    /*
-//     * True iff the {@link #log} level is DEBUG or less.
+  //     * True iff the {@link #log} level is DEBUG or less.
   //     */
   //    protected final static boolean DEBUG = log.isDebugEnabled();
 

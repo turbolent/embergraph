@@ -30,10 +30,8 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 import org.embergraph.btree.IndexMetadata;
-import org.embergraph.btree.IndexSegment;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.ITx;
-import org.embergraph.journal.Journal;
 import org.embergraph.mdi.LocalPartitionMetadata;
 import org.embergraph.resources.ResourceManager.Options;
 import org.embergraph.sparse.GlobalRowStoreHelper;
@@ -42,7 +40,7 @@ import org.embergraph.sparse.ITPS;
 import org.embergraph.sparse.SparseRowStore;
 
 /*
-* Test drives inserts on the GRS index partition until the data service is forced to go through an
+ * Test drives inserts on the GRS index partition until the data service is forced to go through an
  * overflow such that an index build is performed for the GRS index (rather than copying the index
  * into the new live journal). We verify that we can scan the GRS index before and after the
  * asynchronous overflow event, and that we are in fact reading on a complex view (both a {@link

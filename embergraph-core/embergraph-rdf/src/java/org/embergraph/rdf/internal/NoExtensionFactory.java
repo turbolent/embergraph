@@ -26,7 +26,7 @@ import java.util.Iterator;
 import org.embergraph.rdf.model.EmbergraphValue;
 
 /*
-* A class which does not support any extensions.
+ * A class which does not support any extensions.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -1,7 +1,7 @@
 package org.embergraph.bop;
 
 /*
-* Type safe enumeration indicates where an operator may be evaluated. Operators fall into several
+ * Type safe enumeration indicates where an operator may be evaluated. Operators fall into several
  * distinct categories based on whether or not their inputs need to be made available on specific
  * nodes ({@link #HASHED} or {@link #SHARDED}), whether they can be evaluated anywhere their inputs
  * may exist ({@link #ANY}), or whether they must be evaluated at the query controller ({@link

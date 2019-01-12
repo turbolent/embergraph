@@ -26,7 +26,7 @@ import java.nio.ByteBuffer;
 import java.util.zip.Adler32;
 
 /*
-* Utility class for computing the {@link Adler32} checksum of a buffer. This class is NOT
+ * Utility class for computing the {@link Adler32} checksum of a buffer. This class is NOT
  * thread-safe.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

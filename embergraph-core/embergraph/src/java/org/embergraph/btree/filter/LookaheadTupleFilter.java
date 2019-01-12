@@ -33,7 +33,7 @@ import org.embergraph.btree.ITupleIterator;
 import org.embergraph.btree.ITupleSerializer;
 
 /*
-* Lookahead filter for an {@link ITuple}. You can push back a single {@link ITuple} onto the
+ * Lookahead filter for an {@link ITuple}. You can push back a single {@link ITuple} onto the
  * filter.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

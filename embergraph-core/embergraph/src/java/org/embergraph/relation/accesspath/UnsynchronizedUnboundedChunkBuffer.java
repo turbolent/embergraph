@@ -33,7 +33,7 @@ import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 
 /*
-* An unsynchronized buffer backed by a fixed capacity array that migrates references onto an
+ * An unsynchronized buffer backed by a fixed capacity array that migrates references onto an
  * internal {@link Queue}, which may be drained by an {@link #iterator()}.
  *
  * <p><strong>This implementation is NOT thread-safe.</strong>
@@ -217,15 +217,15 @@ public class UnsynchronizedUnboundedChunkBuffer<E> extends AbstractUnsynchronize
 
       } else {
 
-      /*
-       * Create and return a new chunk[] containing only the elements
+        /*
+         * Create and return a new chunk[] containing only the elements
          * remaining in the current iterator.
          */
 
         final int remaining = chunk.length - i;
 
-      /*
-       * Dynamically instantiation an array of the same component type
+        /*
+         * Dynamically instantiation an array of the same component type
          * as the objects that we are visiting.
          */
 
@@ -269,8 +269,8 @@ public class UnsynchronizedUnboundedChunkBuffer<E> extends AbstractUnsynchronize
 
       if (!keyOrder.equals(getKeyOrder())) {
 
-      /*
-       * Sort into the required order.
+        /*
+         * Sort into the required order.
          *
          * Note: Since this iterator is supposed to have snapshot
          * semantics the chunk is cloned so that the sort does not

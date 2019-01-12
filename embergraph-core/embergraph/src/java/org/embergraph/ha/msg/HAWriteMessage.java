@@ -32,7 +32,7 @@ import org.embergraph.io.compression.IRecordCompressor;
 import org.embergraph.journal.StoreTypeEnum;
 
 /*
-* A message carrying RMI metadata about a payload which will be replicated using a socket-level
+ * A message carrying RMI metadata about a payload which will be replicated using a socket-level
  * transfer facility.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -422,7 +422,7 @@ public class HAWriteMessage extends HAWriteMessageBase implements IHAWriteMessag
   //	static String compressorKey = CompressorRegistry.DEFLATE_BEST_SPEED;
 
   //	/*
-//	 * This configuration method has a dual role since if the Deflater is configured
+  //	 * This configuration method has a dual role since if the Deflater is configured
   //	 * with NO_COMPRESSION, the message indicates directly that the buffer is not compressed
   //	 * avoiding the double buffering of the Deflater class.
   //	 *

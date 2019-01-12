@@ -14,7 +14,7 @@ import cern.colt.list.ByteArrayList;
 import cern.colt.list.IntArrayList;
 import cern.colt.list.ObjectArrayList;
 /*
-* Hash map holding (key,value) associations of type <tt>(int-->Object)</tt>; Automatically grows
+ * Hash map holding (key,value) associations of type <tt>(int-->Object)</tt>; Automatically grows
  * and shrinks as needed; Implemented using open addressing with double hashing. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
  * view</a> to get the broad picture.
@@ -205,11 +205,8 @@ public class OpenIntObjectHashMap extends AbstractIntObjectMap {
 
     final int hash = HashFunctions.hash(key) & 0x7FFFFFFF;
     int i = hash % length;
-    int decrement =
-        hash
-            % (length
-                - 2); // double hashing, see
-                      // http://www.eece.unm.edu/faculty/heileman/hash/node4.html
+    int decrement = hash % (length - 2); // double hashing, see
+    // http://www.eece.unm.edu/faculty/heileman/hash/node4.html
     // int decrement = (hash / length) % length;
     if (decrement == 0) decrement = 1;
 
@@ -255,11 +252,8 @@ public class OpenIntObjectHashMap extends AbstractIntObjectMap {
 
     final int hash = HashFunctions.hash(key) & 0x7FFFFFFF;
     int i = hash % length;
-    int decrement =
-        hash
-            % (length
-                - 2); // double hashing, see
-                      // http://www.eece.unm.edu/faculty/heileman/hash/node4.html
+    int decrement = hash % (length - 2); // double hashing, see
+    // http://www.eece.unm.edu/faculty/heileman/hash/node4.html
     // int decrement = (hash / length) % length;
     if (decrement == 0) decrement = 1;
 

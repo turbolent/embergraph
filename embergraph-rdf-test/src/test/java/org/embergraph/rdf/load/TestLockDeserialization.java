@@ -29,10 +29,9 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import junit.framework.TestCase2;
 import org.embergraph.io.SerializerUtil;
-import org.embergraph.service.ClientService;
 
 /*
-* This is a test suite for the {@link ReentrantLock} deserialization pattern used by the {@link
+ * This is a test suite for the {@link ReentrantLock} deserialization pattern used by the {@link
  * MappedRDFFileLoadTask} when it executes on a remote {@link ClientService}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

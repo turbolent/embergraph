@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree;
 
 /*
-* Interface for non-batch operations on a B+-Tree mapping non-null variable length unsigned byte[]
+ * Interface for non-batch operations on a B+-Tree mapping non-null variable length unsigned byte[]
  * keys to arbitrary values.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

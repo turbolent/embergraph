@@ -38,7 +38,7 @@ import org.embergraph.ganglia.IGangliaDefaults;
 import org.embergraph.ganglia.util.GangliaUtil;
 
 /*
-* A plugin for ganglia.
+ * A plugin for ganglia.
  *
  * <p>Note: This plugin will not start (and will not be loaded from the classpath) unless {@link
  * PlatformStatsPlugIn.Options#COLLECT_PLATFORM_STATISTICS} is set to <code>true</code>.

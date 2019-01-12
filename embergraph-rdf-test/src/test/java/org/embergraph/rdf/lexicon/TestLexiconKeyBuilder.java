@@ -21,7 +21,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.lexicon;
 
-import java.util.Locale;
 import java.util.Properties;
 import junit.framework.TestCase2;
 import org.embergraph.btree.keys.DefaultKeyBuilderFactory;
@@ -43,7 +42,7 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.XMLSchema;
 
 /*
-* Test suite for {@link LexiconKeyBuilder}.
+ * Test suite for {@link LexiconKeyBuilder}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -24,11 +24,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.util.concurrent;
 
 import java.nio.channels.ClosedByInterruptException;
-import java.util.concurrent.Callable;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-import java.util.concurrent.FutureTask;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -39,12 +36,10 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.embergraph.bop.engine.QueryTimeoutException;
 import org.embergraph.relation.accesspath.BufferClosedException;
-import org.embergraph.relation.accesspath.IAsynchronousIterator;
-import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.util.InnerCause;
 
 /*
-* Abstract base class for tasks whose processing may be halted asynchronously. While this bears
+ * Abstract base class for tasks whose processing may be halted asynchronously. While this bears
  * some resemblance to {@link Future}, this class is used in contexts where the process to be halted
  * does not map nicely into a {@link Callable} or {@link Runnable} and hence can not be modeled
  * using a {@link FutureTask}.
@@ -62,7 +57,7 @@ public class Haltable<V> implements IHaltable<V> {
   private static final transient Logger log = Logger.getLogger(Haltable.class);
 
   //    /*
-//     * Exception used to indicate a {@link #cancel(boolean) cancelled}
+  //     * Exception used to indicate a {@link #cancel(boolean) cancelled}
   //     * computation.
   //     */
   //    private static final Throwable CANCELLED = new InterruptedException("CANCELLED");
@@ -139,8 +134,8 @@ public class Haltable<V> implements IHaltable<V> {
     lock.lock();
     try {
       if (didHalt = !halt) {
-      /*
-       * This is the first cause.
+        /*
+         * This is the first cause.
          */
         // note the first cause (and handle an illegal null if found).
         firstCause = (cause != null ? cause : new IllegalArgumentException());
@@ -184,8 +179,8 @@ public class Haltable<V> implements IHaltable<V> {
 
     if (halt) {
       if (firstCause == null) {
-      /*
-       * Note: this is an error since there is an expectation by the
+        /*
+         * Note: this is an error since there is an expectation by the
          * process when it invokes halted() that the process is still
          * running (since it invoked halted() it must be running). Since
          * it is running,

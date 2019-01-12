@@ -29,7 +29,7 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.io.DataInputBuffer;
 
 /*
-* Stream decoder for solution sets (chunk oriented).
+ * Stream decoder for solution sets (chunk oriented).
  *
  * @see SolutionSetStreamEncoder
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

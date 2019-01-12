@@ -3,7 +3,7 @@ package org.embergraph.service.ndx.pipeline;
 import org.embergraph.btree.keys.KVO;
 
 /*
-* NOP implementation.
+ * NOP implementation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

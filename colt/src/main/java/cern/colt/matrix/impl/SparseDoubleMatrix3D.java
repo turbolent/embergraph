@@ -13,7 +13,7 @@ import cern.colt.map.OpenIntDoubleHashMap;
 import cern.colt.matrix.DoubleMatrix2D;
 import cern.colt.matrix.DoubleMatrix3D;
 /*
-* Sparse hashed 3-d matrix holding <tt>double</tt> elements. First see the <a
+ * Sparse hashed 3-d matrix holding <tt>double</tt> elements. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
  * view</a> to get the broad picture.
  *

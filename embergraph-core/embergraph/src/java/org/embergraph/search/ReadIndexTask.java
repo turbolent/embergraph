@@ -1,16 +1,14 @@
 package org.embergraph.search;
 
 import java.util.concurrent.Callable;
-import java.util.concurrent.ConcurrentHashMap;
 import org.apache.log4j.Logger;
 import org.embergraph.btree.IRangeQuery;
-import org.embergraph.btree.ISimpleSplitHandler;
 import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleIterator;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Procedure reads on the terms index, aggregating data on a per-{@link Hit} basis.
+ * Procedure reads on the terms index, aggregating data on a per-{@link Hit} basis.
  *
  * <p>The procedure uses an {@link IRangeQuery#rangeIterator(byte[], byte[])} to perform a key range
  * scan for a specific term. The range iterator will automatically issue queries, obtaining a

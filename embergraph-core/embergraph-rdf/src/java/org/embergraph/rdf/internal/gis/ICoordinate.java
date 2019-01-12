@@ -18,7 +18,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.internal.gis;
 
 /*
-* Interface for a coordinate (latitude, longitude) on a sphere. There are several ways in which a
+ * Interface for a coordinate (latitude, longitude) on a sphere. There are several ways in which a
  * coordinate may be expressed:
  *
  * <pre>

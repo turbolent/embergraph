@@ -36,7 +36,7 @@ import org.embergraph.counters.PeriodEnum;
 import org.embergraph.util.config.NicUtil;
 
 /*
-* Utility class for testing {@link CounterSetHTTPD} or {@link CounterSetHTTPDServer}
+ * Utility class for testing {@link CounterSetHTTPD} or {@link CounterSetHTTPDServer}
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -78,8 +78,8 @@ public class TestCounterSetHTTPDServer extends TestCase {
 
               setValue(val);
 
-            /*
-       * Note: A multiplier is used to have time, as reported to
+              /*
+               * Note: A multiplier is used to have time, as reported to
                * the history instrument, pass faster than the clock time.
                * This lets you test the UI out time minutes, hours, and
                * days in far less than the corresponding wall clock time.

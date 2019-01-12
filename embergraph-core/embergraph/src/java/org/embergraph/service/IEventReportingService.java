@@ -3,7 +3,7 @@ package org.embergraph.service;
 import java.util.Iterator;
 
 /*
-* Extension of the common service interface to support event reporting.
+ * Extension of the common service interface to support event reporting.
  *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$

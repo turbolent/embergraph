@@ -33,11 +33,10 @@ import org.embergraph.rdf.sparql.ast.ProjectionNode;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
-import org.embergraph.rdf.spo.DistinctTermAdvancer;
 import org.junit.Ignore;
 
 /*
-* Test suite for {@link ASTDistinctTermScanOptimizer}.
+ * Test suite for {@link ASTDistinctTermScanOptimizer}.
  *
  * @see <a href="http://trac.blazegraph.com/ticket/1035" > DISTINCT PREDICATEs query is slow </a>
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -104,8 +103,8 @@ public class TestASTDistinctTermScanOptimizer extends AbstractOptimizerTestCase 
             final StatementPatternNode sp1 =
                 newStatementPatternNode(new VarNode(s), new VarNode(p), new VarNode(o));
 
-          /*
-       * Note: The assumption is that the range counts have
+            /*
+             * Note: The assumption is that the range counts have
              * already been attached for the basic triple pattern.
              */
             sp1.setProperty(Annotations.ESTIMATED_CARDINALITY, rangeCount_sp1);
@@ -116,8 +115,8 @@ public class TestASTDistinctTermScanOptimizer extends AbstractOptimizerTestCase 
             given = select(projection, where(sp1));
           }
 
-        /*
-       * We need to convert:
+          /*
+           * We need to convert:
            *
            * <pre>
            * SELECT DISTINCT ?s {?s ?p ?o}
@@ -147,14 +146,14 @@ public class TestASTDistinctTermScanOptimizer extends AbstractOptimizerTestCase 
             // the triple pattern.
             final StatementPatternNode sp1 =
                 newStatementPatternNode(new VarNode(s), new VarNode(p), new VarNode(o));
-          /*
-       * Annotate with the name of the variable(s) to become
+            /*
+             * Annotate with the name of the variable(s) to become
              * bound to the fast range count of that triple pattern.
              */
             final VarNode distinctTermScanVar = new VarNode(s);
             sp1.setDistinctTermScanVar(distinctTermScanVar);
-          /*
-       * Estimate the cardinality of the distinct term scan
+            /*
+             * Estimate the cardinality of the distinct term scan
              * access path. This is just a linear estimate based on
              * assuming that we can do a proportional fraction of
              * the work using the distinct term scan depending on
@@ -163,8 +162,8 @@ public class TestASTDistinctTermScanOptimizer extends AbstractOptimizerTestCase 
              * quad pattern access path.
              */
             final long newRangeCount = (long) ((1.0 / (store.isQuads() ? 4 : 3)) * rangeCount_sp1);
-          /*
-       * Update the estimated cardinality on the SP.
+            /*
+             * Update the estimated cardinality on the SP.
              */
             sp1.setProperty(Annotations.ESTIMATED_CARDINALITY, newRangeCount);
             // the optimizer also adds a SOPC key order to be used by the access path

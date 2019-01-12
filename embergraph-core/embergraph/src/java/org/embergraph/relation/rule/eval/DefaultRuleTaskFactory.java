@@ -5,18 +5,15 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import org.apache.log4j.Logger;
-import org.embergraph.bop.IBindingSet;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.relation.accesspath.IBuffer;
 import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.eval.pipeline.DistributedJoinMasterTask;
-import org.embergraph.relation.rule.eval.pipeline.JoinMasterTask;
-import org.embergraph.relation.rule.eval.pipeline.JoinTask;
 import org.embergraph.relation.rule.eval.pipeline.LocalJoinMasterTask;
 import org.embergraph.service.IEmbergraphFederation;
 
 /*
-* Default factory for tasks to execute {@link IRule}s.
+ * Default factory for tasks to execute {@link IRule}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -29,7 +26,7 @@ public class DefaultRuleTaskFactory implements IRuleTaskFactory, Externalizable 
   private static final long serialVersionUID = -6751546625682021618L;
 
   //    /*
-//     * Nested subquery join strategy.
+  //     * Nested subquery join strategy.
   //     * <p>
   //     * Note: When used on a scale-out index, this results in the use of
   //     * {@link ClientIndexView}s and a LOT of RMI. The {@link #PIPELINE}

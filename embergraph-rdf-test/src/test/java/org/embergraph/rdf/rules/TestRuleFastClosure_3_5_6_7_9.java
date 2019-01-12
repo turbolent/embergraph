@@ -48,7 +48,7 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDFS;
 
 /*
-* Test suite for {@link AbstractRuleFastClosure_3_5_6_7_9}.
+ * Test suite for {@link AbstractRuleFastClosure_3_5_6_7_9}.
  *
  * @see RuleFastClosure3
  * @see RuleFastClosure5

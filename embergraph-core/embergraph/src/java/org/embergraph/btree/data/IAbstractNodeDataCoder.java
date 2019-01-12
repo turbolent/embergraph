@@ -27,7 +27,7 @@ import org.embergraph.io.AbstractFixedByteArrayBuffer;
 import org.embergraph.io.DataOutputBuffer;
 
 /*
-* Interface for coding (compressing) an {@link INodeData} or {@link ILeafData} onto a byte[].
+ * Interface for coding (compressing) an {@link INodeData} or {@link ILeafData} onto a byte[].
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -26,7 +26,7 @@ import java.io.Serializable;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 
 /*
-* Factory for AbstractResourceScanner implementations.
+ * Factory for AbstractResourceScanner implementations.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

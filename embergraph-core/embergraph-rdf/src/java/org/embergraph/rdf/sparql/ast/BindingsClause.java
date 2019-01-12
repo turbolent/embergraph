@@ -33,7 +33,7 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IVariable;
 
 /*
-* The solutions declared by a BINDINGS clause.
+ * The solutions declared by a BINDINGS clause.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

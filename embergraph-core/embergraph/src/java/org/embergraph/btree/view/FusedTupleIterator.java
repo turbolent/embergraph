@@ -29,7 +29,7 @@ import org.embergraph.btree.ITupleIterator;
 import org.embergraph.util.BytesUtil;
 
 /*
-* An aggregate iterator view of the one or more source {@link ITupleIterator}s.
+ * An aggregate iterator view of the one or more source {@link ITupleIterator}s.
  *
  * @see FusedView#rangeIterator(byte[], byte[], int, int,
  *     org.embergraph.btree.filter.IFilterConstructor)
@@ -75,7 +75,7 @@ public class FusedTupleIterator<I extends ITupleIterator<E>, E> implements ITupl
   protected final ITuple<E>[] sourceTuple;
 
   //    /*
-//     * <code>true</code> iff {@link IRangeQuery#REVERSE} was specified for the
+  //     * <code>true</code> iff {@link IRangeQuery#REVERSE} was specified for the
   //     * source iterator. When {@link IRangeQuery#REVERSE} was specified then the
   //     * source iterators will all use reverse traversal and we change the sense
   //     * of the comparison for the keys so that we impose a total descending key
@@ -223,8 +223,8 @@ public class FusedTupleIterator<I extends ITupleIterator<E>, E> implements ITupl
             //                        if (reverseScan ? ret > 0 : ret < 0) {
             if (ret < 0) {
 
-            /*
-       * This key orders LT the current key.
+              /*
+               * This key orders LT the current key.
                *
                * Note: This test MUST be strictly LT since LTE
                * would break the precedence in which we are
@@ -245,8 +245,8 @@ public class FusedTupleIterator<I extends ITupleIterator<E>, E> implements ITupl
 
       if (sourceTuple[current].isDeletedVersion() && !deleted) {
 
-      /*
-       * The tuple is marked as "deleted" and the caller did not
+        /*
+         * The tuple is marked as "deleted" and the caller did not
          * request deleted tuples so we skip this key and begin again
          * with the next key visible under the fused iterator view.
          */
@@ -256,8 +256,8 @@ public class FusedTupleIterator<I extends ITupleIterator<E>, E> implements ITupl
           log.info("Skipping deleted: source=" + current + ", tuple=" + sourceTuple[current]);
         }
 
-      /*
-       * Clear tuples from other sources having the same key as the
+        /*
+         * Clear tuples from other sources having the same key as the
          * current tuple.
          */
 

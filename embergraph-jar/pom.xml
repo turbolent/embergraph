@@ -18,7 +18,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.embergraph</groupId>
@@ -29,7 +31,9 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
   <artifactId>embergraph-jar</artifactId>
   <version>2.1.5-SNAPSHOT</version>
   <name>Embergraph Executable Jar</name>
-  <description>Embergraph Executable Jar file.  All files required to run Embergraph in a single jar.</description>
+  <description>Embergraph Executable Jar file. All files required to run Embergraph in a single
+    jar.
+  </description>
   <packaging>jar</packaging>
   <build>
     <resources>
@@ -140,9 +144,11 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
                 </filter>
               </filters>
               <transformers>
-                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                <transformer
+                  implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                   <manifestEntries>
-                    <Main-Class>org.embergraph.rdf.sail.webapp.StandaloneNanoSparqlServer</Main-Class>
+                    <Main-Class>org.embergraph.rdf.sail.webapp.StandaloneNanoSparqlServer
+                    </Main-Class>
                     <Build-Number>${project.version}</Build-Number>
                   </manifestEntries>
                 </transformer>

@@ -54,7 +54,7 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.query.TupleQueryResult;
 
 /*
-* Proxied test suite for the Multi-Tenancy API.
+ * Proxied test suite for the Multi-Tenancy API.
  *
  * <p>TODO Verify that the URLs in the VoID and ServiceDescription are correct for both the default
  * sparql end point and for each namespace specific sparql end point. We have to correctly
@@ -579,8 +579,8 @@ public class TestMultiTenancyAPI<S extends IIndexManager> extends AbstractTestNa
               .evaluate();
         }
 
-      /*
-       * TODO Test the other REST API methods
+        /*
+         * TODO Test the other REST API methods
          * (InsertServlet,DeleteServlet). This will verify that the
          * servlet routing is correct for all of those parts of the API
          * (this could also be done by running the base NSS test suite

@@ -23,13 +23,12 @@ package org.embergraph.btree.proc;
 
 import org.embergraph.btree.Errors;
 import org.embergraph.btree.IIndex;
-import org.embergraph.btree.ISimpleBTree;
 import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure.ResultBitBuffer;
 import org.embergraph.btree.raba.IRaba;
 import org.embergraph.btree.raba.codec.IRabaCoder;
 
 /*
-* Batch existence test operation. Existence tests SHOULD be used in place of lookup tests to
+ * Batch existence test operation. Existence tests SHOULD be used in place of lookup tests to
  * determine key existence if null values are allowed in an index (lookup will return a null for
  * both a null value and the absence of a key in the index).
  *

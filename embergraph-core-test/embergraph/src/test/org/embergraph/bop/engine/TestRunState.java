@@ -47,11 +47,10 @@ import org.embergraph.bop.bset.StartOp;
 import org.embergraph.bop.engine.RunState.InnerState;
 import org.embergraph.bop.engine.RunState.RunStateEnum;
 import org.embergraph.bop.solutions.SliceOp;
-import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
 
 /*
-* Test suite for {@link RunState}.
+ * Test suite for {@link RunState}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -1840,7 +1839,7 @@ public class TestRunState extends TestCase2 {
   }
 
   //    /*
-//     * Unit tests for an operator which requests a final evaluation pass but
+  //     * Unit tests for an operator which requests a final evaluation pass but
   //     * which was never triggered during normal evaluation. The final evaluation
   //     * pass is still triggered for such cases.
   //     *
@@ -2060,7 +2059,7 @@ public class TestRunState extends TestCase2 {
   //    }
   //
   //    /*
-//     * FIXME Write unit tests for the last pass invocation on a cluster for
+  //     * FIXME Write unit tests for the last pass invocation on a cluster for
   //     * sharded or hash partitioned operators. These tests need to verify that
   //     * the {@link RunState} expects the correct number of last pass invocations
   //     * (on for each shard or service on which the query was started).

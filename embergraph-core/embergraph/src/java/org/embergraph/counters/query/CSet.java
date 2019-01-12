@@ -4,10 +4,9 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import org.embergraph.counters.ICounter;
-import org.embergraph.counters.ICounterNode;
 
 /*
-* Pairs together an ordered set of category values for a pivot table with the set of counters which
+ * Pairs together an ordered set of category values for a pivot table with the set of counters which
  * share that set of category values.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

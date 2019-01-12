@@ -26,7 +26,7 @@ package org.embergraph.btree;
 import org.embergraph.cache.IHardReferenceQueue;
 
 /*
-* A listener that does nothing.
+ * A listener that does nothing.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

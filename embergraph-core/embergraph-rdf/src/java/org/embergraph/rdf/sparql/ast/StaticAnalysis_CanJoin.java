@@ -27,13 +27,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import org.apache.log4j.Logger;
-import org.embergraph.bop.BOp;
 import org.embergraph.bop.IVariable;
 import org.embergraph.rdf.sparql.ast.eval.IEvaluationContext;
-import org.embergraph.rdf.sparql.ast.ssets.ISolutionSetManager;
 
 /*
-* Class provides methods to determine if two {@link IJoinNode}s can join on a shared variable and
+ * Class provides methods to determine if two {@link IJoinNode}s can join on a shared variable and
  * if they can join on an variable which is indirectly shared through constraints which can be
  * attached to that join.
  *
@@ -175,8 +173,7 @@ public abstract class StaticAnalysis_CanJoin extends StaticAnalysisBase {
      * predicates in the join path, then we can return immediately.
      */
     {
-      final Set<IVariable<?>> vset =
-          getSpannedVariables(vertex, new LinkedHashSet<IVariable<?>>());
+      final Set<IVariable<?>> vset = getSpannedVariables(vertex, new LinkedHashSet<IVariable<?>>());
 
       vset.retainAll(knownBound);
 
@@ -348,8 +345,8 @@ public abstract class StaticAnalysis_CanJoin extends StaticAnalysisBase {
           if (c == null) throw new IllegalArgumentException();
 
           if (used.contains(c)) {
-          /*
-       * Skip constraints which were already assigned to
+            /*
+             * Skip constraints which were already assigned to
              * predicates before this one in the join path.
              */
             continue;
@@ -364,8 +361,8 @@ public abstract class StaticAnalysis_CanJoin extends StaticAnalysisBase {
 
           } else {
 
-          /*
-       * true iff all variables used by this constraint are
+            /*
+             * true iff all variables used by this constraint are
              * bound at this point in the join path.
              */
             final boolean allVarsBound;
@@ -385,8 +382,8 @@ public abstract class StaticAnalysis_CanJoin extends StaticAnalysisBase {
 
           if (attach) {
 
-          /*
-       * All variables have become bound for this constraint,
+            /*
+             * All variables have become bound for this constraint,
              * so add it to the set of "used" constraints.
              */
 

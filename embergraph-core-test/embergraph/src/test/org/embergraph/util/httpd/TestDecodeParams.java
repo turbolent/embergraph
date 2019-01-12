@@ -28,7 +28,7 @@ import java.util.Vector;
 import junit.framework.TestCase2;
 
 /*
-* Test suite for {@link NanoHTTPD#decodeParams(String, LinkedHashMap)}
+ * Test suite for {@link NanoHTTPD#decodeParams(String, LinkedHashMap)}
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -33,13 +33,11 @@ import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.atomic.AtomicLong;
 import org.apache.log4j.Logger;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpContext;
-import org.embergraph.bop.BOpEvaluationContext;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IConstraint;
 import org.embergraph.bop.IElement;
@@ -48,36 +46,26 @@ import org.embergraph.bop.IShardwisePipelineOp;
 import org.embergraph.bop.IVariable;
 import org.embergraph.bop.NV;
 import org.embergraph.bop.PipelineOp;
-import org.embergraph.bop.engine.AbstractRunningQuery;
-import org.embergraph.bop.engine.QueryTimeoutException;
-import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.concurrent.FutureTaskMon;
 import org.embergraph.relation.IRelation;
 import org.embergraph.relation.accesspath.AbstractUnsynchronizedArrayBuffer;
 import org.embergraph.relation.accesspath.AccessPath;
 import org.embergraph.relation.accesspath.ArrayAccessPath;
-import org.embergraph.relation.accesspath.BlockingBuffer;
-import org.embergraph.relation.accesspath.BufferClosedException;
 import org.embergraph.relation.accesspath.EmptyAccessPath;
 import org.embergraph.relation.accesspath.IAccessPath;
-import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.IBindingSetAccessPath;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.ThreadLocalBufferFactory;
 import org.embergraph.relation.accesspath.UnsyncLocalOutputBuffer;
-import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.IStarJoin;
 import org.embergraph.relation.rule.IStarJoin.IStarConstraint;
-import org.embergraph.relation.rule.eval.ISolution;
-import org.embergraph.service.DataService;
 import org.embergraph.striterator.IChunkedOrderedIterator;
-import org.embergraph.striterator.IKeyOrder;
 import org.embergraph.util.BytesUtil;
 import org.embergraph.util.concurrent.Haltable;
 import org.embergraph.util.concurrent.LatchedExecutor;
 
 /*
-* Pipelined join operator for online (selective) queries. The pipeline join accepts chunks of
+ * Pipelined join operator for online (selective) queries. The pipeline join accepts chunks of
  * binding sets from its operand, combines each binding set in turn with its {@link IPredicate}
  * annotation to produce an "asBound" predicate, and then executes a nested indexed subquery against
  * that asBound predicate, writing out a new binding set for each element returned by the asBound
@@ -106,7 +94,7 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
   public interface Annotations extends AccessPathJoinAnnotations {
 
     //		/*
-//		 * An optional {@link IVariable}[] identifying the variables to be
+    //		 * An optional {@link IVariable}[] identifying the variables to be
     //		 * retained in the {@link IBindingSet}s written out by the operator. All
     //		 * variables are retained unless this annotation is specified.
     //		 */
@@ -116,7 +104,7 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
     // Note: The OPTIONAL annotation is on the *predicate*.
     //
     //        /*
-//         * Marks the join as "optional" in the SPARQL sense. Binding sets which
+    //         * Marks the join as "optional" in the SPARQL sense. Binding sets which
     //         * fail the join will be routed to the alternative sink as specified by
     //         * either {@link PipelineOp.Annotations#ALT_SINK_REF} or
     //         * {@link PipelineOp.Annotations#ALT_SINK_GROUP}.
@@ -131,7 +119,7 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
     //		boolean DEFAULT_OPTIONAL = false;
 
     //        /*
-//         * An {@link IConstraint}[] which places restrictions on the legal
+    //         * An {@link IConstraint}[] which places restrictions on the legal
     //         * patterns in the variable bindings (optional).
     //         */
     //        String CONSTRAINTS = (PipelineJoin.class.getName() + ".constraints").intern();
@@ -224,8 +212,7 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
      *
      * <p>Must be a value >= 1.
      */
-    String NUM_TASKS_PER_THREAD =
-        (PipelineJoin.class.getName() + ".numTasksPerThread").intern();
+    String NUM_TASKS_PER_THREAD = (PipelineJoin.class.getName() + ".numTasksPerThread").intern();
 
     int DEFAULT_NUM_TASKS_PER_THREAD = 1;
   }
@@ -379,7 +366,7 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
     private final BOpContext<IBindingSet> context;
 
     //		/*
-//		 * When <code>true</code>, the {@link #stats} will be tracked. This is
+    //		 * When <code>true</code>, the {@link #stats} will be tracked. This is
     //		 * <code>false</code> unless logging is requested for {@link QueryLog}
     //		 * or stats are explicitly request (e.g., to support cutoff joins).
     //		 */
@@ -528,13 +515,13 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
 
       try {
 
-      /*
-       * Consume bindingSet chunks from the source JoinTask(s).
+        /*
+         * Consume bindingSet chunks from the source JoinTask(s).
          */
         consumeSource();
 
-      /*
-       * Flush and close the thread-local output buffers.
+        /*
+         * Flush and close the thread-local output buffers.
          */
         threadLocalBufferFactory.flush();
         if (threadLocalBufferFactory2 != null) threadLocalBufferFactory2.flush();
@@ -550,8 +537,8 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
 
       } catch (Throwable t) {
 
-      /*
-       * This is used for processing errors and also if this task is
+        /*
+         * This is used for processing errors and also if this task is
          * interrupted (because the sink has been closed).
          */
         // ensure query halts.
@@ -573,8 +560,8 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
           log.error(t2.getLocalizedMessage(), t2);
         }
 
-      /*
-       * Close source iterators, which will cause any source JoinTasks
+        /*
+         * Close source iterators, which will cause any source JoinTasks
          * that are still executing to throw a CancellationException
          * when the Future associated with the source iterator is
          * cancelled.
@@ -614,21 +601,21 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
       while (!isDone() && (chunk = nextChunk()) != null) {
 
         if (chunk.length == 0) {
-        /*
-       * This can happen if you feed in an empty IBindingSet[] to
+          /*
+           * This can happen if you feed in an empty IBindingSet[] to
            * the join.
            */
           continue;
         }
 
-      /*
-       * Consume the chunk until done using either the caller's thread
+        /*
+         * Consume the chunk until done using either the caller's thread
          * or the executor service as appropriate to run subtasks.
          */
         if (chunk.length <= 1) {
 
-        /*
-       * Run on the caller's thread anyway since there is just one
+          /*
+           * Run on the caller's thread anyway since there is just one
            * binding set to be consumed.
            */
 
@@ -636,8 +623,8 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
 
         } else {
 
-        /*
-       * Run subtasks on either the caller's thread or the shared
+          /*
+           * Run subtasks on either the caller's thread or the shared
            * executed service depending on the configured value of
            * [maxParallel].
            */
@@ -858,18 +845,18 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
             return null;
           }
 
-        /*
-       * Generate (and optionally coalesce) the access path tasks.
+          /*
+           * Generate (and optionally coalesce) the access path tasks.
            */
           final AccessPathTask[] tasks = generateAccessPaths(chunk);
 
-        /*
-       * Reorder those tasks for better index read performance.
+          /*
+           * Reorder those tasks for better index read performance.
            */
           if (reorderAccessPaths) reorderTasks(tasks);
 
-        /*
-       * Execute the tasks (either in the caller's thread or on
+          /*
+           * Execute the tasks (either in the caller's thread or on
            * the supplied service).
            */
           executeTasks(tasks);
@@ -908,8 +895,8 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
 
         if (asBound == null) {
 
-        /*
-       * This can happen for a SIDS mode join if some of the
+          /*
+           * This can happen for a SIDS mode join if some of the
            * (s,p,o,[c]) and SID are bound on entry and they can not
            * be unified. For example, the s position might be
            * inconsistent with the Subject that can be decoded from
@@ -923,8 +910,8 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
 
         if (partitionId != -1) {
 
-        /*
-       * Constrain the predicate to the desired index partition.
+          /*
+           * Constrain the predicate to the desired index partition.
            *
            * Note: we do this for scale-out joins since the access
            * path will be evaluated by a JoinTask dedicated to this
@@ -951,15 +938,15 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
 
         if (coalesceAccessPaths) {
 
-        /*
-       * Aggregate the source bindingSets that license the same
+          /*
+           * Aggregate the source bindingSets that license the same
            * asBound predicate. The predicates in the keys of this map
            * as "as-bound".
            */
           final Map<IPredicate<E>, Collection<IBindingSet>> map = combineBindingSets(chunk);
 
-        /*
-       * Generate an AccessPathTask from each distinct asBound
+          /*
+           * Generate an AccessPathTask from each distinct asBound
            * predicate that will consume all of the source bindingSets
            * in the chunk which resulted in the same asBound
            * predicate.
@@ -968,8 +955,8 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
 
         } else {
 
-        /*
-       * Do not coalesce access paths.
+          /*
+           * Do not coalesce access paths.
            */
 
           final List<AccessPathTask> tmp = new LinkedList<AccessPathTask>();
@@ -983,8 +970,8 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
 
             if (asBound == null) {
 
-            /*
-       * This can happen for a SIDS mode join if some of the
+              /*
+               * This can happen for a SIDS mode join if some of the
                * (s,p,o,[c]) and SID are bound on entry and they can not
                * be unified. For example, the s position might be
                * inconsistent with the Subject that can be decoded from
@@ -998,8 +985,8 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
 
             if (partitionId != -1) {
 
-            /*
-       * Constrain the predicate to the desired index
+              /*
+               * Constrain the predicate to the desired index
                * partition.
                *
                * Note: we do this for scale-out joins since the
@@ -1038,8 +1025,8 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
 
         if (log.isDebugEnabled()) log.debug("chunkSize=" + chunk.length);
 
-      /*
-       * Note: HashMap is used in preference to LinkedHashMap for
+        /*
+         * Note: HashMap is used in preference to LinkedHashMap for
          * better speed. We do not need to maintain order in this
          * collection.
          */
@@ -1055,8 +1042,8 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
 
           if (asBound == null) {
 
-          /*
-       * This can happen for a SIDS mode join if some of the
+            /*
+             * This can happen for a SIDS mode join if some of the
              * (s,p,o,[c]) and SID are bound on entry and they can not
              * be unified. For example, the s position might be
              * inconsistent with the Subject that can be decoded from
@@ -1070,8 +1057,8 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
 
           if (partitionId != -1) {
 
-          /*
-       * Constrain the predicate to the desired index
+            /*
+             * Constrain the predicate to the desired index
              * partition.
              *
              * Note: we do this for scale-out joins since the access
@@ -1092,8 +1079,8 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
 
           if (values == null) {
 
-          /*
-       * This is the first bindingSet for this asBound
+            /*
+             * This is the first bindingSet for this asBound
              * predicate. We create a collection of bindingSets to
              * be paired with that predicate and put the collection
              * into the map using that predicate as the key.
@@ -1110,8 +1097,8 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
             stats.accessPathDups.increment();
           }
 
-        /*
-       * Add the bindingSet to the collection of bindingSets
+          /*
+           * Add the bindingSet to the collection of bindingSets
            * paired with the asBound predicate.
            */
 
@@ -1193,8 +1180,8 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
 
         if (executor == null) {
 
-        /*
-       * No Executor, so run each task in the caller's thread.
+          /*
+           * No Executor, so run each task in the caller's thread.
            */
 
           for (AccessPathTask task : tasks) {
@@ -1205,8 +1192,8 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
           return;
         }
 
-      /*
-       * Build list of FutureTasks. This list is used to check all
+        /*
+         * Build list of FutureTasks. This list is used to check all
          * tasks for errors and ensure that any running tasks are
          * cancelled.
          */
@@ -1222,8 +1209,8 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
 
         try {
 
-        /*
-       * Execute all tasks.
+          /*
+           * Execute all tasks.
            */
           for (FutureTask<Void> ft : futureTasks) {
 
@@ -1233,8 +1220,8 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
             executor.execute(ft);
           } // next task.
 
-        /*
-       * Wait for each task. If any task throws an exception, then
+          /*
+           * Wait for each task. If any task throws an exception, then
            * [halt] will become true and any running tasks will error
            * out quickly. Once [halt := true], we do not wait for any
            * more tasks, but proceed to cancel all tasks in the
@@ -1248,8 +1235,8 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
 
         } finally {
 
-        /*
-       * Ensure that all tasks are cancelled, regardless of
+          /*
+           * Ensure that all tasks are cancelled, regardless of
            * whether they were started or have already finished.
            */
           for (FutureTask<Void> ft : futureTasks) {
@@ -1358,8 +1345,8 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
 
         if (bindingSets == null) throw new IllegalArgumentException();
 
-      /*
-       * Note: this needs to be the access path for the local index
+        /*
+         * Note: this needs to be the access path for the local index
          * partition. We handle this by (a) constraining the predicate
          * to the desired index partition; (b) using an IJoinNexus that
          * is initialized once the JoinTask starts to execute inside of
@@ -1437,8 +1424,8 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
 
         if (accessPath.getPredicate() instanceof IStarJoin<?>) {
 
-        /*
-       * Star join. This has not yet proven to be more efficient.
+          /*
+           * Star join. This has not yet proven to be more efficient.
            * Presumably we wind up with sufficiently good IO locality
            * with a normal pipeline join that the star join does not
            * improve matters further.
@@ -1498,8 +1485,8 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
 
           if (optional) {
 
-          /*
-       * Note: when NO binding sets were accepted AND the
+            /*
+             * Note: when NO binding sets were accepted AND the
              * predicate is OPTIONAL then we output the _original_
              * binding set(s) to the sink join task(s). The
              * CONSTRAINT(s) are NOT applied for the optional
@@ -1662,8 +1649,8 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
 
           if (optional) {
 
-          /*
-       * Note: when NO binding sets were accepted AND the
+            /*
+             * Note: when NO binding sets were accepted AND the
              * predicate is OPTIONAL then we output the _original_
              * binding set(s) to the sink join task(s). The
              * CONSTRAINT(s) are NOT applied for the optional
@@ -1730,8 +1717,8 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
 
         final IStarJoin starJoin = (IStarJoin) accessPath.getPredicate();
 
-      /*
-       * FIXME The star join does not handle the alternative sink yet.
+        /*
+         * FIXME The star join does not handle the alternative sink yet.
          * See the ChunkTask for the normal join.
          */
         final AbstractUnsynchronizedArrayBuffer<IBindingSet> unsyncBuffer =
@@ -1745,16 +1732,16 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
 
         try {
 
-        /*
-       * Note: The fast range count would give us an upper bound,
+          /*
+           * Note: The fast range count would give us an upper bound,
            * unless expanders are used, in which case there can be
            * more elements visited.
            */
           final Object[] elements;
           {
 
-          /*
-       * First, gather all chunks.
+            /*
+             * First, gather all chunks.
              */
             int nchunks = 0;
             final List<Object[]> chunks = new LinkedList<Object[]>();
@@ -1772,8 +1759,8 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
               nchunks++;
             } // next chunk.
 
-          /*
-       * Now flatten the chunks into a simple array.
+            /*
+             * Now flatten the chunks into a simple array.
              */
             if (nchunks == 0) {
               // No match.
@@ -1823,8 +1810,8 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
 
                 if (constraint.isMatch(e)) {
 
-                /*
-       * For each match for the constraint, we
+                  /*
+                   * For each match for the constraint, we
                    * clone the old solutions and create a new
                    * solutions that appends the variable
                    * bindings from this match.
@@ -1862,8 +1849,8 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
 
               if (constraintSolutions == null) {
 
-              /*
-       * We did not find any matches to this
+                /*
+                 * We did not find any matches to this
                  * constraint. That is ok, as long it's
                  * optional.
                  */
@@ -1876,8 +1863,8 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
 
               } else {
 
-              /*
-       * Set the old solutions to the new solutions,
+                /*
+                 * Set the old solutions to the new solutions,
                  * and move on to the next constraint.
                  */
                 solutions =
@@ -1937,8 +1924,8 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
       @Override
       public int compareTo(final AccessPathTask o) {
 
-      /*
-       * Just go ahead and run the ArrayAccessPaths first.
+        /*
+         * Just go ahead and run the ArrayAccessPaths first.
          */
         if (accessPath instanceof ArrayAccessPath) return -1;
         if (o.accessPath instanceof ArrayAccessPath) return 1;
@@ -2048,8 +2035,8 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
               //                             */
               //                            this.naccepted[bindex]++;
 
-            /*
-       * Clone the binding set since it is tested for each
+              /*
+               * Clone the binding set since it is tested for each
                * element visited.
                */
               bset = bset.clone();
@@ -2141,8 +2128,8 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
       @Override
       protected AbstractUnsynchronizedArrayBuffer<IBindingSet> initialValue() {
 
-      /*
-       * Wrap the buffer provided to the constructor with a thread
+        /*
+         * Wrap the buffer provided to the constructor with a thread
          * local buffer.
          */
 

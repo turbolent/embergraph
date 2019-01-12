@@ -24,10 +24,9 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Formatter;
 import org.apache.log4j.Logger;
-import org.embergraph.ha.halog.IHALogReader;
 
 /*
-* Utility class for operations on files that are named using a commit counter.
+ * Utility class for operations on files that are named using a commit counter.
  *
  * <p>The commit counter based files are arranged in a heirarchial directory structure with 3 digits
  * per directory and 7 directory levels. These levels are labeled with depths <code>[0..6]</code>.

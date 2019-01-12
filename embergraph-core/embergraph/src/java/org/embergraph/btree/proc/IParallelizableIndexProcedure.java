@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree.proc;
 
 /*
-* A marker interface for an {@link IIndexProcedure} whose operation may be safely applied in
+ * A marker interface for an {@link IIndexProcedure} whose operation may be safely applied in
  * parallel to multiple index partitions.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

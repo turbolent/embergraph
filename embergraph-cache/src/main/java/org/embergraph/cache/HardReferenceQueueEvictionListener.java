@@ -1,7 +1,7 @@
 package org.embergraph.cache;
 
 /*
-* Interface for reporting cache evictions.
+ * Interface for reporting cache evictions.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

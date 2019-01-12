@@ -28,12 +28,11 @@ import java.util.regex.Pattern;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.Tokenizer;
-import org.apache.lucene.analysis.core.KeywordAnalyzer;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 
 /*
-* An analyzer intended for the term-completion use case; particularly for technical vocabularies
+ * An analyzer intended for the term-completion use case; particularly for technical vocabularies
  * and concept schemes.
  *
  * <p>This analyzer generates several index terms for each word in the input. These are intended to
@@ -133,7 +132,7 @@ public class TermCompletionAnalyzer extends Analyzer {
     final String[] words;
     final CharTermAttribute termAtt;
 
-    char[] currentWord = new char[]{};
+    char[] currentWord = new char[] {};
     Matcher softMatcher;
     int currentWordIx = -1;
 

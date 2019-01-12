@@ -18,7 +18,7 @@ package cutthecrap.utils.striterators;
 import java.util.Iterator;
 
 /*
-* ******************************
+ * ******************************
  *
  * @author Martyn Cutcher
  */

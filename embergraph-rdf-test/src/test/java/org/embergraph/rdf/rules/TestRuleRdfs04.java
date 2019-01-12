@@ -37,7 +37,7 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
 /*
-* Test suite for {@link RuleRdfs04a} and {@link RuleRdfs04b}
+ * Test suite for {@link RuleRdfs04a} and {@link RuleRdfs04b}
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

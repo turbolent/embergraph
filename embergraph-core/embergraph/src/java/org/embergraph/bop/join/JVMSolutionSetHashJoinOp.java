@@ -26,7 +26,7 @@ import org.embergraph.bop.BOp;
 import org.embergraph.bop.NV;
 
 /*
-* {@inheritDoc}
+ * {@inheritDoc}
  *
  * <p>JVM Specific version.
  *

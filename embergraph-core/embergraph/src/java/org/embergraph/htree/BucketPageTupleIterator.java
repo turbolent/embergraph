@@ -7,7 +7,7 @@ import org.embergraph.btree.ITupleIterator;
 import org.embergraph.btree.raba.IRaba;
 
 /*
-* Visits the non-empty tuples in each {@link BucketPage} visited by the source iterator.
+ * Visits the non-empty tuples in each {@link BucketPage} visited by the source iterator.
  *
  * <p>TODO This might be reworked as an expander and an iterator visiting the tuples on a single
  * bucket page. That could provide more reuse. See {@link BucketPage#tuples()}

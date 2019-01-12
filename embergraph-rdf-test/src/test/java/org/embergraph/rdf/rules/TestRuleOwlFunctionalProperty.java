@@ -29,7 +29,7 @@ import org.openrdf.model.vocabulary.OWL;
 import org.openrdf.model.vocabulary.RDF;
 
 /*
-* Test suite for owl:FunctionalProperty processing.
+ * Test suite for owl:FunctionalProperty processing.
  *
  * <pre>
  * (x rdf:type owl:FunctionalProperty), (a x b), (a x c) -&gt;

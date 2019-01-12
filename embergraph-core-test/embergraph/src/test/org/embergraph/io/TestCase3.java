@@ -27,14 +27,12 @@ import java.net.ServerSocket;
 import java.nio.ByteBuffer;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
-import junit.framework.AssertionFailedError;
-import junit.framework.TestCase;
 import junit.framework.TestCase2;
 import org.embergraph.journal.TestHelper;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Base class for some <code>assertEquals</code> methods not covered by {@link TestCase} or {@link
+ * Base class for some <code>assertEquals</code> methods not covered by {@link TestCase} or {@link
  * TestCase2}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

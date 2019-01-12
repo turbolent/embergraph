@@ -26,7 +26,7 @@ import org.embergraph.rdf.vocab.Vocabulary;
 import org.openrdf.model.URI;
 
 /*
-* Default implementation of {@link IInlineURIFactory} that comes pre-loaded with two handlers:
+ * Default implementation of {@link IInlineURIFactory} that comes pre-loaded with two handlers:
  *
  * <ul>
  *   <li>IPv4 ({@link InlineIPv4URIHandler})

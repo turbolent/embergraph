@@ -31,11 +31,10 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 import org.embergraph.relation.accesspath.BlockingBuffer;
-import org.embergraph.service.IRemoteExecutor;
 import org.embergraph.service.master.IAsynchronousClientTask;
 
 /*
-* Extended to assign chunks of work items to a remote {@link IAsynchronousClientTask}, to track the
+ * Extended to assign chunks of work items to a remote {@link IAsynchronousClientTask}, to track the
  * set of outstanding asynchronous operations for a specific client task (the "pending set"), and to
  * close the client task when the sink not assign any more work to that client.
  *

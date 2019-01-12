@@ -28,7 +28,7 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.impl.literal.XSDBooleanIV;
 
 /*
-* Imposes the constraint <code>!x</code>. The operand of this operator must evaluate to a boolean.
+ * Imposes the constraint <code>!x</code>. The operand of this operator must evaluate to a boolean.
  * If the operand is not known to evaluate to a boolean, it is wrapped with an {@link EBVBOp}.
  */
 public class NotBOp extends XSDBooleanIVValueExpression {

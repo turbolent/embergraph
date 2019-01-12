@@ -1,5 +1,5 @@
 /*
-* The Notice below must appear in each file of the Source Code of any copy you distribute of the
+ * The Notice below must appear in each file of the Source Code of any copy you distribute of the
  * Licensed Product. Contributors to any Modifications may add their own copyright notices to
  * identify their own contributions.
  *
@@ -48,10 +48,9 @@ import org.apache.log4j.Logger;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.striterator.IChunkedIterator;
-import org.openrdf.model.Value;
 
 /*
-* Wraps an iterator that visits term identifiers and exposes each visited term identifier as a
+ * Wraps an iterator that visits term identifiers and exposes each visited term identifier as a
  * {@link EmbergraphValue} (batch API).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

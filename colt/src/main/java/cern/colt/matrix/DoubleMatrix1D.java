@@ -12,7 +12,7 @@ import cern.colt.list.DoubleArrayList;
 import cern.colt.list.IntArrayList;
 import cern.colt.matrix.impl.AbstractMatrix1D;
 /*
-* Abstract base class for 1-d matrices (aka <i>vectors</i>) holding <tt>double</tt> elements. First
+ * Abstract base class for 1-d matrices (aka <i>vectors</i>) holding <tt>double</tt> elements. First
  * see the <a href="package-summary.html">package summary</a> and javadoc <a
  * href="package-tree.html">tree view</a> to get the broad picture.
  *

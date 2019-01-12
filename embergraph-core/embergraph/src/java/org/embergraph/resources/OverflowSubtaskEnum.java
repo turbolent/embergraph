@@ -23,12 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.resources;
 
-import org.embergraph.btree.IndexSegment;
-import org.embergraph.btree.IndexSegmentStore;
-import org.embergraph.service.ResourceService;
-
 /*
-* Various kinds of subtasks for asynchronous index partition overflow tasks.
+ * Various kinds of subtasks for asynchronous index partition overflow tasks.
  *
  * @see OverflowActionEnum
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

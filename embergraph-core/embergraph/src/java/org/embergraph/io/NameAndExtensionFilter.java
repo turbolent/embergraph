@@ -21,7 +21,7 @@ import java.io.File;
 import java.io.FileFilter;
 
 /*
-* Helper class to filter for files with a known basename and extension.
+ * Helper class to filter for files with a known basename and extension.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -31,7 +31,7 @@ import org.embergraph.counters.query.ICounterSelector;
 import org.embergraph.counters.query.URLQueryModel;
 
 /*
-* Renders the selected counters using the counter set XML representation - the client can apply
+ * Renders the selected counters using the counter set XML representation - the client can apply
  * XSLT as desired to style the XML.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

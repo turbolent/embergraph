@@ -35,12 +35,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
-import junit.framework.AssertionFailedError;
 import junit.framework.TestCase2;
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.btree.keys.KVO;
 import org.embergraph.mdi.IMetadataIndex;
-import org.embergraph.mdi.IPartitionMetadata;
 import org.embergraph.mdi.MetadataIndex;
 import org.embergraph.mdi.PartitionLocator;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
@@ -51,7 +49,7 @@ import org.embergraph.service.ndx.ISplitter;
 import org.embergraph.util.DaemonThreadFactory;
 
 /*
-* Abstract base class for test suites for the {@link AbstractMasterTask} and friends using {@link
+ * Abstract base class for test suites for the {@link AbstractMasterTask} and friends using {@link
  * IPartitionMetadata} locators.
  *
  * <p>Note: There are a bunch of inner classes which have the same names as the generic types used
@@ -320,7 +318,7 @@ public class AbstractKeyRangeMasterTestCase extends TestCase2 {
     }
 
     //        /*
-//         * Handle a stale locator per {@link IndexWriteTask}.
+    //         * Handle a stale locator per {@link IndexWriteTask}.
     //         *
     //         * @deprecated by the use of the redirect queue.
     //         */

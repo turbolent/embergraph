@@ -6,7 +6,7 @@ import java.util.concurrent.TimeoutException;
 import org.apache.log4j.Logger;
 
 /*
-* Implementation that may be used when service scores are not yet available.
+ * Implementation that may be used when service scores are not yet available.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

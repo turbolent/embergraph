@@ -28,7 +28,7 @@ import java.io.InputStream;
 import java.nio.ByteBuffer;
 
 /*
-* Abstract base class for {@link IRawStore} implementations. This class uses a delegation pattern
+ * Abstract base class for {@link IRawStore} implementations. This class uses a delegation pattern
  * for the {@link IStoreSerializer} interface and does not implement either the methods defined
  * directly by the {@link IRawStore} interface nor the methods of the {@link IAddressManager}
  * interface. As such it may be used as an abstract base class by any {@link IRawStore}
@@ -54,7 +54,7 @@ public abstract class AbstractRawStore implements IRawStore {
   public AbstractRawStore() {}
 
   //    /*
-//     * The default implementation delegates to {@link #write(ByteBuffer)}.
+  //     * The default implementation delegates to {@link #write(ByteBuffer)}.
   //     */
   //    @Override
   //    public long write(ByteBuffer data, long oldAddr) {

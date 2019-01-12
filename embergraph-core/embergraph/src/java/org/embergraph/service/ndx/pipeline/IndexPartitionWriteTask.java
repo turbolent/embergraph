@@ -38,7 +38,7 @@ import org.embergraph.service.Split;
 import org.embergraph.util.InnerCause;
 
 /*
-* Class drains a {@link BlockingBuffer} writing on a specific index partition.
+ * Class drains a {@link BlockingBuffer} writing on a specific index partition.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import org.embergraph.util.concurrent.ExecutionExceptions;
 
 /*
-* Response for a 2-phase commit.
+ * Response for a 2-phase commit.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

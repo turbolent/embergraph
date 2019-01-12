@@ -21,7 +21,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sail.sparql;
 
-import info.aduna.net.ParsedURI;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import org.embergraph.rdf.internal.XSD;
@@ -42,7 +41,7 @@ import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /*
-* Test suite for building up triple patterns, including those which are covered by the property
+ * Test suite for building up triple patterns, including those which are covered by the property
  * paths extension in SPARQL 1.1 (a triple pattern which a constant in the predicate position is
  * treated by the sesame SPARQL grammar as a degenerate case of a property path.)
  *

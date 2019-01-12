@@ -8,7 +8,7 @@ import org.embergraph.rdf.ServiceProviderHook;
 import org.openrdf.rio.RDFFormat;
 
 /*
-* Filter recognizes anything that is a registered as an {@link RDFFormat} or which would be
+ * Filter recognizes anything that is a registered as an {@link RDFFormat} or which would be
  * recognized as such if you stripped off a trailing <code>.zip</code> or <code>.gz</code> filename
  * extension. If it does not recognize your format, then you can create a subclass which ensures the
  * static initialization of your format with {@link RDFFormat}. That needs to be done in static code

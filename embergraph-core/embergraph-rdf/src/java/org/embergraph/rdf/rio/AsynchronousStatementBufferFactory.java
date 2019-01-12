@@ -25,7 +25,6 @@ package org.embergraph.rdf.rio;
 
 import cutthecrap.utils.striterators.Filter;
 import cutthecrap.utils.striterators.Striterator;
-import java.beans.Statement;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -43,14 +42,11 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.AbstractExecutorService;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
-import java.util.concurrent.FutureTask;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.ScheduledExecutorService;
@@ -66,7 +62,6 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.ZipInputStream;
 import org.apache.log4j.Logger;
 import org.embergraph.btree.AsynchronousIndexWriteConfiguration;
-import org.embergraph.btree.IndexMetadata;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.KVO;
 import org.embergraph.btree.keys.KeyBuilder;
@@ -77,7 +72,6 @@ import org.embergraph.counters.Instrument;
 import org.embergraph.counters.OneShotInstrument;
 import org.embergraph.io.ByteArrayBuffer;
 import org.embergraph.io.DataOutputBuffer;
-import org.embergraph.journal.AbstractTask;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.BlobIV;
@@ -96,24 +90,18 @@ import org.embergraph.rdf.lexicon.Term2IdWriteProc.Term2IdWriteProcConstructor;
 import org.embergraph.rdf.model.EmbergraphBNode;
 import org.embergraph.rdf.model.EmbergraphBNodeImpl;
 import org.embergraph.rdf.model.EmbergraphLiteral;
-import org.embergraph.rdf.model.EmbergraphResource;
 import org.embergraph.rdf.model.EmbergraphStatement;
-import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
-import org.embergraph.rdf.model.EmbergraphValueImpl;
 import org.embergraph.rdf.model.EmbergraphValueSerializer;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.SPOIndexWriteProc;
-import org.embergraph.rdf.spo.SPOIndexWriter;
 import org.embergraph.rdf.spo.SPOKeyOrder;
 import org.embergraph.rdf.spo.SPORelation;
 import org.embergraph.rdf.spo.SPOTupleSerializer;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.ScaleOutTripleStore;
-import org.embergraph.relation.accesspath.BlockingBuffer;
-import org.embergraph.relation.accesspath.IBuffer;
 import org.embergraph.relation.accesspath.IRunnableBuffer;
 import org.embergraph.relation.accesspath.UnsynchronizedUnboundedChunkBuffer;
 import org.embergraph.search.TextIndexWriteProc;
@@ -141,7 +129,7 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParser;
 
 /*
-* Factory object for high-volume RDF data load.
+ * Factory object for high-volume RDF data load.
  *
  * <p>The asynchronous statement buffer w/o SIDs is much simpler that w/. If we require that the
  * document is fully buffered in memory, then we can simplify this to just:
@@ -789,8 +777,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
       try {
 
-      /*
-       * Submit resource for parsing.
+        /*
+         * Submit resource for parsing.
          *
          * @todo it would be nice to return a Future here that tracked the
          * document through the workflow.
@@ -800,8 +788,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
       } catch (RejectedExecutionException ex) {
 
-      /*
-       * Back out the document since the task was not accepted for
+        /*
+         * Back out the document since the task was not accepted for
          * execution.
          */
 
@@ -834,8 +822,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
    * @throws Exception if there is a problem creating the parser task.
    * @throws RejectedExecutionException if the service is shutdown -or- the retryMillis is ZERO(0L).
    */
-  public void submitOne(final R resource, final long retryMillis)
-      throws Exception {
+  public void submitOne(final R resource, final long retryMillis) throws Exception {
 
     if (resource == null) throw new IllegalArgumentException();
 
@@ -1275,8 +1262,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
       {
         if (lexiconRelation.isTextIndex()) {
 
-        /*
-       * FIXME Must hook in once the tids are available so we can
+          /*
+           * FIXME Must hook in once the tids are available so we can
            * tokenize the RDF Literals (Note: only the literals, and
            * only those literals that will be indexed) and write out
            * the tuples on the text index.
@@ -1617,8 +1604,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
         assertSumOfLatchs();
 
-      /*
-       * No more tasks will request TIDs, so close the TERM2ID and
+        /*
+         * No more tasks will request TIDs, so close the TERM2ID and
          * BLOBS masters. It will flush its writes.
          */
         guardLatch_term2Id.await();
@@ -1648,8 +1635,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
           assertSumOfLatchs();
         }
 
-      /*
-       * No new index write tasks may start (and all should have
+        /*
+         * No new index write tasks may start (and all should have
          * terminated by now).
          */
         guardLatch_other.await();
@@ -2333,8 +2320,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
       } else {
 
-      /*
-       * Processing a standard file.
+        /*
+         * Processing a standard file.
          */
 
         if (log.isInfoEnabled()) log.info("Will load: " + file);
@@ -2538,8 +2525,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
                   @Override
                   public boolean isValid(final Object obj) {
-                  /*
-       * Assigns the IV as a side effect iff the RDF Value can
+                    /*
+                     * Assigns the IV as a side effect iff the RDF Value can
                      * be inlined according to the governing lexicon
                      * configuration and returns true iff the value CAN NOT
                      * be inlined. Thus, inlining is done as a side effect
@@ -2568,8 +2555,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
                   private static final long serialVersionUID = 1L;
 
-                /*
-       * Filter hides blank nodes since we do not write them onto
+                  /*
+                   * Filter hides blank nodes since we do not write them onto
                    * the reverse index.
                    *
                    * Filter does not visit blobs since we do not want to write
@@ -2612,8 +2599,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
                   private static final long serialVersionUID = 1L;
 
-                /*
-       * Filter hides blank nodes since we do not write them onto
+                  /*
+                   * Filter hides blank nodes since we do not write them onto
                    * the TEXT index.
                    */
                   @Override
@@ -2706,7 +2693,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     }
 
     //        /*
-//         * Return <code>true</code> iff the {@link EmbergraphValue} is fully inline
+    //         * Return <code>true</code> iff the {@link EmbergraphValue} is fully inline
     //         * (in which case the {@link IV} is set as a side-effect on the
     //         * {@link EmbergraphValue}).
     //         */
@@ -2750,8 +2737,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
           for (EmbergraphValue v : chunkIn) {
 
-          /*
-       * Note: The iterator we are visiting has already had
+            /*
+             * Note: The iterator we are visiting has already had
              * the IVs for fully inline Values resolved and set as a
              * side-effect and the inline Values have been filtered
              * out. We will only see non-inline values here, but
@@ -2935,8 +2922,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
             // Serialize the term.
             final byte[] val = ser.serialize(v, out.reset(), tbuf);
 
-          /*
-       * Note: The EmbergraphValue instance is NOT supplied to
+            /*
+             * Note: The EmbergraphValue instance is NOT supplied to
              * the KVO since we do not want it to be retained and
              * since there is no side-effect on the EmbergraphValue for
              * writes on ID2TERM (unlike the writes on TERM2ID).
@@ -2947,8 +2934,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
           // make dense.
           final KVO<EmbergraphValue>[] dense = KVO.dense(chunkOut, i);
 
-        /*
-       * Put into key order in preparation for writing on the
+          /*
+           * Put into key order in preparation for writing on the
            * reverse index.
            */
           Arrays.sort(dense);
@@ -3026,8 +3013,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
       try {
 
-      /*
-       * TODO capacity for the full text index writes.
+        /*
+         * TODO capacity for the full text index writes.
          */
         final int capacity = 100000;
 
@@ -3130,8 +3117,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
             // generate value for the index.
             final byte[] val = tupleSer.serializeVal(spo);
 
-          /*
-       * Note: The SPO is deliberately not provided to the KVO
+            /*
+             * Note: The SPO is deliberately not provided to the KVO
              * instance since it is not required (there is nothing
              * being passed back from the write via a side-effect on
              * the EmbergraphStatementImpl) and since it otherwise will
@@ -3367,8 +3354,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
       Map<String, EmbergraphBNode> bnodes = this.bnodes.get();
       if (bnodes == null) {
 
-      /*
-       * Allocate a canonicalizing map for blank nodes. Since this
+        /*
+         * Allocate a canonicalizing map for blank nodes. Since this
          * will be a private map it does not need to be thread-safe.
          */
         setBNodeMap(new HashMap<String, EmbergraphBNode>(bnodesInitialCapacity));
@@ -3384,8 +3371,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
        */
       if (bnodes instanceof ConcurrentHashMap) {
 
-        final EmbergraphBNode tmp =
-            bnodes.putIfAbsent(id, bnode);
+        final EmbergraphBNode tmp = bnodes.putIfAbsent(id, bnode);
 
         if (tmp != null) {
 
@@ -3447,8 +3433,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
         // impose canonicalizing mapping for blank nodes.
         term = getCanonicalBNode((EmbergraphBNodeImpl) term0);
 
-      /*
-       * Fall through.
+        /*
+         * Fall through.
          *
          * Note: This also records the blank node in the values map so
          * that we can process the values map without having to consider
@@ -3463,8 +3449,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
       if (values == null) {
 
-      /*
-       * Create a private (non-thread safe) canonicalizing mapping for
+        /*
+         * Create a private (non-thread safe) canonicalizing mapping for
          * RDF Values.
          *
          * Note: A linked hash map is used to make the iterator faster.
@@ -3527,13 +3513,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     private void _handleStatement(
         final Resource s, final URI p, final Value o, final Resource c, final StatementEnum type) {
 
-      final EmbergraphStatement stmt =
-          valueFactory.createStatement(
-              s,
-              p,
-              o,
-              c,
-              type);
+      final EmbergraphStatement stmt = valueFactory.createStatement(s, p, o, c, type);
 
       if (statements == null) {
 
@@ -3613,8 +3593,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
             protected void signal() throws InterruptedException {
 
               super.signal();
-            /*
-       * Note: There is no requirement for an atomic state
+              /*
+               * Note: There is no requirement for an atomic state
                * transition for these two counters so there is no reason
                * to take the lock here.
                */
@@ -3655,8 +3635,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
       } finally {
 
-      /*
-       * Decrement now that all chunks have been queued for
+        /*
+         * Decrement now that all chunks have been queued for
          * asynchronous writes.
          */
 
@@ -3670,7 +3650,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     }
 
     //        /*
-//         * Buffers the asynchronous writes on the BLOBS index.
+    //         * Buffers the asynchronous writes on the BLOBS index.
     //         *
     //         * @throws Exception
     //         */
@@ -3945,8 +3925,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
       try {
 
-      /*
-       * Make sure that no errors were reported by those tasks.
+        /*
+         * Make sure that no errors were reported by those tasks.
          */
         for (Object f : futures) {
 
@@ -3955,8 +3935,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
       } finally {
 
-      /*
-       * At this point all writes have been buffered. We now discard
+        /*
+         * At this point all writes have been buffered. We now discard
          * the buffered data (RDF Values and statements) since it will
          * no longer be used.
          */
@@ -4036,7 +4016,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
   }
 
   //    /*
-//     * Task buffers the asynchronous writes on the BLOBS index.
+  //     * Task buffers the asynchronous writes on the BLOBS index.
   //     */
   //    private class BufferBlobsWrites implements Callable<Void> {
   //

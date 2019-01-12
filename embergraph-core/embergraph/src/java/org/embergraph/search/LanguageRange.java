@@ -3,7 +3,7 @@ package org.embergraph.search;
 import java.util.Locale;
 
 /*
-* This is an implementation of RFC 4647 language range, targetted at the specific needs within
+ * This is an implementation of RFC 4647 language range, targetted at the specific needs within
  * embergraph, and only supporting the extended filtering specified in section 3.3.2
  *
  * <p>Language ranges are comparable so that sorting an array and then matching a language tag

@@ -47,7 +47,7 @@ import org.embergraph.util.StackInfoReport;
 // import org.embergraph.journal.jini.ha.HAJournal;
 
 /*
-* The HA Load Balancer servlet provides a transparent proxy for requests arriving its configured
+ * The HA Load Balancer servlet provides a transparent proxy for requests arriving its configured
  * URL pattern (the "external" interface for the load balancer) to the root of the web application.
  *
  * <p>When successfully deployed, requests having prefix corresponding to the URL pattern for the
@@ -86,7 +86,7 @@ public class HALoadBalancerServlet extends ProxyServlet {
      * directly into a simple concept within the LBS servlet.
      */
     //        /*
-//         * The prefix at which the load balancer is deployed (its URL pattern,
+    //         * The prefix at which the load balancer is deployed (its URL pattern,
     //         * less any wildcard). This is typically
     //         *
     //         * <pre>
@@ -605,16 +605,16 @@ public class HALoadBalancerServlet extends ProxyServlet {
       // Look at ServletConfig for the configured value.
       if (owningClass == HALoadBalancerServlet.class) {
 
-      /*
-       * The HALoadBalancerServlet does not use a namespace prefix for
+        /*
+         * The HALoadBalancerServlet does not use a namespace prefix for
          * its web.xml declarations.
          */
         s = servletConfig.getInitParameter(name);
 
       } else {
 
-      /*
-       * The other policy objects DO use their owningClass as a
+        /*
+         * The other policy objects DO use their owningClass as a
          * namespace prefix. This is done to avoid collisions among the
          * different policy classes.
          */
@@ -944,8 +944,8 @@ public class HALoadBalancerServlet extends ProxyServlet {
       if (log.isDebugEnabled()) log.debug("proxyToRequestURI=" + proxyToRequestURI);
 
       if (proxyToRequestURI == null) {
-      /*
-       * The LBS policy made a choice not to rewrite this request (not
+        /*
+         * The LBS policy made a choice not to rewrite this request (not
          * an error, but a deliberate choice).
          */
         return null;

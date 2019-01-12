@@ -30,7 +30,7 @@ import org.embergraph.btree.IndexSegment.ImmutableNodeFactory.ImmutableLeaf;
 import org.embergraph.io.DirectBufferPool;
 
 /*
-* Adds some methods for testing an {@link IndexSegment} for consistency.
+ * Adds some methods for testing an {@link IndexSegment} for consistency.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

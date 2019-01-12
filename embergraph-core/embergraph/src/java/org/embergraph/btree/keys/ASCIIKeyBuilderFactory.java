@@ -30,7 +30,7 @@ import java.io.ObjectOutput;
 import java.io.Serializable;
 
 /*
-* Factory for instances that do NOT support Unicode.
+ * Factory for instances that do NOT support Unicode.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

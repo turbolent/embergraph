@@ -21,17 +21,15 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.join;
 
-import com.ibm.icu.util.BytesTrie.Iterator;
 import cutthecrap.utils.striterators.ICloseableIterator;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IConstraint;
 import org.embergraph.bop.IVariable;
 import org.embergraph.bop.engine.BOpStats;
-import org.embergraph.htree.HTree;
 import org.embergraph.relation.accesspath.IBuffer;
 
 /*
-* Interface for hash index build and hash join operations.
+ * Interface for hash index build and hash join operations.
  *
  * <h2>Use cases</h2>
  *

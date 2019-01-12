@@ -1,10 +1,8 @@
 package org.embergraph.rdf.rio;
 
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.rdf.load.IStatementBufferFactory;
-import org.embergraph.relation.accesspath.IBuffer;
 import org.openrdf.model.Statement;
 
 /** Factory interface for asynchronous writers on an {@link ITripleStore}. */

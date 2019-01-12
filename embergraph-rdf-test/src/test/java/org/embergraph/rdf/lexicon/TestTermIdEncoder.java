@@ -23,10 +23,9 @@ package org.embergraph.rdf.lexicon;
 
 import java.util.Random;
 import junit.framework.TestCase2;
-import org.embergraph.btree.ICounter;
 
 /*
-* Unit test for unified encoding / decoding for partitioned and unpartitioned long counters as
+ * Unit test for unified encoding / decoding for partitioned and unpartitioned long counters as
  * assigned by the {@link ICounter} for a TERM2ID index or index partition.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

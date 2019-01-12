@@ -38,14 +38,13 @@ import org.embergraph.rdf.internal.impl.literal.XSDIntegerIV;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.sparql.ast.DummyConstantNode;
-import org.embergraph.rdf.sparql.ast.FilterNode;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 import org.openrdf.query.algebra.evaluation.ValueExprEvaluationException;
 import org.openrdf.query.algebra.evaluation.function.datetime.Timezone;
 import org.openrdf.query.algebra.evaluation.function.datetime.Tz;
 
 /*
-* A date expression involving a left IValueExpression operand. The operation to be applied to the
+ * A date expression involving a left IValueExpression operand. The operation to be applied to the
  * operands is specified by the {@link Annotations#OP} annotation.
  */
 public class DateBOp extends IVValueExpression<IV> implements INeedsMaterialization {
@@ -154,8 +153,8 @@ public class DateBOp extends IVValueExpression<IV> implements INeedsMaterializat
           case TIMEZONE:
             return timezone(bl);
           case DATE:
-          /*
-       * @see https://jira.blazegraph.com/browse/BLZG-1388
+            /*
+             * @see https://jira.blazegraph.com/browse/BLZG-1388
              * FullyInlineTypedLiteralIV is used to keep exact string representation of newDate in literal,
              * that results in different internal representation in contrast to xsd:dateTime values,
              * which represented as LiteralExtensionIV with delegate of XSDLong

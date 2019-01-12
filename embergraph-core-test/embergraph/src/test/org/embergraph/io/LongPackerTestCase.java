@@ -32,7 +32,7 @@ import java.util.Random;
 import junit.framework.TestCase;
 
 /*
-* TestAll suite for {@link LongPacker}.
+ * TestAll suite for {@link LongPacker}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

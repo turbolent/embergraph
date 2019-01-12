@@ -6,7 +6,6 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IVariable;
-import org.embergraph.journal.Journal;
 import org.embergraph.relation.accesspath.AbstractUnsynchronizedArrayBuffer;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.relation.accesspath.IAsynchronousIterator;
@@ -16,7 +15,7 @@ import org.embergraph.relation.rule.eval.IJoinNexus;
 import org.embergraph.relation.rule.eval.ISolution;
 
 /*
-* {@link JoinTask} implementation for a {@link Journal}.
+ * {@link JoinTask} implementation for a {@link Journal}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -222,8 +221,8 @@ public class LocalJoinTask extends JoinTask {
 
       if (joinNexus.getAction().isMutation()) {
 
-      /*
-       * For mutation operations, the solutionBuffer for the last
+        /*
+         * For mutation operations, the solutionBuffer for the last
          * join dimension writes solutions onto the target relation.
          * When that buffer is flushed it returns the #of solutions
          * that resulted in a state change in the target relation.

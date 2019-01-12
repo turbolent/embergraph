@@ -16,7 +16,7 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 package cutthecrap.utils.striterators;
 
 /*
-* IXPropertyIterator
+ * IXPropertyIterator
  *
  * <p>A standard iterator, extended to provide a nextProperty method returning IXProperty objects
  */

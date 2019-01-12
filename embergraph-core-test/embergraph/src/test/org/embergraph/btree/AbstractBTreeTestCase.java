@@ -49,12 +49,11 @@ import org.embergraph.cache.HardReferenceQueue;
 import org.embergraph.io.SerializerUtil;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
-import org.embergraph.service.ndx.ClientIndexView;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Abstract test case for {@link BTree} tests.
+ * Abstract test case for {@link BTree} tests.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -646,7 +645,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
   }
 
   //	/*
-//	 * Verifies details for the {@link IBucketData} interface.
+  //	 * Verifies details for the {@link IBucketData} interface.
   //	 *
   //	 * @param b1
   //	 *            A hash bucket.
@@ -917,7 +916,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
   }
 
   //    /*
-//     * <p>
+  //     * <p>
   //     * Unit test for the {@link #getRandomKeys(int, int, int)} test helper. The
   //     * test verifies fence posts by requiring the randomly generated keys to be
   //     * dense in the target array. The test checks for several different kinds of
@@ -986,7 +985,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
   //    }
   //
   //    /*
-//     * Test helper produces a set of distinct randomly selected external keys.
+  //     * Test helper produces a set of distinct randomly selected external keys.
   //     */
   //    public int[] getRandomKeys(int nkeys) {
   //
@@ -995,7 +994,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
   //    }
   //
   //    /*
-//     * <p>
+  //     * <p>
   //     * Test helper produces a set of distinct randomly selected external keys in
   //     * the half-open range [fromKey:toKey).
   //     * </p>
@@ -1760,8 +1759,8 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
 
       if (i % 100 == 0) {
 
-      /*
-       * Validate the keys and entries.
+        /*
+         * Validate the keys and entries.
          */
 
         assertEquals("#entries", expected.size(), btree.getEntryCount());
@@ -2038,8 +2037,8 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
 
       } catch (AssertionFailedError ex) {
 
-      /*
-       * Lazily generate message.
+        /*
+         * Lazily generate message.
          */
         fail(
             "Keys differ: index="
@@ -2066,8 +2065,8 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
           assertSameValue(expectedVal, actualVal);
 
         } catch (AssertionFailedError ex) {
-        /*
-       * Lazily generate message.
+          /*
+           * Lazily generate message.
            */
           fail(
               "Values differ: index="
@@ -2083,8 +2082,8 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
       }
 
       if (expectedTuple.getVersionTimestamp() != actualTuple.getVersionTimestamp()) {
-      /*
-       * Lazily generate message.
+        /*
+         * Lazily generate message.
          */
         assertEquals(
             "timestamps differ: index=" + index + ", key=" + BytesUtil.toString(expectedKey),
@@ -2273,8 +2272,8 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
 
         if (val != null) {
 
-        /*
-       * Only do message construction if we know that the assert
+          /*
+           * Only do message construction if we know that the assert
            * will fail.
            */
           fail(
@@ -2290,8 +2289,8 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
 
         if (val == null) {
 
-        /*
-       * Only do message construction if we know that the assert
+          /*
+           * Only do message construction if we know that the assert
            * will fail.
            */
           fail(
@@ -2305,8 +2304,8 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
 
         if (BytesUtil.compareBytes(expected[i], val) != 0) {
 
-        /*
-       * Only do message construction if we know that the assert
+          /*
+           * Only do message construction if we know that the assert
            * will fail.
            */
           fail(

@@ -28,7 +28,7 @@ import org.embergraph.journal.AbstractJournal;
 import org.embergraph.rdf.sparql.ast.QueryHints;
 
 /*
-* A factory pattern for the {@link ICacheConnection}.
+ * A factory pattern for the {@link ICacheConnection}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

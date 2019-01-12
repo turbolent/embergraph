@@ -4,11 +4,8 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IPredicate;
-import org.embergraph.bop.engine.QueryEngine;
-import org.embergraph.bop.solutions.SortOp;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.journal.NoSuchIndexException;
 import org.embergraph.journal.TimestampUtility;
@@ -22,7 +19,7 @@ import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.striterator.IKeyOrder;
 
 /*
-* A stream of {@link IBindingSet} are mapped across the shards which will have the data for the
+ * A stream of {@link IBindingSet} are mapped across the shards which will have the data for the
  * {@link IPredicate#asBound(IBindingSet)} {@link IPredicate}.
  *
  * <p>Unsynchronized (non-thread safe) buffer maps the {@link IBindingSet}s across the index
@@ -64,7 +61,7 @@ public abstract class MapBindingSetsOverShardsBuffer<E extends IBindingSet, F>
   protected final IPredicate<F> pred;
 
   //    /*
-//     * Identifies the index for the access path required by the {@link #pred
+  //     * Identifies the index for the access path required by the {@link #pred
   //     * predicate}.
   //     */
   //    protected final IKeyOrder<F> keyOrder;
@@ -77,14 +74,14 @@ public abstract class MapBindingSetsOverShardsBuffer<E extends IBindingSet, F>
   protected final long timestamp;
 
   //    /*
-//     * The name of the scale-out index associated with the {@link #pred
+  //     * The name of the scale-out index associated with the {@link #pred
   //     * predicate}, including both the relation name and the {@link IKeyOrder}
   //     * components of the index name.
   //     */
   //    protected final String namespace;
   //
   //    /*
-//     * The associated {@link IMetadataIndex}.
+  //     * The associated {@link IMetadataIndex}.
   //     *
   //     * @todo might be moved into the {@link IShardMapper} constructors for
   //     *       efficiency so only materialized when necessary. Alternatively, we
@@ -95,7 +92,7 @@ public abstract class MapBindingSetsOverShardsBuffer<E extends IBindingSet, F>
   //    protected final IMetadataIndex mdi;
   //
   //    /*
-//     * The {@link IKeyBuilder} for the index associated with the access path
+  //     * The {@link IKeyBuilder} for the index associated with the access path
   //     * required by the predicate.
   //     */
   //    protected final IKeyBuilder keyBuilder;

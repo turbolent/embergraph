@@ -26,7 +26,6 @@ package org.embergraph.mdi;
 import org.apache.log4j.Logger;
 import org.embergraph.btree.AbstractBTree;
 import org.embergraph.btree.DelegateIndex;
-import org.embergraph.btree.ILinearList;
 import org.embergraph.btree.IRangeQuery;
 import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleIterator;
@@ -35,7 +34,7 @@ import org.embergraph.cache.LRUCache;
 import org.embergraph.mdi.MetadataIndex.MetadataIndexMetadata;
 
 /*
-* The extension semantics for the {@link IMetadataIndex} are implemented by this class.
+ * The extension semantics for the {@link IMetadataIndex} are implemented by this class.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

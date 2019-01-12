@@ -13,7 +13,7 @@ import cern.colt.matrix.ObjectMatrix1D;
 import cern.colt.matrix.ObjectMatrix2D;
 import cern.colt.matrix.ObjectMatrix3D;
 /*
-* Matrix quicksorts and mergesorts. Use idioms like <tt>Sorting.quickSort.sort(...)</tt> and
+ * Matrix quicksorts and mergesorts. Use idioms like <tt>Sorting.quickSort.sort(...)</tt> and
  * <tt>Sorting.mergeSort.sort(...)</tt>.
  *
  * <p>This is another case demonstrating one primary goal of this library: Delivering easy to use,

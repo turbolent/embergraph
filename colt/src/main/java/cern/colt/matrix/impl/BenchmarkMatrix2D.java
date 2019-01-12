@@ -10,7 +10,7 @@ package cern.colt.matrix.impl;
 
 import cern.colt.matrix.DoubleMatrix2D;
 /*
-* Benchmarks the performance of matrices. Here are the results of some encouraging measurements.
+ * Benchmarks the performance of matrices. Here are the results of some encouraging measurements.
  * Note that all benchmarks only measure the time spent in accessing a matrix element; they exclude
  * the loop itself.
  *

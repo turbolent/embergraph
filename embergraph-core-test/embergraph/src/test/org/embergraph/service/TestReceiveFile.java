@@ -24,8 +24,6 @@ import java.io.File;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
-import java.nio.channels.FileLock;
-import java.nio.channels.OverlappingFileLockException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -39,7 +37,7 @@ import org.embergraph.util.DaemonThreadFactory;
 import org.embergraph.util.config.NicUtil;
 
 /*
-* Test verifies the ability to transmit a file using the {@link ResourceService}.
+ * Test verifies the ability to transmit a file using the {@link ResourceService}.
  *
  * @version $Id$
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson </a>

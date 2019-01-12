@@ -18,12 +18,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.vocab.core;
 
-import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.vocab.BaseVocabularyDecl;
 import org.embergraph.service.geospatial.GeoSpatial;
 
 /*
-* Core Embergraph vocabulary.
+ * Core Embergraph vocabulary.
  *
  * <p>Note: Do not modify this class. Create an entirely new vocabulary that extends this one and
  * edit {@link AbstractTripleStore.Options#DEFAULT_VOCABULARY_CLASS}.

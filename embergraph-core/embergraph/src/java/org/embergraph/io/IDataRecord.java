@@ -25,7 +25,7 @@ package org.embergraph.io;
 import java.nio.ByteBuffer;
 
 /*
-* An interface for absolute get/put operations on a slice of a byte[].
+ * An interface for absolute get/put operations on a slice of a byte[].
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -42,7 +42,7 @@ public interface IDataRecord extends IByteArraySlice {
   IDataRecord slice(final int aoff, final int alen);
 
   //    /*
-//     * Return a copy of the data in the slice.
+  //     * Return a copy of the data in the slice.
   //     *
   //     * @return A new array containing data in the slice.
   //     *

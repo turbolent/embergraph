@@ -10,7 +10,7 @@ package cern.jet.random;
 
 import cern.jet.random.engine.RandomEngine;
 /*
-* Uniform distribution; <A
+ * Uniform distribution; <A
  * HREF="http://www.cern.ch/RD11/rkb/AN16pp/node292.html#SECTION0002920000000000000000"> Math
  * definition</A> and <A HREF="http://www.statsoft.com/textbook/glosu.html#Uniform Distribution">
  * animated definition</A>.

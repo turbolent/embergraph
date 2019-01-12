@@ -24,13 +24,9 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.lexicon.BlobsIndexHelper;
 import org.embergraph.rdf.model.EmbergraphValue;
-import org.openrdf.model.BNode;
-import org.openrdf.model.Literal;
-import org.openrdf.model.URI;
-import org.openrdf.model.Value;
 
 /*
-* Implementation for any kind of RDF {@link Value} when the value is not being inlined, but
+ * Implementation for any kind of RDF {@link Value} when the value is not being inlined, but
  * primarily used with large RDF {@link Value}s. Instances of this class can represent {@link URI}s,
  * {@link BNode}s (if they are not being inlined), or {@link Literal}s (including datatype literals
  * if they are not being inlined). The representation of the {@link BlobIV} is simply the key in the
@@ -64,7 +60,7 @@ public class BlobIV<V extends EmbergraphValue> extends AbstractNonInlineExtensio
   }
 
   ////    /*
-////     * {@inheritDoc}
+  ////     * {@inheritDoc}
   ////     * <p>
   ////     * This checks the hashCode and the counter, both of which must decode to
   ////     * ZERO (0). The {@link VTE} may be any of the possible {@link VTE}s. "null"
@@ -85,12 +81,12 @@ public class BlobIV<V extends EmbergraphValue> extends AbstractNonInlineExtensio
   //	}
   //
   //	/*
-//	 * Singleton for a "null" {@link IV}.
+  //	 * Singleton for a "null" {@link IV}.
   //	 */
   //	final public static transient BlobIV<?> NullIV = BlobIV.mockIV(VTE.URI);
   //
   //	/*
-//	 * Create a mock {@link IV} having the indicated {@link VTE} which will
+  //	 * Create a mock {@link IV} having the indicated {@link VTE} which will
   //	 * report <code>true</code> for {@link #isNullIV()}. This is used by some
   //	 * code patterns where we need to associate a {@link EmbergraphValue} not in
   //	 * the database with an {@link IV} on a temporary basis.
@@ -200,7 +196,7 @@ public class BlobIV<V extends EmbergraphValue> extends AbstractNonInlineExtensio
   }
 
   //    /*
-//     * Callers must explicitly populate the value cache.
+  //     * Callers must explicitly populate the value cache.
   //     * <p>
   //     * {@inheritDoc}
   //     */
@@ -212,7 +208,7 @@ public class BlobIV<V extends EmbergraphValue> extends AbstractNonInlineExtensio
   //    }
   //
   //    /*
-//     * Operation is not supported because this {@link IV} type is not 100%
+  //     * Operation is not supported because this {@link IV} type is not 100%
   //     * inline. You MUST explicitly set the value cache.
   //     * <p>
   //     * {@inheritDoc}
@@ -305,7 +301,7 @@ public class BlobIV<V extends EmbergraphValue> extends AbstractNonInlineExtensio
   }
 
   //	/*
-//	 * Override default serialization to send the cached {@link EmbergraphValue}.
+  //	 * Override default serialization to send the cached {@link EmbergraphValue}.
   //	 */
   //	private void writeObject(final java.io.ObjectOutputStream out)
   //			throws IOException {
@@ -317,7 +313,7 @@ public class BlobIV<V extends EmbergraphValue> extends AbstractNonInlineExtensio
   //	}
   //
   //	/*
-//	 * Override default serialization to recover the cached {@link EmbergraphValue}
+  //	 * Override default serialization to recover the cached {@link EmbergraphValue}
   //	 * .
   //	 */
   //	@SuppressWarnings("unchecked")

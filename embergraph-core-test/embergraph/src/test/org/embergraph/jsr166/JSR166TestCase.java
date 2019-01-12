@@ -35,7 +35,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /*
-* Base class for JSR166 Junit TCK tests. Defines some constants, utility methods and classes, as
+ * Base class for JSR166 Junit TCK tests. Defines some constants, utility methods and classes, as
  * well as a simple framework for helping to make sure that assertions failing in generated threads
  * cause the associated test that generated them to itself fail (which JUnit does not otherwise
  * arrange). The rules for creating such tests are:
@@ -915,7 +915,7 @@ public class JSR166TestCase extends TestCase {
   }
 
   //    /*
-//     * Analog of CheckedRunnable for RecursiveAction
+  //     * Analog of CheckedRunnable for RecursiveAction
   //     */
   //    public abstract class CheckedRecursiveAction extends RecursiveAction {
   //        protected abstract void realCompute() throws Throwable;
@@ -930,7 +930,7 @@ public class JSR166TestCase extends TestCase {
   //    }
   //
   //    /*
-//     * Analog of CheckedCallable for RecursiveTask
+  //     * Analog of CheckedCallable for RecursiveTask
   //     */
   //    public abstract class CheckedRecursiveTask<T> extends RecursiveTask<T> {
   //        protected abstract T realCompute() throws Throwable;

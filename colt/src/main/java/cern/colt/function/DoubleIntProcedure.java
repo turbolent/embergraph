@@ -9,7 +9,7 @@ CERN makes no representations about the suitability of this software for any pur
 It is provided "as is" without expressed or implied warranty.
 */
 /*
-* Interface that represents a procedure object: a procedure that takes two arguments and does not
+ * Interface that represents a procedure object: a procedure that takes two arguments and does not
  * return a value.
  */
 public interface DoubleIntProcedure {

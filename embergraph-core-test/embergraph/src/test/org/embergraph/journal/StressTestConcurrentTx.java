@@ -49,7 +49,7 @@ import org.embergraph.util.DaemonThreadFactory;
 import org.embergraph.util.NV;
 
 /*
-* Stress tests for concurrent transaction processing.
+ * Stress tests for concurrent transaction processing.
  *
  * <p>Note: For short transactions, TPS is basically constant for a given combination of the buffer
  * mode and whether or not commits are forced to disk. This means that the #of clients is not a
@@ -119,8 +119,8 @@ public class StressTestConcurrentTx extends ProxyTestCase<Journal> implements IC
 
       if (false && journal.getBufferStrategy() instanceof MappedBufferStrategy) {
 
-      /*
-       * @todo the mapped buffer strategy has become cpu bound w/o
+        /*
+         * @todo the mapped buffer strategy has become cpu bound w/o
          * termination when used with concurrent clients - this needs to
          * be looked into further.
          */
@@ -281,8 +281,8 @@ public class StressTestConcurrentTx extends ProxyTestCase<Journal> implements IC
 
           } else {
 
-          /*
-       * Other kinds of exceptions are errors.
+            /*
+             * Other kinds of exceptions are errors.
              */
 
             fail("Not expecting: " + ex, ex);
@@ -448,8 +448,8 @@ public class StressTestConcurrentTx extends ProxyTestCase<Journal> implements IC
 
         if (commitTime == 0L) {
 
-        /*
-       *
+          /*
+           *
            */
           throw new AssertionError("Expecting non-zero commit time");
         }

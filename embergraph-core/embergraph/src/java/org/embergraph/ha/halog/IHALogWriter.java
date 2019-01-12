@@ -23,7 +23,7 @@ import org.embergraph.ha.msg.IHAWriteMessage;
 import org.embergraph.journal.IRootBlockView;
 
 /*
-* A constrained interface providing access to limited operations on the live HALog.
+ * A constrained interface providing access to limited operations on the live HALog.
  *
  * @author Martyn Cutcher
  * @author Bryan Thompson

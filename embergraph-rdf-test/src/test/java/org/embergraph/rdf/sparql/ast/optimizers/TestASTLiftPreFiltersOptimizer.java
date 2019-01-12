@@ -25,7 +25,7 @@ import org.apache.log4j.Logger;
 import org.embergraph.rdf.sparql.ast.AbstractASTEvaluationTestCase;
 
 /*
-* Test suite for {@link ASTLiftPreFiltersOptimizer}.
+ * Test suite for {@link ASTLiftPreFiltersOptimizer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

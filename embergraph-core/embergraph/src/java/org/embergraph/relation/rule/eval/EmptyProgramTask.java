@@ -5,7 +5,7 @@ import org.embergraph.relation.rule.IStep;
 import org.embergraph.striterator.EmptyChunkedIterator;
 
 /*
-* Provides execution for an "empty" program.
+ * Provides execution for an "empty" program.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

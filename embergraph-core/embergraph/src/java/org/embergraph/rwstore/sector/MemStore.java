@@ -32,11 +32,10 @@ import org.embergraph.rawstore.IAddressManager;
 import org.embergraph.rawstore.IAllocationContext;
 import org.embergraph.rawstore.IAllocationManagerStore;
 import org.embergraph.rawstore.IPSOutputStream;
-import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.TransientResourceMetadata;
 
 /*
-* An {@link IRawStore} backed by an {@link IMemoryManager}.
+ * An {@link IRawStore} backed by an {@link IMemoryManager}.
  *
  * @author thompsonbry
  */

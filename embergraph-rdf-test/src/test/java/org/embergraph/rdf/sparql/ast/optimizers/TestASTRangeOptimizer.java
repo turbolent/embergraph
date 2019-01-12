@@ -41,7 +41,6 @@ import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.QueryType;
 import org.embergraph.rdf.sparql.ast.RangeNode;
 import org.embergraph.rdf.sparql.ast.StatementPatternNode;
-import org.embergraph.rdf.sparql.ast.ValueExpressionNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.openrdf.model.impl.URIImpl;
@@ -81,20 +80,14 @@ public class TestASTRangeOptimizer extends AbstractASTEvaluationTestCase {
 
       { // lower
         final FunctionNode f =
-            new FunctionNode(
-                FunctionRegistry.GT,
-                null,
-                new VarNode("p"), new ConstantNode(lower));
+            new FunctionNode(FunctionRegistry.GT, null, new VarNode("p"), new ConstantNode(lower));
 
         where.addChild(new FilterNode(f));
       }
 
       { // upper
         final FunctionNode f =
-            new FunctionNode(
-                FunctionRegistry.LT,
-                null,
-                new VarNode("p"), new ConstantNode(upper));
+            new FunctionNode(FunctionRegistry.LT, null, new VarNode("p"), new ConstantNode(upper));
 
         where.addChild(new FilterNode(f));
       }
@@ -124,20 +117,14 @@ public class TestASTRangeOptimizer extends AbstractASTEvaluationTestCase {
 
       { // lower
         final FunctionNode f =
-            new FunctionNode(
-                FunctionRegistry.GT,
-                null,
-                new VarNode("p"), new ConstantNode(lower));
+            new FunctionNode(FunctionRegistry.GT, null, new VarNode("p"), new ConstantNode(lower));
 
         where.addChild(new FilterNode(f));
       }
 
       { // upper
         final FunctionNode f =
-            new FunctionNode(
-                FunctionRegistry.LT,
-                null,
-                new VarNode("p"), new ConstantNode(upper));
+            new FunctionNode(FunctionRegistry.LT, null, new VarNode("p"), new ConstantNode(upper));
 
         where.addChild(new FilterNode(f));
       }
@@ -193,10 +180,7 @@ public class TestASTRangeOptimizer extends AbstractASTEvaluationTestCase {
 
       { // lower
         final FunctionNode f =
-            new FunctionNode(
-                FunctionRegistry.GT,
-                null,
-                new VarNode("p"), new ConstantNode(lower));
+            new FunctionNode(FunctionRegistry.GT, null, new VarNode("p"), new ConstantNode(lower));
 
         where.addChild(new FilterNode(f));
       }
@@ -237,10 +221,7 @@ public class TestASTRangeOptimizer extends AbstractASTEvaluationTestCase {
 
       { // lower
         final FunctionNode f =
-            new FunctionNode(
-                FunctionRegistry.GT,
-                null,
-                new VarNode("p"), new ConstantNode(lower));
+            new FunctionNode(FunctionRegistry.GT, null, new VarNode("p"), new ConstantNode(lower));
 
         where.addChild(new FilterNode(f));
       }
@@ -316,10 +297,7 @@ public class TestASTRangeOptimizer extends AbstractASTEvaluationTestCase {
 
       { // upper
         final FunctionNode f =
-            new FunctionNode(
-                FunctionRegistry.LT,
-                null,
-                new VarNode("p"), new ConstantNode(upper));
+            new FunctionNode(FunctionRegistry.LT, null, new VarNode("p"), new ConstantNode(upper));
 
         where.addChild(new FilterNode(f));
       }
@@ -360,10 +338,7 @@ public class TestASTRangeOptimizer extends AbstractASTEvaluationTestCase {
 
       { // upper
         final FunctionNode f =
-            new FunctionNode(
-                FunctionRegistry.LT,
-                null,
-                new VarNode("p"), new ConstantNode(upper));
+            new FunctionNode(FunctionRegistry.LT, null, new VarNode("p"), new ConstantNode(upper));
 
         where.addChild(new FilterNode(f));
       }
@@ -415,16 +390,10 @@ public class TestASTRangeOptimizer extends AbstractASTEvaluationTestCase {
       final JoinGroupNode where = new JoinGroupNode();
 
       final FunctionNode f1 =
-          new FunctionNode(
-              FunctionRegistry.GT,
-              null,
-              new VarNode("p"), new ConstantNode(lower));
+          new FunctionNode(FunctionRegistry.GT, null, new VarNode("p"), new ConstantNode(lower));
 
       final FunctionNode f2 =
-          new FunctionNode(
-              FunctionRegistry.LT,
-              null,
-              new VarNode("p"), new ConstantNode(upper));
+          new FunctionNode(FunctionRegistry.LT, null, new VarNode("p"), new ConstantNode(upper));
 
       final FunctionNode f = FunctionNode.AND(f1, f2);
 
@@ -454,16 +423,10 @@ public class TestASTRangeOptimizer extends AbstractASTEvaluationTestCase {
       final JoinGroupNode where = new JoinGroupNode();
 
       final FunctionNode f1 =
-          new FunctionNode(
-              FunctionRegistry.GT,
-              null,
-              new VarNode("p"), new ConstantNode(lower));
+          new FunctionNode(FunctionRegistry.GT, null, new VarNode("p"), new ConstantNode(lower));
 
       final FunctionNode f2 =
-          new FunctionNode(
-              FunctionRegistry.LT,
-              null,
-              new VarNode("p"), new ConstantNode(upper));
+          new FunctionNode(FunctionRegistry.LT, null, new VarNode("p"), new ConstantNode(upper));
 
       final FunctionNode f = FunctionNode.AND(f1, f2);
 
@@ -516,16 +479,10 @@ public class TestASTRangeOptimizer extends AbstractASTEvaluationTestCase {
       final JoinGroupNode where = new JoinGroupNode();
 
       final FunctionNode f1 =
-          new FunctionNode(
-              FunctionRegistry.GT,
-              null,
-              new VarNode("p"), new ConstantNode(lower));
+          new FunctionNode(FunctionRegistry.GT, null, new VarNode("p"), new ConstantNode(lower));
 
       final FunctionNode f2 =
-          new FunctionNode(
-              FunctionRegistry.GT,
-              null,
-              new ConstantNode(upper), new VarNode("p"));
+          new FunctionNode(FunctionRegistry.GT, null, new ConstantNode(upper), new VarNode("p"));
 
       final FunctionNode f = FunctionNode.AND(f1, f2);
 
@@ -555,16 +512,10 @@ public class TestASTRangeOptimizer extends AbstractASTEvaluationTestCase {
       final JoinGroupNode where = new JoinGroupNode();
 
       final FunctionNode f1 =
-          new FunctionNode(
-              FunctionRegistry.GT,
-              null,
-              new VarNode("p"), new ConstantNode(lower));
+          new FunctionNode(FunctionRegistry.GT, null, new VarNode("p"), new ConstantNode(lower));
 
       final FunctionNode f2 =
-          new FunctionNode(
-              FunctionRegistry.GT,
-              null,
-              new ConstantNode(upper), new VarNode("p"));
+          new FunctionNode(FunctionRegistry.GT, null, new ConstantNode(upper), new VarNode("p"));
 
       final FunctionNode f = FunctionNode.AND(f1, f2);
 
@@ -631,13 +582,15 @@ public class TestASTRangeOptimizer extends AbstractASTEvaluationTestCase {
             new FunctionNode(
                 FunctionRegistry.GT,
                 null,
-                new VarNode("o2"), FunctionNode.subtract(new VarNode("o1"), new ConstantNode(ten)));
+                new VarNode("o2"),
+                FunctionNode.subtract(new VarNode("o1"), new ConstantNode(ten)));
 
         final FunctionNode f2 =
             new FunctionNode(
                 FunctionRegistry.LT,
                 null,
-                new VarNode("o2"), FunctionNode.add(new VarNode("o1"), new ConstantNode(ten)));
+                new VarNode("o2"),
+                FunctionNode.add(new VarNode("o1"), new ConstantNode(ten)));
 
         final FunctionNode f = FunctionNode.AND(f1, f2);
 
@@ -685,13 +638,15 @@ public class TestASTRangeOptimizer extends AbstractASTEvaluationTestCase {
             new FunctionNode(
                 FunctionRegistry.GT,
                 null,
-                new VarNode("o2"), FunctionNode.subtract(new VarNode("o1"), new ConstantNode(ten)));
+                new VarNode("o2"),
+                FunctionNode.subtract(new VarNode("o1"), new ConstantNode(ten)));
 
         final FunctionNode f2 =
             new FunctionNode(
                 FunctionRegistry.LT,
                 null,
-                new VarNode("o2"), FunctionNode.add(new VarNode("o1"), new ConstantNode(ten)));
+                new VarNode("o2"),
+                FunctionNode.add(new VarNode("o1"), new ConstantNode(ten)));
 
         final FunctionNode f = FunctionNode.AND(f1, f2);
 
@@ -759,23 +714,14 @@ public class TestASTRangeOptimizer extends AbstractASTEvaluationTestCase {
 
       { // filters
         final FunctionNode f1 =
-            new FunctionNode(
-                FunctionRegistry.LT,
-                null,
-                new VarNode("o"), new VarNode("o1"));
+            new FunctionNode(FunctionRegistry.LT, null, new VarNode("o"), new VarNode("o1"));
 
         final FunctionNode f2 =
-            new FunctionNode(
-                FunctionRegistry.LT,
-                null,
-                new VarNode("o"), new VarNode("o2"));
+            new FunctionNode(FunctionRegistry.LT, null, new VarNode("o"), new VarNode("o2"));
 
         final IV upper = new XSDNumericIV(100);
         final FunctionNode f3 =
-            new FunctionNode(
-                FunctionRegistry.LT,
-                null,
-                new VarNode("o"), new ConstantNode(upper));
+            new FunctionNode(FunctionRegistry.LT, null, new VarNode("o"), new ConstantNode(upper));
 
         final FunctionNode and = FunctionNode.AND(f1, f2);
 
@@ -821,23 +767,14 @@ public class TestASTRangeOptimizer extends AbstractASTEvaluationTestCase {
 
       { // filters
         final FunctionNode f1 =
-            new FunctionNode(
-                FunctionRegistry.LT,
-                null,
-                new VarNode("o"), new VarNode("o1"));
+            new FunctionNode(FunctionRegistry.LT, null, new VarNode("o"), new VarNode("o1"));
 
         final FunctionNode f2 =
-            new FunctionNode(
-                FunctionRegistry.LT,
-                null,
-                new VarNode("o"), new VarNode("o2"));
+            new FunctionNode(FunctionRegistry.LT, null, new VarNode("o"), new VarNode("o2"));
 
         final IV upper = new XSDNumericIV(100);
         final FunctionNode f3 =
-            new FunctionNode(
-                FunctionRegistry.LT,
-                null,
-                new VarNode("o"), new ConstantNode(upper));
+            new FunctionNode(FunctionRegistry.LT, null, new VarNode("o"), new ConstantNode(upper));
 
         final FunctionNode and = FunctionNode.AND(f1, f2);
 

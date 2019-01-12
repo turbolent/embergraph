@@ -25,7 +25,6 @@ import java.io.File;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledFuture;
@@ -38,7 +37,6 @@ import org.embergraph.btree.Checkpoint;
 import org.embergraph.btree.ICheckpointProtocol;
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.journal.Name2Addr.Entry;
-import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.WormAddressManager;
 import org.embergraph.relation.locator.DefaultResourceLocator;
 import org.embergraph.sparse.GlobalRowStoreHelper;
@@ -46,7 +44,7 @@ import org.embergraph.sparse.SparseRowStore;
 import org.embergraph.util.DaemonThreadFactory;
 
 /*
-* A temporary store that supports named indices but no concurrency controls.
+ * A temporary store that supports named indices but no concurrency controls.
  *
  * <p>If you want a temporary store that supports named indices and concurrency controls then choose
  * a {@link Journal} with {@link BufferMode#Temporary}. This has the advantage of full concurrency
@@ -146,7 +144,7 @@ public class TemporaryStore extends TemporaryRawStore implements IBTreeManager {
   }
 
   //    /*
-//     * Setup the btree that resolved named btrees.
+  //     * Setup the btree that resolved named btrees.
   //     */
   //    private void setupName2AddrBTree() {
   //
@@ -159,14 +157,14 @@ public class TemporaryStore extends TemporaryRawStore implements IBTreeManager {
   //    }
 
   //    /*
-//     * The address of the last checkpoint written. When ZERO(0L) no checkpoint
+  //     * The address of the last checkpoint written. When ZERO(0L) no checkpoint
   //     * has been written and {@link #name2Addr} is simple discarded on
   //     * {@link #abort()}.
   //     */
   //    private long lastCheckpointAddr = 0L;
   //
   //    /*
-//     * Reverts to the last checkpoint, if any. If there is no last checkpoint,
+  //     * Reverts to the last checkpoint, if any. If there is no last checkpoint,
   //     * then the post-condition is as if the store had never been written on
   //     * (except that the storage on the backing file is not reclaimed).
   //     */
@@ -177,7 +175,7 @@ public class TemporaryStore extends TemporaryRawStore implements IBTreeManager {
   //    }
   //
   //    /*
-//     * Reverts to the checkpoint associated with the given <i>checkpointAddr</i>.
+  //     * Reverts to the checkpoint associated with the given <i>checkpointAddr</i>.
   //     * When ZERO(0L), the post-condition is as if the store had never been
   //     * written on (except that the storage on the backing file is not
   //     * reclaimed). The <i>checkpointAddr</i> is noted as the current
@@ -206,7 +204,7 @@ public class TemporaryStore extends TemporaryRawStore implements IBTreeManager {
   //    }
   //
   //    /*
-//     * Checkpoints the dirty indices and notes the new
+  //     * Checkpoints the dirty indices and notes the new
   //     * {@link #restoreLastCheckpoint()} point. You can revert to the last
   //     * written checkpoint using {@link #restoreLastCheckpoint()} or to an
   //     * arbitrary checkpoint using {@link #restoreCheckpoint(long)}.
@@ -326,7 +324,7 @@ public class TemporaryStore extends TemporaryRawStore implements IBTreeManager {
   }
 
   //    /*
-//     * Return an {@link ITx#UNISOLATED} view of the named index -or-
+  //     * Return an {@link ITx#UNISOLATED} view of the named index -or-
   //     * <code>null</code> if there is no registered index by that name.
   //     */
   @Override
@@ -336,7 +334,7 @@ public class TemporaryStore extends TemporaryRawStore implements IBTreeManager {
   }
 
   //    /*
-//     * Return an {@link ITx#UNISOLATED} view of the named index -or-
+  //     * Return an {@link ITx#UNISOLATED} view of the named index -or-
   //     * <code>null</code> if there is no registered index by that name.
   //     */
   //    public HTree getHTree(final String name) {

@@ -28,7 +28,7 @@ import org.embergraph.rdf.changesets.IChangeRecord;
 import org.embergraph.rdf.spo.ISPO;
 
 /*
-* Extended to include a revision time for each record.
+ * Extended to include a revision time for each record.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

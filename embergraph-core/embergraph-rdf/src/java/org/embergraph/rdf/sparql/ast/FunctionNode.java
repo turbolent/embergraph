@@ -1,16 +1,14 @@
 package org.embergraph.rdf.sparql.ast;
 
-import java.io.Serializable;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
 import org.embergraph.bop.BOp;
-import org.embergraph.bop.IValueExpression;
 import org.embergraph.bop.NV;
 import org.openrdf.model.URI;
 
 /*
-* AST node for anything which is neither a constant nor a variable, including math operators,
+ * AST node for anything which is neither a constant nor a variable, including math operators,
  * string functions, etc. The {@link FunctionNode} arguments are the ordered list {@link
  * ValueExpressionNode}s that are the arguments to the SPARQL function.
  *
@@ -145,99 +143,85 @@ public class FunctionNode extends ValueExpressionNode {
   /** Return <code>t1 AND t2</code>. */
   public static FunctionNode AND(final ValueExpressionNode t1, final ValueExpressionNode t2) {
 
-    return new FunctionNode(
-        FunctionRegistry.AND, null /* scalarValues */, t1, t2);
+    return new FunctionNode(FunctionRegistry.AND, null /* scalarValues */, t1, t2);
   }
 
   /** Return <code>t1 OR t2</code>. */
   public static FunctionNode OR(final ValueExpressionNode t1, final ValueExpressionNode t2) {
 
-    return new FunctionNode(
-        FunctionRegistry.OR, null /* scalarValues */, t1, t2);
+    return new FunctionNode(FunctionRegistry.OR, null /* scalarValues */, t1, t2);
   }
 
   /** Return <code>t1 OR t2</code>. */
   public static FunctionNode NOT(final ValueExpressionNode inner) {
 
-    return new FunctionNode(
-        FunctionRegistry.NOT, null /* scalarValues */, inner);
+    return new FunctionNode(FunctionRegistry.NOT, null /* scalarValues */, inner);
   }
 
   /** Return <code>t1 + t2</code> (aka ADD). */
   public static FunctionNode add(final ValueExpressionNode t1, final ValueExpressionNode t2) {
 
-    return new FunctionNode(
-        FunctionRegistry.ADD, null /* scalarValues */, t1, t2);
+    return new FunctionNode(FunctionRegistry.ADD, null /* scalarValues */, t1, t2);
   }
 
   /** Return <code>t1 - t2</code> (aka SUBTRACT). */
   public static FunctionNode subtract(final ValueExpressionNode t1, final ValueExpressionNode t2) {
 
-    return new FunctionNode(
-        FunctionRegistry.SUBTRACT, null /* scalarValues */, t1, t2);
+    return new FunctionNode(FunctionRegistry.SUBTRACT, null /* scalarValues */, t1, t2);
   }
 
   /** Return <code>sameTerm(t1,t2)</code> (aka EQ). */
   public static FunctionNode sameTerm(final ValueExpressionNode t1, final ValueExpressionNode t2) {
 
-    return new FunctionNode(
-        FunctionRegistry.SAME_TERM, null /* scalarValues */, t1, t2);
+    return new FunctionNode(FunctionRegistry.SAME_TERM, null /* scalarValues */, t1, t2);
   }
 
   /** Return <code>t1 = t2</code> (aka EQ aka RDFTERM-EQUALS). */
   public static FunctionNode EQ(final ValueExpressionNode t1, final ValueExpressionNode t2) {
 
-    return new FunctionNode(
-        FunctionRegistry.EQ, null /* scalarValues */, t1, t2);
+    return new FunctionNode(FunctionRegistry.EQ, null /* scalarValues */, t1, t2);
   }
 
   /** Return <code>t1 != t2</code> */
   public static FunctionNode NE(final ValueExpressionNode t1, final ValueExpressionNode t2) {
 
-    return new FunctionNode(
-        FunctionRegistry.NE, null /* scalarValues */, t1, t2);
+    return new FunctionNode(FunctionRegistry.NE, null /* scalarValues */, t1, t2);
   }
 
   /** Return <code>t1 < t2</code> */
   public static FunctionNode LT(final ValueExpressionNode t1, final ValueExpressionNode t2) {
 
-    return new FunctionNode(
-        FunctionRegistry.LT, null /* scalarValues */, t1, t2);
+    return new FunctionNode(FunctionRegistry.LT, null /* scalarValues */, t1, t2);
   }
 
   /** Return <code>t1 > t2</code> */
   public static FunctionNode GT(final ValueExpressionNode t1, final ValueExpressionNode t2) {
 
-    return new FunctionNode(
-        FunctionRegistry.GT, null /* scalarValues */, t1, t2);
+    return new FunctionNode(FunctionRegistry.GT, null /* scalarValues */, t1, t2);
   }
 
   /** Return <code>t1 <= t2</code> */
   public static FunctionNode LE(final ValueExpressionNode t1, final ValueExpressionNode t2) {
 
-    return new FunctionNode(
-        FunctionRegistry.LE, null /* scalarValues */, t1, t2);
+    return new FunctionNode(FunctionRegistry.LE, null /* scalarValues */, t1, t2);
   }
 
   /** Return <code>t1 >= t2</code> */
   public static FunctionNode GE(final ValueExpressionNode t1, final ValueExpressionNode t2) {
 
-    return new FunctionNode(
-        FunctionRegistry.GE, null /* scalarValues */, t1, t2);
+    return new FunctionNode(FunctionRegistry.GE, null /* scalarValues */, t1, t2);
   }
 
   /** Return <code>min(v1,v2)</code> */
   public static FunctionNode MIN(final ValueExpressionNode v1, final ValueExpressionNode v2) {
 
-    return new FunctionNode(
-        FunctionRegistry.MIN, null /* scalarValues */, v1, v2);
+    return new FunctionNode(FunctionRegistry.MIN, null /* scalarValues */, v1, v2);
   }
 
   /** Return <code>max(v1,v2)</code> */
   public static FunctionNode MAX(final ValueExpressionNode v1, final ValueExpressionNode v2) {
 
-    return new FunctionNode(
-        FunctionRegistry.MAX, null /* scalarValues */, v1, v2);
+    return new FunctionNode(FunctionRegistry.MAX, null /* scalarValues */, v1, v2);
   }
 
   /** Return a binary function <code>op(t1,t2)</code> */

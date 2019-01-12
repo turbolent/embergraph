@@ -23,11 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.rio;
 
-import java.util.Collections;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import org.embergraph.rdf.model.EmbergraphBNode;
-import org.embergraph.rdf.model.EmbergraphStatement;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.relation.accesspath.IBuffer;
@@ -37,7 +34,7 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
 /*
-* Abstraction for a buffer that loads {@link Statement}s into an {@link AbstractTripleStore}.
+ * Abstraction for a buffer that loads {@link Statement}s into an {@link AbstractTripleStore}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

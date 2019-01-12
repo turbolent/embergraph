@@ -23,7 +23,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.counters.win;
 
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 import java.nio.channels.ClosedByInterruptException;
@@ -40,7 +39,6 @@ import org.apache.log4j.Logger;
 import org.embergraph.counters.AbstractProcessCollector;
 import org.embergraph.counters.AbstractProcessReader;
 import org.embergraph.counters.CounterSet;
-import org.embergraph.counters.ICounter;
 import org.embergraph.counters.ICounterSet;
 import org.embergraph.counters.IHostCounters;
 import org.embergraph.counters.IInstrument;
@@ -50,7 +48,7 @@ import org.embergraph.util.CSVReader.Header;
 import org.embergraph.util.InnerCause;
 
 /*
-* Collects per-host performance counters on a Windows platform using <code>typeperf</code> and
+ * Collects per-host performance counters on a Windows platform using <code>typeperf</code> and
  * aligns them with those declared by {@link IRequiredHostCounters}.
  *
  * <p>Note: The names of counters under Windows are NOT case-sensitive.
@@ -65,12 +63,12 @@ public class TypeperfCollector extends AbstractProcessCollector {
   private static final Logger log = Logger.getLogger(TypeperfCollector.class);
 
   //    /*
-//     * True iff the {@link #log} level is INFO or less.
+  //     * True iff the {@link #log} level is INFO or less.
   //     */
   //    final protected static boolean INFO = log.isInfoEnabled();
   //
   //    /*
-//     * True iff the {@link #log} level is DEBUG or less.
+  //     * True iff the {@link #log} level is DEBUG or less.
   //     */
   //    final protected static boolean DEBUG = log.isDebugEnabled();
 
@@ -439,8 +437,8 @@ public class TypeperfCollector extends AbstractProcessCollector {
                 "\\LogicalDisk(_Total)\\% Free Space",
                 p + IRequiredHostCounters.LogicalDisk_PercentFreeSpace, .01d),
 
-          /*
-       * These are system wide counters for the network interface.
+            /*
+             * These are system wide counters for the network interface.
              * There are also counters for the network queue length, packets
              * discarded, and packet errors that might be interesting. (I
              * can't find _Total versions declared for these counters so I
@@ -454,8 +452,8 @@ public class TypeperfCollector extends AbstractProcessCollector {
             // "\\Network Interface(_Total)\\Bytes Sent/Sec",
             // "\\Network Interface(_Total)\\Bytes Total/Sec",
 
-          /*
-       * System wide counters for DISK IO.
+            /*
+             * System wide counters for DISK IO.
              */
             new InstrumentForWPC(
                 "\\PhysicalDisk(_Total)\\Avg. Disk Queue Length",
@@ -466,17 +464,11 @@ public class TypeperfCollector extends AbstractProcessCollector {
                 1d),
             new InstrumentForWPC(
                 "\\PhysicalDisk(_Total)\\% Idle Time",
-                p
-                    + IRequiredHostCounters.PhysicalDisk
-                    + ICounterSet.pathSeparator
-                    + "% Idle Time",
+                p + IRequiredHostCounters.PhysicalDisk + ICounterSet.pathSeparator + "% Idle Time",
                 .01d),
             new InstrumentForWPC(
                 "\\PhysicalDisk(_Total)\\% Disk Time",
-                p
-                    + IRequiredHostCounters.PhysicalDisk
-                    + ICounterSet.pathSeparator
-                    + "% Disk Time",
+                p + IRequiredHostCounters.PhysicalDisk + ICounterSet.pathSeparator + "% Disk Time",
                 .01d),
             new InstrumentForWPC(
                 "\\PhysicalDisk(_Total)\\% Disk Read Time",
@@ -525,7 +517,7 @@ public class TypeperfCollector extends AbstractProcessCollector {
             // "\\PhysicalDisk(_Total)\\Disk Writes/sec",
             // "\\PhysicalDisk(_Total)\\Avg. Disk Bytes/Read",
             // "\\PhysicalDisk(_Total)\\Avg. Disk Bytes/Write",
-        );
+            );
 
     for (InstrumentForWPC inst : decls) {
 

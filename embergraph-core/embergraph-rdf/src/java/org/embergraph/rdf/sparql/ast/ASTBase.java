@@ -25,16 +25,11 @@ import java.util.Map;
 import java.util.Properties;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.ModifiableBOpBase;
-import org.embergraph.bop.PipelineOp;
-import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
-import org.embergraph.rdf.sparql.ast.eval.AST2BOpUtility;
 import org.embergraph.rdf.sparql.ast.explainhints.ExplainHints;
 import org.embergraph.rdf.sparql.ast.explainhints.IExplainHint;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTQueryHintOptimizer;
-import org.embergraph.rdf.sparql.ast.optimizers.IASTOptimizer;
 
 /*
-* Base class for the AST.
+ * Base class for the AST.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

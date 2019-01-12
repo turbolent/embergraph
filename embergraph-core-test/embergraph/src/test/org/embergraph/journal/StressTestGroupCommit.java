@@ -44,7 +44,6 @@ import org.embergraph.btree.IIndex;
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.journal.Journal.Options;
-import org.embergraph.rawstore.IRawStore;
 import org.embergraph.testutil.ExperimentDriver;
 import org.embergraph.testutil.ExperimentDriver.IComparisonTest;
 import org.embergraph.testutil.ExperimentDriver.Result;
@@ -52,7 +51,7 @@ import org.embergraph.util.Bytes;
 import org.embergraph.util.NV;
 
 /*
-* Stress test of the group commit mechanism. This class may be used to tune the performance of a
+ * Stress test of the group commit mechanism. This class may be used to tune the performance of a
  * variety of parameters that effect the throughput of group commit. There are other stress tests
  * that show the throughput for more complex tasks or for isolated tasks (transactions). This test
  * focuses purely on the group commit mechanism itself.
@@ -446,8 +445,8 @@ public class StressTestGroupCommit extends ProxyTestCase<Journal> implements ICo
             if (isInnerCause(ex, InterruptedException.class)
                 || isInnerCause(ex, ClosedByInterruptException.class)) {
 
-            /*
-       * Note: Tasks will be interrupted if a timeout
+              /*
+               * Note: Tasks will be interrupted if a timeout
                * occurs when attempting to run the submitted tasks
                * - this is normal.
                */

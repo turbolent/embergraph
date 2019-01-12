@@ -31,7 +31,7 @@ import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 
 /*
-* Wraps an {@link IRemoteChunkedIterator} so that it looks like an {@link IChunkedOrderedIterator}
+ * Wraps an {@link IRemoteChunkedIterator} so that it looks like an {@link IChunkedOrderedIterator}
  * again.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

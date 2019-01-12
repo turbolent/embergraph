@@ -37,13 +37,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
 import org.apache.log4j.Logger;
-import org.embergraph.bop.IValueExpression;
 import org.embergraph.rdf.internal.DTE;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.internal.IVUtility;
-import org.embergraph.rdf.internal.LexiconConfiguration;
 import org.embergraph.rdf.internal.VTE;
-import org.embergraph.rdf.internal.constraints.SPARQLConstraint;
 import org.embergraph.rdf.internal.impl.TermId;
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.internal.impl.literal.FullyInlineTypedLiteralIV;
@@ -60,9 +56,7 @@ import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
-import org.embergraph.rdf.sail.EmbergraphValueReplacer;
 import org.embergraph.rdf.sail.sparql.ast.ASTBlankNode;
-import org.embergraph.rdf.sail.sparql.ast.ASTDatasetClause;
 import org.embergraph.rdf.sail.sparql.ast.ASTFalse;
 import org.embergraph.rdf.sail.sparql.ast.ASTIRI;
 import org.embergraph.rdf.sail.sparql.ast.ASTNumericLiteral;
@@ -82,7 +76,7 @@ import org.openrdf.model.vocabulary.XMLSchema;
 import org.openrdf.query.MalformedQueryException;
 
 /*
-* Visits the AST model and builds a map from each RDF {@link Value} to {@link EmbergraphValue}
+ * Visits the AST model and builds a map from each RDF {@link Value} to {@link EmbergraphValue}
  * objects that have mock IVs assigned to them.
  *
  * <p>Note: The {@link PrefixDeclProcessor} will rewrite {@link ASTQName} nodes as {@link ASTIRI}
@@ -378,13 +372,10 @@ public class ASTDeferredIVResolutionInitializer extends ASTVisitorBase {
           embergraphValue = valueFactory.createLiteral(((AbstractLiteralIV) iv).booleanValue());
           break;
         case XSDString:
-          embergraphValue =
-              valueFactory.createLiteral(
-                  iv.stringValue(), dte.getDatatypeURI());
+          embergraphValue = valueFactory.createLiteral(iv.stringValue(), dte.getDatatypeURI());
           break;
         case XSDInteger:
-          embergraphValue =
-              valueFactory.createLiteral(iv.stringValue(), XMLSchema.INTEGER);
+          embergraphValue = valueFactory.createLiteral(iv.stringValue(), XMLSchema.INTEGER);
           break;
         case XSDDecimal:
           embergraphValue =

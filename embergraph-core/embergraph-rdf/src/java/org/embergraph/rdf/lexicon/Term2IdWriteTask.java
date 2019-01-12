@@ -36,7 +36,7 @@ import org.embergraph.service.Split;
 import org.embergraph.service.ndx.pipeline.KVOList;
 
 /*
-* Synchronous RPC write on the TERM2ID index.
+ * Synchronous RPC write on the TERM2ID index.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -150,8 +150,8 @@ public class Term2IdWriteTask implements Callable<KVO<EmbergraphValue>[]> {
       {
         final long _begin = System.currentTimeMillis();
 
-      /*
-       * Create a key buffer holding the sort keys. This does not
+        /*
+         * Create a key buffer holding the sort keys. This does not
          * allocate new storage for the sort keys, but rather aligns the
          * data structures for the call to splitKeys(). This also makes
          * a[] into a dense copy of the references in b[], but without
@@ -197,8 +197,8 @@ public class Term2IdWriteTask implements Callable<KVO<EmbergraphValue>[]> {
 
         if (ndistinct == 0) {
 
-        /*
-       * Nothing to be written.
+          /*
+           * Nothing to be written.
            */
 
           return new KVO[0];

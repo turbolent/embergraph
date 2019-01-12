@@ -1,6 +1,5 @@
 package org.embergraph.resources;
 
-import java.lang.ref.SoftReference;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -10,19 +9,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.log4j.Logger;
-import org.embergraph.btree.BTree;
 import org.embergraph.btree.BTreeCounters;
 import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleIterator;
 import org.embergraph.io.DataInputBuffer;
 import org.embergraph.journal.AbstractJournal;
-import org.embergraph.journal.ITx;
 import org.embergraph.journal.Name2Addr.Entry;
 import org.embergraph.journal.Name2Addr.EntrySerializer;
-import org.embergraph.service.IDataService;
 
 /*
-* Metadata on the entire synchronous and asynchronous overflow task.
+ * Metadata on the entire synchronous and asynchronous overflow task.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -41,7 +37,7 @@ public class OverflowMetadata {
   public final long lastCommitTime;
 
   //    /*
-//     * The names of any index partitions that were copied onto the new journal
+  //     * The names of any index partitions that were copied onto the new journal
   //     * during synchronous overflow processing.
   //     */
   //    private final Set<String> copied = new HashSet<String>();
@@ -144,7 +140,7 @@ public class OverflowMetadata {
   }
 
   //    /*
-//     * The action to take / taken for the index partition.
+  //     * The action to take / taken for the index partition.
   //     *
   //     * @param name
   //     *            The name of the index partition.
@@ -302,8 +298,8 @@ public class OverflowMetadata {
         final Entry entry =
             EntrySerializer.INSTANCE.deserialize(new DataInputBuffer(tuple.getValue()));
 
-      /*
-       * Obtain the delta in the btree performance counters for this
+        /*
+         * Obtain the delta in the btree performance counters for this
          * index partition since the last overflow.
          */
         BTreeCounters btreeCounters = delta.get(entry.name);

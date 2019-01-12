@@ -58,7 +58,7 @@ import org.xml.sax.ext.DefaultHandler2;
 import org.xml.sax.ext.EntityResolver2;
 
 /*
-* A harness for running comparison of different configurations.
+ * A harness for running comparison of different configurations.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -490,8 +490,8 @@ public class ExperimentDriver {
           }
         }
 
-      /*
-       * Write out results when they are available.
+        /*
+         * Write out results when they are available.
          */
         if (cond.result != null) {
 
@@ -635,8 +635,8 @@ public class ExperimentDriver {
 
       } finally {
 
-      /*
-       * Always write the summary onto the file.
+        /*
+         * Always write the summary onto the file.
          */
 
         if (exists) {
@@ -647,8 +647,8 @@ public class ExperimentDriver {
 
         writer.write("Run: " + new Date(runStartTime) + "\n\n");
 
-      /*
-       * Collect the distinct condition and result columns.
+        /*
+         * Collect the distinct condition and result columns.
          *
          * Note: This extracts all columns whose values are constants
          * for a given run and write them out once at the top of the
@@ -729,8 +729,8 @@ public class ExperimentDriver {
             first = false;
           }
 
-        /*
-       * Remove column headings that were identified as invariants.
+          /*
+           * Remove column headings that were identified as invariants.
            */
           {
             Iterator<Object> itr2 = invariants.keySet().iterator();
@@ -746,8 +746,8 @@ public class ExperimentDriver {
           }
         }
 
-      /*
-       * Write out the invariants across the runs.
+        /*
+         * Write out the invariants across the runs.
          */
         {
           writer.write("Invariants:\n");
@@ -866,7 +866,7 @@ public class ExperimentDriver {
     public static final String SYSTEM_EXPERIMENT_FILENAME_0_1 = "Experiment.dtd";
 
     //        /*
-//         * The Java resource containing the inline-mention-form DTD, version
+    //         * The Java resource containing the inline-mention-form DTD, version
     //         * 0.1.
     //         */
     //        public static final String SYSTEM_EXPERIMENT_RESOURCE_0_1 = "org/embergraph/journal/"

@@ -32,7 +32,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import junit.framework.TestCase;
 
 /*
-* Unit tests for random block IO include read, write, overwrite (aka update), and delete. There are
+ * Unit tests for random block IO include read, write, overwrite (aka update), and delete. There are
  * also some unit tests for atomic append after random write since random writes can leave "holes"
  * in files.
  *
@@ -659,8 +659,8 @@ public class TestRandomBlockOps extends AbstractRepositoryTestCase {
         switch (op) {
           case Op.append:
             {
-            /*
-       * @todo make empty, near empty, full, and near full blocks
+              /*
+               * @todo make empty, near empty, full, and near full blocks
                * relatively likely while also exercising the offset and
                * length parameters. The same changes should be applied to
                * the writeBlock() case below.
@@ -680,8 +680,8 @@ public class TestRandomBlockOps extends AbstractRepositoryTestCase {
             {
               final long block = getRandomBlock(id, version);
               if (block == -1L) {
-              /*
-       * Since there are no blocks try deleting one at random
+                /*
+                 * Since there are no blocks try deleting one at random
                  * and verify that it was not deleted.
                  */
                 assertFalse(

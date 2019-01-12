@@ -46,10 +46,8 @@ import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
-import org.embergraph.counters.History;
 import org.embergraph.counters.ICounterSet;
 import org.embergraph.counters.PeriodEnum;
-import org.embergraph.counters.httpd.CounterSetHTTPD;
 import org.embergraph.service.Event;
 import org.embergraph.service.IEventReportingService;
 import org.embergraph.service.IService;
@@ -57,7 +55,7 @@ import org.embergraph.util.CaseInsensitiveStringComparator;
 import org.embergraph.util.httpd.NanoHTTPD;
 
 /*
-* The model for a URL used to query an {@link ICounterSelector}.
+ * The model for a URL used to query an {@link ICounterSelector}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -191,7 +189,7 @@ public class URLQueryModel {
   public final LinkedHashMap<String, Vector<String>> params;
 
   //    /*
-//     * The request headers.
+  //     * The request headers.
   //     */
   //    final public Map<String,String> headers;
 
@@ -576,8 +574,8 @@ public class URLQueryModel {
         if (patterns.size() > 1)
           throw new IllegalArgumentException("Only one pattern per field: " + name);
 
-      /*
-       * compile the pattern
+        /*
+         * compile the pattern
          *
          * Note: Throws PatternSyntaxException if the pattern can
          * not be compiled.
@@ -602,8 +600,8 @@ public class URLQueryModel {
 
       if (v == null) {
 
-      /*
-       * Use a default for eventOrderBy.
+        /*
+         * Use a default for eventOrderBy.
          */
 
         try {
@@ -641,8 +639,8 @@ public class URLQueryModel {
       case events:
         if (eventReportingService == null) {
 
-        /*
-       * Throw exception since the report type requires events but
+          /*
+           * Throw exception since the report type requires events but
            * they are not available.
            */
 
@@ -702,8 +700,8 @@ public class URLQueryModel {
      */
     switch (timestampFormat) {
       case dateTime:
-      /*
-       * Note: I have decided to go with the long format (date + time)
+        /*
+         * Note: I have decided to go with the long format (date + time)
          * since runs often span days and the time along is not enough
          * information.
          */

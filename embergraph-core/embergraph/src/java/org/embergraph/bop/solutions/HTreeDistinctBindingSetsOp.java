@@ -18,13 +18,11 @@ import org.embergraph.bop.controller.NamedSetAnnotations;
 import org.embergraph.bop.engine.BOpStats;
 import org.embergraph.bop.join.HTreeHashJoinUtility;
 import org.embergraph.bop.join.JoinTypeEnum;
-import org.embergraph.htree.HTree;
-import org.embergraph.rdf.internal.IV;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.UnsyncLocalOutputBuffer;
 
 /*
-* A pipelined DISTINCT operator based on the persistence capable {@link HTree} suitable for very
+ * A pipelined DISTINCT operator based on the persistence capable {@link HTree} suitable for very
  * large solution sets. Only the variables which are used to determine the DISTINCT solutions are
  * projected from the operator. The operator is specific to the RDF data model (it relies on encoded
  * {@link IV} s).
@@ -51,7 +49,7 @@ public class HTreeDistinctBindingSetsOp extends PipelineOp implements ISingleThr
       extends PipelineOp.Annotations, HTreeAnnotations, DistinctAnnotations, NamedSetAnnotations {
 
     //        /*
-//         * The name of {@link IQueryAttributes} attribute under which the
+    //         * The name of {@link IQueryAttributes} attribute under which the
     //         * {@link HTreeHashJoinState} for this operator is stored. The attribute
     //         * name includes the query UUID. The query UUID must be extracted and
     //         * used to lookup the {@link IRunningQuery} to which the solution set

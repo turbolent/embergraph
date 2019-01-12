@@ -9,7 +9,7 @@ It is provided "as is" without expressed or implied warranty.
 package cern.colt;
 
 /*
-* Array manipulations; complements <tt>java.util.Arrays</tt>.
+ * Array manipulations; complements <tt>java.util.Arrays</tt>.
  *
  * @see java.util.Arrays
  * @see cern.colt.Sorting

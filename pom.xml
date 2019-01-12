@@ -18,14 +18,22 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.embergraph</groupId>
   <artifactId>embergraph-parent</artifactId>
   <version>2.1.5-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Embergraph</name>
-  <description>Embergraph is a ultra high-performance graph database supporting Blueprints and RDF/SPARQL APIs. It supports up to 50 Billion edges on a single machine and has a High Availability and Scale-out architecture. It is in production use for customers such as EMC, Syapse, Wikidata Query Service, the British Museum, and many others.  GPU acceleration and High Availability (HA) are available in the Enterprise edition.  It contains war, jar, deb, rpm, and tar.gz deployment artifacts.</description>
+  <description>Embergraph is a ultra high-performance graph database supporting Blueprints and
+    RDF/SPARQL APIs. It supports up to 50 Billion edges on a single machine and has a High
+    Availability and Scale-out architecture. It is in production use for customers such as EMC,
+    Syapse, Wikidata Query Service, the British Museum, and many others. GPU acceleration and High
+    Availability (HA) are available in the Enterprise edition. It contains war, jar, deb, rpm, and
+    tar.gz deployment artifacts.
+  </description>
   <inceptionYear>2006</inceptionYear>
   <licenses>
     <license>

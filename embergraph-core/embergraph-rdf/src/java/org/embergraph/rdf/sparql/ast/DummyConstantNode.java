@@ -9,7 +9,7 @@ import org.embergraph.rdf.internal.impl.TermId;
 import org.embergraph.rdf.model.EmbergraphValue;
 
 /*
-* The dummy constant node is used to represent constants in the AST that do not actually exist in
+ * The dummy constant node is used to represent constants in the AST that do not actually exist in
  * the database. For example, the pattern and flags arguments to regex, or possibly the right
  * operand to a compare operation whose left operand is a datatype, label, or str function. Also
  * useful for magic predicates such as those used by free text search.

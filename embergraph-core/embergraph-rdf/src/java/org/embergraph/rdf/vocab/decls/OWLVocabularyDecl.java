@@ -30,7 +30,7 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.OWL;
 
 /*
-* Vocabulary and namespace for {@link OWL}.
+ * Vocabulary and namespace for {@link OWL}.
  *
  * @see http://www.w3.org/2002/07/owl#
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -7,9 +7,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.internal.impl.bnode.SidIV;
 import org.embergraph.rdf.model.EmbergraphBNode;
-import org.embergraph.rdf.model.EmbergraphBNodeImpl;
 import org.embergraph.rdf.model.EmbergraphResource;
 import org.embergraph.rdf.model.EmbergraphStatement;
 import org.embergraph.rdf.model.EmbergraphURI;
@@ -19,10 +17,9 @@ import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.striterator.AbstractChunkedResolverator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
-import org.openrdf.model.Value;
 
 /*
-* Efficiently resolve term identifiers in Embergraph {@link ISPO}s to RDF {@link EmbergraphValue}s.
+ * Efficiently resolve term identifiers in Embergraph {@link ISPO}s to RDF {@link EmbergraphValue}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -165,16 +162,16 @@ public class EmbergraphStatementIteratorImpl
       final IV<?, ?> _c = spo.c();
       final EmbergraphResource c;
       if (_c != null) {
-      /*
-       * FIXME This kludge to strip off the null graph should be
+        /*
+         * FIXME This kludge to strip off the null graph should be
          * isolated to the EmbergraphSail's package. Our own code should be
          * protected from this behavior. Also see the
          * EmbergraphSolutionResolverator.
          */
         final EmbergraphResource tmp = (EmbergraphResource) resolve(terms, _c);
         if (tmp instanceof EmbergraphURI && tmp.equals(BD.NULL_GRAPH)) {
-        /*
-       * Strip off the "nullGraph" context.
+          /*
+           * Strip off the "nullGraph" context.
            */
           c = null;
         } else {
@@ -221,7 +218,7 @@ public class EmbergraphStatementIteratorImpl
   }
 
   //    /*
-//     * Sids need to be handled specially because their individual ISPO
+  //     * Sids need to be handled specially because their individual ISPO
   //     * components might need materialization as well.
   //     */
   //    private void handleSid(final SidIV<?> sid,

@@ -24,7 +24,7 @@ package org.embergraph.journal;
 import java.nio.ByteBuffer;
 
 /*
-* Test suite for {@link CommitRecordSerializer}.
+ * Test suite for {@link CommitRecordSerializer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

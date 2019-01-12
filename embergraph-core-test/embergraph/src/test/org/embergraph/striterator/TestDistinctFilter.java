@@ -24,7 +24,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.striterator;
 
 import junit.framework.TestCase2;
-import org.embergraph.btree.BTree;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.journal.IIndexManager;
@@ -32,7 +31,7 @@ import org.embergraph.journal.TemporaryStore;
 import org.embergraph.util.Bytes;
 
 /*
-* Unit tests for {@link DistinctFilter}.
+ * Unit tests for {@link DistinctFilter}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

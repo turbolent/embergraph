@@ -34,7 +34,7 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
 /*
-* This tests a skin to help process an OWL specification.
+ * This tests a skin to help process an OWL specification.
  *
  * <p>The idea is to be able to define a usable interface to OWL that in itself will support the
  * development of the Alchemist to generate such skins for other models.
@@ -134,7 +134,7 @@ public class TestOwlGOM extends ProxyGOMTest {
   }
 
   //	/*
-//	 * Utility to load n3 statements from a resource
+  //	 * Utility to load n3 statements from a resource
   //	 */
   //	private void load(final URL data, final RDFFormat format)
   //			throws IOException, RDFParseException, RepositoryException {

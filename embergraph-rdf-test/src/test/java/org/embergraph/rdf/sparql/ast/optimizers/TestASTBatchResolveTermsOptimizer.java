@@ -24,7 +24,6 @@ package org.embergraph.rdf.sparql.ast.optimizers;
 import java.util.Collections;
 import org.embergraph.bop.Constant;
 import org.embergraph.bop.IBindingSet;
-import org.embergraph.bop.IValueExpression;
 import org.embergraph.bop.Var;
 import org.embergraph.bop.bindingSet.ListBindingSet;
 import org.embergraph.rdf.internal.VTE;
@@ -48,7 +47,7 @@ import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /*
-* Test suite for {@link ASTDeferredIVResolution}.
+ * Test suite for {@link ASTDeferredIVResolution}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestASTServiceNodeOptimizer.java 6080 2012-03-07 18:38:55Z thompsonbry $

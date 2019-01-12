@@ -41,7 +41,7 @@ import org.openrdf.rio.RDFHandlerException;
 import org.openrdf.rio.RDFParseException;
 
 /*
-* This test suite is for trac items where the failure mode is a 500 error caused by a software
+ * This test suite is for trac items where the failure mode is a 500 error caused by a software
  * error, often in the static optimizer.
  *
  * <p>The tests each consist of a test query in a file in this package. The typical test succeeds if

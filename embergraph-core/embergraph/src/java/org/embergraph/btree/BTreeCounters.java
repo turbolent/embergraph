@@ -17,7 +17,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.btree;
 
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import org.embergraph.btree.AbstractBTree.IBTreeCounters;
 import org.embergraph.counters.CAT;
@@ -26,7 +25,7 @@ import org.embergraph.counters.ICounterSetAccess;
 import org.embergraph.counters.Instrument;
 
 /*
-* A helper class that collects statistics on an {@link AbstractBTree}.
+ * A helper class that collects statistics on an {@link AbstractBTree}.
  *
  * <p>Note: This class DOES NOT have a hard reference to the {@link AbstractBTree}. Holding an
  * instance of this class WILL NOT force the {@link AbstractBTree} to remain strongly reachable.
@@ -80,7 +79,7 @@ public final class BTreeCounters implements Cloneable, ICounterSetAccess {
   }
 
   //    /*
-//     * Returns a "mark". The mark is a copy of the counters taken at the moment
+  //     * Returns a "mark". The mark is a copy of the counters taken at the moment
   //     * requested. You can compute the delta between the last mark or any mark
   //     * using {@link #subtract(BTreeCounters)}.
   //     */
@@ -340,7 +339,6 @@ public final class BTreeCounters implements Cloneable, ICounterSetAccess {
   /** #of leaf read operations. */
   public final CAT leavesRead = new CAT();
   /** Total bytes read for nodes and leaves (but not raw records). */
-
   public final CAT bytesRead = new CAT();
   /** Read time for nodes and leaves (but not raw records). */
   public final CAT readNanos = new CAT();
@@ -367,20 +365,20 @@ public final class BTreeCounters implements Cloneable, ICounterSetAccess {
    */
   //    // touch()
   //	/*
-//	 * Nanoseconds inside of doSyncTouch().
+  //	 * Nanoseconds inside of doSyncTouch().
   //	 *
   //     * @see BLZG-1664
   //	 */
   //    public final CAT syncTouchNanos = new CAT();
   //    /*
-//     * Nanoseconds inside of doTouch() (this is also invoked from within
+  //     * Nanoseconds inside of doTouch() (this is also invoked from within
   //     * doSyncTouch()).
   //     *
   //     * @see BLZG-1664
   //     */
   //    public final CAT touchNanos = new CAT();
   //    /*
-//     * doTouch() call counter.
+  //     * doTouch() call counter.
   //     *
   //     * @see BLZG-1664
   //     */
@@ -393,17 +391,17 @@ public final class BTreeCounters implements Cloneable, ICounterSetAccess {
    * some performance regression for both load and query.  See BLZG-1693.
    */
   //    /*
-//     * The #of node or leaf references evicted from the write retention queue.
+  //     * The #of node or leaf references evicted from the write retention queue.
   //     */
   //    public final AtomicLong queueEvict = new AtomicLong();
   //    /*
-//     * The #of node or leave references evicted from the write retention queue
+  //     * The #of node or leave references evicted from the write retention queue
   //     * that are no longer referenced on that queue. If the reference is dirty,
   //     * it will be serialized and written on the backing store.
   //     */
   //    public final AtomicLong queueEvictNoRef = new AtomicLong();
   //    /*
-//     * The #of node or leave references evicted from the write retention queue
+  //     * The #of node or leave references evicted from the write retention queue
   //     * that are no longer referenced on that queue and are dirty and thus will
   //     * be immediately serialized and written on the backing store.
   //     */

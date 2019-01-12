@@ -35,19 +35,15 @@ import org.embergraph.rdf.sparql.ast.FunctionNode;
 import org.embergraph.rdf.sparql.ast.FunctionRegistry;
 import org.embergraph.rdf.sparql.ast.GroupByNode;
 import org.embergraph.rdf.sparql.ast.HavingNode;
-import org.embergraph.rdf.sparql.ast.IValueExpressionNode;
 import org.embergraph.rdf.sparql.ast.JoinGroupNode;
 import org.embergraph.rdf.sparql.ast.OrderByExpr;
 import org.embergraph.rdf.sparql.ast.OrderByNode;
 import org.embergraph.rdf.sparql.ast.ProjectionNode;
-import org.embergraph.rdf.sparql.ast.QueryBase;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.QueryType;
 import org.embergraph.rdf.sparql.ast.SliceNode;
 import org.embergraph.rdf.sparql.ast.StatementPatternNode;
-import org.embergraph.rdf.sparql.ast.ValueExpressionNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
-import org.embergraph.rdf.sparql.ast.optimizers.IASTOptimizer;
 import org.embergraph.rdf.vocab.decls.FOAFVocabularyDecl;
 import org.openrdf.model.vocabulary.DC;
 import org.openrdf.model.vocabulary.RDF;
@@ -56,7 +52,7 @@ import org.openrdf.query.algebra.StatementPattern.Scope;
 import org.openrdf.query.impl.DatasetImpl;
 
 /*
-* Test suite for {@link EmbergraphExprBuilder}.
+ * Test suite for {@link EmbergraphExprBuilder}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestEmbergraphExprBuilder.java 5073 2011-08-23 00:33:54Z thompsonbry $
@@ -281,8 +277,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
 
       final GroupByNode groupBy = new GroupByNode();
       expected.setGroupBy(groupBy);
-      groupBy.addExpr(
-          new AssignmentNode(new VarNode("z"), new VarNode("o")));
+      groupBy.addExpr(new AssignmentNode(new VarNode("z"), new VarNode("o")));
     }
 
     /*
@@ -335,10 +330,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
       final GroupByNode groupBy = new GroupByNode();
       expected.setGroupBy(groupBy);
       final FunctionNode funct =
-          new FunctionNode(
-              FunctionRegistry.STR,
-              null /* scalarValues */,
-              new VarNode("o"));
+          new FunctionNode(FunctionRegistry.STR, null /* scalarValues */, new VarNode("o"));
       // Note: anonymous variable.
       final VarNode anonvar1 = new VarNode("-groupBy-1");
       anonvar1.setAnonymous(true);
@@ -398,7 +390,8 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
               FunctionRegistry.GT,
               null, // scalarValues
               // args
-              new VarNode("o"), new VarNode("s")));
+              new VarNode("o"),
+              new VarNode("s")));
     }
 
     /*
@@ -492,10 +485,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
       final OrderByNode orderBy = new OrderByNode();
       expected.setOrderBy(orderBy);
       final FunctionNode funct =
-          new FunctionNode(
-              FunctionRegistry.STR,
-              null /* scalarValues */,
-              new VarNode("s"));
+          new FunctionNode(FunctionRegistry.STR, null /* scalarValues */, new VarNode("s"));
       orderBy.addExpr(new OrderByExpr(funct, false /* ascending */));
     }
 

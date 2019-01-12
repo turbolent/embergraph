@@ -28,16 +28,11 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-import org.embergraph.btree.IndexMetadata;
-import org.embergraph.journal.ITx;
 import org.embergraph.mdi.IMetadataIndex;
-import org.embergraph.mdi.PartitionLocator;
-import org.embergraph.resources.StaleLocatorException;
 import org.embergraph.service.AbstractScaleOutFederation;
-import org.embergraph.service.IDataService;
 
 /*
-* A client-side view of a scale-out index as of some <i>timestamp</i>.
+ * A client-side view of a scale-out index as of some <i>timestamp</i>.
  *
  * <p>This view automatically handles the split, join, or move of index partitions within the
  * federation. The {@link IDataService} throws back a (sometimes wrapped) {@link

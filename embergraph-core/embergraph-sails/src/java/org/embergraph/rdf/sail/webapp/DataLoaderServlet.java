@@ -43,7 +43,7 @@ import org.embergraph.rdf.store.DataLoader.MyLoadStats;
 import org.openrdf.rio.RDFFormat;
 
 /*
-* Provides {@link org.embergraph.rdf.store.DataLoader} via the REST API.
+ * Provides {@link org.embergraph.rdf.store.DataLoader} via the REST API.
  *
  * <p>See BLZG-1713
  *

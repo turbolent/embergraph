@@ -27,7 +27,7 @@ import org.embergraph.journal.IIndexManager;
 import org.embergraph.rdf.task.IApiTask;
 
 /*
-* Base class for delegation patterns where the delegate is an {@link IApiTask}. This is necessary
+ * Base class for delegation patterns where the delegate is an {@link IApiTask}. This is necessary
  * in order to pass through the {@link #isGRSRequired()} and {@link #setIndexManager(IIndexManager)}
  * method to both the base class and the delegate.
  *

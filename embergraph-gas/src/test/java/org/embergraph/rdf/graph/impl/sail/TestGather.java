@@ -34,7 +34,7 @@ import org.openrdf.model.impl.StatementImpl;
 import org.openrdf.sail.SailConnection;
 
 /*
-* Test class for GATHER.
+ * Test class for GATHER.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -254,8 +254,8 @@ public class TestGather extends AbstractSailGraphTestCase {
         // Do one round.
         gasContext.doRound(new GASStats());
 
-      /*
-       * Lookup the state for the starting vertex (this should be the
+        /*
+         * Lookup the state for the starting vertex (this should be the
          * only vertex whose state was modified since we did only one
          * round).
          */

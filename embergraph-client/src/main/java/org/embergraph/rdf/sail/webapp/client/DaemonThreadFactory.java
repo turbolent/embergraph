@@ -21,7 +21,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 
 /*
-* A thread factory that configures the thread as a daemon thread.
+ * A thread factory that configures the thread as a daemon thread.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

@@ -37,7 +37,7 @@ import org.openrdf.query.QueryInterruptedException;
 import org.openrdf.query.impl.MapBindingSet;
 
 /*
-* Converts a embergraph {@link ICloseableIterator} {@link IBindingSet}s containing either (a)
+ * Converts a embergraph {@link ICloseableIterator} {@link IBindingSet}s containing either (a)
  * {@link EmbergraphValue}s or (b) {@link IV}s having cached {@link EmbergraphValue}s into a Sesame
  * 2 {@link CloseableIteration} visiting Sesame 2 {@link BindingSet}s containing {@link
  * EmbergraphValue}s.
@@ -117,8 +117,8 @@ public class Embergraph2Sesame2BindingSetIterator
     } catch (Throwable t) {
 
       if (!open) {
-      /*
-       * The iterator was concurrently closed. This often means that the connection guarding the
+        /*
+         * The iterator was concurrently closed. This often means that the connection guarding the
          * query was concurrently closed, in which case it is possible for a concurrent writer to
          * have triggered recycling (on the RWStore). Therefore, we want to ignore any thrown
          * exception after the iterator was closed since a wide variety of problems could be
@@ -145,8 +145,8 @@ public class Embergraph2Sesame2BindingSetIterator
       // Wrap and rethrow.
       if (InnerCause.isInnerCause(t, QueryTimeoutException.class)) {
 
-      /*
-       * Align with the openrdf API.
+        /*
+         * Align with the openrdf API.
          */
 
         throw new QueryInterruptedException(t);
@@ -182,7 +182,7 @@ public class Embergraph2Sesame2BindingSetIterator
     //
     //            if (!open) {
     //                /*
-//                 * The iterator was concurrently closed. This often means that
+    //                 * The iterator was concurrently closed. This often means that
     //                 * the connection guarding the query was concurrently closed, in
     //                 * which case it is possible for a concurrent writer to have
     //                 * triggered recycling (on the RWStore). Therefore, we want to
@@ -247,8 +247,8 @@ public class Embergraph2Sesame2BindingSetIterator
 
       final EmbergraphValue value;
       if (val instanceof IV) {
-      /*
-       * The bound value is an IV. The IV MUST have the EmbergraphValue
+        /*
+         * The bound value is an IV. The IV MUST have the EmbergraphValue
          * cached.
          */
         value = ((IV) val).getValue();

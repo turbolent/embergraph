@@ -34,7 +34,7 @@ import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.TimeUnit;
 
 /*
-* Helper class for managing the execution of a set of {@link Callable} tasks on an {@link
+ * Helper class for managing the execution of a set of {@link Callable} tasks on an {@link
  * ExecutorService}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -154,8 +154,8 @@ public class ExecutionHelper<T> {
 
       if (service.isShutdown()) {
 
-      /*
-       * Asynchronous shutdown of the executor service.
+        /*
+         * Asynchronous shutdown of the executor service.
          *
          * Note: When normal shutdown of the service is requested it is
          * common that the main thread will be in a state in which it

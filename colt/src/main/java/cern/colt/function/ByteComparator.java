@@ -9,7 +9,7 @@ CERN makes no representations about the suitability of this software for any pur
 It is provided "as is" without expressed or implied warranty.
 */
 /*
-* A comparison function which imposes a <i>total ordering</i> on some collection of elements.
+ * A comparison function which imposes a <i>total ordering</i> on some collection of elements.
  * Comparators can be passed to a sort method (such as <tt>cern.colt.Sorting.quickSort</tt>) to
  * allow precise control over the sort order.
  *

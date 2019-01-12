@@ -33,7 +33,7 @@ import org.openrdf.model.Value;
 import org.openrdf.model.impl.URIImpl;
 
 /*
-* Example of how to do a custom enum and map that enum over a byte using a native inline {@link
+ * Example of how to do a custom enum and map that enum over a byte using a native inline {@link
  * XSDByteIV}.
  */
 public class ColorsEnumExtension<V extends EmbergraphValue> implements IExtension<V> {

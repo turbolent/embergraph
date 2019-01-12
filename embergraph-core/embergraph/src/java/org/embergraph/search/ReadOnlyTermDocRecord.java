@@ -1,7 +1,7 @@
 package org.embergraph.search;
 
 /*
-* Read-only {@link ITermDocRecord}.
+ * Read-only {@link ITermDocRecord}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

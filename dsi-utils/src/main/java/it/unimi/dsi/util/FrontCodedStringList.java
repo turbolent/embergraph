@@ -52,7 +52,7 @@ import java.util.Iterator;
 import java.util.zip.GZIPInputStream;
 
 /*
-* Compact storage of strings using front-coding compression.
+ * Compact storage of strings using front-coding compression.
  *
  * <p>This class stores a list of strings using front-coding compression (of course, the compression
  * will be reasonable only if the list is sorted, but you could also use instances of this class

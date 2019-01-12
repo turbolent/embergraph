@@ -18,7 +18,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.eval.service;
 
-import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.vocab.BaseVocabularyDecl;
 import org.embergraph.rdf.vocab.core.EmbergraphCoreVocabulary_v20160317;
 import org.openrdf.model.impl.URIImpl;

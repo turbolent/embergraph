@@ -9,7 +9,7 @@ It is provided "as is" without expressed or implied warranty.
 package cern.jet.random;
 
 /*
-* Abstract base class for all continous distributions.
+ * Abstract base class for all continous distributions.
  *
  * @author wolfgang.hoschek@cern.ch
  * @version 1.0, 09/24/99

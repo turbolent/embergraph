@@ -19,7 +19,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rwstore.sector;
 
 /*
-* The {@link ISectorManager} defines the contract required to manage a set of {@link
+ * The {@link ISectorManager} defines the contract required to manage a set of {@link
  * SectorAllocator}s.
  *
  * <p>The {@link ISectorManager} is passed to the {@link SectorAllocator} constructors and they will

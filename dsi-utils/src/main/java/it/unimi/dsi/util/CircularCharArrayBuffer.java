@@ -24,7 +24,7 @@ package it.unimi.dsi.util;
 import java.util.Arrays;
 
 /*
-* A circular char buffer, that can be used to implement a sliding window over a text. The buffer
+ * A circular char buffer, that can be used to implement a sliding window over a text. The buffer
  * has a maximum size, fixed at construction time. As new characters are {@linkplain #add(char[],
  * int, int) added}, the oldest ones are discarded if necessary. At all times, the number of
  * available characters present in the buffer is {@link #size()} (it will never be larger than the

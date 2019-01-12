@@ -44,10 +44,9 @@ import org.embergraph.bop.ap.Predicate;
 import org.embergraph.bop.constraint.AND;
 import org.embergraph.bop.constraint.BooleanValueExpression;
 import org.embergraph.bop.constraint.Constraint;
-import org.embergraph.bop.joinGraph.rto.JGraph;
 
 /*
-* This test suite is built around around BSBM Q5. Each test has an existing join path and a new
+ * This test suite is built around around BSBM Q5. Each test has an existing join path and a new
  * vertex to be added to the join path. The question is whether or not the vertex <em>can join</em>
  * with the join path using one or more shared variable(s). This tests a method used to
  * incrementally grow a join path when it is dynamically decided that an {@link IPredicate} may be
@@ -463,8 +462,8 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
         assertTrue(PartitionedJoinGroup.canJoin(t0, t1));
         assertTrue(PartitionedJoinGroup.canJoin(t1, t0));
         if (t0 != t1) {
-        /*
-       * Test join path extension, but not when the vertex used to
+          /*
+           * Test join path extension, but not when the vertex used to
            * extend the path is already present in the join path.
            */
           assertTrue(

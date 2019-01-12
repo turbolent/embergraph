@@ -28,11 +28,10 @@ import java.nio.ByteBuffer;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import junit.framework.TestCase2;
-import org.embergraph.io.DirectBufferPool;
 import org.embergraph.io.SerializerUtil;
 
 /*
-* Abstract base class for {@link IRecordCompressor} test suites.
+ * Abstract base class for {@link IRecordCompressor} test suites.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -655,7 +654,7 @@ public abstract class AbstractRecordCompressorTestCase extends TestCase2
   }
 
   //    /*
-//     * Test helper applies the compression algorithm to the data and then
+  //     * Test helper applies the compression algorithm to the data and then
   //     * verifies that the expected data can be recovered by applying the
   //     * decompression algorithm.
   //     *

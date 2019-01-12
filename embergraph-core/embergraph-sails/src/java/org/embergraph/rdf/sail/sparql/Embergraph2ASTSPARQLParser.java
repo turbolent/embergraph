@@ -41,29 +41,24 @@ import org.embergraph.rdf.sail.sparql.ast.ParseException;
 import org.embergraph.rdf.sail.sparql.ast.SyntaxTreeBuilder;
 import org.embergraph.rdf.sail.sparql.ast.TokenMgrError;
 import org.embergraph.rdf.sail.sparql.ast.VisitorException;
-import org.embergraph.rdf.sparql.ast.ASTBase;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.Update;
 import org.embergraph.rdf.sparql.ast.UpdateRoot;
-import org.embergraph.rdf.sparql.ast.eval.AST2BOpUtility;
 import org.embergraph.rdf.sparql.ast.hints.QueryHintScope;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTQueryHintOptimizer;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.parser.ParsedOperation;
-import org.openrdf.query.parser.ParsedQuery;
 import org.openrdf.query.parser.ParsedUpdate;
 import org.openrdf.query.parser.QueryParser;
 import org.openrdf.query.parser.QueryParserUtil;
-import org.openrdf.query.parser.sparql.SPARQLParser;
 
 /*
-* Overridden version of the openrdf {@link SPARQLParser} class which extracts additional
+ * Overridden version of the openrdf {@link SPARQLParser} class which extracts additional
  * information required by embergraph and associates it with the {@link ParsedQuery} or {@link
  * ParsedUpdate}.
  *
@@ -196,8 +191,8 @@ public class Embergraph2ASTSPARQLParser implements QueryParser {
 
         BaseDeclProcessor.process(uc, baseURI);
 
-      /*
-       * Do a special dance to handle prefix declarations in
+        /*
+         * Do a special dance to handle prefix declarations in
          * sequences: if the current operation has its own prefix
          * declarations, use those. Otherwise, try and use prefix
          * declarations from a previous operation in this sequence.
@@ -222,8 +217,8 @@ public class Embergraph2ASTSPARQLParser implements QueryParser {
 
         PrefixDeclProcessor.process(uc);
 
-      /*
-       * Note: In the query part of an update, blank nodes are treated
+        /*
+         * Note: In the query part of an update, blank nodes are treated
          * as anonymous vars. In the data part of the update, like in a
          * construct node, if a blank node is seen, for each binding set
          * in the solution list, a new blank node is generated. If it is
@@ -233,8 +228,8 @@ public class Embergraph2ASTSPARQLParser implements QueryParser {
          */
         BlankNodeVarProcessor.process(uc);
 
-      /*
-       * Prepare deferred batch IV resolution of ASTRDFValue to EmbergraphValues.
+        /*
+         * Prepare deferred batch IV resolution of ASTRDFValue to EmbergraphValues.
          * @see https://jira.blazegraph.com/browse/BLZG-1176
          *
          * Note: IV resolution must proceed separately (or be
@@ -253,8 +248,8 @@ public class Embergraph2ASTSPARQLParser implements QueryParser {
 
         if (updateNode != null) {
 
-        /*
-       * Translate an UPDATE operation.
+          /*
+           * Translate an UPDATE operation.
            */
           final Update updateOp = (Update) updateNode.jjtAccept(updateExprBuilder, null /* data */);
 

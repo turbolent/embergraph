@@ -23,11 +23,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.service.ndx.pipeline;
 
-import java.util.concurrent.Callable;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 
 /*
-* Interface for task consuming data written on an application on an asynchronous write buffer.
+ * Interface for task consuming data written on an application on an asynchronous write buffer.
  *
  * @param <H> The generic type of the value returned by the {@link Callable} for the master (the
  *     statistics object).

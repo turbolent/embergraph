@@ -23,16 +23,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop;
 
 import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
 import org.embergraph.bop.engine.QueryEngine;
-import org.embergraph.btree.ILocalBTreeView;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.relation.IRelation;
 import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.relation.locator.ILocatableResource;
-import org.embergraph.relation.locator.IResourceLocator;
-import org.embergraph.relation.rule.IRule;
-import org.embergraph.relation.rule.eval.IJoinNexus;
 import org.embergraph.service.IEmbergraphFederation;
 
 /** Base class for the embergraph operation evaluation context (NOT serializable). */
@@ -150,7 +145,7 @@ public class BOpContextBase {
   }
 
   //  /*
-//  * Return a writable view of the relation.
+  //  * Return a writable view of the relation.
   //  *
   //  * @param namespace
   //  *            The namespace of the relation.

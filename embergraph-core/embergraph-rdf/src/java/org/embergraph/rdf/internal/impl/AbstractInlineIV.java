@@ -22,7 +22,7 @@ import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.model.EmbergraphValue;
 
 /*
-* Abstract base class for inline RDF values (literals, blank nodes, and statement identifiers can
+ * Abstract base class for inline RDF values (literals, blank nodes, and statement identifiers can
  * be inlined).
  *
  * <p>{@inheritDoc}
@@ -52,13 +52,13 @@ public abstract class AbstractInlineIV<V extends EmbergraphValue, T> extends Abs
   }
 
   //	/*
-//	 * Returns a human interpretable string value of the {@link IV} object. When
+  //	 * Returns a human interpretable string value of the {@link IV} object. When
   //	 * possible, returns either a Literal's label, a URI's URI or a BNode's ID.
   //	 */
   //    abstract public String stringValue();
 
   //    /*
-//     * No term identifier for an inline IV - throws an exception.
+  //     * No term identifier for an inline IV - throws an exception.
   //     */
   //    final public long getTermId() {
   //        throw new UnsupportedOperationException();

@@ -29,9 +29,6 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 import org.embergraph.bop.joinGraph.IEvaluationPlanFactory;
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.rdf.axioms.Axioms;
-import org.embergraph.rdf.spo.SPORelation;
-import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.relation.accesspath.IElementFilter;
 import org.embergraph.relation.rule.eval.AbstractJoinNexusFactory;
 import org.embergraph.relation.rule.eval.ActionEnum;
@@ -39,7 +36,7 @@ import org.embergraph.relation.rule.eval.IJoinNexus;
 import org.embergraph.relation.rule.eval.IRuleTaskFactory;
 
 /*
-* Factory for {@link RDFJoinNexus} objects.
+ * Factory for {@link RDFJoinNexus} objects.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

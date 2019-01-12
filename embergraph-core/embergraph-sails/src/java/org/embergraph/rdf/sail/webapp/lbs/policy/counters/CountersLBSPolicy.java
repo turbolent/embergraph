@@ -22,7 +22,6 @@ import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -39,21 +38,18 @@ import org.embergraph.counters.DefaultInstrumentFactory;
 import org.embergraph.counters.ICounterNode;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.Journal;
-import org.embergraph.journal.PlatformStatsPlugIn;
-import org.embergraph.rdf.sail.webapp.CountersServlet;
 import org.embergraph.rdf.sail.webapp.client.ConnectOptions;
 import org.embergraph.rdf.sail.webapp.client.EntityContentProvider;
 import org.embergraph.rdf.sail.webapp.client.IMimeTypes;
 import org.embergraph.rdf.sail.webapp.client.JettyResponseListener;
 import org.embergraph.rdf.sail.webapp.client.RemoteRepository;
 import org.embergraph.rdf.sail.webapp.lbs.AbstractHostLBSPolicy;
-import org.embergraph.rdf.sail.webapp.lbs.IHALoadBalancerPolicy;
 import org.embergraph.rdf.sail.webapp.lbs.IHostMetrics;
 import org.embergraph.rdf.sail.webapp.lbs.IHostScoringRule;
 import org.embergraph.rdf.sail.webapp.lbs.ServiceScore;
 
 /*
-* Stochastically proxy the request to the services based on their load.
+ * Stochastically proxy the request to the services based on their load.
  *
  * <p>Note: This {@link IHALoadBalancerPolicy} has a dependency on the {@link PlatformStatsPlugIn}.
  * The plugin must be setup to publish out performance counters using the {@link CounterServlet}.
@@ -260,8 +256,8 @@ public class CountersLBSPolicy extends AbstractHostLBSPolicy {
 
       try {
 
-      /*
-       * Note: This will throw a runtime exception if the source
+        /*
+         * Note: This will throw a runtime exception if the source
          * contains more than 60 minutes worth of history data.
          */
         counterSet.readXML(is, DefaultInstrumentFactory.NO_OVERWRITE_60M, null /* filter */);

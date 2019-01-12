@@ -1,7 +1,7 @@
 package org.embergraph.blueprints;
 
 /*
-* An atomic unit of information about a property graph. Analogous to an RDF statement- the atomic
+ * An atomic unit of information about a property graph. Analogous to an RDF statement- the atomic
  * unit of information about an RDF graph.
  *
  * @author mikepersonick

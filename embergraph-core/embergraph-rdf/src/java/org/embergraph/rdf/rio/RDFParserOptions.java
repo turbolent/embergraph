@@ -26,10 +26,9 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 import org.openrdf.rio.RDFParser;
 import org.openrdf.rio.RDFParser.DatatypeHandling;
-import org.openrdf.rio.helpers.RDFParserBase;
 
 /*
-* Instances of this class may be used to configure options on an {@link RDFParser}. The options all
+ * Instances of this class may be used to configure options on an {@link RDFParser}. The options all
  * have the defaults specified by {@link RDFParserBase}.
  *
  * <p>Note: synchronization on the class instance is used to ensure safe publication of the member
@@ -60,8 +59,7 @@ public class RDFParserOptions implements Serializable, IRDFParserOptions {
      * RDFParserBase#setPreserveBNodeIDs(boolean)} (default is {@value
      * #DEFAULT_PRESERVE_BNODE_IDS}).
      */
-    String PRESERVE_BNODE_IDS =
-        RDFParserOptions.class.getName() + ".preserveBNodeIDs";
+    String PRESERVE_BNODE_IDS = RDFParserOptions.class.getName() + ".preserveBNodeIDs";
 
     String DEFAULT_PRESERVE_BNODE_IDS = "false";
 

@@ -21,27 +21,19 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.store;
 
-import java.nio.ByteBuffer;
 import java.util.Enumeration;
 import java.util.Properties;
 import java.util.UUID;
 import org.apache.log4j.Logger;
-import org.embergraph.io.DirectBufferPool;
-import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.journal.IIndexStore;
 import org.embergraph.journal.ITx;
-import org.embergraph.journal.Journal;
 import org.embergraph.journal.TemporaryStore;
-import org.embergraph.rdf.inf.TruthMaintenance;
 import org.embergraph.rdf.sail.EmbergraphSail;
-import org.embergraph.rdf.spo.SPORelation;
 import org.embergraph.relation.locator.DefaultResourceLocator;
-import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.util.PropertyUtil;
 
 /*
-* A temporary triple store based on the <em>embergraph</em> architecture. Data is buffered in
+ * A temporary triple store based on the <em>embergraph</em> architecture. Data is buffered in
  * memory but will overflow to disk for large stores. The backing store is a {@link TemporaryStore}.
  *
  * <p>Note: the {@link TempTripleStore} declares indices that do NOT support isolation. This offers
@@ -141,7 +133,7 @@ public class TempTripleStore extends AbstractLocalTripleStore {
   }
 
   //    /*
-//     * Deletes the backing {@link TemporaryStore}, thereby destroying all
+  //     * Deletes the backing {@link TemporaryStore}, thereby destroying all
   //     * {@link TempTripleStore}s on that {@link TemporaryStore}. After calling
   //     * this method you will see an {@link IllegalStateException} if you attempt
   //     * further operations on {@link TempTripleStore}s that were backed by the
@@ -159,8 +151,7 @@ public class TempTripleStore extends AbstractLocalTripleStore {
    * @todo define options for {@link TemporaryStore} and then extend them here.
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
-  public interface Options
-      extends AbstractTripleStore.Options { // , TemporaryStore.Options {
+  public interface Options extends AbstractTripleStore.Options { // , TemporaryStore.Options {
   }
 
   /*

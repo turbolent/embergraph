@@ -34,7 +34,7 @@ import org.embergraph.rawstore.SimpleMemoryRawStore;
 import org.embergraph.service.Split;
 
 /*
-* Unit tests for {@link ISplitter}.
+ * Unit tests for {@link ISplitter}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -4,12 +4,11 @@ import java.util.Arrays;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IPredicate;
 import org.embergraph.btree.keys.IKeyBuilder;
-import org.embergraph.mdi.PartitionLocator;
 import org.embergraph.striterator.IKeyOrder;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Helper class used to place the binding sets into order based on the {@link #fromKey} associated
+ * Helper class used to place the binding sets into order based on the {@link #fromKey} associated
  * with the {@link #asBound} predicate.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

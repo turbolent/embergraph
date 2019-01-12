@@ -26,7 +26,6 @@ import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
-import org.openrdf.model.impl.ValueFactoryImpl;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFHandlerException;
 import org.openrdf.rio.RDFParseException;
@@ -36,7 +35,7 @@ import org.openrdf.rio.helpers.RDFParserBase;
 import org.openrdf.rio.ntriples.NTriplesUtil;
 
 /*
-* RDF parser for N-Triples files. A specification of NTriples can be found in <a
+ * RDF parser for N-Triples files. A specification of NTriples can be found in <a
  * href="http://www.w3.org/TR/rdf-testcases/#ntriples">this section</a> of the RDF Test Cases
  * document. This parser is not thread-safe, therefore its public methods are synchronized.
  *
@@ -106,7 +105,7 @@ public class EmbergraphNTriplesParser extends RDFParserBase {
   }
 
   //	/*
-//	 * Return a buffer of zero length and non-zero capacity. The same buffer is
+  //	 * Return a buffer of zero length and non-zero capacity. The same buffer is
   //	 * reused for each thing which is parsed. This reduces the heap churn
   //	 * substantially. However, you have to watch out for side-effects and
   //	 * convert the buffer to a {@link String} before the buffer is reused.
@@ -207,7 +206,8 @@ public class EmbergraphNTriplesParser extends RDFParserBase {
     // Note: baseURI will be checked in parse(Reader, String)
 
     try {
-      parse(new InputStreamReader(new BOMInputStream(in, false), StandardCharsets.US_ASCII), baseURI);
+      parse(
+          new InputStreamReader(new BOMInputStream(in, false), StandardCharsets.US_ASCII), baseURI);
     } catch (UnsupportedEncodingException e) {
       // Every platform should support the US-ASCII encoding...
       throw new RuntimeException(e);

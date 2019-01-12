@@ -59,7 +59,7 @@ import org.openrdf.query.parser.ParsedTupleQuery;
 import org.openrdf.query.parser.QueryParserUtil;
 
 /*
-* A JUnit test for testing Sail implementations that store RDF data. This is purely a test for data
+ * A JUnit test for testing Sail implementations that store RDF data. This is purely a test for data
  * storage and retrieval which assumes that no inferencing or whatsoever is performed. This is an
  * abstract class that should be extended for specific Sail implementations.
  */

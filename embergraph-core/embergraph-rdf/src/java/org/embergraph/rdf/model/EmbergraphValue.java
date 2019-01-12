@@ -1,5 +1,5 @@
 /*
-* The Notice below must appear in each file of the Source Code of any copy you distribute of the
+ * The Notice below must appear in each file of the Source Code of any copy you distribute of the
  * Licensed Product. Contributors to any Modifications may add their own copyright notices to
  * identify their own contributions.
  *
@@ -42,12 +42,10 @@ package org.embergraph.rdf.model;
 
 import org.embergraph.bop.IElement;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.store.IRawTripleStore;
-import org.embergraph.rdf.store.TempTripleStore;
 import org.openrdf.model.Value;
 
 /*
-* An interface which exposes the internal 64-bit long integer identifiers for {@link Value}s stored
+ * An interface which exposes the internal 64-bit long integer identifiers for {@link Value}s stored
  * within a {@link IRawTripleStore}. Values may also be stored inline inside the statement indices
  * rather than referencing the lexicon. See {@link IV}.
  *

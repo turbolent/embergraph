@@ -39,25 +39,20 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeoutException;
 import org.apache.log4j.Logger;
-import org.embergraph.btree.ILinearList;
 import org.embergraph.btree.IRangeQuery;
 import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleIterator;
-import org.embergraph.btree.IndexSegment;
-import org.embergraph.journal.ITransactionService;
-import org.embergraph.journal.ITx;
 import org.embergraph.journal.NoSuchIndexException;
 import org.embergraph.journal.TimestampUtility;
 import org.embergraph.mdi.IMetadataIndex;
 import org.embergraph.mdi.PartitionLocator;
-import org.embergraph.resources.StoreManager;
 import org.embergraph.service.AbstractScaleOutClient.MetadataIndexCachePolicy;
 import org.embergraph.service.AbstractScaleOutClient.Options;
 import org.embergraph.service.ndx.ClientIndexView;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Abstract base class for federation implementations using the scale-out index architecture
+ * Abstract base class for federation implementations using the scale-out index architecture
  * (federations that support key-range partitioned indices).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -398,8 +393,8 @@ public abstract class AbstractScaleOutFederation<T> extends AbstractFederation<T
       if ((System.currentTimeMillis() - begin) >= timeout
           || (metadataService != null && dataServiceUUIDs.length >= minDataServices)) {
 
-      /*
-       * Either a timeout or we have the MDS and enough DS.
+        /*
+         * Either a timeout or we have the MDS and enough DS.
          *
          * Either way, we are done so break out of the loop.
          */

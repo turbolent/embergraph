@@ -55,7 +55,7 @@ import org.openrdf.rio.RDFWriterRegistry;
 import org.openrdf.rio.helpers.StatementCollector;
 
 /*
-* Demonstrate how to use embergraph. You are free to use this code for whatever purpose without
+ * Demonstrate how to use embergraph. You are free to use this code for whatever purpose without
  * restriction.
  *
  * @author mikep
@@ -661,8 +661,8 @@ public class SampleCode {
       final Properties properties = sampleCode.loadProperties(propertiesFile);
 
       if (properties.getProperty(org.embergraph.journal.Options.FILE) == null) {
-      /*
-       * Create a backing file iff none was specified in the
+        /*
+         * Create a backing file iff none was specified in the
          * properties file.
          */
         final File journal = File.createTempFile("embergraph", ".jnl");

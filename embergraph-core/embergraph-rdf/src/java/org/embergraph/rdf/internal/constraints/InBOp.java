@@ -20,13 +20,12 @@ package org.embergraph.rdf.internal.constraints;
 import java.util.Map;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IConstant;
-import org.embergraph.bop.IConstraint;
 import org.embergraph.bop.IValueExpression;
 import org.embergraph.bop.NV;
 import org.embergraph.rdf.internal.IV;
 
 /*
-* Abstract base class for "IN" {@link IConstraint} implementations.
+ * Abstract base class for "IN" {@link IConstraint} implementations.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: INConstraint.java 4286 2011-03-09 17:36:10Z mrpersonick $

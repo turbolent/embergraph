@@ -29,7 +29,7 @@ import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /*
-* Query hint used to indicate the {@link DescribeMode} that will be used to evaluate a DESCRIBE
+ * Query hint used to indicate the {@link DescribeMode} that will be used to evaluate a DESCRIBE
  * query.
  *
  * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/578">Concise Bounded Description

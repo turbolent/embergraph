@@ -27,7 +27,6 @@ import org.embergraph.bop.BOpContextBase;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IValueExpression;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
-import org.embergraph.rdf.internal.ILexiconConfiguration;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.constraints.INeedsMaterialization;
 import org.embergraph.rdf.internal.constraints.IVValueExpression;
@@ -41,7 +40,7 @@ import org.openrdf.model.impl.LiteralImpl;
 import org.openrdf.model.impl.URIImpl;
 
 /*
-* Test suite for registering and evaluating custom functions.
+ * Test suite for registering and evaluating custom functions.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

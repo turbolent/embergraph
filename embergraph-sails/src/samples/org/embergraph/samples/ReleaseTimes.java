@@ -21,7 +21,7 @@ import org.openrdf.repository.RepositoryResult;
 import org.openrdf.sail.SailException;
 
 /*
-* Example of History retention usage with Sail interface classes.
+ * Example of History retention usage with Sail interface classes.
  *
  * <p>A sequence of commits updates the value of a statement and retains the commit time of each.
  *

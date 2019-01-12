@@ -28,7 +28,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 /*
-* Packing utility for non-negative <code>long</code> values.
+ * Packing utility for non-negative <code>long</code> values.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

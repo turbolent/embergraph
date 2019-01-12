@@ -24,14 +24,12 @@ package it.unimi.dsi.io;
 import it.unimi.dsi.fastutil.io.MeasurableInputStream;
 import it.unimi.dsi.fastutil.io.RepositionableStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.ByteBuffer;
-import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileChannel.MapMode;
 
 /*
-* A bridge between byte {@linkplain ByteBuffer buffers} and {@linkplain InputStream input streams}.
+ * A bridge between byte {@linkplain ByteBuffer buffers} and {@linkplain InputStream input streams}.
  *
  * <p>The main usefulness of this class is that of making it possible creating input streams that
  * are really based on a {@link MappedByteBuffer}.

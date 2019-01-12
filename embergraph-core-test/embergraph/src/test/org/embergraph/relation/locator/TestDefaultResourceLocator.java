@@ -42,13 +42,12 @@ import org.embergraph.journal.Journal.Options;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.relation.AbstractRelation;
 import org.embergraph.relation.AbstractResource;
-import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 import org.embergraph.util.NT;
 
 /*
-* Test suite for location relations, etc.
+ * Test suite for location relations, etc.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -106,20 +105,18 @@ public class TestDefaultResourceLocator extends TestCase2 {
       assertNotNull(mockRelation.getIndex());
 
       {
-      /*
-       * Should be locatable now since the writes on the global row
+        /*
+         * Should be locatable now since the writes on the global row
          * store are unisolated (ah!, but only if you are using the
          * concurrency control API)
          */
         assertNotNull(store.getResourceLocator().locate(namespace, ITx.UNISOLATED));
 
         // a request for the unisolated view gives us the same instance.
-        assertTrue(
-            store.getResourceLocator().locate(namespace, ITx.UNISOLATED)
-                == mockRelation);
+        assertTrue(store.getResourceLocator().locate(namespace, ITx.UNISOLATED) == mockRelation);
 
-      /*
-       * the read-committed relation is also locatable since its in
+        /*
+         * the read-committed relation is also locatable since its in
          * the global row store but it will not see the indices until
          * (a) they have been created; and (b) there has been a commit
          * of the journal.
@@ -129,8 +126,7 @@ public class TestDefaultResourceLocator extends TestCase2 {
         // a request for the read committed view is not the same
         // instance as the unisolated view.
         assertTrue(
-            store.getResourceLocator().locate(namespace, ITx.READ_COMMITTED)
-                != mockRelation);
+            store.getResourceLocator().locate(namespace, ITx.READ_COMMITTED) != mockRelation);
       }
 
       {
@@ -142,19 +138,16 @@ public class TestDefaultResourceLocator extends TestCase2 {
                 .getIndex());
 
         // a request for the unisolated view gives us the same instance.
-        assertTrue(
-            store.getResourceLocator().locate(namespace, ITx.UNISOLATED)
-                == mockRelation);
+        assertTrue(store.getResourceLocator().locate(namespace, ITx.UNISOLATED) == mockRelation);
 
-      /*
-       * @todo The read-committed view still does not see the relation
+        /*
+         * @todo The read-committed view still does not see the relation
          * since there has not been a commit yet after the index was
          * created.
          */
         if (false) {
 
-          assertNull(
-              store.getResourceLocator().locate(namespace, ITx.READ_COMMITTED));
+          assertNull(store.getResourceLocator().locate(namespace, ITx.READ_COMMITTED));
 
           final MockRelation readCommittedView1 =
               (MockRelation) store.getResourceLocator().locate(namespace, ITx.READ_COMMITTED);
@@ -167,8 +160,8 @@ public class TestDefaultResourceLocator extends TestCase2 {
           // commit
           store.commit();
 
-        /*
-       * should be a new read-committed view
+          /*
+           * should be a new read-committed view
            *
            * FIXME cache must be defeated for read-committed!!! at least
            * if there HAS been a commit
@@ -179,8 +172,8 @@ public class TestDefaultResourceLocator extends TestCase2 {
           // different view after a commit.
           assertTrue(readCommittedView1 != readCommittedView2);
 
-        /*
-       * The index is now visible to the read committed view.
+          /*
+           * The index is now visible to the read committed view.
            */
           assertNull(readCommittedView2.getIndex());
 
@@ -268,8 +261,8 @@ public class TestDefaultResourceLocator extends TestCase2 {
        */
       {
 
-      /*
-       * The UNISOLATED view of the resource should be locatable now
+        /*
+         * The UNISOLATED view of the resource should be locatable now
          * since the writes on the global row store are unisolated.
          */
         assertNotNull(store.getResourceLocator().locate(namespace, ITx.UNISOLATED));
@@ -277,8 +270,8 @@ public class TestDefaultResourceLocator extends TestCase2 {
         // a request for the unisolated view gives us the same instance.
         assertTrue(store.getResourceLocator().locate(namespace, ITx.UNISOLATED) == mockRelation);
 
-      /*
-       * Note: The read-committed view is not, in fact, locatable.
+        /*
+         * Note: The read-committed view is not, in fact, locatable.
          * This is because the GRS update on the Journal does not
          * include a commit.  That update will become visible only
          * once we do a Journal.commit().
@@ -307,18 +300,17 @@ public class TestDefaultResourceLocator extends TestCase2 {
       final long lastCommitTime = store.commit();
 
       {
-      /*
-       * The read-committed view of the resource is also locatable.
+        /*
+         * The read-committed view of the resource is also locatable.
          */
         assertNotNull(store.getResourceLocator().locate(namespace, ITx.READ_COMMITTED));
 
-      /*
-       * The read committed view is not the same instance as the
+        /*
+         * The read committed view is not the same instance as the
          * unisolated view.
          */
         assertTrue(
-            store.getResourceLocator().locate(namespace, ITx.READ_COMMITTED)
-                != mockRelation);
+            store.getResourceLocator().locate(namespace, ITx.READ_COMMITTED) != mockRelation);
       }
 
       if (log.isInfoEnabled()) {
@@ -343,8 +335,8 @@ public class TestDefaultResourceLocator extends TestCase2 {
         assertTrue(ts1 != tx1);
         assertTrue(ts1 != tx2);
 
-      /*
-       * @todo There might not be enough commit latency to have
+        /*
+         * @todo There might not be enough commit latency to have
          * lastCommitTime - 1 be GT priorCommitTime. If this happens
          * either resolve issue 145 or add some latency into the test.
          *
@@ -377,8 +369,8 @@ public class TestDefaultResourceLocator extends TestCase2 {
         assertEquals(tx1, view_tx1.getTimestamp());
         assertEquals(tx2, view_tx2.getTimestamp());
 
-      /*
-       * Read-only views report the commit time from which they were
+        /*
+         * Read-only views report the commit time from which they were
          * materialized.
          */
         assertEquals(null, ((MockRelation) view_un).getCommitTime());
@@ -393,8 +385,8 @@ public class TestDefaultResourceLocator extends TestCase2 {
         assertTrue(p_un != p_tx2);
         assertTrue(p_tx1 != p_tx2);
 
-      /*
-       * Verify that the [propertyCache] is working.
+        /*
+         * Verify that the [propertyCache] is working.
          *
          * Note: Unfortunately, I have not been able to devise any means
          * of testing the [propertyCache] without exposing that as a
@@ -424,8 +416,8 @@ public class TestDefaultResourceLocator extends TestCase2 {
         assertNull(locator.propertyCache.get(new NT(namespace, tx2)));
         assertNull(locator.propertyCache.get(new NT(namespace, ts1)));
 
-      /*
-       * Cached for the last commit time, which should have been used
+        /*
+         * Cached for the last commit time, which should have been used
          * to hand back the Properties for {tx1, tx2, ts1}.
          */
         assertNotNull(locator.propertyCache.get(new NT(namespace, lastCommitTime)));

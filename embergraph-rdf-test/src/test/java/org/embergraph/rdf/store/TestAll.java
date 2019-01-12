@@ -26,7 +26,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /*
-* Runs tests for each {@link ITripleStore} implementation.
+ * Runs tests for each {@link ITripleStore} implementation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

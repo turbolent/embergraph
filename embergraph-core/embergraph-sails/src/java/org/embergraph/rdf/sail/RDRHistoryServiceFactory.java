@@ -27,7 +27,6 @@ import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleIterator;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.SuccessorUtil;
-import org.embergraph.rdf.changesets.IChangeLog;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVUtility;
 import org.embergraph.rdf.internal.impl.bnode.SidIV;
@@ -238,8 +237,8 @@ public class RDRHistoryServiceFactory implements CustomServiceFactory {
 
         final IStriterator sitr = new Striterator(titr);
 
-      /*
-       * Resolve ITuple -> ISPO.
+        /*
+         * Resolve ITuple -> ISPO.
          */
         sitr.addFilter(
             new Resolver() {
@@ -252,8 +251,8 @@ public class RDRHistoryServiceFactory implements CustomServiceFactory {
               }
             });
 
-      /*
-       * Filter against bound terms.
+        /*
+         * Filter against bound terms.
          */
         sitr.addFilter(
             new Filter() {
@@ -262,8 +261,8 @@ public class RDRHistoryServiceFactory implements CustomServiceFactory {
               @Override
               public boolean isValid(final Object e) {
                 toIVs((ISPO) e, ivs);
-              /*
-       * Compare against the asBound predicate.
+                /*
+                 * Compare against the asBound predicate.
                  */
                 for (int i = 0; i < 5; i++) {
                   final IVariableOrConstant term = asBound.get(i);
@@ -278,8 +277,8 @@ public class RDRHistoryServiceFactory implements CustomServiceFactory {
               }
             });
 
-      /*
-       * Resolve ISPO -> IBindingSet (one to many).
+        /*
+         * Resolve ISPO -> IBindingSet (one to many).
          */
         sitr.addFilter(
             new Expander() {
@@ -296,8 +295,8 @@ public class RDRHistoryServiceFactory implements CustomServiceFactory {
                       @Override
                       protected Object resolve(final Object e) {
                         final IBindingSet bs = ((IBindingSet) e).clone();
-                      /*
-       * Bind variables in the result.
+                        /*
+                         * Bind variables in the result.
                          */
                         for (int i = 0; i < 5; i++) {
                           final IVariableOrConstant term = asBound.get(i);

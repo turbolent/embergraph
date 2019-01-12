@@ -30,7 +30,7 @@ import org.openrdf.model.URI;
 import org.openrdf.model.vocabulary.RDF;
 
 /*
-* Test suite for {@link RuleRdf01}.
+ * Test suite for {@link RuleRdf01}.
  *
  * <pre>
  *   triple(?v rdf:type rdf:Property) :-

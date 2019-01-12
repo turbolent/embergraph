@@ -11,7 +11,7 @@ package cern.colt.matrix.linalg;
 import cern.colt.matrix.DoubleMatrix2D;
 // import cern.colt.matrix.DenseDoubleMatrix1D;
 /*
-* For an <tt>m x n</tt> matrix <tt>A</tt> with <tt>m >= n</tt>, the LU decomposition is an <tt>m x
+ * For an <tt>m x n</tt> matrix <tt>A</tt> with <tt>m >= n</tt>, the LU decomposition is an <tt>m x
  * n</tt> unit lower triangular matrix <tt>L</tt>, an <tt>n x n</tt> upper triangular matrix
  * <tt>U</tt>, and a permutation vector <tt>piv</tt> of length <tt>m</tt> so that <tt>A(piv,:) =
  * L*U</tt>; If <tt>m < n</tt>, then <tt>L</tt> is <tt>m x m</tt> and <tt>U</tt> is <tt>m x n</tt>.

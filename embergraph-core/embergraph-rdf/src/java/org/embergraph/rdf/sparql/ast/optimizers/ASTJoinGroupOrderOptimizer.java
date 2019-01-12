@@ -25,7 +25,6 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IVariable;
 import org.embergraph.rdf.sparql.ast.AssignmentNode;
@@ -42,7 +41,7 @@ import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 import org.embergraph.rdf.sparql.ast.service.ServiceRegistry;
 
 /*
-* This optimizer brings a join group node into a valid order according to the SPARQL 1.1 semantics
+ * This optimizer brings a join group node into a valid order according to the SPARQL 1.1 semantics
  * and optimizes the order of the nodes in the join group using various heuristics.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
@@ -194,8 +193,8 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
 
           final ASTJoinGroupPartition candidatePartition = partitionList.get(j);
 
-        /*
-       * Calculate the conflicting vars as the intersection of the maybe vars of the bordering
+          /*
+           * Calculate the conflicting vars as the intersection of the maybe vars of the bordering
            * OPTIONAL or MINUS with the maybe vars of the node to move around, minus the nodes that
            * are known to be bound upfront.
            */
@@ -244,8 +243,8 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
           final ASTJoinGroupPartition partitionToMove = partitionList.get(partitionForCandidate);
           partitionToMove.addNonOptionalNonMinusNodeToPartition(candidate);
 
-        /*
-       * Given that the node has been moved to partitionForCandidate, the
+          /*
+           * Given that the node has been moved to partitionForCandidate, the
            * definitelyProducedUpToPartition needs to be updated for all partitions starting at the
            * partition following the partitionForCandidate, up to the partition i, which contained
            * the node before (later partitions carry this info already).
@@ -508,8 +507,8 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
         final IGroupMemberNode node = toBePlaced.get(i);
         final GroupNodeVarBindingInfo nodeBindingInfo = bindingInfoMap.get(node);
 
-      /*
-       * The first condition is that the node can be safely placed. The second condition is a
+        /*
+         * The first condition is that the node can be safely placed. The second condition is a
          * fallback, where we randomly pick the last node (even if it does not satisfy the
          * condition).
          */

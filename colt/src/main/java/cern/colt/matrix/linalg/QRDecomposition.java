@@ -13,7 +13,7 @@ import cern.colt.matrix.DoubleMatrix2D;
 import cern.jet.math.Functions;
 
 /*
-* For an <tt>m x n</tt> matrix <tt>A</tt> with <tt>m >= n</tt>, the QR decomposition is an <tt>m x
+ * For an <tt>m x n</tt> matrix <tt>A</tt> with <tt>m >= n</tt>, the QR decomposition is an <tt>m x
  * n</tt> orthogonal matrix <tt>Q</tt> and an <tt>n x n</tt> upper triangular matrix <tt>R</tt> so
  * that <tt>A = Q*R</tt>.
  *
@@ -275,8 +275,7 @@ public class QRDecomposition implements java.io.Serializable {
 
     buf.append("\n\npseudo inverse(A) = ");
     try {
-      buf.append(
-          this.solve(cern.colt.matrix.DoubleFactory2D.dense.identity(QR.rows())));
+      buf.append(this.solve(cern.colt.matrix.DoubleFactory2D.dense.identity(QR.rows())));
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }

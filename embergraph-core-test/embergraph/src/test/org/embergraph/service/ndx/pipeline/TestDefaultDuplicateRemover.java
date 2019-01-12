@@ -28,7 +28,7 @@ import junit.framework.TestCase2;
 import org.embergraph.btree.keys.KVO;
 
 /*
-* Test suite for {@link DefaultDuplicateRemover}.
+ * Test suite for {@link DefaultDuplicateRemover}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

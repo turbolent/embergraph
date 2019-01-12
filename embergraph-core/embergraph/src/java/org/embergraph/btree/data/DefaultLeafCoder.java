@@ -29,7 +29,6 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import org.embergraph.btree.AbstractBTree;
-import org.embergraph.btree.IndexMetadata;
 import org.embergraph.btree.raba.IRaba;
 import org.embergraph.btree.raba.codec.ICodedRaba;
 import org.embergraph.btree.raba.codec.IRabaCoder;
@@ -39,7 +38,7 @@ import org.embergraph.rawstore.IRawStore;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Default implementation for immutable {@link ILeafData} records.
+ * Default implementation for immutable {@link ILeafData} records.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -270,8 +269,8 @@ public class DefaultLeafCoder implements IAbstractNodeDataCoder<ILeafData>, Exte
       buf.putLong(max);
 
       if (versionTimestampBits > 0) {
-      /*
-       * Note: We only write the deltas if there is more than one
+        /*
+         * Note: We only write the deltas if there is more than one
          * distinct timestamp value (min!=max). When min==max, the
          * deltas are coded in zero bits, so this would be a NOP anyway.
          */
@@ -890,7 +889,7 @@ public class DefaultLeafCoder implements IAbstractNodeDataCoder<ILeafData>, Exte
     }
 
     //        /*
-//         * For a leaf the #of tuples is always the #of keys.
+    //         * For a leaf the #of tuples is always the #of keys.
     //         */
     //        final public long getSpannedTupleCount() {
     //
@@ -1069,7 +1068,7 @@ public class DefaultLeafCoder implements IAbstractNodeDataCoder<ILeafData>, Exte
     //		}
 
     //		/*
-//		 * Visits the index of each bucket entry having a matching hash code.
+    //		 * Visits the index of each bucket entry having a matching hash code.
     //		 *
     //		 * @todo a trie over the hash entries would provide much faster search.
     //		 */
@@ -1194,7 +1193,7 @@ public class DefaultLeafCoder implements IAbstractNodeDataCoder<ILeafData>, Exte
     }
 
     //        /*
-//         * Update the data record to set the prior and next leaf address.
+    //         * Update the data record to set the prior and next leaf address.
     //         * <p>
     //         * Note: In order to use this method to write linked leaves on the store
     //         * you have to either write behind at a pre-determined address on the

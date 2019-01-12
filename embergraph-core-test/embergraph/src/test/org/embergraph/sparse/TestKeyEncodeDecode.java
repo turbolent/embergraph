@@ -23,7 +23,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.sparse;
 
-import com.ibm.icu.text.CollationKey;
 import java.text.Collator;
 import java.util.Properties;
 import junit.framework.TestCase2;
@@ -33,7 +32,7 @@ import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.KeyBuilder;
 
 /*
-* Test suite for round trip of keys as encoded by {@link
+ * Test suite for round trip of keys as encoded by {@link
  * Schema#fromKey(org.embergraph.btree.keys.IKeyBuilder, Object)}, by {@link AtomicRowWriteRead},
  * and as decoded by the {@link KeyDecoder}.
  *

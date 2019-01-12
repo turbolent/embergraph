@@ -59,7 +59,7 @@ import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.rio.RDFFormat;
 
 /*
-* Test suite for {@link TruthMaintenance}.
+ * Test suite for {@link TruthMaintenance}.
  *
  * @todo add a stress test where we assert random statements and then back out those assertions
  *     verifying that we recover the original closure?
@@ -156,8 +156,8 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
               new SPO(z3, y2, z3, StatementEnum.Explicit),
             };
 
-      /*
-       * add statement to the focusStore and do NOT use the focusStore
+        /*
+         * add statement to the focusStore and do NOT use the focusStore
          * lexicon (it does not exist) to assign sids to the statements.
          */
         store.addStatements(
@@ -444,8 +444,8 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
           assertionBuffer.add(U, rdfsSubClassOf, V);
           assertionBuffer.add(V, rdfsSubClassOf, X);
 
-        /*
-       * Note: this statement is entailed by the other two, but we
+          /*
+           * Note: this statement is entailed by the other two, but we
            * represent it explicitly as well in order to test the
            * downgrade mechanism.
            */
@@ -492,8 +492,8 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
 
           assertTrue(tempStore == retractionBuffer.getStatementStore());
 
-        /*
-       * Retract this statement. It is explicitly present in the
+          /*
+           * Retract this statement. It is explicitly present in the
            * DB. However, note that it is also inferred. Therefore, it
            * MUST be downgraded to an inference.
            */
@@ -597,8 +597,7 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
 
         // verify that stmt c is marked as explicit in the kb.
 
-        final EmbergraphStatement stmtC =
-            store.getStatement(foo, rdftype, graph);
+        final EmbergraphStatement stmtC = store.getStatement(foo, rdftype, graph);
 
         assertNotNull(stmtC);
 
@@ -634,8 +633,7 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
 
         // verify that stmt c is marked as explicit in the kb.
 
-        final EmbergraphStatement stmtC =
-            store.getStatement(foo, rdftype, graph);
+        final EmbergraphStatement stmtC = store.getStatement(foo, rdftype, graph);
 
         assertNotNull(stmtC);
 

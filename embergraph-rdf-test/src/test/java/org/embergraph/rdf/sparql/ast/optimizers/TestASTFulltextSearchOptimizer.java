@@ -42,7 +42,7 @@ import org.embergraph.service.fts.FTS;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /*
-* Test suite for {@link ASTFulltextSearchOptimizer}.
+ * Test suite for {@link ASTFulltextSearchOptimizer}.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$

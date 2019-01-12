@@ -16,7 +16,7 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 package org.embergraph.rdf.graph;
 
 /*
-* Typesafe enumeration used to specify whether a GATHER or SCATTER phase is applied to the
+ * Typesafe enumeration used to specify whether a GATHER or SCATTER phase is applied to the
  * in-edges, out-edges, both, or not run.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -57,8 +57,8 @@ public enum EdgesEnum {
   public boolean isDirected() {
     switch (this) {
       case NoEdges:
-      /*
-       * Note: None is neither directed nor non-directed regardless of the
+        /*
+         * Note: None is neither directed nor non-directed regardless of the
          * value returned here. The caller should not be inquiring about
          * directedness of the GATHER or SCATTER unless they will be
          * executing that stage.

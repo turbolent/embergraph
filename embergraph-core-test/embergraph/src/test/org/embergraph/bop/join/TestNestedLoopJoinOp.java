@@ -23,7 +23,7 @@ package org.embergraph.bop.join;
 import junit.framework.TestCase2;
 
 /*
-* Test suite the {@link NestedLoopJoinOp}
+ * Test suite the {@link NestedLoopJoinOp}
  *
  * @author thompsonbry
  *     <p>FIXME Test suite! It would be best to refactor the existing hash join test suites, at

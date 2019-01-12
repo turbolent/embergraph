@@ -28,7 +28,7 @@ import org.embergraph.bop.BOp;
 import org.embergraph.bop.IVariable;
 
 /*
-* AST node for subqueries.
+ * AST node for subqueries.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

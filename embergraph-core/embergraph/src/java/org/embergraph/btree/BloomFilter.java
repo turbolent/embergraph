@@ -37,7 +37,7 @@ import org.embergraph.io.SerializerUtil;
 import org.embergraph.rawstore.IRawStore;
 
 /*
-* Encapsulates the actual implementation class and provides the protocol for (de-)serialization.
+ * Encapsulates the actual implementation class and provides the protocol for (de-)serialization.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -396,7 +396,7 @@ public class BloomFilter implements IBloomFilter, Externalizable {
   }
 
   //    /*
-//     * Marks the filter as dirty.
+  //     * Marks the filter as dirty.
   //     */
   //    final protected void setDirty() {
   //

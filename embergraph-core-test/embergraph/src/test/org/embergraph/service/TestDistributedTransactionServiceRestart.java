@@ -30,7 +30,7 @@ import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleIterator;
 
 /*
-* Unit tests of the setReleaseTime, snapshot and restart aspects of the {@link
+ * Unit tests of the setReleaseTime, snapshot and restart aspects of the {@link
  * DistributedTransactionService} (all having to do with the maintenance of the commit time index,
  * including across restart).
  *

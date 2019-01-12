@@ -57,7 +57,7 @@ import org.embergraph.striterator.CloseableIteratorWrapper;
 import org.embergraph.striterator.Dechunkerator;
 
 /*
-* Test suite for managing named solution sets.
+ * Test suite for managing named solution sets.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

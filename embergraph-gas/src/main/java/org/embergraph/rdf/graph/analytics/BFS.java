@@ -25,7 +25,6 @@ import org.embergraph.rdf.graph.EdgesEnum;
 import org.embergraph.rdf.graph.Factory;
 import org.embergraph.rdf.graph.FrontierEnum;
 import org.embergraph.rdf.graph.IBinder;
-import org.embergraph.rdf.graph.IBindingExtractor;
 import org.embergraph.rdf.graph.IGASContext;
 import org.embergraph.rdf.graph.IGASScheduler;
 import org.embergraph.rdf.graph.IGASState;
@@ -36,7 +35,7 @@ import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 
 /*
-* Breadth First Search (BFS) is an iterative graph traversal primitive. The frontier is expanded
+ * Breadth First Search (BFS) is an iterative graph traversal primitive. The frontier is expanded
  * iteratively until no new vertices are discovered. Each visited vertex is marked with the round
  * (origin ZERO) in which it was visited. This is its distance from the initial frontier.
  *
@@ -293,7 +292,7 @@ public class BFS extends BaseGASProgram<BFS.VS, BFS.ES, Void>
   }
 
   //    /*
-//     * Reduce the active vertex state, returning a histogram reporting the #of
+  //     * Reduce the active vertex state, returning a histogram reporting the #of
   //     * vertices at each distance from the starting vertex. There will always be
   //     * one vertex at depth zero - this is the starting vertex. For each
   //     * successive depth, the #of vertices that were labeled at that depth is

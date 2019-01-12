@@ -28,7 +28,7 @@ import it.unimi.dsi.fastutil.objects.ObjectLists;
 import java.io.Serializable;
 
 /*
-* A class providing static methods and objects that do useful things with {@linkplain StringMap
+ * A class providing static methods and objects that do useful things with {@linkplain StringMap
  * string maps} and {@linkplain PrefixMap prefix maps}.
  *
  * @see StringMap

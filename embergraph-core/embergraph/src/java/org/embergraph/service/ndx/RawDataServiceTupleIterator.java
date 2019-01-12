@@ -29,16 +29,13 @@ import java.util.Iterator;
 import org.embergraph.btree.AbstractChunkedTupleIterator;
 import org.embergraph.btree.ResultSet;
 import org.embergraph.btree.proc.BatchRemove.BatchRemoveConstructor;
-import org.embergraph.journal.IIndexStore;
-import org.embergraph.journal.ITx;
 import org.embergraph.mdi.IResourceMetadata;
 import org.embergraph.rawstore.IBlock;
-import org.embergraph.service.AbstractDistributedFederation;
 import org.embergraph.service.IDataService;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Class supports range query across against an unpartitioned index on an {@link IDataService} but
+ * Class supports range query across against an unpartitioned index on an {@link IDataService} but
  * DOES NOT handle index partition splits, moves or joins.
  *
  * <p>Note: This class supports caching of the remote metadata index, which does not use index

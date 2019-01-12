@@ -17,7 +17,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.btree.raba.codec;
 
-import it.unimi.dsi.fastutil.bytes.ByteArrayFrontCodedList;
 import it.unimi.dsi.fastutil.bytes.custom.CustomByteArrayFrontCodedList;
 import java.io.Externalizable;
 import java.io.IOException;
@@ -32,7 +31,7 @@ import org.embergraph.io.DataOutputBuffer;
 import org.embergraph.util.Bytes;
 
 /*
-* Class provides (de-)compression for logical byte[][]s based on front coding. The data MUST be
+ * Class provides (de-)compression for logical byte[][]s based on front coding. The data MUST be
  * ordered. <code>null</code> values are not allowed.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

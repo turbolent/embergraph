@@ -31,12 +31,11 @@ import org.embergraph.btree.keys.DefaultKeyBuilderFactory;
 import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.btree.keys.TestKeyBuilder;
 import org.embergraph.io.SerializerUtil;
-import org.embergraph.rawstore.IBlock;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Test suite for {@link AbstractChunkedTupleIterator} and its concrete {@link
+ * Test suite for {@link AbstractChunkedTupleIterator} and its concrete {@link
  * ChunkedLocalRangeIterator} implementation which depends on the {@link ResultSet}.
  *
  * <p>Note: There are other implementations derived from the same abstract base class so they have a
@@ -423,7 +422,6 @@ public class TestChunkedIterators extends AbstractBTreeTestCase {
 
             // delete only the even keys.
             return i % 2 == 0;
-
           }
         };
 
@@ -485,8 +483,8 @@ public class TestChunkedIterators extends AbstractBTreeTestCase {
 
         // verify deleted only the even keys.
         if (0 == (i % 2)) {
-        /*
-       * Found a key that decodes as an even integer.
+          /*
+           * Found a key that decodes as an even integer.
            */
           fail("n=" + n + ", tuple=" + tuple + ", i=" + i);
         }
@@ -991,8 +989,8 @@ public class TestChunkedIterators extends AbstractBTreeTestCase {
 
       {
 
-      /*
-       * Compare objects de-serialized from the tuple. If the
+        /*
+         * Compare objects de-serialized from the tuple. If the
          * operation is not supported for the expected iterator, then it
          * should also be not supported for the actual iterator.
          */

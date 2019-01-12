@@ -1,13 +1,12 @@
 package org.embergraph.relation.accesspath;
 
 import org.embergraph.relation.IMutableRelation;
-import org.embergraph.relation.IRelation;
 import org.embergraph.striterator.ChunkedArrayIterator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 
 /*
-* Base class for {@link IBuffer} of {@link IRelation} elements whose target is a mutation (insert,
+ * Base class for {@link IBuffer} of {@link IRelation} elements whose target is a mutation (insert,
  * delete, or update) of some {@link IMutableRelation}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -91,7 +90,7 @@ public abstract class AbstractElementBuffer<R> extends AbstractArrayBuffer<R> {
   public static class InsertBuffer<R> extends AbstractElementBuffer<R> {
 
     //        /*
-//         * Ctor variant when the element will be written into the buffer in an
+    //         * Ctor variant when the element will be written into the buffer in an
     //         * unknown order.
     //         *
     //         * @param capacity
@@ -139,7 +138,7 @@ public abstract class AbstractElementBuffer<R> extends AbstractArrayBuffer<R> {
   public static class DeleteBuffer<R> extends AbstractElementBuffer<R> {
 
     //        /*
-//         * Ctor variant when the element will be written into the buffer in an
+    //         * Ctor variant when the element will be written into the buffer in an
     //         * unknown order.
     //         *
     //         * @param capacity
@@ -176,7 +175,7 @@ public abstract class AbstractElementBuffer<R> extends AbstractArrayBuffer<R> {
   }
 
   //    /*
-//     * Buffer writes on
+  //     * Buffer writes on
   //     * {@link IMutableRelation#update(IChunkedIterator, ITransform)} when it is
   //     * {@link #flush() flushed}.
   //     *
@@ -189,7 +188,7 @@ public abstract class AbstractElementBuffer<R> extends AbstractArrayBuffer<R> {
   //        private final ITransform<R> transform;
   //
   //        /*
-//         * Ctor variant when the element will be written into the buffer in an
+  //         * Ctor variant when the element will be written into the buffer in an
   //         * unknown order.
   //         *
   //         * @param capacity
@@ -204,7 +203,7 @@ public abstract class AbstractElementBuffer<R> extends AbstractArrayBuffer<R> {
   //        }
   //
   //        /*
-//         * Ctor variant used when you have a <em>strong</em> guarantee of the
+  //         * Ctor variant used when you have a <em>strong</em> guarantee of the
   //         * order in which the elements will be written into the buffer.
   //         *
   //         * @param capacity

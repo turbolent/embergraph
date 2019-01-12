@@ -33,14 +33,8 @@ import org.embergraph.btree.BTree;
 import org.embergraph.btree.BTreeCounters;
 import org.embergraph.btree.ILocalBTreeView;
 import org.embergraph.btree.IndexMetadata;
-import org.embergraph.btree.IndexSegment;
-import org.embergraph.btree.IndexSegmentStore;
-import org.embergraph.btree.view.FusedView;
 import org.embergraph.counters.CounterSet;
-import org.embergraph.htree.HTree;
 import org.embergraph.rawstore.IRawStore;
-import org.embergraph.resources.ResourceManager;
-import org.embergraph.resources.StaleLocatorException;
 import org.embergraph.resources.StaleLocatorReason;
 import org.embergraph.service.DataService;
 import org.embergraph.service.IDataService;
@@ -48,7 +42,7 @@ import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.IServiceShutdown;
 
 /*
-* Interface manging the resources on which indices are stored. The resources may be either a
+ * Interface manging the resources on which indices are stored. The resources may be either a
  * journal, which contains {@link BTree}s, or an {@link IndexSegmentStore} containing a single
  * {@link IndexSegment}.
  *

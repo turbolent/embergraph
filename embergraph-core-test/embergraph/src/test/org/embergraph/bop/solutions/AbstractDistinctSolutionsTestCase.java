@@ -58,7 +58,7 @@ import org.openrdf.model.Value;
 import org.openrdf.model.impl.LiteralImpl;
 
 /*
-* Abstract base class for DISTINCT SOLUTIONS test suites.
+ * Abstract base class for DISTINCT SOLUTIONS test suites.
  *
  * <p>TODO Write a unit test in which some variables are unbound.
  *

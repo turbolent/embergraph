@@ -69,7 +69,6 @@ import java.util.zip.ZipInputStream;
 import org.apache.log4j.Logger;
 import org.embergraph.bop.engine.AbstractQueryEngineTestCase;
 import org.embergraph.bop.fed.QueryEngineFactory;
-import org.embergraph.journal.IBTreeManager;
 import org.embergraph.rdf.sail.sparql.Embergraph2ASTSPARQLParser;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
@@ -93,7 +92,7 @@ import org.openrdf.rio.Rio;
 import org.openrdf.rio.helpers.StatementCollector;
 
 /*
-* Abstract base class for data driven test suites.
+ * Abstract base class for data driven test suites.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @openrdf
@@ -684,8 +683,8 @@ public abstract class AbstractDataDrivenSPARQLTestCase extends AbstractDataAndSP
 
       } catch (MalformedURLException e) {
 
-      /*
-       * Ignore. we will handle the problem below if this was not
+        /*
+         * Ignore. we will handle the problem below if this was not
          * a URL.
          */
 

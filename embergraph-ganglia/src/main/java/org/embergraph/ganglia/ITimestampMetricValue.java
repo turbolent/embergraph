@@ -17,7 +17,7 @@
 package org.embergraph.ganglia;
 
 /*
-* A read-only interface for a reported or observed metric value with a timestamp and a reference to
+ * A read-only interface for a reported or observed metric value with a timestamp and a reference to
  * the {@link IGangliaMetadataMessage} for that metric.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

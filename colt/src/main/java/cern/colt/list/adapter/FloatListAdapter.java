@@ -10,7 +10,7 @@ package cern.colt.list.adapter;
 
 import cern.colt.list.AbstractFloatList;
 /*
-* Adapter that permits an {@link cern.colt.list.AbstractFloatList} to be viewed and treated as a
+ * Adapter that permits an {@link cern.colt.list.AbstractFloatList} to be viewed and treated as a
  * JDK 1.2 {@link java.util.AbstractList}. Makes the contained list compatible with the JDK 1.2
  * Collections Framework.
  *

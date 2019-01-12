@@ -35,19 +35,17 @@ import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IVariable;
 import org.embergraph.bop.Var;
 import org.embergraph.bop.bindingSet.ListBindingSet;
-import org.embergraph.htree.HTree;
 import org.embergraph.io.DataInputBuffer;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVCache;
 import org.embergraph.rdf.internal.IVUtility;
-import org.embergraph.rdf.internal.impl.TermId;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.rdf.model.EmbergraphValueSerializer;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Decoder for {@link IVSolutionSetEncoder}.
+ * Decoder for {@link IVSolutionSetEncoder}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -231,16 +229,16 @@ public class IVSolutionSetDecoder implements IBindingSetDecoder {
       final int newCached = in.unpackInt();
 
       if (newCached > 0 && numBindings == 0) {
-      /*
-       * Illegal combination. New IV => EmbergraphValue cache
+        /*
+         * Illegal combination. New IV => EmbergraphValue cache
          * associations can only appear with new bindings.
          */
         throw new RuntimeException();
       }
 
       if (newCached > 0 && namespace == null) {
-      /*
-       * This is where we discover the namespace for the serialized
+        /*
+         * This is where we discover the namespace for the serialized
          * EmbergraphValue objects.
          */
         namespace = in.readUTF2();
@@ -312,8 +310,8 @@ public class IVSolutionSetDecoder implements IBindingSetDecoder {
           if (bitIndex >= maxBitIndex) break;
           final boolean isSet = BytesUtil.getBit(data, bitIndex++);
           if (isSet) {
-          /*
-       * Decode the IV for this variable.
+            /*
+             * Decode the IV for this variable.
              *
              * Note: A "mock" IV will be decoded into a non-null
              * TermId.
@@ -352,8 +350,8 @@ public class IVSolutionSetDecoder implements IBindingSetDecoder {
           if (bitIndex >= maxBitIndex) break;
           final boolean isSet = BytesUtil.getBit(data, bitIndex++);
           if (isSet) {
-          /*
-       * Decode the cached Value for the IV.
+            /*
+             * Decode the cached Value for the IV.
              */
             chksum++;
             final IV<?, ?> iv = ivs.get(i);
@@ -361,8 +359,8 @@ public class IVSolutionSetDecoder implements IBindingSetDecoder {
             if (!iv.isNullIV()) {
               cache.put(iv, value);
             } else {
-            /*
-       * We must attach the IVCache association for a
+              /*
+               * We must attach the IVCache association for a
                * mockIV since it is NOT possible to recover that
                * association from the cache.
                *

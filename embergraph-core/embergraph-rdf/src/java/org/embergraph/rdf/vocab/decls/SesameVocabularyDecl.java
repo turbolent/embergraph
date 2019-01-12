@@ -30,7 +30,7 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.SESAME;
 
 /*
-* Vocabulary and namespace for {@link Sesame}.
+ * Vocabulary and namespace for {@link Sesame}.
  *
  * @see Sesame
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

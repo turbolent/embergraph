@@ -6,7 +6,7 @@ import org.embergraph.io.AbstractFixedByteArrayBuffer;
 import org.embergraph.rawstore.IRawStore;
 
 /*
-* Mock object for {@link ILeafData} used for unit tests.
+ * Mock object for {@link ILeafData} used for unit tests.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

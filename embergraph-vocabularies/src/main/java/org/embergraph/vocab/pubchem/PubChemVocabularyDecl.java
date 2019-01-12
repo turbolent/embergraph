@@ -34,7 +34,7 @@ import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
 /*
-* Vocabulary declarations covering the PubChem data from {@link
+ * Vocabulary declarations covering the PubChem data from {@link
  * https://pubchem.ncbi.nlm.nih.gov/rdf/}.
  *
  * @author <a href="ms@metaphacts.com">Michael Schmidt</a>
@@ -53,7 +53,7 @@ public class PubChemVocabularyDecl implements VocabularyDecl {
         new URIImpl("http://semanticscience.org/resource/has-unit"), // rank=4, count=250090869
         new URIImpl(
             "http://rdf.ncbi.nlm.nih.gov/pubchem/vocabulary#PubChemAssayOutcome"), // rank=5,
-                                                                                   // count=229961334
+        // count=229961334
         new URIImpl("http://purl.obolibrary.org/obo/IAO_0000136"), // rank=6, count=229958616
         new URIImpl("http://purl.obolibrary.org/obo/OBI_0000299"), // rank=7, count=229958616
         new URIImpl(
@@ -68,9 +68,8 @@ public class PubChemVocabularyDecl implements VocabularyDecl {
         new URIImpl("http://purl.org/dc/terms/bibliographicCitation"), // rank=19, count=10656147
         new URIImpl("http://purl.org/spar/cito/citesAsDataSource"), // rank=20, count=9607311
         new URIImpl("http://purl.org/spar/cito/isDiscussedBy"), // rank=21, count=7932441
-        new URIImpl(
-            "http://rdf.ncbi.nlm.nih.gov/pubchem/vocabulary#hasSimilarProtein"), // rank=23,
-                                                                                 // count=4496257
+        new URIImpl("http://rdf.ncbi.nlm.nih.gov/pubchem/vocabulary#hasSimilarProtein"), // rank=23,
+        // count=4496257
         new URIImpl("http://semanticscience.org/resource/CHEMINF_000455"), // rank=24, count=3207006
         new URIImpl(
             "http://rdf.ncbi.nlm.nih.gov/pubchem/vocabulary#has_parent"), // rank=25, count=2333130
@@ -78,9 +77,8 @@ public class PubChemVocabularyDecl implements VocabularyDecl {
         new URIImpl(
             "http://www.biopax.org/release/biopax-level3.owl#organism"), // rank=27, count=538728
         new URIImpl("http://purl.obolibrary.org/obo/BFO_0000057"), // rank=28, count=480877
-        new URIImpl(
-            "http://www.biopax.org/release/biopax-level3.owl#pathwayComponent"), // rank=29,
-                                                                                 // count=433628
+        new URIImpl("http://www.biopax.org/release/biopax-level3.owl#pathwayComponent"), // rank=29,
+        // count=433628
         new URIImpl("http://purl.org/dc/terms/subject"), // rank=30, count=413015
         new URIImpl("http://www.bioassayontology.org/bao#BAO_0000209"), // rank=31, count=290253
         new URIImpl(
@@ -170,9 +168,8 @@ public class PubChemVocabularyDecl implements VocabularyDecl {
         new URIImpl("http://purl.obolibrary.org/obo/CHEBI_26819"), // rank=53, count=13902
         new URIImpl("http://purl.obolibrary.org/obo/CHEBI_26836"), // rank=54, count=13902
         new URIImpl("http://www.bioassayontology.org/bao#BAO_0002162"), // rank=55, count=12496
-        new URIImpl(
-            "http://www.biopax.org/release/biopax-level3.owl#SmallMolecule"), // rank=56,
-                                                                              // count=12254
+        new URIImpl("http://www.biopax.org/release/biopax-level3.owl#SmallMolecule"), // rank=56,
+        // count=12254
         new URIImpl("http://purl.obolibrary.org/obo/CHEBI_17754"), // rank=57, count=11428
         new URIImpl("http://purl.obolibrary.org/obo/CHEBI_15850"), // rank=58, count=11428
         new URIImpl("http://purl.obolibrary.org/obo/CHEBI_17522"), // rank=59, count=11428

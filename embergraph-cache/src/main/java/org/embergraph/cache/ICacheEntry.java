@@ -21,7 +21,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.cache;
 
 /*
-* Interface for hard reference cache entries exposes a <i>dirty</i> flag in addition to the object
+ * Interface for hard reference cache entries exposes a <i>dirty</i> flag in addition to the object
  * identifier and object reference.
  *
  * @author thompsonbry

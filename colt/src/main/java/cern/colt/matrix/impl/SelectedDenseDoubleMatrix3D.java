@@ -11,7 +11,7 @@ package cern.colt.matrix.impl;
 import cern.colt.matrix.DoubleMatrix2D;
 import cern.colt.matrix.DoubleMatrix3D;
 /*
-* Selection view on dense 3-d matrices holding <tt>double</tt> elements. First see the <a
+ * Selection view on dense 3-d matrices holding <tt>double</tt> elements. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
  * view</a> to get the broad picture.
  *
@@ -212,7 +212,7 @@ class SelectedDenseDoubleMatrix3D extends DoubleMatrix3D {
   protected DoubleMatrix2D like2D(
       int rows, int columns, int rowZero, int columnZero, int rowStride, int columnStride) {
     throw new InternalError(); // this method is never called since viewRow() and viewColumn are
-                               // overridden properly.
+    // overridden properly.
   }
   /*
    * Sets the matrix cell at coordinate <tt>[slice,row,column]</tt> to the specified value.

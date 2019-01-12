@@ -23,7 +23,7 @@ import org.embergraph.rwstore.IRawTx;
 import org.embergraph.service.AbstractTransactionService;
 
 /*
-* Test suite for {@link MemStore}.
+ * Test suite for {@link MemStore}.
  *
  * @author thompsonbry
  */

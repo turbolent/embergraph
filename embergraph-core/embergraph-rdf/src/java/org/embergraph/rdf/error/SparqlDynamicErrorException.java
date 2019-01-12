@@ -25,7 +25,7 @@ import org.embergraph.util.NV;
 import org.openrdf.model.URI;
 
 /*
-* A SPARQL dynamic (runtime) error.
+ * A SPARQL dynamic (runtime) error.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -27,7 +27,7 @@ import org.embergraph.btree.keys.NoSuccessorException;
 import org.embergraph.btree.keys.TestKeyBuilder;
 
 /*
-* Test suite for the {@link ILinearList} access methods.
+ * Test suite for the {@link ILinearList} access methods.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

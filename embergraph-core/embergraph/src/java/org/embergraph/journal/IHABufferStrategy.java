@@ -26,7 +26,6 @@ import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.security.DigestException;
 import java.security.MessageDigest;
-import java.util.UUID;
 import java.util.concurrent.Future;
 import org.embergraph.ha.HAGlue;
 import org.embergraph.ha.QuorumService;
@@ -35,14 +34,13 @@ import org.embergraph.ha.msg.IHALogRequest;
 import org.embergraph.ha.msg.IHARebuildRequest;
 import org.embergraph.ha.msg.IHAWriteMessage;
 import org.embergraph.io.IBufferAccess;
-import org.embergraph.io.writecache.WriteCache;
 import org.embergraph.io.writecache.WriteCacheService;
 import org.embergraph.journal.AbstractJournal.ISnapshotData;
 import org.embergraph.quorum.Quorum;
 import org.embergraph.quorum.QuorumException;
 
 /*
-* A highly available {@link IBufferStrategy}.
+ * A highly available {@link IBufferStrategy}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

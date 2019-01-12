@@ -32,7 +32,7 @@ import org.embergraph.bop.join.PipelineJoin;
 import org.embergraph.util.Bytes;
 
 /*
-* Class provides a logger which may be used for observing all solutions flowing into each operator
+ * Class provides a logger which may be used for observing all solutions flowing into each operator
  * in the query plan and the final solutions flowing into the query buffer.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -118,7 +118,7 @@ public class SolutionsLog {
   }
 
   //    /*
-//     *
+  //     *
   //     * TODO This can not be used because the {@link LocalChunkMessage} wraps an
   //     * iterator rather than an {@link IBindingSet}[]. Visiting the iterator on
   //     * that class therefore *drains* the chunk and it can not be "rewound". We

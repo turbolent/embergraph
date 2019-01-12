@@ -45,7 +45,7 @@ import org.openrdf.repository.Repository;
 import org.openrdf.repository.dataset.DatasetRepository;
 
 /*
-* Runs the SPARQL test suite against a JiniFederation, which must be already deployed. Each test in
+ * Runs the SPARQL test suite against a JiniFederation, which must be already deployed. Each test in
  * the suite is run against a distinct quad store in its own embergraph namespace.
  *
  * <p>To run this test suite, you need to have a deployed federation. You then specify the
@@ -353,7 +353,7 @@ public class EmbergraphFederationSparqlTest extends SPARQLQueryTest {
   private EmbergraphSail _sail = null;
 
   //	/*
-//	 * Dumps the locators for an index of a relation.
+  //	 * Dumps the locators for an index of a relation.
   //	 *
   //	 * @param fed
   //	 * @param namespace

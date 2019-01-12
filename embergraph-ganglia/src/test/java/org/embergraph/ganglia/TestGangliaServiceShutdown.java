@@ -28,7 +28,7 @@ import java.util.concurrent.FutureTask;
 import junit.framework.TestCase;
 
 /*
-* Unit test for shutdown of the {@link GangliaListener}.
+ * Unit test for shutdown of the {@link GangliaListener}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

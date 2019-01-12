@@ -21,30 +21,23 @@ package org.embergraph.sparse;
 
 import cutthecrap.utils.striterators.Resolver;
 import cutthecrap.utils.striterators.Striterator;
-import java.text.RuleBasedCollator;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import org.apache.log4j.Logger;
-import org.embergraph.bfs.EmbergraphFileSystem;
 import org.embergraph.btree.AbstractBTree;
 import org.embergraph.btree.IIndex;
 import org.embergraph.btree.IRangeQuery;
 import org.embergraph.btree.ITuple;
-import org.embergraph.btree.IndexMetadata;
-import org.embergraph.btree.keys.CollatorEnum;
 import org.embergraph.btree.keys.IKeyBuilder;
-import org.embergraph.journal.IIndexManager;
-import org.embergraph.journal.ITimestampService;
-import org.embergraph.journal.Journal;
 import org.embergraph.journal.TimestampUtility;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.relation.RelationSchema;
 import org.embergraph.service.ndx.IClientIndex;
 
 /*
-* A client-side class that knows how to use an {@link IIndex} to provide an efficient data model in
+ * A client-side class that knows how to use an {@link IIndex} to provide an efficient data model in
  * which a logical row is stored as one or more entries in the {@link IIndex}. Operations are
  * provided for atomic read and write of logical row. While the scan operations are always
  * consistent (they will never reveal data from a row that undergoing concurrent modification), they
@@ -125,12 +118,12 @@ public class SparseRowStore implements IRowStoreConstants {
   protected static final Logger log = Logger.getLogger(SparseRowStore.class);
 
   //    /*
-//     * True iff the {@link #log} level is INFO or less.
+  //     * True iff the {@link #log} level is INFO or less.
   //     */
   //    final protected boolean INFO = log.isInfoEnabled();
   //
   //    /*
-//     * True iff the {@link #log} level is DEBUG or less.
+  //     * True iff the {@link #log} level is DEBUG or less.
   //     */
   //    final protected boolean DEBUG = log.isDebugEnabled();
 
@@ -173,7 +166,7 @@ public class SparseRowStore implements IRowStoreConstants {
   }
 
   //    /*
-//     * Used to encode and decode tuples for the {@link SparseRowStore} index.
+  //     * Used to encode and decode tuples for the {@link SparseRowStore} index.
   //     * Each tuple corresponds to a {@link ITPV timestamped property value} for
   //     * some {@link Schema}.
   //     *
@@ -193,7 +186,7 @@ public class SparseRowStore implements IRowStoreConstants {
   //    public class TPVTupleSerializer implements ITupleSerializer {
   //
   //        /*
-//         * De-serialization ctor.
+  //         * De-serialization ctor.
   //         */
   //        public TPVTupleSerializer() {
   //
@@ -212,7 +205,7 @@ public class SparseRowStore implements IRowStoreConstants {
   //        }
   //
   //        /*
-//         * De-serializes as much of the key as possible.
+  //         * De-serializes as much of the key as possible.
   //         *
   //         * @see KeyDecoder
   //         */

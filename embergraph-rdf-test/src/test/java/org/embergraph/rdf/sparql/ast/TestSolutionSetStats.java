@@ -24,7 +24,7 @@ package org.embergraph.rdf.sparql.ast;
 import org.embergraph.bop.IBindingSet;
 
 /*
-* Test suite for {@link SolutionSetStats}.
+ * Test suite for {@link SolutionSetStats}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestSolutionSetStats.java 6099 2012-03-09 16:35:55Z thompsonbry $

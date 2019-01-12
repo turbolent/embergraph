@@ -34,27 +34,21 @@ import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.IResourceLock;
 import org.embergraph.journal.ITx;
 import org.embergraph.journal.Journal;
-import org.embergraph.mdi.MetadataIndex;
 import org.embergraph.rawstore.IBlock;
 import org.embergraph.rawstore.WormAddressManager;
 import org.embergraph.relation.AbstractResource;
 import org.embergraph.relation.IDatabase;
 import org.embergraph.relation.RelationSchema;
-import org.embergraph.relation.locator.DefaultResourceLocator;
-import org.embergraph.search.FullTextIndex;
-import org.embergraph.service.IDataService;
-import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.sparse.AutoIncIntegerCounter;
 import org.embergraph.sparse.IRowStoreConstants;
 import org.embergraph.sparse.ITPS;
 import org.embergraph.sparse.ITPV;
 import org.embergraph.sparse.LogicalRowSplitHandler;
-import org.embergraph.sparse.Schema;
 import org.embergraph.sparse.SparseRowStore;
 import org.embergraph.util.Bytes;
 
 /*
-* A distributed file system with extensible metadata and atomic append implemented using the
+ * A distributed file system with extensible metadata and atomic append implemented using the
  * embergraph scale-out architecture. Files have a client assigned identifier, which is a Unicode
  * string. The file identifier MAY be structured so as to look like a hierarchical file system using
  * any desired convention. Files are versioned and historical versions MAY be accessed until the
@@ -385,8 +379,8 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
       // setup metadata index.
       {
 
-      /*
-       * Note: This specifies an split handler that keeps the logical
+        /*
+         * Note: This specifies an split handler that keeps the logical
          * row together. This is a hard requirement. The atomic
          * read/update guarantee depends on this.
          */
@@ -409,8 +403,8 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
       // setup data index.
       {
 
-      /*
-       * @todo specify split handler that tends to keep the blocks for a
+        /*
+         * @todo specify split handler that tends to keep the blocks for a
          * file together (soft requirement).
          */
 
@@ -419,8 +413,8 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
         final IndexMetadata md =
             new IndexMetadata(indexManager, tmp, name, UUID.randomUUID(), IndexTypeEnum.BTree);
 
-      /*
-       * @todo unit tests for correct copying of blobs during overflow.
+        /*
+         * @todo unit tests for correct copying of blobs during overflow.
          * See {@link IOverflowHandler}.
          */
         md.setOverflowHandler(new BlobOverflowHandler());

@@ -30,7 +30,7 @@ import org.embergraph.io.DirectBufferPool;
 import org.embergraph.io.IBufferAccess;
 
 /*
-* Test the raw socket protocol implemented by {@link HASendService} and {@link HAReceiveService}.
+ * Test the raw socket protocol implemented by {@link HASendService} and {@link HAReceiveService}.
  *
  * @author martyn Cutcher
  */

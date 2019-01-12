@@ -23,7 +23,6 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
@@ -159,8 +158,8 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
 
         if (gasState.isVisited(targetVertices)) {
 
-        /*
-       * If we've reached all target vertices then halt the
+          /*
+           * If we've reached all target vertices then halt the
            * program N rounds from now where
            * N = maxIterationsAfterTargets.
            */
@@ -241,8 +240,7 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
    * SPO.
    */
   @Override
-  public boolean doRound(final IGASStats stats)
-      throws Exception {
+  public boolean doRound(final IGASStats stats) throws Exception {
 
     // The fontier for this round.
     final IStaticFrontier f = gasState.frontier();
@@ -566,8 +564,8 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
             return gatherEdges;
           }
 
-        /*
-       * Note: The API does not permit vertices to be scheduled for execution during the GATHER
+          /*
+           * Note: The API does not permit vertices to be scheduled for execution during the GATHER
            * phase.
            */
           @Override
@@ -636,8 +634,8 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
 
       if (pushDownApply()) {
 
-      /*
-       * Run the APPLY as part of the SCATTER.
+        /*
+         * Run the APPLY as part of the SCATTER.
          *
          * TODO This can be done on a thread pool or fork/join pool
          * since we know that there are no duplicates in the frontier.
@@ -707,8 +705,8 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
 
       try {
 
-      /*
-       * Note: since (left,right) may be null, we need to known if
+        /*
+         * Note: since (left,right) may be null, we need to known if
          * left is defined.
          */
         boolean first = true;
@@ -738,8 +736,8 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
 
         if (pushDownApply()) {
 
-        /*
-       * Run the APPLY as part of the GATHER.
+          /*
+           * Run the APPLY as part of the GATHER.
            *
            * TODO This can be done on a thread pool or fork/join pool
            * since we know that there are no duplicates in the
@@ -852,7 +850,7 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
   }
 
   //    /*
-//     * {@inheritDoc}
+  //     * {@inheritDoc}
   //     * <p>
   //     * The default implementation only visits the edges.
   //     */
@@ -864,7 +862,7 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
   //    }
 
   //    /*
-//     * Return an {@link IFilter} that will only visit the edges of the graph.
+  //     * Return an {@link IFilter} that will only visit the edges of the graph.
   //     *
   //     * @see IGASState#isEdge(Statement)
   //     */
@@ -875,7 +873,7 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
   //    }
   //
   //    /*
-//     * Filter visits only edges (filters out attribute values).
+  //     * Filter visits only edges (filters out attribute values).
   //     * <p>
   //     * Note: This filter is pushed down onto the AP and evaluated close to the
   //     * data.

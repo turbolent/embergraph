@@ -25,7 +25,7 @@ import java.util.Map;
 import org.embergraph.bop.BOp;
 
 /*
-* The CREATE ENTAILMENTS operation compute entailments in the Graph Store.
+ * The CREATE ENTAILMENTS operation compute entailments in the Graph Store.
  *
  * <pre>
  * CREATE ENTAILMENTS

@@ -27,7 +27,7 @@ import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /*
-* Test suite for the {@link IDirtyListener} protocol.
+ * Test suite for the {@link IDirtyListener} protocol.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -100,8 +100,8 @@ public class TestDirtyListener extends AbstractHTreeTestCase {
         // verify event was not generated.
         listener.assertCounter(0);
 
-      /*
-       * Write on the btree and verify that the listener is notified.
+        /*
+         * Write on the btree and verify that the listener is notified.
          */
         btree.insert(k1, val);
         if (log.isInfoEnabled()) log.info("after insert of 1 key:\n" + btree.PP());
@@ -110,8 +110,8 @@ public class TestDirtyListener extends AbstractHTreeTestCase {
 
         listener.assertCounter(1);
 
-      /*
-       * Write again -- there should be no notice at the listener
+        /*
+         * Write again -- there should be no notice at the listener
          * since the tree is still dirty. We write enough entries to
          * split the initial bucket page.
          */
@@ -124,15 +124,15 @@ public class TestDirtyListener extends AbstractHTreeTestCase {
 
         listener.assertCounter(1);
 
-      /*
-       * Flush to the store. This makes the tree clean again.
+        /*
+         * Flush to the store. This makes the tree clean again.
          */
         assertTrue("dirty", btree.root.isDirty());
         addr2 = btree.writeCheckpoint();
         assertFalse("dirty", btree.root.isDirty());
 
-      /*
-       * Insert another record. The tree still becomes dirty and the
+        /*
+         * Insert another record. The tree still becomes dirty and the
          * listener gets notified.
          */
         listener.setExpected(true);
@@ -142,8 +142,8 @@ public class TestDirtyListener extends AbstractHTreeTestCase {
       }
 
       if (true) {
-      /*
-       * FIXME The rest of this test relies on the ability to remove
+        /*
+         * FIXME The rest of this test relies on the ability to remove
          * tuples. It was originally written for the B+Tree. It needs to
          * be ported to the HTree once we support removal of key/val
          * pairs.
@@ -207,8 +207,8 @@ public class TestDirtyListener extends AbstractHTreeTestCase {
 
         listener.assertCounter(1);
 
-      /*
-       * Flush to the store making the tree clean again.
+        /*
+         * Flush to the store making the tree clean again.
          */
         addr3 = btree.writeCheckpoint();
       }

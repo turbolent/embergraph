@@ -26,11 +26,9 @@ import org.embergraph.rdf.sparql.ast.IJoinNode;
 import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTRunFirstRunLastOptimizer;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTStaticJoinOptimizer;
 
 /*
-* Query hint to run a join first in a join group. This hint must be used with {@link
+ * Query hint to run a join first in a join group. This hint must be used with {@link
  * QueryHintScope#Prior}.
  *
  * <p>Note: This sets an AST annotation which is interpreted by the {@link

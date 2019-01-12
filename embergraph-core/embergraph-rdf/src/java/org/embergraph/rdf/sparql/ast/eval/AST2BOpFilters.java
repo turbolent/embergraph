@@ -44,8 +44,6 @@ import org.embergraph.bop.join.PipelineJoin;
 import org.embergraph.bop.rdf.join.ChunkedMaterializationOp;
 import org.embergraph.bop.rdf.join.InlineMaterializeOp;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.internal.NotMaterializedException;
-import org.embergraph.rdf.internal.constraints.CompareBOp;
 import org.embergraph.rdf.internal.constraints.INeedsMaterialization;
 import org.embergraph.rdf.internal.constraints.INeedsMaterialization.Requirement;
 import org.embergraph.rdf.internal.constraints.IsInlineBOp;
@@ -62,7 +60,7 @@ import org.embergraph.rdf.sparql.ast.IJoinNode;
 import org.embergraph.rdf.sparql.ast.StaticAnalysis;
 
 /*
-* Class handles the materialization pattern for filters by adding a series of materialization steps
+ * Class handles the materialization pattern for filters by adding a series of materialization steps
  * to materialize terms needed downstream.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -82,7 +80,7 @@ public class AST2BOpFilters extends AST2BOpBase {
    * been moved to the delegate method (immediate below). bbt.
    */
   //    /*
-//     * Adds a series of materialization steps to materialize terms needed
+  //     * Adds a series of materialization steps to materialize terms needed
   //     * downstream.
   //     *
   //     * To materialize the variable ?term, the pipeline looks as follows:
@@ -305,8 +303,8 @@ public class AST2BOpFilters extends AST2BOpBase {
 
       if (!it.hasNext()) {
 
-      /*
-       * If there are no more terms to materialize, the terminus of
+        /*
+         * If there are no more terms to materialize, the terminus of
          * this materialization pipeline is the "right" (downstream)
          * operator that was passed in.
          */
@@ -314,8 +312,8 @@ public class AST2BOpFilters extends AST2BOpBase {
 
       } else {
 
-      /*
-       * If there are more terms, the terminus of this materialization
+        /*
+         * If there are more terms, the terminus of this materialization
          * pipeline is the 1st operator of the next materialization
          * pipeline.
          */
@@ -363,8 +361,8 @@ public class AST2BOpFilters extends AST2BOpBase {
       final Predicate lexPred;
       {
 
-      /*
-       * An anonymous variable whose name is based on the variable in
+        /*
+         * An anonymous variable whose name is based on the variable in
          * the query whose Value we are trying to materialize from the
          * IV.
          */
@@ -484,13 +482,11 @@ public class AST2BOpFilters extends AST2BOpBase {
     return applyQueryHints(
         new ChunkedMaterializationOp(
             leftOrEmpty(left),
-            new NV(
-                ChunkedMaterializationOp.Annotations.VARS, vars.toArray(new IVariable[nvars])),
+            new NV(ChunkedMaterializationOp.Annotations.VARS, vars.toArray(new IVariable[nvars])),
             new NV(ChunkedMaterializationOp.Annotations.RELATION_NAME, new String[] {ns}),
             new NV(ChunkedMaterializationOp.Annotations.TIMESTAMP, timestamp),
             new NV(
-                ChunkedMaterializationOp.Annotations.MATERIALIZE_INLINE_IVS,
-                materializeInlineIvs),
+                ChunkedMaterializationOp.Annotations.MATERIALIZE_INLINE_IVS, materializeInlineIvs),
             new NV(
                 PipelineOp.Annotations.SHARED_STATE,
                 !ctx.isCluster()), // live stats, but not on the cluster.
@@ -502,7 +498,7 @@ public class AST2BOpFilters extends AST2BOpBase {
   }
 
   //    /*
-//     * Wrapper for handling the {@link AST2BOpContext} / {@link BOpContextBase}
+  //     * Wrapper for handling the {@link AST2BOpContext} / {@link BOpContextBase}
   //     * API mismatch.
   //     *
   //     * @param left

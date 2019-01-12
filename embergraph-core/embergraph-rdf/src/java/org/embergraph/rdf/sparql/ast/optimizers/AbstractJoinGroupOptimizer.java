@@ -197,8 +197,8 @@ public abstract class AbstractJoinGroupOptimizer implements IASTOptimizer {
               ((ConstantNode) alpNode.right()).getValueExpression());
         }
 
-      /*
-       * The transitivity vars are unique to the alpNode, so we don't
+        /*
+         * The transitivity vars are unique to the alpNode, so we don't
          * need to merge, simple addition will do fine.
          */
 
@@ -224,8 +224,7 @@ public abstract class AbstractJoinGroupOptimizer implements IASTOptimizer {
         final ServiceNode serviceNode = (ServiceNode) child;
 
         @SuppressWarnings("unchecked")
-        final GraphPatternGroup<IGroupMemberNode> childGroup =
-            serviceNode.getGraphPattern();
+        final GraphPatternGroup<IGroupMemberNode> childGroup = serviceNode.getGraphPattern();
 
         optimize(ctx, sa, bSets, childGroup);
       }

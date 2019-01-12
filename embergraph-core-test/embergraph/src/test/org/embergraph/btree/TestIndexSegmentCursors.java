@@ -24,11 +24,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree;
 
 import java.io.File;
-import java.io.IOException;
 import org.embergraph.btree.IndexSegment.IndexSegmentTupleCursor;
 
 /*
-* Test suite for {@link IndexSegmentTupleCursor}.
+ * Test suite for {@link IndexSegmentTupleCursor}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -21,7 +21,7 @@ package org.embergraph.service;
 import org.embergraph.mdi.IPartitionMetadata;
 
 /*
-* Describes a "split" of keys for a batch operation. This is used in scale-out where the operation
+ * Describes a "split" of keys for a batch operation. This is used in scale-out where the operation
  * is parallelized across multiple index partitions. It is also used within a single index partition
  * when an operation that has a lot of keys in its keys[] is parallelized over sub-key-ranges of
  * that keys[].

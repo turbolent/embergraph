@@ -20,7 +20,7 @@ import org.embergraph.relation.rule.Rule;
 import org.embergraph.striterator.IKeyOrder;
 
 /*
-* State for a rule execution.
+ * State for a rule execution.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -11,14 +11,13 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IPredicate;
 import org.embergraph.btree.IIndex;
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.journal.TemporaryStore;
 import org.embergraph.relation.accesspath.AccessPath;
 import org.embergraph.relation.accesspath.AccessPathFusedView;
 import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.striterator.IKeyOrder;
 
 /*
-* A factory for fused views reading from both of the source {@link IRelation}s.
+ * A factory for fused views reading from both of the source {@link IRelation}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -65,7 +64,7 @@ public class RelationFusedView<E> implements IRelation<E> {
   }
 
   //    /*
-//     * Note: You can not compute the exact element count for a fused view since
+  //     * Note: You can not compute the exact element count for a fused view since
   //     * there may be duplicate elements in the two source {@link IRelation}s
   //     * (well, you could merge the data in the views into a temporary view but
   //     * that is hardly efficient).

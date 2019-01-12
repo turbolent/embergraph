@@ -34,7 +34,7 @@ import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.Instrument;
 
 /*
-* This class coordinates a schedule among concurrent operations requiring exclusive access to
+ * This class coordinates a schedule among concurrent operations requiring exclusive access to
  * shared resources. Whenever possible, the result is a concurrent schedule - that is, operations
  * having non-overlapping lock requirements run concurrently while operations that have lock
  * contentions are queued behind operations that currently have locks on the relevant resources. A
@@ -417,8 +417,8 @@ public class LockManager</*T,*/ R extends Comparable<R>> {
 
       if (resources != null) {
 
-      /*
-       * The operation has already declared some locks. Since
+        /*
+         * The operation has already declared some locks. Since
          * [predeclareLocks] is true it is not permitted to grow the set
          * of declared locks, so we throw an exception.
          */
@@ -557,8 +557,8 @@ public class LockManager</*T,*/ R extends Comparable<R>> {
 
         if (!resourceQueues.containsKey(resource)) {
 
-        /*
-       * Note: This would indicate a failure of the mechanisms
+          /*
+           * Note: This would indicate a failure of the mechanisms
            * which keep the resource queues around while there are
            * tasks seeking or holding locks for those queues.
            */

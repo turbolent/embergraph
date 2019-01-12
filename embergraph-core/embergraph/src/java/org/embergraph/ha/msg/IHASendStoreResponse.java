@@ -20,7 +20,7 @@ package org.embergraph.ha.msg;
 import org.embergraph.journal.IRootBlockView;
 
 /*
-* Interface for a response for a request to send the backing file in support of a disaster rebuild.
+ * Interface for a response for a request to send the backing file in support of a disaster rebuild.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

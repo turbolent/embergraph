@@ -25,7 +25,7 @@ package org.embergraph.service.master;
 import java.io.Serializable;
 
 /*
-* A hash function.
+ * A hash function.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

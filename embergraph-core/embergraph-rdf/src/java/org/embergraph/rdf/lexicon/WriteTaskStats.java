@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import org.embergraph.counters.CAT;
 
 /*
-* Class for reporting various timings for writes on the lexicon indices.
+ * Class for reporting various timings for writes on the lexicon indices.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

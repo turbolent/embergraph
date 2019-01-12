@@ -35,7 +35,7 @@ import org.openrdf.query.TupleQuery;
 import org.openrdf.query.TupleQueryResult;
 
 /*
-* GETSTMTS test suite for includeInferred.
+ * GETSTMTS test suite for includeInferred.
  *
  * @see <a href="http://jira.blazegraph.com/browse/BLZG-1207" > getStatements() ignores
  *     includeInferred (REST API) </a>

@@ -24,7 +24,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree.isolation;
 
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.Properties;
 import java.util.UUID;
 import org.embergraph.btree.AbstractBTree;
@@ -34,15 +33,13 @@ import org.embergraph.btree.IRangeQuery;
 import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleIterator;
 import org.embergraph.btree.IndexMetadata;
-import org.embergraph.btree.view.FusedView;
-import org.embergraph.btree.view.TestFusedView;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.Journal;
 import org.embergraph.journal.Options;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Test suite for {@link IsolatedFusedView}.
+ * Test suite for {@link IsolatedFusedView}.
  *
  * <p>Note: the test suite for an isolated write set is similar to a {@link FusedView} except that
  * it must also handle the per tuple revision timestamps properly. The timestamps do not really
@@ -155,8 +152,8 @@ public class TestIsolatedFusedView extends AbstractBTreeTestCase {
       assertFalse(view.contains(k7));
       assertSameIterator(new byte[][] {v3a}, view.rangeIterator(null, null));
       {
-      /*
-       * Verify all entries, included those that are marked as deleted.
+        /*
+         * Verify all entries, included those that are marked as deleted.
          */
         final ITupleIterator itr =
             view.rangeIterator(
@@ -191,8 +188,8 @@ public class TestIsolatedFusedView extends AbstractBTreeTestCase {
       assertEquals(v5a, writeSet.lookup(k5)); // on write set.
       assertFalse(groundState.contains(k5)); // not on ground state.
       {
-      /*
-       * Verify the written entry.
+        /*
+         * Verify the written entry.
          */
         ITuple tuple = view.rangeIterator(k5, BytesUtil.successor(k5)).next();
         assertEquals(k5, tuple.getKey());
@@ -209,8 +206,8 @@ public class TestIsolatedFusedView extends AbstractBTreeTestCase {
       assertEquals(v3b, writeSet.lookup(k3)); // on write set.
       assertEquals(v3a, groundState.lookup(k3)); // unchanged on groundState.
       {
-      /*
-       * Verify the written entry.
+        /*
+         * Verify the written entry.
          */
         ITuple tuple = view.rangeIterator(k3, BytesUtil.successor(k3)).next();
         assertEquals(k3, tuple.getKey());
@@ -228,8 +225,8 @@ public class TestIsolatedFusedView extends AbstractBTreeTestCase {
       assertEquals(v7a, writeSet.lookup(k7)); // on write set.
       assertEquals(null, groundState.lookup(k7)); // unchanged on groundState.
       {
-      /*
-       * Verify the written entry.
+        /*
+         * Verify the written entry.
          */
         ITuple tuple = view.rangeIterator(k7, BytesUtil.successor(k7)).next();
         assertEquals(k7, tuple.getKey());
@@ -247,8 +244,8 @@ public class TestIsolatedFusedView extends AbstractBTreeTestCase {
       assertEquals(v7b, writeSet.lookup(k7)); // on write set.
       assertEquals(null, groundState.lookup(k7)); // unchanged on groundState.
       {
-      /*
-       * Verify the written entry.
+        /*
+         * Verify the written entry.
          */
         ITuple tuple = view.rangeIterator(k7, BytesUtil.successor(k7)).next();
         assertEquals(k7, tuple.getKey());

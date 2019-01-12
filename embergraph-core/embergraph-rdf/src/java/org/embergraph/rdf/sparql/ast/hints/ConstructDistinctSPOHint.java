@@ -25,10 +25,9 @@ import org.embergraph.rdf.sparql.ast.ASTBase;
 import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
-import org.embergraph.rdf.sparql.ast.eval.ASTConstructIterator;
 
 /*
-* Query hint for disabling the DISTINCT SPO behavior for a CONSTRUCT QUERY.
+ * Query hint for disabling the DISTINCT SPO behavior for a CONSTRUCT QUERY.
  *
  * @see ASTConstructIterator
  * @see https://jira.blazegraph.com/browse/BLZG-1341 (performance of dumping single graph)

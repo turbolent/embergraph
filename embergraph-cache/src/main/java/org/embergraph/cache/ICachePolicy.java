@@ -23,7 +23,7 @@ package org.embergraph.cache;
 import java.util.Iterator;
 
 /*
-* Interface for cache policy.
+ * Interface for cache policy.
  *
  * <p>The semantics of this interface are generally specified in terms of a hard reference cache
  * backing a weak (or soft) reference cache. Examples of methods on the interface whose semantics
@@ -98,7 +98,7 @@ public interface ICachePolicy<K, T> {
   T get(K oid);
 
   //    /*
-//     * Return true iff there is a dirty entry in the cache under that key. The
+  //     * Return true iff there is a dirty entry in the cache under that key. The
   //     * cache ordering is NOT updated by this method.
   //     *
   //     * @param oid

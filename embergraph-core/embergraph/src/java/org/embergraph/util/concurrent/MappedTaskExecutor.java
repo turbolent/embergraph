@@ -6,7 +6,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
@@ -14,7 +13,7 @@ import java.util.concurrent.TimeoutException;
 import org.apache.log4j.Logger;
 
 /*
-* A fly weight helper class that runs tasks either sequentially or with limited parallelism against
+ * A fly weight helper class that runs tasks either sequentially or with limited parallelism against
  * some thread pool. Deadlock can arise when limited parallelism is applied if there are
  * dependencies among the tasks. Limited parallelism is enforced by running chunks of tasks in
  * sequence. Higher concurrency is possible when using a dedicated thread pool having the desired

@@ -27,7 +27,7 @@ import org.embergraph.bop.PipelineOp;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 
 /*
-* Extended to use the {@link BufferAnnotations} to provision the {@link BlockingBuffer} and to
+ * Extended to use the {@link BufferAnnotations} to provision the {@link BlockingBuffer} and to
  * track the {@link BOpStats} as chunks are added to the buffer.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

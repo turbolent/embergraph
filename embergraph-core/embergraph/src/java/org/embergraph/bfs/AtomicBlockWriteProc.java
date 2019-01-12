@@ -31,11 +31,10 @@ import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.proc.ISimpleIndexProcedure;
 import org.embergraph.io.DataOutputBuffer;
 import org.embergraph.journal.AbstractJournal;
-import org.embergraph.journal.Journal;
 import org.embergraph.util.Bytes;
 
 /*
-* Atomic write of a single block for a file version.
+ * Atomic write of a single block for a file version.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

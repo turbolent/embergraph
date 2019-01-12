@@ -22,7 +22,7 @@ import java.text.ParseException;
 import org.embergraph.rdf.internal.gis.ICoordinate.UNITS;
 
 /*
-* Test suite for {@link CoordinateUtility}.
+ * Test suite for {@link CoordinateUtility}.
  *
  * @todo test distance between coordinates based on some known points in each quadrant.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -40,7 +40,7 @@ public class TestCoordinateUtility extends AbstractCoordinateTestCase {
   }
 
   // /*
-// * Test routine to convert a latitude into the angle in the transverse
+  // * Test routine to convert a latitude into the angle in the transverse
   // * graticule used by trig functions.
   // */
   // public void test_toTransverseGraticule() {

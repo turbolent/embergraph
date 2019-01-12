@@ -21,11 +21,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.engine;
 
-import java.lang.ref.WeakReference;
 import java.lang.reflect.Constructor;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,10 +50,6 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IQueryAttributes;
 import org.embergraph.bop.PipelineOp;
 import org.embergraph.bop.bindingSet.ListBindingSet;
-import org.embergraph.bop.fed.QueryEngineFactory;
-import org.embergraph.btree.BTree;
-import org.embergraph.btree.IndexSegment;
-import org.embergraph.btree.view.FusedView;
 import org.embergraph.cache.ConcurrentWeakValueCache;
 import org.embergraph.concurrent.FutureTaskMon;
 import org.embergraph.counters.CounterSet;
@@ -65,8 +59,6 @@ import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.Journal;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rdf.sail.webapp.client.HttpClientConfigurator;
-import org.embergraph.resources.IndexManager;
-import org.embergraph.service.IDataService;
 import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.geospatial.GeoSpatialCounters;
 import org.embergraph.util.DaemonThreadFactory;
@@ -74,7 +66,7 @@ import org.embergraph.util.InnerCause;
 import org.embergraph.util.concurrent.IHaltable;
 
 /*
-* A class managing execution of concurrent queries against a local {@link IIndexManager}.
+ * A class managing execution of concurrent queries against a local {@link IIndexManager}.
  *
  * <p>
  *
@@ -274,14 +266,14 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
   protected final GeoSpatialCounters geoSpatialCounters = newGeoSpatialCounters();
 
   //    /*
-//     * Statistics for queries which are "tagged" so we can recognize their
+  //     * Statistics for queries which are "tagged" so we can recognize their
   //     * instances as members of some group.
   //     */
   //    final protected ConcurrentHashMap<String/* groupId */, Counters> groupCounters = new
   // ConcurrentHashMap<String, Counters>();
 
   //    /*
-//     * Factory for {@link Counters} instances associated with a query group. A
+  //     * Factory for {@link Counters} instances associated with a query group. A
   //     * query is marked as a member of a group using {@link QueryHints#TAG}. This
   //     * is typically used to mark queries which are instances of the same query
   //     * template.
@@ -358,7 +350,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
       new AtomicReference<HttpClient>();
 
   //    /*
-//     * A pool used to service IO requests (reads on access paths).
+  //     * A pool used to service IO requests (reads on access paths).
   //     * <p>
   //     * Note: An IO thread pool at this level must attach threads to operations
   //     * (access path reads) rather than to individual IO requests. In order to do
@@ -368,7 +360,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
   //    private final Executor iopool;
 
   //    /*
-//     * A pool for executing fork/join tasks servicing light weight tasks which
+  //     * A pool for executing fork/join tasks servicing light weight tasks which
   //     * DO NOT block on IO. Examples of such tasks abound, including: NIO for
   //     * sending/receiving direct {@link ByteBuffer}s containing binding sets,
   //     * elements, solutions, etc; formulation of access paths from binding sets;
@@ -448,15 +440,15 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
 
           if (!isRunning()) {
 
-          /*
-       * Shutdown.
+            /*
+             * Shutdown.
              */
 
             throw new IllegalStateException();
           }
 
-        /*
-       * Lazy instantiation.
+          /*
+           * Lazy instantiation.
            */
 
           clientConnectionManagerRef.set(cm = HttpClientConfigurator.getInstance().newInstance());
@@ -687,8 +679,8 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
 
       if (deadlineQueue.size() > DEADLINE_QUEUE_SCAN_SIZE) {
 
-      /*
-       * Scan the deadline queue, removing entries for expired
+        /*
+         * Scan the deadline queue, removing entries for expired
          * queries.
          */
         scanDeadlineQueue(nowNanos, deadlineQueue);
@@ -708,8 +700,8 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
       // test for query done or deadline expired.
       if (x.checkDeadline(nowNanos) == null) {
 
-      /*
-       * This query is known to be done. It was removed from the
+        /*
+         * This query is known to be done. It was removed from the
          * priority queue above. We need to check the next element in
          * the priority order to see whether it is also done.
          */
@@ -719,8 +711,8 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
 
       if (x.deadlineNanos > nowNanos) {
 
-      /*
-       * This query has not yet reached its deadline. That means that
+        /*
+         * This query has not yet reached its deadline. That means that
          * no other query in the deadline queue has reached its
          * deadline. Therefore we are done for now.
          */
@@ -910,8 +902,8 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
             final long now = System.nanoTime();
             if ((remaining = deadline - (now - mark)) < 0) {
               // log.error("Checking deadline queue");
-            /*
-       * Check for queries whose deadline is expired.
+              /*
+               * Check for queries whose deadline is expired.
                *
                * Note: We only do this every DEADLINE_CHECK_MILLIS
                * and then reset [mark] and [remaining].
@@ -927,8 +919,8 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
             // Consume chunk already on queue for this query.
             if (q != null && !q.isDone()) q.consumeChunk();
           } catch (InterruptedException e) {
-          /*
-       * Note: Uncomment the stack trace here if you want to
+            /*
+             * Note: Uncomment the stack trace here if you want to
              * find where the query was interrupted.
              *
              * Note: If you want to find out who interrupted the
@@ -1173,7 +1165,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
   }
 
   //    /*
-//     * Return an {@link IAsynchronousIterator} that will read a single, empty
+  //     * Return an {@link IAsynchronousIterator} that will read a single, empty
   //     * {@link IBindingSet}.
   //     */
   //    private static ThickAsynchronousIterator<IBindingSet[]> newBindingSetIterator() {
@@ -1183,7 +1175,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
   //    }
 
   //    /*
-//     * Return an {@link IAsynchronousIterator} that will read a single
+  //     * Return an {@link IAsynchronousIterator} that will read a single
   //     * {@link IBindingSet}.
   //     *
   //     * @param bindingSet
@@ -1198,7 +1190,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
   //    }
 
   //    /*
-//     * Return an {@link IAsynchronousIterator} that will read the source
+  //     * Return an {@link IAsynchronousIterator} that will read the source
   //     * {@link IBindingSet}s.
   //     *
   //     * @param bsets
@@ -1250,7 +1242,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
   }
 
   //    /*
-//     * Return a {@link LocalChunkMessage} for the query wrapping the specified
+  //     * Return a {@link LocalChunkMessage} for the query wrapping the specified
   //     * source.
   //     *
   //     * @param queryId
@@ -1368,7 +1360,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
   }
 
   //    /*
-//     * Evaluate a query. This node will serve as the controller for the query.
+  //     * Evaluate a query. This node will serve as the controller for the query.
   //     *
   //     * @param query
   //     *            The query to evaluate.
@@ -1397,7 +1389,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
   //    }
 
   //    /*
-//     * Evaluate a query. This node will serve as the controller for the query.
+  //     * Evaluate a query. This node will serve as the controller for the query.
   //     *
   //     * @param queryId
   //     *            The unique identifier for the query.
@@ -1520,8 +1512,8 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
 
       if (deadline > 0) {
 
-      /*
-       * Impose a deadline on the query.
+        /*
+         * Impose a deadline on the query.
          */
         runningQuery.setDeadline(deadline);
       }
@@ -1656,8 +1648,8 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
 
       } catch (IllegalStateException ex) {
 
-      /*
-       * The query engine either is not initialized or was shutdown concurrent with adding the new
+        /*
+         * The query engine either is not initialized or was shutdown concurrent with adding the new
          * query to the running query table. We yank the query out of the running query table in
          * order to have no net effect and then throw out the exception indicating that the
          * QueryEngine has been shutdown.
@@ -1924,9 +1916,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
               IChunkMessage.class);
 
       // save reference.
-      runningQuery =
-          ctor.newInstance(
-              this, queryId, controller, clientProxy, query, realSource);
+      runningQuery = ctor.newInstance(this, queryId, controller, clientProxy, query, realSource);
 
     } catch (Exception ex) {
 

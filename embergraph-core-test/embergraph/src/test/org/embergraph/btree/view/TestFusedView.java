@@ -36,20 +36,17 @@ import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleCursor;
 import org.embergraph.btree.ITupleIterator;
 import org.embergraph.btree.IndexMetadata;
-import org.embergraph.btree.IndexSegment;
 import org.embergraph.btree.NOPTupleSerializer;
 import org.embergraph.btree.TestTuple;
-import org.embergraph.btree.filter.Advancer;
 import org.embergraph.btree.filter.TupleFilter;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
-import org.embergraph.sparse.SparseRowStore;
 import org.embergraph.striterator.Resolver;
 import org.embergraph.striterator.Striterator;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Test suite for {@link FusedView}.
+ * Test suite for {@link FusedView}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -1402,8 +1399,8 @@ public class TestFusedView extends AbstractBTreeTestCase {
       // k7 : key deleted.
       assertNull(cursor.seek(k7));
       {
-      /*
-       * Test seek to deleted key when DELETED is specified.
+        /*
+         * Test seek to deleted key when DELETED is specified.
          */
 
         // another cursor with DELETED in the flags.

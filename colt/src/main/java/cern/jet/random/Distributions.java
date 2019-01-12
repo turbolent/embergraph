@@ -10,7 +10,7 @@ package cern.jet.random;
 
 import cern.jet.random.engine.RandomEngine;
 /*
-* Contains methods for conveniently generating pseudo-random numbers from special distributions
+ * Contains methods for conveniently generating pseudo-random numbers from special distributions
  * such as the Burr, Cauchy, Erlang, Geometric, Lambda, Laplace, Logistic, Weibull, etc.
  *
  * <p><b>About this class:</b>

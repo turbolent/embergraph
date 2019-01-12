@@ -27,7 +27,7 @@ import java.io.Serializable;
 import java.util.Comparator;
 
 /*
-* Places {@link Long} values into descending order.
+ * Places {@link Long} values into descending order.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

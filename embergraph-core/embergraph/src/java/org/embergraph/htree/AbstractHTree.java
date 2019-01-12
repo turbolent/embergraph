@@ -6,7 +6,6 @@ import cutthecrap.utils.striterators.Resolver;
 import cutthecrap.utils.striterators.Striterator;
 import java.io.PrintStream;
 import java.lang.ref.Reference;
-import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -25,8 +24,6 @@ import org.apache.log4j.Logger;
 import org.embergraph.Banner;
 import org.embergraph.EmbergraphStatics;
 import org.embergraph.btree.AbstractBTree.IBTreeCounters;
-import org.embergraph.btree.AbstractNode;
-import org.embergraph.btree.BTree;
 import org.embergraph.btree.BTreeCounters;
 import org.embergraph.btree.EntryScanIterator;
 import org.embergraph.btree.HTreeIndexMetadata;
@@ -41,29 +38,24 @@ import org.embergraph.btree.IndexInconsistentError;
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.btree.PO;
 import org.embergraph.btree.ReadWriteLockManager;
-import org.embergraph.btree.UnisolatedReadWriteIndex;
 import org.embergraph.btree.data.IAbstractNodeData;
 import org.embergraph.cache.HardReferenceQueue;
 import org.embergraph.cache.HardReferenceQueueWithBatchingUpdates;
 import org.embergraph.cache.IHardReferenceQueue;
-import org.embergraph.cache.RingBuffer;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.ICounterSetAccess;
 import org.embergraph.counters.OneShotInstrument;
 import org.embergraph.io.AbstractFixedByteArrayBuffer;
 import org.embergraph.io.ByteArrayBuffer;
 import org.embergraph.io.compression.IRecordCompressorFactory;
-import org.embergraph.journal.IAtomicStore;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.rawstore.IRawStore;
-import org.embergraph.resources.IndexManager;
-import org.embergraph.service.DataService;
 import org.embergraph.util.concurrent.Computable;
 import org.embergraph.util.concurrent.LatchedExecutor;
 import org.embergraph.util.concurrent.Memoizer;
 
 /*
-* Abstract base class for a persistence capable extensible hash tree.
+ * Abstract base class for a persistence capable extensible hash tree.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -161,7 +153,7 @@ public abstract class AbstractHTree
   }
 
   //	/*
-//	 * {@inheritDoc}
+  //	 * {@inheritDoc}
   //	 * <p>
   //	 * Return some "statistics" about the btree including both the static
   //	 * {@link CounterSet} and the {@link BTreeCounters}s.
@@ -312,7 +304,7 @@ public abstract class AbstractHTree
   private final IReadWriteLockManager lockManager;
 
   //	/*
-//	 * The #of entries in a directory bucket, which is 2^{@link #addressBits}
+  //	 * The #of entries in a directory bucket, which is 2^{@link #addressBits}
   //	 * (aka <code>1<<addressBits</code>).
   //	 */
   //    protected final int branchingFactor;
@@ -371,8 +363,8 @@ public abstract class AbstractHTree
   private static final Computable<LoadChildRequest, AbstractPage> loadChild =
       new Computable<LoadChildRequest, AbstractPage>() {
 
-      /*
-       * Loads a child node from the specified address.
+        /*
+         * Loads a child node from the specified address.
          *
          * @return A hard reference to that child node.
          * @throws IllegalArgumentException if addr is <code>null</code>.
@@ -424,7 +416,7 @@ public abstract class AbstractHTree
     }
 
     //        /*
-//         * The approximate size of the cache (used solely for debugging to
+    //         * The approximate size of the cache (used solely for debugging to
     //         * detect cache leaks).
     //         */
     //        int size() {
@@ -448,7 +440,7 @@ public abstract class AbstractHTree
     }
 
     //        /*
-//         * Called from {@link AbstractBTree#close()}.
+    //         * Called from {@link AbstractBTree#close()}.
     //         *
     //         * @todo should we do this?  There should not be any reads against the
     //         * the B+Tree when it is close()d.  Therefore I do not believe there
@@ -803,7 +795,7 @@ public abstract class AbstractHTree
   public abstract long getLastCommitTime();
 
   //    /*
-//     * The timestamp associated with unisolated writes on this index. This
+  //     * The timestamp associated with unisolated writes on this index. This
   //     * timestamp is designed to allow the interleaving of full transactions
   //     * (whose revision timestamp is assigned by the transaction service) with
   //     * unisolated operations on the same indices.
@@ -1510,8 +1502,8 @@ public abstract class AbstractHTree
 
       if (t != root) {
 
-      /*
-       * The parent MUST be defined unless this is the root node.
+        /*
+         * The parent MUST be defined unless this is the root node.
          */
 
         assert t.parent != null;
@@ -1652,8 +1644,8 @@ public abstract class AbstractHTree
 
       if (t != root) {
 
-      /*
-       * The parent MUST be defined unless this is
+        /*
+         * The parent MUST be defined unless this is
          * the root node.
          */
 
@@ -1670,7 +1662,7 @@ public abstract class AbstractHTree
       final Integer level =
           t.getLevel()
               - nodeLevel; // FIXME Write getLevel(A,B) for HTree. This will check for cases where
-                           // [t] is not a child of [node].
+      // [t] is not a child of [node].
 
       // Lookup dirty list for that level.
       List<AbstractPage> dirtyList = dirtyMap.get(level);
@@ -1740,8 +1732,8 @@ public abstract class AbstractHTree
 
       if (dirtyListSize < minDirtyListSizeForParallelEvict) {
 
-      /*
-       * Avoid parallelism when only a few nodes or leaves will be
+        /*
+         * Avoid parallelism when only a few nodes or leaves will be
          * evicted.
          */
         for (AbstractPage t : dirtyList) {
@@ -1778,8 +1770,8 @@ public abstract class AbstractHTree
 
                         if (u != root) {
 
-                        /*
-       * The parent MUST be defined unless this is
+                          /*
+                           * The parent MUST be defined unless this is
                            * the root node.
                            */
 

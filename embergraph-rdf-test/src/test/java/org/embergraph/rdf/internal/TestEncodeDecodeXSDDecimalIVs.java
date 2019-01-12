@@ -31,7 +31,7 @@ import org.embergraph.rdf.internal.impl.literal.XSDDecimalIV;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 
 /*
-* Unit tests for {@link XSDDecimalIV}.
+ * Unit tests for {@link XSDDecimalIV}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -198,7 +198,7 @@ public class TestEncodeDecodeXSDDecimalIVs extends AbstractEncodeDecodeKeysTestC
   }
 
   //    /*
-//     * Unit test for {@link XSDDecimalIV}.
+  //     * Unit test for {@link XSDDecimalIV}.
   //     */
   //    public void test_encodeDecode_XSDDecimal_2() {
   //

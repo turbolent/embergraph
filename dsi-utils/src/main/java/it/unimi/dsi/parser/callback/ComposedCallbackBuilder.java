@@ -29,7 +29,7 @@ import it.unimi.dsi.parser.Element;
 import java.util.Map;
 
 /*
-* A builder for composed callbacks.
+ * A builder for composed callbacks.
  *
  * <p>To compose a series of callbacks, you must first create an instance of this class, {@linkplain
  * #add(Callback) add all required callbacks}, and finally {@linkplain #compose() get the composed

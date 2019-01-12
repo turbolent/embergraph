@@ -24,11 +24,10 @@ package org.embergraph.bop.solutions;
 import java.util.Comparator;
 import java.util.Map;
 import org.embergraph.bop.BOp;
-import org.embergraph.bop.IValueExpression;
 import org.embergraph.bop.PipelineOp;
 
 /*
-* Base class for operators which sort binding sets.
+ * Base class for operators which sort binding sets.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

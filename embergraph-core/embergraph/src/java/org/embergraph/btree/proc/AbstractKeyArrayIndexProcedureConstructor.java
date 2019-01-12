@@ -5,10 +5,9 @@ import org.embergraph.btree.IIndex;
 import org.embergraph.btree.ITupleSerializer;
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.btree.raba.codec.IRabaCoder;
-import org.embergraph.service.IDataService;
 
 /*
-* A factory for {@link IKeyArrayIndexProcedure}s so that their data may be key range partitions and
+ * A factory for {@link IKeyArrayIndexProcedure}s so that their data may be key range partitions and
  * mapped against each relevant index partition.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

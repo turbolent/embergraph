@@ -7,14 +7,13 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import org.embergraph.gom.om.IObjectManager;
-import org.embergraph.gom.om.ObjectMgrModel;
 import org.openrdf.model.Resource;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.query.BindingSet;
 
 /*
-* A (forward or reverse) link set.
+ * A (forward or reverse) link set.
  *
  * @author <a href="mailto:martyncutcher@users.sourceforge.net">Martyn Cutcher</a>
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

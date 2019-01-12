@@ -1,9 +1,7 @@
 package org.embergraph.rdf.changesets;
 
-import org.embergraph.rdf.model.StatementEnum;
-
 /*
-* Attempting to add or remove statements can have a number of different effects. This enum captures
+ * Attempting to add or remove statements can have a number of different effects. This enum captures
  * the different actions that can take place as a result of trying to add or remove a statement from
  * the database.
  */
@@ -55,7 +53,7 @@ public enum ChangeAction {
   UPDATED,
 
   //        /*
-//         * This change action can occur for one of two reasons:
+  //         * This change action can occur for one of two reasons:
   //         * <p>
   //         * <ul>
   //         * <li> A statement is asserted, but already exists in the database as

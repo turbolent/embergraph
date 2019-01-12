@@ -23,12 +23,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sail.tck;
 
 import java.util.Properties;
-import org.embergraph.journal.Journal;
 import org.embergraph.rdf.sail.EmbergraphSail.Options;
 import org.openrdf.query.Dataset;
 
 /*
-* Test harness for running the SPARQL test suites against a {@link Journal} using full read/write
+ * Test harness for running the SPARQL test suites against a {@link Journal} using full read/write
  * transaction support.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -59,7 +58,7 @@ public class EmbergraphSparqlFullRWTxTest extends EmbergraphSparqlTest {
   }
 
   //	/*
-//	 * Overridden to use {@link EmbergraphSail#getConnection()} since we do not
+  //	 * Overridden to use {@link EmbergraphSail#getConnection()} since we do not
   //	 * have to workaround a deadlock in concurrent access to the unisolated
   //	 * connection by the test harness when using full read-write transactions.
   //	 */

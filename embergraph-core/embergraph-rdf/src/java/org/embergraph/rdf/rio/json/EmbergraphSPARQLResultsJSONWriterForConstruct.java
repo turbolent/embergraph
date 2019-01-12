@@ -32,7 +32,7 @@ import org.openrdf.rio.RioSetting;
 import org.openrdf.rio.WriterConfig;
 
 /*
-* A TupleQueryResultWriter that writes query results in the <a
+ * A TupleQueryResultWriter that writes query results in the <a
  * href="http://www.w3.org/TR/rdf-sparql-json-res/">SPARQL Query Results JSON Format</a>.
  */
 public class EmbergraphSPARQLResultsJSONWriterForConstruct implements RDFWriter {
@@ -65,8 +65,7 @@ public class EmbergraphSPARQLResultsJSONWriterForConstruct implements RDFWriter 
     try {
       writer.startDocument();
       writer.startHeader();
-      writer.startQueryResult(
-          Arrays.asList("subject", "predicate", "object", "context"));
+      writer.startQueryResult(Arrays.asList("subject", "predicate", "object", "context"));
       writer.endHeader();
     } catch (QueryResultHandlerException e) {
       throw new RDFHandlerException(e);

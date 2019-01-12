@@ -28,7 +28,7 @@ import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /*
-* Data driven test suite for GeoSpatial service feature, GeoSpatial in triples vs. quads mode,
+ * Data driven test suite for GeoSpatial service feature, GeoSpatial in triples vs. quads mode,
  * testing of different service configurations, as well as correctness of the GeoSpatial service
  * itself.
  *

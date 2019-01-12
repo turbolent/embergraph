@@ -4,7 +4,7 @@ import java.util.regex.Pattern;
 import org.embergraph.counters.query.HistoryTable;
 
 /*
-* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public abstract class HistoryTableRenderer implements IRenderer {

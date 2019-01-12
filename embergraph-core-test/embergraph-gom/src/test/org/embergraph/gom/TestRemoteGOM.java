@@ -41,7 +41,6 @@ import org.embergraph.gom.gpo.IGPO;
 import org.embergraph.gom.gpo.ILinkSet;
 import org.embergraph.gom.om.IObjectManager;
 import org.embergraph.gom.om.NanoSparqlObjectManager;
-import org.embergraph.gom.om.ObjectMgrModel;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.ITx;
@@ -63,7 +62,7 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
 /*
-* Similar to TestGOM but is setup to connect to the NanoSparqlServer using a RemoteRepository
+ * Similar to TestGOM but is setup to connect to the NanoSparqlServer using a RemoteRepository
  *
  * @author Martyn Cutcher
  */

@@ -23,7 +23,7 @@ package org.embergraph.btree.data;
 import org.embergraph.btree.raba.IRaba;
 
 /*
-* Interface for access to the keys {@link IRaba} of a node or leaf in an index data structure.
+ * Interface for access to the keys {@link IRaba} of a node or leaf in an index data structure.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: ILeafData.java 4388 2011-04-11 13:35:47Z thompsonbry $

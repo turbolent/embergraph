@@ -26,7 +26,7 @@ package org.embergraph.relation.rule;
 import junit.framework.TestCase2;
 
 /*
-* Unit tests for {@link Slice}.
+ * Unit tests for {@link Slice}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

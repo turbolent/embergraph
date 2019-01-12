@@ -36,7 +36,7 @@ import org.embergraph.bop.bindingSet.EmptyBindingSet;
 import org.embergraph.bop.bindingSet.ListBindingSet;
 
 /*
-* Test suite for {@link Predicate}.
+ * Test suite for {@link Predicate}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -186,20 +186,20 @@ public class TestPredicate extends TestCase2 {
     // verify same data, but different references.
     for (int i = 0; i < p1.arity(); i++) {
       if (p1.get(i).isVar()) {
-      /*
-       * A variable might have become bound so check the binding set
+        /*
+         * A variable might have become bound so check the binding set
          * for that variable.
          */
         final IConstant<?> c = bindingSet.get((IVariable<?>) p1.get(i));
         if (c != null) {
-        /*
-       * The variable should have been bound to that constant.
+          /*
+           * The variable should have been bound to that constant.
            */
           assertTrue("i=" + i, p2.get(i).isConstant());
           // equals (same data)
           assertEquals("i=" + i, c, p2.get(i));
-        /*
-       * asBound() needs to associate the constant with the variable in
+          /*
+           * asBound() needs to associate the constant with the variable in
            * order for the binding to be propagated to the variable. This
            * was not true historically when we visited IElements on access
            * paths, but it is true now that we are visting IBindingSets on
@@ -217,8 +217,8 @@ public class TestPredicate extends TestCase2 {
           assertTrue("i=" + i, p1.get(i) == p2.get(i));
         }
       } else {
-      /*
-       * Since not a variable in p1, the asBound variable is a
+        /*
+         * Since not a variable in p1, the asBound variable is a
          * constant (no deep copy for constants).
          */
         assertTrue("i=" + i, p2.get(i).isConstant());

@@ -24,7 +24,7 @@ import org.embergraph.rdf.sparql.ast.JoinGroupNode;
 import org.embergraph.rdf.sparql.ast.UnionNode;
 
 /*
-* Test suite for the {@link ASTJoinGroupOrderOptimizer}.
+ * Test suite for the {@link ASTJoinGroupOrderOptimizer}.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  */
@@ -548,8 +548,8 @@ public class TestASTJoinGroupOrderOptimizer extends AbstractOptimizerTestCaseWit
                     unionWithVars("bound", "x3"),
                     assignmentWithVar("bound", "x1")));
 
-      /*
-       * Only the second UNION expression bounds x1 for sure. The BIND node is placed at the first
+        /*
+         * Only the second UNION expression bounds x1 for sure. The BIND node is placed at the first
          * "useful" position after that one.
          */
         expected =

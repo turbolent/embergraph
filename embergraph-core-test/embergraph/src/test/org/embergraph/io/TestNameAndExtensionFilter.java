@@ -28,7 +28,7 @@ import java.util.Vector;
 import junit.framework.TestCase;
 
 /*
-* Test suite for {@link NameAndExtensionFilter}.
+ * Test suite for {@link NameAndExtensionFilter}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

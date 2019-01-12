@@ -10,7 +10,7 @@ package cern.colt.matrix.doublealgo;
 
 import cern.colt.matrix.DoubleMatrix2D;
 /*
-* A comparison function which imposes a <i>total ordering</i> on some collection of elements.
+ * A comparison function which imposes a <i>total ordering</i> on some collection of elements.
  * Comparators can be passed to a sort method (such as
  * <tt>cern.colt.matrix.doublealgo.Sorting.quickSort</tt>) to allow precise control over the sort
  * order.

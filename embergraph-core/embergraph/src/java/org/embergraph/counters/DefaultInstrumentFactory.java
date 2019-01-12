@@ -26,7 +26,7 @@ package org.embergraph.counters;
 import org.embergraph.counters.ICounterSet.IInstrumentFactory;
 
 /*
-* Used to read in {@link CounterSet} XML, aggregating data into {@link HistoryInstrument}s.
+ * Used to read in {@link CounterSet} XML, aggregating data into {@link HistoryInstrument}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

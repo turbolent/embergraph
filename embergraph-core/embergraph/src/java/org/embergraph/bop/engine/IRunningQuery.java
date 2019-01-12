@@ -26,16 +26,13 @@ import java.util.Map;
 import java.util.UUID;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
-import org.embergraph.bop.IPredicate;
 import org.embergraph.bop.IQueryContext;
-import org.embergraph.bop.PipelineOp;
-import org.embergraph.btree.ILocalBTreeView;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.util.concurrent.IHaltable;
 
 /*
-* Non-Remote interface exposing a limited set of the state of an executing query.
+ * Non-Remote interface exposing a limited set of the state of an executing query.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -121,7 +118,7 @@ public interface IRunningQuery extends IHaltable<Void>, IQueryContext {
   long getElapsed();
 
   //	/*
-//	 * Return <code>true</code> if there are no operators which could
+  //	 * Return <code>true</code> if there are no operators which could
   //	 * (re-)trigger the specified operator.
   //	 * <p>
   //	 * Note: This is intended to be invoked synchronously from within the
@@ -140,7 +137,7 @@ public interface IRunningQuery extends IHaltable<Void>, IQueryContext {
   //    boolean isLastInvocation(final int bopId,final int nconsumed);
 
   //    /*
-//     * Cancel the running query (normal termination).
+  //     * Cancel the running query (normal termination).
   //     * <p>
   //     * Note: This method provides a means for an operator to indicate that the
   //     * query should halt immediately for reasons other than abnormal
@@ -152,7 +149,7 @@ public interface IRunningQuery extends IHaltable<Void>, IQueryContext {
   //    void halt();
   //
   //    /*
-//     * Cancel the query (abnormal termination).
+  //     * Cancel the query (abnormal termination).
   //     *
   //     * @param t
   //     *            The cause.
@@ -165,7 +162,7 @@ public interface IRunningQuery extends IHaltable<Void>, IQueryContext {
   //    Throwable halt(final Throwable t);
   //
   //    /*
-//     * Return the cause if the query was terminated by an exception.
+  //     * Return the cause if the query was terminated by an exception.
   //     * @return
   //     */
   //    Throwable getCause();

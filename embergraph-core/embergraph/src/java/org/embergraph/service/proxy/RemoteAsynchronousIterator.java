@@ -28,13 +28,10 @@ import java.io.Serializable;
 import java.rmi.Remote;
 import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
-import org.embergraph.bop.IBindingSet;
 import org.embergraph.relation.accesspath.IAsynchronousIterator;
-import org.embergraph.relation.rule.eval.ISolution;
-import org.embergraph.relation.rule.eval.pipeline.JoinTask;
 
 /*
-* {@link Remote} interface declaring the API of {@link IAsynchronousIterator} but also declaring
+ * {@link Remote} interface declaring the API of {@link IAsynchronousIterator} but also declaring
  * that each methods throws {@link IOException} in order to be compatible with {@link Remote} and
  * {@link Exporter}. Of course, this means that this interface can not extend {@link
  * IAsynchronousIterator}!

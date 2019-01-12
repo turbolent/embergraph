@@ -49,7 +49,7 @@ import org.embergraph.service.ndx.RawDataServiceTupleIterator;
 import org.embergraph.util.Bytes;
 
 /*
-* Some unit tests for moving an index partition.
+ * Some unit tests for moving an index partition.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -255,8 +255,8 @@ public class TestMove extends AbstractEmbeddedFederationTestCase {
                   + "), npartitions="
                   + npartitions);
 
-      /*
-       * Compare the index against ground truth after overflow.
+        /*
+         * Compare the index against ground truth after overflow.
          */
         if (log.isInfoEnabled()) log.info("Verifying scale-out index against ground truth");
 
@@ -281,8 +281,7 @@ public class TestMove extends AbstractEmbeddedFederationTestCase {
       LoadBalancerService.log.setLevel(Level.INFO);
 
       final AbstractEmbeddedLoadBalancerService lbs =
-          ((AbstractEmbeddedLoadBalancerService)
-              fed.getLoadBalancerService());
+          ((AbstractEmbeddedLoadBalancerService) fed.getLoadBalancerService());
 
       final ServiceScore[] fakeServiceScores = new ServiceScore[2];
 
@@ -320,8 +319,8 @@ public class TestMove extends AbstractEmbeddedFederationTestCase {
       //            while (!done)
       {
 
-      /*
-       * Just a little random data.
+        /*
+         * Just a little random data.
          *
          * Note: We have to write enough data so that the new updates
          * are not just copied onto the new journal in order for the
@@ -349,8 +348,8 @@ public class TestMove extends AbstractEmbeddedFederationTestCase {
             BatchInsertConstructor.RETURN_NO_VALUES,
             null /* handler */);
 
-      /*
-       * Set flag to force overflow on group commit.
+        /*
+         * Set flag to force overflow on group commit.
          */
         dataService0.forceOverflow(false /* immediate */, true /* compactingMerge */);
 
@@ -367,8 +366,8 @@ public class TestMove extends AbstractEmbeddedFederationTestCase {
         // wait until overflow processing is done.
         overflowCounter = awaitAsynchronousOverflow(dataService0, overflowCounter);
 
-      /*
-       * Compare the index against ground truth after overflow.
+        /*
+         * Compare the index against ground truth after overflow.
          */
 
         if (log.isInfoEnabled()) log.info("Verifying scale-out index against ground truth");

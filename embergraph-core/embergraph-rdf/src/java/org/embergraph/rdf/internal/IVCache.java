@@ -23,11 +23,9 @@ package org.embergraph.rdf.internal;
 
 import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.model.EmbergraphValue;
-import org.embergraph.rdf.model.EmbergraphValueFactory;
-import org.openrdf.model.Value;
 
 /*
-* Interface for managing the {@link EmbergraphValue} cached on an {@link IV}.
+ * Interface for managing the {@link EmbergraphValue} cached on an {@link IV}.
  *
  * <p>This interface is designed to support the query plan generator. The {@link EmbergraphValue} is
  * cached when a query plan decides that the materialized value is required for a downstream
@@ -87,7 +85,7 @@ public interface IVCache<V extends EmbergraphValue, T> {
   V getValue() throws NotMaterializedException;
 
   //	/*
-//	 * Drop the cached {@link EmbergraphValue}. This is a NOP if the cache is
+  //	 * Drop the cached {@link EmbergraphValue}. This is a NOP if the cache is
   //	 * empty.
   //	 *
   //	 * @deprecated There is a concurrency problem with this method for any IV for

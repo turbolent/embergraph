@@ -308,8 +308,8 @@ public class RAMGASEngine extends GASEngine {
 
       final URI linkTypeIV = ctx.getLinkType();
       if (linkTypeIV != null) {
-      /*
-       * FIXME RDR: We need to use a union of access paths for link
+        /*
+         * FIXME RDR: We need to use a union of access paths for link
          * attributes for the generic SAIL since it does not have the
          * concept of statements about statements. This will require
          * applying the access paths that will visit the appropriate
@@ -344,8 +344,8 @@ public class RAMGASEngine extends GASEngine {
 
         if (v instanceof Resource) {
 
-        /*
-       * FIXME This is not ignoring self-loops. Realistically, we
+          /*
+           * FIXME This is not ignoring self-loops. Realistically, we
            * want to include them in the data since they are part of
            * the data, but we do not want to consider them in samples
            * since they do not actually go anywhere. The SAIL and BD

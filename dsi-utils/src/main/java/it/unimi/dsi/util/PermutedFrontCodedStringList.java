@@ -39,7 +39,7 @@ import java.io.IOException;
 import java.io.Serializable;
 
 /*
-* A {@link it.unimi.dsi.util.FrontCodedStringList} whose indices are permuted.
+ * A {@link it.unimi.dsi.util.FrontCodedStringList} whose indices are permuted.
  *
  * <p>It may happen that a list of strings compresses very well using front coding, but
  * unfortunately alphabetical order is <em>not</em> the right order for the strings in the list.

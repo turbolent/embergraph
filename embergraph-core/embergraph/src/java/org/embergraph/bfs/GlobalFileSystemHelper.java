@@ -29,7 +29,7 @@ import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.ITx;
 
 /*
-* Helper class.
+ * Helper class.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

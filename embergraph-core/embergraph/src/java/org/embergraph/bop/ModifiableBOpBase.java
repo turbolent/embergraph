@@ -30,7 +30,7 @@ import java.util.ListIterator;
 import java.util.Map;
 
 /*
-* Abstract base class for mutable {@link BOp}s. Unlike {@link BOpBase}, this class supports
+ * Abstract base class for mutable {@link BOp}s. Unlike {@link BOpBase}, this class supports
  * destructive mutation. This is the base class for the embergraph AST nodes. ASTs are destructively
  * rewritten by optimizers before they are turned into a query plan.
  *
@@ -632,7 +632,7 @@ public class ModifiableBOpBase extends CoreBaseBOp {
   //    }
   //
   //    /*
-//     * Deep copy the arguments.
+  //     * Deep copy the arguments.
   //     * <p>
   //     * Note: As long as we stick to the immutable semantics for bops, we can
   //     * just make a shallow copy of the arguments in the "copy" constructor and
@@ -654,7 +654,7 @@ public class ModifiableBOpBase extends CoreBaseBOp {
   //    }
   //
   //    /*
-//     * Deep copy the annotations.
+  //     * Deep copy the annotations.
   //     * <p>
   //     * Note: This does not know how to deep copy annotations which are not
   //     * {@link BOp}s or immutable objects such as {@link String}s or

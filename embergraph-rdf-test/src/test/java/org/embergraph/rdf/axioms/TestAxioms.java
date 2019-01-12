@@ -24,7 +24,6 @@ package org.embergraph.rdf.axioms;
 import java.util.Iterator;
 import java.util.Properties;
 import org.embergraph.io.SerializerUtil;
-import org.embergraph.rdf.model.EmbergraphStatement;
 import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
@@ -36,7 +35,7 @@ import org.openrdf.model.vocabulary.OWL;
 import org.openrdf.model.vocabulary.RDF;
 
 /*
-* Test suite for the {@link Axioms}.
+ * Test suite for the {@link Axioms}.
  *
  * <p>Note: {@link BaseAxioms} required an {@link AbstractTripleStore} to convert the {@link
  * EmbergraphStatement} objects into {@link SPO}s. This makes it impossible to unit test the axioms

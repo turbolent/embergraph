@@ -25,19 +25,13 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.UUID;
 import java.util.concurrent.Future;
-import org.embergraph.ha.halog.HALogWriter;
 import org.embergraph.ha.msg.IHASendState;
 import org.embergraph.ha.msg.IHASyncRequest;
 import org.embergraph.ha.msg.IHAWriteMessage;
-import org.embergraph.ha.pipeline.HAReceiveService;
-import org.embergraph.ha.pipeline.HASendService;
-import org.embergraph.io.writecache.WriteCache;
 import org.embergraph.journal.IRootBlockView;
-import org.embergraph.quorum.Quorum;
-import org.embergraph.quorum.QuorumMember;
 
 /*
-* A non-remote interface for a member service in a {@link Quorum} defining methods to replicating
+ * A non-remote interface for a member service in a {@link Quorum} defining methods to replicating
  * writes.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -101,7 +95,7 @@ public interface QuorumPipeline<S extends HAPipelineGlue> {
    * itself is not aware of pipeline state changes.
    */
   //    /*
-//     * The service used by the leader to transmit NIO buffers to the next node
+  //     * The service used by the leader to transmit NIO buffers to the next node
   //     * in the write pipeline. The returned object is valid as long as this node
   //     * remains the quorum leader.
   //     *
@@ -116,7 +110,7 @@ public interface QuorumPipeline<S extends HAPipelineGlue> {
    * itself is not aware of pipeline state changes.
    */
   //    /*
-//     * The service used by the followers to accept and relay NIO buffers along
+  //     * The service used by the followers to accept and relay NIO buffers along
   //     * the write pipeline. The returned object is valid until the service
   //     * becomes the leader or disconnects from the {@link Quorum}.
   //     *

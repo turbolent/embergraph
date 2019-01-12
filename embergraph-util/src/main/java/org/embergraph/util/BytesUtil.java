@@ -17,9 +17,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.util;
 
-import it.unimi.dsi.fastutil.bytes.custom.CustomByteArrayFrontCodedList;
-import it.unimi.dsi.io.InputBitStream;
-import it.unimi.dsi.io.OutputBitStream;
 import java.nio.ByteBuffer;
 import java.util.Comparator;
 import java.util.regex.Matcher;
@@ -27,7 +24,7 @@ import java.util.regex.Pattern;
 import org.apache.log4j.Logger;
 
 /*
-* Class supporting operations on variable length byte[] keys.
+ * Class supporting operations on variable length byte[] keys.
  *
  * <p>Comparison operations that accept a starting offset are used when the byte[]s are known to
  * share a leading prefix that may be skipped during comparison.
@@ -224,7 +221,7 @@ public class BytesUtil {
   }
 
   // /*
-// * Byte-wise comparison of a {@link ByteBuffer} and a byte[]. The data are
+  // * Byte-wise comparison of a {@link ByteBuffer} and a byte[]. The data are
   // * treated as arrays of unsigned bytes. The {@link ByteBuffer} position,
   // * limit and mark are unchanged by this procedure.
   // *
@@ -253,7 +250,7 @@ public class BytesUtil {
   // }
 
   // /*
-// * Byte-wise comparison of byte[]s (the arrays are treated as arrays of
+  // * Byte-wise comparison of byte[]s (the arrays are treated as arrays of
   // * unsigned bytes).
   // *
   // * @param aoff

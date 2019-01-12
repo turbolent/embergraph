@@ -21,7 +21,7 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 
 /*
-* An implementation of a Blueprints Graph that implements immortality using the RDR specification.
+ * An implementation of a Blueprints Graph that implements immortality using the RDR specification.
  *
  * <p>Modeling vertices <<:v1 rdf:type :Vertex>> :timestamp "t1" .
  *

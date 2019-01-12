@@ -31,7 +31,7 @@ import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
 import org.embergraph.rdf.sparql.ast.StaticAnalysis;
 
 /*
-* Class representing an ordered list of {@link ASTJoinGroupPartition}s.
+ * Class representing an ordered list of {@link ASTJoinGroupPartition}s.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$

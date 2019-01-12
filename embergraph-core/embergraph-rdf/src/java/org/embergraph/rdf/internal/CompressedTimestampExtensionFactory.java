@@ -25,7 +25,7 @@ import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.model.EmbergraphValue;
 
 /*
-* Extension factory that adds a compressed timestamp literal datatype, namely
+ * Extension factory that adds a compressed timestamp literal datatype, namely
  * <http://www.embergraph.org/rdf/datatype#compressedTimestamp>. Integers typed with this datatype
  * should be literals, which are compactly stored in the database.
  *

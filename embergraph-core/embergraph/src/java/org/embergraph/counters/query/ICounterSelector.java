@@ -24,12 +24,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.counters.query;
 
 import java.util.regex.Pattern;
-import org.embergraph.counters.HistoryInstrument;
 import org.embergraph.counters.ICounter;
 import org.embergraph.counters.PeriodEnum;
 
 /*
-* Interface for selecting counters.
+ * Interface for selecting counters.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

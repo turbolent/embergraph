@@ -4,7 +4,6 @@ import cutthecrap.utils.striterators.FilterBase;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import org.apache.log4j.Logger;
-import org.embergraph.btree.IIndex;
 import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleCursor;
 import org.embergraph.btree.ITupleIterator;
@@ -13,7 +12,7 @@ import org.embergraph.io.ByteArrayBuffer;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Used to write logic that advances an {@link ITupleCursor} to another key after it visits some
+ * Used to write logic that advances an {@link ITupleCursor} to another key after it visits some
  * element. For example, the "distinct term scan" for the RDF DB is written in this manner.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -139,8 +138,8 @@ public abstract class Advancer<E> extends FilterBase implements ITupleFilter<E> 
 
         } catch (KeyOutOfRangeException ex) {
 
-        /*
-       * We have advanced beyond a key range constraint imposed either
+          /*
+           * We have advanced beyond a key range constraint imposed either
            * by the ITupleCursor or by an index partition. In either case
            * we treat the source iterator as if it was exhausted.
            *

@@ -10,7 +10,7 @@ package cern.jet.random;
 
 import cern.jet.random.engine.RandomEngine;
 /*
-* Zeta distribution.
+ * Zeta distribution.
  *
  * <p>Valid parameter ranges: <tt>ro &gt; 0</tt> and <tt>pk &gt;= 0</tt>.
  * <dt>If either <tt>ro &gt; 100</tt> or <tt>k &gt; 10000</tt> numerical problems in computing the

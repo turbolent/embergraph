@@ -24,25 +24,18 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import org.embergraph.bfs.EmbergraphFileSystem;
-import org.embergraph.btree.BTree;
 import org.embergraph.btree.IIndex;
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.journal.IIndexStore;
 import org.embergraph.journal.IResourceLockService;
 import org.embergraph.journal.TemporaryStore;
 import org.embergraph.relation.locator.IResourceLocator;
-import org.embergraph.relation.rule.eval.pipeline.DistributedJoinTask;
-import org.embergraph.relation.rule.eval.pipeline.JoinTaskFactoryTask;
-import org.embergraph.resources.IndexManager;
-import org.embergraph.resources.StoreManager.ManagedJournal;
 import org.embergraph.service.DataService;
-import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.sparse.SparseRowStore;
 
 /*
-* The index view that we need for the {@link DistributedJoinTask} is on the {@link IndexManager}
+ * The index view that we need for the {@link DistributedJoinTask} is on the {@link IndexManager}
  * class, not the live {@link ManagedJournal}. Looking on the live journal we will only see the
  * mutable {@link BTree} and not the entire index partition view. However, {@link IndexManager} does
  * not implement {@link IIndexManager} or even {@link IIndexStore}. Therefore this class was

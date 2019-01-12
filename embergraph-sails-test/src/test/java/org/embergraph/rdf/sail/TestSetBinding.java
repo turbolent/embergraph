@@ -27,20 +27,17 @@ import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
-import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
-import org.openrdf.model.Value;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQuery;
 import org.openrdf.query.TupleQueryResult;
-import org.openrdf.query.impl.AbstractQuery;
 import org.openrdf.query.impl.BindingImpl;
 import org.openrdf.repository.RepositoryResult;
 import org.openrdf.rio.RDFFormat;
 
 /*
-* Test suite for {@link AbstractQuery#setBinding(String, Value)}
+ * Test suite for {@link AbstractQuery#setBinding(String, Value)}
  *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
@@ -79,8 +76,7 @@ public class TestSetBinding extends ProxyEmbergraphSailTestCase {
 
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
 
-      final EmbergraphSailRepositoryConnection cxn =
-          repo.getConnection();
+      final EmbergraphSailRepositoryConnection cxn = repo.getConnection();
 
       try {
 

@@ -42,7 +42,7 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
 /*
-* Base test suite for the embedded (local) GOM.
+ * Base test suite for the embedded (local) GOM.
  *
  * @author Martyn Cutcher
  */

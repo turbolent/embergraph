@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.journal;
 
 /*
-* An interface providing a read-only view of a commit record. A commit record is written on each
+ * An interface providing a read-only view of a commit record. A commit record is written on each
  * commit. The basic metadata in the commit record are the root addresses from which various
  * critical resources may be loaded, e.g., data structures for mapping index names to their
  * addresses on the {@link Journal}, etc. The {@link Journal} maintains an {@link

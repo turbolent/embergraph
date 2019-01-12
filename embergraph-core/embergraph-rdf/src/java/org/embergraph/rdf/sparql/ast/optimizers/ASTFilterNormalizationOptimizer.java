@@ -43,7 +43,7 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.openrdf.model.URI;
 
 /*
-* The {@link ASTFilterNormalizationOptimizer} is responsible for the static decomposition and
+ * The {@link ASTFilterNormalizationOptimizer} is responsible for the static decomposition and
  * optimization of filter expressions. In it's first version, it decomposes conjunctive FILTER
  * expressions, enabling (i) a more precise placement of filter expressions in join groups and (ii)
  * clears the way for static binding analysis through the {@link ASTStaticBindingsOptimizer}.

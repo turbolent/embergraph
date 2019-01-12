@@ -26,7 +26,7 @@ import java.io.ObjectStreamException;
 import org.embergraph.rdf.model.StatementEnum;
 
 /*
-* A filter that matches explicit or inferred statements but not those whose {@link StatementEnum}
+ * A filter that matches explicit or inferred statements but not those whose {@link StatementEnum}
  * is {@link StatementEnum#Axiom}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

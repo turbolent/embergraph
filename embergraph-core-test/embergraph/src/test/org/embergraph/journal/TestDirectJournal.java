@@ -28,7 +28,7 @@ import junit.framework.Test;
 import org.embergraph.rawstore.IRawStore;
 
 /*
-* Test suite for {@link BufferMode#Direct} journals.
+ * Test suite for {@link BufferMode#Direct} journals.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -28,7 +28,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /*
-* Interface adds some methods for stream-based access to {@link IDataRecord}.
+ * Interface adds some methods for stream-based access to {@link IDataRecord}.
  *
  * <p>Note: These methods are isolated on this interface to prevent confusion with the stream-based
  * semantics of the {@link ByteArrayBuffer}.

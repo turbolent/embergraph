@@ -30,7 +30,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
 /*
-* A parser for simple object specifications based on strings.
+ * A parser for simple object specifications based on strings.
  *
  * <p>Whenever a particular instance of a class (not a singleton) has to be specified in textual
  * format, one faces the difficulty of having {@link Class#forName(String)} but no analogous method

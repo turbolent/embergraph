@@ -27,7 +27,6 @@ import cutthecrap.utils.striterators.ICloseableIterator;
 import cutthecrap.utils.striterators.IFilter;
 import java.io.PrintStream;
 import java.lang.ref.Reference;
-import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -36,7 +35,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutionException;
@@ -54,39 +52,27 @@ import org.embergraph.btree.AbstractBTreeTupleCursor.ReadOnlyBTreeTupleCursor;
 import org.embergraph.btree.IndexMetadata.Options;
 import org.embergraph.btree.IndexSegment.IndexSegmentTupleCursor;
 import org.embergraph.btree.data.IAbstractNodeData;
-import org.embergraph.btree.data.ILeafData;
-import org.embergraph.btree.data.INodeData;
 import org.embergraph.btree.filter.Reverserator;
 import org.embergraph.btree.filter.TupleRemover;
 import org.embergraph.btree.filter.WrappedTupleIterator;
-import org.embergraph.btree.keys.IKeyBuilder;
-import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedureConstructor;
 import org.embergraph.btree.proc.IKeyRangeIndexProcedure;
 import org.embergraph.btree.proc.IResultHandler;
 import org.embergraph.btree.proc.ISimpleIndexProcedure;
-import org.embergraph.btree.view.FusedView;
 import org.embergraph.cache.HardReferenceQueue;
 import org.embergraph.cache.HardReferenceQueueWithBatchingUpdates;
 import org.embergraph.cache.IHardReferenceQueue;
-import org.embergraph.cache.RingBuffer;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.OneShotInstrument;
 import org.embergraph.io.AbstractFixedByteArrayBuffer;
 import org.embergraph.io.ByteArrayBuffer;
 import org.embergraph.io.DirectBufferPool;
 import org.embergraph.io.compression.IRecordCompressorFactory;
-import org.embergraph.journal.CompactTask;
-import org.embergraph.journal.IAtomicStore;
-import org.embergraph.journal.IConcurrencyManager;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.Journal;
 import org.embergraph.mdi.IResourceMetadata;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.TransientResourceMetadata;
-import org.embergraph.resources.IndexManager;
-import org.embergraph.resources.OverflowManager;
-import org.embergraph.service.DataService;
 import org.embergraph.service.Split;
 import org.embergraph.util.InnerCause;
 import org.embergraph.util.concurrent.Computable;
@@ -94,7 +80,7 @@ import org.embergraph.util.concurrent.LatchedExecutor;
 import org.embergraph.util.concurrent.Memoizer;
 
 /*
-* Base class for mutable and immutable B+-Tree implementations.
+ * Base class for mutable and immutable B+-Tree implementations.
  *
  * <p>The B+-Tree implementation supports variable length unsigned byte[] keys and provides a {@link
  * IKeyBuilder} utilities designed to make it possible to generate keys from any combination of
@@ -295,8 +281,8 @@ public abstract class AbstractBTree
   private static final Computable<LoadChildRequest, AbstractNode<?>> loadChild =
       new Computable<LoadChildRequest, AbstractNode<?>>() {
 
-      /*
-       * Loads a child node from the specified address.
+        /*
+         * Loads a child node from the specified address.
          *
          * @return A hard reference to that child node.
          * @throws IllegalArgumentException if addr is <code>null</code>.
@@ -352,7 +338,7 @@ public abstract class AbstractBTree
     }
 
     //        /*
-//         * The approximate size of the cache (used solely for debugging to
+    //         * The approximate size of the cache (used solely for debugging to
     //         * detect cache leaks).
     //         */
     //        int size() {
@@ -376,7 +362,7 @@ public abstract class AbstractBTree
     }
 
     //        /*
-//         * Called from {@link AbstractBTree#close()}.
+    //         * Called from {@link AbstractBTree#close()}.
     //         *
     //         * @todo should we do this?  There should not be any reads against the
     //         * the B+Tree when it is close()d.  Therefore I do not believe there
@@ -459,8 +445,8 @@ public abstract class AbstractBTree
 
       } catch (InterruptedException e) {
 
-      /*
-       * Note: This exception will be thrown iff interrupted while
+        /*
+         * Note: This exception will be thrown iff interrupted while
          * awaiting the FutureTask inside of the Memoizer.
          */
 
@@ -519,8 +505,7 @@ public abstract class AbstractBTree
    * the {@link IndexSegment}.
    *
    * <p>Note: Not <code>private</code> since {@link Checkpoint} reads this field.
-   */
-  /*private*/ volatile BloomFilter bloomFilter;
+   *//*private*/ volatile BloomFilter bloomFilter;
 
   /*
    * Return the optional {@link IBloomFilter}, transparently {@link #reopen()}ing the index if
@@ -533,7 +518,7 @@ public abstract class AbstractBTree
   public abstract BloomFilter getBloomFilter();
 
   //    /*
-//     * The finger is a trial feature. The purpose is to remember the last
+  //     * The finger is a trial feature. The purpose is to remember the last
   //     * leaf(s) in the tree that was visited by a search operation and to
   //     * pre-test that those leaf(s) on the next search operation.
   //     * <p>
@@ -561,7 +546,7 @@ public abstract class AbstractBTree
   protected final NodeSerializer nodeSer;
 
   //    /*
-//     * Count of the #of times that a reference to this {@link AbstractBTree}
+  //     * Count of the #of times that a reference to this {@link AbstractBTree}
   //     * occurs on a {@link HardReferenceQueue}. This field will remain zero(0)
   //     * unless the {@link AbstractBTree} is placed onto a
   //     * {@link HardReferenceQueue} maintained by the application.
@@ -652,7 +637,7 @@ public abstract class AbstractBTree
   private final int minDirtyListSizeForParallelEvict;
 
   //    /*
-//     * The {@link #readRetentionQueue} reduces reads through to the backing
+  //     * The {@link #readRetentionQueue} reduces reads through to the backing
   //     * store in order to prevent disk reads and reduces de-serialization costs
   //     * for nodes by maintaining them as materialized objects.
   //     * <p>
@@ -1039,7 +1024,7 @@ public abstract class AbstractBTree
   }
 
   //    /*
-//     * Note: Method is package private so that it may be overridden for unit
+  //     * Note: Method is package private so that it may be overridden for unit
   //     * tests.
   //     */
   //    final protected RingBuffer<PO> newReadRetentionQueue() {
@@ -1060,13 +1045,13 @@ public abstract class AbstractBTree
   //    }
 
   //    /*
-//     * The capacity for the {@link #readRetentionQueue} (may differ for
+  //     * The capacity for the {@link #readRetentionQueue} (may differ for
   //     * {@link BTree} and {@link IndexSegment}).
   //     */
   //    abstract protected int getReadRetentionQueueCapacity();
   //
   //    /*
-//     * The capacity for the {@link #readRetentionQueue} (may differ for
+  //     * The capacity for the {@link #readRetentionQueue} (may differ for
   //     * {@link BTree} and {@link IndexSegment}).
   //     */
   //    abstract protected int getReadRetentionQueueScan();
@@ -1421,8 +1406,8 @@ public abstract class AbstractBTree
               || InnerCause.isInnerCause(t, InterruptedException.class)) {
             throw new RuntimeException(t);
           }
-        /*
-       * Log the error and track the #of errors, but keep scanning
+          /*
+           * Log the error and track the #of errors, but keep scanning
            * the index.
            */
           stats.nerrors++;
@@ -1633,7 +1618,7 @@ public abstract class AbstractBTree
   //     */
   //
   //    /*
-//     * Returns true if the optional bloom filter reports that the key exists.
+  //     * Returns true if the optional bloom filter reports that the key exists.
   //     *
   //     * @param key
   //     *            The key.
@@ -1912,8 +1897,8 @@ public abstract class AbstractBTree
 
         if (getEntryCount() > filter.getMaxN()) {
 
-        /*
-       * Disable the filter since the index has exceeded the
+          /*
+           * Disable the filter since the index has exceeded the
            * maximum #of index entries for which the bloom filter will
            * have an acceptable error rate.
            */
@@ -1941,8 +1926,8 @@ public abstract class AbstractBTree
 
         } else {
 
-        /*
-       * Add the key to the bloom filter.
+          /*
+           * Add the key to the bloom filter.
            *
            * Note: While this will be invoked when the sequence is
            * insert(key), remove(key), followed by insert(key) again,
@@ -2463,7 +2448,7 @@ public abstract class AbstractBTree
   }
 
   //    /*
-//     * Return an iterator based on the post-order {@link Striterator}. This
+  //     * Return an iterator based on the post-order {@link Striterator}. This
   //     * iterator does not support random seeks, reverse scans, or concurrent
   //     * modification during traversal but it is <em>faster</em> than the
   //     * {@link AbstractBTreeTupleCursor} when all you need is a forward
@@ -2632,8 +2617,8 @@ public abstract class AbstractBTree
 
         final IndexSegment seg = (IndexSegment) this;
 
-      /*
-       * @todo we could scan the list of pools and chose the best fit
+        /*
+         * @todo we could scan the list of pools and chose the best fit
          * pool and then allocate a buffer from that pool. Best fit
          * would mean either the byte range fits without "too much" slop
          * or the #of reads will have to perform is not too large. We
@@ -2678,8 +2663,8 @@ public abstract class AbstractBTree
 
       if ((flags & REVERSE) != 0) {
 
-      /*
-       * Reverse scan iterator.
+        /*
+         * Reverse scan iterator.
          *
          * Note: The reverse scan MUST be layered directly over the
          * ITupleCursor. Most critically, REMOVEALL combined with a
@@ -2798,8 +2783,8 @@ public abstract class AbstractBTree
 
         if (overflowHandler != null) {
 
-        /*
-       * Provide the handler with the opportunity to copy the
+          /*
+           * Provide the handler with the opportunity to copy the
            * blob's data onto the backing store for this index and
            * re-write the value, which is presumably the blob
            * reference.
@@ -2932,7 +2917,7 @@ public abstract class AbstractBTree
   public abstract ILeafCursor newLeafCursor(byte[] key);
 
   //    /*
-//     * Clone the caller's cursor.
+  //     * Clone the caller's cursor.
   //     *
   //     * @param leafCursor
   //     *            Another leaf cursor.
@@ -3411,8 +3396,8 @@ public abstract class AbstractBTree
 
       if (t != root) {
 
-      /*
-       * The parent MUST be defined unless this is the root node.
+        /*
+         * The parent MUST be defined unless this is the root node.
          */
 
         assert t.parent != null;
@@ -3548,8 +3533,8 @@ public abstract class AbstractBTree
 
       if (t != root) {
 
-      /*
-       * The parent MUST be defined unless this is
+        /*
+         * The parent MUST be defined unless this is
          * the root node.
          */
 
@@ -3632,8 +3617,8 @@ public abstract class AbstractBTree
 
       if (dirtyListSize < minDirtyListSizeForParallelEvict) {
 
-      /*
-       * Avoid parallelism when only a few nodes or leaves will be
+        /*
+         * Avoid parallelism when only a few nodes or leaves will be
          * evicted.
          */
         for (AbstractNode t : dirtyList) {
@@ -3670,8 +3655,8 @@ public abstract class AbstractBTree
 
                         if (u != root) {
 
-                        /*
-       * The parent MUST be defined unless this is
+                          /*
+                           * The parent MUST be defined unless this is
                            * the root node.
                            */
 
@@ -3966,8 +3951,8 @@ public abstract class AbstractBTree
        */
       if (null != storeCache.putIfAbsent(addr, node.getDelegate())) {
 
-      /*
-       * Note: For a WORM store, the address is always new so there
+        /*
+         * Note: For a WORM store, the address is always new so there
          * will not be an entry in the cache for that address.
          *
          * Note: For a RW store, the addresses can be reused and the
@@ -4173,7 +4158,7 @@ public abstract class AbstractBTree
   //     */
   //
   //    /*
-//     * Note: DO NOT invoke this method from hot code such as
+  //     * Note: DO NOT invoke this method from hot code such as
   //     * {@link #touch(AbstractNode)} as that will impose a huge performance
   //     * penalty! It is sufficient to let the
   //     * {@link SynchronizedHardReferenceQueueWithTimeout} invoke this method
@@ -4320,8 +4305,8 @@ public abstract class AbstractBTree
 
       if (((BTree) this).getCheckpoint().getRootAddr() == addr) {
 
-      /*
-       * TODO This is a bit of a hack.  It is designed to prevent
+        /*
+         * TODO This is a bit of a hack.  It is designed to prevent
          * the double-delete of the last committed root node or leaf.
          * This should be cleaned up as part of addressing [1].
          *

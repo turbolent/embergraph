@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 import org.embergraph.bop.engine.IRunningQuery;
 
 /*
-* Iteration construct wraps an {@link IRunningQuery} with logic to (a) verify that the {@link
+ * Iteration construct wraps an {@link IRunningQuery} with logic to (a) verify that the {@link
  * IRunningQuery} has not encountered an error; and (b) to cancel the {@link IRunningQuery} when the
  * iterator draining the {@link IRunningQuery} is {@link #close() closed}.
  */

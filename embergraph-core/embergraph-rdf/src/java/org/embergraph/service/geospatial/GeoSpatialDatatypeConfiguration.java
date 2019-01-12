@@ -39,7 +39,7 @@ import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
 /*
-* Configuration of a single geospatial datatype, including value type, multiplier, min possible
+ * Configuration of a single geospatial datatype, including value type, multiplier, min possible
  * value, and mapping to the service.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>

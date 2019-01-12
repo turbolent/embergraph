@@ -36,7 +36,7 @@ import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryResult;
 
 /*
-* @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
+ * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
  */
 public class TestReadWriteTransactions extends ProxyEmbergraphSailTestCase {
@@ -88,8 +88,7 @@ public class TestReadWriteTransactions extends ProxyEmbergraphSailTestCase {
     try {
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      final EmbergraphSailRepositoryConnection isolated =
-          repo.getReadWriteConnection();
+      final EmbergraphSailRepositoryConnection isolated = repo.getReadWriteConnection();
       isolated.setAutoCommit(false);
       //        final EmbergraphSailRepositoryConnection unisolated =
       //            (EmbergraphSailRepositoryConnection) repo.getUnisolatedConnection();
@@ -97,8 +96,7 @@ public class TestReadWriteTransactions extends ProxyEmbergraphSailTestCase {
 
       // read-committed view of the same database.
       // final AbstractTripleStore view = store.asReadCommittedView();
-      RepositoryConnection readView =
-          repo.getReadOnlyConnection();
+      RepositoryConnection readView = repo.getReadOnlyConnection();
 
       try {
 
@@ -140,8 +138,8 @@ public class TestReadWriteTransactions extends ProxyEmbergraphSailTestCase {
         readView = repo.getReadOnlyConnection();
 
         // now visible in the view
-      /*
-       * Note: this will fail if the Journal#getIndex(name,timestamp) does
+        /*
+         * Note: this will fail if the Journal#getIndex(name,timestamp) does
          * not return an index view with read-committed (vs read-consistent)
          * semantics. For the index view to have read-committed semantics
          * the view MUST update if there is an intervening commit. This is
@@ -282,7 +280,7 @@ public class TestReadWriteTransactions extends ProxyEmbergraphSailTestCase {
   }
 
   //    /*
-//     * @todo Need to test how the system reacts to concurrent reads and writes.
+  //     * @todo Need to test how the system reacts to concurrent reads and writes.
   //     * Simulate real work load.  Incremental writes, outnumbered by reads by
   //     * some factor, say somewhere between 10 to 100.  Write size will vary, say
   //     * from 1 to 10000 statements.

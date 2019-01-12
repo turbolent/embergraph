@@ -24,7 +24,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /*
-* An immutable coordinate expressed in degrees, minutes and (tenths of) seconds.
+ * An immutable coordinate expressed in degrees, minutes and (tenths of) seconds.
  *
  * <p>Note: When the angle is negative, all components must be negative. For example, 0794731W
  * corresponds to -79 deg 47' 31.111439999999998", but the individual components are actually -79,

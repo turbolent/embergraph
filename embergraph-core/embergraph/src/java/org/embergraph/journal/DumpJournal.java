@@ -58,7 +58,7 @@ import org.embergraph.util.BytesUtil;
 import org.embergraph.util.InnerCause;
 
 /*
-* A utility class that opens the journal in a read-only mode and dumps the root blocks and metadata
+ * A utility class that opens the journal in a read-only mode and dumps the root blocks and metadata
  * about the indices on a journal file.
  *
  * <p>TODO add an option to dump only as of a specified commitTime?
@@ -197,8 +197,8 @@ public class DumpJournal {
 
       try {
 
-      /*
-       * Stat the file and report on its size, etc.
+        /*
+         * Stat the file and report on its size, etc.
          */
         {
           System.out.println("File: " + file);
@@ -339,7 +339,7 @@ public class DumpJournal {
 
     //        Note: This does not fix the issue.
     //        /*
-//         * Start a transaction. This will bracket all index access and protect
+    //         * Start a transaction. This will bracket all index access and protect
     //         * the data on the journal from concurrent recycling.
     //         *
     //         * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/762">
@@ -659,8 +659,8 @@ public class DumpJournal {
 
         if (InnerCause.isInnerCause(t, ClassNotFoundException.class)) {
 
-        /*
-       * This is typically a tuple serializer that has a
+          /*
+           * This is typically a tuple serializer that has a
            * dependency on an application class that is not present in
            * the CLASSPATH. Add the necessary dependency(s) and you
            * should no longer see this message.
@@ -700,8 +700,8 @@ public class DumpJournal {
 
           if (ndx instanceof AbstractBTree) {
 
-          /*
-       * TODO GIST : dumpTuples for HTree.
+            /*
+             * TODO GIST : dumpTuples for HTree.
              */
 
             DumpIndex.dumpIndex((AbstractBTree) ndx, showTuples);
@@ -915,8 +915,8 @@ public class DumpJournal {
           case Stream:
             @SuppressWarnings("unused")
             final Stream stream = (Stream) ndx;
-          /*
-       * Note: We can't do anything here with a Stream, but we do
+            /*
+             * Note: We can't do anything here with a Stream, but we do
              * try to read on the address as a stream in the caller.
              */
             continue;

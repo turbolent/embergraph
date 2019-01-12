@@ -27,14 +27,10 @@ import java.io.Serializable;
 import java.util.Properties;
 import org.embergraph.bop.joinGraph.IEvaluationPlanFactory;
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.journal.IIndexStore;
 import org.embergraph.relation.accesspath.IElementFilter;
-import org.embergraph.relation.rule.IProgram;
-import org.embergraph.service.DataService;
-import org.embergraph.service.IEmbergraphFederation;
 
 /*
-* A factory for {@link IJoinNexus} instances.
+ * A factory for {@link IJoinNexus} instances.
  *
  * <p>Note: This factory plays a critical role in (re-)constructing a suitable {@link IJoinNexus}
  * instance when an {@link IProgram} is executed on a remote {@link DataService} or when its

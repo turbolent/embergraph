@@ -33,7 +33,7 @@ import junit.framework.TestSuite;
 import org.embergraph.journal.BufferMode;
 
 /*
-* This class provides static methods to help creating test classes and suites of tests that use the
+ * This class provides static methods to help creating test classes and suites of tests that use the
  * proxy test approach. For creating test classes use {@link #suiteWhenStandalone(Class, String,
  * TestMode...)}, when creating test suites use {@link #suiteWithOptionalProxy(String, TestMode...)}
  *
@@ -85,8 +85,8 @@ public class ProxySuiteHelper {
                 protected void tearDown() throws Exception {
                   ((TestNanoSparqlServerWithProxyIndexManager) suite2.getDelegate())
                       .tearDownAfterSuite();
-                /*
-       * Note: Do not clear. Will not leak unless the
+                  /*
+                   * Note: Do not clear. Will not leak unless the
                    * QueryEngine objects are pinned. They will not be
                    * pinned if you shutdown the Journal correctly for each
                    * test; the call to tearDownAfterSuite above calls the destroy() method

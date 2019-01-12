@@ -28,13 +28,9 @@ import org.embergraph.bop.BOpBase;
 import org.embergraph.bop.IPredicate;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
-import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.internal.IVCache;
-import org.embergraph.rdf.model.EmbergraphValue;
-import org.embergraph.rdf.sparql.ast.eval.AST2BOpUtility;
 
 /*
-* Test suite for {@link IVBindingSetEncoderWithIVCache}. This class supports an {@link IV} to
+ * Test suite for {@link IVBindingSetEncoderWithIVCache}. This class supports an {@link IV} to
  * {@link EmbergraphValue} cache which provides lookup to resolve the observed associations as
  * reported by {@link IVCache#getValue()}.
  *

@@ -30,7 +30,7 @@ import org.embergraph.io.DirectBufferPool;
 import org.embergraph.rawstore.IRawStore;
 
 /*
-* Test suite for {@link WORMStrategy} journal with the write cache disabled. The purpose of this
+ * Test suite for {@link WORMStrategy} journal with the write cache disabled. The purpose of this
  * version of the test suite is to look for problems related to operation when caching is disabled.
  *
  * <p>Note: The HA journal requires that cache be enabled. However, the HA journal is tested by a

@@ -17,7 +17,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
 /*
-* Note: Portions of this file are copyright by Aduna.
+ * Note: Portions of this file are copyright by Aduna.
  *
  * <p>Copyright Aduna (http://www.aduna-software.com/) (c) 1997-2007.
  *
@@ -40,7 +40,7 @@ import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 import org.openrdf.model.Literal;
 
 /*
-* A math expression involving a left and right IValueExpression operand. The operation to be
+ * A math expression involving a left and right IValueExpression operand. The operation to be
  * applied to the operands is specified by the {@link Annotations#OP} annotation.
  */
 public final class MathBOp extends IVValueExpression implements INeedsMaterialization {

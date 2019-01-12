@@ -27,7 +27,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /*
-* An immutable coordinate expressed as degrees and decimal minutes with 3 digits after the decimal.
+ * An immutable coordinate expressed as degrees and decimal minutes with 3 digits after the decimal.
  *
  * <pre>
  *        Degrees and Decimal Minutes

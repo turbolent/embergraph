@@ -17,20 +17,16 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.btree;
 
-import java.io.Serializable;
 import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedureConstructor;
-import org.embergraph.btree.proc.IIndexProcedure;
 import org.embergraph.btree.proc.IKeyRangeIndexProcedure;
-import org.embergraph.btree.proc.IParallelizableIndexProcedure;
 import org.embergraph.btree.proc.IResultHandler;
 import org.embergraph.btree.proc.ISimpleIndexProcedure;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.ICounterSetAccess;
 import org.embergraph.mdi.IResourceMetadata;
-import org.embergraph.service.Split;
 
 /*
-* Interface for mutable B+-Tree mapping arbitrary non-null keys to arbitrary values.
+ * Interface for mutable B+-Tree mapping arbitrary non-null keys to arbitrary values.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

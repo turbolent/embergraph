@@ -2,10 +2,9 @@ package org.embergraph.relation.accesspath;
 
 import cutthecrap.utils.striterators.Resolver;
 import org.embergraph.btree.ITuple;
-import org.embergraph.btree.Tuple;
 
 /*
-* Resolve an {@link ITuple} to its {@link Tuple#getObject()}.
+ * Resolve an {@link ITuple} to its {@link Tuple#getObject()}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

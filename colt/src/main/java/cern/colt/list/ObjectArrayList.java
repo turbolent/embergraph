@@ -10,7 +10,7 @@ package cern.colt.list;
 
 import cern.colt.function.ObjectProcedure;
 /*
-* Resizable list holding <code>Object</code> elements; implemented with arrays. First see the <a
+ * Resizable list holding <code>Object</code> elements; implemented with arrays. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
  * view</a> to get the broad picture.
  */
@@ -352,7 +352,8 @@ public class ObjectArrayList extends AbstractList {
       }
     } else {
       for (int i = size; --i >= 0; ) {
-        if (theElements[i] == null ? otherElements[i] != null
+        if (theElements[i] == null
+            ? otherElements[i] != null
             : !theElements[i].equals(otherElements[i])) return false;
       }
     }
@@ -481,8 +482,7 @@ public class ObjectArrayList extends AbstractList {
 
     Object[] theElements = elements;
     for (int i = from + 1; i <= to; i++) {
-      if (((Comparable) theElements[i]).compareTo(theElements[i - 1]) < 0)
-        return false;
+      if (((Comparable) theElements[i]).compareTo(theElements[i - 1]) < 0) return false;
     }
     return true;
   }

@@ -36,12 +36,10 @@ import org.embergraph.bop.IVariableOrConstant;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.lexicon.ITermIVFilter;
 import org.embergraph.rdf.model.StatementEnum;
-import org.embergraph.rdf.rules.InferenceEngine;
 import org.embergraph.rdf.spo.ExplicitSPOFilter;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.SPO;
 import org.embergraph.rdf.spo.SPOKeyOrder;
-import org.embergraph.rdf.spo.SPORelation;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.striterator.ChunkedArrayIterator;
@@ -50,7 +48,7 @@ import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 
 /*
-* Provides backward chaining for (x rdf:type rdfs:Resource).
+ * Provides backward chaining for (x rdf:type rdfs:Resource).
  *
  * <p>Note: You only need to do this on read from a high level query language since the rest of the
  * RDFS rules will run correctly without the (x rdf:type rdfs:Resource) entailments being present.
@@ -421,8 +419,8 @@ public class BackchainTypeResourceIterator implements IChunkedOrderedIterator<IS
 
         if (cmp < 0) {
 
-        /*
-       * Consuming from [resourceIds] (the term identifier ordered
+          /*
+           * Consuming from [resourceIds] (the term identifier ordered
            * LT the next term identifier from [posItr]).
            *
            * There is NOT an explicit statement from [posItr], so emit
@@ -435,8 +433,8 @@ public class BackchainTypeResourceIterator implements IChunkedOrderedIterator<IS
 
         } else {
 
-        /*
-       * Consuming from [posItr].
+          /*
+           * Consuming from [posItr].
            *
            * There is an explicit statement for the current term
            * identifer from [resourceIds].
@@ -444,8 +442,8 @@ public class BackchainTypeResourceIterator implements IChunkedOrderedIterator<IS
 
           if (cmp != 0) {
 
-          /*
-       * Since [resourceIds] and [posItr] are NOT visiting the
+            /*
+             * Since [resourceIds] and [posItr] are NOT visiting the
              * same term identifier, we pushback on [resourceIds].
              *
              * Note: When they DO visit the same term identifier
@@ -461,8 +459,8 @@ public class BackchainTypeResourceIterator implements IChunkedOrderedIterator<IS
 
       } else {
 
-      /*
-       * [posItr] is exhausted so just emit inferences based on
+        /*
+         * [posItr] is exhausted so just emit inferences based on
          * [resourceIds].
          */
 

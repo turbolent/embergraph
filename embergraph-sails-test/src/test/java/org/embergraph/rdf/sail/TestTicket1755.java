@@ -41,7 +41,7 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
 /*
-* Unit test template for use in submission of bugs.
+ * Unit test template for use in submission of bugs.
  *
  * <p>This test case will delegate to an underlying backing store. You can specify this store via a
  * JVM property as follows: <code>-DtestClass=org.embergraph.rdf.sail.TestEmbergraphSailWithQuads
@@ -99,8 +99,8 @@ public class TestTicket1755 extends QuadsTestCase {
                   + "   ?s <http://end> ?end.\r\n"
                   + "   FILTER(\"0521-01-01\"^^<http://www.w3.org/2001/XMLSchema#date> >= ?begin)\r\n"
                   + "}";
-        /*
-       * There are 3 IVs in the parsed tree:
+          /*
+           * There are 3 IVs in the parsed tree:
            * LiteralExtensionIV in Constant as an argument of ConstantNode in FunctionNode
            * LiteralExtensionIV in EmbergraphValue in ConstantNode as an argument of FunctionNode
            * LiteralExtensionIV in Constant as an argument of valueExpression annotation of FunctionNode
@@ -115,8 +115,8 @@ public class TestTicket1755 extends QuadsTestCase {
                   + "   ?s <http://end> ?end.\r\n"
                   + "   FILTER((\"0521-01-01\"^^<http://www.w3.org/2001/XMLSchema#date> >= ?begin) && true)\r\n"
                   + "}";
-        /*
-       * There are 6 IVs in the parsed tree:
+          /*
+           * There are 6 IVs in the parsed tree:
            * LiteralExtensionIV in Constant as an argument of CompareBOp in valueExpression annotation of FunctionNode
            * XSDBooleanIV in Constant as an  argument of EBVBOp in valueExpression annotation of FunctionNode
            * LiteralExtensionIV in Constant as an argument of valueExpression annotation of FunctionNode

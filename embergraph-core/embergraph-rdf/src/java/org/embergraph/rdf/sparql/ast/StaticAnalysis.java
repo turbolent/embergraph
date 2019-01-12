@@ -43,19 +43,12 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.constraints.INeedsMaterialization;
 import org.embergraph.rdf.internal.constraints.INeedsMaterialization.Requirement;
 import org.embergraph.rdf.internal.constraints.IPassesMaterialization;
-import org.embergraph.rdf.internal.impl.literal.FullyInlineTypedLiteralIV;
-import org.embergraph.rdf.sparql.ast.cache.CacheConnectionImpl;
-import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.eval.IEvaluationContext;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTBottomUpOptimizer;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTLiftPreFiltersOptimizer;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTOptimizerList;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
-import org.embergraph.rdf.sparql.ast.ssets.ISolutionSetManager;
 import org.openrdf.model.URI;
 
 /*
-* Methods for static analysis of a query. There is one method which looks "up". This corresponds to
+ * Methods for static analysis of a query. There is one method which looks "up". This corresponds to
  * how we actually evaluation things (left to right in the query plan). There are two methods which
  * look "down". This corresponds to the bottom-up evaluation semantics of SPARQL.
  *
@@ -398,7 +391,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
   }
 
   //    /*
-//     * Return the set of variables which are "in-scope" for a given node. This
+  //     * Return the set of variables which are "in-scope" for a given node. This
   //     * is based on bottom up evaluation semantics rather than the top-down,
   //     * left-to-right evaluation order. The "in-scope" variables are the
   //     * variables which are locally produced, which are produced in a child
@@ -459,7 +452,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
   //    }
   //
   //    /*
-//     * Reports on all in-scope variables for a {@link JoinGroupNode} or
+  //     * Reports on all in-scope variables for a {@link JoinGroupNode} or
   //     * {@link UnionNode}.
   //     */
   //    private Set<IVariable<?>> getInScopeVars(
@@ -562,8 +555,8 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
 
       for (IGroupMemberNode child : parent) {
 
-      /*
-       * We've found ourself. Stop collecting vars.
+        /*
+         * We've found ourself. Stop collecting vars.
          */
         if (child == node) {
 
@@ -690,8 +683,8 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
 
       for (IGroupMemberNode child : parent) {
 
-      /*
-       * We've found ourself. Stop collecting vars.
+        /*
+         * We've found ourself. Stop collecting vars.
          */
         if (child == node) {
 
@@ -707,8 +700,8 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
 
           if (
           /* !optional && */ !minus) {
-          /*
-       * MINUS does not produce any bindings, it just removes
+            /*
+             * MINUS does not produce any bindings, it just removes
              * solutions. On the other hand, OPTIONAL joins DO
              * produce bindings, they are just "maybe" bindings.
              */
@@ -810,8 +803,8 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
 
         final ISolutionSetStats stats = getSolutionSetStats(name);
 
-      /*
-       * Note: This is all variables which are bound in ALL solutions.
+        /*
+         * Note: This is all variables which are bound in ALL solutions.
          */
 
         vars.addAll(stats.getAlwaysBound());
@@ -958,8 +951,8 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
 
         final ISolutionSetStats stats = getSolutionSetStats(name);
 
-      /*
-       * Note: This is all variables bound in ANY solution. It MAY
+        /*
+         * Note: This is all variables bound in ANY solution. It MAY
          * include variables which are NOT bound in some solutions.
          */
 
@@ -1027,8 +1020,8 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
 
         if (!sp.isOptional()) {
 
-        /*
-       * Required JOIN (statement pattern).
+          /*
+           * Required JOIN (statement pattern).
            */
 
           getDefinitelyProducedBindings(sp, vars, recursive);
@@ -1046,8 +1039,8 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
           || child instanceof SubqueryRoot
           || child instanceof ServiceNode) {
 
-      /*
-       * Required JOIN (Named solution set, SPARQL 1.1 subquery,
+        /*
+         * Required JOIN (Named solution set, SPARQL 1.1 subquery,
          * EXISTS, or SERVICE).
          *
          * Note: We have to descend recursively into these structures in
@@ -1076,8 +1069,8 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
 
       } else if (child instanceof AssignmentNode) {
 
-      /*
-       * Note: BIND() in a group is only a "maybe" because the spec says
+        /*
+         * Note: BIND() in a group is only a "maybe" because the spec says
          * that an error when evaluating a BIND() in a group will not fail
          * the solution.
          *
@@ -1318,8 +1311,8 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
 
         if (bind.getValueExpression() instanceof IConstant<?>) {
 
-        /*
-       * 1. The projection of a constant.
+          /*
+           * 1. The projection of a constant.
            *
            * Note: This depends on pre-evaluation of constant
            * expressions. If the expression has not been reduced to a
@@ -1335,8 +1328,8 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
 
           if (definitelyBound.contains(bind.getVar())) {
 
-          /*
-       * 2. The projection of a definitely bound variable
+            /*
+             * 2. The projection of a definitely bound variable
              * under the same name.
              */
 
@@ -1350,8 +1343,8 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
 
           if (definitelyBound.contains(bind.getValueExpression())) {
 
-          /*
-       * 3. The projection of a definitely bound variable
+            /*
+             * 3. The projection of a definitely bound variable
              * under a different name.
              */
 
@@ -1363,8 +1356,8 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
 
         if (!isAggregate) {
 
-        /*
-       * 4. The projection of a select expression which is not an
+          /*
+           * 4. The projection of a select expression which is not an
            * aggregate. Normally, the projected variable will be
            * bound if all components of the select expression are
            * definitely bound: this comment ignores the possibility
@@ -1384,22 +1377,21 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
            * expression.
            */
           final Set<IVariable<?>> usedVars =
-              getSpannedVariables(
-                  bind.getValueExpression(), new LinkedHashSet<IVariable<?>>());
+              getSpannedVariables(bind.getValueExpression(), new LinkedHashSet<IVariable<?>>());
 
           usedVars.removeAll(definitelyBound);
 
           if (!usedVars.isEmpty()) {
 
-          /*
-       * There is at least one variable which is used by the
+            /*
+             * There is at least one variable which is used by the
              * select expression which is not definitely bound.
              */
             continue;
           }
 
-        /*
-       * All variables used by the select expression are
+          /*
+           * All variables used by the select expression are
            * definitely bound so the projected variable for that
            * select expression will be definitely bound.
            */
@@ -1453,8 +1445,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
 
     final Set<IVariable<?>> vars = new LinkedHashSet<IVariable<?>>();
 
-    final GraphPatternGroup<IGroupMemberNode> graphPattern =
-        node.getGraphPattern();
+    final GraphPatternGroup<IGroupMemberNode> graphPattern = node.getGraphPattern();
 
     if (graphPattern != null) {
 
@@ -1474,8 +1465,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
 
     final Set<IVariable<?>> vars = new LinkedHashSet<IVariable<?>>();
 
-    final GraphPatternGroup<IGroupMemberNode> graphPattern =
-        node.getGraphPattern();
+    final GraphPatternGroup<IGroupMemberNode> graphPattern = node.getGraphPattern();
 
     if (graphPattern != null) {
 
@@ -2263,8 +2253,8 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
 
       if (exprNode instanceof FunctionNode) {
 
-      /*
-       * Hack used when the EmbergraphExprBuilder needs to decide
+        /*
+         * Hack used when the EmbergraphExprBuilder needs to decide
          * on the validity of aggregate expressions before we
          * get around to caching the value expressions during
          * evaluation (i.e., to pass the compliance tests for
@@ -2405,8 +2395,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
 
       return isCNFDisjunct;
 
-    } else
-      return !functionURI.equals(FunctionRegistry.AND);
+    } else return !functionURI.equals(FunctionRegistry.AND);
   }
 
   /*

@@ -27,10 +27,9 @@ import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 import org.embergraph.service.AbstractFederation;
 import org.embergraph.service.AbstractHATransactionService;
-import org.embergraph.service.DataService;
 
 /*
-* Implementation for a standalone journal using single-phase commits.
+ * Implementation for a standalone journal using single-phase commits.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -155,8 +154,8 @@ public abstract class JournalTransactionService extends AbstractHATransactionSer
 
       if (localState == null) {
 
-      /*
-       * The client should maintain the local state of the transaction
+        /*
+         * The client should maintain the local state of the transaction
          * until the transaction service either commits or aborts the
          * tx.
          */
@@ -238,8 +237,8 @@ public abstract class JournalTransactionService extends AbstractHATransactionSer
 
         if (localState.isEmptyWriteSet()) {
 
-        /*
-       * Sort of a NOP commit.
+          /*
+           * Sort of a NOP commit.
            */
 
           localState.setRunState(RunState.Committed);
@@ -454,7 +453,7 @@ public abstract class JournalTransactionService extends AbstractHATransactionSer
    * will advance normally and things can get aged out of the store.
    */
   //    /*
-//     * Ignored since the {@link Journal} records the last commit time
+  //     * Ignored since the {@link Journal} records the last commit time
   //     * in its root blocks.
   //     */
   //    public void notifyCommit(long commitTime) {
@@ -467,7 +466,7 @@ public abstract class JournalTransactionService extends AbstractHATransactionSer
    * will advance normally and things can get aged out of the store.
    */
   //    /*
-//     * Always returns ZERO (0L) since history can not be released on the
+  //     * Always returns ZERO (0L) since history can not be released on the
   //     * {@link Journal}.
   //     */
   //    @Override
@@ -478,7 +477,7 @@ public abstract class JournalTransactionService extends AbstractHATransactionSer
   //    }
 
   //    /*
-//     * Throws exception since distributed transactions are not used for a single
+  //     * Throws exception since distributed transactions are not used for a single
   //     * {@link Journal}.
   //     */
   //    @Override
@@ -489,7 +488,7 @@ public abstract class JournalTransactionService extends AbstractHATransactionSer
   //    }
   //
   //    /*
-//     * Throws exception since distributed transactions are not used for a single
+  //     * Throws exception since distributed transactions are not used for a single
   //     * {@link Journal}.
   //     */
   //    @Override
@@ -511,7 +510,7 @@ public abstract class JournalTransactionService extends AbstractHATransactionSer
   }
 
   //	/*
-//	 * Invoke a method with the {@link AbstractTransactionService}'s lock held.
+  //	 * Invoke a method with the {@link AbstractTransactionService}'s lock held.
   //	 *
   //	 * @param <T>
   //	 * @param callable
@@ -528,7 +527,7 @@ public abstract class JournalTransactionService extends AbstractHATransactionSer
   //	}
   //
   //	/*
-//	 * Invoke a method with the {@link AbstractTransactionService}'s lock held.
+  //	 * Invoke a method with the {@link AbstractTransactionService}'s lock held.
   //	 *
   //	 * But throw immediate exception if try fails.
   //	 *

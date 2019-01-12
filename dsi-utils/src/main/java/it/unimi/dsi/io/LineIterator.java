@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 /*
-* An adapter that exposes a fast buffered reader as an iterator over the returned lines. Since we
+ * An adapter that exposes a fast buffered reader as an iterator over the returned lines. Since we
  * just actually read a line to know whether {@link #hasNext()} should return true, the last line
  * read from the underlying fast buffered reader has to be cached. Mixing calls to this adapter and
  * to the underlying fast buffered reader will not usually give the expected results.

@@ -28,7 +28,7 @@ import org.embergraph.io.DirectBufferPoolAllocator.IAllocation;
 import org.embergraph.io.DirectBufferPoolAllocator.IAllocationContext;
 
 /*
-* Test suite for {@link DirectBufferPoolAllocator}.
+ * Test suite for {@link DirectBufferPoolAllocator}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -162,7 +162,7 @@ public class TestDirectBufferPoolAllocator extends TestCase2 {
   }
 
   //    /*
-//     * @todo Write a unit test to look for a memory leak in the backing
+  //     * @todo Write a unit test to look for a memory leak in the backing
   //     *       {@link DirectBufferPool} as allocations are released from the
   //     *       {@link DirectBufferPoolAllocator}. However, not that the
   //     *       {@link DirectBufferPool} DOES NOT release buffers back to the JVM
@@ -220,7 +220,7 @@ public class TestDirectBufferPoolAllocator extends TestCase2 {
   }
 
   //    /*
-//     * @todo write a unit test for
+  //     * @todo write a unit test for
   //     *       {@link DirectBufferPoolAllocator#put(byte[], IAllocation[])}.
   //     */
   //    public void test_put() {

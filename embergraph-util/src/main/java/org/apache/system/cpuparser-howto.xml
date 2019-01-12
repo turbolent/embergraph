@@ -19,34 +19,36 @@
      limitations under the License.
 -->
 <document>
-    <properties>
-        <title>Event - How To Extend System Util</title>
-    </properties>
-    <body>
-        <section name="System Util Design">
-            <p>
+  <properties>
+    <title>Event - How To Extend System Util</title>
+  </properties>
+  <body>
+    <section name="System Util Design">
+      <p>
         SystemUtil determines which CPUParser it needs by examining
         the results from
-                <code>System.getProperty( "os.name" )</code>.
+        <code>System.getProperty( "os.name" )</code>.
         It strips all the whitespace from the name, and appends it
         to the
-                <code>org.apache.excalibur.util.system</code> package.
+        <code>org.apache.excalibur.util.system</code>
+        package.
         For example, if the "os.name" property returns "Windows XP",
         then the full class name needs to be
-                <code>org.apache.excalibur.util.system.WindowsXP</code>.
-            </p>
-        </section>
-        <section name="Writing a CPUParser">
-            <p>
-        Writing a CPUParser is not hard.  You only need to know
+        <code>org.apache.excalibur.util.system.WindowsXP</code>.
+      </p>
+    </section>
+    <section name="Writing a CPUParser">
+      <p>
+        Writing a CPUParser is not hard. You only need to know
         how to name your implementation, and then write the relevant
-        logic.  All CPUParser implementations must be in the
-                <code>org.apache.excalibur.util.system</code> package and
-        implement the CPUParser interface.  The example below is
+        logic. All CPUParser implementations must be in the
+        <code>org.apache.excalibur.util.system</code>
+        package and
+        implement the CPUParser interface. The example below is
         taken from the WindowsXP CPUParser included in this project.
-            </p>
-            <source>
-                <![CDATA[
+      </p>
+      <source>
+        <![CDATA[
 package org.apache.excalibur.util.system;
 
 import java.io.BufferedReader;
@@ -116,7 +118,7 @@ public final class WindowsXP implements CPUParser
 }
 
       ]]>
-            </source>
-        </section>
-    </body>
+      </source>
+    </section>
+  </body>
 </document>

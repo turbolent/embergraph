@@ -26,11 +26,9 @@ import org.embergraph.btree.BTree;
 import org.embergraph.btree.BTreeCounters;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.ITx;
-import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.spo.SPORelation;
 
 /*
-* Abstract base class for both transient and persistent {@link ITripleStore} implementations using
+ * Abstract base class for both transient and persistent {@link ITripleStore} implementations using
  * local storage.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

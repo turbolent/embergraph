@@ -17,10 +17,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.sail.model;
 
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -31,7 +28,7 @@ import java.io.Writer;
 import java.util.List;
 
 /*
-* Helper class for Json Serialization of Model Objects
+ * Helper class for Json Serialization of Model Objects
  *
  * @author beebs
  */
@@ -49,8 +46,7 @@ public class JsonHelper {
     writer.writeValue(w, rQueries);
   }
 
-  public static List<RunningQuery> readRunningQueryList(InputStream is)
-      throws IOException {
+  public static List<RunningQuery> readRunningQueryList(InputStream is) throws IOException {
 
     final ObjectMapper mapper = new ObjectMapper();
     mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);

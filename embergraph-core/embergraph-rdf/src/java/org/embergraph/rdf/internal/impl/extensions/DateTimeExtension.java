@@ -48,7 +48,7 @@ import org.openrdf.model.Value;
 import org.openrdf.model.datatypes.XMLDatatypeUtil;
 
 /*
-* This implementation of {@link IExtension} implements inlining for literals that represent
+ * This implementation of {@link IExtension} implements inlining for literals that represent
  * xsd:dateTime literals. These literals will be stored as time in milliseconds since the epoch. The
  * milliseconds are encoded as an inline long.
  */

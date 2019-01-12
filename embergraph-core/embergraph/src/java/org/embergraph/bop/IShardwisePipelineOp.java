@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop;
 
 /*
-* An interface for {@link PipelineOp}s which are mapped across shards.
+ * An interface for {@link PipelineOp}s which are mapped across shards.
  *
  * @param <E> The generic type of the elements in the relation on which the predicate will read or
  *     write.

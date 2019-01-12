@@ -26,7 +26,7 @@ package org.embergraph.bop;
 import java.io.Serializable;
 
 /*
-* An interface for specifying constraints on the allowable states of an {@link IBindingSet}. For
+ * An interface for specifying constraints on the allowable states of an {@link IBindingSet}. For
  * example, you can impose the constraint that two variables must have distinct bindings the
  * constraint that a binding must be (or must not be) a particular value type, or that the binding
  * must take on one of a set of enumerated values.

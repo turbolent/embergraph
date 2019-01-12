@@ -38,10 +38,9 @@ import org.embergraph.util.DaemonThreadFactory;
 import org.openrdf.model.Statement;
 import org.openrdf.model.impl.StatementImpl;
 import org.openrdf.model.impl.URIImpl;
-import org.openrdf.query.QueryEvaluationException;
 
 /*
-* Proxied test suite providing a stress test of the multi-tenancy API.
+ * Proxied test suite providing a stress test of the multi-tenancy API.
  *
  * @param <S>
  * @see {@link StressTestConcurrentRestApiRequests} which provides full coverage of the REST API

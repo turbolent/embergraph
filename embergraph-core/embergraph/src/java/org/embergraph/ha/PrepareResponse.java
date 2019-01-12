@@ -23,7 +23,7 @@ package org.embergraph.ha;
 import cern.colt.Arrays;
 
 /*
-* The 2-phase prepare outcome as coordinated by the leader.
+ * The 2-phase prepare outcome as coordinated by the leader.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

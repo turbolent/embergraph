@@ -25,12 +25,11 @@ import cutthecrap.utils.striterators.IFilter;
 import java.util.Iterator;
 import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedureConstructor;
 import org.embergraph.btree.proc.IResultHandler;
-import org.embergraph.journal.IResourceManager;
 import org.embergraph.mdi.IResourceMetadata;
 import org.embergraph.service.Split;
 
 /*
-* A fly-weight wrapper that does not permit write operations and reads through onto an underlying
+ * A fly-weight wrapper that does not permit write operations and reads through onto an underlying
  * {@link IIndex}.
  *
  * <p>Note: use this class sparingly. An index loaded from a historical commit point will always be
@@ -106,7 +105,7 @@ public class ReadOnlyIndex extends DelegateIndex {
   }
 
   //    /*
-//     * Overridden to ensure that procedure is applied against read-only view and
+  //     * Overridden to ensure that procedure is applied against read-only view and
   //     * not the {@link DelegateIndex}.
   //     */
   //    @Override
@@ -117,7 +116,7 @@ public class ReadOnlyIndex extends DelegateIndex {
   //    }
   //
   //    /*
-//     * Overridden to ensure that procedure is applied against read-only view and
+  //     * Overridden to ensure that procedure is applied against read-only view and
   //     * not the {@link DelegateIndex}.
   //     */
   //    @Override

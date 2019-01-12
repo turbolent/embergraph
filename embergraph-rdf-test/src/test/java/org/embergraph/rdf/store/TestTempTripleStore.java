@@ -26,7 +26,7 @@ import junit.extensions.proxy.ProxyTestSuite;
 import junit.framework.Test;
 
 /*
-* Proxy test suite for {@link TempTripleStore}.
+ * Proxy test suite for {@link TempTripleStore}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

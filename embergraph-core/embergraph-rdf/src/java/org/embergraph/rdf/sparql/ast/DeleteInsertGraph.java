@@ -25,7 +25,7 @@ import java.util.Map;
 import org.embergraph.bop.BOp;
 
 /*
-* The DELETE/INSERT operation can be used to remove or add triples from/to the Graph Store based on
+ * The DELETE/INSERT operation can be used to remove or add triples from/to the Graph Store based on
  * bindings for a query pattern specified in a WHERE clause:
  *
  * <pre>

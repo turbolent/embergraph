@@ -26,7 +26,7 @@ import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
 import org.embergraph.rdf.sparql.ast.SubqueryRoot;
 
 /*
-* Class allowing for precise placement of FILTER expressions within join group.
+ * Class allowing for precise placement of FILTER expressions within join group.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$

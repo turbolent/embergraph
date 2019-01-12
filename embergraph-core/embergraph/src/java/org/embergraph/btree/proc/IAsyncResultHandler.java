@@ -25,11 +25,9 @@ package org.embergraph.btree.proc;
 
 import org.embergraph.btree.keys.KVO;
 import org.embergraph.service.Split;
-import org.embergraph.service.ndx.IAsynchronousWriteBufferFactory;
-import org.embergraph.service.ndx.pipeline.IndexPartitionWriteTask;
 
 /*
-* Interface for chunk-at-a-time result processing for asynchronous index writes.
+ * Interface for chunk-at-a-time result processing for asynchronous index writes.
  *
  * <p>Note: For backward compatibility both {@link #aggregate(KVO[], Object, Split)} and {@link
  * IResultHandler#aggregate(Object, Split)} will be invoked by the {@link IndexPartitionWriteTask}.

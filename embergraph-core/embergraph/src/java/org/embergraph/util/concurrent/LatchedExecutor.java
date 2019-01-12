@@ -18,18 +18,14 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.util.concurrent;
 
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
-import java.util.concurrent.FutureTask;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.Semaphore;
 import org.apache.log4j.Logger;
 
 /*
-* A fly weight helper class that runs tasks either sequentially or with limited parallelism against
+ * A fly weight helper class that runs tasks either sequentially or with limited parallelism against
  * some thread pool. Deadlock can arise when limited parallelism is applied if there are
  * dependencies among the tasks. Limited parallelism is enforced using a counting {@link Semaphore}.
  * New tasks can start iff the latch is non-zero. The maximum parallelism is the minimum of the
@@ -91,8 +87,8 @@ public class LatchedExecutor implements Executor {
   public void execute(final Runnable r) {
     if (!queue.offer(
         new Runnable() {
-        /*
-       * Wrap the Runnable in a class that will start the next Runnable
+          /*
+           * Wrap the Runnable in a class that will start the next Runnable
            * from the queue when it completes.
            */
           @Override

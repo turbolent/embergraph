@@ -36,7 +36,6 @@ import org.embergraph.rdf.graph.IBinder;
 import org.embergraph.rdf.graph.IGASContext;
 import org.embergraph.rdf.graph.IGASEngine;
 import org.embergraph.rdf.graph.IGASProgram;
-import org.embergraph.rdf.graph.IGASScheduler;
 import org.embergraph.rdf.graph.IGASSchedulerImpl;
 import org.embergraph.rdf.graph.IGASState;
 import org.embergraph.rdf.graph.IGASStats;
@@ -44,10 +43,7 @@ import org.embergraph.rdf.graph.IGraphAccessor;
 import org.embergraph.rdf.graph.IPredecessor;
 import org.embergraph.rdf.graph.IReducer;
 import org.embergraph.rdf.graph.TraversalDirectionEnum;
-import org.embergraph.rdf.graph.analytics.CC;
-import org.embergraph.rdf.graph.analytics.PR;
 import org.embergraph.rdf.graph.impl.GASEngine;
-import org.embergraph.rdf.graph.impl.GASState;
 import org.embergraph.rdf.graph.impl.bd.EmbergraphGASEngine.EmbergraphGraphAccessor;
 import org.embergraph.rdf.graph.impl.scheduler.CHMScheduler;
 import org.embergraph.rdf.internal.IV;
@@ -77,7 +73,7 @@ import org.openrdf.model.ValueFactory;
 import org.openrdf.model.impl.URIImpl;
 
 /*
-* A SERVICE that exposes {@link IGASProgram}s for SPARQL execution.
+ * A SERVICE that exposes {@link IGASProgram}s for SPARQL execution.
  *
  * <p>For example, the following would run a depth-limited BFS traversal:
  *
@@ -419,11 +415,11 @@ public class GASService extends CustomServiceFactoryBase {
       this.traversalDirection =
           TraversalDirectionEnum.valueOf(
               getOnlyArg(
-                  Options.PROGRAM,
-                  Options.TRAVERSAL_DIRECTION,
-                  store
-                      .getValueFactory()
-                      .createLiteral(Options.DEFAULT_DIRECTED_TRAVERSAL.name()))
+                      Options.PROGRAM,
+                      Options.TRAVERSAL_DIRECTION,
+                      store
+                          .getValueFactory()
+                          .createLiteral(Options.DEFAULT_DIRECTED_TRAVERSAL.name()))
                   .stringValue());
 
       this.maxIterations =
@@ -732,8 +728,8 @@ public class GASService extends CustomServiceFactoryBase {
 
         if (initialFrontier != null) {
 
-        /*
-       * FIXME Why can't we pass in the Value (with a defined IV)
+          /*
+           * FIXME Why can't we pass in the Value (with a defined IV)
            * and not the IV? This should work. Passing in the IV is
            * against the grain of the API and the generalized
            * abstraction as Values. Of course, having the IV is
@@ -752,8 +748,8 @@ public class GASService extends CustomServiceFactoryBase {
 
         if (targetVertices != null && gasProgram instanceof IPredecessor) {
 
-        /*
-       * Remove vertices from the visited set that are not on a
+          /*
+           * Remove vertices from the visited set that are not on a
            * path leading to at least one of the specified target
            * vertices.
            *
@@ -779,16 +775,14 @@ public class GASService extends CustomServiceFactoryBase {
           sb.append("GAS");
           sb.append(": analytic=" + gasProgram.getClass().getSimpleName());
           sb.append(", nthreads=" + nthreads);
-          sb.append(
-              ", scheduler="
-                  + gasState.getScheduler().getClass().getSimpleName());
+          sb.append(", scheduler=" + gasState.getScheduler().getClass().getSimpleName());
           sb.append(", gasEngine=" + gasEngine.getClass().getSimpleName());
           sb.append(", stats=" + stats);
           log.info(sb.toString());
         }
 
-      /*
-       * Bind output variables (if any).
+        /*
+         * Bind output variables (if any).
          */
 
         final IBindingSet[] out =
@@ -912,8 +906,8 @@ public class GASService extends CustomServiceFactoryBase {
 
             } else if (vals.size() == 1) {
 
-            /*
-       * Bind the single value, leave the parent in the
+              /*
+               * Bind the single value, leave the parent in the
                * bSets.
                */
 
@@ -925,8 +919,8 @@ public class GASService extends CustomServiceFactoryBase {
 
             } else {
 
-            /*
-       * Remove the parent from the bSets, for each new
+              /*
+               * Remove the parent from the bSets, for each new
                * value, clone the parent, bind the value, and add
                * the new solution to the bSets
                */
@@ -965,8 +959,8 @@ public class GASService extends CustomServiceFactoryBase {
 
         } else {
 
-        /*
-       * The Value is a EmbergraphValueImpl (if the bind() method
+          /*
+           * The Value is a EmbergraphValueImpl (if the bind() method
            * used the supplied ValueFactory). We need to convert
            * it to an IV and this code ASSUMES that we can do this
            * using an inline IV with the as configured KB. (This

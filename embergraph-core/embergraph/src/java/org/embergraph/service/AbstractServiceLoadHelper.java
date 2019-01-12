@@ -4,7 +4,7 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /*
-* Base class for abstract implementations with integration points for the {@link
+ * Base class for abstract implementations with integration points for the {@link
  * LoadBalancerService}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -28,7 +28,7 @@ import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /*
-* Mark a statement pattern to include history or not. When history is enabled statements are not
+ * Mark a statement pattern to include history or not. When history is enabled statements are not
  * deleted - they are simply marked as history using StatementEnum.History. By default these SPOs
  * are hidden from view.
  */

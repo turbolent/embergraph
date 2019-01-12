@@ -21,10 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.join;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.FutureTask;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpContext;
@@ -35,19 +33,14 @@ import org.embergraph.bop.IQueryAttributes;
 import org.embergraph.bop.IVariable;
 import org.embergraph.bop.NV;
 import org.embergraph.bop.PipelineOp;
-import org.embergraph.bop.controller.HTreeNamedSubqueryOp;
 import org.embergraph.bop.controller.INamedSolutionSetRef;
-import org.embergraph.bop.controller.INamedSubqueryOp;
-import org.embergraph.bop.controller.JVMNamedSubqueryOp;
 import org.embergraph.bop.controller.NamedSetAnnotations;
-import org.embergraph.bop.engine.IRunningQuery;
-import org.embergraph.htree.HTree;
 import org.embergraph.relation.accesspath.AbstractUnsynchronizedArrayBuffer;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.UnsyncLocalOutputBuffer;
 
 /*
-* Operator joins a solution set modeled as a hash index into the pipeline. The solution set may be
+ * Operator joins a solution set modeled as a hash index into the pipeline. The solution set may be
  * modeled by an {@link HTree} or a JVM {@link HashMap}. While this JOIN requires the RHS hash index
  * to be fully materialized, evaluation of the LHS source solutions is pipelined.
  *
@@ -207,8 +200,8 @@ public abstract class SolutionSetHashJoinOp extends PipelineOp {
 
       if (!state.getJoinType().isNormal() && !op.isLastPassRequested()) {
 
-      /*
-       * Anything but a Normal join requires that we observe all solutions
+        /*
+         * Anything but a Normal join requires that we observe all solutions
          * and then do some final reporting. This is necessary for Optional,
          * Exists, and NotExists.
          */
@@ -246,8 +239,8 @@ public abstract class SolutionSetHashJoinOp extends PipelineOp {
 
         if (release && context.isLastInvocation()) {
 
-        /*
-       * Note: It is possible to INCLUDE the named temporary
+          /*
+           * Note: It is possible to INCLUDE the named temporary
            * solution set multiple times within a query. If we want to
            * release() the hash tree then we need to know how many
            * times the temporary solution set is being included and
@@ -295,15 +288,15 @@ public abstract class SolutionSetHashJoinOp extends PipelineOp {
 
       switch (state.getJoinType()) {
         case Normal:
-        /*
-       * Nothing to do.
+          /*
+           * Nothing to do.
            */
           break;
         case Optional:
         case NotExists:
           {
-          /*
-       * Output the optional solutions.
+            /*
+             * Output the optional solutions.
              */
 
             // where to write the optional solutions.
@@ -321,8 +314,8 @@ public abstract class SolutionSetHashJoinOp extends PipelineOp {
           }
         case Exists:
           {
-          /*
-       * Output the join set.
+            /*
+             * Output the join set.
              *
              * Note: This has special hooks to support (NOT) EXISTS
              * graph patterns, which must bind the "ASK_VAR" depending

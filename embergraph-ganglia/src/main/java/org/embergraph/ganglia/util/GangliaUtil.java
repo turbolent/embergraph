@@ -20,7 +20,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /*
-* Utility class.
+ * Utility class.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

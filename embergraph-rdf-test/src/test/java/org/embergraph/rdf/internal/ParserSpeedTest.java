@@ -26,7 +26,7 @@ import org.openrdf.rio.RDFParserRegistry;
 import org.openrdf.rio.helpers.RDFHandlerBase;
 
 /*
-* Utility to measure the raw speed of the RDF parser.
+ * Utility to measure the raw speed of the RDF parser.
  *
  * <p>Note: The RIO ntriples parser appears to do about 68k tps flat out on BSBM 200M.
  *

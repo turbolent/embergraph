@@ -32,7 +32,7 @@ import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.util.InnerCause;
 
 /*
-* A pipelined aggregation operator based on an in memory hash table associating with per-group
+ * A pipelined aggregation operator based on an in memory hash table associating with per-group
  * state for each aggregate expression (it can also handle the degenerate case where all solutions
  * form a single implicit group). This operator is highly efficient, but may only be used if (a)
  * DISTINCT is NOT specified for any aggregate and (b) aggregates do not embed other aggregates.
@@ -184,8 +184,8 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
         Object exprValue;
 
         try {
-        /*
-       * Note: This has a side-effect on the solution and causes
+          /*
+           * Note: This has a side-effect on the solution and causes
            * the evaluated GROUP_BY value expressions to become bound
            * on the solution. This is necessary in order for us to
            * compute the aggregates incrementally.
@@ -282,8 +282,8 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
 
         if (expr instanceof IVariable<?>) {
 
-        /*
-       * Propagate bare variable used in GROUP_BY clause to [aggregates].
+          /*
+           * Propagate bare variable used in GROUP_BY clause to [aggregates].
            *
            * <pre>
            * GROUP BY ?x
@@ -307,8 +307,8 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
 
         } else if (expr instanceof IBind<?>) {
 
-        /*
-       * Propagate BIND declared by GROUP_BY clause to [aggregates].
+          /*
+           * Propagate BIND declared by GROUP_BY clause to [aggregates].
            *
            * <pre>
            * GROUP BY (2*?y as ?x)
@@ -373,8 +373,8 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
       }
 
       if (groupByState.isNestedAggregates()) {
-      /*
-       * Pipelined aggregation does not support aggregates which embed
+        /*
+         * Pipelined aggregation does not support aggregates which embed
          * other aggregates.
          */
         throw new UnsupportedOperationException(
@@ -417,8 +417,8 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
 
       } else {
 
-      /*
-       * The map is only defined if a GROUP_BY clause was used.
+        /*
+         * The map is only defined if a GROUP_BY clause was used.
          */
 
         map =
@@ -478,8 +478,8 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
       final SharedState sharedState;
       synchronized (stats) {
         if (stats.first) {
-        /*
-       * Setup the shared state.
+          /*
+           * Setup the shared state.
            */
           stats.first = false;
           sharedState = new SharedState(op, stats);
@@ -552,15 +552,15 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
 
             if (groupBy == null) {
 
-            /*
-       * A single implicit group.
+              /*
+               * A single implicit group.
                */
               doAggregate(aggExpr, bset, stats);
 
             } else {
 
-            /*
-       * Explicit GROUP_BY.
+              /*
+               * Explicit GROUP_BY.
                */
               accept(bset);
             }
@@ -574,15 +574,15 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
 
           if (groupBy == null) {
 
-          /*
-       * A single implicit group.
+            /*
+             * A single implicit group.
              *
              * Output solution for the implicit group IFF the HAVING
              * constraints are satisfied.
              */
 
-          /*
-       * The intermediate solution with all bindings produced when evaluating this solution
+            /*
+             * The intermediate solution with all bindings produced when evaluating this solution
              * group.
              *
              * <p>Note: There is no GROUP_BY so we do not need to propagate any bindings declared by
@@ -606,8 +606,8 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
                 TypeErrorLog.handleTypeError(ex, expr, stats);
                 continue;
               } catch (IllegalArgumentException ex) {
-              /*
-       * Note: This a hack turns an
+                /*
+                 * Note: This a hack turns an
                  * IllegalArgumentException which we presume is
                  * coming out of new Constant(null) into an
                  * (implicit) SPARQL type error so we can drop
@@ -644,8 +644,8 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
 
           } else {
 
-          /*
-       * Explicit GROUP_BY.
+            /*
+             * Explicit GROUP_BY.
              *
              * Output solutions for the observed groups which pass
              * the optional HAVING constraint(s).
@@ -666,8 +666,8 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
                   TypeErrorLog.handleTypeError(ex, expr, stats);
                   continue;
                 } catch (IllegalArgumentException ex) {
-                /*
-       * Note: This hack turns an
+                  /*
+                   * Note: This hack turns an
                    * IllegalArgumentException which we presume
                    * is coming out of new Constant(null) into
                    * an (implicit) SPARQL type error so we can
@@ -751,8 +751,8 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
 
         if (InnerCause.isInnerCause(t, SparqlTypeErrorException.class)) {
 
-        /*
-       * Trap the type error. The group will be reported, but this
+          /*
+           * Trap the type error. The group will be reported, but this
            * aggregate will not bind a value for that group (the
            * aggregate will track its error state internally.)
            */

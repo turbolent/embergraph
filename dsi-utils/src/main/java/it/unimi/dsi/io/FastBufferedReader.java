@@ -32,7 +32,7 @@ import java.io.ObjectInputStream;
 import java.io.Reader;
 
 /*
-* A lightweight, unsynchronised buffered reader based on {@linkplain
+ * A lightweight, unsynchronised buffered reader based on {@linkplain
  * it.unimi.dsi.lang.MutableString mutable strings}.
  *
  * <p>This class provides buffering for readers, but it does so with purposes and an internal logic

@@ -22,23 +22,17 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.store;
 
 import org.embergraph.rdf.model.EmbergraphStatement;
-import org.embergraph.rdf.model.EmbergraphStatementImpl;
 import org.embergraph.rdf.model.EmbergraphValue;
-import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.rules.InferenceEngine;
 import org.embergraph.rdf.spo.ISPO;
-import org.embergraph.rdf.spo.SPO;
-import org.embergraph.rdf.store.DataLoader.Options;
-import org.embergraph.relation.accesspath.EmptyAccessPath;
 import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.openrdf.model.Resource;
-import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
 /*
-* Interface for a triple -or- quad store.
+ * Interface for a triple -or- quad store.
  *
  * <p>Note: This API does NOT implement a Truth Maintenance (TM) strategy and by itself only
  * supports "explicit" triples. If the knowledge base is NOT to store any entailments then the

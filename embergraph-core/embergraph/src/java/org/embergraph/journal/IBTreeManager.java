@@ -24,17 +24,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.journal;
 
 import org.embergraph.btree.BTree;
-import org.embergraph.btree.ICheckpointProtocol;
 import org.embergraph.btree.IIndex;
 import org.embergraph.btree.IndexMetadata;
-import org.embergraph.btree.view.FusedView;
-import org.embergraph.htree.HTree;
-import org.embergraph.service.IDataService;
-import org.embergraph.service.IMetadataService;
-import org.embergraph.service.ndx.IClientIndex;
 
 /*
-* Interface for management of local index resources such as {@link BTree}, {@link HTree}, etc.
+ * Interface for management of local index resources such as {@link BTree}, {@link HTree}, etc.
  *
  * <p>TODO GIST This interface was historically only for the local {@link BTree}. The GIST support
  * has been pushed down into the {@link IGISTLocalManager}. The {@link BTree} and {@link IIndex}

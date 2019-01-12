@@ -21,13 +21,12 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation.accesspath;
 
-import java.io.Serializable;
 import org.embergraph.bop.ap.filter.SameVariableConstraint;
 import org.embergraph.btree.ITuple;
 import org.embergraph.btree.filter.TupleFilter;
 
 /*
-* {@link TupleFilter} class wrapping the {@link SameVariableConstraint}.
+ * {@link TupleFilter} class wrapping the {@link SameVariableConstraint}.
  *
  * <p>Note: This filter can execute local to the index shard in scale-out. Therefore it MUST NOT
  * have a reference to the {@link AccessPath} in order to be {@link Serializable}. This used to be

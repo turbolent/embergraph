@@ -28,10 +28,9 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.TimeoutException;
 import junit.framework.TestCase2;
-import org.embergraph.resources.AsynchronousOverflowTask;
 
 /*
-* Unit tests for the round robin behaviors of the load balancer in isolation (not an integration
+ * Unit tests for the round robin behaviors of the load balancer in isolation (not an integration
  * test).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

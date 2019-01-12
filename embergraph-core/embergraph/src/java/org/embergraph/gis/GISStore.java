@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.gis;
 
 /*
-* This is a placeholder for a GIS design. While GIS systems are typically R-trees, I am considering
+ * This is a placeholder for a GIS design. While GIS systems are typically R-trees, I am considering
  * an approach that leverages the existing scale-out B+-Tree architecture using a design similar in
  * many ways to the triple store.
  *

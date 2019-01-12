@@ -10,7 +10,7 @@ package cern.jet.stat.quantile;
 
 import cern.colt.list.DoubleArrayList;
 /*
-* A buffer holding <tt>double</tt> elements; internally used for computing approximate quantiles.
+ * A buffer holding <tt>double</tt> elements; internally used for computing approximate quantiles.
  */
 class DoubleBuffer extends Buffer {
   protected DoubleArrayList values;
@@ -108,14 +108,7 @@ class DoubleBuffer extends Buffer {
   }
   /** Returns a String representation of the receiver. */
   public String toString() {
-    return "k="
-        + this.k
-        + ", w="
-        + weight()
-        + ", l="
-        + level()
-        + ", size="
-        + values.size();
+    return "k=" + this.k + ", w=" + weight() + ", l=" + level() + ", size=" + values.size();
     // ", v=" + values.toString();
   }
 }

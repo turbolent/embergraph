@@ -31,7 +31,7 @@ import org.embergraph.bop.BOp;
 import org.embergraph.bop.IVariable;
 
 /*
-* An AST node which provides a reference in an {@link IGroupNode} and indicates that a named
+ * An AST node which provides a reference in an {@link IGroupNode} and indicates that a named
  * solution set should be joined with the solutions in the group.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -69,7 +69,7 @@ public class NamedSubqueryInclude extends GroupMemberNodeBase<NamedSubqueryInclu
      * @see https://sourceforge.net/apps/trac/bigdata/ticket/405
      */
     //        /*
-//         * When <code>true</code>, the join variables will be ignored when
+    //         * When <code>true</code>, the join variables will be ignored when
     //         * performing the join. This option makes it possible to build an index
     //         * using join variables, but to evaluate the join without regard to
     //         * those join variables.

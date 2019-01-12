@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.eval;
 
 /*
-* Data driven test suite for named subquery evaluation (that is, for queries which are explicitly
+ * Data driven test suite for named subquery evaluation (that is, for queries which are explicitly
  * written using the named subquery syntax).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -59,7 +59,7 @@ public class TestNamedSubQuery extends AbstractDataDrivenSPARQLTestCase {
   }
 
   //    /*
-//     * This is a variant {@link #test_named_subquery()} in which the JOIN ON
+  //     * This is a variant {@link #test_named_subquery()} in which the JOIN ON
   //     * query hint is used to explicitly specify NO join variables.
   //     */
   //    public void test_named_subquery_noJoinVars() throws Exception {

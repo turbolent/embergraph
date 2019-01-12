@@ -20,19 +20,15 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.btree;
 
-import java.lang.ref.WeakReference;
 import java.lang.reflect.Constructor;
 import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.locks.Lock;
 import org.embergraph.EmbergraphStatics;
-import org.embergraph.btree.AbstractBTreeTupleCursor.MutableBTreeTupleCursor;
-import org.embergraph.btree.Leaf.ILeafListener;
 import org.embergraph.btree.data.ILeafData;
 import org.embergraph.btree.data.INodeData;
 import org.embergraph.io.ByteArrayBuffer;
 import org.embergraph.journal.AbstractJournal;
-import org.embergraph.journal.IIndexManager;
 import org.embergraph.mdi.IResourceMetadata;
 import org.embergraph.mdi.JournalMetadata;
 import org.embergraph.mdi.LocalPartitionMetadata;
@@ -41,7 +37,7 @@ import org.embergraph.rwstore.IRWStrategy;
 import org.embergraph.util.Bytes;
 
 /*
-* This class implements a variant of a B+Tree in which all values are stored in leaves, but the
+ * This class implements a variant of a B+Tree in which all values are stored in leaves, but the
  * leaves are not connected with prior-next links. This constraint arises from the requirement to
  * support a copy-on-write policy.
  *
@@ -184,7 +180,7 @@ public class BTree extends AbstractBTree
   private Checkpoint checkpoint = null;
 
   //    /*
-//     * The root of the btree. This is initially a leaf until the leaf is split,
+  //     * The root of the btree. This is initially a leaf until the leaf is split,
   //     * at which point it is replaced by a node. The root is also replaced each
   //     * time copy-on-write triggers a cascade of updates.
   //     */
@@ -230,7 +226,7 @@ public class BTree extends AbstractBTree
   private final ByteArrayBuffer recordAddrBuf;
 
   //    /*
-//     * The last address from which the {@link IndexMetadata} record was read or
+  //     * The last address from which the {@link IndexMetadata} record was read or
   //     * on which it was written.
   //     */
   //    private long lastMetadataAddr;
@@ -518,7 +514,7 @@ public class BTree extends AbstractBTree
   //    }
 
   //    /*
-//     * Mark the B+Tree as read-only. Once the B+Tree is marked as read-only,
+  //     * Mark the B+Tree as read-only. Once the B+Tree is marked as read-only,
   //     * that instance will remain read-only.
   //     *
   //     * @param readOnly
@@ -678,7 +674,7 @@ public class BTree extends AbstractBTree
   }
 
   //    /*
-//     * Converts this {@link BTree} to a read-only {@link BTree}, stealing its
+  //     * Converts this {@link BTree} to a read-only {@link BTree}, stealing its
   //     * cached nodes and leaves. If {@link BTree} is already read-only, then
   //     * <i>this</i> instance is returned. Otherwise, a read-only {@link BTree} is
   //     * loaded from the last checkpoint, populated with new instances of cached
@@ -794,8 +790,8 @@ public class BTree extends AbstractBTree
       if (
       /* autoCommit && */ needsCheckpoint()) {
 
-      /*
-       * Flush the btree, write a checkpoint record, and return the
+        /*
+         * Flush the btree, write a checkpoint record, and return the
          * address of that checkpoint record. The [checkpoint] reference
          * is also updated.
          */
@@ -857,8 +853,8 @@ public class BTree extends AbstractBTree
 
       if (filter != null && filter.isDirty() && filter.isEnabled()) {
 
-      /*
-       * The bloom filter is enabled, is loaded and is dirty, so write
+        /*
+         * The bloom filter is enabled, is loaded and is dirty, so write
          * it on the store now.
          *
          * @see https://sourceforge.net/apps/trac/bigdata/ticket/440
@@ -996,7 +992,7 @@ public class BTree extends AbstractBTree
   }
 
   //    /*
-//     * Return true iff the state of this B+Tree has been modified since the last
+  //     * Return true iff the state of this B+Tree has been modified since the last
   //     * {@link Checkpoint} record associated with the given address.
   //     *
   //     * @param checkpointAddr
@@ -1529,8 +1525,7 @@ public class BTree extends AbstractBTree
        * BTree.
        */
       final Constructor ctor =
-          cl.getConstructor(
-              IRawStore.class, Checkpoint.class, IndexMetadata.class, Boolean.TYPE);
+          cl.getConstructor(IRawStore.class, Checkpoint.class, IndexMetadata.class, Boolean.TYPE);
 
       final BTree btree =
           (BTree)
@@ -1554,7 +1549,7 @@ public class BTree extends AbstractBTree
   }
 
   //    /*
-//     * Load an instance of a {@link BTree} or derived class from the store. The
+  //     * Load an instance of a {@link BTree} or derived class from the store. The
   //     * {@link BTree} or derived class MUST declare a constructor with the
   //     * following signature: <code>
   //     *
@@ -1657,8 +1652,7 @@ public class BTree extends AbstractBTree
        * BTree.
        */
       final Constructor ctor =
-          cl.getConstructor(
-              IRawStore.class, Checkpoint.class, IndexMetadata.class, Boolean.TYPE);
+          cl.getConstructor(IRawStore.class, Checkpoint.class, IndexMetadata.class, Boolean.TYPE);
 
       final BTree btree =
           (BTree) ctor.newInstance(new Object[] {store, checkpoint, metadata, readOnly});
@@ -1729,8 +1723,8 @@ public class BTree extends AbstractBTree
 
       if (counter == btree.checkpoint.getCounter() + 1) {
 
-      /*
-       * The first time the counter is incremented beyond the value in
+        /*
+         * The first time the counter is incremented beyond the value in
          * the checkpoint record we fire off a dirty event to put the
          * BTree on the commit list.
          */
@@ -1740,8 +1734,8 @@ public class BTree extends AbstractBTree
 
       if (counter == 0L) {
 
-      /*
-       * The counter has wrapped back to ZERO.
+        /*
+         * The counter has wrapped back to ZERO.
          */
 
         throw new RuntimeException("Counter overflow");
@@ -1788,8 +1782,8 @@ public class BTree extends AbstractBTree
 
       if (tmp >= MAX_LOCAL_COUNTER) {
 
-      /*
-       * Note: Checkpoint MUST persist the raw counter in scale-out
+        /*
+         * Note: Checkpoint MUST persist the raw counter in scale-out
          * this code will observe the partitionId in the high word and
          * throw an exception. The whole point of this check is to
          * verify that the underlying index local counter has not
@@ -2030,8 +2024,8 @@ public class BTree extends AbstractBTree
 
       while (n > 0) {
 
-      /*
-       * Again, clearing the reference is important since we are
+        /*
+         * Again, clearing the reference is important since we are
          * managing weak reference reachability with this stack.
          */
 
@@ -2281,8 +2275,8 @@ public class BTree extends AbstractBTree
 
           if (p == null) {
 
-          /*
-       * No right-sibling (must be the last leaf).
+            /*
+             * No right-sibling (must be the last leaf).
              */
 
             // undo changes to the stack.
@@ -2366,8 +2360,8 @@ public class BTree extends AbstractBTree
 
           if (p == null) {
 
-          /*
-       * No left-sibling (must be the first leaf).
+            /*
+             * No left-sibling (must be the first leaf).
              */
 
             // undo changes to the stack.

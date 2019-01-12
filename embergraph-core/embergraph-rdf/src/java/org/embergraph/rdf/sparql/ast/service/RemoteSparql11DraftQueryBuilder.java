@@ -32,7 +32,7 @@ import org.openrdf.query.Binding;
 import org.openrdf.query.BindingSet;
 
 /*
-* Utility class constructs a valid SPARQL query for a remote <code>SPARQL 1.1</code> using the
+ * Utility class constructs a valid SPARQL query for a remote <code>SPARQL 1.1</code> using the
  * <code>BINDINGS</code> clause to vector solutions into that remote end point.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -80,8 +80,8 @@ public class RemoteSparql11DraftQueryBuilder extends RemoteSparql11QueryBuilder 
     {
       sb.append("SELECT ");
       if (projectedVars.isEmpty()) {
-      /*
-       * Note: This is a dubious hack for openrdf federated query
+        /*
+         * Note: This is a dubious hack for openrdf federated query
          * testEmptyServiceBlock. Since there are no variables in the
          * service clause, it was sending an invalid SELECT expression.
          * It is now hacked to send a "*" instead.
@@ -142,8 +142,8 @@ public class RemoteSparql11DraftQueryBuilder extends RemoteSparql11QueryBuilder 
       final String tmp = exprImage.substring(beginIndex, endIndex);
       sb.append("WHERE {\n");
       if (bnodes != null) {
-      /*
-       * Impose a same-term constraint for all variables which are
+        /*
+         * Impose a same-term constraint for all variables which are
          * bound to the same blank node.
          */
         for (Set<String> sameTermVars : bnodes.values()) {

@@ -35,7 +35,7 @@ import org.embergraph.rawstore.IRawStore;
 import org.embergraph.util.Bytes;
 
 /*
-* Test suite for {@link TemporaryStore} (temporary store with named indices).
+ * Test suite for {@link TemporaryStore} (temporary store with named indices).
  *
  * @todo add test to verify read back after we overflow the initial write cache.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -187,8 +187,7 @@ public class TestTemporaryStore extends AbstractRawStoreTestCase {
 
     try {
 
-      final AbstractBufferStrategy bufferStrategy =
-          store.getBufferStrategy();
+      final AbstractBufferStrategy bufferStrategy = store.getBufferStrategy();
 
       final long userExtent = bufferStrategy.getUserExtent();
 
@@ -292,8 +291,7 @@ public class TestTemporaryStore extends AbstractRawStoreTestCase {
 
     try {
 
-      final AbstractBufferStrategy bufferStrategy =
-          store.getBufferStrategy();
+      final AbstractBufferStrategy bufferStrategy = store.getBufferStrategy();
 
       final long userExtent = bufferStrategy.getUserExtent();
 
@@ -332,8 +330,7 @@ public class TestTemporaryStore extends AbstractRawStoreTestCase {
 
     try {
 
-      final AbstractBufferStrategy bufferStrategy =
-          store.getBufferStrategy();
+      final AbstractBufferStrategy bufferStrategy = store.getBufferStrategy();
 
       final long userExtent = bufferStrategy.getUserExtent();
 
@@ -407,7 +404,7 @@ public class TestTemporaryStore extends AbstractRawStoreTestCase {
   }
 
   //    /*
-//     * Test that the store transparently overflows onto disk when the maximum
+  //     * Test that the store transparently overflows onto disk when the maximum
   //     * in-memory limit has been exceeded. The test also makes sure that the
   //     * existing data is recoverable and that the new data is also recoverable
   //     * (when the buffer is extended it is typically copied while the length of a

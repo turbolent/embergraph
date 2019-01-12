@@ -25,7 +25,7 @@ import java.util.Properties;
 import org.embergraph.testutil.ExperimentDriver.Result;
 
 /*
-* Stress tests where a {@link TxDag} is used to detect deadlock.
+ * Stress tests where a {@link TxDag} is used to detect deadlock.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

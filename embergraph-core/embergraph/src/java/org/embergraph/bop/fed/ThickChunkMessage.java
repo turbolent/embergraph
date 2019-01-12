@@ -36,15 +36,13 @@ import org.embergraph.io.DataInputBuffer;
 import org.embergraph.io.DataOutputBuffer;
 import org.embergraph.io.LongPacker;
 import org.embergraph.io.ShortPacker;
-import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.internal.IVCache;
 import org.embergraph.rdf.internal.encoder.IVSolutionSetDecoder;
 import org.embergraph.rdf.internal.encoder.IVSolutionSetEncoder;
 import org.embergraph.relation.accesspath.EmptyCloseableIterator;
 import org.embergraph.relation.accesspath.ThickCloseableIterator;
 
 /*
-* A thick version of this interface in which the chunk is sent inline with the RMI message.
+ * A thick version of this interface in which the chunk is sent inline with the RMI message.
  *
  * <p>Note: The encoding is {@link IV} specific and supports the {@link IVCache} associations.
  * However, it CAN NOT be used with non-{@link IV} data. This is fine in the deployed system but it

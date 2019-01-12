@@ -39,17 +39,14 @@ import org.embergraph.btree.raba.codec.IRabaCoder;
 import org.embergraph.io.DataOutputBuffer;
 import org.embergraph.io.LongPacker;
 import org.embergraph.io.ShortPacker;
-import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.AbstractIV;
-import org.embergraph.rdf.internal.impl.BlobIV;
 import org.embergraph.rdf.lexicon.BlobsWriteProc.Result;
 import org.embergraph.relation.IMutableRelationIndexWriteProcedure;
 import org.embergraph.service.Split;
-import org.openrdf.model.Value;
 
 /*
-* This unisolated operation inserts {@link Value}s into the
+ * This unisolated operation inserts {@link Value}s into the
  * <em>{termCode,hash(Value),counter}:Value</em> index, assigning {@link IV}s to {@link Value}s as a
  * side-effect.
  *
@@ -205,8 +202,8 @@ public class BlobsWriteProc extends AbstractKeyArrayIndexProcedure<Result>
       final int counter;
       if (!toldBNodes && vte == VTE.BNODE) {
 
-      /*
-       * Do not enter blank nodes into the TERMS index.
+        /*
+         * Do not enter blank nodes into the TERMS index.
          *
          * For this case, we just assign a term identifier and leave it
          * at that. If two different documents by some chance happen to
@@ -223,8 +220,8 @@ public class BlobsWriteProc extends AbstractKeyArrayIndexProcedure<Result>
           // blank nodes can not be resolved by the index.
           counter = BlobsIndexHelper.NOT_FOUND;
 
-        /*
-       * FIXME Use this to track down people who pass in a blank
+          /*
+           * FIXME Use this to track down people who pass in a blank
            * node on a read-only request when we are not using told
            * bnodes. Under these conditions we can not unify the blank
            * node with the TERMS index so the node should not have
@@ -234,8 +231,8 @@ public class BlobsWriteProc extends AbstractKeyArrayIndexProcedure<Result>
 
         } else {
 
-        /*
-       * We are not in a told bnode mode and this is not a
+          /*
+           * We are not in a told bnode mode and this is not a
            * read-only request. The TERMS index will be used to assign
            * a unique counter to complete the blank node's key. That
            * counter is just the current size of the collision bucket
@@ -250,8 +247,8 @@ public class BlobsWriteProc extends AbstractKeyArrayIndexProcedure<Result>
 
       } else {
 
-      /*
-       * The serialized EmbergraphValue object.
+        /*
+         * The serialized EmbergraphValue object.
          *
          * TODO Avoid materialization of this, preferring to operate on
          * streams in the source IRaba. We will need to compare it with
@@ -272,8 +269,8 @@ public class BlobsWriteProc extends AbstractKeyArrayIndexProcedure<Result>
 
       if (counter != BlobsIndexHelper.NOT_FOUND) {
 
-      /*
-       * TODO This does not update the bucketSize when the Value was
+        /*
+         * TODO This does not update the bucketSize when the Value was
          * not found in the index. We could do this by changing the
          * return value of resolveOrAddValue() to -rangeCount and
          * casting to an (int). The (-rangeCount) could then be

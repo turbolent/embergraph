@@ -21,12 +21,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.io;
 
-import junit.extensions.proxy.IProxyTest;
 import junit.framework.TestCase;
 import org.apache.log4j.Logger;
 
 /*
-* Some helper methods for CI.
+ * Some helper methods for CI.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

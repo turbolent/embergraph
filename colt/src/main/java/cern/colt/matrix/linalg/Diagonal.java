@@ -10,7 +10,7 @@ package cern.colt.matrix.linalg;
 
 import cern.colt.matrix.DoubleMatrix2D;
 /*
-* For diagonal matrices we can often do better.
+ * For diagonal matrices we can often do better.
  *
  * @author wolfgang.hoschek@cern.ch
  * @version 1.0, 09/24/99

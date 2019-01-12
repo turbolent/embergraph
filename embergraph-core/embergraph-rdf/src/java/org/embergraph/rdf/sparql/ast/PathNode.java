@@ -5,7 +5,7 @@ import org.embergraph.bop.BOp;
 import org.embergraph.bop.NV;
 
 /*
-* AST Node used to represent a property path.
+ * AST Node used to represent a property path.
  *
  * <p>See http://www.w3.org/TR/sparql11-query/#rTriplesSameSubjectPath for details.
  *

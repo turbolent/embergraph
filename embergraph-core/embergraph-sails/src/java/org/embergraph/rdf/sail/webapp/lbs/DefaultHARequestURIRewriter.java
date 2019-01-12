@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.embergraph.journal.IIndexManager;
 
 /*
-* Default implementation.
+ * Default implementation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

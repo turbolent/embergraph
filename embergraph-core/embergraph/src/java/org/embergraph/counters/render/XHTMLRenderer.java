@@ -29,7 +29,6 @@ import org.embergraph.counters.query.CounterSetSelector;
 import org.embergraph.counters.query.HistoryTable;
 import org.embergraph.counters.query.ICounterSelector;
 import org.embergraph.counters.query.PivotTable;
-import org.embergraph.counters.query.ReportEnum;
 import org.embergraph.counters.query.TimestampFormatEnum;
 import org.embergraph.counters.query.URLQueryModel;
 import org.embergraph.counters.query.URLQueryParam;
@@ -38,7 +37,7 @@ import org.embergraph.service.IEventReportingService;
 import org.embergraph.util.HTMLUtility;
 
 /*
-* (X)HTML rendering of a {@link CounterSet}.
+ * (X)HTML rendering of a {@link CounterSet}.
  *
  * @todo UI widgets for regex filters, depth, correlated.
  * @todo make documentation available on the counters via click through on their name.
@@ -206,8 +205,8 @@ public class XHTMLRenderer implements IRenderer {
       switch (model.reportType) {
         case hierarchy:
 
-        /*
-       * @todo rewrite to use node.getDepth() + model.depth so that
+          /*
+           * @todo rewrite to use node.getDepth() + model.depth so that
            * the relative depth is maintained during navigation.
            */
           writeCounterSet(w, (CounterSet) node, model.depth);
@@ -456,8 +455,8 @@ public class XHTMLRenderer implements IRenderer {
 
         final ICounter<?> counter = (ICounter<?>) node;
 
-      /*
-       * write out values for the counter.
+        /*
+         * write out values for the counter.
          */
 
         w.write("  <th align=\"left\">");
@@ -466,8 +465,8 @@ public class XHTMLRenderer implements IRenderer {
 
         if (counter.getInstrument() instanceof HistoryInstrument) {
 
-        /*
-       * Report the average over the last hour, day, and month.
+          /*
+           * Report the average over the last hour, day, and month.
            *
            * @todo could report the current value, the weighted
            * average for the last 5 units, and the weighted average
@@ -511,8 +510,8 @@ public class XHTMLRenderer implements IRenderer {
 
         } else {
 
-        /*
-       * Report only the most recent value.
+          /*
+           * Report only the most recent value.
            */
 
           // w.write(" <th>N/A</th\n>");
@@ -544,7 +543,7 @@ public class XHTMLRenderer implements IRenderer {
   }
 
   //    /*
-//     * Writes details on a single counter whose {@link IInstrument} provides a
+  //     * Writes details on a single counter whose {@link IInstrument} provides a
   //     * history. The goal is to be able to easily copy and paste the data into a
   //     * program for plotting, e.g., as an X-Y graph (values against time).
   //     *
@@ -579,7 +578,7 @@ public class XHTMLRenderer implements IRenderer {
   //    }
 
   //    /*
-//     * Writes a table containing the samples for a {@link History} for some
+  //     * Writes a table containing the samples for a {@link History} for some
   //     * {@link ICounter}.
   //     *
   //     * @param w
@@ -952,8 +951,8 @@ public class XHTMLRenderer implements IRenderer {
       // for each row in the HistoryTable.
       for (int row = 0; row < t.nrows; row++) {
 
-      /*
-       * The time will be zero for the first row and a delta (expressed in
+        /*
+         * The time will be zero for the first row and a delta (expressed in
          * the units of the history) for the remaining rows.
          *
          * Note: The time units are computed using floating point math and
@@ -970,8 +969,8 @@ public class XHTMLRenderer implements IRenderer {
 
         final String timeStr = cdata(formatter.date(timestamp));
 
-      /*
-       * The set of distinct ordered matched category values in the
+        /*
+         * The set of distinct ordered matched category values in the
          * current row of the history table.
          */
         for (CSet cset : pt.csets) {
@@ -983,8 +982,8 @@ public class XHTMLRenderer implements IRenderer {
                   + "category names: "
                   + Arrays.toString(pt.cnames);
 
-        /*
-       * Aggregate values for counters in this cset having a value for
+          /*
+           * Aggregate values for counters in this cset having a value for
            * each value column in turn.
            *
            * If none of the counters in the cset have a value for the row
@@ -1042,8 +1041,8 @@ public class XHTMLRenderer implements IRenderer {
 
                 valueCountForColumn++;
 
-              /*
-       * The counter appears just once in the data table
+                /*
+                 * The counter appears just once in the data table
                  * so we can stop once we find its index.
                  */
                 break;
@@ -1052,8 +1051,8 @@ public class XHTMLRenderer implements IRenderer {
 
             if (valueCountForColumn > 0) {
 
-            /*
-       * There was at least one sample for the current value
+              /*
+               * There was at least one sample for the current value
                * column.
                */
 
@@ -1454,8 +1453,8 @@ public class XHTMLRenderer implements IRenderer {
 
       final String tooltip;
       if (false) {
-      /*
-       * FIXME Finish the event flyover formatting support. I need to
+        /*
+         * FIXME Finish the event flyover formatting support. I need to
          * validate the HTML table and then validate how it is embedded
          * inside of the flot data. Since it occurs inline, it probably
          * needs to be escaped. It may also be impossible to do this in
@@ -1466,8 +1465,8 @@ public class XHTMLRenderer implements IRenderer {
         writeEventFlyover(sw, e);
         tooltip = sw.toString();
       } else {
-      /*
-       * use the tab-delimited format, but remove the trailing
+        /*
+         * use the tab-delimited format, but remove the trailing
          * newline.
          */
         tooltip = e.toString().replace("\n", "");

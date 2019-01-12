@@ -15,8 +15,8 @@
   <!--                                                           -->
 
   <properties>
-     <author>thompsonbry@users.sourceforge.com</author>
-     <title>embergraph</title>
+    <author>thompsonbry@users.sourceforge.com</author>
+    <title>embergraph</title>
   </properties>
 
   <body>
@@ -24,41 +24,41 @@
     <!-- horizontal links at top of page. -->
     <links>
       <item name="Javadoc"
-            href="/apidocs/index.html"
-	    />
+        href="/apidocs/index.html"
+      />
     </links>
 
-   <!-- A top-level, hierarchical menu -->
-   <menu name="embergraph">
-     <item name="embergraph"
-           href="http://www.embergraph.org"
-	    />
-     <item name="sourceforge"
-           href="http://sourceforge.net/projects/embergraph/"
-           img="http://sourceforge.net/sflogo.php?group_id=95673&amp;type=1"
-	    />
-   </menu>
+    <!-- A top-level, hierarchical menu -->
+    <menu name="embergraph">
+      <item name="embergraph"
+        href="http://www.embergraph.org"
+      />
+      <item name="sourceforge"
+        href="http://sourceforge.net/projects/embergraph/"
+        img="http://sourceforge.net/sflogo.php?group_id=95673&amp;type=1"
+      />
+    </menu>
 
-   <!-- Architecture. -->
-   <menu name="Architecture">
-     <item name="Web-published UML (zipped)"
-           href="/architecture/embergraph-published-model.zip"
-	    />
-   </menu>
+    <!-- Architecture. -->
+    <menu name="Architecture">
+      <item name="Web-published UML (zipped)"
+        href="/architecture/embergraph-published-model.zip"
+      />
+    </menu>
 
-   <!-- References. -->
-   <!--
-   <menu name="References">
-     <item name="DBCache paper (ACM portal - full text available)"
-           href="http://portal.acm.org/citation.cfm?id=1995"
-	    />
-   </menu>
-	    -->
+    <!-- References. -->
+    <!--
+    <menu name="References">
+      <item name="DBCache paper (ACM portal - full text available)"
+            href="http://portal.acm.org/citation.cfm?id=1995"
+       />
+    </menu>
+       -->
 
-   <!-- Add the google(tm) search widget.  There is no way to
-        position where this will appear at present. -->
+    <!-- Add the google(tm) search widget.  There is no way to
+         position where this will appear at present. -->
 
-   <search/>
+    <search/>
 
   </body>
 

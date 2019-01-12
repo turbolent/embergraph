@@ -35,21 +35,11 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import org.apache.log4j.Logger;
 import org.embergraph.bop.IBindingSet;
-import org.embergraph.bop.IPredicate;
-import org.embergraph.journal.ConcurrencyManager;
-import org.embergraph.journal.ITx;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.relation.accesspath.BufferClosedException;
-import org.embergraph.relation.accesspath.IAccessPath;
-import org.embergraph.relation.accesspath.IAsynchronousIterator;
-import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.IBuffer;
 import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
-import org.embergraph.relation.accesspath.UnsynchronizedArrayBuffer;
-import org.embergraph.relation.rule.IQueryOptions;
 import org.embergraph.relation.rule.IRule;
-import org.embergraph.relation.rule.ISlice;
-import org.embergraph.relation.rule.eval.ActionEnum;
 import org.embergraph.relation.rule.eval.IJoinNexus;
 import org.embergraph.relation.rule.eval.IJoinNexusFactory;
 import org.embergraph.relation.rule.eval.IRuleState;
@@ -58,14 +48,11 @@ import org.embergraph.relation.rule.eval.IStepTask;
 import org.embergraph.relation.rule.eval.RuleLog;
 import org.embergraph.relation.rule.eval.RuleState;
 import org.embergraph.relation.rule.eval.RuleStats;
-import org.embergraph.service.DataService;
-import org.embergraph.service.IEmbergraphFederation;
-import org.embergraph.striterator.IKeyOrder;
 import org.embergraph.util.InnerCause;
 import org.embergraph.util.concurrent.ExecutionExceptions;
 
 /*
-* Master providing efficient distributed evaluation of {@link IRule}s. For query, this task should
+ * Master providing efficient distributed evaluation of {@link IRule}s. For query, this task should
  * be run by the client that wishes to materialize the query results. For mutation, this task may be
  * run by any client or service since the data does not flow through the master for mutation.
  *
@@ -353,8 +340,8 @@ public abstract class JoinMasterTask implements IStepTask, IJoinMaster {
 
       if (log.isInfoEnabled()) {
 
-      /*
-       * Give the join tasks a chance to complete so that the join
+        /*
+         * Give the join tasks a chance to complete so that the join
          * stats will get reported to the master so that the master can
          * report out the correct stats to its caller.
          *
@@ -456,8 +443,8 @@ public abstract class JoinMasterTask implements IStepTask, IJoinMaster {
 
       } catch (CancellationException ex) {
 
-      /*
-       * A JoinTask will be canceled if any of its output buffers are
+        /*
+         * A JoinTask will be canceled if any of its output buffers are
          * asynchronously closed. This will occur if a downstream
          * JoinTask discovers that it has satisfied a SLICE or
          * encountered an error during processing. Either way, we treat
@@ -476,8 +463,8 @@ public abstract class JoinMasterTask implements IStepTask, IJoinMaster {
             || InnerCause.isInnerCause(ex, BufferClosedException.class)
             || InnerCause.isInnerCause(ex, CancellationException.class)) {
 
-        /*
-       * The root cause was the asynchronous close of the
+          /*
+           * The root cause was the asynchronous close of the
            * buffer that is the overflow() target for the
            * unsynchronized buffer. This will occur if the
            * high-level iterator was closed() while join thread(s)
@@ -525,8 +512,8 @@ public abstract class JoinMasterTask implements IStepTask, IJoinMaster {
 
         } else {
 
-        /*
-       * Something unexpected.
+          /*
+           * Something unexpected.
            */
 
           // add to list of errors.

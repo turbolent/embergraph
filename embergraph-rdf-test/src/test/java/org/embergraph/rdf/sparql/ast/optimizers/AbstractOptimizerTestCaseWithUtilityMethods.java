@@ -41,7 +41,6 @@ import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
-import org.embergraph.rdf.sparql.ast.ArbitraryLengthPathNode;
 import org.embergraph.rdf.sparql.ast.AssignmentNode;
 import org.embergraph.rdf.sparql.ast.BindingsClause;
 import org.embergraph.rdf.sparql.ast.FilterNode;
@@ -62,7 +61,6 @@ import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.StaticAnalysis;
 import org.embergraph.rdf.sparql.ast.SubqueryRoot;
 import org.embergraph.rdf.sparql.ast.UnionNode;
-import org.embergraph.rdf.sparql.ast.ValueExpressionNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpUtility;
@@ -71,7 +69,7 @@ import org.embergraph.rdf.store.BDS;
 import org.embergraph.service.fts.FTS;
 
 /*
-* Test case helper class in the style of {@link Helper} exposing additional methods for
+ * Test case helper class in the style of {@link Helper} exposing additional methods for
  * constructing ASTs with different properties.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>

@@ -32,11 +32,10 @@ import org.embergraph.btree.keys.IKeyBuilderFactory;
 import org.embergraph.io.ByteArrayBuffer;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVUtility;
-import org.embergraph.rdf.internal.impl.TermId;
 import org.openrdf.model.Value;
 
 /*
-* Handles the term:id index (forward mapping for the lexicon). The keys are unsigned byte[]s
+ * Handles the term:id index (forward mapping for the lexicon). The keys are unsigned byte[]s
  * representing a total order for the RDF {@link Value} space. The index assigns term identifiers,
  * and those term identifiers are stored in the values of the index.
  *

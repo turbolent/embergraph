@@ -22,7 +22,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.engine;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
-import java.nio.ByteBuffer;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -57,11 +56,9 @@ import org.embergraph.bop.bset.StartOp;
 import org.embergraph.bop.constraint.Constraint;
 import org.embergraph.bop.constraint.EQ;
 import org.embergraph.bop.constraint.EQConstant;
-import org.embergraph.bop.fed.TestFederatedQueryEngine;
 import org.embergraph.bop.join.PipelineJoin;
 import org.embergraph.bop.solutions.SliceOp;
 import org.embergraph.bop.solutions.SliceOp.SliceStats;
-import org.embergraph.io.DirectBufferPoolAllocator.IAllocationContext;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.ITx;
 import org.embergraph.journal.Journal;
@@ -70,7 +67,7 @@ import org.embergraph.util.InnerCause;
 import org.embergraph.util.concurrent.LatchedExecutor;
 
 /*
-* Test suite for the {@link QueryEngine} against a local database instance.
+ * Test suite for the {@link QueryEngine} against a local database instance.
  *
  * <p>Note: The {@link BOp}s are unit tested separately. This test suite is focused on interactions
  * when {@link BOp}s are chained together in a query, such as a sequence of pipeline joins, a slice
@@ -460,13 +457,12 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
                 new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
                 new NV(PipelineOp.Annotations.SHARED_STATE, true),
                 new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
-                new NV(
-                    QueryEngine.Annotations.CHUNK_HANDLER, StandaloneChunkHandler.TEST_INSTANCE)
+                new NV(QueryEngine.Annotations.CHUNK_HANDLER, StandaloneChunkHandler.TEST_INSTANCE)
                 //                        new NV(
                 //
                 // QueryEngineTestAnnotations.COMBINE_RECEIVED_CHUNKS,
                 //                                false),
-            ));
+                ));
 
     final PipelineOp query = sliceOp;
 
@@ -680,7 +676,7 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
   }
 
   //    /*
-//     * Test the ability of the query engine to defer the evaluation of a one
+  //     * Test the ability of the query engine to defer the evaluation of a one
   //     * shot operator until all inputs are available for that operator.
   //     *
   //     * @todo We could do this using a mock operator and feeding a bunch of
@@ -739,15 +735,14 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
                 new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
                 new NV(PipelineOp.Annotations.SHARED_STATE, true),
                 new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
-                new NV(
-                    QueryEngine.Annotations.CHUNK_HANDLER, StandaloneChunkHandler.TEST_INSTANCE)
+                new NV(QueryEngine.Annotations.CHUNK_HANDLER, StandaloneChunkHandler.TEST_INSTANCE)
                 //                                        // Require the chunked running query
                 // impl.
                 //                                        new
                 // NV(QueryEngine.Annotations.RUNNING_QUERY_CLASS,
                 //
                 // ChunkedRunningQuery.class.getName()),
-            ));
+                ));
 
     // the source data.
     final IBindingSet[] source =
@@ -817,8 +812,8 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
       assertEquals((long) nsources, stats.unitsIn.get());
       assertEquals((long) nsources, stats.unitsOut.get());
       if (runningQuery instanceof ChunkedRunningQuery) {
-      /*
-       * The unit test setup will result in four distinct chunks
+        /*
+         * The unit test setup will result in four distinct chunks
          * being presented to the SliceOp and four distinct invocations
          * of the ChunkTask for that SliceOp.
          */
@@ -1019,7 +1014,7 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
                 new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)
                 //                        new NV(Predicate.Annotations.KEY_ORDER,
                 //                                R.primaryKeyOrder),
-            ));
+                ));
 
     final PipelineJoin<E> joinOp =
         new PipelineJoin<E>(
@@ -1550,8 +1545,8 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
                   new Constant<String>("Leon"),
                   new Constant<String>("Paul")
                 }),
-          /*
-       * No. The CONSTRAINT on the 2nd join [x == y] filters all
+            /*
+             * No. The CONSTRAINT on the 2nd join [x == y] filters all
              * solutions. For solutions where the optional join fails, [y] is
              * not bound. Since [y] is part of the constraint on that join we DO
              * NOT observe those solutions which only join on the first access

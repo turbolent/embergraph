@@ -7,7 +7,7 @@ import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.striterator.IKeyOrder;
 
 /*
-* Wrapper for an {@link IAsynchronousIterator} exposing an interface suitable for export as a proxy
+ * Wrapper for an {@link IAsynchronousIterator} exposing an interface suitable for export as a proxy
  * object using RMI to communicate back with itself and pull data efficiently from the source
  * iterator.
  *
@@ -64,7 +64,7 @@ public class RemoteChunkedIterator<E> implements IRemoteChunkedIterator<E> {
    */
   //
   //    /*
-//     * Note: since [keepAlive := false], this appears to be sufficient to force
+  //     * Note: since [keepAlive := false], this appears to be sufficient to force
   //     * the proxy to be unexported and force the source iterator to be closed.
   //     */
   //    protected void finalize() throws Throwable {

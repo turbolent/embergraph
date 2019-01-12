@@ -26,7 +26,7 @@ import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 
 /*
-* A non-remote interface for a service which will participate in a quorum as a member service (as
+ * A non-remote interface for a service which will participate in a quorum as a member service (as
  * opposed to a client service that merely watches the quorum). The methods on this interface are
  * aware of the service {@link UUID} of the member service and can report on its role and
  * relationships in the {@link Quorum}. In order to <em>act</em> on the distributed quorum state,

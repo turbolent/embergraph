@@ -30,7 +30,7 @@ import org.embergraph.rdf.internal.NotMaterializedException;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 
 /*
-* Coalesce BOp The COALESCE function form returns the RDF term value of the first expression that
+ * Coalesce BOp The COALESCE function form returns the RDF term value of the first expression that
  * evaluates without error. In SPARQL, evaluating an unbound variable raises an error.
  */
 public class CoalesceBOp extends IVValueExpression<IV> implements IPassesMaterialization {

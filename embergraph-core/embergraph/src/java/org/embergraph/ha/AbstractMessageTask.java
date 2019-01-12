@@ -9,7 +9,7 @@ import org.embergraph.ha.msg.IHAMessage;
 import org.embergraph.quorum.ServiceLookup;
 
 /*
-* Helper class submits the RMI for a PREPARE, COMMIT, or ABORT message. This is used to execute the
+ * Helper class submits the RMI for a PREPARE, COMMIT, or ABORT message. This is used to execute the
  * different requests in parallel on a local executor service.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

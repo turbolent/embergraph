@@ -28,10 +28,9 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.Map;
 import java.util.TreeMap;
-import org.embergraph.ganglia.GangliaService;
 
 /*
-* A class for those few statics that it makes sense to reference from other places.
+ * A class for those few statics that it makes sense to reference from other places.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

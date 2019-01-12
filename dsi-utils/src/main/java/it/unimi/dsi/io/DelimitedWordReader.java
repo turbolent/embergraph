@@ -29,7 +29,7 @@ import it.unimi.dsi.lang.MutableString;
 import java.io.Reader;
 
 /*
-* A word reader that breaks words on a given set of characters.
+ * A word reader that breaks words on a given set of characters.
  *
  * <p>This class is a simple subclass of {@link FastBufferedReader}. It overwrites {@link
  * #isWordConstituent(char)} so that word constituents are defined negatively by a set of

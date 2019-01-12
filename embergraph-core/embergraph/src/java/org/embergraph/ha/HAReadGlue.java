@@ -23,14 +23,12 @@ package org.embergraph.ha;
 
 import java.io.IOException;
 import java.rmi.Remote;
-import java.util.UUID;
 import java.util.concurrent.Future;
 import org.embergraph.ha.msg.IHAReadRequest;
 import org.embergraph.ha.msg.IHAReadResponse;
-import org.embergraph.rawstore.IRawStore;
 
 /*
-* A {@link Remote} interface supporting low-level reads against persistent data from a quorum
+ * A {@link Remote} interface supporting low-level reads against persistent data from a quorum
  * member. This interface is used to handle bad reads, which are identified by a checksum error when
  * reading on the local disk. To handle a bad read, the quorum member reads on a different member of
  * the same quorum.

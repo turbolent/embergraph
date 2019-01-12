@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.service;
 
 /*
-* Exception thrown when a service was requested but has not been discovered or is otherwise not
+ * Exception thrown when a service was requested but has not been discovered or is otherwise not
  * available.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

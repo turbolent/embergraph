@@ -30,7 +30,7 @@ import org.embergraph.btree.keys.TestKeyBuilder;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /*
-* Test ability to traverse tuples using an {@link ITupleCursor} while the SAME THREAD is used to
+ * Test ability to traverse tuples using an {@link ITupleCursor} while the SAME THREAD is used to
  * insert, update, or remove tuples from a mutable {@link BTree}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

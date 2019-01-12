@@ -71,9 +71,7 @@ public class TestSparqlUpdateSuppressTruthMaintenance<S extends IIndexManager>
     return ProxySuiteHelper.suiteWhenStandalone(
         TestSparqlUpdateSuppressTruthMaintenance.class,
         "test.*",
-        new LinkedHashSet<BufferMode>(
-            Arrays.asList(
-                BufferMode.MemStore)),
+        new LinkedHashSet<BufferMode>(Arrays.asList(BufferMode.MemStore)),
         TestMode.triplesPlusTruthMaintenance);
   }
 

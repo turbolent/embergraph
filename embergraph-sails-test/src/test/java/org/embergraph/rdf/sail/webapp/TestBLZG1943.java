@@ -23,7 +23,6 @@ package org.embergraph.rdf.sail.webapp;
 import java.util.Properties;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.internal.impl.extensions.GeoSpatialLiteralExtension;
 import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sail.EmbergraphSailRepository;
 import org.embergraph.rdf.sail.EmbergraphSailRepositoryConnection;
@@ -39,7 +38,7 @@ import org.openrdf.query.TupleQueryResult;
 import org.openrdf.query.Update;
 
 /*
-* Test case for ticket BLZG-1943: thread safety issues related to reuse of {@link
+ * Test case for ticket BLZG-1943: thread safety issues related to reuse of {@link
  * GeoSpatialLiteralExtension}'s internal key builder.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>

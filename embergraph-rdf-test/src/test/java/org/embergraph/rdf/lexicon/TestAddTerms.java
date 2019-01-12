@@ -41,7 +41,7 @@ import org.embergraph.rdf.vocab.NoVocabulary;
 import org.openrdf.model.vocabulary.RDF;
 
 /*
-* Test suite for adding terms to the lexicon.
+ * Test suite for adding terms to the lexicon.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -102,8 +102,8 @@ public class TestAddTerms extends AbstractTripleStoreTestCase {
       terms.add(f.createLiteral("12.00", f.createURI("http://www.w3.org/2001/XMLSchema#float")));
 
       if (store.getLexiconRelation().isStoreBlankNodes()) {
-      /*
-       * Note: Blank nodes will not round trip through the lexicon unless
+        /*
+         * Note: Blank nodes will not round trip through the lexicon unless
          * the "told bnodes" is enabled.
          */
         terms.add(f.createBNode());
@@ -167,8 +167,8 @@ public class TestAddTerms extends AbstractTripleStoreTestCase {
 
       if (!store.isStable()) {
 
-      /*
-       * We need a restart safe store to test this since otherwise a
+        /*
+         * We need a restart safe store to test this since otherwise a
          * term cache could give us a false positive.
          */
 
@@ -268,8 +268,8 @@ public class TestAddTerms extends AbstractTripleStoreTestCase {
 
       if (store.getLexiconRelation().isStoreBlankNodes()) {
 
-      /*
-       * Note: Blank nodes will not round trip through the lexicon unless
+        /*
+         * Note: Blank nodes will not round trip through the lexicon unless
          * the "told bnodes" is enabled.
          */
         final EmbergraphBNode bnode1 = f.createBNode();
@@ -364,8 +364,8 @@ public class TestAddTerms extends AbstractTripleStoreTestCase {
 
       if (store.getLexiconRelation().isStoreBlankNodes()) {
 
-      /*
-       * Note: Blank nodes will not round trip through the lexicon unless
+        /*
+         * Note: Blank nodes will not round trip through the lexicon unless
          * the "told bnodes" is enabled.
          */
 

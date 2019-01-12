@@ -29,15 +29,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import org.apache.log4j.Logger;
-import org.embergraph.btree.BTree;
-import org.embergraph.btree.IndexSegment;
 import org.embergraph.io.ShortPacker;
-import org.embergraph.journal.Journal;
-import org.embergraph.resources.IndexManager;
 import org.embergraph.service.Params;
 
 /*
-* Base class for {@link IResourceMetadata} implementations.
+ * Base class for {@link IResourceMetadata} implementations.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -51,7 +47,7 @@ public abstract class AbstractResourceMetadata
   private String filename;
 
   //    /*
-//     * The size of that file in bytes.
+  //     * The size of that file in bytes.
   //     */
   //    private long nbytes;
 
@@ -138,7 +134,6 @@ public abstract class AbstractResourceMetadata
         && filename.equals(o.getFile())
         //                && nbytes == o.size()
         && createTime == o.getCreateTime();
-
   }
 
   public final String getFile() {

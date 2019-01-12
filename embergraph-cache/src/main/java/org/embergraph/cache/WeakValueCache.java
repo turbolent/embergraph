@@ -28,7 +28,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 /*
-* A memory sensitive cache using weak references for its values and object ids for its keys and
+ * A memory sensitive cache using weak references for its values and object ids for its keys and
  * backed by the CRUD operations of the persistence layer, which is assumed to implement a hard
  * reference LRU or similar cache policy.
  *
@@ -366,8 +366,8 @@ public final class WeakValueCache<K, T> implements ICachePolicy<K, T> {
         obj = entry.getObject();
 
         if (obj != null) {
-        /*
-       * Note: Dirty objects are installed when they are evicted
+          /*
+           * Note: Dirty objects are installed when they are evicted
            * on the hard reference cache and it is impossible for an
            * object to be dirty if it is not found on the hard
            * reference cache. Therefore we always set the dirty flag
@@ -507,7 +507,7 @@ public final class WeakValueCache<K, T> implements ICachePolicy<K, T> {
   }
 
   //    /*
-//	 * The #of entries in the weak reference cache. Entries may be
+  //	 * The #of entries in the weak reference cache. Entries may be
   //	 * deterministically {@link #remove(long) removed} from the cache. However
   //	 * entries are also cleared from the cache once the object in that entry
   //	 * becomes weakly reachable. The number of entries in the cache is therefore

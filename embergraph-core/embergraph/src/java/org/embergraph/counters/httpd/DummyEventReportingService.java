@@ -10,11 +10,10 @@ import java.util.UUID;
 import org.embergraph.counters.AbstractStatisticsCollector;
 import org.embergraph.service.Event;
 import org.embergraph.service.EventReceiver;
-import org.embergraph.service.IEventReportingService;
 import org.embergraph.service.IService;
 
 /*
-* A dummy implementation of the {@link IEventReportingService} interface, used for testing the HTTP
+ * A dummy implementation of the {@link IEventReportingService} interface, used for testing the HTTP
  * telemtry service.
  *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>

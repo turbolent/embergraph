@@ -18,7 +18,7 @@ import cern.colt.matrix.DoubleMatrix3D;
 import cern.jet.math.Functions;
 import cern.jet.random.engine.RandomEngine;
 /*
-* Basic statistics operations on matrices. Computation of covariance, correlation, distance matrix.
+ * Basic statistics operations on matrices. Computation of covariance, correlation, distance matrix.
  * Random sampling views. Conversion to histograms with and without OLAP cube operators. Conversion
  * to bins with retrieval of statistical bin measures. Also see {@link cern.jet.stat} and {@link
  * hep.aida.bin}, in particular {@link hep.aida.bin.DynamicBin1D}.
@@ -64,8 +64,8 @@ public class Statistic extends Object {
   public static final VectorVectorFunction EUCLID =
       new VectorVectorFunction() {
         public final double apply(DoubleMatrix1D a, DoubleMatrix1D b) {
-          return Math.sqrt(a.aggregate(b,
-              Functions.plus, Functions.chain(Functions.square, Functions.minus)));
+          return Math.sqrt(
+              a.aggregate(b, Functions.plus, Functions.chain(Functions.square, Functions.minus)));
         }
       };
 
@@ -73,8 +73,8 @@ public class Statistic extends Object {
   public static final VectorVectorFunction BRAY_CURTIS =
       new VectorVectorFunction() {
         public final double apply(DoubleMatrix1D a, DoubleMatrix1D b) {
-          return a.aggregate(b, Functions.plus, Functions.chain(Functions.abs, Functions.minus)) / a.aggregate(b, Functions.plus,
-              Functions.plus);
+          return a.aggregate(b, Functions.plus, Functions.chain(Functions.abs, Functions.minus))
+              / a.aggregate(b, Functions.plus, Functions.plus);
         }
       };
 
@@ -121,8 +121,7 @@ public class Statistic extends Object {
      * @param y the second argument vector passed to the function.
      * @return the result of the function.
      */
-    double apply(
-        cern.colt.matrix.DoubleMatrix1D x, cern.colt.matrix.DoubleMatrix1D y);
+    double apply(cern.colt.matrix.DoubleMatrix1D x, cern.colt.matrix.DoubleMatrix1D y);
   }
 
   /** Makes this class non instantiable, but still let's others inherit from it. */

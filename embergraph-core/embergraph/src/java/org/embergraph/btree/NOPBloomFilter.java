@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree;
 
 /*
-* A bloom filter that never reports <code>false</code> (this means that you must always check the
+ * A bloom filter that never reports <code>false</code> (this means that you must always check the
  * index) and that does not permit anything to be added and, in fact, has no state.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -23,7 +23,6 @@ import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import org.embergraph.btree.keys.IKeyBuilder;
@@ -31,7 +30,7 @@ import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.btree.keys.SuccessorUtil;
 
 /*
-* A schema for a sparse row store. Note that more than one schema may be used with the same index.
+ * A schema for a sparse row store. Note that more than one schema may be used with the same index.
  * The name of the schema is always encoded as the first component of the key.
  *
  * @todo support optional strong typing for column values?
@@ -97,13 +96,13 @@ public class Schema implements Externalizable {
     if (schemaBytes == null) {
 
       if (SparseRowStore.schemaNameUnicodeClean) {
-      /*
-       * One time encoding of the schema name as UTF8.
+        /*
+         * One time encoding of the schema name as UTF8.
          */
         schemaBytes = name.getBytes(StandardCharsets.UTF_8);
       } else {
-      /*
-       * One time encoding of the schema name as a Unicode sort key.
+        /*
+         * One time encoding of the schema name as a Unicode sort key.
          */
         schemaBytes = asSortKey(name);
       }
@@ -113,7 +112,7 @@ public class Schema implements Externalizable {
   }
 
   //    /*
-//     * The length of the value that will be returned by {@link #getSchemaBytes()}
+  //     * The length of the value that will be returned by {@link #getSchemaBytes()}
   //     */
   //    final protected int getSchemaBytesLength() {
   //
@@ -244,8 +243,8 @@ public class Schema implements Externalizable {
       case Unicode:
       case ASCII:
         //        case UnsignedBytes:
-      /*
-       * Note: See toKey() for how to correctly form the sort key for the
+        /*
+         * Note: See toKey() for how to correctly form the sort key for the
          * successor of a Unicode value.
          */
         throw new UnsupportedOperationException();
@@ -305,7 +304,7 @@ public class Schema implements Externalizable {
    */
 
   //    /*
-//     * Forms the key in {@link #keyBuilder} that should be used as the last key
+  //     * Forms the key in {@link #keyBuilder} that should be used as the last key
   //     * (exclusive) for a range query that will visit all index entries for the
   //     * specified primary key.
   //     *

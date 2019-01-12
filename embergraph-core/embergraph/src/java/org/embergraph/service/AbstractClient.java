@@ -29,7 +29,7 @@ import org.apache.log4j.Logger;
 import org.embergraph.Banner;
 
 /*
-* Abstract base class for {@link IEmbergraphClient} implementations.
+ * Abstract base class for {@link IEmbergraphClient} implementations.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

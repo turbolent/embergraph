@@ -24,7 +24,6 @@ package org.embergraph.rdf.sparql.ast.eval;
 import cutthecrap.utils.striterators.ICloseableIterator;
 import cutthecrap.utils.striterators.Resolver;
 import cutthecrap.utils.striterators.Striterator;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -53,7 +52,6 @@ import org.embergraph.bop.PipelineOp;
 import org.embergraph.bop.Var;
 import org.embergraph.bop.fed.QueryEngineFactory;
 import org.embergraph.bop.join.BaseJoinStats;
-import org.embergraph.bop.join.PipelineJoin;
 import org.embergraph.bop.join.PipelineJoin.Annotations;
 import org.embergraph.btree.IRangeQuery;
 import org.embergraph.btree.ITuple;
@@ -116,7 +114,7 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 
 /*
-* A factory for a geospatial service, see {@link GeoSpatial#SEARCH}.
+ * A factory for a geospatial service, see {@link GeoSpatial#SEARCH}.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
@@ -277,8 +275,8 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
         if (!uri.stringValue().startsWith(GeoSpatial.NAMESPACE))
           throw new RuntimeException("Expecting search predicate: " + sp);
 
-      /*
-       * Some search predicate.
+        /*
+         * Some search predicate.
          */
 
         if (!ASTGeoSpatialSearchOptimizer.searchUris.contains(uri))
@@ -830,8 +828,8 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
 
         filter.setObjectPos(objectPos); // position of the object in the index
 
-      /*
-       * If the context is provided, we would need a key order such as PCOS or CPOS, but
+        /*
+         * If the context is provided, we would need a key order such as PCOS or CPOS, but
          * unfortunately these key order are not available. As a "workaround", we do not pass in the
          * context into the predicate, but instead set an additional context check in the filter.
          *
@@ -947,8 +945,8 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
         final TermNode p = query.getPredicate();
         final VarNode o = new VarNode(oVar);
 
-      /*
-       * We call kb.getPredicate(), which has the nice feature that it returns null if the
+        /*
+         * We call kb.getPredicate(), which has the nice feature that it returns null if the
          * predicate is unsatisfiable (i.e., if the predicate does not appear in the data). This
          * gives us an early exit point for the service (see null check below).
          */
@@ -988,8 +986,8 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
         // if there's no executor specified or only one subtask, we run the task in process
         if (executor == null || tasks.size() == 1) {
 
-        /*
-       * No Executor, so run each task in the caller's thread.
+          /*
+           * No Executor, so run each task in the caller's thread.
            */
 
           for (GeoSpatialServiceCallSubRangeTask task : tasks) {
@@ -1002,8 +1000,8 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
           return null;
         }
 
-      /*
-       * Build list of FutureTasks. This list is used to check all
+        /*
+         * Build list of FutureTasks. This list is used to check all
          * tasks for errors and ensure that any running tasks are
          * cancelled.
          */
@@ -1018,8 +1016,8 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
 
         try {
 
-        /*
-       * Execute all tasks.
+          /*
+           * Execute all tasks.
            */
           for (FutureTask<Void> ft : futureTasks) {
 
@@ -1029,8 +1027,8 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
             executor.execute(ft);
           } // next task.
 
-        /*
-       * Wait for each task. If any task throws an exception, then
+          /*
+           * Wait for each task. If any task throws an exception, then
            * [halt] will become true and any running tasks will error
            * out quickly. Once [halt := true], we do not wait for any
            * more tasks, but proceed to cancel all tasks in the
@@ -1044,8 +1042,8 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
 
         } finally {
 
-        /*
-       * Ensure that all tasks are cancelled, regardless of
+          /*
+           * Ensure that all tasks are cancelled, regardless of
            * whether they were started or have already finished.
            */
           for (FutureTask<Void> ft : futureTasks) {
@@ -1136,8 +1134,8 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
           this.geoSpatialSearchRange = geoSpatialSearchRange;
         }
 
-      /*
-       * Computes the partitions based on the configuration. For now, we always partition along
+        /*
+         * Computes the partitions based on the configuration. For now, we always partition along
          * the last dimension, e.g. for a ternary datatype such as LAT+LON+TIME we would partition
          * on TIME.
          *
@@ -1293,8 +1291,8 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
           return partitions;
         }
 
-      /*
-       * The number of partitions is calculated based on two parameters. First, there is a minumum
+        /*
+         * The number of partitions is calculated based on two parameters. First, there is a minumum
          * number of datapoints per task, which is considered a hard limit. This means, we generate
          * *at most* (totalPointsInRange/minDatapointsPerTask) tasks.
          *
@@ -1999,8 +1997,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
             || predicate.equals(GeoSpatial.CUSTOM_FIELDS_LOWER_BOUNDS)
             || predicate.equals(GeoSpatial.CUSTOM_FIELDS_UPPER_BOUNDS)) {
 
-          requiredBound.add(
-              (IVariable<?>) object); // the subject var is what we return
+          requiredBound.add((IVariable<?>) object); // the subject var is what we return
         }
       }
     }

@@ -33,10 +33,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock;
-import org.embergraph.btree.BTree.Counter;
-import org.embergraph.counters.AbstractStatisticsCollector;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.Instrument;
 import org.embergraph.counters.striped.StripedCounters;
@@ -56,8 +52,6 @@ import org.embergraph.io.FileChannelUtility;
 import org.embergraph.io.IBufferAccess;
 import org.embergraph.io.IReopenChannel;
 import org.embergraph.io.MergeStreamWithSnapshotData;
-import org.embergraph.io.compression.CompressorRegistry;
-import org.embergraph.io.compression.IRecordCompressor;
 import org.embergraph.io.writecache.IBackingReader;
 import org.embergraph.io.writecache.WriteCache;
 import org.embergraph.io.writecache.WriteCacheCounters;
@@ -65,11 +59,10 @@ import org.embergraph.io.writecache.WriteCacheService;
 import org.embergraph.journal.AbstractJournal.ISnapshotData;
 import org.embergraph.quorum.Quorum;
 import org.embergraph.quorum.QuorumException;
-import org.embergraph.rawstore.IRawStore;
 import org.embergraph.util.ChecksumError;
 
 /*
-* Disk-based Write Once Read Many (WORM) journal strategy. The phsyical layout on the disk is the
+ * Disk-based Write Once Read Many (WORM) journal strategy. The phsyical layout on the disk is the
  * journal header, the root blocks, and then the user extent.
  *
  * <p>Writes are buffered in a write cache. The cache is flushed when it would overflow. As a result
@@ -264,8 +257,8 @@ public class WORMStrategy extends AbstractBufferStrategy
 
       try {
 
-      /*
-       * Issue the disk writes (does not force to the disk).
+        /*
+         * Issue the disk writes (does not force to the disk).
          *
          * Note: This will wind up calling writeOnDisk().
          *
@@ -496,8 +489,8 @@ public class WORMStrategy extends AbstractBufferStrategy
       // IRawStore API
       {
 
-      /*
-       * reads
+        /*
+         * reads
          */
 
         root.addCounter(
@@ -551,8 +544,8 @@ public class WORMStrategy extends AbstractBufferStrategy
               }
             });
 
-      /*
-       * writes
+        /*
+         * writes
          */
 
         root.addCounter(
@@ -604,8 +597,8 @@ public class WORMStrategy extends AbstractBufferStrategy
       {
         final CounterSet disk = root.makePath("disk");
 
-      /*
-       * read
+        /*
+         * read
          */
 
         disk.addCounter(
@@ -664,8 +657,8 @@ public class WORMStrategy extends AbstractBufferStrategy
               }
             });
 
-      /*
-       * write
+        /*
+         * write
          */
 
         disk.addCounter(
@@ -724,8 +717,8 @@ public class WORMStrategy extends AbstractBufferStrategy
               }
             });
 
-      /*
-       * other
+        /*
+         * other
          */
 
         disk.addCounter(
@@ -1056,8 +1049,8 @@ public class WORMStrategy extends AbstractBufferStrategy
         final int dpos = data.position();
         final int nbytes = data.remaining();
 
-      /*
-       * Note: We are holding the readLock (above). This is Ok since
+        /*
+         * Note: We are holding the readLock (above). This is Ok since
          * file extension occurs when the record is accepted for write
          * while only the readLock is required to actually write on the
          * file.
@@ -1200,8 +1193,8 @@ public class WORMStrategy extends AbstractBufferStrategy
     if (writeCacheService != null) {
       try {
         if (quorum != null) {
-        /*
-       * When the WORMStrategy is part of an HA quorum, we need to close out and then reopen the
+          /*
+           * When the WORMStrategy is part of an HA quorum, we need to close out and then reopen the
            * WriteCacheService every time the quorum token is changed. For convenience, this is
            * handled by extending the semantics of abort() on the Journal and reset() on the
            * WORMStrategy.
@@ -1406,8 +1399,8 @@ public class WORMStrategy extends AbstractBufferStrategy
       // Note: Can throw ChecksumError, InterruptedException
       ByteBuffer tmp = writeCacheService.read(paddr, nbytes);
       if (tmp != null) {
-      /*
-       * Hit on the write cache.
+        /*
+         * Hit on the write cache.
          *
          * Update the store counters.
          */
@@ -1579,8 +1572,8 @@ public class WORMStrategy extends AbstractBufferStrategy
 
       if (raf != null && raf.getChannel().isOpen()) {
 
-      /*
-       * The channel is still open. If you are allowing concurrent
+        /*
+         * The channel is still open. If you are allowing concurrent
          * reads on the channel, then this could indicate that two
          * readers each found the channel closed and that one was able
          * to re-open the channel before the other such that the channel
@@ -1592,8 +1585,8 @@ public class WORMStrategy extends AbstractBufferStrategy
 
       if (temporaryStore && !fileOpened) {
 
-      /*
-       * The backing file has not been opened.
+        /*
+         * The backing file has not been opened.
          *
          * Note: Without this case this method would create the backing
          * store for a Temporary store if anyone happened to invoke it.
@@ -1613,16 +1606,16 @@ public class WORMStrategy extends AbstractBufferStrategy
 
       try {
 
-      /*
-       * Request a shared file lock.
+        /*
+         * Request a shared file lock.
          */
 
         final boolean readOnly = "r".equals(fileMode);
 
         if (raf.getChannel().tryLock(0, Long.MAX_VALUE, readOnly /* shared */) == null) {
 
-        /*
-       * Note: A null return indicates that someone else holds the
+          /*
+           * Note: A null return indicates that someone else holds the
            * lock. This can happen if the platform does not support
            * shared locks or if someone requested an exclusive file
            * lock.
@@ -1639,8 +1632,8 @@ public class WORMStrategy extends AbstractBufferStrategy
 
       } catch (IOException ex) {
 
-      /*
-       * Note: This is true of NFS volumes. This is Ok and should be
+        /*
+         * Note: This is true of NFS volumes. This is Ok and should be
          * ignored. However the backing file is not protected against
          * accidental deletes or overwrites.
          */
@@ -1738,8 +1731,8 @@ public class WORMStrategy extends AbstractBufferStrategy
       final long offset;
       synchronized (writeOnCacheLock) {
 
-      /*
-       * Allocate address for a new record with [nbytes] of data.
+        /*
+         * Allocate address for a new record with [nbytes] of data.
          *
          * Note: [writeOnCacheLock] imposes a total ordering over the
          * allocations AND also over those records which get written
@@ -1775,8 +1768,8 @@ public class WORMStrategy extends AbstractBufferStrategy
         }
         if (!wroteOnCache) {
 
-        /*
-       * The writeCache is disabled or the record is too large for
+          /*
+           * The writeCache is disabled or the record is too large for
            * the write cache, so just write the record directly on the
            * disk.
            *
@@ -1795,8 +1788,8 @@ public class WORMStrategy extends AbstractBufferStrategy
             writeOnDisk(data, paddr);
 
             if (useChecksums) {
-            /*
-       * Note: If [useChecksums] is enabled but we are not
+              /*
+               * Note: If [useChecksums] is enabled but we are not
                * using the WriteCacheService then we also need to
                * write the checksum on the file here.
                */
@@ -1976,8 +1969,8 @@ public class WORMStrategy extends AbstractBufferStrategy
       }
 
       if (log.isTraceEnabled()) {
-      /*
-       * Note: There are only two places where the journal writes on the
+        /*
+         * Note: There are only two places where the journal writes on the
          * disk using this backing buffer implementation. Here and when it
          * updates the root blocks. It only syncs the disk at the commit.
          */
@@ -2082,8 +2075,8 @@ public class WORMStrategy extends AbstractBufferStrategy
 
         if (!temporaryStore) {
 
-        /*
-       * Generally, you want to force the file data to the disk
+          /*
+           * Generally, you want to force the file data to the disk
            * here. The file metadata MIGHT not matter since we always
            * force it to the disk when we change the file size (unless
            * the file system updates other aspects of file metadata
@@ -2164,8 +2157,8 @@ public class WORMStrategy extends AbstractBufferStrategy
       getRandomAccessFile().setLength(newExtent);
 
       if (writeCacheService != null) {
-      /*
-       * Inform the write cache service that the file extent has
+        /*
+         * Inform the write cache service that the file extent has
          * changed. It will propagate this message along the write
          * pipeline when HA is enabled.
          */
@@ -2197,8 +2190,8 @@ public class WORMStrategy extends AbstractBufferStrategy
        */
       if (!temporaryStore) {
 
-      /*
-       * We need to force the file data and metadata to the disk. When
+        /*
+         * We need to force the file data and metadata to the disk. When
          * integrated with the WriteCacheService the FileChannel#force()
          * request will be executed in a different thread and would
          * deadlock unless we first release the WriteLock since

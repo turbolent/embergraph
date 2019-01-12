@@ -24,7 +24,7 @@ package org.embergraph.bop.bindingSet;
 import java.util.ArrayList;
 
 /*
-* A light weight stack. Items are stored in the backing {@link ArrayList}. The top of the stack is
+ * A light weight stack. Items are stored in the backing {@link ArrayList}. The top of the stack is
  * {@link ArrayList#size()} MINUS ONE (1). The bottom of the stack is index ZERO (0).
  *
  * <p>Note: {@link java.util.Stack} does not offer a constructor which may be used to specify the

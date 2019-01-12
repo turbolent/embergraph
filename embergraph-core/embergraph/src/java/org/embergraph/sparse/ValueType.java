@@ -19,7 +19,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.sparse;
 
-import java.io.Externalizable;
 import java.io.IOException;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
@@ -29,7 +28,7 @@ import org.embergraph.io.DataOutputBuffer;
 import org.embergraph.io.SerializerUtil;
 
 /*
-* A type safe enumeration of value types. This class also supports encoding and decoding of
+ * A type safe enumeration of value types. This class also supports encoding and decoding of
  * instances of the enumerated value types and is used for encoding and decoding of column values.
  */
 public enum ValueType {
@@ -143,8 +142,8 @@ public enum ValueType {
 
       if (v == null) {
 
-      /*
-       * A null will be interpreted as a deletion request for a
+        /*
+         * A null will be interpreted as a deletion request for a
          * column value on insert / update.
          */
         return null;

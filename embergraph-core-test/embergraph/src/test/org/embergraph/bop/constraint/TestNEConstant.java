@@ -30,7 +30,7 @@ import org.embergraph.bop.Var;
 import org.embergraph.bop.bindingSet.ListBindingSet;
 
 /*
-* Unit tests for {@link NEConstant}.
+ * Unit tests for {@link NEConstant}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

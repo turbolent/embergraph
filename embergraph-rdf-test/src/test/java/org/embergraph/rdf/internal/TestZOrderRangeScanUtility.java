@@ -24,7 +24,7 @@ import junit.framework.TestCase2;
 import org.embergraph.service.geospatial.ZOrderRangeScanUtil;
 
 /*
-* Test for utility functionalities required for zOrder index construction, such as {@link
+ * Test for utility functionalities required for zOrder index construction, such as {@link
  * ZOrderRangeScanUtil}.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>

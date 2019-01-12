@@ -44,7 +44,7 @@ import org.embergraph.quorum.QuorumActor;
 import org.embergraph.rwstore.RWWriteCacheService;
 
 /*
-* Test suite for the {@link WriteCacheService} using scattered writes on a backing file.
+ * Test suite for the {@link WriteCacheService} using scattered writes on a backing file.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestWriteCacheService.java 2866 2010-05-18 18:36:35Z thompsonbry $
@@ -60,7 +60,7 @@ public class TestRWWriteCacheService extends TestCase3 {
   }
 
   // /*
-// *
+  // *
   // * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan
   // Thompson</a>
   // * @version $Id: TestRWWriteCacheService.java 4532 2011-05-20 16:06:11Z
@@ -71,7 +71,7 @@ public class TestRWWriteCacheService extends TestCase3 {
   // AbstractQuorumMember<S> {
 
   // /*
-// * @param quorum
+  // * @param quorum
   // */
   // protected MyMockQuorumMember() {
 
@@ -442,8 +442,8 @@ public class TestRWWriteCacheService extends TestCase3 {
 
       if (raf != null && raf.getChannel().isOpen()) {
 
-      /*
-       * The channel is still open. If you are allowing concurrent
+        /*
+         * The channel is still open. If you are allowing concurrent
          * reads on the channel, then this could indicate that two
          * readers each found the channel closed and that one was able
          * to re-open the channel before the other such that the channel

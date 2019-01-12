@@ -18,7 +18,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.eval;
 
 /*
-* Problems with negated path expressions.
+ * Problems with negated path expressions.
  *
  * @see <a href="https://jira.blazegraph.com/browse/BLZG-5590">Negated path produces exception</a>
  */

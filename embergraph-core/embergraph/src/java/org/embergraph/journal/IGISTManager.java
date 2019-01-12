@@ -24,7 +24,7 @@ import java.util.Iterator;
 import org.embergraph.btree.IndexMetadata;
 
 /*
-* Interface for managing local or distributed index structures in a manner that is not B+Tree
+ * Interface for managing local or distributed index structures in a manner that is not B+Tree
  * specific. These methods are thus GIST compatible, but that does not guarantee distributed support
  * for all GIST data structures.
  *

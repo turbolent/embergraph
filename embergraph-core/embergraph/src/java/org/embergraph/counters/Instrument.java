@@ -27,7 +27,7 @@ import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 
 /*
-* Abstract class for reporting instrumented values supporting some useful conversions.
+ * Abstract class for reporting instrumented values supporting some useful conversions.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -4,7 +4,7 @@ import org.embergraph.mdi.IMetadataIndex;
 import org.embergraph.service.ndx.AbstractSplitter;
 
 /*
-* Helper class efficiently splits an array of sorted keys into groups associated with a specific
+ * Helper class efficiently splits an array of sorted keys into groups associated with a specific
  * index partition.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

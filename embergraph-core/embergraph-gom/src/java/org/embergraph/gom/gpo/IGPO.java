@@ -21,15 +21,13 @@ package org.embergraph.gom.gpo;
 import java.util.Map;
 import java.util.Set;
 import org.embergraph.gom.om.IObjectManager;
-import org.embergraph.gom.skin.GenericSkinRegistry;
 import org.embergraph.rdf.model.EmbergraphResource;
-import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
 /*
-* A generic object has identity and an extensible, loosely-typed property set. When the value of a
+ * A generic object has identity and an extensible, loosely-typed property set. When the value of a
  * property is another generic object, the property models a directed many-to-one association.
  * Many-to-many linking patterns are modeled using intermediate objects and a convenience API.
  * Reverse navigation for associations is automatically aggregated by the association target within

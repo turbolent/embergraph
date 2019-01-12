@@ -24,7 +24,7 @@ import cutthecrap.utils.striterators.FilterBase;
 import java.util.Iterator;
 
 /*
-* Class may be used to collect statistics from a stream of solutions.
+ * Class may be used to collect statistics from a stream of solutions.
  *
  * @see SolutionSetStatserator#getStats()
  */

@@ -36,7 +36,6 @@ import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.sail.EmbergraphSail.EmbergraphSailConnection;
 import org.embergraph.rdf.sparql.ast.service.history.HistoryChangeRecord;
-import org.embergraph.rdf.sparql.ast.service.history.HistoryServiceFactory;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.SPO;
 import org.embergraph.rdf.spo.SPORelation;
@@ -46,7 +45,7 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.sail.SailException;
 
 /*
-* Test the index supporting the {@link HistoryServiceFactory}.
+ * Test the index supporting the {@link HistoryServiceFactory}.
  *
  * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/607">History Service</a>
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -463,8 +462,8 @@ public class TestHistoryIndex extends ProxyEmbergraphSailTestCase {
                         }
                       });
 
-        /*
-       * The older entries should have been pruned out.
+          /*
+           * The older entries should have been pruned out.
            */
           final HistoryChangeRecord[] a =
               new HistoryChangeRecord[] {

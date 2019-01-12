@@ -38,11 +38,10 @@ import org.embergraph.bop.solutions.SliceOp;
 import org.embergraph.bop.solutions.SliceOp.SliceStats;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.Journal;
-import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
 
 /*
-* Stress test for {@link SliceOp} in which a large number of small chunks are fed into the query
+ * Stress test for {@link SliceOp} in which a large number of small chunks are fed into the query
  * such that the concurrency constraints of the slice are stress tested. {@link
  * SliceOp#isSharedState()} returns <code>true</code> so each invocation of the same {@link SliceOp}
  * operator instance should use the same {@link SliceStats} object. This test will fail if that is

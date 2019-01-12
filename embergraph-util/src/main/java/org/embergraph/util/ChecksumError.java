@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.util;
 
 /*
-* Exception thrown when the checksum field does not match the checksum computed for the data being
+ * Exception thrown when the checksum field does not match the checksum computed for the data being
  * read. This is a serious error and indicates bad logic and/or corrupt data.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

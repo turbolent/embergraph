@@ -9,7 +9,7 @@ It is provided "as is" without expressed or implied warranty.
 package cern.colt.list;
 
 /*
-* Resizable list holding <code>long</code> elements; implemented with arrays; not efficient; just
+ * Resizable list holding <code>long</code> elements; implemented with arrays; not efficient; just
  * to demonstrate which methods you must override to implement a fully functional list. First see
  * the <a href="package-summary.html">package summary</a> and javadoc <a
  * href="package-tree.html">tree view</a> to get the broad picture.

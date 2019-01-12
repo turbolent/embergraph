@@ -42,7 +42,7 @@ import org.embergraph.rdf.store.BDS;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /*
-* Test suite for {@link ASTSearchOptimizer}.
+ * Test suite for {@link ASTSearchOptimizer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

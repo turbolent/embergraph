@@ -1,7 +1,6 @@
 package org.embergraph.rdf.model;
 
 import junit.framework.TestCase;
-import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.TermId;
 import org.openrdf.model.BNode;
@@ -14,7 +13,7 @@ import org.openrdf.model.impl.ValueFactoryImpl;
 import org.openrdf.model.vocabulary.XMLSchema;
 
 /*
-* Test suite for equals() semantics for {@link EmbergraphValue} implementations. Each test makes
+ * Test suite for equals() semantics for {@link EmbergraphValue} implementations. Each test makes
  * sure that two embergraph values are equals() if they have the same data, regardless of whether
  * they have the same value factory. Note that two {@link EmbergraphValue}s for the same {@link
  * ValueFactory} which have the same {@link IV} are compared on the basis of that {@link IV} (unless

@@ -34,13 +34,12 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
-import org.embergraph.journal.AbstractTask;
 import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.embergraph.rdf.task.AbstractApiTask;
 import org.embergraph.util.NV;
 
 /*
-* Abstract base class for REST API methods. This class is compatible with a job-oriented
+ * Abstract base class for REST API methods. This class is compatible with a job-oriented
  * concurrency control pattern.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

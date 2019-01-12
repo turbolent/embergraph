@@ -23,7 +23,7 @@ package org.embergraph.btree;
 import org.embergraph.cache.IHardReferenceQueue;
 
 /*
-* Hard reference cache eviction listener writes a dirty node or leaf onto the persistence store.
+ * Hard reference cache eviction listener writes a dirty node or leaf onto the persistence store.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -92,8 +92,8 @@ public class DefaultEvictionListener implements IEvictionListener {
 
       if (node.deleted) {
 
-      /*
-       * Deleted nodes are ignored as they are evicted from the queue.
+        /*
+         * Deleted nodes are ignored as they are evicted from the queue.
          */
 
         return;
@@ -108,16 +108,16 @@ public class DefaultEvictionListener implements IEvictionListener {
 
         if (node.isLeaf()) {
 
-        /*
-       * A leaf is written out directly.
+          /*
+           * A leaf is written out directly.
            */
 
           btree.writeNodeOrLeaf(node);
 
         } else {
 
-        /*
-       * A non-leaf node must be written out using a post-order
+          /*
+           * A non-leaf node must be written out using a post-order
            * traversal so that all dirty children are written through
            * before the dirty parent. This is required in order to
            * assign persistent identifiers to the dirty children.
@@ -163,8 +163,8 @@ public class DefaultEvictionListener implements IEvictionListener {
 
       if (!btree.readOnly) {
 
-      /*
-       * If the btree is mutable and an eviction fails, then the index MUST be discarded.
+        /*
+         * If the btree is mutable and an eviction fails, then the index MUST be discarded.
          *
          * @see <a href="http://trac.blazegraph.com/ticket/1005">Invalidate BTree objects if error
          *     occurs during eviction </a>

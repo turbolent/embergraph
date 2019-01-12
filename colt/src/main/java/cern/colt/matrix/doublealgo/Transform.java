@@ -13,7 +13,7 @@ import cern.colt.matrix.DoubleMatrix2D;
 import cern.jet.math.Functions;
 
 /*
-* Deprecated; Basic element-by-element transformations on {@link cern.colt.matrix.DoubleMatrix1D}
+ * Deprecated; Basic element-by-element transformations on {@link cern.colt.matrix.DoubleMatrix1D}
  * and {@link cern.colt.matrix.DoubleMatrix2D}. All transformations modify the first argument matrix
  * to hold the result of the transformation. Use idioms like <tt>result = mult(matrix.copy(),5)</tt>
  * to leave source matrices unaffected.

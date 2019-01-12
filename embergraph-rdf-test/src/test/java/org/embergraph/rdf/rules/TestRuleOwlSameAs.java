@@ -31,7 +31,7 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.OWL;
 
 /*
-* Test suite for owl:sameAs processing.
+ * Test suite for owl:sameAs processing.
  *
  * <pre>
  *   owl:sameAs1 : (x owl:sameAs y) -&gt; (y owl:sameAs x)

@@ -25,7 +25,7 @@ import java.util.Properties;
 import org.embergraph.testutil.ExperimentDriver.Result;
 
 /*
-* Stress tests where we predeclare locks and sort the lock requests. Under these conditions we DO
+ * Stress tests where we predeclare locks and sort the lock requests. Under these conditions we DO
  * NOT maintain a {@link TxDag} since deadlocks CAN NOT arise.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

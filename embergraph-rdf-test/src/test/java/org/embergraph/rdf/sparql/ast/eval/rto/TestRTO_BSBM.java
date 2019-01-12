@@ -30,7 +30,7 @@ import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sparql.ast.QueryHints;
 
 /*
-* Data driven test suite for the Runtime Query Optimizer (RTO) using BSBM data and queries based on
+ * Data driven test suite for the Runtime Query Optimizer (RTO) using BSBM data and queries based on
  * BSBM.
  *
  * <p>Note: BSBM is parameterized. We can generate more queries against the pc100 data set easily
@@ -377,7 +377,7 @@ public class TestRTO_BSBM extends AbstractRTOTestCase {
    */
 
   //    /*
-//     * BSBM Q1 against pc1000 (OOM on laptop).
+  //     * BSBM Q1 against pc1000 (OOM on laptop).
   //     */
   //    public void _test_BSBM_Q1_pc1000() throws Exception {
   //

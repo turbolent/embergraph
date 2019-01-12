@@ -29,11 +29,9 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
-import org.embergraph.service.ResourceService;
-import org.embergraph.util.concurrent.Haltable;
 
 /*
-* An allocator for {@link ByteBuffer} slices backed by direct {@link ByteBuffer}s allocated against
+ * An allocator for {@link ByteBuffer} slices backed by direct {@link ByteBuffer}s allocated against
  * a {@link DirectBufferPool}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -141,7 +139,7 @@ public class DirectBufferPoolAllocator {
   }
 
   //    /*
-//     * A direct {@link ByteBuffer} allocated from the {@link #directBufferPool}
+  //     * A direct {@link ByteBuffer} allocated from the {@link #directBufferPool}
   //     * together with the identifier assigned to that {@link ByteBuffer} (we can
   //     * not directly insert {@link ByteBuffer}s into the keys of a hash map since
   //     * their hash code is a function of their content).
@@ -369,8 +367,8 @@ public class DirectBufferPoolAllocator {
           if (directBuffer == null) {
 
             if (!open.get()) {
-            /*
-       * The allocation pool is closed.
+              /*
+               * The allocation pool is closed.
                *
                * Note: The lock serializes these decisions since
                * otherwise allocations could be made concurrent
@@ -486,8 +484,8 @@ public class DirectBufferPoolAllocator {
 
         if (!allocations.remove(a.id, a)) {
 
-        /*
-       * The allocation was not found in the map.
+          /*
+           * The allocation was not found in the map.
            */
           throw new RuntimeException();
         }

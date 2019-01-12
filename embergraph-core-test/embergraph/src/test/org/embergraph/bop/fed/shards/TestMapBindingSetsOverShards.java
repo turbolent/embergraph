@@ -56,7 +56,7 @@ import org.embergraph.striterator.ChunkedArrayIterator;
 import org.embergraph.striterator.Dechunkerator;
 
 /*
-* Unit tests for {@link MapBindingSetsOverShardsBuffer}.
+ * Unit tests for {@link MapBindingSetsOverShardsBuffer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestMapBindingSetsOverShards.java 3448 2010-08-18 20:55:58Z thompsonbry $
@@ -233,10 +233,7 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
                 ITx.UNISOLATED,
                 DataService.getIndexPartitionName(name, 0 /* partitionId */),
                 new RangeCountProcedure(
-                    true /* exact */,
-                    false /* deleted */,
-                    null /* fromKey */,
-                    null /* toKey */))
+                    true /* exact */, false /* deleted */, null /* fromKey */, null /* toKey */))
             .get()
             .longValue());
 
@@ -248,10 +245,7 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
                 ITx.UNISOLATED,
                 DataService.getIndexPartitionName(name, 1 /* partitionId */),
                 new RangeCountProcedure(
-                    true /* exact */,
-                    false /* deleted */,
-                    null /* fromKey */,
-                    null /* toKey */))
+                    true /* exact */, false /* deleted */, null /* fromKey */, null /* toKey */))
             .get()
             .longValue());
 
@@ -354,8 +348,7 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
     final Predicate<E> pred =
         new Predicate<E>(
             new BOp[] {x, y},
-            NV.asMap(
-                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace})));
+            NV.asMap(new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace})));
 
     final long tx = fed.getTransactionService().newTx(ITx.READ_COMMITTED);
 
@@ -494,8 +487,7 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
     final Predicate<E> pred =
         new Predicate<E>(
             new BOp[] {x, y},
-            NV.asMap(
-                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace})));
+            NV.asMap(new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace})));
 
     final long tx = fed.getTransactionService().newTx(ITx.READ_COMMITTED);
 
@@ -599,8 +591,7 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
     final Predicate<E> pred =
         new Predicate<E>(
             new BOp[] {x, y},
-            NV.asMap(
-                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace})));
+            NV.asMap(new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace})));
 
     final long tx = fed.getTransactionService().newTx(ITx.READ_COMMITTED);
 
@@ -721,8 +712,8 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
       return new AbstractArrayBuffer<IBindingSet[]>(
           outputBufferCapacity, IBindingSet[].class, null /* filter */) {
 
-      /*
-       * Puts a copy of the locator and the binding set chunk onto a list for examination by the
+        /*
+         * Puts a copy of the locator and the binding set chunk onto a list for examination by the
          * test harness.
          */
         @Override

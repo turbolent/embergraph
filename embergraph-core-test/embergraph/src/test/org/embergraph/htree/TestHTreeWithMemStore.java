@@ -44,7 +44,7 @@ import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Integration test with a persistence store.
+ * Integration test with a persistence store.
  *
  * @author bryan
  */
@@ -446,8 +446,8 @@ public class TestHTreeWithMemStore extends TestCase {
 
         if (true) {
 
-        /*
-       * Note: This code verifies that the dumpPages() code is
+          /*
+           * Note: This code verifies that the dumpPages() code is
            * working. If you comment this out, then write an explicit
            * unit test for dumpPages().
            */

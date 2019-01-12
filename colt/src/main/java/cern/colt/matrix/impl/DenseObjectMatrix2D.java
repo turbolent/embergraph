@@ -11,7 +11,7 @@ package cern.colt.matrix.impl;
 import cern.colt.matrix.ObjectMatrix1D;
 import cern.colt.matrix.ObjectMatrix2D;
 /*
-* Dense 2-d matrix holding <tt>Object</tt> elements. First see the <a
+ * Dense 2-d matrix holding <tt>Object</tt> elements. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
  * view</a> to get the broad picture.
  *

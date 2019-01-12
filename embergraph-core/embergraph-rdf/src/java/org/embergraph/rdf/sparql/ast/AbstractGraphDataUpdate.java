@@ -23,13 +23,11 @@ package org.embergraph.rdf.sparql.ast;
 
 import java.util.Map;
 import org.embergraph.bop.BOp;
-import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.model.EmbergraphStatement;
-import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.spo.ISPO;
 
 /*
-* Abstract base class for the <code>INSERT DATA</code> and <code>DELETE DATA</code> operations.
+ * Abstract base class for the <code>INSERT DATA</code> and <code>DELETE DATA</code> operations.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -111,8 +109,8 @@ public abstract class AbstractGraphDataUpdate extends GraphUpdate {
 
         if (i >= 10) {
 
-        /*
-       * Truncate the description.
+          /*
+           * Truncate the description.
            *
            * <p>Note: People sometimes push a LOT of data through with a DeleteData or InsertData
            * operation. This truncates the description to avoid problems with log files or the echo

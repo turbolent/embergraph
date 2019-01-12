@@ -40,14 +40,11 @@ import org.embergraph.rdf.sparql.ast.QueryType;
 import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.SubqueryRoot;
 import org.embergraph.rdf.sparql.ast.VarNode;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTBottomUpOptimizer;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTExistsOptimizer;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTJoinOrderByTypeOptimizer;
 import org.embergraph.rdf.spo.SPOKeyOrder;
 import org.openrdf.model.vocabulary.RDF;
 
 /*
-* Test suite for SPARQL negation (EXISTS and MINUS).
+ * Test suite for SPARQL negation (EXISTS and MINUS).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -530,8 +527,8 @@ public class TestNegation extends AbstractDataDrivenSPARQLTestCase {
       final SubqueryRoot notExistsSubquery2;
       {
         notExistsSubquery2 = new SubqueryRoot(QueryType.ASK);
-      /*
-       * Note: This can not be attached until after the nested join
+        /*
+         * Note: This can not be attached until after the nested join
          * group.
          */
         //                whereClause.addChild(notExistsSubquery2);
@@ -595,8 +592,8 @@ public class TestNegation extends AbstractDataDrivenSPARQLTestCase {
       {
         final JoinGroupNode group = whereClause;
 
-      /*
-       * <pre>
+        /*
+         * <pre>
          *       QueryType: ASK
          *       SELECT VarNode(ar) VarNode(-exists-1)[anonymous]
          *         JoinGroupNode {

@@ -25,7 +25,7 @@ import java.io.IOException;
 import org.embergraph.service.IService;
 
 /*
-* A service for unique timestamps.
+ * A service for unique timestamps.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

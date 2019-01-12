@@ -30,7 +30,7 @@ import org.openrdf.model.impl.LiteralImpl;
 import org.openrdf.model.impl.URIImpl;
 
 /*
-* Utility class to encode/decode RDF {@link Value}s for interchange with the REST API.
+ * Utility class to encode/decode RDF {@link Value}s for interchange with the REST API.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -107,7 +107,7 @@ public class EncodeDecodeValue {
   //        }
   //
   //        /*
-//         * Read a character.
+  //         * Read a character.
   //         *
   //         * TODO Does not handle the 8 character escape code sequences (but
   //         * neither does the SPARQL parser!)
@@ -181,7 +181,7 @@ public class EncodeDecodeValue {
   //    }
   //
   //    /*
-//     * Apply code point escape sequences for anything that we need to escape.
+  //     * Apply code point escape sequences for anything that we need to escape.
   //     * For our purposes, this is just <code>"</code> and <code>&gt;</code>.
   //     * @param s
   //     * @return
@@ -195,7 +195,7 @@ public class EncodeDecodeValue {
   //    }
   //
   //    /*
-//     * Decode all code point escape sequences. Note that we need to decode more
+  //     * Decode all code point escape sequences. Note that we need to decode more
   //     * than we encode since we are not responsible for the encoding when it
   //     * comes to the REST API, just the decoding.
   //     *
@@ -266,8 +266,8 @@ public class EncodeDecodeValue {
 
       if (slen == closeQuotePos + 1) {
 
-      /*
-       * Plain literal.
+        /*
+         * Plain literal.
          */
 
         return new LiteralImpl(label);
@@ -277,8 +277,8 @@ public class EncodeDecodeValue {
 
       if (ch2 == '@') {
 
-      /*
-       * Language code literal.
+        /*
+         * Language code literal.
          */
 
         final String languageCode = s.substring(closeQuotePos + 2);
@@ -287,8 +287,8 @@ public class EncodeDecodeValue {
 
       } else if (ch2 == '^') {
 
-      /*
-       * Datatype literal.
+        /*
+         * Datatype literal.
          */
 
         if (slen <= closeQuotePos + 2) throw new IllegalArgumentException(s);
@@ -426,8 +426,8 @@ public class EncodeDecodeValue {
 
       if (s == null || s.length() == 0) {
 
-      /*
-       * Allowed. This is a reference to the openrdf "null" graph.
+        /*
+         * Allowed. This is a reference to the openrdf "null" graph.
          *
          * Note: "c=" reports a zero length string so we need to decode that
          * to a null reference.

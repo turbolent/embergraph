@@ -12,7 +12,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 
 /*
-* An adapter from callbacks of the bullet parser to standard SAX content handler. Can be used to
+ * An adapter from callbacks of the bullet parser to standard SAX content handler. Can be used to
  * run, eg., <samp>tagsoup</samp> and the bullet parser against a page and check that the actual
  * callback invocations are the same.
  */

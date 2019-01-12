@@ -27,7 +27,7 @@ import junit.framework.TestCase2;
 import org.embergraph.striterator.IChunkedIterator;
 
 /*
-* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestUnsynchronizedUnboundedChunkBuffer extends TestCase2 {

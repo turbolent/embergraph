@@ -26,14 +26,13 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
-import junit.framework.AssertionFailedError;
 import org.embergraph.io.TestCase3;
 import org.embergraph.quorum.MockQuorumFixture.MockQuorum;
 import org.embergraph.quorum.MockQuorumFixture.MockQuorum.MockQuorumActor;
 import org.embergraph.quorum.MockQuorumFixture.MockQuorumMember;
 
 /*
-* Abstract base class for testing using a {@link MockQuorumFixture}.
+ * Abstract base class for testing using a {@link MockQuorumFixture}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -195,7 +194,7 @@ public abstract class AbstractQuorumTestCase extends TestCase3 {
   }
 
   //    /*
-//     * Waits up to 5 seconds for the condition to succeed.
+  //     * Waits up to 5 seconds for the condition to succeed.
   //     *
   //     * @param cond
   //     *            The condition, which must throw an

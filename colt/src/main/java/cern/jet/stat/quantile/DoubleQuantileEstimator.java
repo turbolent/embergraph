@@ -11,7 +11,7 @@ package cern.jet.stat.quantile;
 import cern.colt.list.DoubleArrayList;
 import cern.colt.list.ObjectArrayList;
 /*
-* The abstract base class for approximate quantile finders computing quantiles over a sequence of
+ * The abstract base class for approximate quantile finders computing quantiles over a sequence of
  * <tt>double</tt> elements.
  */
 // abstract class ApproximateDoubleQuantileFinder extends Object implements DoubleQuantileFinder {

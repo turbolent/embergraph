@@ -43,7 +43,6 @@ import org.embergraph.rdf.sparql.ast.JoinGroupNode;
 import org.embergraph.rdf.sparql.ast.QueryNodeWithBindingSet;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.StatementPatternNode;
-import org.embergraph.rdf.sparql.ast.ValueExpressionNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpUtility;
@@ -52,7 +51,7 @@ import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /*
-* Test suite for {@link ASTSimpleOptionalOptimizer}.
+ * Test suite for {@link ASTSimpleOptionalOptimizer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -353,7 +352,7 @@ public class TestASTSimpleOptionalOptimizer extends AbstractASTEvaluationTestCas
    * filter in this case.
    */
   //    /*
-//     * A variant of the TCK test where the filter is in the optional group and
+  //     * A variant of the TCK test where the filter is in the optional group and
   //     * uses a variable which is "incoming bound" to the optional group (hence
   //     * definitely bound in the parent group).
   //     * <p>

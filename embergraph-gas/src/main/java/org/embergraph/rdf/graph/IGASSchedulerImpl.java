@@ -16,7 +16,7 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 package org.embergraph.rdf.graph;
 
 /*
-* Extended {@link IGASScheduler} interface. This interface is exposed to the implementation of the
+ * Extended {@link IGASScheduler} interface. This interface is exposed to the implementation of the
  * GAS Engine. The methods on this interface are NOT for use by the {@link IGASProgram} and MIGHT
  * NOT (really, should not) be available on the {@link IGASScheduler} supplied to an {@link
  * IGASProgram}.

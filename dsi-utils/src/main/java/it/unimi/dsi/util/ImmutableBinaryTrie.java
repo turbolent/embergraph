@@ -35,7 +35,7 @@ import java.util.Iterator;
 import java.util.ListIterator;
 
 /*
-* An immutable implementation of binary tries.
+ * An immutable implementation of binary tries.
  *
  * <p>Instance of this class are built starting from a lexicographically ordered list of {@link
  * BitVector}s representing binary words. Each word is assigned its position (starting from 0) in

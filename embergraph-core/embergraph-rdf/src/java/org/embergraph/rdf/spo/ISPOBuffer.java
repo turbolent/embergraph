@@ -25,10 +25,9 @@ package org.embergraph.rdf.spo;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.embergraph.relation.accesspath.IBuffer;
 
 /*
-* A buffer for {@link SPO}s. {@link ISPOBuffer}s are used to collect {@link SPO}s into chunks that
+ * A buffer for {@link SPO}s. {@link ISPOBuffer}s are used to collect {@link SPO}s into chunks that
  * can be sorted in order to support efficient batch operations on statement indices.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -5,7 +5,7 @@ import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.SuccessorUtil;
 
 /*
-* Set up the from and to keys for the {@link ReadIndexTask} and {@link CountIndexTask}.
+ * Set up the from and to keys for the {@link ReadIndexTask} and {@link CountIndexTask}.
  *
  * @param <V> The generic type of the document identifier.
  */

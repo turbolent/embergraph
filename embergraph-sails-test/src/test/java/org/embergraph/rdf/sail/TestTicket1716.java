@@ -25,7 +25,7 @@ import org.openrdf.query.UpdateExecutionException;
 import org.openrdf.repository.RepositoryException;
 
 /*
-* Test suite for an issue where IV resolution of invalid numeric literal fails
+ * Test suite for an issue where IV resolution of invalid numeric literal fails
  *
  * @see <a href="https://jira.blazegraph.com/browse/BLZG-1716">SPARQL Update parser fails on invalid
  *     numeric literals

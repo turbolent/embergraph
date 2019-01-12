@@ -39,10 +39,9 @@ import org.embergraph.bop.engine.IQueryClient;
 import org.embergraph.bop.engine.IQueryPeer;
 import org.embergraph.bop.engine.QueryEngine;
 import org.embergraph.io.DirectBufferPoolAllocator.IAllocationContext;
-import org.embergraph.service.IEmbergraphFederation;
 
 /*
-* Extends {@link ChunkedRunningQuery} to provide additional state and logic required to support
+ * Extends {@link ChunkedRunningQuery} to provide additional state and logic required to support
  * distributed query evaluation against an {@link IEmbergraphFederation} .
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -278,8 +277,8 @@ public class FederatedRunningQuery extends ChunkedRunningQuery {
 
       } catch (RemoteException e) {
 
-      /*
-       * If we do not manage to notify the peer then the peer will not
+        /*
+         * If we do not manage to notify the peer then the peer will not
          * release resources assigned to the query in a timely manner.
          * However, assuming the peer eventually manages to send some
          * data to another node which has been notified (or to the
@@ -325,8 +324,8 @@ public class FederatedRunningQuery extends ChunkedRunningQuery {
       case ANY:
       case HASHED:
         {
-        /*
-       * For both ANY and HASHED we want to send a last pass message to
+          /*
+           * For both ANY and HASHED we want to send a last pass message to
            * each service on which the operator was evaluated. For ANY, the
            * set of such services will be discovered dynamically as the query
            * is evaluated. For HASHED, the set of such services will be
@@ -358,8 +357,8 @@ public class FederatedRunningQuery extends ChunkedRunningQuery {
         }
       case SHARDED:
         {
-        /*
-       * Generate a last pass message for each shard on which the operator
+          /*
+           * Generate a last pass message for each shard on which the operator
            * was invoked.
            */
           for (Integer shardId : ((Set<Integer>) doneOn)) {

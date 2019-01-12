@@ -26,7 +26,7 @@ import org.embergraph.counters.CAT;
 import org.embergraph.relation.accesspath.IAccessPath;
 
 /*
-* Extended to expose counters shared by various join operators (some join operators may define more
+ * Extended to expose counters shared by various join operators (some join operators may define more
  * counters as well).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

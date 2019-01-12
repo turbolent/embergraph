@@ -25,7 +25,7 @@ import org.embergraph.bop.engine.BOpStats;
 import org.embergraph.counters.CAT;
 
 /*
-* Adds reporting for the size of the named solution set.
+ * Adds reporting for the size of the named solution set.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

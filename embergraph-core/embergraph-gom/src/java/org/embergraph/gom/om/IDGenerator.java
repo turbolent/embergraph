@@ -26,7 +26,7 @@ import org.openrdf.model.URI;
 import org.openrdf.model.ValueFactory;
 
 /*
-* Generator for globally unique URIs.
+ * Generator for globally unique URIs.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

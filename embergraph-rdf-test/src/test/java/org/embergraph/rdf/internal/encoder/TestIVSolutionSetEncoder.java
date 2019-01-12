@@ -32,7 +32,7 @@ import org.embergraph.io.DataOutputBuffer;
 import org.embergraph.rdf.internal.IV;
 
 /*
-* Test suite for {@link IVSolutionSetEncoder} and {@link IVSolutionSetDecoder}.
+ * Test suite for {@link IVSolutionSetEncoder} and {@link IVSolutionSetDecoder}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

@@ -16,7 +16,7 @@
 package org.embergraph.ganglia;
 
 /*
-* Attributes for {@link IGangliaMetadataMessage} records.
+ * Attributes for {@link IGangliaMetadataMessage} records.
  *
  * <p>Note: The attribute names, group names, titles, and descriptions for the core metrics can be
  * discovered from the output of

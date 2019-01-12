@@ -11,7 +11,7 @@ package cern.colt.matrix.impl;
 import cern.colt.matrix.DoubleMatrix1D;
 import cern.colt.matrix.DoubleMatrix2D;
 /*
-* 1-d matrix holding <tt>double</tt> elements; either a view wrapping another matrix or a matrix
+ * 1-d matrix holding <tt>double</tt> elements; either a view wrapping another matrix or a matrix
  * whose views are wrappers.
  *
  * @author wolfgang.hoschek@cern.ch

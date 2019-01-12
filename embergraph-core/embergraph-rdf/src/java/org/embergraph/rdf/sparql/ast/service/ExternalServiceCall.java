@@ -21,12 +21,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.service;
 
-import org.embergraph.rdf.internal.IV;
-import org.openrdf.model.Value;
 import org.openrdf.query.BindingSet;
 
 /*
-* Service invocation interface for an external (non-embergraph, but same JVM) service. Data
+ * Service invocation interface for an external (non-embergraph, but same JVM) service. Data
  * interchange with the external service uses the Sesame {@link BindingSet} and Sesame {@link Value}
  * objects. Embergraph {@link IV}s will be materialized as Sesame {@link Value}s for the
  * BindingsClause. Sesame {@link Value}s drained from the service will be resolved against the

@@ -1,9 +1,7 @@
 package org.embergraph.rwstore;
 
-import org.embergraph.io.writecache.WriteCache.FileChannelScatteredWriteCache;
-
 /*
-* This is a callback interface that can be used to synchronize store allocation structures.
+ * This is a callback interface that can be used to synchronize store allocation structures.
  *
  * <p>It has been conceived to allow two {@link RWStore}s to maintain the in-memory {@link
  * FixedAllocator}s w/o the need to initialize from the root block on each commit.

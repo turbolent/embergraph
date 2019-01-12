@@ -3,7 +3,7 @@ package org.embergraph.bop.fed;
 import java.util.UUID;
 
 /*
-* An allocation context which is shared by all operators running in the same query which target the
+ * An allocation context which is shared by all operators running in the same query which target the
  * same service.
  */
 class ServiceContext extends AllocationContextKey {

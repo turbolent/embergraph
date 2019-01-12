@@ -11,7 +11,7 @@ package cern.jet.random;
 import cern.jet.random.engine.RandomEngine;
 import cern.jet.stat.Probability;
 /*
-* Normal (aka Gaussian) distribution; See the <A
+ * Normal (aka Gaussian) distribution; See the <A
  * HREF="http://www.cern.ch/RD11/rkb/AN16pp/node188.html#SECTION0001880000000000000000"> math
  * definition</A> and <A HREF="http://www.statsoft.com/textbook/glosn.html#Normal Distribution">
  * animated definition</A>.

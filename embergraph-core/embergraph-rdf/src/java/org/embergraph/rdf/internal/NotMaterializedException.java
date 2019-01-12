@@ -1,9 +1,7 @@
 package org.embergraph.rdf.internal;
 
-import org.embergraph.rdf.lexicon.LexiconRelation;
-
 /*
-* Exception thrown by {@link IV#getValue()} if the {@link IV} has not first been cached using
+ * Exception thrown by {@link IV#getValue()} if the {@link IV} has not first been cached using
  * {@link IV#asValue(LexiconRelation)}.
  *
  * @author thompsonbry

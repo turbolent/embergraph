@@ -21,7 +21,7 @@ import java.io.File;
 import java.nio.ByteBuffer;
 
 /*
-* Transient buffer strategy uses a direct buffer but never writes on disk.
+ * Transient buffer strategy uses a direct buffer but never writes on disk.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

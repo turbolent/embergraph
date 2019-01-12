@@ -25,12 +25,10 @@ package org.embergraph.service.ndx;
 
 import java.util.LinkedList;
 import org.embergraph.btree.keys.KVO;
-import org.embergraph.mdi.IMetadataIndex;
-import org.embergraph.resources.StaleLocatorException;
 import org.embergraph.service.Split;
 
 /*
-* Interface for finding the {@link Split}s for an ordered set of unsigned byte[] keys. Each key
+ * Interface for finding the {@link Split}s for an ordered set of unsigned byte[] keys. Each key
  * MUST be fully specified, e.g., point lookup. This algorithm does NOT handle cases where multiple
  * partitions must be scanned because they share the same prefix as the key.
  *

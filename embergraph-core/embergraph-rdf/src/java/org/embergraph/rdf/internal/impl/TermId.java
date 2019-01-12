@@ -29,13 +29,9 @@ import org.embergraph.rdf.internal.impl.literal.NumericIV;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.util.Bytes;
-import org.openrdf.model.BNode;
-import org.openrdf.model.Literal;
-import org.openrdf.model.URI;
-import org.openrdf.model.Value;
 
 /*
-* Implementation for any kind of RDF {@link Value} when the values is not being inlined. Instances
+ * Implementation for any kind of RDF {@link Value} when the values is not being inlined. Instances
  * of this class can represent {@link URI}s, {@link BNode}s (if they are not being inlined), or
  * {@link Literal}s (including datatype literals if they are not being inlined). Larger RDF {@link
  * Value}s should be represented with {@link BlobIV} instead of this class.
@@ -268,7 +264,7 @@ public class TermId<V extends EmbergraphValue> extends AbstractNonInlineIV<V, Vo
   }
 
   //    /*
-//     * Override default serialization to send the cached {@link EmbergraphValue}.
+  //     * Override default serialization to send the cached {@link EmbergraphValue}.
   //     *
   //     * @see https://sourceforge.net/apps/trac/bigdata/ticket/337
   //     */
@@ -281,7 +277,7 @@ public class TermId<V extends EmbergraphValue> extends AbstractNonInlineIV<V, Vo
   //	}
   //
   //	/*
-//	 * Override default serialization to recover the cached {@link EmbergraphValue}
+  //	 * Override default serialization to recover the cached {@link EmbergraphValue}
   //	 * .
   //	 */
   //	@SuppressWarnings("unchecked")

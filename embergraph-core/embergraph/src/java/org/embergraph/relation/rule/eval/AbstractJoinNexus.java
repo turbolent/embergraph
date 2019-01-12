@@ -46,8 +46,6 @@ import org.embergraph.config.LongValidator;
 import org.embergraph.io.IStreamSerializer;
 import org.embergraph.io.SerializerUtil;
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.journal.Journal;
-import org.embergraph.journal.TemporaryStore;
 import org.embergraph.mdi.PartitionLocator;
 import org.embergraph.relation.AbstractResource;
 import org.embergraph.relation.IMutableRelation;
@@ -65,7 +63,6 @@ import org.embergraph.relation.rule.IProgram;
 import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.IStep;
 import org.embergraph.service.AbstractScaleOutFederation;
-import org.embergraph.service.DataService;
 import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.ndx.IClientIndex;
 import org.embergraph.striterator.ChunkedConvertingIterator;
@@ -73,7 +70,7 @@ import org.embergraph.striterator.DistinctFilter;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /*
-* Base implementation for {@link IJoinNexus}
+ * Base implementation for {@link IJoinNexus}
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -321,7 +318,7 @@ public abstract class AbstractJoinNexus implements IJoinNexus {
   }
 
   //    /*
-//     * @deprecated by {@link #getTailAccessPath(IRelation, IPredicate)}
+  //     * @deprecated by {@link #getTailAccessPath(IRelation, IPredicate)}
   //     *
   //     * @see #getTailAccessPath(IRelation, IPredicate).
   //     */
@@ -717,8 +714,8 @@ public abstract class AbstractJoinNexus implements IJoinNexus {
 
       if (((IRule) step).getHead() != null && (solutionFlags & ELEMENT) != 0) {
 
-      /*
-       * Head exists and elements are requested, so impose DISTINCT
+        /*
+         * Head exists and elements are requested, so impose DISTINCT
          * based on the materialized elements.
          */
 
@@ -735,8 +732,8 @@ public abstract class AbstractJoinNexus implements IJoinNexus {
 
         if ((solutionFlags & BINDINGS) != 0) {
 
-        /*
-       * Bindings were requested so impose DISTINCT based on those
+          /*
+           * Bindings were requested so impose DISTINCT based on those
            * bindings.
            */
 
@@ -802,7 +799,6 @@ public abstract class AbstractJoinNexus implements IJoinNexus {
   protected final boolean isEmptyProgram(final IStep step) {
 
     return !step.isRule() && ((IProgram) step).stepCount() == 0;
-
   }
 
   /*
@@ -867,7 +863,7 @@ public abstract class AbstractJoinNexus implements IJoinNexus {
   }
 
   //    /*
-//     * This variant is submitted and executes the rules from inside of the
+  //     * This variant is submitted and executes the rules from inside of the
   //     * {@link ConcurrencyManager} on the {@link LocalDataServiceImpl} (fast).
   //     * <p>
   //     * Note: This can only be done if all indices for the relation(s) are (a)
@@ -896,7 +892,7 @@ public abstract class AbstractJoinNexus implements IJoinNexus {
   //    }
 
   //  /*
-//  * Return <code>true</code> if the <i>relationName</i> is on a
+  //  * Return <code>true</code> if the <i>relationName</i> is on a
   //  * {@link TempTripleStore}
   //  *
   //  * @todo Rather than parsing the relation name, it would be better to have
@@ -938,7 +934,7 @@ public abstract class AbstractJoinNexus implements IJoinNexus {
   //   }
 
   ////   /*
-////    * A per-relation reentrant read-write lock allows either concurrent readers
+  ////    * A per-relation reentrant read-write lock allows either concurrent readers
   ////    * or an writer on the unisolated view of a relation. When we use this lock
   ////    * we also use {@link ITx#UNISOLATED} reads and writes and
   ////    * {@link #makeWriteSetsVisible()} is a NOP.

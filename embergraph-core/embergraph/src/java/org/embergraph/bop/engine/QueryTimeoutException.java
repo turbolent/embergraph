@@ -24,7 +24,7 @@ package org.embergraph.bop.engine;
 import java.util.concurrent.TimeoutException;
 
 /*
-* Exception thrown if a query is halted due to a timeout.
+ * Exception thrown if a query is halted due to a timeout.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

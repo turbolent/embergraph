@@ -18,7 +18,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.ha.msg;
 
 /*
-* Interface for RMI messages used to communicate metadata about a raw data transfer occurring on a
+ * Interface for RMI messages used to communicate metadata about a raw data transfer occurring on a
  * socket channel.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

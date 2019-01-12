@@ -29,7 +29,7 @@ import org.apache.log4j.Level;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /*
-* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestLeafSplitShortestSeparatorKey extends TestCase2 {

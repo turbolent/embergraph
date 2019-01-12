@@ -29,7 +29,7 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.sail.SailRepository;
 
 /*
-* Class to test EmbergraphGraphEmbedded creation using a SailRepository for client test suite
+ * Class to test EmbergraphGraphEmbedded creation using a SailRepository for client test suite
  * coverage.
  *
  * @author beebs

@@ -25,10 +25,9 @@ import java.util.Map;
 import java.util.Set;
 import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IVariable;
-import org.embergraph.rdf.internal.IVCache;
 
 /*
-* A set of interesting statistics on a solution set.
+ * A set of interesting statistics on a solution set.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

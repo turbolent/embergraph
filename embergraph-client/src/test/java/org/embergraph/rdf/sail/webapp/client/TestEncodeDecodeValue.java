@@ -33,7 +33,7 @@ import org.openrdf.model.impl.ValueFactoryImpl;
 import org.openrdf.model.vocabulary.RDF;
 
 /*
-* Test suite for utility class to encode and decode RDF Values for interchange via the REST API.
+ * Test suite for utility class to encode and decode RDF Values for interchange via the REST API.
  *
  * @see EncodeDecodeValue
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

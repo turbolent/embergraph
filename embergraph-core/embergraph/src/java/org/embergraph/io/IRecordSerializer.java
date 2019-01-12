@@ -26,7 +26,7 @@ package org.embergraph.io;
 import java.io.Serializable;
 
 /*
-* An abstraction for serializing and de-serializing objects as byte[]s.
+ * An abstraction for serializing and de-serializing objects as byte[]s.
  *
  * <p>Note: Some serializers use the convention that a <code>null</code> will be de-serialized as a
  * <code>null</code>. This convention makes it easy to de-serialize the value and then test to see

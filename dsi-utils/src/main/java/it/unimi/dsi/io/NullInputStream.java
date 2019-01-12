@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.io.Serializable;
 
 /*
-* End-of-stream-only input stream.
+ * End-of-stream-only input stream.
  *
  * <p>This stream has length 0, and will always return end-of-file on any read attempt.
  *

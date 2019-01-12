@@ -25,7 +25,7 @@ import org.embergraph.ha.msg.IHANotifyReleaseTimeResponse;
 import org.embergraph.journal.IRootBlockView;
 
 /*
-* A 2-phase request as coordinated by the leader (local object).
+ * A 2-phase request as coordinated by the leader (local object).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

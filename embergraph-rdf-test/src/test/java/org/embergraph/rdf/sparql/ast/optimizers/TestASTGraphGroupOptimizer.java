@@ -41,12 +41,11 @@ import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpUtility;
 import org.embergraph.rdf.sparql.ast.eval.ASTDeferredIVResolution;
-import org.embergraph.rdf.sparql.ast.eval.TestNamedGraphs;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /*
-* Test suite for {@link ASTGraphGroupOptimizer}.
+ * Test suite for {@link ASTGraphGroupOptimizer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestASTGraphGroupOptimizer.java 5701 2011-11-20 00:52:36Z thompsonbry $
@@ -357,7 +356,7 @@ public class TestASTGraphGroupOptimizer extends AbstractASTEvaluationTestCase {
    */
 
   //    /*
-//     * Given
+  //     * Given
   //     *
   //     * <pre>
   //     *   SELECT VarNode(subj)
@@ -466,7 +465,7 @@ public class TestASTGraphGroupOptimizer extends AbstractASTEvaluationTestCase {
   //    }
   //
   //    /*
-//     * Given
+  //     * Given
   //     *
   //     * <pre>
   //     *   SELECT VarNode(subj)
@@ -582,7 +581,7 @@ public class TestASTGraphGroupOptimizer extends AbstractASTEvaluationTestCase {
   //    }
   //
   //    /*
-//     * Given
+  //     * Given
   //     *
   //     * <pre>
   //     *   SELECT VarNode(subj)
@@ -702,7 +701,7 @@ public class TestASTGraphGroupOptimizer extends AbstractASTEvaluationTestCase {
   //    }
   //
   //    /*
-//     * Given
+  //     * Given
   //     *
   //     * <pre>
   //     *   SELECT VarNode(subj)
@@ -823,7 +822,7 @@ public class TestASTGraphGroupOptimizer extends AbstractASTEvaluationTestCase {
   //    }
   //
   //    /*
-//     * Given
+  //     * Given
   //     *
   //     * <pre>
   //     *   SELECT VarNode(subj)

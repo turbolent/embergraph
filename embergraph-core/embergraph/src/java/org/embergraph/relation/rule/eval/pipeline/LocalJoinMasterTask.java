@@ -6,9 +6,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
 import org.embergraph.bop.IBindingSet;
-import org.embergraph.btree.UnisolatedReadWriteIndex;
-import org.embergraph.journal.ITx;
-import org.embergraph.journal.Journal;
 import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.IBuffer;
 import org.embergraph.relation.rule.IRule;
@@ -17,7 +14,7 @@ import org.embergraph.relation.rule.eval.ISolution;
 import org.embergraph.service.IEmbergraphFederation;
 
 /*
-* Implementation for local join execution on a {@link Journal}.
+ * Implementation for local join execution on a {@link Journal}.
  *
  * <p>Note: Just like a nested subquery join, when used for mutation this must read and write on the
  * {@link ITx#UNISOLATED} indices and an {@link UnisolatedReadWriteIndex} will be used to serialize

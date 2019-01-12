@@ -3,7 +3,7 @@ package org.embergraph.counters;
 import java.util.concurrent.TimeUnit;
 
 /*
-* A type-safe enumeration of the different periods at which samples may be combined within a {@link
+ * A type-safe enumeration of the different periods at which samples may be combined within a {@link
  * History}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

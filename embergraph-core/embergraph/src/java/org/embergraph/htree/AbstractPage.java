@@ -22,14 +22,12 @@ import java.lang.ref.Reference;
 import java.util.Iterator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.embergraph.btree.BTree;
 import org.embergraph.btree.PO;
 import org.embergraph.btree.data.IAbstractNodeData;
-import org.embergraph.cache.HardReferenceQueue;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Persistence capable abstract base class for HTree pages.
+ * Persistence capable abstract base class for HTree pages.
  *
  * @author thompsonbry
  */
@@ -615,8 +613,8 @@ abstract class AbstractPage extends PO
 
       if (!parent.isDirty()) {
 
-      /*
-       * Note: pass up the identity of the old child since we want
+        /*
+         * Note: pass up the identity of the old child since we want
          * to avoid having its parent reference reset.
          */
         parent = (DirectoryPage) parent.copyOnWrite(oldId);

@@ -26,7 +26,6 @@ import java.util.Set;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IVariable;
 import org.embergraph.rdf.internal.constraints.InBOp;
-import org.embergraph.rdf.sparql.ast.hints.OptimizerQueryHint;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTStaticJoinOptimizer;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 

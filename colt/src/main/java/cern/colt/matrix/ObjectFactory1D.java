@@ -11,7 +11,7 @@ package cern.colt.matrix;
 import cern.colt.matrix.impl.DenseObjectMatrix1D;
 import cern.colt.matrix.impl.SparseObjectMatrix1D;
 /*
-* Factory for convenient construction of 1-d matrices holding <tt>Object</tt> cells. Use idioms
+ * Factory for convenient construction of 1-d matrices holding <tt>Object</tt> cells. Use idioms
  * like <tt>ObjectFactory1D.dense.make(1000)</tt> to construct dense matrices,
  * <tt>ObjectFactory1D.sparse.make(1000)</tt> to construct sparse matrices.
  *

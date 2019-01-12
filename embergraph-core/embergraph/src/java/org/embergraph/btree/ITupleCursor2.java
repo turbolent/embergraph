@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree;
 
 /*
-* Extended interface.
+ * Extended interface.
  *
  * <p>When {@link #first()}, {@link #last()}, or {@link ITupleCursor#seek(byte[])} return <code>null
  * </code> it is an indication that there is no visitable tuple in the index corresponding to that
@@ -118,7 +118,7 @@ public interface ITupleCursor2<E> extends ITupleCursor<E> {
   ITuple<E> priorTuple();
 
   //  /*
-//  * Change the half-open range for the cursor. This can be useful if you want
+  //  * Change the half-open range for the cursor. This can be useful if you want
   //  * to perform a series of key-range scans. If the {@link #currentKey()} is
   //  * no longer within the bounds for the cursor it will not be on a visitable
   //  * tuple after invoking this method and you must {@link #seek(byte[])} to a

@@ -28,7 +28,7 @@ import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /*
-* Data driven test suite testing configurability of GeoSpatial service. The query set is a subset
+ * Data driven test suite testing configurability of GeoSpatial service. The query set is a subset
  * of queries from {@link TestGeoSpatialServiceEvaluation}, with possible modifications to account
  * for the changed configuration.
  *

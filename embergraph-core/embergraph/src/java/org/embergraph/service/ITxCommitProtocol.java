@@ -24,12 +24,9 @@ package org.embergraph.service;
 import java.io.IOException;
 import java.rmi.Remote;
 import java.util.concurrent.ExecutionException;
-import org.embergraph.btree.ITuple;
-import org.embergraph.journal.ITransactionService;
-import org.embergraph.journal.ValidationError;
 
 /*
-* Remote interface by which the {@link ITransactionService} manages the state of transactions on
+ * Remote interface by which the {@link ITransactionService} manages the state of transactions on
  * the distributed {@link IDataService}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -76,8 +73,7 @@ public interface ITxCommitProtocol extends Remote {
    * @throws ExecutionException This will wrap a {@link ValidationError} if validation fails.
    * @throws IOException if there is an RMI problem.
    */
-  long singlePhaseCommit(long tx)
-      throws InterruptedException, ExecutionException, IOException;
+  long singlePhaseCommit(long tx) throws InterruptedException, ExecutionException, IOException;
 
   /*
    * Request that the {@link IDataService} participate in a 3-phase commit.
@@ -209,7 +205,7 @@ public interface ITxCommitProtocol extends Remote {
   void prepare(long tx, long revisionTime) throws Throwable, IOException;
 
   //    /*
-//     * Cancel a 2-phase commit.
+  //     * Cancel a 2-phase commit.
   //     *
   //     * @param tx
   //     *            The transaction identifier.

@@ -33,7 +33,7 @@ import org.apache.log4j.Logger;
 import org.embergraph.util.CaseInsensitiveStringComparator;
 
 /*
-* Parser for MIME type data. MIME type, subtype, and MIME parameter names are case-insensitive.
+ * Parser for MIME type data. MIME type, subtype, and MIME parameter names are case-insensitive.
  * Parameters values are treated as case-sensitive by this class, but subclasses may override the
  * comparison logic for parameters, e.g., the "q" parameter in {@link AcceptMIMEType} has a default
  * value and its values are compared after conversion into a floating point number.
@@ -1006,7 +1006,7 @@ public class MIMEType {
   }
 
   //     /*
-//      * Returns an immutable {@link Iterator} that visits the MIME
+  //      * Returns an immutable {@link Iterator} that visits the MIME
   //      * parameters, each of which is a name-value pair represented
   //      * using an {@link NVPair} instance.<p>
   //      *

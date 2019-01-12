@@ -48,7 +48,7 @@ import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /*
-* Test suite for {@link ASTAttachJoinFiltersOptimizer}.
+ * Test suite for {@link ASTAttachJoinFiltersOptimizer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

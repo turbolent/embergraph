@@ -36,7 +36,7 @@ import org.openrdf.query.TupleQueryResult;
 import org.openrdf.query.algebra.evaluation.QueryBindingSet;
 
 /*
-* This class provides proxy delegation logic for abstract methods declared by {@link
+ * This class provides proxy delegation logic for abstract methods declared by {@link
  * AbstractEmbergraphSailTestCase} and is used to extend the set of tests that will be applied to
  * all implementations of the generic object model Java API. If you want to test a new
  * implementation, you MUST extend the {@link AbstractEmbergraphSailTestCase} instead and implement
@@ -191,8 +191,8 @@ public abstract class ProxyEmbergraphSailTestCase extends AbstractEmbergraphSail
 
         if (grp.activeCount() != startupActiveThreads) log.error(failMessage);
 
-      /*
-       * Wait up to 2 seconds for threads to die off so the next test
+        /*
+         * Wait up to 2 seconds for threads to die off so the next test
          * will run more cleanly.
          */
         for (int i = 0; i < 20; i++) {

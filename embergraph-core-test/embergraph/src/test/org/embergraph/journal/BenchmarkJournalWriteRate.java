@@ -36,12 +36,10 @@ import org.embergraph.btree.IIndex;
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.KeyBuilder;
-import org.embergraph.rawstore.IRawStore;
-import org.embergraph.testutil.ExperimentDriver;
 import org.embergraph.util.Bytes;
 
 /*
-* A benchmark that computes the raw platform write rate for pure sequential IO, the journal's write
+ * A benchmark that computes the raw platform write rate for pure sequential IO, the journal's write
  * rate, and both unisolated and isolated index write rates. The overhead of the journal can be
  * estimated by comparing the pure sequential writes on the file system with the write rates when
  * using each of the journal modes. Likewise, the overhead of the index can be estimated in

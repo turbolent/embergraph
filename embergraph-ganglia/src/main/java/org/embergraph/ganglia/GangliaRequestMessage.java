@@ -16,7 +16,7 @@
 package org.embergraph.ganglia;
 
 /*
-* A ganglia request for a metric.
+ * A ganglia request for a metric.
  *
  * <p>Ganglia sends out request messages when a service wants to obtain fresh metrics. The gmond
  * instances handle the request by clearing the timestamp associated with the metric. This causes

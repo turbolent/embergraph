@@ -34,7 +34,6 @@ import org.embergraph.rdf.vocab.NoVocabulary;
 import org.openrdf.OpenRDFException;
 import org.openrdf.model.impl.LiteralImpl;
 import org.openrdf.model.vocabulary.XMLSchema;
-import org.openrdf.query.Binding;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQuery;
@@ -127,11 +126,13 @@ public class TestTicket1388 extends ProxyEmbergraphSailTestCase {
       solution.add(
           createBindingSet(
               new BindingImpl("myDate", new LiteralImpl("2014-04-11", XMLSchema.DATE)),
-              new BindingImpl("countDoc", new LiteralImpl(Integer.toString(3), XMLSchema.INTEGER))));
+              new BindingImpl(
+                  "countDoc", new LiteralImpl(Integer.toString(3), XMLSchema.INTEGER))));
       solution.add(
           createBindingSet(
               new BindingImpl("myDate", new LiteralImpl("2014-05-29", XMLSchema.DATE)),
-              new BindingImpl("countDoc", new LiteralImpl(Integer.toString(2), XMLSchema.INTEGER))));
+              new BindingImpl(
+                  "countDoc", new LiteralImpl(Integer.toString(2), XMLSchema.INTEGER))));
 
       compare(tqr, solution);
 

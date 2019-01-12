@@ -23,18 +23,12 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation.accesspath;
 
-import org.embergraph.bop.IElement;
-import org.embergraph.bop.IPredicate;
 import org.embergraph.btree.IIndex;
-import org.embergraph.relation.IRelation;
-import org.embergraph.relation.rule.IQueryOptions;
-import org.embergraph.relation.rule.IRule;
-import org.embergraph.service.IDataService;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 
 /*
-* An abstraction for efficient reads of {@link IElement}s from a {@link IRelation} using the index
+ * An abstraction for efficient reads of {@link IElement}s from a {@link IRelation} using the index
  * selected by an {@link IPredicate} constraint. Like their {@link #iterator()}, implementations of
  * this interface are NOT required to be thread-safe. They are designed for a single-threaded
  * consumer.
@@ -57,7 +51,7 @@ public interface IAccessPath<R> extends IAbstractAccessPath<R> { // extends Iter
   IIndex getIndex();
 
   //    /*
-//     * The raw iterator for traversing the selected index within the key range
+  //     * The raw iterator for traversing the selected index within the key range
   //     * implied by {@link IPredicate}.
   //     * <p>
   //     * Note: The access path may incorporate additional constraints from the
@@ -88,7 +82,7 @@ public interface IAccessPath<R> extends IAbstractAccessPath<R> { // extends Iter
   IChunkedOrderedIterator<R> iterator();
 
   //    /*
-//     * An iterator visiting elements using the natural order of the index
+  //     * An iterator visiting elements using the natural order of the index
   //     * selected for the {@link IPredicate}.
   //     *
   //     * @param limit
@@ -140,7 +134,7 @@ public interface IAccessPath<R> extends IAbstractAccessPath<R> { // extends Iter
   IChunkedOrderedIterator<R> iterator(long offset, long limit, int capacity);
 
   //    /*
-//     * Remove all elements selected by the {@link IPredicate} (optional
+  //     * Remove all elements selected by the {@link IPredicate} (optional
   //     * operation).
   //     *
   //     * @return The #of elements that were removed.

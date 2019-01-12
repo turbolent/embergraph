@@ -28,7 +28,7 @@ import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /*
-* Data driven test suite for GeoSpatial service feature aiming at the definition of custom fields
+ * Data driven test suite for GeoSpatial service feature aiming at the definition of custom fields
  * (possibly combined with predefined fields).
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>

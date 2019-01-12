@@ -1,7 +1,7 @@
 package org.embergraph.rdf.rules;
 
 /*
-* We have two rules that can throw this exception - {@link RuleOwlFunctionalProperty} and {@link
+ * We have two rules that can throw this exception - {@link RuleOwlFunctionalProperty} and {@link
  * RuleOwlInverseFunctionalProperty}. Those rules define conditions where instead of producing an
  * entailment, a constraint is violated and the closure operation must fail.
  *

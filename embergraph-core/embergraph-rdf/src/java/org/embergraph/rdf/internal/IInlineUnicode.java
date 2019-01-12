@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.internal;
 
 /*
-* Interface for {@link IV}s which have inline Unicode components in their representation. This
+ * Interface for {@link IV}s which have inline Unicode components in their representation. This
  * interface provides a means to cache the byteLength of the {@link IV} at the time that the
  * compressed Unicode representation is computed.
  *

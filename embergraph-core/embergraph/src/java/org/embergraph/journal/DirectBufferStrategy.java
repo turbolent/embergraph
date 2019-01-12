@@ -19,13 +19,10 @@ package org.embergraph.journal;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.nio.channels.ClosedByInterruptException;
-import java.nio.channels.ClosedChannelException;
-import java.util.concurrent.ExecutorService;
 import org.embergraph.io.FileChannelUtility;
 
 /*
-* Direct buffer strategy uses a direct {@link ByteBuffer} as a write through cache and writes
+ * Direct buffer strategy uses a direct {@link ByteBuffer} as a write through cache and writes
  * through to disk for persistence.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

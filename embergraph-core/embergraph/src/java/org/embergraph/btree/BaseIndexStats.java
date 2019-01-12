@@ -21,7 +21,7 @@ import java.io.PrintWriter;
 import java.util.Map;
 
 /*
-* Basic stats that are available for all index types and whose collection does not require
+ * Basic stats that are available for all index types and whose collection does not require
  * visitation of the index pages.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -166,8 +166,8 @@ public class BaseIndexStats {
 
       if (stats == null) {
 
-      /*
-       * Something for which we did not extract the PageStats.
+        /*
+         * Something for which we did not extract the PageStats.
          */
 
         out.println("name: " + name + " :: no statistics?");

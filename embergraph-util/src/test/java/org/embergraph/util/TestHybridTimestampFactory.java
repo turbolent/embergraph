@@ -24,7 +24,7 @@ package org.embergraph.util;
 import junit.framework.TestCase;
 
 /*
-* Test suite for {@link HybridTimestampFactory}.
+ * Test suite for {@link HybridTimestampFactory}.
  *
  * @todo test ctor correct acceptance and correct rejection and internally computed fields.
  * @todo test with all legal ctor values for counterBits and plot the #of distinct timestamps per

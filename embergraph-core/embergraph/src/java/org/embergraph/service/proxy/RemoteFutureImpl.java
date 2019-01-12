@@ -1,14 +1,13 @@
 package org.embergraph.service.proxy;
 
 import java.io.IOException;
-import java.rmi.Remote;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 /*
-* A helper object that provides the API of {@link Future} but whose methods throw {@link
+ * A helper object that provides the API of {@link Future} but whose methods throw {@link
  * IOException} and are therefore compatible with {@link Remote} and {@link Exporter}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

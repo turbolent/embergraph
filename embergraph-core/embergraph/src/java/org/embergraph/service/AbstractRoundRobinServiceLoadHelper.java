@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.log4j.Logger;
 
 /*
-* A round robin implementation that may be used when there are no scores available. Services are
+ * A round robin implementation that may be used when there are no scores available. Services are
  * selected using a round robin policy. The class will notice service joins and service leaves and
  * will incorporate the new set of services into its decision making while preserving a (mostly)
  * round robin behavior.

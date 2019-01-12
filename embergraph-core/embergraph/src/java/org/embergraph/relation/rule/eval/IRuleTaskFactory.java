@@ -28,7 +28,7 @@ import org.embergraph.relation.accesspath.IBuffer;
 import org.embergraph.relation.rule.IRule;
 
 /*
-* A factory for objects that handle the execution of an {@link IRule}. This interface is {@link
+ * A factory for objects that handle the execution of an {@link IRule}. This interface is {@link
  * Serializable} since instances of the interface must travel with the {@link IRule} to which they
  * are attached.
  *

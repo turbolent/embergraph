@@ -39,7 +39,6 @@ import org.apache.log4j.Logger;
 import org.embergraph.bop.BOpContext;
 import org.embergraph.bop.BOpUtility;
 import org.embergraph.bop.Constant;
-import org.embergraph.bop.HTreeAnnotations;
 import org.embergraph.bop.HashMapAnnotations;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IConstraint;
@@ -51,14 +50,13 @@ import org.embergraph.bop.join.JVMHashIndex.Bucket;
 import org.embergraph.bop.join.JVMHashIndex.Key;
 import org.embergraph.bop.join.JVMHashIndex.SolutionHit;
 import org.embergraph.counters.CAT;
-import org.embergraph.htree.HTree;
 import org.embergraph.rdf.internal.impl.literal.XSDBooleanIV;
 import org.embergraph.relation.accesspath.BufferClosedException;
 import org.embergraph.relation.accesspath.IBuffer;
 import org.embergraph.util.InnerCause;
 
 /*
-* Utility class supporting hash join against a Java hash collection.
+ * Utility class supporting hash join against a Java hash collection.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -93,17 +91,17 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
   protected final JoinTypeEnum joinType;
 
   //    /*
-//     * <code>true</code> iff the join is OPTIONAL.
+  //     * <code>true</code> iff the join is OPTIONAL.
   //     */
   //    private final boolean optional;
   //
   //    /*
-//     * <code>true</code> iff this is a DISTINCT filter.
+  //     * <code>true</code> iff this is a DISTINCT filter.
   //     */
   //    private final boolean filter;
   //
   //    /*
-//     * <code>true</code> iff a solution having an unbound {@link #joinVars}
+  //     * <code>true</code> iff a solution having an unbound {@link #joinVars}
   //     * should be dropped and <code>false</code> if it should be indexed anyway.
   //     */
   //    private final boolean dropSolutionsHavingUnboundJoinVars;
@@ -431,16 +429,16 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
 
       for (IBindingSet bset : all) {
 
-      /*
-       * Note: For a DISTINCT SOLUTIONS filter, we only consider the
+        /*
+         * Note: For a DISTINCT SOLUTIONS filter, we only consider the
          * variables that are being projected. Further, all variables
          * are used when computing the hash code. Therefore "joinVars"
          * == "selectedVars" for a DISTINCT SOLUTIONS filter.
          */
         bset = bset.copy(joinVars); // only consider the selected variables.
 
-      /*
-       * Note: Solutions are NOT dropped if a variable is not bound in
+        /*
+         * Note: Solutions are NOT dropped if a variable is not bound in
          * a given solution. The variable is simply not used when
          * computing the hash code. Specifying optional:=true here
          * causes makeKey() to have this behavior.
@@ -576,8 +574,8 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
                 }
               case Exists:
                 {
-                /*
-       * The right solution is output iff there is at
+                  /*
+                   * The right solution is output iff there is at
                    * least one left solution which joins with that
                    * right solution. Each right solution is output at
                    * most one time.
@@ -594,8 +592,8 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
                 }
               case NotExists:
                 {
-                /*
-       * The right solution is output iff there does not
+                  /*
+                   * The right solution is output iff there does not
                    * exist any left solution which joins with that
                    * right solution. This basically an optional join
                    * where the solutions which join are not output.
@@ -809,8 +807,8 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
 
           if (outputDistinctJVs) {
 
-          /*
-       * Output those solutions that are distinct on the join
+            /*
+             * Output those solutions that are distinct on the join
              * variables. We do this by laying a DISTINCT filter
              * over the solutions drawn from each bucket that we
              * visit. The DISTINCT filter does not need to consider
@@ -838,8 +836,8 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
 
           } else if (selected != null) {
 
-          /*
-       * FIXME We should be using projectedInVars here since
+            /*
+             * FIXME We should be using projectedInVars here since
              * outputSolutions() is used to stream solutions into
              * the child join group (at least for some kinds of
              * joins, but there might be exceptions for joining with
@@ -1085,8 +1083,8 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
         // Fully materialize the solution set as a Bucket[].
         final Bucket[] t = all[i].getRightSolutions().toArray();
 
-      /*
-       * Sort the array. It's natural sort order is by the hash code
+        /*
+         * Sort the array. It's natural sort order is by the hash code
          * of the join variables.
          */
         Arrays.sort(t);
@@ -1108,8 +1106,8 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
     while (sourceIndex[0] < sortedSourceBuckets[0].length) {
 
       if (!optional) {
-      /*
-       * If the join is not optional, then we are done as soon as any
+        /*
+         * If the join is not optional, then we are done as soon as any
          * source is exhausted.
          */
         for (int i = 1; i < sourceIndex.length; i++) {

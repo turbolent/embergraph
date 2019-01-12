@@ -59,7 +59,6 @@ import org.embergraph.btree.IIndex;
 import org.embergraph.btree.ILocalBTreeView;
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.btree.view.FusedView;
-import org.embergraph.concurrent.NonBlockingLockManager;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.ha.HAGlue;
 import org.embergraph.ha.QuorumService;
@@ -70,7 +69,6 @@ import org.embergraph.quorum.Quorum;
 import org.embergraph.rawstore.IAllocationContext;
 import org.embergraph.rawstore.IPSOutputStream;
 import org.embergraph.relation.locator.DefaultResourceLocator;
-import org.embergraph.relation.locator.ILocatableResource;
 import org.embergraph.relation.locator.IResourceLocator;
 import org.embergraph.resources.NoSuchStoreException;
 import org.embergraph.resources.ResourceManager;
@@ -81,11 +79,10 @@ import org.embergraph.rwstore.IRWStrategy;
 import org.embergraph.rwstore.IRawTx;
 import org.embergraph.sparse.GlobalRowStoreHelper;
 import org.embergraph.sparse.SparseRowStore;
-import org.embergraph.util.InnerCause;
 import org.embergraph.util.concurrent.TaskCounters;
 
 /*
-* Abstract base class for tasks that may be submitted to the {@link ConcurrencyManager}. Tasks may
+ * Abstract base class for tasks that may be submitted to the {@link ConcurrencyManager}. Tasks may
  * be isolated (by a transaction), unisolated, read-committed, or historical reads. Tasks access
  * named resources (aka indices), which they pre-declare in their constructors.
  *
@@ -347,8 +344,8 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
 
         if (tmp != null) {
 
-        /*
-       * Exact match on a named index.
+          /*
+           * Exact match on a named index.
            *
            * Add a read-only copy of the entry with additional state
            * for tracking registration and dropping of named indices.
@@ -361,8 +358,8 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
 
         } else {
 
-        /*
-       * Add a read-only copy of the Name2Addr entry for all entries spanned by that namespace.
+          /*
+           * Add a read-only copy of the Name2Addr entry for all entries spanned by that namespace.
            * This provides the additional state for tracking registration and dropping of named
            * indices and also supports hierarchical locking pattersn.
            *
@@ -543,8 +540,8 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
 
       synchronized (name2Addr) {
 
-      /*
-       * RWStore: There are two reasons why we must use shadow
+        /*
+         * RWStore: There are two reasons why we must use shadow
          * allocations for unisolated operations against the RWStore.
          *
          * (1) A rollback of an unisolated operation which caused
@@ -572,8 +569,8 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
          */
 
         if ((resourceManager.getLiveJournal().getBufferStrategy() instanceof IRWStrategy)) {
-        /*
-       * Note: Do NOT use the name2Addr cache for the RWStore.
+          /*
+           * Note: Do NOT use the name2Addr cache for the RWStore.
            * Each unisolated index view MUST be backed by a shadow
            * journal!
            *
@@ -631,8 +628,8 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
 
       } catch (NoSuchStoreException ex) {
 
-      /*
-       * Add a little more information to the stack trace.
+        /*
+         * Add a little more information to the stack trace.
          */
         throw new NoSuchStoreException(entry.toString() + ":" + ex.getMessage(), ex);
       }
@@ -1054,8 +1051,8 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
 
           if (l != null) {
 
-          /*
-       * Force the BTree onto name2addr's commit list.
+            /*
+             * Force the BTree onto name2addr's commit list.
              *
              * Note: This will also change the dirty listener to be
              * [Name2Addr].
@@ -1263,8 +1260,8 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
 
       if (resourceManager instanceof ResourceManager) {
 
-      /*
-       * This is a read-write transaction with a distributed database.
+        /*
+         * This is a read-write transaction with a distributed database.
          */
 
         // UUID of the dataService on which the tx will run.
@@ -1272,8 +1269,8 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
 
         try {
 
-        /*
-       * Notify the transaction service. We send both the UUID of
+          /*
+           * Notify the transaction service. We send both the UUID of
            * the dataService and the array of the named resources
            * which the operation isolated by that transaction has
            * requested. Transaction commits are placed into a partial
@@ -1309,8 +1306,8 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
 
         if (transactionManager.getTx(timestamp) == null) {
 
-        /*
-       * Start tx on this data service.
+          /*
+           * Start tx on this data service.
            *
            * <p>FIXME This should be passing the [readsOnCommitTime] into the Tx object. However,
            * that information is not available when we are running on a cluster per the ticket
@@ -1411,8 +1408,8 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
     for (String theDeclaredResource : resource) {
 
       if (theDeclaredResource.equals(theRequestedResource)) {
-      /*
-       * Exact match. This resource was declared.
+        /*
+         * Exact match. This resource was declared.
          */
         return true;
       }
@@ -1435,8 +1432,8 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
 
         if (theRequestedResource.charAt(theDeclaredResource.length()) == '.') {
 
-        /*
-       * Prefix match.
+          /*
+           * Prefix match.
            *
            * E.g., name:="kb.spo.osp" and the task declared the
            * resource "kb". In this case, "kb" is a PREFIX of the
@@ -1653,8 +1650,8 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
 
       if (checkpointNanoTime != 0L) {
 
-      /*
-       * Increment by the time required to checkpoint the indices
+        /*
+         * Increment by the time required to checkpoint the indices
          * written on by the task (IFF a write task and the task
          * completes normally).
          */
@@ -1711,8 +1708,8 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
         //
         //                }
 
-      /*
-       * Delegate handles handshaking for writable transactions.
+        /*
+         * Delegate handles handshaking for writable transactions.
          */
 
         final Callable<T> delegate = new InnerReadWriteTxServiceCallable<T>(this, tx);
@@ -1741,8 +1738,8 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
 
       } else {
 
-      /*
-       * Handle unisolated write tasks, which need to coordinate with
+        /*
+         * Handle unisolated write tasks, which need to coordinate with
          * the lock manager for the unisolated indices.
          */
 
@@ -1830,8 +1827,8 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
 
       if (Thread.interrupted()) {
 
-      /*
-       * @todo why test after return? if the task ran, it ran, right?
+        /*
+         * @todo why test after return? if the task ran, it ran, right?
          */
 
         throw new InterruptedException();
@@ -1978,8 +1975,8 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
 
         delegate.nanoTime_finishedWork = System.nanoTime();
 
-      /*
-       * Release hard references to the named indices. The backing
+        /*
+         * Release hard references to the named indices. The backing
          * indices are reading from the ground state identified by the
          * start time of the ReadWrite transaction.
          */
@@ -2038,8 +2035,8 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
 
       } catch (Throwable t) {
 
-      /*
-       * RWStore: If there is an error in the task execution, then for
+        /*
+         * RWStore: If there is an error in the task execution, then for
          * RWStore we need to explicitly undo the allocations for the
          * B+Tree(s) on which this task wrote. If we do not take this
          * step, then the records already written onto the store up to
@@ -2054,8 +2051,8 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
 
       } finally {
 
-      /*
-       * @todo This is the ONLY place where it would be safe to handle
+        /*
+         * @todo This is the ONLY place where it would be safe to handle
          * after actions while holding the lock. As soon as we leave
          * this method we have lost the exclusive lock on the index and
          * another task could be running on it before we can do anything
@@ -2070,8 +2067,8 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
         writeService.activeTaskCountWithLocksHeld.decrementAndGet();
 
         try {
-        /*
-       * Release the locks held by the task.
+          /*
+           * Release the locks held by the task.
            */
           writeService.getLockManager().releaseLocksForTask(delegate.resource);
         } catch (Throwable t) {
@@ -2281,8 +2278,8 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
     public ICheckpointProtocol getUnisolatedIndex(final String name) {
       try {
 
-      /*
-       * FIXME GIST. This will throw a ClassCastException if the
+        /*
+         * FIXME GIST. This will throw a ClassCastException if the
          * returned index is an ILocalBTreeView.
          *
          * @see http://trac.blazegraph.com/ticket/585 (GIST)
@@ -2330,8 +2327,8 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
 
       if (resourceManager instanceof IJournal) {
 
-      /*
-       * This code path supports any type of index (BTree, HTree, etc).
+        /*
+         * This code path supports any type of index (BTree, HTree, etc).
          *
          * Note: It does NOT support ILocalBTreeView (e.g., FusedView,
          * IsolatedFusedView).
@@ -2355,8 +2352,8 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
 
       if (TimestampUtility.isReadWriteTx(timestamp)) {
 
-      /*
-       * This code path supports read/write transactions. The interface
+        /*
+         * This code path supports read/write transactions. The interface
          * returned for a read/write transaction is an ILocalBTreeView and
          * will be an IsolatableFusedView (extends FusedView). These classes
          * do not implement ICheckpointProtocol. Therefore we can not
@@ -2383,8 +2380,8 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
       // did the task declare the resource name?
       if (isResource(GlobalRowStoreHelper.GLOBAL_ROW_STORE_INDEX)) {
 
-      /*
-       * Return an unisolated view of the index, but the view is still
+        /*
+         * Return an unisolated view of the index, but the view is still
          * scoped by the task. The index will be created if it does not
          * exist.
          */
@@ -2781,8 +2778,8 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
               new Filter() {
                 private static final long serialVersionUID = 1L;
 
-              /*
-       * Impose prefix restriction on the Name2Addr scan.
+                /*
+                 * Impose prefix restriction on the Name2Addr scan.
                  *
                  * TODO This forces us to scan all indices that were isolated
                  * by the task. When using hierarchical locking that is
@@ -2801,8 +2798,8 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
           .addFilter(
               new Resolver() {
                 private static final long serialVersionUID = 1L;
-              /*
-       * Resolve Entry to the name of the index.
+                /*
+                 * Resolve Entry to the name of the index.
                  */
                 @Override
                 protected Object resolve(final Object obj) {
@@ -2918,8 +2915,8 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
         // to the AbstractTask
         try {
 
-        /*
-       * FIXME GIST : This will throw a ClassCastException if the
+          /*
+           * FIXME GIST : This will throw a ClassCastException if the
            * index type is ReadCommittedIndex or FusedView.
            */
           return (ICheckpointProtocol) AbstractTask.this.getIndex(name);

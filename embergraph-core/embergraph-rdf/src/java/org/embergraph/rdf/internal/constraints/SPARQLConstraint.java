@@ -31,7 +31,7 @@ import org.embergraph.rdf.sparql.ast.FilterNode;
 import org.embergraph.util.InnerCause;
 
 /*
-* BOpConstraint that wraps a {@link EBVBOp}, which itself computes the effective boolean value of
+ * BOpConstraint that wraps a {@link EBVBOp}, which itself computes the effective boolean value of
  * an {@link IValueExpression}.
  */
 @SuppressWarnings("rawtypes")

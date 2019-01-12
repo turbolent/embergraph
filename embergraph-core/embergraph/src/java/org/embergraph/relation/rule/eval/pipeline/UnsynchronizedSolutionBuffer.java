@@ -1,8 +1,6 @@
 package org.embergraph.relation.rule.eval.pipeline;
 
 import org.embergraph.bop.IBindingSet;
-import org.embergraph.relation.accesspath.BufferClosedException;
-import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.IBuffer;
 import org.embergraph.relation.accesspath.IElementFilter;
 import org.embergraph.relation.rule.IRule;
@@ -10,7 +8,7 @@ import org.embergraph.relation.rule.eval.IJoinNexus;
 import org.embergraph.relation.rule.eval.ISolution;
 
 /*
-* Implementation used to write on the {@link JoinTask#getSolutionBuffer()} for the last join
+ * Implementation used to write on the {@link JoinTask#getSolutionBuffer()} for the last join
  * dimension. The solution buffer is either an {@link IBlockingBuffer} (for query) or a buffer that
  * writes on the head relation for the rule (for mutation).
  *

@@ -24,18 +24,9 @@ Copyright (C) Embergraph contributors 2019. All rights reserved.
 package org.embergraph.btree;
 
 import cutthecrap.utils.striterators.IFilter;
-import cutthecrap.utils.striterators.Striterator;
-import java.util.Iterator;
-import org.embergraph.bfs.EmbergraphFileSystem;
-import org.embergraph.btree.IndexSegment.IndexSegmentTupleCursor;
-import org.embergraph.btree.filter.ITupleFilter;
-import org.embergraph.btree.filter.TupleRemover;
-import org.embergraph.service.IDataService;
-import org.embergraph.service.IEmbergraphClient;
-import org.embergraph.service.ndx.IClientIndex;
 
 /*
-* Interface for range count and range query operations.
+ * Interface for range count and range query operations.
  *
  * <p>Note: There are implementations of this interface for both local indices and for distributed
  * scale-out indices.
@@ -305,7 +296,7 @@ public interface IRangeQuery {
       byte[] fromKey, byte[] toKey, int capacity, int flags, IFilter filterCtor);
 
   //    /*
-//     * An iterator that is mapped over a set of key ranges.
+  //     * An iterator that is mapped over a set of key ranges.
   //     *
   //     * @param fromKeys
   //     *            An array of inclusive lower bounds with one entry for each key
@@ -336,7 +327,7 @@ public interface IRangeQuery {
   // use the rangeIterator anyway.
 
   //    /*
-//     * Removes all entries in the key range from the index. When running on a
+  //     * Removes all entries in the key range from the index. When running on a
   //     * scale-out index, this operation is atomic for each index partition. The
   //     * operation may be used to build queue-like constructed by atomic delete of
   //     * the first item in a key range. This operation is parallelized across

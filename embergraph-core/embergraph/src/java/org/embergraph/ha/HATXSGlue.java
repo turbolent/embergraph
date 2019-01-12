@@ -20,14 +20,12 @@ package org.embergraph.ha;
 import java.io.IOException;
 import java.rmi.Remote;
 import java.util.concurrent.BrokenBarrierException;
-import java.util.concurrent.Future;
 import org.embergraph.ha.msg.IHAGatherReleaseTimeRequest;
 import org.embergraph.ha.msg.IHANotifyReleaseTimeRequest;
 import org.embergraph.ha.msg.IHANotifyReleaseTimeResponse;
-import org.embergraph.journal.ITransactionService;
 
 /*
-* RMI interface for the {@link ITransactionService} for HA.
+ * RMI interface for the {@link ITransactionService} for HA.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @see <a

@@ -36,7 +36,7 @@ import org.embergraph.btree.keys.TestKeyBuilder;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /*
-* @todo Add tests at that layer for cursor, reverse, remove, and other flag based iterator
+ * @todo Add tests at that layer for cursor, reverse, remove, and other flag based iterator
  *     semantics. Potentially aggregate the stacked iterators into a package and their own test
  *     suite.
  *     <p>It would be best if that test suite could be reused against the federation as well, but
@@ -179,7 +179,6 @@ public class TestTupleFilters extends AbstractBTreeTestCase {
 
             // delete only the even keys.
             return i % 2 == 0;
-
           }
         };
 
@@ -242,8 +241,8 @@ public class TestTupleFilters extends AbstractBTreeTestCase {
 
         // verify deleted only the even keys.
         if (0 == (i % 2)) {
-        /*
-       * Found a key that decodes as an even integer.
+          /*
+           * Found a key that decodes as an even integer.
            */
           fail("n=" + n + ", tuple=" + tuple + ", i=" + i);
         }
@@ -262,7 +261,7 @@ public class TestTupleFilters extends AbstractBTreeTestCase {
   }
 
   //    /*
-//     * Test explores the behavior of a filtering {@link Striterator} when
+  //     * Test explores the behavior of a filtering {@link Striterator} when
   //     * removing elements during traversal. The {@link Filter} uses a one step
   //     * lookahead, and this test is designed to see whether the {@link Filter}
   //     * causes the wrong element to be removed when {@link Iterator#remove()} is
@@ -283,7 +282,7 @@ public class TestTupleFilters extends AbstractBTreeTestCase {
   //                .addFilter(new Filter() {
   //                    private static final long serialVersionUID = 1L;
   //                    /*
-//                     * Accept only the even values.
+  //                     * Accept only the even values.
   //                     */
   //                    @Override
   //                    protected boolean isValid(Object obj) {

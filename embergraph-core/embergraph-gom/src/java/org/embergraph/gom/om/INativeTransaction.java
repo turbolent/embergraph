@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.gom.om;
 
 /*
-* This interface defines a protocol for native transactions. Native transactions may be used to
+ * This interface defines a protocol for native transactions. Native transactions may be used to
  * buffering updates and perform an implicit commit when the transaction counter reaches zero.
  * Operations outside of a transaction context are NOT buffered and are immediately committed.
  *

@@ -24,12 +24,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.counters.render;
 
 import org.embergraph.counters.query.ICounterSelector;
-import org.embergraph.counters.query.ReportEnum;
 import org.embergraph.counters.query.URLQueryModel;
 import org.embergraph.util.httpd.NanoHTTPD;
 
 /*
-* Factory for {@link IRenderer} objects based on a MIME type. For known MIME types, the factory
+ * Factory for {@link IRenderer} objects based on a MIME type. For known MIME types, the factory
  * returns an instance of an {@link IRenderer} capable of rendering for that MIME type. The instance
  * will then decide whether or not it can render the requested {@link ReportEnum} as not all report
  * types can be rendered for all MIME types. For example, a request for a graph of the event data

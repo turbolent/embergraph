@@ -31,7 +31,7 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
 /*
-* Test suite for {@link AbstractRuleFastClosure_11_13}.
+ * Test suite for {@link AbstractRuleFastClosure_11_13}.
  *
  * @see RuleFastClosure11
  * @see RuleFastClosure13

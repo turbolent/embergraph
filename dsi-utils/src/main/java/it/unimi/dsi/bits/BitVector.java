@@ -24,11 +24,10 @@ package it.unimi.dsi.bits;
 import it.unimi.dsi.fastutil.booleans.BooleanList;
 import it.unimi.dsi.fastutil.longs.LongSortedSet;
 import it.unimi.dsi.util.LongBigList;
-import java.util.List;
 import java.util.RandomAccess;
 
 /*
-* A vector of bits, a&#46;k&#46;a&#46; bit sequence, bit string, binary word, etc.
+ * A vector of bits, a&#46;k&#46;a&#46; bit sequence, bit string, binary word, etc.
  *
  * <p>This interface define several operations on finite sequences of bits. Efficient
  * implementations, such as {@link LongArrayBitVector}, use approximately one bit of memory for each

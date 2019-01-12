@@ -24,27 +24,10 @@ Copyright (C) Embergraph contributors 2019. All rights reserved.
 package org.embergraph.service;
 
 import java.util.Properties;
-import org.embergraph.btree.IIndex;
-import org.embergraph.btree.proc.IIndexProcedure;
-import org.embergraph.cache.HardReferenceQueue;
-import org.embergraph.counters.AbstractStatisticsCollector;
-import org.embergraph.counters.CounterSet;
-import org.embergraph.counters.query.QueryUtil;
-import org.embergraph.ganglia.GangliaService;
 import org.embergraph.ganglia.IGangliaDefaults;
-import org.embergraph.journal.IIndexStore;
-import org.embergraph.journal.ITx;
-import org.embergraph.mdi.IMetadataIndex;
-import org.embergraph.relation.accesspath.IAccessPath;
-import org.embergraph.relation.locator.ILocatableResource;
-import org.embergraph.relation.locator.IResourceLocator;
-import org.embergraph.relation.rule.eval.ProgramTask;
-import org.embergraph.resources.StaleLocatorException;
-import org.embergraph.service.ndx.ClientIndexView;
-import org.embergraph.util.concurrent.ThreadPoolExecutorStatisticsTask;
 
 /*
-* Interface for clients of a {@link IEmbergraphFederation}.
+ * Interface for clients of a {@link IEmbergraphFederation}.
  *
  * <p>An application uses a {@link IEmbergraphClient} to connect to an {@link
  * IEmbergraphFederation}. Once connected, the application uses the {@link IEmbergraphFederation}
@@ -353,7 +336,7 @@ public interface IEmbergraphClient<T> {
 
     // Now handled by TemporaryStoreFactory.Options.
     //        /*
-//         * The maximum extent for a {@link TemporaryStore} before a new
+    //         * The maximum extent for a {@link TemporaryStore} before a new
     //         * {@link TemporaryStore} will be created by
     //         * {@link IIndexStore#getTempStore()} for an {@link IEmbergraphClient}
     //         * (default {@value #DEFAULT_TEMP_STORE_MAXIMUM_EXTENT}).

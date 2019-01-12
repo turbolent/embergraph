@@ -56,7 +56,7 @@ import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /*
-* Optimizes SELECT COUNT(*) { triple-pattern } using the fast range count mechanisms when that
+ * Optimizes SELECT COUNT(*) { triple-pattern } using the fast range count mechanisms when that
  * feature would produce exact results for the KB instance.
  *
  * <h2>Cases handled by this optimizer</h2>
@@ -287,8 +287,8 @@ public class ASTFastRangeCountOptimizer implements IASTOptimizer {
       final DatasetNode dataset = sa.getQueryRoot().getDataset();
       boolean ok = false;
       if (dataset == null || dataset.getNamedGraphs() == null) {
-      /*
-       * The dataset is all graphs.
+        /*
+         * The dataset is all graphs.
          */
         ok = true;
       }
@@ -297,8 +297,8 @@ public class ASTFastRangeCountOptimizer implements IASTOptimizer {
         if (scalarValues != null) {
           final Boolean isDistinct = (Boolean) scalarValues.get(AggregateBase.Annotations.DISTINCT);
           if (isDistinct != null && isDistinct) {
-          /*
-       * We can not use the fast-range-count for a quads-mode
+            /*
+             * We can not use the fast-range-count for a quads-mode
              * default graph query. If there are multiple graphs in
              * the default graph query, then we need to take the RDF
              * merge of those named graphs. This is done by feeding
@@ -403,8 +403,8 @@ public class ASTFastRangeCountOptimizer implements IASTOptimizer {
         boundVars.remove(((VarNode) arg).getValueExpression());
       }
       if (boundVars.isEmpty()) {
-      /*
-       * If boundVars is now empty then all variables appearing in the
+        /*
+         * If boundVars is now empty then all variables appearing in the
          * triple pattern also appear in the COUNT( expression-list ).
          * So this is effectively equivalent to a COUNT(*) expression.
          */

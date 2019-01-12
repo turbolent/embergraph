@@ -21,10 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.join;
 
-import org.embergraph.bop.IPredicate;
-
 /*
-* A type safe enumeration of the different flavors of hash index "joins".
+ * A type safe enumeration of the different flavors of hash index "joins".
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

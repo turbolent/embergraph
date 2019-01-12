@@ -24,7 +24,6 @@ import org.embergraph.journal.ITx;
 import org.embergraph.journal.TimestampUtility;
 import org.embergraph.rdf.graph.EdgesEnum;
 import org.embergraph.rdf.graph.IGASContext;
-import org.embergraph.rdf.graph.IGASEngine;
 import org.embergraph.rdf.graph.IGASProgram;
 import org.embergraph.rdf.graph.IGASSchedulerImpl;
 import org.embergraph.rdf.graph.IGASState;
@@ -42,14 +41,13 @@ import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.SPOKeyOrder;
 import org.embergraph.rdf.store.AbstractTripleStore;
-import org.embergraph.service.IEmbergraphFederation;
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 import org.openrdf.model.Value;
 import org.openrdf.sail.Sail;
 
 /*
-* {@link IGASEngine} for dynamic activation of vertices. This implementation maintains a frontier
+ * {@link IGASEngine} for dynamic activation of vertices. This implementation maintains a frontier
  * and lazily initializes the vertex state when the vertex is visited for the first time. This is
  * appropriate for algorithms, such as BFS, that use a dynamic frontier.
  *
@@ -109,7 +107,7 @@ public class EmbergraphGASEngine extends GASEngine {
   private static final Logger log = Logger.getLogger(GASEngine.class);
 
   //    /*
-//     * The {@link IIndexManager} is used to access the graph.
+  //     * The {@link IIndexManager} is used to access the graph.
   //     */
   //    private final IIndexManager indexManager;
 
@@ -199,8 +197,8 @@ public class EmbergraphGASEngine extends GASEngine {
 
       if (this.timestamp == ITx.READ_COMMITTED) {
 
-      /*
-       * Clear the reference. A new view will be obtained
+        /*
+         * Clear the reference. A new view will be obtained
          * automatically by getKB().
          */
 
@@ -235,8 +233,8 @@ public class EmbergraphGASEngine extends GASEngine {
 
       if (timestamp == ITx.READ_COMMITTED) {
 
-      /*
-       * Note: This code is request the view as of the the last commit time. If we use
+        /*
+         * Note: This code is request the view as of the the last commit time. If we use
          * ITx.READ_COMMITTED here then it will cause the Journal to provide us with a
          * ReadCommittedIndex and that has a synchronization hot spot!
          */
@@ -314,8 +312,8 @@ public class EmbergraphGASEngine extends GASEngine {
         linkAttrTypeIV = getIV(ctx.getLinkAttributeType());
 
         final IKeyBuilder keyBuilder;
-      /*
-       * Optimize case where P is a constant and O is known (2 bound).
+        /*
+         * Optimize case where P is a constant and O is known (2 bound).
          *
          * P is a constant.
          *
@@ -333,8 +331,8 @@ public class EmbergraphGASEngine extends GASEngine {
 
         if (posOptimization) {
 
-        /*
-       * POS(C)
+          /*
+           * POS(C)
            */
           keyOrder = kb.isQuads() ? SPOKeyOrder.POCS : SPOKeyOrder.POS;
 
@@ -352,8 +350,8 @@ public class EmbergraphGASEngine extends GASEngine {
 
         } else if (!inEdges) {
 
-        /*
-       * SPO(C) or OSP(C)
+          /*
+           * SPO(C) or OSP(C)
            *
            * Note: For RDR link attribute access, the keys are formed
            * differently. Lower case letters are used for variables.
@@ -394,8 +392,8 @@ public class EmbergraphGASEngine extends GASEngine {
 
           if (linkAttrTypeIV != null) {
 
-          /*
-       * Restrict to the SID region of the index. See
+            /*
+             * Restrict to the SID region of the index. See
              * SidIV.encode().
              */
             keyBuilder.appendSigned(SidIV.toFlags());
@@ -414,8 +412,8 @@ public class EmbergraphGASEngine extends GASEngine {
 
           keyBuilder.reset();
 
-        /*
-       * Just have to ignore it.  We need to introduce a join to
+          /*
+           * Just have to ignore it.  We need to introduce a join to
            * handle it.
            */
           //                    if (linkAttrTypeIV != null) {
@@ -500,15 +498,15 @@ public class EmbergraphGASEngine extends GASEngine {
             });
 
         if (linkTypeIV != null && !posOptimization) {
-        /*
-       * A link type constraint was specified, but we were not
+          /*
+           * A link type constraint was specified, but we were not
            * able to use the POS(C) index optimization. In this case
            * we have to add a filter to impose that link type
            * constraint.
            */
           if (linkAttrTypeIV == null) {
-          /*
-       * The linkTypeIV is the Predicate.
+            /*
+             * The linkTypeIV is the Predicate.
              */
             sitr.addFilter(
                 new Filter() {
@@ -520,8 +518,8 @@ public class EmbergraphGASEngine extends GASEngine {
                   }
                 });
           } else {
-          /*
-       * The linkTypeIV is part of the SIDIV of the Subject.
+            /*
+             * The linkTypeIV is part of the SIDIV of the Subject.
              */
             sitr.addFilter(
                 new Filter() {
@@ -540,8 +538,8 @@ public class EmbergraphGASEngine extends GASEngine {
         }
 
         if (linkAttrTypeIV != null) {
-        /*
-       * A link attribute type constraint was specified.
+          /*
+           * A link attribute type constraint was specified.
            */
           sitr.addFilter(
               new Filter() {
@@ -558,8 +556,8 @@ public class EmbergraphGASEngine extends GASEngine {
 
         if (linkTypeIV == null && linkAttrTypeIV == null) {
 
-        /*
-       * Wrap the iterator with a filter that will exclude any
+          /*
+           * Wrap the iterator with a filter that will exclude any
            * non-link Statements.
            *
            * Note: This is handled automatically by the fromkey, toKey
@@ -588,7 +586,7 @@ public class EmbergraphGASEngine extends GASEngine {
     } // class AP
 
     //        /*
-//         * Return an {@link IFilter} that will only visit the edges of the graph.
+    //         * Return an {@link IFilter} that will only visit the edges of the graph.
     //         *
     //         * @see IGASState#isEdge(Statement)
     //         */
@@ -786,16 +784,16 @@ public class EmbergraphGASEngine extends GASEngine {
 
           final int rindex = r.nextInt(size);
 
-        /*
-       * Use tuple that will return both the key and the value so
+          /*
+           * Use tuple that will return both the key and the value so
            * we can decode the entire tuple.
            */
           final Tuple<ISPO> tuple = new Tuple<ISPO>(ndx, IRangeQuery.KEYS | IRangeQuery.VALS);
 
           if (ndx.valueAt(rindex, tuple) == null) {
 
-          /*
-       * This is a deleted tuple. Try again.
+            /*
+             * This is a deleted tuple. Try again.
              *
              * Note: This retry is NOT safe for production use. The
              * index might not have any undeleted tuples. However,

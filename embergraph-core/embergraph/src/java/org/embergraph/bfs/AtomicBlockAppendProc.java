@@ -27,7 +27,6 @@ import java.util.Arrays;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.embergraph.btree.AbstractBTree;
-import org.embergraph.btree.BTree;
 import org.embergraph.btree.IIndex;
 import org.embergraph.btree.ILinearList;
 import org.embergraph.btree.IRangeQuery;
@@ -35,15 +34,13 @@ import org.embergraph.btree.ITupleIterator;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.btree.proc.ISimpleIndexProcedure;
-import org.embergraph.btree.view.FusedView;
 import org.embergraph.io.DataOutputBuffer;
 import org.embergraph.journal.AbstractJournal;
-import org.embergraph.journal.Journal;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Atomic append of a single block to a file version.
+ * Atomic append of a single block to a file version.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -339,8 +336,8 @@ public class AtomicBlockAppendProc implements ISimpleIndexProcedure<Object>, Ext
 
       if (toIndex == entryCount) {
 
-      /*
-       * Insertion point is after all entries in the index.
+        /*
+         * Insertion point is after all entries in the index.
          *
          * Note: In this case we consider the prior key in the
          * index partition. If that key is for the same file
@@ -357,8 +354,8 @@ public class AtomicBlockAppendProc implements ISimpleIndexProcedure<Object>, Ext
 
       } else {
 
-      /*
-       * Insertion point is at the toKey.
+        /*
+         * Insertion point is at the toKey.
          *
          * Note: Since the probe key is beyond the last block
          * for the file version we adjust the toIndex so that we
@@ -454,13 +451,13 @@ public class AtomicBlockAppendProc implements ISimpleIndexProcedure<Object>, Ext
 
       if (cmp == 0) {
 
-      /*
-       * The key at the computed toIndex is the same file version.
+        /*
+         * The key at the computed toIndex is the same file version.
          */
         if (prefix.length + Bytes.SIZEOF_LONG == key.length) {
 
-        /*
-       * The given key includes a block identifier so we
+          /*
+           * The given key includes a block identifier so we
            * extract it.
            *
            * Note: When the given key is a leftSeparator for an
@@ -493,8 +490,8 @@ public class AtomicBlockAppendProc implements ISimpleIndexProcedure<Object>, Ext
 
         } else {
 
-        /*
-       * This case arises when the leftSeparator encodes the
+          /*
+           * This case arises when the leftSeparator encodes the
            * file version but does not include a block identifier.
            */
 
@@ -503,8 +500,8 @@ public class AtomicBlockAppendProc implements ISimpleIndexProcedure<Object>, Ext
 
       } else {
 
-      /*
-       * Since the key does not compare as equal for the full
+        /*
+         * Since the key does not compare as equal for the full
          * length of the prefix it can not encode the same file
          * version.
          */

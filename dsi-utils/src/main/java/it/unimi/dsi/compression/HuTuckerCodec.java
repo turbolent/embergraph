@@ -26,7 +26,7 @@ import it.unimi.dsi.fastutil.booleans.BooleanArrays;
 import java.io.Serializable;
 
 /*
-* An implementation of the Hu&ndash;Tucker optimal lexicographical prefix-free code.
+ * An implementation of the Hu&ndash;Tucker optimal lexicographical prefix-free code.
  *
  * <p>The familiar Huffman coding technique can be extended so to preserve the order in which
  * symbols are given to the coder, in the sense that if <var>j</var>&lt;<var>k</var>, then the

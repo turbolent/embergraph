@@ -21,21 +21,12 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.hints;
 
-import org.embergraph.rdf.sparql.ast.JoinGroupNode;
-import org.embergraph.rdf.sparql.ast.NamedSubqueryRoot;
-import org.embergraph.rdf.sparql.ast.QueryBase;
 import org.embergraph.rdf.sparql.ast.QueryHints;
-import org.embergraph.rdf.sparql.ast.QueryRoot;
-import org.embergraph.rdf.sparql.ast.StatementPatternNode;
-import org.embergraph.rdf.sparql.ast.SubqueryRoot;
-import org.embergraph.rdf.sparql.ast.UnionNode;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTQueryHintOptimizer;
-import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
 /*
-* Type safe enumeration for the scope of a query hint. The {@link URI} for each scope is {@value
+ * Type safe enumeration for the scope of a query hint. The {@link URI} for each scope is {@value
  * QueryHints#NAMESPACE} plus the name of the enumeration value. For example, <code>
  * http://www.embergraph.org/queryHints#Group</code> would apply to the entire group in which that
  * query hint was found.

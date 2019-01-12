@@ -27,7 +27,7 @@ import org.embergraph.quorum.Quorum;
 import org.embergraph.rawstore.IMRMW;
 
 /*
-* An persistence capable data structure supporting atomic commit, scalable named indices, and
+ * An persistence capable data structure supporting atomic commit, scalable named indices, and
  * transactions.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

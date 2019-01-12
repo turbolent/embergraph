@@ -26,7 +26,7 @@ package org.embergraph.relation.accesspath;
 import org.apache.log4j.Logger;
 
 /*
-* An abstract implementation of an unsynchronized buffer backed by a fixed capacity array.
+ * An abstract implementation of an unsynchronized buffer backed by a fixed capacity array.
  *
  * <p><strong>This implementation is NOT thread-safe.</strong>
  *

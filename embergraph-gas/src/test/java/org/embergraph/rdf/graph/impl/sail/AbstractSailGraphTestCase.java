@@ -112,9 +112,7 @@ public class AbstractSailGraphTestCase extends AbstractGraphTestCase {
 
       dc = sail.getValueFactory().createURI("http://www.embergraph.org/DC");
 
-      vertices =
-          new LinkedHashSet<Value>(
-              Arrays.asList(foafPerson, mike, bryan, martyn, dc));
+      vertices = new LinkedHashSet<Value>(Arrays.asList(foafPerson, mike, bryan, martyn, dc));
 
       linkTypes = new LinkedHashSet<Value>(Arrays.asList(rdfType, foafKnows));
     }

@@ -29,13 +29,12 @@ import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.spo.ISPO;
-import org.embergraph.rdf.spo.SPORelation;
 import org.embergraph.rdf.vocab.NoVocabulary;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
 /*
-* Test suite for {@link ISPO#isModified()}.
+ * Test suite for {@link ISPO#isModified()}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

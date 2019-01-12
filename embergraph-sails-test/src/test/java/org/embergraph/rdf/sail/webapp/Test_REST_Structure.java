@@ -35,7 +35,7 @@ import org.embergraph.rdf.sail.webapp.client.JettyResponseListener;
 import org.embergraph.util.config.NicUtil;
 
 /*
-* Proxied test suite for bootstrap and basic structure tests for the REST API.
+ * Proxied test suite for bootstrap and basic structure tests for the REST API.
  *
  * @param <S>
  */
@@ -197,7 +197,7 @@ public class Test_REST_Structure<S extends IIndexManager> extends AbstractTestNa
   }
 
   // /*
-// * The <code>/namespace/</code> servlet responds (multi-tenancy API).
+  // * The <code>/namespace/</code> servlet responds (multi-tenancy API).
   // */
   // public void test_webapp_structure_namespace() throws Exception {
 

@@ -18,7 +18,7 @@ package org.embergraph.rdf.graph;
 import org.openrdf.model.Value;
 
 /*
-* A interface for {@link IGASProgram}s that compute paths and track a predecessor relationship
+ * A interface for {@link IGASProgram}s that compute paths and track a predecessor relationship
  * among the visited vertices. This interface can be used to eliminate vertices from the visited set
  * that are not on a path to a set of specified target vertices.
  *

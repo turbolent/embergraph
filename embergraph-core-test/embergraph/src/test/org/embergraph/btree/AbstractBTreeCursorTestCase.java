@@ -27,7 +27,7 @@ import java.util.UUID;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /*
-* Abstract base class for some unit tests that can only be run against a {@link BTree}.
+ * Abstract base class for some unit tests that can only be run against a {@link BTree}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

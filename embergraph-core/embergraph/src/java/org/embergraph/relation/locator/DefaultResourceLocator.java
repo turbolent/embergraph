@@ -36,31 +36,23 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.locks.Lock;
 import org.apache.log4j.Logger;
-import org.embergraph.btree.IIndex;
 import org.embergraph.cache.ConcurrentWeakValueCache;
 import org.embergraph.cache.ConcurrentWeakValueCacheWithTimeout;
-import org.embergraph.cache.LRUCache;
 import org.embergraph.concurrent.NamedLock;
-import org.embergraph.journal.AbstractTask;
 import org.embergraph.journal.ICommitRecord;
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.journal.IIndexStore;
 import org.embergraph.journal.IJournal;
 import org.embergraph.journal.ITx;
-import org.embergraph.journal.Journal;
 import org.embergraph.journal.TemporaryStore;
 import org.embergraph.journal.TimestampUtility;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.relation.AbstractResource;
-import org.embergraph.relation.IRelation;
 import org.embergraph.relation.RelationSchema;
-import org.embergraph.service.IEmbergraphFederation;
-import org.embergraph.sparse.GlobalRowStoreHelper;
 import org.embergraph.sparse.SparseRowStore;
 import org.embergraph.util.NT;
 
 /*
-* Generic implementation relies on a ctor for the resource with the following method signature:
+ * Generic implementation relies on a ctor for the resource with the following method signature:
  *
  * <pre>
  * public NAME ( IIndexManager indexManager, String namespace, Long timestamp, Properties properties )
@@ -341,8 +333,8 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
 
       if (delegate != null) {
 
-      /*
-       * A delegate was specified, so see if the delegate can resolve
+        /*
+         * A delegate was specified, so see if the delegate can resolve
          * this request.
          */
 
@@ -426,8 +418,8 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
     synchronized (seeAlso) { // FIXME Probably a read/write lock since [seeAlso] normally empty.
       for (IIndexManager indexManager : seeAlso.keySet()) {
 
-      /*
-       * read properties from the global row store for the default
+        /*
+         * read properties from the global row store for the default
          * index manager.
          */
         Properties properties = null;
@@ -440,8 +432,8 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
 
           if (indexManager instanceof TemporaryStore) {
 
-          /*
-       * Note: Asynchronous close is common for temporary
+            /*
+             * Note: Asynchronous close is common for temporary
              * stores since they can be asynchronously closed
              * and removed from the [seeAlso] weak value cache.
              */
@@ -450,8 +442,8 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
 
           } else {
 
-          /*
-       * Other stores should more typically remain open, but
+            /*
+             * Other stores should more typically remain open, but
              * they could be closed asynchronously for valid
              * reasons.
              */
@@ -580,15 +572,15 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
 
       if (indexManager instanceof IJournal) {
 
-      /*
-       * For a Journal, find the commitTime backing that read-only
+        /*
+         * For a Journal, find the commitTime backing that read-only
          * view.
          */
 
         final IJournal journal = (IJournal) indexManager;
 
-      /*
-       * Note: Using the local transaction manager to resolve a
+        /*
+         * Note: Using the local transaction manager to resolve a
          * read-only transaction identifer to the ITx object and then
          * retrieving the readsOnCommitTime from that ITx is a
          * non-blocking code path. It is preferrable to looking up the
@@ -613,15 +605,15 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
 
           if (commitRecord == null) {
 
-          /*
-       * No data for that timestamp.
+            /*
+             * No data for that timestamp.
              */
 
             return null;
           }
 
-        /*
-       * Find the timestamp associated with that commit record.
+          /*
+           * Find the timestamp associated with that commit record.
            *
            * Note: We also save commitTime2 to stuff into the properties,
            * thereby revealing the commitTime backing the resource view
@@ -633,8 +625,8 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
 
       } else {
 
-      /*
-       * Federation, TemporaryStore, etc.
+        /*
+         * Federation, TemporaryStore, etc.
          *
          * Note: The TemporaryStore lacks a history mechanism.
          *
@@ -686,8 +678,8 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
 
       if (cachedMap != null) {
 
-      /*
-       * Property cache hit.
+        /*
+         * Property cache hit.
          */
 
         // Save reference to the property set.
@@ -696,8 +688,8 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
 
       } else {
 
-      /*
-       * Property cache miss.
+        /*
+         * Property cache miss.
          */
 
         propertyCacheHit = false;
@@ -752,16 +744,16 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
 
       if (timestamp == ITx.UNISOLATED) {
 
-      /*
-       * The unisolated view.
+        /*
+         * The unisolated view.
          */
 
         rowStore = indexManager.getGlobalRowStore();
 
       } else if (timestamp == ITx.READ_COMMITTED) {
 
-      /*
-       * View for the last commit time.
+        /*
+         * View for the last commit time.
          */
 
         rowStore = indexManager.getGlobalRowStore(indexManager.getLastCommitTime());
@@ -785,8 +777,8 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
 
         } else {
 
-        /*
-       * TODO This should use the readsOnCommitTime on the cluster
+          /*
+           * TODO This should use the readsOnCommitTime on the cluster
            * as well.
            *
            * @see https://sourceforge.net/apps/trac/bigdata/ticket/266
@@ -887,7 +879,7 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
               String.class, // relation namespace
               Long.class, // timestamp of the view
               Properties.class // configuration properties.
-          );
+              );
 
     } catch (Exception e) {
 
@@ -897,9 +889,7 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
     final T r;
     try {
 
-      r =
-          ctor.newInstance(
-              indexManager, nt.getName(), nt.getTimestamp(), properties);
+      r = ctor.newInstance(indexManager, nt.getName(), nt.getTimestamp(), properties);
 
       r.init();
 

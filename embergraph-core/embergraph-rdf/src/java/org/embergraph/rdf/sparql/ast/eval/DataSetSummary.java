@@ -10,16 +10,11 @@ import org.embergraph.bop.Constant;
 import org.embergraph.bop.IVariable;
 import org.embergraph.bop.ap.Predicate;
 import org.embergraph.bop.cost.SubqueryCostReport;
-import org.embergraph.bop.fed.FederatedQueryEngine;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.model.EmbergraphURI;
-import org.embergraph.rdf.store.IRawTripleStore;
 import org.embergraph.relation.IRelation;
 import org.embergraph.relation.accesspath.AccessPath;
-import org.embergraph.service.ResourceService;
 import org.openrdf.model.URI;
-import org.openrdf.query.Dataset;
 
 /** Helper class summarizes the named graphs or default graph mode for a quads query. */
 @SuppressWarnings("rawtypes")

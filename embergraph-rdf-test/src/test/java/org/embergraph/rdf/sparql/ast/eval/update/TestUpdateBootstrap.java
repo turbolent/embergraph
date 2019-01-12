@@ -60,7 +60,7 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
 /*
-* Bootstrapped test suite for core UPDATE functionality based on BOP evaluation.
+ * Bootstrapped test suite for core UPDATE functionality based on BOP evaluation.
  *
  * <p>Note: We are not using BOP evaluation for SPARQL UPDATE at this time, so this test is NOT
  * being run in CI.
@@ -285,8 +285,8 @@ public class TestUpdateBootstrap extends AbstractASTEvaluationTestCase {
       {
         final BOpStats stats = future.getStats().get(resolutionId);
 
-      /*
-       * Note: This assumes that rdf:type and rdfs:label are not
+        /*
+         * Note: This assumes that rdf:type and rdfs:label are not
          * defined by the vocabulary.  We have to subtract out each
          * Value which was declared by the vocabulary or is otherwise
          * represented as a fully inline IV.
@@ -478,8 +478,8 @@ public class TestUpdateBootstrap extends AbstractASTEvaluationTestCase {
       {
         final BOpStats stats = future.getStats().get(resolutionId);
 
-      /*
-       * Note: This assumes that rdf:type and rdfs:label are not
+        /*
+         * Note: This assumes that rdf:type and rdfs:label are not
          * defined by the vocabulary.  We have to subtract out each
          * Value which was declared by the vocabulary or is otherwise
          * represented as a fully inline IV.

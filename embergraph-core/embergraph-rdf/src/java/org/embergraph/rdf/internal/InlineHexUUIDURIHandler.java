@@ -25,7 +25,7 @@ import org.embergraph.rdf.internal.impl.literal.UUIDLiteralIV;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 
 /*
-* Inline URI Handler to handle URI's in the form of a Hex UUID such as:
+ * Inline URI Handler to handle URI's in the form of a Hex UUID such as:
  *
  * <pre>
  *   http://blazegraph.com/element/010072F0000038090100000000D56C9E

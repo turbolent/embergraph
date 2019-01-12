@@ -29,7 +29,7 @@ import org.embergraph.btree.keys.TestKeyBuilder;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /*
-* A test of the {@link IndexSegmentBuilder} in which there are some deleted tuples in the source
+ * A test of the {@link IndexSegmentBuilder} in which there are some deleted tuples in the source
  * {@link BTree} which are to be copied to the destination {@link IndexSegment} (this is really a
  * test of the incremental build scenario since deleted tuples are never copied for a compacting
  * merge).

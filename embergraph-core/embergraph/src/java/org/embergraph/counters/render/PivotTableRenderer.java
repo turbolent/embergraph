@@ -1,17 +1,10 @@
 package org.embergraph.counters.render;
 
-import java.util.regex.Pattern;
 import org.apache.log4j.Logger;
-import org.embergraph.counters.HistoryInstrument;
-import org.embergraph.counters.ICounter;
-import org.embergraph.counters.ICounterNode;
-import org.embergraph.counters.PeriodEnum;
-import org.embergraph.counters.query.HistoryTable;
 import org.embergraph.counters.query.PivotTable;
-import org.embergraph.counters.query.URLQueryModel;
 
 /*
-* Writes out a pivot table containing the histories for the selected counters. Sample output is:
+ * Writes out a pivot table containing the histories for the selected counters. Sample output is:
  *
  * <pre>
  * Minutes  Timestamp    hostname indexName   indexPartitionName  readSecs    writeSecs   leafSplits  tailSplits

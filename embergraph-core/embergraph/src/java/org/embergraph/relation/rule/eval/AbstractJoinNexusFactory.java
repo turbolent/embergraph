@@ -26,17 +26,12 @@ import java.lang.ref.WeakReference;
 import java.util.Properties;
 import java.util.WeakHashMap;
 import org.apache.log4j.Logger;
-import org.embergraph.bop.IBindingSet;
-import org.embergraph.bop.joinGraph.IEvaluationPlan;
 import org.embergraph.bop.joinGraph.IEvaluationPlanFactory;
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.relation.IMutableRelation;
-import org.embergraph.relation.accesspath.IBuffer;
 import org.embergraph.relation.accesspath.IElementFilter;
-import org.embergraph.relation.rule.IRule;
 
 /*
-* Base implementation for {@link IJoinNexusFactory}.
+ * Base implementation for {@link IJoinNexusFactory}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

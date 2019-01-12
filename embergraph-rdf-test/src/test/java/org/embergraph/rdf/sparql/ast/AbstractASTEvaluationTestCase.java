@@ -32,11 +32,8 @@ import java.util.LinkedHashSet;
 import java.util.Properties;
 import java.util.Set;
 import org.apache.log4j.Logger;
-import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpContextBase;
 import org.embergraph.bop.BOpUtility;
-import org.embergraph.bop.ContextBindingSet;
-import org.embergraph.bop.IValueExpression;
 import org.embergraph.bop.IVariable;
 import org.embergraph.bop.Var;
 import org.embergraph.bop.engine.AbstractQueryEngineTestCase;
@@ -44,11 +41,9 @@ import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.ITx;
 import org.embergraph.journal.Journal;
 import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.internal.ILexiconConfiguration;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.TermId;
-import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.sail.EmbergraphSail;
@@ -58,7 +53,7 @@ import org.embergraph.rdf.store.LocalTripleStore;
 import org.openrdf.model.Value;
 
 /*
-* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class AbstractASTEvaluationTestCase extends AbstractQueryEngineTestCase {
@@ -237,7 +232,7 @@ public class AbstractASTEvaluationTestCase extends AbstractQueryEngineTestCase {
   }
 
   //    /*
-//     * Return a mock IV for the value.
+  //     * Return a mock IV for the value.
   //     */
   //    @SuppressWarnings("unchecked")
   //    protected IV<EmbergraphValue, ?> mockIV(final EmbergraphValue value) {

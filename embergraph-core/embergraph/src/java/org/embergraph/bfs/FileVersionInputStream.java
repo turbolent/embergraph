@@ -10,7 +10,7 @@ import org.embergraph.rawstore.IBlock;
 import org.embergraph.util.Bytes;
 
 /*
-* Reads from blocks visited by a range scan for a file and version.
+ * Reads from blocks visited by a range scan for a file and version.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

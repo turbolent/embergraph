@@ -60,7 +60,7 @@ import org.embergraph.rdf.properties.PropertiesFormat;
 import org.embergraph.rdf.properties.PropertiesWriter;
 
 /*
-* {@link PropertiesFormat} XML writer.
+ * {@link PropertiesFormat} XML writer.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

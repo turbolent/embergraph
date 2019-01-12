@@ -27,7 +27,7 @@ import org.apache.log4j.Logger;
 import org.embergraph.util.NV;
 
 /*
-* Extract and return the quality score for the mime type (defaults to <code>1.0</code>).
+ * Extract and return the quality score for the mime type (defaults to <code>1.0</code>).
  *
  * <p>Note: <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1">the grammar</a>
  * permits whitespace fairly generally, but the parser in this class does not cope with this

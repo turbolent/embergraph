@@ -27,11 +27,10 @@ import java.util.Properties;
 import junit.extensions.proxy.ProxyTestSuite;
 import junit.framework.Test;
 import org.embergraph.io.DirectBufferPool;
-import org.embergraph.io.writecache.WriteCache;
 import org.embergraph.rawstore.IRawStore;
 
 /*
-* Test suite for {@link WORMStrategy} journals which runs with a single {@link WriteCache} buffer.
+ * Test suite for {@link WORMStrategy} journals which runs with a single {@link WriteCache} buffer.
  * The purpose of this version of the test suite is to look for deadlocks or other problems related
  * to having a single {@link WriteCache} buffer.
  *

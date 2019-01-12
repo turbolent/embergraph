@@ -15,7 +15,7 @@ import org.openrdf.rio.RDFParser;
 import org.openrdf.rio.helpers.RDFHandlerBase;
 
 /*
-* Test suite for standalone usage of Embergraph RDF Parsers. See also
+ * Test suite for standalone usage of Embergraph RDF Parsers. See also
  * https://jira.blazegraph.com/browse/BLZG-1322
  */
 public class TestStandaloneRDRParsers {

@@ -27,7 +27,7 @@ import java.util.Comparator;
 import java.util.List;
 
 /*
-* Class provides static information about project dependencies.
+ * Class provides static information about project dependencies.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

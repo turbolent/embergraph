@@ -20,7 +20,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.internal.constraints;
 
 import java.util.Map;
-import org.embergraph.bop.AbstractAccessPathOp;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpBase;
 import org.embergraph.bop.BOpContextBase;
@@ -31,7 +30,6 @@ import org.embergraph.bop.NV;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.ILexiconConfiguration;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.internal.IVCache;
 import org.embergraph.rdf.internal.NotMaterializedException;
 import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.model.EmbergraphLiteral;
@@ -45,7 +43,7 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.Value;
 
 /*
-* A specialized IValueExpression that evaluates to an IV. The inputs are usually, but not strictly
+ * A specialized IValueExpression that evaluates to an IV. The inputs are usually, but not strictly
  * limited to, IVs as well. This class also contains many useful helper methods for evaluation,
  * including providing access to the EmbergraphValueFactory and LexiconConfiguration.
  */
@@ -239,8 +237,8 @@ public abstract class IVValueExpression<T extends IV> extends BOpBase
 
           if (!(bset instanceof ContextBindingSet)) {
 
-          /*
-       * This generally indicates a failure to propagate the
+            /*
+             * This generally indicates a failure to propagate the
              * context wrapper for the binding set to a new binding
              * set during a copy (projection), bind (join), etc. It
              * could also indicate a failure to wrap binding sets

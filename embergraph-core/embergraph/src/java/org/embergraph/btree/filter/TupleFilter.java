@@ -1,23 +1,18 @@
 package org.embergraph.btree.filter;
 
-import cutthecrap.utils.striterators.Filter;
 import cutthecrap.utils.striterators.FilterBase;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import org.apache.log4j.Logger;
-import org.embergraph.btree.AbstractBTree;
 import org.embergraph.btree.AbstractTuple;
-import org.embergraph.btree.BTree;
-import org.embergraph.btree.IRangeQuery;
 import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleCursor;
 import org.embergraph.btree.ITupleIterator;
 import org.embergraph.btree.ITupleSerializer;
-import org.embergraph.btree.Tuple;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Filter supporting {@link ITupleIterator}s.
+ * Filter supporting {@link ITupleIterator}s.
  *
  * <p><strong>Warning: Unlike {@link Filter}, this class correctly uses a second {@link Tuple}
  * instance to perform filtering.<strong> This is necessary since the {@link Tuple} instance for the
@@ -197,8 +192,8 @@ public abstract class TupleFilter<E> extends FilterBase implements ITupleFilter<
 
       if (src instanceof ITupleCursor<?>) {
 
-      /*
-       * The ITupleCursor supports traversal with concurrent
+        /*
+         * The ITupleCursor supports traversal with concurrent
          * modification. Therefore we can remove the correct entry from
          * the underlying B+Tree by directing the remove(key) request to
          * the index implementation itself.
@@ -215,8 +210,8 @@ public abstract class TupleFilter<E> extends FilterBase implements ITupleFilter<
 
       } else {
 
-      /*
-       * Otherwise the one step lookahead imposed by the filter means
+        /*
+         * Otherwise the one step lookahead imposed by the filter means
          * that the source iterator is already positioned on a successor
          * of the current element. If we were to use [src.remove()]
          * here, it would cause a successor of the current element to be

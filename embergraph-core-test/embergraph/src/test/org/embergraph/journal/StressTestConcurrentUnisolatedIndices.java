@@ -21,7 +21,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.journal;
 
-import java.io.Writer;
 import java.nio.channels.ClosedByInterruptException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,7 +47,7 @@ import org.embergraph.util.Bytes;
 import org.embergraph.util.NV;
 
 /*
-* Stress tests for concurrent processing of operations on named unisolated indices.
+ * Stress tests for concurrent processing of operations on named unisolated indices.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -281,8 +280,8 @@ public class StressTestConcurrentUnisolatedIndices extends ProxyTestCase<Journal
         if (isInnerCause(ex, InterruptedException.class)
             || isInnerCause(ex, ClosedByInterruptException.class)) {
 
-        /*
-       * Note: Tasks will be interrupted if a timeout occurs when
+          /*
+           * Note: Tasks will be interrupted if a timeout occurs when
            * attempting to run the submitted tasks - this is normal.
            */
 
@@ -399,8 +398,8 @@ public class StressTestConcurrentUnisolatedIndices extends ProxyTestCase<Journal
 
       try {
 
-      /*
-       * First, mark each index in the [btrees] concurrent hash map
+        /*
+         * First, mark each index in the [btrees] concurrent hash map
          * with the thread in which this task instance is executing.
          *
          * Note: These marks will be cleared by a finally {} clause
@@ -426,8 +425,8 @@ public class StressTestConcurrentUnisolatedIndices extends ProxyTestCase<Journal
           indices[i] = getJournal().getIndex(name);
         }
 
-      /*
-       * Random write operations on the named index(s).
+        /*
+         * Random write operations on the named index(s).
          */
         for (int i = 0; i < nops; i++) {
 
@@ -460,8 +459,8 @@ public class StressTestConcurrentUnisolatedIndices extends ProxyTestCase<Journal
 
       } finally {
 
-      /*
-       * Clear the marks from the concurrent hash map which associate
+        /*
+         * Clear the marks from the concurrent hash map which associate
          * the named resources (the indices) with the thread in which
          * this test was executing.
          */

@@ -37,7 +37,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 /*
-* An abstract implementation of a {@link BitVector}.
+ * An abstract implementation of a {@link BitVector}.
  *
  * <p>This abstract implementation provides almost all methods: you have to provide just {@link
  * it.unimi.dsi.fastutil.booleans.BooleanList#getBoolean(int)} and {@link java.util.List#size()}. No

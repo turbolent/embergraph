@@ -53,11 +53,10 @@ import org.embergraph.rdf.sparql.ast.SubqueryRoot;
 import org.embergraph.rdf.sparql.ast.UnionNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
-import org.embergraph.rdf.sparql.ast.eval.AST2BOpUtility;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 
 /*
-* NOTE: this optimizer was not sound from a correctness perspective in previous versions (cf.
+ * NOTE: this optimizer was not sound from a correctness perspective in previous versions (cf.
  * http://trac.blazegraph.com/ticket/1071); the rewritten form should be fine from a correctness
  * perspective, but does not really optimize queries from a performance perspective, so it has been
  * (temporarily) disabled in the {@link DefaultOptimizerList}. The description below describes the
@@ -203,8 +202,8 @@ public class ASTComplexOptionalOptimizer implements IASTOptimizer {
 
       if (child instanceof GraphPatternGroup<?>) {
 
-      /*
-       * Note: Do recursion *before* we do the rewrite.
+        /*
+         * Note: Do recursion *before* we do the rewrite.
          */
 
         @SuppressWarnings("unchecked")
@@ -218,8 +217,8 @@ public class ASTComplexOptionalOptimizer implements IASTOptimizer {
 
         if (childGroup.isOptional()
             && (!(childGroup.arity() == 1 && childGroup.get(0) instanceof NamedSubqueryInclude))) {
-        /*
-       * Note: Do NOT translate a child group which consists
+          /*
+           * Note: Do NOT translate a child group which consists
            * solely of a named subquery include. That is the target
            * output for this optimizer!
            *
@@ -357,19 +356,19 @@ public class ASTComplexOptionalOptimizer implements IASTOptimizer {
           group.removeChild(t);
           whereClause.addChild(t);
         } else if (t instanceof FilterNode) {
-        /*
-       * Leave other filters in place. They depend on something in
+          /*
+           * Leave other filters in place. They depend on something in
            * the optional groups.
            */
         } else if (t instanceof AssignmentNode) {
-        /*
-       * Leave assignment nodes in place. They run last.
+          /*
+           * Leave assignment nodes in place. They run last.
            */
         } else if (t instanceof JoinGroupNode) {
           final JoinGroupNode childGroup = (JoinGroupNode) t;
           if (childGroup.isOptional()) {
-          /*
-       * This will be moved into a different named subquery in
+            /*
+             * This will be moved into a different named subquery in
              * the next step (below).
              */
             complexGroups.add(childGroup);
@@ -379,8 +378,8 @@ public class ASTComplexOptionalOptimizer implements IASTOptimizer {
             whereClause.addChild(childGroup);
           }
         } else {
-        /*
-       * This is a catch all for things which might not have been
+          /*
+           * This is a catch all for things which might not have been
            * considered above.
            */
           throw new AssertionError("Not expecting: " + t + " in " + group);
@@ -495,16 +494,16 @@ public class ASTComplexOptionalOptimizer implements IASTOptimizer {
        * query with the named subquery ID.
        */
       {
-      /*
-       * sa.getProjectedVars computes required variables according
+        /*
+         * sa.getProjectedVars computes required variables according
          * to the ancestor axis
          */
         final Set<IVariable<?>> projectedVars =
             sa.getProjectedVars(
                 anInclude, whereClause, query, exogenousVars, new LinkedHashSet<IVariable<?>>());
 
-      /*
-       * In addition to the vars collected by sa.getProjectedVars,
+        /*
+         * In addition to the vars collected by sa.getProjectedVars,
          * we need to retain variables appearing in subsequent complex
          * join groups. This is necessary to avoid a blowup (duplicates)
          * in the number of results, see ticket #801, i.e. we need to
@@ -526,8 +525,8 @@ public class ASTComplexOptionalOptimizer implements IASTOptimizer {
 
         projectedVars.addAll(joinVarCandidates);
 
-      /*
-       * Having computed the projection vars, we're now ready to
+        /*
+         * Having computed the projection vars, we're now ready to
          * build the projection clause for the current named subquery.
          */
         final ProjectionNode projection = new ProjectionNode();

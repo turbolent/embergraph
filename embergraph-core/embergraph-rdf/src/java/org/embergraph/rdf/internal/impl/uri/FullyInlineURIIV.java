@@ -31,7 +31,7 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
 /*
-* Implementation for inline {@link URI}s. All information is inlined. This class is mainly targeted
+ * Implementation for inline {@link URI}s. All information is inlined. This class is mainly targeted
  * at inlining at fully inlining URIs in scale-out (which can be an attractive option).
  */
 public class FullyInlineURIIV<V extends EmbergraphURI> extends AbstractInlineIV<V, URI>

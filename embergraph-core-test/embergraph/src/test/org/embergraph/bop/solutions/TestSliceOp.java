@@ -60,7 +60,7 @@ import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.util.InnerCause;
 
 /*
-* Unit tests for {@link SliceOp}.
+ * Unit tests for {@link SliceOp}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

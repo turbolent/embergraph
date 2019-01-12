@@ -30,7 +30,7 @@ import org.embergraph.rawstore.IAllocationContext;
 import org.embergraph.rawstore.IPSOutputStream;
 
 /*
-* ********************************************************************** PSOutputStream
+ * ********************************************************************** PSOutputStream
  *
  * <p>Provides stream interface direct to the low-level store.
  *
@@ -407,7 +407,7 @@ public class PSOutputStream extends IPSOutputStream {
 }
 
 /*
-* ********************************************* Jython test
+ * ********************************************* Jython test
  *
  * <p>from cutthecrap.gpo.client import OMClient; from cutthecrap.gpo import *; from java.io import
  * *;

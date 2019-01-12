@@ -21,17 +21,15 @@ import java.util.UUID;
 import org.embergraph.btree.BTree;
 import org.embergraph.btree.Checkpoint;
 import org.embergraph.btree.IndexMetadata;
-import org.embergraph.btree.IndexSegmentStore;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.io.SerializerUtil;
-import org.embergraph.mdi.IResourceMetadata;
 import org.embergraph.mdi.SegmentMetadata;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.util.Bytes;
 
 /*
-* {@link BTree} mapping {@link IndexSegmentStore} <em>createTime</em>s to {@link IResourceMetadata}
+ * {@link BTree} mapping {@link IndexSegmentStore} <em>createTime</em>s to {@link IResourceMetadata}
  * records. The keys are the long integers (commitTimes) followed by the index segment UUID to break
  * ties (this is not the scale-out index UUID, but the UUID of the specific index segment). The
  * values are {@link IResourceMetadata} objects.

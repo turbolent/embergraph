@@ -24,7 +24,7 @@ package org.embergraph.bop;
 import java.util.Map;
 
 /*
-* Base class for immutable operators such as {@link Var} and {@link Constant}. These operators do
+ * Base class for immutable operators such as {@link Var} and {@link Constant}. These operators do
  * not deep copy their data and do not permit decoration with annotations.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

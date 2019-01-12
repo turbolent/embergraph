@@ -24,7 +24,7 @@ package org.embergraph.service;
 import java.util.Properties;
 
 /*
-* A client for an embedded federation (the client and the data services all run in the same
+ * A client for an embedded federation (the client and the data services all run in the same
  * process).
  *
  * @see EmbeddedFederation

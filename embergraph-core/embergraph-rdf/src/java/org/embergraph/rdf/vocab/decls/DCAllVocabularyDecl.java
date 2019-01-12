@@ -28,7 +28,7 @@ import org.embergraph.rdf.vocab.VocabularyDecl;
 import org.openrdf.model.URI;
 
 /*
-* Vocabulary and namespace for Dublin Core, including:
+ * Vocabulary and namespace for Dublin Core, including:
  *
  * <ul>
  *   <li>{@link DCTermsVocabularyDecl}

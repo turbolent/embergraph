@@ -31,7 +31,7 @@ import org.embergraph.service.TestEDS;
 import org.embergraph.service.TestJournal;
 
 /*
-* Test suite for the spare row store facility (aka key-value store).
+ * Test suite for the spare row store facility (aka key-value store).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

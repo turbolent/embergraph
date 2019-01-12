@@ -35,7 +35,7 @@ import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQueryResult;
 
 /*
-* Proxied test suite for {@link DataLoaderServlet}
+ * Proxied test suite for {@link DataLoaderServlet}
  *
  * @author beebs
  */

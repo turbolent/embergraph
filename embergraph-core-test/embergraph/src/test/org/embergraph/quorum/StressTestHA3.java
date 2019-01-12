@@ -26,7 +26,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /*
-* Stress test suite for {@link TestHA3QuorumSemantics}.
+ * Stress test suite for {@link TestHA3QuorumSemantics}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

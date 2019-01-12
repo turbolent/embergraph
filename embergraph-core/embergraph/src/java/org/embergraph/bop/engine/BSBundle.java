@@ -21,10 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.engine;
 
-import java.util.Comparator;
-
 /*
-* An immutable class capturing the evaluation context of an operator against a shard.
+ * An immutable class capturing the evaluation context of an operator against a shard.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

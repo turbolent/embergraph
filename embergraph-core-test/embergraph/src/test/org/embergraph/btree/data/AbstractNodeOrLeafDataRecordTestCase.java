@@ -35,7 +35,7 @@ import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
 /*
-* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public abstract class AbstractNodeOrLeafDataRecordTestCase extends AbstractBTreeTestCase {
@@ -317,7 +317,7 @@ public abstract class AbstractNodeOrLeafDataRecordTestCase extends AbstractBTree
   }
 
   //    /*
-//     * Run a large stress test.
+  //     * Run a large stress test.
   //     *
   //     * @param args
   //     *            unused.
@@ -531,7 +531,7 @@ public abstract class AbstractNodeOrLeafDataRecordTestCase extends AbstractBTree
    * examine things like childAddr[] and timestamp[] coding costs.
    */
   //    /*
-//     * Performance stress test for B+Tree node/leaf data records.
+  //     * Performance stress test for B+Tree node/leaf data records.
   //     *
   //     * <dl>
   //     * <dt>nops</dt>
@@ -657,7 +657,7 @@ public abstract class AbstractNodeOrLeafDataRecordTestCase extends AbstractBTree
   //    }
   //
   //    /*
-//     * Helper class generates a random sequence of operation codes obeying the
+  //     * Helper class generates a random sequence of operation codes obeying the
   //     * probability distribution described in the constructor call.
   //     *
   //     * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -674,7 +674,7 @@ public abstract class AbstractNodeOrLeafDataRecordTestCase extends AbstractBTree
   //        static public final int RECODE = 6;
   //
   //        /*
-//         * The last defined operator.
+  //         * The last defined operator.
   //         */
   //        static final int lastOp = RECODE;
   //
@@ -736,7 +736,7 @@ public abstract class AbstractNodeOrLeafDataRecordTestCase extends AbstractBTree
   //        }
   //
   //        /*
-//         * Return the name of the operator.
+  //         * Return the name of the operator.
   //         *
   //         * @param op
   //         * @return
@@ -762,7 +762,7 @@ public abstract class AbstractNodeOrLeafDataRecordTestCase extends AbstractBTree
   //        }
   //
   //        /*
-//         * An array of normalized probabilities assigned to each operator. The
+  //         * An array of normalized probabilities assigned to each operator. The
   //         * array may be indexed by the operator, e.g., dist[{@link #fetch}]
   //         * would be the probability of a fetch operation.
   //         *
@@ -773,7 +773,7 @@ public abstract class AbstractNodeOrLeafDataRecordTestCase extends AbstractBTree
   //        }
   //
   //        /*
-//         * Generate a random operator according to the distribution described to
+  //         * Generate a random operator according to the distribution described to
   //         * to the constructor.
   //         *
   //         * @return A declared operator selected according to a probability
@@ -794,7 +794,7 @@ public abstract class AbstractNodeOrLeafDataRecordTestCase extends AbstractBTree
   //    }
   //
   //    /*
-//     * Tests of the {@link Op} test helper class.
+  //     * Tests of the {@link Op} test helper class.
   //     *
   //     * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
   //     * @version $Id$
@@ -820,7 +820,7 @@ public abstract class AbstractNodeOrLeafDataRecordTestCase extends AbstractBTree
   //        }
   //
   //        /*
-//         * Correct rejection test when all rates are zero.
+  //         * Correct rejection test when all rates are zero.
   //         */
   //        public void test_correctRejectionAllZero() {
   //            /*
@@ -836,7 +836,7 @@ public abstract class AbstractNodeOrLeafDataRecordTestCase extends AbstractBTree
   //        }
   //
   //        /*
-//         * Correct rejection test when one or more rates are negative.
+  //         * Correct rejection test when one or more rates are negative.
   //         */
   //        public void test_correctRejectionNegativeRate() {
   //            /*
@@ -852,7 +852,7 @@ public abstract class AbstractNodeOrLeafDataRecordTestCase extends AbstractBTree
   //        }
   //
   //        /*
-//         * Verifies the {@link Op} class given an instance with some probability
+  //         * Verifies the {@link Op} class given an instance with some probability
   //         * distribution.
   //         */
   //        void doOpTest(final Op gen) {

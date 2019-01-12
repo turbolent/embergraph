@@ -53,7 +53,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /*
-* A SPARQL 1.1 Update test, created by reading in a W3C working-group style manifest.
+ * A SPARQL 1.1 Update test, created by reading in a W3C working-group style manifest.
  *
  * @author Jeen Broekstra
  */

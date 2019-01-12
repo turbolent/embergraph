@@ -24,7 +24,7 @@ import java.lang.reflect.Array;
  */
 
 /*
-* A class providing static methods and objects that do useful things with {@linkplain
+ * A class providing static methods and objects that do useful things with {@linkplain
  * it.unimi.dsi.lang.FlyweightPrototype flyweight protoypes}.
  */
 public class FlyweightPrototypes {

@@ -20,10 +20,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.sparql.ast;
 
-import org.embergraph.bop.controller.SubqueryOp;
-
 /*
-* Used to specify the query plan for FILTER (NOT) EXISTS. There are two basic plans: vectored
+ * Used to specify the query plan for FILTER (NOT) EXISTS. There are two basic plans: vectored
  * sub-plan and subquery with LIMIT ONE. Each plan has its advantages.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

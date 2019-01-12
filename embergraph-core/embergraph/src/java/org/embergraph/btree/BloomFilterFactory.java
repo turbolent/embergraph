@@ -24,10 +24,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree;
 
 import java.io.Serializable;
-import org.embergraph.relation.accesspath.IAccessPath;
 
 /*
-* An interface that is used to generate a bloom filter for an {@link AbstractBTree} and which
+ * An interface that is used to generate a bloom filter for an {@link AbstractBTree} and which
  * allows the caller to specify the expected number of index entries, the desired error rate for the
  * filter at that #of index entries, and the maximum error rate before the bloom filter will be
  * disabled.

@@ -3,7 +3,7 @@ package org.embergraph.service.ndx.pipeline;
 import org.embergraph.service.AbstractFederation;
 
 /*
-* Statistics for asynchronous index writes.
+ * Statistics for asynchronous index writes.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -16,7 +16,7 @@
 package org.embergraph.ganglia;
 
 /*
-* Class bundles together an {@link IGangliaMetricMessage} with the {@link IGangliaMetadataMessage}
+ * Class bundles together an {@link IGangliaMetricMessage} with the {@link IGangliaMetadataMessage}
  * which provides its declaration.
  */
 public class RichMetricMessage extends GangliaMetricMessage {

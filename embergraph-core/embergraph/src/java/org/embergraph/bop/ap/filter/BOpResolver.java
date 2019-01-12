@@ -28,7 +28,7 @@ import java.util.Map;
 import org.embergraph.bop.BOp;
 
 /*
-* Striterator resolver pattern.
+ * Striterator resolver pattern.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

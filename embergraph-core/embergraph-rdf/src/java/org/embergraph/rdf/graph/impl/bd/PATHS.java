@@ -33,7 +33,6 @@ import org.embergraph.rdf.graph.EdgesEnum;
 import org.embergraph.rdf.graph.Factory;
 import org.embergraph.rdf.graph.FrontierEnum;
 import org.embergraph.rdf.graph.IBinder;
-import org.embergraph.rdf.graph.IBindingExtractor;
 import org.embergraph.rdf.graph.IGASContext;
 import org.embergraph.rdf.graph.IGASScheduler;
 import org.embergraph.rdf.graph.IGASState;
@@ -46,7 +45,7 @@ import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 
 /*
-* PATHS is an iterative graph traversal operation. The frontier is expanded iteratively until no
+ * PATHS is an iterative graph traversal operation. The frontier is expanded iteratively until no
  * new vertices are discovered, or until the target vertices have all been reached. Each vertex is
  * marked with its depth and with a list of all predecessors and their edges to the vertex. This
  * algorithm is useful for creating a complete connected subgraph between a source and a set of
@@ -342,8 +341,8 @@ public class PATHS extends BaseGASProgram<PATHS.VS, PATHS.ES, Void>
               final IVariable<?>[] outVars,
               final IBindingSet bs) {
 
-          /*
-       * We want to return a different set of edges depending on
+            /*
+             * We want to return a different set of edges depending on
              * which predecessor the caller is asking about.  We can
              * find that information in the binding set.
              */
@@ -378,8 +377,8 @@ public class PATHS extends BaseGASProgram<PATHS.VS, PATHS.ES, Void>
 
             final VS vs = state.getState(u);
 
-          /*
-       * Return the edges for this predecessor.
+            /*
+             * Return the edges for this predecessor.
              */
             return new LinkedList<Value>(vs.predecessors().get(predVal));
           }
@@ -402,8 +401,8 @@ public class PATHS extends BaseGASProgram<PATHS.VS, PATHS.ES, Void>
               final IVariable<?>[] outVars,
               final IBindingSet bs) {
 
-          /*
-       * We want to return a different set of edges depending on
+            /*
+             * We want to return a different set of edges depending on
              * which predecessor the caller is asking about.  We can
              * find that information in the binding set.
              */

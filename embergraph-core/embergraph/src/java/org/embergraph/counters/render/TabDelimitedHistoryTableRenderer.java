@@ -9,7 +9,7 @@ import org.embergraph.counters.query.HistoryTable;
 import org.embergraph.counters.query.QueryUtil;
 
 /*
-* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TabDelimitedHistoryTableRenderer extends HistoryTableRenderer {
@@ -53,8 +53,8 @@ public class TabDelimitedHistoryTableRenderer extends HistoryTableRenderer {
       // header row.
       w.write(t.units + "\t");
       for (ICounter counter : t.a) {
-      /*
-       * If the pattern included capturing groups then use the matched
+        /*
+         * If the pattern included capturing groups then use the matched
          * groups as the label for the column.
          */
         final String[] groups = QueryUtil.getCapturedGroups(pattern, counter);

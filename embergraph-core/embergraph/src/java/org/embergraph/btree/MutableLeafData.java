@@ -22,7 +22,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree;
 
-import it.unimi.dsi.bits.BitVector;
 import org.embergraph.btree.data.ILeafData;
 import org.embergraph.btree.raba.IRaba;
 import org.embergraph.btree.raba.MutableKeyBuffer;
@@ -31,7 +30,7 @@ import org.embergraph.io.AbstractFixedByteArrayBuffer;
 import org.embergraph.rawstore.IRawStore;
 
 /*
-* Implementation maintains Java objects corresponding to the persistent data and defines methods
+ * Implementation maintains Java objects corresponding to the persistent data and defines methods
  * for a variety of mutations on the {@link ILeafData} record which operate by direct manipulation
  * of the Java objects.
  *
@@ -316,7 +315,7 @@ public class MutableLeafData implements ILeafData {
   }
 
   //    /*
-//     * For a leaf the #of entries is always the #of keys.
+  //     * For a leaf the #of entries is always the #of keys.
   //     */
   //    final public int getSpannedTupleCount() {
   //

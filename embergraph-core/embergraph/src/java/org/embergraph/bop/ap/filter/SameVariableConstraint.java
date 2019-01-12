@@ -16,10 +16,9 @@ import org.embergraph.bop.IPredicate;
 import org.embergraph.bop.IVariable;
 import org.embergraph.bop.IVariableOrConstant;
 import org.embergraph.io.LongPacker;
-import org.embergraph.relation.accesspath.IAccessPath;
 
 /*
-* Filter imposes the "same variable" constraint on the elements visited by an {@link IAccessPath}.
+ * Filter imposes the "same variable" constraint on the elements visited by an {@link IAccessPath}.
  * The filter is required IFF a {@link IVariable} appears in more than one position for the {@link
  * IPredicate} associated with the {@link IAccessPath}. For example, in <code>spo(?g, p1, o1, ?g)
  * </code>, the variable <i>g</i> shows up at both index ZERO (0) and index THREE (3).

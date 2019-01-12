@@ -18,7 +18,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.service.fts;
 
 /*
-* Exception signalizing problems while executing fulltext search against an external index.
+ * Exception signalizing problems while executing fulltext search against an external index.
  * Problems that might occur are, for instance, problems connecting the endpoint, misconfiguration
  * via the {@link FTS} magic vocabulary, etc.
  *

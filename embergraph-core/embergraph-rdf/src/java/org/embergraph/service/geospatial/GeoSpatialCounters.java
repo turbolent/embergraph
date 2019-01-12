@@ -27,7 +27,7 @@ import org.embergraph.counters.ICounterSetAccess;
 import org.embergraph.counters.Instrument;
 
 /*
-* Counters related to the usage of GeoSpatial services
+ * Counters related to the usage of GeoSpatial services
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$

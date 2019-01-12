@@ -25,18 +25,12 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.Arrays;
 import java.util.UUID;
-import org.embergraph.btree.BTree;
-import org.embergraph.btree.IndexMetadata;
-import org.embergraph.btree.IndexSegment;
-import org.embergraph.btree.IndexSegmentStore;
 import org.embergraph.io.LongPacker;
 import org.embergraph.io.ShortPacker;
-import org.embergraph.journal.Journal;
-import org.embergraph.service.DataService;
 import org.embergraph.util.BytesUtil;
 
 /*
-* An immutable object providing metadata about a local index partition, including the partition
+ * An immutable object providing metadata about a local index partition, including the partition
  * identifier, the left and right separator keys defining the half-open key range of the index
  * partition, and optionally defining the {@link IResourceMetadata}[] required to materialize a view
  * of that index partition.
@@ -94,7 +88,7 @@ public class LocalPartitionMetadata implements IPartitionMetadata, Externalizabl
   private IndexPartitionCause cause;
 
   //    /*
-//     * A history of operations giving rise to the current partition metadata.
+  //     * A history of operations giving rise to the current partition metadata.
   //     * E.g., register(timestamp), copyOnOverflow(timestamp), split(timestamp),
   //     * join(partitionId,partitionId,timestamp), etc. This is truncated when
   //     * serialized to keep it from growing without bound.
@@ -104,7 +98,7 @@ public class LocalPartitionMetadata implements IPartitionMetadata, Externalizabl
   //    private String history;
   //
   //    /*
-//     * If the history string exceeds {@link #MAX_HISTORY_LENGTH} characters then
+  //     * If the history string exceeds {@link #MAX_HISTORY_LENGTH} characters then
   //     * truncates it to the last {@link #MAX_HISTORY_LENGTH}-3 characters,
   //     * prepends "...", and returns the result. Otherwise returns the entire
   //     * history string.
@@ -375,7 +369,7 @@ public class LocalPartitionMetadata implements IPartitionMetadata, Externalizabl
   }
 
   //    /*
-//     * A history of the changes to the index partition.
+  //     * A history of the changes to the index partition.
   //     *
   //     * @deprecated I've essentially disabled the history (it is always empty
   //     *             when it is persisted). I found it nearly impossible to read.

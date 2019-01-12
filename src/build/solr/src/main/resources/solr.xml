@@ -33,9 +33,9 @@
   sharedLib: path to a lib directory that will be shared across all cores
 -->
 <solr persistent="true">
-	<!-- by default, this is 50 @ WARN
+  <!-- by default, this is 50 @ WARN
   <logging enabled="true">
-  	<watcher size="100" threshold="INFO" />
+    <watcher size="100" threshold="INFO" />
   </logging>
    -->
 
@@ -47,7 +47,9 @@
   All of the attributes in cores after defaultCoreName only apply when running in SolrCloud mode.
   You can read more about SolrCloud mode at http://wiki.apache.org/solr/SolrCloud
   -->
-  <cores adminPath="/admin/cores" defaultCoreName="${solr.default.core.name}" host="${host:}" hostPort="${jetty.port:}" hostContext="${hostContext:}" zkClientTimeout="${zkClientTimeout:15000}">
-    <core name="${solr.default.core.name}" instanceDir="${solr.default.core.directory}" />
+  <cores adminPath="/admin/cores" defaultCoreName="${solr.default.core.name}" host="${host:}"
+    hostPort="${jetty.port:}" hostContext="${hostContext:}"
+    zkClientTimeout="${zkClientTimeout:15000}">
+    <core name="${solr.default.core.name}" instanceDir="${solr.default.core.directory}"/>
   </cores>
 </solr>

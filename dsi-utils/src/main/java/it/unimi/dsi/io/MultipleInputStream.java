@@ -26,7 +26,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /*
-* A multiple input stream.
+ * A multiple input stream.
  *
  * <p>Instances of this class encapsulate a sequence of input streams. When one of the streams is
  * exhausted, the multiple stream behaves as if on an end of file. However, after calling {@link

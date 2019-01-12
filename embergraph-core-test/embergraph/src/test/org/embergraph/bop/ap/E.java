@@ -25,7 +25,7 @@ import java.io.Serializable;
 import org.embergraph.bop.IElement;
 
 /*
-* An element for the test {@link R relation}.
+ * An element for the test {@link R relation}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

@@ -50,7 +50,6 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.relation.RelationSchema;
 import org.embergraph.service.AbstractFederation;
 import org.embergraph.service.AbstractTransactionService;
-import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.util.InnerCause;
 import org.embergraph.util.PropertyUtil;
 import org.openrdf.model.BNode;
@@ -59,7 +58,7 @@ import org.openrdf.model.impl.LinkedHashModel;
 import org.openrdf.model.impl.ValueFactoryImpl;
 
 /*
-* Mult-tenancy Administration Servlet (management for embergraph namespaces). A embergraph
+ * Mult-tenancy Administration Servlet (management for embergraph namespaces). A embergraph
  * namespace corresponds to a partition in the naming of durable resources. A {@link Journal} or
  * {@link IEmbergraphFederation} may have multiple KB instances, each in their own namespace. This
  * servlet allows you to manage those KB instances using CRUD operations.
@@ -611,8 +610,8 @@ public class MultiTenancyServlet extends EmbergraphRDFServlet {
 
                   } catch (Throwable t) {
                     if (InnerCause.isInnerCause(t, DatasetNotFoundException.class)) {
-                    /*
-       * There is no such triple/quad store instance.
+                      /*
+                       * There is no such triple/quad store instance.
                        */
                       throw new HttpOperationException(
                           HttpServletResponse.SC_NOT_FOUND,
@@ -680,8 +679,8 @@ public class MultiTenancyServlet extends EmbergraphRDFServlet {
 
       } else {
 
-      /*
-       * The set of registered namespaces for KBs.
+        /*
+         * The set of registered namespaces for KBs.
          */
         final List<String> namespaces = getEmbergraphRDFContext().getNamespacesTx(tx);
 

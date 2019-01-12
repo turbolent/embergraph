@@ -26,7 +26,7 @@ import junit.extensions.proxy.IProxyTest;
 import junit.framework.Test;
 
 /*
-* This class provides proxy delegation logic for abstract methods declared by {@link
+ * This class provides proxy delegation logic for abstract methods declared by {@link
  * AbstractTestCase} and is used to extend the set of tests that will be applied to all
  * implementations of the generic object model Java API. If you want to test a new implementation,
  * you MUST extend the {@link AbstractTestCase} instead and implement its abstract methods for your

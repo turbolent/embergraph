@@ -18,13 +18,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.internal;
 
-import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.model.EmbergraphURI;
-import org.embergraph.rdf.vocab.Vocabulary;
 import org.openrdf.model.URI;
 
 /*
-* Specialized interface for resolving (and creating if necessary) datatype URIs. This interface
+ * Specialized interface for resolving (and creating if necessary) datatype URIs. This interface
  * requires access to a mutable view of the database since unknown URIs will be registered.
  *
  * @author mrpersonick

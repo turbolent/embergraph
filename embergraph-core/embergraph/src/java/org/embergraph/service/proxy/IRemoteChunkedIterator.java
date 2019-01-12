@@ -24,10 +24,9 @@ package org.embergraph.service.proxy;
 
 import java.io.IOException;
 import java.rmi.Remote;
-import org.embergraph.striterator.IChunkedIterator;
 
 /*
-* Interface for objects proxying for asynchronous chunked iterators. This is used to export
+ * Interface for objects proxying for asynchronous chunked iterators. This is used to export
  * iterators. We wrap an {@link IChunkedIterator} with an object that implements this interface, and
  * then export a proxy for that object. On the client, we wrap the proxy so as to hide the {@link
  * IOException}s and regain our original interface signature.

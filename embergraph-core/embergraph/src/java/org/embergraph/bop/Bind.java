@@ -3,7 +3,7 @@ package org.embergraph.bop;
 import java.util.Map;
 
 /*
-* Operator causes a variable to be bound to the result of its evaluation as a side-effect.
+ * Operator causes a variable to be bound to the result of its evaluation as a side-effect.
  *
  * @author thompsonbry
  */

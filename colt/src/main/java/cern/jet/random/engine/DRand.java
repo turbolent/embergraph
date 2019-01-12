@@ -10,7 +10,7 @@ package cern.jet.random.engine;
 
 import java.util.Date;
 /*
-* Quick medium quality uniform pseudo-random number generator.
+ * Quick medium quality uniform pseudo-random number generator.
  *
  * <p>Produces uniformly distributed <tt>int</tt>'s and <tt>long</tt>'s in the closed intervals
  * <tt>[Integer.MIN_VALUE,Integer.MAX_VALUE]</tt> and <tt>[Long.MIN_VALUE,Long.MAX_VALUE]</tt>,

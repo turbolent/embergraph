@@ -23,7 +23,6 @@ import java.io.Writer;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
@@ -32,18 +31,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.embergraph.ha.HAStatusEnum;
 import org.embergraph.journal.AbstractJournal;
-import org.embergraph.journal.AbstractTask;
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.quorum.AbstractQuorum;
 import org.embergraph.rdf.sail.webapp.client.EncodeDecodeValue;
 import org.embergraph.rdf.sail.webapp.client.IMimeTypes;
-import org.embergraph.rdf.store.BD;
 import org.embergraph.rdf.task.AbstractApiTask;
 import org.embergraph.util.NV;
 import org.openrdf.model.Resource;
 
 /*
-* Useful glue for implementing service actions, but does not directly implement any service action/
+ * Useful glue for implementing service actions, but does not directly implement any service action/
  */
 public abstract class EmbergraphServlet extends HttpServlet implements IMimeTypes {
 
@@ -85,7 +81,7 @@ public abstract class EmbergraphServlet extends HttpServlet implements IMimeType
       "org.embergraph.rdf.sail.webapp.HALoadBalancerServlet.instances";
 
   //    /*
-//     * The {@link ServletContext} attribute whose value is the
+  //     * The {@link ServletContext} attribute whose value is the
   //     * {@link SparqlCache}.
   //     */
   //    /* package */static final transient String ATTRIBUTE_SPARQL_CACHE =
@@ -344,7 +340,7 @@ public abstract class EmbergraphServlet extends HttpServlet implements IMimeType
   }
 
   //	/*
-//	 * The {@link SparqlCache}.
+  //	 * The {@link SparqlCache}.
   //	 */
   //    protected SparqlCache getSparqlCache() {
   //

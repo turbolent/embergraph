@@ -30,7 +30,6 @@ import org.embergraph.rdf.internal.constraints.MathUtility;
 import org.embergraph.rdf.internal.impl.extensions.CompressedTimestampExtension;
 import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
 import org.embergraph.rdf.internal.impl.literal.NumericIV;
-import org.embergraph.rdf.internal.impl.literal.PackedLongIV;
 import org.embergraph.rdf.internal.impl.literal.XSDDecimalIV;
 import org.embergraph.rdf.internal.impl.literal.XSDIntegerIV;
 import org.embergraph.rdf.model.EmbergraphLiteral;
@@ -42,7 +41,7 @@ import org.embergraph.test.MockTermIdFactory;
 import org.openrdf.model.URI;
 
 /*
-* Test suite for math operations on {@link PackedLongIV} and {@link CompressedTimestampExtension}.
+ * Test suite for math operations on {@link PackedLongIV} and {@link CompressedTimestampExtension}.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$

@@ -28,7 +28,7 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.bop.aggregate.IAggregate;
 
 /*
-* A rewrite of a {@link GroupByState} in which all {@link IAggregate} expressions have been lifted
+ * A rewrite of a {@link GroupByState} in which all {@link IAggregate} expressions have been lifted
  * out in order to (a) minimize redundancy when computing the aggregates; and (b) simplify the logic
  * required to compute the {@link IAggregate}s.
  *

@@ -22,9 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.join;
 
 import org.embergraph.bop.engine.BOpStats;
-import org.embergraph.bop.join.PipelineJoin.Annotations;
 import org.embergraph.counters.CAT;
-import org.embergraph.relation.accesspath.IAccessPath;
 
 /** Extended statistics for the join operator. */
 public class PipelineJoinStats extends BaseJoinStats {

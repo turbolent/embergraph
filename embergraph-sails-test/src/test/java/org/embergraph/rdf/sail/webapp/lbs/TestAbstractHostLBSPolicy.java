@@ -25,7 +25,7 @@ import org.embergraph.EmbergraphStatics;
 import org.embergraph.util.httpd.Config;
 
 /*
-* Test suite for the basic stochastic load balancing mechanism for LBS policies based on actual
+ * Test suite for the basic stochastic load balancing mechanism for LBS policies based on actual
  * host workloads regardless of how those workload metrics are obtained.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

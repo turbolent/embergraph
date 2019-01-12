@@ -24,9 +24,7 @@ import cutthecrap.utils.striterators.ICloseableIterator;
 import java.util.Arrays;
 import java.util.UUID;
 import org.embergraph.bop.controller.INamedSolutionSetRef;
-import org.embergraph.bop.engine.IRunningQuery;
 import org.embergraph.bop.solutions.ISolutionSet;
-import org.embergraph.btree.IIndex;
 import org.embergraph.btree.ISimpleIndexAccess;
 import org.embergraph.journal.AbstractJournal;
 import org.embergraph.journal.IBTreeManager;
@@ -34,11 +32,10 @@ import org.embergraph.journal.ITx;
 import org.embergraph.journal.TimestampUtility;
 import org.embergraph.rdf.sparql.ast.ISolutionSetStats;
 import org.embergraph.rdf.sparql.ast.ssets.ISolutionSetManager;
-import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.striterator.Chunkerator;
 
 /*
-* Utility class for {@link INamedSolutionSetRef}s.
+ * Utility class for {@link INamedSolutionSetRef}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -271,7 +268,7 @@ public class NamedSolutionSetRefUtility {
   }
 
   //    /*
-//     * Resolve the pre-existing named solution set returning its
+  //     * Resolve the pre-existing named solution set returning its
   //     * {@link ISolutionSetStats}.
   //     *
   //     * @param sparqlCache
@@ -293,7 +290,7 @@ public class NamedSolutionSetRefUtility {
   //    }
   //
   //    /*
-//     * Resolve the pre-existing named solution set returning an iterator that
+  //     * Resolve the pre-existing named solution set returning an iterator that
   //     * will visit the solutions (access path scan).
   //     *
   //     * @return An iterator that will visit the solutions in the named solution

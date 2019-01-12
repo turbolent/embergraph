@@ -38,7 +38,7 @@ import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.rio.RDFFormat;
 
 /*
-* Proxied test suite.
+ * Proxied test suite.
  *
  * @param <S> TODO Should test GET as well as POST (this requires that we configured the client
  *     differently).

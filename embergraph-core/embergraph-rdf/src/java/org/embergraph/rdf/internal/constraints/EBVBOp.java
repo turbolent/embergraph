@@ -32,7 +32,7 @@ import org.openrdf.query.algebra.evaluation.ValueExprEvaluationException;
 import org.openrdf.query.algebra.evaluation.util.QueryEvaluationUtil;
 
 /*
-* Calculates the "effective boolean value" of an IValueExpression. See the SPARQL spec for details.
+ * Calculates the "effective boolean value" of an IValueExpression. See the SPARQL spec for details.
  */
 public class EBVBOp extends XSDBooleanIVValueExpression implements INeedsMaterialization {
 

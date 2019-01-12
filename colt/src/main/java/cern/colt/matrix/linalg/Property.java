@@ -14,7 +14,7 @@ import cern.colt.matrix.DoubleMatrix3D;
 import cern.jet.math.Functions;
 
 /*
-* Tests matrices for linear algebraic properties (equality, tridiagonality, symmetry, singularity,
+ * Tests matrices for linear algebraic properties (equality, tridiagonality, symmetry, singularity,
  * etc).
  *
  * <p>Except where explicitly indicated, all methods involving equality tests (<tt>==</tt>) allow

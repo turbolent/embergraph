@@ -40,7 +40,7 @@ import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 
 /*
-* Helper class provides efficient stand-off serialization of RDF {@link Value} objects.
+ * Helper class provides efficient stand-off serialization of RDF {@link Value} objects.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -240,8 +240,8 @@ public class EmbergraphValueSerializer<V extends Value> {
         case VERSION1:
           {
             if (tmp == null) {
-            /*
-       * Allocate lazily on the code path where it is necessary.
+              /*
+               * Allocate lazily on the code path where it is necessary.
                */
               tmp = new ByteArrayBuffer(128);
             }
@@ -361,8 +361,8 @@ public class EmbergraphValueSerializer<V extends Value> {
 
       case ITermIndexCodes.TERM_CODE_LCL:
 
-      /*
-       * Note: This field is ASCII [A-Za-z0-9] and "-". However, this
+        /*
+         * Note: This field is ASCII [A-Za-z0-9] and "-". However, this
          * method writes using UTF-8 so it will generate one byte per
          * character and it is probably more work to write the data
          * directly as ASCII bytes.
@@ -488,8 +488,8 @@ public class EmbergraphValueSerializer<V extends Value> {
 
       case ITermIndexCodes.TERM_CODE_LCL:
 
-      /*
-       * Note: This field is ASCII [A-Za-z0-9] and "-". However, this
+        /*
+         * Note: This field is ASCII [A-Za-z0-9] and "-". However, this
          * method writes using UTF-8 so it will generate one byte per
          * character and it is probably more work to write the data
          * directly as ASCII bytes.

@@ -41,15 +41,13 @@ import org.embergraph.bop.PipelineOp;
 import org.embergraph.bop.ap.Predicate;
 import org.embergraph.bop.engine.BOpStats;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.internal.LexiconConfiguration;
 import org.embergraph.rdf.internal.impl.literal.NumericIV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.model.EmbergraphValue;
-import org.embergraph.rdf.sparql.ast.AssignmentNode;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 
 /*
-* A vectored operator that resolves variables bound to mocked terms in binding sets through a
+ * A vectored operator that resolves variables bound to mocked terms in binding sets through a
  * dictionary join. This may be necessary when having {@link AssignmentNode} inside queries; these
  * construct fresh values, which are mocked in a first step. Whenever these values are used later in
  * the query, e.g. by joining such a mock URI with a statement pattern, they need to be resolved to
@@ -254,8 +252,8 @@ public class MockTermResolverOp extends PipelineOp {
             throw new RuntimeException("NULL? : var=" + entry.getKey() + ", " + bindingSet);
           }
 
-        /*
-       * We are interested only in ivs whose value resolves to a EmbergraphValue that is mocked.
+          /*
+           * We are interested only in ivs whose value resolves to a EmbergraphValue that is mocked.
            * As a side effect, the internal cache of the mocked value is cleared.
            */
           collectIVsToResolve(iv, ivMap, lex);
@@ -279,8 +277,8 @@ public class MockTermResolverOp extends PipelineOp {
             throw new RuntimeException("NULL? : var=" + v + ", " + bindingSet);
           }
 
-        /*
-       * We are interested only in ivs whose value resolves to a EmbergraphValue that is mocked.
+          /*
+           * We are interested only in ivs whose value resolves to a EmbergraphValue that is mocked.
            * As a side effect, the internal cache of the mocked value is cleared.
            */
           collectIVsToResolve(iv, ivMap, lex);
@@ -410,8 +408,8 @@ public class MockTermResolverOp extends PipelineOp {
 
         final EmbergraphValue value = ivMap.get(iv);
 
-      /*
-       * Note: constants are immutable, so we can't execute a c.set(), but instead we need to
+        /*
+         * Note: constants are immutable, so we can't execute a c.set(), but instead we need to
          * construct a fresh constant with the resolved value.
          */
         if (value != null && value.getIV() != null) {
@@ -444,8 +442,8 @@ public class MockTermResolverOp extends PipelineOp {
 
         final EmbergraphValue value = ivMap.get(iv);
 
-      /*
-       * Note: constants are immutable, so we can't execute a c.set(), but instead we need to
+        /*
+         * Note: constants are immutable, so we can't execute a c.set(), but instead we need to
          * construct a fresh constant with the resolved value.
          */
         bindingSet.set(entry.getKey(), new Constant<IV<EmbergraphValue, ?>>(value.getIV()));

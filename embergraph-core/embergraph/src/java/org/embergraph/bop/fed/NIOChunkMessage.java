@@ -22,7 +22,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.fed;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
-import java.io.Externalizable;
 import java.io.Serializable;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
@@ -40,12 +39,11 @@ import org.embergraph.io.DirectBufferPoolAllocator;
 import org.embergraph.io.DirectBufferPoolAllocator.IAllocation;
 import org.embergraph.io.DirectBufferPoolAllocator.IAllocationContext;
 import org.embergraph.io.SerializerUtil;
-import org.embergraph.rdf.internal.encoder.IVSolutionSetEncoder;
 import org.embergraph.service.ManagedResourceService;
 import org.embergraph.service.ResourceService;
 
 /*
-* An {@link IChunkMessage} where the payload is made available to the receiving service using an
+ * An {@link IChunkMessage} where the payload is made available to the receiving service using an
  * NIO transfer against the sender's {@link ResourceService}. This is suitable for moving large
  * blocks of data during query evaluation.
  *

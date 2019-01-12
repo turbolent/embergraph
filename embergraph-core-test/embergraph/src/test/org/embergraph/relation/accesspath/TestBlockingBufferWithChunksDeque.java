@@ -24,7 +24,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.relation.accesspath;
 
 import java.util.NoSuchElementException;
-import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -41,7 +40,7 @@ import junit.framework.TestCase2;
 import org.embergraph.util.DaemonThreadFactory;
 
 /*
-* Test suite for {@link BlockingBuffer} and its {@link IAsynchronousIterator} when using an array
+ * Test suite for {@link BlockingBuffer} and its {@link IAsynchronousIterator} when using an array
  * type for the elements (chunk processing) and a {@link BlockingDeque}, which permits combination
  * of chunks as they are added to the buffer.
  *
@@ -187,8 +186,8 @@ public class TestBlockingBufferWithChunksDeque extends TestCase2 {
                   assertTrue("isOpen", buffer.isOpen());
                   assertTrue("isEmpty", buffer.isEmpty());
 
-                /*
-       * Add another element - should not block since the buffer is
+                  /*
+                   * Add another element - should not block since the buffer is
                    * empty.
                    */
                   if (log.isInfoEnabled()) log.info("Adding last chunk to buffer.");
@@ -198,8 +197,8 @@ public class TestBlockingBufferWithChunksDeque extends TestCase2 {
                   assertEquals("chunkCount", 4L, buffer.getChunksAddedCount());
                   assertEquals("elementCount", 7L, buffer.getElementsAddedCount());
 
-                /*
-       * itr.hasNext() (in the producer thread) will block until
+                  /*
+                   * itr.hasNext() (in the producer thread) will block until
                    * the buffer is closed.
                    */
                   buffer.close();
@@ -228,8 +227,8 @@ public class TestBlockingBufferWithChunksDeque extends TestCase2 {
                     assertSameArray(new Integer[] {e0, e1}, itr.next(50, TimeUnit.MILLISECONDS));
                     if (log.isInfoEnabled()) log.info("Have first chunk");
 
-                  /*
-       * Verify that we obtained the first chunk before the
+                    /*
+                     * Verify that we obtained the first chunk before the
                      * buffer was closed. Otherwise next() blocked
                      * attempting to compile a full chunk until the producer
                      * timeout, at which point the producer closed the
@@ -244,8 +243,8 @@ public class TestBlockingBufferWithChunksDeque extends TestCase2 {
                     assertSameArray(new Integer[] {e2, e3, e4}, itr.next());
                     if (log.isInfoEnabled()) log.info("Have second chunk");
 
-                  /*
-       * Verify that nothing is available from the iterator
+                    /*
+                     * Verify that nothing is available from the iterator
                      * (non-blocking test).
                      */
                     assertFalse(itr.hasNext(1, TimeUnit.NANOSECONDS));
@@ -260,8 +259,8 @@ public class TestBlockingBufferWithChunksDeque extends TestCase2 {
                     lock.unlock();
                   }
 
-                /*
-       * Should block until we close the buffer. Will report
+                  /*
+                   * Should block until we close the buffer. Will report
                    * [false] if the consumer was interrupted within hasNext()
                    * since that will cause the iterator to be asynchronously
                    * closed.

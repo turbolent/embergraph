@@ -25,7 +25,6 @@ import java.util.Properties;
 import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.internal.XSD;
 import org.embergraph.rdf.internal.impl.bnode.SidIV;
-import org.embergraph.rdf.load.IStatementBufferFactory;
 import org.embergraph.rdf.model.EmbergraphBNode;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.model.EmbergraphStatement;
@@ -44,7 +43,7 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
 /*
-* Test suite for {@link StatementBuffer}.
+ * Test suite for {@link StatementBuffer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  *     <p>TODO Parameterize with {@link IStatementBufferFactory} and use to test other
@@ -446,15 +445,15 @@ public class TestStatementBuffer extends AbstractTripleStoreTestCase {
     try {
 
       if (!QueryHints.DEFAULT_REIFICATION_DONE_RIGHT) {
-      /*
-       * Disabled.
+        /*
+         * Disabled.
          */
         return;
       }
 
       if (!store.isStatementIdentifiers()) {
-      /*
-       * Disabled. FIXME This should be ON for TRIPLES or QUADS. It only works in the SIDS mode
+        /*
+         * Disabled. FIXME This should be ON for TRIPLES or QUADS. It only works in the SIDS mode
          * right now. The root cause is
          *
          * <pre>

@@ -30,7 +30,7 @@ import org.embergraph.btree.raba.ReadOnlyValuesRaba;
 import org.embergraph.io.DataOutputBuffer;
 
 /*
-* Unit tests for the {@link EmptyRabaValueCoder}.
+ * Unit tests for the {@link EmptyRabaValueCoder}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

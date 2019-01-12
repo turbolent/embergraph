@@ -64,14 +64,13 @@ import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.spo.SPO;
-import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.LiteralImpl;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDF;
 
 /*
-* Test of encode/decode and especially <em>comparator</em> semantics for mixed {@link IV}s.
+ * Test of encode/decode and especially <em>comparator</em> semantics for mixed {@link IV}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -154,8 +153,8 @@ public abstract class AbstractEncodeDecodeMixedIVsTest extends AbstractEncodeDec
       // Fully inline
       {
 
-      /*
-       * BNODEs
+        /*
+         * BNODEs
          */
         if (fullyInlineUnicode) {
           // blank nodes with Unicode IDs.
@@ -184,8 +183,8 @@ public abstract class AbstractEncodeDecodeMixedIVsTest extends AbstractEncodeDec
           ivs.add(new UUIDBNodeIV<EmbergraphBNode>(UUID.randomUUID()));
         }
 
-      /*
-       * URIs
+        /*
+         * URIs
          */
         ivs.add(new FullyInlineURIIV<EmbergraphURI>(new URIImpl("http://www.embergraph.org")));
         ivs.add(new FullyInlineURIIV<EmbergraphURI>(new URIImpl("http://www.embergraph.org/")));
@@ -212,8 +211,8 @@ public abstract class AbstractEncodeDecodeMixedIVsTest extends AbstractEncodeDec
                   new VocabURIByteIV<EmbergraphURI>((byte) 1)));
         }
 
-      /*
-       * Literals
+        /*
+         * Literals
          */
 
         if (fullyInlineUnicode) {
@@ -574,8 +573,8 @@ public abstract class AbstractEncodeDecodeMixedIVsTest extends AbstractEncodeDec
       // Not inline
       {
 
-      /*
-       * TermIds
+        /*
+         * TermIds
          */
         for (int i = 0; i < 100; i++) {
 
@@ -593,8 +592,8 @@ public abstract class AbstractEncodeDecodeMixedIVsTest extends AbstractEncodeDec
           }
         }
 
-      /*
-       * BLOBS
+        /*
+         * BLOBS
          */
         {
           for (int i = 0; i < 100; i++) {

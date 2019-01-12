@@ -22,7 +22,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.eval;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
-import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -69,7 +68,7 @@ import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
 /*
-* A factory for a statement pattern slicing service. It accepts a group with a single triple
+ * A factory for a statement pattern slicing service. It accepts a group with a single triple
  * pattern in it:
  *
  * <pre>

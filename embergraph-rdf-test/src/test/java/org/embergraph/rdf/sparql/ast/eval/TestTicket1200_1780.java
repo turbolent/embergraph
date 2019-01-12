@@ -18,7 +18,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.eval;
 
 /*
-* Test case for https://jira.blazegraph.com/browse/BLZG-1200: REGEX does not use SPARQL spec for
+ * Test case for https://jira.blazegraph.com/browse/BLZG-1200: REGEX does not use SPARQL spec for
  * conversion of literals with a language type
  *
  * @author <a href="mailto:beebs@blazegraph.com">Brad Bebee</a>

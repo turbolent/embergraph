@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
 import org.embergraph.EmbergraphStatics;
 
 /*
-* A low-contention/high concurrency weak value cache. This class can offer substantially less lock
+ * A low-contention/high concurrency weak value cache. This class can offer substantially less lock
  * contention and hence greater performance than the {@link WeakValueCache}. The class batches
  * touches using a thread-local queue in order to improve throughput over the {@link
  * ConcurrentWeakValueCache}. Because of the thread-local queues, which must have 64 to 128 elements
@@ -237,8 +237,8 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V>
             64, // threadLocalQueueCapacity
             32, // threadLocalTryLockSize
             new IBatchedUpdateListener<V>() {
-            /*
-       * Since processing the ReferenceQueue requires a lock, we let the thread which
+              /*
+               * Since processing the ReferenceQueue requires a lock, we let the thread which
                * batches the access order updates remove entries for cleared references.
                * [Historically this task was handled by the thread modifying the map in put() and
                * putIfAbsent(), which caused contention for the lock inside of the ReferenceQueue.]
@@ -289,8 +289,8 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V>
 
       if (v != null) {
 
-      /*
-       * The reference paired with the key has not been cleared so we
+        /*
+         * The reference paired with the key has not been cleared so we
          * append it to the queue so that the reference will be retained
          * longer (a touch).
          */
@@ -338,8 +338,8 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V>
 
       if (v != null) {
 
-      /*
-       * The reference paired with the key has not been cleared so we
+        /*
+         * The reference paired with the key has not been cleared so we
          * append it to the queue so that the reference will be retained
          * longer (a touch).
          */
@@ -637,7 +637,7 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V>
   }
 
   //    /*
-//     * Clears stale references from the backing {@link HardReferenceQueue}.
+  //     * Clears stale references from the backing {@link HardReferenceQueue}.
   //     * <p>
   //     * Note: Evictions from the backing hard reference queue are driven by
   //     * touches (get, put, remove). This means that the LRU entries in the map

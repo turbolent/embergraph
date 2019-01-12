@@ -25,16 +25,14 @@ package org.embergraph.journal;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
-import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.TimeUnit;
 import org.embergraph.counters.ICounterSetAccess;
 import org.embergraph.service.IServiceShutdown;
 
 /*
-* Interface for managing concurrent access to resources (indices).
+ * Interface for managing concurrent access to resources (indices).
  *
  * @see AbstractTask, Base class for tasks to be executed with concurrency control.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -45,7 +43,7 @@ public interface IConcurrencyManager extends IServiceShutdown, ICounterSetAccess
   ILocalTransactionManager getTransactionManager();
 
   //    /*
-//     * The server side of the transaction manager.
+  //     * The server side of the transaction manager.
   //     */
   //    public ITransactionManager getTransactionService();
 

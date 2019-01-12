@@ -57,8 +57,8 @@ public class BindingSetComparator<E> implements Comparator<IBindingSet> {
 
       if (v instanceof IBind<?>) {
 
-      /*
-       * Use the variable on which the computed expression was bound.
+        /*
+         * Use the variable on which the computed expression was bound.
          *
          * Note: This assumes that the value expression for the bind has
          * already been evaluated such that we may simply resolve the

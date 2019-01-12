@@ -35,7 +35,7 @@ import java.util.Map;
 import org.apache.log4j.Level;
 
 /*
-* Utility class that provides a set of static convenience methods related to processing information
+ * Utility class that provides a set of static convenience methods related to processing information
  * about the current node's Network Interface Card(s) (NICs) and associated IP address(es) and
  * hostname. Although useful in general, the methods in this utility class may be particularly
  * useful when employed from within a Jini configuration file.
@@ -310,7 +310,7 @@ public class NicUtil {
   }
 
   //    /*
-//     * Three-argument version of <code>getInetAddress</code> that retrieves
+  //     * Three-argument version of <code>getInetAddress</code> that retrieves
   //     * the desired interface name from the given <code>Configuration</code>
   //     * parameter.
   //     */
@@ -449,8 +449,7 @@ public class NicUtil {
    *     where the value that is returned is determined according to the criteria described above.
    */
   public static String getIpAddress(
-      String systemPropertyName, String defaultNic, boolean loopbackOk)
-      throws IOException {
+      String systemPropertyName, String defaultNic, boolean loopbackOk) throws IOException {
     if (systemPropertyName != null) { // system property takes precedence
       String nicName = System.getProperty(systemPropertyName);
       boolean propSet = true;

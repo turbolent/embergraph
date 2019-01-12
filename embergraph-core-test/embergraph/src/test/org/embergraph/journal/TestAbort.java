@@ -29,7 +29,7 @@ import org.embergraph.io.ChecksumUtility;
 import org.embergraph.io.DirectBufferPool;
 
 /*
-* Test the ability to abort (discard an uncommitted write set). This is a test of the unisolated
+ * Test the ability to abort (discard an uncommitted write set). This is a test of the unisolated
  * {@link IAtomicStore#abort()} semantics, NOT a test of transactional abort semantics.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -182,8 +182,8 @@ public class TestAbort extends ProxyTestCase<Journal> {
 
         final long addr = store.write(ByteBuffer.wrap(a));
 
-      /*
-       * Verify read back
+        /*
+         * Verify read back
          */
         final ByteBuffer b = store.read(addr);
 

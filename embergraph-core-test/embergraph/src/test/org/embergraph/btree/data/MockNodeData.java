@@ -4,7 +4,7 @@ import org.embergraph.btree.raba.IRaba;
 import org.embergraph.io.AbstractFixedByteArrayBuffer;
 
 /*
-* Mock object for {@link INodeData}.
+ * Mock object for {@link INodeData}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

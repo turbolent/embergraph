@@ -240,6 +240,5 @@ public class ModelUtil {
       // objects are not (both) bNodes
       return obj1.equals(obj2);
     }
-
   }
 }

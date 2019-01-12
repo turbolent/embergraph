@@ -17,7 +17,7 @@ import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 
 /*
-* Simple graph program constructs a local graph using a SPARQL query that extracts edges of
+ * Simple graph program constructs a local graph using a SPARQL query that extracts edges of
  * interest from the SPARQL server.
  *
  * <p>To get started, start the NanoSparqlServer. Then LOAD the data set into the server using

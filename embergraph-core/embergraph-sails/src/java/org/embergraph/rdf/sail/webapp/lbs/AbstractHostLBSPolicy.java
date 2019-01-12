@@ -23,10 +23,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.UUID;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
@@ -38,12 +36,11 @@ import org.apache.log4j.Logger;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.Journal;
 import org.embergraph.journal.PlatformStatsPlugIn;
-import org.embergraph.quorum.Quorum;
 import org.embergraph.rdf.sail.webapp.HALoadBalancerServlet;
 import org.embergraph.util.InnerCause;
 
 /*
-* Abstract base class for an LBS policy that uses per-host load metrics.
+ * Abstract base class for an LBS policy that uses per-host load metrics.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -328,8 +325,8 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
                         // Terminate if interrupted.
                         throw ex;
                       }
-                    /*
-       * Note: If the task thows an exception it will not
+                      /*
+                       * Note: If the task thows an exception it will not
                        * be rescheduled, therefore log @ ERROR rather than
                        * allowing the unchecked exception to be
                        * propagated.
@@ -727,13 +724,13 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
     HostScore hostScore = null;
     {
       if (hostScores.length == 1) {
-      /*
-       * Only one host.
+        /*
+         * Only one host.
          */
         hostScore = hostScores[0];
       } else {
-      /*
-       * Multiple hosts.
+        /*
+         * Multiple hosts.
          *
          * Note: Choice is inversely proportional to normalized workload
          * (1 - load).

@@ -15,7 +15,7 @@ import org.openrdf.rio.RDFWriter;
 import org.openrdf.rio.turtle.TurtleWriter;
 
 /*
-* An implementation of the RDFWriter interface that writes RDF documents in Turtle format. The
+ * An implementation of the RDFWriter interface that writes RDF documents in Turtle format. The
  * Turtle format is defined in <a href="http://www.dajobe.org/2004/01/turtle/">in this document</a>.
  *
  * @openrdf

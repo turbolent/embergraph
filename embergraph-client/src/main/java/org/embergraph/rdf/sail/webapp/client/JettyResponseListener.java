@@ -158,13 +158,13 @@ public class JettyResponseListener extends InputStreamResponseListener {
     {
       final String contentEncoding = getContentEncoding();
       if (contentEncoding != null) {
-      /*
-       * Explicit content encoding.
+        /*
+         * Explicit content encoding.
          */
         r = new InputStreamReader(getInputStream(), contentEncoding);
       } else if (getContentType() != null && getContentType().startsWith("text/")) {
-      /*
-       * Note: Per Section 3.7.1 Canonicalization and Text Defaults of the HTTP 1.1 specification:
+        /*
+         * Note: Per Section 3.7.1 Canonicalization and Text Defaults of the HTTP 1.1 specification:
          *
          * <p>The "charset" parameter is used with some media types to define the character set
          * (section 3.4) of the data. When no explicit charset parameter is provided by the sender,
@@ -175,8 +175,8 @@ public class JettyResponseListener extends InputStreamResponseListener {
          */
         r = new InputStreamReader(getInputStream(), StandardCharsets.ISO_8859_1);
       } else {
-      /*
-       * Also per that section, no default otherwise.
+        /*
+         * Also per that section, no default otherwise.
          */
         r = new InputStreamReader(getInputStream());
       }

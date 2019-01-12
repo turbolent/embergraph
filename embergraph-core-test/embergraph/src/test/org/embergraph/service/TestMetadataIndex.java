@@ -27,10 +27,9 @@ import java.io.IOException;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import org.embergraph.btree.IndexMetadata;
-import org.embergraph.mdi.MetadataIndex;
 
 /*
-* Some unit tests for the {@link MetadataIndex} as accessed via the {@link IMetadataService}.
+ * Some unit tests for the {@link MetadataIndex} as accessed via the {@link IMetadataService}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -42,7 +42,6 @@ import org.embergraph.rdf.sail.EmbergraphSail.Options;
 import org.embergraph.rdf.store.BDS;
 import org.embergraph.search.Hiterator;
 import org.embergraph.search.IHit;
-import org.embergraph.search.TestSearch;
 import org.openrdf.model.Graph;
 import org.openrdf.model.Literal;
 import org.openrdf.model.Statement;
@@ -64,7 +63,7 @@ import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.rio.helpers.StatementCollector;
 
 /*
-* Test suite for high-level query against a graph containing statements about statements.
+ * Test suite for high-level query against a graph containing statements about statements.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -90,7 +89,7 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
   }
 
   //    /*
-//     * Overriden to cause the backing store to be deleted.
+  //     * Overriden to cause the backing store to be deleted.
   //     */
   //    protected void tearDown() throws Exception {
   //
@@ -196,7 +195,7 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
   //    }
 
   //    /*
-//     * This runs a hand-coded query corresponding to a SPARQL query using the
+  //     * This runs a hand-coded query corresponding to a SPARQL query using the
   //     * {@link BD#SEARCH} magic predicate.
   //     *
   //     * <pre>
@@ -666,8 +665,7 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
 
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      final EmbergraphSailRepositoryConnection cxn =
-          repo.getConnection();
+      final EmbergraphSailRepositoryConnection cxn = repo.getConnection();
 
       try {
 
@@ -701,8 +699,8 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
         cxn.add(s7, RDFS.LABEL, l7);
         cxn.add(s8, RDFS.LABEL, l8);
 
-      /*
-       * Note: The either flush() or commit() is required to flush the
+        /*
+         * Note: The either flush() or commit() is required to flush the
          * statement buffers to the database before executing any operations
          * that go around the sail.
          */
@@ -2148,8 +2146,7 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
 
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      final EmbergraphSailRepositoryConnection cxn =
-          repo.getConnection();
+      final EmbergraphSailRepositoryConnection cxn = repo.getConnection();
 
       try {
 
@@ -2183,8 +2180,8 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
         cxn.add(s7, RDFS.LABEL, l7);
         cxn.add(s8, RDFS.LABEL, l8);
 
-      /*
-       * Note: The either flush() or commit() is required to flush the
+        /*
+         * Note: The either flush() or commit() is required to flush the
          * statement buffers to the database before executing any operations
          * that go around the sail.
          */
@@ -2393,7 +2390,7 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
   //    }
 
   //    /*
-//     * Process a query in min/max rank chunks, with a goal of reaching the
+  //     * Process a query in min/max rank chunks, with a goal of reaching the
   //     * number of snippets specified by numSnippets.
   //     *
   //     * @param cxn
@@ -2536,8 +2533,7 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
 
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      final EmbergraphSailRepositoryConnection cxn =
-          repo.getConnection();
+      final EmbergraphSailRepositoryConnection cxn = repo.getConnection();
 
       try {
 
@@ -2571,8 +2567,8 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
         cxn.add(s7, RDFS.LABEL, l7);
         cxn.add(s8, RDFS.LABEL, l8);
 
-      /*
-       * Note: The either flush() or commit() is required to flush the
+        /*
+         * Note: The either flush() or commit() is required to flush the
          * statement buffers to the database before executing any operations
          * that go around the sail.
          */

@@ -32,10 +32,9 @@ import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IVariable;
 import org.embergraph.rdf.sparql.ast.eval.IEvaluationContext;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
-import org.embergraph.rdf.sparql.ast.ssets.ISolutionSetManager;
 
 /*
-* Base class for static analysis.
+ * Base class for static analysis.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -201,8 +200,8 @@ public class StaticAnalysisBase {
 
         final ISolutionSetStats stats = getSolutionSetStats(name);
 
-      /*
-       * Note: This is all variables which are bound in ANY solution.
+        /*
+         * Note: This is all variables which are bound in ANY solution.
          * It MAY include variables which are NOT bound in some
          * solutions.
          */
@@ -340,7 +339,7 @@ public class StaticAnalysisBase {
   }
 
   //    /*
-//     * Add all variables on the {@link ProjectionNode} of the subquery to the
+  //     * Add all variables on the {@link ProjectionNode} of the subquery to the
   //     * set of distinct variables visible within the scope of the parent query.
   //     *
   //     * @param subquery
@@ -386,7 +385,6 @@ public class StaticAnalysisBase {
      * variables.
      */
     return fvars.isEmpty();
-
   }
 
   /*

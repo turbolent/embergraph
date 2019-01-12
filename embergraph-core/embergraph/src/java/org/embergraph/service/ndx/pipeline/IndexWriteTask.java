@@ -24,24 +24,21 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.service.ndx.pipeline;
 
 import java.util.LinkedList;
-import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
 import org.embergraph.btree.keys.KVO;
 import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedureConstructor;
-import org.embergraph.btree.proc.IIndexProcedure;
 import org.embergraph.btree.proc.IKeyArrayIndexProcedure;
 import org.embergraph.btree.proc.IResultHandler;
 import org.embergraph.mdi.PartitionLocator;
 import org.embergraph.relation.accesspath.BlockingBuffer;
-import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.service.IDataService;
 import org.embergraph.service.Split;
 import org.embergraph.service.ndx.IScaleOutClientIndex;
 
 /*
-* Task drains a {@link BlockingBuffer} containing {@link KVO}[] chunks, splits the chunks based on
+ * Task drains a {@link BlockingBuffer} containing {@link KVO}[] chunks, splits the chunks based on
  * the separator keys for the scale-out index, and then assigns each chunk to per-index partition
  * {@link BlockingBuffer} which is in turned drained by an {@link IndexPartitionWriteTask} that
  * writes onto a specific index partition.

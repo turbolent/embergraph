@@ -26,7 +26,7 @@ import org.embergraph.bop.IValueExpression;
 import org.embergraph.bop.engine.BOpStats;
 
 /*
-* A utility class for logging type errors.
+ * A utility class for logging type errors.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -17,7 +17,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
 /*
-* https://jira.blazegraph.com/browse/BLZG-1862 and https://jira.blazegraph.com/browse/BLZG-856 take
+ * https://jira.blazegraph.com/browse/BLZG-1862 and https://jira.blazegraph.com/browse/BLZG-856 take
  * this optimizer into an infinite loop.
  *
  * <p>BLZG-856 SELECT * WITH { SELECT * { INCLUDE %sub_record }} AS %foo { INCLUDE %foo } and

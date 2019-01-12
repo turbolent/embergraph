@@ -31,7 +31,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import org.embergraph.journal.ICommitter;
 
 /*
-* Base class for managing read/write locks for unisolated {@link ICommitter}s.
+ * Base class for managing read/write locks for unisolated {@link ICommitter}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @see <a href="http://trac.blazegraph.com/ticket/855">AssertionError: Child does not have
@@ -60,7 +60,7 @@ public class ReadWriteLockManager implements IReadWriteLockManager {
    * hash map.
    */
   //    /*
-//     * The unisolated persistence capable data structure.
+  //     * The unisolated persistence capable data structure.
   //     */
   //    final private ICheckpointProtocol committer;
 
@@ -205,8 +205,8 @@ public class ReadWriteLockManager implements IReadWriteLockManager {
     @Override
     public void lock() {
       try {
-      /*
-       * Note: The original UnisolatedReadWriteLock semantics are
+        /*
+         * Note: The original UnisolatedReadWriteLock semantics are
          * always those of a tryLock with a default timeout. Make sure
          * that we keep this in place!
          */
@@ -296,8 +296,8 @@ public class ReadWriteLockManager implements IReadWriteLockManager {
     @Override
     public void lock() {
       try {
-      /*
-       * Note: The original UnisolatedReadWriteLock semantics are
+        /*
+         * Note: The original UnisolatedReadWriteLock semantics are
          * always those of a tryLock with a default timeout. Make sure
          * that we keep this in place!
          */

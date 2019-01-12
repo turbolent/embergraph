@@ -22,10 +22,9 @@ Copyright (C) Embergraph contributors 2019. All rights reserved.
 package org.embergraph.btree.proc;
 
 import org.embergraph.btree.raba.IRaba;
-import org.embergraph.service.ndx.ClientIndexView;
 
 /*
-* Interface for procedures that are mapped across one or more index partitions based on an array of
+ * Interface for procedures that are mapped across one or more index partitions based on an array of
  * keys. The keys are interpreted as variable length unsigned byte[]s and MUST be in sorted order.
  * The {@link ClientIndexView} will transparently break down the procedure into one procedure per
  * index partition based on the index partitions spanned by the keys.

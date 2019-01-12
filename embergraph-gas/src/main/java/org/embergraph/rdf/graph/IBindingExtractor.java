@@ -18,7 +18,7 @@ package org.embergraph.rdf.graph;
 import java.util.List;
 
 /*
-* This interface makes it possible to extract bindings for variables from an {@link IGASProgram}.
+ * This interface makes it possible to extract bindings for variables from an {@link IGASProgram}.
  *
  * @param <VS> The generic type for the per-vertex state. This is scoped to the computation of the
  *     {@link IGASProgram}.

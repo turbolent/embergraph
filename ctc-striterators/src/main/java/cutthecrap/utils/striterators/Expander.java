@@ -18,7 +18,7 @@ package cutthecrap.utils.striterators;
 import java.util.Iterator;
 
 /*
-* Expander
+ * Expander
  *
  * <p>Used with Expanderator by Striterator to expand returned objects.
  *

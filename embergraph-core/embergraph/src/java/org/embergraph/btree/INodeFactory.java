@@ -21,7 +21,7 @@ import org.embergraph.btree.data.ILeafData;
 import org.embergraph.btree.data.INodeData;
 
 /*
-* Interface for creating nodes or leaves.
+ * Interface for creating nodes or leaves.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

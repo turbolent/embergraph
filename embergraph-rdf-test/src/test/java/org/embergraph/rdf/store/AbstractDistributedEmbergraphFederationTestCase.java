@@ -25,7 +25,7 @@ import junit.framework.TestCase2;
 import org.embergraph.service.AbstractScaleOutClient;
 
 /*
-* An abstract test harness that sets up (and tears down) the metadata and data services required
+ * An abstract test harness that sets up (and tears down) the metadata and data services required
  * for a embergraph federation using JINI to handle service discovery.
  *
  * <p>Note: The configuration options for the (meta)data services are set in their respective <code>

@@ -23,7 +23,7 @@ package org.embergraph.btree;
 import java.util.NoSuchElementException;
 
 /*
-* Visits the values of a {@link Leaf} in the external key ordering. There is exactly one value per
+ * Visits the values of a {@link Leaf} in the external key ordering. There is exactly one value per
  * key for a leaf node.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

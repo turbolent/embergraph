@@ -25,7 +25,7 @@ import java.util.Properties;
 import org.embergraph.rdf.sail.EmbergraphSail.Options;
 
 /*
-* A variant of the test suite using full read/write transactions.
+ * A variant of the test suite using full read/write transactions.
  *
  * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/531" > SPARQL UPDATE for NAMED
  *     SOLUTION SETS </a>

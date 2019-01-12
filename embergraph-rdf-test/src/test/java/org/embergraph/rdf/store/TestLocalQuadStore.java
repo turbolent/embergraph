@@ -29,7 +29,7 @@ import org.embergraph.journal.Options;
 import org.embergraph.rdf.axioms.NoAxioms;
 
 /*
-* Proxy test suite for {@link LocalTripleStore} in quad-store mode.
+ * Proxy test suite for {@link LocalTripleStore} in quad-store mode.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

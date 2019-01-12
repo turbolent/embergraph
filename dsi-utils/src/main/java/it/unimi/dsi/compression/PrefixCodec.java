@@ -24,7 +24,7 @@ package it.unimi.dsi.compression;
 import it.unimi.dsi.bits.BitVector;
 
 /*
-* A codec based on a set of prefix-free codewords.
+ * A codec based on a set of prefix-free codewords.
  *
  * <p>Prefix codec work by building a vector of prefix-free codewords, one for each symbol. The
  * method {@link #codeWords()} returns that vector. Moreover, this interface strengthens the return

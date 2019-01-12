@@ -23,7 +23,6 @@ package it.unimi.dsi.io;
 
 import it.unimi.dsi.bits.Fast;
 import it.unimi.dsi.fastutil.booleans.AbstractBooleanIterator;
-import it.unimi.dsi.fastutil.booleans.BooleanIterator;
 import it.unimi.dsi.fastutil.ints.IntIterators;
 import it.unimi.dsi.fastutil.io.BinIO;
 import it.unimi.dsi.fastutil.io.FastBufferedInputStream;
@@ -41,7 +40,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.nio.channels.FileChannel;
 
 /*
-* Bit-level input stream.
+ * Bit-level input stream.
  *
  * <p>This class wraps any {@link InputStream} so that you can treat it as <em>bit</em> stream.
  * Constructors and methods closely resemble those of {@link InputStream}. Data can be read from

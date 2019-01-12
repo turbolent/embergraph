@@ -2,12 +2,10 @@ package org.embergraph.rwstore;
 
 import java.util.concurrent.locks.Lock;
 import org.embergraph.journal.IBufferStrategy;
-import org.embergraph.journal.RWStrategy;
 import org.embergraph.rawstore.IAllocationManagerStore;
-import org.embergraph.rwstore.sector.MemStrategy;
 
 /*
-* Defines a marker interface to be used to indicate strategies that share RW semantics such as
+ * Defines a marker interface to be used to indicate strategies that share RW semantics such as
  * {@link RWStrategy} and {@link MemStrategy}
  *
  * @author Martyn Cutcher

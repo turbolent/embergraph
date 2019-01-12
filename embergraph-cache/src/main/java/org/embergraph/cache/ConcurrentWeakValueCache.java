@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.apache.log4j.Logger;
 
 /*
-* A low-contention/high concurrency weak value cache. This class can offer substantially less lock
+ * A low-contention/high concurrency weak value cache. This class can offer substantially less lock
  * contention and hence greater performance than the {@link WeakValueCache}.
  *
  * <p>The role of the {@link HardReferenceQueue} is to place a minimum upper bound on the #of
@@ -257,8 +257,8 @@ public class ConcurrentWeakValueCache<K, V> implements IConcurrentWeakValueCache
 
       if (v != null) {
 
-      /*
-       * The reference paired with the key has not been cleared so we
+        /*
+         * The reference paired with the key has not been cleared so we
          * append it to the queue so that the reference will be retained
          * longer (a touch).
          */
@@ -304,8 +304,8 @@ public class ConcurrentWeakValueCache<K, V> implements IConcurrentWeakValueCache
 
       if (v != null) {
 
-      /*
-       * The reference paired with the key has not been cleared so we
+        /*
+         * The reference paired with the key has not been cleared so we
          * append it to the queue so that the reference will be retained
          * longer (a touch).
          */
@@ -402,8 +402,8 @@ public class ConcurrentWeakValueCache<K, V> implements IConcurrentWeakValueCache
 
       if (oldRef != null && oldVal == null) {
 
-      /*
-       * There was an entry under the key but its reference has been
+        /*
+         * There was an entry under the key but its reference has been
          * cleared. A cleared value paired to the key is equivalent to
          * there being no entry under the key (the entry will be cleared
          * the next time removeClearedRefernces() is invoked). Therefore
@@ -435,8 +435,8 @@ public class ConcurrentWeakValueCache<K, V> implements IConcurrentWeakValueCache
 
         } else {
 
-        /*
-       * We lost a potential concurrent data race, so make recursive call to ensure correct
+          /*
+           * We lost a potential concurrent data race, so make recursive call to ensure correct
            * value is returned.
            *
            * @see <a href="http://trac.blazegraph.com/ticket/1004">Concurrent binding problem </a>
@@ -599,7 +599,7 @@ public class ConcurrentWeakValueCache<K, V> implements IConcurrentWeakValueCache
   }
 
   //    /*
-//     * Clears stale references from the backing {@link HardReferenceQueue}.
+  //     * Clears stale references from the backing {@link HardReferenceQueue}.
   //     * <p>
   //     * Note: Evictions from the backing hard reference queue are driven by
   //     * touches (get, put, remove). This means that the LRU entries in the map

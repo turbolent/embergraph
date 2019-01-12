@@ -43,7 +43,7 @@ import org.embergraph.rdf.sparql.ast.UnionNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /*
-* Pruning rules for unknown IVs in statement patterns:
+ * Pruning rules for unknown IVs in statement patterns:
  *
  * <p>If an optional join is known to fail, then remove the optional group in which it appears from
  * the group (which could be an optional group, a join group, or a union).
@@ -270,8 +270,8 @@ public class ASTUnknownTermOptimizer implements IASTOptimizer {
       if (!(child instanceof GroupNodeBase<?>)) continue;
 
       if (((GroupNodeBase<?>) child).getContext() != null) {
-      /*
-       * Do not prune GRAPH ?g {} or GRAPH uri {}. Those constructions
+        /*
+         * Do not prune GRAPH ?g {} or GRAPH uri {}. Those constructions
          * have special semantics.
          */
         continue;

@@ -20,7 +20,7 @@ import java.util.Iterator;
 import org.apache.log4j.Logger;
 
 /*
-* A view on a mutable int[] that may be extended.
+ * A view on a mutable int[] that may be extended.
  *
  * <p>Note: The backing int[] always has an {@link #off() offset} of ZERO (0) and a {@link #len()
  * length} equal to the capacity of the backing int[].
@@ -353,8 +353,8 @@ public class ManagedArray<T> implements IManagedArray<T> {
 
       if ((aoff + alen) > len) {
 
-      /*
-       * The operation run length at that offset would extend beyond
+        /*
+         * The operation run length at that offset would extend beyond
          * the end of the slice.
          */
 

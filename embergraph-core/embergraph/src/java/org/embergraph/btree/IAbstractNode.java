@@ -20,7 +20,7 @@ package org.embergraph.btree;
 import java.util.Iterator;
 
 /*
-* Interface for a node or a leaf of a B+-Tree.
+ * Interface for a node or a leaf of a B+-Tree.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

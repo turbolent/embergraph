@@ -18,7 +18,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sail.webapp.client;
 
 /*
-* Interface for embergraph transactions on the client.
+ * Interface for embergraph transactions on the client.
  *
  * @author bryan
  * @see <a href="http://trac.bigdata.com/ticket/1156">Support read/write transactions in the REST

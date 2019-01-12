@@ -27,7 +27,7 @@ import java.io.Serializable;
 import java.util.Iterator;
 
 /*
-* Stackable filter pattern with generics.
+ * Stackable filter pattern with generics.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

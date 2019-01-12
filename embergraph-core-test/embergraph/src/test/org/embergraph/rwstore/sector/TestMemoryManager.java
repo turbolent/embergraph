@@ -366,8 +366,8 @@ public class TestMemoryManager extends TestCase2 {
                   if (log.isInfoEnabled())
                     log.info(
                         "Attempting blocking allocation: slotBytes: " + manager.getSlotBytes());
-                /*
-       * blocking allocation of the same size that was
+                  /*
+                   * blocking allocation of the same size that was
                    * just refused.
                    */
                   return manager.allocate(sectorSize);

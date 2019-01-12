@@ -26,7 +26,7 @@ import it.unimi.dsi.fastutil.chars.CharList;
 import it.unimi.dsi.lang.MutableString;
 
 /*
-* QuickSearch matching against a constant string.
+ * QuickSearch matching against a constant string.
  *
  * <p>The {@linkplain java.util.regex regular expression facilities} of the Java API are a powerful
  * tool; however, when searching for a <em>constant</em> pattern many algorithms can increase of

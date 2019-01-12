@@ -20,12 +20,9 @@ package org.embergraph.journal;
 import java.io.IOException;
 import java.util.UUID;
 import java.util.concurrent.BrokenBarrierException;
-import org.embergraph.service.IDataService;
-import org.embergraph.service.IEmbergraphFederation;
-import org.embergraph.service.ITxCommitProtocol;
 
 /*
-* Extended interface for distributed 2-phase transactions for an {@link IEmbergraphFederation}.
+ * Extended interface for distributed 2-phase transactions for an {@link IEmbergraphFederation}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

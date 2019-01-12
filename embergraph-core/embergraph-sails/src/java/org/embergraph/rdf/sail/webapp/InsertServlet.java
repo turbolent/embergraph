@@ -46,7 +46,7 @@ import org.openrdf.rio.helpers.RDFHandlerBase;
 import org.openrdf.sail.SailException;
 
 /*
-* Handler for INSERT operations.
+ * Handler for INSERT operations.
  *
  * @author martyncutcher
  */
@@ -257,8 +257,8 @@ public class InsertServlet extends EmbergraphRDFServlet {
 
         conn = getConnection();
 
-      /*
-       * There is a request body, so let's try and parse it.
+        /*
+         * There is a request body, so let's try and parse it.
          *
          * <p>FIXME This does not handle .gz or .zip files. We handle this in the
          *
@@ -278,8 +278,8 @@ public class InsertServlet extends EmbergraphRDFServlet {
         rdfParser.setRDFHandler(
             new AddStatementHandler(conn.getSailConnection(), nmodified, defaultContext));
 
-      /*
-       * Run the parser, which will cause statements to be inserted.
+        /*
+         * Run the parser, which will cause statements to be inserted.
          */
         rdfParser.parse(req.getInputStream(), baseURI);
 
@@ -447,8 +447,8 @@ public class InsertServlet extends EmbergraphRDFServlet {
             hconn.setDoOutput(false);
             hconn.setReadTimeout(0); // no timeout? http param?
 
-          /*
-       * There is a request body, so let's try and parse it.
+            /*
+             * There is a request body, so let's try and parse it.
              *
              * @see <a href= "https://sourceforge.net/apps/trac/bigdata/ticket/620" > UpdateServlet
              *     fails to parse MIMEType when doing conneg. </a>
@@ -464,8 +464,8 @@ public class InsertServlet extends EmbergraphRDFServlet {
 
             if (format == null) {
 
-            /*
-       * Try to get the RDFFormat from the URL's file
+              /*
+               * Try to get the RDFFormat from the URL's file
                * path.
                */
               // BLZG-1929
@@ -503,8 +503,8 @@ public class InsertServlet extends EmbergraphRDFServlet {
             rdfParser.setRDFHandler(
                 new AddStatementHandler(conn.getSailConnection(), nmodified, defactoContext));
 
-          /*
-       * Run the parser, which will cause statements to be
+            /*
+             * Run the parser, which will cause statements to be
              * inserted.
              */
 
@@ -520,8 +520,8 @@ public class InsertServlet extends EmbergraphRDFServlet {
           } finally {
 
             if (hconn instanceof HttpURLConnection) {
-            /*
-       * Disconnect, but only after we have loaded all the
+              /*
+               * Disconnect, but only after we have loaded all the
                * URLs. Disconnect is optional for java.net. It is
                * a hint that you will not be accessing more
                * resources on the connected host. By disconnecting

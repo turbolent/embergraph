@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.embergraph.rdf.sail.webapp.HALoadBalancerServlet;
 
 /*
-* Load balancer policy interface.
+ * Load balancer policy interface.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @see HALoadBalancerServlet

@@ -42,7 +42,7 @@ import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Unit tests for splitting an index segment based on its size on the disk, the nominal size of an
+ * Unit tests for splitting an index segment based on its size on the disk, the nominal size of an
  * index partition, and an optional application level constraint on the choice of the separator
  * keys. This approach presumes a compacting merge has been performed such that all history other
  * than the buffered writes is on a single index segment. The buffered writes are not considered
@@ -76,7 +76,7 @@ public class TestFixedLengthPrefixShardSplits extends AbstractTestSegSplitter {
   //    protected IPartitionIdFactory pidFactory = new MockPartitionIdFactory();
   //
   //    /*
-//     * Always accepts the recommended separator key.
+  //     * Always accepts the recommended separator key.
   //     */
   //    protected static final ISimpleSplitHandler acceptAllSplits = new ISimpleSplitHandler() {
   //
@@ -89,7 +89,7 @@ public class TestFixedLengthPrefixShardSplits extends AbstractTestSegSplitter {
   //    };
   //
   //    /*
-//     * Always returns <code>null</code> (never accepts any splits).
+  //     * Always returns <code>null</code> (never accepts any splits).
   //     */
   //    protected static final ISimpleSplitHandler rejectAllSplits = new ISimpleSplitHandler() {
   //
@@ -102,7 +102,7 @@ public class TestFixedLengthPrefixShardSplits extends AbstractTestSegSplitter {
   //    };
   //
   //    /*
-//     * Accepts the recommended separator key unless it is GTE the key given to
+  //     * Accepts the recommended separator key unless it is GTE the key given to
   //     * the constructor, in which case it refuses to accept any splits.
   //     */
   //    private static class RejectSplitsAfterKey implements ISimpleSplitHandler {
@@ -137,7 +137,7 @@ public class TestFixedLengthPrefixShardSplits extends AbstractTestSegSplitter {
   //    };
   //
   //    /*
-//     * Generate an {@link IndexSegment} from the given BTree.
+  //     * Generate an {@link IndexSegment} from the given BTree.
   //     *
   //     * @param src
   //     *            The source {@link BTree}.
@@ -198,7 +198,7 @@ public class TestFixedLengthPrefixShardSplits extends AbstractTestSegSplitter {
   //    }
   //
   //    /*
-//     * Register a {@link BTree} against the journal, generate some data in the
+  //     * Register a {@link BTree} against the journal, generate some data in the
   //     * specified key range, and commit the data.
   //     *<p>
   //     * Note: this uses int values to generate the keys. If you specify the
@@ -272,7 +272,7 @@ public class TestFixedLengthPrefixShardSplits extends AbstractTestSegSplitter {
   //    }
   //
   //    /*
-//     * Register a {@link BTree} against the journal, generate some data and
+  //     * Register a {@link BTree} against the journal, generate some data and
   //     * commit the data (the data corresponds to a simple triple index schema but
   //     * does not handle statement indices with variable length keys).
   //     *
@@ -364,12 +364,12 @@ public class TestFixedLengthPrefixShardSplits extends AbstractTestSegSplitter {
   //    }
 
   //    /*
-//     * A {@link SparseRowStore} schema used by some unit tests.
+  //     * A {@link SparseRowStore} schema used by some unit tests.
   //     */
   //    private final Schema schema = new Schema("Employee", "Id", KeyType.Long);
   //
   //    /*
-//     * Register a {@link BTree} against the journal, generate some data and
+  //     * Register a {@link BTree} against the journal, generate some data and
   //     * commit the data.
   //     * <p>
   //     * Note: This is a bit slow since it does a commit after each logical row
@@ -444,7 +444,7 @@ public class TestFixedLengthPrefixShardSplits extends AbstractTestSegSplitter {
   //    }
   //
   //    /*
-//     * Mock implementation assigns index partitions from a counter beginning
+  //     * Mock implementation assigns index partitions from a counter beginning
   //     * with ZERO (0), which is the first legal index partition identifier. The
   //     * name parameter is ignored.
   //     *
@@ -722,8 +722,8 @@ public class TestFixedLengthPrefixShardSplits extends AbstractTestSegSplitter {
         assertNotNull(prefix);
         assertEquals("prefix length", Bytes.SIZEOF_LONG, prefix.length);
 
-      /*
-       * Lookup the indexOf the prefix in the source B+Tree. For this
+        /*
+         * Lookup the indexOf the prefix in the source B+Tree. For this
          * unit test (and for the SPO indices) it will be an insertion
          * point. Convert that to an index and compare the keyAt that
          * index and keyAt(index-1). They should differ in their first 8

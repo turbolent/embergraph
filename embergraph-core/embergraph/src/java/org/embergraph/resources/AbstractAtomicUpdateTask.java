@@ -27,7 +27,7 @@ import java.util.UUID;
 import org.embergraph.btree.BTree;
 
 /*
-* Abstract base class for tasks responsible for the atomic update of the view of an index
+ * Abstract base class for tasks responsible for the atomic update of the view of an index
  * partition.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -8,7 +8,7 @@ import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 
 /*
-* The BasicSkin provides standard type wrappers to help with conversions
+ * The BasicSkin provides standard type wrappers to help with conversions
  *
  * @author Martyn Cutcher
  */

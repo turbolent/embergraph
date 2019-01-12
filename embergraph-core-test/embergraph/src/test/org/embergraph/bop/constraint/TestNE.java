@@ -30,7 +30,7 @@ import org.embergraph.bop.Var;
 import org.embergraph.bop.bindingSet.ListBindingSet;
 
 /*
-* Unit tests for {@link NE}.
+ * Unit tests for {@link NE}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -72,7 +72,7 @@ public class TestNE extends TestCase2 {
   public void testGet() {
     final Var<?> x = Var.var("x");
     final Var<?> y = Var.var("y");
-    final Var<?>[] vars = new Var<?>[]{x, y};
+    final Var<?>[] vars = new Var<?>[] {x, y};
 
     final NE op = new NE(x, y);
 

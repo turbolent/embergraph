@@ -10,7 +10,7 @@ package cern.colt.matrix.linalg;
 
 import cern.colt.matrix.DoubleMatrix2D;
 /*
-* Interface that represents a function object: a function that takes two arguments and returns a
+ * Interface that represents a function object: a function that takes two arguments and returns a
  * single value.
  */
 public interface Matrix2DMatrix2DFunction {

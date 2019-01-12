@@ -24,10 +24,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.relation.rule;
 
 import java.io.Serializable;
-import org.embergraph.relation.accesspath.IAccessPath;
 
 /*
-* Indicates the first solution to be returned to the caller (offset) and the #of solutions to be
+ * Indicates the first solution to be returned to the caller (offset) and the #of solutions to be
  * returned (limit).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

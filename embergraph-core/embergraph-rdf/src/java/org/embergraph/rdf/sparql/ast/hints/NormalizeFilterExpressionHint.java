@@ -26,10 +26,9 @@ import org.embergraph.rdf.sparql.ast.JoinGroupNode;
 import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTFilterNormalizationOptimizer;
 
 /*
-* Query hint to enable/disable normalization and decomposition of complex FILTER expressions with
+ * Query hint to enable/disable normalization and decomposition of complex FILTER expressions with
  * {@link QueryHints#NORMALIZE_FILTER_EXPRESSIONS}. The hint applies to groups or subgroups.
  *
  * <p>Note: This sets an AST annotation which is interpreted by the {@link

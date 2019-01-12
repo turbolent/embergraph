@@ -26,7 +26,6 @@ import java.util.Map;
 import java.util.Set;
 import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IVariable;
-import org.embergraph.rdf.internal.IVCache;
 
 /** Class models the compiled statistics based on the observed solutions. */
 public class CompiledSolutionSetStats implements ISolutionSetStats, Serializable {

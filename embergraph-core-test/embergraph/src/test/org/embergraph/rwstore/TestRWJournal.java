@@ -69,7 +69,7 @@ import org.embergraph.util.InnerCause;
 import org.embergraph.util.PseudoRandom;
 
 /*
-* Test suite for {@link BufferMode#DiskRW} journals.
+ * Test suite for {@link BufferMode#DiskRW} journals.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -650,7 +650,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
     }
 
     // /*
-// * Test that allocate() pre-extends the store when a record is
+    // * Test that allocate() pre-extends the store when a record is
     // allocated
     // * which would overflow the current user extent.
     // */
@@ -776,7 +776,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
     }
 
     //		/*
-//		 * Test write of a record and then update of a slice of that record.
+    //		 * Test write of a record and then update of a slice of that record.
     //		 * <p>
     //		 * Note: Since the record was written but not flushed it will be found
     //		 * in the write cache by update().
@@ -2014,8 +2014,8 @@ public class TestRWJournal extends AbstractJournalTestCase {
         if (rw.getHistoryRetention() != 0) {
           assertEquals(pa, bs.getPhysicalAddress(faddr));
 
-        /*
-       * Commit before testing for deferred frees. Since there is a
+          /*
+           * Commit before testing for deferred frees. Since there is a
            * prior commit point, we are not allowed to immediately free
            * any record from that commit point in order to preserve the
            * consistency of the last commit point, so we have to commit
@@ -2097,8 +2097,8 @@ public class TestRWJournal extends AbstractJournalTestCase {
         // Note: This will result flush the write cache.
         store.commit();
 
-      /*
-       * Read back the record and verify the update is visible.
+        /*
+         * Read back the record and verify the update is visible.
          */
         {
           final ByteBuffer b = bufferStrategy.read(addr);
@@ -2262,8 +2262,8 @@ public class TestRWJournal extends AbstractJournalTestCase {
 
         final ITupleIterator<CommitRecordIndex.Entry> commitRecords;
         {
-        /*
-       * Commit can be called prior to Journal initialisation, in which
+          /*
+           * Commit can be called prior to Journal initialisation, in which
            * case the commitRecordIndex will not be set.
            */
           final IIndex commitRecordIndex = journal.getReadOnlyCommitRecordIndex();
@@ -2753,8 +2753,8 @@ public class TestRWJournal extends AbstractJournalTestCase {
         // do first half of the RWStore protocol.
         rws.commit();
 
-      /*
-       * remove the commit state such that subsequent abort()/reset()
+        /*
+         * remove the commit state such that subsequent abort()/reset()
          * will fail to correctly restore the pre-commit state.
          */
         rws.clearCommitStateRef();

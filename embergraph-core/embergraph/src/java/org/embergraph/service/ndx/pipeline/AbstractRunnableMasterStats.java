@@ -16,7 +16,7 @@ import org.embergraph.service.AbstractFederation;
 import org.embergraph.util.concurrent.MovingAverageTask;
 
 /*
-* Statistics for the consumer, including several moving averages based on sampled data.
+ * Statistics for the consumer, including several moving averages based on sampled data.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -411,8 +411,8 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
                   return 0d;
                 }
                 final double mean = n.get() / (double) m.get(); // partitionCount;
-              /*
-       * To calculate the standard deviation, we compute the
+                /*
+                 * To calculate the standard deviation, we compute the
                  * difference of each data point from the mean, and
                  * square the result.  We keep the running sum of those
                  * squares to compute the average, below.
@@ -422,8 +422,8 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
                   final double delta = (mean - queueSize.doubleValue());
                   sse += delta * delta;
                 }
-              /*
-       * Next we average these values and take the square
+                /*
+                 * Next we average these values and take the square
                  * root, which gives the standard deviation.
                  */
                 final double stdev = Math.sqrt(sse / m.get());
@@ -862,8 +862,8 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
                 break;
               }
             }
-          /*
-       * Now format the performance counter message.
+            /*
+             * Now format the performance counter message.
              */
             int n = 0;
             final StringBuilder sb = new StringBuilder();

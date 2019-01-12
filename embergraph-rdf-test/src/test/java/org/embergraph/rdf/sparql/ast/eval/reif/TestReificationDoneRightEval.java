@@ -23,7 +23,6 @@ package org.embergraph.rdf.sparql.ast.eval.reif;
 
 import java.util.Properties;
 import org.embergraph.EmbergraphStatics;
-import org.embergraph.bop.ap.Predicate;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.internal.XSD;
@@ -43,7 +42,7 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.vocab.decls.DCTermsVocabularyDecl;
 
 /*
-* Reification Done Right test suite.
+ * Reification Done Right test suite.
  *
  * <p>The basic extension is:
  *

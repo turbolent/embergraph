@@ -22,12 +22,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.htree;
 
 import org.embergraph.btree.ICounter;
-import org.embergraph.btree.IIndex;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /*
-* Test suite for the {@link IIndex#getCounter()} interface.
+ * Test suite for the {@link IIndex#getCounter()} interface.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

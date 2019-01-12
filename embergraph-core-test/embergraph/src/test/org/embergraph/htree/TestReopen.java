@@ -29,7 +29,7 @@ import org.embergraph.rwstore.sector.MemStore;
 import org.embergraph.util.PseudoRandom;
 
 /*
-* Unit tests for the close/checkpoint/reopen protocol designed to manage the resource burden of
+ * Unit tests for the close/checkpoint/reopen protocol designed to manage the resource burden of
  * indices without invalidating the index objects (indices opens can be reopened as long as their
  * backing store remains available).
  *
@@ -369,8 +369,7 @@ public class TestReopen extends AbstractHTreeTestCase {
           psr2.nextBytes(key, i);
           byte[] r1 = htree.remove(key);
           byte[] r2 = groundTruth.remove(key);
-          if (r1 == null ? r2 != null : r2 == null)
-            fail("Inconsistency on remove!");
+          if (r1 == null ? r2 != null : r2 == null) fail("Inconsistency on remove!");
           if (r1 != null) entries--;
         } else {
           // add an entry.

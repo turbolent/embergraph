@@ -27,12 +27,11 @@ import java.util.UUID;
 import org.embergraph.btree.IIndex;
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.journal.ITx;
-import org.embergraph.mdi.MetadataIndex;
 import org.embergraph.mdi.PartitionLocator;
 import org.embergraph.service.ndx.ClientIndexView;
 
 /*
-* Test suite for the {@link EmbeddedClient}.
+ * Test suite for the {@link EmbeddedClient}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

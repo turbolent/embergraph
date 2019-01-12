@@ -3,7 +3,7 @@ package org.embergraph.bfs;
 import java.util.Map;
 
 /*
-* Document header interface for {@link Document}s stored in the {@link IContentRepository}.
+ * Document header interface for {@link Document}s stored in the {@link IContentRepository}.
  *
  * @author mike@systap.com
  * @version $Id$

@@ -26,7 +26,7 @@ import org.embergraph.rdf.sail.webapp.client.IRemoteTx;
 import org.embergraph.rdf.sail.webapp.client.RemoteTransactionManager;
 
 /*
-* Proxied test suite for testing the transaction management API. The outer class provides a test
+ * Proxied test suite for testing the transaction management API. The outer class provides a test
  * suite for behaviors that are consistent without regard to whether or not isolatable indices have
  * been enabled. There are then two inner classes that provide tests where we are controlling the
  * configuration and verifying behaviors that are specific to when isolatable indices are / are not

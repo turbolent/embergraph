@@ -28,7 +28,7 @@ import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.embergraph.search.ConfigurableAnalyzerFactory.AnalyzerOptions;
 
 /*
-* Unit tests for {@link ConfigurableAnalyzerFactory}. We use the same setup, as defined in {@link
+ * Unit tests for {@link ConfigurableAnalyzerFactory}. We use the same setup, as defined in {@link
  * #getExtraProperties()} for all the tests. Some of the tests check whether bad combinations of
  * options are detected and reported correctly. Others check that some input, in a particular
  * language is tokenized as expected.

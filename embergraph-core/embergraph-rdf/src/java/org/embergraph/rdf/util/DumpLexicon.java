@@ -35,7 +35,7 @@ import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Utility class to dump the TERMS index of a triple store.
+ * Utility class to dump the TERMS index of a triple store.
  *
  * @author thompsonbry
  */
@@ -242,14 +242,14 @@ public class DumpLexicon {
   }
 
   //  /*
-//  * Dumps the lexicon in a variety of ways (test suites only).
+  //  * Dumps the lexicon in a variety of ways (test suites only).
   //  */
   // public StringBuilder dumpTerms() {
   //
   //     final StringBuilder sb = new StringBuilder(Bytes.kilobyte32 * 4);
   //
   //     /*
-//      * Dumps the terms in term order.
+  //      * Dumps the terms in term order.
   //      */
   //     sb.append("---- terms in term order ----\n");
   //     for( Iterator<Value> itr = termIterator(); itr.hasNext(); ) {
@@ -304,14 +304,14 @@ public class DumpLexicon {
 
           final ITuple<?> tuple = itr.next();
 
-        /*
-       * The sort key for the term. This is not readily decodable.
+          /*
+           * The sort key for the term. This is not readily decodable.
            * See LexiconKeyBuilder for specifics.
            */
           final byte[] key = tuple.getKey();
 
-        /*
-       * Decode the TermIV.
+          /*
+           * Decode the TermIV.
            */
           final TermId<?> iv = (TermId<?>) IVUtility.decode(tuple.getValue());
 
@@ -339,7 +339,7 @@ public class DumpLexicon {
       }
 
       // /*
-// * Dumps the term:id index.
+      // * Dumps the term:id index.
       // */
       // for( Iterator<BlobIV> itr =
       // store.getLexiconRelation().termsIndexScan(); itr.hasNext(); ) {
@@ -349,7 +349,7 @@ public class DumpLexicon {
       // }
 
       // /*
-// * Dumps the id:term index.
+      // * Dumps the id:term index.
       // */
       // for( Iterator<Value> itr =
       // store.getLexiconRelation().idTermIndexScan(); itr.hasNext(); ) {
@@ -359,7 +359,7 @@ public class DumpLexicon {
       // }
 
       // /*
-// * Dumps the terms in term order.
+      // * Dumps the terms in term order.
       // */
       // for( Iterator<Value> itr =
       // store.getLexiconRelation().termIterator(); itr.hasNext(); ) {

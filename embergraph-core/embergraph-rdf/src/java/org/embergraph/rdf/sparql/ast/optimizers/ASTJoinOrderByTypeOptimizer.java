@@ -24,7 +24,6 @@ package org.embergraph.rdf.sparql.ast.optimizers;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IValueExpression;
@@ -34,25 +33,22 @@ import org.embergraph.rdf.sparql.ast.AssignmentNode;
 import org.embergraph.rdf.sparql.ast.BindingsClause;
 import org.embergraph.rdf.sparql.ast.GraphPatternGroup;
 import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
-import org.embergraph.rdf.sparql.ast.IJoinNode;
 import org.embergraph.rdf.sparql.ast.JoinGroupNode;
 import org.embergraph.rdf.sparql.ast.NamedSubqueryInclude;
 import org.embergraph.rdf.sparql.ast.PropertyPathUnionNode;
-import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.embergraph.rdf.sparql.ast.QueryType;
 import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.StaticAnalysis;
 import org.embergraph.rdf.sparql.ast.SubqueryRoot;
 import org.embergraph.rdf.sparql.ast.ZeroLengthPathNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
-import org.embergraph.rdf.sparql.ast.eval.AST2BOpUtility;
 import org.embergraph.rdf.sparql.ast.service.ServiceFactory;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 import org.embergraph.rdf.sparql.ast.service.ServiceRegistry;
 import org.openrdf.model.URI;
 
 /*
-* This optimizer simply puts each type of {@link IGroupMemberNode} within a {@link JoinGroupNode}
+ * This optimizer simply puts each type of {@link IGroupMemberNode} within a {@link JoinGroupNode}
  * in the right order with respect to the other types.
  *
  * <p>TODO TEST SUITE!
@@ -356,8 +352,8 @@ public class ASTJoinOrderByTypeOptimizer extends AbstractJoinGroupOptimizer
 
             if (f != null) {
 
-            /*
-       * Queue services in the beginning or in the end. Note that the query hint can be used
+              /*
+               * Queue services in the beginning or in the end. Note that the query hint can be used
                * to override the service defaults.
                */
               if (f.getServiceOptions().isRunFirst()) {
@@ -439,8 +435,8 @@ public class ASTJoinOrderByTypeOptimizer extends AbstractJoinGroupOptimizer
         if (child instanceof SubqueryRoot) {
           final SubqueryRoot subquery = (SubqueryRoot) child;
           if (subquery.getQueryType() == QueryType.ASK) {
-          /*
-       * ASK subqueries are used for FILTER EXISTS and FILTER NOT EXISTS. They can not be run
+            /*
+             * ASK subqueries are used for FILTER EXISTS and FILTER NOT EXISTS. They can not be run
              * before the required join groups.
              *
              * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/515">Query with two
@@ -568,8 +564,8 @@ public class ASTJoinOrderByTypeOptimizer extends AbstractJoinGroupOptimizer
 
         if (sp.isOptional()) {
 
-        /*
-       * ASTSimpleOptionalOptimizer will recognize and lift out
+          /*
+           * ASTSimpleOptionalOptimizer will recognize and lift out
            * simple optionals into the parent join group. A simple
            * optional is basically a single a statement pattern in an
            * optional join group. If there were any FILTERs in the

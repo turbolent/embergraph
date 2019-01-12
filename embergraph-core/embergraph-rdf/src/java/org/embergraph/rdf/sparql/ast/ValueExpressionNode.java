@@ -6,7 +6,7 @@ import org.embergraph.bop.IValueExpression;
 import org.embergraph.rdf.internal.IV;
 
 /*
-* AST node for value expressions.
+ * AST node for value expressions.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

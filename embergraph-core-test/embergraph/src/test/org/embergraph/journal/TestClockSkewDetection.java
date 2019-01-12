@@ -22,7 +22,7 @@ import junit.framework.TestCase2;
 import org.embergraph.util.ClocksNotSynchronizedException;
 
 /*
-* Test suite for {@link ClocksNotSynchronizedException}. The basic pattern of events is as follows:
+ * Test suite for {@link ClocksNotSynchronizedException}. The basic pattern of events is as follows:
  *
  * <pre>
  * leader   : t1          : timestamp before gather() messages are sent to followers.

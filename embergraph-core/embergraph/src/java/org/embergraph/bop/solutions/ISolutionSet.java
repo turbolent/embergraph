@@ -22,17 +22,11 @@ package org.embergraph.bop.solutions;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 import org.embergraph.bop.IBindingSet;
-import org.embergraph.bop.controller.INamedSolutionSetRef;
-import org.embergraph.btree.BTree;
 import org.embergraph.btree.ICheckpointProtocol;
-import org.embergraph.htree.HTree;
 import org.embergraph.rdf.sparql.ast.ISolutionSetStats;
-import org.embergraph.relation.accesspath.AccessPath;
-import org.embergraph.relation.accesspath.IAccessPath;
-import org.embergraph.stream.Stream;
 
 /*
-* Interface for durable solution sets.
+ * Interface for durable solution sets.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  *     <p>TODO Provide {@link ISolutionSet} implementations derived from {@link HTree} and {@link
@@ -57,7 +51,7 @@ public interface ISolutionSet extends ICheckpointProtocol {
   ISolutionSetStats getStats();
 
   //    /*
-//     * Return the CREATE schema for the solution set (this is the metadata used
+  //     * Return the CREATE schema for the solution set (this is the metadata used
   //     * to provision the characteristics of the solution set).
   //     *
   //     * TODO This should be stored in a "root" on the checkpoint record.
@@ -78,7 +72,7 @@ public interface ISolutionSet extends ICheckpointProtocol {
   void put(final ICloseableIterator<IBindingSet[]> src);
 
   //    /*
-//     * The {@link IVariable[]} specifying the join variables (required). The
+  //     * The {@link IVariable[]} specifying the join variables (required). The
   //     * order of the entries is used when forming the as-bound keys for the hash
   //     * table. Duplicate elements and null elements are not permitted.
   //     *

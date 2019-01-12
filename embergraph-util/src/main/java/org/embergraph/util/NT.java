@@ -3,7 +3,7 @@ package org.embergraph.util;
 import java.io.Serializable;
 
 /*
-* The name of an {@link org.embergraph.btree.IIndex} or an {@link
+ * The name of an {@link org.embergraph.btree.IIndex} or an {@link
  * org.embergraph.relation.IRelation} and a timestamp. This is used as a key for a {@link
  * org.embergraph.cache.WeakValueCache} to provide a canonicalizing mapping for index views or
  * relation views.

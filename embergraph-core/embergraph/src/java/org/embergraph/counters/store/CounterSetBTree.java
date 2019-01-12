@@ -33,7 +33,6 @@ import org.apache.log4j.Logger;
 import org.embergraph.btree.BTree;
 import org.embergraph.btree.Checkpoint;
 import org.embergraph.btree.DefaultTupleSerializer;
-import org.embergraph.btree.IIndex;
 import org.embergraph.btree.IRangeQuery;
 import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleIterator;
@@ -57,11 +56,10 @@ import org.embergraph.counters.IInstrument;
 import org.embergraph.counters.PeriodEnum;
 import org.embergraph.io.SerializerUtil;
 import org.embergraph.rawstore.IRawStore;
-import org.embergraph.sparse.SparseRowStore;
 import org.embergraph.util.Bytes;
 
 /*
-* An API encapsulating for writing and querying counter sets. The data are written onto an {@link
+ * An API encapsulating for writing and querying counter sets. The data are written onto an {@link
  * IIndex}. The {@link IIndex} may be local or remote.
  *
  * <p>The multipart key is used. The first component is the milliseconds of the associated timestamp
@@ -582,8 +580,8 @@ public class CounterSetBTree extends BTree {
 
       if (fromTime < entry.timestamp || toTime >= entry.timestamp) {
 
-      /*
-       * Due to the leading [minutes] field in the key there can be
+        /*
+         * Due to the leading [minutes] field in the key there can be
          * some underscan and overscan of the index. Therefore we filter
          * to ensure that only timestamps which are strictly within the
          * specified milliseconds are extracted.

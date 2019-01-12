@@ -23,10 +23,9 @@ package org.embergraph.ha;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
-import org.embergraph.quorum.Quorum;
 
 /*
-* A non-remote interface for a member service in a {@link Quorum} defining methods to support
+ * A non-remote interface for a member service in a {@link Quorum} defining methods to support
  * service the 2-phase quorum commit protocol.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

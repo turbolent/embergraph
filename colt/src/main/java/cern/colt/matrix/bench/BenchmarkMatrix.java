@@ -15,7 +15,7 @@ import cern.colt.matrix.DoubleMatrix3D;
 import java.io.StreamTokenizer;
 
 /*
-* Configurable matrix benchmark. Runs the operations defined in main(args) or in the file specified
+ * Configurable matrix benchmark. Runs the operations defined in main(args) or in the file specified
  * by args. To get <a href="doc-files/usage.txt">this overall help</a> on usage type <tt>java
  * cern.colt.matrix.bench.BenchmarkMatrix -help</tt>. To get help on usage of a given command, type
  * <tt>java cern.colt.matrix.bench.BenchmarkMatrix -help &lt;command&gt;</tt>. Here is the <a
@@ -928,7 +928,7 @@ public class BenchmarkMatrix {
             double secs = BenchmarkKernel.run(minSeconds, function);
             opsPerSec = (float) (ops / secs);
           } else { // skip this parameter combination (not used in practice & would take a lot of
-                   // memory and time)
+            // memory and time)
             opsPerSec = Float.NaN;
           }
           timings.set(k, i, j, opsPerSec);

@@ -33,7 +33,7 @@ import org.embergraph.io.DataOutputBuffer;
 import org.embergraph.util.Bytes;
 
 /*
-* Default implementation for immutable {@link IDirectoryData} records.
+ * Default implementation for immutable {@link IDirectoryData} records.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: DefaultNodeCoder.java 4585 2011-06-01 13:42:56Z thompsonbry $

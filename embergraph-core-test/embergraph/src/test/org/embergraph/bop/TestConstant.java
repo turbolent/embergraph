@@ -26,7 +26,7 @@ package org.embergraph.bop;
 import junit.framework.TestCase2;
 
 /*
-* Test suite for {@link Constant}.
+ * Test suite for {@link Constant}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

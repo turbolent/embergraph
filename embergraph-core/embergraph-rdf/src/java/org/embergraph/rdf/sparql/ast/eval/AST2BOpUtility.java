@@ -70,7 +70,6 @@ import org.embergraph.bop.join.JoinAnnotations;
 import org.embergraph.bop.join.JoinTypeEnum;
 import org.embergraph.bop.join.NestedLoopJoinOp;
 import org.embergraph.bop.join.PipelinedHashIndexAndSolutionSetJoinOp;
-import org.embergraph.bop.join.SolutionSetHashJoinOp;
 import org.embergraph.bop.paths.ArbitraryLengthPathOp;
 import org.embergraph.bop.paths.ZeroLengthPathOp;
 import org.embergraph.bop.rdf.join.ChunkedMaterializationOp;
@@ -95,7 +94,6 @@ import org.embergraph.bop.solutions.SliceOp;
 import org.embergraph.bop.solutions.SortOrder;
 import org.embergraph.btree.IRangeQuery;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
-import org.embergraph.rdf.internal.ILexiconConfiguration;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.constraints.CoalesceBOp;
 import org.embergraph.rdf.internal.constraints.ConditionalBind;
@@ -111,7 +109,6 @@ import org.embergraph.rdf.internal.constraints.XSDBooleanIVValueExpression;
 import org.embergraph.rdf.internal.impl.TermId;
 import org.embergraph.rdf.internal.impl.literal.NumericIV;
 import org.embergraph.rdf.internal.impl.literal.XSDBooleanIV;
-import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.sparql.ast.ASTBase;
@@ -160,10 +157,6 @@ import org.embergraph.rdf.sparql.ast.UnionNode;
 import org.embergraph.rdf.sparql.ast.ValueExpressionNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.ZeroLengthPathNode;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTExistsOptimizer;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTJoinOrderByTypeOptimizer;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTNamedSubqueryOptimizer;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTSetValueExpressionsOptimizer;
 import org.embergraph.rdf.sparql.ast.service.MockIVReturningServiceCall;
 import org.embergraph.rdf.sparql.ast.service.ServiceCall;
 import org.embergraph.rdf.sparql.ast.service.ServiceCallUtility;
@@ -178,7 +171,7 @@ import org.embergraph.striterator.Chunkerator;
 import org.openrdf.model.URI;
 
 /*
-* Query plan generator converts an AST into a query plan made up of {@link PipelineOp}s.
+ * Query plan generator converts an AST into a query plan made up of {@link PipelineOp}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @see <a href= "https://sourceforge.net/apps/mediawiki/bigdata/index.php?title=QueryEvaluation"
@@ -531,8 +524,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
       if (orderBy != null && !orderBy.isEmpty()) {
 
-      /*
-       * Note: ORDER BY before DISTINCT, so DISTINCT must preserve
+        /*
+         * Note: ORDER BY before DISTINCT, so DISTINCT must preserve
          * order.
          *
          * @see https://sourceforge.net/apps/trac/bigdata/ticket/563
@@ -595,7 +588,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
         final IVariable<?>[] projectedVars = projection.getProjectionVars();
 
         //				/*
-//				 * BLZG-1958: we only need a projection op if the set of projected vars
+        //				 * BLZG-1958: we only need a projection op if the set of projected vars
         //				 * differs from the variables bound inside the query.
         //               *
         //               * NOTE: The following code sets the top-level projection conditionally,
@@ -632,8 +625,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
         anns.add(new NV(PipelineOp.Annotations.SHARED_STATE, true)); // live stats
         anns.add(new NV(ProjectionOp.Annotations.SELECT, projectedVars));
         if (preserveOrder) {
-        /*
-       * @see #563 (ORDER BY + DISTINCT)
+          /*
+           * @see #563 (ORDER BY + DISTINCT)
            * @see #1044 (PROJECTION after ORDER BY does not preserve order)
            */
           anns.add(new NV(PipelineOp.Annotations.MAX_PARALLEL, 1));
@@ -649,8 +642,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
       if (materializeProjection) {
 
-      /*
-       * Note: Materialization done from within the query plan needs
+        /*
+         * Note: Materialization done from within the query plan needs
          * to occur before the SLICE operator since the SLICE will
          * interrupt the query evaluation when it is satisfied, which
          * means that downstream operators will be canceled. Therefore a
@@ -688,8 +681,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
                   !ctx.isCluster())); // live stats, but not on the cluster.
           anns.add(new NV(BOp.Annotations.BOP_ID, ctx.nextId()));
           if (preserveOrder) {
-          /*
-       * @see #563 (ORDER BY + DISTINCT)
+            /*
+             * @see #563 (ORDER BY + DISTINCT)
              * @see #1044 (PROJECTION after ORDER BY does not preserve order)
              */
             anns.add(new NV(PipelineOp.Annotations.MAX_PARALLEL, 1));
@@ -1137,8 +1130,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
       vars.addAll(projectedVars); // start with everything "projected".
       vars.retainAll(maybeBound); // retain "maybe" incoming bound vars.
       if (serviceRef instanceof IVariable) {
-      /*
-       * If the serviceRef is a bare variable, then that variable
+        /*
+         * If the serviceRef is a bare variable, then that variable
          * needs to be materialized.
          */
         vars.add((IVariable<?>) serviceRef);
@@ -1282,8 +1275,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
       if (nsr != null) {
 
-      /*
-       * We will do a hash join against the named solution set
+        /*
+         * We will do a hash join against the named solution set
          * generated by that named subquery root.
          *
          * TODO We run into problems here where the join variables were
@@ -1305,8 +1298,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
           throw new AssertionError("NamedSubqueryRoot doneSet not found: " + name);
         }
 
-      /*
-       * Get the known materialized variables from the named subquery
+        /*
+         * Get the known materialized variables from the named subquery
          * and combine them with those which are known to be
          * materialized in the parent to get the full set of variables
          * known to be materialized once we join in the named subquery
@@ -1325,8 +1318,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
          * partly materialized).
          */
 
-      /*
-       * BLZG-2098: avoid adding variables to done set if we use a native hash join; which will
+        /*
+         * BLZG-2098: avoid adding variables to done set if we use a native hash join; which will
          * not maintain materializations.
          */
         if (!(ctx.nativeHashJoins)) {
@@ -1337,8 +1330,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
         if (joinvars == null) {
 
-        /*
-       * The most likely explanation is not running the
+          /*
+           * The most likely explanation is not running the
            * ASTNamedSubqueryOptimizer.
            */
 
@@ -1348,8 +1341,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
         // Convert to IVariable[].
         joinVars = ASTUtil.convert(joinvars);
 
-      /*
-       * TODO This should be set based on the #of INCLUDEs for the
+        /*
+         * TODO This should be set based on the #of INCLUDEs for the
          * named subquery. We can not release the associated hash index
          * until all includes are done.
          */
@@ -1358,8 +1351,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
       } else {
 
-      /*
-       * Attempt to resolve a pre-existing named solution set.
+        /*
+         * Attempt to resolve a pre-existing named solution set.
          *
          * <p>If we find the named solution set, then we will handle it in one of two ways.
          *
@@ -1381,8 +1374,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
          */
         final ISolutionSetStats stats = ctx.sa.getSolutionSetStats(name);
 
-      /*
-       * Note: This is all variables whose IVCache association is
+        /*
+         * Note: This is all variables whose IVCache association is
          * always present when that variable is bound in a solution
          * (that is, all variables which we do not need to materialize
          * for the solution set).
@@ -1400,8 +1393,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
          * partly materialized).
          */
 
-      /*
-       * BLZG-2098: avoid adding variables to done set if we use a native hash join; which will
+        /*
+         * BLZG-2098: avoid adding variables to done set if we use a native hash join; which will
          * not maintain materializations.
          */
         if (!(ctx.nativeHashJoins)) {
@@ -1410,8 +1403,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
         if (isNamedSolutionSetScan(ctx, nsi)) {
 
-        /*
-       * Optimize with SCAN and nested loop join.
+          /*
+           * Optimize with SCAN and nested loop join.
            *
            * Note: This optimization also preserves the ORDER in the
            * named solution set.
@@ -1420,8 +1413,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
           return convertNamedSolutionSetScan(left, nsi, doneSet, ctx);
         }
 
-      /*
-       * Find the join variables. This is the set of variables which
+        /*
+         * Find the join variables. This is the set of variables which
          * are both definitely bound on entry to the INCLUDE and which
          * are known to be bound by all solutions in the named solution
          * set.
@@ -1439,8 +1432,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
         // flatten into IVariable[].
         joinVars = joinvars.toArray(new IVariable[] {});
 
-      /*
-       * Pass all variable bindings along.
+        /*
+         * Pass all variable bindings along.
          *
          * Note: If we restrict the [select] annotation to only those
          * variables projected by the subquery, then we will wind up
@@ -1453,8 +1446,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
         @SuppressWarnings("rawtypes")
         final IVariable[] selectVars = null;
 
-      /*
-       * The identifier for the source solution set.
+        /*
+         * The identifier for the source solution set.
          *
          * Note: This is a pre-existing solution set. It is located
          * using the KB view (namespace and timestamp).
@@ -1463,8 +1456,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
             NamedSolutionSetRefUtility.newInstance(
                 ctx.getNamespace(), ctx.getTimestamp(), name, IVariable.EMPTY /* joinVars */);
 
-      /*
-       * The identifier for the generated index.
+        /*
+         * The identifier for the generated index.
          *
          * Note: This is a dynamically generated index scoped to the
          * query. it is located using the queryId.
@@ -2607,8 +2600,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
       if (j < (arity - 2)) {
 
-      /*
-       * Not the last one - send the Tee to the next Tee and the next
+        /*
+         * Not the last one - send the Tee to the next Tee and the next
          * subquery.
          */
         anns.add(new NV(PipelineOp.Annotations.SINK_REF, nextTeeId));
@@ -2619,8 +2612,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
       } else {
 
-      /*
-       * Last one - send the Tee to the last two subqueries.
+        /*
+         * Last one - send the Tee to the last two subqueries.
          */
         anns.add(new NV(PipelineOp.Annotations.SINK_REF, subqueryIds[j]));
         anns.add(new NV(PipelineOp.Annotations.ALT_SINK_REF, subqueryIds[j + 1]));
@@ -2656,9 +2649,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
        */
       left =
           new CopyOp(
-              leftOrEmpty(left),
-              NV.asMap(
-                  new NV(Predicate.Annotations.BOP_ID, subqueryIds[i++])));
+              leftOrEmpty(left), NV.asMap(new NV(Predicate.Annotations.BOP_ID, subqueryIds[i++])));
 
       // Start with everything already known to be materialized.
       final Set<IVariable<?>> tmp = new LinkedHashSet<IVariable<?>>(doneSet);
@@ -2958,11 +2949,9 @@ public class AST2BOpUtility extends AST2BOpRTO {
       final Set<IVariable<?>> doneSet,
       final AST2BOpContext ctx) {
 
-    final IVariableOrConstant<?> leftTerm =
-        zlpNode.left().getValueExpression();
+    final IVariableOrConstant<?> leftTerm = zlpNode.left().getValueExpression();
 
-    final IVariableOrConstant<?> rightTerm =
-        zlpNode.right().getValueExpression();
+    final IVariableOrConstant<?> rightTerm = zlpNode.right().getValueExpression();
 
     left =
         applyQueryHints(
@@ -3149,8 +3138,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
       if (child instanceof StatementPatternNode) {
         final StatementPatternNode sp = (StatementPatternNode) child;
-      /*
-       * Add statement pattern joins and the filters on those joins.
+        /*
+         * Add statement pattern joins and the filters on those joins.
          *
          * Note: This handles both required and optional statement
          * pattern joins, but not optional join groups.
@@ -3183,14 +3172,14 @@ public class AST2BOpUtility extends AST2BOpRTO {
         left = addServiceCall(left, (ServiceNode) child, doneSet, ctx);
         continue;
       } else if (child instanceof NamedSubqueryInclude) {
-      /*
-       * INCLUDE
+        /*
+         * INCLUDE
          */
         left = addNamedSubqueryInclude(left, (NamedSubqueryInclude) child, doneSet, ctx);
         continue;
       } else if (child instanceof BindingsClause) {
-      /*
-       * VALUES clause
+        /*
+         * VALUES clause
          */
         left = addValues(left, (BindingsClause) child, doneSet, ctx);
         continue;
@@ -3198,8 +3187,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
         final SubqueryRoot subquery = (SubqueryRoot) child;
         switch (subquery.getQueryType()) {
           case ASK:
-          /*
-       * The graph pattern for (NOT) EXISTS. An anonymous variable
+            /*
+             * The graph pattern for (NOT) EXISTS. An anonymous variable
              * becomes bound to the truth state of the graph pattern
              * (whether or not a solution exists). The FILTER in which
              * the (NOT) EXISTS appears then tests the truth state of
@@ -3211,8 +3200,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
             left = addExistsSubquery(left, subquery, doneSet, ctx);
             break;
           case SELECT:
-          /*
-       * SPARQL 1.1 style subqueries which were not lifted out
+            /*
+             * SPARQL 1.1 style subqueries which were not lifted out
              * into named subqueries.
              */
             left = addSparql11Subquery(left, subquery, doneSet, ctx);
@@ -3228,8 +3217,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
         left = convertUnion(left, unionNode, doneSet, ctx);
         continue;
       } else if (child instanceof GraphPatternGroup<?>) {
-      /*
-       * Sub-groups, OPTIONAL groups, and UNION.
+        /*
+         * Sub-groups, OPTIONAL groups, and UNION.
          *
          * This is all handled by addSubgroup. The plan within the
          * subgroup will be somewhat different if the subgroup is a
@@ -3256,8 +3245,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
             required ? doneSet : new LinkedHashSet<IVariable<?>>(doneSet);
         left = addSubgroup(left, subgroup, groupLocalDoneSet, ctx);
 
-      /*
-       * BLZG-1688: in the inner group, we may actuallt not only extend the (passed in)
+        /*
+         * BLZG-1688: in the inner group, we may actuallt not only extend the (passed in)
          * groupLocalDoneSet, but also remove variables from it again. Removing variables has global
          * visibility, so we need to propagate this information to the doneSet.
          */
@@ -3421,8 +3410,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
           && child.arity() == 1
           && (child.get(0) instanceof NamedSubqueryInclude)) {
 
-      /*
-       * OPTIONAL {INCLUDE x}.
+        /*
+         * OPTIONAL {INCLUDE x}.
          */
 
         final NamedSubqueryInclude nsi = (NamedSubqueryInclude) child.get(0);
@@ -3435,8 +3424,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
         if (joinVars.isEmpty()) {
           joinVars.addAll(theJoinVars);
         } else if (!joinVars.equals(theJoinVars)) {
-        /*
-       * The join variables are not the same.
+          /*
+           * The join variables are not the same.
            *
            * TODO It is possible to fix this for some queries since
            * the there is some flexibility in how we choose the join
@@ -3455,8 +3444,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
       } else if (optionalIncludes.isEmpty() && child instanceof NamedSubqueryInclude) {
 
-      /*
-       * INCLUDE %namedSet JOIN ON (theJoinVars)
+        /*
+         * INCLUDE %namedSet JOIN ON (theJoinVars)
          */
 
         final NamedSubqueryInclude nsi = (NamedSubqueryInclude) child;
@@ -3470,8 +3459,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
           if (theJoinVars.isEmpty()) {
 
-          /*
-       * If the 2nd INCLUDE does not have any join variables either then we can not do a merge
+            /*
+             * If the 2nd INCLUDE does not have any join variables either then we can not do a merge
              * join. However, see the comment block immediately below. We should be doing better in
              * join variable assignment for sub-selects!
              */
@@ -3482,8 +3471,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
         } else if (!joinVars.equals(theJoinVars)) {
 
-        /*
-       * The join variables are not the same.
+          /*
+           * The join variables are not the same.
            *
            * <p>TODO It is possible to fix this for some queries since the there is some flexibility
            * in how we choose the join variables. However, we need to model the MERGE JOIN in the
@@ -3802,8 +3791,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
       if (req.getRequirement() == Requirement.ALWAYS) {
 
-      /*
-       * Add all the newly materialized variables to the set we've
+        /*
+         * Add all the newly materialized variables to the set we've
          * already done.
          */
 
@@ -3893,8 +3882,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
       if (req.getRequirement() == Requirement.ALWAYS) {
 
-      /*
-       * Add all the newly materialized variables to the set we've
+        /*
+         * Add all the newly materialized variables to the set we've
          * already done.
          */
 
@@ -3994,8 +3983,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
       if (req.getRequirement() == Requirement.ALWAYS) {
 
-      /*
-       * Add all the newly materialized variables to the set we've
+        /*
+         * Add all the newly materialized variables to the set we've
          * already done.
          */
 
@@ -4080,8 +4069,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
     final boolean usePipelinedHashJoin = usePipelinedHashJoin(ctx, subgroup);
 
-    if (ctx.isCluster()
-        && BOpUtility.visitAll(subgroup, NamedSubqueryInclude.class).hasNext()) {
+    if (ctx.isCluster() && BOpUtility.visitAll(subgroup, NamedSubqueryInclude.class).hasNext()) {
       /*
        * Since something in the subgroup (or recursively in some
        * sub-subgroup) will require access to a named solution set, we
@@ -4254,9 +4242,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
                     new NV(JVMSolutionSetHashJoinOp.Annotations.CONSTRAINTS, joinConstraints),
                     new NV(JVMSolutionSetHashJoinOp.Annotations.RELEASE, release),
                     new NV(JVMSolutionSetHashJoinOp.Annotations.LAST_PASS, lastPass),
-                    new NV(
-                        JVMSolutionSetHashJoinOp.Annotations.NAMED_SET_REF,
-                        namedSolutionSet) //
+                    new NV(JVMSolutionSetHashJoinOp.Annotations.NAMED_SET_REF, namedSolutionSet) //
                     ),
                 subgroup,
                 ctx);
@@ -4371,8 +4357,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
               BOpEvaluationContext.CONTROLLER));
       anns.add(new NV(JVMDistinctBindingSetsOp.Annotations.SHARED_STATE, true));
       if (preserveOrder) {
-      /*
-       * @see https://sourceforge.net/apps/trac/bigdata/ticket/563 (ORDER
+        /*
+         * @see https://sourceforge.net/apps/trac/bigdata/ticket/563 (ORDER
          * BY + DISTINCT)
          */
         anns.add(new NV(PipelineOp.Annotations.MAX_PARALLEL, 1));
@@ -4384,8 +4370,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
        * DISTINCT on the native heap.
        */
       if (preserveOrder) {
-      /*
-       * TODO The HTree DISTINCT operator is not preserving the input
+        /*
+         * TODO The HTree DISTINCT operator is not preserving the input
          * order. This is probably due to vectoring. This limits the
          * scalablity of DISTINCT + ORDER BY since the HTree is not
          * being used.
@@ -4657,8 +4643,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
       if (!(expr instanceof IVariableOrConstant<?> && !(expr instanceof IBind))) {
 
-      /*
-       * Wrap the expression with a BIND of an anonymous variable.
+        /*
+         * Wrap the expression with a BIND of an anonymous variable.
          */
 
         expr = new Bind(Var.var("--anon" + ctx.nextId()), expr);
@@ -4910,8 +4896,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
       if (!joinVars.isEmpty()) {
 
-      /*
-       * A hash join can only be used when there is at least one
+        /*
+         * A hash join can only be used when there is at least one
          * variable which is known to be bound and which will also be
          * bound by the predicate.
          */
@@ -4935,8 +4921,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
        * Either triple store mode or provenance mode.
        */
       if (cvar != null && database.isStatementIdentifiers() && cvar.getValue() != null) {
-      /*
-       * Note: The context position is used as a statement identifier
+        /*
+         * Note: The context position is used as a statement identifier
          * (SID). SIDs may be used to retrieve provenance statements
          * (statements about statement) using high-level query. SIDs are
          * represented as blank nodes and is not possible to have them
@@ -5037,8 +5023,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
               StatementPatternNode.Annotations.DISTINCT,
               StatementPatternNode.Annotations.DEFAULT_DISTINCT))) {
 
-      /*
-       * Visit only the distinct values for the first key component.
+        /*
+         * Visit only the distinct values for the first key component.
          *
          * TODO  We MUST pin the choice of the index for this filter. In
          * order to do that we need to interact with the join ordering
@@ -5056,8 +5042,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
       }
 
       if (!query.getIncludeInferred()) {
-      /*
-       * Filter out anything which is not an Explicit statement.
+        /*
+         * Filter out anything which is not an Explicit statement.
          */
         filters.add(ElementFilter.newInstance(ExplicitSPOFilter.INSTANCE));
       }
@@ -5076,8 +5062,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
           }
           filter = tmp;
         }
-      /*
-       * Attach a filter on elements visited by the access path.
+        /*
+         * Attach a filter on elements visited by the access path.
          */
         anns.add(new NV(IPredicate.Annotations.INDEX_LOCAL_FILTER, filter));
       }
@@ -5139,7 +5125,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
   }
 
   //    /*
-//     * Convert an {@link IValueExpressionNode} (recursively) to an
+  //     * Convert an {@link IValueExpressionNode} (recursively) to an
   //     * {@link IValueExpression}. If the {@link IValueExpression} can be reduced
   //     * to an {@link IConstant}, then that {@link IConstant} will be be returned
   //     * instead. Either way, the {@link IValueExpression} is set on the
@@ -5282,8 +5268,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
         if (op instanceof IAggregate) {
 
-        /*
-       * Aggregates can not be evaluated at this time.
+          /*
+           * Aggregates can not be evaluated at this time.
            */
 
           return ve;
@@ -5291,8 +5277,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
         if (op instanceof IsBoundBOp || op instanceof CoalesceBOp) {
 
-        /*
-       * These handle unbound variables with special semantics and
+          /*
+           * These handle unbound variables with special semantics and
            * can not be evaluated until we have an actual solution as
            * they will not throw a SparqlTypeErrorException for an
            * unbound variable.
@@ -5303,8 +5289,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
         if (op instanceof UnknownFunctionBOp) {
 
-        /*
-       * We want to defer on unknown functions until execution
+          /*
+           * We want to defer on unknown functions until execution
            * time (to allow simple parsing to succeed).
            */
 
@@ -5313,8 +5299,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
         if (op instanceof UUIDBOp) { // || op instanceof NowBOp) {
 
-        /*
-       * We cannot pre-generate these, they need to be unique
+          /*
+           * We cannot pre-generate these, they need to be unique
            * for each call.
            */
           return ve;
@@ -5549,8 +5535,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
                   new NV(HashIndexOp.Annotations.JOIN_TYPE, joinType),
                   new NV(HashIndexOp.Annotations.JOIN_VARS, joinVars),
                   new NV(HashIndexOp.Annotations.BINDING_SETS_SOURCE, bindingSetsSource),
-                /*
-       * For the pipelined hash index op, the projection is handled inline, so we need
+                  /*
+                   * For the pipelined hash index op, the projection is handled inline, so we need
                    * to pass in this information; note that, for this variant, there is no
                    * projection at the end of this method. Note that, in turn, this operator does
                    * not support the OUTPUT_DISTINCT_JVs annotation, since this is a "built-in"
@@ -5758,7 +5744,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
     final IVariable<?> assVar = ass.getVar();
     final QueryRoot root = ctx.sa.getQueryRoot();
 
-    return BOpUtility.countVarOccurrencesOutsideProjections(root, assVar) > 1;/*
+    return BOpUtility.countVarOccurrencesOutsideProjections(root, assVar) > 1; /*
      * Fallback: we can't be sure that resolval is not required
      */
   }

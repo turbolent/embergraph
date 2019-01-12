@@ -26,7 +26,7 @@ import org.embergraph.io.FileChannelUtility;
 import org.embergraph.io.IReopenChannel;
 
 /*
-* Abstract base class for implementations that use a direct buffer as a write through cache to an
+ * Abstract base class for implementations that use a direct buffer as a write through cache to an
  * image on the disk. This covers both the {@link BufferMode#Direct}, where we use explicit IO
  * operations, and the {@link BufferMode#Mapped}, where we memory-map the image. Common features
  * shared by these implementations deal mainly with initialization of a new disk image.
@@ -224,7 +224,7 @@ public abstract class DiskBackedBufferStrategy extends BasicBufferStrategy
   }
 
   //    /*
-//     * This method transparently re-opens the channel for the backing file.
+  //     * This method transparently re-opens the channel for the backing file.
   //     * <p>
   //     * Note: This method is synchronized so that concurrent readers do not try
   //     * to all open the store at the same time.
@@ -328,16 +328,16 @@ public abstract class DiskBackedBufferStrategy extends BasicBufferStrategy
 
       try {
 
-      /*
-       * Request a shared file lock.
+        /*
+         * Request a shared file lock.
          */
 
         final boolean readOnly = "r".equals(fileMode);
 
         if (raf.getChannel().tryLock(0, Long.MAX_VALUE, readOnly /* shared */) == null) {
 
-        /*
-       * Note: A null return indicates that someone else holds the
+          /*
+           * Note: A null return indicates that someone else holds the
            * lock. This can happen if the platform does not support
            * shared locks or if someone requested an exclusive file
            * lock.
@@ -354,8 +354,8 @@ public abstract class DiskBackedBufferStrategy extends BasicBufferStrategy
 
       } catch (IOException ex) {
 
-      /*
-       * Note: This is true of NFS volumes. This is Ok and should be
+        /*
+         * Note: This is true of NFS volumes. This is Ok and should be
          * ignored. However the backing file is not protected against
          * accidental deletes or overwrites.
          */

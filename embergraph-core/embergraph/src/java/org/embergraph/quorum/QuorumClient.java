@@ -25,7 +25,7 @@ import java.rmi.Remote;
 import java.util.UUID;
 
 /*
-* A non-remote interface for a client which monitors the state of a quorum. This interface adds the
+ * A non-remote interface for a client which monitors the state of a quorum. This interface adds the
  * ability to receive notice of quorum state changes and resolve the {@link Remote} interface for
  * the member services of the quorum.
  *

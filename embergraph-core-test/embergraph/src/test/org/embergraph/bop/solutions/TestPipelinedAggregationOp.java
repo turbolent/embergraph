@@ -27,7 +27,7 @@ import org.embergraph.bop.NV;
 import org.embergraph.bop.PipelineOp;
 
 /*
-* Unit tests for {@link PipelinedAggregationOp}.
+ * Unit tests for {@link PipelinedAggregationOp}.
  *
  * @author thompsonbry
  */

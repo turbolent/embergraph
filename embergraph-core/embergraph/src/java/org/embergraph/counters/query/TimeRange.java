@@ -26,10 +26,9 @@ package org.embergraph.counters.query;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.embergraph.counters.render.XHTMLRenderer;
 
 /*
-* Utility class to interpret URL query parameters as a time range. Some examples of supported
+ * Utility class to interpret URL query parameters as a time range. Some examples of supported
  * expressions include:
  *
  * <dl>

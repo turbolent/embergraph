@@ -1,5 +1,5 @@
 /*
-* The Notice below must appear in each file of the Source Code of any copy you distribute of the
+ * The Notice below must appear in each file of the Source Code of any copy you distribute of the
  * Licensed Product. Contributors to any Modifications may add their own copyright notices to
  * identify their own contributions.
  *
@@ -43,10 +43,8 @@ package org.embergraph.rdf.inf;
 import java.util.Properties;
 import org.apache.log4j.Logger;
 import org.apache.log4j.MDC;
-import org.embergraph.journal.TemporaryStore;
 import org.embergraph.rdf.changesets.IChangeLog;
 import org.embergraph.rdf.model.StatementEnum;
-import org.embergraph.rdf.rio.IStatementBuffer;
 import org.embergraph.rdf.rules.InferenceEngine;
 import org.embergraph.rdf.spo.ExplicitSPOFilter;
 import org.embergraph.rdf.spo.ISPO;
@@ -54,13 +52,12 @@ import org.embergraph.rdf.spo.SPO;
 import org.embergraph.rdf.spo.SPOArrayIterator;
 import org.embergraph.rdf.spo.SPOKeyOrder;
 import org.embergraph.rdf.store.AbstractTripleStore;
-import org.embergraph.rdf.store.IRawTripleStore;
 import org.embergraph.rdf.store.TempTripleStore;
 import org.embergraph.relation.accesspath.IElementFilter;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /*
-* The {@link TruthMaintenance} class facilitates maintaining the RDF(S)+ closure on a database as
+ * The {@link TruthMaintenance} class facilitates maintaining the RDF(S)+ closure on a database as
  * {@link SPO}s are asserted or retracted. This is a flyweight class that accepts a reference to the
  * database and provides a factory for a {@link TempTripleStore} on which {@link SPO}s may be
  * written. The caller writes {@link SPO}s on the {@link TempTripleStore} and then invokes either
@@ -274,8 +271,8 @@ public class TruthMaintenance {
 
             if (tmp.getStatementType() == StatementEnum.Explicit) {
 
-            /*
-       * Since the statement is already explicit in the
+              /*
+               * Since the statement is already explicit in the
                * database we just delete it from the tempStore.
                */
 
@@ -285,8 +282,8 @@ public class TruthMaintenance {
 
             } else {
 
-            /*
-       * The statement was not explicit in the database so
+              /*
+               * The statement was not explicit in the database so
                * we buffer it. When the buffer is flushed, the
                * statement will be written onto the database and
                * made explicit.
@@ -679,15 +676,15 @@ public class TruthMaintenance {
 
           if (spo.getStatementType() == StatementEnum.Axiom) {
 
-          /*
-       * Ignore.
+            /*
+             * Ignore.
              */
             if (INFO) log.info("Ignoring axiom in the tempStore: " + spo);
 
           } else if (depth > 0 && spo.getStatementType() == StatementEnum.Explicit) {
 
-          /*
-       * Closure produces inferences (rather than explicit
+            /*
+             * Closure produces inferences (rather than explicit
              * statements) so this block should never be executed.
              */
 
@@ -699,8 +696,8 @@ public class TruthMaintenance {
 
           } else if (database.isAxiom(spo.s(), spo.p(), spo.o())) {
 
-          /*
-       * Convert back to an axiom. We need this in case an
+            /*
+             * Convert back to an axiom. We need this in case an
              * explicit statement is being retracted that is also an
              * axiom.
              *
@@ -722,8 +719,8 @@ public class TruthMaintenance {
               && Justification.isGrounded(
                   inferenceEngine, tempStore, database, spo, testHead, testFocusStore)) {
 
-          /*
-       * Add a variant of the statement that is marked as
+            /*
+             * Add a variant of the statement that is marked as
              * "inferred" rather than as "explicit" to the buffer.
              * When the buffer is flushed the statement will be
              * written onto the database.
@@ -749,16 +746,16 @@ public class TruthMaintenance {
               && Justification.isGrounded(
                   inferenceEngine, tempStore, database, spo, testHead, testFocusStore)) {
 
-          /*
-       * Ignore.
+            /*
+             * Ignore.
              */
 
             if (INFO) log.info(spo.toString(database) + " is grounded");
 
           } else if (!database.hasStatement(spo.s, spo.p, spo.o)) {
 
-          /*
-       * Ignore.
+            /*
+             * Ignore.
              *
              * @todo this should be done as a bulk filter on the
              * focusStore below rather than a set of point tests in
@@ -772,8 +769,8 @@ public class TruthMaintenance {
 
           } else {
 
-          /*
-       * The statement (and its justifications) will be
+            /*
+             * The statement (and its justifications) will be
              * removed from the database when the buffer is
              * flushed.
              */
@@ -782,8 +779,8 @@ public class TruthMaintenance {
 
             if (INFO) log.info("Retracting: " + spo.toString(database));
 
-          /*
-       * The ungrounded statement will be added to the
+            /*
+             * The ungrounded statement will be added to the
              * focusStore. Once all such ungrounded statements
              * have been collected we will compute their closure
              * against the database.

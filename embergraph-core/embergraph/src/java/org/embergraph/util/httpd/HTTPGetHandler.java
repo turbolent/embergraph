@@ -21,12 +21,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.util.httpd;
 
-import java.util.Collection;
 import org.embergraph.util.httpd.NanoHTTPD.Request;
 import org.embergraph.util.httpd.NanoHTTPD.Response;
 
 /*
-* Interface allows for implementation of different handlers for "GET".
+ * Interface allows for implementation of different handlers for "GET".
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /*
-* Allows pushback of the most recently visited element onto the iterator.
+ * Allows pushback of the most recently visited element onto the iterator.
  *
  * <p>Note: There is no corresponding {@link IFilter} pattern for this class since you need the
  * interface offered by the {@link PushbackIterator} in order to use pushback.

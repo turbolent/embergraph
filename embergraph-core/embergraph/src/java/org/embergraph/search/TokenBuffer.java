@@ -8,7 +8,7 @@ import org.embergraph.btree.keys.KV;
 import org.embergraph.btree.proc.LongAggregator;
 
 /*
-* A buffer holding tokens extracted from one or more documents / fields. Each entry in the buffer
+ * A buffer holding tokens extracted from one or more documents / fields. Each entry in the buffer
  * corresponds to the {@link TermFrequencyData} extracted from a field of some document. When the
  * buffer overflows it is {@link #flush()}, writing on the indices.
  *
@@ -268,8 +268,8 @@ public class TokenBuffer<V extends Comparable<V>> {
         //                final byte[] key = recordBuilder.getKey(keyBuilder, termText,
         //                        false/* successor */, docId, fieldId);
 
-      /*
-       * Note: This wraps both sides of the record together and passes
+        /*
+         * Note: This wraps both sides of the record together and passes
          * them into the tupleSerializer so it can examine both pieces
          * when making its decision on how to encode the information
          * into the key/val of the index.

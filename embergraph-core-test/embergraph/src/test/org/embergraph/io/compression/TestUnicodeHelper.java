@@ -28,7 +28,7 @@ import org.embergraph.io.DataInputBuffer;
 import org.embergraph.io.DataOutputBuffer;
 
 /*
-* Test suite for {@link UnicodeHelper}.
+ * Test suite for {@link UnicodeHelper}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -31,7 +31,7 @@ import org.openrdf.query.TupleQuery;
 import org.openrdf.query.TupleQueryResult;
 
 /*
-* @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
+ * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
  */
 public class TestOrderBy extends ProxyEmbergraphSailTestCase {
@@ -64,8 +64,7 @@ public class TestOrderBy extends ProxyEmbergraphSailTestCase {
     final EmbergraphSail sail = getSail();
     sail.initialize();
     final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-    final EmbergraphSailRepositoryConnection cxn =
-        repo.getConnection();
+    final EmbergraphSailRepositoryConnection cxn = repo.getConnection();
     cxn.setAutoCommit(false);
 
     try {

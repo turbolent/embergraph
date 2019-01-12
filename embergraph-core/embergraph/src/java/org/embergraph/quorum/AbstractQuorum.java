@@ -56,7 +56,7 @@ import org.embergraph.util.concurrent.ThreadGuard;
 import org.embergraph.util.concurrent.ThreadGuard.Guard;
 
 /*
-* Abstract base class handles much of the logic for the distribution of RMI calls from the leader
+ * Abstract base class handles much of the logic for the distribution of RMI calls from the leader
  * to the follower and for the HA write pipeline.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -158,7 +158,7 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
   protected final ReentrantLock lock = new ReentrantLock();
 
   //    /*
-//     * Condition signaled when a quorum is fully met. The preconditions for this
+  //     * Condition signaled when a quorum is fully met. The preconditions for this
   //     * event are:
   //     * <ul>
   //     * <li>At least (k+1)/2 services agree on the same lastCommitTime.</li>
@@ -174,7 +174,7 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
   //    private final Condition quorumMeet = lock.newCondition();
   //
   //    /*
-//     * Condition signaled when a quorum breaks.
+  //     * Condition signaled when a quorum breaks.
   //     */
   //  private final Condition quorumBreak = lock.newCondition();
 
@@ -210,7 +210,7 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
   private final Condition joinedChange = lock.newCondition();
 
   //    /*
-//     * Condition signaled when the {@link #lastValidToken} is set by the
+  //     * Condition signaled when the {@link #lastValidToken} is set by the
   //     * {@link QuorumWatcherBase}.
   //     * <p>
   //     * See {@link #quorumMeet} and {@link #quorumBreak} for the
@@ -603,8 +603,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
           // Will be propagated below.
           interrupted = true;
         } finally {
-        /*
-       * Cancel any tasks which did not terminate in a timely manner.
+          /*
+           * Cancel any tasks which did not terminate in a timely manner.
            */
           final List<Runnable> notrun = watcherActionService.shutdownNow();
           watcherActionService = null;
@@ -627,8 +627,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
           // Will be propagated below.
           interrupted = true;
         } finally {
-        /*
-       * Cancel any tasks which did not terminate in a timely manner.
+          /*
+           * Cancel any tasks which did not terminate in a timely manner.
            */
           final List<Runnable> notrun = actorActionService.shutdownNow();
           actorActionService = null;
@@ -649,8 +649,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
           // Will be propagated below.
           interrupted = true;
         } finally {
-        /*
-       * Cancel any tasks which did terminate in a timely manner.
+          /*
+           * Cancel any tasks which did terminate in a timely manner.
            */
           final List<Runnable> notrun = eventService.shutdownNow();
           eventService = null;
@@ -1000,7 +1000,7 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
    */
 
   //    /*
-//     * Search for the vote for the service.
+  //     * Search for the vote for the service.
   //     *
   //     * @param serviceId
   //     *            The service identifier.
@@ -1079,8 +1079,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
       while (itr.hasNext()) {
         final UUID current = itr.next();
         if (serviceId.equals(current)) {
-        /*
-       * Found the caller's service in the pipeline so we return
+          /*
+           * Found the caller's service in the pipeline so we return
            * the prior service, which is its upstream, service, and
            * the next service, which is its downstream service.
            */
@@ -1454,8 +1454,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
 
     private void runActorTask(final ActorTask task) {
       if (!singleThreadActor) {
-      /*
-       * Run in the caller's thread.
+        /*
+         * Run in the caller's thread.
          */
         try {
           task.call();
@@ -1502,8 +1502,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
     private void runActorTask(final ActorTask task, final long timeout, final TimeUnit unit)
         throws InterruptedException, ExecutionException, TimeoutException {
       if (!singleThreadActor) {
-      /*
-       * Timeout support requires an executor service to run the actor
+        /*
+         * Timeout support requires an executor service to run the actor
          * tasks.
          */
         throw new UnsupportedOperationException();
@@ -1569,8 +1569,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
       @Override
       protected void doAction() throws InterruptedException {
         if (!members.contains(serviceId)) throw new QuorumException(ERR_NOT_MEMBER + serviceId);
-      /*
-       * Note: This has been modified to automatically add the service
+        /*
+         * Note: This has been modified to automatically add the service
          * to the pipeline and the javadoc for the pre-/post- conditions
          * declared in QuorumActor has been updated (9/9/2012). The
          * change is inside of conditionalCastVoteImpl().
@@ -1706,7 +1706,7 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
     }
 
     //        /*
-//         * An interruptable version of {@link #memberRemove()}.
+    //         * An interruptable version of {@link #memberRemove()}.
     //         * <p>
     //         * Note: This is used by {@link AbstractQuorum#terminate()}. That code
     //         * is already holding the lock in the caller's thread. Therefore it
@@ -1887,8 +1887,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
     private void conditionalPipelineRemoveImpl() throws InterruptedException {
       if (pipeline.contains(serviceId)) {
         if (log.isDebugEnabled()) log.debug("serviceId=" + serviceId);
-      /*
-       * Remove the service from the pipeline.
+        /*
+         * Remove the service from the pipeline.
          */
         doPipelineRemove();
         guard(
@@ -1908,8 +1908,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
        */
       final Long lastCommitTime = getCastVoteIfConsensus(serviceId);
       if (lastCommitTime == null) {
-      /*
-       * Either the service did not vote for the consensus or there is
+        /*
+         * Either the service did not vote for the consensus or there is
          * no consensus.
          */
         throw new QuorumException(ERR_NOT_IN_CONSENSUS + serviceId);
@@ -1924,8 +1924,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
         }
         // Get the join order.
         final UUID[] joined = getJoined();
-      /*
-       * No services may join out of the vote order. Verify that the
+        /*
+         * No services may join out of the vote order. Verify that the
          * predecessor(s) of this service in the vote order are joined
          * in the vote order.
          */
@@ -1946,8 +1946,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
         }
         if (joined.length > index) {
           if (joined[index].equals(serviceId)) {
-          /*
-       * Service is already joined and the joined order up to
+            /*
+             * Service is already joined and the joined order up to
              * that service is the same as the vote order.
              */
             return;
@@ -2003,8 +2003,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
           });
       if (client == null) throw new AsynchronousQuorumCloseException();
       if (token != NO_QUORUM) {
-      /*
-       * The token was concurrently updated so we will not attempt
+        /*
+         * The token was concurrently updated so we will not attempt
          * to clear it.
          */
         throw new QuorumException(
@@ -2019,8 +2019,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
         return;
       }
       if (lastValidToken > newValue) {
-      /*
-       * The lastValidToken must advance.
+        /*
+         * The lastValidToken must advance.
          */
         throw new QuorumException(
             "Last valid token must advance: lastValidToken="
@@ -2029,8 +2029,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
                 + newValue);
       }
       if (token != NO_QUORUM) {
-      /*
-       * Do not change a valid token. It MUST be cleared before it may
+        /*
+         * Do not change a valid token. It MUST be cleared before it may
          * be changed.
          */
         throw new QuorumException(
@@ -2220,8 +2220,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
                 + serviceId
                 + ", otherServiceId="
                 + psid);
-      /*
-       * Note: The JOINED[] entry MUST be removed first in case the service is not truely dead.
+        /*
+         * Note: The JOINED[] entry MUST be removed first in case the service is not truely dead.
          *
          * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/724" > HA wire pulling and
          *     sure kill testing </a>
@@ -2248,8 +2248,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
      */
     protected boolean reorganizePipeline() {
       if (lock.isHeldByCurrentThread()) {
-      /*
-       * The lock can not be held across this method because it will
+        /*
+         * The lock can not be held across this method because it will
          * cause deadlocks when we invoke Future#get() on the Future
          * returned by moveToEndOfPipeline().
          */
@@ -2262,8 +2262,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
       //            final UUID[] voteOrder;
       lock.lock();
       try {
-      /*
-       * Extract this stuff while holding the lock so we have a
+        /*
+         * Extract this stuff while holding the lock so we have a
          * snapshot of the internal state.
          */
         pipeline = getPipeline();
@@ -2411,8 +2411,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
       watcherActionService.execute(
           new Runnable() {
             public void run() {
-            /*
-       * Note: DO NOT acquire the lock here. It will cause
+              /*
+               * Note: DO NOT acquire the lock here. It will cause
                * reorganizePipeline() to deadlock if it runs with the lock
                * held.
                */
@@ -2442,8 +2442,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
           if (client != null) {
             final UUID clientId = client.getServiceId();
             if (serviceId.equals(clientId)) {
-            /*
-       * The service which was added is our client, so we
+              /*
+               * The service which was added is our client, so we
                * send it a synchronous message so it can handle
                * that add event.
                */
@@ -2480,8 +2480,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
           if (client != null) {
             final UUID clientId = client.getServiceId();
             if (serviceId.equals(clientId)) {
-            /*
-       * The service which was removed is our client, so
+              /*
+               * The service which was removed is our client, so
                * we send it a synchronous message so it can handle
                * that add event.
                */
@@ -2524,8 +2524,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
           if (client != null) {
             final UUID clientId = client.getServiceId();
             if (serviceId.equals(clientId)) {
-            /*
-       * The service which was added to the write pipeline
+              /*
+               * The service which was added to the write pipeline
                * is our client, so we send it a synchronous
                * message so it can handle that add event, e.g., by
                * setting itself up to receive data.
@@ -2537,8 +2537,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
               }
             }
             if (lastId != null && clientId.equals(lastId)) {
-            /*
-       * If our client was the last service in the write
+              /*
+               * If our client was the last service in the write
                * pipeline, then the new service is now its
                * downstream service. The client needs to handle
                * this event by configuring itself to send data to
@@ -2570,8 +2570,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
       if (serviceId == null) throw new IllegalArgumentException();
       lock.lock();
       try {
-      /*
-       * Look for the service before/after the one being removed from
+        /*
+         * Look for the service before/after the one being removed from
          * the pipeline.
          *
          * If the service that was remove is out client, then we notify
@@ -2591,8 +2591,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
           if (client != null) {
             final UUID clientId = client.getServiceId();
             if (serviceId.equals(clientId)) {
-            /*
-       * The service which was removed from the write
+              /*
+               * The service which was removed from the write
                * pipeline is our client, so we send it a
                * synchronous message so it can handle that add
                * event, e.g., by tearing down its service which is
@@ -2605,8 +2605,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
               }
             }
             if (priorNext != null && clientId.equals(priorNext[0])) {
-            /*
-       * Notify the client that its downstream service was
+              /*
+               * Notify the client that its downstream service was
                * removed from the write pipeline. The client needs
                * to handle this event by configuring itself to
                * send data to that service.
@@ -2619,8 +2619,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
               }
             }
             if (priorNext != null && priorNext[0] != null && clientId.equals(priorNext[1])) {
-            /*
-       * Notify the client that its upstream service was
+              /*
+               * Notify the client that its upstream service was
                * removed from the write pipeline but it is NOT the
                * first service in the write pipeline. The client
                * will need to handle this event by closing the
@@ -2634,8 +2634,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
               }
             }
             if (priorNext != null && priorNext[0] == null && clientId.equals(priorNext[1])) {
-            /*
-       * Notify the client that its upstream service was
+              /*
+               * Notify the client that its upstream service was
                * removed from the write pipeline such that it is
                * now the first service in the write pipeline. The
                * client will need to handle this event by
@@ -2651,8 +2651,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
           }
           // queue client event.
           sendEvent(new E(QuorumEventEnum.PIPELINE_REMOVE, lastValidToken, token, serviceId));
-        /*
-       * If the service that left the pipeline was blocking the
+          /*
+           * If the service that left the pipeline was blocking the
            * service that is trying to become the leader and we are
            * that service trying to become the leader, then we need to
            * elect ourselves as the leader.
@@ -2671,8 +2671,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
             // consensus.
             final Long lastCommitTime = getCastVoteIfConsensus(clientId);
             if (lastCommitTime != null) {
-            /*
-       * Our client is in the consensus.
+              /*
+               * Our client is in the consensus.
                */
               if (log.isInfoEnabled())
                 log.info("This client is in consensus on commitTime: " + lastCommitTime);
@@ -2686,21 +2686,21 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
               if (isLeader) {
                 final int njoined = joined.size();
                 if (njoined >= kmeet && token == NO_QUORUM) {
-                /*
-       * Elect the leader.
+                  /*
+                   * Elect the leader.
                    */
                   final UUID[] pipeline = getPipeline();
                   if (pipeline.length > 0 && pipeline[0].equals(clientId)) {
-                  /*
-       * The pipeline is well organized, so
+                    /*
+                     * The pipeline is well organized, so
                      * elect ourselves as the leader now.
                      */
                     if (log.isInfoEnabled())
                       log.info("Electing leader: " + AbstractQuorum.this.toString());
                     doAction(
                         new Runnable() {
-                        /*
-       * Note: This needs to be submitted
+                          /*
+                           * Note: This needs to be submitted
                            * as an action since we will
                            * otherwise be in the zk event
                            * thread and be unable to observe
@@ -2780,8 +2780,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
             final QuorumMember<S> client = getClientAsMember();
             if (nvotes == kmeet) {
               if (client != null) {
-              /*
-       * Tell the client that consensus has been
+                /*
+                 * Tell the client that consensus has been
                  * reached on this last commit time.
                  */
                 try {
@@ -2803,8 +2803,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
               final UUID clientId = client.getServiceId();
               final UUID[] voteOrder = votesForCommitTime.toArray(new UUID[0]);
               if (nvotes == kmeet && clientId.equals(voteOrder[0])) {
-              /*
-       * The client is the first service in the vote
+                /*
+                 * The client is the first service in the vote
                  * order, so it will be the first service to
                  * join and will become the leader when the
                  * other services join.
@@ -2827,8 +2827,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
                     });
               } else {
                 if (clientId.equals(serviceId)) {
-                /*
-       * The service which just cast its vote is
+                  /*
+                   * The service which just cast its vote is
                    * our client. If the service before our
                    * client in the vote order is already
                    * joined, then it is time for our client to
@@ -2920,8 +2920,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
     protected void setToken(final long newToken) {
       lock.lock();
       try {
-      /*
-       * @todo think through this again. if the watcher can see events
+        /*
+         * @todo think through this again. if the watcher can see events
          * out of their proper order then it may need to do things like
          * wait for enough joined services before a quorum can meet.
          * However, out of order events could also result in overwriting
@@ -2947,8 +2947,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
         final UUID leaderId = getLeaderId();
         // must exist when quorum meets.
         assert leaderId != null : "Leader is null : " + AbstractQuorum.this.toString();
-      /*
-       * The quorum has met.
+        /*
+         * The quorum has met.
          */
         if (log.isInfoEnabled())
           log.info(
@@ -2963,8 +2963,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
             launderThrowable(t);
           }
         }
-      /*
-       * Note: If we send out an event here then any code path that
+        /*
+         * Note: If we send out an event here then any code path that
          * reenters the AbstractQuorum from another thread seeking a
          * lock will deadlock. Either the event must be dispatched after
          * we release the lock (which might be held at multiple points
@@ -2982,7 +2982,7 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
     }
 
     //        /*
-//         * Method is invoked by the {@link QuorumWatcher} when the leader
+    //         * Method is invoked by the {@link QuorumWatcher} when the leader
     //         * updates the lastValidToken. Note that the lastValidToken is updated
     //         * first and then the current token is set from the lastValidToken.
     //         * Since the quorum does not meet until the token has been updated, this
@@ -3007,7 +3007,7 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
     //        }
     //
     //        /*
-//         * Method is invoked by the {@link QuorumWatcher} when the leader
+    //         * Method is invoked by the {@link QuorumWatcher} when the leader
     //         * publishes out a new quorum token.
     //         */
     //        protected void setToken() {
@@ -3097,8 +3097,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
           }
           sendEvent(
               new E(QuorumEventEnum.QUORUM_BROKE, lastValidToken, token, null /* serviceId */));
-        /*
-       * Note: Replacing this code with the logic below fixes a problem where a leader
+          /*
+           * Note: Replacing this code with the logic below fixes a problem where a leader
            * was failing to update its lastCommitTime after a quorum break caused by
            * a follower that was halted.  The quorum could not meet after the follower
            * was restarted because the leader had not voted for a lastCommitTime. The
@@ -3120,8 +3120,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
             if (joined.contains(clientId)) {
               final QuorumMember<S> member = getMember();
               if (false && member instanceof QuorumService) {
-              /*
-       * Set the last commit time.
+                /*
+                 * Set the last commit time.
                  *
                  * Note: After a quorum break, a service MUST
                  * recast its vote for it's then-current
@@ -3194,8 +3194,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
         //                }
         final QuorumMember<S> client = getClientAsMember();
         if (client != null) {
-        /*
-       * Since our client is a quorum member, figure out whether
+          /*
+           * Since our client is a quorum member, figure out whether
            * or not it just joined, in which case we send it a
            * synchronous message.
            */
@@ -3216,8 +3216,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
           // consensus.
           final Long lastCommitTime = getCastVoteIfConsensus(clientId);
           if (lastCommitTime != null) {
-          /*
-       * Our client is in the consensus.
+            /*
+             * Our client is in the consensus.
              */
             if (log.isInfoEnabled())
               log.info("This client is in consensus on commitTime: " + lastCommitTime);
@@ -3233,8 +3233,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
             if (isLeader) {
               final int njoined = joined.size();
               if (njoined >= kmeet && token == NO_QUORUM) {
-              /*
-       * Elect the leader.
+                /*
+                 * Elect the leader.
                  */
                 if (log.isInfoEnabled())
                   log.info(
@@ -3244,8 +3244,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
                     new Runnable() {
                       public void run() {
                         if (actor.reorganizePipeline()) {
-                        /*
-       * Reorganizing the pipeline can
+                          /*
+                           * Reorganizing the pipeline can
                            * cause service leaves for services
                            * before the leader in the pipeline
                            * order. This means that we need to
@@ -3256,8 +3256,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
                           if (log.isInfoEnabled())
                             log.info("Reorganized the pipeline: " + AbstractQuorum.this.toString());
                         } else {
-                        /*
-       * The pipeline is well organized,
+                          /*
+                           * The pipeline is well organized,
                            * so elect the leader now.
                            */
                           if (log.isInfoEnabled())
@@ -3278,14 +3278,14 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
                 throw new AssertionError(AbstractQuorum.this.toString());
               }
               final UUID waitsFor = voteOrder[index - 1];
-            /*
-       * If the service which joined immediately proceeds
+              /*
+               * If the service which joined immediately proceeds
                * our client in the vote order, then do a service
                * join for our client now.
                */
               if (serviceId.equals(waitsFor)) {
-              /*
-       * Elect a follower.
+                /*
+                 * Elect a follower.
                  */
                 if (log.isInfoEnabled())
                   log.info("Follower will join: " + AbstractQuorum.this.toString());
@@ -3351,8 +3351,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
                   + willBreak);
         final QuorumMember<S> client = getClientAsMember();
         if (client != null && willBreak) {
-        /*
-       * Invalidate the current quorum token.
+          /*
+           * Invalidate the current quorum token.
            *
            * Note: Only clients can take actions on the distributed
            * quorum state. Non-clients monitoring the quorum will have
@@ -3379,8 +3379,8 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
         if (client != null) {
           // Notify all quorum members that a service left.
           try {
-          /*
-       * PREVIOUSLY called client.serviceLeave() unconditionally
+            /*
+             * PREVIOUSLY called client.serviceLeave() unconditionally
              *
              * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/695">HAJournalServer
              *     reports "follower" but is in SeekConsensus and is not participating in commits
@@ -3435,14 +3435,14 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
         executor.execute(
             new Runnable() {
               public void run() {
-              /*
-       * Block until we get the lock so these events will come
+                /*
+                 * Block until we get the lock so these events will come
                  * after the Quorum has handled the original message.
                  */
                 lock.lock();
                 try {
-                /*
-       * We acquired the lock so the events appear after
+                  /*
+                   * We acquired the lock so the events appear after
                    * they were handled by the Quourm, but we will send
                    * the events without the lock.
                    */

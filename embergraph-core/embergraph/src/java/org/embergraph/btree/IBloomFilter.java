@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree;
 
 /*
-* Interface for bloom filter implementations using an unsigned byte[] key.
+ * Interface for bloom filter implementations using an unsigned byte[] key.
  *
  * <p>Bloom filters give a 100% guarantee when reporting that a key was NOT found but only a
  * statistical guarantee when reporting that a key was found. Therefore if either {@link

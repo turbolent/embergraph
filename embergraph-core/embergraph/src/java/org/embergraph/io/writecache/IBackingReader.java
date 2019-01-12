@@ -21,7 +21,7 @@ package org.embergraph.io.writecache;
 import java.nio.ByteBuffer;
 
 /*
-* A backing reader can be provided to a WriteCacheService which can use the readRaw callback method
+ * A backing reader can be provided to a WriteCacheService which can use the readRaw callback method
  * as part of an encapsulated caching strategy.
  *
  * @author Martyn Cutcher

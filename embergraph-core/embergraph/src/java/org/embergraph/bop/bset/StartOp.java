@@ -2,10 +2,9 @@ package org.embergraph.bop.bset;
 
 import java.util.Map;
 import org.embergraph.bop.BOp;
-import org.embergraph.bop.PipelineOp;
 
 /*
-* A version of {@link CopyOp} which is always evaluated on the query controller.
+ * A version of {@link CopyOp} which is always evaluated on the query controller.
  *
  * <p>Note: {@link CopyOp} and {@link StartOp} are the same. {@link StartOp} exists solely to
  * reflect its functional role at the end of the query pipeline.

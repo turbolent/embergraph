@@ -26,7 +26,7 @@ package org.embergraph.relation.accesspath;
 import junit.framework.TestCase2;
 
 /*
-* Test suite for the {@link UnsynchronizedArrayBuffer}.
+ * Test suite for the {@link UnsynchronizedArrayBuffer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

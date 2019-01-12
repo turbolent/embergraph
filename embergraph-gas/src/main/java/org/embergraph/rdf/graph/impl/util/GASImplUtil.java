@@ -19,14 +19,14 @@ import java.util.Set;
 import org.openrdf.model.Value;
 
 /*
-* Some utility method for the GAS Engine implementation.
+ * Some utility method for the GAS Engine implementation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class GASImplUtil {
 
   //    /*
-//     * Compact a collection of vertices into an ordered frontier.
+  //     * Compact a collection of vertices into an ordered frontier.
   //     *
   //     * @param vertices
   //     *            The collection of vertices for the new frontier.

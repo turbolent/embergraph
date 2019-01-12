@@ -26,7 +26,7 @@ import org.embergraph.rawstore.WormAddressManager;
 import org.embergraph.util.Bytes;
 
 /*
-* Tests logic to encode and decode the offsets within regions in an {@link IndexSegmentStore}.
+ * Tests logic to encode and decode the offsets within regions in an {@link IndexSegmentStore}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

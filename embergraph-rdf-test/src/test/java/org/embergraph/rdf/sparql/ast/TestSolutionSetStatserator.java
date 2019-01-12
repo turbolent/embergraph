@@ -5,7 +5,7 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.striterator.CloseableIteratorWrapper;
 
 /*
-* Test suite for {@link SolutionSetStatserator}
+ * Test suite for {@link SolutionSetStatserator}
  *
  * @author bryan
  */

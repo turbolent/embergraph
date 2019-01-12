@@ -25,12 +25,10 @@ package org.embergraph.rdf.vocab;
 import java.util.Iterator;
 import org.embergraph.bop.IConstant;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.Value;
 
 /*
-* Interface for a pre-defined vocabulary.
+ * Interface for a pre-defined vocabulary.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

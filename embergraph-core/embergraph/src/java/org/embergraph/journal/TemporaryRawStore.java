@@ -23,7 +23,6 @@ package org.embergraph.journal;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -36,10 +35,9 @@ import org.embergraph.quorum.Quorum;
 import org.embergraph.rawstore.AbstractRawWormStore;
 import org.embergraph.rawstore.IMRMW;
 import org.embergraph.rawstore.WormAddressManager;
-import org.embergraph.relation.locator.ILocatableResource;
 
 /*
-* A non-restart-safe store for temporary data that buffers data in memory until the write cache
+ * A non-restart-safe store for temporary data that buffers data in memory until the write cache
  * overflows (or is flushed to the disk) and then converts to a disk-based store. The backing file
  * (if any) is released when the temporary store is {@link #close()}d.
  *
@@ -60,7 +58,7 @@ public class TemporaryRawStore extends AbstractRawWormStore implements IMRMW {
   private final DiskOnlyStrategy buf;
 
   //    /*
-//     * When non-<code>null</code> this is a direct {@link ByteBuffer}
+  //     * When non-<code>null</code> this is a direct {@link ByteBuffer}
   //     * allocated using the {@link DirectBufferPool} during
   //     * {@link #overflowToDisk()} and handed off to the {@link DiskOnlyStrategy}
   //     * for use as its write cache. When non-<code>null</code> this buffer is
@@ -125,8 +123,8 @@ public class TemporaryRawStore extends AbstractRawWormStore implements IMRMW {
 
         if (!tmpDir.mkdirs()) {
 
-        /*
-       * The return code is ignored. The directory could have been
+          /*
+           * The return code is ignored. The directory could have been
            * concurrently created so there is no reason to look at the
            * return code here. If we can't create the file below then
            * we have a problem and it will get reported.

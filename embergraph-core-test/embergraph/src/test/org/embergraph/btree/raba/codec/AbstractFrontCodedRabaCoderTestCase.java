@@ -30,7 +30,7 @@ import org.embergraph.btree.raba.IRaba;
 import org.embergraph.btree.raba.ReadOnlyKeysRaba;
 
 /*
-* Test suite for the {@link FrontCodedRabaCoder}.
+ * Test suite for the {@link FrontCodedRabaCoder}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

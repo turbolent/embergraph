@@ -32,7 +32,7 @@ import java.util.Iterator;
 import java.util.regex.Pattern;
 
 /*
-* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public abstract class AbstractCounterSet implements ICounterSet {

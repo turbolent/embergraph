@@ -10,7 +10,7 @@ package cern.colt.buffer;
 
 import cern.colt.list.ObjectArrayList;
 /*
-* Fixed sized (non resizable) streaming buffer connected to a target <tt>ObjectBufferConsumer</tt>
+ * Fixed sized (non resizable) streaming buffer connected to a target <tt>ObjectBufferConsumer</tt>
  * to which data is automatically flushed upon buffer overflow.
  *
  * @author wolfgang.hoschek@cern.ch

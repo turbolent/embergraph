@@ -30,7 +30,7 @@ import org.embergraph.bop.Var;
 import org.embergraph.bop.ap.Predicate;
 
 /*
-* Unit tests for {@link PartitionedJoinGroup#canJoin(IPredicate, IPredicate)}
+ * Unit tests for {@link PartitionedJoinGroup#canJoin(IPredicate, IPredicate)}
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

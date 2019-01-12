@@ -43,7 +43,7 @@ import org.embergraph.journal.Journal;
 import org.embergraph.striterator.ChunkedArrayIterator;
 
 /*
-* Test suite for {@link SampleIndex}.
+ * Test suite for {@link SampleIndex}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestSampleLocalBTree.java 3665 2010-09-28 16:53:22Z thompsonbry $

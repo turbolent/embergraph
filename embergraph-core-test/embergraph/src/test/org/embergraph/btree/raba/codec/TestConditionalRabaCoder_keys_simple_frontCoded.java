@@ -25,7 +25,7 @@ package org.embergraph.btree.raba.codec;
 import org.embergraph.btree.raba.ConditionalRabaCoder;
 
 /*
-* Test suite for the {@link ConditionalRabaCoder}.
+ * Test suite for the {@link ConditionalRabaCoder}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

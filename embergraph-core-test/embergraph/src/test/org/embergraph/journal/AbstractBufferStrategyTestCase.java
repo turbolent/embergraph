@@ -24,13 +24,12 @@ package org.embergraph.journal;
 import java.nio.ByteBuffer;
 import java.util.Properties;
 import java.util.Random;
-import org.embergraph.btree.IndexSegmentBuilder;
 import org.embergraph.rawstore.AbstractRawStoreTestCase;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.util.Bytes;
 
 /*
-* Base class for writing test cases for the different {@link IBufferStrategy} implementations.
+ * Base class for writing test cases for the different {@link IBufferStrategy} implementations.
  *
  * @todo write tests for {@link IBufferStrategy#transferTo(java.io.RandomAccessFile)}. This code is
  *     currently getting "checked" by the {@link IndexSegmentBuilder}.

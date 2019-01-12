@@ -242,7 +242,7 @@ public class HASendState implements IHASendState, Externalizable {
   // static final private int MARKER_SIZE = 8;
 
   // /*
-// * Unique marker generation with JVM wide random number generator.
+  // * Unique marker generation with JVM wide random number generator.
   // *
   // * @return A "pretty unique" marker.
   // */
@@ -258,7 +258,7 @@ public class HASendState implements IHASendState, Externalizable {
   // }
 
   // /*
-// * Checks that the first byte is not repeated in the remaining bytes, this
+  // * Checks that the first byte is not repeated in the remaining bytes, this
   // * simplifies search for the token in the input stream.
   // */
   // static private boolean unique1(final byte[] bytes) {

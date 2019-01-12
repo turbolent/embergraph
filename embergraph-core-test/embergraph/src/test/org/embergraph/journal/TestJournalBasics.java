@@ -21,13 +21,12 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.journal;
 
-import junit.extensions.proxy.ProxyTestSuite;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /*
-* Aggregates all tests into something approximately increasing dependency order. Most of the tests
+ * Aggregates all tests into something approximately increasing dependency order. Most of the tests
  * that are aggregated are proxied test suites and will therefore run with the configuration of the
  * test class running that suite.
  *

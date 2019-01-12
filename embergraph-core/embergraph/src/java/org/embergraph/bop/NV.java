@@ -26,11 +26,11 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /*
- A name-value pair.
- *
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @version $Id$
- */
+A name-value pair.
+*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+* @version $Id$
+*/
 public class NV implements Serializable, Comparable<NV> {
 
   /** */

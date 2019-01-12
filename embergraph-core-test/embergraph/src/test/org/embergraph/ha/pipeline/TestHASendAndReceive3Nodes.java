@@ -21,7 +21,6 @@ package org.embergraph.ha.pipeline;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
-import java.nio.channels.Selector;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
@@ -35,7 +34,7 @@ import org.embergraph.util.ChecksumError;
 import org.embergraph.util.InnerCause;
 
 /*
-* Test the raw socket protocol implemented by {@link HASendService} and {@link HAReceiveService}
+ * Test the raw socket protocol implemented by {@link HASendService} and {@link HAReceiveService}
  * against a pipeline of 3 nodes.
  *
  * @author martyn Cutcher

@@ -29,7 +29,7 @@ import junit.framework.TestCase2;
 import org.embergraph.journal.IIndexManager;
 
 /*
-* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public abstract class AbstractIndexManagerTestCase<S extends IIndexManager> extends TestCase2 {
@@ -82,12 +82,12 @@ public abstract class AbstractIndexManagerTestCase<S extends IIndexManager> exte
   protected abstract S getIndexManager();
 
   //    /*
-//     * Open/create an {@link IIndexManager} using the given properties.
+  //     * Open/create an {@link IIndexManager} using the given properties.
   //     */
   //    abstract protected S getStore(Properties properties);
   //
   //    /*
-//     * Close and then re-open an {@link IIndexManager} backed by the same
+  //     * Close and then re-open an {@link IIndexManager} backed by the same
   //     * persistent data.
   //     *
   //     * @param store

@@ -27,7 +27,7 @@ import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /*
-* Test suite for {@link CommitRecordIndex}. Tests focus on get (exact match) vs find (most recent
+ * Test suite for {@link CommitRecordIndex}. Tests focus on get (exact match) vs find (most recent
  * match less than or equal to) and restart safety.
  *
  * @see TestCommitHistory, which tests the {@link CommitRecordIndex} in situ.

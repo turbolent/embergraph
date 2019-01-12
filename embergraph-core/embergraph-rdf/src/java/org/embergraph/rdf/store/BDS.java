@@ -23,12 +23,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.store;
 
-import org.embergraph.rdf.sparql.ast.eval.SliceServiceFactory;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
 /*
-* A vocabulary for the embergraph full text search facility. Full text search may be used to
+ * A vocabulary for the embergraph full text search facility. Full text search may be used to
  * combine text search and graph search. Low-latency, user facing search applications may be created
  * by slicing the full text search results and feeding them incrementally into SPARQL queries. This
  * approach allows the application to manage the cost of the SPARQL query by bounding the input. If
@@ -340,8 +339,7 @@ public interface BDS {
    * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/803" > prefixMatch does not work
    *     in full text search </a>
    */
-  @Deprecated
-  URI PREFIX_MATCH = new URIImpl(NAMESPACE + "prefixMatch");
+  @Deprecated URI PREFIX_MATCH = new URIImpl(NAMESPACE + "prefixMatch");
 
   /** @deprecated This option is now invoked using a wildcard. */
   boolean DEFAULT_PREFIX_MATCH = false;
@@ -367,11 +365,9 @@ public interface BDS {
    *
    * @deprecated Feature was never completed due to scalability issues. See BZLG-1548, BLZG-563.
    */
-  @Deprecated
-  URI SUBJECT_SEARCH = new URIImpl(NAMESPACE + "subjectSearch");
+  @Deprecated URI SUBJECT_SEARCH = new URIImpl(NAMESPACE + "subjectSearch");
 
-  @Deprecated
-  boolean DEFAULT_SUBJECT_SEARCH = false;
+  @Deprecated boolean DEFAULT_SUBJECT_SEARCH = false;
 
   /*
    * Magic predicate used for the "search in search" service. Also serves as the identifier for the

@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop;
 
 /*
-* Exception thrown when a {@link BOp} which is not a {@link PipelineOp} is encountered in a context
+ * Exception thrown when a {@link BOp} which is not a {@link PipelineOp} is encountered in a context
  * which only permits {@link PipelineOp}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

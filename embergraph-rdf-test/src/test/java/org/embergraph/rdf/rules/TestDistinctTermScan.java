@@ -1,5 +1,5 @@
 /*
-* The Notice below must appear in each file of the Source Code of any copy you distribute of the
+ * The Notice below must appear in each file of the Source Code of any copy you distribute of the
  * Licensed Product. Contributors to any Modifications may add their own copyright notices to
  * identify their own contributions.
  *
@@ -46,14 +46,13 @@ import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.rio.IStatementBuffer;
 import org.embergraph.rdf.rio.StatementBuffer;
-import org.embergraph.rdf.spo.DistinctTermAdvancer;
 import org.embergraph.rdf.spo.SPOKeyOrder;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
 /*
-* Test suite for the {@link DistinctTermAdvancer}.
+ * Test suite for the {@link DistinctTermAdvancer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

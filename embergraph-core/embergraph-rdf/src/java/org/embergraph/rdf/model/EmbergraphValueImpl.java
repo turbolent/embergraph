@@ -22,12 +22,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.model;
 
 import java.io.IOException;
-import org.embergraph.bop.IElement;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVUtility;
 
 /*
-* Abstract base class for {@link EmbergraphValue} implementations.
+ * Abstract base class for {@link EmbergraphValue} implementations.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -49,7 +48,7 @@ public abstract class EmbergraphValueImpl implements EmbergraphValue {
 
   //    Note: unused.
   //    /*
-//     *
+  //     *
   //     * @param valueFactory
   //     *
   //     * @throws IllegalArgumentException

@@ -17,7 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /*
-* SailBase is an abstract Sail implementation that takes care of common sail tasks, including
+ * SailBase is an abstract Sail implementation that takes care of common sail tasks, including
  * proper closing of active connections and a grace period for active connections during shutdown of
  * the store.
  *

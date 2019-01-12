@@ -37,7 +37,7 @@ import org.embergraph.service.master.FileSystemScanner;
 import org.embergraph.util.DaemonThreadFactory;
 
 /*
-* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestFileSystemScanner extends TestCase2 {

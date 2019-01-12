@@ -32,7 +32,7 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.ProxyTestCase;
 
 /*
-* Test suite for {@link ReplaceBOp}.
+ * Test suite for {@link ReplaceBOp}.
  *
  * @author <a href="mailto:mpersonick@users.sourceforge.net">Mike Personick</a>
  */

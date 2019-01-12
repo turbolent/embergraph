@@ -26,7 +26,6 @@ import it.unimi.dsi.fastutil.ints.IntArrays;
 import it.unimi.dsi.fastutil.objects.AbstractObjectList;
 import it.unimi.dsi.fastutil.objects.AbstractObjectListIterator;
 import it.unimi.dsi.fastutil.objects.ObjectListIterator;
-import java.io.DataOutput;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Serializable;
@@ -36,7 +35,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /*
-* Compact storage of lists of arrays using front coding.
+ * Compact storage of lists of arrays using front coding.
  *
  * <p>This class stores immutably a list of arrays in a single large array using front coding (of
  * course, the compression will be reasonable only if the list is sorted lexicographically&mdash;see
@@ -496,7 +495,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
   }
 
   //    /*
-//     * Reads a coded length.
+  //     * Reads a coded length.
   //     *
   //     * @param a
   //     *            the data array.
@@ -1195,8 +1194,8 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
 
       if (clen < mlen) {
 
-      /*
-       * No match is possible once the common length is LT the matched
+        /*
+         * No match is possible once the common length is LT the matched
          * length.
          */
 
@@ -1207,8 +1206,8 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
       pos += count(clen);
 
       if (clen > mlen) {
-      /*
-       * No match is possible while the common prefix length with the
+        /*
+         * No match is possible while the common prefix length with the
          * prior entry is GT the matched length with the probe key.
          */
         pos += rlen;

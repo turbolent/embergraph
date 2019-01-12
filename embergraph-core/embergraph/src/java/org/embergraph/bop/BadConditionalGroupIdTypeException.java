@@ -1,7 +1,7 @@
 package org.embergraph.bop;
 
 /*
-* Exception thrown when a {@link PipelineOp.Annotations#CONDITIONAL_GROUP} is not an {@link
+ * Exception thrown when a {@link PipelineOp.Annotations#CONDITIONAL_GROUP} is not an {@link
  * Integer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

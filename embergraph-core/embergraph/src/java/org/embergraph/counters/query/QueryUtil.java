@@ -47,7 +47,6 @@ import org.embergraph.counters.History;
 import org.embergraph.counters.History.SampleIterator;
 import org.embergraph.counters.HistoryInstrument;
 import org.embergraph.counters.ICounter;
-import org.embergraph.counters.ICounterNode;
 import org.embergraph.counters.ICounterSet;
 import org.embergraph.counters.ICounterSet.IInstrumentFactory;
 import org.embergraph.counters.IHostCounters;
@@ -58,13 +57,12 @@ import org.embergraph.journal.ConcurrencyManager.IConcurrencyManagerCounters;
 import org.embergraph.resources.ResourceManager.IResourceManagerCounters;
 import org.embergraph.resources.StoreManager.IStoreManagerCounters;
 import org.embergraph.service.DataService.IDataServiceCounters;
-import org.embergraph.service.Event;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.concurrent.IQueueCounters.IThreadPoolExecutorTaskCounters;
 import org.xml.sax.SAXException;
 
 /*
-* Some static utility methods.
+ * Some static utility methods.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

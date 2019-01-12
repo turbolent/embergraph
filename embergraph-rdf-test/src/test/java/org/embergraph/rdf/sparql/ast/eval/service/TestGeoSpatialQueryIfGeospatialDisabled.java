@@ -29,7 +29,7 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.service.geospatial.GeoSpatialSearchException;
 
 /*
-* Test case asserting that geospatial SERVICE query fails with proper exception if geospatial
+ * Test case asserting that geospatial SERVICE query fails with proper exception if geospatial
  * submodue is turned off.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>

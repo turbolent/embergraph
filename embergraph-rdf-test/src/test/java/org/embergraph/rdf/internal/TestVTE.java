@@ -24,7 +24,7 @@ package org.embergraph.rdf.internal;
 import junit.framework.TestCase;
 
 /*
-* Test suite for {@link VTE}.
+ * Test suite for {@link VTE}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

@@ -5,12 +5,11 @@ import org.embergraph.counters.Instrument;
 import org.embergraph.rdf.rio.IAsynchronousWriteStatementBufferFactory;
 import org.embergraph.rdf.rio.RDFParserOptions;
 import org.embergraph.rdf.store.AbstractTripleStore;
-import org.embergraph.service.ILoadBalancerService;
 import org.openrdf.model.Statement;
 import org.openrdf.rio.RDFFormat;
 
 /*
-* Factory for tasks for loading RDF resources into a database.
+ * Factory for tasks for loading RDF resources into a database.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

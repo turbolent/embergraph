@@ -4,7 +4,7 @@ import java.util.Comparator;
 import org.embergraph.rdf.model.EmbergraphValue;
 
 /*
-* Places {@link EmbergraphValue}s into an ordering determined by their assigned {@link
+ * Places {@link EmbergraphValue}s into an ordering determined by their assigned {@link
  * EmbergraphValue#getIV() IVs} (internal values).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

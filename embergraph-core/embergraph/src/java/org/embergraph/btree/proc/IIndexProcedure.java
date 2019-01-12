@@ -25,16 +25,10 @@ package org.embergraph.btree.proc;
 
 import java.io.Serializable;
 import org.embergraph.btree.IIndex;
-import org.embergraph.btree.IRangeQuery;
-import org.embergraph.btree.ISimpleBTree;
 import org.embergraph.journal.IReadOnly;
-import org.embergraph.service.DataService;
-import org.embergraph.service.IDataService;
-import org.embergraph.service.ndx.ClientIndexView;
-import org.embergraph.sparse.SparseRowStore;
 
 /*
-* An arbitrary procedure run against a single index.
+ * An arbitrary procedure run against a single index.
  * <p>
  * There is a fairly direct correspondence between map / reduce processing and
  * the use of index procedures. The "map" phase corresponds to the

@@ -33,7 +33,6 @@ import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
-import java.util.UUID;
 import org.apache.log4j.Logger;
 import org.apache.system.SystemUtil;
 import org.embergraph.Banner;
@@ -47,7 +46,7 @@ import org.embergraph.util.httpd.AbstractHTTPD;
 import org.embergraph.util.httpd.Config;
 
 /*
-* Base class for collecting data on a host. The data are described by a hierarchical collection of
+ * Base class for collecting data on a host. The data are described by a hierarchical collection of
  * {@link ICounterSet}s and {@link ICounter}s. A {@link IRequiredHostCounters minimum set of
  * counters} is defined which SHOULD be available for decision-making. Implementations are free to
  * report any additional data which they can make available. Reporting is assumed to be periodic,
@@ -120,7 +119,7 @@ public abstract class AbstractStatisticsCollector implements IStatisticsCollecto
   }
 
   //    /*
-//     * Return the load average for the last minute if available and -1
+  //     * Return the load average for the last minute if available and -1
   //     * otherwise.
   //     * <p>
   //     * Note: The load average is available on 1.6+ JVMs.
@@ -575,8 +574,7 @@ public abstract class AbstractStatisticsCollector implements IStatisticsCollecto
      * generally used as the service name. A single host may run many different services and will
      * report the counters for each service using the path formed as described above.
      */
-    String PROCESS_NAME =
-        AbstractStatisticsCollector.class.getPackage().getName() + ".processName";
+    String PROCESS_NAME = AbstractStatisticsCollector.class.getPackage().getName() + ".processName";
   }
 
   /*

@@ -23,10 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.striterator;
 
-import java.util.NoSuchElementException;
-
 /*
-* An extension of {@link IChunkedIterator} interface that knows about natural traversal orders and
+ * An extension of {@link IChunkedIterator} interface that knows about natural traversal orders and
  * how to re-order the elements that are being visited to support JOINs where the natural order for
  * the access paths is different for the left- and right-hand side of the JOIN.
  *

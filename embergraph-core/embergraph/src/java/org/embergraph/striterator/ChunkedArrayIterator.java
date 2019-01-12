@@ -25,7 +25,7 @@ import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 /*
-* Fully buffered iterator.
+ * Fully buffered iterator.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -47,7 +47,7 @@ public class ChunkedArrayIterator<E> implements IChunkedOrderedIterator<E> {
   private int i = 0;
 
   //    /*
-//     * The element most recently returned by {@link #next()}.
+  //     * The element most recently returned by {@link #next()}.
   //     */
   //    private E current = null;
 

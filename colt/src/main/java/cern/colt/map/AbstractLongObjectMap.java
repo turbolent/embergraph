@@ -13,7 +13,7 @@ import cern.colt.function.LongProcedure;
 import cern.colt.list.LongArrayList;
 import cern.colt.list.ObjectArrayList;
 /*
-* Abstract base class for hash maps holding (key,value) associations of type
+ * Abstract base class for hash maps holding (key,value) associations of type
  * <tt>(long-->Object)</tt>. First see the <a href="package-summary.html">package summary</a> and
  * javadoc <a href="package-tree.html">tree view</a> to get the broad picture.
  *

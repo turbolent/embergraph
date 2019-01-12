@@ -27,7 +27,7 @@ import org.embergraph.bop.NV;
 import org.embergraph.bop.PipelineOp;
 
 /*
-* Abstract base class for MERGE JOIN implementations.
+ * Abstract base class for MERGE JOIN implementations.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

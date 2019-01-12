@@ -8,10 +8,9 @@ import org.embergraph.bop.IValueExpression;
 import org.embergraph.bop.IVariable;
 import org.embergraph.bop.ModifiableBOpBase;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.sparql.ast.eval.AST2BOpUtility;
 
 /*
-* AST node models the assignment of a value expression to a variable
+ * AST node models the assignment of a value expression to a variable
  *
  * <pre>
  * BIND( valueExpr AS ?var )

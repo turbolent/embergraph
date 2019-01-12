@@ -24,17 +24,14 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree.view;
 
 import cutthecrap.utils.striterators.IFilter;
-import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.Iterator;
 import org.apache.log4j.Logger;
 import org.embergraph.btree.AbstractBTree;
 import org.embergraph.btree.BTree;
-import org.embergraph.btree.IAutoboxBTree;
 import org.embergraph.btree.IBloomFilter;
 import org.embergraph.btree.ICounter;
 import org.embergraph.btree.IIndex;
-import org.embergraph.btree.ILinearList;
 import org.embergraph.btree.ILocalBTreeView;
 import org.embergraph.btree.IRangeQuery;
 import org.embergraph.btree.ITuple;
@@ -49,7 +46,6 @@ import org.embergraph.btree.Tuple;
 import org.embergraph.btree.filter.Reverserator;
 import org.embergraph.btree.filter.TupleRemover;
 import org.embergraph.btree.filter.WrappedTupleIterator;
-import org.embergraph.btree.isolation.IsolatedFusedView;
 import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedureConstructor;
 import org.embergraph.btree.proc.IKeyRangeIndexProcedure;
 import org.embergraph.btree.proc.IResultHandler;
@@ -57,12 +53,10 @@ import org.embergraph.btree.proc.ISimpleIndexProcedure;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.mdi.IResourceMetadata;
 import org.embergraph.mdi.LocalPartitionMetadata;
-import org.embergraph.relation.accesspath.AccessPath;
-import org.embergraph.service.MetadataService;
 import org.embergraph.service.Split;
 
 /*
-* A fused view providing read-write operations on multiple B+-Trees mapping variable length
+ * A fused view providing read-write operations on multiple B+-Trees mapping variable length
  * unsigned byte[] keys to arbitrary values. The sources MUST support deletion markers. The order of
  * the sources MUST correspond to the recency of their data. Writes will be directed to the first
  * source in the sequence (the most recent source). Deletion markers are used to prevent a miss on a
@@ -220,8 +214,8 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
 
         } else {
 
-        /*
-       * Note: This provides a canonicalizing mapping using a weak
+          /*
+           * Note: This provides a canonicalizing mapping using a weak
            * reference and thereby decouples the FusedView from a hard
            * reference to the IndexSegment.
            */
@@ -286,7 +280,7 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
   }
 
   //    /*
-//     * A {@link ThreadLocal} {@link Tuple} that is used to copy the value
+  //     * A {@link ThreadLocal} {@link Tuple} that is used to copy the value
   //     * associated with a key out of the btree during lookup operations.
   //     * <p>
   //     * Note: This field is NOT static. This limits the scope of the
@@ -305,7 +299,7 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
   //    };
   //
   //    /*
-//     * A {@link ThreadLocal} {@link Tuple} that is used for contains() tests.
+  //     * A {@link ThreadLocal} {@link Tuple} that is used for contains() tests.
   //     * The tuple does not copy either the keys or the values. Contains is
   //     * implemented as a lookup operation that either return this tuple or
   //     * <code>null</code>. When isolation is supported, the version metadata
@@ -1290,8 +1284,8 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
             && src instanceof BTree
             && srcs[i + 1].getBloomFilter() != null) {
 
-        /*
-       * Do a real point test when we have a FusedView and the 1st
+          /*
+           * Do a real point test when we have a FusedView and the 1st
            * or 2nd component of the view is a BTree and there are
            * additional components in the view and they have a bloom
            * filter enabled. This covers the case where the BTree is
@@ -1323,8 +1317,8 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
 
         if (filter == null || filter.contains(key)) {
 
-        /*
-       * Either no filter, a disabled filter, or the filter exists
+          /*
+           * Either no filter, a disabled filter, or the filter exists
            * and reports that it has seen the key. At the worst, this
            * is a false positive and we will be forced to check the
            * index.

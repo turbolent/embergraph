@@ -19,7 +19,6 @@ package org.embergraph.journal;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.text.NumberFormat;
 import java.util.UUID;
@@ -29,13 +28,11 @@ import org.apache.log4j.Logger;
 import org.embergraph.io.FileChannelUtility;
 import org.embergraph.mdi.IResourceMetadata;
 import org.embergraph.rawstore.AbstractRawWormStore;
-import org.embergraph.rawstore.IRawStore;
-import org.embergraph.rawstore.WormAddressManager;
 import org.embergraph.resources.ResourceManager;
 import org.embergraph.util.Bytes;
 
 /*
-* Abstract base class for {@link IBufferStrategy} implementation.
+ * Abstract base class for {@link IBufferStrategy} implementation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -337,8 +334,8 @@ public abstract class AbstractBufferStrategy extends AbstractRawWormStore
 
       if (newExtent - userExtent < needed) {
 
-      /*
-       * Not enough room for the requested extension.
+        /*
+         * Not enough room for the requested extension.
          */
 
         log.error(ERR_MAX_EXTENT);
@@ -592,7 +589,7 @@ public abstract class AbstractBufferStrategy extends AbstractRawWormStore
 
   //
   //    /*
-//     * {@inheritDoc}
+  //     * {@inheritDoc}
   //     * <p>
   //     * Note: By default there is no WriteCache to buffer any writes
   //     *

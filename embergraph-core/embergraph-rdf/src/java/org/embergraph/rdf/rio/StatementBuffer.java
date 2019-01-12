@@ -54,10 +54,7 @@ import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.SPO;
 import org.embergraph.rdf.store.AbstractTripleStore;
-import org.embergraph.rdf.store.IRawTripleStore;
 import org.embergraph.rdf.store.TempTripleStore;
-import org.embergraph.relation.accesspath.IBuffer;
-import org.embergraph.relation.accesspath.IElementFilter;
 import org.embergraph.striterator.ChunkedArrayIterator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.util.concurrent.LatchedExecutor;
@@ -69,7 +66,7 @@ import org.openrdf.model.Value;
 import org.openrdf.model.vocabulary.RDF;
 
 /*
-* A write buffer for absorbing the output of the RIO parser or other {@link Statement} source and
+ * A write buffer for absorbing the output of the RIO parser or other {@link Statement} source and
  * writing that output onto an {@link AbstractTripleStore} using the batch API.
  *
  * <p>Note: there is a LOT of {@link Value} duplication in parsed RDF and we get a significant
@@ -245,7 +242,7 @@ public class StatementBuffer<S extends Statement>
   }
 
   //    /*
-//     * When true only distinct terms are stored in the buffer (this is always
+  //     * When true only distinct terms are stored in the buffer (this is always
   //     * true since this condition always outperforms the alternative).
   //     */
   //    protected final boolean distinct = true;
@@ -682,7 +679,7 @@ public class StatementBuffer<S extends Statement>
   }
 
   //	/*
-//	 * Evict a batch (blocking put, but spins to look for an error in
+  //	 * Evict a batch (blocking put, but spins to look for an error in
   //	 * {@link Future} for the thread draining the queue.
   //	 *
   //	 * @param batch
@@ -817,8 +814,8 @@ public class StatementBuffer<S extends Statement>
 
       if (avail.size() == 1) {
 
-      /*
-       * Safety check. Do not merge a single batch.
+        /*
+         * Safety check. Do not merge a single batch.
          */
         final BatchResult batchResult = avail.get(0).writeNow();
         bnodesResolvedCount += batchResult.getNumBNodesResolved();
@@ -893,7 +890,7 @@ public class StatementBuffer<S extends Statement>
   }
 
   //    /*
-//     * Processes the {@link #deferredStmts deferred statements}.
+  //     * Processes the {@link #deferredStmts deferred statements}.
   //     * <p>
   //     * When statement identifiers are enabled the processing of statements using
   //     * blank nodes in their subject or object position must be deferred until we
@@ -1288,8 +1285,8 @@ public class StatementBuffer<S extends Statement>
 
       if (ft == null || ft.isDone() /* BLZG-1813 */) {
 
-      /*
-       * If the future is done, get the future, and
+        /*
+         * If the future is done, get the future, and
          * propogate any exceptions.
          *
          * @see BLZG-1813
@@ -1300,8 +1297,8 @@ public class StatementBuffer<S extends Statement>
 
             ft.get(); // get the future.
 
-          /*
-       * Fall through. New Future will be created below.
+            /*
+             * Fall through. New Future will be created below.
              */
 
           } catch (InterruptedException e) {
@@ -1315,8 +1312,8 @@ public class StatementBuffer<S extends Statement>
           }
         }
 
-      /*
-       * Note: Lazily initialized since reset() does not make the
+        /*
+         * Note: Lazily initialized since reset() does not make the
          * StatementBuffer object invalid for further use.
          */
 
@@ -1474,8 +1471,8 @@ public class StatementBuffer<S extends Statement>
 
       if (existingTerm != null) {
 
-      /*
-       * Term already exists, do not add.
+        /*
+         * Term already exists, do not add.
          */
         return existingTerm;
       }
@@ -1709,8 +1706,8 @@ public class StatementBuffer<S extends Statement>
       }
 
       if (cloned) {
-      /*
-       * The data was cloned, so reset the statement of the buffer in
+        /*
+         * The data was cloned, so reset the statement of the buffer in
          * the outer context (but not the bnodes nor deferred stmts).
          */
         sb._clear();
@@ -2087,8 +2084,8 @@ public class StatementBuffer<S extends Statement>
         // THIS IS THE CORRECT ACTION!
         incrementalWrite();
       } else {
-      /*
-       * This will flush all blank nodes. It may be necessary on very
+        /*
+         * This will flush all blank nodes. It may be necessary on very
          * large files. It also resets the blank node and deferred
          * statement maps afterwards (since they are set to null by
          * reset()).
@@ -2129,7 +2126,6 @@ public class StatementBuffer<S extends Statement>
     // which will get added to values array while running incrementalWrite
     // @see https://jira.blazegraph.com/browse/BLZG-1708
     return numValues + bnodesTotalCount - bnodesResolvedCount + arity > values.length;
-
   }
 
   /*
@@ -2169,8 +2165,8 @@ public class StatementBuffer<S extends Statement>
                 (EmbergraphURI) getDistinctTerm(stmt.getPredicate(), true),
                 getDistinctTerm(stmt.getObject(), true)));
 
-      /*
-       * Do not "add if absent".  This is not a real term, just a
+        /*
+         * Do not "add if absent".  This is not a real term, just a
          * composition of other terms.
          */
         return bnode;
@@ -2182,8 +2178,8 @@ public class StatementBuffer<S extends Statement>
 
         if (bnodes == null) {
 
-        /*
-       * Allocating canonicalizing map for blank nodes. Note:
+          /*
+           * Allocating canonicalizing map for blank nodes. Note:
            * Using linked hash map since we have to iterate over this
            * in order to decide how many resolved and unresolved blank
            * nodes remain in the map per
@@ -2206,8 +2202,8 @@ public class StatementBuffer<S extends Statement>
 
           if (existingBNode != null) {
 
-          /*
-       * Return existing blank node with same ID, do not
+            /*
+             * Return existing blank node with same ID, do not
              * add since not absent.
              */
             return existingBNode;
@@ -2257,8 +2253,8 @@ public class StatementBuffer<S extends Statement>
           }
         }
 
-      /*
-       * Term already exists, do not add.
+        /*
+         * Term already exists, do not add.
          */
         return existingTerm;
       }
@@ -2407,8 +2403,8 @@ public class StatementBuffer<S extends Statement>
 
       } else if (equals(o, RDF_STATEMENT) && equals(p, RDF_TYPE)) {
 
-      /*
-       * Ignore these statements.
+        /*
+         * Ignore these statements.
          *
          * _:sid rdf:type rdf:Statement .
          */

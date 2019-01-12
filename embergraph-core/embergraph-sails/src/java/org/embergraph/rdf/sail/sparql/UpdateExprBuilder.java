@@ -90,7 +90,6 @@ import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.TermNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.spo.ISPO;
-import org.embergraph.rdf.spo.SPO;
 import org.openrdf.model.BNode;
 import org.openrdf.model.Statement;
 import org.openrdf.model.Value;
@@ -101,7 +100,7 @@ import org.openrdf.rio.helpers.BasicParserSettings;
 import org.openrdf.rio.helpers.StatementCollector;
 
 /*
-* Extension of {@link EmbergraphExprBuilder} that builds Update Expressions.
+ * Extension of {@link EmbergraphExprBuilder} that builds Update Expressions.
  *
  * @author Jeen Broekstra
  * @author Bryan Thompson
@@ -544,8 +543,8 @@ public class UpdateExprBuilder extends EmbergraphExprBuilder {
 
         with = (ConstantNode) withNode.jjtAccept(this, data);
 
-      /*
-       * Set the default context for the WHERE clause, DELETE clause,
+        /*
+         * Set the default context for the WHERE clause, DELETE clause,
          * and/or INSERT clauser.
          */
 
@@ -675,8 +674,8 @@ public class UpdateExprBuilder extends EmbergraphExprBuilder {
 
       for (Statement stmt : stmts) {
 
-      /*
-       * Blank nodes are not allowed in DELETE DATA.
+        /*
+         * Blank nodes are not allowed in DELETE DATA.
          *
          * <p>See http://trac.bigdata.com/ticket/1076#comment:5
          */

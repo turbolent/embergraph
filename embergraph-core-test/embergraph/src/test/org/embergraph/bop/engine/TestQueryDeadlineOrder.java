@@ -37,7 +37,7 @@ import org.embergraph.journal.Journal;
 import org.embergraph.striterator.ChunkedArrayIterator;
 
 /*
-* Test suite for {@link QueryDeadline} ordering.
+ * Test suite for {@link QueryDeadline} ordering.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

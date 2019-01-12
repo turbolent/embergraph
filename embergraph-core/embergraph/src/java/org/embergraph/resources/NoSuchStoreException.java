@@ -1,10 +1,9 @@
 package org.embergraph.resources;
 
 import java.util.UUID;
-import org.embergraph.journal.ITx;
 
 /*
-* An instance of this class is thrown when a {@link UUID} does not identify any store known to the
+ * An instance of this class is thrown when a {@link UUID} does not identify any store known to the
  * {@link StoreManager}. This can arise if the store file is deleted by an operator, but the most
  * common explanation is that resource was considered "release free" and was deleted by the {@link
  * StoreManager}.

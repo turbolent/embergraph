@@ -40,7 +40,6 @@ import org.embergraph.resources.ResourceManager;
 import org.embergraph.service.AbstractClient;
 import org.embergraph.service.DistributedTransactionService;
 import org.embergraph.service.EmbeddedClient;
-import org.embergraph.service.EmbeddedFederation;
 import org.embergraph.service.IEmbergraphClient;
 import org.embergraph.service.IEmbergraphFederation;
 import org.openrdf.query.Dataset;
@@ -51,7 +50,7 @@ import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryException;
 
 /*
-* Test harness for running the SPARQL test suites against an {@link EmbeddedFederation}.
+ * Test harness for running the SPARQL test suites against an {@link EmbeddedFederation}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

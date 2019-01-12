@@ -25,7 +25,7 @@ import org.openrdf.repository.sail.SailRepository;
 import org.openrdf.sail.SailException;
 
 /*
-* Embergraph specific {@link SailRepository} implementation class.
+ * Embergraph specific {@link SailRepository} implementation class.
  *
  * @see EmbergraphSailRepositoryConnection
  */

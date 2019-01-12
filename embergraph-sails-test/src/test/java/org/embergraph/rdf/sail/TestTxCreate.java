@@ -23,13 +23,12 @@ package org.embergraph.rdf.sail;
 
 import java.util.Properties;
 import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.internal.LexiconConfiguration;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.vocab.NoVocabulary;
 import org.openrdf.sail.SailException;
 
 /*
-* Unit test for the creation of a Sail with isolatable indices. This unit test was developed in
+ * Unit test for the creation of a Sail with isolatable indices. This unit test was developed in
  * response to <a href="https://sourceforge.net/apps/trac/bigdata/ticket/252">issue #252</a>, which
  * reported a problem when creating a Sail which supports fully isolated indices and also uses
  * inline date times. The problem goes back to how the {@link LexiconConfiguration} gains access to

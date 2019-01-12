@@ -32,7 +32,7 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.rdf.internal.IV;
 
 /*
-* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 @SuppressWarnings("rawtypes")

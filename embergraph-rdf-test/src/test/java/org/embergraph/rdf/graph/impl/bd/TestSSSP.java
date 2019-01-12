@@ -25,7 +25,7 @@ import org.embergraph.rdf.graph.analytics.SSSP;
 import org.openrdf.model.URI;
 
 /*
-* Test class for SSP traversal.
+ * Test class for SSP traversal.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

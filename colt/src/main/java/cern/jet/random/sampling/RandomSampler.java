@@ -10,7 +10,7 @@ package cern.jet.random.sampling;
 
 import cern.jet.random.engine.RandomEngine;
 /*
-* Space and time efficiently computes a sorted <i>Simple Random Sample Without Replacement
+ * Space and time efficiently computes a sorted <i>Simple Random Sample Without Replacement
  * (SRSWOR)</i>, that is, a sorted set of <tt>n</tt> random numbers from an interval of <tt>N</tt>
  * numbers; Example: Computing <tt>n=3</tt> random numbers from the interval <tt>[1,50]</tt> may
  * yield the sorted random set <tt>(7,13,47)</tt>. Since we are talking about a set (sampling
@@ -244,7 +244,7 @@ public class RandomSampler extends cern.colt.PersistentObject {
 
     long negalphainv =
         -13; // tuning paramter, determines when to switch from method D to method A. Dependent on
-             // programming language, platform, etc.
+    // programming language, platform, etc.
 
     nreal = n;
     ninv = 1.0 / nreal;
@@ -478,7 +478,7 @@ public class RandomSampler extends cern.colt.PersistentObject {
 
     long negalphainv =
         -13; // tuning paramter, determines when to switch from method D to method A. Dependent on
-             // programming language, platform, etc.
+    // programming language, platform, etc.
 
     nreal = n;
     ninv = 1.0 / nreal;

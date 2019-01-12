@@ -9,7 +9,7 @@ import org.embergraph.counters.IHistoryEntry;
 import org.embergraph.counters.PeriodEnum;
 
 /*
-* A class representing one or more performance counter histories where those histories have been
+ * A class representing one or more performance counter histories where those histories have been
  * aligned so that the individual timestamps for the performance counter values in each row are
  * aligned.
  *

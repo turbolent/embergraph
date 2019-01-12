@@ -9,7 +9,7 @@ It is provided "as is" without expressed or implied warranty.
 package cern.colt.map;
 
 /*
-* Abstract base class for hash maps holding objects or primitive data types such as <code>int
+ * Abstract base class for hash maps holding objects or primitive data types such as <code>int
  * </code>, <code>float</code>, etc. as keys and/or values. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
  * view</a> to get the broad picture.

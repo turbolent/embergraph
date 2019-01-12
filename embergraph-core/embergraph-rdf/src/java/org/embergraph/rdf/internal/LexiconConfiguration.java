@@ -41,7 +41,6 @@ import org.embergraph.rdf.internal.impl.AbstractInlineIV;
 import org.embergraph.rdf.internal.impl.bnode.FullyInlineUnicodeBNodeIV;
 import org.embergraph.rdf.internal.impl.bnode.NumericBNodeIV;
 import org.embergraph.rdf.internal.impl.bnode.UUIDBNodeIV;
-import org.embergraph.rdf.internal.impl.extensions.XSDStringExtension;
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.internal.impl.literal.FullyInlineTypedLiteralIV;
 import org.embergraph.rdf.internal.impl.literal.IPv4AddrIV;
@@ -58,7 +57,6 @@ import org.embergraph.rdf.internal.impl.literal.XSDUnsignedLongIV;
 import org.embergraph.rdf.internal.impl.literal.XSDUnsignedShortIV;
 import org.embergraph.rdf.internal.impl.uri.FullyInlineURIIV;
 import org.embergraph.rdf.internal.impl.uri.URIExtensionIV;
-import org.embergraph.rdf.lexicon.LexiconKeyOrder;
 import org.embergraph.rdf.model.EmbergraphBNode;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.model.EmbergraphURI;
@@ -77,7 +75,7 @@ import org.openrdf.model.datatypes.XMLDatatypeUtil;
 import org.openrdf.model.impl.URIImpl;
 
 /*
-* An object which describes which kinds of RDF Values are inlined into the statement indices and
+ * An object which describes which kinds of RDF Values are inlined into the statement indices and
  * how other RDF Values are coded into the lexicon.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -750,19 +748,19 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
     try {
 
       if (dtex != null) {
-      /*
-       * Handle an extended intrinsic datatype.
+        /*
+         * Handle an extended intrinsic datatype.
          */
         switch (dtex) {
           case IPV4:
-          /*
-       * Extension for IPv4. Throws UnknownHostException if not
+            /*
+             * Extension for IPv4. Throws UnknownHostException if not
              * parseable as an IPv4.
              */
             return new IPv4AddrIV<EmbergraphLiteral>(v);
           case PACKED_LONG:
-          /*
-       * Extension for packed long value in the range [0;72057594037927935L].
+            /*
+             * Extension for packed long value in the range [0;72057594037927935L].
              */
             return new PackedLongIV<EmbergraphLiteral>(v);
           default:
@@ -933,8 +931,8 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
 
       } catch (Exception ex) {
 
-      /*
-       * String id could not be converted to a UUID. Fall through.
+        /*
+         * String id could not be converted to a UUID. Fall through.
          */
 
       }
@@ -961,8 +959,8 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
 
       } catch (Exception ex) {
 
-      /*
-       * String id could not be converted to an Integer. Fall
+        /*
+         * String id could not be converted to an Integer. Fall
          * through.
          */
 
@@ -1003,7 +1001,7 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
   }
 
   //    /*
-//     * Hack for supported {@link DTE}s (this is here because we do not support
+  //     * Hack for supported {@link DTE}s (this is here because we do not support
   //     * the unsigned variants yet).
   //     *
   //     * @param dte

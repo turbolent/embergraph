@@ -33,7 +33,7 @@ import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.SubqueryRoot;
 
 /*
-* Test suite for the {@link ASTJoinGroupPartition} and the {@link ASTJoinGroupPartitions} utility
+ * Test suite for the {@link ASTJoinGroupPartition} and the {@link ASTJoinGroupPartitions} utility
  * classes.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>

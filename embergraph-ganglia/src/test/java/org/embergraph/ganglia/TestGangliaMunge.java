@@ -18,7 +18,7 @@ package org.embergraph.ganglia;
 import junit.framework.TestCase;
 
 /*
-* Unit tests for ability to munge a metric name into something compatible with a file system
+ * Unit tests for ability to munge a metric name into something compatible with a file system
  * (ganglia stores metrics in the file system and does not do a good job of munging the metrics
  * itself).
  */

@@ -25,16 +25,13 @@ package org.embergraph.service.ndx;
 
 import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicInteger;
-import org.embergraph.btree.ITuple;
-import org.embergraph.journal.ITx;
-import org.embergraph.mdi.IMetadataIndex;
 import org.embergraph.mdi.PartitionLocator;
 import org.embergraph.resources.StaleLocatorException;
 import org.embergraph.service.AbstractScaleOutFederation;
 import org.embergraph.service.IDataService;
 
 /*
-* A client-side view of a scale-out index.
+ * A client-side view of a scale-out index.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

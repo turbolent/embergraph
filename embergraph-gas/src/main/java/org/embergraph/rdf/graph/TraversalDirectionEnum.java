@@ -16,7 +16,7 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 package org.embergraph.rdf.graph;
 
 /*
-* Typesafe enumeration of manner in which an RDF graph will be traversed by an {@link IGASProgram}
+ * Typesafe enumeration of manner in which an RDF graph will be traversed by an {@link IGASProgram}
  * based on its {@link EdgesEnum}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

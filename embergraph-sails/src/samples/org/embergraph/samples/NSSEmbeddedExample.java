@@ -9,7 +9,7 @@ import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sail.webapp.NanoSparqlServer;
 
 /*
-* Class demonstrates how to start the {@link NanoSparqlServer} from within embedded code.
+ * Class demonstrates how to start the {@link NanoSparqlServer} from within embedded code.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

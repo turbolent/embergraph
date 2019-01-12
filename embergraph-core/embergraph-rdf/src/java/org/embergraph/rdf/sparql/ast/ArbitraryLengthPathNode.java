@@ -35,7 +35,7 @@ import org.embergraph.rdf.sparql.ast.optimizers.ASTALPServiceOptimizer;
 import org.embergraph.rdf.sparql.ast.optimizers.StaticOptimizer;
 
 /*
-* A special kind of AST node that represents the SPARQL 1.1 arbitrary length path operator. This
+ * A special kind of AST node that represents the SPARQL 1.1 arbitrary length path operator. This
  * node has a single child arg - a JoinGroupNode consisting of other operators (the path) that must
  * be run to fixed point. This node also has several annotations that define the schematics (the
  * left and right sides and the lower and upper bounds) of the arbitrary length path.
@@ -443,8 +443,8 @@ public class ArbitraryLengthPathNode extends GroupMemberNodeBase<ArbitraryLength
         final long estCard =
             pathExpr.getProperty(AST2BOpBase.Annotations.ESTIMATED_CARDINALITY, Long.MAX_VALUE);
 
-      /*
-       * The upper bound tells us how often the pattern will be executed, we multiply it with the
+        /*
+         * The upper bound tells us how often the pattern will be executed, we multiply it with the
          * estimated cardinality and add the zero match adjustment.
          */
         if (estCard < Long.MAX_VALUE) {

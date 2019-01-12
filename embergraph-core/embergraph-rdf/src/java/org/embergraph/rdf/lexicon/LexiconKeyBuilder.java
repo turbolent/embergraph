@@ -1,8 +1,6 @@
 package org.embergraph.rdf.lexicon;
 
 import org.embergraph.btree.keys.IKeyBuilder;
-import org.embergraph.btree.keys.IKeyBuilderFactory;
-import org.embergraph.btree.keys.StrengthEnum;
 import org.openrdf.model.BNode;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
@@ -10,7 +8,7 @@ import org.openrdf.model.Value;
 import org.openrdf.model.vocabulary.XMLSchema;
 
 /*
-* Flyweight helper class for building (and decoding to the extent possible) unsigned byte[] keys
+ * Flyweight helper class for building (and decoding to the extent possible) unsigned byte[] keys
  * for RDF {@link Value}s and term identifiers. In general, keys for RDF values are formed by a
  * leading byte that indicates the type of the value (URI, BNode, or some type of Literal), followed
  * by the components of that value type.
@@ -131,7 +129,7 @@ public class LexiconKeyBuilder implements ITermIndexCodes {
   }
 
   // /*
-// * The key corresponding to the start of the literals section of the
+  // * The key corresponding to the start of the literals section of the
   // * terms index.
   // */
   // public byte[] litStartKey() {
@@ -141,7 +139,7 @@ public class LexiconKeyBuilder implements ITermIndexCodes {
   // }
 
   // /*
-// * The key corresponding to the first key after the literals section of
+  // * The key corresponding to the first key after the literals section of
   // the
   // * terms index.
   // */
@@ -187,22 +185,22 @@ public class LexiconKeyBuilder implements ITermIndexCodes {
 
       if (languageCode != null) {
 
-      /*
-       * language code literal.
+        /*
+         * language code literal.
          */
         return languageCodeLiteral2key(languageCode, text);
 
       } else if (datatypeUri != null) {
 
-      /*
-       * datatype literal.
+        /*
+         * datatype literal.
          */
         return datatypeLiteral2key(datatypeUri, text);
 
       } else {
 
-      /*
-       * plain literal.
+        /*
+         * plain literal.
          */
         return plainLiteral2key(text);
       }

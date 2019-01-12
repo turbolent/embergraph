@@ -7,7 +7,7 @@ import org.embergraph.counters.ICounter;
 import org.embergraph.counters.query.URLQueryModel;
 
 /*
-* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TextValueFormatter extends ValueFormatter {

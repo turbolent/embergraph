@@ -46,10 +46,8 @@ import org.embergraph.btree.raba.codec.FrontCodedRabaCoder;
 import org.embergraph.btree.raba.codec.SimpleRabaCoder;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.internal.IVCache;
 import org.embergraph.rdf.internal.IVUtility;
 import org.embergraph.rdf.internal.impl.BlobIV;
-import org.embergraph.rdf.internal.impl.TermId;
 import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
 import org.embergraph.rdf.lexicon.BlobsIndexHelper;
 import org.embergraph.rdf.lexicon.BlobsTupleSerializer;
@@ -58,12 +56,10 @@ import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
-import org.embergraph.rdf.sparql.ast.eval.AST2BOpUtility;
 import org.embergraph.util.Bytes;
-import org.openrdf.model.Value;
 
 /*
-* A concrete implementation using scalable {@link BTree}s to store the mapping from an {@link IV}
+ * A concrete implementation using scalable {@link BTree}s to store the mapping from an {@link IV}
  * to the cached RDF {@link Value}. This approach is useful when you will be encoding a LOT of data
  * and you need to get the cached RDF {@link Value} objects off of the JVM heap.
  *
@@ -492,8 +488,8 @@ public class IVBindingSetEncoderWithIVCache extends IVBindingSetEncoder {
           h = new BlobsIndexHelper();
         }
 
-      /*
-       * Note: The insert logic for the BLOBS index here is different
+        /*
+         * Note: The insert logic for the BLOBS index here is different
          * (and much simpler) because we already have the exact BlobIV
          * and we want to ensure that there is an entry under that key
          * in the [blobsCache].
@@ -515,8 +511,8 @@ public class IVBindingSetEncoderWithIVCache extends IVBindingSetEncoder {
           blobsCache.insert(key, val);
         }
 
-      /*
-       * BLZG-1899: we also need to encode literal extension IVs: these IVs require
+        /*
+         * BLZG-1899: we also need to encode literal extension IVs: these IVs require
          * materialization although they are inlined, since their interpretation depends on the
          * LexiconConfiguration
          */
@@ -626,8 +622,8 @@ public class IVBindingSetEncoderWithIVCache extends IVBindingSetEncoder {
           continue;
         }
 
-      /*
-       * TODO Factor out the buffers used to do the de-serialization
+        /*
+         * TODO Factor out the buffers used to do the de-serialization
          * when we vector the resolution of IVs.
          */
         final EmbergraphValue value = valueFactory.getValueSerializer().deserialize(val);

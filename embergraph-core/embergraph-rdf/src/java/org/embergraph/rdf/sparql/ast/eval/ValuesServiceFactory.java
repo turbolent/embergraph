@@ -22,7 +22,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.eval;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
-import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -49,7 +48,7 @@ import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
 /*
-* A factory for a service that simulates the VALUES syntax in SPARQL:
+ * A factory for a service that simulates the VALUES syntax in SPARQL:
  *
  * <p>service bd:values { # service params bd:serviceParam bd:values.var ?var . bd:serviceParam
  * bd:values.val "val1" . bd:serviceParam bd:values.val "val2" . ... }

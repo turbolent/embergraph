@@ -25,11 +25,8 @@ Copyright (C) Embergraph contributors 2019. All rights reserved.
 
 package org.embergraph.io;
 
-import it.unimi.dsi.fastutil.io.RepositionableStream;
-import java.nio.ByteBuffer;
-
 /*
-* An interface for reading from and accessing a managed byte[] with access methods similar to those
+ * An interface for reading from and accessing a managed byte[] with access methods similar to those
  * of {@link ByteBuffer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -7,7 +7,7 @@ import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Class permits specification of a pre-assigned index partition splits onto data services.
+ * Class permits specification of a pre-assigned index partition splits onto data services.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

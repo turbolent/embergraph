@@ -32,14 +32,13 @@ import org.embergraph.btree.keys.SuccessorUtil;
 import org.embergraph.io.ByteArrayBuffer;
 import org.embergraph.io.DataInputBuffer;
 import org.embergraph.io.DataOutputBuffer;
-import org.embergraph.journal.IIndexStore;
 import org.embergraph.journal.ITx;
 import org.embergraph.journal.TimestampUtility;
 import org.embergraph.rawstore.IBlock;
 import org.embergraph.util.BytesUtil;
 
 /*
-* A chunked iterator that proceeds a {@link ResultSet} at a time. This introduces the concept of a
+ * A chunked iterator that proceeds a {@link ResultSet} at a time. This introduces the concept of a
  * {@link #continuationQuery()} so that the iterator can materialize the tuples using a sequence of
  * queries that progresses through the index until all tuples in the key range have been visited.
  *
@@ -156,8 +155,8 @@ public abstract class AbstractChunkedTupleIterator<E> implements ITupleIterator<
 
       if (commitTime == 0L) {
 
-      /*
-       * The commitTime is not yet available (nothing has been read).
+        /*
+         * The commitTime is not yet available (nothing has been read).
          */
 
         throw new IllegalStateException();

@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /*
-* Packing utility for non-negative <code>short</code> values.
+ * Packing utility for non-negative <code>short</code> values.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

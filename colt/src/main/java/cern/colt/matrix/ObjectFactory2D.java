@@ -11,7 +11,7 @@ package cern.colt.matrix;
 import cern.colt.matrix.impl.DenseObjectMatrix2D;
 import cern.colt.matrix.impl.SparseObjectMatrix2D;
 /*
-* Factory for convenient construction of 2-d matrices holding <tt>Object</tt> cells. Also provides
+ * Factory for convenient construction of 2-d matrices holding <tt>Object</tt> cells. Also provides
  * convenient methods to compose (concatenate) and decompose (split) matrices from/to constituent
  * blocks.
  *

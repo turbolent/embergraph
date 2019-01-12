@@ -24,40 +24,25 @@ import org.apache.log4j.Logger;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IPredicate;
 import org.embergraph.bop.IVariable;
-import org.embergraph.btree.AbstractBTree;
-import org.embergraph.journal.AbstractTask;
-import org.embergraph.journal.ConcurrencyManager;
-import org.embergraph.journal.IIndexManager;
-import org.embergraph.journal.IIndexStore;
-import org.embergraph.journal.IJournal;
-import org.embergraph.journal.ITx;
-import org.embergraph.rdf.spo.SPOKeyOrder;
 import org.embergraph.relation.IRelation;
 import org.embergraph.relation.accesspath.AbstractUnsynchronizedArrayBuffer;
 import org.embergraph.relation.accesspath.AccessPath;
-import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.relation.accesspath.BufferClosedException;
 import org.embergraph.relation.accesspath.IAccessPath;
-import org.embergraph.relation.accesspath.IAsynchronousIterator;
-import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.IBuffer;
-import org.embergraph.relation.accesspath.UnsynchronizedArrayBuffer;
 import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.IStarJoin;
 import org.embergraph.relation.rule.IStarJoin.IStarConstraint;
 import org.embergraph.relation.rule.eval.ChunkTrace;
 import org.embergraph.relation.rule.eval.IJoinNexus;
 import org.embergraph.relation.rule.eval.ISolution;
-import org.embergraph.service.DataService;
-import org.embergraph.service.IDataService;
 import org.embergraph.striterator.IChunkedOrderedIterator;
-import org.embergraph.striterator.IKeyOrder;
 import org.embergraph.util.BytesUtil;
 import org.embergraph.util.InnerCause;
 import org.embergraph.util.concurrent.LatchedExecutor;
 
 /*
-* Consumes {@link IBindingSet} chunks from the previous join dimension.
+ * Consumes {@link IBindingSet} chunks from the previous join dimension.
  *
  * <p>Note: Instances of this class MUST be created on the {@link IDataService} that is host to the
  * index partition on the task will read and they MUST run inside of an {@link AbstractTask} on the
@@ -220,8 +205,8 @@ public abstract class JoinTask implements Callable<Void> {
             && !InnerCause.isInnerCause(cause, RejectedExecutionException.class)
             && !InnerCause.isInnerCause(cause, BufferClosedException.class)) {
 
-        /*
-       * This logs all unexpected causes, not just the first one
+          /*
+           * This logs all unexpected causes, not just the first one
            * to be reported for this join task.
            *
            * Note: The master will log the firstCause that it receives
@@ -326,8 +311,8 @@ public abstract class JoinTask implements Callable<Void> {
       T tmp = map.get(t);
       if (tmp == null) {
         if (map.put(t, tmp = initialValue()) != null) {
-        /*
-       * Note: Since the key is the thread it is not possible for
+          /*
+           * Note: Since the key is the thread it is not possible for
            * there to be a concurrent put of an entry under the same
            * key so we do not have to use putIfAbsent().
            */
@@ -386,7 +371,7 @@ public abstract class JoinTask implements Callable<Void> {
     }
 
     //	    /*
-//	     * Reset the per-{@link Thread} unsynchronized output buffers (used as
+    //	     * Reset the per-{@link Thread} unsynchronized output buffers (used as
     //	     * part of error handling for the {@link JoinTask}).
     //	     */
     //	    final protected void resetUnsyncBuffers() throws Exception {
@@ -767,7 +752,7 @@ public abstract class JoinTask implements Callable<Void> {
   abstract void closeSources();
 
   //    /*
-//     * Flush the per-{@link Thread} unsynchronized output buffers (they
+  //     * Flush the per-{@link Thread} unsynchronized output buffers (they
   //     * write onto the thread-safe output buffer).
   //     */
   //    final protected void flushUnsyncBuffers() throws Exception {
@@ -804,7 +789,7 @@ public abstract class JoinTask implements Callable<Void> {
   //	}
 
   //    /*
-//     * Reset the per-{@link Thread} unsynchronized output buffers (used as
+  //     * Reset the per-{@link Thread} unsynchronized output buffers (used as
   //     * part of error handling for the {@link JoinTask}).
   //     */
   //    final protected void resetUnsyncBuffers() throws Exception {
@@ -911,8 +896,8 @@ public abstract class JoinTask implements Callable<Void> {
 
         while (!halt && (chunk = nextChunk()) != null) {
 
-        /*
-       * @todo ChunkTrace for bindingSet chunks in as well as
+          /*
+           * @todo ChunkTrace for bindingSet chunks in as well as
            * access path chunks consumed.
            */
 
@@ -925,28 +910,28 @@ public abstract class JoinTask implements Callable<Void> {
                     + ", partitionId="
                     + partitionId);
 
-        /*
-       * Aggregate the source bindingSets that license the
+          /*
+           * Aggregate the source bindingSets that license the
            * same asBound predicate.
            */
           final Map<IPredicate<?>, Collection<IBindingSet>> map = combineBindingSets(chunk);
 
-        /*
-       * Generate an AccessPathTask from each distinct
+          /*
+           * Generate an AccessPathTask from each distinct
            * asBound predicate that will consume all of the source
            * bindingSets in the chunk which resulted in the same
            * asBound predicate.
            */
           final AccessPathTask[] tasks = getAccessPathTasks(map);
 
-        /*
-       * Reorder those tasks for better index read
+          /*
+           * Reorder those tasks for better index read
            * performance.
            */
           reorderTasks(tasks);
 
-        /*
-       * Execute the tasks (either in the caller's thread or
+          /*
+           * Execute the tasks (either in the caller's thread or
            * on the supplied service).
            */
           executeTasks(tasks);
@@ -996,8 +981,8 @@ public abstract class JoinTask implements Callable<Void> {
 
         if (partitionId != -1) {
 
-        /*
-       * Constrain the predicate to the desired index partition.
+          /*
+           * Constrain the predicate to the desired index partition.
            *
            * Note: we do this for scale-out joins since the access
            * path will be evaluated by a JoinTask dedicated to this
@@ -1014,8 +999,8 @@ public abstract class JoinTask implements Callable<Void> {
 
         if (values == null) {
 
-        /*
-       * This is the first bindingSet for this asBound
+          /*
+           * This is the first bindingSet for this asBound
            * predicate. We create a collection of bindingSets to
            * be paired with that predicate and put the collection
            * into the map using that predicate as the key.
@@ -1031,8 +1016,8 @@ public abstract class JoinTask implements Callable<Void> {
           stats.accessPathDups++;
         }
 
-      /*
-       * Add the bindingSet to the collection of bindingSets
+        /*
+         * Add the bindingSet to the collection of bindingSets
          * paired with the asBound predicate.
          */
 
@@ -1106,8 +1091,8 @@ public abstract class JoinTask implements Callable<Void> {
 
       if (executor == null) {
 
-      /*
-       * No Executor, so run each task in the caller's thread.
+        /*
+         * No Executor, so run each task in the caller's thread.
          */
 
         for (AccessPathTask task : tasks) {
@@ -1134,8 +1119,8 @@ public abstract class JoinTask implements Callable<Void> {
 
       try {
 
-      /*
-       * Execute all tasks.
+        /*
+         * Execute all tasks.
          */
         for (FutureTask<Void> ft : futureTasks) {
 
@@ -1145,8 +1130,8 @@ public abstract class JoinTask implements Callable<Void> {
           executor.execute(ft);
         } // next task.
 
-      /*
-       * Wait for each task. If any task throws an exception, then
+        /*
+         * Wait for each task. If any task throws an exception, then
          * [halt] will become true and any running tasks will error out
          * quickly. Once [halt := true], we do not wait for any more
          * tasks, but proceed to cancel all tasks in the finally {}
@@ -1160,8 +1145,8 @@ public abstract class JoinTask implements Callable<Void> {
 
       } finally {
 
-      /*
-       * Ensure that all tasks are cancelled, regardless of whether
+        /*
+         * Ensure that all tasks are cancelled, regardless of whether
          * they were started or have already finished.
          */
         for (FutureTask<Void> ft : futureTasks) {
@@ -1329,8 +1314,8 @@ public abstract class JoinTask implements Callable<Void> {
 
       try {
 
-      /*
-       * @todo In order to run the chunks on a thread pool, pass in
+        /*
+         * @todo In order to run the chunks on a thread pool, pass in
          * [null] for the unsyncBuffer and each chunk will get its own
          * buffer.
          */
@@ -1355,8 +1340,8 @@ public abstract class JoinTask implements Callable<Void> {
 
         if (nothingAccepted && predicate.isOptional()) {
 
-        /*
-       * Note: when NO binding sets were accepted AND the
+          /*
+           * Note: when NO binding sets were accepted AND the
            * predicate is OPTIONAL then we output the _original_
            * binding set(s) to the sink join task(s).
            */
@@ -1398,16 +1383,16 @@ public abstract class JoinTask implements Callable<Void> {
 
       try {
 
-      /*
-       * Note: The fast range count would give us an upper bound,
+        /*
+         * Note: The fast range count would give us an upper bound,
          * unless expanders are used, in which case there can be more
          * elements visited.
          */
         final Object[] elements;
         {
 
-        /*
-       * First, gather all chunks.
+          /*
+           * First, gather all chunks.
            */
           int nchunks = 0;
           final List<Object[]> chunks = new LinkedList<Object[]>();
@@ -1425,8 +1410,8 @@ public abstract class JoinTask implements Callable<Void> {
             nchunks++;
           } // next chunk.
 
-        /*
-       * Now flatten the chunks into a simple array.
+          /*
+           * Now flatten the chunks into a simple array.
            */
           if (nchunks == 0) {
             // No match.
@@ -1476,8 +1461,8 @@ public abstract class JoinTask implements Callable<Void> {
 
               if (constraint.isMatch(e)) {
 
-              /*
-       * For each match for the constraint, we clone
+                /*
+                 * For each match for the constraint, we clone
                  * the old solutions and create a new solutions
                  * that appends the variable bindings from this
                  * match.
@@ -1668,8 +1653,8 @@ public abstract class JoinTask implements Callable<Void> {
               log.info("bset before: " + bset);
             }
 
-          /*
-       * Clone the binding set since it is tested for each
+            /*
+             * Clone the binding set since it is tested for each
              * element visited.
              */
             bset = bset.clone();
@@ -1685,8 +1670,8 @@ public abstract class JoinTask implements Callable<Void> {
 
               bset = bset.copy(variablesToKeep);
 
-            /*
-       * Accept this binding set.
+              /*
+               * Accept this binding set.
                *
                * @todo This is the place to intervene for
                * scale-out default graph queries. Instead of

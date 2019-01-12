@@ -25,13 +25,11 @@ import org.embergraph.bop.IVariableOrConstant;
 import org.embergraph.bop.NV;
 import org.embergraph.bop.Var;
 import org.embergraph.bop.ap.Predicate;
-import org.embergraph.journal.ITx;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.model.EmbergraphValue;
-import org.openrdf.model.Value;
 
 /*
-* A <code>
+ * A <code>
  * lex(EmbergraphValue,IV)
  * </code> predicate used for querying the {@link LexiconRelation}'s TERMS index.
  *

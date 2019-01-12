@@ -27,7 +27,7 @@ import org.embergraph.rdf.sail.webapp.client.IPreparedSparqlUpdate;
 import org.embergraph.rwstore.RWStore;
 
 /*
-* Tests that are RWStore specific.
+ * Tests that are RWStore specific.
  *
  * @author bryan
  * @param <S>

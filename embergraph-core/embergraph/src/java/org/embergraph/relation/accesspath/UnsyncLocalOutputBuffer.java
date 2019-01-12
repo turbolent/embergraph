@@ -1,10 +1,9 @@
 package org.embergraph.relation.accesspath;
 
 import org.embergraph.bop.IBindingSet;
-import org.embergraph.bop.engine.BOpStats;
 
 /*
-* Wraps the base class to update the caller's {@link BOpStats}.
+ * Wraps the base class to update the caller's {@link BOpStats}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: UnsyncLocalOutputBuffer.java 3448 2010-08-18 20:55:58Z thompsonbry $

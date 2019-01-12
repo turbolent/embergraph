@@ -24,11 +24,10 @@ package org.embergraph.bop;
 import java.util.Arrays;
 import java.util.UUID;
 import org.embergraph.bop.controller.INamedSolutionSetRef;
-import org.embergraph.bop.engine.IRunningQuery;
 import org.embergraph.journal.ITx;
 
 /*
-* Class models the information which uniquely describes a named solution set. The "name" is
+ * Class models the information which uniquely describes a named solution set. The "name" is
  * comprised of the following components:
  *
  * <dl>

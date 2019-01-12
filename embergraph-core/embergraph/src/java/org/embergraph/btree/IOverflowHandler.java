@@ -27,7 +27,7 @@ import java.io.Serializable;
 import org.embergraph.rawstore.IRawStore;
 
 /*
-* An interface that allows you to inspect index entries during an {@link IndexSegmentBuilder}
+ * An interface that allows you to inspect index entries during an {@link IndexSegmentBuilder}
  * operation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

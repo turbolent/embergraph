@@ -17,10 +17,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.quorum;
 
-import java.util.UUID;
-
 /*
-* Enumeration of event types for the events described by the {@link QuorumStateChangeListener}
+ * Enumeration of event types for the events described by the {@link QuorumStateChangeListener}
  * interface.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

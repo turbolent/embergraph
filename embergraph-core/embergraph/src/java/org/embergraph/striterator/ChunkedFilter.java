@@ -27,7 +27,7 @@ import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 /*
-* Chunk-at-a-time filter.
+ * Chunk-at-a-time filter.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -90,7 +90,7 @@ public abstract class ChunkedFilter<I extends IChunkedIterator<E>, E, F>
   }
 
   //    /*
-//     * TODO The need for this variant is worrysome - it is required if you do
+  //     * TODO The need for this variant is worrysome - it is required if you do
   //     * NOT specify the generic types and then try to use this class. It is now
   //     * an error with Java 7.  I have taken this variant out.  Hopefully it is
   //     * no longer required by recent Java 6 compilers....

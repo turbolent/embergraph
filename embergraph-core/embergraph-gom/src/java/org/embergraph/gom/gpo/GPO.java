@@ -28,7 +28,7 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.query.BindingSet;
 
 /*
-* A TripleStore backed GPO yields a number of challenges.
+ * A TripleStore backed GPO yields a number of challenges.
  *
  * <ol>
  *   <li>We need a property mechanism to track the statement assertion and retractions required for

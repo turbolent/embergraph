@@ -30,7 +30,7 @@ import org.apache.log4j.Logger;
 import org.embergraph.relation.accesspath.IElementFilter;
 
 /*
-* Converts an <code>Iterator</code> into chunked iterator.
+ * Converts an <code>Iterator</code> into chunked iterator.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -221,8 +221,8 @@ public class ChunkedWrappedIterator<E> implements IChunkedOrderedIterator<E> {
 
       if (chunk == null) {
 
-      /*
-       * Dynamically instantiate an array of the same component type
+        /*
+         * Dynamically instantiate an array of the same component type
          * as the objects that we are visiting.
          */
 

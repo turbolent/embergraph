@@ -24,7 +24,6 @@ import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IValueExpression;
 import org.embergraph.bop.NV;
-import org.embergraph.bop.solutions.IVComparator;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
@@ -39,7 +38,7 @@ import org.openrdf.query.algebra.evaluation.ValueExprEvaluationException;
 import org.openrdf.query.algebra.evaluation.util.QueryEvaluationUtil;
 
 /*
-* Perform open-world value comparison operations per the SPARQL spec (the LT operator). This does
+ * Perform open-world value comparison operations per the SPARQL spec (the LT operator). This does
  * NOT implement the broader ordering for ORDER BY. That is handled by {@link IVComparator}.
  *
  * @see <a href="http://www.w3.org/TR/2013/REC-sparql11-query-20130321/#op_lt">&lt;</a>

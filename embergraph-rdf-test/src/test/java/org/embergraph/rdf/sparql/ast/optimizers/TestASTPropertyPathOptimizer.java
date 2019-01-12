@@ -25,7 +25,7 @@ import static org.embergraph.rdf.sparql.ast.optimizers.AbstractOptimizerTestCase
 import static org.embergraph.rdf.sparql.ast.optimizers.AbstractOptimizerTestCase.HelperFlag.ZERO_OR_MORE;
 
 /*
-* Test suite for {@link ASTUnionFiltersOptimizer}.
+ * Test suite for {@link ASTUnionFiltersOptimizer}.
  *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id: TestASTEmptyGroupOptimizer.java 5302 2011-10-07 14:28:03Z thompsonbry $

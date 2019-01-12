@@ -22,11 +22,10 @@ package org.embergraph.rdf.axioms;
 
 import java.util.Iterator;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.spo.SPO;
 
 /*
-* Abstraction for a set of RDFS Axioms.
+ * Abstraction for a set of RDFS Axioms.
  *
  * @author personickm
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

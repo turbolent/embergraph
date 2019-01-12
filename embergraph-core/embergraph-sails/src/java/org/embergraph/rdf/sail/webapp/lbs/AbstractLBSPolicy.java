@@ -34,7 +34,6 @@ import org.embergraph.ha.HAGlue;
 import org.embergraph.ha.IHAJournal;
 import org.embergraph.ha.QuorumService;
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.quorum.AbstractQuorum;
 import org.embergraph.quorum.Quorum;
 import org.embergraph.quorum.QuorumEvent;
 import org.embergraph.quorum.QuorumListener;
@@ -42,7 +41,7 @@ import org.embergraph.rdf.sail.webapp.EmbergraphServlet;
 import org.embergraph.rdf.sail.webapp.HALoadBalancerServlet;
 
 /*
-* Abstract base class establishes a listener for quorum events, tracks the services that are
+ * Abstract base class establishes a listener for quorum events, tracks the services that are
  * members of the quorum, and caches metadata about those services (especially the requestURL at
  * which they will respond).
  *
@@ -383,8 +382,8 @@ public abstract class AbstractLBSPolicy
     switch (e.getEventType()) {
       case SERVICE_JOIN:
       case SERVICE_LEAVE:
-      /*
-       * Note: We do not want to run any blocking code in the ZK event
+        /*
+         * Note: We do not want to run any blocking code in the ZK event
          * thread!
          */
         getJournal()

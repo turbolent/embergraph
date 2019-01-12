@@ -10,7 +10,7 @@ package cern.jet.random;
 
 import cern.jet.random.engine.RandomEngine;
 /*
-* Mean-square BreitWigner distribution; See the <A
+ * Mean-square BreitWigner distribution; See the <A
  * HREF="http://www.cern.ch/RD11/rkb/AN16pp/node23.html#SECTION000230000000000000000"> math
  * definition</A>.
  *

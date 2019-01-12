@@ -25,12 +25,9 @@ package org.embergraph.resources;
 
 import org.apache.log4j.Logger;
 import org.embergraph.journal.AbstractTask;
-import org.embergraph.journal.ITx;
-import org.embergraph.service.IDataService;
-import org.embergraph.service.IMetadataService;
 
 /*
-* Abstract base class for tasks run during post-processing of a journal by the {@link
+ * Abstract base class for tasks run during post-processing of a journal by the {@link
  * ResourceManager}. These tasks are designed with a historical read that handles history up to some
  * specified commitTime and the submits an {@link ITx#UNISOLATED} task that brings things up to date
  * and coordinates an atomic update between the {@link IDataService}(s) and the {@link

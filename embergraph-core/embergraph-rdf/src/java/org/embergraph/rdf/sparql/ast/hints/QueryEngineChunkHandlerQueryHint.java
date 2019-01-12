@@ -21,7 +21,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.hints;
 
-import org.embergraph.bop.engine.IChunkHandler;
 import org.embergraph.bop.engine.NativeHeapStandloneChunkHandler;
 import org.embergraph.rdf.sparql.ast.ASTBase;
 import org.embergraph.rdf.sparql.ast.QueryHints;
@@ -29,7 +28,7 @@ import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /*
-* Query hint deciding on the {@link IChunkHandler} to be used.
+ * Query hint deciding on the {@link IChunkHandler} to be used.
  *
  * @see BLZG-533 (Vector query engine on the native heap)
  */

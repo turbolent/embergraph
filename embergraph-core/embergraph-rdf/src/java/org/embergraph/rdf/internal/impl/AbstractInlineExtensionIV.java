@@ -27,7 +27,7 @@ import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.model.EmbergraphValue;
 
 /*
-* Abstract base class for fully inline {@link IExtensionIV}s.
+ * Abstract base class for fully inline {@link IExtensionIV}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

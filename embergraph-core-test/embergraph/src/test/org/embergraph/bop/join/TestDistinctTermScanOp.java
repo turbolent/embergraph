@@ -29,13 +29,11 @@ import org.embergraph.bop.ap.R;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.ITx;
 import org.embergraph.journal.Journal;
-import org.embergraph.rdf.spo.DistinctTermAdvancer;
-import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
 import org.embergraph.striterator.ChunkedArrayIterator;
 
 /*
-* Unit tests for the {@link DistinctTermScanOp} operator.
+ * Unit tests for the {@link DistinctTermScanOp} operator.
  *
  * <p>TODO These tests must be specific to the IV layer. They can not be written for a relation
  * whose elements are (String,String) tuples. However, we now have test coverage for this at the AST
@@ -129,7 +127,7 @@ public class TestDistinctTermScanOp extends TestCase2 {
   }
 
   //    /*
-//	 * Unit test corresponding to
+  //	 * Unit test corresponding to
   //	 *
   //	 * <pre>
   //	 * SELECT DISTINCT ?x { ("Mary",?X) }

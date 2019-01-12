@@ -31,7 +31,7 @@ import org.embergraph.btree.ITupleIterator;
 import org.embergraph.service.DistributedTransactionService.SnapshotHelper;
 
 /*
-* Unit tests for {@link SnapshotHelper}.
+ * Unit tests for {@link SnapshotHelper}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

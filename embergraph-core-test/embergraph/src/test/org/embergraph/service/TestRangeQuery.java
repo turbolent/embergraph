@@ -42,7 +42,7 @@ import org.embergraph.service.ndx.PartitionedTupleIterator;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Test suite for the {@link IRangeQuery} API.
+ * Test suite for the {@link IRangeQuery} API.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -540,7 +540,6 @@ public class TestRangeQuery extends AbstractEmbeddedFederationTestCase {
 
             // delete only the even keys.
             return i % 2 == 0;
-
           }
         };
 

@@ -39,7 +39,7 @@ import java.util.TreeMap;
 import org.apache.log4j.Logger;
 
 /*
-* A helper class to read CSV (comma separated value) and similar kinds of delimited data. Files may
+ * A helper class to read CSV (comma separated value) and similar kinds of delimited data. Files may
  * use commas or tabs to delimit columns. If you have to parse other kinds of delimited data then
  * you should override {@link #split(String)}.
  *
@@ -122,8 +122,8 @@ public class CSVReader implements Iterator<Map<String, Object>> {
             NumberFormat.getPercentInstance(),
             NumberFormat.getNumberInstance(),
 
-          /*
-       * Note: There are no factory methods for formats that
+            /*
+             * Note: There are no factory methods for formats that
              * handle exponents. I've put a few in here, but there may
              * very well be other examples that will still not be parsed
              * correctly.
@@ -369,8 +369,8 @@ public class CSVReader implements Iterator<Map<String, Object>> {
         }
 
         while (tailDelayMillis != 0L && !r.ready()) {
-        /*
-       * Wait until more data is available.
+          /*
+           * Wait until more data is available.
            *
            * @todo may have to wait until a newline is available, or
            * just incrementally buffer until we have a full line of

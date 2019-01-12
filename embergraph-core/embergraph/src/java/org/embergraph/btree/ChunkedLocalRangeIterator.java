@@ -27,13 +27,12 @@ import cutthecrap.utils.striterators.IFilter;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.util.Iterator;
-import org.embergraph.btree.filter.ITupleFilter;
 import org.embergraph.io.ByteBufferInputStream;
 import org.embergraph.rawstore.IBlock;
 import org.embergraph.rawstore.IRawStore;
 
 /*
-* Chunked range iterator running against a local index or index view.
+ * Chunked range iterator running against a local index or index view.
  *
  * <p>Note: When {@link IRangeQuery#REMOVEALL} is specified without the {@link IRangeQuery#CURSOR}
  * flag, the iterator will populate its buffers up to the capacity and then delete behind once the
@@ -146,8 +145,8 @@ public class ChunkedLocalRangeIterator<E> extends AbstractChunkedTupleIterator<E
 
       if (!cursor) {
 
-      /*
-       * Queue the key for removal IFF CURSOR was NOT specified.
+        /*
+         * Queue the key for removal IFF CURSOR was NOT specified.
          */
 
         remove();

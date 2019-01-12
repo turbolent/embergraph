@@ -4,59 +4,62 @@
 <!--                                                        -->
 <project name="dbpedia" basedir=".">
 
-	<property file="build.properties" />
+  <property file="build.properties"/>
 
-	<path id="runtime.classpath">
-		<!-- The embergraph dependencies (for the nano-server). -->
-		<fileset dir="${embergraph.build.dir}/lib">
-			<include name="**/*.jar" />
-		</fileset>
-	</path>
+  <path id="runtime.classpath">
+    <!-- The embergraph dependencies (for the nano-server). -->
+    <fileset dir="${embergraph.build.dir}/lib">
+      <include name="**/*.jar"/>
+    </fileset>
+  </path>
 
-	<!-- Note: split data files and use RDFDataLoadMaster for scale-out. -->
-	<target name="run-load"
-		    description="Load a data set.">
-		<!-- delete file if it exists so we load into a new journal. -->
-		<delete file="${dbpedia.journalFile}" />
-		<java classname="org.embergraph.rdf.store.DataLoader"
-		      fork="true" failonerror="true"
-		      >
-			<arg line="-namespace ${dbpedianamespace} ${dbpedia.journalPropertyFile} ${dbpedia.sourceData}" />
-			<!-- specify/override the journal file name. -->
-			<jvmarg line="${queryJvmArgs} -Dorg.embergraph.journal.AbstractJournal.file=${dbpedia.journalFile}
+  <!-- Note: split data files and use RDFDataLoadMaster for scale-out. -->
+  <target name="run-load"
+    description="Load a data set.">
+    <!-- delete file if it exists so we load into a new journal. -->
+    <delete file="${dbpedia.journalFile}"/>
+    <java classname="org.embergraph.rdf.store.DataLoader"
+      fork="true" failonerror="true"
+    >
+      <arg
+        line="-namespace ${dbpedianamespace} ${dbpedia.journalPropertyFile} ${dbpedia.sourceData}"/>
+      <!-- specify/override the journal file name. -->
+      <jvmarg line="${queryJvmArgs} -Dorg.embergraph.journal.AbstractJournal.file=${dbpedia.journalFile}
 				-Dorg.embergraph.rdf.store.DataLoader.bufferCapacity=100000
 				-Dorg.embergraph.io.DirectBufferPool.bufferCapacity=10485760
 				-Dorg.embergraph.rdf.rio.RDFParserOptions.stopAtFirstError=false
-				" />
-			<classpath>
-				<path refid="runtime.classpath" />
-			</classpath>
-		</java>
-	</target>
+				"/>
+      <classpath>
+        <path refid="runtime.classpath"/>
+      </classpath>
+    </java>
+  </target>
 
-	<target name="start-sparql-server"
-		    description="Start a small http server fronting for a embergraph database instance.">
-		<java classname="org.embergraph.rdf.sail.webapp.NanoSparqlServer"
-		      fork="true" failonerror="true"
-		      >
-			<arg line="-nthreads 32 ${dbpedia.nanoServerPort} ${dbpedia.namespace} ${dbpedia.journalPropertyFile}" />
-			<!-- specify/override the journal file name. -->
-			<jvmarg line="${queryJvmArgs} -Dorg.embergraph.journal.AbstractJournal.file=${dbpedia.journalFile}" />
-			<classpath>
-				<path refid="runtime.classpath" />
-			</classpath>
-		</java>
-	</target>
-		
-	<target name="dump-journal" 
-		    description="Dump interesting facts about the loaded data.">
-		<java classname="org.embergraph.journal.DumpJournal"
-                           fork="true" failonerror="true">
-			<arg line="-pages ${dbpedia.journalFile}"/>
-			<classpath>
-				<path refid="runtime.classpath" />
-			</classpath>
-		</java>
-	</target>
+  <target name="start-sparql-server"
+    description="Start a small http server fronting for a embergraph database instance.">
+    <java classname="org.embergraph.rdf.sail.webapp.NanoSparqlServer"
+      fork="true" failonerror="true"
+    >
+      <arg
+        line="-nthreads 32 ${dbpedia.nanoServerPort} ${dbpedia.namespace} ${dbpedia.journalPropertyFile}"/>
+      <!-- specify/override the journal file name. -->
+      <jvmarg
+        line="${queryJvmArgs} -Dorg.embergraph.journal.AbstractJournal.file=${dbpedia.journalFile}"/>
+      <classpath>
+        <path refid="runtime.classpath"/>
+      </classpath>
+    </java>
+  </target>
+
+  <target name="dump-journal"
+    description="Dump interesting facts about the loaded data.">
+    <java classname="org.embergraph.journal.DumpJournal"
+      fork="true" failonerror="true">
+      <arg line="-pages ${dbpedia.journalFile}"/>
+      <classpath>
+        <path refid="runtime.classpath"/>
+      </classpath>
+    </java>
+  </target>
 
 </project>

@@ -27,10 +27,9 @@ import java.util.concurrent.Future;
 import org.embergraph.ha.msg.IHA2PhaseAbortMessage;
 import org.embergraph.ha.msg.IHA2PhaseCommitMessage;
 import org.embergraph.ha.msg.IHA2PhasePrepareMessage;
-import org.embergraph.journal.AbstractJournal;
 
 /*
-* A {@link Remote} interface supporting a 2-phase commit protocol for the members of a highly
+ * A {@link Remote} interface supporting a 2-phase commit protocol for the members of a highly
  * available quorum.
  *
  * @see QuorumCommit

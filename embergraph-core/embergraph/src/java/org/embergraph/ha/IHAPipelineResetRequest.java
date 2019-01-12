@@ -21,7 +21,7 @@ import java.util.UUID;
 import org.embergraph.ha.msg.IHAMessage;
 
 /*
-* Message requesting a pipeline reset on a service.
+ * Message requesting a pipeline reset on a service.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

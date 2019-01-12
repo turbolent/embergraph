@@ -29,7 +29,7 @@ import org.embergraph.btree.keys.KeyBuilder.Options;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Tests for Unicode support in {@link KeyBuilder}.
+ * Tests for Unicode support in {@link KeyBuilder}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

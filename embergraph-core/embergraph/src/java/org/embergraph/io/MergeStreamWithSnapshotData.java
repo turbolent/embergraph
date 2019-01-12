@@ -27,7 +27,7 @@ import org.embergraph.journal.AbstractJournal.ISnapshotData;
 import org.embergraph.journal.AbstractJournal.ISnapshotEntry;
 
 /*
-* This utility class provide a method to write an InputStream to an OutputStream, merging with the
+ * This utility class provide a method to write an InputStream to an OutputStream, merging with the
  * ISnapshotData.
  *
  * <p>The ISnapshotData provides access to an ordered iteration of [Address,Data] that is processed

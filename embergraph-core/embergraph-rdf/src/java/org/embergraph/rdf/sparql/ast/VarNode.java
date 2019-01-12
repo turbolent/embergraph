@@ -8,7 +8,7 @@ import org.embergraph.bop.Var;
 import org.embergraph.rdf.internal.IV;
 
 /*
-* Used to represent a variable in the AST.
+ * Used to represent a variable in the AST.
  *
  * <p>Note: Unlike {@link Var}, this class does NOT support reference testing for equality. Multiple
  * {@link VarNode} instances MAY exist for the same {@link IVariable}. You must either compare the
@@ -40,7 +40,7 @@ public class VarNode extends TermNode {
      * effort.
      */
     //        /*
-//		 * Annotation marks a variable which is a statement identifier.
+    //		 * Annotation marks a variable which is a statement identifier.
     //		 *
     //		 * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/526">
     //		 *      Reification Done Right</a>
@@ -106,7 +106,7 @@ public class VarNode extends TermNode {
   }
 
   //	/*
-//	 * Return <code>true</code> if this is an SID variable (a variable which
+  //	 * Return <code>true</code> if this is an SID variable (a variable which
   //	 * binds statement identifiers composed from triples). This marker is useful
   //	 * mainly when reading the AST tree as an aid to understanding where a given
   //	 * variable came from in the original query.
@@ -118,7 +118,7 @@ public class VarNode extends TermNode {
   //	}
   //
   //	/*
-//	 * Mark this as an SID variable (one which represents a triple reference
+  //	 * Mark this as an SID variable (one which represents a triple reference
   //	 * pattern).
   //	 *
   //	 * @param val

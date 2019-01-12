@@ -31,14 +31,12 @@ import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.IKeyBuilderFactory;
 import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.io.SerializerUtil;
-import org.embergraph.journal.ICommitRecord;
-import org.embergraph.journal.IJournal;
 import org.embergraph.mdi.JournalMetadata;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.util.Bytes;
 
 /*
-* {@link BTree} mapping {@link IJournal} <em>createTimes</em> (long integers) to {@link
+ * {@link BTree} mapping {@link IJournal} <em>createTimes</em> (long integers) to {@link
  * JournalMetadata} records describing the {@link IJournal}.
  *
  * <p>Note: Access to this object MUST be synchronized.

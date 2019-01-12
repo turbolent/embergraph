@@ -26,10 +26,9 @@ import cutthecrap.utils.striterators.Filterator;
 import java.util.Iterator;
 import java.util.Map;
 import org.embergraph.bop.BOp;
-import org.embergraph.btree.ITupleIterator;
 
 /*
-* Used to filter for objects which satisfy some criteria.
+ * Used to filter for objects which satisfy some criteria.
  *
  * <p><strong>WARNING : DO NOT USE THIS CLASS ON {@link ITupleIterator}s - use {@link
  * BOpTupleFilter} instead.</strong>
@@ -43,7 +42,7 @@ public abstract class BOpFilter extends BOpFilterBase {
   private static final long serialVersionUID = 1L;
 
   //    /*
-//     * Deserialization.
+  //     * Deserialization.
   //     */
   //    public BOpFilter() {
   //        super();

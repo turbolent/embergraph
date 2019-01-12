@@ -39,7 +39,7 @@ import org.embergraph.rawstore.SimpleMemoryRawStore;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Unit tests for {@link HTree}.
+ * Unit tests for {@link HTree}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  *     <p>TODO Work through a detailed example in which we have an elided bucket page or directory
@@ -346,7 +346,7 @@ public class TestHTree extends AbstractHTreeTestCase {
   }
 
   //    /*
-//     * Unit test for
+  //     * Unit test for
   //     * {@link HTree#addLevel(DirectoryPage, int, int, org.embergraph.htree.HTree.AbstractPage)}
   //     * .
   //     */
@@ -442,7 +442,7 @@ public class TestHTree extends AbstractHTreeTestCase {
   //    }
   //
   //    /*
-//     * Unit test for
+  //     * Unit test for
   //     * {@link HTree#addLevel(DirectoryPage, int, int, org.embergraph.htree.HTree.AbstractPage)}
   //     * .
   //     */

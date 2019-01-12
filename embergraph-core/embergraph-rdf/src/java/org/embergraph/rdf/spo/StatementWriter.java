@@ -5,11 +5,10 @@ import java.util.concurrent.atomic.AtomicLong;
 import org.apache.log4j.Logger;
 import org.embergraph.rdf.changesets.IChangeLog;
 import org.embergraph.rdf.store.AbstractTripleStore;
-import org.embergraph.relation.accesspath.IElementFilter;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /*
-* Writes statements on all the statement indices in parallel.
+ * Writes statements on all the statement indices in parallel.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -20,7 +20,7 @@ package org.embergraph.rdf.internal.gis;
 import org.embergraph.rdf.internal.gis.ICoordinate.UNITS;
 
 /*
-* Utility class for operations on {@link ICoordinate}s.
+ * Utility class for operations on {@link ICoordinate}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -191,7 +191,7 @@ public class CoordinateUtility {
   }
 
   // /*
-// * The real width of a longitudinal degree on a given latitude.
+  // * The real width of a longitudinal degree on a given latitude.
   // *
   // * @param secondsNorth
   // * The latitude (north/south).
@@ -227,7 +227,7 @@ public class CoordinateUtility {
   }
 
   // /*
-// * Return the angle converted to the transverse graticule that is used by
+  // * Return the angle converted to the transverse graticule that is used by
   // * trig functions (shifted 90 degrees).
   // *
   // * @param degreesNorth The latitude in degrees north/south.

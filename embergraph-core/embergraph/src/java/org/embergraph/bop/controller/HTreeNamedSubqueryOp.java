@@ -44,13 +44,12 @@ import org.embergraph.bop.engine.IRunningQuery;
 import org.embergraph.bop.engine.QueryEngine;
 import org.embergraph.bop.join.HTreeHashJoinAnnotations;
 import org.embergraph.bop.join.HTreeHashJoinUtility;
-import org.embergraph.bop.join.HTreeSolutionSetHashJoinOp;
 import org.embergraph.bop.join.JoinTypeEnum;
 import org.embergraph.bop.join.NamedSolutionSetStats;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 
 /*
-* Evaluation of a subquery, producing a named result set. This operator passes through any source
+ * Evaluation of a subquery, producing a named result set. This operator passes through any source
  * binding sets without modification. The subquery is evaluated exactly once, the first time this
  * operator is invoked for a given query plan. If some variables are known to be bound, then they
  * should be rewritten into constants or their bindings should be inserted into the subquery using
@@ -74,7 +73,7 @@ public class HTreeNamedSubqueryOp extends PipelineOp
       extends SubqueryAnnotations, HTreeHashJoinAnnotations, NamedSetAnnotations {
 
     //        /*
-//         * The name of {@link IQueryAttributes} attribute under which the
+    //         * The name of {@link IQueryAttributes} attribute under which the
     //         * subquery solution set is stored (a {@link HTreeHashJoinState}
     //         * reference). The attribute name includes the query UUID. The query
     //         * UUID must be extracted and used to lookup the {@link IRunningQuery}
@@ -189,15 +188,15 @@ public class HTreeNamedSubqueryOp extends PipelineOp
 
       {
 
-      /*
-       * First, see if the map already exists.
+        /*
+         * First, see if the map already exists.
          *
          * Note: Since the operator is not thread-safe, we do not need
          * to use a putIfAbsent pattern here.
          */
 
-      /*
-       * Lookup the attributes for the query on which we will hang the
+        /*
+         * Lookup the attributes for the query on which we will hang the
          * solution set. See BLZG-1493 (if queryId is null, use the query
          * attributes for this running query).
          */
@@ -207,8 +206,8 @@ public class HTreeNamedSubqueryOp extends PipelineOp
 
         if (state == null) {
 
-        /*
-       * Note: This operator does not support optional semantics.
+          /*
+           * Note: This operator does not support optional semantics.
            */
           state =
               new HTreeHashJoinUtility(
@@ -354,8 +353,8 @@ public class HTreeNamedSubqueryOp extends PipelineOp
         } catch (Throwable t) {
 
           if (runningSubquery == null || runningSubquery.getCause() != null) {
-          /*
-       * If things fail before we start the subquery, or if a
+            /*
+             * If things fail before we start the subquery, or if a
              * subquery fails (due to abnormal termination), then
              * propagate the error to the parent and rethrow the
              * first cause error out of the subquery.

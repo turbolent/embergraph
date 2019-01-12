@@ -42,7 +42,7 @@ import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
 /*
-* This is an experimental feature that captures history using the change log mechanism and RDR. For
+ * This is an experimental feature that captures history using the change log mechanism and RDR. For
  * each relevant change event (subclasses can decide relevance), a new triple is added to the
  * database, where the subject is the original statement, the predicate is the change action (added
  * or removed), and the object is the commit time.
@@ -310,8 +310,8 @@ public class RDRHistory implements IChangeLog {
       }
 
       if ((buffer.counter - removes.counter) == 0) {
-      /*
-       * Nothing written (net) to the temp store.
+        /*
+         * Nothing written (net) to the temp store.
          */
         return;
       }

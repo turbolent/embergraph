@@ -38,7 +38,6 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.bop.PipelineOp;
 import org.embergraph.journal.TimestampUtility;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.internal.IVCache;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.TermId;
 import org.embergraph.rdf.lexicon.LexiconRelation;
@@ -47,7 +46,7 @@ import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.Value;
 
 /*
-* Vectored operator adds and/or resolves the RDF {@link Value}s associated with mock {@link IV}s.
+ * Vectored operator adds and/or resolves the RDF {@link Value}s associated with mock {@link IV}s.
  * On input, the variables must be mock {@link IV}s whose {@link IVCache} is set to the
  * corresponding {@link EmbergraphValue}. On output, the bindings of the variables will be replaced
  * by the corresponding {@link IV} if it exists or is an inline {@link IV} and (it writing is
@@ -211,15 +210,15 @@ public class ChunkedResolutionOp extends PipelineOp {
 
           if (iv == null) {
 
-          /*
-       * Since the term identifier is NULL this value is not
+            /*
+             * Since the term identifier is NULL this value is not
              * known to the kb.
              */
 
             if (log.isInfoEnabled()) log.info("Not in knowledge base: " + term);
 
-          /*
-       * Create a dummy iv and cache the unknown value on it
+            /*
+             * Create a dummy iv and cache the unknown value on it
              * so that it can be used during query evalution.
              */
             final IV dummy = TermId.mockIV(VTE.valueOf(term));

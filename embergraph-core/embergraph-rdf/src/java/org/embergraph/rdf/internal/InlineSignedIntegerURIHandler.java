@@ -24,7 +24,7 @@ import org.embergraph.rdf.internal.impl.literal.XSDIntegerIV;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
 
 /*
-* Simple InlineURIHandler that packs the localName portion of the URI into an appropriately sized
+ * Simple InlineURIHandler that packs the localName portion of the URI into an appropriately sized
  * signed integer.
  */
 public class InlineSignedIntegerURIHandler extends InlineURIHandler {

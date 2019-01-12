@@ -10,7 +10,7 @@ package cern.jet.stat.quantile;
 
 import cern.colt.list.DoubleArrayList;
 /*
-* Exact quantile finding algorithm for known and unknown <tt>N</tt> requiring large main memory;
+ * Exact quantile finding algorithm for known and unknown <tt>N</tt> requiring large main memory;
  * computes quantiles over a sequence of <tt>double</tt> elements. The folkore algorithm: Keeps all
  * elements in main memory, sorts the list, then picks the quantiles.
  *

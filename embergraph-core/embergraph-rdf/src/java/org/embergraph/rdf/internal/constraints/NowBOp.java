@@ -28,7 +28,6 @@ import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.ImmutableBOp;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.sparql.ast.FilterNode;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 
 /** Implements the now() operator. */

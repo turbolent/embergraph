@@ -26,10 +26,9 @@ package org.embergraph.mdi;
 import org.embergraph.btree.IRangeQuery;
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.mdi.MetadataIndex.MetadataIndexMetadata;
-import org.embergraph.service.IDataService;
 
 /*
-* Interface for a metadata index. The metadata index stores the {@link PartitionLocator}s that
+ * Interface for a metadata index. The metadata index stores the {@link PartitionLocator}s that
  * specify which {@link IDataService} has data for each index partition in a scale-out index.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

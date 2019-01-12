@@ -26,7 +26,7 @@ import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
 /*
-* Handler is mapped to a namespace prefix. When a URI is presented that matches the handler's
+ * Handler is mapped to a namespace prefix. When a URI is presented that matches the handler's
  * namespace prefix, this class attempts to parse the remaining portion of the URI into an inline
  * literal. The namespace prefix must be present in the vocabulary. The localName must be parseable
  * into an inline literal. If either of these things is not true the URI will not be inlined.

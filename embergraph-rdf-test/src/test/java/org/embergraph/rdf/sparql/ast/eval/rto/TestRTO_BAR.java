@@ -22,11 +22,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.eval.rto;
 
 import java.util.Properties;
-import org.embergraph.bop.rdf.joinGraph.GenerateBarData;
 import org.embergraph.rdf.sail.EmbergraphSail;
 
 /*
-* Data driven test suite for the Runtime Query Optimizer (RTO) using BAR data and queries.
+ * Data driven test suite for the Runtime Query Optimizer (RTO) using BAR data and queries.
  *
  * @see GenerateBarData
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

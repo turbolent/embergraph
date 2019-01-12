@@ -5,7 +5,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.apache.log4j.Logger;
 
 /*
-* Multi-token implementation of {@link IHitCollector} backed by a {@link ConcurrentHashMap}.
+ * Multi-token implementation of {@link IHitCollector} backed by a {@link ConcurrentHashMap}.
  *
  * @author mikepersonick
  * @param <V> The generic type of the document identifier.

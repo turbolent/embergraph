@@ -1,7 +1,7 @@
 package org.embergraph.service.ndx.pipeline;
 
 /*
-* Extends {@link KVOList} to provide handshaking with a {@link KVOLatch}.
+ * Extends {@link KVOList} to provide handshaking with a {@link KVOLatch}.
  *
  * <p>Note: {@link IDuplicateRemover}s MUST create a list from the identified duplicates so that the
  * {@link KVOLatch} of each duplicate as well as the original are decremented after a successful

@@ -36,7 +36,7 @@ import org.embergraph.io.DataOutputBuffer;
 import org.embergraph.io.LongPacker;
 
 /*
-* Coder conditionally applies other {@link IRabaCoder}s based on a condition, typically the
+ * Coder conditionally applies other {@link IRabaCoder}s based on a condition, typically the
  * branching factor or the #of elements in the {@link IRaba}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

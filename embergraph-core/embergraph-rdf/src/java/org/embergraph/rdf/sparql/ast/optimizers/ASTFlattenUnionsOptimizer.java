@@ -38,7 +38,7 @@ import org.embergraph.rdf.sparql.ast.UnionNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /*
-* Flatten nested UNIONs whenever possible.
+ * Flatten nested UNIONs whenever possible.
  *
  * <pre>
  * UNION(A,B,C) := UNION(A,UNION(B,C)) -or- UNION(UNION(A,B),C))
@@ -133,8 +133,8 @@ public class ASTFlattenUnionsOptimizer implements IASTOptimizer {
 
           final UnionNode childUnion = (UnionNode) directChild.get(0);
 
-        /*
-       * Lift union.
+          /*
+           * Lift union.
            *
            * Note: All children MUST be JoinGroupNodes
            */

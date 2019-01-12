@@ -22,7 +22,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.zip.Deflater;
 
 /*
-* Registration pattern for {@link IRecordCompressor} implementations.
+ * Registration pattern for {@link IRecordCompressor} implementations.
  *
  * @author Martyn Cutcher
  */

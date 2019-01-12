@@ -27,7 +27,7 @@ import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQueryResult;
 
 /*
-* Simple stored query consisting of a parameterized SPARQL query.
+ * Simple stored query consisting of a parameterized SPARQL query.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

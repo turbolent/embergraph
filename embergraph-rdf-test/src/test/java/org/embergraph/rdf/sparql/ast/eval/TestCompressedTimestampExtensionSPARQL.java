@@ -22,11 +22,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.eval;
 
 import java.util.Properties;
-import org.embergraph.rdf.internal.impl.extensions.CompressedTimestampExtension;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /*
-* Data driven test suite {@link CompressedTimestampExtension}, testing real SPARQL queries
+ * Data driven test suite {@link CompressedTimestampExtension}, testing real SPARQL queries
  * including mathematical operations over the extension.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>

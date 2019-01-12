@@ -19,9 +19,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.join;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -29,11 +27,10 @@ import org.apache.log4j.Logger;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IVariable;
-import org.embergraph.bop.solutions.JVMDistinctBindingSetsOp;
 import org.embergraph.counters.CAT;
 
 /*
-* A hash index for {@link IBindingSet}s that supports duplicate solutions and hit counts. The hit
+ * A hash index for {@link IBindingSet}s that supports duplicate solutions and hit counts. The hit
  * counts are used to detect {@link IBindingSet}s that do not join for OPTIONAL, MINUS, and related
  * kinds of "negation" joins.
  *
@@ -52,7 +49,7 @@ public class JVMHashIndex {
   private static final int ONE = 1;
 
   //    /*
-//     * Return the hash code which will be used as the key given the ordered
+  //     * Return the hash code which will be used as the key given the ordered
   //     * as-bound values for the join variables.
   //     *
   //     * @param joinVars
@@ -143,8 +140,8 @@ public class JVMHashIndex {
 
         if (!indexSolutionsHavingUnboundJoinVars) {
 
-        /*
-       * Drop solution having an unbound join variable.
+          /*
+           * Drop solution having an unbound join variable.
            */
 
           if (log.isDebugEnabled())

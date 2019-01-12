@@ -28,14 +28,11 @@ import java.util.concurrent.ExecutionException;
 import org.embergraph.rdf.sail.EmbergraphSail.EmbergraphSailConnection;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.TempTripleStore;
-import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
-import org.openrdf.model.URI;
-import org.openrdf.model.Value;
 import org.openrdf.sail.SailException;
 
 /*
-* Test suite for wrapping a {@link TempTripleStore} as a {@link EmbergraphSail}.
+ * Test suite for wrapping a {@link TempTripleStore} as a {@link EmbergraphSail}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

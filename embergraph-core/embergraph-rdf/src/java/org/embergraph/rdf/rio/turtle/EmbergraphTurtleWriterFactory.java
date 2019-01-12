@@ -13,7 +13,7 @@ import org.openrdf.rio.RDFWriter;
 import org.openrdf.rio.RDFWriterFactory;
 
 /*
-* An RDR-aware {@link RDFWriterFactory} for Turtle writers.
+ * An RDR-aware {@link RDFWriterFactory} for Turtle writers.
  *
  * @author Arjohn Kampman
  * @openrdf

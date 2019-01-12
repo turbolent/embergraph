@@ -48,8 +48,8 @@ class RestApiCreateKBTask extends AbstractDelegateRestApiTask<Void> {
           getIndexManager().getResourceLocator().locate(namespace, ITx.UNISOLATED) != null;
 
       if (exists) {
-      /*
-       * The namespace already exists.
+        /*
+         * The namespace already exists.
          *
          * Note: The response code is defined as 409 (Conflict) since 1.3.2.
          */

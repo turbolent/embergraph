@@ -23,10 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.cache;
 
-import java.util.concurrent.ConcurrentHashMap;
-
 /*
-* Extends the basic behavior to clear stale references from a backing hard reference queue. The
+ * Extends the basic behavior to clear stale references from a backing hard reference queue. The
  * weak reference values for entries whose hard reference is cleared from the backing hard reference
  * queue WILL NOT be cleared from this map as long as those references remain strongly reachable.
  *

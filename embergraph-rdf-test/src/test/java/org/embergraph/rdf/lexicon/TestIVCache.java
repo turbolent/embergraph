@@ -7,7 +7,6 @@ import org.embergraph.io.SerializerUtil;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.NotMaterializedException;
 import org.embergraph.rdf.internal.impl.AbstractIV;
-import org.embergraph.rdf.internal.impl.BlobIV;
 import org.embergraph.rdf.internal.impl.bnode.NumericBNodeIV;
 import org.embergraph.rdf.internal.impl.bnode.UUIDBNodeIV;
 import org.embergraph.rdf.internal.impl.literal.UUIDLiteralIV;
@@ -24,7 +23,7 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.AbstractTripleStoreTestCase;
 
 /*
-* Test suite for {@link IV#getValue()}, which provides a cache on the {@link IV} for a materialized
+ * Test suite for {@link IV#getValue()}, which provides a cache on the {@link IV} for a materialized
  * {@link EmbergraphValue}.
  *
  * @author thompsonbry

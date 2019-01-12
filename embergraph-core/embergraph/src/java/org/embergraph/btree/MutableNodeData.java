@@ -28,7 +28,7 @@ import org.embergraph.btree.raba.MutableKeyBuffer;
 import org.embergraph.io.AbstractFixedByteArrayBuffer;
 
 /*
-* Implementation maintains Java objects corresponding to the persistent data and defines methods
+ * Implementation maintains Java objects corresponding to the persistent data and defines methods
  * for a variety of mutations on the {@link INodeData} record which operate by direct manipulation
  * of the Java objects.
  *

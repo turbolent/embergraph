@@ -11,7 +11,7 @@ package cern.jet.random;
 import cern.jet.random.engine.RandomEngine;
 import cern.jet.stat.Probability;
 /*
-* Negative Binomial distribution; See the <A
+ * Negative Binomial distribution; See the <A
  * HREF="http://www.statlets.com/usermanual/glossary2.htm"> math definition</A>.
  *
  * <p>Instance methods operate on a user supplied uniform random number generator; they are

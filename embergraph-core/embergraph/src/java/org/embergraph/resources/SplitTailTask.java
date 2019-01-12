@@ -31,7 +31,7 @@ import org.embergraph.service.EventResource;
 import org.embergraph.service.Split;
 
 /*
-* Splits the tail of an index partition and optionally submits a task to move the tail to a target
+ * Splits the tail of an index partition and optionally submits a task to move the tail to a target
  * data service specified by the caller.
  *
  * <p>The split point is choosen by locating the right-most non-leaf node. The key range which would
@@ -123,8 +123,8 @@ public class SplitTailTask extends AbstractPrepareTask {
 
       try {
 
-      /*
-       * Split into head (most) and tail. both will be new index
+        /*
+         * Split into head (most) and tail. both will be new index
          * partitions.
          */
 
@@ -137,8 +137,8 @@ public class SplitTailTask extends AbstractPrepareTask {
 
       } finally {
 
-      /*
-       * We are done building index segments from the source index
+        /*
+         * We are done building index segments from the source index
          * partition view so we clear our references for that view.
          */
 
@@ -156,8 +156,8 @@ public class SplitTailTask extends AbstractPrepareTask {
 
       if (moveTarget != null) {
 
-      /*
-       * Note: Unlike a normal move where there are writes on the old
+        /*
+         * Note: Unlike a normal move where there are writes on the old
          * journal, all the data for the rightSibling is in an index
          * segment that we just built and new writes MAY be buffered on
          * the live journal. Therefore we use a different entry point
@@ -165,23 +165,23 @@ public class SplitTailTask extends AbstractPrepareTask {
          * data from the old journal.
          */
 
-      /*
-       * Obtain a new partition identifier for the partition that will
+        /*
+         * Obtain a new partition identifier for the partition that will
          * be created when we move the rightSibling to the target data
          * service.
          */
         final int newPartitionId = resourceManager.nextPartitionId(vmd.indexMetadata.getName());
 
-      /*
-       * The name of the post-split rightSibling (this is the source
+        /*
+         * The name of the post-split rightSibling (this is the source
          * index partition for the move operation).
          */
         final String rightSiblingName =
             DataService.getIndexPartitionName(
                 vmd.indexMetadata.getName(), splitResult.splits[1].pmd.getPartitionId());
 
-      /*
-       * Move.
+        /*
+         * Move.
          *
          * Note: We do not explicitly delete the source index segment
          * for the rightSibling after the move. It will be required for
@@ -211,8 +211,8 @@ public class SplitTailTask extends AbstractPrepareTask {
 
           if (buildResult != null) {
 
-          /*
-       * At this point the index segment was either incorporated into
+            /*
+             * At this point the index segment was either incorporated into
              * the new view in a restart safe manner or there was an error.
              * Either way, we now remove the index segment store's UUID from
              * the retentionSet so it will be subject to the release policy

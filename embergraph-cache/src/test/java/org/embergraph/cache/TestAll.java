@@ -26,7 +26,7 @@ import junit.framework.TestSuite;
 import org.embergraph.testutil.ExperimentDriver;
 
 /*
-* Aggregates unit tests into dependency order.
+ * Aggregates unit tests into dependency order.
  *
  * @version $Id$
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

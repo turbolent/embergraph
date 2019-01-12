@@ -29,7 +29,7 @@ import org.embergraph.mdi.ISeparatorKeys;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Test imposing constraint on a fromKey or toKey based on an index partition's boundaries.
+ * Test imposing constraint on a fromKey or toKey based on an index partition's boundaries.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

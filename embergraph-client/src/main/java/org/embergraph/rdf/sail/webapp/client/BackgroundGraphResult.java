@@ -25,7 +25,7 @@ import org.openrdf.rio.RDFParseException;
 import org.openrdf.rio.RDFParser;
 
 /*
-* Provides concurrent access to statements as they are being parsed.
+ * Provides concurrent access to statements as they are being parsed.
  *
  * @author James Leigh
  */

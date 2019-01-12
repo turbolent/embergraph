@@ -24,7 +24,7 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
 /*
-* A simple class that represents a triple (or quad) pattern.
+ * A simple class that represents a triple (or quad) pattern.
  *
  * @see <a href="http://trac.blazegraph.com/ticket/866" > Efficient batch remove of a collection of
  *     triple patterns </a>
@@ -103,7 +103,6 @@ public class EmbergraphTriplePattern {
     } else if (!p.equals(other.p)) return false;
     if (s == null) {
       return other.s == null;
-    } else
-      return s.equals(other.s);
+    } else return s.equals(other.s);
   }
 }

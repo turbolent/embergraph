@@ -24,49 +24,32 @@ import java.io.ObjectOutput;
 import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.nio.ByteBuffer;
-import java.util.Locale;
 import java.util.Properties;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
-import org.embergraph.btree.data.ILeafData;
-import org.embergraph.btree.data.INodeData;
 import org.embergraph.btree.isolation.IConflictResolver;
-import org.embergraph.btree.keys.DefaultKeyBuilderFactory;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.IKeyBuilderFactory;
-import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.btree.raba.codec.CanonicalHuffmanRabaCoder;
-import org.embergraph.btree.raba.codec.FrontCodedRabaCoder;
 import org.embergraph.btree.raba.codec.FrontCodedRabaCoder.DefaultFrontCodedRabaCoder;
 import org.embergraph.btree.raba.codec.FrontCodedRabaCoderDupKeys;
 import org.embergraph.btree.raba.codec.IRabaCoder;
-import org.embergraph.btree.view.FusedView;
 import org.embergraph.config.Configuration;
 import org.embergraph.config.IValidator;
 import org.embergraph.config.IntegerRangeValidator;
 import org.embergraph.config.IntegerValidator;
-import org.embergraph.htree.HTree;
-import org.embergraph.io.DirectBufferPool;
 import org.embergraph.io.LongPacker;
 import org.embergraph.io.SerializerUtil;
 import org.embergraph.io.compression.IRecordCompressorFactory;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.mdi.LocalPartitionMetadata;
-import org.embergraph.mdi.MetadataIndex;
 import org.embergraph.rawstore.IRawStore;
-import org.embergraph.relation.accesspath.IAsynchronousIterator;
-import org.embergraph.resources.OverflowManager;
-import org.embergraph.resources.StaleLocatorException;
-import org.embergraph.service.AbstractFederation;
-import org.embergraph.service.DataService;
 import org.embergraph.service.IDataService;
 import org.embergraph.service.IEmbergraphFederation;
-import org.embergraph.service.ndx.pipeline.AbstractSubtask;
-import org.embergraph.sparse.SparseRowStore;
 
 /*
-* The persistent and mostly immutable metadata for a {@link AbstractBTree}. This class allows you
+ * The persistent and mostly immutable metadata for a {@link AbstractBTree}. This class allows you
  * to configured several very important aspects of the B+Tree (and other persistence capable data
  * structures) behavior. Read on.
  *
@@ -374,7 +357,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
             .intern();
 
     //        /*
-//         * Option determines whether or not per-child locks are used by
+    //         * Option determines whether or not per-child locks are used by
     //         * {@link Node} for a <em>read-only</em> {@link AbstractBTree} (default
     //         * {@value #DEFAULT_CHILD_LOCKS}). This option effects synchronization
     //         * in {@link Node#getChild(int)}. Synchronization is not required for
@@ -449,7 +432,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     String DEFAULT_BTREE_BRANCHING_FACTOR = "32"; // "256"
 
     //        /*
-//         * The capacity of the hard reference queue used to retain recently used
+    //         * The capacity of the hard reference queue used to retain recently used
     //         * nodes (or leaves) (default
     //         * {@value #DEFAULT_BTREE_READ_RETENTION_QUEUE_CAPACITY}). When zero
     //         * (0), this queue is disabled.
@@ -501,7 +484,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     //        String DEFAULT_BTREE_READ_RETENTION_QUEUE_CAPACITY = "10000";
     //
     //        /*
-//         * The #of entries on the hard reference queue that will be scanned for
+    //         * The #of entries on the hard reference queue that will be scanned for
     //         * a match before a new reference is appended to the queue. This trades
     //         * off the cost of scanning entries on the queue, which is handled by
     //         * the queue itself, against the cost of queue churn.
@@ -595,7 +578,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     String DEFAULT_INDEX_SEGMENT_BUFFER_NODES = "false";
 
     //        /*
-//         * The size of the LRU cache backing the weak reference cache for leaves
+    //         * The size of the LRU cache backing the weak reference cache for leaves
     //         * (default {@value #DEFAULT_INDEX_SEGMENT_LEAF_CACHE_CAPACITY}).
     //         * <p>
     //         * While the {@link AbstractBTree} already provides caching for nodes
@@ -612,13 +595,13 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     //                + ".leafCacheCapacity";
     //
     //        /*
-//         *
+    //         *
     //         * @see #INDEX_SEGMENT_LEAF_CACHE_CAPACITY
     //         */
     //        String DEFAULT_INDEX_SEGMENT_LEAF_CACHE_CAPACITY = "100";
     //
     //        /*
-//         * The timeout in nanoseconds for the LRU cache backing the weak
+    //         * The timeout in nanoseconds for the LRU cache backing the weak
     //         * reference cache for {@link IndexSegment} leaves (default
     //         * {@value #DEFAULT_INDEX_SEGMENT_LEAF_CACHE_TIMEOUT}).
     //         * <p>
@@ -636,7 +619,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     //                + ".leafCacheTimeout";
     //
     //        /*
-//         *
+    //         *
     //         * @see #INDEX_SEGMENT_LEAF_CACHE_TIMEOUT
     //         */
     //        String DEFAULT_INDEX_SEGMENT_LEAF_CACHE_TIMEOUT = ""
@@ -669,7 +652,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     //        *
     //        * final int entryCountPerSplit = 5 * Bytes.megabyte32; (or 50k)
     //        /*
-//         * An index partition which has no more than this many tuples should be
+    //         * An index partition which has no more than this many tuples should be
     //         * joined with its rightSibling (if any).
     //         */
     //        String SPLIT_HANDLER_MIN_ENTRY_COUNT = DefaultSplitHandler.class
@@ -677,14 +660,14 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     //                + ".minimumEntryCount";
     //
     //        /*
-//         * The target #of tuples for an index partition.
+    //         * The target #of tuples for an index partition.
     //         */
     //        String SPLIT_HANDLER_ENTRY_COUNT_PER_SPLIT = DefaultSplitHandler.class
     //                .getName()
     //                + ".entryCountPerSplit";
     //
     //        /*
-//         * The index partition will be split when its actual entry count is GTE
+    //         * The index partition will be split when its actual entry count is GTE
     //         * to <code>overCapacityMultiplier * entryCountPerSplit</code>
     //         */
     //        String SPLIT_HANDLER_OVER_CAPACITY_MULTIPLIER = DefaultSplitHandler.class
@@ -692,7 +675,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     //                + ".overCapacityMultiplier";
     //
     //        /*
-//         * When an index partition will be split, the #of new index partitions
+    //         * When an index partition will be split, the #of new index partitions
     //         * will be chosen such that each index partition is approximately
     //         * <i>underCapacityMultiplier</i> full.
     //         */
@@ -701,7 +684,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     //                + ".underCapacityMultiplier";
     //
     //        /*
-//         * The #of samples to take per estimated split (non-negative, and
+    //         * The #of samples to take per estimated split (non-negative, and
     //         * generally on the order of 10s of samples). The purpose of the samples
     //         * is to accommodate the actual distribution of the keys in the index.
     //         */
@@ -1125,7 +1108,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
   }
 
   //    /*
-//     * @see Options#BTREE_READ_RETENTION_QUEUE_CAPACITY
+  //     * @see Options#BTREE_READ_RETENTION_QUEUE_CAPACITY
   //     */
   //    public final int getBTreeReadRetentionQueueCapacity() {
   //
@@ -1140,7 +1123,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
   //    }
   //
   //    /*
-//     * @see Options#BTREE_READ_RETENTION_QUEUE_SCAN
+  //     * @see Options#BTREE_READ_RETENTION_QUEUE_SCAN
   //     */
   //    public final int getBTreeReadRetentionQueueScan() {
   //
@@ -1676,8 +1659,8 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
 
       if (val != null) {
 
-      /*
-       * Attempt to interpret the value as either a UUID or the name of
+        /*
+         * Attempt to interpret the value as either a UUID or the name of
          * a data service joined with the federation.
          */
 
@@ -2632,8 +2615,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
        * declare the required public constructor.
        */
 
-      final Constructor ctor =
-          cl.getConstructor(IndexMetadata.class, Checkpoint.class);
+      final Constructor ctor = cl.getConstructor(IndexMetadata.class, Checkpoint.class);
 
       final Checkpoint checkpoint =
           (Checkpoint) ctor.newInstance(new Object[] {this, oldCheckpoint});

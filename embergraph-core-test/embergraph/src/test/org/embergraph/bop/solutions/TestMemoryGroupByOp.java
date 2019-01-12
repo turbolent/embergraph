@@ -53,7 +53,7 @@ import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
 
 /*
-* Unit tests for {@link MemoryGroupByOp}.
+ * Unit tests for {@link MemoryGroupByOp}.
  *
  * @author thompsonbry
  */
@@ -174,8 +174,7 @@ public class TestMemoryGroupByOp extends AbstractAggregationTestCase {
           new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(9));
 
       // COUNT(DISTINCT ?v) AS ?S
-      final IValueExpression<IV> countDistinctVAsS =
-          new Bind(S, new COUNT(true /* distinct */, v));
+      final IValueExpression<IV> countDistinctVAsS = new Bind(S, new COUNT(true /* distinct */, v));
 
       final GroupByOp query =
           newFixture(
@@ -194,9 +193,9 @@ public class TestMemoryGroupByOp extends AbstractAggregationTestCase {
        * </pre>
        */
       final IBindingSet[] data =
-          new IBindingSet[]{
-              new ListBindingSet(new IVariable<?>[]{w, s, v}, new IConstant[]{num9, s1, num1}),
-              new ListBindingSet(new IVariable<?>[]{s, v}, new IConstant[]{s2, num2})
+          new IBindingSet[] {
+            new ListBindingSet(new IVariable<?>[] {w, s, v}, new IConstant[] {num9, s1, num1}),
+            new ListBindingSet(new IVariable<?>[] {s, v}, new IConstant[] {s2, num2})
           };
 
       /*
@@ -216,9 +215,9 @@ public class TestMemoryGroupByOp extends AbstractAggregationTestCase {
               new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(1)));
 
       final IBindingSet[] expected =
-          new IBindingSet[]{
-              new ListBindingSet(new IVariable<?>[]{w, S}, new IConstant[]{num9, _num1}),
-              new ListBindingSet(new IVariable<?>[]{S}, new IConstant[]{_num1})
+          new IBindingSet[] {
+            new ListBindingSet(new IVariable<?>[] {w, S}, new IConstant[] {num9, _num1}),
+            new ListBindingSet(new IVariable<?>[] {S}, new IConstant[] {_num1})
           };
 
       final BOpStats stats = query.newStats();

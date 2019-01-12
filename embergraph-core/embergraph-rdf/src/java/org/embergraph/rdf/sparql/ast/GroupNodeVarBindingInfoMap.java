@@ -25,7 +25,7 @@ import java.util.Map;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTJoinGroupFilterExistsInfo;
 
 /*
-* Map from nodes to their respective {@link GroupNodeVarBindingInfo} object, including setup
+ * Map from nodes to their respective {@link GroupNodeVarBindingInfo} object, including setup
  * method.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>

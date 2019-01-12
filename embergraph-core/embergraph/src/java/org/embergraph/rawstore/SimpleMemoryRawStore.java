@@ -22,19 +22,16 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rawstore;
 
 import java.io.File;
-import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.ExecutorService;
 import org.embergraph.counters.CounterSet;
-import org.embergraph.journal.TemporaryRawStore;
 import org.embergraph.mdi.IResourceMetadata;
 
 /*
-* A purely transient append-only implementation useful when data need to be buffered in memory. The
+ * A purely transient append-only implementation useful when data need to be buffered in memory. The
  * writes are stored in an {@link ArrayList}.
  *
  * <p>Note: it is safe to NOT call {@link #close()} on this implementation. The implementation does

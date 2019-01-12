@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 /*
-* Exposes a linked list of retry exceptions leading to the failure of an {@link
+ * Exposes a linked list of retry exceptions leading to the failure of an {@link
  * AbstractDataServiceProcedureTask}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -46,7 +46,7 @@ public class ClientException extends RuntimeException {
   }
 
   //        /*
-//         *
+  //         *
   //         */
   //        public ClientException() {
   //            super();
@@ -81,7 +81,7 @@ public class ClientException extends RuntimeException {
   }
 
   //        /*
-//         * @param cause
+  //         * @param cause
   //         */
   //        public ClientException(Throwable cause, List<Throwable> causes) {
 

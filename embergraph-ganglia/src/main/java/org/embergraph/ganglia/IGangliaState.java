@@ -19,7 +19,7 @@ package org.embergraph.ganglia;
 import java.util.Iterator;
 
 /*
-* A read-only view of the soft state of the cluster as maintained through the ganglia protocol.
+ * A read-only view of the soft state of the cluster as maintained through the ganglia protocol.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

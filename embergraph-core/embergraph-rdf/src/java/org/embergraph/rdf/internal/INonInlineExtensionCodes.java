@@ -26,7 +26,7 @@ import org.embergraph.rdf.internal.impl.literal.PartlyInlineTypedLiteralIV;
 import org.embergraph.rdf.internal.impl.uri.PartlyInlineURIIV;
 
 /*
-* An interface declaring the one byte extension code for non-inline {@link IV} s.
+ * An interface declaring the one byte extension code for non-inline {@link IV} s.
  *
  * <p>Note: Negative codes are used for extension types for which an extension {@link IV} follows
  * the extension byte. Positive codes are used for extension types where the data immediately

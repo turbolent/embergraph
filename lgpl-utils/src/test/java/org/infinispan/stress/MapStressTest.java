@@ -18,7 +18,7 @@ import org.infinispan.util.concurrent.BufferedConcurrentHashMap;
 import org.infinispan.util.concurrent.BufferedConcurrentHashMap.Eviction;
 
 /*
-* Stress test different maps for container implementations
+ * Stress test different maps for container implementations
  *
  * @author Manik Surtani
  * @since 4.0

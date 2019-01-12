@@ -36,7 +36,7 @@ import org.embergraph.service.fts.FulltextSearchHiterator;
 import org.embergraph.service.fts.IFulltextSearch;
 
 /*
-* Implementation based on the built-in keyword search capabilities for embergraph.
+ * Implementation based on the built-in keyword search capabilities for embergraph.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$

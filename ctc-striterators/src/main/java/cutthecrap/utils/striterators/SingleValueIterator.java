@@ -16,7 +16,7 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 package cutthecrap.utils.striterators;
 
 /*
-* ************************************************************************* SingleValueIterator
+ * ************************************************************************* SingleValueIterator
  *
  * <p>Only one value but need to return an iterator? This makes it easy.
  */

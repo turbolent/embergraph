@@ -12,7 +12,7 @@ import cern.colt.list.IntArrayList;
 import cern.colt.list.ObjectArrayList;
 import cern.colt.matrix.impl.AbstractMatrix2D;
 /*
-* Abstract base class for 2-d matrices holding <tt>Object</tt> elements. First see the <a
+ * Abstract base class for 2-d matrices holding <tt>Object</tt> elements. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
  * view</a> to get the broad picture.
  *
@@ -328,7 +328,8 @@ public abstract class ObjectMatrix2D extends AbstractMatrix2D {
     } else {
       for (int row = rows; --row >= 0; ) {
         for (int column = columns; --column >= 0; ) {
-          if (getQuick(row, column) == null ? other.getQuick(row, column) != null
+          if (getQuick(row, column) == null
+              ? other.getQuick(row, column) != null
               : !getQuick(row, column).equals(other.getQuick(row, column))) return false;
         }
       }

@@ -3,14 +3,11 @@ package org.embergraph.rdf.internal.impl.literal;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import javax.xml.datatype.XMLGregorianCalendar;
-import org.embergraph.rdf.internal.DTE;
 import org.embergraph.rdf.internal.DTEExtension;
-import org.embergraph.rdf.internal.IExtension;
 import org.embergraph.rdf.internal.ILexiconConfiguration;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.InlineLiteralIV;
 import org.embergraph.rdf.internal.VTE;
-import org.embergraph.rdf.internal.impl.AbstractIV;
 import org.embergraph.rdf.internal.impl.AbstractInlineExtensionIV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.model.EmbergraphLiteral;
@@ -19,7 +16,7 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 
 /*
-* Class provides support for datatype {@link Literal}s for which an {@link IExtension} was
+ * Class provides support for datatype {@link Literal}s for which an {@link IExtension} was
  * registered. An {@link LiteralExtensionIV} <strong>always</strong> has the <em>inline</em> and
  * <em>extension</em> bits set. An instance of this class bundles together an inline value of some
  * primitive data type declared by {@link DTE} with the {@link IV} of the datatype URI for the

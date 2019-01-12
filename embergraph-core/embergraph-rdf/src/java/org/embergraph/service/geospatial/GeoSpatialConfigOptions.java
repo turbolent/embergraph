@@ -23,7 +23,7 @@ package org.embergraph.service.geospatial;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /*
-* Class hosting options for geospatial configuration and defaults.
+ * Class hosting options for geospatial configuration and defaults.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$

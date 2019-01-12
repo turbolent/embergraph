@@ -14,7 +14,7 @@ import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.service.geospatial.GeoSpatialDatatypeConfiguration;
 
 /*
-* Default {@link IExtensionFactory}. The following extensions are supported:
+ * Default {@link IExtensionFactory}. The following extensions are supported:
  *
  * <dl>
  *   <dt>{@link DateTimeExtension}

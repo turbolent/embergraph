@@ -26,7 +26,7 @@ package org.embergraph.util.concurrent;
 import java.util.concurrent.Callable;
 
 /*
-* Moving average based on the change in some sampled value.
+ * Moving average based on the change in some sampled value.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

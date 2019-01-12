@@ -23,7 +23,7 @@ import org.embergraph.bop.IValueExpression;
 import org.embergraph.rdf.internal.IV;
 
 /*
-* An {@link IValueExpressionNode} paired with a flag to indicating an ascending or descending sort
+ * An {@link IValueExpressionNode} paired with a flag to indicating an ascending or descending sort
  * order.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

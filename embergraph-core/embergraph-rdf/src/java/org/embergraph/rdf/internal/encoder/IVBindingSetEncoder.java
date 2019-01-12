@@ -30,9 +30,7 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.bop.bindingSet.ListBindingSet;
 import org.embergraph.btree.keys.ASCIIKeyBuilderFactory;
 import org.embergraph.btree.keys.IKeyBuilder;
-import org.embergraph.htree.HTree;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.internal.IVCache;
 import org.embergraph.rdf.internal.IVUtility;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.TermId;
@@ -46,10 +44,9 @@ import org.embergraph.rdf.model.EmbergraphURIImpl;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.URI;
-import org.openrdf.model.Value;
 
 /*
-* A utility class for generating and processing compact representations of {@link IBindingSet}s
+ * A utility class for generating and processing compact representations of {@link IBindingSet}s
  * whose {@link IConstant}s are bound to {@link IV}s. Individual {@link IV}s may be associated with
  * a cached RDF {@link Value}.
  *
@@ -215,8 +212,8 @@ public class IVBindingSetEncoder implements IBindingSetEncoder, IBindingSetDecod
 
         if (iv.isNullIV()) {
 
-        /*
-       * BLZG-611 (https://jira.blazegraph.com/browse/BLZG-611): we need to properly encode (and
+          /*
+           * BLZG-611 (https://jira.blazegraph.com/browse/BLZG-611): we need to properly encode (and
            * later on, decode) mocked IVs, which have either been constructed at runtime or
            * represent values that are not present in the database. We do this by wrapping fully
            * inlined IV types (for URIs, literals, or blank nodes) into MockedValueIV, which will be
@@ -300,8 +297,8 @@ public class IVBindingSetEncoder implements IBindingSetEncoder, IBindingSetDecod
     for (IVariable<?> v : schema) {
 
       if (i == ivs.length) {
-      /*
-       * This solution does not include all variables which were
+        /*
+         * This solution does not include all variables which were
          * eventually discovered to be part of the schema.
          */
         break;

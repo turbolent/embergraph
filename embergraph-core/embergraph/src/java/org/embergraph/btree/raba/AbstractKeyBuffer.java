@@ -20,7 +20,7 @@ package org.embergraph.btree.raba;
 import java.util.Iterator;
 
 /*
-* Class with implementations supporting mutable and immutable variable length byte[] keys.
+ * Class with implementations supporting mutable and immutable variable length byte[] keys.
  *
  * @todo supporting a scalar int32 key natively would provide better performance for an object
  *     index. once it is up to int64, the byte[] approach could in fact be better on 32-bit

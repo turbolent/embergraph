@@ -25,16 +25,13 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import junit.framework.TestCase2;
-import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.XSD;
 import org.embergraph.rdf.internal.impl.TermId;
 import org.openrdf.model.URI;
-import org.openrdf.model.Value;
-import org.openrdf.model.ValueFactory;
 
 /*
-* Unit tests for {@link EmbergraphValueFactoryImpl}.
+ * Unit tests for {@link EmbergraphValueFactoryImpl}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

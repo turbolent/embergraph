@@ -26,7 +26,7 @@ import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.embergraph.rdf.sparql.ast.SubqueryRoot;
 
 /*
-* Test suite for {@link ASTUnionFiltersOptimizer}.
+ * Test suite for {@link ASTUnionFiltersOptimizer}.
  *
  * @author Jeremy Carroll
  */

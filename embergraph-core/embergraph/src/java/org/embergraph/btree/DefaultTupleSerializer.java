@@ -31,7 +31,6 @@ import java.util.Properties;
 import org.embergraph.btree.keys.DefaultKeyBuilderFactory;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.IKeyBuilderFactory;
-import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.btree.keys.ThreadLocalKeyBuilderFactory;
 import org.embergraph.btree.raba.codec.CanonicalHuffmanRabaCoder;
 import org.embergraph.btree.raba.codec.FrontCodedRabaCoder.DefaultFrontCodedRabaCoder;
@@ -39,7 +38,7 @@ import org.embergraph.btree.raba.codec.IRabaCoder;
 import org.embergraph.io.SerializerUtil;
 
 /*
-* Default implementation uses the {@link KeyBuilder} to format the object as a key and uses Java
+ * Default implementation uses the {@link KeyBuilder} to format the object as a key and uses Java
  * default serialization for the value. You only need to subclass this if you want to use custom
  * (de-)serialization of the value, custom conversion of the application key to an unsigned byte[],
  * or if you have a special type of application key such that you are able to decode the unsigned

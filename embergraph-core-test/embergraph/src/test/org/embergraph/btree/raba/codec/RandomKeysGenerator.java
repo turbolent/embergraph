@@ -29,7 +29,7 @@ import java.util.TreeSet;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Random B+Tree keys generator. The keys are variable length unsigned byte[]s of up to
+ * Random B+Tree keys generator. The keys are variable length unsigned byte[]s of up to
  * <i>maxKeyLength</i> bytes. Random byte[]s are generated and then sorted into unsigned byte[]
  * order.
  *

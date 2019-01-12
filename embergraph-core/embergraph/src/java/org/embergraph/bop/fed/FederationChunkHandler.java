@@ -21,7 +21,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.fed;
 
-import java.nio.ByteBuffer;
 import java.rmi.RemoteException;
 import java.util.LinkedList;
 import java.util.List;
@@ -29,7 +28,6 @@ import java.util.Map;
 import java.util.UUID;
 import org.apache.log4j.Logger;
 import org.embergraph.bop.BOp;
-import org.embergraph.bop.BOpEvaluationContext;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IPredicate;
 import org.embergraph.bop.IShardwisePipelineOp;
@@ -40,17 +38,15 @@ import org.embergraph.bop.engine.IRunningQuery;
 import org.embergraph.bop.engine.LocalChunkMessage;
 import org.embergraph.bop.engine.StandaloneChunkHandler;
 import org.embergraph.bop.fed.shards.MapBindingSetsOverShardsBuffer;
-import org.embergraph.io.DirectBufferPool;
 import org.embergraph.io.DirectBufferPoolAllocator.IAllocationContext;
 import org.embergraph.mdi.PartitionLocator;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.IBuffer;
-import org.embergraph.relation.rule.eval.pipeline.DistributedJoinTask;
 
 /*
-* The base class is extended to organize the output from one operator so in order to make it
+ * The base class is extended to organize the output from one operator so in order to make it
  * available to another operator running on a different node. There are several cases which have to
  * be handled and which are identified by the {@link BOp#getEvaluationContext()}. In addition, we
  * need to handle low latency and high data volume queries somewhat differently. Except for {@link
@@ -157,15 +153,15 @@ public class FederationChunkHandler<E> extends StandaloneChunkHandler {
     switch (targetOp.getEvaluationContext()) {
       case ANY:
         {
-        /*
-       * This operator may be evaluated anywhere.
+          /*
+           * This operator may be evaluated anywhere.
            */
           return super.handleChunk(query, bopId, sinkId, chunk);
         }
       case HASHED:
         {
-        /*
-       * @todo The sink must use annotations to describe the nodes over
+          /*
+           * @todo The sink must use annotations to describe the nodes over
            * which the binding sets will be mapped and the hash function to be
            * applied. Look up those annotations and apply them to distribute
            * the binding sets across the nodes.
@@ -174,8 +170,8 @@ public class FederationChunkHandler<E> extends StandaloneChunkHandler {
         }
       case SHARDED:
         {
-        /*
-       * The sink must read or write on a shard so we map the binding sets
+          /*
+           * The sink must read or write on a shard so we map the binding sets
            * across the access path for the sink.
            *
            * @todo Set the capacity of the the "map" buffer to the size of the
@@ -210,8 +206,8 @@ public class FederationChunkHandler<E> extends StandaloneChunkHandler {
                       BlockingBuffer.DEFAULT_CONSUMER_CHUNK_TIMEOUT_UNIT);
                 }
               };
-        /*
-       * Map the binding sets over shards.
+          /*
+           * Map the binding sets over shards.
            */
           {
             //                final IAsynchronousIterator<IBindingSet[]> itr = sink
@@ -232,8 +228,8 @@ public class FederationChunkHandler<E> extends StandaloneChunkHandler {
             }
             mapper.flush();
           }
-        /*
-       * The allocation context.
+          /*
+           * The allocation context.
            *
            * @todo use (queryId, serviceId, sinkId) when the target bop is
            * high volume operator (this requires annotation by the query
@@ -242,8 +238,8 @@ public class FederationChunkHandler<E> extends StandaloneChunkHandler {
           final IAllocationContext allocationContext =
               q.getAllocationContext(new QueryContext(q.getQueryId()));
 
-        /*
-       * Generate the output chunks and notify the receivers.
+          /*
+           * Generate the output chunks and notify the receivers.
            *
            * FIXME If the output buffer has a bounded capacity then this can
            * deadlock when the buffer fills up because we are not draining the
@@ -264,8 +260,8 @@ public class FederationChunkHandler<E> extends StandaloneChunkHandler {
 
             final PartitionLocator locator = e.getKey();
 
-          /*
-       * Note: newBuffer() above creates an BlockingBuffer so this
+            /*
+             * Note: newBuffer() above creates an BlockingBuffer so this
              * cast is safe.
              */
             final IBlockingBuffer<IBindingSet[]> shardSink =
@@ -304,8 +300,8 @@ public class FederationChunkHandler<E> extends StandaloneChunkHandler {
 
             if (a.length > 0) {
 
-            /*
-       * Send message.
+              /*
+               * Send message.
                *
                * Note: This avoids sending empty chunks.
                *
@@ -332,8 +328,8 @@ public class FederationChunkHandler<E> extends StandaloneChunkHandler {
       case CONTROLLER:
         {
 
-        /*
-       * Format the binding sets onto a ByteBuffer and publish that
+          /*
+           * Format the binding sets onto a ByteBuffer and publish that
            * ByteBuffer as a manager resource for the query and notify the
            * query controller that data is available for it.
            */
@@ -471,8 +467,8 @@ public class FederationChunkHandler<E> extends StandaloneChunkHandler {
 
       } else {
 
-      /*
-       * Marshall the data onto direct ByteBuffer(s) and send a thin
+        /*
+         * Marshall the data onto direct ByteBuffer(s) and send a thin
          * message by RMI. The receiver will retrieve the data using NIO
          * against the ResourceService.
          */

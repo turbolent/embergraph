@@ -1,7 +1,7 @@
 package org.embergraph.rwstore.sector;
 
 /*
-* Thrown if there are not sufficient resources available to satisfy a blocking request against an
+ * Thrown if there are not sufficient resources available to satisfy a blocking request against an
  * {@link IMemoryManager}
  *
  * @author thompsonbry

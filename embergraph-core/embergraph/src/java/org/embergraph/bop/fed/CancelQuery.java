@@ -3,7 +3,7 @@ package org.embergraph.bop.fed;
 import org.embergraph.bop.engine.AbstractRunningQuery;
 
 /*
-* {@link Runnable} will halt the query, interrupting any operators which are currently running for
+ * {@link Runnable} will halt the query, interrupting any operators which are currently running for
  * that query.
  */
 class CancelQuery implements Runnable {

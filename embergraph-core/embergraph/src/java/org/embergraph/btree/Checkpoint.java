@@ -25,14 +25,12 @@ import java.nio.ByteBuffer;
 import org.embergraph.bop.solutions.SolutionSetStream;
 import org.embergraph.htree.HTree;
 import org.embergraph.io.SerializerUtil;
-import org.embergraph.journal.AbstractJournal;
-import org.embergraph.journal.Name2Addr;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.stream.Stream;
 import org.embergraph.stream.Stream.StreamIndexMetadata;
 
 /*
-* A checkpoint record is written each time the btree is flushed to the store.
+ * A checkpoint record is written each time the btree is flushed to the store.
  *
  * <p>Note: In order to create a btree use {@link BTree#create(IRawStore, IndexMetadata)} to write
  * the initial {@link IndexMetadata} record and the initial check point on the store. It will then
@@ -277,8 +275,8 @@ public class Checkpoint implements ICheckpoint, Externalizable {
 
     this(
         btree.getMetadataAddr(),
-      /*
-       * root node or leaf.
+        /*
+         * root node or leaf.
          *
          * Note: if the [root] reference is not defined then we use the
          * address in the last checkpoint record. if that is 0L then
@@ -288,8 +286,8 @@ public class Checkpoint implements ICheckpoint, Externalizable {
         btree.getRootAddr(),
         //                (btree.root == null ? btree.getCheckpoint().getRootAddr()
         //                        : btree.root.getIdentity()),
-      /*
-       * optional bloom filter.
+        /*
+         * optional bloom filter.
          *
          * Note: if the [bloomFilter] reference is not defined then we
          * use the address in the last checkpoint record. if that is 0L
@@ -305,8 +303,8 @@ public class Checkpoint implements ICheckpoint, Externalizable {
         btree.nnodes,
         btree.nleaves,
         btree.nentries,
-      /*
-       * Note: This MUST access the raw counter in scale-out or the
+        /*
+         * Note: This MUST access the raw counter in scale-out or the
          * logic in PartitionedCounter.wrap(long) will observe the
          * partitionId in the high word and throw an exception. The
          * whole point of that check in PartitionedCounter.wrap(long) is
@@ -342,8 +340,8 @@ public class Checkpoint implements ICheckpoint, Externalizable {
 
     this(
         htree.getMetadataAddr(),
-      /*
-       * root node or leaf.
+        /*
+         * root node or leaf.
          *
          * Note: if the [root] reference is not defined then we use the
          * address in the last checkpoint record. if that is 0L then
@@ -351,8 +349,8 @@ public class Checkpoint implements ICheckpoint, Externalizable {
          * demand.
          */
         htree.getRootAddr(),
-      /*
-       * optional bloom filter.
+        /*
+         * optional bloom filter.
          *
          * Note: if the [bloomFilter] reference is not defined then we
          * use the address in the last checkpoint record. if that is 0L
@@ -399,8 +397,8 @@ public class Checkpoint implements ICheckpoint, Externalizable {
 
     this(
         stream.getMetadataAddr(),
-      /*
-       * root node or leaf.
+        /*
+         * root node or leaf.
          *
          * Note: if the [root] reference is not defined then we use the
          * address in the last checkpoint record. if that is 0L then
@@ -408,8 +406,8 @@ public class Checkpoint implements ICheckpoint, Externalizable {
          * demand.
          */
         stream.getRootAddr(),
-      /*
-       * optional bloom filter.
+        /*
+         * optional bloom filter.
          *
          * Note: if the [bloomFilter] reference is not defined then we
          * use the address in the last checkpoint record. if that is 0L
@@ -769,8 +767,8 @@ public class Checkpoint implements ICheckpoint, Externalizable {
         ndx = HTree.create(store, (HTreeIndexMetadata) metadata);
         break;
       case Stream:
-      /*
-       * FIXME GIST : This is not setting the SolutionSetStream class
+        /*
+         * FIXME GIST : This is not setting the SolutionSetStream class
          * since Stream.create() is being invoked rather than
          * SolutionSetStream.create()
          *

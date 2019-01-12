@@ -26,7 +26,7 @@ import java.util.UUID;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 /*
-* Abstract base class for a {@link QuorumMember}.
+ * Abstract base class for a {@link QuorumMember}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

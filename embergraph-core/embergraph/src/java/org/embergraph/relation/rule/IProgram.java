@@ -24,12 +24,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.relation.rule;
 
 import java.util.Iterator;
-import org.embergraph.bop.IPredicate;
-import org.embergraph.relation.IMutableRelation;
-import org.embergraph.relation.rule.eval.ISolution;
 
 /*
-* A program consists of a set of rules and/or programs. Some programs are executed sequentially
+ * A program consists of a set of rules and/or programs. Some programs are executed sequentially
  * while others are (at least logically) parallel. A program may also specify the transitive closure
  * of its rules.
  *

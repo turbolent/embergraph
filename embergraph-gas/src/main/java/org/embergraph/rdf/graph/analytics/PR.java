@@ -25,7 +25,6 @@ import org.embergraph.rdf.graph.EdgesEnum;
 import org.embergraph.rdf.graph.Factory;
 import org.embergraph.rdf.graph.FrontierEnum;
 import org.embergraph.rdf.graph.IBinder;
-import org.embergraph.rdf.graph.IBindingExtractor;
 import org.embergraph.rdf.graph.IGASContext;
 import org.embergraph.rdf.graph.IGASScheduler;
 import org.embergraph.rdf.graph.IGASState;
@@ -36,7 +35,7 @@ import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 
 /*
-* Page rank assigns weights to the vertices in a graph based by on the relative "importance" as
+ * Page rank assigns weights to the vertices in a graph based by on the relative "importance" as
  * determined by the patterns of directed links in the graph. The algorithm is given stated in terms
  * of a computation that is related until the delta in the computed values for the vertices is
  * within <i>epsilon</i> of ZERO. However, in practice convergence is based on <i>epsilon</i> is
@@ -376,8 +375,8 @@ public class PR extends BaseGASProgram<PR.VS, PR.ES, Double> {
           return;
         }
 
-      /*
-       * Only report the larger ranked values.
+        /*
+         * Only report the larger ranked values.
          */
 
         if (log.isDebugEnabled()) log.debug("v=" + u + ", pageRank=" + pageRank);

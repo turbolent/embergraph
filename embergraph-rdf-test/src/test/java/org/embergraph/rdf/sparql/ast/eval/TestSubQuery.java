@@ -23,14 +23,9 @@ package org.embergraph.rdf.sparql.ast.eval;
 
 import org.embergraph.bop.BOpUtility;
 import org.embergraph.rdf.sparql.ast.NamedSubqueryRoot;
-import org.embergraph.rdf.sparql.ast.QueryHints;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTComplexOptionalOptimizer;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTSparql11SubqueryOptimizer;
-import org.embergraph.rdf.sparql.ast.optimizers.TestASTSparql11SubqueryOptimizer;
-import org.openrdf.model.Value;
 
 /*
-* Data driven test suite.
+ * Data driven test suite.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

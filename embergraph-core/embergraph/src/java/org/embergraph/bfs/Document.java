@@ -5,7 +5,7 @@ import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 
 /*
-* Document model interface for operations on the {@link IContentRepository}.
+ * Document model interface for operations on the {@link IContentRepository}.
  *
  * @author mike@systap.com
  * @version $Id$

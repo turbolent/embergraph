@@ -24,12 +24,11 @@ package org.embergraph.rdf.sparql.ast.eval;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 import org.embergraph.service.fts.FTS;
 import org.openrdf.model.URI;
 
 /*
-* Translate {@link FTS#SEARCH} and related magic predicates into a {@link ServiceNode} which will
+ * Translate {@link FTS#SEARCH} and related magic predicates into a {@link ServiceNode} which will
  * invoke the embergraph search engine.
  *
  * <pre>

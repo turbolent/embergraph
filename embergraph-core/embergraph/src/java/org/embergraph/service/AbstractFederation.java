@@ -55,7 +55,6 @@ import org.embergraph.bfs.EmbergraphFileSystem;
 import org.embergraph.bfs.GlobalFileSystemHelper;
 import org.embergraph.btree.IIndex;
 import org.embergraph.btree.IndexMetadata;
-import org.embergraph.cache.ConcurrentWeakValueCacheWithTimeout;
 import org.embergraph.counters.AbstractStatisticsCollector;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.ICounterSet;
@@ -69,7 +68,6 @@ import org.embergraph.counters.ganglia.QueryEngineMetricsCollector;
 import org.embergraph.counters.query.QueryUtil;
 import org.embergraph.ganglia.DefaultMetadataFactory;
 import org.embergraph.ganglia.GangliaMetadataFactory;
-import org.embergraph.ganglia.GangliaService;
 import org.embergraph.ganglia.GangliaSlopeEnum;
 import org.embergraph.ganglia.IGangliaDefaults;
 import org.embergraph.ganglia.util.GangliaUtil;
@@ -91,7 +89,7 @@ import org.embergraph.util.concurrent.ThreadPoolExecutorStatisticsTask;
 import org.embergraph.util.httpd.AbstractHTTPD;
 
 /*
-* Abstract base class for {@link IEmbergraphFederation} implementations.
+ * Abstract base class for {@link IEmbergraphFederation} implementations.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -162,8 +160,8 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
     try {
 
       {
-      /*
-       * Note: The embedded GangliaService is executed on the main
+        /*
+         * Note: The embedded GangliaService is executed on the main
          * thread pool. We need to terminate the GangliaService in order
          * for the thread pool to shutdown.
          */
@@ -474,8 +472,8 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
 
         scaleOutIndexCounters.put(name, t);
 
-      /*
-       * Attach to the counters reported by the client to the LBS.
+        /*
+         * Attach to the counters reported by the client to the LBS.
          *
          * Note: The counters should not exist under this path since we
          * are just creating them now, but if they do then they are
@@ -574,8 +572,8 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
           }
         }
 
-      /*
-       * Basic counters.
+        /*
+         * Basic counters.
          */
 
         AbstractStatisticsCollector.addBasicServiceOrClientCounters(
@@ -811,8 +809,8 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
 
           try {
 
-          /*
-       * As a failsafe (or at least a failback) we ask the
+            /*
+             * As a failsafe (or at least a failback) we ask the
              * client for ANY data service that it knows about and
              * use that as the data service on which we will
              * register this index. This lets us keep going if the
@@ -899,8 +897,8 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
 
     } catch (Exception e) {
       if (InnerCause.isInnerCause(e, NoSuchIndexException.class)) {
-      /*
-       * Wrap with the root cause per the API for dropIndex().
+        /*
+         * Wrap with the root cause per the API for dropIndex().
          */
         final NoSuchIndexException tmp = new NoSuchIndexException(name);
         tmp.initCause(e);
@@ -1085,7 +1083,7 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
   }
 
   //    /*
-//     * Return <code>true</code> if the service startup preconditions are
+  //     * Return <code>true</code> if the service startup preconditions are
   //     * noticably satisified before the timeout elapsed.
   //     *
   //     * @param timeout
@@ -1139,8 +1137,8 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
       } catch (RejectedExecutionException t) {
 
         if (isOpen()) {
-        /*
-       * Only an error if the federation is still open.
+          /*
+           * Only an error if the federation is still open.
            */
           log.error(t, t);
         }
@@ -1210,8 +1208,8 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
           }
         }
 
-      /*
-       * Start collecting performance counters (if enabled).
+        /*
+         * Start collecting performance counters (if enabled).
          *
          * Note: This needs to be done first since the counters from the
          * platform will otherwise not be incorporated into those
@@ -1219,8 +1217,8 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
          */
         startPlatformStatisticsCollection();
 
-      /*
-       * start collection on various work queues.
+        /*
+         * start collection on various work queues.
          *
          * Note: The data service starts collection for its queues
          * (actually, the concurrency managers queues) once it is up and
@@ -1230,8 +1228,8 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
          */
         startQueueStatisticsCollection();
 
-      /*
-       * Start embedded Ganglia peer. It will develop a snapshot of
+        /*
+         * Start embedded Ganglia peer. It will develop a snapshot of
          * the cluster metrics in memory and will self-report metrics
          * from the performance counter hierarchy to the ganglia
          * network.
@@ -1267,8 +1265,8 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
         AbstractFederation.this.didStart();
 
       } catch (IllegalStateException ex) {
-      /*
-       * If the federation was concurrently closed, log @ WARN and
+        /*
+         * If the federation was concurrently closed, log @ WARN and
          * return rather than throwing out the exception.
          */
         if (!isOpen()) {
@@ -1357,8 +1355,8 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
 
         final String hostName = AbstractStatisticsCollector.fullyQualifiedHostName;
 
-      /*
-       * Note: This needs to be the value reported by the statistics
+        /*
+         * Note: This needs to be the value reported by the statistics
          * collector since that it what makes it into the counter set
          * path prefix for this service.
          *
@@ -1417,8 +1415,8 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
 
         final int initialDelay = IGangliaDefaults.INITIAL_DELAY;
 
-      /*
-       * Note: Use ZERO (0) if you are running gmond on the same host.
+        /*
+         * Note: Use ZERO (0) if you are running gmond on the same host.
          * That will prevent the GangliaService from transmitting a
          * different heartbeat, which would confuse gmond and gmetad.
          */
@@ -1449,8 +1447,8 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
             new GangliaMetadataFactory(
                 new DefaultMetadataFactory(defaultUnits, defaultSlope, defaultTMax, defaultDMax));
 
-      /*
-       * Layer on the ability to (a) recognize and align host
+        /*
+         * Layer on the ability to (a) recognize and align host
          * embergraph's performance counters hierarchy with those declared
          * by ganglia and; (b) provide nice declarations for various
          * application counters of interest.
@@ -1484,8 +1482,8 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
         gangliaService.addMetricCollector(
             new QueryEngineMetricsCollector(AbstractFederation.this, statisticsCollector));
 
-      /*
-       * TODO The problem with reporting per-service statistics is
+        /*
+         * TODO The problem with reporting per-service statistics is
          * that ganglia lacks a facility to readily aggregate statistics
          * across services on a host (SMS + anything). The only way this
          * can readily be made to work is if each service has a distinct
@@ -1517,8 +1515,8 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
 
       } catch (RejectedExecutionException t) {
 
-      /*
-       * Ignore.
+        /*
+         * Ignore.
          *
          * Note: This occurs if the federation shutdown() before we
          * start the embedded ganglia peer. For example, it is common
@@ -1646,8 +1644,8 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
 
       try {
 
-      /*
-       * Report the performance counters to the load balancer.
+        /*
+         * Report the performance counters to the load balancer.
          */
 
         reportPerformanceCounters();
@@ -1756,8 +1754,8 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
 
         if (uuid == mdsUUID) {
 
-        /*
-       * @todo getDataServices(int maxCount) DOES NOT return MDS
+          /*
+           * @todo getDataServices(int maxCount) DOES NOT return MDS
            * UUIDs because we don't want people storing application
            * data there, but getDataService(UUID) should probably work
            * for the MDS UUID also since once you have the UUID you
@@ -1827,8 +1825,8 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
 
         events.drainTo(c);
 
-      /*
-       * @todo since there is a delay before events are sent along it
+        /*
+         * @todo since there is a delay before events are sent along it
          * is quite common that the end() event will have been generated
          * such that the event is complete before we send it along.
          * there should be an easy way to notice this and avoid sending

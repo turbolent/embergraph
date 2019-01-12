@@ -34,10 +34,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;
 import org.apache.log4j.Logger;
-import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure;
 
 /*
-* Default implementation.
+ * Default implementation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -131,7 +130,7 @@ public class TPS implements ITPS, Externalizable, IRowStoreConstants {
   }
 
   //    /*
-//     * Remove all existing bindings for that property regardless of the
+  //     * Remove all existing bindings for that property regardless of the
   //     * associated timestamp.
   //     *
   //     * @param name
@@ -251,7 +250,7 @@ public class TPS implements ITPS, Externalizable, IRowStoreConstants {
   }
 
   // /*
-//     * Return <code>true</code> if there are any bindings for the property.
+  //     * Return <code>true</code> if there are any bindings for the property.
   //     *
   //     * @param name
   //     *            The property name.
@@ -509,7 +508,7 @@ public class TPS implements ITPS, Externalizable, IRowStoreConstants {
   //    private final transient Integer ONE = Integer.valueOf(1);
   //
   //    /*
-//     * Return a frequency distribution for the distinct timestamps.
+  //     * Return a frequency distribution for the distinct timestamps.
   //     */
   //    private HashMap<Long,Integer> timestamps() {
   //
@@ -542,7 +541,7 @@ public class TPS implements ITPS, Externalizable, IRowStoreConstants {
   //    }
   //
   //    /*
-//     * Return a frequency distribution for the distinct property names.
+  //     * Return a frequency distribution for the distinct property names.
   //     */
   //    private LinkedHashMap<String,Integer> names() {
   //

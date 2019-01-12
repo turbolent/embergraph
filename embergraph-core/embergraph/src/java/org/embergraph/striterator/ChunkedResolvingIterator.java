@@ -23,11 +23,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.striterator;
 
-import cutthecrap.utils.striterators.ICloseableIterator;
 import java.util.Arrays;
 
 /*
-* Converts the type of the source iterator using {@link #resolve(Object)}.
+ * Converts the type of the source iterator using {@link #resolve(Object)}.
  *
  * <p>Note: This class correctly passes {@link ICloseableIterator#close()} through to the source
  * iterator.
@@ -104,8 +103,8 @@ public abstract class ChunkedResolvingIterator<E, S> implements IChunkedOrderedI
 
       if (b == null) {
 
-      /*
-       * Dynamically instantiation an array of the same component type
+        /*
+         * Dynamically instantiation an array of the same component type
          * as the objects that we are visiting.
          */
 

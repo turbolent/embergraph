@@ -59,21 +59,18 @@ import org.embergraph.journal.ITransactionService;
 import org.embergraph.journal.ITx;
 import org.embergraph.journal.IndexProcedureTask;
 import org.embergraph.journal.JournalTransactionService.SinglePhaseCommit;
-import org.embergraph.journal.Name2Addr;
 import org.embergraph.journal.RegisterIndexTask;
 import org.embergraph.journal.RunState;
 import org.embergraph.journal.TimestampUtility;
 import org.embergraph.journal.Tx;
-import org.embergraph.journal.WriteExecutorService;
 import org.embergraph.mdi.IResourceMetadata;
 import org.embergraph.rawstore.IBlock;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.resources.ResourceManager;
-import org.embergraph.resources.StoreManager;
 import org.embergraph.resources.StoreManager.ManagedJournal;
 
 /*
-* An implementation of a network-capable {@link IDataService}. The service is started using the
+ * An implementation of a network-capable {@link IDataService}. The service is started using the
  * {@link DataServer} class. Operations are submitted using an {@link
  * IConcurrencyManager#submit(AbstractTask)} and will run with the appropriate concurrency controls
  * as imposed by that method.
@@ -203,7 +200,7 @@ public abstract class DataService extends AbstractService
       }
 
       //            /*
-//             * @todo this must report the entire service failover chain.
+      //             * @todo this must report the entire service failover chain.
       //             */
       //            public UUID[] getDataServiceUUIDs() {
       //
@@ -358,7 +355,7 @@ public abstract class DataService extends AbstractService
     }
 
     //        /*
-//         * Dynamically detach and attach the counters for the named indices
+    //         * Dynamically detach and attach the counters for the named indices
     //         * underneath of the {@link IndexManager}.
     //         * <p>
     //         * Note: This method limits the frequency of update to no more than once
@@ -473,8 +470,8 @@ public abstract class DataService extends AbstractService
 
       if (!dataService.resourceManager.isOpen()) {
 
-      /*
-       * This will happen if the store manager is unable to discover
+        /*
+         * This will happen if the store manager is unable to discover
          * the timestamp service. It will halt its startup process and
          * report that it is closed. At that point the data service can
          * not start and will shutdown.
@@ -526,8 +523,8 @@ public abstract class DataService extends AbstractService
 
       if (!dataService.isOpen()) {
 
-      /*
-       * The service has already been closed.
+        /*
+         * The service has already been closed.
          */
 
         log.warn("Service is not open.");
@@ -744,8 +741,8 @@ public abstract class DataService extends AbstractService
 
       if (TimestampUtility.isReadOnly(tx)) {
 
-      /*
-       * A read-only transaction.
+        /*
+         * A read-only transaction.
          *
          * Note: We do not maintain state on the client for read-only
          * transactions. The state for a read-only transaction is
@@ -763,8 +760,8 @@ public abstract class DataService extends AbstractService
 
       if (localState == null) {
 
-      /*
-       * This is not an active transaction.
+        /*
+         * This is not an active transaction.
          */
 
         throw new IllegalStateException();
@@ -778,8 +775,8 @@ public abstract class DataService extends AbstractService
 
       {
 
-      /*
-       * A transaction with an empty write set can commit immediately
+        /*
+         * A transaction with an empty write set can commit immediately
          * since validation and commit are basically NOPs (this is the same
          * as the read-only case.)
          *
@@ -793,8 +790,8 @@ public abstract class DataService extends AbstractService
 
           if (localState.isEmptyWriteSet()) {
 
-          /*
-       * Sort of a NOP commit.
+            /*
+             * Sort of a NOP commit.
              */
 
             localState.setRunState(RunState.Committed);
@@ -821,8 +818,8 @@ public abstract class DataService extends AbstractService
 
       try {
 
-      /*
-       * FIXME This is not working yet. If we submit directly to the
+        /*
+         * FIXME This is not working yet. If we submit directly to the
          * concurrency manager, then there is a ClassCastException on
          * the DirtyListener. If we submit directly to the WriteService
          * then the task does not hold its locks. None of these options
@@ -836,8 +833,8 @@ public abstract class DataService extends AbstractService
         //                .getWriteService().getLockManager().submit(task.getResource(),
         // task).get();
 
-      /*
-       * FIXME The state changes for the local tx should be atomic across
+        /*
+         * FIXME The state changes for the local tx should be atomic across
          * this operation. In order to do that we have to make those changes
          * inside of SinglePhaseTask while it is holding the lock, but after
          * it has committed. Perhaps the best way to do this is with a pre-
@@ -909,8 +906,8 @@ public abstract class DataService extends AbstractService
 
       if (TimestampUtility.isReadOnly(tx)) {
 
-      /*
-       * A read-only transaction.
+        /*
+         * A read-only transaction.
          *
          * Note: We do not maintain state on the client for read-only
          * transactions. The state for a read-only transaction is captured
@@ -928,8 +925,8 @@ public abstract class DataService extends AbstractService
 
       if (state == null) {
 
-      /*
-       * This is not an active transaction.
+        /*
+         * This is not an active transaction.
          */
 
         throw new IllegalStateException();
@@ -1026,8 +1023,8 @@ public abstract class DataService extends AbstractService
         boolean success = false;
         try {
 
-        /*
-       * Wait until the entire distributed transaction is
+          /*
+           * Wait until the entire distributed transaction is
            * committed.
            */
           success = txService.committed(tx, dataServiceUUID);
@@ -1372,7 +1369,7 @@ public abstract class DataService extends AbstractService
   }
 
   //    /*
-//     * Encapsulate the {@link Future} within a proxy that may be marshalled by
+  //     * Encapsulate the {@link Future} within a proxy that may be marshalled by
   //     * RMI and sent to a remote client. The client will interact with the
   //     * unmarshalled {@link Future}, which in turn will use RMI to control the
   //     * original {@link Future} within the {@link DataService}.
@@ -1423,8 +1420,8 @@ public abstract class DataService extends AbstractService
 
       if (timestamp == ITx.UNISOLATED && readOnly) {
 
-      /*
-       * If the iterator is readOnly then READ_COMMITTED has the same
+        /*
+         * If the iterator is readOnly then READ_COMMITTED has the same
          * semantics as UNISOLATED and provides better concurrency since
          * it reduces contention for the writeService.
          */
@@ -1615,8 +1612,8 @@ public abstract class DataService extends AbstractService
 
       if (immediate) {
 
-      /*
-       * Run the task on the write service. The task writes a small
+        /*
+         * Run the task on the write service. The task writes a small
          * record on the journal in order to make sure that it is dirty
          * and then sets the flag to force overflow with the next
          * commit. Since the task runs on the write service and since
@@ -1647,8 +1644,8 @@ public abstract class DataService extends AbstractService
 
       } else {
 
-      /*
-       * Provoke overflow with the next group commit. All this does is
+        /*
+         * Provoke overflow with the next group commit. All this does is
          * set the flag that will cause overflow to occur with the next
          * group commit. Since the task does not run on the write
          * service it will return immediately.

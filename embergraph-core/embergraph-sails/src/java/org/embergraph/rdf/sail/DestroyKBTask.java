@@ -28,7 +28,7 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.task.AbstractApiTask;
 
 /*
-* Task destroys a KB for the given namespace. The correct use of this class is as follows:
+ * Task destroys a KB for the given namespace. The correct use of this class is as follows:
  *
  * <pre>
  * AbstractApiTask.submitApiTask(indexManager, new DestroyKBTask(namespace)).get();
@@ -96,7 +96,7 @@ public class DestroyKBTask extends AbstractApiTask<Void> {
     }
 
     //      /*
-//       * Note: Unless group commit is enabled, we need to make this operation
+    //       * Note: Unless group commit is enabled, we need to make this operation
     //       * mutually exclusive with KB level writers in order to avoid the
     //       * possibility of a triggering a commit during the middle of a
     //       * EmbergraphSailConnection level operation (or visa versa).
@@ -149,7 +149,7 @@ public class DestroyKBTask extends AbstractApiTask<Void> {
     //         if (!isGroupCommit && acquiredConnection) {
     //
     //            /*
-//             * When group commit is not enabled, we need to release the
+    //             * When group commit is not enabled, we need to release the
     //             * unisolated connection.
     //             *
     //             * @see #1143 (Isolation broken in NSS when groupCommit disabled)

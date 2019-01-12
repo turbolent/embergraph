@@ -24,7 +24,7 @@ import java.util.Properties;
 import java.util.StringTokenizer;
 
 /*
-* Parses the Linux environment--Uses the proc filesystem to determine all the CPU information.
+ * Parses the Linux environment--Uses the proc filesystem to determine all the CPU information.
  *
  * @author <a href="mailto:dev@avalon.apache.org">Avalon Development Team</a>
  * @version $Id$

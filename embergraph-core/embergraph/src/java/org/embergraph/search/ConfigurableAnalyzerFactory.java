@@ -20,14 +20,12 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.search;
 
-import java.util.Set;
 import java.util.regex.Pattern;
 import org.apache.log4j.Logger;
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.util.Version;
 
 /*
-* This class can be used with the embergraph properties file to specify which {@link Analyzer}s are
+ * This class can be used with the embergraph properties file to specify which {@link Analyzer}s are
  * used for which languages. Languages are specified by the language tag on RDF literals, which
  * conform with <a href="http://www.rfc-editor.org/rfc/rfc5646.txt">RFC 5646</a>. Within embergraph
  * plain literals are assigned to the default locale's language.

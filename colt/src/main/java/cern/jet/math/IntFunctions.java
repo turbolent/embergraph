@@ -13,7 +13,7 @@ import cern.colt.function.IntIntFunction;
 import cern.colt.function.IntIntProcedure;
 import cern.colt.function.IntProcedure;
 /*
-* Integer Function objects to be passed to generic methods. Same as {@link Functions} except
+ * Integer Function objects to be passed to generic methods. Same as {@link Functions} except
  * operating on integers.
  *
  * <p>For aliasing see {@link #intFunctions}.

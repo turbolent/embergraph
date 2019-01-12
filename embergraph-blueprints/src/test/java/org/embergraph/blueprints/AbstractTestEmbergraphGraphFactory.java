@@ -27,7 +27,7 @@ import org.apache.log4j.Logger;
 import org.junit.Test;
 
 /*
-* Abstract Test class for Blueprints client test coverage. Creates a new KB, Loads a Graph, closes
+ * Abstract Test class for Blueprints client test coverage. Creates a new KB, Loads a Graph, closes
  * it, re-opens, and validates the same number of edges and vertices exist. Implementations do this
  * for the different client connection and persistence methods, i.e. EmbergraphGraphClient,
  * EmbergraphGraphEmbedded, etc.

@@ -4,7 +4,7 @@ import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 
 /*
-* Inline URI Handler to handle URI's in the form of a Hex UUID with a prefix and suffix such as:
+ * Inline URI Handler to handle URI's in the form of a Hex UUID with a prefix and suffix such as:
  *
  * <pre>
  *   http://blazegraph.com/element/prefix010072F0000038090100000000D56C9Esuffix

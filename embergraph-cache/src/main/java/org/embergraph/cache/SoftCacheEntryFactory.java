@@ -21,10 +21,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.cache;
 
 import java.lang.ref.ReferenceQueue;
-import java.lang.ref.WeakReference;
 
 /*
-* The default factory for {@link WeakReference} cache entries.
+ * The default factory for {@link WeakReference} cache entries.
  *
  * @author thompsonbry
  * @version $Id$

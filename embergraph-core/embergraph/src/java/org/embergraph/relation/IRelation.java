@@ -28,25 +28,16 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import org.embergraph.bop.BOp;
-import org.embergraph.bop.BOpEvaluationContext;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IPredicate;
-import org.embergraph.bop.IVariable;
 import org.embergraph.btree.IIndex;
-import org.embergraph.btree.ITuple;
-import org.embergraph.btree.ITupleIterator;
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.spo.SPORelation;
-import org.embergraph.relation.accesspath.AccessPath;
 import org.embergraph.relation.accesspath.IAccessPath;
-import org.embergraph.relation.accesspath.IElementFilter;
 import org.embergraph.relation.locator.ILocatableResource;
-import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.striterator.IKeyOrder;
 
 /*
-* An abstraction corresponding to a set of elements using some schema (think a table containing a
+ * An abstraction corresponding to a set of elements using some schema (think a table containing a
  * set of rows). Each relation is backed by one or more indices and knows how to return the {@link
  * IAccessPath} that is most efficient given an {@link IPredicate} expressing a query against the
  * {@link IRelation}.
@@ -70,7 +61,7 @@ public interface IRelation<E> extends ILocatableResource<IRelation<E>> {
   Class<E> getElementClass();
 
   //    /*
-//     * Create and return a new element. The element is constructed from the
+  //     * Create and return a new element. The element is constructed from the
   //     * predicate given the bindings. Typically, this is used when generating an
   //     * {@link ISolution} for an {@link IRule} during either a query or mutation
   //     * operations. The element is NOT inserted into the relation.
@@ -240,7 +231,7 @@ public interface IRelation<E> extends ILocatableResource<IRelation<E>> {
       IIndexManager localIndexManager, IKeyOrder<E> keyOrder, IPredicate<E> predicate);
 
   //    /*
-//     * This handles a request for an access path that is restricted to a
+  //     * This handles a request for an access path that is restricted to a
   //     * specific index partition. This access path is used with the scale-out
   //     * JOIN strategy, which distributes join tasks onto each index partition
   //     * from which it needs to read. Those tasks constrain the predicate to only

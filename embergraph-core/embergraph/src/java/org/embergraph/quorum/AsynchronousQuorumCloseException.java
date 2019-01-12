@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.quorum;
 
 /*
-* An instance of this class is thrown when the caller is awaiting a quorum event and the quorum is
+ * An instance of this class is thrown when the caller is awaiting a quorum event and the quorum is
  * asynchronously closed.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

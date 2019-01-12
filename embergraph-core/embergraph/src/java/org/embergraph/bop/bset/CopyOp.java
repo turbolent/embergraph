@@ -34,12 +34,11 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.bop.NV;
 import org.embergraph.bop.PipelineOp;
 import org.embergraph.bop.engine.BOpStats;
-import org.embergraph.bop.engine.IChunkAccessor;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
 
 /*
-* This operator copies its source to its sink(s). Specializations exist which are used to feed the
+ * This operator copies its source to its sink(s). Specializations exist which are used to feed the
  * the initial set of intermediate results into a pipeline ( {@link StartOp}) and which are used to
  * replicate intermediate results to more than one sink ({@link Tee}).
  *

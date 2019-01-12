@@ -23,7 +23,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /*
-* An immutable coordinate expressed as double precision decimal degrees on the surface of (the
+ * An immutable coordinate expressed as double precision decimal degrees on the surface of (the
  * Earth's) sphere.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

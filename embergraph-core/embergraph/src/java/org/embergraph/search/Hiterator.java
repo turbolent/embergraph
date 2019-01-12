@@ -3,7 +3,7 @@ package org.embergraph.search;
 import java.util.Iterator;
 
 /*
-* Visits search results in order of decreasing relevance.
+ * Visits search results in order of decreasing relevance.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -58,7 +58,7 @@ public class Hiterator<A extends IHit> implements Iterator<A> {
   ////    final private int maxRank;
   //
   //    /*
-//     * The rank of the last hit returned by {@link #next()}. The rank is in
+  //     * The rank of the last hit returned by {@link #next()}. The rank is in
   //     * [1:nhits] and is incremented as we return each hit in {@link #next()}.
   //     */
   //    private int rank = 0;
@@ -73,7 +73,7 @@ public class Hiterator<A extends IHit> implements Iterator<A> {
   ////    private A lastHit = null;
   //
   ////    /*
-////     * The minimum cosine that will be visited as specified to
+  ////     * The minimum cosine that will be visited as specified to
   ////     * {@link FullTextIndex#search(String, String, double, int)}
   ////     */
   ////    public double minCosine() {
@@ -83,7 +83,7 @@ public class Hiterator<A extends IHit> implements Iterator<A> {
   ////    }
   ////
   ////    /*
-////     * The maximum rank that will be visited as specified to
+  ////     * The maximum rank that will be visited as specified to
   ////     * {@link FullTextIndex#search(String, String, double, int)}
   ////     */
   ////    public int maxRank() {
@@ -93,7 +93,7 @@ public class Hiterator<A extends IHit> implements Iterator<A> {
   ////    }
   //
   //    /*
-//     *
+  //     *
   //     * @param hits
   //     */
   //    public Hiterator(final Collection<A> hits
@@ -120,7 +120,7 @@ public class Hiterator<A extends IHit> implements Iterator<A> {
   //    }
   //
   ////    /*
-////     * The #of hits (approximate).
+  ////     * The #of hits (approximate).
   ////     *
   ////     * @todo differentiate between the #of hits and the #of hits that satisfy
   ////     *       the minCosine and maxRank criteria
@@ -177,7 +177,7 @@ public class Hiterator<A extends IHit> implements Iterator<A> {
   //    }
   //
   //    /*
-//     * The rank of the last hit returned (origin ONE).
+  //     * The rank of the last hit returned (origin ONE).
   //     *
   //     * @throws IllegalStateException
   //     *             if nothing has been visited yet.
@@ -192,7 +192,7 @@ public class Hiterator<A extends IHit> implements Iterator<A> {
   //    }
   //
   //    /*
-//     * @throws UnsupportedOperationException
+  //     * @throws UnsupportedOperationException
   //     */
   //    public void remove() {
   //

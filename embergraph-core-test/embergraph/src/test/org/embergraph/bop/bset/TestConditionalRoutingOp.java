@@ -43,13 +43,11 @@ import org.embergraph.bop.engine.AbstractQueryEngineTestCase;
 import org.embergraph.bop.engine.BOpStats;
 import org.embergraph.bop.engine.BlockingBufferWithStats;
 import org.embergraph.bop.engine.MockRunningQuery;
-import org.embergraph.bop.solutions.JVMDistinctBindingSetsOp;
-import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
 
 /*
-* Unit tests for {@link JVMDistinctBindingSetsOp}.
+ * Unit tests for {@link JVMDistinctBindingSetsOp}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

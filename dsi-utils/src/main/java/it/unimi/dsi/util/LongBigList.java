@@ -22,10 +22,9 @@ package it.unimi.dsi.util;
  */
 
 import it.unimi.dsi.fastutil.longs.LongList;
-import java.util.List;
 
 /*
-* A list of longs with long indices.
+ * A list of longs with long indices.
  *
  * <p>Unfortunately, {@link List} is limited to positions smaller than or equal to {@link
  * Integer#MAX_VALUE}. Since bits in a not-so-large array need to be indexed with longs, the

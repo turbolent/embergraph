@@ -29,7 +29,6 @@ import java.security.DigestException;
 import java.security.MessageDigest;
 import java.util.Arrays;
 import org.apache.log4j.Logger;
-import org.embergraph.ha.msg.IHAMessage;
 import org.embergraph.ha.msg.IHAWriteMessage;
 import org.embergraph.io.ChecksumUtility;
 import org.embergraph.io.DirectBufferPool;
@@ -43,7 +42,7 @@ import org.embergraph.util.ChecksumError;
 import org.embergraph.util.InnerCause;
 
 /*
-* Given an HALog file can be used to replay the file and can provide a readable dump of the
+ * Given an HALog file can be used to replay the file and can provide a readable dump of the
  * content. When replaying, the current position is compared to the EOF to determine whether more
  * data can be read. The called should call {@link IHALogReader#hasMoreBuffers()} and if so read the
  * next associated buffer and process with the returned {@link IHAMessage}. If {@link
@@ -98,8 +97,8 @@ public class HALogReader implements IHALogReader {
        */
       m_raf.seek(0L);
       try {
-      /*
-       * Note: this next line will throw IOException if there is a
+        /*
+         * Note: this next line will throw IOException if there is a
          * file lock contention.
          */
         magic = m_raf.readInt();
@@ -142,8 +141,8 @@ public class HALogReader implements IHALogReader {
       final long cc1 = m_closeRootBlock.getCommitCounter();
 
       if ((cc0 + 1) != cc1 && (cc0 != cc1)) {
-      /*
-       * Counters are inconsistent with either an empty log file or a
+        /*
+         * Counters are inconsistent with either an empty log file or a
          * single transaction scope.
          */
         throw new IllegalStateException(
@@ -163,7 +162,7 @@ public class HALogReader implements IHALogReader {
   }
 
   //    /*
-//     * {@inheritDoc}
+  //     * {@inheritDoc}
   //     *
   //     * TODO This was added to address a file handle leak. However, I am quite
   //     * dubious that this will fix the problem. While GC may be necessary to

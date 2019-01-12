@@ -22,17 +22,15 @@ import org.embergraph.rdf.internal.DTE;
 import org.embergraph.rdf.internal.IInlineUnicode;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVUnicode;
-import org.embergraph.rdf.internal.impl.extensions.XSDStringExtension;
 import org.embergraph.rdf.lexicon.ITermIndexCodes;
 import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.model.EmbergraphLiteral;
-import org.embergraph.rdf.model.EmbergraphLiteralImpl;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 
 /*
-* Implementation for inline {@link Literal}s. Literals may be plain (just a label), have a datatype
+ * Implementation for inline {@link Literal}s. Literals may be plain (just a label), have a datatype
  * URI, or have a language code. In each case, all information is inlined. This class is mainly
  * targeted at inlining small plain literals and language code literals, but may also be used to
  * fully inline literals in scale-out (which can be an attractive option).
@@ -238,9 +236,7 @@ public class FullyInlineTypedLiteralIV<V extends EmbergraphLiteral>
 
       return datatype.equals(t.getDatatype());
 
-    } else
-      return t.getDatatype() == null;
-
+    } else return t.getDatatype() == null;
   }
 
   /** Return the hash code of the label (per {@link Literal#hashCode()}) */

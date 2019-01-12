@@ -12,7 +12,7 @@ import cern.colt.function.IntComparator;
 import cern.colt.list.DoubleArrayList;
 import cern.colt.list.IntArrayList;
 /*
-* Given some interval boundaries, partitions arrays such that all elements falling into an interval
+ * Given some interval boundaries, partitions arrays such that all elements falling into an interval
  * are placed next to each other.
  *
  * <p>The algorithms partition arrays into two or more intervals. They distinguish between

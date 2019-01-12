@@ -19,12 +19,10 @@ package org.embergraph.rwstore;
 
 import org.embergraph.cache.ConcurrentWeakValueCache;
 import org.embergraph.journal.AbstractJournal;
-import org.embergraph.journal.DeleteBlockCommitter;
 import org.embergraph.journal.ICommitter;
-import org.embergraph.journal.Journal;
 
 /*
-* Interface for glue methods which permit the coordination of the hisory retention and deferred
+ * Interface for glue methods which permit the coordination of the hisory retention and deferred
  * release mechanisms between the {@link Journal}, the {@link IRWStrategy}, and the backing {@link
  * IStore}.
  *

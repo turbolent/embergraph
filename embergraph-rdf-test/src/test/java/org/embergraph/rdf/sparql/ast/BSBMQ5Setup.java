@@ -36,7 +36,7 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /*
-* Problem setup for BSBM Q5.
+ * Problem setup for BSBM Q5.
  *
  * <p>
  *
@@ -283,7 +283,8 @@ public class BSBMQ5Setup {
               new FunctionNode(
                   FunctionRegistry.ADD,
                   null /* scalarArgs */,
-                  new VarNode("origProperty1"), new ConstantNode(_120.getIV())));
+                  new VarNode("origProperty1"),
+                  new ConstantNode(_120.getIV())));
 
       final ValueExpressionNode right =
           new FunctionNode(
@@ -293,13 +294,11 @@ public class BSBMQ5Setup {
               new FunctionNode(
                   FunctionRegistry.SUBTRACT,
                   null /* scalarArgs */,
-                  new VarNode("origProperty1"), new ConstantNode(_120.getIV())));
+                  new VarNode("origProperty1"),
+                  new ConstantNode(_120.getIV())));
 
       final ValueExpressionNode expr =
-          new FunctionNode(
-              FunctionRegistry.AND,
-              null /* scalarValues */,
-              left, right);
+          new FunctionNode(FunctionRegistry.AND, null /* scalarValues */, left, right);
 
       c1 = new FilterNode(expr);
 
@@ -317,7 +316,8 @@ public class BSBMQ5Setup {
               new FunctionNode(
                   FunctionRegistry.ADD,
                   null /* scalarArgs */,
-                  new VarNode("origProperty2"), new ConstantNode(_170.getIV())));
+                  new VarNode("origProperty2"),
+                  new ConstantNode(_170.getIV())));
 
       final ValueExpressionNode right =
           new FunctionNode(
@@ -327,13 +327,11 @@ public class BSBMQ5Setup {
               new FunctionNode(
                   FunctionRegistry.SUBTRACT,
                   null /* scalarArgs */,
-                  new VarNode("origProperty2"), new ConstantNode(_170.getIV())));
+                  new VarNode("origProperty2"),
+                  new ConstantNode(_170.getIV())));
 
       final ValueExpressionNode expr =
-          new FunctionNode(
-              FunctionRegistry.AND,
-              null /* scalarValues */,
-              left, right);
+          new FunctionNode(FunctionRegistry.AND, null /* scalarValues */, left, right);
 
       c2 = new FilterNode(expr);
 

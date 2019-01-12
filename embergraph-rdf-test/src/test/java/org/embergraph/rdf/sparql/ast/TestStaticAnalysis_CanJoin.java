@@ -126,7 +126,7 @@ public class TestStaticAnalysis_CanJoin extends TestCase2 {
   }
 
   //    /*
-//     * TODO Write unit tests for canJoin of {@link IBindingProducerNode}s which
+  //     * TODO Write unit tests for canJoin of {@link IBindingProducerNode}s which
   //     * are not just {@link StatementPatternNode}s, including {@link ServiceNode}
   //     * , {@link SubqueryRoot}, etc.
   //     */

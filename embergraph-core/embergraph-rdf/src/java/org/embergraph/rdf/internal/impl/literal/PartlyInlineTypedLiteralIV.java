@@ -12,7 +12,7 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.Value;
 
 /*
-* A {@link Literal} modeled as a datatype {@link IV} plus an inline Unicode <code>label</code>.
+ * A {@link Literal} modeled as a datatype {@link IV} plus an inline Unicode <code>label</code>.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -23,11 +23,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation.rule.eval;
 
-import java.io.Serializable;
 import java.util.Iterator;
-import java.util.Properties;
-import java.util.concurrent.ExecutorService;
-import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IConstraint;
@@ -37,38 +33,23 @@ import org.embergraph.bop.joinGraph.IEvaluationPlan;
 import org.embergraph.bop.joinGraph.IEvaluationPlanFactory;
 import org.embergraph.bop.joinGraph.IRangeCountFactory;
 import org.embergraph.btree.keys.ISortKeyBuilder;
-import org.embergraph.config.Configuration;
 import org.embergraph.config.IValidator;
 import org.embergraph.io.IStreamSerializer;
-import org.embergraph.journal.AbstractTask;
-import org.embergraph.journal.ConcurrencyManager;
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.mdi.IMetadataIndex;
 import org.embergraph.mdi.PartitionLocator;
-import org.embergraph.relation.AbstractResource;
 import org.embergraph.relation.IMutableRelation;
 import org.embergraph.relation.IRelation;
-import org.embergraph.relation.RelationFusedView;
 import org.embergraph.relation.accesspath.IAccessPath;
-import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.IBuffer;
 import org.embergraph.relation.accesspath.IElementFilter;
-import org.embergraph.relation.accesspath.UnsynchronizedArrayBuffer;
-import org.embergraph.relation.locator.IResourceLocator;
-import org.embergraph.relation.rule.IProgram;
 import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.IStep;
-import org.embergraph.relation.rule.Rule;
-import org.embergraph.relation.rule.eval.pipeline.JoinTask;
 import org.embergraph.service.AbstractScaleOutFederation;
-import org.embergraph.service.IDataService;
-import org.embergraph.service.IDataServiceCallable;
 import org.embergraph.striterator.IChunkedOrderedIterator;
-import org.embergraph.striterator.IKeyOrder;
 
 /*
-* Interface provides an interoperability nexus for the {@link IPredicate}s, {@link IBindingSet}s,
+ * Interface provides an interoperability nexus for the {@link IPredicate}s, {@link IBindingSet}s,
  * and {@link ISolution}s for the evaluation of an {@link IRule} and is responsible for resolving
  * the relation symbol to the {@link IRelation} object. Instances of this interface may be
  * type-specific and allow you to control various implementation classes used during {@link IRule}
@@ -348,7 +329,7 @@ public interface IJoinNexus {
   IRelation getTailRelationView(IPredicate pred);
 
   //    /*
-//     * Obtain an access path reading from the view for the relation associated
+  //     * Obtain an access path reading from the view for the relation associated
   //     * with the specified predicate (from the tail of some rule).
   //     *
   //     * @param pred

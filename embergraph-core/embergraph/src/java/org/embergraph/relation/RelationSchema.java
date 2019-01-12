@@ -1,12 +1,10 @@
 package org.embergraph.relation;
 
-import org.embergraph.relation.locator.DefaultResourceLocator;
-import org.embergraph.relation.locator.ILocatableResource;
 import org.embergraph.sparse.KeyType;
 import org.embergraph.sparse.Schema;
 
 /*
-* A {@link Schema} for metadata about existing relations. Each relation corresponds more or less to
+ * A {@link Schema} for metadata about existing relations. Each relation corresponds more or less to
  * a table in an RDBMS. A relation "exists" when there are indices for its data. An {@link
  * IRelation} is a Class that allows you to read or write on the relation's data. Given the {@link
  * #NAMESPACE} of a relation, the {@link RelationSchema} specifies the {@link #CLASS} that should be

@@ -23,10 +23,9 @@ import java.io.OutputStream;
 import java.util.Iterator;
 import org.embergraph.btree.raba.AbstractRaba;
 import org.embergraph.btree.raba.IRaba;
-import org.embergraph.htree.HTree;
 
 /*
-* A flyweight mutable implementation for an {@link HTree} bucket page using a backing <code>
+ * A flyweight mutable implementation for an {@link HTree} bucket page using a backing <code>
  * byte[][]</code>. Unlike the values in a B+Tree, the {@link HTree} values need not be dense.
  * Further, each bucket page is logically divided into a set of buddy hash buckets. All operations
  * therefore take place within a buddy bucket. The buddy bucket is identified by its offset and its

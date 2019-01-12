@@ -35,7 +35,7 @@ import org.embergraph.service.AbstractTransactionService.TxState;
 import org.embergraph.util.Bytes;
 
 /*
-* {@link BTree} whose keys are the absolute value of the txIds and whose values are {@link
+ * {@link BTree} whose keys are the absolute value of the txIds and whose values are {@link
  * ITxState0} tuples for the transaction.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

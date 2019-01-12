@@ -26,7 +26,7 @@ package org.embergraph.relation;
 import org.embergraph.relation.locator.ILocatableResource;
 
 /*
-* Mutation interface
+ * Mutation interface
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

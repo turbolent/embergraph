@@ -25,7 +25,7 @@ import java.util.Random;
 import junit.framework.TestCase;
 
 /*
-* Test suite for {@link WormAddressManager}.
+ * Test suite for {@link WormAddressManager}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -44,7 +44,7 @@ public class TestWormAddressManager extends TestCase {
   }
 
   //    /*
-//     * verify that the constructor correctly interprets is parameter as the #of
+  //     * verify that the constructor correctly interprets is parameter as the #of
   //     * offset bits.
   //     */
   //    public void test_ctor_default() {
@@ -219,7 +219,7 @@ public class TestWormAddressManager extends TestCase {
   }
 
   //    /*
-//     * Test of packing and unpacking addresses with a small set of addresses
+  //     * Test of packing and unpacking addresses with a small set of addresses
   //     * using 32 bit offsets.
   //     */
   //    public void test_packUnpack_32() throws IOException {
@@ -229,7 +229,7 @@ public class TestWormAddressManager extends TestCase {
   //    }
   //
   //    /*
-//     * Test of packing and unpacking addresses with a small set of addresses
+  //     * Test of packing and unpacking addresses with a small set of addresses
   //     * using 48 bit offsets.
   //     */
   //    public void test_packUnpack_48() throws IOException {
@@ -239,7 +239,7 @@ public class TestWormAddressManager extends TestCase {
   //    }
   //
   //    /*
-//     * Test of packing and unpacking addresses with a set of addresses selected
+  //     * Test of packing and unpacking addresses with a set of addresses selected
   //     * from each of the legal values of the offsetBits.
   //     */
   //    public void test_packUnpack() throws IOException {
@@ -280,8 +280,8 @@ public class TestWormAddressManager extends TestCase {
 
       if (nbytes < 0 || offset > am.maxOffset || offset < 0L) {
 
-      /*
-       * Check for correct rejection.
+        /*
+         * Check for correct rejection.
          */
         try {
 
@@ -314,7 +314,7 @@ public class TestWormAddressManager extends TestCase {
   }
 
   //    /*
-//     * Helper method verifies (de-)serialization of addresses.
+  //     * Helper method verifies (de-)serialization of addresses.
   //     *
   //     * @param offsetBits
   //     *

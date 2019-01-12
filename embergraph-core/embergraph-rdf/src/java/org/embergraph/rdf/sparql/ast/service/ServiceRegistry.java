@@ -25,7 +25,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicReference;
-import org.apache.http.conn.ClientConnectionManager;
 import org.eclipse.jetty.client.HttpClient;
 import org.embergraph.bop.join.BaseJoinStats;
 import org.embergraph.rdf.graph.impl.bd.GASService;
@@ -49,7 +48,7 @@ import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
 /*
-* Registry for service calls.
+ * Registry for service calls.
  *
  * @see <a href="https://sourceforge.net/apps/mediawiki/bigdata/index.php?title=FederatedQuery">
  *     Federated Query and Custom Services</a>

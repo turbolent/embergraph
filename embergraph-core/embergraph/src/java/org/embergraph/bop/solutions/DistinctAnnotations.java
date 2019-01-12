@@ -23,7 +23,7 @@ package org.embergraph.bop.solutions;
 import org.embergraph.bop.join.HashJoinAnnotations;
 
 /*
-* Annotations for DISTINCT operators.
+ * Annotations for DISTINCT operators.
  *
  * @author thompsonbry@users.sourceforge.net
  */

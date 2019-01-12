@@ -4,69 +4,71 @@
 <!--                                                        -->
 <project name="btc" default="run-load" basedir=".">
 
-	<property file="build.properties" />
+  <property file="build.properties"/>
 
-	<!-- runtime classpath w/o install. -->
-	<path id="runtime.classpath">
-		<!-- The embergraph dependencies. -->
-		<fileset dir="${embergraph.build.dir}/lib">
-			<include name="**/*.jar" />
-		</fileset>
-	</path>
+  <!-- runtime classpath w/o install. -->
+  <path id="runtime.classpath">
+    <!-- The embergraph dependencies. -->
+    <fileset dir="${embergraph.build.dir}/lib">
+      <include name="**/*.jar"/>
+    </fileset>
+  </path>
 
-	<target name="clean" description="deletes the generated database.">
-		<!-- delete file if it exists so we load into a new journal. -->
-		<delete file="${journalFile}" verbose="true" />
-	</target>
+  <target name="clean" description="deletes the generated database.">
+    <!-- delete file if it exists so we load into a new journal. -->
+    <delete file="${journalFile}" verbose="true"/>
+  </target>
 
-	<target name="prepare">
-	</target>
+  <target name="prepare">
+  </target>
 
-	<target name="run-split" depends="" description="Splits RDF files.">
-		<java classname="org.embergraph.rdf.util.Splitter" fork="true" failonerror="true">
-			<arg line="
+  <target name="run-split" depends="" description="Splits RDF files.">
+    <java classname="org.embergraph.rdf.util.Splitter" fork="true" failonerror="true">
+      <arg line="
 				Splitter.config
-			" />
-			<jvmarg line="-server -Xmx1g" />
-			<classpath>
-				<path refid="runtime.classpath" />
-			</classpath>
-		</java>
-	</target>
+			"/>
+      <jvmarg line="-server -Xmx1g"/>
+      <classpath>
+        <path refid="runtime.classpath"/>
+      </classpath>
+    </java>
+  </target>
 
-	<!-- Note: For scale-out, split the data files and use MappedRDFDataLoadMaster. -->
-	<target name="run-load" depends="clean, prepare">
-		<java classname="org.embergraph.rdf.store.DataLoader" fork="true" failonerror="true">
-			<arg line="
+  <!-- Note: For scale-out, split the data files and use MappedRDFDataLoadMaster. -->
+  <target name="run-load" depends="clean, prepare">
+    <java classname="org.embergraph.rdf.store.DataLoader" fork="true" failonerror="true">
+      <arg line="
 				-namespace ${namespace}
 				-format nquads
 				${journalPropertyFile}
 				${dataFiles}
-			" />
-			<!-- specify/override the journal file name. -->
-			<!-- uniprot has datatype validation errors so we set stopAtFirstError=false -->
-			<jvmarg line="${queryJvmArgs}
+			"/>
+      <!-- specify/override the journal file name. -->
+      <!-- uniprot has datatype validation errors so we set stopAtFirstError=false -->
+      <jvmarg line="${queryJvmArgs}
 				-Dorg.embergraph.journal.AbstractJournal.file=${journalFile}
 				-Dorg.embergraph.rdf.rio.RDFParserOptions.stopAtFirstError=false
 				-Dorg.embergraph.rdf.store.DataLoader.bufferCapacity=1000000
-			" />
-			<classpath>
-				<path refid="runtime.classpath" />
-			</classpath>
-		</java>
-	</target>
+			"/>
+      <classpath>
+        <path refid="runtime.classpath"/>
+      </classpath>
+    </java>
+  </target>
 
-	<target name="start-nano-server" depends="prepare" description="Start a small http server fronting for a embergraph database instance.">
-		<java classname="org.embergraph.rdf.sail.webapp.NanoSparqlServer" fork="true" failonerror="true">
-			<arg line="${nanoServerPort} ${namespace} ${journalPropertyFile}" />
-			<!-- specify/override the journal file name. -->
-			<jvmarg line="${queryJvmArgs}
+  <target name="start-nano-server" depends="prepare"
+    description="Start a small http server fronting for a embergraph database instance.">
+    <java classname="org.embergraph.rdf.sail.webapp.NanoSparqlServer" fork="true"
+      failonerror="true">
+      <arg line="${nanoServerPort} ${namespace} ${journalPropertyFile}"/>
+      <!-- specify/override the journal file name. -->
+      <jvmarg line="${queryJvmArgs}
 				-Dorg.embergraph.journal.AbstractJournal.file=${journalFile}
-			" />
-			<classpath>
-				<path refid="runtime.classpath" />
-			</classpath>
-		</java>
-	</target>
+			"/>
+      <classpath>
+        <path refid="runtime.classpath"/>
+      </classpath>
+    </java>
+  </target>
 
 </project>

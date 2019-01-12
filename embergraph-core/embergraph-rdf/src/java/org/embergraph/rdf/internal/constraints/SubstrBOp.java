@@ -31,7 +31,7 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 
 /*
-* This function has an origin of ONE (1) not ZERO (0). The start and offset parameters are doubles
+ * This function has an origin of ONE (1) not ZERO (0). The start and offset parameters are doubles
  * and are ROUNDED using xpath:numeric-round to obtain the appropriate integer values. A negative or
  * zero starting offset is treated as indicating the first character in the string, which is at
  * index ONE (1). When the length parameter is not specified then it is assumed to be infinite.

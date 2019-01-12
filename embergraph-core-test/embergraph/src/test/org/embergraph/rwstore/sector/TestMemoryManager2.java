@@ -25,7 +25,7 @@ import junit.framework.TestCase2;
 import org.embergraph.io.DirectBufferPool;
 
 /*
-* Some additional tests for the {@link MemoryManager} which look at the effect of the #of buffers
+ * Some additional tests for the {@link MemoryManager} which look at the effect of the #of buffers
  * it is allowed to allocate.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

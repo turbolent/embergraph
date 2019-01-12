@@ -29,7 +29,7 @@ import org.embergraph.quorum.QuorumActor;
 import org.embergraph.util.DaemonThreadFactory;
 
 /*
-* These tests exercise the lifetime semantics of a WriteCacheService.
+ * These tests exercise the lifetime semantics of a WriteCacheService.
  *
  * <p>Specifically they stress the initialization and shutdown of services, and concurrent
  * interactions.
@@ -273,8 +273,8 @@ public class TestWriteCacheServiceLifetime extends TestCase3 {
 
       if (raf != null && raf.getChannel().isOpen()) {
 
-      /*
-       * The channel is still open. If you are allowing concurrent
+        /*
+         * The channel is still open. If you are allowing concurrent
          * reads on the channel, then this could indicate that two
          * readers each found the channel closed and that one was able
          * to re-open the channel before the other such that the channel

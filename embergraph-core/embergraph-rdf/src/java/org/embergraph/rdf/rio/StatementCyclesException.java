@@ -1,7 +1,7 @@
 package org.embergraph.rdf.rio;
 
 /*
-* An instance of this exception is thrown if cycles are detected amoung statements. A cycle can
+ * An instance of this exception is thrown if cycles are detected amoung statements. A cycle can
  * exist only when statement identifiers are enabled and a statement is made either directly about
  * itself or indirectly via one or more statements about itself.
  *

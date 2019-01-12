@@ -24,7 +24,7 @@ import org.embergraph.rdf.graph.impl.util.ManagedArray;
 import org.openrdf.model.Value;
 
 /*
-* An implementation of a "static" frontier that grows and reuses the backing vertex array.
+ * An implementation of a "static" frontier that grows and reuses the backing vertex array.
  *
  * <p>Note: This implementation has package private methods that permit certain kinds of mutation.
  *

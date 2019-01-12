@@ -18,7 +18,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.internal;
 
 /*
-* Abstract class that defines the integer packing needed to allow for support of multiple inline
+ * Abstract class that defines the integer packing needed to allow for support of multiple inline
  * integer URI handlers with the same namepace.
  *
  * <p>This is required as once the integer value is inlined it is not possible to determine which

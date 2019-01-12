@@ -26,7 +26,7 @@ import org.embergraph.btree.raba.ReadOnlyKeysRaba;
 import org.embergraph.io.DataOutputBuffer;
 
 /*
-* Test suite for the B+Tree {@link INodeData} records (accessing coded data in place).
+ * Test suite for the B+Tree {@link INodeData} records (accessing coded data in place).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -122,7 +122,7 @@ public abstract class AbstractNodeDataRecordTestCase extends AbstractNodeOrLeafD
     final int nkeys = 1; // 1 key so 2 children.
     final byte[][] keys = new byte[m][];
     final long[] childAddr = new long[] {10, 20, 0, 0};
-    final long[] childEntryCount = new long[]{4, 7, 0, 0};
+    final long[] childEntryCount = new long[] {4, 7, 0, 0};
     final boolean hasVersionTimestamps = false;
     final long minimumVersionTimestamp = 0L;
     final long maximumVersionTimestamp = 0L;
@@ -155,7 +155,7 @@ public abstract class AbstractNodeDataRecordTestCase extends AbstractNodeOrLeafD
     final int nkeys = 1; // 1 key so 2 children.
     final byte[][] keys = new byte[m][];
     final long[] childAddr = new long[] {10, 20, 0, 0};
-    final long[] childEntryCount = new long[]{4, 7, 0, 0};
+    final long[] childEntryCount = new long[] {4, 7, 0, 0};
     final boolean hasVersionTimestamps = true;
     final long minimumVersionTimestamp = System.currentTimeMillis();
     final long maximumVersionTimestamp = System.currentTimeMillis() + 20;

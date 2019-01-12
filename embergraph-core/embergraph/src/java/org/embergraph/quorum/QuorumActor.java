@@ -24,7 +24,7 @@ import java.rmi.Remote;
 import java.util.UUID;
 
 /*
-* An interface that causes various changes in the distributed quorum state required to execute the
+ * An interface that causes various changes in the distributed quorum state required to execute the
  * intention of a {@link QuorumMember} service and its cognizant {@link AbstractQuorum}. The {@link
  * QuorumActor} is responsible for making coherent changes in the distributed quorum state. However,
  * when a service terminates abnormally, is partitioned from the distributed quorum, etc., then the
@@ -132,14 +132,14 @@ public interface QuorumActor<S extends Remote, C extends QuorumClient<S>> {
   void serviceLeave();
 
   //    /*
-//     * Set the lastValidToken on the quorum equal to the given token. When a new
+  //     * Set the lastValidToken on the quorum equal to the given token. When a new
   //     * leader will be elected, this method will be invoked to update the quorum
   //     * token, passing in <code>newToken := lastValidToken+1</code>.
   //     */
   //    void setLastValidToken(final long newToken);
   //
   //    /*
-//     * Set the current token on the quorum equal to the lastValidToken. Note that
+  //     * Set the current token on the quorum equal to the lastValidToken. Note that
   //     * {@link #setLastValidToken(long)} will have been invoked as a precondition
   //     * so this has the effect of updating the current token to the recently
   //     * assigned newToken.
@@ -147,7 +147,7 @@ public interface QuorumActor<S extends Remote, C extends QuorumClient<S>> {
   //    void setToken();
 
   //    /*
-//     * Set the lastValidToken on the quorum equal to the given token. When a new
+  //     * Set the lastValidToken on the quorum equal to the given token. When a new
   //     * leader will be elected, this method will be invoked to update the quorum
   //     * token, passing in <code>newToken := lastValidToken+1</code>.
   //     */

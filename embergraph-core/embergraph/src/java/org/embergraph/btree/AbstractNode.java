@@ -25,7 +25,6 @@ import cutthecrap.utils.striterators.IStriterator;
 import cutthecrap.utils.striterators.Striterator;
 import java.io.PrintStream;
 import java.lang.ref.Reference;
-import java.lang.ref.WeakReference;
 import java.util.Iterator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -34,18 +33,17 @@ import org.embergraph.btree.data.IKeysData;
 import org.embergraph.btree.filter.EmptyTupleIterator;
 import org.embergraph.btree.raba.IRaba;
 import org.embergraph.btree.raba.MutableKeyBuffer;
-import org.embergraph.cache.HardReferenceQueue;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Abstract node supporting incremental persistence and copy-on-write semantics.
+ * Abstract node supporting incremental persistence and copy-on-write semantics.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public abstract class AbstractNode<
         T extends AbstractNode
-      /*
-       * DO-NOT-USE-GENERIC-HERE. The compiler will fail under Linux (JDK 1.6.0_14,
+        /*
+         * DO-NOT-USE-GENERIC-HERE. The compiler will fail under Linux (JDK 1.6.0_14,
          * _16).
          */
         >
@@ -462,8 +460,8 @@ public abstract class AbstractNode<
 
       if (!parent.isDirty()) {
 
-      /*
-       * Note: pass up the identity of the old child since we want
+        /*
+         * Note: pass up the identity of the old child since we want
          * to avoid having its parent reference reset.
          */
         parent = (Node) parent.copyOnWrite(oldId);
@@ -590,8 +588,8 @@ public abstract class AbstractNode<
 
             private static final long serialVersionUID = 1L;
 
-          /*
-       * Expand the value objects for each leaf visited in the
+            /*
+             * Expand the value objects for each leaf visited in the
              * post-order traversal.
              */
             protected Iterator expand(final Object childObj) {
@@ -651,8 +649,8 @@ public abstract class AbstractNode<
 
       if ((btree instanceof IndexSegment)) {
 
-      /*
-       * @todo back out underflow support.
+        /*
+         * @todo back out underflow support.
          * The leaves and nodes of an IndexSegment are allowed to
          * underflow down to one key when the IndexSegment was generated
          * using an overestimate of the actual tuple count.

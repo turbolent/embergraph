@@ -19,7 +19,7 @@ import org.openrdf.model.Statement;
 import org.openrdf.model.Value;
 
 /*
-* Abstract interface for GAS programs.
+ * Abstract interface for GAS programs.
  *
  * @param <VS> The generic type for the per-vertex state. This is scoped to the computation of the
  *     {@link IGASProgram}.
@@ -44,7 +44,7 @@ public interface IGASProgram<VS, ES, ST>
   void before(IGASContext<VS, ES, ST> ctx);
 
   //    /*
-//     * Return a default reduction that will be applied after the
+  //     * Return a default reduction that will be applied after the
   //     * {@link IGASProgram} is executed.
   //     *
   //     * @return The default reduction -or- <code>null</code> if no such reduction

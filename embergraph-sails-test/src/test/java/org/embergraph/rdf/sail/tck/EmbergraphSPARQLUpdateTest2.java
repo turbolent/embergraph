@@ -40,7 +40,6 @@ import java.util.Properties;
 import junit.framework.TestCase2;
 import org.apache.log4j.Logger;
 import org.embergraph.bop.engine.AbstractQueryEngineTestCase;
-import org.embergraph.journal.AbstractTask;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.rdf.sail.EmbergraphSail;
@@ -62,7 +61,7 @@ import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
 
 /*
-* Test suite for BIGDATA extension to SPARQL UPDATE for NAMED SOLUTION SETS.
+ * Test suite for BIGDATA extension to SPARQL UPDATE for NAMED SOLUTION SETS.
  *
  * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/524">SPARQL Cache </a>
  * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/531">SPARQL UPDATE Extensions
@@ -199,8 +198,8 @@ public class EmbergraphSPARQLUpdateTest2 extends TestCase2 {
 
       } catch (MalformedURLException e) {
 
-      /*
-       * Ignore. we will handle the problem below if this was not
+        /*
+         * Ignore. we will handle the problem below if this was not
          * a URL.
          */
 

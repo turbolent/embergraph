@@ -23,7 +23,7 @@ package org.embergraph.rdf.sail.webapp.client;
 import org.eclipse.jetty.client.HttpClient;
 
 /*
-* Factory for {@link HttpClient} objects.
+ * Factory for {@link HttpClient} objects.
  *
  * @author bryan
  */

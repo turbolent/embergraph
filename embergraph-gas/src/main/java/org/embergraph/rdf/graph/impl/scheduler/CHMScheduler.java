@@ -22,7 +22,7 @@ import org.embergraph.rdf.graph.impl.GASEngine;
 import org.openrdf.model.Value;
 
 /*
-* A simple scheduler based on a {@link ConcurrentHashMap}.
+ * A simple scheduler based on a {@link ConcurrentHashMap}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

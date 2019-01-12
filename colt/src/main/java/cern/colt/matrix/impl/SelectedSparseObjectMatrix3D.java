@@ -12,7 +12,7 @@ import cern.colt.map.AbstractIntObjectMap;
 import cern.colt.matrix.ObjectMatrix2D;
 import cern.colt.matrix.ObjectMatrix3D;
 /*
-* Selection view on sparse 3-d matrices holding <tt>Object</tt> elements. First see the <a
+ * Selection view on sparse 3-d matrices holding <tt>Object</tt> elements. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
  * view</a> to get the broad picture.
  *
@@ -217,7 +217,7 @@ class SelectedSparseObjectMatrix3D extends ObjectMatrix3D {
   protected ObjectMatrix2D like2D(
       int rows, int columns, int rowZero, int columnZero, int rowStride, int columnStride) {
     throw new InternalError(); // this method is never called since viewRow() and viewColumn are
-                               // overridden properly.
+    // overridden properly.
   }
   /*
    * Sets the matrix cell at coordinate <tt>[slice,row,column]</tt> to the specified value.

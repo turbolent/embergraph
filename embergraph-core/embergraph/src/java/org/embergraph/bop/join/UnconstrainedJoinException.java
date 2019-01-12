@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.join;
 
 /*
-* An exception thrown when a hash join does not have any join variables and is considering the
+ * An exception thrown when a hash join does not have any join variables and is considering the
  * cross product of two many solutions as a result.
  *
  * <p>This exception normally indicates a problem with the query plan since a hash join without any

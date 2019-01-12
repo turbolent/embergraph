@@ -24,7 +24,7 @@ package org.embergraph.rdf.model;
 import java.util.Objects;
 
 /*
-* This class wraps a {@link EmbergraphStatement} and provides {@link #hashCode()} and {@link
+ * This class wraps a {@link EmbergraphStatement} and provides {@link #hashCode()} and {@link
  * #equals(Object)} respecting all four fields rather than SPO as per the {@link
  * org.openrdf.model.Statement} contract.
  *

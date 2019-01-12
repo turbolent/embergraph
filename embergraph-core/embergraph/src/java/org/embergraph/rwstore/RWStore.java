@@ -56,7 +56,6 @@ import java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock;
 import org.apache.log4j.Logger;
 import org.apache.system.SystemUtil;
-import org.embergraph.btree.BTree.Counter;
 import org.embergraph.btree.IIndex;
 import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleIterator;
@@ -80,8 +79,6 @@ import org.embergraph.io.FileChannelUtility.AsyncTransfer;
 import org.embergraph.io.IBufferAccess;
 import org.embergraph.io.IReopenChannel;
 import org.embergraph.io.MergeStreamWithSnapshotData;
-import org.embergraph.io.compression.CompressorRegistry;
-import org.embergraph.io.compression.IRecordCompressor;
 import org.embergraph.io.writecache.BufferedWrite;
 import org.embergraph.io.writecache.IBackingReader;
 import org.embergraph.io.writecache.IBufferedWriter;
@@ -105,14 +102,13 @@ import org.embergraph.quorum.Quorum;
 import org.embergraph.quorum.QuorumException;
 import org.embergraph.rawstore.IAllocationContext;
 import org.embergraph.rawstore.IPSOutputStream;
-import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rwstore.StorageStats.Bucket;
 import org.embergraph.service.AbstractTransactionService;
 import org.embergraph.util.BytesUtil;
 import org.embergraph.util.ChecksumError;
 
 /*
-* Storage class
+ * Storage class
  *
  * <p>Provides an interface to allocating storage within a disk file.
  *
@@ -441,7 +437,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     String DEFAULT_DOUBLE_BUFFER_WRITES = "true";
 
     //        /*
-//         * When <code>true</code> fills recycled storage with a recognizable
+    //         * When <code>true</code> fills recycled storage with a recognizable
     //         * byte pattern.
     //         */
     //        String OVERWRITE_DELETE = RWStore.class.getName() + ".overwriteDelete";
@@ -449,7 +445,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     //        String DEFAULT_OVERWRITE_DELETE = "false";
     //
     //        /*
-//         * When <code>true</code> the RWStore will protect any address from
+    //         * When <code>true</code> the RWStore will protect any address from
     //         * recycling, and generate an exception if the address is subsequently
     //         * accessed
     //         */
@@ -509,7 +505,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
   //  private boolean m_committing;
 
   //    /*
-//     * When <code>true</code> the allocations will not actually be recycled
+  //     * When <code>true</code> the allocations will not actually be recycled
   //     * until after a store restart. When <code>false</code>, the allocations are
   //     * recycled once they satisfy the history retention requirement.
   //     */
@@ -727,7 +723,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
   private volatile boolean m_open = true;
 
   //    /*
-//     * If m_blacklist is non-null then a request to blacklist as address will
+  //     * If m_blacklist is non-null then a request to blacklist as address will
   //     * add the address to the blacklist.
   //     *
   //     * When a blacklisted address is freed and is re-allocated, the re-allocation
@@ -1015,8 +1011,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
       if (m_rb.getNextOffset() == 0) { // if zero then new file
         setAllocations(fileMetadata);
 
-      /*
-       * FIXME Martyn, the code paths here are crazy complicated.
+        /*
+         * FIXME Martyn, the code paths here are crazy complicated.
          * defaultInit() is also invoked from initFromRootBlock().
          * Simplify this. BBT
          */
@@ -1140,8 +1136,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
       if (size > 0) {
 
-      /*
-       * This is a real allocation.
+        /*
+         * This is a real allocation.
          */
 
         alloc.setAddressExternal(latchedAddr);
@@ -1497,8 +1493,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
       if (m_nextAllocation == 0) {
 
-      /*
-       * Skip the first 32K in the file. The root blocks live here but
+        /*
+         * Skip the first 32K in the file. The root blocks live here but
          * nothing else.
          */
 
@@ -1559,8 +1555,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
         // The byte offset of the metabits region in the file.
         rawmbaddr >>= 16;
 
-      /*
-       * Read the metabits block, including a header and the int32[]
+        /*
+         * Read the metabits block, including a header and the int32[]
          * that encodes both startAddrs and bit vectors.
          */
         final byte[] buf = new byte[metaBitsStore * 4];
@@ -2014,8 +2010,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
         try {
           return m_writeCacheService.read(paddr, sze + 4);
         } catch (Throwable e) {
-        /*
-       * Note: ClosedByInterruptException can be thrown out of
+          /*
+           * Note: ClosedByInterruptException can be thrown out of
            * FileChannelUtility.readAll(), typically because the LIMIT on
            * a query was satisfied, but we do not want to log that as an
            * error.
@@ -2224,8 +2220,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
         assert paddr > 0;
 
-      /*
-       * Check WriteCache first
+        /*
+         * Check WriteCache first
          *
          * <p>Note that the buffer passed in should include the checksum value, so the cached data
          * is 4 bytes less than the buffer size.
@@ -2261,8 +2257,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
             buf[offset + i] = in[i];
           }
           m_cacheReads++;
-        /*
-       * Hit on the write cache.
+          /*
+           * Hit on the write cache.
            *
            * Update the store counters.
            */
@@ -2332,8 +2328,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
       } catch (PhysicalAddressResolutionException e) {
         throw new IllegalArgumentException("Unable to read data: " + e, e);
       } catch (Throwable e) {
-      /*
-       * Note: ClosedByInterruptException can be thrown out of
+        /*
+         * Note: ClosedByInterruptException can be thrown out of
          * FileChannelUtility.readAll(), typically because the LIMIT on
          * a query was satisfied, but we do not want to log that as an
          * error.
@@ -2347,7 +2343,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
   }
 
   //    /*
-//     * Convenience check for thoseA batch invoice public methods that must be restricted if a
+  //     * Convenience check for thoseA batch invoice public methods that must be restricted if a
   // rebuild is in progress
   //     */
   //  private void assertNoRebuild() {
@@ -2435,8 +2431,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
       } else {
         final FixedAllocator alloc = getBlockByAddress(addr);
 
-      /*
-       * There are a few conditions here. If the context owns the
+        /*
+         * There are a few conditions here. If the context owns the
          * allocator and the allocation was made by this context then it
          * can be freed immediately. The problem comes when the context
          * is null and the allocator is NOT owned, BUT there are active
@@ -2453,8 +2449,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
          * there are open read-only transactions.
          */
         if (m_minReleaseAge == 0) {
-        /*
-       * The session protection is complicated by the mix of
+          /*
+           * The session protection is complicated by the mix of
            * transaction protection and isolated AllocationContexts.
            *
            * If this is the first use of an IAllocationContext then
@@ -2688,8 +2684,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
         if (!alloc.isCommitted(addrOffset)) {
           m_writeCacheService.clearWrite(pa, addr);
           //                    m_writeCache.overwrite(pa, sze);
-        /*
-       * Pass the size of the allocator, NOT the size of the
+          /*
+           * Pass the size of the allocator, NOT the size of the
            * allocation.
            *
            * @see <a
@@ -2804,13 +2800,13 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
           final ArrayList<FixedAllocator> list = m_freeFixed[i];
           if (list.size() == 0) {
-          /*
-       * No allocator on the free list for that slot size.
+            /*
+             * No allocator on the free list for that slot size.
              */
             final FixedAllocator candidate;
             if (size < this.cSmallSlot) {
-            /*
-       * Check to see if can locate a good enough
+              /*
+               * Check to see if can locate a good enough
                * Allocator
                *
                * @see BLZG-1278 (Small slot optimization to
@@ -2825,8 +2821,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
               candidate.addToFreeList();
               allocator = candidate;
             } else {
-            /*
-       * We need a new allocator.
+              /*
+               * We need a new allocator.
                */
               allocator = new FixedAllocator(this, block);
 
@@ -3092,7 +3088,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
   //  }
 
   //  /*
-//   * Must handle valid possibility that a request to start/commit transaction
+  //   * Must handle valid possibility that a request to start/commit transaction
   //   * could be made within a commitCallback request
   //   */
   //  synchronized public void startTransaction() {
@@ -3200,8 +3196,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
       syncMetaTransients();
 
       if (!isolatedWrites) {
-      /*
-       * Now we should be able to unwind any unused allocators and unused alloc blocks. An unused
+        /*
+         * Now we should be able to unwind any unused allocators and unused alloc blocks. An unused
          * allocator is one with no diskAddr (never committed). But it may be more difficult to
          * determine if an alloc block has never been used, for that we really need to know what the
          * nextAllocationOffset was at the previous commit. This could be cached as
@@ -3240,8 +3236,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
       }
 
       if (m_quorum != null) {
-      /*
-       * When the RWStore is part of an HA quorum, we need to close out and then reopen the
+        /*
+         * When the RWStore is part of an HA quorum, we need to close out and then reopen the
          * WriteCacheService every time the quorum token is changed. For convienence, this is
          * handled by extending the semantics of abort() on the Journal and reset() on the RWStore.
          *
@@ -3250,8 +3246,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
         m_writeCacheService.close();
         m_writeCacheService = newWriteCacheService();
       } else if (m_writeCacheService != null) {
-      /*
-       * Note: We DO NOT need to reset() the WriteCacheService. If a
+        /*
+         * Note: We DO NOT need to reset() the WriteCacheService. If a
          * record was already flushed to the disk, then it is on the
          * disk and clearing the record from the cache will not change
          * that. If the record has not yet been flushed to the disk,
@@ -3791,8 +3787,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
        * @see https://sourceforge.net/apps/trac/bigdata/ticket/480
        */
       if (m_lastDeferredReleaseTime >= latestReleasableTime) {
-      /*
-       * Note: Added for HA. I have observed both values equal to ZERO. Since we add ONE (1) to
+        /*
+         * Note: Added for HA. I have observed both values equal to ZERO. Since we add ONE (1) to
          * the lastDeferredReleaseTime it MUST BE LT the latestReleasableTime or we will get a
          * "toKey LT fromKey" exception.
          *
@@ -4856,8 +4852,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
         if (raf != null) {
           final FileChannel channel = raf.getChannel();
           if (channel.isOpen()) {
-          /*
-       * The channel is still open. If you are allowing
+            /*
+             * The channel is still open. If you are allowing
              * concurrent reads on the channel, then this could
              * indicate that two readers each found the channel
              * closed and that one was able to re-open the channel
@@ -5007,8 +5003,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
         m_deferredFreeOut.writeInt(-rwaddr);
         m_deferredFreeOut.writeInt(sze);
 
-      /*
-       * rather than write out blob address, instead flatten the blob addresses and
+        /*
+         * rather than write out blob address, instead flatten the blob addresses and
          * write all to remove the latency on commit caused by reading potentially many blob headers.
          *
          * This idea was propposed to support BLZG-641/BLZG-1663 to redcue commit latency.
@@ -5624,8 +5620,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
         // Update the root block.
         FileChannelUtility.writeAll(m_reopener, data, pos);
 
-      /*
-       * Generally, you want to force the file data to the disk here.
+        /*
+         * Generally, you want to force the file data to the disk here.
          * The file metadata MIGHT not matter since we always force it
          * to the disk when we change the file size (unless the file
          * system updates other aspects of file metadata during normal
@@ -5735,7 +5731,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
     // This is reported by the WriteCacheService.
     //        /*
-//         * #of write requests that write through to the backing file.
+    //         * #of write requests that write through to the backing file.
     //         */
     //        public volatile long ndiskWrite;
 
@@ -5750,7 +5746,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
     // This is reported by the WriteCacheService.
     //        /*
-//         * #of bytes that have been written on the disk.
+    //         * #of bytes that have been written on the disk.
     //         */
     //        public volatile long bytesWrittenOnDisk;
 
@@ -5759,7 +5755,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
     // This is reported by the WriteCacheService.
     //        /*
-//         * Total elapsed time for writing on the disk.
+    //         * Total elapsed time for writing on the disk.
     //         */
     //        public volatile long elapsedDiskWriteNanos;
 
@@ -5891,8 +5887,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
       // IRawStore API
       {
 
-      /*
-       * reads
+        /*
+         * reads
          */
 
         root.addCounter(
@@ -5946,8 +5942,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
               }
             });
 
-      /*
-       * writes
+        /*
+         * writes
          */
 
         root.addCounter(
@@ -6018,8 +6014,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
       {
         final CounterSet disk = root.makePath("disk");
 
-      /*
-       * read
+        /*
+         * read
          */
 
         disk.addCounter(
@@ -6078,8 +6074,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
               }
             });
 
-      /*
-       * write
+        /*
+         * write
          */
 
         //                disk.addCounter("nwrites", new Instrument<Long>() {
@@ -6130,8 +6126,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
         //                    }
         //                });
 
-      /*
-       * other
+        /*
+         * other
          */
 
         disk.addCounter(
@@ -6448,8 +6444,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
         if (sequence == 0L && nbytes == bufferCapacity && remaining > bufferCapacity) {
 
-        /*
-       * Adjust the first block so the remainder will be
+          /*
+           * Adjust the first block so the remainder will be
            * aligned on the bufferCapacity boundaries (IO
            * efficiency).
            */
@@ -6670,7 +6666,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
   }
 
   //  /*
-//   * If historical data is maintained then this will return the earliest time for which
+  //   * If historical data is maintained then this will return the earliest time for which
   //   * data can be safely retrieved.
   //   *
   //   * @return time of last release
@@ -7036,8 +7032,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
           if (m_nextAllocation == 0) {
 
-          /*
-       * Skip the first 32K in the file. The root blocks live here but
+            /*
+             * Skip the first 32K in the file. The root blocks live here but
              * nothing else.
              */
 
@@ -7107,7 +7103,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     /** The latched address of each address that appears more than once across the delete blocks. */
     private final Set<Integer> m_duplicates = new LinkedHashSet<Integer>();
     //        /*
-//         * The hexstring version of the data associated with the addresses that
+    //         * The hexstring version of the data associated with the addresses that
     //         * are present more than once in the delete blocks.
     //         */
     //      private final ArrayList<String> m_dupData = new ArrayList<String>();
@@ -7150,8 +7146,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
         for (int latchedAddr : m_duplicates) {
           //                  final int latchedAddr = m_duplicates.get(i);
           sb.append("\nDuplicate: latchedAddr=" + latchedAddr + "\n");
-        /*
-       * Note: Now dumped by DumpJournal.
+          /*
+           * Note: Now dumped by DumpJournal.
            */
           //                    final byte[] data;
           //                    try {
@@ -7376,7 +7372,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
   //  private HARebuildRequest m_rebuildRequest = null;
 
   //    /*
-//     * Only blacklist the addr if not already available, in other words
+  //     * Only blacklist the addr if not already available, in other words
   //     * a blacklisted address only makes sense if it for previously
   //     * committed data and not instantly recyclable.
   //     */
@@ -7590,7 +7586,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     return sb.toString();
   }
   //    /*
-//     *
+  //     *
   //     * @return whether WCS is flushed
   //     *
   //     * @see IBufferStrategy#isFlushed()

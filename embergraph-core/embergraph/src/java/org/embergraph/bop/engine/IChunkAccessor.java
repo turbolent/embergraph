@@ -22,14 +22,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.engine;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
-import java.nio.ByteBuffer;
-import java.util.concurrent.BlockingQueue;
-import org.embergraph.bop.IBindingSet;
-import org.embergraph.relation.accesspath.BlockingBuffer;
-import org.embergraph.striterator.IChunkedIterator;
 
 /*
-* API providing a variety of ways to access chunks of data (data are typically elements or binding
+ * API providing a variety of ways to access chunks of data (data are typically elements or binding
  * sets).
  *
  * <p>TODO This could be much more flexible and should be harmonized to support high volume
@@ -67,7 +62,7 @@ public interface IChunkAccessor<E> {
   ICloseableIterator<E[]> iterator();
 
   //    /*
-//     * Chunked iterator pattern. The iterator may be used for element at a time
+  //     * Chunked iterator pattern. The iterator may be used for element at a time
   //     * processing, but the underlying iterator operators in chunks. The size of
   //     * the chunks depends originally on the data producer, but smaller chunks
   //     * may be automatically combined into larger chunks both during production

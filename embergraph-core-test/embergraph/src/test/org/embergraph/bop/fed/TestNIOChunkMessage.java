@@ -45,7 +45,7 @@ import org.embergraph.striterator.Dechunkerator;
 import org.embergraph.util.config.NicUtil;
 
 /*
-* Unit tests for {@link NIOChunkMessage}.
+ * Unit tests for {@link NIOChunkMessage}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @todo test with large source chunks which span more than one direct buffer.
@@ -187,8 +187,8 @@ public class TestNIOChunkMessage extends TestCase2 {
         // the data is not inline with the message.
         assertFalse(msg.isMaterialized());
 
-      /*
-       * Directly invoke the core materialize method on the message
+        /*
+         * Directly invoke the core materialize method on the message
          * impl.
          */
         msg.materialize(resourceService, allocationContext);

@@ -8,18 +8,12 @@ import org.apache.log4j.Logger;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.model.EmbergraphStatement;
 import org.embergraph.rdf.model.EmbergraphValue;
-import org.embergraph.rdf.sparql.ast.ProjectionNode;
-import org.embergraph.rdf.sparql.ast.eval.ASTConstructIterator;
-import org.embergraph.rdf.store.TempTripleStore;
 import org.openrdf.model.Graph;
-import org.openrdf.model.Resource;
-import org.openrdf.model.Value;
 import org.openrdf.model.impl.GraphImpl;
 import org.openrdf.query.QueryEvaluationException;
-import org.openrdf.rio.RDFWriter;
 
 /*
-* Collects statements written onto the {@link RDFWriter} interface and adds/replaces the DESCRIBE
+ * Collects statements written onto the {@link RDFWriter} interface and adds/replaces the DESCRIBE
  * of the {@link Resource} specified to the constructor.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -98,8 +92,8 @@ public class DescribeCacheUpdater
 
       try {
 
-      /*
-       * Update the DESCRIBE cache IFF the iterator is exhausted
+        /*
+         * Update the DESCRIBE cache IFF the iterator is exhausted
          * by normal means (versus a thrown exception from the
          * source iterator).
          */

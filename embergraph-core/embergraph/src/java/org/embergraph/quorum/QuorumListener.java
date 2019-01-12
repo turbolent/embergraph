@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.quorum;
 
 /*
-* An interface for receiving informational quorum events. These events are intended for clients
+ * An interface for receiving informational quorum events. These events are intended for clients
  * interested in quorum state changes. Services that are HA aware use a more intimate API to handle
  * the state changes.
  *

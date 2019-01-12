@@ -20,7 +20,6 @@ package org.embergraph.bop.solutions;
 import cutthecrap.utils.striterators.ICloseableIterator;
 import java.util.Map;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.FutureTask;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpContext;
@@ -33,12 +32,11 @@ import org.embergraph.bop.PipelineOp;
 import org.embergraph.bop.engine.BOpStats;
 import org.embergraph.bop.join.IDistinctFilter;
 import org.embergraph.bop.join.JVMDistinctFilter;
-import org.embergraph.bop.join.JVMHashJoinUtility;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.UnsyncLocalOutputBuffer;
 
 /*
-* A pipelined DISTINCT operator based on a hash table.
+ * A pipelined DISTINCT operator based on a hash table.
  *
  * <p>Note: This implementation is a pipelined operator which inspects each chunk of solutions as
  * they arrive and those solutions which are distinct for each chunk are passed on. It uses a {@link

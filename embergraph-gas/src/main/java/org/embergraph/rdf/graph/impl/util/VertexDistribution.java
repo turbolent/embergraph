@@ -25,7 +25,7 @@ import org.embergraph.rdf.graph.EdgesEnum;
 import org.openrdf.model.Resource;
 
 /*
-* Utility class for sampling vertices from a graph.
+ * Utility class for sampling vertices from a graph.
  *
  * <p>If we build a table <code>[f,v]</code>, where <code>f</code> is a frequency value and <code>v
  * </code> is a vertex identifier, then we can select according to different biases depending on how
@@ -92,7 +92,7 @@ public class VertexDistribution {
   }
 
   //    /*
-//     * Add a sample of a vertex having some attribute value.
+  //     * Add a sample of a vertex having some attribute value.
   //     *
   //     * @param v
   //     *            The vertex.

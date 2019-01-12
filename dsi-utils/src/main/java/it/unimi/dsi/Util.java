@@ -28,7 +28,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 /*
-* All-purpose static-method container class.
+ * All-purpose static-method container class.
  *
  * @author Sebastiano Vigna
  * @since 0.1

@@ -27,7 +27,7 @@ import java.util.regex.PatternSyntaxException;
 import org.apache.log4j.Logger;
 
 /*
-* This class provides set of utilities for encoding and decoding HTTP headers and doubles as the
+ * This class provides set of utilities for encoding and decoding HTTP headers and doubles as the
  * base class for all classes that implement support for a specific HTTP header, such as {@link
  * LinkHeader}, {@link AcceptHeader}, etc.
  */
@@ -106,7 +106,6 @@ public class HTTPHeaderUtility {
     if (c >= 0 && c <= 31) return true;
 
     return c == 127;
-
   }
 
   /** Returns true iff the character is an HTTP <code>separator</code> character. */

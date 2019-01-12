@@ -64,12 +64,8 @@ import org.embergraph.counters.CAT;
 import org.embergraph.htree.HTree;
 import org.embergraph.io.ByteArrayBuffer;
 import org.embergraph.rawstore.IRawStore;
-import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.internal.IVCache;
-import org.embergraph.rdf.internal.encoder.IBindingSetDecoder;
 import org.embergraph.rdf.internal.encoder.IVBindingSetEncoder;
 import org.embergraph.rdf.internal.impl.literal.XSDBooleanIV;
-import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.relation.accesspath.BufferClosedException;
 import org.embergraph.relation.accesspath.IBuffer;
@@ -81,7 +77,7 @@ import org.embergraph.util.BytesUtil;
 import org.embergraph.util.InnerCause;
 
 /*
-* Utility methods to support hash index builds and hash index joins using a scalable native memory
+ * Utility methods to support hash index builds and hash index joins using a scalable native memory
  * data structures.
  *
  * <h2>Vectoring and IV encoding</h2>
@@ -218,7 +214,7 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
   private final PipelineOp op;
 
   //    /*
-//     * This basically controls the vectoring of the hash join.
+  //     * This basically controls the vectoring of the hash join.
   //     */
   //    private final int chunkSize = 1000;//ChunkedWrappedIterator.DEFAULT_CHUNK_SIZE;
 
@@ -235,7 +231,7 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
   private final boolean filter;
 
   //    /*
-//     * The operator which was used to construct the {@link IHashJoinUtility}
+  //     * The operator which was used to construct the {@link IHashJoinUtility}
   //     * state.
   //     * <p>
   //     * Note: This is NOT necessarily the operator which is currently executing.
@@ -553,7 +549,7 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
   }
 
   //    /*
-//     * Checkpoint the join set (used to buffer the optional solutions).
+  //     * Checkpoint the join set (used to buffer the optional solutions).
   //     * <p>
   //     * Note: Since we always output the solutions which did not join from a
   //     * single thread as part of last pass evaluation there is no need to
@@ -733,14 +729,14 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
           // Encode the key.
           final byte[] key = keyBuilder.reset().append(tmp.hashCode).getKey();
 
-        /*
-       * Encode the solution. Do not update the cache since we are
+          /*
+           * Encode the solution. Do not update the cache since we are
            * only encoding so we can probe the hash index.
            */
           final byte[] val = encoder.encodeSolution(tmp.bset, false /* updateCache */);
 
-        /*
-       * Search the hash index for a match.
+          /*
+           * Search the hash index for a match.
            *
            * TODO VECTOR: This does not take explicit advantage of the
            * fact that different source solutions will fall into the
@@ -968,8 +964,8 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
 
         while (fromIndex < n) {
 
-        /*
-       * Figure out how many left solutions in the current chunk
+          /*
+           * Figure out how many left solutions in the current chunk
            * have the same hash code. We will use the same iterator
            * over the right solutions for that hash code against the
            * HTree.
@@ -1000,8 +996,8 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
                     + ", firstLeft="
                     + a[fromIndex]);
 
-        /*
-       * Note: all source solutions in [fromIndex:toIndex) have
+          /*
+           * Note: all source solutions in [fromIndex:toIndex) have
            * the same hash code. They will be vectored together.
            */
           // All solutions which join for that collision bucket
@@ -1023,8 +1019,8 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
           {
             final byte[] key = keyBuilder.reset().append(hashCode).getKey();
 
-          /*
-       * Visit all source solutions having the same hash code.
+            /*
+             * Visit all source solutions having the same hash code.
              *
              * @see <a href="https://jira.blazegraph.com/browse/BLZG-848">Stochastic results with
              *     Analytic Query Mode) </a>
@@ -1054,8 +1050,8 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
 
               final ITuple<?> t = titr.next();
 
-            /*
-       * Note: The map entries must be the full source
+              /*
+               * Note: The map entries must be the full source
                * binding set, not just the join variables, even
                * though the key and equality in the key is defined
                * in terms of just the join variables.
@@ -1153,8 +1149,8 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
                     }
                   case Exists:
                     {
-                    /*
-       * The right solution is output iff there is
+                      /*
+                       * The right solution is output iff there is
                        * at least one left solution which joins
                        * with that right solution. Each right
                        * solution is output at most one time. This
@@ -1173,8 +1169,8 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
                     }
                   case NotExists:
                     {
-                    /*
-       * The right solution is output iff there
+                      /*
+                       * The right solution is output iff there
                        * does not exist any left solution which
                        * joins with that right solution. This
                        * basically an optional join where the
@@ -1194,8 +1190,8 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
             } // next rightSolution with the same hash code.
 
             if (joined != null && !joined.isEmpty()) {
-            /*
-       * Vector the inserts into the [joinSet].
+              /*
+               * Vector the inserts into the [joinSet].
                */
               final BS2[] a2 = joined.toArray(new BS2[njoined]);
               Arrays.sort(a2, 0, njoined);
@@ -1396,8 +1392,8 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
 
         final ByteArrayBuffer tb = t.getValueBuffer();
 
-      /*
-       * Note: This MUST be treated as effectively immutable since we
+        /*
+         * Note: This MUST be treated as effectively immutable since we
          * may have to output multiple solutions for each rightSolution.
          * Those output solutions MUST NOT side-effect [rightSolutions].
          */
@@ -1438,8 +1434,8 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
 
         if (!found) {
 
-        /*
-       * Since the source solution is not in the join set, output
+          /*
+           * Since the source solution is not in the join set, output
            * it as an optional solution.
            */
 
@@ -1593,8 +1589,8 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
 
         } else if (selectVars != null) {
 
-        /*
-       * FIXME We should be using projectedInVars here since
+          /*
+           * FIXME We should be using projectedInVars here since
            * outputSolutions() is used to stream solutions into
            * the child join group (at least for some kinds of
            * joins, but there might be exceptions for joining with
@@ -1748,8 +1744,8 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
           sols0.addFilter(
               new Visitor() {
                 private static final long serialVersionUID = 1L;
-              /*
-       * Set the tuple for the first source each time it advances.
+                /*
+                 * Set the tuple for the first source each time it advances.
                  *
                  * @param obj The tuple.
                  */
@@ -1768,8 +1764,8 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
             sols0.addFilter(
                 new Expander() {
                   private static final long serialVersionUID = 1L;
-                /*
-       * Expansion pattern gives solutions for source @ slot.
+                  /*
+                   * Expansion pattern gives solutions for source @ slot.
                    *
                    * @param obj The tuple in set[slot-1].
                    */
@@ -1783,15 +1779,15 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
                     final byte[] key2 = ((ITuple<?>) obj).getKey();
                     final ITupleIterator<?> ret = thisTree.lookupAll(key2);
                     if (optional && !ret.hasNext()) {
-                    /*
-       * Nothing for that key from this source. Return
+                      /*
+                       * Nothing for that key from this source. Return
                        * a single marker value so we can proceed to
                        * the remaining sources rather than halting.
                        */
                       return new SingleValueIterator(NULL_VALUE);
                     } else {
-                    /*
-       * Iterator visiting solutions from this source
+                      /*
+                       * Iterator visiting solutions from this source
                        * for the current key in the prior source.
                        */
                       return ret;
@@ -1802,8 +1798,8 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
             sols0.addFilter(
                 new Visitor() {
                   private static final long serialVersionUID = 1L;
-                /*
-       * Assign tuple to set[slot].
+                  /*
+                   * Assign tuple to set[slot].
                    *
                    * <p>Note: If [obj==NULL_VALUE] then no solutions for that slot.
                    */
@@ -1815,8 +1811,8 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
           }
         } // end of striterator setup.
 
-      /*
-       * This will visit after all expansions. That means that we will
+        /*
+         * This will visit after all expansions. That means that we will
          * observe the cross product of the solutions from the remaining
          * sources having the same hash for each from the first source.
          *

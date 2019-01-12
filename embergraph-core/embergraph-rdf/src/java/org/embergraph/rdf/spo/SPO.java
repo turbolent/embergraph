@@ -20,29 +20,22 @@ package org.embergraph.rdf.spo;
 import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IPredicate;
 import org.embergraph.bop.IVariableOrConstant;
-import org.embergraph.rdf.inf.Justification;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.internal.IVCache;
 import org.embergraph.rdf.internal.IVUtility;
-import org.embergraph.rdf.internal.NotMaterializedException;
 import org.embergraph.rdf.internal.impl.bnode.SidIV;
 import org.embergraph.rdf.model.EmbergraphResource;
 import org.embergraph.rdf.model.EmbergraphStatement;
-import org.embergraph.rdf.model.EmbergraphStatementImpl;
 import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.StatementEnum;
-import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.IRawTripleStore;
-import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.util.Bits;
 import org.openrdf.model.Resource;
-import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
 /*
-* Represents a triple, triple+SID, or quad. When used to represent a triple, the statement
+ * Represents a triple, triple+SID, or quad. When used to represent a triple, the statement
  * identifier MAY be set on the triple after the object has been instantiated. When used to
  * represent a quad, the context position SHOULD be treated as immutable and {@link
  * #setStatementIdentifier(IV)} will reject arguments if they can not be validated as statement
@@ -81,17 +74,17 @@ public class SPO implements ISPO, java.io.Serializable {
   private IV sid = null;
 
   //    /*
-//     * Statement type (inferred, explicit, or axiom).
+  //     * Statement type (inferred, explicit, or axiom).
   //     */
   //    private StatementEnum type;
   //
   //    /*
-//     * User flag
+  //     * User flag
   //     */
   //    private boolean userFlag;
   //
   //    /*
-//     * Override flag used for downgrading statements during truth maintenance.
+  //     * Override flag used for downgrading statements during truth maintenance.
   //     */
   //    private transient boolean override = false;
   //
@@ -99,7 +92,7 @@ public class SPO implements ISPO, java.io.Serializable {
   //    private transient ModifiedEnum modified = ModifiedEnum.NONE;
   //
   //   /*
-//    * If sidable, we will lazily instantiate a sid when requested via
+  //    * If sidable, we will lazily instantiate a sid when requested via
   //    * {@link #c()}, {@link #getStatementIdentifier()}, and {@link SPO#get(int)}
   //    * with a parameter of 3. This should reduce heap pressure by only creating
   //    * sids on-demand on an as-needed basis.
@@ -127,7 +120,7 @@ public class SPO implements ISPO, java.io.Serializable {
   private static int OVERRIDE_BIT = 6;
 
   //    /*
-//	 * Denotes which bit to find the sidable flag within the {@link #flags}.
+  //	 * Denotes which bit to find the sidable flag within the {@link #flags}.
   //	 */
   //    private static int SIDABLE_BIT = 7;
 
@@ -750,14 +743,14 @@ public class SPO implements ISPO, java.io.Serializable {
   }
 
   //	/*
-//	 * Sidable is hiding in the 7 bit of the flags.
+  //	 * Sidable is hiding in the 7 bit of the flags.
   //	 */
   //	private boolean sidable() {
   //		return Bits.get(flags, SIDABLE_BIT);
   //	}
   //
   //	/*
-//	 * Sidable is hiding in the 7 bit of the flags.
+  //	 * Sidable is hiding in the 7 bit of the flags.
   //	 */
   //	private void sidable(final boolean sidable) {
   //		flags = Bits.set(flags, SIDABLE_BIT, sidable);

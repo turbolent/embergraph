@@ -53,15 +53,10 @@ import org.embergraph.bop.Var;
 import org.embergraph.bop.bindingSet.ListBindingSet;
 import org.embergraph.bop.joinGraph.IEvaluationPlanFactory;
 import org.embergraph.bop.joinGraph.fast.DefaultEvaluationPlanFactory2;
-import org.embergraph.btree.AbstractBTree;
-import org.embergraph.btree.BTree;
 import org.embergraph.btree.IIndex;
 import org.embergraph.btree.ITupleIterator;
-import org.embergraph.btree.IndexMetadata;
-import org.embergraph.btree.IndexSegment;
 import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.btree.keys.SuccessorUtil;
-import org.embergraph.journal.IConcurrencyManager;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.IResourceLock;
 import org.embergraph.journal.ITx;
@@ -76,25 +71,16 @@ import org.embergraph.rdf.inf.IJustificationIterator;
 import org.embergraph.rdf.inf.Justification;
 import org.embergraph.rdf.inf.JustificationIterator;
 import org.embergraph.rdf.internal.DefaultExtensionFactory;
-import org.embergraph.rdf.internal.IDatatypeURIResolver;
-import org.embergraph.rdf.internal.IExtension;
-import org.embergraph.rdf.internal.IExtensionFactory;
-import org.embergraph.rdf.internal.IInlineURIFactory;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.InlineURIFactory;
 import org.embergraph.rdf.internal.NotMaterializedException;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.constraints.RangeBOp;
 import org.embergraph.rdf.internal.impl.BlobIV;
-import org.embergraph.rdf.internal.impl.extensions.XSDStringExtension;
 import org.embergraph.rdf.lexicon.EmbergraphSubjectCentricFullTextIndex;
 import org.embergraph.rdf.lexicon.EmbergraphValueCentricFullTextIndex;
 import org.embergraph.rdf.lexicon.ITermIndexCodes;
-import org.embergraph.rdf.lexicon.ITextIndexer;
-import org.embergraph.rdf.lexicon.IValueCentricTextIndexer;
-import org.embergraph.rdf.lexicon.LexiconKeyOrder;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.lexicon.TermIdEncoder;
 import org.embergraph.rdf.model.EmbergraphResource;
 import org.embergraph.rdf.model.EmbergraphStatement;
 import org.embergraph.rdf.model.EmbergraphURI;
@@ -105,13 +91,11 @@ import org.embergraph.rdf.rio.IStatementBuffer;
 import org.embergraph.rdf.rio.StatementBuffer;
 import org.embergraph.rdf.rules.BaseClosure;
 import org.embergraph.rdf.rules.FastClosure;
-import org.embergraph.rdf.rules.FullClosure;
 import org.embergraph.rdf.rules.InferenceEngine;
 import org.embergraph.rdf.rules.MatchRule;
 import org.embergraph.rdf.rules.RDFJoinNexusFactory;
 import org.embergraph.rdf.rules.RuleContextEnum;
 import org.embergraph.rdf.sail.RDRHistory;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTBottomUpOptimizer;
 import org.embergraph.rdf.spo.BulkCompleteConverter;
 import org.embergraph.rdf.spo.BulkFilterConverter;
 import org.embergraph.rdf.spo.ExplicitSPOFilter;
@@ -123,11 +107,9 @@ import org.embergraph.rdf.spo.SPOPredicate;
 import org.embergraph.rdf.spo.SPORelation;
 import org.embergraph.rdf.spo.SPOTupleSerializer;
 import org.embergraph.rdf.spo.StatementWriter;
-import org.embergraph.rdf.spo.XXXCShardSplitHandler;
 import org.embergraph.rdf.vocab.BaseVocabulary;
 import org.embergraph.rdf.vocab.NoVocabulary;
 import org.embergraph.rdf.vocab.Vocabulary;
-import org.embergraph.rdf.vocab.VocabularyDecl;
 import org.embergraph.rdf.vocab.core.EmbergraphCoreVocabulary_v20160317;
 import org.embergraph.relation.AbstractResource;
 import org.embergraph.relation.IDatabase;
@@ -149,7 +131,6 @@ import org.embergraph.relation.rule.eval.DefaultRuleTaskFactory;
 import org.embergraph.relation.rule.eval.IJoinNexus;
 import org.embergraph.relation.rule.eval.IJoinNexusFactory;
 import org.embergraph.relation.rule.eval.IRuleTaskFactory;
-import org.embergraph.relation.rule.eval.ISolution;
 import org.embergraph.search.FullTextIndex;
 import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.geospatial.GeoSpatialConfig;
@@ -160,7 +141,6 @@ import org.embergraph.striterator.ChunkedConvertingIterator;
 import org.embergraph.striterator.ChunkedWrappedIterator;
 import org.embergraph.striterator.DelegateChunkedIterator;
 import org.embergraph.striterator.EmptyChunkedIterator;
-import org.embergraph.striterator.IChunkedIterator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 import org.embergraph.util.BytesUtil;
@@ -175,10 +155,9 @@ import org.openrdf.model.vocabulary.OWL;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.model.vocabulary.XMLSchema;
-import org.openrdf.rio.rdfxml.RDFXMLParser;
 
 /*
-* Abstract base class that implements logic for the {@link ITripleStore} interface that is
+ * Abstract base class that implements logic for the {@link ITripleStore} interface that is
  * invariant across the choice of the backing store.
  *
  * <p>By default, this class supports RDFS inference plus optional support for <code>owl:sameAs
@@ -203,7 +182,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
    * of the embedded services using "ServiceRegistry.getInstance()".
    */
   //    /*
-//     * Make sure that any services are registered.
+  //     * Make sure that any services are registered.
   //     */
   //    static {
   //
@@ -1130,8 +1109,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
      *
      * @see {@link ASTBottomUpOptimizer}
      */
-    String BOTTOM_UP_EVALUATION =
-        AbstractTripleStore.class.getName() + ".bottomUpEvaluation";
+    String BOTTOM_UP_EVALUATION = AbstractTripleStore.class.getName() + ".bottomUpEvaluation";
 
     String DEFAULT_BOTTOM_UP_EVALUATION = "true";
 
@@ -1320,8 +1298,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
       } else {
 
-      /*
-       * no axioms if no lexicon (the lexicon is required to write the
+        /*
+         * no axioms if no lexicon (the lexicon is required to write the
          * axioms).
          */
 
@@ -1510,8 +1488,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
       if (Boolean.valueOf(tmp.getProperty(Options.TEXT_INDEX, Options.DEFAULT_TEXT_INDEX))) {
 
-      /*
-       * If the text index is enabled for a new kb instance, then disable
+        /*
+         * If the text index is enabled for a new kb instance, then disable
          * the fieldId component of the full text index key since it is not
          * used by the RDF database and will just waste space in the index.
          *
@@ -1536,8 +1514,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
       if (lexicon) {
 
-      /*
-       * Setup the vocabulary.
+        /*
+         * Setup the vocabulary.
          */
         {
           assert vocabRef.get() == null;
@@ -1559,8 +1537,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
           ((BaseVocabulary) vocabRef.get()).init();
         }
 
-      /*
-       * For performance reasons, we also store the geospatial configuration
+        /*
+         * For performance reasons, we also store the geospatial configuration
          * in the global row store, in case geospatial is enabled.
          */
         {
@@ -1588,8 +1566,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
             // initialized geospatial configuration if geospatial is enabled
             if (geoSpatial) {
 
-            /*
-       * We have configuration strings of the form -
+              /*
+               * We have configuration strings of the form -
                * [AbstractTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG].0 = ... -
                * [AbstractTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG].1 = ... -
                * [AbstractTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG].2 = ... ...
@@ -1668,16 +1646,15 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
        */
       if (lexicon) {
 
-      /*
-       * Setup the axiom model.
+        /*
+         * Setup the axiom model.
          */
         {
           assert axioms == null;
 
           try {
 
-            final Constructor<? extends BaseAxioms> ctor =
-                axiomClass.getConstructor(String.class);
+            final Constructor<? extends BaseAxioms> ctor = axiomClass.getConstructor(String.class);
 
             // save reference.
             axioms = ctor.newInstance(LEXICON_NAMESPACE);
@@ -1701,8 +1678,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
        */
       {
 
-      /*
-       * Convert the Properties to a Map.
+        /*
+         * Convert the Properties to a Map.
          */
         final Map<String, Object> map = GlobalRowStoreUtil.convert(tmp);
 
@@ -1727,8 +1704,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
           // setProperty(TripleStoreSchema.GEO_SPATIAL_CONFIG,geoSpatoalConfig)
         }
 
-      /*
-       * Note: This will now be false automatically since the [map] is
+        /*
+         * Note: This will now be false automatically since the [map] is
          * based on the Properties object [tmp] and we have already set
          * this property to [false] in tmp.
          */
@@ -1749,8 +1726,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
           log.debug("Properties after write: " + afterMap);
         }
 
-      /*
-       * Note: A commit is required in order for a read-committed view
+        /*
+         * Note: A commit is required in order for a read-committed view
          * to have access to the registered indices.
          *
          * @todo have the caller do this? It does not really belong here
@@ -1760,8 +1737,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
         commit();
 
-      /*
-       * Add this instance to the locator cache, but NOT before we
+        /*
+         * Add this instance to the locator cache, but NOT before we
          * have committed the changes to the global row store.
          *
          * Note: Normally, the instances are created by the locator
@@ -1807,8 +1784,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
           if (lex != null && lex.getIndexManager() == getIndexManager()) {
 
-          /*
-       * Destroy the lexicon, but only if it is backed by the
+            /*
+             * Destroy the lexicon, but only if it is backed by the
              * same index manager. (This prevents a lexicon on the
              * database from being destroyed when a statements-only
              * instance on a temporary store is destroyed.
@@ -1871,8 +1848,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
       synchronized (this) {
         if (axioms == null) {
 
-        /*
-       * The vocabulary is stored in properties for the triple
+          /*
+           * The vocabulary is stored in properties for the triple
            * store instance in the global row store. However, we
            * pre-materialize those properties so we can directly
            * retrieve the vocabulary from the materialized properties.
@@ -1920,8 +1897,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
         if (vocab == null) {
 
-        /*
-       * The vocabulary is stored in properties for the triple
+          /*
+           * The vocabulary is stored in properties for the triple
            * store instance in the global row store. However, we
            * pre-materialize those properties so we can directly
            * retrieve the vocabulary from the materialized properties.
@@ -1973,8 +1950,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
         if (geoSpatialConfig == null) {
 
-        /*
-       * The vocabulary is stored in properties for the triple
+          /*
+           * The vocabulary is stored in properties for the triple
            * store instance in the global row store. However, we
            * pre-materialize those properties so we can directly
            * retrieve the vocabulary from the materialized properties.
@@ -2054,8 +2031,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
       if (TimestampUtility.isReadWriteTx(t)) {
 
-      /*
-       * A read-write tx must use the unisolated view of the lexicon.
+        /*
+         * A read-write tx must use the unisolated view of the lexicon.
          */
         t = ITx.UNISOLATED;
       }
@@ -2074,7 +2051,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
   // Note: Use LexiconRelation#getSearchEngine().
   //    /*
-//     * Full text information retrieval for RDF essentially treats the RDF
+  //     * Full text information retrieval for RDF essentially treats the RDF
   //     * Literals as "documents." The literals are broken down into "token"s to
   //     * obtain a "token frequency distribution" for that literal/document. The
   //     * full text index contains the indexed token data.
@@ -3272,7 +3249,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
   //    }
   //
   //    /*
-//     * Dumps the #of statements using each predicate in the kb (tab delimited,
+  //     * Dumps the #of statements using each predicate in the kb (tab delimited,
   //     * unordered).
   //     *
   //     * @param resolveTerms
@@ -3623,16 +3600,16 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
       } else {
 
-      /*
-       * Use a thread pool to write out the statement and the
+        /*
+         * Use a thread pool to write out the statement and the
          * justifications concurrently. This drammatically reduces the
          * latency when also writing justifications.
          */
 
         final List<Callable<Long>> tasks = new ArrayList<Callable<Long>>(2);
 
-      /*
-       * Note: we reject using the filter before stmts or
+        /*
+         * Note: we reject using the filter before stmts or
          * justifications make it into the buffer so we do not need to
          * apply the filter again here.
          */
@@ -4119,8 +4096,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
               db.getAccessPath(sid, null, null).iterator(),
               null /* filter */);
 
-        /*
-       * sid in the predicate position.
+          /*
+           * sid in the predicate position.
            *
            * Note: this case is not allowed by RDF but a TMGraph model
            * might use it.
@@ -4164,7 +4141,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
   // Use getLexiconRelation().getSearchEngine().search(...)
   //    /*
-//     * <p>
+  //     * <p>
   //     * Performs a full text search against literals returning an {@link IHit}
   //     * list visiting the term identifiers for literals containing tokens parsed
   //     * from the query. Those term identifiers may be used to join against the
@@ -4334,8 +4311,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
       if (getIndexManager() instanceof IEmbergraphFederation<?>) {
 
-      /*
-       * Use historical reads.
+        /*
+         * Use historical reads.
          *
          * Note: The read timestamp will be automatically updated before
          * each mutation step so that all mutation operations will see
@@ -4347,8 +4324,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
       } else {
 
-      /*
-       * LTS closure operations.
+        /*
+         * LTS closure operations.
          *
          * Note: This means that we use UNISOLATED reads since mutation
          * requires that the caller is using the UNISOLATED relation.

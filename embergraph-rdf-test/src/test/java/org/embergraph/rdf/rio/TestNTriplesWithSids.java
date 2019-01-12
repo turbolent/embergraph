@@ -19,7 +19,7 @@ import org.openrdf.rio.RDFParseException;
 import org.openrdf.rio.RDFParserRegistry;
 
 /*
-* Test suite for SIDS support with NTRIPLES data.
+ * Test suite for SIDS support with NTRIPLES data.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

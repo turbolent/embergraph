@@ -26,11 +26,10 @@ import java.rmi.Remote;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import org.embergraph.btree.IndexMetadata;
-import org.embergraph.mdi.MetadataIndex;
 import org.embergraph.mdi.PartitionLocator;
 
 /*
-* A metadata service for a named index.
+ * A metadata service for a named index.
  *
  * <p>The metadata service maintains locator information for the data service instances responsible
  * for each partition in the named index. Partitions are automatically split when they overflow
@@ -57,8 +56,7 @@ public interface IMetadataService extends IDataService, Remote {
    * @throws ExecutionException
    * @throws InterruptedException
    */
-  int nextPartitionId(String name)
-      throws IOException, InterruptedException, ExecutionException;
+  int nextPartitionId(String name) throws IOException, InterruptedException, ExecutionException;
 
   /*
    * Updates the {@link MetadataIndex} for the named scale-out index to reflect the split of an
@@ -74,8 +72,7 @@ public interface IMetadataService extends IDataService, Remote {
    * @throws InterruptedException
    * @throws ExecutionException
    */
-  void splitIndexPartition(
-      String name, PartitionLocator oldLocator, PartitionLocator[] newLocators)
+  void splitIndexPartition(String name, PartitionLocator oldLocator, PartitionLocator[] newLocators)
       throws IOException, InterruptedException, ExecutionException;
   /*
    * Updates the {@link MetadataIndex} for the named scale-out index to reflect the join of N index
@@ -90,8 +87,7 @@ public interface IMetadataService extends IDataService, Remote {
    * @throws InterruptedException
    * @throws ExecutionException
    */
-  void joinIndexPartition(
-      String name, PartitionLocator[] oldLocators, PartitionLocator newLocator)
+  void joinIndexPartition(String name, PartitionLocator[] oldLocators, PartitionLocator newLocator)
       throws IOException, InterruptedException, ExecutionException;
 
   /*
@@ -107,8 +103,7 @@ public interface IMetadataService extends IDataService, Remote {
    * @throws InterruptedException
    * @throws ExecutionException
    */
-  void moveIndexPartition(
-      String name, PartitionLocator oldLocator, PartitionLocator newLocator)
+  void moveIndexPartition(String name, PartitionLocator oldLocator, PartitionLocator newLocator)
       throws IOException, InterruptedException, ExecutionException;
 
   /*
@@ -129,8 +124,7 @@ public interface IMetadataService extends IDataService, Remote {
    * @throws InterruptedException
    * @throws ExecutionException
    */
-  UUID registerScaleOutIndex(
-      IndexMetadata metadata, byte[][] separatorKeys, UUID[] dataServices)
+  UUID registerScaleOutIndex(IndexMetadata metadata, byte[][] separatorKeys, UUID[] dataServices)
       throws IOException, InterruptedException, ExecutionException;
 
   /*
@@ -138,8 +132,7 @@ public interface IMetadataService extends IDataService, Remote {
    *
    * @param name The name of the scale-out index.
    */
-  void dropScaleOutIndex(String name)
-      throws IOException, InterruptedException, ExecutionException;
+  void dropScaleOutIndex(String name) throws IOException, InterruptedException, ExecutionException;
 
   /*
    * The partition with that separator key or <code>null</code> (exact match on the separator key).

@@ -28,7 +28,7 @@ import org.embergraph.rdf.internal.impl.literal.XSDBooleanIV;
 import org.embergraph.rdf.sparql.ast.FilterNode;
 
 /*
-* Base class for RDF value expression BOps that happen to evaluate to an {@link XSDBooleanIV}.
+ * Base class for RDF value expression BOps that happen to evaluate to an {@link XSDBooleanIV}.
  * These are operators such as Compare, Is*, And, Or, etc.
  */
 public abstract class XSDBooleanIVValueExpression extends IVValueExpression<XSDBooleanIV> {

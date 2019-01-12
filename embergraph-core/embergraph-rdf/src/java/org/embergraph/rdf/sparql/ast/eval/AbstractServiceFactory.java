@@ -23,12 +23,11 @@ package org.embergraph.rdf.sparql.ast.eval;
 
 import org.embergraph.rdf.sparql.ast.service.EmbergraphServiceCall;
 import org.embergraph.rdf.sparql.ast.service.ServiceCallCreateParams;
-import org.embergraph.rdf.sparql.ast.service.ServiceFactory;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /*
-* An abstract {@link ServiceFactory} that deals with service parameters (magic predicates that
+ * An abstract {@link ServiceFactory} that deals with service parameters (magic predicates that
  * configure the service) in a standardized manner using the {@link ServiceParams} helper class.
  */
 public abstract class AbstractServiceFactory extends AbstractServiceFactoryBase {

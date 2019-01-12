@@ -23,7 +23,7 @@ import org.embergraph.rdf.graph.impl.GASEngine;
 import org.openrdf.model.Value;
 
 /*
-* A scheduler suitable for a single thread.
+ * A scheduler suitable for a single thread.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

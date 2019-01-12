@@ -3,7 +3,7 @@ package org.embergraph.bfs;
 import java.util.Iterator;
 
 /*
-* Document-centric interface for the {@link EmbergraphFileSystem}.
+ * Document-centric interface for the {@link EmbergraphFileSystem}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

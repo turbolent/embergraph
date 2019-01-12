@@ -24,10 +24,9 @@ package org.embergraph.bop.solutions;
 import java.util.Map;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.PipelineOp;
-import org.embergraph.bop.aggregate.IAggregate;
 
 /*
-* Base class for operators which perform aggregation operations on binding sets.
+ * Base class for operators which perform aggregation operations on binding sets.
  *
  * <h2>Aggregation semantics and errors.</h2>
  *

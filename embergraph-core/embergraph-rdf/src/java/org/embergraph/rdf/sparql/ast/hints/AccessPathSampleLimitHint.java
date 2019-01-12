@@ -21,7 +21,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.hints;
 
-import org.embergraph.bop.IPredicate;
 import org.embergraph.rdf.sparql.ast.ASTBase;
 import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
@@ -29,7 +28,7 @@ import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /*
-* Query hint for turning the controlling the #of access paths to sample when making a decision
+ * Query hint for turning the controlling the #of access paths to sample when making a decision
  * between a SCAN+FILTER or PARALLEL SUBQUERY plan for a named or default graph access path.
  *
  * <p>FIXME Unit test. This one is a bit tricky. It gets attached as an AST annotation which is

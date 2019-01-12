@@ -47,7 +47,7 @@ import org.embergraph.journal.IIndexManager;
 import org.embergraph.rdf.sail.webapp.client.ConnectOptions;
 
 /*
-* This class supports making requests to the server with fairly low level control. Each operation
+ * This class supports making requests to the server with fairly low level control. Each operation
  * is set up by calls to the protected methods such as {@link #setMethodisPost(String, String)},
  * {@link #setAllow400s()}, and then to call {@link #serviceRequest(String...)} to actually process
  * the request. This process may be repeated multiple times. After each call to {@link

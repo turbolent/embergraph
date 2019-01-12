@@ -32,7 +32,6 @@ import org.embergraph.btree.BTree;
 import org.embergraph.btree.IIndex;
 import org.embergraph.btree.ILocalBTreeView;
 import org.embergraph.btree.ISimpleSplitHandler;
-import org.embergraph.btree.IndexMetadata;
 import org.embergraph.btree.IndexSegment;
 import org.embergraph.btree.Leaf;
 import org.embergraph.btree.Node;
@@ -44,7 +43,7 @@ import org.embergraph.util.BytesUtil;
 import org.embergraph.util.concurrent.ExecutionExceptions;
 
 /*
-* Utility methods for {@link ISimpleSplitHandler}s and friends.
+ * Utility methods for {@link ISimpleSplitHandler}s and friends.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -174,8 +173,8 @@ public class SplitUtility {
 
         if (i + 1 == nsplits && split.toIndex == 0) {
 
-        /*
-       * Note: This is allowed in case the index partition has
+          /*
+           * Note: This is allowed in case the index partition has
            * more than int32 entries in which case the toIndex of the
            * last split can not be defined and will be zero.
            */
@@ -216,8 +215,7 @@ public class SplitUtility {
     {
 
       // right separator for the last split.
-      final byte[] rightSeparator =
-          splits[splits.length - 1].pmd.getRightSeparatorKey();
+      final byte[] rightSeparator = splits[splits.length - 1].pmd.getRightSeparatorKey();
 
       if (rightSeparator == null) {
 
@@ -354,12 +352,12 @@ public class SplitUtility {
               -1, // Note: split not allowed during move.
               fromKey,
               separatorKey,
-            /*
-       * Note: no resources for an index segment
+              /*
+               * Note: no resources for an index segment
                */
               null,
-            /*
-       * Note: cause will be set by the atomic update task.
+              /*
+               * Note: cause will be set by the atomic update task.
                */
               null
               //                    , oldpmd.getHistory()
@@ -391,12 +389,12 @@ public class SplitUtility {
               -1, // Note: split not allowed during move.
               separatorKey,
               toKey,
-            /*
-       * Note: no resources for an index segment
+              /*
+               * Note: no resources for an index segment
                */
               null,
-            /*
-       * Note: Cause will be set by the atomic update for the
+              /*
+               * Note: Cause will be set by the atomic update for the
                * split task.
                */
               null
@@ -595,8 +593,8 @@ public class SplitUtility {
 
       if (fromKey == null && toKey == null) {
 
-      /*
-       * Note: This is not legal because it implies that we are
+        /*
+         * Note: This is not legal because it implies that we are
          * building the index segment from the entire source key range -
          * hence not a split at all!
          */
@@ -764,8 +762,8 @@ public class SplitUtility {
        */
       if (remainingSplits == 1) {
 
-      /*
-       * This is the last split: always use the rightSeparator.
+        /*
+         * This is the last split: always use the rightSeparator.
          */
 
         toKey = oldpmd.getRightSeparatorKey();
@@ -784,8 +782,8 @@ public class SplitUtility {
 
         if (splitHandler != null) {
 
-        /*
-       * Allow override of the recommended separator.
+          /*
+           * Allow override of the recommended separator.
            *
            * Note: we receive a separatorKey from the override so we
            * can create a separation not represented by any key
@@ -802,8 +800,8 @@ public class SplitUtility {
 
           if (chosenKey == null) {
 
-          /*
-       * No separator key could be identified. The rest of the
+            /*
+             * No separator key could be identified. The rest of the
              * data in the segment will all go into this split.
              */
 
@@ -811,8 +809,8 @@ public class SplitUtility {
 
             if (splits.isEmpty() && overextension > 2d) {
 
-            /*
-       * Log, but keep going.
+              /*
+               * Log, but keep going.
                *
                * Note: An application with poorly written override
                * logic could cause an index segment to fail to
@@ -833,8 +831,8 @@ public class SplitUtility {
 
             if (splits.isEmpty()) {
 
-            /*
-       * Since no splits have been chosen we can not
+              /*
+               * Since no splits have been chosen we can not
                * return everything in a single split. Instead we
                * return null and the source WILL NOT be split.
                */
@@ -842,8 +840,8 @@ public class SplitUtility {
               return null;
             }
 
-          /*
-       * Everything remaining goes into this split.
+            /*
+             * Everything remaining goes into this split.
              */
 
             toKey = oldpmd.getRightSeparatorKey();
@@ -862,8 +860,8 @@ public class SplitUtility {
 
             if (toIndex < low || toIndex > high) {
 
-            /*
-       * The override did not return a separator key
+              /*
+               * The override did not return a separator key
                * within the key range which we instructed it to
                * use. This is a bug in the application's override
                * code.
@@ -884,8 +882,8 @@ public class SplitUtility {
 
             if (toIndex == high) {
 
-            /*
-       * If they choose the last allowed index then all
+              /*
+               * If they choose the last allowed index then all
                * tuples have been consumed and we are done. In
                * this case we use the rightSeparator rather than
                * the chosen key in order to enforce the constraint
@@ -908,8 +906,8 @@ public class SplitUtility {
 
           if (splitAt == high) {
 
-          /*
-       * Enforce the constraint that the last split has the
+            /*
+             * Enforce the constraint that the last split has the
              * same rightSeparator as the source index segment.
              */
             toKey = oldpmd.getRightSeparatorKey();
@@ -918,8 +916,8 @@ public class SplitUtility {
 
           } else {
 
-          /*
-       * Take whatever key is at the recommended split index and
+            /*
+             * Take whatever key is at the recommended split index and
              * use that as the separator key for this split.
              */
             toKey = seg.keyAt(splitAt);
@@ -954,16 +952,16 @@ public class SplitUtility {
       // Create Split description.
       {
 
-      /*
-       * Get the next partition identifier for the named scale-out
+        /*
+         * Get the next partition identifier for the named scale-out
          * index.
          *
          * Note: This is a RMI.
          */
         final int partitionId = partitionIdFactory.nextPartitionId(scaleOutIndexName);
 
-      /*
-       * Describe the partition metadata for the new split.
+        /*
+         * Describe the partition metadata for the new split.
          */
         final LocalPartitionMetadata newpmd =
             new LocalPartitionMetadata(
@@ -971,12 +969,12 @@ public class SplitUtility {
                 -1, // Note: split not allowed during move.
                 fromKey, // leftSeparatorKey
                 toKey, // rightSeparatorKey
-              /*
-       * Note: no resources for an index segment.
+                /*
+                 * Note: no resources for an index segment.
                  */
                 null,
-              /*
-       * Note: cause will be set by the atomic update task.
+                /*
+                 * Note: cause will be set by the atomic update task.
                  */
                 null
                 //                        , oldpmd.getHistory()

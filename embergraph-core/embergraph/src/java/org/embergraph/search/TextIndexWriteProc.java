@@ -36,7 +36,7 @@ import org.embergraph.btree.raba.codec.IRabaCoder;
 import org.embergraph.relation.IMutableRelationIndexWriteProcedure;
 
 /*
-* Writes on the text index.
+ * Writes on the text index.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

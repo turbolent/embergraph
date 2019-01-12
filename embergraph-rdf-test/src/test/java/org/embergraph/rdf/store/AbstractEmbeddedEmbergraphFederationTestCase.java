@@ -28,7 +28,7 @@ import org.embergraph.service.EmbeddedClient;
 import org.embergraph.service.IEmbergraphClient;
 
 /*
-* An abstract test harness that sets up (and tears down) the metadata and data services required
+ * An abstract test harness that sets up (and tears down) the metadata and data services required
  * for a embergraph federation using in-process services rather than service discovery (which means
  * that there is no network IO).
  *

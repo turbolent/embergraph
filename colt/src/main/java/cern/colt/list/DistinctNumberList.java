@@ -9,7 +9,7 @@ It is provided "as is" without expressed or implied warranty.
 package cern.colt.list;
 
 /*
-* Resizable compressed list holding numbers; based on the fact that a number from a large list with
+ * Resizable compressed list holding numbers; based on the fact that a number from a large list with
  * few distinct values need not take more than <tt>log(distinctValues)</tt> bits; implemented with a
  * <tt>MinMaxNumberList</tt>. First see the <a href="package-summary.html">package summary</a> and
  * javadoc <a href="package-tree.html">tree view</a> to get the broad picture.

@@ -2,7 +2,6 @@ package org.embergraph.rdf.spo;
 
 import java.util.Arrays;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicLong;
 import org.apache.log4j.Logger;
 import org.embergraph.btree.IIndex;
@@ -11,11 +10,10 @@ import org.embergraph.btree.ITupleIterator;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.btree.keys.SuccessorUtil;
-import org.embergraph.rdf.inf.Justification;
 import org.embergraph.util.Bytes;
 
 /*
-* Class writes on the justification index, removing all {@link Justification}s for each statement
+ * Class writes on the justification index, removing all {@link Justification}s for each statement
  * specified by the caller.
  *
  * <p>Note: There is only one index for {@link Justification}s. The keys all use the {s,p,o} of the

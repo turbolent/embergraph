@@ -27,7 +27,7 @@ import org.embergraph.btree.IIndex;
 import org.embergraph.btree.IndexMetadata;
 
 /*
-* Test suite for restart-safety of {@link BTree}s backed by an {@link IJournal}.
+ * Test suite for restart-safety of {@link BTree}s backed by an {@link IJournal}.
  *
  * @todo explore flushing the indexCache as if a GC had occurred after a commit?
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -66,7 +66,7 @@ public class TestCommitList extends ProxyTestCase<Journal> {
   //    private Properties properties;
 
   //    /*
-//     * Re-open the same backing store.
+  //     * Re-open the same backing store.
   //     *
   //     * @param store
   //     *            the existing store.

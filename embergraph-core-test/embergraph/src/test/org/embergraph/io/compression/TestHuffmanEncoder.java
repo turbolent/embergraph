@@ -37,7 +37,7 @@ import java.util.zip.InflaterInputStream;
 import junit.framework.TestCase2;
 
 /*
-* Explores the built-in huffman coding support in the Deflate library. Unfortunately, {@link
+ * Explores the built-in huffman coding support in the Deflate library. Unfortunately, {@link
  * Deflater} does not provide access to the dictionary. For the B+Tree, what we generally want is to
  * use a canonical huffman code since it is both more space efficient and preserves the alphabetic
  * ordering of the coded values. However, this test suite might be refactored for store level record
@@ -183,10 +183,10 @@ public class TestHuffmanEncoder extends TestCase2 {
   public void test_huffman_reuse() throws IOException {
 
     final String[] messages = {
-        "this is an example of huffman encoding",
-        "this is an example of huffman encoding in which the decode and the encode are reused",
-        "the lazy brown dog jumped over the fence",
-        "Application and reuse of a {@link Deflater} and an {@link Inflater} to encode and decode byte[]s.  While instances of these classes are reused, concurrency is not tested (reuse is serialized)."
+      "this is an example of huffman encoding",
+      "this is an example of huffman encoding in which the decode and the encode are reused",
+      "the lazy brown dog jumped over the fence",
+      "Application and reuse of a {@link Deflater} and an {@link Inflater} to encode and decode byte[]s.  While instances of these classes are reused, concurrency is not tested (reuse is serialized)."
     };
 
     HuffmanEncoder c = new HuffmanEncoder();
@@ -350,8 +350,8 @@ public class TestHuffmanEncoder extends TestCase2 {
 
       } catch (EOFException ex) {
 
-      /*
-       * Ignore - this is how we notice the end of the input stream.
+        /*
+         * Ignore - this is how we notice the end of the input stream.
          *
          * @todo throwing and catching an exception is too expensive to
          * be done as the expected code path.

@@ -25,20 +25,18 @@ import java.util.concurrent.atomic.AtomicReference;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import org.apache.log4j.Logger;
-import org.embergraph.ganglia.GangliaListener;
 import org.embergraph.ganglia.GangliaService;
 import org.embergraph.ganglia.IHostReport;
 import org.embergraph.journal.GangliaPlugIn;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.Journal;
 import org.embergraph.rdf.sail.webapp.lbs.AbstractHostLBSPolicy;
-import org.embergraph.rdf.sail.webapp.lbs.IHALoadBalancerPolicy;
 import org.embergraph.rdf.sail.webapp.lbs.IHostMetrics;
 import org.embergraph.rdf.sail.webapp.lbs.IHostScoringRule;
 import org.embergraph.rdf.sail.webapp.lbs.ServiceScore;
 
 /*
-* Stochastically proxy the request to the services based on their load.
+ * Stochastically proxy the request to the services based on their load.
  *
  * <p>Note: This {@link IHALoadBalancerPolicy} has a dependency on the {@link GangliaPlugIn}. The
  * {@link GangliaPlugIn} must be setup to listen to the Ganglia protocol and build up an in-memory
@@ -81,7 +79,7 @@ public class GangliaLBSPolicy extends AbstractHostLBSPolicy {
   public interface InitParams extends AbstractHostLBSPolicy.InitParams {}
 
   //    /*
-//     * Place into descending order by load_one.
+  //     * Place into descending order by load_one.
   //     * <p>
   //     * Note: We do not rely on the ordering imposed by this comparator. Instead,
   //     * we filter the hosts for those that correspond to the joined services in
@@ -203,8 +201,8 @@ public class GangliaLBSPolicy extends AbstractHostLBSPolicy {
           break;
         }
 
-      /*
-       * Note: This recognizes the local host name as well as the
+        /*
+         * Note: This recognizes the local host name as well as the
          * canonical hostname. ganglia defaults to reporting the local
          * name of the host. embergraph defaults to using the canonical
          * name of the host. To make things line up, we check for a

@@ -38,7 +38,7 @@ import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.spo.SPO;
 
 /*
-* Advances the cursor to the next zOrderKey that is greater or equal than the first point in the
+ * Advances the cursor to the next zOrderKey that is greater or equal than the first point in the
  * next region. Note that this next key is not necessarily a hit (but, depending on the data) this
  * might be a miss again.
  *

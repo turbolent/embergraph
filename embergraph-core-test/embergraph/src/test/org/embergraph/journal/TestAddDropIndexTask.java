@@ -30,7 +30,7 @@ import org.embergraph.btree.IndexMetadata;
 import org.embergraph.journal.Journal.Options;
 
 /*
-* Test suite for {@link RegisterIndexTask} and {@link DropIndexTask}.
+ * Test suite for {@link RegisterIndexTask} and {@link DropIndexTask}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -84,8 +84,8 @@ public class TestAddDropIndexTask extends ProxyTestCase {
 
           log.info("Resolved future");
 
-        /*
-       * This verifies that the write task did not return control to
+          /*
+           * This verifies that the write task did not return control to
            * the caller until the write set of that task was committed.
            */
 
@@ -130,8 +130,8 @@ public class TestAddDropIndexTask extends ProxyTestCase {
 
                   protected Object doTask() throws Exception {
 
-                  /*
-       * Note: Throws an exception if the index is not registered.
+                    /*
+                     * Note: Throws an exception if the index is not registered.
                      */
 
                     IIndex ndx = getIndex(name);
@@ -148,8 +148,8 @@ public class TestAddDropIndexTask extends ProxyTestCase {
 
           assertNull(future.get());
 
-        /*
-       * The commit counter MUST NOT have been changed since we ran a
+          /*
+           * The commit counter MUST NOT have been changed since we ran a
            * read-only task.
            */
 
@@ -183,8 +183,8 @@ public class TestAddDropIndexTask extends ProxyTestCase {
 
           assertTrue("Index did not exist?", (Boolean) future.get());
 
-        /*
-       * This verifies that the write task did not return control to
+          /*
+           * This verifies that the write task did not return control to
            * the caller until the write set of that task was committed.
            */
 
@@ -225,8 +225,8 @@ public class TestAddDropIndexTask extends ProxyTestCase {
 
                   protected Object doTask() throws Exception {
 
-                  /*
-       * Note: Throws an exception if the index is not registered.
+                    /*
+                     * Note: Throws an exception if the index is not registered.
                      */
 
                     try {
@@ -250,8 +250,8 @@ public class TestAddDropIndexTask extends ProxyTestCase {
 
           assertNull(future.get());
 
-        /*
-       * We ran a read-only task so the commit counter MUST NOT have
+          /*
+           * We ran a read-only task so the commit counter MUST NOT have
            * been changed.
            */
 
@@ -311,8 +311,8 @@ public class TestAddDropIndexTask extends ProxyTestCase {
 
         assertEquals("indexUUID", indexUUID, future.get());
 
-      /*
-       * This verifies that the write task did not return control to the
+        /*
+         * This verifies that the write task did not return control to the
          * caller until the write set of that task was committed.
          */
 
@@ -341,8 +341,8 @@ public class TestAddDropIndexTask extends ProxyTestCase {
         // Note: the UUID for the pre-existing index is returned.
         assertEquals("indexUUID", indexUUID, future.get());
 
-      /*
-       * This verifies that no commit was performed since no data was
+        /*
+         * This verifies that no commit was performed since no data was
          * actually written on the store because the index was pre-existing.
          */
 
@@ -363,8 +363,8 @@ public class TestAddDropIndexTask extends ProxyTestCase {
         // should return true if the index was dropped.
         assertTrue("Index did not exist?", (Boolean) future.get());
 
-      /*
-       * Verify that a commit was performed.
+        /*
+         * Verify that a commit was performed.
          */
 
         assertEquals(
@@ -384,8 +384,8 @@ public class TestAddDropIndexTask extends ProxyTestCase {
         // should return false since the index does not exist.
         assertFalse("Index exists?", (Boolean) future.get());
 
-      /*
-       * Verify that a commit was NOT performed since no data was written
+        /*
+         * Verify that a commit was NOT performed since no data was written
          * by the task.
          */
 

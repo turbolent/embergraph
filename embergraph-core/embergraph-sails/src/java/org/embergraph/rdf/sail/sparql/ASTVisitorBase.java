@@ -162,7 +162,7 @@ import org.embergraph.rdf.sail.sparql.ast.SyntaxTreeBuilderVisitor;
 import org.embergraph.rdf.sail.sparql.ast.VisitorException;
 
 /*
-* Base class for visitors of the SPARQL AST.
+ * Base class for visitors of the SPARQL AST.
  *
  * @author arjohn
  * @openrdf

@@ -46,7 +46,6 @@ import org.embergraph.rdf.sparql.ast.BindingsClause;
 import org.embergraph.rdf.sparql.ast.FilterNode;
 import org.embergraph.rdf.sparql.ast.FunctionNode;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
-import org.embergraph.rdf.sparql.ast.IVariableBindingRequirements;
 import org.embergraph.rdf.sparql.ast.JoinGroupNode;
 import org.embergraph.rdf.sparql.ast.NamedSubqueryInclude;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
@@ -62,7 +61,7 @@ import org.embergraph.rdf.store.BDS;
 import org.embergraph.service.fts.FTS;
 
 /*
-* Test implementation of {@link IVariableBindingRequirements} interface.
+ * Test implementation of {@link IVariableBindingRequirements} interface.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  */

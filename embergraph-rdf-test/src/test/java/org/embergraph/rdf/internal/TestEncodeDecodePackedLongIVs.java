@@ -32,7 +32,7 @@ import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.openrdf.model.URI;
 
 /*
-* Unit tests for {@link PackedLongIV} and its associated {@link CompressedTimestampExtension}
+ * Unit tests for {@link PackedLongIV} and its associated {@link CompressedTimestampExtension}
  * extension.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>

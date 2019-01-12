@@ -37,7 +37,7 @@ import org.embergraph.counters.ICounterSet.IInstrumentFactory;
 import org.xml.sax.SAXException;
 
 /*
-* Unit tests for {@link CounterSet}.
+ * Unit tests for {@link CounterSet}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

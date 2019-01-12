@@ -28,7 +28,7 @@ import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IVariable;
 
 /*
-* An object which mocks the statistics for a single empty solution set. This is used to make some
+ * An object which mocks the statistics for a single empty solution set. This is used to make some
  * of the unit tests happy which were written before the {@link ISolutionSetStats} interface was
  * introduced.
  *

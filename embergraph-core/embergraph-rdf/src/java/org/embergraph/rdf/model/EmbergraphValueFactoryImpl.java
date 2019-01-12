@@ -31,14 +31,12 @@ import java.util.Map;
 import java.util.TimeZone;
 import java.util.UUID;
 import javax.xml.datatype.XMLGregorianCalendar;
-import org.embergraph.cache.WeakValueCache;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.impl.extensions.DateTimeExtension;
 import org.embergraph.rdf.internal.impl.literal.XSDUnsignedByteIV;
 import org.embergraph.rdf.internal.impl.literal.XSDUnsignedIntIV;
 import org.embergraph.rdf.internal.impl.literal.XSDUnsignedLongIV;
 import org.embergraph.rdf.internal.impl.literal.XSDUnsignedShortIV;
-import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.util.concurrent.CanonicalFactory;
 import org.openrdf.model.BNode;
 import org.openrdf.model.Literal;
@@ -49,7 +47,7 @@ import org.openrdf.model.datatypes.XMLDatatypeUtil;
 import org.openrdf.model.impl.BooleanLiteralImpl;
 
 /*
-* An implementation using {@link EmbergraphValue}s and {@link EmbergraphStatement}s. Values
+ * An implementation using {@link EmbergraphValue}s and {@link EmbergraphStatement}s. Values
  * constructed using this factory do NOT have term identifiers assigned. Statements constructed
  * using this factory do NOT have statement identifiers assigned. Those metadata can be resolved
  * against the various indices and then set on the returned values and statements.
@@ -102,7 +100,7 @@ public class EmbergraphValueFactoryImpl implements EmbergraphValueFactory {
     // @see <a href="http://trac.blazegraph.com/ticket/980"> Object position query hint is not a
     // Literal </a>
     //        /*
-//         * Cache the IV on the EmbergraphValue for these boolean constants.
+    //         * Cache the IV on the EmbergraphValue for these boolean constants.
     //         *
     //         * @see <a href="http://trac.blazegraph.com/ticket/983"> Concurrent insert
     //         *      data with boolean object causes IllegalArgumentException </a>
@@ -156,7 +154,7 @@ public class EmbergraphValueFactoryImpl implements EmbergraphValueFactory {
   }
 
   //    /*
-//     * Return the instance associated with the <i>namespace</i>.
+  //     * Return the instance associated with the <i>namespace</i>.
   //     * <p>
   //     * Note: This canonicalizing mapping for {@link EmbergraphValueFactoryImpl}s is
   //     * based on the namespace of the {@link LexiconRelation}. This makes the
@@ -594,8 +592,8 @@ public class EmbergraphValueFactoryImpl implements EmbergraphValueFactory {
 
       if (iv == null || !iv.isNullIV()) {
 
-      /*
-       * A value from the same value factory whose IV is either
+        /*
+         * A value from the same value factory whose IV is either
          * unknown or defined (but not a NullIV or DummyIV).
          */
 

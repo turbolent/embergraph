@@ -1,10 +1,9 @@
 package org.embergraph.service;
 
 import java.util.UUID;
-import org.embergraph.service.LoadBalancerService.UpdateTask;
 
 /*
-* Per-service metadata and a score for that service which gets updated periodically by the {@link
+ * Per-service metadata and a score for that service which gets updated periodically by the {@link
  * UpdateTask}. {@link ServiceScore}s are a <em>resource utilization</em> measure. They are higher
  * for a service which is more highly utilized. There are several ways to look at the score,
  * including the {@link #rawScore}, the {@link #rank}, and the {@link #drank normalized

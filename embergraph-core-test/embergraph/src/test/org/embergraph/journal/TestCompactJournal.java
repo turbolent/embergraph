@@ -34,7 +34,7 @@ import org.embergraph.btree.IndexMetadata;
 import org.embergraph.btree.keys.KV;
 
 /*
-* Test suite for {@link Journal#compact(java.io.File)}.
+ * Test suite for {@link Journal#compact(java.io.File)}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

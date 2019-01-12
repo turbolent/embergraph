@@ -4,7 +4,7 @@ import java.util.Arrays;
 import org.embergraph.btree.IndexMetadata;
 
 /*
-* The result of a {@link JoinIndexPartitionTask}.
+ * The result of a {@link JoinIndexPartitionTask}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -33,7 +33,7 @@ import org.embergraph.util.BytesUtil;
 import org.openrdf.model.Literal;
 
 /*
-* Internal value representing an inline IP address. Uses the IPv4Address class to represent the IP
+ * Internal value representing an inline IP address. Uses the IPv4Address class to represent the IP
  * address and perform the translation to and from a <code>byte[]</code>, which is then used
  * directly in the IV key (after the flags).
  *

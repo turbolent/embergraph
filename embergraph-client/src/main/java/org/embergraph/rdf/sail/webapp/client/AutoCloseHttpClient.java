@@ -24,7 +24,7 @@ import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.embergraph.util.StackInfoReport;
 
 /*
-* A {@link HttpClient} that supports the {@link AutoCloseable} protocol and which will be
+ * A {@link HttpClient} that supports the {@link AutoCloseable} protocol and which will be
  * transparently closed by the {@link RemoteRepositoryManager} if {@link
  * RemoteRepositoryManager#close()} is invoked.
  *

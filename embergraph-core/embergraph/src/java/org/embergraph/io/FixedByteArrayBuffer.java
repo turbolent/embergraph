@@ -28,7 +28,7 @@ package org.embergraph.io;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Efficient absolute get/put operations on a slice of a byte[]. This class is not thread-safe under
+ * Efficient absolute get/put operations on a slice of a byte[]. This class is not thread-safe under
  * mutation because the operations are not atomic. Concurrent operations on the same region of the
  * slice can reveal partial updates.
  *

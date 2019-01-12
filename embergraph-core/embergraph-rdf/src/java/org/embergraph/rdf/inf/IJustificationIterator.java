@@ -24,7 +24,7 @@ package org.embergraph.rdf.inf;
 import org.embergraph.striterator.IChunkedIterator;
 
 /*
-* Interface for chunked {@link Justification} iterators.
+ * Interface for chunked {@link Justification} iterators.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

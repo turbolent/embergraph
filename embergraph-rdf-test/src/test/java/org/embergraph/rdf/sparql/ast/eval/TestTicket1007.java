@@ -18,7 +18,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.eval;
 
 /*
-* Various tests covering different constellations where values are constructed using BIND and
+ * Various tests covering different constellations where values are constructed using BIND and
  * reused in other parts of the query, such as
  *
  * <p>- testing inlined vs. non-inlined configuration - using BIND prior to vs. after

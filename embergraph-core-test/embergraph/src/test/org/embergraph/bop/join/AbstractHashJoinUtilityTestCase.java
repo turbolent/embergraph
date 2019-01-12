@@ -59,7 +59,7 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDF;
 
 /*
-* Test suite for both {@link HTreeHashJoinUtility} and {@link JVMHashJoinUtility}.
+ * Test suite for both {@link HTreeHashJoinUtility} and {@link JVMHashJoinUtility}.
  *
  * <p>TODO Unit test of optional solutions
  *
@@ -1812,7 +1812,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
    */
 
   //    /*
-//     * Unit tests for NOT EXISTS based on Sesame <code>sparql11-exists-06</code>
+  //     * Unit tests for NOT EXISTS based on Sesame <code>sparql11-exists-06</code>
   //     * . This uses the same data as the previous test (and has the same
   //     * solutions), but the query is slightly different and includes a FILTER
   //     * inside of the EXISTS graph pattern.

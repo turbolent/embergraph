@@ -25,7 +25,7 @@ import org.apache.log4j.Level;
 import org.embergraph.btree.keys.TestKeyBuilder;
 
 /*
-* Test suite for iterators that visit only dirty nodes or leaves. This test suite was factored
+ * Test suite for iterators that visit only dirty nodes or leaves. This test suite was factored
  * apart from {@link TestIterators} since this suite relies on (and to some extent validates) both
  * node and leaf IO and copy-on-write mechanisms.
  *

@@ -25,7 +25,7 @@ import java.util.Set;
 import org.embergraph.bop.IVariable;
 
 /*
-* Interface and annotations for AST nodes which have a {@link ProjectionNode}.
+ * Interface and annotations for AST nodes which have a {@link ProjectionNode}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

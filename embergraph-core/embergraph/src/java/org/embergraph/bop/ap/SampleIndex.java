@@ -21,7 +21,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.ap;
 
-import cutthecrap.utils.striterators.IFilter;
 import it.unimi.dsi.bits.BitVector;
 import it.unimi.dsi.bits.LongArrayBitVector;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
@@ -37,22 +36,17 @@ import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpContextBase;
 import org.embergraph.bop.IPredicate;
 import org.embergraph.btree.AbstractBTree;
-import org.embergraph.btree.ILeafCursor;
-import org.embergraph.btree.ILinearList;
 import org.embergraph.btree.IRangeQuery;
 import org.embergraph.btree.ITuple;
-import org.embergraph.btree.ITupleCursor;
 import org.embergraph.btree.filter.Advancer;
-import org.embergraph.btree.view.FusedView;
 import org.embergraph.relation.IRelation;
 import org.embergraph.relation.accesspath.AccessPath;
 import org.embergraph.relation.accesspath.IAccessPath;
-import org.embergraph.relation.rule.IAccessPathExpander;
 import org.embergraph.striterator.IKeyOrder;
 import org.embergraph.util.Bytes;
 
 /*
-* Sampling operator for the {@link IAccessPath} implied by an {@link IPredicate}.
+ * Sampling operator for the {@link IAccessPath} implied by an {@link IPredicate}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: AbstractSampleIndex.java 3672 2010-09-28 23:39:42Z thompsonbry $
@@ -229,8 +223,8 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
 
       if (limit >= rangeCount) {
 
-      /*
-       * The sample will contain everything in the access path.
+        /*
+         * The sample will contain everything in the access path.
          */
         return new AccessPathSample<E>(limit, accessPath);
       }
@@ -369,8 +363,8 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
 
       if (skipCount > 0) {
 
-      /*
-       * If the skip count is positive, then skip over N tuples.
+        /*
+         * If the skip count is positive, then skip over N tuples.
          */
 
         final long nextIndex = Math.min(ndx.getEntryCount() - 1, currentIndex + skipCount);
@@ -465,8 +459,8 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
 
       if (nread < offsets.length - 1) {
 
-      /*
-       * Skip to the next tuple.
+        /*
+         * Skip to the next tuple.
          */
 
         final long nextIndex = offsets[nread];
@@ -611,8 +605,8 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
       final long rangeCount = (toIndex - fromIndex);
 
       if (limit > rangeCount) {
-      /*
-       * Note: cast valid since limit is int32 and limit LT rangeCount
+        /*
+         * Note: cast valid since limit is int32 and limit LT rangeCount
          * so rangeCount may be cast to int32.
          */
         limit = (int) rangeCount;
@@ -682,8 +676,8 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
       final long rangeCount = (toIndex - fromIndex);
 
       if (limit > rangeCount) {
-      /*
-       * Note: cast valid since limit is int32 and limit LT rangeCount
+        /*
+         * Note: cast valid since limit is int32 and limit LT rangeCount
          * so rangeCount may be cast to int32.
          */
         limit = (int) rangeCount;
@@ -734,8 +728,8 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
       final long rangeCount2 = (toIndex - fromIndex);
 
       if (rangeCount2 > Integer.MAX_VALUE) {
-      /*
-       * The utility of this class is limited to smaller range counts
+        /*
+         * The utility of this class is limited to smaller range counts
          * so it will reject anything with a very large range count.
          */
         throw new UnsupportedOperationException();
@@ -763,8 +757,8 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
       // Choose random tuple indices for the remaining tuples.
       for (int i = 0; i < limit; i++) {
 
-      /*
-       * Look for an unused bit starting at this index. If necessary,
+        /*
+         * Look for an unused bit starting at this index. If necessary,
          * this will wrap around to zero.
          */
 
@@ -857,8 +851,8 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
       // Choose random tuple indices for the remaining tuples.
       for (int i = 0; i < limit; i++) {
 
-      /*
-       * Look for an unused bit starting at this index. If necessary,
+        /*
+         * Look for an unused bit starting at this index. If necessary,
          * this will wrap around to zero.
          */
 

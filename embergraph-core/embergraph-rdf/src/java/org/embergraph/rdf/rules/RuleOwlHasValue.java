@@ -25,7 +25,7 @@ import org.openrdf.model.vocabulary.OWL;
 import org.openrdf.model.vocabulary.RDF;
 
 /*
-* owl:hasValue
+ * owl:hasValue
  *
  * <pre>
  *  (x rdf:type a), (a rdf:type owl:Restriction), (a owl:onProperty p), (a owl:hasValue v) -&gt; (x p v)

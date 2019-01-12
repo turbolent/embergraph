@@ -23,7 +23,7 @@ package org.embergraph.btree;
 import java.util.NoSuchElementException;
 
 /*
-* Visits the direct children of a {@link Node} in the external key ordering.
+ * Visits the direct children of a {@link Node} in the external key ordering.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -87,12 +87,12 @@ class ChildIterator implements INodeIterator {
     {
       /*
        * figure out the last index to visit.
-         *
-         * Note: Unlike a leaf, we do visit the child in which the toKey
-         * would be found.  This is necessary in order to ensure that we
-         * visit any keys in leaves spanned by the child that are less
-         * than the toKey.
-         */
+       *
+       * Note: Unlike a leaf, we do visit the child in which the toKey
+       * would be found.  This is necessary in order to ensure that we
+       * visit any keys in leaves spanned by the child that are less
+       * than the toKey.
+       */
       int toIndex;
 
       if (toKey != null) {
@@ -100,8 +100,8 @@ class ChildIterator implements INodeIterator {
         toIndex = node.findChild(toKey);
 
         if (fromIndex > toIndex) {
-        /*
-       * Note: we test for from/to key out of order _before_
+          /*
+           * Note: we test for from/to key out of order _before_
            * incrementing the toIndex.
            */
           throw new IllegalArgumentException("fromKey > toKey");

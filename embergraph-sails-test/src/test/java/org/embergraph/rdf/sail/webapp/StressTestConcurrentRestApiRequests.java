@@ -68,10 +68,9 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.impl.ValueFactoryImpl;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.TupleQueryResult;
-import org.openrdf.query.parser.sparql.SPARQLUpdateTest;
 
 /*
-* Proxied test suite.
+ * Proxied test suite.
  *
  * <p>Note: Also see {@link SPARQLUpdateTest}. These two test suites SHOULD be kept synchronized.
  * {@link SPARQLUpdateTest} runs against a local kb instance while this class runs against the NSS.
@@ -119,7 +118,6 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
         "test.*", // normal
         new LinkedHashSet<>(Collections.singletonList(BufferMode.MemStore)),
         TestMode.quads);
-
   }
 
   private static final String EX_NS = "http://example.org/";
@@ -223,8 +221,8 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
       while (true) {
         for (Map.Entry<String, ReadWriteLock> e : namespaces.entrySet()) {
           if (namespaceExistCounter.get() == 0) {
-          /*
-       * Either we need to run some operations that create new
+            /*
+             * Either we need to run some operations that create new
              * namespaces or we need to NOT run operations that
              * destroy the last namespace.
              */
@@ -249,15 +247,15 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
             takenLock.lock();
           }
           if (namespaces.get(namespace) != lock) {
-          /*
-       * The lock object was changed. Release the lock and
+            /*
+             * The lock object was changed. Release the lock and
              * look some more.
              */
             takenLock.unlock();
             continue; // continue looking.
           }
-        /*
-       * Namespace still exists in the map and is governed by the
+          /*
+           * Namespace still exists in the map and is governed by the
            * same lock.
            */
           return namespace;
@@ -285,8 +283,8 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
         final String namespace, final boolean readOnly, final boolean remove) {
       if (namespace == null) throw new IllegalArgumentException();
       if (remove && readOnly) {
-      /*
-       * Note: We might need to relax this constraint if we allow
+        /*
+         * Note: We might need to relax this constraint if we allow
          * DESTROY NAMESPACE operation without regard to concurrent
          * client API requests. (Or perhaps we will just not use this
          * map when we do that since the whole point is to violate the
@@ -456,7 +454,7 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
   public void test_concurrentClients() throws Exception {
     if (!EmbergraphStatics.runKnownBadTests)
       return; // FIXME Conditionally disabled in CI due to "namespace: EXISTS" test harness
-              // failures.
+    // failures.
     /*
      * Note: Using a timeout will cause any tasks still running when the
      * timeout expires to be interrupted.
@@ -734,8 +732,8 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
           if (isInnerCause(ex, InterruptedException.class)
               || isInnerCause(ex, ClosedByInterruptException.class)) {
 
-          /*
-       * Note: Tasks will be interrupted if a timeout occurs
+            /*
+             * Note: Tasks will be interrupted if a timeout occurs
              * when attempting to run the submitted tasks - this is
              * normal.
              */
@@ -844,7 +842,7 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
     private final boolean readOnly;
 
     //        /*
-//         * The probability that the task will be interrupted while it is
+    //         * The probability that the task will be interrupted while it is
     //         * executing (this probability is independent for each task so it does
     //         * not need to be normalized) (default is ZERO).
     //         */
@@ -868,14 +866,14 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
     }
 
     //        /*
-//         * Return true iff this is a read-only task.
+    //         * Return true iff this is a read-only task.
     //         */
     //        public final boolean isReadOnly() {
     //            return readOnly;
     //        }
 
     //        /*
-//         * The probability that the task will be interrupted while it is
+    //         * The probability that the task will be interrupted while it is
     //         * executing (this probability is independent for each task so it does
     //         * not need to be normalized) (default is ZERO).
     //         */
@@ -928,8 +926,8 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
        */
       @Override
       public final Void call() throws Exception {
-      /*
-       * The UUID that will be assigned to a REST API request that we
+        /*
+         * The UUID that will be assigned to a REST API request that we
          * can cancel from the test harness.
          */
         final UUID uuid = UUID.randomUUID();
@@ -938,8 +936,8 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
           doApply(rmgr, uuid);
           return null;
         } catch (Throwable t) {
-        /*
-       * Note: The stack traces here are from the *client*. Any
+          /*
+           * Note: The stack traces here are from the *client*. Any
            * stack trace from the server shows up as the response
            * entity and we DO NOT have visibility into that trace (no
            * RMI style stack frame from the server).
@@ -953,8 +951,8 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
            */
           if (isTerminationByInterrupt(t)) {
             if (log.isInfoEnabled()) log.info(t);
-          /*
-       * The test harness is either being torn down or has
+            /*
+             * The test harness is either being torn down or has
              * explicitly interrupted the execution of this
              * RestApiOp. We will wrap (a) and re-throw the
              * exception; and (b) CANCEL the operation on the
@@ -998,7 +996,6 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
         if (InnerCause.isInnerCause(cause, ClosedByInterruptException.class)) return true;
         if (InnerCause.isInnerCause(cause, BufferClosedException.class)) return true;
         return InnerCause.isInnerCause(cause, QueryTimeoutException.class);
-
       }
     }
 
@@ -1571,8 +1568,8 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
                   @Override
                   public Void call() throws Exception {
 
-                  /*
-       * Atomic decision whether to destroy the namespace
+                    /*
+                     * Atomic decision whether to destroy the namespace
                      * (MUTEX).
                      *
                      * TODO This MUTEX section means that at most one
@@ -1690,7 +1687,7 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
   }
 }
 /*
-* FIXME Verify that we are observing CANCEL requests for non-SPARQL QUERY and non-SPARQL UPDATE
+ * FIXME Verify that we are observing CANCEL requests for non-SPARQL QUERY and non-SPARQL UPDATE
  * operations (specifically CREATE NAMESPACE and DROP NAMESPACE) on the server. Go ahead and test
  * out the CANCEL DROP NAMESPACE manually using a large load into one namespace + commit. Then DROP
  * NAMESPACE and look for the operation running in the status window. Finally cancel that operation

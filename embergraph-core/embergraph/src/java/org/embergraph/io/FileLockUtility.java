@@ -30,17 +30,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.nio.channels.FileChannel;
-import java.nio.channels.FileLock;
 import java.util.UUID;
 import org.apache.log4j.Logger;
-import org.embergraph.journal.AbstractJournal;
-import org.embergraph.journal.FileMetadata;
 import org.embergraph.journal.Options;
-import org.embergraph.resources.StoreManager;
 
 /*
-* Utility methods for managing exlusive {@link FileLock}s and advisory locks depending on what is
+ * Utility methods for managing exlusive {@link FileLock}s and advisory locks depending on what is
  * supported by the platform, file access mode, and volume on which the file resides.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -122,8 +117,8 @@ public class FileLockUtility {
 
         } else {
 
-        /*
-       * A null return indicates that someone else holds the lock.
+          /*
+           * A null return indicates that someone else holds the lock.
            */
           try {
 
@@ -135,16 +130,16 @@ public class FileLockUtility {
             log.error(t, t);
           }
 
-        /*
-       * We were not able to get a lock on the file.
+          /*
+           * We were not able to get a lock on the file.
            */
           throw new RuntimeException("Already locked: " + file.getAbsoluteFile());
         }
 
       } catch (IOException ex) {
 
-      /*
-       * The platform does not support FileLock (memory mapped files,
+        /*
+         * The platform does not support FileLock (memory mapped files,
          * read-only files, NFS mounted files all have this problem).
          */
         log.warn("FileLock not supported: file=" + file.getAbsolutePath() + " : " + ex);
@@ -221,8 +216,8 @@ public class FileLockUtility {
 
       if (raf.getChannel().isOpen()) {
 
-      /*
-       * close the file iff open.
+        /*
+         * close the file iff open.
          *
          * Note: a thread that is interrupted during an IO can cause the
          * file to be closed asynchronously. This is handled by the

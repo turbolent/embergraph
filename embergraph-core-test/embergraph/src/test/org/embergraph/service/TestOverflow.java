@@ -36,7 +36,7 @@ import org.embergraph.resources.ResourceManager.Options;
 import org.embergraph.service.ndx.ClientIndexView;
 
 /*
-* Simple test verifies that a scale-out index is preserved across both synchronous and asynchronous
+ * Simple test verifies that a scale-out index is preserved across both synchronous and asynchronous
  * overflow events.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

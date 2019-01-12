@@ -22,13 +22,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.internal.encoder;
 
 import org.embergraph.bop.IBindingSet;
-import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVCache;
-import org.embergraph.rdf.internal.IVUtility;
-import org.embergraph.rdf.model.EmbergraphValue;
 
 /*
-* Interface for encoding {@link IBindingSet}s comprised of {@link IV}s. The interface is slightly
+ * Interface for encoding {@link IBindingSet}s comprised of {@link IV}s. The interface is slightly
  * more complicated than it otherwise would be due to (a) {@link IVCache} and (b) the need to vector
  * operations.
  *

@@ -27,7 +27,6 @@ import java.util.Iterator;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVUtility;
 import org.embergraph.rdf.model.StatementEnum;
-import org.embergraph.rdf.rules.InferenceEngine;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.SPO;
 import org.embergraph.rdf.spo.SPOKeyOrder;
@@ -38,7 +37,7 @@ import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 
 /*
-* Provides backward chaining for reverse property collection on owl:sameAs for the ?PO and ??O
+ * Provides backward chaining for reverse property collection on owl:sameAs for the ?PO and ??O
  * access paths.
  *
  * <p>Note: This is a reverse properties query: we know o and and we want to know all {s,p} tuples

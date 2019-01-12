@@ -26,7 +26,7 @@ import java.util.Vector;
 import junit.framework.TestCase2;
 
 /*
-* Abstract base class for cache policy test defines some test harness helper methods and utility
+ * Abstract base class for cache policy test defines some test harness helper methods and utility
  * classes.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

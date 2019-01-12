@@ -20,15 +20,13 @@ package org.embergraph.rdf.sail.webapp;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.concurrent.TimeoutException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.quorum.AsynchronousQuorumCloseException;
 
 /*
-* Proxy class / factory pattern to break embergraph-jini dependency. See BLZG-1370.
+ * Proxy class / factory pattern to break embergraph-jini dependency. See BLZG-1370.
  *
  * @author beebs
  */

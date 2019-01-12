@@ -37,7 +37,7 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
 /*
-* Test suite for {@link OwlSameAsPropertiesExpandingIterator}.
+ * Test suite for {@link OwlSameAsPropertiesExpandingIterator}.
  *
  * @author <a href="mailto:mpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$

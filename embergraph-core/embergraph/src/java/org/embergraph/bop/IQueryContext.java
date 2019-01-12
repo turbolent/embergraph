@@ -22,11 +22,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop;
 
 import java.util.UUID;
-import org.embergraph.htree.HTree;
 import org.embergraph.rwstore.sector.IMemoryManager;
 
 /*
-* Context for the evaluation of a query pipeline.
+ * Context for the evaluation of a query pipeline.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

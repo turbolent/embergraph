@@ -27,7 +27,7 @@ import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /*
-* Unit tests for commit functionality that do not trigger copy-on-write.
+ * Unit tests for commit functionality that do not trigger copy-on-write.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

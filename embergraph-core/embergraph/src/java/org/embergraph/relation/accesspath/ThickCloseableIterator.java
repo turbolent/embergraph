@@ -30,7 +30,7 @@ import java.io.Serializable;
 import java.util.NoSuchElementException;
 
 /*
-* An {@link ICloseableIterator} that may be serialized and sent to a remote JVM for consumption.
+ * An {@link ICloseableIterator} that may be serialized and sent to a remote JVM for consumption.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -19,8 +19,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.btree;
 
-import it.unimi.dsi.bits.BitVector;
-import it.unimi.dsi.bits.LongArrayBitVector;
 import it.unimi.dsi.io.InputBitStream;
 import it.unimi.dsi.io.OutputBitStream;
 import java.io.Externalizable;
@@ -29,11 +27,8 @@ import java.io.InputStream;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.io.OutputStream;
-import java.util.Iterator;
 import org.apache.log4j.Logger;
-import org.embergraph.btree.data.DefaultLeafCoder;
 import org.embergraph.btree.data.ILeafData;
-import org.embergraph.btree.filter.ITupleFilter;
 import org.embergraph.btree.raba.AbstractRaba;
 import org.embergraph.btree.raba.IRaba;
 import org.embergraph.btree.raba.MutableKeysRaba;
@@ -45,14 +40,12 @@ import org.embergraph.io.DataOutputBuffer;
 import org.embergraph.io.FixedByteArrayBuffer;
 import org.embergraph.io.LongPacker;
 import org.embergraph.io.ShortPacker;
-import org.embergraph.journal.ITx;
 import org.embergraph.mdi.IResourceMetadata;
 import org.embergraph.rawstore.IRawStore;
-import org.embergraph.service.IDataService;
 import org.embergraph.util.BytesUtil;
 
 /*
-* An object used to stream key scan results back to the client.
+ * An object used to stream key scan results back to the client.
  *
  * <p>Note: The {@link IRangeQuery} bit flags may be used to indicate which data and metadata are
  * returned. If the corresponding data was not requested then the access methods for that data will
@@ -157,7 +150,7 @@ public class ResultSet implements ILeafData, Externalizable {
   }
 
   //    /*
-//     * The next key that should be used to retrieve keys and/or values starting
+  //     * The next key that should be used to retrieve keys and/or values starting
   //     * from the first possible successor of the {@link #getLastKey()} visited by
   //     * the iterator in this operation (the successor is formed by appending a
   //     * <code>nul</code> byte to the {@link #getLastKey()}).
@@ -593,8 +586,8 @@ public class ResultSet implements ILeafData, Externalizable {
 
       } else {
 
-      /*
-       * Wrap the coded the keys.
+        /*
+         * Wrap the coded the keys.
          */
 
         // the byte length of the coded keys.
@@ -635,8 +628,8 @@ public class ResultSet implements ILeafData, Externalizable {
 
       } else {
 
-      /*
-       * Wrap the coded the values.
+        /*
+         * Wrap the coded the values.
          */
 
         // the byte length of the coded values.
@@ -953,8 +946,8 @@ public class ResultSet implements ILeafData, Externalizable {
 
       if (tupleSerializer == null) {
 
-      /*
-       * Set lazily in case the ITupleSerializer was overridden by a
+        /*
+         * Set lazily in case the ITupleSerializer was overridden by a
          * filter chain that converts the object type of the elements
          * serialized within the tuple. For example, the logical row
          * scan for the SparseRowStore does this when it converts
@@ -1044,7 +1037,7 @@ public class ResultSet implements ILeafData, Externalizable {
   }
 
   //    /*
-//     * The #of tuples visited by the iterator.
+  //     * The #of tuples visited by the iterator.
   //     * <p>
   //     * Note: This is is the same as the values returned by
   //     * {@link #getKeyCount()} or {@link #getValueCount()}. It DOES NOT report
@@ -1144,7 +1137,7 @@ public class ResultSet implements ILeafData, Externalizable {
   }
 
   //    /*
-//     * FIXME Remove. This is for debugging.
+  //     * FIXME Remove. This is for debugging.
   //     */
   //    private static final boolean writebits = false;
 

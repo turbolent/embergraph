@@ -37,7 +37,7 @@ import org.apache.log4j.Logger;
 import org.embergraph.util.InnerCause;
 
 /*
-* Test the ability to rollback a commit.
+ * Test the ability to rollback a commit.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -250,8 +250,8 @@ public class TestDoubleOpen extends ProxyTestCase<Journal> {
 
         if ((cause = InnerCause.getInnerCause(t, OverlappingFileLockException.class)) != null) {
 
-        /*
-       * This is the expected exception per
+          /*
+           * This is the expected exception per
            * the javadoc.
            */
 
@@ -259,8 +259,8 @@ public class TestDoubleOpen extends ProxyTestCase<Journal> {
 
         } else if ((cause = InnerCause.getInnerCause(t, IOException.class)) != null) {
 
-        /*
-       * This is another exception which does
+          /*
+           * This is another exception which does
            * in fact occur some percentage of the
            * time.
            */

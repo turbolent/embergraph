@@ -27,7 +27,7 @@ import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /*
-* Query hint for turning on/off a distinct filter over the triples extracted from the default graph
+ * Query hint for turning on/off a distinct filter over the triples extracted from the default graph
  * in quads mode.
  *
  * <p>By default, a DISTINCT filter is applied when evaluating access paths against the default

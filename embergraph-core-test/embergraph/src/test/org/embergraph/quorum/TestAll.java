@@ -32,7 +32,7 @@ import junit.textui.ResultPrinter;
 import org.apache.log4j.Logger;
 
 /*
-* Aggregates test suites in increasing dependency order.
+ * Aggregates test suites in increasing dependency order.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

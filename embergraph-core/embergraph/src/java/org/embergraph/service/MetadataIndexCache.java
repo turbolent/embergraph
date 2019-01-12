@@ -8,7 +8,7 @@ import org.embergraph.mdi.MetadataIndex.MetadataIndexMetadata;
 import org.embergraph.util.InnerCause;
 
 /*
-* Concrete implementation for {@link IMetadataIndex} views.
+ * Concrete implementation for {@link IMetadataIndex} views.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -49,8 +49,8 @@ public class MetadataIndexCache extends AbstractIndexCache<IMetadataIndex> {
         {
           if (timestamp == ITx.UNISOLATED || timestamp == ITx.READ_COMMITTED) {
 
-          /*
-       * A class that is willing to update its cache if the client
+            /*
+             * A class that is willing to update its cache if the client
              * discovers stale locators.
              */
 
@@ -58,8 +58,8 @@ public class MetadataIndexCache extends AbstractIndexCache<IMetadataIndex> {
 
           } else {
 
-          /*
-       * A class that caches all the locators. This is used for
+            /*
+             * A class that caches all the locators. This is used for
              * historical reads since the locators can not become stale.
              */
 

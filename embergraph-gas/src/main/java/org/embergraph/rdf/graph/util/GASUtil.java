@@ -22,7 +22,7 @@ import org.openrdf.model.Statement;
 import org.openrdf.model.Value;
 
 /*
-* Utility class for operations on the public interfaces.
+ * Utility class for operations on the public interfaces.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

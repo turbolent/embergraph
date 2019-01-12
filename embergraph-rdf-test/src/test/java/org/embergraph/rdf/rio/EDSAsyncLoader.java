@@ -37,7 +37,7 @@ import org.embergraph.service.EmbeddedFederation;
 import org.openrdf.rio.RDFFormat;
 
 /*
-*
+ *
  *
  * <pre>
  * -server -Xmx1000m

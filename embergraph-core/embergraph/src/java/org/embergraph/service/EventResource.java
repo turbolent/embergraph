@@ -29,7 +29,7 @@ import org.embergraph.btree.IndexMetadata;
 import org.embergraph.mdi.LocalPartitionMetadata;
 
 /*
-* Semi-structured representation of the data service on which the event occurred, the name of the
+ * Semi-structured representation of the data service on which the event occurred, the name of the
  * index, and the index partition identifier.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

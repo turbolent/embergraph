@@ -40,7 +40,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 /*
-* Extension of {@link TestCase} that supports logging, loading test resources, and hierarchical
+ * Extension of {@link TestCase} that supports logging, loading test resources, and hierarchical
  * properties.
  *
  * <p>Note: When using Maven (or Ant), you need to be aware that that your <code>project.xml</code>
@@ -120,8 +120,8 @@ public abstract class TestCase2 extends TestCase {
     for (int i = 0; i < expected.length; i++) {
 
       if (expected[i] != actual[i]) {
-      /*
-       * Only do message construction if we know that the assert will
+        /*
+         * Only do message construction if we know that the assert will
          * fail.
          */
         assertEquals(msg + "values differ: index=" + i, expected[i], actual[i]);
@@ -189,8 +189,8 @@ public abstract class TestCase2 extends TestCase {
     for (int i = 0; i < expected.length; i++) {
 
       if (expected[i] != actual[i]) {
-      /*
-       * Only do the message construction if we know that the assert
+        /*
+         * Only do the message construction if we know that the assert
          * will fail.
          */
         assertEquals(msg + "values differ: index=" + i, expected[i], actual[i]);
@@ -236,8 +236,8 @@ public abstract class TestCase2 extends TestCase {
     for (int i = 0; i < expected.length; i++) {
 
       if (expected[i] != actual[i]) {
-      /*
-       * Only do the message construction if we know that the assert
+        /*
+         * Only do the message construction if we know that the assert
          * will fail.
          */
         assertEquals(msg + "values differ: index=" + i, expected[i], actual[i]);
@@ -283,8 +283,8 @@ public abstract class TestCase2 extends TestCase {
     for (int i = 0; i < expected.length; i++) {
 
       if (expected[i] != actual[i]) {
-      /*
-       * Only do the message construction if we know that the assert
+        /*
+         * Only do the message construction if we know that the assert
          * will fail.
          */
         assertEquals(msg + "values differ: index=" + i, expected[i], actual[i]);
@@ -331,8 +331,8 @@ public abstract class TestCase2 extends TestCase {
     for (int i = 0; i < expected.length; i++) {
 
       if (expected[i] != actual[i]) {
-      /*
-       * Only do the message construction if we know that the assert
+        /*
+         * Only do the message construction if we know that the assert
          * will fail.
          */
         assertEquals(msg + "values differ: index=" + i, expected[i], actual[i]);
@@ -378,8 +378,8 @@ public abstract class TestCase2 extends TestCase {
     for (int i = 0; i < expected.length; i++) {
 
       if (expected[i] != actual[i]) {
-      /*
-       * Only do the message construction if we know that the assert
+        /*
+         * Only do the message construction if we know that the assert
          * will fail.
          */
         assertEquals(msg + "values differ: index=" + i, expected[i], actual[i]);
@@ -436,8 +436,8 @@ public abstract class TestCase2 extends TestCase {
 
       } catch (AssertionFailedError ex) {
 
-      /*
-       * Only do the message construction once the assertion is known
+        /*
+         * Only do the message construction once the assertion is known
          * to fail.
          */
         fail(msg + "values differ: index=" + i, ex);
@@ -494,8 +494,8 @@ public abstract class TestCase2 extends TestCase {
 
       } catch (AssertionFailedError ex) {
 
-      /*
-       * Only do the message construction once the assertion is known
+        /*
+         * Only do the message construction once the assertion is known
          * to fail.
          */
         fail(msg + "values differ: index=" + i, ex);
@@ -551,8 +551,8 @@ public abstract class TestCase2 extends TestCase {
 
       } catch (AssertionFailedError ex) {
 
-      /*
-       * Only do the message construction once the assertion is known
+        /*
+         * Only do the message construction once the assertion is known
          * to fail.
          */
 
@@ -672,8 +672,8 @@ public abstract class TestCase2 extends TestCase {
       try {
         assertSameValue(expected[i], g);
       } catch (AssertionFailedError ex) {
-      /*
-       * Only do message construction if we know that the assert will
+        /*
+         * Only do message construction if we know that the assert will
          * fail.
          */
         fail(
@@ -758,7 +758,7 @@ public abstract class TestCase2 extends TestCase {
   }
 
   //    /*
-//     * Verifies that the iterator visits the specified objects in some
+  //     * Verifies that the iterator visits the specified objects in some
   //     * arbitrary ordering and that the iterator is exhausted once all
   //     * expected objects have been visited.  The implementation uses a
   //     * selection without replacement "pattern".
@@ -779,7 +779,7 @@ public abstract class TestCase2 extends TestCase {
   //    }
   //
   //    /*
-//     * Verifies that the iterator visits the specified objects in some
+  //     * Verifies that the iterator visits the specified objects in some
   //     * arbitrary ordering and that the iterator is exhausted once all
   //     * expected objects have been visited.  The implementation uses a
   //     * selection without replacement "pattern".
@@ -1874,7 +1874,7 @@ public abstract class TestCase2 extends TestCase {
   }
 
   //    /*
-//     * Derived from <a
+  //     * Derived from <a
   //     * href="http://www.cygnus-software.com/papers/comparingfloats/comparingfloats.htm">
   //     * Comparing floating point numbers </a> by Bruce Dawson.
   //     *
@@ -1949,7 +1949,7 @@ public abstract class TestCase2 extends TestCase {
   //    }
   //
   //    /*
-//     * Derived from <a
+  //     * Derived from <a
   //     * href="http://www.cygnus-software.com/papers/comparingfloats/comparingfloats.htm">
   //     * Comparing floating point numbers </a> by Bruce Dawson.
   //     *

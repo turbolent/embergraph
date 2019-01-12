@@ -26,7 +26,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /*
-* Test suite for RIO extensions but NOT the integration tests.
+ * Test suite for RIO extensions but NOT the integration tests.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

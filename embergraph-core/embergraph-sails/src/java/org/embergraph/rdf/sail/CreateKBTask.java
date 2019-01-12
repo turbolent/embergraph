@@ -41,7 +41,7 @@ import org.embergraph.rdf.task.AbstractApiTask;
 import org.embergraph.util.InnerCause;
 
 /*
-* Task creates a KB for the given namespace iff no such KB exists. The correct use of this class is
+ * Task creates a KB for the given namespace iff no such KB exists. The correct use of this class is
  * as follows:
  *
  * <pre>
@@ -93,8 +93,8 @@ public class CreateKBTask extends AbstractApiTask<Void> {
 
       if (InnerCause.isInnerCause(t, AsynchronousQuorumCloseException.class)) {
 
-      /*
-       * The quorum is closed, so we stopped trying.
+        /*
+         * The quorum is closed, so we stopped trying.
          *
          * Note: This can also happen if the quorum has not been started
          * yet. The HAJournalServer explicitly invokes the CreateKBTask
@@ -145,8 +145,8 @@ public class CreateKBTask extends AbstractApiTask<Void> {
 
       } else {
 
-      /*
-       * Wait for a quorum meet.
+        /*
+         * Wait for a quorum meet.
          */
         final long token;
         try {
@@ -164,8 +164,8 @@ public class CreateKBTask extends AbstractApiTask<Void> {
           throw new RuntimeException(e1);
         }
 
-      /*
-       * Now wait until the service is HAReady.
+        /*
+         * Now wait until the service is HAReady.
          */
         try {
           jnl.awaitHAReady(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
@@ -181,8 +181,8 @@ public class CreateKBTask extends AbstractApiTask<Void> {
 
         final IJournal journal = jnl;
         if (journal.isGroupCommit() && journal.getRootBlockView().getCommitCounter() == 0L) {
-        /*
-       * Force the GRS to be materialized. This is necessary for the
+          /*
+           * Force the GRS to be materialized. This is necessary for the
            * initial KB create when using group commit and HA. (For HA the
            * initial KB create is single threaded within the context of the
            * leader election. However, this is not true for a standalone
@@ -202,8 +202,8 @@ public class CreateKBTask extends AbstractApiTask<Void> {
 
       if (isSoloOrLeader) {
 
-      /*
-       * Note: createLTS() writes on the GRS. This is an atomic row
+        /*
+         * Note: createLTS() writes on the GRS. This is an atomic row
          * store. The change is automatically committed. The unisolated
          * view of the EmbergraphSailConnection is being used solely to
          * have the correct locks.
@@ -248,8 +248,8 @@ public class CreateKBTask extends AbstractApiTask<Void> {
       // Attempt to resolve the namespace.
       if (indexManager.getResourceLocator().locate(namespace, ITx.UNISOLATED) == null) {
 
-      /*
-       * Register triple store for scale-out.
+        /*
+         * Register triple store for scale-out.
          *
          * Note: Scale-out does not have a global lock.
          */
@@ -287,7 +287,7 @@ public class CreateKBTask extends AbstractApiTask<Void> {
     EmbergraphSail.checkProperties(properties);
 
     //      /*
-//       * Note: Unless group commit is enabled, we need to make this operation
+    //       * Note: Unless group commit is enabled, we need to make this operation
     //       * mutually exclusive with KB level writers in order to avoid the
     //       * possibility of a triggering a commit during the middle of a
     //       * EmbergraphSailConnection level operation (or visa versa).
@@ -335,8 +335,8 @@ public class CreateKBTask extends AbstractApiTask<Void> {
               EmbergraphSail.Options.ISOLATABLE_INDICES,
               EmbergraphSail.Options.DEFAULT_ISOLATABLE_INDICES))) {
 
-      /*
-       * Isolatable indices: requires the use of a tx to create the KB
+        /*
+         * Isolatable indices: requires the use of a tx to create the KB
          * instance.
          *
          * FIXME BLZG-2041: Verify test coverage of this code path.
@@ -368,8 +368,8 @@ public class CreateKBTask extends AbstractApiTask<Void> {
 
       } else {
 
-      /*
-       * Create KB without isolatable indices.
+        /*
+         * Create KB without isolatable indices.
          */
 
         final LocalTripleStore lts =
@@ -413,7 +413,7 @@ public class CreateKBTask extends AbstractApiTask<Void> {
     //         if (!isGroupCommit && acquiredConnection) {
     //
     //            /*
-//             * When group commit is not enabled, we need to release the
+    //             * When group commit is not enabled, we need to release the
     //             * unisolated connection.
     //             *
     //             * @see #1143 (Isolation broken in NSS when groupCommit disabled)

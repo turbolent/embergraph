@@ -22,11 +22,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.engine;
 
 import java.io.Serializable;
-import org.embergraph.bop.BOp;
 import org.embergraph.counters.CAT;
 
 /*
-* Statistics associated with the evaluation of a {@link BOp}. These statistics are per {@link BOp}.
+ * Statistics associated with the evaluation of a {@link BOp}. These statistics are per {@link BOp}.
  * The top-level {@link BOp} will reflect the throughput for the entire pipeline.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

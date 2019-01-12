@@ -21,10 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop;
 
-import org.embergraph.relation.rule.eval.IJoinNexus;
-
 /*
-* An interface for exposing the data in an object view of a tuple by index position. This
+ * An interface for exposing the data in an object view of a tuple by index position. This
  * facilitates binding values elements read from an access path onto binding sets during join
  * processing.
  *

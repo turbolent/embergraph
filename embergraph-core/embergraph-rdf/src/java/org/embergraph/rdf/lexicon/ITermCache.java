@@ -25,7 +25,7 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.model.EmbergraphValue;
 
 /*
-* Reduced interface for the {@link LexiconRelation}'s term cache. This interface was added because
+ * Reduced interface for the {@link LexiconRelation}'s term cache. This interface was added because
  * the term cache reference is actually passed into some helper classes. The interface makes it
  * clear when we are operating on the term cache rather than some other concurrent map.
  *

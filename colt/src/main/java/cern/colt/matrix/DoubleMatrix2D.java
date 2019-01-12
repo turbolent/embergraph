@@ -14,7 +14,7 @@ import cern.colt.matrix.impl.AbstractMatrix2D;
 import cern.colt.matrix.impl.DenseDoubleMatrix1D;
 import cern.colt.matrix.impl.DenseDoubleMatrix2D;
 /*
-* Abstract base class for 2-d matrices holding <tt>double</tt> elements. First see the <a
+ * Abstract base class for 2-d matrices holding <tt>double</tt> elements. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
  * view</a> to get the broad picture.
  *

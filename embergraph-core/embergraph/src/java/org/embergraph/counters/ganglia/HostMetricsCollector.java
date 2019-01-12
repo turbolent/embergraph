@@ -11,7 +11,7 @@ import org.embergraph.ganglia.IGangliaMetricsCollector;
 import org.embergraph.ganglia.IGangliaMetricsReporter;
 
 /*
-* Reflects collected host metrics to ganglia.
+ * Reflects collected host metrics to ganglia.
  *
  * <pre>
  * /192.168.1.10/CPU/% IO Wait=0.0

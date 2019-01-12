@@ -26,7 +26,7 @@ import java.util.UUID;
 import org.embergraph.bop.PipelineOp;
 
 /*
-* Default implementation.
+ * Default implementation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

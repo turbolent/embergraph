@@ -23,7 +23,7 @@ import javax.script.ScriptException;
 import junit.framework.TestCase2;
 
 /*
-* Note: Java6 embeds JavaScript support based on Mozilla Rhino version 1.6R2.
+ * Note: Java6 embeds JavaScript support based on Mozilla Rhino version 1.6R2.
  *
  * @see <a
  *     href="http://docs.oracle.com/javase/6/docs/technotes/guides/scripting/programmer_guide/index.html">

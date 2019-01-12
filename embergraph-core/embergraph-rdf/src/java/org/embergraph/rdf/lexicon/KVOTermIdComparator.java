@@ -6,7 +6,7 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.model.EmbergraphValue;
 
 /*
-* Places {@link KVO}s containing {@link EmbergraphValue} references into an ordering determined by
+ * Places {@link KVO}s containing {@link EmbergraphValue} references into an ordering determined by
  * the assigned term identifiers}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

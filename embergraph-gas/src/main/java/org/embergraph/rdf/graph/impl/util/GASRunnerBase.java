@@ -10,18 +10,16 @@ import org.embergraph.rdf.graph.FrontierEnum;
 import org.embergraph.rdf.graph.IGASContext;
 import org.embergraph.rdf.graph.IGASEngine;
 import org.embergraph.rdf.graph.IGASProgram;
-import org.embergraph.rdf.graph.IGASScheduler;
 import org.embergraph.rdf.graph.IGASSchedulerImpl;
 import org.embergraph.rdf.graph.IGASState;
 import org.embergraph.rdf.graph.IGASStats;
 import org.embergraph.rdf.graph.IGraphAccessor;
 import org.embergraph.rdf.graph.impl.GASEngine;
-import org.embergraph.rdf.graph.impl.GASState;
 import org.embergraph.rdf.graph.impl.GASStats;
 import org.openrdf.model.Value;
 
 /*
-* Base class for running performance tests.
+ * Base class for running performance tests.
  *
  * @param <VS> The generic type for the per-vertex state. This is scoped to the computation of the
  *     {@link IGASProgram}.
@@ -450,8 +448,8 @@ public abstract class GASRunnerBase<VS, ES, ST> implements Callable<IGASStats> {
 
         } else {
 
-        /*
-       * The initial frontier is a single vertex. Choose it
+          /*
+           * The initial frontier is a single vertex. Choose it
            * from the sampled vertices.
            */
 
@@ -465,8 +463,8 @@ public abstract class GASRunnerBase<VS, ES, ST> implements Callable<IGASStats> {
             final IGASStats stats = gasContext.call();
 
             if (stats.getFrontierSize() == 1) {
-            /*
-       * The starting vertex was not actually connected to any
+              /*
+               * The starting vertex was not actually connected to any
                * other vertices by the traversal performed by the GAS
                * program.
                */
@@ -505,9 +503,7 @@ public abstract class GASRunnerBase<VS, ES, ST> implements Callable<IGASStats> {
       sb.append(", distSize=" + (dist == null ? "N/A" : dist.size())); // #available for sampling.
       sb.append(", nunconnected=" + nunconnected); // #unconnected vertices.
       sb.append(", nthreads=" + opt.nthreads);
-      sb.append(
-          ", scheduler="
-              + gasState.getScheduler().getClass().getSimpleName());
+      sb.append(", scheduler=" + gasState.getScheduler().getClass().getSimpleName());
       sb.append(", gasEngine=" + gasEngine.getClass().getSimpleName());
       opt.report(sb); // extension hook.
       // performance results.

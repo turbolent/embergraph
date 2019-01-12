@@ -27,7 +27,7 @@ import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.relation.accesspath.IElementFilter;
 
 /*
-* Filter matches only {@link StatementEnum#Inferred} statements.
+ * Filter matches only {@link StatementEnum#Inferred} statements.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

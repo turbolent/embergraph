@@ -44,7 +44,7 @@ import org.embergraph.search.TokenBuffer;
 import org.openrdf.model.Literal;
 
 /*
-* Implementation based on the built-in keyword search capabilities for embergraph.
+ * Implementation based on the built-in keyword search capabilities for embergraph.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: EmbergraphRDFFullTextIndex.java 4709 2011-06-15 16:23:22Z thompsonbry $
@@ -264,8 +264,8 @@ public class EmbergraphSubjectCentricFullTextIndex extends FullTextIndex
 
       if (!(val instanceof Literal)) {
 
-      /*
-       * Note: If you allow URIs to be indexed then the code which is
+        /*
+         * Note: If you allow URIs to be indexed then the code which is
          * responsible for free text search for quads must impose a
          * filter on the subject and predicate positions to ensure that
          * free text search can not be used to materialize literals or

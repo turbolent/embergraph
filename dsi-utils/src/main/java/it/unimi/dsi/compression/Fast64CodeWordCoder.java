@@ -26,7 +26,7 @@ import it.unimi.dsi.io.OutputBitStream;
 import java.io.IOException;
 
 /*
-* A fast coder based on a set of codewords of length at most 64.
+ * A fast coder based on a set of codewords of length at most 64.
  *
  * <p>
  *

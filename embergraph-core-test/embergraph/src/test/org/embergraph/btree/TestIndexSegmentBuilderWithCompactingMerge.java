@@ -29,7 +29,7 @@ import org.embergraph.btree.keys.TestKeyBuilder;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /*
-* A test of the {@link IndexSegmentBuilder} in which there are some deleted tuples in the source
+ * A test of the {@link IndexSegmentBuilder} in which there are some deleted tuples in the source
  * {@link BTree} and a compacting merge is performed.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -152,8 +152,8 @@ public class TestIndexSegmentBuilderWithCompactingMerge extends AbstractIndexSeg
         assertSameEntryIterator(
             expected.rangeIterator(fromKey, toKey), actual.rangeIterator(fromKey, toKey));
 
-      /*
-       * The index segment's iterator WITH the DELETED tuples should
+        /*
+         * The index segment's iterator WITH the DELETED tuples should
          * visit the same tuples in the same order as the ground truth
          * BTree's iterator WITHOUT the DELETED tuples (because the
          * deleted tuples SHOULD NOT have been copied into the generated
@@ -230,8 +230,8 @@ public class TestIndexSegmentBuilderWithCompactingMerge extends AbstractIndexSeg
         assertSameEntryIterator(
             expected.rangeIterator(fromKey, toKey), actual.rangeIterator(fromKey, toKey));
 
-      /*
-       * The index segment's iterator WITH the DELETED tuples should
+        /*
+         * The index segment's iterator WITH the DELETED tuples should
          * visit the same tuples in the same order as the ground truth
          * BTree's iterator WITHOUT the DELETED tuples (because the
          * deleted tuples SHOULD NOT have been copied into the generated
@@ -312,8 +312,8 @@ public class TestIndexSegmentBuilderWithCompactingMerge extends AbstractIndexSeg
         assertSameEntryIterator(
             expected.rangeIterator(fromKey, toKey), actual.rangeIterator(fromKey, toKey));
 
-      /*
-       * The index segment's iterator WITH the DELETED tuples should
+        /*
+         * The index segment's iterator WITH the DELETED tuples should
          * visit the same tuples in the same order as the ground truth
          * BTree's iterator WITHOUT the DELETED tuples (because the
          * deleted tuples SHOULD NOT have been copied into the generated

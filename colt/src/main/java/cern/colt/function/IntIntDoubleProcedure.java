@@ -9,7 +9,7 @@ It is provided "as is" without expressed or implied warranty.
 package cern.colt.function;
 
 /*
-* Interface that represents a procedure object: a procedure that takes three arguments and does not
+ * Interface that represents a procedure object: a procedure that takes three arguments and does not
  * return a value.
  */
 public interface IntIntDoubleProcedure {

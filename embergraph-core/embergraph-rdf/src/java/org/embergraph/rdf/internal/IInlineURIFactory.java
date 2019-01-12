@@ -24,7 +24,7 @@ import org.embergraph.rdf.vocab.Vocabulary;
 import org.openrdf.model.URI;
 
 /*
-* This factory will create {@link URIExtensionIV}s using {@link InlineURIHandler} delegates.
+ * This factory will create {@link URIExtensionIV}s using {@link InlineURIHandler} delegates.
  * Handler delegates are registered with a namespace prefix that they can handle. These namespace
  * prefixes must be defined in the vocabulary so that they can be properly inlined. The URI to be
  * inlined will then be presented to each handler for conversion. The first registered handler to

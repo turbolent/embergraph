@@ -22,7 +22,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.engine;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
-import java.nio.ByteBuffer;
 import java.nio.channels.ClosedByInterruptException;
 import java.util.Arrays;
 import java.util.Collections;
@@ -35,7 +34,6 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -44,22 +42,16 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.locks.ReentrantLock;
 import org.apache.log4j.Logger;
 import org.embergraph.bop.BOp;
-import org.embergraph.bop.BOpEvaluationContext;
 import org.embergraph.bop.BOpUtility;
 import org.embergraph.bop.DefaultQueryAttributes;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IQueryAttributes;
 import org.embergraph.bop.PipelineOp;
-import org.embergraph.bop.bset.EndOp;
 import org.embergraph.bop.engine.RunState.RunStateEnum;
 import org.embergraph.bop.fed.EmptyChunkMessage;
-import org.embergraph.bop.solutions.SliceOp;
 import org.embergraph.io.DirectBufferPool;
-import org.embergraph.io.DirectBufferPoolAllocator;
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.journal.ITx;
 import org.embergraph.rdf.sparql.ast.QueryHints;
-import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.rwstore.sector.IMemoryManager;
 import org.embergraph.rwstore.sector.MemoryManager;
@@ -69,7 +61,7 @@ import org.embergraph.util.concurrent.Haltable;
 import org.embergraph.util.concurrent.IHaltable;
 
 /*
-* Abstract base class for various {@link IRunningQuery} implementations. The purpose of this class
+ * Abstract base class for various {@link IRunningQuery} implementations. The purpose of this class
  * is to isolate aspects common to different designs for managing resources for a running query and
  * make it easier to realize different strategies for managing the resources allocated to a running
  * query.
@@ -128,7 +120,7 @@ public abstract class AbstractRunningQuery implements IRunningQuery {
   private StaticAnalysisStats saStats = null;
 
   //    /*
-//     * The query deadline. The value is the system clock time in milliseconds
+  //     * The query deadline. The value is the system clock time in milliseconds
   //     * when the query is due and {@link Long#MAX_VALUE} if there is no deadline.
   //     * In order to have a guarantee of a consistent clock, the deadline is
   //     * interpreted by the query controller.
@@ -211,7 +203,7 @@ public abstract class AbstractRunningQuery implements IRunningQuery {
   private final ICloseableIterator<IBindingSet[]> queryIterator;
 
   //    /*
-//     * The #of solutions delivered to the {@link #queryBuffer}.
+  //     * The #of solutions delivered to the {@link #queryBuffer}.
   //     */
   //    public long getSolutionCount() {
   //
@@ -226,7 +218,7 @@ public abstract class AbstractRunningQuery implements IRunningQuery {
   //    }
   //
   //    /*
-//     * The #of solution chunks delivered to the {@link #queryBuffer}.
+  //     * The #of solution chunks delivered to the {@link #queryBuffer}.
   //     */
   //    public long getSolutionChunkCount() {
   //
@@ -260,7 +252,7 @@ public abstract class AbstractRunningQuery implements IRunningQuery {
   private final AtomicBoolean didQueryTearDown = new AtomicBoolean(false);
 
   //    /*
-//     * A collection reporting on whether or not a given operator has been torn
+  //     * A collection reporting on whether or not a given operator has been torn
   //     * down. This collection is used to provide the guarantee that an operator
   //     * is torn down exactly once, regardless of the #of invocations of the
   //     * operator or the #of errors which might occur during query processing.
@@ -705,8 +697,8 @@ public abstract class AbstractRunningQuery implements IRunningQuery {
         // Data race on insert into CHM.
         BOpStats tmp = statsMap.putIfAbsent(msg.getBOpId(), msg.getStats());
 
-      /*
-       * Combine stats, but do not combine a stats object with itself.
+        /*
+         * Combine stats, but do not combine a stats object with itself.
          *
          * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/464">Query Statistics do
          *     not update correctly on cluster</a>
@@ -720,8 +712,8 @@ public abstract class AbstractRunningQuery implements IRunningQuery {
             tmp.add(msg.getStats());
           }
         }
-      /*
-       * Post-increment now that we know who one the data race.
+        /*
+         * Post-increment now that we know who one the data race.
          *
          * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/793">Explain reports
          *     incorrect value for opCount</a>
@@ -743,8 +735,8 @@ public abstract class AbstractRunningQuery implements IRunningQuery {
             return;
           }
         case AllDone:
-        /*
-       * Operator is all done.
+          /*
+           * Operator is all done.
            */
           triggerOperatorsAwaitingLastPass();
           // Release any native buffers.
@@ -809,8 +801,8 @@ public abstract class AbstractRunningQuery implements IRunningQuery {
 
         if (log.isInfoEnabled()) log.info("Triggering at-once (no solutions in): " + bopId);
 
-      /*
-       * Since evaluation is purely local, we specify -1 as the shardId.
+        /*
+         * Since evaluation is purely local, we specify -1 as the shardId.
          */
         final IChunkMessage<IBindingSet> emptyMessage =
             new EmptyChunkMessage<IBindingSet>(
@@ -1157,21 +1149,21 @@ public abstract class AbstractRunningQuery implements IRunningQuery {
       // halt the query.
       boolean cancelled = future.cancel(mayInterruptIfRunning);
       if (didQueryTearDown.compareAndSet(false /* expect */, true /* update */)) {
-      /*
-       * Do additional cleanup exactly once.
+        /*
+         * Do additional cleanup exactly once.
          */
         if (realSource != null) realSource.release();
         // close() IAsynchronousIterators for accepted messages.
         releaseAcceptedMessages();
-      /*
-       * Cancel any running operators for this query on this node.
+        /*
+         * Cancel any running operators for this query on this node.
          *
          * Note: This can interrupt *this* thread. E.g., when SLICE
          * calls halt().
          */
         cancelled |= cancelRunningOperators(mayInterruptIfRunning);
-      /*
-       * Test and clear the interrupt status.
+        /*
+         * Test and clear the interrupt status.
          *
          * Note: This prevents a thread from interrupting itself during
          * the query tear down. If we do not do this then the interrupt
@@ -1191,8 +1183,8 @@ public abstract class AbstractRunningQuery implements IRunningQuery {
           cancelled |= cancelQueryOnPeers(future.getCause(), runState.getServiceIds());
         }
         if (queryBuffer != null) {
-        /*
-       * Close the query buffer so the iterator draining the query
+          /*
+           * Close the query buffer so the iterator draining the query
            * results will recognize that no new results will become
            * available. Failure to do this will cause the iterator to
            * hang waiting for more results.
@@ -1578,8 +1570,7 @@ public abstract class AbstractRunningQuery implements IRunningQuery {
       return true;
     } else if (InnerCause.isInnerCause(t, ClosedByInterruptException.class)) {
       return true;
-    } else
-      return InnerCause.isInnerCause(t, InterruptedException.class);
+    } else return InnerCause.isInnerCause(t, InterruptedException.class);
   }
 
   @Override

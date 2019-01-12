@@ -22,10 +22,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.engine;
 
 import org.embergraph.bop.IBindingSet;
-import org.embergraph.bop.solutions.SolutionSetStream;
 
 /*
-* Implementation supports a standalone database. Depending on the specific instance used, either
+ * Implementation supports a standalone database. Depending on the specific instance used, either
  * the generated chunk is left on the Java heap or it is migrated onto the native heap using a
  * {@link SolutionSetStream}. Either way, it is then handed off synchronously using {@link
  * QueryEngine#acceptChunk(IChunkMessage)}. That method will queue the chunk for asynchronous

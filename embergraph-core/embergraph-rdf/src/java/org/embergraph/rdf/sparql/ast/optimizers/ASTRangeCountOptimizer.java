@@ -38,13 +38,12 @@ import org.embergraph.rdf.sparql.ast.StaticAnalysis;
 import org.embergraph.rdf.sparql.ast.TermNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTStaticJoinOptimizer.Annotations;
-import org.embergraph.rdf.spo.SPORelation;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.util.concurrent.ExecutionExceptions;
 
 /*
-* Attach range counts to all statement patterns in the query.
+ * Attach range counts to all statement patterns in the query.
  *
  * @author mikepersonick
  */

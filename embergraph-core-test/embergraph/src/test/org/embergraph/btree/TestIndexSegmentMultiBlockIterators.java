@@ -29,7 +29,7 @@ import org.embergraph.io.DirectBufferPool;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Test suite for {@link IndexSegmentMultiBlockIterator}.
+ * Test suite for {@link IndexSegmentMultiBlockIterator}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -335,8 +335,8 @@ public class TestIndexSegmentMultiBlockIterators extends AbstractIndexSegmentTes
 
       if (seg.getStore().getCheckpoint().maxNodeOrLeafLength > pool.getBufferCapacity()) {
 
-      /*
-       * The individual leaves must be less than the buffer size in
+        /*
+         * The individual leaves must be less than the buffer size in
          * order for us to read at least one leaf per block.
          */
 
@@ -350,8 +350,8 @@ public class TestIndexSegmentMultiBlockIterators extends AbstractIndexSegmentTes
 
       if (nblocks < 2) {
 
-      /*
-       * The leaves extent needs to be larger than the buffer size in
+        /*
+         * The leaves extent needs to be larger than the buffer size in
          * order for us to test with more than one block read from the
          * backing file.
          */

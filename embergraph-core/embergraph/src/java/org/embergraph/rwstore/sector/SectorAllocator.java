@@ -23,7 +23,7 @@ import org.apache.log4j.Logger;
 import org.embergraph.rwstore.IWriteCacheManager;
 
 /*
-* The SectorAllocator is designed as an alternative the the standard RWStore FixedAllocators.
+ * The SectorAllocator is designed as an alternative the the standard RWStore FixedAllocators.
  *
  * <p>The idea of the SectorAllocator is to efficiently contain within a single region as dense a
  * usage as possible. Since a SectorAllocator is able to allocate a full range of slot sizes, it
@@ -327,7 +327,7 @@ public class SectorAllocator implements Comparable<SectorAllocator> {
   }
 
   //	/*
-//	 * A previous version of bit2Offset that calculated the offset dynamically
+  //	 * A previous version of bit2Offset that calculated the offset dynamically
   //	 * @param bit
   //	 * @return the offset in the sector
   //	 */

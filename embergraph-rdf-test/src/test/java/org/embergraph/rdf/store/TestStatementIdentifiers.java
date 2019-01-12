@@ -1,5 +1,5 @@
 /*
-* The Notice below must appear in each file of the Source Code of any copy you distribute of the
+ * The Notice below must appear in each file of the Source Code of any copy you distribute of the
  * Licensed Product. Contributors to any Modifications may add their own copyright notices to
  * identify their own contributions.
  *
@@ -64,7 +64,7 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
 /*
-* Test of the statement identifier semantics.
+ * Test of the statement identifier semantics.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -236,8 +236,8 @@ public class TestStatementIdentifiers extends AbstractTripleStoreTestCase {
               "sid @ i=" + i, stmts[i].getStatementIdentifier(), a[i].getStatementIdentifier());
         }
 
-      /*
-       * Note: no statements should have been written on the kb since
+        /*
+         * Note: no statements should have been written on the kb since
          * they were all pre-existing. addStatements() should have just
          * read the pre-existing statement identifiers out of the KB and
          * assigned them to a[].
@@ -300,8 +300,8 @@ public class TestStatementIdentifiers extends AbstractTripleStoreTestCase {
         // re-open the database.
         store = reopenStore(store);
 
-      /*
-       * Verify read back from the KB. Note that the SPO[] is already
+        /*
+         * Verify read back from the KB. Note that the SPO[] is already
          * in SPO order and we are reading in SPO order so the array and
          * the iterator should be aligned and should visit the same #of
          * statements (since there is no truth maintenance in this test
@@ -310,8 +310,8 @@ public class TestStatementIdentifiers extends AbstractTripleStoreTestCase {
          */
         assertSameSPOArray(store, stmts, stmts.length);
 
-      /*
-       * Verify same statement identifiers assigned if we re-assert
+        /*
+         * Verify same statement identifiers assigned if we re-assert
          * the statements.
          *
          * Note: this creates a new SPO[] with the same {s,p,o}:type
@@ -338,8 +338,8 @@ public class TestStatementIdentifiers extends AbstractTripleStoreTestCase {
                 "sid @ i=" + i, stmts[i].getStatementIdentifier(), a[i].getStatementIdentifier());
           }
 
-        /*
-       * Note: no statements should have been written on the kb
+          /*
+           * Note: no statements should have been written on the kb
            * since they were all pre-existing. addStatements() should
            * have just read the pre-existing statement identifiers out
            * of the KB and assigned them to a[].
@@ -675,8 +675,8 @@ public class TestStatementIdentifiers extends AbstractTripleStoreTestCase {
         buf.add(sid1, RDF.PREDICATE, RDF.TYPE);
         buf.add(sid1, RDF.OBJECT, A);
 
-      /*
-       * Flush to the database, resolving statement identifiers as
+        /*
+         * Flush to the database, resolving statement identifiers as
          * necessary.
          */
         try {
@@ -728,8 +728,8 @@ public class TestStatementIdentifiers extends AbstractTripleStoreTestCase {
       {
         StatementBuffer buf = new StatementBuffer(store, 100 /* capacity */);
 
-      /*
-       * Flush to the database, resolving statement identifiers as
+        /*
+         * Flush to the database, resolving statement identifiers as
          * necessary.
          */
         try {

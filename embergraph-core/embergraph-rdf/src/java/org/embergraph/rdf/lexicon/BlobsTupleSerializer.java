@@ -37,14 +37,11 @@ import org.embergraph.rdf.internal.IVUtility;
 import org.embergraph.rdf.internal.impl.BlobIV;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
-import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.rdf.model.EmbergraphValueSerializer;
 import org.embergraph.rdf.store.AbstractTripleStore;
-import org.embergraph.util.Bytes;
-import org.openrdf.model.Value;
 
 /*
-* Encapsulates key and value formation for the TERMS index. The keys are {@link BlobIV}s. The
+ * Encapsulates key and value formation for the TERMS index. The keys are {@link BlobIV}s. The
  * values are {@link EmbergraphValue}s serialized using the {@link EmbergraphValueSerializer}. Large
  * values are converted to raw records and must be materialized before they can be deserialized.
  *

@@ -22,11 +22,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.eval.service;
 
 import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
-import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 import org.embergraph.rdf.store.BD;
 
 /*
-* Data driven test suite for full text search.
+ * Data driven test suite for full text search.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -397,7 +396,7 @@ public class TestSearch extends AbstractDataDrivenSPARQLTestCase {
   }
 
   //    /*
-//     * TODO Unit test for search-in-search pattern:
+  //     * TODO Unit test for search-in-search pattern:
   //     *
   //     * <pre>
   //     * select ?snippet

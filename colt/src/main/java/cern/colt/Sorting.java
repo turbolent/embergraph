@@ -17,7 +17,7 @@ import cern.colt.function.LongComparator;
 import cern.colt.function.ShortComparator;
 import java.util.Comparator;
 /*
-* Quicksorts, mergesorts and binary searches; complements <tt>java.util.Arrays</tt>. Contains, for
+ * Quicksorts, mergesorts and binary searches; complements <tt>java.util.Arrays</tt>. Contains, for
  * example, the quicksort on Comparators and Comparables, which are still missing in
  * <tt>java.util.Arrays</tt> of JDK 1.2. Also provides mergesorts for types not supported in
  * <tt>java.util.Arrays</tt>, as well as a couple of other methods for primitive arrays. The

@@ -1,9 +1,7 @@
 package org.embergraph.btree.raba.codec;
 
-import org.embergraph.btree.raba.IRaba;
-
 /*
-* Interface for {@link IRaba} data generators. A generator produces a <code>byte[][]</code>
+ * Interface for {@link IRaba} data generators. A generator produces a <code>byte[][]</code>
  * representing keys or values.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

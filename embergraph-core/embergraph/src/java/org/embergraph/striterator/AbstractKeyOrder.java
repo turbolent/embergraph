@@ -24,13 +24,11 @@ package org.embergraph.striterator;
 import org.embergraph.bop.IElement;
 import org.embergraph.bop.IPredicate;
 import org.embergraph.bop.IVariableOrConstant;
-import org.embergraph.btree.DefaultTupleSerializer;
-import org.embergraph.btree.ITupleSerializer;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.SuccessorUtil;
 
 /*
-* Abstract base class provides default behavior for generating keys for a given index order.
+ * Abstract base class provides default behavior for generating keys for a given index order.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

@@ -43,11 +43,9 @@ import org.embergraph.btree.AsynchronousIndexWriteConfiguration;
 import org.embergraph.btree.ICounter;
 import org.embergraph.btree.IRangeQuery;
 import org.embergraph.btree.ITuple;
-import org.embergraph.btree.ITupleCursor;
 import org.embergraph.btree.ITupleIterator;
 import org.embergraph.btree.ITupleSerializer;
 import org.embergraph.btree.IndexMetadata;
-import org.embergraph.btree.ResultSet;
 import org.embergraph.btree.keys.KVO;
 import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure.ResultBitBuffer;
 import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure.ResultBuffer;
@@ -58,7 +56,6 @@ import org.embergraph.btree.proc.BatchInsert.BatchInsertConstructor;
 import org.embergraph.btree.proc.BatchLookup.BatchLookupConstructor;
 import org.embergraph.btree.proc.BatchPutIfAbsent.BatchPutIfAbsentConstructor;
 import org.embergraph.btree.proc.BatchRemove.BatchRemoveConstructor;
-import org.embergraph.btree.proc.IIndexProcedure;
 import org.embergraph.btree.proc.IKeyArrayIndexProcedure;
 import org.embergraph.btree.proc.IKeyRangeIndexProcedure;
 import org.embergraph.btree.proc.IParallelizableIndexProcedure;
@@ -82,7 +79,6 @@ import org.embergraph.service.AbstractClient;
 import org.embergraph.service.AbstractScaleOutFederation;
 import org.embergraph.service.IDataService;
 import org.embergraph.service.IEmbergraphClient;
-import org.embergraph.service.IEmbergraphClient.Options;
 import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.IMetadataService;
 import org.embergraph.service.Split;
@@ -92,7 +88,7 @@ import org.embergraph.util.InnerCause;
 import org.embergraph.util.concurrent.ExecutionHelper;
 
 /*
-* A client-side view of a scale-out index as of some <i>timestamp</i>.
+ * A client-side view of a scale-out index as of some <i>timestamp</i>.
  *
  * <p>This view automatically handles the split, join, or move of index partitions within the
  * federation. The {@link IDataService} throws back a (sometimes wrapped) {@link
@@ -673,8 +669,8 @@ public class ClientIndexView implements IScaleOutClientIndex {
 
       if (parallel) {
 
-      /*
-       * Parallel iterator scan. This breaks the total ordering
+        /*
+         * Parallel iterator scan. This breaks the total ordering
          * guarantee of the iterator in exchange for faster visitation
          * of the tuples in key range which spans multiple index
          * partitions.
@@ -685,8 +681,8 @@ public class ClientIndexView implements IScaleOutClientIndex {
 
       } else {
 
-      /*
-       * Process the index partitions in key order so the total order
+        /*
+         * Process the index partitions in key order so the total order
          * of the keys is preserved by the iterator visitation ordering.
          */
 
@@ -698,8 +694,8 @@ public class ClientIndexView implements IScaleOutClientIndex {
 
       if (isReadConsistentTx) {
 
-      /*
-       * Terminate the transaction since we created it ourselves.
+        /*
+         * Terminate the transaction since we created it ourselves.
          */
 
         try {
@@ -934,8 +930,8 @@ public class ClientIndexView implements IScaleOutClientIndex {
 
       try {
 
-      /*
-       * Scan visits index partition locators in key order.
+        /*
+         * Scan visits index partition locators in key order.
          *
          * Note: We are using the caller's timestamp.
          *
@@ -948,8 +944,8 @@ public class ClientIndexView implements IScaleOutClientIndex {
 
         while (itr.hasNext()) {
 
-        /*
-       * Process the remaining locators a "chunk" at a time. The
+          /*
+           * Process the remaining locators a "chunk" at a time. The
            * chunk size is chosen to be the configured size of the
            * client thread pool. This lets us avoid overwhelming the
            * thread pool queue when mapping a procedure across a very
@@ -969,8 +965,8 @@ public class ClientIndexView implements IScaleOutClientIndex {
 
             final PartitionLocator locator = itr.next();
 
-          /*
-       * Constrain the iterator's range to the intersection of
+            /*
+             * Constrain the iterator's range to the intersection of
              * the index partition and the original iterator range.
              */
 
@@ -1402,8 +1398,8 @@ public class ClientIndexView implements IScaleOutClientIndex {
           && proc.isReadOnly()
           && TimestampUtility.isReadCommittedOrUnisolated(getTimestamp())) {
 
-      /*
-       * Create a read-historical transaction from the last commit
+        /*
+         * Create a read-historical transaction from the last commit
          * point of the federation in order to provide consistent
          * reads for the mapped procedure.
          */
@@ -1442,8 +1438,8 @@ public class ClientIndexView implements IScaleOutClientIndex {
 
         } catch (IOException e) {
 
-        /*
-       * log error but do not rethrow since operation is over
+          /*
+           * log error but do not rethrow since operation is over
            * anyway.
            */
 
@@ -1655,8 +1651,8 @@ public class ClientIndexView implements IScaleOutClientIndex {
           f.get();
 
         } catch (ExecutionException e) {
-        /*
-       * FIXME This needs to recognize when the remote task was
+          /*
+           * FIXME This needs to recognize when the remote task was
            * cancelled by an interrupt and handle that condition
            * appropriately. This is tricky since we are running
            * multiple tasks in parallel. Probably we should interrupt
@@ -1804,7 +1800,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
   }
 
   //    /*
-//     * {@inheritDoc}
+  //     * {@inheritDoc}
   //     *
   //     * Find the partition for the first key. Check the last key, if it is in the
   //     * same partition then then this is the simplest case and we can just send
@@ -2000,7 +1996,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
   //    }
   //
   //    /*
-//     * Paranoia testing for generated splits.
+  //     * Paranoia testing for generated splits.
   //     *
   //     * @param locator
   //     * @param fromIndex

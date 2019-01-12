@@ -28,10 +28,9 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.MDC;
 import org.embergraph.Banner;
 import org.embergraph.counters.AbstractStatisticsCollector;
-import org.embergraph.counters.CounterSet;
 
 /*
-* Abstract base class defines protocols for setting the service {@link UUID}, etc.
+ * Abstract base class defines protocols for setting the service {@link UUID}, etc.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -119,7 +118,7 @@ public abstract class AbstractService implements IService {
   }
 
   //    /*
-//     * Shuts down the {@link #getFederation()} used by this service.
+  //     * Shuts down the {@link #getFederation()} used by this service.
   //     */
   public synchronized void shutdown() {
 
@@ -132,7 +131,7 @@ public abstract class AbstractService implements IService {
   }
 
   //    /*
-//     * Shuts down the {@link #getFederation()} used by this service.
+  //     * Shuts down the {@link #getFederation()} used by this service.
   //     */
   public synchronized void shutdownNow() {
 

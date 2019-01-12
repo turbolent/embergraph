@@ -18,10 +18,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sail.webapp.lbs;
 
 import javax.servlet.http.HttpServletRequest;
-import org.embergraph.rdf.sail.webapp.HALoadBalancerServlet;
 
 /*
-* Interface for rewriting the Request-URI once the load balancer has determined the target host and
+ * Interface for rewriting the Request-URI once the load balancer has determined the target host and
  * service to which the request will be proxied.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

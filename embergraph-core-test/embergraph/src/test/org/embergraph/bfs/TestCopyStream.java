@@ -28,7 +28,7 @@ import java.io.IOException;
 import java.util.Random;
 
 /*
-* Unit tests for copying streams into the repository and reading them back.
+ * Unit tests for copying streams into the repository and reading them back.
  *
  * <p>Note: Copying streams is basically a sequence of atomic append operations. {@link
  * TestAppendBlock} is responsible for covering the behavior of the atomic append operation,

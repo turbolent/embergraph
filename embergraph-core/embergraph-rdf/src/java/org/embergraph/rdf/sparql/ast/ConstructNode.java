@@ -24,10 +24,9 @@ package org.embergraph.rdf.sparql.ast;
 import java.util.Map;
 import org.embergraph.bop.BOp;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
-import org.embergraph.rdf.spo.ISPO;
 
 /*
-* A template for the construction of one or more graphs based on the solutions projected by a
+ * A template for the construction of one or more graphs based on the solutions projected by a
  * query.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

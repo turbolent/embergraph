@@ -22,14 +22,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop;
 
 import java.util.Map;
-import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 import org.embergraph.bop.engine.BOpStats;
-import org.embergraph.bop.engine.IChunkMessage;
-import org.embergraph.bop.engine.QueryEngine;
 
 /*
-* Abstract base class for pipeline operators where the data moving along the pipeline is chunks of
+ * Abstract base class for pipeline operators where the data moving along the pipeline is chunks of
  * {@link IBindingSet}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -191,7 +188,7 @@ public abstract class PipelineOp extends BOpBase {
     boolean DEFAULT_LAST_PASS = false;
 
     //      /*
-//      * For hash partitioned operators, this is the set of the member nodes
+    //      * For hash partitioned operators, this is the set of the member nodes
     //      * for the operator.
     //      * <p>
     //      * This annotation is required for such operators since the set of known
@@ -343,7 +340,6 @@ public abstract class PipelineOp extends BOpBase {
      * the native heap.
      */
     return maxMemory == Long.MAX_VALUE;
-
   }
 
   /*
@@ -364,7 +360,6 @@ public abstract class PipelineOp extends BOpBase {
      * native heap.
      */
     return maxMemory > 0L && maxMemory < Long.MAX_VALUE;
-
   }
 
   /*
@@ -405,7 +400,7 @@ public abstract class PipelineOp extends BOpBase {
   }
 
   //	/*
-//	 * Return <code>true</code> iff concurrent invocations of the operator are
+  //	 * Return <code>true</code> iff concurrent invocations of the operator are
   //	 * permitted.
   //	 * <p>
   //	 * Note: Operators which are not thread-safe still permit concurrent

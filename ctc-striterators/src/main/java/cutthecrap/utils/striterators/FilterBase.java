@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 /*
-* Used with Filterator by Striterator to filter returned objects. This can represent either a
+ * Used with Filterator by Striterator to filter returned objects. This can represent either a
  * single {@link IFilter} or a chain of {@link IFilter}s.
  */
 public abstract class FilterBase implements IFilter, Cloneable {
@@ -36,15 +36,13 @@ public abstract class FilterBase implements IFilter, Cloneable {
    * the filter chain.
    *
    * <p>Note: package private for unit tests.
-   */
-  /*private*/ volatile List<IFilter> filterChain = null;
+   *//*private*/ volatile List<IFilter> filterChain = null;
 
   /*
    * Annotations may be used to decorate the {@link IFilter} with required or optional metadata.
    *
    * <p>Note: package private for unit tests.
-   */
-  /*private*/ volatile Map<String, Object> annotations;
+   *//*private*/ volatile Map<String, Object> annotations;
 
   public FilterBase() {}
 
@@ -58,8 +56,8 @@ public abstract class FilterBase implements IFilter, Cloneable {
     if (filter == null) throw new IllegalArgumentException();
     if (filterChain == null) {
       synchronized (this) {
-      /*
-       * Note: double-checked locking pattern and volatile field are
+        /*
+         * Note: double-checked locking pattern and volatile field are
          * used to ensure visibility in combination with lazy create of
          * the backing list.
          */

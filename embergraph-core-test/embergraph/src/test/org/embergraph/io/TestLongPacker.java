@@ -31,7 +31,7 @@ import java.util.Random;
 import junit.framework.TestCase;
 
 /*
-* Test suite for packing and unpacking unsigned long integers using the {@link DataInputBuffer} and
+ * Test suite for packing and unpacking unsigned long integers using the {@link DataInputBuffer} and
  * the {@link ByteArrayBuffer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -346,7 +346,7 @@ public class TestLongPacker extends TestCase {
   }
 
   //    /*
-//     * Random non-negative long values (64 bits of random long) with a uniform
+  //     * Random non-negative long values (64 bits of random long) with a uniform
   //     * distribution.
   //     *
   //     * @author thompsonbry

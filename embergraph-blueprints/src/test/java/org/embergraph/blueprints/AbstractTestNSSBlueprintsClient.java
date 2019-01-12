@@ -41,7 +41,7 @@ import org.embergraph.rdf.task.AbstractApiTask;
 import org.embergraph.util.config.NicUtil;
 
 /*
-* Unit tests for the {@link NanoSparqlServer} with a focus on the ability to override the init
+ * Unit tests for the {@link NanoSparqlServer} with a focus on the ability to override the init
  * parameters, the default http port, etc. This test suite is written without the proxy mechanisms
  * to make this easier to debug.
  *

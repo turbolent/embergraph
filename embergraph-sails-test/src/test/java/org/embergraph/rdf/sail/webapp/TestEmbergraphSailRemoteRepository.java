@@ -47,13 +47,12 @@ import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQuery;
 import org.openrdf.query.UpdateExecutionException;
-import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.RepositoryResult;
 import org.openrdf.rio.RDFFormat;
 
 /*
-* Proxied test suite for {@link EmbergraphSailRemoteRepository} and {@link
+ * Proxied test suite for {@link EmbergraphSailRemoteRepository} and {@link
  * EmbergraphSailRemoteRepositoryConnection}.
  *
  * <p>Note: There are two versions of the test suite. One with isolatable indices enabled and one

@@ -22,7 +22,7 @@ import org.openrdf.query.resultio.TupleQueryResultParserFactory;
 import org.openrdf.query.resultio.sparqljson.SPARQLResultsJSONParser;
 
 /*
-* A {@link TupleQueryResultParserFactory} for parsers of SPARQL-1.1 JSON Tuple Query Results.
+ * A {@link TupleQueryResultParserFactory} for parsers of SPARQL-1.1 JSON Tuple Query Results.
  *
  * @author Peter Ansell
  */

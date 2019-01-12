@@ -51,7 +51,7 @@ import org.openrdf.query.TupleQueryResult;
 import org.openrdf.repository.RepositoryException;
 
 /*
-* An {@link IObjectManager} for use with an embedded database, including JSP pages running in the
+ * An {@link IObjectManager} for use with an embedded database, including JSP pages running in the
  * same webapp as the NanoSparqlServer and applications that do not expose a public web interface.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -115,7 +115,7 @@ public class ObjectManager extends ObjectMgrModel {
      * connection across its life cycle.
      */
     //        /*
-//         * Local ObjectManager can flush incrementally from the dirty list
+    //         * Local ObjectManager can flush incrementally from the dirty list
     //         *
     //         * A maximum size of 4000 dirty objects is a sensible default.
     //         */

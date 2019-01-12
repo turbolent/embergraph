@@ -201,8 +201,8 @@ public class RegexBOp extends XSDBooleanIVValueExpression implements INeedsMater
 
         if (Thread.interrupted()) {
 
-        /*
-       * Eagerly notice if the operator is interrupted.
+          /*
+           * Eagerly notice if the operator is interrupted.
            *
            * Note: Regex can be a high latency operation for a large
            * RDF Literal. Therefore we want to check for an interrupt
@@ -259,8 +259,8 @@ public class RegexBOp extends XSDBooleanIVValueExpression implements INeedsMater
             break;
           case 'i':
             {
-            /*
-       * The SPARQL REGEX operator is based on the XQuery REGEX
+              /*
+               * The SPARQL REGEX operator is based on the XQuery REGEX
                * operator. That operator should be Unicode clean by
                * default. Therefore, when case-folding is specified, we
                * also need to include the UNICODE_CASE option.

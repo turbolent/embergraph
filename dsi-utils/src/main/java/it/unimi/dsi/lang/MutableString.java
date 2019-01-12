@@ -43,7 +43,7 @@ import java.io.UTFDataFormatException;
 import java.io.Writer;
 
 /*
-* Fast, compact, optimised &amp; versatile mutable strings.
+ * Fast, compact, optimised &amp; versatile mutable strings.
  *
  * <h3>Motivation</h3>
  *

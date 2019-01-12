@@ -28,7 +28,7 @@ import java.util.Enumeration;
 import java.util.Iterator;
 
 /*
-* Streaming iterator pattern ala Martyn Cutcher with generics.
+ * Streaming iterator pattern ala Martyn Cutcher with generics.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

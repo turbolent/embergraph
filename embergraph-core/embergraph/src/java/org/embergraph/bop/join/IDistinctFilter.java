@@ -27,7 +27,7 @@ import org.embergraph.bop.engine.BOpStats;
 import org.embergraph.relation.accesspath.IBuffer;
 
 /*
-* A "DISTINCT" filter for {@link IBindingSet}s.
+ * A "DISTINCT" filter for {@link IBindingSet}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

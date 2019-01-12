@@ -31,7 +31,6 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.vocabulary.RDF;
-import org.openrdf.query.Binding;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQuery;
@@ -70,8 +69,7 @@ public class TestInlineValues extends ProxyEmbergraphSailTestCase {
     final EmbergraphSail sail = getSail();
     sail.initialize();
     final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-    final EmbergraphSailRepositoryConnection cxn =
-        repo.getConnection();
+    final EmbergraphSailRepositoryConnection cxn = repo.getConnection();
     cxn.setAutoCommit(false);
 
     try {
@@ -120,8 +118,7 @@ public class TestInlineValues extends ProxyEmbergraphSailTestCase {
         TupleQueryResult result = tupleQuery.evaluate();
 
         Collection<BindingSet> solution = new LinkedList<BindingSet>();
-        solution.add(
-            createBindingSet(new BindingImpl("s", A), new BindingImpl("age", _25)));
+        solution.add(createBindingSet(new BindingImpl("s", A), new BindingImpl("age", _25)));
 
         compare(result, solution);
       }
@@ -137,8 +134,7 @@ public class TestInlineValues extends ProxyEmbergraphSailTestCase {
     final EmbergraphSail sail = getSail();
     sail.initialize();
     final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-    final EmbergraphSailRepositoryConnection cxn =
-        repo.getConnection();
+    final EmbergraphSailRepositoryConnection cxn = repo.getConnection();
     cxn.setAutoCommit(false);
 
     try {
@@ -187,8 +183,7 @@ public class TestInlineValues extends ProxyEmbergraphSailTestCase {
         TupleQueryResult result = tupleQuery.evaluate();
 
         Collection<BindingSet> solution = new LinkedList<BindingSet>();
-        solution.add(
-            createBindingSet(new BindingImpl("s", B), new BindingImpl("age", _45)));
+        solution.add(createBindingSet(new BindingImpl("s", B), new BindingImpl("age", _45)));
 
         compare(result, solution);
       }
@@ -204,8 +199,7 @@ public class TestInlineValues extends ProxyEmbergraphSailTestCase {
     final EmbergraphSail sail = getSail();
     sail.initialize();
     final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-    final EmbergraphSailRepositoryConnection cxn =
-        repo.getConnection();
+    final EmbergraphSailRepositoryConnection cxn = repo.getConnection();
     cxn.setAutoCommit(false);
 
     try {
@@ -266,10 +260,8 @@ public class TestInlineValues extends ProxyEmbergraphSailTestCase {
         final TupleQueryResult result = tupleQuery.evaluate();
 
         Collection<BindingSet> solution = new LinkedList<BindingSet>();
-        solution.add(
-            createBindingSet(new BindingImpl("s", A), new BindingImpl("age", _25)));
-        solution.add(
-            createBindingSet(new BindingImpl("s", B), new BindingImpl("age", _45)));
+        solution.add(createBindingSet(new BindingImpl("s", A), new BindingImpl("age", _25)));
+        solution.add(createBindingSet(new BindingImpl("s", B), new BindingImpl("age", _45)));
 
         compare(result, solution);
       }
@@ -307,10 +299,8 @@ public class TestInlineValues extends ProxyEmbergraphSailTestCase {
         final TupleQueryResult result = tupleQuery.evaluate();
 
         Collection<BindingSet> solution = new LinkedList<BindingSet>();
-        solution.add(
-            createBindingSet(new BindingImpl("s", A), new BindingImpl("age", _25)));
-        solution.add(
-            createBindingSet(new BindingImpl("s", B), new BindingImpl("age", _45)));
+        solution.add(createBindingSet(new BindingImpl("s", A), new BindingImpl("age", _25)));
+        solution.add(createBindingSet(new BindingImpl("s", B), new BindingImpl("age", _45)));
 
         compare(result, solution);
       }

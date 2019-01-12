@@ -38,7 +38,7 @@ import org.embergraph.io.DirectBufferPool;
 import org.embergraph.util.httpd.AbstractHTTPD;
 
 /*
-* Basic delegate for services that need to override the service UUID and service interface reported
+ * Basic delegate for services that need to override the service UUID and service interface reported
  * to the {@link ILoadBalancerService}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -129,8 +129,8 @@ public class DefaultServiceFederationDelegate<T extends AbstractService>
 
         } catch (Exception ex) {
 
-        /*
-       * Typically this is because the live journal has been
+          /*
+           * Typically this is because the live journal has been
            * concurrently closed during the request.
            */
 

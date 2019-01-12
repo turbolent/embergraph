@@ -43,7 +43,7 @@ import org.openrdf.rio.RioSetting;
 import org.openrdf.rio.helpers.BasicWriterSettings;
 
 /*
-* An abstract class to implement the base functionality for both SPARQLBooleanJSONWriter and
+ * An abstract class to implement the base functionality for both SPARQLBooleanJSONWriter and
  * SPARQLResultsJSONWriter.
  *
  * <p>Embergraph Changes:

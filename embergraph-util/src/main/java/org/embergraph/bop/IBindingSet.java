@@ -28,7 +28,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 /*
-* Interface for a set of bindings. The set of variables values is extensible and the bound values
+ * Interface for a set of bindings. The set of variables values is extensible and the bound values
  * are loosely typed.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -130,7 +130,7 @@ public interface IBindingSet extends Cloneable, Serializable {
   int hashCode();
 
   //	/*
-//	 * Make a copy of the current symbol table (aka current variable bindings)
+  //	 * Make a copy of the current symbol table (aka current variable bindings)
   //	 * and push it onto onto the stack. Variable bindings will be made against
   //	 * the current symbol table. The symbol table stack is propagated by
   //	 * {@link #clone()} and {@link #copy(IVariable[])}. Symbols tables may be
@@ -147,7 +147,7 @@ public interface IBindingSet extends Cloneable, Serializable {
   //	public void push();
   //
   //	/*
-//	 * Pop the current symbol table off of the stack.
+  //	 * Pop the current symbol table off of the stack.
   //	 *
   //	 * @param save
   //	 *            When <code>true</code>, the bindings on the current symbol
@@ -164,7 +164,7 @@ public interface IBindingSet extends Cloneable, Serializable {
   //	public void pop(boolean save);
 
   //    /*
-//     * Push the current symbol table, copying the bindings for only the named
+  //     * Push the current symbol table, copying the bindings for only the named
   //     * variables into a new symbol table on the top of the stack. Only the
   //     * bindings in the current symbol table are visible. {@link #iterator()}
   //     * WILL NOT visit bindings unless they are present at the top of the stack.
@@ -193,7 +193,7 @@ public interface IBindingSet extends Cloneable, Serializable {
   //    public void push(IVariable[] vars);
   //
   //    /*
-//     * Pop the current symbol table off of the stack, copying the bindings for
+  //     * Pop the current symbol table off of the stack, copying the bindings for
   //     * the specified variables into the revealed symbol table.
   //     * <p>
   //     * The variables represent the projection of the subquery. For correct

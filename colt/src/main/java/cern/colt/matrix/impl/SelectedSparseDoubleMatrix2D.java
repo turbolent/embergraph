@@ -12,7 +12,7 @@ import cern.colt.map.AbstractIntDoubleMap;
 import cern.colt.matrix.DoubleMatrix1D;
 import cern.colt.matrix.DoubleMatrix2D;
 /*
-* Selection view on sparse 2-d matrices holding <tt>double</tt> elements. First see the <a
+ * Selection view on sparse 2-d matrices holding <tt>double</tt> elements. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
  * view</a> to get the broad picture.
  *
@@ -239,7 +239,7 @@ class SelectedSparseDoubleMatrix2D extends DoubleMatrix2D {
    */
   protected DoubleMatrix1D like1D(int size, int zero, int stride) {
     throw new InternalError(); // this method is never called since viewRow() and viewColumn are
-                               // overridden properly.
+    // overridden properly.
   }
   /*
    * Sets the matrix cell at coordinate <tt>[row,column]</tt> to the specified value.

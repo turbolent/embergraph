@@ -3,7 +3,7 @@ package org.embergraph.btree.keys;
 import java.text.Collator;
 
 /*
-* Type safe enumeration for the strength.
+ * Type safe enumeration for the strength.
  *
  * <p>Note: ICU and the JDK use different integer constants for the #IDENTICAL strength
  *

@@ -28,7 +28,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.ext.DefaultHandler2;
 
 /*
-* Remote client for the Transaction Management API.
+ * Remote client for the Transaction Management API.
  *
  * @author bryan
  * @since 1.5.2
@@ -321,8 +321,7 @@ public class RemoteTransactionManager {
    */
   public IRemoteTxState0 statusTx(final long txId) throws RemoteTransactionNotFoundException {
 
-    final ConnectOptions opts =
-        new ConnectOptions(mgr.getBaseServiceURL() + "/tx/" + txId);
+    final ConnectOptions opts = new ConnectOptions(mgr.getBaseServiceURL() + "/tx/" + txId);
 
     opts.method = "POST";
 
@@ -371,8 +370,7 @@ public class RemoteTransactionManager {
       return true;
     }
 
-    final ConnectOptions opts =
-        new ConnectOptions(mgr.getBaseServiceURL() + "/tx/" + txId);
+    final ConnectOptions opts = new ConnectOptions(mgr.getBaseServiceURL() + "/tx/" + txId);
 
     opts.method = "POST";
 
@@ -423,8 +421,7 @@ public class RemoteTransactionManager {
    */
   private void abortTx(final long txId) throws RemoteTransactionNotFoundException {
 
-    final ConnectOptions opts =
-        new ConnectOptions(mgr.getBaseServiceURL() + "/tx/" + txId);
+    final ConnectOptions opts = new ConnectOptions(mgr.getBaseServiceURL() + "/tx/" + txId);
 
     opts.method = "POST";
 
@@ -476,8 +473,7 @@ public class RemoteTransactionManager {
   private void commitTx(final long txId)
       throws RemoteTransactionNotFoundException, RemoteTransactionValidationException {
 
-    final ConnectOptions opts =
-        new ConnectOptions(mgr.getBaseServiceURL() + "/tx/" + txId);
+    final ConnectOptions opts = new ConnectOptions(mgr.getBaseServiceURL() + "/tx/" + txId);
 
     opts.method = "POST";
 

@@ -29,7 +29,6 @@ import java.util.Map;
 import org.embergraph.bop.AbstractAccessPathOp;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.Constant;
-import org.embergraph.bop.CoreBaseBOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IElement;
@@ -47,7 +46,7 @@ import org.embergraph.relation.rule.IAccessPathExpander;
 import org.embergraph.striterator.IKeyOrder;
 
 /*
-* A generic implementation of an immutable {@link IPredicate}.
+ * A generic implementation of an immutable {@link IPredicate}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -205,7 +204,7 @@ public class Predicate<E> extends AbstractAccessPathOp<E> implements IPredicate<
   }
 
   //    /*
-//     *
+  //     *
   //     * @deprecated This is being replaced by two classes of filters. One which
   //     *             is always evaluated local to the index and one which is
   //     *             evaluated in the JVM in which the access path is evaluated

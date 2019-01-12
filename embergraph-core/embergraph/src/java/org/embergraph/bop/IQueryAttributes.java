@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop;
 
 /*
-* An interface providing access to named attribute values which may be shared across operators or
+ * An interface providing access to named attribute values which may be shared across operators or
  * across multiple invocations of the same operator. The bindings are scoped to the owning {@link
  * IQueryContext}.
  *

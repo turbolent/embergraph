@@ -3,7 +3,7 @@ package org.embergraph.search;
 import org.apache.log4j.Logger;
 
 /*
-* Single-token implementation of {@link IHitCollector} backed by a simple array of hits.
+ * Single-token implementation of {@link IHitCollector} backed by a simple array of hits.
  *
  * @author mikepersonick
  * @param <V> The generic type of the document identifier.

@@ -27,7 +27,7 @@ import org.embergraph.rdf.sparql.ast.ISolutionSetStats;
 import org.embergraph.rdf.spo.ISPO;
 
 /*
-* A management interface for named solution sets.
+ * A management interface for named solution sets.
  *
  * <p>Note: This is an internal interface that may evolve substantially.
  *

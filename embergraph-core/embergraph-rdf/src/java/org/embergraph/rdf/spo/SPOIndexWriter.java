@@ -1,5 +1,5 @@
 /*
-* The Notice below must appear in each file of the Source Code of any copy you distribute of the
+ * The Notice below must appear in each file of the Source Code of any copy you distribute of the
  * Licensed Product. Contributors to any Modifications may add their own copyright notices to
  * identify their own contributions.
  *
@@ -52,7 +52,7 @@ import org.embergraph.rdf.spo.SPOIndexWriteProc.IndexWriteProcConstructor;
 import org.embergraph.relation.accesspath.IElementFilter;
 
 /*
-* Helper class writes an {@link ISPO}[] on one of the statement indices.
+ * Helper class writes an {@link ISPO}[] on one of the statement indices.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -232,16 +232,16 @@ public class SPOIndexWriter implements Callable<Long> {
 
       if (quads) {
         if (spo.c() == null) {
-        /*
-       * Do not permit an ISPO to be written onto a quads mode
+          /*
+           * Do not permit an ISPO to be written onto a quads mode
            * index without the [c] position bound.
            */
           throw new IllegalArgumentException("context not bound: " + spo);
         }
       } else if (!sids) {
         if (spo.c() != null) {
-        /*
-       * Do not permit an ISPO to be written onto the index in
+          /*
+           * Do not permit an ISPO to be written onto the index in
            * triples mode if its context position is not bound.
            */
           throw new IllegalArgumentException("context bound, but not quads or sids: " + spo);
@@ -308,8 +308,8 @@ public class SPOIndexWriter implements Callable<Long> {
 
         if (m[i] != ModifiedEnum.NONE) {
 
-        /*
-       * Note: This only turns on the modified flag. It will not
+          /*
+           * Note: This only turns on the modified flag. It will not
            * clear it if it is already set. The caller has to take
            * responsibility for that. This way if the statement is
            * written twice and the 2nd time the indices are not

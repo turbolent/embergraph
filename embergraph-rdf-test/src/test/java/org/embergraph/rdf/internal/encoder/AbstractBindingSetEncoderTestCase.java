@@ -27,7 +27,6 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.Random;
 import java.util.UUID;
-import junit.framework.TestCase;
 import junit.framework.TestCase2;
 import org.embergraph.bop.Constant;
 import org.embergraph.bop.IBindingSet;
@@ -35,10 +34,8 @@ import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IVariable;
 import org.embergraph.bop.Var;
 import org.embergraph.bop.bindingSet.ListBindingSet;
-import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVCache;
-import org.embergraph.rdf.internal.IVUtility;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.XSD;
 import org.embergraph.rdf.internal.impl.BlobIV;
@@ -69,7 +66,7 @@ import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.openrdf.model.impl.URIImpl;
 
 /*
-* Base class for {@link IBindingSetEncoder}and {@link IBindingSetDecoder} test suites.
+ * Base class for {@link IBindingSetEncoder}and {@link IBindingSetDecoder} test suites.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

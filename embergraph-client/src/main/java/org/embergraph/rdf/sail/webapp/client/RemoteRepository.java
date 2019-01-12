@@ -19,7 +19,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sail.webapp.client;
 
 import info.aduna.io.IOUtil;
-import java.io.Closeable;
 import java.io.File;
 import java.io.InputStream;
 import java.io.Reader;
@@ -43,7 +42,7 @@ import org.openrdf.query.TupleQueryResult;
 import org.openrdf.rio.RDFFormat;
 
 /*
-* Java API to the Nano Sparql Server.
+ * Java API to the Nano Sparql Server.
  *
  * <p>Note: The {@link RemoteRepository} object SHOULD be reused for multiple operations against the
  * same end point.
@@ -625,8 +624,8 @@ public class RemoteRepository extends RemoteRepositoryBase {
         response.abort();
         if (!ok) {
           try {
-          /*
-       * POST back to the server to cancel the request in case
+            /*
+             * POST back to the server to cancel the request in case
              * it is still running on the server.
              */
             cancel(uuid);
@@ -705,8 +704,8 @@ public class RemoteRepository extends RemoteRepositoryBase {
       }
 
       if (remove.c != null) {
-      /*
-       * Note: Due to the way in which the RemoveOp declares [c] even when
+        /*
+         * Note: Due to the way in which the RemoveOp declares [c] even when
          * it is not a "delete-by-accesspath" request, we have to check for
          * [c!=null] here.
          *
@@ -739,8 +738,8 @@ public class RemoteRepository extends RemoteRepositoryBase {
         response.abort();
         if (!ok) {
           try {
-          /*
-       * POST back to the server to cancel the request in case
+            /*
+             * POST back to the server to cancel the request in case
              * it is still running on the server.
              */
             cancel(uuid);
@@ -876,8 +875,8 @@ public class RemoteRepository extends RemoteRepositoryBase {
         response.abort();
         if (!ok) {
           try {
-          /*
-       * POST back to the server to cancel the request in case
+            /*
+             * POST back to the server to cancel the request in case
              * it is still running on the server.
              */
             cancel(uuid);

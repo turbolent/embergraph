@@ -24,7 +24,7 @@ import cutthecrap.utils.striterators.ICloseableIterator;
 import org.embergraph.rawstore.IRawStore;
 
 /*
-* Generic data access methods defined for all persistence capable data structures.
+ * Generic data access methods defined for all persistence capable data structures.
  *
  * <p>TODO There should be a high level method to insert objects into the index (index "entries" not
  * tuples - the index will need to compute the appropriate key, etc. in an implementation dependent

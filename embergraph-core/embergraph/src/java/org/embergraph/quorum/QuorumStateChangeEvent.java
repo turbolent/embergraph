@@ -20,7 +20,7 @@ package org.embergraph.quorum;
 import java.util.UUID;
 
 /*
-* Event data equivalent to the {@link QuorumStateChangeListener} API. This interface makes it
+ * Event data equivalent to the {@link QuorumStateChangeListener} API. This interface makes it
  * possible to enqueue these messages and then process them asynchronously.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

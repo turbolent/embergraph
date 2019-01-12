@@ -21,23 +21,15 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.optimizers;
 
-import org.embergraph.rdf.sparql.ast.FunctionRegistry;
 import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.embergraph.rdf.sparql.ast.eval.ASTFulltextSearchOptimizer;
 import org.embergraph.rdf.sparql.ast.eval.ASTGeoSpatialSearchOptimizer;
 import org.embergraph.rdf.sparql.ast.eval.ASTSearchInSearchOptimizer;
 import org.embergraph.rdf.sparql.ast.eval.ASTSearchOptimizer;
 import org.embergraph.util.ClassPathUtil;
-import org.openrdf.query.algebra.evaluation.impl.CompareOptimizer;
-import org.openrdf.query.algebra.evaluation.impl.ConjunctiveConstraintSplitter;
-import org.openrdf.query.algebra.evaluation.impl.DisjunctiveConstraintOptimizer;
-import org.openrdf.query.algebra.evaluation.impl.FilterOptimizer;
-import org.openrdf.query.algebra.evaluation.impl.IterativeEvaluationOptimizer;
-import org.openrdf.query.algebra.evaluation.impl.QueryModelNormalizer;
-import org.openrdf.query.algebra.evaluation.impl.SameTermFilterOptimizer;
 
 /*
-* Pre-populated list of the default optimizers.
+ * Pre-populated list of the default optimizers.
  *
  * <pre>
  * optimizerList.add(new BindingAssigner()); // done.
@@ -577,7 +569,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
     //        add(new ASTHashJoinOptimizer());
 
     //        /*
-//         * Recognizes cases where intermediate variables are not required
+    //         * Recognizes cases where intermediate variables are not required
     //         * outside of a group and rewrites the group into a subquery having a
     //         * projection which does not include the intermediate variables.
     //         *

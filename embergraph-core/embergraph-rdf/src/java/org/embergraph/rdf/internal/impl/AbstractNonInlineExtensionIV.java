@@ -23,13 +23,11 @@ package org.embergraph.rdf.internal.impl;
 
 import org.embergraph.rdf.internal.DTE;
 import org.embergraph.rdf.internal.IExtensionIV;
-import org.embergraph.rdf.internal.INonInlineExtensionCodes;
-import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.model.EmbergraphValue;
 
 /*
-* Abstract base class for non-inline {@link IV}s which use the extension bit and distinguish
+ * Abstract base class for non-inline {@link IV}s which use the extension bit and distinguish
  * themselves by an {@link #getExtensionByte() extension byte} following the flags byte.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

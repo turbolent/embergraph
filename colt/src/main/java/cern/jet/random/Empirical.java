@@ -10,7 +10,7 @@ package cern.jet.random;
 
 import cern.jet.random.engine.RandomEngine;
 /*
-* Empirical distribution.
+ * Empirical distribution.
  *
  * <p>The probability distribution function (pdf) must be provided by the user as an array of
  * positive real numbers. The pdf does not need to be provided in the form of relative

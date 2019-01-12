@@ -36,7 +36,7 @@ import org.embergraph.bop.PipelineOp;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 
 /*
-* An attempt to solve the zero length path problem with its own operator.
+ * An attempt to solve the zero length path problem with its own operator.
  *
  * @deprecated Does not work. Leads to cardinality problems and can be removed. Zero Length Paths
  *     are integrated into the ALP node / ArbitraryLengthPathOp now.
@@ -169,8 +169,8 @@ public class ZeroLengthPathOp extends PipelineOp {
         // first check to see if the variable side is already bound
         if (bs.isBound(gearing.var)) {
 
-        /*
-       * If it has a value that is not equals to the constant
+          /*
+           * If it has a value that is not equals to the constant
            * side then we filter out the solution (by not adding it
            * to chunkOut).
            */

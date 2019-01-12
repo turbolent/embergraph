@@ -20,7 +20,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.util;
 
 /*
-* PseudoRandom is derived from an algorithm used to create a dissolve graphics effect.
+ * PseudoRandom is derived from an algorithm used to create a dissolve graphics effect.
  *
  * <p>Given a maximum number it generates all numbers from 1 to that number in a deterministic but
  * pseudorandom order.

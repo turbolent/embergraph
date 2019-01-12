@@ -9,7 +9,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.embergraph.bop.BOp;
@@ -17,8 +16,6 @@ import org.embergraph.bop.BTreeAnnotations;
 import org.embergraph.bop.HTreeAnnotations;
 import org.embergraph.bop.HashMapAnnotations;
 import org.embergraph.bop.ap.filter.BOpFilterBase;
-import org.embergraph.bop.ap.filter.DistinctFilter;
-import org.embergraph.bop.engine.IRunningQuery;
 import org.embergraph.btree.BTree;
 import org.embergraph.btree.BloomFilterFactory;
 import org.embergraph.btree.DefaultTupleSerializer;
@@ -32,18 +29,15 @@ import org.embergraph.btree.raba.codec.EmptyRabaValueCoder;
 import org.embergraph.btree.raba.codec.FrontCodedRabaCoder;
 import org.embergraph.htree.HTree;
 import org.embergraph.io.DirectBufferPool;
-import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVUtility;
-import org.embergraph.rdf.sparql.ast.eval.ASTConstructIterator;
 import org.embergraph.rdf.spo.ISPO;
-import org.embergraph.rdf.spo.SPO;
 import org.embergraph.rdf.spo.SPOKeyOrder;
 import org.embergraph.rwstore.sector.MemStore;
 import org.embergraph.rwstore.sector.MemoryManager;
 import org.embergraph.util.BytesUtil.UnsignedByteArrayComparator;
 
 /*
-* A scalable DISTINCT operator based for {@link SPO}s.
+ * A scalable DISTINCT operator based for {@link SPO}s.
  *
  * <p>Note: While highly scalable, this class will absorb a minimum of one direct buffer per use.
  * This is because we do not have access to the memory manager of the {@link IRunningQuery} on which
@@ -283,8 +277,8 @@ public class NativeDistinctFilter extends BOpFilterBase {
     @Override
     public void close() {
       if (open.compareAndSet(true /* expect */, false /* update */)) {
-      /*
-       * Close when first invoked.
+        /*
+         * Close when first invoked.
          */
         if (index != null) {
           index.close();
@@ -347,8 +341,7 @@ public class NativeDistinctFilter extends BOpFilterBase {
        * index is created.
        */
       {
-        final SPOKeyOrder indexKeyOrder =
-            getRequiredProperty(properties, Annotations.KEY_ORDER);
+        final SPOKeyOrder indexKeyOrder = getRequiredProperty(properties, Annotations.KEY_ORDER);
 
         filterKeyOrder = getFilterKeyOrder(indexKeyOrder);
 

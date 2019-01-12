@@ -25,10 +25,9 @@ package org.embergraph.service;
 
 import java.util.Properties;
 import org.embergraph.mdi.IMetadataIndex;
-import org.embergraph.mdi.PartitionLocator;
 
 /*
-* Client class for {@link AbstractScaleOutFederation}s.
+ * Client class for {@link AbstractScaleOutFederation}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

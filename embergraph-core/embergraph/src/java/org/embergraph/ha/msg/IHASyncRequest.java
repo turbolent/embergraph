@@ -20,7 +20,7 @@ package org.embergraph.ha.msg;
 import java.util.UUID;
 
 /*
-* An abstract message for either re-synchronizing (incremental catch up) or re-building (ground up
+ * An abstract message for either re-synchronizing (incremental catch up) or re-building (ground up
  * rebuild).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -28,7 +28,7 @@ import java.util.UUID;
 public interface IHASyncRequest extends IHAMessage {
 
   //    /*
-//     * When <code>true</code> the request is part of an incremental
+  //     * When <code>true</code> the request is part of an incremental
   //     * re-synchronization. When <code>false</code> the request is part of
   //     * a total re-build.
   //     */

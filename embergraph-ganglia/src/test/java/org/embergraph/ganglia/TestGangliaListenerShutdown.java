@@ -19,7 +19,6 @@
 
 package org.embergraph.ganglia;
 
-import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.concurrent.ExecutorService;
@@ -29,7 +28,7 @@ import junit.framework.TestCase;
 import org.apache.log4j.Logger;
 
 /*
-* Unit test for shutdown of the {@link GangliaService}.
+ * Unit test for shutdown of the {@link GangliaService}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

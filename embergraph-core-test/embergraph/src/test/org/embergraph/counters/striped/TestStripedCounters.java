@@ -26,7 +26,7 @@ import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.Instrument;
 
 /*
-* Unit tests for {@link StripedCounters}.
+ * Unit tests for {@link StripedCounters}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

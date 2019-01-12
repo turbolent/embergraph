@@ -20,7 +20,7 @@ import java.util.Enumeration;
 import java.util.Iterator;
 
 /*
-* Striterator - transformation and mapping patterns over java {@link Iterator} s.
+ * Striterator - transformation and mapping patterns over java {@link Iterator} s.
  *
  * <p>Extends the {@link Iterator} interface to expose methods to add {@link IFilter} objects and a
  * specific Type filter

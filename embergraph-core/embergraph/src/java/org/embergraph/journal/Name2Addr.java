@@ -35,7 +35,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Properties;
 import java.util.Set;
 import java.util.UUID;
@@ -64,21 +63,18 @@ import org.embergraph.btree.keys.StrengthEnum;
 import org.embergraph.btree.keys.SuccessorUtil;
 import org.embergraph.cache.ConcurrentWeakValueCache;
 import org.embergraph.cache.ConcurrentWeakValueCacheWithTimeout;
-import org.embergraph.cache.LRUCache;
-import org.embergraph.cache.WeakValueCache;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.ICounterSet;
 import org.embergraph.io.DataInputBuffer;
 import org.embergraph.mdi.LocalPartitionMetadata;
 import org.embergraph.rawstore.IRawStore;
-import org.embergraph.resources.IndexManager;
 import org.embergraph.resources.ResourceManager;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 import org.embergraph.util.concurrent.ExecutionExceptions;
 
 /*
-* <p>
+ * <p>
  * {@link Name2Addr} is a {@link BTree} mapping index names to an {@link Entry}
  * containing the last {@link Checkpoint} record committed for the named index
  * and the timestamp of that commit. The keys are Unicode strings using the
@@ -203,8 +199,8 @@ public class Name2Addr extends BTree {
 
       if (!needsCheckpoint) {
 
-      /*
-       * Grab the checkpointAddr for the object.
+        /*
+         * Grab the checkpointAddr for the object.
          */
 
         try {
@@ -243,8 +239,8 @@ public class Name2Addr extends BTree {
 
         if (cached == null) {
 
-        /*
-       * There is no index in the cache for this name. This can
+          /*
+           * There is no index in the cache for this name. This can
            * occur if someone is holding a reference to a mutable
            * BTree and they write on it after a commit or abort.
            */
@@ -254,8 +250,8 @@ public class Name2Addr extends BTree {
 
         if (cached != btree) {
 
-        /*
-       * There is a different index in the cache for this name.
+          /*
+           * There is a different index in the cache for this name.
            * This can occur if someone is holding a reference to a
            * mutable BTree and they write on it after a commit or
            * abort but the named index has already been re-loaded into
@@ -265,8 +261,8 @@ public class Name2Addr extends BTree {
           throw new RuntimeException("Different index in cache: " + name);
         }
 
-      /*
-       * Note: This MUST be synchronized to prevent loss of dirty
+        /*
+         * Note: This MUST be synchronized to prevent loss of dirty
          * notifications that arrive while a concurrent commit is in
          * progress.
          */
@@ -279,8 +275,8 @@ public class Name2Addr extends BTree {
 
         if (log.isInfoEnabled()) {
 
-        /*
-       * Note: The size of the commit list can appear to increment
+          /*
+           * Note: The size of the commit list can appear to increment
            * by more than one if there are concurrent writes on
            * different indices (e.g., if this log message is written
            * outside of the synchronized block).
@@ -489,8 +485,8 @@ public class Name2Addr extends BTree {
       final long checkpointAddr;
       if (l.needsCheckpoint) {
 
-      /*
-       * Note: AbstractTask flags [needsCheckpoint := false] on the
+        /*
+         * Note: AbstractTask flags [needsCheckpoint := false] on the
          * DirtyListener and handles the BTree checkpoint itself in
          * order to avoid the possibility of a concurrent modification
          * by this code during commit processing.
@@ -512,8 +508,8 @@ public class Name2Addr extends BTree {
 
       } else {
 
-      /*
-       * Note: AbstractTask avoids concurrent modification of the
+        /*
+         * Note: AbstractTask avoids concurrent modification of the
          * BTree checkpoint record during a commit by synchronizing on
          * Name2Addr.
          *
@@ -672,8 +668,8 @@ public class Name2Addr extends BTree {
         final Entry oldEntry =
             (val == null ? null : EntrySerializer.INSTANCE.deserialize(new DataInputBuffer(val)));
 
-      /*
-       * Update if there is no existing entry or if the checkpointAddr has
+        /*
+         * Update if there is no existing entry or if the checkpointAddr has
          * changed or if there was no commit time on the old entry.
          */
 
@@ -826,8 +822,8 @@ public class Name2Addr extends BTree {
 
       if (ndx.getDirtyListener() == null) {
 
-      /*
-       * Note: We can't return an unisolated view of a BTree to the
+        /*
+         * Note: We can't return an unisolated view of a BTree to the
          * caller without having a dirty listener set on it that will
          * report any changes back to this name2addr instance.  An
          * exception thrown here indicates that the BTree was able to
@@ -1194,8 +1190,8 @@ public class Name2Addr extends BTree {
 
       if (found != null) {
 
-      /*
-       * Report out the names of the indices whose counters are being
+        /*
+         * Report out the names of the indices whose counters are being
          * returned.
          */
 
@@ -1521,7 +1517,7 @@ public class Name2Addr extends BTree {
   }
 
   //    /*
-//     * The SuccessorUtil does not work with CollatedKeys since it bumps the "meta/control" data
+  //     * The SuccessorUtil does not work with CollatedKeys since it bumps the "meta/control" data
   //     * at the end of the key, rather than the "value" data of the key.
   //     *
   //     * It has been observed that the key data is delimited with a 01 byte, followed by

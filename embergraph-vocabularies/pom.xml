@@ -18,7 +18,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.embergraph</groupId>
@@ -29,7 +31,8 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
   <artifactId>embergraph-vocabularies</artifactId>
   <version>2.1.5-SNAPSHOT</version>
   <name>Embergraph Vocabularies</name>
-  <description>Embergraph Custom Vocabularies and Inline URI Handlers for commonly used data sets.</description>
+  <description>Embergraph Custom Vocabularies and Inline URI Handlers for commonly used data sets.
+  </description>
   <reporting>
     <plugins>
       <plugin>
@@ -41,7 +44,8 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
           <maxmemory>1000m</maxmemory>
           <author>true</author>
           <version>true</version>
-          <doctitle><![CDATA[<h1>Embergraph Custom Vocabularies and Inline URI Handlers for commonly used data sets</h1>]]></doctitle>
+          <doctitle>
+            <![CDATA[<h1>Embergraph Custom Vocabularies and Inline URI Handlers for commonly used data sets</h1>]]></doctitle>
           <bottom><![CDATA[
 <i>Copyright &#169; SYSTAP, LLC DBA Blazegraph 2006-2018. All Rights Reserved.</i>
 <i>Copyright &#169; Embergraph contributors 2019. All Rights Reserved.</i>

@@ -22,11 +22,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast;
 
 import java.util.List;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTAttachJoinFiltersOptimizer;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTSimpleOptionalOptimizer;
 
 /*
-* A marker interface for any kind of AST Node which joins stuff.
+ * A marker interface for any kind of AST Node which joins stuff.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

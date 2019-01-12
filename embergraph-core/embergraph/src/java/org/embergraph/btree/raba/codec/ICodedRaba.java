@@ -21,7 +21,7 @@ import org.embergraph.btree.raba.IRaba;
 import org.embergraph.io.AbstractFixedByteArrayBuffer;
 
 /*
-* Interface for an coded logical byte[][]. Implementations of this interface MUST be thread-safe
+ * Interface for an coded logical byte[][]. Implementations of this interface MUST be thread-safe
  * since the B+Tree guarantees the ability to perform concurrent read operations and instances of
  * this interface are used to code the keys and values of B+Tree nodes and leaves.
  *

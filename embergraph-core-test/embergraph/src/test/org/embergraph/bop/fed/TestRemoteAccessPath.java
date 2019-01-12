@@ -47,7 +47,6 @@ import org.embergraph.journal.ITx;
 import org.embergraph.journal.Journal;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.relation.accesspath.IAccessPath;
-import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
 import org.embergraph.service.AbstractEmbeddedFederationTestCase;
@@ -58,7 +57,7 @@ import org.embergraph.striterator.ChunkedArrayIterator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /*
-* Unit tests of a remote access path.
+ * Unit tests of a remote access path.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

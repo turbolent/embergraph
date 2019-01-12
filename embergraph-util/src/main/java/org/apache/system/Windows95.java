@@ -22,7 +22,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 /*
-* Parses the Windows 95 environment--the same class should work for other Windows versions, but I
+ * Parses the Windows 95 environment--the same class should work for other Windows versions, but I
  * only have one to test. Windows 9x environments can only use one processor--even if there are more
  * installed in the system.
  *

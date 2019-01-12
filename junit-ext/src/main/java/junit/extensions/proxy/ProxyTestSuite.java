@@ -20,12 +20,11 @@
 package junit.extensions.proxy;
 
 import junit.framework.Test;
-import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import org.apache.log4j.Logger;
 
 /*
-* A simple wrapper around {@link TestSuite} that permits the caller to specify the delegate {@link
+ * A simple wrapper around {@link TestSuite} that permits the caller to specify the delegate {@link
  * Test} for either directly or recursively contained {@link IProxyTest}s added to a {@link
  * ProxyTestSuite}. There are three cases for junit:
  *

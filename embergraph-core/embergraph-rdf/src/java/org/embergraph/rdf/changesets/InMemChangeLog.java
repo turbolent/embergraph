@@ -29,7 +29,7 @@ import org.embergraph.rdf.store.EmbergraphStatementIterator;
 import org.embergraph.striterator.ChunkedArrayIterator;
 
 /*
-* This is a very simple implementation of a change log. NOTE: This is not a particularly great
+ * This is a very simple implementation of a change log. NOTE: This is not a particularly great
  * implementation. First of all it ends up storing two copies of the change set. Secondly it needs
  * to be smarter about concurrency, or maybe we can be smart about it when we do the implementation
  * on the other side (the SAIL connection can just write change events to a buffer and then the

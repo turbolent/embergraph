@@ -3,12 +3,11 @@ package org.embergraph.resources;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-import org.embergraph.journal.CommitRecordIndex;
 import org.embergraph.journal.ITransactionService;
 import org.embergraph.service.Params;
 
 /*
-* A class that captures the results of {@link StoreManager#purgeOldResources()}.
+ * A class that captures the results of {@link StoreManager#purgeOldResources()}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

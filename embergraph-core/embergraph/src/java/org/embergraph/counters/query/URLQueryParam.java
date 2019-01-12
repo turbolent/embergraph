@@ -3,7 +3,7 @@ package org.embergraph.counters.query;
 import java.util.Vector;
 
 /*
-* The ordered set of values bound for a URL query parameter.
+ * The ordered set of values bound for a URL query parameter.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

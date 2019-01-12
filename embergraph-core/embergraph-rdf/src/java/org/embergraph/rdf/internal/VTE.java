@@ -21,14 +21,13 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.internal;
 
-import org.embergraph.rdf.internal.impl.AbstractIV;
 import org.openrdf.model.BNode;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
 /*
-* Value Type Enumeration (IVTE) is a class with methods for interpreting and setting the bit flags
+ * Value Type Enumeration (IVTE) is a class with methods for interpreting and setting the bit flags
  * used to identify the type of an RDF Value (URI, Literal, Blank Node, SID, etc).
  */
 public enum VTE {

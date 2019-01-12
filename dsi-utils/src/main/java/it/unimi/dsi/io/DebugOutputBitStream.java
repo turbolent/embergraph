@@ -26,7 +26,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 
 /*
-* A debugging wrapper for output bit streams.
+ * A debugging wrapper for output bit streams.
  *
  * <p>This class can be used to wrap an output bit stream. The semantics of the resulting write
  * operations is unchanged, but each operation will be logged.

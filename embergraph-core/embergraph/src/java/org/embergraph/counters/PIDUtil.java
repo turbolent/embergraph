@@ -35,7 +35,7 @@ import org.apache.log4j.Logger;
 import org.apache.system.SystemUtil;
 
 /*
-* Utility to return the PID of the JVM.
+ * Utility to return the PID of the JVM.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

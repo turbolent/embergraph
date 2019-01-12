@@ -28,7 +28,7 @@ import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /*
-* Data driven test suite testing configurability of GeoSpatial service. The few tests in this class
+ * Data driven test suite testing configurability of GeoSpatial service. The few tests in this class
  * replicate examples from {@link TestGeoSpatialServiceConfiguration} with a custom datatype instead
  * of using the built-in datatype.
  *

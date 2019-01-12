@@ -16,7 +16,7 @@
 package org.embergraph.ganglia;
 
 /*
-* Factory associates the {@link IGangliaMetadataMessage} with the {@link IGangliaMetricMessage}.
+ * Factory associates the {@link IGangliaMetadataMessage} with the {@link IGangliaMetricMessage}.
  */
 public class RichMetricFactory {
 

@@ -28,7 +28,7 @@ import it.unimi.dsi.lang.MutableString;
 import java.io.IOException;
 
 /*
-* A set of interned mutable strings.
+ * A set of interned mutable strings.
  *
  * <p>This class extends {@link it.unimi.dsi.fastutil.objects.ObjectOpenHashSet} by providing an
  * {@link #intern(MutableString)} method with a semantics similar to that of {@link

@@ -34,7 +34,7 @@ import org.openrdf.model.datatypes.XMLDatatypeUtil;
 import org.openrdf.model.impl.URIImpl;
 
 /*
-* This implementation of {@link IExtension} implements inlining for literals that represent time in
+ * This implementation of {@link IExtension} implements inlining for literals that represent time in
  * milliseconds since the epoch. The milliseconds are encoded as an inline long.
  */
 public class EpochExtension<V extends EmbergraphValue> implements IExtension<V> {

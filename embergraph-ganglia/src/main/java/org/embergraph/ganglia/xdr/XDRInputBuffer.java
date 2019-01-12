@@ -16,7 +16,7 @@
 package org.embergraph.ganglia.xdr;
 
 /*
-* A class for reading XDR data from an internal buffer.
+ * A class for reading XDR data from an internal buffer.
  *
  * @see <a href="http://www.ietf.org/rfc/rfc4506.txt">RDF 4506</a>
  */

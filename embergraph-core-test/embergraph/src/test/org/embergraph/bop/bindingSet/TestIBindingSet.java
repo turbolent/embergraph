@@ -34,7 +34,7 @@ import org.embergraph.bop.Var;
 import org.embergraph.io.SerializerUtil;
 
 /*
-* Unit tests for {@link IBindingSet}.
+ * Unit tests for {@link IBindingSet}.
  *
  * <p>Note:
  *

@@ -24,14 +24,11 @@ package org.embergraph.rdf.inf;
 import org.embergraph.rdf.changesets.IChangeLog;
 import org.embergraph.rdf.changesets.StatementWriter;
 import org.embergraph.rdf.spo.ISPO;
-import org.embergraph.rdf.spo.SPO;
 import org.embergraph.rdf.store.AbstractTripleStore;
-import org.embergraph.relation.accesspath.AbstractElementBuffer.DeleteBuffer;
-import org.embergraph.relation.rule.eval.AbstractSolutionBuffer.DeleteSolutionBuffer;
 import org.embergraph.striterator.ChunkedArrayIterator;
 
 /*
-* A buffer for {@link SPO}s which causes the corresponding statements (and their {@link
+ * A buffer for {@link SPO}s which causes the corresponding statements (and their {@link
  * Justification}s) be retracted from the database when it is {@link #flush()}ed.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

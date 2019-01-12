@@ -24,7 +24,7 @@ package org.embergraph.rdf.sparql.ast.service;
 import org.openrdf.query.BindingSet;
 
 /*
-* Interface for objects which can construct a valid SPARQL query for execution against a remote
+ * Interface for objects which can construct a valid SPARQL query for execution against a remote
  * SPARQL end point.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -33,7 +33,7 @@ import org.openrdf.query.BindingSet;
 public interface IRemoteSparqlQueryBuilder {
 
   //    /*
-//     * When <code>true</code>, the implementation will process all source
+  //     * When <code>true</code>, the implementation will process all source
   //     * solutions. Otherwise, it must be invoked for each source solution in
   //     * turn.
   //     *
@@ -50,7 +50,7 @@ public interface IRemoteSparqlQueryBuilder {
   String getSparqlQuery(final BindingSet[] bindingSets);
 
   // /*
-// * If necessary, decorrelate, filter, or otherwise translate the solutions
+  // * If necessary, decorrelate, filter, or otherwise translate the solutions
   // from the service. For
   // * example, this may be used to "reverse" the UNION pattern in which the
   // * variables were rewritten. If the query was produced using the simplest

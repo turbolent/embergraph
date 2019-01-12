@@ -26,7 +26,7 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.lang.MutableString;
 
 /*
-* A factory for well-formed XML documents.
+ * A factory for well-formed XML documents.
  *
  * <p>This factory assumes that every new name of an element type or of an attribute is new valid
  * name. For entities, instead, resolution is deferred to {@link it.unimi.dsi.parser.HTMLFactory}.

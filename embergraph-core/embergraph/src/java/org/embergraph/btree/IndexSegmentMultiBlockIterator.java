@@ -5,14 +5,13 @@ import java.nio.ByteBuffer;
 import java.util.NoSuchElementException;
 import org.apache.log4j.Logger;
 import org.embergraph.btree.IndexSegment.ImmutableNodeFactory.ImmutableLeaf;
-import org.embergraph.btree.IndexSegment.IndexSegmentTupleCursor;
 import org.embergraph.btree.data.ILeafData;
 import org.embergraph.io.DirectBufferPool;
 import org.embergraph.io.IBufferAccess;
 import org.embergraph.util.BytesUtil;
 
 /*
-* A fast iterator based on multi-block IO for the {@link IndexSegment}. This iterator is designed
+ * A fast iterator based on multi-block IO for the {@link IndexSegment}. This iterator is designed
  * for operations which will fully visit either all leaves in the {@link IndexSegment} or a
  * key-range corresponding to a substantial proportion of those leaves. A direct {@link ByteBuffer}
  * is allocated from the caller's {@link DirectBufferPool} and an IO request is issued against the

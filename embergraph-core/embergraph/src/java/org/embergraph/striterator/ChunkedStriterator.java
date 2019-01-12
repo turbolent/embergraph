@@ -24,11 +24,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.striterator;
 
 import java.util.Iterator;
-import org.embergraph.btree.ITupleIterator;
 // import org.embergraph.btree.filter.IFilter;
 
 /*
-* Chunked streaming iterator.
+ * Chunked streaming iterator.
  *
  * @todo Like the {@link ITupleIterator}, the {@link IChunkedIterator}s can be executed on the
  *     server and them stream results back to the client. We really need to introduce custom

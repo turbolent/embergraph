@@ -28,7 +28,7 @@ import org.embergraph.bop.controller.INamedSolutionSetRef;
 import org.embergraph.journal.ITx;
 
 /*
-* Test suite for {@link NamedSolutionSetRef}.
+ * Test suite for {@link NamedSolutionSetRef}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

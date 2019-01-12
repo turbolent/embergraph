@@ -24,15 +24,13 @@ package org.embergraph.rawstore;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.util.UUID;
 import org.embergraph.counters.CounterSet;
-import org.embergraph.journal.TemporaryRawStore;
 import org.embergraph.mdi.IResourceMetadata;
 
 /*
-* A simple persistent unbuffered implementation backed by a file.
+ * A simple persistent unbuffered implementation backed by a file.
  *
  * @see {@link TemporaryRawStore}, which provides a solution for temporary data that begins with the
  *     benefits of a memory-resident buffer and then converts to a disk-based store on overflow.
@@ -50,7 +48,7 @@ public class SimpleFileRawStore extends AbstractRawWormStore {
   protected final RandomAccessFile raf;
 
   //    /*
-//     * This provides a purely transient means to identify deleted records.  This
+  //     * This provides a purely transient means to identify deleted records.  This
   //     * data does NOT survive restart of the store.
   //     */
   //    private final Set<Long> deleted = new HashSet<Long>();
@@ -321,7 +319,7 @@ public class SimpleFileRawStore extends AbstractRawWormStore {
   }
 
   //    /*
-//     * Note: the delete implementation checks its arguments and makes a
+  //     * Note: the delete implementation checks its arguments and makes a
   //     * <em>transient</em> note that the record has been deleted but that
   //     * information does NOT survive restart of the store.
   //     */

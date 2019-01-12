@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 /*
-* Class buffers up to a block of data at a time and flushes blocks using an atomic append operation
+ * Class buffers up to a block of data at a time and flushes blocks using an atomic append operation
  * on the identifier file version.
  *
  * @todo this would benefit from asynchronous write-behind of the last block so that caller's do not

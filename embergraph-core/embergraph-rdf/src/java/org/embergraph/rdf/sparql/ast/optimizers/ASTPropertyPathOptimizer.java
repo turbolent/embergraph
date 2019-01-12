@@ -201,8 +201,8 @@ public class ASTPropertyPathOptimizer extends AbstractJoinGroupOptimizer impleme
         if (i < (pathSeq.arity() - 1)
             && (mod == PathMod.ZERO_OR_ONE || mod == PathMod.ZERO_OR_MORE)) {
 
-        /*
-       * We need to create a new path sequence using an alt and
+          /*
+           * We need to create a new path sequence using an alt and
            * then run the optimizer on the new sequence instead of
            * this one.
            *
@@ -253,8 +253,8 @@ public class ASTPropertyPathOptimizer extends AbstractJoinGroupOptimizer impleme
 
             } else {
 
-            /*
-       * After the splitting element we add a copy of
+              /*
+               * After the splitting element we add a copy of
                * the subsequent elements to the two alternatives.
                */
 

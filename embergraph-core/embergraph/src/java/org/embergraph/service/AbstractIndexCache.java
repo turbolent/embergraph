@@ -6,17 +6,15 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import org.apache.log4j.Logger;
-import org.embergraph.btree.IIndex;
 import org.embergraph.btree.IRangeQuery;
 import org.embergraph.cache.ConcurrentWeakValueCache;
 import org.embergraph.cache.ConcurrentWeakValueCacheWithTimeout;
 import org.embergraph.concurrent.NamedLock;
 import org.embergraph.journal.ITx;
-import org.embergraph.service.ndx.IClientIndex;
 import org.embergraph.util.NT;
 
 /*
-* Abstract base class providing caching for {@link IIndex} like objects. A canonicalizing cache is
+ * Abstract base class providing caching for {@link IIndex} like objects. A canonicalizing cache is
  * used with weak references to the {@link IIndex}s back by a hard reference LRU cache. This tends
  * to keep around views that are reused while letting references for unused views be cleared by the
  * garbage collector in a timely manner.
@@ -159,8 +157,8 @@ public abstract class AbstractIndexCache<T extends IRangeQuery> {
 
         if (ndx == null) {
 
-        /*
-       * The entry under the key has been cleared so we just skip
+          /*
+           * The entry under the key has been cleared so we just skip
            * over this entry. Entries associated with a value whose
            * weak reference has been cleared will be automatically
            * removed from the map - we don't need to worry about them

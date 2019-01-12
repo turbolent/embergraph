@@ -35,7 +35,7 @@ import org.embergraph.bop.IValueExpression;
 import org.embergraph.bop.IVariable;
 
 /*
-* AST node modeling projected value expressions.
+ * AST node modeling projected value expressions.
  *
  * <p>Note: "*" is modeled using an explicit variable whose name is <code>*</code>.
  *

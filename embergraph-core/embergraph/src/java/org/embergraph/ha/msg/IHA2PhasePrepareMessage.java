@@ -18,11 +18,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.ha.msg;
 
 import java.util.concurrent.TimeUnit;
-import org.embergraph.ha.HACommitGlue;
 import org.embergraph.journal.IRootBlockView;
 
 /*
-* Message used by the {@link HACommitGlue} interface to indicate that the recipient should save a
+ * Message used by the {@link HACommitGlue} interface to indicate that the recipient should save a
  * reference to the caller's root block, flush writes to the backing channel and acknowledge "yes"
  * if ready to commit. If the node can not prepare for any reason, then it must return "no".
  *

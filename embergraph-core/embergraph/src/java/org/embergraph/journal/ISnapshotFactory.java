@@ -21,7 +21,7 @@ import java.io.File;
 import java.io.IOException;
 
 /*
-* Interface allows an application to decide on the file name for the snapshot, whether or not the
+ * Interface allows an application to decide on the file name for the snapshot, whether or not the
  * snapshot will be compressed, etc.
  *
  * @author bryan

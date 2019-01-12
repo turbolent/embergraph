@@ -10,7 +10,7 @@ package cern.colt.buffer;
 
 import cern.colt.list.DoubleArrayList;
 /*
-* Fixed sized (non resizable) streaming buffer connected to a target
+ * Fixed sized (non resizable) streaming buffer connected to a target
  * <tt>DoubleBuffer2DConsumer</tt> to which data is automatically flushed upon buffer overflow.
  *
  * @author wolfgang.hoschek@cern.ch

@@ -31,7 +31,7 @@ import java.util.Map;
 import java.util.Set;
 
 /*
-* A callback extracting links.
+ * A callback extracting links.
  *
  * <p>This callbacks extracts links existing in the web page. The links are then accessible in
  * {@link #urls} (a set of {@link String}s). Note that we guarantee that the iteration order in the

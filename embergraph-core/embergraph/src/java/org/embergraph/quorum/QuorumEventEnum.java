@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.quorum;
 
 /*
-* A type-safe enumeration for informational quorum events.
+ * A type-safe enumeration for informational quorum events.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -53,16 +53,16 @@ public enum QuorumEventEnum {
   /** Event generated when a service leaves a quorum. */
   SERVICE_LEAVE,
   //    /*
-//     * Event generated when a service joins a quorum as a follower.
+  //     * Event generated when a service joins a quorum as a follower.
   //     */
   //    ELECTED_FOLLOWER,
   //    /*
-//     * Event generated when a new leader is elected, including when a quorum
+  //     * Event generated when a new leader is elected, including when a quorum
   //     * meets.
   //     */
   //    ELECTED_LEADER,
   //    /*
-//     * Event generated when the (lastValidToken,token) are atomically updated.
+  //     * Event generated when the (lastValidToken,token) are atomically updated.
   //     */
   //    SET_LAST_VALID_TOKEN,
   /*

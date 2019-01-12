@@ -29,7 +29,7 @@ import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
 /*
-* Default dispatch pattern for a core REST API.
+ * Default dispatch pattern for a core REST API.
  *
  * @author Martyn Cutcher
  */
@@ -180,8 +180,8 @@ public class RESTServlet extends EmbergraphRDFServlet {
 
       if (m_describeServlet != null) {
 
-      /*
-       * Test the DESCRIBE cache.
+        /*
+         * Test the DESCRIBE cache.
          */
 
         req.setAttribute(DescribeCacheServlet.ATTR_DESCRIBE_URIS, Collections.singleton(uri));

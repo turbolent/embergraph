@@ -24,11 +24,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.relation.rule;
 
 import java.io.Serializable;
-import org.embergraph.bop.IPredicate;
 import org.embergraph.relation.accesspath.IAccessPath;
 
 /*
-* An interface for expander patterns for an {@link IPredicate} when it appears in the right-hand
+ * An interface for expander patterns for an {@link IPredicate} when it appears in the right-hand
  * position of a JOIN.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -30,7 +30,7 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.service.geospatial.GeoSpatialSearchException;
 
 /*
-* Correct rejection test for GeoSpatial data, making sure that appropriate error messages are
+ * Correct rejection test for GeoSpatial data, making sure that appropriate error messages are
  * thrown in cases where we encounter data format problems or service calls are not properly
  * configured.
  *

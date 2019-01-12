@@ -31,7 +31,7 @@ import java.util.NoSuchElementException;
 import junit.framework.TestCase2;
 
 /*
-* Test suite for {@link RingBuffer}.
+ * Test suite for {@link RingBuffer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

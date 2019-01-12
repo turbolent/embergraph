@@ -19,11 +19,8 @@ import java.util.AbstractMap;
 import java.util.AbstractSet;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.ConcurrentModificationException;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -35,7 +32,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.locks.ReentrantLock;
 
 /*
-* A hash table supporting full concurrency of retrievals and adjustable expected concurrency for
+ * A hash table supporting full concurrency of retrievals and adjustable expected concurrency for
  * updates. This class obeys the same functional specification as {@link java.util.Hashtable}, and
  * includes versions of methods corresponding to each method of <tt>Hashtable</tt>. However, even
  * though all operations are thread-safe, retrieval operations do <em>not</em> entail locking, and

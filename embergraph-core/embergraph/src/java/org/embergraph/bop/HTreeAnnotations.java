@@ -21,10 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop;
 
-import org.embergraph.htree.HTree;
-
 /*
-* Annotations for an operator using an {@link HTree}.
+ * Annotations for an operator using an {@link HTree}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: ConcurrentHashMapAnnotations.java 3665 2010-09-28 16:53:22Z thompsonbry $

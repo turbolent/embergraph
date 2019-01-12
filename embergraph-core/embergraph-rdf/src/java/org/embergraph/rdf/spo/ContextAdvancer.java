@@ -21,9 +21,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.spo;
 
-import org.embergraph.btree.IRangeQuery;
 import org.embergraph.btree.ITuple;
-import org.embergraph.btree.ITupleCursor;
 import org.embergraph.btree.filter.Advancer;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.KeyBuilder;
@@ -32,7 +30,7 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVUtility;
 
 /*
-* Advancer for a quads index whose last key component is the "context position (such as SPOC or
+ * Advancer for a quads index whose last key component is the "context position (such as SPOC or
  * SOPC). The advancer will skip to first possible key for the next distinct triple for each quad
  * which it visits. This is a cheap way to impose a "DISTINCT" filter using an index scan and works
  * well for both local and scale-out indices.

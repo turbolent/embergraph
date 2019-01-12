@@ -33,7 +33,7 @@ import org.embergraph.journal.TimestampUtility;
 import org.embergraph.relation.AbstractRelation;
 
 /*
-* Helper class.
+ * Helper class.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -91,8 +91,8 @@ public class GlobalRowStoreHelper {
 
         try {
 
-        /*
-       * Note: This specifies an split handler that keeps the
+          /*
+           * Note: This specifies an split handler that keeps the
            * logical row together. This is a hard requirement. The
            * atomic read/update guarantee depends on this.
            *
@@ -105,8 +105,8 @@ public class GlobalRowStoreHelper {
 
           // Ensure that splits do not break logical rows.
           indexMetadata.setSplitHandler(LogicalRowSplitHandler.INSTANCE);
-        /*
-       * This is now handled by using the UTF8 encoding of the primary key regardless
+          /*
+           * This is now handled by using the UTF8 encoding of the primary key regardless
            * of the collator mode chosen (this fixes the problem with embedded nuls).
            */
           //                    if (CollatorEnum.JDK.toString().equals(
@@ -136,8 +136,8 @@ public class GlobalRowStoreHelper {
           throw new RuntimeException(ex);
         }
 
-      /*
-       * The live view of the global row store must be wrapped by an UnisolatedReadWriteIndex on a
+        /*
+         * The live view of the global row store must be wrapped by an UnisolatedReadWriteIndex on a
          * Journal.
          *
          * @see http://sourceforge.net/apps/trac/bigdata/ticket/616 (Row store read/update not

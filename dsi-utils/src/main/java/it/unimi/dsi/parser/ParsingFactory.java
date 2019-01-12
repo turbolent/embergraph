@@ -24,7 +24,7 @@ package it.unimi.dsi.parser;
 import it.unimi.dsi.lang.MutableString;
 
 /*
-* A set of coherent methods to turn element-type, attribute and entity names to unique interned
+ * A set of coherent methods to turn element-type, attribute and entity names to unique interned
  * instances.
  *
  * <p>The {@link it.unimi.dsi.parser.BulletParser} needs a way to turn a name (for an element type,

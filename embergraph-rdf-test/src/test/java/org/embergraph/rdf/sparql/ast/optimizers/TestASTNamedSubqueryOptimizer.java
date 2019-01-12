@@ -50,7 +50,7 @@ import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /*
-* Test suite for the {@link ASTNamedSubqueryOptimizer}.
+ * Test suite for the {@link ASTNamedSubqueryOptimizer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestASTNamedSubqueryOptimizer.java 6281 2012-04-12 17:27:36Z thompsonbry $

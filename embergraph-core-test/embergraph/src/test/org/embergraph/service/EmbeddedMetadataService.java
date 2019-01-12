@@ -4,7 +4,7 @@ import java.util.Properties;
 import java.util.UUID;
 
 /*
-* A local (in process) metadata service.
+ * A local (in process) metadata service.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

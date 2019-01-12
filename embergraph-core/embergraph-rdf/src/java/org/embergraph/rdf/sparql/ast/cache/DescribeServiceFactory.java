@@ -15,10 +15,9 @@ import org.embergraph.rdf.sparql.ast.service.ServiceCall;
 import org.embergraph.rdf.sparql.ast.service.ServiceCallCreateParams;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.store.AbstractTripleStore;
-import org.embergraph.rdf.store.BD;
 
 /*
-* This service tracks KB updates via an {@link IChangeLog} and is responsible for DESCRIBE cache
+ * This service tracks KB updates via an {@link IChangeLog} and is responsible for DESCRIBE cache
  * invalidation for resources for which an update has been observed.
  *
  * @see BD#DESCRIBE
@@ -137,8 +136,8 @@ public class DescribeServiceFactory extends CustomServiceFactoryBase {
 
       if (record.getChangeAction() == ChangeAction.UPDATED) {
 
-      /*
-       * This state change does not matter for cache maintenance
+        /*
+         * This state change does not matter for cache maintenance
          * unless we also plan to note the {Axiom, Inference, Explicit}
          * state on the statements in the cache.
          */

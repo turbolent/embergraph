@@ -30,7 +30,7 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDF;
 
 /*
-* Vocabulary and namespace for RDF.
+ * Vocabulary and namespace for RDF.
  *
  * @see http://www.w3.org/1999/02/22-rdf-syntax-ns#
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

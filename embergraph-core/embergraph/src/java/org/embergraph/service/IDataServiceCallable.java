@@ -1,12 +1,7 @@
 package org.embergraph.service;
 
-import org.embergraph.btree.proc.IIndexProcedure;
-import org.embergraph.journal.AbstractTask;
-import org.embergraph.journal.DropIndexTask;
-import org.embergraph.journal.RegisterIndexTask;
-
 /*
-* Interface for procedures that require access to the {@link IDataService} and or the federation.
+ * Interface for procedures that require access to the {@link IDataService} and or the federation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -29,7 +29,7 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTStaticJoinOptimizer;
 
 /*
-* Query hint for setting {@link ASTStaticJoinOptimizer.Annotations#OPTIMISTIC} on a {@link
+ * Query hint for setting {@link ASTStaticJoinOptimizer.Annotations#OPTIMISTIC} on a {@link
  * JoinGroupNode}.
  */
 final class OptimisticQueryHint extends AbstractDoubleQueryHint {

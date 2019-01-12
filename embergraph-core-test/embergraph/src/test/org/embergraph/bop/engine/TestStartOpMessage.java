@@ -26,7 +26,7 @@ import junit.framework.TestCase2;
 import org.embergraph.io.SerializerUtil;
 
 /*
-* Test suite for {@link StartOpMessage}.
+ * Test suite for {@link StartOpMessage}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

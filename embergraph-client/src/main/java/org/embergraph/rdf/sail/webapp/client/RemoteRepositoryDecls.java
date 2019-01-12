@@ -25,7 +25,7 @@ import org.openrdf.model.impl.URIImpl;
 // import org.embergraph.rdf.sparql.ast.service.RemoteServiceOptions;
 
 /*
-* Various declarations used by the client API.
+ * Various declarations used by the client API.
  *
  * <p>Note: Some of these fields are replicated from the org.embergraph.rdf.store.BD interface in
  * order to avoid dragging in other aspects of the embergraph code base.

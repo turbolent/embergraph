@@ -33,25 +33,18 @@ import org.embergraph.bop.BOpUtility;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IConstraint;
 import org.embergraph.bop.IPredicate;
-import org.embergraph.bop.IQueryAttributes;
 import org.embergraph.bop.IVariable;
 import org.embergraph.bop.NV;
 import org.embergraph.bop.PipelineOp;
-import org.embergraph.bop.ap.SampleIndex;
 import org.embergraph.bop.ap.SampleIndex.SampleType;
-import org.embergraph.bop.controller.AbstractSubqueryOp;
 import org.embergraph.bop.engine.AbstractRunningQuery;
 import org.embergraph.bop.engine.IRunningQuery;
 import org.embergraph.bop.engine.QueryEngine;
-import org.embergraph.rdf.sparql.ast.JoinGroupNode;
-import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpRTO;
-import org.embergraph.rdf.sparql.ast.eval.AST2BOpUtility;
-import org.embergraph.util.NT;
 import org.embergraph.util.concurrent.Haltable;
 
 /*
-* A join graph with annotations for estimated cardinality and other details in support of runtime
+ * A join graph with annotations for estimated cardinality and other details in support of runtime
  * query optimization. A join graph is a collection of access paths reading on relations (the
  * vertices of the join graph) and joins which connect those relations (the edges of the join
  * graph). This boils down to a collection of {@link IPredicate}s (access paths reading on on
@@ -94,7 +87,7 @@ public class JoinGraph extends PipelineOp {
   public interface Annotations extends PipelineOp.Annotations {
 
     //        /*
-//         * The variables to be projected out of the join graph (optional). When
+    //         * The variables to be projected out of the join graph (optional). When
     //         * <code>null</code>, all variables will be projected out.
     //         */
     //        String SELECTED = JoinGraph.class.getName() + ".selected";
@@ -182,7 +175,7 @@ public class JoinGraph extends PipelineOp {
    */
 
   //	/*
-//	 * @see Annotations#SELECTED
+  //	 * @see Annotations#SELECTED
   //	 */
   //	public IVariable<?>[] getSelected() {
   //
@@ -372,8 +365,8 @@ public class JoinGraph extends PipelineOp {
 
       if (getQueryPlan(context.getRunningQuery()) == null) {
 
-      /*
-       * Use the RTO to generate a query plan.
+        /*
+         * Use the RTO to generate a query plan.
          *
          * TODO Make sure that the JoinGraph can not be triggered
          * concurrently, e.g., that the CONTROLLER attribute prevents
@@ -385,8 +378,8 @@ public class JoinGraph extends PipelineOp {
         // Create the join graph.
         final JGraph g = new JGraph(JoinGraph.this);
 
-      /*
-       * This map is used to associate join path segments (expressed
+        /*
+         * This map is used to associate join path segments (expressed
          * as an ordered array of bopIds) with edge sample to avoid
          * redundant effort.
          */
@@ -396,8 +389,8 @@ public class JoinGraph extends PipelineOp {
         final Path path =
             g.runtimeOptimizer(context.getRunningQuery().getQueryEngine(), edgeSamples);
 
-      /*
-       * Release samples.
+        /*
+         * Release samples.
          *
          * TODO If we have fully sampled some vertices or edges, then we
          * could replace the JOIN with the sample. For this to work, we
@@ -430,8 +423,8 @@ public class JoinGraph extends PipelineOp {
 
         // final long elapsed_queryOptimizer = mark - begin;
 
-      /*
-       * Generate the query from the selected join path.
+        /*
+         * Generate the query from the selected join path.
          */
         final PipelineOp queryOp =
             AST2BOpRTO.compileJoinGraph(

@@ -25,13 +25,12 @@ import org.embergraph.bop.IValueExpression;
 import org.embergraph.bop.ImmutableBOp;
 import org.embergraph.bop.NV;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.sparql.ast.FilterNode;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.vocabulary.XMLSchema;
 
 /*
-* A math expression involving a left and right IValueExpression operand. The operation to be
+ * A math expression involving a left and right IValueExpression operand. The operation to be
  * applied to the operands is specified by the {@link Annotations#OP} annotation.
  */
 public class NumericBOp extends IVValueExpression<IV> implements INeedsMaterialization {

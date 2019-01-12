@@ -37,7 +37,7 @@ import org.embergraph.btree.keys.KV;
 import org.embergraph.util.InnerCause;
 
 /*
-* Test suite for {@link Journal#snapshot(org.embergraph.journal.Journal.ISnapshotFactory)}.
+ * Test suite for {@link Journal#snapshot(org.embergraph.journal.Journal.ISnapshotFactory)}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @see <a href="http://trac.bigdata.com/ticket/1172">Online backup for Journal </a>
@@ -601,8 +601,8 @@ public class TestSnapshotJournal extends ProxyTestCase<Journal> {
         // commit the journal (!)
         src.commit();
 
-      /*
-       * Submit task for concurrent writes. Note that this task does not
+        /*
+         * Submit task for concurrent writes. Note that this task does not
          * do a commit, but it does write modifications onto the live
          * indices. Those changes should not be visible in the snapshot.
          * Since the task does not do a commit, the snapshot should have

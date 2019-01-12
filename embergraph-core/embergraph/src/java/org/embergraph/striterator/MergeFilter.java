@@ -28,7 +28,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /*
-* Merge sort of two iterators with duplicates suppressed. The elements must be comparable. Each
+ * Merge sort of two iterators with duplicates suppressed. The elements must be comparable. Each
  * source iterator must deliver its elements in a total ordering in order for the aggregate iterator
  * to maintain a total ordering.
  *
@@ -202,8 +202,8 @@ public class MergeFilter<I extends Iterator<E>, E extends Comparable<E>>
 
         if (chunk == null) {
 
-        /*
-       * Dynamically instantiation an array of the same component
+          /*
+           * Dynamically instantiation an array of the same component
            * type as the objects that we are visiting.
            */
 

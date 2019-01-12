@@ -21,7 +21,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.hints;
 
-import org.embergraph.bop.PipelineOp;
 import org.embergraph.bop.join.PipelineJoin.Annotations;
 import org.embergraph.rdf.sparql.ast.ASTBase;
 import org.embergraph.rdf.sparql.ast.IQueryNode;
@@ -29,7 +28,7 @@ import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /*
-* Sets the {@link PipelineOp.Annotations#MIN_DATAPOINTS_PER_TASK} annotation of an operator.
+ * Sets the {@link PipelineOp.Annotations#MIN_DATAPOINTS_PER_TASK} annotation of an operator.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$

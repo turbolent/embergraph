@@ -53,7 +53,7 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.sail.SailException;
 
 /*
-* Test suite for the {@link ServiceRegistry}.
+ * Test suite for the {@link ServiceRegistry}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -264,8 +264,8 @@ public class TestServiceRegistry extends AbstractEmbergraphExprBuilderTestCase {
         assertNull(ServiceRegistry.getInstance().get(serviceURI1));
         assertNull(ServiceRegistry.getInstance().get(serviceURI2));
 
-      /*
-       * Verify create for both end points. One is an alias. Neither
+        /*
+         * Verify create for both end points. One is an alias. Neither
          * is explicitly paired with a ServiceFactory.
          */
         final QueryEngine queryEngine =

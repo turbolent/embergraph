@@ -27,7 +27,7 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.sail.SailConnection;
 
 /*
-* Base class for running performance tests against the embergraph backend.
+ * Base class for running performance tests against the embergraph backend.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -120,8 +120,8 @@ public class EmbergraphGASRunner<VS, ES, ST> extends GASRunnerBase<VS, ES, ST> {
           }
         }
 
-      /*
-       * Obtain a buffered reader on the input stream.
+        /*
+         * Obtain a buffered reader on the input stream.
          */
 
         final Properties properties = new Properties();
@@ -144,8 +144,8 @@ public class EmbergraphGASRunner<VS, ES, ST> extends GASRunnerBase<VS, ES, ST> {
           }
         }
 
-      /*
-       * Allow override of select options from the command line.
+        /*
+         * Allow override of select options from the command line.
          */
         {
           final String[] overrides =
@@ -225,8 +225,8 @@ public class EmbergraphGASRunner<VS, ES, ST> extends GASRunnerBase<VS, ES, ST> {
 
         if (fileStr == null) {
 
-        /*
-       * We will use a temporary file that we create here. The journal
+          /*
+           * We will use a temporary file that we create here. The journal
            * will be destroyed below.
            */
           isTemporary = true;

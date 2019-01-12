@@ -1,7 +1,7 @@
 package org.embergraph.btree.keys;
 
 /*
-* Type-safe enumeration of collators that may be configured.
+ * Type-safe enumeration of collators that may be configured.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -21,7 +21,7 @@ public enum CollatorEnum {
   ICU,
 
   //    /*
-//     * A JNI plugin for ICU (native code for faster generation of sort keys).
+  //     * A JNI plugin for ICU (native code for faster generation of sort keys).
   //     *
   //     * @deprecated ICU4JNI is no longer being developed. The ICU project has
   //     *             provided high performance pure Java code for all aspects of

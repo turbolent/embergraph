@@ -28,7 +28,7 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.rdf.lexicon.LexiconRelation;
 
 /*
-* Iterator pattern for chunked materialization.
+ * Iterator pattern for chunked materialization.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

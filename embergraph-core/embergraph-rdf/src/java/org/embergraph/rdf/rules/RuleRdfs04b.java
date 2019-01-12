@@ -27,7 +27,7 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
 /*
-* rdfs4b:
+ * rdfs4b:
  *
  * <pre>
  * (?u ?a ?v) -&gt; (?v rdf:type rdfs:Resource)

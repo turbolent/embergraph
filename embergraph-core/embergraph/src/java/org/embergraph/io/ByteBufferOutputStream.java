@@ -23,7 +23,7 @@ import java.io.OutputStream;
 import java.nio.ByteBuffer;
 
 /*
-* Writes bytes onto a {@link ByteBuffer}.
+ * Writes bytes onto a {@link ByteBuffer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

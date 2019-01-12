@@ -28,7 +28,7 @@ import org.embergraph.relation.rule.IStep;
 import org.embergraph.relation.rule.Program;
 
 /*
-* Program automatically maps the rules added across the combination of the database (the relation
+ * Program automatically maps the rules added across the combination of the database (the relation
  * named on the rule) and the focusStore.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -42,7 +42,7 @@ public class MappedProgram extends Program {
   private String focusStore;
 
   //    /*
-//     * De-serialization ctor.
+  //     * De-serialization ctor.
   //     */
   //    public MappedProgram() {
   //
@@ -108,8 +108,8 @@ public class MappedProgram extends Program {
        */
       if (this.isClosure()) {
 
-      /*
-       * insert the individual rules into the closure program.
+        /*
+         * insert the individual rules into the closure program.
          */
 
         final Iterator<? extends IStep> steps = subProgram.steps();

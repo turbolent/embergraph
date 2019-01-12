@@ -32,7 +32,7 @@ import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.QueryType;
 
 /*
-* This is a thin-client implementation of a Blueprints wrapper around the client library that
+ * This is a thin-client implementation of a Blueprints wrapper around the client library that
  * interacts with the NanoSparqlServer. This is a functional implementation suitable for writing
  * POCs - it is not a high performance implementation by any means (currently does not support
  * caching or batched update). Does have a single "bulk upload" operation that wraps a method on

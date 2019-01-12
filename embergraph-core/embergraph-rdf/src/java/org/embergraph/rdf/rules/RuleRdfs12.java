@@ -24,7 +24,7 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
 /*
-* rdfs12:
+ * rdfs12:
  *
  * <pre>
  *  (?u rdfs:subPropertyOf rdfs:member) :-

@@ -23,37 +23,26 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation.rule.eval;
 
-import cutthecrap.utils.striterators.ICloseableIterator;
 import java.io.IOException;
 import java.util.Iterator;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import org.apache.log4j.Logger;
-import org.embergraph.journal.AbstractTask;
 import org.embergraph.journal.BufferMode;
-import org.embergraph.journal.ConcurrencyManager;
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.journal.IIndexStore;
-import org.embergraph.journal.ITx;
 import org.embergraph.journal.Journal;
 import org.embergraph.journal.TimestampUtility;
-import org.embergraph.relation.IMutableRelation;
 import org.embergraph.relation.accesspath.ChunkConsumerIterator;
 import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.rule.IProgram;
-import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.IStep;
 import org.embergraph.service.DataService;
 import org.embergraph.service.DataServiceCallable;
-import org.embergraph.service.IDataService;
 import org.embergraph.service.IEmbergraphFederation;
-import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /*
-* Task for executing a program when all of the indices for the relation are co-located on the same
+ * Task for executing a program when all of the indices for the relation are co-located on the same
  * {@link DataService}.
  *
  * @todo Named result sets. This would provide a means to run a IRuleTask and cache the output for
@@ -105,7 +94,7 @@ public class ProgramTask extends DataServiceCallable<Object> implements IProgram
   private transient IIndexManager indexManager;
 
   //    /*
-//     * Note: NOT serialized!
+  //     * Note: NOT serialized!
   //     */
   //    private transient DataService dataService;
 
@@ -210,16 +199,16 @@ public class ProgramTask extends DataServiceCallable<Object> implements IProgram
 
         if (!step.isRule() && ((IProgram) step).isClosure()) {
 
-        /*
-       * Compute closure of a flat set of rules.
+          /*
+           * Compute closure of a flat set of rules.
            */
 
           totals = executeClosure((IProgram) step);
 
         } else if (util.isClosureProgram(step)) {
 
-        /*
-       * Compute closure of a program that embedded closure
+          /*
+           * Compute closure of a program that embedded closure
            * operations.
            */
 
@@ -227,8 +216,8 @@ public class ProgramTask extends DataServiceCallable<Object> implements IProgram
 
         } else {
 
-        /*
-       * Execute a mutation operation that does not use closure.
+          /*
+           * Execute a mutation operation that does not use closure.
            */
 
           totals = executeMutation(step);
@@ -242,16 +231,16 @@ public class ProgramTask extends DataServiceCallable<Object> implements IProgram
 
         if ((!step.isRule() && ((IProgram) step).isClosure()) || util.isClosureProgram(step)) {
 
-        /*
-       * The step is either a closure program or embeds a closure
+          /*
+           * The step is either a closure program or embeds a closure
            * program.
            */
 
           throw new UnsupportedOperationException("Closure only allowed for mutation.");
         }
 
-      /*
-       * Execute a query.
+        /*
+         * Execute a query.
          */
         return new ChunkConsumerIterator<ISolution>(executeQuery(step));
       }
@@ -395,8 +384,8 @@ public class ProgramTask extends DataServiceCallable<Object> implements IProgram
 
       if (indexManager instanceof IEmbergraphFederation<?>) {
 
-      /*
-       * Advance the read-consistent timestamp so that any writes from
+        /*
+         * Advance the read-consistent timestamp so that any writes from
          * the previous rules or the last round are now visible.
          *
          * Note: The federation has shard-wise autoCommit semantics
@@ -408,8 +397,8 @@ public class ProgramTask extends DataServiceCallable<Object> implements IProgram
         final long lastCommitTime = indexManager.getLastCommitTime();
 
         try {
-        /*
-       * A read-only tx reading from the lastCommitTime.
+          /*
+           * A read-only tx reading from the lastCommitTime.
            *
            * Note: This provides a read-lock on the commit time from
            * which the mutation task will read.
@@ -433,8 +422,8 @@ public class ProgramTask extends DataServiceCallable<Object> implements IProgram
           && indexManager instanceof Journal
           && ((Journal) indexManager).getBufferStrategy().getBufferMode() == BufferMode.DiskRW) {
 
-      /*
-       * Do a commit and then advance the read-consistent timestamp so
+        /*
+         * Do a commit and then advance the read-consistent timestamp so
          * that any writes from the previous rules or the last round are
          * now visible.
          *
@@ -452,8 +441,8 @@ public class ProgramTask extends DataServiceCallable<Object> implements IProgram
         // force a commit before running the mutation rule.
         final long lastCommitTime = jnl.commit();
 
-      /*
-       * A read-only tx reading from the commit point we just
+        /*
+         * A read-only tx reading from the commit point we just
          * introduced.
          *
          * Note: This provides a read-lock on the commit time from which
@@ -488,8 +477,8 @@ public class ProgramTask extends DataServiceCallable<Object> implements IProgram
     } finally {
 
       if (tx != 0L) {
-      /*
-       * Terminate the read-only tx (releases the read-lock).
+        /*
+         * Terminate the read-only tx (releases the read-lock).
          */
         if (indexManager instanceof IEmbergraphFederation<?>) {
           try {

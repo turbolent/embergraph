@@ -38,7 +38,7 @@ import org.embergraph.util.Bytes;
 import org.embergraph.util.httpd.AbstractHTTPD;
 
 /*
-* Exposes a {@link CounterSet} via HTTPD.
+ * Exposes a {@link CounterSet} via HTTPD.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

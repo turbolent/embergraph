@@ -5,7 +5,7 @@ import java.util.UUID;
 import org.embergraph.journal.IResourceManager;
 
 /*
-* A local (in process) data service.
+ * A local (in process) data service.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

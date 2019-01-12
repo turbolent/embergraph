@@ -25,7 +25,7 @@ import java.util.UUID;
 import org.embergraph.quorum.Quorum;
 
 /*
-* Helper class finds all joined and non-joined services for the quorum client.
+ * Helper class finds all joined and non-joined services for the quorum client.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

@@ -27,7 +27,6 @@ import java.util.TreeMap;
 import java.util.Vector;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 import org.embergraph.service.IServiceShutdown;
@@ -36,7 +35,7 @@ import org.embergraph.util.CaseInsensitiveStringComparator;
 import org.embergraph.util.DaemonThreadFactory;
 
 /*
-* A simple, tiny, nicely embeddable HTTP 1.0 server in Java
+ * A simple, tiny, nicely embeddable HTTP 1.0 server in Java
  *
  * <p>NanoHTTPD version 1.1, Copyright &copy; 2001,2005-2007 Jarno Elonen (elonen@iki.fi,
  * http://iki.fi/elonen/)
@@ -340,8 +339,8 @@ public class NanoHTTPD implements IServiceShutdown {
 
               while (open) {
 
-              /*
-       * Hand off request to a pool of worker threads.
+                /*
+                 * Hand off request to a pool of worker threads.
                  */
 
                 requestService.submit(new HTTPSession(ss.accept()));
@@ -520,8 +519,8 @@ public class NanoHTTPD implements IServiceShutdown {
         is = mySocket.getInputStream();
         if (is == null) return; // Should never happen...
 
-      /*
-       * Parse the request.
+        /*
+         * Parse the request.
          *
          * FIXME Buffer reuse and sizing.
          */
@@ -608,8 +607,8 @@ public class NanoHTTPD implements IServiceShutdown {
           sendError(HTTP_BADREQUEST, ERR_BAD_REQUEST);
         }
 
-      /*
-       * TODO Save off the full requestURI for the Request object vs
+        /*
+         * TODO Save off the full requestURI for the Request object vs
          * provide for reconstruction?
          */
 
@@ -619,8 +618,8 @@ public class NanoHTTPD implements IServiceShutdown {
 
         String uriString = requestURI;
 
-      /*
-       * Decode parameters from the URI (LinkedHashMap preserves their
+        /*
+         * Decode parameters from the URI (LinkedHashMap preserves their
          * ordering). This gives us just the "file" as a side-effect.
          */
         final int qmi = uriString.indexOf('?');
@@ -638,8 +637,8 @@ public class NanoHTTPD implements IServiceShutdown {
 
         uri = uriString;
 
-      /*
-       * The protocol version.
+        /*
+         * The protocol version.
          */
 
         final String version = st.nextToken();
@@ -648,8 +647,8 @@ public class NanoHTTPD implements IServiceShutdown {
           log.debug("method=" + method + ", requestURI=[" + requestURI + "], version=" + version);
         }
 
-      /*
-       * The headers will follow starting with the next line.
+        /*
+         * The headers will follow starting with the next line.
          */
 
       }
@@ -676,8 +675,8 @@ public class NanoHTTPD implements IServiceShutdown {
       final String contentType = headers.get(CONTENT_TYPE);
 
       if (MIME_APPLICATION_URL_ENCODED.equals(contentType)) {
-      /*
-       * Decode url encoded parameters in the request body.
+        /*
+         * Decode url encoded parameters in the request body.
          */
         long size = 0x7FFFFFFFFFFFFFFFl;
         final String contentLength = headers.get(CONTENT_LENGTH);
@@ -695,8 +694,8 @@ public class NanoHTTPD implements IServiceShutdown {
           }
         }
       } else {
-      /*
-       * Otherwise the service is responsible for reading the request
+        /*
+         * Otherwise the service is responsible for reading the request
          * body directly from the input stream and the input stream is
          * currently positioned on the request body (if any).
          */
@@ -729,14 +728,14 @@ public class NanoHTTPD implements IServiceShutdown {
 
           nread -= 2;
 
-        /*
-       * Convert everything up to the CRLF into a String.
+          /*
+           * Convert everything up to the CRLF into a String.
            *
            * TODO This should explicitly use the appropriate encoding
            * for HTTP headers and the HTTP request line. What is that?
            */
-          final String s = new String(_baos.toByteArray(), 0 /* off */, nread /* len */,
-              StandardCharsets.UTF_8);
+          final String s =
+              new String(_baos.toByteArray(), 0 /* off */, nread /* len */, StandardCharsets.UTF_8);
 
           if (log.isTraceEnabled()) log.trace("[" + s + "]");
 
@@ -852,8 +851,8 @@ public class NanoHTTPD implements IServiceShutdown {
         log.error(ioe, ioe);
       } finally {
         if (data != null) {
-        /*
-       * Close input stream. Producer should notice and abort if
+          /*
+           * Close input stream. Producer should notice and abort if
            * running.
            */
           try {
@@ -1133,8 +1132,7 @@ public class NanoHTTPD implements IServiceShutdown {
       // Get MIME type from file name extension, if possible
       String mime = null;
       final int dot = f.getCanonicalPath().lastIndexOf('.');
-      if (dot >= 0)
-        mime = theMimeTypes.get(f.getCanonicalPath().substring(dot + 1).toLowerCase());
+      if (dot >= 0) mime = theMimeTypes.get(f.getCanonicalPath().substring(dot + 1).toLowerCase());
       if (mime == null) mime = MIME_DEFAULT_BINARY;
 
       // Support (simple) skipping:
@@ -1288,7 +1286,7 @@ public class NanoHTTPD implements IServiceShutdown {
    * order to reduce the size of the compiled class file.
    */
   //	/*
-//	 * The distribution license
+  //	 * The distribution license
   //	 */
   //	private static final String LICENCE =
   //		"Copyright (C) 2001,2005 by Jarno Elonen <elonen@iki.fi>\n"+

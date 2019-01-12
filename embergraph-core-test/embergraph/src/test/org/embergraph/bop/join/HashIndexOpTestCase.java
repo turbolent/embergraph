@@ -33,14 +33,13 @@ import org.embergraph.bop.engine.IRunningQuery;
 import org.embergraph.bop.engine.QueryEngine;
 import org.embergraph.bop.join.AbstractHashJoinUtilityTestCase.JoinSetup;
 import org.embergraph.bop.solutions.SolutionSetStream;
-import org.embergraph.htree.HTree;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.Journal;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.stream.Stream.StreamIndexMetadata;
 
 /*
-* Abstract test suite for {@link HashIndexOp} implementations.
+ * Abstract test suite for {@link HashIndexOp} implementations.
  *
  * <p>TODO Test variant with non-empty join vars.
  *
@@ -537,16 +536,16 @@ public abstract class HashIndexOpTestCase extends TestCase2 {
         assertNotNull(
             "Source not found: " + namedSetSourceRef, queryAttributes2.get(namedSetSourceRef));
 
-      /*
-       * Verify that the generated index has the correct solutions.
+        /*
+         * Verify that the generated index has the correct solutions.
          */
         final IHashJoinUtility tmp = (IHashJoinUtility) queryAttributes2.get(namedSetRef);
 
         // Verify index scan against expected solutions.
         AbstractQueryEngineTestCase.assertSameSolutionsAnyOrder(expectedSolutions, tmp.indexScan());
 
-      /*
-       * Copy the source solutions to the sink.
+        /*
+         * Copy the source solutions to the sink.
          */
         BOpUtility.copy(
             context.getSource(),

@@ -24,7 +24,7 @@ package org.embergraph.rdf.sparql.ast;
 import java.util.Map;
 
 /*
-* Interface for prefix declarations.
+ * Interface for prefix declarations.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

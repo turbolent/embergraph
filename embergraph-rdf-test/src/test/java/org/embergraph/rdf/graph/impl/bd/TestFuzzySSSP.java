@@ -25,7 +25,7 @@ import org.embergraph.rdf.graph.analytics.FuzzySSSP.FuzzySSSPResult;
 import org.openrdf.model.Value;
 
 /*
-* TODO. This is a placeholder to remove the embergraph dependency from the embergraph-gas project.
+ * TODO. This is a placeholder to remove the embergraph dependency from the embergraph-gas project.
  * See BLZG-1272. Needs unit tests: BLZG-1369.
  *
  * @author beebs

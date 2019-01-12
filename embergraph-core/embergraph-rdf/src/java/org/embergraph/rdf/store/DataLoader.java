@@ -53,8 +53,6 @@ import org.embergraph.journal.RWStrategy;
 import org.embergraph.rdf.ServiceProviderHook;
 import org.embergraph.rdf.inf.ClosureStats;
 import org.embergraph.rdf.inf.TruthMaintenance;
-import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.load.IStatementBufferFactory;
 import org.embergraph.rdf.rio.LoadStats;
 import org.embergraph.rdf.rio.PresortRioLoader;
 import org.embergraph.rdf.rio.RDFParserOptions;
@@ -62,12 +60,11 @@ import org.embergraph.rdf.rio.RioLoaderEvent;
 import org.embergraph.rdf.rio.RioLoaderListener;
 import org.embergraph.rdf.rio.StatementBuffer;
 import org.embergraph.rdf.rules.InferenceEngine;
-import org.embergraph.rdf.spo.SPO;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
 /*
-* A utility class to load RDF data into an {@link AbstractTripleStore}. This class supports a
+ * A utility class to load RDF data into an {@link AbstractTripleStore}. This class supports a
  * number of options, including a durable queues pattern, and can be more efficient if multiple
  * files are batched into a single commit point. The {@link #main(String[]) main routine} will open
  * the {@link Journal} itself and therefore this class can not be used while the {@link Journal} is
@@ -342,8 +339,7 @@ public class DataLoader {
      *
      * <p>See BLZG-1777
      */
-    String GZIP_BUFFER_SIZE =
-        DataLoader.class.getClass().getName() + ".gzipBufferSize";
+    String GZIP_BUFFER_SIZE = DataLoader.class.getClass().getName() + ".gzipBufferSize";
 
     int DEFAULT_GZIP_BUFFER_SIZE = 65535;
 
@@ -531,8 +527,8 @@ public class DataLoader {
       if ((properties.getProperty(Options.PRESERVE_BNODE_IDS) == null)
           && database.getLexiconRelation().isStoreBlankNodes()) {
 
-      /*
-       * Note: preserveBNodeIDs is overridden based on whether or not
+        /*
+         * Note: preserveBNodeIDs is overridden based on whether or not
          * the target is storing the blank node identifiers (unless the
          * property was explicitly set - this amounts to a conditional
          * default).
@@ -977,8 +973,8 @@ public class DataLoader {
 
       if (rdfStream == null) {
 
-      /*
-       * If we do not find as a Resource then try the file system.
+        /*
+         * If we do not find as a Resource then try the file system.
          */
 
         final File file = new File(resource);
@@ -1195,8 +1191,8 @@ public class DataLoader {
 
         if (ignoreInvalidFiles) {
 
-        /*
-       * Log warning and DO NOT rethrow the exception.
+          /*
+           * Log warning and DO NOT rethrow the exception.
            *
            * Note: The file will still be entered into the "failSet"
            * if durable queues are enabled.
@@ -1375,8 +1371,8 @@ public class DataLoader {
 
           @Override
           public void processingNotification(final RioLoaderEvent e) {
-          /*
-       * This reports as statements are parsed. Depending on how
+            /*
+             * This reports as statements are parsed. Depending on how
              * things are buffered, the parser can run ahead of the index
              * writes.
              */
@@ -1428,8 +1424,8 @@ public class DataLoader {
 
         if (fileIfSourceIsFile != null) {
 
-        /*
-       * Record output in support of durable queues pattern.
+          /*
+           * Record output in support of durable queues pattern.
            *
            * Note: We need to defer the rename until the next
            * commit(). So we just make a note of the outcome here.
@@ -1455,8 +1451,8 @@ public class DataLoader {
       if (closureEnum == ClosureEnum.Incremental
           || (endOfBatch && closureEnum == ClosureEnum.Batch)) {
 
-      /*
-       * compute the closure.
+        /*
+         * compute the closure.
          *
          * @todo batch closure logically belongs in the outer method.
          */
@@ -1633,8 +1629,8 @@ public class DataLoader {
       case Batch:
         {
 
-        /*
-       * Incremental truth maintenance.
+          /*
+           * Incremental truth maintenance.
            */
 
           if (buffer == null) throw new IllegalStateException();
@@ -1646,8 +1642,8 @@ public class DataLoader {
               new TruthMaintenance(inferenceEngine)
                   .assertAll((TempTripleStore) buffer.getStatementStore());
 
-        /*
-       * Discard the buffer since the backing tempStore was closed when
+          /*
+           * Discard the buffer since the backing tempStore was closed when
            * we performed truth maintenance.
            */
 
@@ -1659,8 +1655,8 @@ public class DataLoader {
       case None:
         {
 
-        /*
-       * Close the database against itself.
+          /*
+           * Close the database against itself.
            *
            * Note: if there are already computed entailments in the database
            * AND any explicit statements have been deleted then the caller
@@ -2049,7 +2045,7 @@ public class DataLoader {
           if (new File(dir, name).isDirectory()) {
 
             // Skip hidden files.
-            return !dir.isHidden();//                if(dir.getName().equals(".svn")) {
+            return !dir.isHidden(); //                if(dir.getName().equals(".svn")) {
             //
             //                    // Skip .svn files.
             //                    return false;

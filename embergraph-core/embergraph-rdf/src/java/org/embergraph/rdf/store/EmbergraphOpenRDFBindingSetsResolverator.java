@@ -37,9 +37,7 @@ import org.embergraph.rdf.internal.impl.TermId;
 import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
-import org.embergraph.rdf.sail.EmbergraphValueReplacer;
 import org.embergraph.relation.accesspath.BlockingBuffer;
-import org.embergraph.relation.rule.eval.ISolution;
 import org.embergraph.striterator.AbstractChunkedResolverator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.openrdf.model.Value;
@@ -47,7 +45,7 @@ import org.openrdf.query.Binding;
 import org.openrdf.query.BindingSet;
 
 /*
-* Efficiently resolve openrdf {@link BindingSet}s to embergraph {@link IBindingSet}s (this is a
+ * Efficiently resolve openrdf {@link BindingSet}s to embergraph {@link IBindingSet}s (this is a
  * streaming API).
  *
  * @see EmbergraphValueReplacer

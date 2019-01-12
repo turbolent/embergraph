@@ -44,7 +44,7 @@ import org.embergraph.util.Bytes;
 import org.embergraph.util.DaemonThreadFactory;
 
 /*
-* Test suite for {@link HALogWriter} and {@link HALogReader}.
+ * Test suite for {@link HALogWriter} and {@link HALogReader}.
  *
  * @author <a href="mailto:martyncutcher@users.sourceforge.net">Martyn Cutcher</a>
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -231,8 +231,7 @@ public class TestHALogWriter extends TestCase2 {
   }
 
   /** Simple WriteReader, no concurrency, confirms non-delayed responses. */
-  public void testSimpleRWWriterReader()
-      throws IOException, InterruptedException {
+  public void testSimpleRWWriterReader() throws IOException, InterruptedException {
 
     final HALogWriter writer = new HALogWriter(logdir);
 
@@ -278,8 +277,8 @@ public class TestHALogWriter extends TestCase2 {
           // The HALog is logically empty.
           // assertTrue(reader.isEmpty());
 
-        /*
-       * Note: Don't do this here. The method will block for the
+          /*
+           * Note: Don't do this here. The method will block for the
            * live HALog until the file is closed (sealed with the
            * closing root block) or destroyed.
            */
@@ -553,8 +552,8 @@ public class TestHALogWriter extends TestCase2 {
 
       } finally {
 
-      /*
-       * Note: This should not throw an IOException.
+        /*
+         * Note: This should not throw an IOException.
          *
          * Note: It it does throw an IOException, then it can also be
          * masking an error in the try{} above. Diagnose both if you get
@@ -600,8 +599,8 @@ public class TestHALogWriter extends TestCase2 {
        */
       for (long commitCounter = 1L; commitCounter <= nfiles; commitCounter++) {
 
-      /*
-       * Note: We need to spin here in case the reader tries to open
+        /*
+         * Note: We need to spin here in case the reader tries to open
          * the HALog for reading before the writer has created the HALog
          * for that commit point. This can be done by monitoring the
          * writer or the file system.
@@ -625,8 +624,8 @@ public class TestHALogWriter extends TestCase2 {
           Thread.sleep(100 /* ms */);
         }
 
-      /*
-       * Open and read the next HALog file, blocking until all data
+        /*
+         * Open and read the next HALog file, blocking until all data
          * has been read from that file.
          */
         new ReaderTask(commitCounter, writer, wf).call();
@@ -1035,8 +1034,8 @@ public class TestHALogWriter extends TestCase2 {
           assertFalse(r2.isEmpty());
           assertTrue(r2.hasMoreBuffers());
 
-        /*
-       * Now use the 2nd reader to read the data to make sure that
+          /*
+           * Now use the 2nd reader to read the data to make sure that
            * the IHALogReader is really open and functional.
            */
           try {

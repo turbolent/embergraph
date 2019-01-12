@@ -26,7 +26,7 @@ import junit.framework.TestCase2;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Test suite for {@link DataOutputBuffer}.
+ * Test suite for {@link DataOutputBuffer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -23,7 +23,7 @@ package it.unimi.dsi.io;
 import java.io.Closeable;
 
 /*
-* A marker interface for a closeable resource that implements safety measures to make resource
+ * A marker interface for a closeable resource that implements safety measures to make resource
  * tracking easier.
  *
  * <p>Classes implementing this interface must provide a <em>safety-net finaliser</em>&mdash;a

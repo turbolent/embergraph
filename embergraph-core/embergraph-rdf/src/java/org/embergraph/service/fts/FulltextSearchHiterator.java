@@ -20,7 +20,7 @@ package org.embergraph.service.fts;
 import java.util.Iterator;
 
 /*
-* Visits external fulltext index search results in order of decreasing relevance.
+ * Visits external fulltext index search results in order of decreasing relevance.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$

@@ -51,12 +51,10 @@ import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.StaticAnalysis;
 import org.embergraph.rdf.sparql.ast.TermNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
-import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.SPOKeyOrder;
 import org.embergraph.rdf.spo.SPOPredicate;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.model.Resource;
-import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.query.BindingSet;
@@ -65,7 +63,7 @@ import org.openrdf.query.algebra.StatementPattern.Scope;
 import org.openrdf.query.impl.EmptyBindingSet;
 
 /*
-* Iterator consumes the solutions from a query and interprets them according to a {@link
+ * Iterator consumes the solutions from a query and interprets them according to a {@link
  * ConstructNode}. Ground triples in the template are output immediately. Any non-ground triples are
  * output iff they are fully (and validly) bound for a given solution. Blank nodes are scoped to a
  * solution.
@@ -160,7 +158,7 @@ public class ASTConstructIterator
   private final IFilterTest filter;
 
   //    /*
-//     * Return <code>true</code>iff {@link LexiconRelation#isStoreBlankNodes()}
+  //     * Return <code>true</code>iff {@link LexiconRelation#isStoreBlankNodes()}
   //     * is <code>true</code>.
   //     */
   //    private final boolean toldBNodes;
@@ -243,8 +241,8 @@ public class ASTConstructIterator
 
       } else {
 
-      /*
-       * A statement pattern that we will process for each solution.
+        /*
+         * A statement pattern that we will process for each solution.
          */
 
         templates.add(pat);
@@ -522,11 +520,10 @@ public class ASTConstructIterator
      * Multiple named graphs could be visited, so the statement pattern
      * in the CONSTRUCT could produce duplicate triples.
      */
-    return !quads || sp2.c() != null || sp2.getScope() != Scope.NAMED_CONTEXTS;/*
+    return !quads || sp2.c() != null || sp2.getScope() != Scope.NAMED_CONTEXTS; /*
      * The construct should produce distinct triples without our having to
      * add a DISTINCT filter.
      */
-
   }
 
   @Override
@@ -536,8 +533,8 @@ public class ASTConstructIterator
 
       if (!buffer.isEmpty()) {
 
-      /*
-       * At least one statement is ready in the buffer.
+        /*
+         * At least one statement is ready in the buffer.
          */
 
         return true;
@@ -545,8 +542,8 @@ public class ASTConstructIterator
 
       if (!src.hasNext()) {
 
-      /*
-       * Nothing left to visit.
+        /*
+         * Nothing left to visit.
          */
 
         close();
@@ -592,8 +589,8 @@ public class ASTConstructIterator
 
       if (filter instanceof ICloseable) {
 
-      /*
-       * Ensure that we release the backing MemoryManager in a timely
+        /*
+         * Ensure that we release the backing MemoryManager in a timely
          * fashion.
          *
          * @see <a
@@ -764,8 +761,8 @@ public class ASTConstructIterator
 
       if (value == null) {
 
-      /*
-       * If the value is null, then the valueCache was not set on the IV for the Constant. Since
+        /*
+         * If the value is null, then the valueCache was not set on the IV for the Constant. Since
          * the Constant was a Constant specified in the original query, this means that is an IV in
          * the original AST whose valueCache was not set.
          *
@@ -787,14 +784,14 @@ public class ASTConstructIterator
 
       if (value instanceof EmbergraphBNode) {
 
-      /*
-       * Blank nodes require special handling.
+        /*
+         * Blank nodes require special handling.
          */
 
         if (this.bnodes != null) {
 
-        /*
-       * DESCRIBE
+          /*
+           * DESCRIBE
            *
            * Note: This preserves the ID/IV for constants in the
            * query, but it breaks semantics for CONSTRUCT. The test
@@ -809,8 +806,8 @@ public class ASTConstructIterator
           return value;
         }
 
-      /*
-       * CONSTRUCT.
+        /*
+         * CONSTRUCT.
          *
          * Note: The blank nodes will be scoped to the solution.
          */
@@ -850,8 +847,8 @@ public class ASTConstructIterator
 
       if (v.isAnonymous()) {
 
-      /*
-       * Anonymous variable. I can't quite say whether or not this is
+        /*
+         * Anonymous variable. I can't quite say whether or not this is
          * a hack, so let me explain what is going on instead. When the
          * SPARQL grammar parses a blank node in a query, it is *always*
          * turned into an anonymous variable. So, when we interpret the

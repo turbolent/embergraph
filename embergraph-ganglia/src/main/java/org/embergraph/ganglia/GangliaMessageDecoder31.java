@@ -75,8 +75,8 @@ public class GangliaMessageDecoder31 implements IGangliaMessageDecoder {
       case METADATA:
         {
 
-        /*
-       * Decode a ganglia metric declaration record.
+          /*
+           * Decode a ganglia metric declaration record.
            */
 
           // metric metadata record.
@@ -129,8 +129,8 @@ public class GangliaMessageDecoder31 implements IGangliaMessageDecoder {
       case REQUEST:
         {
 
-        /*
-       * Ganglia sends out request messages when a service wants to obtain
+          /*
+           * Ganglia sends out request messages when a service wants to obtain
            * fresh metrics. The request record itself does not have any
            * additional fields.
            */
@@ -147,8 +147,8 @@ public class GangliaMessageDecoder31 implements IGangliaMessageDecoder {
       case UINT32:
       case UINT16:
         {
-        /*
-       * Decode a metric value.
+          /*
+           * Decode a metric value.
            *
            * [format:string][value]
            *

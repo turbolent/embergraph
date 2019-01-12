@@ -34,7 +34,7 @@ import org.openrdf.rio.RDFParseException;
 import org.openrdf.rio.helpers.StatementCollector;
 
 /*
-* An extension of {@link SPARQLUpdateDataBlockParser} that processes data in the format specified
+ * An extension of {@link SPARQLUpdateDataBlockParser} that processes data in the format specified
  * in the SPARQL* grammar. This format is almost completely compatible with
  * SPARQLUpdateDataBlockParser, except:
  *

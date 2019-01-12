@@ -25,15 +25,11 @@ package org.embergraph.btree.keys;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.Locale;
-import java.util.Properties;
 import java.util.UUID;
-import org.embergraph.btree.keys.KeyBuilder.Options;
 import org.embergraph.io.IManagedByteArray;
-import org.embergraph.util.BytesUtil;
 
 /*
-* Interface for building up variable <code>unsigned byte[]</code> keys from one or more primitive
+ * Interface for building up variable <code>unsigned byte[]</code> keys from one or more primitive
  * data types values and/or Unicode strings. An instance of this interface may be {@link #reset()}
  * and reused to encode a series of keys.
  *
@@ -220,7 +216,7 @@ public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray 
    * ASCII encoding, use appendASCII(String).
    */
   //    /*
-//     * Encodes a character as a Unicode sort key by first converting it to a
+  //     * Encodes a character as a Unicode sort key by first converting it to a
   //     * unicode string of length N and then encoding it using
   //     * {@link #append(String)} (optional operation).
   //     *
@@ -360,7 +356,7 @@ public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray 
    * If you want signed integer semantics then use append(short).
    */
   //    /*
-//     * Encodes a character as a 16-bit unsigned integer.
+  //     * Encodes a character as a 16-bit unsigned integer.
   //     * <p>
   //     * Note: Characters are encoded as unsigned integers rather than as Unicode
   //     * values since the semantics of Unicode collation sequences often violate

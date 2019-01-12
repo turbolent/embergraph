@@ -31,7 +31,7 @@ import org.embergraph.rwstore.IRWStrategy;
 import org.embergraph.service.AbstractTransactionService;
 
 /*
-* Test the ability to get (exact match) and find (most recent less than or equal to) historical
+ * Test the ability to get (exact match) and find (most recent less than or equal to) historical
  * commit records in a {@link Journal}. Also verifies that a canonicalizing cache is maintained (you
  * never obtain distinct concurrent instances of the same commit record).
  *
@@ -315,8 +315,8 @@ public class TestCommitHistory extends ProxyTestCase<Journal> {
           assertEquals(commitRecords[i - 1], journal.getCommitRecord(commitTime[i - 1]));
         }
 
-      /*
-       * Obtain a unique timestamp from the same source that the journal
+        /*
+         * Obtain a unique timestamp from the same source that the journal
          * is using to generate the commit timestamps. This ensures that
          * there will be at least one possible timestamp between each commit
          * timestamp.
@@ -328,8 +328,8 @@ public class TestCommitHistory extends ProxyTestCase<Journal> {
 
       if (journal.isStable()) {
 
-      /*
-       * Close and then re-open the store so that we will also be testing
+        /*
+         * Close and then re-open the store so that we will also be testing
          * restart-safety of the commit record index.
          */
 
@@ -369,8 +369,8 @@ public class TestCommitHistory extends ProxyTestCase<Journal> {
           assertEquals(commitRecords[i - 1], journal.getCommitRecord(commitTime[i] - 1));
         }
 
-      /*
-       * Verify a null return if we probe with a timestamp before any
+        /*
+         * Verify a null return if we probe with a timestamp before any
          * commit time.
          */
         assertNull(journal.getCommitRecord(commitTime[0] - 1));

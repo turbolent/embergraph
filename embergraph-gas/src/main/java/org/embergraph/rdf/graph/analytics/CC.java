@@ -27,7 +27,6 @@ import org.embergraph.rdf.graph.EdgesEnum;
 import org.embergraph.rdf.graph.Factory;
 import org.embergraph.rdf.graph.FrontierEnum;
 import org.embergraph.rdf.graph.IBinder;
-import org.embergraph.rdf.graph.IBindingExtractor;
 import org.embergraph.rdf.graph.IGASScheduler;
 import org.embergraph.rdf.graph.IGASState;
 import org.embergraph.rdf.graph.IReducer;
@@ -37,7 +36,7 @@ import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 
 /*
-* Connected components computes the distinct sets of non-overlapping subgraphs within a graph. All
+ * Connected components computes the distinct sets of non-overlapping subgraphs within a graph. All
  * vertices within a connected component are connected along at least one path.
  *
  * <p>The implementation works by assigning a label to each vertex. The label is initially the

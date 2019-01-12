@@ -21,14 +21,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf;
 
-import info.aduna.lang.service.ServiceRegistry;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.Charset;
 import java.util.Arrays;
-import java.util.ServiceLoader;
 import org.apache.log4j.Logger;
-import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.resultio.TupleQueryResultParserFactory;
 import org.openrdf.query.resultio.TupleQueryResultParserRegistry;
 import org.openrdf.query.resultio.TupleQueryResultWriterFactory;
@@ -40,7 +37,7 @@ import org.openrdf.rio.RDFWriterFactory;
 import org.openrdf.rio.RDFWriterRegistry;
 
 /*
-* This static class provides a hook which allows the replacement of services registered via the
+ * This static class provides a hook which allows the replacement of services registered via the
  * openrdf {@link ServiceRegistry} pattern which makes use of the same underlying pattern which is
  * disclosed by the {@link ServiceLoader}.
  *

@@ -43,7 +43,7 @@ import org.apache.commons.configuration.ConfigurationUtils;
 import org.apache.commons.configuration.PropertiesConfiguration;
 
 /*
-* An extension of {@link org.apache.commons.configuration.PropertiesConfiguration} providing
+ * An extension of {@link org.apache.commons.configuration.PropertiesConfiguration} providing
  * setters for primitive types, a simpler {@linkplain #save(CharSequence) way to save preferences}
  * and transparent handling of {@link java.lang.Enum} lowercased keys.
  *
@@ -80,8 +80,8 @@ public class Properties extends PropertiesConfiguration implements Serializable 
    * @param filename a file name.
    */
   public void save(final CharSequence filename) throws ConfigurationException, IOException {
-    final Writer w = new OutputStreamWriter(new FileOutputStream(filename.toString()),
-        StandardCharsets.UTF_8);
+    final Writer w =
+        new OutputStreamWriter(new FileOutputStream(filename.toString()), StandardCharsets.UTF_8);
     super.save(w);
     w.close();
   }

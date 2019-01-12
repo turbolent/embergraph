@@ -23,11 +23,10 @@ package org.embergraph.bop.join;
 
 import org.embergraph.bop.PipelineOp;
 import org.embergraph.io.DirectBufferPool;
-import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rwstore.sector.MemoryManager;
 
 /*
-* Test suite for the {@link HTreeHashJoinUtility}.
+ * Test suite for the {@link HTreeHashJoinUtility}.
  *
  * <p>TODO Write a unit test which verifies that the ivCache is used and that the cached {@link
  * EmbergraphValue}s are correctly restored when the rightSolutions had cached values and the

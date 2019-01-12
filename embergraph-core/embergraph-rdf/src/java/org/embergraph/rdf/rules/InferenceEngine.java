@@ -21,23 +21,14 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 import org.embergraph.bop.joinGraph.fast.DefaultEvaluationPlanFactory2;
 import org.embergraph.rdf.axioms.Axioms;
-import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.axioms.RdfsAxioms;
-import org.embergraph.rdf.inf.BackchainTypeResourceIterator;
 import org.embergraph.rdf.inf.ClosureStats;
-import org.embergraph.rdf.inf.Justification;
-import org.embergraph.rdf.inf.TruthMaintenance;
 import org.embergraph.rdf.store.AbstractTripleStore;
-import org.embergraph.rdf.store.DataLoader;
-import org.embergraph.rdf.store.TempTripleStore;
-import org.embergraph.relation.accesspath.IElementFilter;
-import org.embergraph.relation.rule.Program;
 import org.embergraph.relation.rule.eval.ActionEnum;
 import org.embergraph.relation.rule.eval.IJoinNexus;
 import org.embergraph.relation.rule.eval.IJoinNexusFactory;
 
 /*
-* Flyweight object encapsulates some configuration state and provides methods to compute or update
+ * Flyweight object encapsulates some configuration state and provides methods to compute or update
  * the closure of the database. An instance of this is obtained from {@link
  * AbstractTripleStore#getInferenceEngine()}.
  *

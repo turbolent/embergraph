@@ -24,10 +24,9 @@ package org.embergraph.service.proxy;
 
 import java.io.IOException;
 import java.rmi.Remote;
-import org.embergraph.relation.accesspath.IBuffer;
 
 /*
-* {@link Remote} interface declaring the API of {@link IBuffer} but also declaring that each
+ * {@link Remote} interface declaring the API of {@link IBuffer} but also declaring that each
  * methods throws {@link IOException} in order to be compatible with {@link Remote} and {@link
  * Exporter}. Of course, this means that this interface can not extend {@link IBuffer}!
  *

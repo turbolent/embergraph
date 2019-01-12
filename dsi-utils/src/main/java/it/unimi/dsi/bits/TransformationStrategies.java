@@ -30,7 +30,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /*
-* A class providing static methods and objects that do useful things with transformation
+ * A class providing static methods and objects that do useful things with transformation
  * strategies.
  *
  * @see TransformationStrategy

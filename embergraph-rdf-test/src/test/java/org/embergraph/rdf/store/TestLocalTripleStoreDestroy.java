@@ -30,14 +30,12 @@ import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.ITx;
 import org.embergraph.rdf.lexicon.LexiconKeyOrder;
 import org.embergraph.rdf.spo.SPOKeyOrder;
-import org.embergraph.relation.AbstractResource;
 import org.embergraph.relation.RelationSchema;
-import org.embergraph.relation.locator.DefaultResourceLocator;
 import org.embergraph.sparse.ITPS;
 import org.embergraph.sparse.SparseRowStore;
 
 /*
-* Test suite to verify the semantics of destroying a {@link LocalTripleStore}, including verifying
+ * Test suite to verify the semantics of destroying a {@link LocalTripleStore}, including verifying
  * that the indices are deleted (gone from Name2Addr), that the locator is cleared from the {@link
  * DefaultResourceLocator}, and that the entries from the {@link AbstractTripleStore} are removed
  * from the global row store.
@@ -372,8 +370,8 @@ public class TestLocalTripleStoreDestroy extends ProxyTestCase {
       // Verify post-conditions of the created KBs.
       {
 
-      /*
-       * Verify that both triple store declarations exist in the GRS.
+        /*
+         * Verify that both triple store declarations exist in the GRS.
          *
          * Note: Will be in lexical order for Unicode.
          */
@@ -381,8 +379,8 @@ public class TestLocalTripleStoreDestroy extends ProxyTestCase {
             getNamespaces(indexManager, ITx.UNISOLATED).toArray(new String[] {});
         assertEquals(new String[] {namespace, namespace1}, namespaces);
 
-      /*
-       * Verify that the unislolated versions of each triple stores is
+        /*
+         * Verify that the unislolated versions of each triple stores is
          * the same reference that we obtained above when that triple
          * store was created.
          */
@@ -460,8 +458,8 @@ public class TestLocalTripleStoreDestroy extends ProxyTestCase {
        */
       {
 
-      /*
-       * Verify that the triple store declaration exists in the GRS.
+        /*
+         * Verify that the triple store declaration exists in the GRS.
          *
          * Note: Will be in lexical order for Unicode.
          */
@@ -469,8 +467,8 @@ public class TestLocalTripleStoreDestroy extends ProxyTestCase {
             getNamespaces(indexManager, ITx.UNISOLATED).toArray(new String[] {});
         assertEquals(new String[] {namespace1}, namespaces);
 
-      /*
-       * Verify that the unislolated versions of each triple stores is the
+        /*
+         * Verify that the unislolated versions of each triple stores is the
          * same reference that we obtained above when that triple store was
          * created.
          */

@@ -17,10 +17,9 @@ import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.relation.rule.eval.ISolution;
 import org.embergraph.striterator.AbstractChunkedResolverator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
-import org.openrdf.model.Value;
 
 /*
-* Efficiently resolve term identifiers in Embergraph {@link ISolution}s to RDF {@link
+ * Efficiently resolve term identifiers in Embergraph {@link ISolution}s to RDF {@link
  * EmbergraphValue}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

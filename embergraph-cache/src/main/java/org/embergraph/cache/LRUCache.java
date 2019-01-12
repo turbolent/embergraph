@@ -28,7 +28,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
 import org.apache.log4j.Logger;
 
 /*
-* Hard reference hash map with Least Recently Used ordering over entries. The keys are object
+ * Hard reference hash map with Least Recently Used ordering over entries. The keys are object
  * identifiers. The values are cache entries wrapping the identified objects.
  *
  * @version $Id$
@@ -230,8 +230,8 @@ public class LRUCache<K, T> implements ICachePolicy<K, T> {
 
         if (map.size() >= capacity && reentrantPutCounter == 1) {
 
-        /*
-       * Purge the the LRU position until the cache is just under
+          /*
+           * Purge the the LRU position until the cache is just under
            * capacity.
            */
 
@@ -254,8 +254,8 @@ public class LRUCache<K, T> implements ICachePolicy<K, T> {
             map.remove(entry.key);
           }
 
-        /*
-       * Recycle the last cache entry that we purged.
+          /*
+           * Recycle the last cache entry that we purged.
            */
 
           // set key and object on LRU entry.
@@ -271,8 +271,8 @@ public class LRUCache<K, T> implements ICachePolicy<K, T> {
 
         } else {
 
-        /*
-       * Create a new entry and link into the MRU position.
+          /*
+           * Create a new entry and link into the MRU position.
            *
            * Note: This also handles the case of a reentrant
            * invocation, in which case the cache will be temporarily

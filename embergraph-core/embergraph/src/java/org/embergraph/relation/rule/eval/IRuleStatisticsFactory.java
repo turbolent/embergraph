@@ -23,12 +23,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation.rule.eval;
 
-import org.embergraph.bop.joinGraph.IEvaluationPlan;
 import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.IStep;
 
 /*
-* A factory for rule statistics objects.
+ * A factory for rule statistics objects.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

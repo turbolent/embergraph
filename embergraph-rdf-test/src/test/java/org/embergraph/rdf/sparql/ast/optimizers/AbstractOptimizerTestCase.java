@@ -21,7 +21,6 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IValueExpression;
 import org.embergraph.bop.IVariable;
-import org.embergraph.bop.ModifiableBOpBase;
 import org.embergraph.journal.ITx;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.constraints.IsBoundBOp;
@@ -74,7 +73,7 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /*
-* A helper class that can make it easier to write {@link IASTOptimizer} tests.
+ * A helper class that can make it easier to write {@link IASTOptimizer} tests.
  *
  * @author jeremycarroll
  */
@@ -698,8 +697,7 @@ public abstract class AbstractOptimizerTestCase extends AbstractASTEvaluationTes
 
     protected FunctionNode bound(final VarNode varNode) {
 
-      final FunctionNode rslt =
-          new FunctionNode(FunctionRegistry.BOUND, null, varNode);
+      final FunctionNode rslt = new FunctionNode(FunctionRegistry.BOUND, null, varNode);
 
       rslt.setValueExpression(new IsBoundBOp(varNode.getValueExpression()));
 

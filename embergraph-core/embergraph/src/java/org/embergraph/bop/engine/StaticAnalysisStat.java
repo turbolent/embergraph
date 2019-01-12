@@ -25,7 +25,7 @@ import java.io.Serializable;
 import org.embergraph.counters.CAT;
 
 /*
-* Statistics associated with the Static Analysis phase, such as runtime for the parser, given
+ * Statistics associated with the Static Analysis phase, such as runtime for the parser, given
  * optimizers, etc.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>

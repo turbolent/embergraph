@@ -33,7 +33,7 @@ import org.embergraph.io.SerializerUtil;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Test insert, lookup, and value scan for leaves.
+ * Test insert, lookup, and value scan for leaves.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -78,8 +78,8 @@ public class TestInsertLookupRemoveKeysInRootLeaf extends AbstractBTreeTestCase 
 
       if (index >= 0) {
 
-      /*
-       * The key is already present in the leaf.
+        /*
+         * The key is already present in the leaf.
          */
 
         continue;
@@ -394,8 +394,8 @@ public class TestInsertLookupRemoveKeysInRootLeaf extends AbstractBTreeTestCase 
 
       if (i % 100 == 0) {
 
-      /*
-       * Validate the keys and entries.
+        /*
+         * Validate the keys and entries.
          */
 
         assertEquals("#entries", expected.size(), btree.getEntryCount());

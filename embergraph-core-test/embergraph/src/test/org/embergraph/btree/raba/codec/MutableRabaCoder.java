@@ -22,8 +22,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree.raba.codec;
 
-import org.embergraph.btree.Leaf;
-import org.embergraph.btree.Node;
 import org.embergraph.btree.raba.IRaba;
 import org.embergraph.btree.raba.MutableKeyBuffer;
 import org.embergraph.btree.raba.MutableValueBuffer;
@@ -31,7 +29,7 @@ import org.embergraph.io.AbstractFixedByteArrayBuffer;
 import org.embergraph.io.DataOutputBuffer;
 
 /*
-* This "codes" a raba as a {@link MutableKeyBuffer} or {@link MutableValueBuffer} depending on
+ * This "codes" a raba as a {@link MutableKeyBuffer} or {@link MutableValueBuffer} depending on
  * whether it represents B+Tree keys or values. This class is used by some unit tests as a
  * convenience for establishing a baseline for the performance of {@link ICodedRaba}s against the
  * core mutable {@link IRaba} implementations actually used by {@link Node} and {@link Leaf}.

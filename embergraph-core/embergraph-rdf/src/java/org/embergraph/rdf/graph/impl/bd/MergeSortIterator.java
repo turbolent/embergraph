@@ -7,7 +7,7 @@ import org.embergraph.rdf.internal.IVUtility;
 import org.openrdf.model.Value;
 
 /*
-* An N-way merge sort of N source iterators visiting {@link Value}s (which are actually {@link
+ * An N-way merge sort of N source iterators visiting {@link Value}s (which are actually {@link
  * IV}s).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -143,8 +143,8 @@ public class MergeSortIterator implements Iterator<Value> {
 
             if (ret < 0) {
 
-            /*
-       * This key orders LT the current key.
+              /*
+               * This key orders LT the current key.
                *
                * Note: This test MUST be strictly LT since LTE
                * would break the precedence in which we are

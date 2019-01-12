@@ -21,7 +21,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.apache.log4j.Logger;
 
 /*
-* The metadata and metric state for a ganglia service, including the metadata for all known metrics
+ * The metadata and metric state for a ganglia service, including the metadata for all known metrics
  * and the metrics for all known metrics on all known hosts.
  */
 public class GangliaState implements IGangliaState {
@@ -379,8 +379,8 @@ public class GangliaState implements IGangliaState {
 
       if (age > dmax) {
 
-      /*
-       * This metric has not been updated recently. Drop it.
+        /*
+         * This metric has not been updated recently. Drop it.
          */
         hostCounters.remove(tmv.getMetadata().getMetricName(), tmv);
 

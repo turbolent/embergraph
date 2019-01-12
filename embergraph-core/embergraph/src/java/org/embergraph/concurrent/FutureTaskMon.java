@@ -23,7 +23,7 @@ import java.util.concurrent.FutureTask;
 import org.apache.log4j.Logger;
 
 /*
-* This is a flyweight utility class to be used as a direct replacement for FutureTask in code where
+ * This is a flyweight utility class to be used as a direct replacement for FutureTask in code where
  * we may need to be able to discover the root cancel request causing an interrupt.
  *
  * @author Martyn Cutcher

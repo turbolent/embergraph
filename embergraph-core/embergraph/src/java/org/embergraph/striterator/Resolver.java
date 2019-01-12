@@ -29,7 +29,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /*
-* Pattern for resolving elements of an iterator.
+ * Pattern for resolving elements of an iterator.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -153,8 +153,8 @@ public abstract class Resolver<I extends Iterator<E>, E, F> implements IFilter<I
 
           if (a == null) {
 
-          /*
-       * Dynamically instantiation an array of the same
+            /*
+             * Dynamically instantiation an array of the same
              * component type as the objects that we are visiting.
              */
 
@@ -189,8 +189,8 @@ public abstract class Resolver<I extends Iterator<E>, E, F> implements IFilter<I
 
         if (b == null) {
 
-        /*
-       * Dynamically instantiation an array of the same
+          /*
+           * Dynamically instantiation an array of the same
            * component type as the objects that we are visiting.
            */
 
@@ -242,7 +242,7 @@ public abstract class Resolver<I extends Iterator<E>, E, F> implements IFilter<I
   //            extends ChunkedResolvingIterator<I, E, F> {
   //
   //        /*
-//         * @param src
+  //         * @param src
   //         * @param filter
   //         */
   //        public ChunkedResolvingIterator2(I src) {
@@ -259,7 +259,7 @@ public abstract class Resolver<I extends Iterator<E>, E, F> implements IFilter<I
   //        }
   //
   //        /*
-//         * Resolve an element visited by the source iterator into an element of
+  //         * Resolve an element visited by the source iterator into an element of
   //         * the type visitable by this iterator.
   //         *
   //         * @param e

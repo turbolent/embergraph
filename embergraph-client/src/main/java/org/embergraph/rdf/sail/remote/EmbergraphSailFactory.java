@@ -24,14 +24,13 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
-import org.embergraph.EmbergraphStatics;
 import org.embergraph.rdf.sail.webapp.client.RemoteRepositoryManager;
 import org.embergraph.util.httpd.Config;
 import org.openrdf.repository.sail.SailRepository;
 import org.openrdf.sail.Sail;
 
 /*
-* Helper class to create a embergraph instance.
+ * Helper class to create a embergraph instance.
  *
  * @author mikepersonick
  * @see <a href="http://trac.bigdata.com/ticket/1152" > EmbergraphSailFactory must be moved to the
@@ -70,12 +69,12 @@ public class EmbergraphSailFactory {
     TextIndex,
 
     //        /*
-//         * Create an in-memory instance.
+    //         * Create an in-memory instance.
     //         */
     //        InMemory,
     //
     //        /*
-//         * Create a persistent instance backed by a file.  You must specify
+    //         * Create a persistent instance backed by a file.  You must specify
     //         * the file.
     //         */
     //        Persistent

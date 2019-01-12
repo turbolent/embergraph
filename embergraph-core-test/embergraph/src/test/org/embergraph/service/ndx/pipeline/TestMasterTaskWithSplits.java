@@ -43,12 +43,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.embergraph.btree.keys.KVO;
 import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.btree.keys.TestKeyBuilder;
-import org.embergraph.mdi.IMetadataIndex;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.util.Bytes;
 
 /*
-* Stress test using key-range partitioned index ({@link IMetadataIndex}), which allows us to test
+ * Stress test using key-range partitioned index ({@link IMetadataIndex}), which allows us to test
  * the {@link AbstractMasterTask} under split, move, join and other kinds of index partition
  * operations.
  *
@@ -368,8 +367,8 @@ public class TestMasterTaskWithSplits extends AbstractKeyRangeMasterTestCase {
           //                new Op(OpCode.Split, 1, scheduleUnit),
           //                new Op(OpCode.Split, 1, scheduleUnit),
           //                new Op(OpCode.Split, 1, scheduleUnit),
-        /*
-       * Note: Always include this as the last operation or the test
+          /*
+           * Note: Always include this as the last operation or the test
            * WILL NOT terminate!
            */
           new Op(OpCode.Done, 10, scheduleUnit)
@@ -436,8 +435,8 @@ public class TestMasterTaskWithSplits extends AbstractKeyRangeMasterTestCase {
               return null;
             }
 
-          /*
-       * Note: keys have uniform distribution.
+            /*
+             * Note: keys have uniform distribution.
              */
             final KVO<O>[] a = new KVO[producerChunkSize];
 
@@ -569,8 +568,8 @@ public class TestMasterTaskWithSplits extends AbstractKeyRangeMasterTestCase {
           // lookup that locator.
           final L locator = (L) master.mdi.valueAt(index, master.mdi.getLookupTuple()).getObject();
 
-        /*
-       * Evenly divide the key range of the locator into N key
+          /*
+           * Evenly divide the key range of the locator into N key
            * ranges. If the rightSeparator is null, then we divide the
            * keys based on the a-priori knowledge that the keys are
            * 8-bytes long so the maximum key is formed by encoding
@@ -616,8 +615,8 @@ public class TestMasterTaskWithSplits extends AbstractKeyRangeMasterTestCase {
           final L oldLocator =
               (L) master.mdi.valueAt(index, master.mdi.getLookupTuple()).getObject();
 
-        /*
-       * Divide the key range of the locator into 2 key ranges. If
+          /*
+           * Divide the key range of the locator into 2 key ranges. If
            * the rightSeparator is null, then we divide the keys based
            * on the a-priori knowledge that the keys are 8-bytes long
            * so the maximum key is formed by encoding Long.MAX_VALUE
@@ -780,8 +779,8 @@ public class TestMasterTaskWithSplits extends AbstractKeyRangeMasterTestCase {
       // periodically verify no errors in running tasks.
       while (!halt.get()) {
 
-      /*
-       * End the test if anything is done.
+        /*
+         * End the test if anything is done.
          */
 
         // check master.

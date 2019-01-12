@@ -32,7 +32,6 @@ import com.martiansoftware.jsap.UnflaggedOption;
 import com.martiansoftware.jsap.stringparsers.ForNameStringParser;
 import it.unimi.dsi.Util;
 import it.unimi.dsi.bits.LongArrayBitVector;
-import it.unimi.dsi.fastutil.Function;
 import it.unimi.dsi.fastutil.io.BinIO;
 import it.unimi.dsi.fastutil.objects.AbstractObject2LongFunction;
 import it.unimi.dsi.fastutil.objects.Object2LongFunction;
@@ -51,7 +50,7 @@ import java.util.zip.GZIPInputStream;
 import org.apache.log4j.Logger;
 
 /*
-* A string map based on a minimal perfect hash signed using Shift-Add-Xor hashes.
+ * A string map based on a minimal perfect hash signed using Shift-Add-Xor hashes.
  *
  * <p>A minimal perfect hash function maps a set of string to an initial segment of the natural
  * numbers, but will actually map <em>any</em> string to that segment. By signing each output value

@@ -12,17 +12,14 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.spo.ExplicitSPOFilter;
 import org.embergraph.rdf.spo.SPO;
 import org.embergraph.rdf.spo.SPOPredicate;
-import org.embergraph.rdf.store.LocalTripleStore;
 import org.embergraph.rdf.vocab.Vocabulary;
 import org.embergraph.relation.accesspath.ElementFilter;
 import org.embergraph.relation.rule.Rule;
-import org.openrdf.model.Literal;
-import org.openrdf.model.URI;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
 /*
-* Rule supporting {@link LocalTripleStore#match(Literal[], URI[], URI)}.
+ * Rule supporting {@link LocalTripleStore#match(Literal[], URI[], URI)}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -30,13 +30,12 @@ import java.util.Map;
 import java.util.concurrent.locks.ReentrantLock;
 import org.apache.log4j.Logger;
 import org.embergraph.EmbergraphStatics;
-import org.embergraph.btree.EmbergraphMap;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.service.AbstractDistributedFederation;
 import org.embergraph.service.master.INotifyOutcome;
 
 /*
-* Extends the master task to track outstanding asynchronous operations on work items.
+ * Extends the master task to track outstanding asynchronous operations on work items.
  *
  * <p>The clients notify the {@link AbstractPendingSetSubtask} as each operation completes. The
  * subtask notifies the master, which then clears the entry from its {@link #pendingMap} and also
@@ -201,13 +200,13 @@ public abstract class AbstractPendingSetMasterTask<
     lock.lock();
     try {
       if (cause == null) {
-      /*
-       * Successful completion.
+        /*
+         * Successful completion.
          */
         final Collection<L> locators = getPendingMap().remove(e);
         if (locators == null) {
-        /*
-       * Presume already successful since not in the map. Return
+          /*
+           * Presume already successful since not in the map. Return
            * false since map was not modified.
            */
           return false;
@@ -234,8 +233,8 @@ public abstract class AbstractPendingSetMasterTask<
        */
       final Collection<L> locators = getPendingMap().get(e);
       if (locators == null) {
-      /*
-       * Presume already successful since not in the map. Return false
+        /*
+         * Presume already successful since not in the map. Return false
          * since map was not modified.
          */
         return false;

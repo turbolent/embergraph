@@ -28,7 +28,7 @@ import org.embergraph.btree.IndexMetadata;
 import org.embergraph.rwstore.RWStore;
 
 /*
-* Given an existing journal, ensure that any commitRecords that reference a time prior to the last
+ * Given an existing journal, ensure that any commitRecords that reference a time prior to the last
  * deferred release time are removed. This provides a "fix" for opening a embergraph 1.0.4 journal
  * in embergraph 1.0.6.
  *

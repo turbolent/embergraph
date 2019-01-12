@@ -1,12 +1,11 @@
 package org.embergraph.counters.linux;
 
-import java.util.UUID;
 import org.embergraph.counters.AbstractStatisticsCollector;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.PIDUtil;
 
 /*
-* Collection of host performance data using <code>vmstat</code> and <code>sysstat</code> suite.
+ * Collection of host performance data using <code>vmstat</code> and <code>sysstat</code> suite.
  *
  * @see http://pagesperso-orange.fr/sebastien.godard/
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

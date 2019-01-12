@@ -25,7 +25,7 @@ import java.util.Properties;
 import org.embergraph.journal.ITx;
 
 /*
-* Abstract test case that sets up and connects to a embergraph federation and establishes an RDF
+ * Abstract test case that sets up and connects to a embergraph federation and establishes an RDF
  * database on that federation.
  *
  * <p>Note: The configuration options for the (meta)data services are set in their respective <code>

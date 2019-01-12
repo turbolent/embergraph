@@ -28,7 +28,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /*
-* Aggregates the unit tests for the core B+Tree operations, all of which are in the same package as
+ * Aggregates the unit tests for the core B+Tree operations, all of which are in the same package as
  * the {@link BTree}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

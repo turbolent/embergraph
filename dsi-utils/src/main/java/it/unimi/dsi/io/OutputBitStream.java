@@ -35,7 +35,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.nio.channels.FileChannel;
 
 /*
-* Bit-level output stream.
+ * Bit-level output stream.
  *
  * <p>This class wraps any {@link OutputStream} so that you can treat it as <em>bit</em> stream.
  * Constructors and methods closely resemble those of {@link OutputStream}. Data can be added to
@@ -440,8 +440,7 @@ public class OutputBitStream implements Flushable, Closeable {
 
     if (DEBUG)
       if (len > free)
-        throw new IllegalArgumentException(
-            len + " bit(s) to write, " + free + " available.");
+        throw new IllegalArgumentException(len + " bit(s) to write, " + free + " available.");
 
     current |= (b & ((1 << len) - 1)) << (free -= len);
     if (free == 0) {

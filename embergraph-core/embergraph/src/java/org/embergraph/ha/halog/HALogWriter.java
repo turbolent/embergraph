@@ -29,7 +29,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import org.apache.log4j.Logger;
-import org.embergraph.ha.msg.HAWriteMessage;
 import org.embergraph.ha.msg.IHAWriteMessage;
 import org.embergraph.io.FileChannelUtility;
 import org.embergraph.io.IReopenChannel;
@@ -43,7 +42,7 @@ import org.embergraph.util.Bytes;
 import org.embergraph.util.StackInfoReport;
 
 /*
-* Wrapper class to handle process log creation and output for HA.
+ * Wrapper class to handle process log creation and output for HA.
  *
  * <p>The process log stores the {@link HAWriteMessage} and buffers to support reading and
  * reprocessing as part of the HA synchronization protocol.
@@ -405,8 +404,8 @@ public class HALogWriter implements IHALogWriter {
       }
 
       if (doubleSync) {
-      /*
-       * Flush the HALog records to the disk.
+        /*
+         * Flush the HALog records to the disk.
          *
          * <p>Note: This is intended to avoid the possibility that the writes might be reordered
          * such that closing root block was written to the disk before the HALog records were
@@ -518,8 +517,8 @@ public class HALogWriter implements IHALogWriter {
         case WORM:
         case RW:
           {
-          /*
-       * Write the WriteCache block on the channel.
+            /*
+             * Write the WriteCache block on the channel.
              */
             final int nbytes = msg.getSize();
             assert data.position() == 0;
@@ -602,8 +601,8 @@ public class HALogWriter implements IHALogWriter {
 
       if (m_state != null) {
 
-      /*
-       * Conditional remove iff file is open. Will not remove
+        /*
+         * Conditional remove iff file is open. Will not remove
          * something that has been closed.
          */
         final boolean isCommitted = m_state.isCommitted();
@@ -620,8 +619,8 @@ public class HALogWriter implements IHALogWriter {
 
         if (m_state.m_haLogFile.exists() && !m_state.m_haLogFile.delete()) {
 
-        /*
-       * It is a problem if a file exists and we can not delete
+          /*
+           * It is a problem if a file exists and we can not delete
            * it. We need to be able to remove the file and replace it
            * with a new file when we log the write set for this commit
            * point.
@@ -664,8 +663,7 @@ public class HALogWriter implements IHALogWriter {
    * @throws IOException if the commitCounter identifies an HALog file that does not exist or can
    *     not be read.
    */
-  public IHALogReader getReader(final long commitCounter)
-      throws IOException {
+  public IHALogReader getReader(final long commitCounter) throws IOException {
 
     final File logFile = // new File(m_haLogDir,
         HALogWriter.getHALogFileName(m_haLogDir, commitCounter);
@@ -682,8 +680,8 @@ public class HALogWriter implements IHALogWriter {
 
       if (m_state != null && m_rootBlock.getCommitCounter() + 1 == commitCounter) {
 
-      /*
-       * This is the live HALog file.
+        /*
+         * This is the live HALog file.
          */
 
         if (haLog.isDebugEnabled()) haLog.debug("Opening live HALog: file=" + m_state.m_haLogFile);
@@ -761,8 +759,8 @@ public class HALogWriter implements IHALogWriter {
       synchronized (this) {
         try {
           if (m_accessors == 0) {
-          /*
-       * Already at zero. Do not decrement further.
+            /*
+             * Already at zero. Do not decrement further.
              */
             throw new IllegalStateException();
           }
@@ -770,8 +768,8 @@ public class HALogWriter implements IHALogWriter {
           --m_accessors;
           if (m_accessors == 0) {
             if (haLog.isInfoEnabled()) haLog.info("Closing file", new StackInfoReport());
-          /*
-       * Note: Close the RandomAccessFile rather than the
+            /*
+             * Note: Close the RandomAccessFile rather than the
              * FileChannel. Potential fix for leaking open file
              * handles.
              */
@@ -926,8 +924,8 @@ public class HALogWriter implements IHALogWriter {
 
       synchronized (m_state) {
 
-      /*
-       * Note: synchronized(FileState) makes these decisions atomic.
+        /*
+         * Note: synchronized(FileState) makes these decisions atomic.
          */
 
         if (!m_state.isOpen()) return false;
@@ -981,14 +979,14 @@ public class HALogWriter implements IHALogWriter {
       // Note: this pattern prevents a double-close of a reader.
       if (open.compareAndSet(true /* expected */, false /* newValue */)) {
 
-      /*
-       * Close an open reader.
+        /*
+         * Close an open reader.
          */
         synchronized (m_state) {
           if (m_state.m_accessors == 0) {
 
-          /*
-       * TODO This is a bit of a hack. The problem is that disableHALog() can force the close
+            /*
+             * TODO This is a bit of a hack. The problem is that disableHALog() can force the close
              * of all open readers. This is noticed by the FileState, but the OpenHALogReader itself
              * does not know that it is "closed" (it's open flag has not been cleared). We could
              * "fix" this by keeping an explicit set of the open readers for the live HALog and then

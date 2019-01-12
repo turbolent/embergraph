@@ -26,15 +26,13 @@ package org.embergraph.journal;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.nio.channels.FileChannel;
 import java.util.Random;
-import junit.framework.AssertionFailedError;
 import junit.framework.TestCase;
 import org.apache.log4j.Logger;
 import org.embergraph.util.Bytes;
 
 /*
-* Test suite for conformance with synchronous IO write requests made on a {@link RandomAccessFile}
+ * Test suite for conformance with synchronous IO write requests made on a {@link RandomAccessFile}
  * opened using <code>rss</code> or <code>rdd</code> mode. A conforming platform will NOT reorder
  * writes and will a request to {@link FileChannel#force(boolean)} will flush data through to stable
  * media before the write operation returns. A write cache in the operating system, device driver,

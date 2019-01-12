@@ -18,7 +18,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.embergraph</groupId>
@@ -29,7 +31,14 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
   <artifactId>colt</artifactId>
   <version>2.1.5-SNAPSHOT</version>
   <name>Embergraph Colt</name>
-  <description>Embergraph Modifications to the Colt libraries to remove hep.aida.  Forked under LGPL 2.1 from the original license: Copyright (c) 1999 CERN - European Organization for Nuclear Research.  Permission to use, copy, modify, distribute and sell this software and its documentation for any purpose is hereby granted without fee, provided that the above copyright notice appear in all copies and that both that copyright notice and this permission notice appear in supporting documentation. CERN makes no representations about the suitability of this software for any purpose. It is provided "as is" without expressed or implied warranty.</description>
+  <description>Embergraph Modifications to the Colt libraries to remove hep.aida. Forked under LGPL
+    2.1 from the original license: Copyright (c) 1999 CERN - European Organization for Nuclear
+    Research. Permission to use, copy, modify, distribute and sell this software and its
+    documentation for any purpose is hereby granted without fee, provided that the above copyright
+    notice appear in all copies and that both that copyright notice and this permission notice
+    appear in supporting documentation. CERN makes no representations about the suitability of this
+    software for any purpose. It is provided "as is" without expressed or implied warranty.
+  </description>
   <packaging>jar</packaging>
   <licenses>
     <license>

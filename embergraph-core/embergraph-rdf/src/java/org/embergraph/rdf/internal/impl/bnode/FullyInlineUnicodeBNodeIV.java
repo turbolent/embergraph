@@ -22,11 +22,10 @@ import org.embergraph.rdf.internal.IInlineUnicode;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVUnicode;
 import org.embergraph.rdf.model.EmbergraphBNode;
-import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.model.BNode;
 
 /*
-* Class for inline RDF blank nodes. Blank nodes MUST use a "short" Unicode ID to be inlined with
+ * Class for inline RDF blank nodes. Blank nodes MUST use a "short" Unicode ID to be inlined with
  * this class, where "short" is the maximum length configured for the lexicon.
  *
  * <p>{@inheritDoc}

@@ -24,11 +24,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.service;
 
 import org.embergraph.btree.IndexSegment;
-import org.embergraph.journal.Journal;
-import org.embergraph.resources.OverflowManager;
 
 /*
-* Type safe enum for {@link Event}s.
+ * Type safe enum for {@link Event}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

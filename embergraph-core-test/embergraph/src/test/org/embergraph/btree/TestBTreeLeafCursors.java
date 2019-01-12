@@ -30,7 +30,7 @@ import org.embergraph.btree.keys.TestKeyBuilder;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /*
-* Test suite for the {@link BTree}'s {@link ILeafCursor} implementation. The most critical thing
+ * Test suite for the {@link BTree}'s {@link ILeafCursor} implementation. The most critical thing
  * about this test suite is that it validates the cursor's ability to correctly maintain the {@link
  * Stack} of {@link Node}s over the current cursor position, especially for {@link
  * ILeafCursor#prior()} and {@link ILeafCursor#next()}. These tests have to be conducted at a {@link

@@ -29,7 +29,7 @@ import org.embergraph.service.IServiceShutdown;
 import org.embergraph.service.ITxState;
 
 /*
-* Interface for managing local transaction state (the client side of the {@link
+ * Interface for managing local transaction state (the client side of the {@link
  * ITransactionService}).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

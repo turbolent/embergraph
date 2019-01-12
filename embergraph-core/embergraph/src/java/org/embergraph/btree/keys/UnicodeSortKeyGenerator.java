@@ -3,7 +3,7 @@ package org.embergraph.btree.keys;
 import java.util.Locale;
 
 /*
-* Interface allows us to encapsulate differences between the ICU and JDK libraries for generating
+ * Interface allows us to encapsulate differences between the ICU and JDK libraries for generating
  * sort keys from Unicode strings.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

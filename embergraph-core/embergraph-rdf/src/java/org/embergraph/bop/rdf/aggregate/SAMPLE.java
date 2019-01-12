@@ -28,7 +28,7 @@ import org.embergraph.rdf.internal.constraints.INeedsMaterialization.Requirement
 import org.embergraph.rdf.internal.constraints.IPassesMaterialization;
 
 /*
-* Operator reports an arbitrary value from presented binding sets for the given variable. Missing
+ * Operator reports an arbitrary value from presented binding sets for the given variable. Missing
  * values are not chosen when non-missing values are available.
  *
  * @author thompsonbry

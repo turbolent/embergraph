@@ -26,13 +26,12 @@ import org.apache.log4j.Logger;
 import org.embergraph.io.ChecksumUtility;
 import org.embergraph.io.FileChannelUtility;
 import org.embergraph.io.NOPReopener;
-import org.embergraph.journal.Journal;
 import org.embergraph.journal.RootBlockException;
 import org.embergraph.rawstore.IAddressManager;
 import org.embergraph.util.Bytes;
 
 /*
-* The checkpoint record for an {@link IndexSegment}.
+ * The checkpoint record for an {@link IndexSegment}.
  *
  * <p>The checkpoint record for the index segment file is written at the head of the file. It should
  * have identical timestamps at the start and end of the checkpoint record (e.g., it doubles as a
@@ -678,15 +677,15 @@ public class IndexSegmentCheckpoint implements ICheckpoint {
 
       if (nnodes == 0) {
 
-      /*
-       * The root is a leaf. In this case there is only a single root leaf
+        /*
+         * The root is a leaf. In this case there is only a single root leaf
          * and there are no nodes.
          */
 
         if (offsetNodes != 0L || extentNodes != 0L) {
 
-        /*
-       * Since there is are no nodes, nodes offset and extent MUST be
+          /*
+           * Since there is are no nodes, nodes offset and extent MUST be
            * ZERO.
            */
 
@@ -700,8 +699,8 @@ public class IndexSegmentCheckpoint implements ICheckpoint {
 
         if (am.getByteCount(addrRoot) != extentLeaves) {
 
-        /*
-       * Since there is only a single root leaf, size of the root leaf
+          /*
+           * Since there is only a single root leaf, size of the root leaf
            * record MUST equal extent of the leaves region.
            */
 
@@ -718,8 +717,8 @@ public class IndexSegmentCheckpoint implements ICheckpoint {
 
       } else {
 
-      /*
-       * The root is a node.
+        /*
+         * The root is a node.
          */
 
         if (offsetNodes == 0L || extentNodes == 0L) {

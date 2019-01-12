@@ -23,12 +23,9 @@ package org.embergraph.journal;
 
 import java.nio.ByteBuffer;
 import java.util.UUID;
-import org.embergraph.io.writecache.WriteCache;
-import org.embergraph.quorum.Quorum;
-import org.embergraph.rawstore.WormAddressManager;
 
 /*
-* Interface for a root block on the journal. The root block provides metadata about the journal.
+ * Interface for a root block on the journal. The root block provides metadata about the journal.
  * The journal has two root blocks. The root blocks are written in an alternating order according to
  * the Challis algorithm. Each root block includes a field at the head and tail whose value is
  * strictly increasing fields. This field is often referred to as a root block "timestamps", but in
@@ -169,7 +166,7 @@ public interface IRootBlockView {
    * scale-out.
    */
   //    /*
-//     * The unique identifier for the logical service to which this journal
+  //     * The unique identifier for the logical service to which this journal
   //     * belongs. All physical services for the same logical service will have the
   //     * same logical service {@link UUID}. The logical service {@link UUID} is
   //     * generated when the quorum leader creates the initial journal for a

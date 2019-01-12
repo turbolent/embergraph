@@ -24,11 +24,10 @@ import java.io.ObjectOutput;
 import java.util.UUID;
 import org.embergraph.io.LongPacker;
 import org.embergraph.io.ShortPacker;
-import org.embergraph.service.ndx.ClientIndexView;
 import org.embergraph.util.BytesUtil;
 
 /*
-* An immutable object that may be used to locate an index partition. Instances of this class are
+ * An immutable object that may be used to locate an index partition. Instances of this class are
  * stored as the values in the {@link MetadataIndex}.
  *
  * <p>Note: The {@link ISeparatorKeys#getLeftSeparatorKey()} is always equal to the key under which

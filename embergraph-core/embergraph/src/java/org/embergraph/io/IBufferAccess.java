@@ -23,7 +23,7 @@ import java.nio.ByteBuffer;
 import java.util.concurrent.TimeUnit;
 
 /*
-* Interface for access to, and release of, a direct {@link ByteBuffer} managed by the {@link
+ * Interface for access to, and release of, a direct {@link ByteBuffer} managed by the {@link
  * DirectBufferPool}. A "direct" buffer is a region from the C heap of the native JVM process. Such
  * buffers can be efficient for NIO. They are also efficient when the application needs to store
  * large amounts of data without putting pressure on the Garbage Collector.

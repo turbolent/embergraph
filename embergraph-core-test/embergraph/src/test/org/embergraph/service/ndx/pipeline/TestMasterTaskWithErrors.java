@@ -30,7 +30,7 @@ import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.util.InnerCause;
 
 /*
-* Unit tests for error handling in the control logic used by {@link AbstractMasterTask} and
+ * Unit tests for error handling in the control logic used by {@link AbstractMasterTask} and
  * friends.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

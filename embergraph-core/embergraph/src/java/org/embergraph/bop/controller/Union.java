@@ -23,11 +23,10 @@ package org.embergraph.bop.controller;
 
 import java.util.Map;
 import org.embergraph.bop.BOp;
-import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.NV;
 
 /*
-* UNION()[maxParallel(default all); subqueries=ops]
+ * UNION()[maxParallel(default all); subqueries=ops]
  *
  * <pre>
  * UNION([],{subqueries=[a,b,c]})

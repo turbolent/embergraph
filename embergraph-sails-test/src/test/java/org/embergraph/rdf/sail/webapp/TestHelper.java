@@ -10,7 +10,7 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.repository.RepositoryConnection;
 
 /*
-* Helper class to debug the NSS by issuing commands that we can not issue from the index.html page
+ * Helper class to debug the NSS by issuing commands that we can not issue from the index.html page
  * (HTTP DELETEs, etc).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

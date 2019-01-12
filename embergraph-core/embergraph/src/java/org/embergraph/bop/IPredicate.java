@@ -23,37 +23,15 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop;
 
-import cutthecrap.utils.striterators.FilterBase;
 import cutthecrap.utils.striterators.IFilter;
 import java.io.Serializable;
 import org.embergraph.bop.ap.Predicate;
-import org.embergraph.bop.ap.filter.BOpFilterBase;
-import org.embergraph.bop.ap.filter.BOpTupleFilter;
-import org.embergraph.bop.ap.filter.DistinctFilter;
-import org.embergraph.bop.join.HTreeHashJoinOp;
-import org.embergraph.bop.join.JVMHashJoinOp;
-import org.embergraph.bop.join.PipelineJoin;
-import org.embergraph.bop.joinGraph.IEvaluationPlan;
 import org.embergraph.btree.IRangeQuery;
-import org.embergraph.btree.ITuple;
-import org.embergraph.btree.ITupleCursor;
-import org.embergraph.btree.ITupleIterator;
-import org.embergraph.btree.filter.Advancer;
-import org.embergraph.btree.filter.TupleFilter;
-import org.embergraph.mdi.PartitionLocator;
-import org.embergraph.rdf.spo.SPOKeyOrder;
-import org.embergraph.relation.IRelation;
-import org.embergraph.relation.accesspath.AccessPath;
-import org.embergraph.relation.accesspath.ElementFilter;
-import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.relation.rule.IAccessPathExpander;
-import org.embergraph.relation.rule.IRule;
-import org.embergraph.relation.rule.eval.pipeline.JoinMasterTask;
-import org.embergraph.service.ndx.IClientIndex;
 import org.embergraph.striterator.IKeyOrder;
 
 /*
-* An immutable constraint on the elements visited using an {@link IAccessPath}. The slots in the
+ * An immutable constraint on the elements visited using an {@link IAccessPath}. The slots in the
  * predicate corresponding to variables are named and those names establish binding patterns access
  * {@link IPredicate}s. Access is provided to slots by ordinal index regardless of whether or not
  * they are named variables.
@@ -64,8 +42,7 @@ import org.embergraph.striterator.IKeyOrder;
 public interface IPredicate<E> extends BOp, Cloneable, Serializable {
 
   /** Interface declaring well known annotations. */
-  interface Annotations
-      extends BOp.Annotations, BufferAnnotations, ILocatableResourceAnnotations {
+  interface Annotations extends BOp.Annotations, BufferAnnotations, ILocatableResourceAnnotations {
 
     /*
      * Optional property <em>overrides</em> the {@link IKeyOrder} to use for the access path.
@@ -108,7 +85,7 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
     boolean DEFAULT_OPTIONAL = false;
 
     //        /*
-//         * Constraints on the elements read from the relation.
+    //         * Constraints on the elements read from the relation.
     //         *
     //         * @deprecated This is being replaced by two classes of filters. One
     //         *             which is always evaluated local to the index and one
@@ -124,7 +101,7 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
     //        String CONSTRAINT = "constraint";
 
     //      /*
-//      * An optional {@link IConstraint}[] which places restrictions on the
+    //      * An optional {@link IConstraint}[] which places restrictions on the
     //      * legal patterns in the variable bindings.
     //      */
     //     String CONSTRAINTS = PipelineJoin.class.getName() + ".constraints";
@@ -274,7 +251,7 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
         ;
 
     //		/*
-//		 * Boolean property whose value is <code>true</code> iff this operator
+    //		 * Boolean property whose value is <code>true</code> iff this operator
     //		 * writes on a database.
     //		 * <p>
     //		 * Most operators operate solely on streams of elements or binding sets.
@@ -385,7 +362,7 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
   IAccessPathExpander<E> getAccessPathExpander();
 
   //    /*
-//     * An optional constraint on the visitable elements.
+  //     * An optional constraint on the visitable elements.
   //     *
   //     * @see Annotations#CONSTRAINT
   //     *
@@ -398,7 +375,7 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
   //    public IElementFilter<E> getConstraint();
 
   //    /*
-//     * Return the optional {@link IConstraint}[] to be applied by a join which
+  //     * Return the optional {@link IConstraint}[] to be applied by a join which
   //     * evaluates this {@link IPredicate}.
   //     * <p>
   //     * Note: The {@link Annotations#CONSTRAINTS} are annotated on the
@@ -438,7 +415,7 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
   IKeyOrder<E> getKeyOrder();
 
   //    /*
-//     * Set the {@link IKeyOrder} annotation on the {@link IPredicate}, returning
+  //     * Set the {@link IKeyOrder} annotation on the {@link IPredicate}, returning
   //     * a new {@link IPredicate} in which the annotation takes on the given
   //     * binding.
   //     *
@@ -622,7 +599,7 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
   IPredicate<E> setArg(int index, IVariableOrConstant arg);
 
   //	/*
-//	 * Return <code>true</code> iff this operator is an access path which writes
+  //	 * Return <code>true</code> iff this operator is an access path which writes
   //	 * on the database.
   //	 *
   //	 * @see Annotations#MUTATION

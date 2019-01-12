@@ -21,7 +21,7 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.service.fts.FTS.SearchResultType;
 
 /*
-* Metadata about a search result against an external fulltext index.
+ * Metadata about a search result against an external fulltext index.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$

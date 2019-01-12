@@ -26,7 +26,7 @@ import org.embergraph.btree.keys.TestKeyBuilder;
 import org.embergraph.io.SerializerUtil;
 
 /*
-* Test split and join of the root leaf (the tree never has more than two levels).
+ * Test split and join of the root leaf (the tree never has more than two levels).
  *
  * @see src/architecture/btree.xls for examples for split().
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

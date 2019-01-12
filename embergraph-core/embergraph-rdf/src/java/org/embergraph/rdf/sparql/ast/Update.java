@@ -32,7 +32,7 @@ import org.embergraph.rdf.sail.sparql.ast.ASTDatasetClause;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /*
-* A SPARQL Update operation.
+ * A SPARQL Update operation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -28,7 +28,7 @@ import org.embergraph.btree.AbstractBTreeTupleCursor.ReadOnlyBTreeTupleCursor;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /*
-* Unit tests for {@link ITupleCursor} for a read-only {@link BTree}.
+ * Unit tests for {@link ITupleCursor} for a read-only {@link BTree}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

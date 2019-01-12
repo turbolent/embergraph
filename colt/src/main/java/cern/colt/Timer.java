@@ -9,7 +9,7 @@ It is provided "as is" without expressed or implied warranty.
 package cern.colt;
 
 /*
-* A handy stopwatch for benchmarking. Like a real stop watch used on ancient running tracks you can
+ * A handy stopwatch for benchmarking. Like a real stop watch used on ancient running tracks you can
  * start the watch, stop it, start it again, stop it again, display the elapsed time and reset the
  * watch.
  */

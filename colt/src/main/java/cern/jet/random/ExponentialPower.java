@@ -10,7 +10,7 @@ package cern.jet.random;
 
 import cern.jet.random.engine.RandomEngine;
 /*
-* Exponential Power distribution.
+ * Exponential Power distribution.
  *
  * <p>Valid parameter ranges: <tt>tau &gt;= 1</tt>.
  *

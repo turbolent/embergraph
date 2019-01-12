@@ -22,7 +22,7 @@ import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 
 /*
-* An interface that may be used to extract variable bindings for the vertices visited by the
+ * An interface that may be used to extract variable bindings for the vertices visited by the
  * algorithm.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

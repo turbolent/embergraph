@@ -17,10 +17,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.ha.msg;
 
-import org.embergraph.ha.pipeline.HAReceiveService;
-
 /*
-* Glue class wraps the {@link IHAWriteMessage} and the {@link IHALogRequest} message and exposes
+ * Glue class wraps the {@link IHAWriteMessage} and the {@link IHALogRequest} message and exposes
  * the requires {@link IHAMessage} interface to the {@link HAReceiveService}. This class is never
  * persisted. It just let's us handshake with the {@link HAReceiveService} and get back out the
  * original {@link IHAWriteMessage} as well as the optional {@link IHALogRequest} message.

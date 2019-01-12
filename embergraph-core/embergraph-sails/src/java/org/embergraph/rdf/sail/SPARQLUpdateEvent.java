@@ -22,7 +22,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import org.embergraph.rdf.sparql.ast.Update;
 
 /*
-* An event reflecting progress for some sequence of SPARQL UPDATE operations.
+ * An event reflecting progress for some sequence of SPARQL UPDATE operations.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

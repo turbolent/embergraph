@@ -31,7 +31,7 @@ import org.embergraph.io.writecache.WriteCacheService;
 import org.embergraph.quorum.Quorum;
 
 /*
-* Defines the WriteCacheService to be used by the RWStore.
+ * Defines the WriteCacheService to be used by the RWStore.
  *
  * @author mgc
  */

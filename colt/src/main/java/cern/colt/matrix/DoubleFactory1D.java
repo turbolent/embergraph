@@ -13,7 +13,7 @@ import cern.colt.matrix.impl.SparseDoubleMatrix1D;
 import cern.jet.math.Functions;
 
 /*
-* Factory for convenient construction of 1-d matrices holding <tt>double</tt> cells. Use idioms
+ * Factory for convenient construction of 1-d matrices holding <tt>double</tt> cells. Use idioms
  * like <tt>DoubleFactory1D.dense.make(1000)</tt> to construct dense matrices,
  * <tt>DoubleFactory1D.sparse.make(1000)</tt> to construct sparse matrices.
  *

@@ -19,7 +19,7 @@ import java.util.Iterator;
 import junit.framework.TestCase;
 
 /*
-* Test suite for {@link FilterBase}.
+ * Test suite for {@link FilterBase}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

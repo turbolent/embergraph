@@ -23,8 +23,6 @@ package org.embergraph.rdf.sparql.ast.eval;
 
 import java.util.concurrent.atomic.AtomicLong;
 import org.embergraph.bop.IBindingSet;
-import org.embergraph.journal.ITx;
-import org.embergraph.rdf.internal.IVCache;
 import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.sail.EmbergraphSail;
@@ -36,7 +34,7 @@ import org.openrdf.query.algebra.evaluation.QueryBindingSet;
 import org.openrdf.sail.SailException;
 
 /*
-* Extended to expose the connection used to execute the SPARQL UPDATE request.
+ * Extended to expose the connection used to execute the SPARQL UPDATE request.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

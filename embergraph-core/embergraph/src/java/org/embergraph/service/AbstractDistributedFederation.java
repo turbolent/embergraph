@@ -23,7 +23,7 @@ import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.IBuffer;
 
 /*
-* Abstract base class for {@link IEmbergraphFederation} implementations where the services are
+ * Abstract base class for {@link IEmbergraphFederation} implementations where the services are
  * distributed using RMI and are running, at least in principle, across more than one host/JVM.
  *
  * @todo Explore a variety of cached and uncached strategies for the metadata index. An uncached

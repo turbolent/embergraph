@@ -35,7 +35,7 @@ import org.openrdf.model.Value;
 import org.openrdf.model.datatypes.XMLDatatypeUtil;
 
 /*
-* Adds inlining for the <code>http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/USD</code>
+ * Adds inlining for the <code>http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/USD</code>
  * datatype, which is treated as <code>xsd:float</code>.
  */
 @SuppressWarnings("rawtypes")

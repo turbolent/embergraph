@@ -7,12 +7,11 @@ import java.text.Format;
 import java.text.NumberFormat;
 import java.util.Date;
 import java.util.regex.Pattern;
-import org.embergraph.counters.History;
 import org.embergraph.counters.ICounter;
 import org.embergraph.counters.query.URLQueryModel;
 
 /*
-* Datum specific formatting of {@link ICounter} values (not thread-safe since the {@link Format}
+ * Datum specific formatting of {@link ICounter} values (not thread-safe since the {@link Format}
  * objects are not thread-safe).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

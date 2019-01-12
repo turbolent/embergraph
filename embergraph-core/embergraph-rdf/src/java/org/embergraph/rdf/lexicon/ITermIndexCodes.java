@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.lexicon;
 
 /*
-* This interface defines the signed byte values indicating the type of a term in the term index.
+ * This interface defines the signed byte values indicating the type of a term in the term index.
  * The purpose of this is to partition the term:id index into disjoint key ranges where the order of
  * the terms in each of those partitions is well defined. I.e., URIs are in one key range and the
  * total order over the URIs is well defined. The literals are broken down into a key range
@@ -56,7 +56,7 @@ public interface ITermIndexCodes {
   byte TERM_CODE_BND = 0x05;
 
   //    /*
-//     * Indicates a statement identifier (used for statements about statements
+  //     * Indicates a statement identifier (used for statements about statements
   //     * where the statement identifier is used in any of the subject, predicate,
   //     * or object positions).
   //     * <p>
@@ -69,7 +69,7 @@ public interface ITermIndexCodes {
   //    final public static byte TERM_CODE_STMT = 0x06;
 
   //    /*
-//     * @deprecated This is a place holder for a namespace for an alternative
+  //     * @deprecated This is a place holder for a namespace for an alternative
   //     *             coding of datatype literal keys.
   //     */
   //    final public static byte TERM_CODE_DTL2 = 0x07;

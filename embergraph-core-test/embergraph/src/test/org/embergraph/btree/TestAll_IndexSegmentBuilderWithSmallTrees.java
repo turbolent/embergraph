@@ -26,7 +26,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /*
-* Stress test suite for {@link TestIndexSegmentBuilderWithSmallTree}.
+ * Stress test suite for {@link TestIndexSegmentBuilderWithSmallTree}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

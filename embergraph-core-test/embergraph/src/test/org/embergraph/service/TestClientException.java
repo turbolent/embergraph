@@ -28,7 +28,7 @@ import junit.framework.TestCase;
 import org.embergraph.service.ndx.ClientException;
 
 /*
-* Class written to verify the stack trace printing behavior of {@link ClientException}.
+ * Class written to verify the stack trace printing behavior of {@link ClientException}.
  *
  * <p>Note: You have to inspect the test results by hand.
  *

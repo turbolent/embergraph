@@ -57,7 +57,7 @@ import org.embergraph.rwstore.PSOutputStream;
 import org.embergraph.service.AbstractTransactionService;
 
 /*
-* The MemoryManager manages an off-heap Direct {@link ByteBuffer}. It uses the new SectorAllocator
+ * The MemoryManager manages an off-heap Direct {@link ByteBuffer}. It uses the new SectorAllocator
  * to allocate slots within the address range.
  *
  * <p>The interface is designed to support efficient transfer between NIO buffers.
@@ -494,8 +494,8 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
           return sector;
         }
 
-      /*
-       * We are under capacity, so allocate a new sector and add it to
+        /*
+         * We are under capacity, so allocate a new sector and add it to
          * the free list.
          */
 
@@ -532,8 +532,8 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
 
         if (blocks) {
 
-        /*
-       * We are at the maximum #of sectors.
+          /*
+           * We are at the maximum #of sectors.
            */
 
           SectorAllocator sector = scanForSectorWithFreeSpace(nbytes);
@@ -543,8 +543,8 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
             return sector;
           }
 
-        /*
-       * Wait for something to get freed. Once enough data is
+          /*
+           * Wait for something to get freed. Once enough data is
            * freed from some sector, that sector will be placed back
            * onto the free list.
            */
@@ -620,8 +620,8 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
 
       } else {
 
-      /*
-       * For Blob allocation call the normal allocate and retrieve the allocation address to store
+        /*
+         * For Blob allocation call the normal allocate and retrieve the allocation address to store
          * in the blob header.
          */
         int nblocks = 0;
@@ -637,8 +637,8 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
             final int pos = SectorAllocator.BLOB_SIZE * i;
             final int bsize = i < (nblocks - 1) ? SectorAllocator.BLOB_SIZE : nbytes - pos;
 
-          /*
-       * BLOB RECURSION
+            /*
+             * BLOB RECURSION
              */
             final long bpaddr = allocate(bsize, blocks);
             final int bprwaddr = getAllocationAddress(bpaddr);
@@ -704,16 +704,16 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
 
       if (size <= SectorAllocator.BLOB_SIZE) {
 
-      /*
-       * This is a simple allocation.
+        /*
+         * This is a simple allocation.
          */
 
         return new ByteBuffer[] {getBuffer(rwaddr, size)};
 
       } else {
 
-      /*
-       * This will be a BLOB, so retrieve the header, then parse to
+        /*
+         * This will be a BLOB, so retrieve the header, then parse to
          * retrieve components and assign to ByteBuffer[].
          */
 
@@ -953,8 +953,8 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
         m_userBytes.addAndGet(-size);
         m_slotBytes.addAndGet(-sector.getPhysicalSize(offset));
 
-      /*
-       * TODO if the sector is empty, release it back to the pool.
+        /*
+         * TODO if the sector is empty, release it back to the pool.
          *
          * Note: Sectors can have allocator metadata so they may not be
          * empty in terms of slot bytes even though no user data is
@@ -996,8 +996,8 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
 
           final long mkaddr = makeAddr(hdrbuf[hdrIndex].getInt(), blockSize);
 
-        /*
-       * BLOB RECURSION
+          /*
+           * BLOB RECURSION
            */
 
           immediateFree(mkaddr);
@@ -1282,7 +1282,7 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
 
   private long m_lastDeferredReleaseTime = 0;
   //	/*
-//	 * Call made from AbstractJournal to register the cache used.  This can then
+  //	 * Call made from AbstractJournal to register the cache used.  This can then
   //	 * be accessed to clear entries when storage is made availabel for re-cycling.
   //	 *
   //	 * It is not safe to clear at the point of the delete request since the data

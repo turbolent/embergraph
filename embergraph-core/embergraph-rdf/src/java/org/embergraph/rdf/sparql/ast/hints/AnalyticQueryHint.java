@@ -22,18 +22,13 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.hints;
 
 import org.embergraph.bop.engine.NativeHeapStandloneChunkHandler;
-import org.embergraph.bop.join.HTreeHashJoinUtility;
-import org.embergraph.bop.join.IHashJoinUtility;
-import org.embergraph.bop.join.JVMHashJoinUtility;
-import org.embergraph.bop.join.SolutionSetHashJoinOp;
-import org.embergraph.htree.HTree;
 import org.embergraph.rdf.sparql.ast.ASTBase;
 import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /*
-* Query hint for turning analytic query on/off.
+ * Query hint for turning analytic query on/off.
  *
  * <p>TODO Allow this to be specified for each hash index build rather than just globally for the
  * query execution context. The primary consumer of hash indices is the {@link

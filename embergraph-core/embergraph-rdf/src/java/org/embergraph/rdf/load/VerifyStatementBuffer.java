@@ -1,6 +1,5 @@
 package org.embergraph.rdf.load;
 
-import java.beans.Statement;
 import java.util.concurrent.atomic.AtomicLong;
 import org.apache.log4j.Logger;
 import org.embergraph.rdf.model.EmbergraphStatement;
@@ -11,12 +10,9 @@ import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.SPO;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.striterator.IChunkedOrderedIterator;
-import org.openrdf.model.Literal;
-import org.openrdf.model.URI;
-import org.openrdf.model.Value;
 
 /*
-* Statements inserted into the buffer are verified against the database. No new {@link Value}s or
+ * Statements inserted into the buffer are verified against the database. No new {@link Value}s or
  * {@link Statement}s will be written on the database by this class. The #of {@link URI}, {@link
  * Literal}, and told triples not found in the database are reported by various counters.
  *

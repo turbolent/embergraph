@@ -35,10 +35,9 @@ import org.embergraph.bop.PipelineOp;
 import org.embergraph.bop.engine.BOpStats;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.UnsynchronizedArrayBuffer;
-import org.embergraph.service.IEmbergraphFederation;
 
 /*
-* An operator which imposes an offset/limit on a binding set pipeline.
+ * An operator which imposes an offset/limit on a binding set pipeline.
  *
  * <p>Note: join processing typically involves concurrent processes, hence the order of the results
  * will not be stable unless the results are sorted before applying the slice. When a slice is
@@ -146,7 +145,7 @@ public class SliceOp extends PipelineOp {
   }
 
   //    /*
-//     * Overridden to return <code>true</code> since the correct decision
+  //     * Overridden to return <code>true</code> since the correct decision
   //     * semantics for the slice depend on concurrent invocations for the same
   //     * query having the same {@link SliceStats} object.
   //     * <p>
@@ -261,8 +260,8 @@ public class SliceOp extends PipelineOp {
 
       try {
 
-      /*
-       * buffer forms chunks which get flushed onto the sink.
+        /*
+         * buffer forms chunks which get flushed onto the sink.
          *
          * @todo if we have visibility into the #of source chunks, then do
          * not buffer more than min(#source,#needed).
@@ -275,8 +274,8 @@ public class SliceOp extends PipelineOp {
 
           final IBindingSet[] chunk = source.next();
 
-        /*
-       * Batch each chunk through a lock for better concurrency
+          /*
+           * Batch each chunk through a lock for better concurrency
            * (avoids CAS contention).
            *
            * Note: This is safe because the source chunk is already
@@ -414,7 +413,7 @@ public class SliceOp extends PipelineOp {
   }
 
   //    /*
-//     * This operator must be evaluated on the query controller.
+  //     * This operator must be evaluated on the query controller.
   //     */
   //    @Override
   //    public BOpEvaluationContext getEvaluationContext() {

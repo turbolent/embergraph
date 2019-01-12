@@ -25,7 +25,7 @@ import org.embergraph.bop.join.FastRangeCountOp;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /*
-* @see <a href="http://trac.blazegraph.com/ticket/1037" > Rewrite SELECT COUNT(...)
+ * @see <a href="http://trac.blazegraph.com/ticket/1037" > Rewrite SELECT COUNT(...)
  *     (DISTINCT|REDUCED) {single-triple-pattern} as ESTCARD </a>
  */
 public class TestFastRangeCountOptimizer extends AbstractDataDrivenSPARQLTestCase {

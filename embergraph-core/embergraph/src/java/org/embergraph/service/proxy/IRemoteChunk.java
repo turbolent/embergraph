@@ -1,11 +1,10 @@
 package org.embergraph.service.proxy;
 
 import java.io.Serializable;
-import java.rmi.Remote;
 import org.embergraph.striterator.IKeyOrder;
 
 /*
-* Abstraction for a chunk from a remote iterator. Instances of this interface are serialized by a
+ * Abstraction for a chunk from a remote iterator. Instances of this interface are serialized by a
  * remote service and materialized on the client. The interface itself is NOT {@link Remote}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

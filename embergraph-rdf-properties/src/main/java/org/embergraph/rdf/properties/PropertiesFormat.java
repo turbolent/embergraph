@@ -59,7 +59,7 @@ import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 /*
-* Formats for a properties file.
+ * Formats for a properties file.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -111,7 +111,7 @@ public class PropertiesFormat extends FileFormat implements Iterable<PropertiesF
   }
 
   //    /*
-//     * Binary properties file using <code>application/octet-stream</code>
+  //     * Binary properties file using <code>application/octet-stream</code>
   //     */
   //    public static final PropertiesFormat BINARY = new PropertiesFormat(
   //            "application/octet-stream",

@@ -21,14 +21,13 @@ package it.unimi.dsi.parser.callback;
  *
  */
 
-import it.unimi.dsi.lang.MutableString;
 import it.unimi.dsi.parser.Attribute;
 import it.unimi.dsi.parser.BulletParser;
 import it.unimi.dsi.parser.Element;
 import java.util.Map;
 
 /*
-* A callback for the {@linkplain it.unimi.dsi.parser.BulletParser bullet parser}.
+ * A callback for the {@linkplain it.unimi.dsi.parser.BulletParser bullet parser}.
  *
  * <p>This interface is very loosely inspired to the SAX2 interface. However, it strives to be
  * simple, and to be StringFree&trade;.

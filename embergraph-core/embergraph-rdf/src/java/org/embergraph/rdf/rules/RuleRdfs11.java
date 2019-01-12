@@ -26,7 +26,7 @@ import org.embergraph.relation.rule.Rule;
 import org.openrdf.model.vocabulary.RDFS;
 
 /*
-* rdfs11: this variant uses a nested subquery and may be safely used during truth maintenance.
+ * rdfs11: this variant uses a nested subquery and may be safely used during truth maintenance.
  *
  * <pre>
  *       triple(?u,rdfs:subClassOf,?x) :-

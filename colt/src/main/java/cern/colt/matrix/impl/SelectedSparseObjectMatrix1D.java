@@ -12,7 +12,7 @@ import cern.colt.map.AbstractIntObjectMap;
 import cern.colt.matrix.ObjectMatrix1D;
 import cern.colt.matrix.ObjectMatrix2D;
 /*
-* Selection view on sparse 1-d matrices holding <tt>Object</tt> elements. First see the <a
+ * Selection view on sparse 1-d matrices holding <tt>Object</tt> elements. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
  * view</a> to get the broad picture.
  *

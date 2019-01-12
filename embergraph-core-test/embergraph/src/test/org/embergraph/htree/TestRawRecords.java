@@ -9,7 +9,7 @@ import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /*
-* Unit tests for a {@link HTree} with raw record support enabled (this is where a large <code>
+ * Unit tests for a {@link HTree} with raw record support enabled (this is where a large <code>
  * byte[]</code> value is written directly onto the backing store rather than being stored within
  * the leaf).
  *
@@ -87,7 +87,7 @@ public class TestRawRecords extends AbstractHTreeTestCase {
    */
 
   //	/*
-//	 * Unit test in which we update a small value (inline within the leaf) with
+  //	 * Unit test in which we update a small value (inline within the leaf) with
   //	 * a large value (stored as a raw record).
   //	 */
   //	public void test_updateSmallValueWithLargeValue() {
@@ -169,7 +169,7 @@ public class TestRawRecords extends AbstractHTreeTestCase {
   //	}
   //
   //	/*
-//	 * Unit test in which we update a large value (represented directly on the
+  //	 * Unit test in which we update a large value (represented directly on the
   //	 * backing store) with a small value (inline within the leaf). The test
   //	 * verifies that the original large value is deleted.
   //	 */
@@ -233,7 +233,7 @@ public class TestRawRecords extends AbstractHTreeTestCase {
   //	}
   //
   //	/*
-//	 * Unit test in which we update a large value (represented directly on the
+  //	 * Unit test in which we update a large value (represented directly on the
   //	 * backing store) with another large value (also represented directly on the
   //	 * store). The test verifies that the original large value is deleted.
   //	 */
@@ -306,7 +306,7 @@ public class TestRawRecords extends AbstractHTreeTestCase {
   //	}
   //
   //	/*
-//	 * Unit test in which we insert a large value (represented directly on the
+  //	 * Unit test in which we insert a large value (represented directly on the
   //	 * backing store) and then delete the key under which that value was stored.
   //	 * The test verifies that the original large value is deleted.
   //	 */
@@ -363,7 +363,7 @@ public class TestRawRecords extends AbstractHTreeTestCase {
   //	}
   //
   //	/*
-//	 * Helper class is used to watch for deletes of raw records from the backing
+  //	 * Helper class is used to watch for deletes of raw records from the backing
   //	 * store.
   //	 *
   //	 * @author thompsonbry

@@ -26,10 +26,9 @@ import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
-import org.embergraph.journal.Name2Addr;
 
 /*
-* Persistent record in which we store the version metadata for the ICU dependency in use when the
+ * Persistent record in which we store the version metadata for the ICU dependency in use when the
  * journal was created. embergraph uses Unicode sort keys for various indices, including {@link
  * Name2Addr}. A change in the ICU version can result in sort keys which are NOT compatible. Binary
  * compatibility for Unicode sort keys is an absolute requirement for embergraph. The purpose of

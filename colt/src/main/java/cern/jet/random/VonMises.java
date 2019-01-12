@@ -10,7 +10,7 @@ package cern.jet.random;
 
 import cern.jet.random.engine.RandomEngine;
 /*
-* Von Mises distribution.
+ * Von Mises distribution.
  *
  * <p>Valid parameter ranges: <tt>k &gt; 0</tt>.
  *

@@ -21,11 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.join;
 
-import org.embergraph.bop.IPredicate;
-import org.embergraph.relation.accesspath.IAccessPath;
-
 /*
-* Interface declares additional annotations for joins against an {@link IAccessPath} (versus a
+ * Interface declares additional annotations for joins against an {@link IAccessPath} (versus a
  * subquery or temporary solution set).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -12,7 +12,7 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.repository.RepositoryException;
 
 /*
-* A simple utility class that can be initialized with a ServletRequest and used to simplify dynamic
+ * A simple utility class that can be initialized with a ServletRequest and used to simplify dynamic
  * web pages.
  *
  * @author Martyn Cutcher

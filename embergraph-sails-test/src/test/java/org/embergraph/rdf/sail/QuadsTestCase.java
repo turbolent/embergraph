@@ -24,7 +24,7 @@ package org.embergraph.rdf.sail;
 import org.apache.log4j.Logger;
 
 /*
-* Unit tests for named graphs. Specify <code>
+ * Unit tests for named graphs. Specify <code>
  * -DtestClass=org.embergraph.rdf.sail.TestEmbergraphSailWithQuads</code> to run this test suite.
  *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>

@@ -23,7 +23,6 @@ package org.embergraph.rdf.internal;
 
 import java.math.BigInteger;
 import junit.framework.TestCase2;
-import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.rdf.internal.impl.literal.XSDUnsignedByteIV;
 import org.embergraph.rdf.internal.impl.literal.XSDUnsignedIntIV;
 import org.embergraph.rdf.internal.impl.literal.XSDUnsignedLongIV;
@@ -31,7 +30,7 @@ import org.embergraph.rdf.internal.impl.literal.XSDUnsignedShortIV;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 
 /*
-* Test suite for the xsd:unsigned IV which are internally represented by Java primitives
+ * Test suite for the xsd:unsigned IV which are internally represented by Java primitives
  * (xsd:unsignedByte, xsd:unsignedShort, xsd:unsignedInt, and xsd:unsignedLong). There is a {@link
  * DTE} for each of these cases, e.g., {@link DTE#XSDUnsignedByte}. In each case, the corresponding
  * signed primitive is used to encode the {@link IV} so we represent the unsigned byte in one byte,

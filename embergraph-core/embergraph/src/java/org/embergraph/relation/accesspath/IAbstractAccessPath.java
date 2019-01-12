@@ -21,13 +21,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation.accesspath;
 
-import cutthecrap.utils.striterators.IFilter;
 import org.embergraph.bop.IPredicate;
-import org.embergraph.btree.IRangeQuery;
-import org.embergraph.relation.IRelation;
 
 /*
-* A common interface for all access paths.
+ * A common interface for all access paths.
  *
  * @param <R> The generic type of the [R]elation elements of the {@link IRelation}.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -23,11 +23,10 @@ import junit.framework.TestSuite;
 import org.embergraph.bop.BOpUtility;
 import org.embergraph.bop.join.DistinctTermScanOp;
 import org.embergraph.bop.join.FastRangeCountOp;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTSimpleGroupByAndCountOptimizer;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /*
-* SPARQL level test suite for the {@link ASTSimpleGroupByAndCountOptimizer}.
+ * SPARQL level test suite for the {@link ASTSimpleGroupByAndCountOptimizer}.
  *
  * @see <a href="http://trac.blazegraph.com/ticket/1059">GROUP BY optimization using
  *     distinct-term-scan and fast-range-count</a>

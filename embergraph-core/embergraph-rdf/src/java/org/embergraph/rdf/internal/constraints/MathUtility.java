@@ -5,7 +5,6 @@ import java.math.BigInteger;
 import java.math.RoundingMode;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.internal.XPathMathFunctions;
 import org.embergraph.rdf.internal.constraints.MathBOp.MathOp;
 import org.embergraph.rdf.internal.constraints.NumericBOp.NumericOp;
 import org.embergraph.rdf.internal.impl.extensions.CompressedTimestampExtension;
@@ -428,8 +427,8 @@ public class MathUtility implements IMathOpHandler {
       case MULTIPLY:
         return new XSDDecimalIV(left.multiply(right));
       case DIVIDE:
-      /*
-       * Note: Change per mroycsi.  Reverts to a half-rounding mode iff
+        /*
+         * Note: Change per mroycsi.  Reverts to a half-rounding mode iff
          * an exact quotient can not be represented.
          */
         try {

@@ -11,7 +11,7 @@ package cern.colt.matrix.impl;
 import cern.colt.matrix.DoubleMatrix1D;
 import cern.colt.matrix.DoubleMatrix2D;
 /*
-* 1-d matrix holding <tt>double</tt> elements; either a view wrapping another 2-d matrix and
+ * 1-d matrix holding <tt>double</tt> elements; either a view wrapping another 2-d matrix and
  * therefore delegating calls to it.
  *
  * @author wolfgang.hoschek@cern.ch

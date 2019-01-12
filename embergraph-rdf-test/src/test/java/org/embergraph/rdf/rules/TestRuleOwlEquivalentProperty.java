@@ -31,7 +31,7 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.OWL;
 
 /*
-* Test suite for {@link RuleOwlEquivalentProperty}
+ * Test suite for {@link RuleOwlEquivalentProperty}
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

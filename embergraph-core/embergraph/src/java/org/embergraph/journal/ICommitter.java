@@ -18,7 +18,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.journal;
 
 /*
-* An interface implemented by a persistence capable data structure such as a btree so that it can
+ * An interface implemented by a persistence capable data structure such as a btree so that it can
  * participate in the commit protocol for the store.
  *
  * <p>This interface is invoked by {@link Journal#commit()} for each registered {@link ICommitter}.

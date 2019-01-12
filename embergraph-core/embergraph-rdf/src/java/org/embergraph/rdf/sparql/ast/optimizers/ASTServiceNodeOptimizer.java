@@ -27,7 +27,6 @@ import org.apache.log4j.Logger;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IVariable;
-import org.embergraph.bop.PipelineOp;
 import org.embergraph.rdf.sparql.ast.GroupNodeBase;
 import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
 import org.embergraph.rdf.sparql.ast.IQueryNode;
@@ -43,13 +42,11 @@ import org.embergraph.rdf.sparql.ast.StaticAnalysis;
 import org.embergraph.rdf.sparql.ast.TermNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
-import org.embergraph.rdf.sparql.ast.service.ServiceCall;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
-import org.embergraph.rdf.store.BD;
 import org.embergraph.rdf.store.BDS;
 
 /*
-* Rewrites the WHERE clause of each query by lifting out {@link ServiceNode}s into a named
+ * Rewrites the WHERE clause of each query by lifting out {@link ServiceNode}s into a named
  * subquery. Recursively rewrites the WHERE clause of any named subquery such that there is no more
  * than one {@link ServiceNode} in that subquery by lifting out additional {@link ServiceNode}s into
  * new named subqueries.

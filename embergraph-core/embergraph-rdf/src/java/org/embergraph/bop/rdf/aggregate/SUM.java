@@ -32,7 +32,7 @@ import org.embergraph.rdf.internal.impl.literal.NumericIV;
 import org.openrdf.model.Literal;
 
 /*
-* Operator computes the running sum over the presented binding sets for the given variable. A
+ * Operator computes the running sum over the presented binding sets for the given variable. A
  * missing value does not contribute towards the sum.
  *
  * @author thompsonbry
@@ -120,8 +120,8 @@ public class SUM extends AggregateBase<IV> implements INeedsMaterialization {
 
       if (iv != null) {
 
-      /*
-       * Aggregate non-null literal values.
+        /*
+         * Aggregate non-null literal values.
          */
 
         final Literal lit = IVValueExpression.asLiteral(iv);

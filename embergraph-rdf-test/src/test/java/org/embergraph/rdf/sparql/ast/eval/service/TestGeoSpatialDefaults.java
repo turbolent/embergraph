@@ -28,7 +28,7 @@ import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /*
-* Tests covering the geospatial default configuration, i.e. that the default datatypes are properly
+ * Tests covering the geospatial default configuration, i.e. that the default datatypes are properly
  * registered on startup, and the defaults for the geospatial service configuration are properly
  * taken over.
  *

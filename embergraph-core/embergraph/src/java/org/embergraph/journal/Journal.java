@@ -20,7 +20,6 @@ package org.embergraph.journal;
 import cern.colt.Arrays;
 import java.io.File;
 import java.io.IOException;
-import java.nio.ByteBuffer;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -55,9 +54,7 @@ import org.embergraph.btree.BTreeCounters;
 import org.embergraph.btree.BaseIndexStats;
 import org.embergraph.btree.ILocalBTreeView;
 import org.embergraph.btree.IndexMetadata;
-import org.embergraph.btree.IndexSegment;
 import org.embergraph.btree.ReadCommittedView;
-import org.embergraph.cache.HardReferenceQueue;
 import org.embergraph.concurrent.AccessSemaphore;
 import org.embergraph.concurrent.AccessSemaphore.Access;
 import org.embergraph.config.IntegerValidator;
@@ -79,16 +76,12 @@ import org.embergraph.journal.JournalTransactionService.ValidateWriteSetTask;
 import org.embergraph.quorum.Quorum;
 import org.embergraph.quorum.QuorumException;
 import org.embergraph.rawstore.IRawStore;
-import org.embergraph.rdf.task.IApiTask;
 import org.embergraph.relation.locator.DefaultResourceLocator;
-import org.embergraph.relation.locator.ILocatableResource;
 import org.embergraph.relation.locator.IResourceLocator;
-import org.embergraph.resources.IndexManager;
 import org.embergraph.resources.ResourceManager;
 import org.embergraph.resources.StaleLocatorReason;
 import org.embergraph.rwstore.IHistoryManager;
 import org.embergraph.rwstore.IRawTx;
-import org.embergraph.rwstore.RWStore;
 import org.embergraph.service.AbstractTransactionService;
 import org.embergraph.service.DataService;
 import org.embergraph.service.IEmbergraphFederation;
@@ -101,7 +94,7 @@ import org.embergraph.util.concurrent.ShutdownHelper;
 import org.embergraph.util.concurrent.ThreadPoolExecutorBaseStatisticsTask;
 
 /*
-* Concrete implementation suitable for a local and unpartitioned database.
+ * Concrete implementation suitable for a local and unpartitioned database.
  *
  * <p>Note: This implementation does NOT not support partitioned indices. Because all data must
  * reside on a single journal resource there is no point to a view. Views are designed to have data
@@ -388,7 +381,7 @@ public class Journal extends AbstractJournal
     private final CyclicBarrier barrier;
 
     //        /*
-//         * The {@link Future} for the RMI to each follower that is joined with
+    //         * The {@link Future} for the RMI to each follower that is joined with
     //         * the met quorum.
     //         */
     //        final private Map<UUID, Future<Void>> futures = new HashMap<UUID, Future<Void>>();
@@ -450,7 +443,7 @@ public class Journal extends AbstractJournal
     }
 
     //        /*
-//         * Cancel the requests on the remote services (RMI). This is a best effort
+    //         * Cancel the requests on the remote services (RMI). This is a best effort
     //         * implementation. Any RMI related errors are trapped and ignored in order
     //         * to be robust to failures in RMI when we try to cancel the futures.
     //         */
@@ -537,8 +530,8 @@ public class Journal extends AbstractJournal
 
           if (response.isMock()) {
 
-          /*
-       * The mock response should not have any influence on the consensus release time. The
+            /*
+             * The mock response should not have any influence on the consensus release time. The
              * follower provides the mock response when it is unable to execute the GatherTask
              * correctly, typically because it is not yet HAReady. The mock response preserves
              * liveness for the GATHER protocol. The follower that provided the mock response will
@@ -559,14 +552,14 @@ public class Journal extends AbstractJournal
             minimumResponse = response;
           }
 
-        /*
-       * Verify that the timestamp from the ctor is BEFORE the
+          /*
+           * Verify that the timestamp from the ctor is BEFORE the
            * timestamp assigned by the follower in the GatherTask.
            */
           assertBefore(leaderId, followerId, timeLeader, response.getTimestamp());
 
-        /*
-       * Verify that the timestamp from the GatherTask on the
+          /*
+           * Verify that the timestamp from the GatherTask on the
            * follower is before the timestamp obtained at the top of
            * this run() method.
            */
@@ -672,8 +665,8 @@ public class Journal extends AbstractJournal
 
           final UUID serviceId = joinedServiceIds[i];
 
-        /*
-       * Message each follower.
+          /*
+           * Message each follower.
            *
            * Note: The invoked RMI method submits the GatherTask that
            * executes on the follower and returns. It does not block
@@ -736,8 +729,8 @@ public class Journal extends AbstractJournal
 
         //                spinWaitBarrier(getQuorum(), barrier, token, timeout, units);
 
-      /*
-       * This sets up a task that will monitor the quorum state and
+        /*
+         * This sets up a task that will monitor the quorum state and
          * then interrupt this Thread if it is blocked at the barrier
          * [actually, it uses barrier.reset(), which appears to be a
          * little safer].
@@ -781,8 +774,8 @@ public class Journal extends AbstractJournal
 
                         for (Future<Void> f : futures) {
                           if (f.isDone()) {
-                          /*
-       * Note: If any follower fails
+                            /*
+                             * Note: If any follower fails
                              * on the RMI, then that is
                              * noticed here and the GATHER
                              * will fail on the leader.
@@ -818,8 +811,8 @@ public class Journal extends AbstractJournal
 
           try {
 
-          /*
-       * Throws InterruptedException, BrokenBarrierException,
+            /*
+             * Throws InterruptedException, BrokenBarrierException,
              * TimeoutException.
              *
              * Note: If TimeoutException is thrown, then the barrier
@@ -849,8 +842,8 @@ public class Journal extends AbstractJournal
 
       } finally {
 
-      /*
-       * Cancel local futures for RMI messages to followers.
+        /*
+         * Cancel local futures for RMI messages to followers.
          *
          * Note: Regardless of outcome or errors above, ensure that the
          * futures used to initiate the GatherTask on the followers are
@@ -860,8 +853,8 @@ public class Journal extends AbstractJournal
 
         for (Future<Void> f : futures) {
 
-        /*
-       * Await the Future with a short timeout for the task that
+          /*
+           * Await the Future with a short timeout for the task that
            * did the RMI to each follow to participate in the GATHER
            * protocol. Ensure that these Futures are cancelled if they
            * are not already done, but prefer not to attempt to cancel
@@ -881,16 +874,16 @@ public class Journal extends AbstractJournal
             }
           }
 
-        /*
-       * Future is done. Either cancelled, error, or successfully
+          /*
+           * Future is done. Either cancelled, error, or successfully
            * completed per the code block immediately above.
            */
           try {
             // check outcome of future.
             f.get();
           } catch (CancellationException e) {
-          /*
-       * There is a race between the code path returning from
+            /*
+             * There is a race between the code path returning from
              * the RMI (to request the caller to participate in the
              * gather procotol) and the code path in which the
              * leader awakens from the broken barrier (above). We
@@ -909,8 +902,8 @@ public class Journal extends AbstractJournal
 
         if (consensus == null) {
 
-        /*
-       * If there were any followers that did not message the
+          /*
+           * If there were any followers that did not message the
            * leader and cause the barrier to be decremented and hence
            * the [consensus] to become defined, then we need to
            * decrement the barrier for those followers now in order
@@ -949,7 +942,7 @@ public class Journal extends AbstractJournal
     }
 
     //        /*
-//         * Wait on the {@link CyclicBarrier}, but do this in a loop so we can
+    //         * Wait on the {@link CyclicBarrier}, but do this in a loop so we can
     //         * watch for a quorum break or service leave.
     //         *
     //         * @param quorum
@@ -1123,8 +1116,8 @@ public class Journal extends AbstractJournal
 
       if (lastCommitTime != 0L) {
 
-      /*
-       * Notify the transaction service on startup so it can set the
+        /*
+         * Notify the transaction service on startup so it can set the
          * effective release time based on the last commit time for the
          * store.
          *
@@ -1188,8 +1181,8 @@ public class Journal extends AbstractJournal
         try {
           r.run();
         } catch (Throwable t) {
-        /*
-       * Note: An Interrupt here is not really an ERROR. It
+          /*
+           * Note: An Interrupt here is not really an ERROR. It
            * could be caused by a change in the RunState of the
            * HAJournalServer.
            */
@@ -1261,8 +1254,8 @@ public class Journal extends AbstractJournal
 
         try {
 
-        /*
-       * Message the followers and block until the barrier breaks.
+          /*
+           * Message the followers and block until the barrier breaks.
            */
 
           // Update time remaining.
@@ -1281,16 +1274,16 @@ public class Journal extends AbstractJournal
 
         if (barrierState.cause != null) {
 
-        /*
-       * If an exception was recorded, re-throw it in the thread
+          /*
+           * If an exception was recorded, re-throw it in the thread
            * that invoked commitNow().
            */
 
           throw new RuntimeException(barrierState.cause);
         }
 
-      /*
-       * Update the release time on the leader.
+        /*
+         * Update the release time on the leader.
          *
          * <p>Note: The follower has the new release time, but it is running asynchronously and
          * might not have updated its release time locally by the time the leader leaves the
@@ -1346,17 +1339,16 @@ public class Journal extends AbstractJournal
        * Therefore the releaseTime is updated here since we will not
        * (actually, did not) run the consensus protocol to update it.
        */
-      return haStatus != null && haStatus != HAStatusEnum.NotReady;/*
+      return haStatus != null && haStatus != HAStatusEnum.NotReady; /*
        * Note: When we are using a 2-phase commit, the leader can not
        * update the release time from commit() using this methods. It
        * must rely on the consensus protocol to update the release
        * time instead.
        */
-
     }
 
     //        /*
-//         * {@inheritDoc}
+    //         * {@inheritDoc}
     //         * <p>
     //         * Note: When we are using a 2-phase commit, the leader can not update
     //         * the release time from commit() using this methods. It must rely on
@@ -1556,8 +1548,8 @@ public class Journal extends AbstractJournal
 
         if (haLog.isInfoEnabled()) haLog.info("Running gather on follower");
 
-      /*
-       * This variable is set in the try {} below. We eventually
+        /*
+         * This variable is set in the try {} below. We eventually
          * respond either in the try{} or in the finally{}, depending on
          * whether or not the GatherTask encounters an error when it
          * executes.
@@ -1566,8 +1558,8 @@ public class Journal extends AbstractJournal
 
         try {
 
-        /*
-       * Test pre-conditions BEFORE getting the barrierLock. This
+          /*
+           * Test pre-conditions BEFORE getting the barrierLock. This
            * allows a service that is not yet properly joined to
            * refuse to do the GATHER before it obtains the barrierLock
            * that makes the GatherTask MUTEX with
@@ -1595,8 +1587,8 @@ public class Journal extends AbstractJournal
 
           if (!didNotifyLeader) {
 
-          /*
-       * Send mock response to the leader so it does not block forever waiting for our
+            /*
+             * Send mock response to the leader so it does not block forever waiting for our
              * response. The mock response MUST include our correct serviceId.
              *
              * @see <href= "https://sourceforge.net/apps/trac/bigdata/ticket/720" > HA3 simultaneous
@@ -1620,8 +1612,8 @@ public class Journal extends AbstractJournal
             }
           }
 
-        /*
-       * This exception will force PREPARE to fail on this service
+          /*
+           * This exception will force PREPARE to fail on this service
            * when it checks the GatherTask's Future.
            */
           throw new Exception(t);
@@ -1642,8 +1634,8 @@ public class Journal extends AbstractJournal
 
         final long token = req.token();
 
-      /*
-       * we do not need to handle the case where the token is
+        /*
+         * we do not need to handle the case where the token is
          * invalid. The leader will reset() the CylicBarrier for
          * this case.
          */
@@ -1654,8 +1646,8 @@ public class Journal extends AbstractJournal
         // Verify this service is HAReady for token.
         assertHAReady(token);
 
-      /*
-       * If the quorumService is null because this service is
+        /*
+         * If the quorumService is null because this service is
          * shutting down then the leader will notice the
          * serviceLeave() and reset() the CyclicBarrier.
          */
@@ -1666,14 +1658,14 @@ public class Journal extends AbstractJournal
         //                 */
         //                now = newConsensusProtocolTimestamp();
 
-      /*
-       * Note: At this point we have everything we need to form up
+        /*
+         * Note: At this point we have everything we need to form up
          * our response. If we hit an assertion, we will still
          * respond in the finally {} block below.
          */
 
-      /*
-       * Note: This assert has been moved to the leader when it
+        /*
+         * Note: This assert has been moved to the leader when it
          * analyzes the messages from the followers. This allows us
          * to report out the nature of the exception on the leader
          * and thence back to the client.
@@ -1705,8 +1697,8 @@ public class Journal extends AbstractJournal
             newHANotifyReleaseTimeRequest(
                 serviceId, req.getNewCommitCounter(), req.getNewCommitTime());
 
-      /*
-       * RMI to leader.
+        /*
+         * RMI to leader.
          *
          * Note: Will block until barrier breaks on the leader.
          */
@@ -1716,8 +1708,8 @@ public class Journal extends AbstractJournal
         final IHANotifyReleaseTimeResponse consensusReleaseTime =
             leader.notifyEarliestCommitTime(req2);
 
-      /*
-       * Now spot check the earliest active tx on this follower. We
+        /*
+         * Now spot check the earliest active tx on this follower. We
          * want to make sure that this tx is not reading against a
          * commit point whose state would be released by the new
          * [consensusReleaseTime] that we just obtained from the leader.
@@ -1742,8 +1734,8 @@ public class Journal extends AbstractJournal
 
           if (txState != null && txState.getReadsOnCommitTime() < t2) {
 
-          /*
-       * At least one transaction exists on the follower that
+            /*
+             * At least one transaction exists on the follower that
              * is reading on a commit point LT the commit point
              * which would be released. This is either a failure in
              * the logic to compute the consensus releaseTime or a
@@ -1801,8 +1793,8 @@ public class Journal extends AbstractJournal
 
       if (barrierState == null) {
 
-      /*
-       * If the BarrierState reference has been cleared then it is not
+        /*
+         * If the BarrierState reference has been cleared then it is not
          * possible for us to count down at the barrier for this message
          * (since the CyclicBarrier is gone). Otherwise, we will await()
          * at the CyclicBarrier regardless of the message.
@@ -1818,8 +1810,8 @@ public class Journal extends AbstractJournal
         getQuorum().assertLeader(barrierState.token);
 
         if (barrierState.newCommitCounter != req.getNewCommitCounter()) {
-        /*
-       * Response is for the wrong GATHER request.
+          /*
+           * Response is for the wrong GATHER request.
            */
           throw new RuntimeException(
               "Wrong newCommitCounter: expected="
@@ -1829,8 +1821,8 @@ public class Journal extends AbstractJournal
         }
 
         if (barrierState.newCommitTime != req.getNewCommitTime()) {
-        /*
-       * Response is for the wrong GATHER request.
+          /*
+           * Response is for the wrong GATHER request.
            */
           throw new RuntimeException(
               "Wrong newCommitTime: expected="
@@ -1847,8 +1839,8 @@ public class Journal extends AbstractJournal
 
       } catch (RuntimeException e) {
 
-      /*
-       * Note: The try {} block can throw RuntimeException but not
+        /*
+         * Note: The try {} block can throw RuntimeException but not
          * Exception. If anything is thrown, then reset the barrier and
          * rethrow the exception.
          */
@@ -1863,8 +1855,8 @@ public class Journal extends AbstractJournal
 
       } finally {
 
-      /*
-       * Block until barrier breaks.
+        /*
+         * Block until barrier breaks.
          *
          * Note: The barrier will break immediately if it was reset in
          * the catch{} block above.
@@ -1881,8 +1873,8 @@ public class Journal extends AbstractJournal
                     + barrierState.joinedServiceIds.length);
           }
         } finally {
-        /*
-       * Follower blocks on Thread on the leader here.
+          /*
+           * Follower blocks on Thread on the leader here.
            *
            * Note: This will thrown InterruptedException -or-
            * BarrierBrokenException if the barrier is reset().
@@ -1898,8 +1890,8 @@ public class Journal extends AbstractJournal
 
       if (t != null) {
 
-      /*
-       * Log error.
+        /*
+         * Log error.
          */
         haLog.error(t, t);
 
@@ -1911,8 +1903,8 @@ public class Journal extends AbstractJournal
       final IHANotifyReleaseTimeResponse resp = barrierState.consensus;
 
       if (resp == null) {
-      /*
-       * Log error, but return anyway.
+        /*
+         * Log error, but return anyway.
          */
         haLog.error("No consensus");
       }
@@ -1945,8 +1937,8 @@ public class Journal extends AbstractJournal
         localService = quorum.getClient().getService();
 
       } catch (IllegalStateException ex) {
-      /*
-       * Quorum client is not running (not started or terminated).
+        /*
+         * Quorum client is not running (not started or terminated).
          */
         return null;
       }
@@ -1995,8 +1987,8 @@ public class Journal extends AbstractJournal
 
       if (timestamp == ITx.UNISOLATED || timestamp == ITx.READ_COMMITTED) {
 
-      /*
-       * A read-write tx reads on the current commit point.
+        /*
+         * A read-write tx reads on the current commit point.
          *
          * A read-committed tx reads on the current commit point.
          *
@@ -2035,8 +2027,8 @@ public class Journal extends AbstractJournal
           return _newTx(timestamp);
         }
 
-      /*
-       * Handle commit point pinned by earliestActiveTx's
+        /*
+         * Handle commit point pinned by earliestActiveTx's
          * readsOnCommitTime.
          */
         {
@@ -2121,8 +2113,8 @@ public class Journal extends AbstractJournal
 
         if (tx != null) {
 
-        /*
-       * If we had pre-incremented the transaction counter in
+          /*
+           * If we had pre-incremented the transaction counter in
            * the RWStore, then we decrement it before leaving this
            * method.
            */
@@ -2141,8 +2133,8 @@ public class Journal extends AbstractJournal
 
       if (quorum != null && state != null && !state.isReadOnly()) {
 
-      /*
-       * Commit on write transaction. We must be the quorum leader.
+        /*
+         * Commit on write transaction. We must be the quorum leader.
          */
 
         final long token = getQuorumToken();
@@ -2717,8 +2709,8 @@ public class Journal extends AbstractJournal
 
           if (tx != null) {
 
-          /*
-       * read-only transaction
+            /*
+             * read-only transaction
              *
              * @see <a href=
              * "http://sourceforge.net/apps/trac/bigdata/ticket/546"
@@ -2760,8 +2752,8 @@ public class Journal extends AbstractJournal
 
       } else {
 
-      /*
-       * Writable unisolated index.
+        /*
+         * Writable unisolated index.
          *
          * Note: This is the "live" mutable index. This index is NOT
          * thread-safe. A lock manager is used to ensure that at most
@@ -2950,7 +2942,7 @@ public class Journal extends AbstractJournal
   }
 
   //    /*
-//     * @deprecated This method in particular should be hidden from the
+  //     * @deprecated This method in particular should be hidden from the
   //     *             {@link Journal} as it exposes the {@link ITx} which really
   //     *             deals with the client-side state of a transaction and which
   //     *             should not be visible to applications - they should just use
@@ -3258,7 +3250,7 @@ public class Journal extends AbstractJournal
   }
 
   //    /*
-//     * This request is always ignored for a {@link Journal} since it does not
+  //     * This request is always ignored for a {@link Journal} since it does not
   //     * have any resources to manage.
   //     */
   //    public void setReleaseTime(final long releaseTime) {
@@ -3319,7 +3311,7 @@ public class Journal extends AbstractJournal
   }
 
   //    /*
-//     * Return a view of the global row store as of the specified timestamp. This
+  //     * Return a view of the global row store as of the specified timestamp. This
   //     * is mainly used to provide access to historical views.
   //     *
   //     * @param timestamp
@@ -3348,8 +3340,8 @@ public class Journal extends AbstractJournal
 
       synchronized (globalRowStoreHelper) {
 
-      /*
-       * Note: Synchronized to avoid race conditions when updating
+        /*
+         * Note: Synchronized to avoid race conditions when updating
          * (this allows us to always return our reference if we create a
          * new helper instance).
          */
@@ -3384,8 +3376,8 @@ public class Journal extends AbstractJournal
 
       synchronized (globalFileSystemHelper) {
 
-      /*
-       * Note: Synchronized to avoid race conditions when updating
+        /*
+         * Note: Synchronized to avoid race conditions when updating
          * (this allows us to always return our reference if we create a
          * new helper instance).
          */

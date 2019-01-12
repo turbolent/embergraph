@@ -28,7 +28,7 @@ import it.unimi.dsi.parser.Element;
 import java.util.Map;
 
 /*
-* A default, do-nothing-at-all callback.
+ * A default, do-nothing-at-all callback.
  *
  * <p>Callbacks can inherit from this class and forget about methods they are not interested in.
  *

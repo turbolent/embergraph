@@ -24,7 +24,6 @@ package org.embergraph.btree.raba.codec;
 
 import it.unimi.dsi.bits.BitVector;
 import it.unimi.dsi.compression.CanonicalFast64CodeWordDecoder;
-import it.unimi.dsi.compression.Coder;
 import it.unimi.dsi.compression.Fast64CodeWordCoder;
 import it.unimi.dsi.compression.HuffmanCodec;
 import it.unimi.dsi.compression.HuffmanCodec.DecoderInputs;
@@ -45,7 +44,7 @@ import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Test suite for the {@link CanonicalHuffmanRabaCoder}.
+ * Test suite for the {@link CanonicalHuffmanRabaCoder}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

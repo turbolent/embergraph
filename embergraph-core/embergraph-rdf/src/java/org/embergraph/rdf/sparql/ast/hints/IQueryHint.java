@@ -26,7 +26,7 @@ import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /*
-* Interface for declaring query hints.
+ * Interface for declaring query hints.
  *
  * @param <T> The generic type of the value space for the query hint.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

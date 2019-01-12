@@ -28,7 +28,7 @@ package org.embergraph.relation.rule;
 import java.io.Serializable;
 
 /*
-* An {@link IStep} is either a single {@link IRule} or a complex {@link IProgram}.
+ * An {@link IStep} is either a single {@link IRule} or a complex {@link IProgram}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -18,7 +18,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.embergraph</groupId>
@@ -29,7 +31,8 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
   <artifactId>embergraph-rpm</artifactId>
   <version>2.1.5-SNAPSHOT</version>
   <name>Embergraph RPM Package</name>
-  <description>Embergraph RPM deployer for the RHEL and CentOS package management systems</description>
+  <description>Embergraph RPM deployer for the RHEL and CentOS package management systems
+  </description>
   <packaging>rpm</packaging>
   <!--
        Due to https://jira.blazegraph.com/browse/BLZG-1725, you must build with the -P \!signing
@@ -98,7 +101,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
               <mapping>
                 <directory>${rpm.binDir}</directory>
                 <filemode>755</filemode>
-		<directoryIncluded>false</directoryIncluded>
+                <directoryIncluded>false</directoryIncluded>
                 <username>${rpm.user}</username>
                 <groupname>${rpm.group}</groupname>
                 <sources>
@@ -110,7 +113,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
               <mapping>
                 <directory>/etc/logrotate.d</directory>
                 <configuration>true</configuration>
-		<directoryIncluded>false</directoryIncluded>
+                <directoryIncluded>false</directoryIncluded>
                 <filemode>755</filemode>
                 <username>root</username>
                 <groupname>root</groupname>
@@ -134,7 +137,9 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
                     <location>${project.build.directory}/classes/RWStore.properties</location>
                   </source>
                   <source>
-                    <location>${project.build.directory}/classes/war/WEB-INF/classes/log4j.properties</location>
+                    <location>
+                      ${project.build.directory}/classes/war/WEB-INF/classes/log4j.properties
+                    </location>
                   </source>
                   <source>
                     <location>${project.build.directory}/classes/jetty.xml</location>
@@ -144,7 +149,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
               <mapping>
                 <directory>/etc/init.d</directory>
                 <configuration>true</configuration>
-		<directoryIncluded>false</directoryIncluded>
+                <directoryIncluded>false</directoryIncluded>
                 <filemode>755</filemode>
                 <username>root</username>
                 <groupname>root</groupname>

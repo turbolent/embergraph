@@ -18,7 +18,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.journal;
 
 /*
-* An instance of this exception is thrown when the storage layer must go through an abort before
+ * An instance of this exception is thrown when the storage layer must go through an abort before
  * new writes may be applied or committed.
  *
  * @author bryan

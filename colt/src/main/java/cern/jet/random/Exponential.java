@@ -10,7 +10,7 @@ package cern.jet.random;
 
 import cern.jet.random.engine.RandomEngine;
 /*
-* Exponential Distribution (aka Negative Exponential Distribution); See the <A
+ * Exponential Distribution (aka Negative Exponential Distribution); See the <A
  * HREF="http://www.cern.ch/RD11/rkb/AN16pp/node78.html#SECTION000780000000000000000"> math
  * definition</A> <A HREF="http://www.statsoft.com/textbook/glose.html#Exponential Distribution">
  * animated definition</A>.

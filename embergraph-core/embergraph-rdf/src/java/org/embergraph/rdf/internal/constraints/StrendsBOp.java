@@ -25,7 +25,7 @@ import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
 
 /*
-* @see http://www.w3.org/2005/xpath-functions#ends-with
+ * @see http://www.w3.org/2005/xpath-functions#ends-with
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */

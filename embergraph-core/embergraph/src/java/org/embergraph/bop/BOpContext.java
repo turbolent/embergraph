@@ -31,8 +31,6 @@ import org.eclipse.jetty.client.HttpClient;
 import org.embergraph.bop.bindingSet.ListBindingSet;
 import org.embergraph.bop.controller.INamedSolutionSetRef;
 import org.embergraph.bop.engine.BOpStats;
-import org.embergraph.bop.engine.IChunkMessage;
-import org.embergraph.bop.engine.IQueryClient;
 import org.embergraph.bop.engine.IRunningQuery;
 import org.embergraph.bop.join.BaseJoinStats;
 import org.embergraph.bop.join.IHashJoinUtility;
@@ -48,8 +46,6 @@ import org.embergraph.rdf.sparql.ast.ssets.SolutionSetManager;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.SPO;
 import org.embergraph.rdf.spo.SPOPredicate;
-import org.embergraph.relation.accesspath.AccessPath;
-import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.rwstore.sector.IMemoryManager;
 import org.embergraph.service.IEmbergraphFederation;
@@ -60,7 +56,7 @@ import org.embergraph.striterator.IChunkedIterator;
 import org.embergraph.striterator.IChunkedStriterator;
 
 /*
-* The evaluation context for the operator (NOT serializable).
+ * The evaluation context for the operator (NOT serializable).
  *
  * @param <E> The generic type of the objects processed by the operator.
  */
@@ -468,7 +464,7 @@ public class BOpContext<E> extends BOpContextBase {
   }
 
   //    /*
-//     * Return an access path for a predicate that identifies a data structure
+  //     * Return an access path for a predicate that identifies a data structure
   //     * which can be resolved to a reference attached to as a query attribute.
   //     * <p>
   //     * This method is used for data structures (including {@link Stream}s,
@@ -587,8 +583,8 @@ public class BOpContext<E> extends BOpContextBase {
 
       if (tmp instanceof IHashJoinUtility) {
 
-      /*
-       * Reading solutions from an existing hash index.
+        /*
+         * Reading solutions from an existing hash index.
          */
 
         final IHashJoinUtility state = (IHashJoinUtility) tmp;
@@ -597,16 +593,16 @@ public class BOpContext<E> extends BOpContextBase {
 
       } else if (tmp instanceof ISimpleIndexAccess) {
 
-      /*
-       * Reading solutions from a raw BTree, HTree, or Stream.
+        /*
+         * Reading solutions from a raw BTree, HTree, or Stream.
          */
 
         src = (ICloseableIterator<IBindingSet>) ((ISimpleIndexAccess) tmp).scan();
 
       } else {
 
-      /*
-       * We found something, but we do not know how to turn it
+        /*
+         * We found something, but we do not know how to turn it
          * into an iterator visiting solutions.
          */
 
@@ -758,8 +754,8 @@ public class BOpContext<E> extends BOpContextBase {
 
       } else {
 
-      /*
-       * Note: A variable which is bound outside of the query to a
+        /*
+         * Note: A variable which is bound outside of the query to a
          * constant gets turned into a Constant with that variable as
          * its annotation. This code path causes the binding to be
          * created for the variable and the constant when the constant
@@ -788,8 +784,8 @@ public class BOpContext<E> extends BOpContextBase {
 
       if (sidVar != null) {
 
-      /*
-       * Build a SidIV for the (s,p,o) and binding it on the sid
+        /*
+         * Build a SidIV for the (s,p,o) and binding it on the sid
          * variable.
          *
          * @see <a
@@ -812,7 +808,7 @@ public class BOpContext<E> extends BOpContextBase {
   }
 
   //    /*
-//     * Copy the as-bound values for the named variables out of the
+  //     * Copy the as-bound values for the named variables out of the
   //     * {@link IElement} and into the caller's array.
   //     *
   //     * @return The caller's array. If a variable was resolved to a bound value,
@@ -960,8 +956,8 @@ public class BOpContext<E> extends BOpContextBase {
               return null;
 
             } else if (sval.get() instanceof IV<?, ?>) {
-            /*
-       * Already bound to the same value; Check cached
+              /*
+               * Already bound to the same value; Check cached
                * Value on the IVs.
                */
               final IV siv = (IV) sval.get();
@@ -1090,8 +1086,8 @@ public class BOpContext<E> extends BOpContextBase {
                     final IBindingSet bset =
                         new ContextBindingSet(BOpContext.this, new ListBindingSet());
 
-                  /*
-       * Propagate bindings from the element to the binding
+                    /*
+                     * Propagate bindings from the element to the binding
                      * set.
                      *
                      * Note: This is responsible for handling the semantics
@@ -1105,7 +1101,7 @@ public class BOpContext<E> extends BOpContextBase {
     // ) {
     //
     //            /*
-//             * Close the real source if the caller closes the returned iterator.
+    //             * Close the real source if the caller closes the returned iterator.
     //             */
     //            @Override
     //            public void close() {
@@ -1128,7 +1124,7 @@ public class BOpContext<E> extends BOpContextBase {
    * I've replaced this with AbstractSplitter for the moment.
    */
   //    /*
-//     * Return an iterator visiting the {@link PartitionLocator} for the index
+  //     * Return an iterator visiting the {@link PartitionLocator} for the index
   //     * partitions from which an {@link IAccessPath} must read in order to
   //     * materialize all elements which would be visited for that predicate.
   //     *

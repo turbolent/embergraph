@@ -4,7 +4,7 @@ import java.io.OutputStream;
 import org.embergraph.btree.raba.IRaba;
 
 /*
-* Abstract base class for mock node and leaf data implementations for unit tests.
+ * Abstract base class for mock node and leaf data implementations for unit tests.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

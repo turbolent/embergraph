@@ -41,12 +41,11 @@ import org.embergraph.bop.engine.AbstractQueryEngineTestCase;
 import org.embergraph.bop.engine.BOpStats;
 import org.embergraph.bop.engine.BlockingBufferWithStats;
 import org.embergraph.bop.engine.MockRunningQuery;
-import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
 
 /*
-* Test suite for {@link CopyOp}.
+ * Test suite for {@link CopyOp}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -123,11 +122,7 @@ public class TestCopyBindingSets extends TestCase2 {
 
     final int bopId = 1;
 
-    final CopyOp query =
-        new CopyOp(
-            new BOp[] {},
-            NV.asMap(
-                new NV(BOp.Annotations.BOP_ID, bopId)));
+    final CopyOp query = new CopyOp(new BOp[] {}, NV.asMap(new NV(BOp.Annotations.BOP_ID, bopId)));
 
     // the expected solutions (default sink).
     final IBindingSet[] expected = data.toArray(new IBindingSet[0]);

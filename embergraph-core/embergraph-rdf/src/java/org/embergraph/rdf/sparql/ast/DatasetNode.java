@@ -11,7 +11,7 @@ import org.embergraph.relation.accesspath.IElementFilter;
 import org.openrdf.query.Dataset;
 
 /*
-* AST node models a SPARQL default graph and/or named graph data set.
+ * AST node models a SPARQL default graph and/or named graph data set.
  *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$

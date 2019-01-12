@@ -19,7 +19,7 @@ import java.util.HashSet;
 import org.embergraph.rdf.internal.IV;
 
 /*
-* "IN" filter for the context position based on a native long hash set containing the acceptable
+ * "IN" filter for the context position based on a native long hash set containing the acceptable
  * graph identifiers. While evaluation of the access path will be ordered, the filter does not
  * maintain evolving state so a hash set will likely beat a binary search.
  *

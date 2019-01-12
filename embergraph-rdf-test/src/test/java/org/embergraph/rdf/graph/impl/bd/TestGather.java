@@ -37,7 +37,7 @@ import org.openrdf.model.Statement;
 import org.openrdf.model.Value;
 
 /*
-* Test class for GATHER.
+ * Test class for GATHER.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

@@ -47,7 +47,7 @@ import org.embergraph.service.IEmbergraphFederation;
 import org.openrdf.rio.RDFFormat;
 
 /*
-* Abstract base class for unit tests involving the RIO integration.
+ * Abstract base class for unit tests involving the RIO integration.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -332,8 +332,8 @@ public abstract class AbstractRIOTestCase extends AbstractTripleStoreTestCase {
           }
         }
 
-      /*
-       * Obtain a buffered reader on the input stream.
+        /*
+         * Obtain a buffered reader on the input stream.
          */
         final Reader reader = new BufferedReader(new InputStreamReader(rdfStream));
 

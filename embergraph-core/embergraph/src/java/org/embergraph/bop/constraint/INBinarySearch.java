@@ -1,5 +1,5 @@
 /*
-* The Notice below must appear in each file of the Source Code of any copy you distribute of the
+ * The Notice below must appear in each file of the Source Code of any copy you distribute of the
  * Licensed Product. Contributors to any Modifications may add their own copyright notices to
  * identify their own contributions.
  *
@@ -49,7 +49,7 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.bop.NV;
 
 /*
-* A constraint that a variable may only take on the bindings enumerated by some set.
+ * A constraint that a variable may only take on the bindings enumerated by some set.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -90,10 +90,7 @@ public class INBinarySearch<T> extends INConstraint<T> {
    */
   public INBinarySearch(final IVariable<T> x, final IConstant<T>[] set) {
 
-    super(
-        new BOp[] {},
-        NV.asMap(
-            new NV(Annotations.VARIABLE, x), new NV(Annotations.SET, set)));
+    super(new BOp[] {}, NV.asMap(new NV(Annotations.VARIABLE, x), new NV(Annotations.SET, set)));
   }
 
   @SuppressWarnings("unchecked")

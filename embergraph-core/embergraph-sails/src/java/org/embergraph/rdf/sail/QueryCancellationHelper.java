@@ -28,7 +28,7 @@ import org.embergraph.bop.engine.QueryEngine;
 import org.embergraph.rdf.sail.model.RunningQuery;
 
 /*
-* This class encapsulate functionality that is common to the REST API and Embedded Graph
+ * This class encapsulate functionality that is common to the REST API and Embedded Graph
  * deployments.
  *
  * @author beebs
@@ -122,8 +122,8 @@ public class QueryCancellationHelper {
 
       } catch (RuntimeException ex) {
 
-      /*
-       * Ignore.
+        /*
+         * Ignore.
          *
          * Either the IRunningQuery has already terminated or this is an
          * UPDATE rather than a QUERY.

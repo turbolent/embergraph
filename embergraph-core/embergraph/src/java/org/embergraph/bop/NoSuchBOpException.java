@@ -1,7 +1,7 @@
 package org.embergraph.bop;
 
 /*
-* Exception thrown when there is no {@link BOp} in an operator tree having the desired {@link
+ * Exception thrown when there is no {@link BOp} in an operator tree having the desired {@link
  * BOp.Annotations#BOP_ID}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

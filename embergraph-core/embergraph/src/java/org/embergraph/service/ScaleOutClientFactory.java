@@ -21,7 +21,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 /*
-* Convenience class to break out embergraph-jini dependency. See BLZG-1370.
+ * Convenience class to break out embergraph-jini dependency. See BLZG-1370.
  *
  * @author beebs
  */

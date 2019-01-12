@@ -31,7 +31,7 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTStaticJoinOptimizer.Annotations;
 
 /*
-* Calculate the estimated cardinality of a join group.
+ * Calculate the estimated cardinality of a join group.
  *
  * <p>TODO Calculate estimated cardinality of other things like subqueries and unions.
  *
@@ -78,8 +78,8 @@ public class ASTCardinalityOptimizer extends AbstractJoinGroupOptimizer implemen
 
         for (JoinGroupNode join : union.getChildren()) {
 
-        /*
-       * We can only attach an estimate to the union if we
+          /*
+           * We can only attach an estimate to the union if we
            * get an estimate for all of its children.
            */
           canEstimate &= join.getProperty(Annotations.ESTIMATED_CARDINALITY) != null;

@@ -22,7 +22,7 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 /*
-* The AccessSemaphore implements an idiom of exclusive and shared access.
+ * The AccessSemaphore implements an idiom of exclusive and shared access.
  *
  * <p>A typical use-case for exclusive/shared access might be single writer/multiple readers
  *

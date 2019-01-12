@@ -55,7 +55,7 @@ import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /*
-* Optimizes <code>
+ * Optimizes <code>
  * SELECT (COUNT(*) as ?count) ?z WHERE {  ?x rdf:type ?z  } GROUP BY ?z
  * </code> and similar patterns using an O(N) algorithm, where N is the number of distinct
  * solutions.
@@ -118,8 +118,8 @@ public class ASTSimpleGroupByAndCountOptimizer implements IASTOptimizer {
     if (context.getAbstractTripleStore().isQuads()) {
       boolean ok = false;
       if (dataset == null || dataset.getNamedGraphs() == null) {
-      /*
-       * The dataset is all graphs.
+        /*
+         * The dataset is all graphs.
          */
         ok = true;
       }

@@ -26,7 +26,6 @@ package org.embergraph.rdf.model;
 
 import java.util.Date;
 import javax.xml.datatype.XMLGregorianCalendar;
-import org.embergraph.rdf.store.IRawTripleStore;
 import org.openrdf.model.BNode;
 import org.openrdf.model.Literal;
 import org.openrdf.model.Resource;
@@ -35,7 +34,7 @@ import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 
 /*
-* Interface strengthens the return types and adds some custom extensions.
+ * Interface strengthens the return types and adds some custom extensions.
  *
  * @see EmbergraphValueFactoryImpl#getInstance(String)
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -62,12 +61,12 @@ public interface EmbergraphValueFactory extends ValueFactory {
   EmbergraphValueFactory newBNodeContext();
 
   //    /*
-//     * Create a blank node and flag it as a statement identifier.
+  //     * Create a blank node and flag it as a statement identifier.
   //     */
   //    EmbergraphBNodeImpl createSID();
   //
   //    /*
-//     * Create a blank node with the specified ID and flag it as a statement
+  //     * Create a blank node with the specified ID and flag it as a statement
   //     * identifier.
   //     */
   //    EmbergraphBNodeImpl createSID(String id);

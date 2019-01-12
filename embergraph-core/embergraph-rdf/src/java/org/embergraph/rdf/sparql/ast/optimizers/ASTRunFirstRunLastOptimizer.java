@@ -41,7 +41,7 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.eval.IEvaluationContext;
 
 /*
-* This optimizer simply puts each type of {@link IGroupMemberNode} within a {@link JoinGroupNode}
+ * This optimizer simply puts each type of {@link IGroupMemberNode} within a {@link JoinGroupNode}
  * in the right order w.r.t. to the other types.
  *
  * <p>Basically the ASTRunFirstRunLastOptimizer will look for IJoinNodes that have a query hint of

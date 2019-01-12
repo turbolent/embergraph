@@ -26,14 +26,13 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import org.embergraph.btree.Errors;
 import org.embergraph.btree.IIndex;
-import org.embergraph.btree.ISimpleBTree;
 import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure.ResultBuffer;
 import org.embergraph.btree.raba.IRaba;
 import org.embergraph.btree.raba.codec.IRabaCoder;
 import org.embergraph.service.ndx.NopAggregator;
 
 /*
-* Batch insert operation.
+ * Batch insert operation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

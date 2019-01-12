@@ -84,7 +84,7 @@ import org.openrdf.rio.helpers.StatementCollector;
 import org.openrdf.sail.SailException;
 
 /*
-* Proxied test suite.
+ * Proxied test suite.
  *
  * @param <S>
  */
@@ -136,7 +136,7 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager>
   protected String m_rootURL;
 
   //	/*
-//	 * The request path for the REST API under test.
+  //	 * The request path for the REST API under test.
   //	 */
   //	final protected static String requestPath = "/sparql";
 
@@ -169,7 +169,7 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager>
     //            properties)).get();
     //
     //        /*
-//         * Return a view of the new KB to the caller.
+    //         * Return a view of the new KB to the caller.
     //         *
     //         * Note: The caller MUST NOT attempt to modify this KB view outside of
     //         * the group commit mechanisms. Therefore I am now returning a read-only
@@ -398,7 +398,7 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager>
   }
 
   //    /*
-//    * Returns a view of the triple store using the sail interface.
+  //    * Returns a view of the triple store using the sail interface.
   //    *
   //    * FIXME DO NOT CIRCUMVENT! Use the REST API throughout this test suite.
   //    */
@@ -685,7 +685,7 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager>
   }
 
   //    /*
-//     * "ASK" query using POST with an empty KB.
+  //     * "ASK" query using POST with an empty KB.
   //     */
   //    public void test_POST_ASK() throws Exception {
   //

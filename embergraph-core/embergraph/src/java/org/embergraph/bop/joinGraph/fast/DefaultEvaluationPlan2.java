@@ -34,14 +34,13 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.bop.IVariableOrConstant;
 import org.embergraph.bop.joinGraph.IEvaluationPlan;
 import org.embergraph.bop.joinGraph.IRangeCountFactory;
-import org.embergraph.journal.ITx;
 import org.embergraph.relation.rule.IAccessPathExpander;
 import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.IStarJoin;
 import org.embergraph.relation.rule.eval.IJoinNexus;
 
 /*
-* The evaluation order is determined by analysis of the propagation of bindings. The most selective
+ * The evaluation order is determined by analysis of the propagation of bindings. The most selective
  * predicate is chosen first (having the fewest unbound variables with ties broken by a range count
  * on the data) and "fake" bindings are propagated to the other predicates in the tail. This process
  * is repeated until all variables are bound and an evaluation order has been determined.
@@ -491,8 +490,8 @@ public class DefaultEvaluationPlan2 implements IEvaluationPlan {
 
       if (expander != null && expander.runFirst()) {
 
-      /*
-       * Note: runFirst() essentially indicates that the cardinality
+        /*
+         * Note: runFirst() essentially indicates that the cardinality
          * of the predicate in the data is to be ignored. Therefore we
          * do not request the actual range count and just return -1L as
          * a marker indicating that the range count is not available.
@@ -564,8 +563,8 @@ public class DefaultEvaluationPlan2 implements IEvaluationPlan {
         joinCardinality = Math.min(d1.getCardinality(), d2.getCardinality());
       } else {
         // shared vars and unshared vars - take the max
-      /*
-       * This modification to the join planner results in
+        /*
+         * This modification to the join planner results in
          * significantly faster queries for the bsbm benchmark (3x - 5x
          * overall). It takes a more optimistic perspective on the
          * intersection of two statement patterns, predicting that this

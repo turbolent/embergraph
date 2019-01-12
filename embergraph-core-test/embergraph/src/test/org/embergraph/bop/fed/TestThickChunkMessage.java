@@ -37,11 +37,9 @@ import org.embergraph.bop.engine.IChunkMessage;
 import org.embergraph.bop.engine.IHaltOpMessage;
 import org.embergraph.bop.engine.IQueryClient;
 import org.embergraph.bop.engine.IQueryDecl;
-import org.embergraph.bop.engine.IQueryPeer;
 import org.embergraph.bop.engine.IStartOpMessage;
 import org.embergraph.io.SerializerUtil;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.internal.IVCache;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.TermId;
 import org.embergraph.rdf.model.EmbergraphLiteral;
@@ -50,7 +48,7 @@ import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.striterator.Dechunkerator;
 
 /*
-* Unit tests for {@link ThickChunkMessage}.
+ * Unit tests for {@link ThickChunkMessage}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

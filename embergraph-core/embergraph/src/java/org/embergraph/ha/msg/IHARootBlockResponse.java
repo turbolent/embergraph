@@ -20,7 +20,7 @@ package org.embergraph.ha.msg;
 import org.embergraph.journal.IRootBlockView;
 
 /*
-* Interface for a response requesting a root block from a remote service.
+ * Interface for a response requesting a root block from a remote service.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

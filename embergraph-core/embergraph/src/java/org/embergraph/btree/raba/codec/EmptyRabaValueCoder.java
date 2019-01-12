@@ -35,7 +35,7 @@ import org.embergraph.io.AbstractFixedByteArrayBuffer;
 import org.embergraph.io.DataOutputBuffer;
 
 /*
-* Useful when a B+Tree uses keys but not values. The coder maintains the {@link IRaba#size()}, but
+ * Useful when a B+Tree uses keys but not values. The coder maintains the {@link IRaba#size()}, but
  * any <code>byte[]</code> values stored under the B+Tree will be <strong>discarded</strong> by this
  * {@link IRabaCoder}.
  *

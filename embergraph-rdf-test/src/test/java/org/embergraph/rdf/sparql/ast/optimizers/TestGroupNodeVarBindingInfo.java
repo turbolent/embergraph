@@ -34,7 +34,7 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpUtility;
 
 /*
-* Test suite for the GroupNodeVarBindingInfo class.
+ * Test suite for the GroupNodeVarBindingInfo class.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$

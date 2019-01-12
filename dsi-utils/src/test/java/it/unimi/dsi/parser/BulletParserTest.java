@@ -3,7 +3,6 @@ package it.unimi.dsi.parser;
 import it.unimi.dsi.lang.MutableString;
 import it.unimi.dsi.parser.callback.Callback;
 import it.unimi.dsi.parser.callback.DefaultCallback;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;

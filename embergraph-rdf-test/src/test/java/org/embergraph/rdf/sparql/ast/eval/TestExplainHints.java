@@ -33,7 +33,7 @@ import org.embergraph.rdf.sparql.ast.explainhints.JoinOrderExplainHint;
 import org.embergraph.rdf.sparql.ast.explainhints.UnsatisfiableMinusExplainHint;
 
 /*
-* Test suite for EXPLAIN hints.
+ * Test suite for EXPLAIN hints.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$

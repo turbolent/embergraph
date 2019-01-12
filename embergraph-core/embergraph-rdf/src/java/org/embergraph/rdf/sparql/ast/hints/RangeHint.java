@@ -28,7 +28,7 @@ import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /*
-* Mark a statement pattern as "range safe", which in effect means it uses only one datatype in it
+ * Mark a statement pattern as "range safe", which in effect means it uses only one datatype in it
  * value space (for bindings for O) and that the filters in the query are respecting that datatype.
  */
 final class RangeHint extends AbstractQueryHint<Boolean> {

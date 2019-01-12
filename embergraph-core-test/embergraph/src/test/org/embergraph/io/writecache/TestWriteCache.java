@@ -40,7 +40,7 @@ import org.embergraph.util.Bytes;
 import org.embergraph.util.ChecksumError;
 
 /*
-* Test suite for the {@link WriteCache}.
+ * Test suite for the {@link WriteCache}.
  *
  * <p>Note: This test suite uses the {@link DirectBufferPool} to allocate its buffers. This reduces
  * the likelihood that direct buffers will be leaked across the unit tests. The tests are written
@@ -239,8 +239,8 @@ public class TestWriteCache extends TestCase3 {
           if (log.isInfoEnabled()) log.info("Expected exception: " + ex);
         }
 
-      /*
-       * Correct rejection test for empty write (capacity>0 but still
+        /*
+         * Correct rejection test for empty write (capacity>0 but still
          * empty).
          */
         try {
@@ -272,8 +272,8 @@ public class TestWriteCache extends TestCase3 {
           assertEquals(addr1, writeCache.getFirstOffset());
         }
 
-      /*
-       * Test successful write on the cache with 0L addr and immediate
+        /*
+         * Test successful write on the cache with 0L addr and immediate
          * read back. This verifies that the cache may be used with a
          * store which does not reserve any space for root blocks, etc.
          */
@@ -386,8 +386,8 @@ public class TestWriteCache extends TestCase3 {
         //                    assertEquals(data3b, writeCache.read(addr3));
         //                }
 
-      /*
-       * Now flush the write cache to the backing file and verify (a)
+        /*
+         * Now flush the write cache to the backing file and verify (a)
          * that we can still read the data from the write cache and (b)
          * that we can now read the data from the backing file.
          */
@@ -412,8 +412,8 @@ public class TestWriteCache extends TestCase3 {
 
         }
 
-      /*
-       * Now reset the write cache and verify that (a) the firstAddr
+        /*
+         * Now reset the write cache and verify that (a) the firstAddr
          * was cleared to its distinguished value; (b) read back of the
          * old records fails; (c) that the entire capacity of the cache
          * is now available for a large record; and (d) that flushing
@@ -468,8 +468,8 @@ public class TestWriteCache extends TestCase3 {
           assertEquals(data4, opener.read(addr4, data4.capacity()));
         }
 
-      /*
-       * Test close() [verify API throws IllegalStateException].
+        /*
+         * Test close() [verify API throws IllegalStateException].
          */
         {
 
@@ -612,8 +612,8 @@ public class TestWriteCache extends TestCase3 {
           if (log.isInfoEnabled()) log.info("Expected exception: " + ex);
         }
 
-      /*
-       * Correct rejection test for empty write (capacity>0 but still
+        /*
+         * Correct rejection test for empty write (capacity>0 but still
          * empty).
          */
         try {
@@ -643,8 +643,8 @@ public class TestWriteCache extends TestCase3 {
           assertEquals(addr1, writeCache.getFirstOffset());
         }
 
-      /*
-       * Test successful write on the cache with 0L addr and immediate
+        /*
+         * Test successful write on the cache with 0L addr and immediate
          * read back. This verifies that the cache may be used with a
          * store which does not reserve any space for root blocks, etc.
          */
@@ -754,8 +754,8 @@ public class TestWriteCache extends TestCase3 {
         //                    assertEquals(data3b, writeCache.read(addr3));
         //                }
 
-      /*
-       * Now flush the write cache to the backing file and verify (a)
+        /*
+         * Now flush the write cache to the backing file and verify (a)
          * that we can still read the data from the write cache and (b)
          * that we can now read the data from the backing file.
          */
@@ -780,8 +780,8 @@ public class TestWriteCache extends TestCase3 {
 
         }
 
-      /*
-       * Now reset the write cache and verify that (a) the firstAddr
+        /*
+         * Now reset the write cache and verify that (a) the firstAddr
          * was cleared to its distinguished value; (b) read back of the
          * old records fails; (c) that the entire capacity of the cache
          * is now available for a large record; and (d) that flushing
@@ -844,8 +844,8 @@ public class TestWriteCache extends TestCase3 {
           assertEquals(data4, opener.read(addr4, data4.capacity()));
         }
 
-      /*
-       * Test close() [verify API throws IllegalStateException].
+        /*
+         * Test close() [verify API throws IllegalStateException].
          */
         {
 
@@ -890,7 +890,7 @@ public class TestWriteCache extends TestCase3 {
   }
 
   //    /*
-//     * To test the buffer restore, we will share a buffer between two WriteCache
+  //     * To test the buffer restore, we will share a buffer between two WriteCache
   //     * instances then write data to the first cache and update its recordMap
   //     * from the buffer. This short circuits the HA pipeline that streams the
   //     * ByteBuffer from one cache to the other.
@@ -1096,8 +1096,8 @@ public class TestWriteCache extends TestCase3 {
                 0L /* fileExtent */,
                 null);
 
-      /*
-       * First write 500 records into the cache and confirm they can all be read okay
+        /*
+         * First write 500 records into the cache and confirm they can all be read okay
          */
         for (int i = 0; i < 500; i++) {
           AllocView v = allocs.get(i);
@@ -1107,14 +1107,14 @@ public class TestWriteCache extends TestCase3 {
           AllocView v = allocs.get(i);
           assertEquals(v.buf, writeCache.read(v.addr, v.nbytes)); // expected, actual
         }
-      /*
-       * Flush to disk and reset the cache
+        /*
+         * Flush to disk and reset the cache
          */
         writeCache.closeForWrites();
         writeCache.flush(true);
         writeCache.reset(); // clear cache
-      /*
-       * Now confirm that nothing is in cache and all on disk
+        /*
+         * Now confirm that nothing is in cache and all on disk
          */
         for (int i = 0; i < 500; i++) {
           AllocView v = allocs.get(i);
@@ -1124,8 +1124,8 @@ public class TestWriteCache extends TestCase3 {
           AllocView v = allocs.get(i);
           assertEquals(v.buf, opener.read(v.addr, v.buf.capacity())); // expected, actual
         }
-      /*
-       * Now add further 500 writes, flush and read full 1000 from disk
+        /*
+         * Now add further 500 writes, flush and read full 1000 from disk
          */
         for (int i = 500; i < 1000; i++) {
           AllocView v = allocs.get(i);
@@ -1143,8 +1143,8 @@ public class TestWriteCache extends TestCase3 {
             throw e;
           }
         }
-      /*
-       * Now reset and write full 10000 records, checking for write success and if fail then flush/reset and
+        /*
+         * Now reset and write full 10000 records, checking for write success and if fail then flush/reset and
          * resubmit, asserting that resubmission is successful
          */
         writeCache.reset();
@@ -1158,8 +1158,8 @@ public class TestWriteCache extends TestCase3 {
             assertTrue(writeCache.write(v.addr, v.buf.asReadOnlyBuffer(), checker.checksum(v.buf)));
           }
         }
-      /*
-       * Now flush and check if we can read in all records
+        /*
+         * Now flush and check if we can read in all records
          */
         writeCache.closeForWrites();
         writeCache.flush(true);
@@ -1168,8 +1168,8 @@ public class TestWriteCache extends TestCase3 {
           assertEquals(v.buf, opener.read(v.addr, v.buf.capacity())); // expected, actual
         }
 
-      /*
-       * Now reset, reshuffle and write full 10000 records, checking for write success and if fail then flush/reset and
+        /*
+         * Now reset, reshuffle and write full 10000 records, checking for write success and if fail then flush/reset and
          * resubmit, asserting that resubmission is successful
          */
         writeCache.reset();
@@ -1185,8 +1185,8 @@ public class TestWriteCache extends TestCase3 {
             assertTrue(writeCache.write(v.addr, v.buf.asReadOnlyBuffer(), checker.checksum(v.buf)));
           }
         }
-      /*
-       * Now flush and check if we can read in all records
+        /*
+         * Now flush and check if we can read in all records
          */
         writeCache.closeForWrites();
         writeCache.flush(true);
@@ -1268,8 +1268,8 @@ public class TestWriteCache extends TestCase3 {
 
       if (raf != null && raf.getChannel().isOpen()) {
 
-      /*
-       * The channel is still open. If you are allowing concurrent
+        /*
+         * The channel is still open. If you are allowing concurrent
          * reads on the channel, then this could indicate that two
          * readers each found the channel closed and that one was able
          * to re-open the channel before the other such that the channel
@@ -1319,7 +1319,7 @@ public class TestWriteCache extends TestCase3 {
   }
 
   //    /*
-//     * Helper method verifies that the contents of <i>actual</i> from
+  //     * Helper method verifies that the contents of <i>actual</i> from
   //     * position() to limit() are consistent with the expected byte[]. A
   //     * read-only view of <i>actual</i> is used to avoid side effects on the
   //     * position, mark or limit properties of the buffer.
@@ -1371,7 +1371,7 @@ public class TestWriteCache extends TestCase3 {
   //    }
   //
   //    /*
-//     * Helper method verifies that the contents of <i>actual</i> from
+  //     * Helper method verifies that the contents of <i>actual</i> from
   //     * position() to limit() are consistent with the expected byte[]. A
   //     * read-only view of <i>actual</i> is used to avoid side effects on the
   //     * position, mark or limit properties of the buffer.
@@ -1417,7 +1417,7 @@ public class TestWriteCache extends TestCase3 {
   //    }
 
   //    /*
-//     * Helper method verifies that the contents of <i>actual</i> from
+  //     * Helper method verifies that the contents of <i>actual</i> from
   //     * position() to limit() are consistent with the expected byte[]. A
   //     * read-only view of <i>actual</i> is used to avoid side effects on the
   //     * position, mark or limit properties of the buffer.
@@ -1468,7 +1468,7 @@ public class TestWriteCache extends TestCase3 {
   //    }
 
   //    /*
-//     * Helper method verifies that the contents of <i>actual</i> from
+  //     * Helper method verifies that the contents of <i>actual</i> from
   //     * position() to limit() are consistent with the expected byte[]. A
   //     * read-only view of <i>actual</i> is used to avoid side effects on the
   //     * position, mark or limit properties of the buffer.

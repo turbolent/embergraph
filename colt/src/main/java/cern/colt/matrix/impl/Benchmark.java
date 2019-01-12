@@ -11,7 +11,7 @@ package cern.colt.matrix.impl;
 import cern.colt.matrix.DoubleFactory2D;
 import cern.colt.matrix.DoubleMatrix2D;
 /*
-* Benchmarks the performance of matrix algorithms.
+ * Benchmarks the performance of matrix algorithms.
  *
  * @author wolfgang.hoschek@cern.ch
  * @version 1.0, 09/24/99

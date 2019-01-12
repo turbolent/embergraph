@@ -20,14 +20,12 @@ package org.embergraph.rwstore.sector;
 
 import java.nio.ByteBuffer;
 import org.embergraph.counters.ICounterSetAccess;
-import org.embergraph.io.DirectBufferPool;
 import org.embergraph.rawstore.IAllocationContext;
 import org.embergraph.rawstore.IAllocationManagerStore;
-import org.embergraph.rwstore.IAllocationManager;
 import org.embergraph.rwstore.IStore;
 
 /*
-* Abstraction for managing data in {@link ByteBuffer}s. Typically those buffers will be allocated
+ * Abstraction for managing data in {@link ByteBuffer}s. Typically those buffers will be allocated
  * on the native process heap.
  *
  * <p><strong>CAUTION: The memory manager helps you manage direct storage. However, it does not
@@ -212,13 +210,13 @@ public interface IMemoryManager extends IStore, ICounterSetAccess, IAllocationMa
   long getSlotBytes();
 
   //	/*
-//	 * @return an outputstream to stream data to the memory manager and to retrieve
+  //	 * @return an outputstream to stream data to the memory manager and to retrieve
   //	 * an address to later stream the data back.
   //	 */
   //	public IPSOutputStream getOutputStream();
   //
   //	/*
-//	 * @param context within which any allocations are made by the
+  //	 * @param context within which any allocations are made by the
   //	 * returned IPSOutputStream
   //	 * @return an outputstream to stream data to and to retrieve
   //	 * an address to later stream the data back.
@@ -226,7 +224,7 @@ public interface IMemoryManager extends IStore, ICounterSetAccess, IAllocationMa
   //	public IPSOutputStream getOutputStream(final IAllocationContext context);
   //
   //	/*
-//	 * @return an inputstream for the data for provided address
+  //	 * @return an inputstream for the data for provided address
   //	 */
   //	public InputStream getInputStream(long addr);
 

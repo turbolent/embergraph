@@ -34,7 +34,7 @@ import java.io.Serializable;
 import java.util.NoSuchElementException;
 
 /*
-* An interval of integers. An interval is defined by two integers, called its {@link #left} and
+ * An interval of integers. An interval is defined by two integers, called its {@link #left} and
  * {@link #right} extremes, and contains all integers <var>x</var> such that {@link #left} &le; x
  * &le; {@link #right}.
  *

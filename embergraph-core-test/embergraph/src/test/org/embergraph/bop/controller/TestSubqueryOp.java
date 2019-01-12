@@ -61,7 +61,7 @@ import org.embergraph.journal.Journal;
 import org.embergraph.striterator.ChunkedArrayIterator;
 
 /*
-* Test suite for handling of optional join groups during query evaluation against a local database
+ * Test suite for handling of optional join groups during query evaluation against a local database
  * instance.
  *
  * <pre>

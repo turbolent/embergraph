@@ -32,11 +32,9 @@ import org.embergraph.rdf.internal.XSD;
 import org.embergraph.rdf.sail.sparql.Embergraph2ASTSPARQLParser;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.eval.ASTSearchOptimizer;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTBottomUpOptimizer;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTSetValueExpressionsOptimizer;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTSubGroupJoinVarOptimizer;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTWildcardProjectionOptimizer;
-import org.embergraph.rdf.sparql.ast.optimizers.IASTOptimizer;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 import org.embergraph.rdf.vocab.decls.FOAFVocabularyDecl;
 import org.openrdf.model.impl.LiteralImpl;
@@ -46,7 +44,7 @@ import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /*
-* Test suite for methods supporting static analysis of the variables, including whether a variable
+ * Test suite for methods supporting static analysis of the variables, including whether a variable
  * MUST be bound, MIGHT be bound, or is NOT bound. The static analysis centers around {@link
  * GraphPatternGroup}s. Methods are provided for both the group itself, the group and its parent
  * groups, and the group and its child groups.
@@ -3330,7 +3328,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
   }
 
   //    /*
-//     * Unit test for whether or not a variable is "in-scope" in some part of the
+  //     * Unit test for whether or not a variable is "in-scope" in some part of the
   //     * AST.
   //     *
   //     * <pre>
@@ -3403,7 +3401,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
   //    }
   //
   //    /*
-//     * <code>?v</code> is also in scope when it appears in an OPTIONAL group
+  //     * <code>?v</code> is also in scope when it appears in an OPTIONAL group
   //     *
   //     * <pre>
   //     * PREFIX :    <http://example/>
@@ -3421,7 +3419,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
   //   }
   //
   //    /*
-//     * This test examines a DAWG/TCK query based on a badly formed left join
+  //     * This test examines a DAWG/TCK query based on a badly formed left join
   //     * pattern:
   //     *
   //     * <pre>
@@ -3452,7 +3450,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
   //    }
   //
   //    /*
-//     *
+  //     *
   //     * TODO The test suite should cover all of the bottom-up examples so we can
   //     * work out what the right behavior of this method is in each case. It
   //     * should also cover the EXISTS graph pattern, SERVICE graph pattern, and

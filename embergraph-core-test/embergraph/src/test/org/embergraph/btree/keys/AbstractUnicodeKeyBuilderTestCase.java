@@ -31,7 +31,7 @@ import org.embergraph.btree.keys.KeyBuilder.Options;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Base class for the test suites that examine support for Unicode sort keys in {@link KeyBuilder}.
+ * Base class for the test suites that examine support for Unicode sort keys in {@link KeyBuilder}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -162,7 +162,7 @@ public abstract class AbstractUnicodeKeyBuilderTestCase extends TestCase2 {
    * this assumption in order to be compatible with the JDK collator.
    */
   //    /*
-//     * Test verifies that the <code>nul</code> byte is not part of the key when
+  //     * Test verifies that the <code>nul</code> byte is not part of the key when
   //     * a unicode string is appended to an {@link IKeyBuilder}.
   //     * <p>
   //     * Note: The {@link SparseRowStore} assumes that Unicode sort keys do not

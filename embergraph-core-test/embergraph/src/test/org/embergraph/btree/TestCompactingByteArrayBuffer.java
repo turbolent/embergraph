@@ -23,12 +23,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree;
 
-import java.nio.ByteBuffer;
 import junit.framework.TestCase;
-import org.embergraph.io.DataOutputBuffer;
 
 /*
-* Test harness used to develop a compacting buffer for maintaining branch nodes and leaves in a
+ * Test harness used to develop a compacting buffer for maintaining branch nodes and leaves in a
  * B+Tree that minimizes copying on mutation of the node, helps to minimize heap churn and GC
  * latency related to long lived allocations, and maintains the data in a serializable format.
  *
@@ -127,7 +125,7 @@ public class TestCompactingByteArrayBuffer extends TestCase {
   }
 
   //    /*
-//     * Trial balloon for node/leaf data structure using a mutable buffer and a
+  //     * Trial balloon for node/leaf data structure using a mutable buffer and a
   //     * compacting GC.
   //     *
   //     * @todo also implement {@link INodeData} or have two concrete classes of
@@ -149,11 +147,11 @@ public class TestCompactingByteArrayBuffer extends TestCase {
   //    public static class CompactingByteBuffer extends ByteArrayBuffer implements ILeafData {
   //
   //        /*
-//         * The serialization version.
+  //         * The serialization version.
   //         */
   //        private static transient int SIZEOF_VERSION = Bytes.SIZEOF_BYTE;
   //        /*
-//         * A set of bit flags.
+  //         * A set of bit flags.
   //         *
   //         * @todo if more than 8 bits are required then look into generalized bit
   //         *       stream support or just read the data as a short, int or long and
@@ -161,11 +159,11 @@ public class TestCompactingByteArrayBuffer extends TestCase {
   //         */
   //        private static transient int SIZEOF_FLAGS = Bytes.SIZEOF_BYTE;
   //        /*
-//         * The branching factor (m).
+  //         * The branching factor (m).
   //         */
   //        private static transient int SIZEOF_BRANCHING_FACTOR = Bytes.SIZEOF_SHORT;
   //        /*
-//         * The #of keys.
+  //         * The #of keys.
   //         */
   //        private static transient int SIZEOF_NKEYS = Bytes.SIZEOF_SHORT;
   //
@@ -176,7 +174,7 @@ public class TestCompactingByteArrayBuffer extends TestCase {
   //        private static transient int OFFSET_NKEYS = OFFSET_BRANCHING_FACTOR + SIZEOF_NKEYS;
   //
   //        /*
-//         * Mask for flags revealing the bit whose value is ONE (1) iff the record
+  //         * Mask for flags revealing the bit whose value is ONE (1) iff the record
   //         * represents a leaf (otherwise it represents a node).
   //         */
   //        private static transient int MASK_IS_LEAF = 0x01;

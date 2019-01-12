@@ -26,17 +26,14 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpUtility;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IVariable;
-import org.embergraph.bop.Var;
 import org.embergraph.rdf.sparql.ast.BindingsClause;
 import org.embergraph.rdf.sparql.ast.GraphPatternGroup;
 import org.embergraph.rdf.sparql.ast.GroupNodeBase;
 import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
 import org.embergraph.rdf.sparql.ast.IQueryNode;
-import org.embergraph.rdf.sparql.ast.NamedSubqueriesNode;
 import org.embergraph.rdf.sparql.ast.NamedSubqueryInclude;
 import org.embergraph.rdf.sparql.ast.NamedSubqueryRoot;
 import org.embergraph.rdf.sparql.ast.ProjectionNode;
@@ -48,7 +45,7 @@ import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /*
-* Rewrites any {@link ProjectionNode} with a wild card into the set of variables visible to the
+ * Rewrites any {@link ProjectionNode} with a wild card into the set of variables visible to the
  * {@link QueryBase} having that projection. This is done first for the {@link NamedSubqueriesNode}
  * and then depth-first for the WHERE clause. Only variables projected by a subquery will be
  * projected by the parent query.
@@ -87,8 +84,7 @@ public class ASTWildcardProjectionOptimizer implements IASTOptimizer {
         final Iterator<QueryBase> itr =
             (Iterator<QueryBase>)
                 new Striterator(
-                        BOpUtility.postOrderIteratorWithAnnotations(
-                            subqueryRoot.getWhereClause()))
+                        BOpUtility.postOrderIteratorWithAnnotations(subqueryRoot.getWhereClause()))
                     .addTypeFilter(QueryBase.class);
 
         while (itr.hasNext()) {

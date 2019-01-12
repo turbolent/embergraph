@@ -21,11 +21,8 @@ import cutthecrap.utils.striterators.ICloseableIterator;
 import java.util.Arrays;
 import java.util.concurrent.Future;
 import org.apache.log4j.Logger;
-import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.sail.EmbergraphSailRepositoryConnection;
-import org.embergraph.rdf.sail.EmbergraphSailTupleQuery;
 import org.embergraph.rdf.sail.Sesame2EmbergraphIterator;
-import org.embergraph.rdf.sparql.ast.eval.ASTEvalHelper;
 import org.embergraph.rdf.sparql.ast.eval.AbstractServiceFactoryBase;
 import org.embergraph.rdf.sparql.ast.eval.ServiceParams;
 import org.embergraph.rdf.sparql.ast.service.ExternalServiceCall;
@@ -33,7 +30,6 @@ import org.embergraph.rdf.sparql.ast.service.IServiceOptions;
 import org.embergraph.rdf.sparql.ast.service.OpenrdfNativeServiceOptions;
 import org.embergraph.rdf.sparql.ast.service.ServiceCallCreateParams;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
-import org.embergraph.rdf.sparql.ast.service.ServiceRegistry;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.task.AbstractApiTask;
 import org.openrdf.query.BindingSet;
@@ -41,7 +37,7 @@ import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.query.TupleQueryResult;
 
 /*
-* A SERVICE that exposes a stored query for execution. The stored query may be a SPARQL query or
+ * A SERVICE that exposes a stored query for execution. The stored query may be a SPARQL query or
  * arbitrary procedural application logic, but it must evaluate to a solution multi-set. The service
  * interface is written to the openrdf interfaces in order to remove the burden of dealing with
  * embergraph {@link IV}s from the application.
@@ -98,7 +94,7 @@ public abstract class StoredQueryService extends AbstractServiceFactoryBase {
   public interface Options {
 
     //        /*
-//         * The namespace used for stored query service.
+    //         * The namespace used for stored query service.
     //         */
     //        String NAMESPACE = "http://www.embergraph.org/rdf/stored-query#";
 
@@ -260,8 +256,8 @@ public abstract class StoredQueryService extends AbstractServiceFactoryBase {
         } finally {
           if (cxn != null) {
             if (!success && !cxn.isReadOnly()) {
-            /*
-       * Force rollback of the connection.
+              /*
+               * Force rollback of the connection.
                *
                * Note: It is possible that the commit has already
                * been processed, in which case this rollback()

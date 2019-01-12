@@ -29,7 +29,7 @@ import java.io.IOException;
 import junit.framework.TestCase;
 
 /*
-* @author Fabien Campagne
+ * @author Fabien Campagne
  * @author Sebastiano Vigna
  */
 public class SemiExternalGammaListTest extends TestCase {

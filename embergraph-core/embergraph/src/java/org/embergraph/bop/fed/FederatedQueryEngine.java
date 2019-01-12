@@ -22,7 +22,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.fed;
 
 import java.io.IOException;
-import java.nio.ByteBuffer;
 import java.rmi.RemoteException;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -45,10 +44,9 @@ import org.embergraph.service.DataService;
 import org.embergraph.service.IDataService;
 import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.ManagedResourceService;
-import org.embergraph.service.ResourceService;
 
 /*
-* An {@link IEmbergraphFederation} aware {@link QueryEngine}.
+ * An {@link IEmbergraphFederation} aware {@link QueryEngine}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -64,7 +62,7 @@ public class FederatedQueryEngine extends QueryEngine {
   public interface Annotations extends QueryEngine.Annotations {
 
     //        /*
-//         * The class used to map binding sets across the federation.
+    //         * The class used to map binding sets across the federation.
     //         */
     //        String CHUNK_HANDLER = FederatedQueryEngine.class.getName()
     //                + ".chunkHandler";
@@ -95,7 +93,7 @@ public class FederatedQueryEngine extends QueryEngine {
   private final IQueryClient clientProxy;
 
   //    /*
-//     * A queue of {@link IChunkMessage}s which needs to have their data
+  //     * A queue of {@link IChunkMessage}s which needs to have their data
   //     * materialized so an operator can consume those data on this node.
   //     * This queue is drained by the {@link MaterializeChunksTask}.
   //     */
@@ -113,7 +111,7 @@ public class FederatedQueryEngine extends QueryEngine {
       new AtomicReference<ExecutorService>();
 
   //    /*
-//     * The {@link Future} for the task draining the {@link #chunkMaterializationQueue}.
+  //     * The {@link Future} for the task draining the {@link #chunkMaterializationQueue}.
   //     */
   //    private final AtomicReference<FutureTask<Void>> acceptMessageTaskFuture = new
   // AtomicReference<FutureTask<Void>>();
@@ -358,8 +356,8 @@ public class FederatedQueryEngine extends QueryEngine {
 
       try {
 
-      /*
-       * Note: accept() sets [q] as a side-effect! It SHOULD NOT be
+        /*
+         * Note: accept() sets [q] as a side-effect! It SHOULD NOT be
          * resolved in the constructor since it may require an RMI back
          * to the query controller to materialize the query on this
          * node.
@@ -374,8 +372,8 @@ public class FederatedQueryEngine extends QueryEngine {
 
         if (log.isDebugEnabled()) log.debug("accepted: " + msg);
 
-      /*
-       * Note: This can block if queue for each (operator,shard)
+        /*
+         * Note: This can block if queue for each (operator,shard)
          * bundle has a bounded capacity. If it blocks then the
          * acceptQueue can stagnate as no new IChunkMessages can be
          * materialized.
@@ -391,8 +389,8 @@ public class FederatedQueryEngine extends QueryEngine {
 
         if (q != null) {
 
-        /*
-       * Note: Since no one is watching the Future for this task,
+          /*
+           * Note: Since no one is watching the Future for this task,
            * an error here needs to cause the query to abort.
            */
 
@@ -431,8 +429,8 @@ public class FederatedQueryEngine extends QueryEngine {
 
         if (isController) {
 
-        /*
-       * @todo This would indicate that the query had been
+          /*
+           * @todo This would indicate that the query had been
            * concurrently terminated and cleared from the set of
            * runningQueries and that we were not retaining metadata
            * about queries which had been terminated.
@@ -444,16 +442,16 @@ public class FederatedQueryEngine extends QueryEngine {
 
         try {
 
-        /*
-       * Get the query declaration from the query controller.
+          /*
+           * Get the query declaration from the query controller.
            */
 
           q = getDeclaredQuery(queryId);
 
         } catch (IllegalArgumentException ex) {
 
-        /*
-       * The query is no longer available on the query controller.
+          /*
+           * The query is no longer available on the query controller.
            * Typically, it has been cancelled. For example, by
            * satisifying a LIMIT.
            */
@@ -466,8 +464,8 @@ public class FederatedQueryEngine extends QueryEngine {
 
         if (q == null) {
 
-        /*
-       * Note: Should never be null per getDeclaredQuery().
+          /*
+           * Note: Should never be null per getDeclaredQuery().
            */
 
           throw new AssertionError();
@@ -485,8 +483,8 @@ public class FederatedQueryEngine extends QueryEngine {
 
           if (!AbstractRunningQuery.isRootCauseInterrupt(t)) {
 
-          /*
-       * Note: This can be triggered by serialization errors.
+            /*
+             * Note: This can be triggered by serialization errors.
              *
              * Whatever is thrown out here, we want to log @ ERROR
              * unless the root cause was an interrupt.
@@ -547,8 +545,8 @@ public class FederatedQueryEngine extends QueryEngine {
 
       if (query == null) {
 
-      /*
-       * Should never be null; getQuery() throws
+        /*
+         * Should never be null; getQuery() throws
          * IllegalArgumentException.
          */
 
@@ -722,8 +720,8 @@ public class FederatedQueryEngine extends QueryEngine {
 
       if (proxy == null) {
 
-      /*
-       * Note: Presumably this is due to the concurrent tear down of
+        /*
+         * Note: Presumably this is due to the concurrent tear down of
          * the peer.
          */
 

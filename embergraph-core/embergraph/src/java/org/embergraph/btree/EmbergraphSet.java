@@ -28,11 +28,10 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import java.util.Set;
 import java.util.SortedSet;
 
 /*
-* A {@link SortedSet} backed by a B+Tree.
+ * A {@link SortedSet} backed by a B+Tree.
  *
  * <p>Note: The {@link EmbergraphMap} has the same concurrency constraints as the {@link BTree} - it
  * is single-threaded for writes and allows concurrent readers.

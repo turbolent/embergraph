@@ -48,7 +48,7 @@ import org.embergraph.journal.Journal;
 import org.embergraph.striterator.ChunkedArrayIterator;
 
 /*
-* Test suite for {@link Union}.
+ * Test suite for {@link Union}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestUnionBindingSets.java 3500 2010-09-03 00:27:45Z thompsonbry $
@@ -161,12 +161,11 @@ public class TestUnion extends TestCase2 {
             NV.asMap(
                 new NV(Union.Annotations.BOP_ID, unionId),
                 new NV(Union.Annotations.SUBQUERIES, new BOp[] {startOp1, startOp2}),
-                new NV(
-                    QueryEngine.Annotations.CHUNK_HANDLER, StandaloneChunkHandler.TEST_INSTANCE)
+                new NV(QueryEngine.Annotations.CHUNK_HANDLER, StandaloneChunkHandler.TEST_INSTANCE)
                 //                        new NV(Union.Annotations.EVALUATION_CONTEXT,
                 //                                BOpEvaluationContext.CONTROLLER),
                 //                        new NV(Union.Annotations.CONTROLLER, true),
-            ));
+                ));
 
     final BOp query = unionOp;
 
@@ -208,12 +207,11 @@ public class TestUnion extends TestCase2 {
             NV.asMap(
                 new NV(Union.Annotations.BOP_ID, unionId),
                 new NV(Union.Annotations.SUBQUERIES, new BOp[] {startOp1, startOp2}),
-                new NV(
-                    QueryEngine.Annotations.CHUNK_HANDLER, StandaloneChunkHandler.TEST_INSTANCE)
+                new NV(QueryEngine.Annotations.CHUNK_HANDLER, StandaloneChunkHandler.TEST_INSTANCE)
                 //                        new NV(Union.Annotations.EVALUATION_CONTEXT,
                 //                                BOpEvaluationContext.CONTROLLER),
                 //                        new NV(Union.Annotations.CONTROLLER, true),
-            ));
+                ));
 
     final BOp query = unionOp;
 
@@ -292,7 +290,7 @@ public class TestUnion extends TestCase2 {
                 //                        new NV(Union.Annotations.EVALUATION_CONTEXT,
                 //                                BOpEvaluationContext.CONTROLLER),
                 //                        new NV(Union.Annotations.CONTROLLER, true),
-            ));
+                ));
 
     final BOp sliceOp =
         new SliceOp(

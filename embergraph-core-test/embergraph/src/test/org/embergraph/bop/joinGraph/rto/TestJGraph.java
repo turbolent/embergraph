@@ -24,7 +24,7 @@ package org.embergraph.bop.joinGraph.rto;
 import junit.framework.TestCase2;
 
 /*
-* Test suite for {@link JGraph}, which is the core implementation of the runtime query optimizer
+ * Test suite for {@link JGraph}, which is the core implementation of the runtime query optimizer
  * logic.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -53,7 +53,7 @@ public class TestJGraph extends TestCase2 {
   //    }
 
   //    /*
-//     * Test ability to recognize when there is a predicate without any shared
+  //     * Test ability to recognize when there is a predicate without any shared
   //     * variables.
   //     */
   //    public void test_noSharedVariables() {
@@ -120,7 +120,7 @@ public class TestJGraph extends TestCase2 {
   //    }
   //
   //    /*
-//     * Create and populate relation in the {@link #namespace}.
+  //     * Create and populate relation in the {@link #namespace}.
   //     *
   //     * @return The #of distinct entries.
   //     */

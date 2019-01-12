@@ -24,7 +24,7 @@ package it.unimi.dsi.util;
 import it.unimi.dsi.fastutil.objects.Object2ObjectFunction;
 
 /*
-* A map from prefixes to string intervals (and possibly <i>vice versa</i>).
+ * A map from prefixes to string intervals (and possibly <i>vice versa</i>).
  *
  * <p>Instances of this class provide the services of a {@link StringMap}, but by assuming the
  * strings are lexicographically ordered, they can provide further information by exposing a

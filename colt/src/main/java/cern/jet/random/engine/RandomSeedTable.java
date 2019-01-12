@@ -9,7 +9,7 @@ It is provided "as is" without expressed or implied warranty.
 package cern.jet.random.engine;
 
 /*
-* (Seemingly gigantic) table of good seeds for pseudo-random number generators.
+ * (Seemingly gigantic) table of good seeds for pseudo-random number generators.
  *
  * <p><b>Implementation:</b>
  * <dt>This is a port of <tt>SeedTable.h</tt> used in <A

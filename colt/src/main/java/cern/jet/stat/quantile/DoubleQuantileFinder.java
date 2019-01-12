@@ -10,7 +10,7 @@ package cern.jet.stat.quantile;
 
 import cern.colt.list.DoubleArrayList;
 /*
-* The interface shared by all quantile finders, no matter if they are exact or approximate. It is
+ * The interface shared by all quantile finders, no matter if they are exact or approximate. It is
  * usually completely sufficient to operate on this interface only. Also see {@link
  * hep.aida.bin.QuantileBin1D}, demonstrating how this package can be used.
  */

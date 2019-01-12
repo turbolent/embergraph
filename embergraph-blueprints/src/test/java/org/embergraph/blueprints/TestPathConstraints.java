@@ -204,8 +204,8 @@ public class TestPathConstraints extends TestCase {
 
       { // path filter + incoming bindings
 
-      /*
-       * This tests whether vars used by the service are projected
+        /*
+         * This tests whether vars used by the service are projected
          * in correctly.
          */
         final String queryStr =

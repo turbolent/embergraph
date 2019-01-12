@@ -19,7 +19,7 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 package cutthecrap.utils.striterators;
 
 /*
-* Interface for objects which can have resources which must be explicitly closed (typically
+ * Interface for objects which can have resources which must be explicitly closed (typically
  * iterators).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

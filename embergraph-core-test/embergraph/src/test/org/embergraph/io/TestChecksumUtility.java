@@ -27,7 +27,7 @@ import java.util.zip.Adler32;
 import junit.framework.TestCase;
 
 /*
-* Test suite for {@link ChecksumUtility}.
+ * Test suite for {@link ChecksumUtility}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

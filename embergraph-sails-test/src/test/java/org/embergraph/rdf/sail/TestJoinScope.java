@@ -36,7 +36,7 @@ import org.openrdf.repository.sail.SailTupleQuery;
 import org.openrdf.rio.RDFFormat;
 
 /*
-* Unit tests the quads aspects of the {@link EmbergraphSail} implementation. Specify <code>
+ * Unit tests the quads aspects of the {@link EmbergraphSail} implementation. Specify <code>
  * -DtestClass=org.embergraph.rdf.sail.TestEmbergraphSailWithQuads</code> to run this test suite.
  *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
@@ -81,8 +81,7 @@ public class TestJoinScope extends QuadsTestCase {
     final EmbergraphSail sail = getSail();
     sail.initialize();
     final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-    final EmbergraphSailRepositoryConnection cxn =
-        repo.getConnection();
+    final EmbergraphSailRepositoryConnection cxn = repo.getConnection();
     cxn.setAutoCommit(false);
 
     try {

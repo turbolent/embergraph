@@ -25,7 +25,7 @@ import org.embergraph.cache.HardReferenceQueueEvictionListener;
 import org.embergraph.cache.IHardReferenceQueue;
 
 /*
-* Interface to handle evictions of nodes or leaves from the hard reference queue. The listener is
+ * Interface to handle evictions of nodes or leaves from the hard reference queue. The listener is
  * responsible for decrementing the {@link AbstractNode#referenceCount} and must write a dirty node
  * or leaf onto the store when their reference counter reaches zero(0).
  *

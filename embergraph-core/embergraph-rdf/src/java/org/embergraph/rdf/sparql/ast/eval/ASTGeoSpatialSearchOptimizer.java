@@ -24,13 +24,11 @@ package org.embergraph.rdf.sparql.ast.eval;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import org.embergraph.rdf.sparql.ast.service.ServiceNode;
-import org.embergraph.service.fts.FTS;
 import org.embergraph.service.geospatial.GeoSpatial;
 import org.openrdf.model.URI;
 
 /*
-* Translate {@link FTS#GEOSPATIAL} and related magic predicates into a {@link ServiceNode} which
+ * Translate {@link FTS#GEOSPATIAL} and related magic predicates into a {@link ServiceNode} which
  * will invoke the embergraph geospatial service.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>

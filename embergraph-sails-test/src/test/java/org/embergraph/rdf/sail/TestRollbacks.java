@@ -44,7 +44,7 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.sail.SailRepository;
 
 /*
-* This is a stress test for abort/rollback semantics.
+ * This is a stress test for abort/rollback semantics.
  *
  * <p>This test case will delegate to an underlying backing store. You can specify this store via a
  * JVM property as follows: <code>-DtestClass=org.embergraph.rdf.sail.TestEmbergraphSailWithQuads
@@ -250,8 +250,8 @@ public class TestRollbacks extends QuadsTestCase {
         while (firstCause.get() == null && counter < maxCounter) {
           if (writer) writer(conn);
           else reader(conn);
-        /*
-       * Note: If connection obtained/closed within the loop then
+          /*
+           * Note: If connection obtained/closed within the loop then
            * the query is more likely to have some data to visit
            * within its tx view.
            */

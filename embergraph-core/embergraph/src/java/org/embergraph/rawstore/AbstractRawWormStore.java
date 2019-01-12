@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rawstore;
 
 /*
-* An abstract base class for {@link IRawStore} implementations that use an append only (Write Once,
+ * An abstract base class for {@link IRawStore} implementations that use an append only (Write Once,
  * Read Many) strategy. The {@link IAddressManager} interface is delegated to an {@link
  * WormAddressManager} allowing flexible configuration of the use of bits to represent the byte
  * offset of a record in the store and the bits used to represent the size of a record in the store.

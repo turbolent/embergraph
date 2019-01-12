@@ -26,7 +26,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 /*
-* Tunable progress logger.
+ * Tunable progress logger.
  *
  * <p>This class provides a simple way to log progress information about long-lasting activities.
  *

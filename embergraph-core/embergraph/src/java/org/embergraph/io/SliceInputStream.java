@@ -26,7 +26,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /*
-* A stream which only lets you read a fixed #of bytes from an underlying stream.
+ * A stream which only lets you read a fixed #of bytes from an underlying stream.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

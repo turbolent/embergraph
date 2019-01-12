@@ -25,7 +25,7 @@ import java.util.Random;
 import junit.framework.TestCase;
 
 /*
-* Defines some helper methods for testing {@link ICommitRecord}s.
+ * Defines some helper methods for testing {@link ICommitRecord}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

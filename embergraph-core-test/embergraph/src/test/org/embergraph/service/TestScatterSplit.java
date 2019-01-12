@@ -47,7 +47,7 @@ import org.embergraph.service.ndx.RawDataServiceTupleIterator;
 import org.embergraph.util.Bytes;
 
 /*
-* Some unit tests for moving an index partition.
+ * Some unit tests for moving an index partition.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -271,8 +271,8 @@ public class TestScatterSplit extends AbstractEmbeddedFederationTestCase {
                 + "), npartitions="
                 + npartitions);
 
-      /*
-       * Compare the index against ground truth after overflow.
+        /*
+         * Compare the index against ground truth after overflow.
          */
         if (log.isInfoEnabled()) log.info("Verifying scale-out index against ground truth");
 

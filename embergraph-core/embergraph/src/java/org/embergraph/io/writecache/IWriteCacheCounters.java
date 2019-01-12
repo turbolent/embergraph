@@ -48,7 +48,7 @@ public interface IWriteCacheCounters {
   /** The #of bytes in the records that were accepted by the cache. */
   String BYTES_ACCEPTED = "bytesAccepted";
   // /*
-// * The #of times this write cache was flushed to the backing channel.
+  // * The #of times this write cache was flushed to the backing channel.
   // */
   // String NFLUSHED = "nflushed";
   /*

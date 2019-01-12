@@ -60,8 +60,6 @@ import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.QueryType;
 import org.embergraph.rdf.sparql.ast.SolutionSetStatserator;
 import org.embergraph.rdf.sparql.ast.StatementPatternNode;
-import org.embergraph.rdf.sparql.ast.TestStaticAnalysis;
-import org.embergraph.rdf.sparql.ast.ValueExpressionNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpUtility;
@@ -72,7 +70,7 @@ import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /*
-* Test suite for {@link ASTBottomUpOptimizer}.
+ * Test suite for {@link ASTBottomUpOptimizer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestASTBottomUpOptimizer.java 5197 2011-09-15 19:10:44Z thompsonbry $
@@ -491,7 +489,8 @@ public class TestASTBottomUpOptimizer extends AbstractASTEvaluationTestCase {
                       FunctionRegistry.EQ,
                       null, /* scalarValues */
                       // args
-                      new VarNode(unboundVarName), new ConstantNode(new Constant(ONE.getIV()))));
+                      new VarNode(unboundVarName),
+                      new ConstantNode(new Constant(ONE.getIV()))));
           final GlobalAnnotations globals =
               new GlobalAnnotations(context.getLexiconNamespace(), context.getTimestamp());
           AST2BOpUtility.toVE(getBOpContext(), globals, filterNode.getValueExpressionNode());
@@ -988,7 +987,8 @@ public class TestASTBottomUpOptimizer extends AbstractASTEvaluationTestCase {
               new FunctionNode(
                   FunctionRegistry.EQ,
                   null, // scalarValues(Map)Collections.emptyMap(),
-                  new VarNode(anonvar), new ConstantNode(ONE.getIV())));
+                  new VarNode(anonvar),
+                  new ConstantNode(ONE.getIV())));
       final GlobalAnnotations globals =
           new GlobalAnnotations(context.getLexiconNamespace(), context.getTimestamp());
       AST2BOpUtility.toVE(getBOpContext(), globals, filterNode.getValueExpressionNode());
@@ -1133,7 +1133,8 @@ public class TestASTBottomUpOptimizer extends AbstractASTEvaluationTestCase {
               new FunctionNode(
                   FunctionRegistry.EQ,
                   null, // scalarValues (Map)Collections.emptyMap(),
-                  new VarNode(anonvar), new ConstantNode(ONE.getIV())));
+                  new VarNode(anonvar),
+                  new ConstantNode(ONE.getIV())));
       final GlobalAnnotations globals =
           new GlobalAnnotations(context.getLexiconNamespace(), context.getTimestamp());
       AST2BOpUtility.toVE(getBOpContext(), globals, filterNode.getValueExpressionNode());
@@ -1406,7 +1407,7 @@ public class TestASTBottomUpOptimizer extends AbstractASTEvaluationTestCase {
   //    Note: This was not actually a bottom up evaluation problem at all.
   //
   //    /*
-//     * This is a bottom up semantics test from the openrdf services test suite.
+  //     * This is a bottom up semantics test from the openrdf services test suite.
   //     * There are no shared variables for the two SERVICE clauses. This means
   //     * that we need to lift them out into named subqueries in order to have
   //     * bottom up evaluation semantics.
@@ -1454,7 +1455,7 @@ public class TestASTBottomUpOptimizer extends AbstractASTEvaluationTestCase {
   //                .addTerms(values, values.length, false/* readOnly */);
   //
   //        /*
-//         * The source AST.
+  //         * The source AST.
   //         *
   //         * <pre>
   //         * PREFIX : <http://example.org>
@@ -1604,7 +1605,7 @@ public class TestASTBottomUpOptimizer extends AbstractASTEvaluationTestCase {
   //    }
 
   //    /*
-//     * The variable <code>?n</code> in the FILTER is the same as the
+  //     * The variable <code>?n</code> in the FILTER is the same as the
   //     * variable <code>?n</code> in the outer join group. It must not be
   //     * rewritten into an anonymous variable.
   //     * <pre>
@@ -1721,7 +1722,7 @@ public class TestASTBottomUpOptimizer extends AbstractASTEvaluationTestCase {
   //    }
   //
   //    /*
-//     * The variable <code>?n</code> in the inner FILTER is the same as the
+  //     * The variable <code>?n</code> in the inner FILTER is the same as the
   //     * variable <code>?n</code> in the outer join group. It must not be
   //     * rewritten into an anonymous variable.
   //     * <p>

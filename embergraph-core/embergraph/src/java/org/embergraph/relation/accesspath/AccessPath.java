@@ -30,9 +30,7 @@ import cutthecrap.utils.striterators.NOPFilter;
 import cutthecrap.utils.striterators.Striterator;
 import java.util.Iterator;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.FutureTask;
-import java.util.concurrent.RejectedExecutionException;
 import org.apache.log4j.Logger;
 import org.embergraph.bop.BOpContext;
 import org.embergraph.bop.BufferAnnotations;
@@ -55,14 +53,11 @@ import org.embergraph.btree.ITupleIterator;
 import org.embergraph.btree.IndexSegment;
 import org.embergraph.btree.Tuple;
 import org.embergraph.btree.UnisolatedReadWriteIndex;
-import org.embergraph.btree.isolation.IsolatedFusedView;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.proc.ISimpleIndexProcedure;
-import org.embergraph.btree.view.FusedView;
 import org.embergraph.io.DirectBufferPool;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.ITx;
-import org.embergraph.journal.Journal;
 import org.embergraph.journal.NoSuchIndexException;
 import org.embergraph.journal.TimestampUtility;
 import org.embergraph.mdi.IMetadataIndex;
@@ -72,7 +67,6 @@ import org.embergraph.relation.IRelation;
 import org.embergraph.service.AbstractClient;
 import org.embergraph.service.DataService;
 import org.embergraph.service.IEmbergraphFederation;
-import org.embergraph.service.ndx.IClientIndex;
 import org.embergraph.service.ndx.IScaleOutClientIndex;
 import org.embergraph.striterator.ChunkedArrayIterator;
 import org.embergraph.striterator.ChunkedWrappedIterator;
@@ -84,7 +78,7 @@ import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Abstract base class for type-specific {@link IAccessPath} implementations.
+ * Abstract base class for type-specific {@link IAccessPath} implementations.
  *
  * <p>Note: Filters should be specified when the {@link IAccessPath} is constructed so that they
  * will be evaluated on the data service rather than materializing the elements and then filtering
@@ -337,8 +331,8 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
     if (partitionId != -1) {
 
       if (remoteAccessPath) {
-      /*
-       * A request for a specific shard is not compatible with a
+        /*
+         * A request for a specific shard is not compatible with a
          * request for a remote access path.
          */
         throw new RuntimeException(
@@ -369,8 +363,8 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
 
       if (ndx == null) {
 
-      /*
-       * Some possible root causes for failing to find a shard on a DS
+        /*
+         * Some possible root causes for failing to find a shard on a DS
          * are listed below. You should verify that the addressed shard
          * was actually present on the addressed data service as of the
          * effect read time of the request.
@@ -521,8 +515,8 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
 
       if (sameVarConstraint != null) {
 
-      /*
-       * Stack filters.
+        /*
+         * Stack filters.
          */
         final FilterBase tmp = new NOPFilter();
 
@@ -684,7 +678,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
   }
 
   //    /*
-//     * {@inheritDoc}
+  //     * {@inheritDoc}
   //     *
   //     * @see https://sourceforge.net/apps/trac/bigdata/ticket/209 (Access path
   //     *      should visit solutions for high level query).
@@ -913,8 +907,8 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
 
       if (rangeCountRemaining <= 0) {
 
-      /*
-       * Since the range count is an upper bound we KNOW that the
+        /*
+         * Since the range count is an upper bound we KNOW that the
          * iterator would not visit anything.
          */
 
@@ -1231,8 +1225,8 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
 
       if (hasFilter) {
 
-      /*
-       * If there is a filter, then we need to visit the elements and
+        /*
+         * If there is a filter, then we need to visit the elements and
          * apply the filter to those elements.
          *
          * FIXME If the filter is properly driven through to the indices
@@ -1640,7 +1634,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
   private static final DiskCostModel diskCostModel = DiskCostModel.DEFAULT;
 
   //	/*
-//	 * Dumps the locators for an index of a relation.
+  //	 * Dumps the locators for an index of a relation.
   //	 *
   //	 * @param fed
   //	 * @param namespace

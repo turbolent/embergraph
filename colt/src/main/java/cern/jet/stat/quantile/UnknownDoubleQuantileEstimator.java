@@ -13,7 +13,7 @@ import cern.colt.list.ObjectArrayList;
 import cern.jet.random.engine.RandomEngine;
 import cern.jet.random.sampling.WeightedRandomSampler;
 /*
-* Approximate quantile finding algorithm for unknown <tt>N</tt> requiring only one pass and little
+ * Approximate quantile finding algorithm for unknown <tt>N</tt> requiring only one pass and little
  * main memory; computes quantiles over a sequence of <tt>double</tt> elements. This algorithm
  * requires at most two times the memory of a corresponding approx. quantile finder knowing
  * <tt>N</tt>.

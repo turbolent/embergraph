@@ -11,7 +11,7 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.util.Bytes;
 
 /*
-* Iterator using a {@link BTree} filter out duplicate (s,p,o) tuples.
+ * Iterator using a {@link BTree} filter out duplicate (s,p,o) tuples.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: DistinctSPOIterator.java 3472 2010-08-31 16:21:47Z thompsonbry $

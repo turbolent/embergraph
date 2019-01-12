@@ -17,21 +17,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.rules;
 
-import org.embergraph.bop.IPredicate;
-import org.embergraph.btree.BTree;
-import org.embergraph.journal.Journal;
-import org.embergraph.journal.TemporaryStore;
-import org.embergraph.rdf.inf.TruthMaintenance;
-import org.embergraph.rdf.store.AbstractTripleStore;
-import org.embergraph.rdf.store.LocalTripleStore;
-import org.embergraph.rdf.store.TempTripleStore;
-import org.embergraph.relation.accesspath.IBuffer;
-import org.embergraph.relation.rule.IProgram;
-import org.embergraph.relation.rule.IRule;
-import org.embergraph.service.IEmbergraphFederation;
-
 /*
-* Type-safe enumeration capturing the primary uses cases for rule execution.
+ * Type-safe enumeration capturing the primary uses cases for rule execution.
  *
  * <p>The uses cases here reduce to two basic variants: (a) Query using a read-consistent view; and
  * (b) Rules that write on a database. The latter has two twists: for {@link #TruthMaintenance} the

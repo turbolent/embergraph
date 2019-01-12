@@ -28,19 +28,17 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IVariable;
 import org.embergraph.bop.NamedSolutionSetRefUtility;
 import org.embergraph.bop.solutions.SolutionSetStream;
-import org.embergraph.btree.IndexMetadata;
 import org.embergraph.journal.IBTreeManager;
 import org.embergraph.journal.IJournal;
 import org.embergraph.journal.ITx;
 import org.embergraph.journal.TimestampUtility;
 import org.embergraph.rdf.sparql.ast.ISolutionSetStats;
 import org.embergraph.rdf.spo.ISPO;
-import org.embergraph.relation.AbstractResource;
 import org.embergraph.stream.Stream.StreamIndexMetadata;
 import org.embergraph.striterator.CloseableIteratorWrapper;
 
 /*
-* A manager for named SOLUTION SETS scoped by some namespace and timestamp.
+ * A manager for named SOLUTION SETS scoped by some namespace and timestamp.
  *
  * @see <a href="https://sourceforge.net/apps/mediawiki/bigdata/index.php?title=SPARQL_Update">
  *     SPARQL Update </a>
@@ -91,7 +89,7 @@ public class SolutionSetManager implements ISolutionSetManager {
   }
 
   //    /*
-//     * MVCC VIEWS: Convert over to Name2Addr and layered resolution with
+  //     * MVCC VIEWS: Convert over to Name2Addr and layered resolution with
   //     * appropriate concurrency control at each layer.
   //     *
   //     * <pre>
@@ -286,8 +284,8 @@ public class SolutionSetManager implements ISolutionSetManager {
       final long ts;
       if (getStore() instanceof IJournal) {
 
-      /*
-       * Optimized code path uses the readsOnCommitTime to improve
+        /*
+         * Optimized code path uses the readsOnCommitTime to improve
          * caching.
          */
 
@@ -299,8 +297,8 @@ public class SolutionSetManager implements ISolutionSetManager {
 
       } else {
 
-      /*
-       * Note: This code path is used by the TemporaryStore and possibly ResourceManager (for a
+        /*
+         * Note: This code path is used by the TemporaryStore and possibly ResourceManager (for a
          * data service). The [store] reference here is always the local index manager. Thus it can
          * not be an IEmbergraphFederation.
          *

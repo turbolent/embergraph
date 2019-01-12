@@ -3,7 +3,7 @@ package org.embergraph.bop;
 import java.io.Serializable;
 
 /*
-* An expression which may be evaluated to a value.
+ * An expression which may be evaluated to a value.
  *
  * @author mrpersonick
  */

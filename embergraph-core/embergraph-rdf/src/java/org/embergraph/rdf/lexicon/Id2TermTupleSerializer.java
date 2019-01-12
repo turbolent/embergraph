@@ -39,14 +39,12 @@ import org.embergraph.rdf.internal.IVUtility;
 import org.embergraph.rdf.internal.impl.TermId;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
-import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.rdf.model.EmbergraphValueSerializer;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.util.Bytes;
-import org.openrdf.model.Value;
 
 /*
-* Encapsulates key and value formation for the reverse lexicon index.
+ * Encapsulates key and value formation for the reverse lexicon index.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

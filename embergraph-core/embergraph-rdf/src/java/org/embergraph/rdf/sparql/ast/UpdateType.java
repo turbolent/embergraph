@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast;
 
 /*
-* Typesafe enumeration for SPARQL Graph Update and Graph Management operations.
+ * Typesafe enumeration for SPARQL Graph Update and Graph Management operations.
  *
  * @see http://www.w3.org/TR/sparql11-update/
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

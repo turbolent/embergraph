@@ -27,7 +27,7 @@ import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.sparql.ast.DummyConstantNode;
 
 /*
-* Default implementation of {@link IGeoSpatialLiteralSerializer}, translating literals of the form
+ * Default implementation of {@link IGeoSpatialLiteralSerializer}, translating literals of the form
  * F1#F2#...#Fn to a component string of length n and back.
  *
  * @author msc

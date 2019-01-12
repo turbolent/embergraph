@@ -32,7 +32,7 @@ import org.embergraph.sparse.ITPS;
 import org.embergraph.sparse.ITPV;
 
 /*
-* Test operations on the file metadata index for the {@link EmbergraphFileSystem}.
+ * Test operations on the file metadata index for the {@link EmbergraphFileSystem}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -270,14 +270,14 @@ public class TestFileMetadataIndex extends AbstractRepositoryTestCase {
        */
       {
 
-      /*
-       * all metadata for the file up to (but excluding) the create
+        /*
+         * all metadata for the file up to (but excluding) the create
          * time for version1.
          */
         ITPS tps = repo.readMetadata(id, createTime1 - 1L);
 
-      /*
-       * The version property for version0. This should have been
+        /*
+         * The version property for version0. This should have been
          * overwritten to be deleted (a null) immediately before the new
          * file version was created.
          */

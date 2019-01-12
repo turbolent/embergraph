@@ -35,7 +35,7 @@ import org.embergraph.journal.AbstractJournal.ISnapshotData;
 import org.embergraph.quorum.Quorum;
 
 /*
-* Take a snapshot of the journal.
+ * Take a snapshot of the journal.
  *
  * @author bryan
  * @see <a href="http://trac.bigdata.com/ticket/1080">Snapshot mechanism breaks with metabit
@@ -63,8 +63,7 @@ public class SnapshotTask implements Callable<ISnapshotResult> {
      *
      * <p>-Dorg.embergraph.journal.SnapshotTask.gzipBufferSize=65535
      */
-    String GZIP_BUFFER_SIZE =
-        SnapshotTask.class.getClass().getName() + ".gzipBufferSize";
+    String GZIP_BUFFER_SIZE = SnapshotTask.class.getClass().getName() + ".gzipBufferSize";
   }
 
   private static int getGzipBuffer() {
@@ -119,8 +118,8 @@ public class SnapshotTask implements Callable<ISnapshotResult> {
 
       if (file.exists() && file.length() != 0L) {
 
-      /*
-       * Snapshot exists and is not (logically) empty.
+        /*
+         * Snapshot exists and is not (logically) empty.
          *
          * Note: The SnapshotManager will not recommend taking a snapshot if
          * a snapshot already exists for the current commit point since
@@ -170,8 +169,8 @@ public class SnapshotTask implements Callable<ISnapshotResult> {
         // done.
         success = true;
       } catch (Throwable t) {
-      /*
-       * Log @ ERROR and launder throwable.
+        /*
+         * Log @ ERROR and launder throwable.
          */
         Journal.log.error(t, t);
         if (t instanceof Exception) throw (Exception) t;
@@ -194,8 +193,8 @@ public class SnapshotTask implements Callable<ISnapshotResult> {
           }
         }
 
-      /*
-       * Either rename the temporary file onto the target filename or
+        /*
+         * Either rename the temporary file onto the target filename or
          * delete the tempoary file. The snapshot is not considered to be
          * valid until it is found under the appropriate name.
          */

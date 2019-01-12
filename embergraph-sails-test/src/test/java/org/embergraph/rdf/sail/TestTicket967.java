@@ -63,9 +63,8 @@ public class TestTicket967 extends QuadsTestCase {
         } finally {
           stats.close();
         }
-        conn
-            .rollback(); // discard the result (or commit, but do something to avoid a logged
-                         // warning from Sesame).
+        conn.rollback(); // discard the result (or commit, but do something to avoid a logged
+        // warning from Sesame).
       } finally {
         conn.close();
       }

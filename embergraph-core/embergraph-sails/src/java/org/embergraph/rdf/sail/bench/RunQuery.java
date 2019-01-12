@@ -9,7 +9,6 @@ import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 import java.util.Properties;
 import org.apache.log4j.Logger;
-import org.embergraph.journal.Journal;
 import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sail.EmbergraphSailRepository;
 import org.embergraph.rdf.sail.EmbergraphSailRepositoryConnection;
@@ -19,7 +18,7 @@ import org.openrdf.query.TupleQueryResult;
 import org.openrdf.repository.sail.SailTupleQuery;
 
 /*
-* Open a journal and run a query against it - pretty much the only reason to use this class is if
+ * Open a journal and run a query against it - pretty much the only reason to use this class is if
  * you want to run the query under a debugger against a local {@link Journal}
  *
  * @author thompsonbry
@@ -136,8 +135,7 @@ public class RunQuery {
 
       try {
 
-        final EmbergraphSailRepositoryConnection cxn =
-            repository.getReadOnlyConnection();
+        final EmbergraphSailRepositoryConnection cxn = repository.getReadOnlyConnection();
 
         try {
 

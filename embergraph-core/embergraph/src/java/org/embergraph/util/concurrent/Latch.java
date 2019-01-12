@@ -23,7 +23,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.util.concurrent;
 
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.locks.Condition;
@@ -32,7 +31,7 @@ import org.apache.log4j.Logger;
 import org.embergraph.util.InnerCause;
 
 /*
-* A synchronization aid that allows one or more threads to await a counter becoming zero. Once the
+ * A synchronization aid that allows one or more threads to await a counter becoming zero. Once the
  * counter reaches zero, all waiting threads are released. Threads may invoke {@link #await()} any
  * time after the counter has been incremented. They will not be released until the counter is zero.
  * The typical pattern is to incrementing the counter before some operation and the decrement the

@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 
 /*
-* Helper class for normal shutdown of an {@link ExecutorService}.
+ * Helper class for normal shutdown of an {@link ExecutorService}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

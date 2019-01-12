@@ -36,7 +36,6 @@ import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.SPOKeyOrder;
 import org.embergraph.rdf.spo.SPOPredicate;
 import org.embergraph.rdf.spo.SPORelation;
-import org.embergraph.rdf.vocab.RDFSVocabulary;
 import org.embergraph.relation.IRelation;
 import org.embergraph.relation.RelationFusedView;
 import org.embergraph.relation.accesspath.IAccessPath;
@@ -53,7 +52,7 @@ import org.embergraph.relation.rule.eval.RuleStats;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /*
-* Rule used in steps 3, 5, 6, 7, and 9 of the fast forward closure program.
+ * Rule used in steps 3, 5, 6, 7, and 9 of the fast forward closure program.
  *
  * <pre>
  *    (?x, {P}, ?y) -&gt; (?x, propertyId, ?y)
@@ -261,8 +260,8 @@ public abstract class AbstractRuleFastClosure_3_5_6_7_9 extends Rule {
 
         if (IVUtility.equals(p, propertyId.get())) {
 
-        /*
-       * The rule refuses to consider triple patterns where the
+          /*
+           * The rule refuses to consider triple patterns where the
            * predicate for the subquery is the predicate for the
            * generated entailments since the support would then entail
            * itself.
@@ -304,8 +303,8 @@ public abstract class AbstractRuleFastClosure_3_5_6_7_9 extends Rule {
 
             for (ISPO spo : chunk) {
 
-            /*
-       * Note: since P includes rdfs:subPropertyOf (as
+              /*
+               * Note: since P includes rdfs:subPropertyOf (as
                * well as all of the sub-properties of
                * rdfs:subPropertyOf) there are going to be some
                * axioms in here that we really do not need to
@@ -381,8 +380,8 @@ public abstract class AbstractRuleFastClosure_3_5_6_7_9 extends Rule {
 
       if (view == null) {
 
-      /*
-       * Setup the [database] or [database + focusStore] view used to
+        /*
+         * Setup the [database] or [database + focusStore] view used to
          * compute the closure.
          */
         final IResourceLocator resourceLocator = joinNexus.getIndexManager().getResourceLocator();
@@ -508,8 +507,8 @@ public abstract class AbstractRuleFastClosure_3_5_6_7_9 extends Rule {
 
           tmp.clear();
 
-        /*
-       * query := (?x, p, ?y ) for each p in P, filter ?y element
+          /*
+           * query := (?x, p, ?y ) for each p in P, filter ?y element
            * of P.
            */
 
@@ -518,7 +517,7 @@ public abstract class AbstractRuleFastClosure_3_5_6_7_9 extends Rule {
             final SPOPredicate pred =
                 new SPOPredicate(
                     "view", // @todo the label here is ignored, but should be the ordered names of
-                            // the relations in the view.
+                    // the relations in the view.
                     Var.var("x"),
                     new Constant<IV>(p),
                     Var.var("y"));

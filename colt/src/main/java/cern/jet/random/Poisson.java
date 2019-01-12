@@ -12,7 +12,7 @@ import cern.jet.math.Arithmetic;
 import cern.jet.random.engine.RandomEngine;
 import cern.jet.stat.Probability;
 /*
-* Poisson distribution (quick); See the <A
+ * Poisson distribution (quick); See the <A
  * HREF="http://www.cern.ch/RD11/rkb/AN16pp/node208.html#SECTION0002080000000000000000"> math
  * definition</A> and <A HREF="http://www.statsoft.com/textbook/glosp.html#Poisson Distribution">
  * animated definition</A>.
@@ -66,9 +66,8 @@ public class Poisson extends AbstractDiscreteDistribution {
   protected int m;
 
   protected static final double MEAN_MAX =
-      Integer
-          .MAX_VALUE; // for all means larger than that, we don't try to compute a poisson
-                      // deviation, but return the mean.
+      Integer.MAX_VALUE; // for all means larger than that, we don't try to compute a poisson
+  // deviation, but return the mean.
   protected static final double SWITCH_MEAN = 10.0; // switch from method A to method B
 
   // The uniform random number generated shared by all <b>static</b> methods.

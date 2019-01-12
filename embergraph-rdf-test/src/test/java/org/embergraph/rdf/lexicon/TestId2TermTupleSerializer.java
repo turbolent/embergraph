@@ -37,7 +37,7 @@ import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Test suite for {@link Id2TermTupleSerializer}.
+ * Test suite for {@link Id2TermTupleSerializer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

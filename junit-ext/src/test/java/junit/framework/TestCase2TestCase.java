@@ -27,7 +27,7 @@ import java.io.OutputStream;
 import java.util.Random;
 
 /*
-* Test case for {@link TestCase2}.
+ * Test case for {@link TestCase2}.
  *
  * <p>Note: These tests are not very through.
  *

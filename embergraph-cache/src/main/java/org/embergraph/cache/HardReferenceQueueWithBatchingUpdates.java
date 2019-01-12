@@ -23,13 +23,12 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.cache;
 
-import java.util.Queue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /*
-* A variant relying on thread-local {@link IHardReferenceQueue}s to batch updates and thus minimize
+ * A variant relying on thread-local {@link IHardReferenceQueue}s to batch updates and thus minimize
  * thread contention for the lock required to synchronize calls to {@link #add(Object)}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -106,7 +105,7 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
   private final HardReferenceQueueEvictionListener<T> threadLocalQueueEvictionListener;
 
   //    /*
-//     * @param listener
+  //     * @param listener
   //     *            The eviction listener (sees only evictions from the outer
   //     *            class).
   //     * @param capacity
@@ -192,8 +191,8 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
     this.threadLocalQueueEvictionListener =
         new HardReferenceQueueEvictionListener<T>() {
 
-        /*
-       * Add the reference to the backing queue for the outer class. The caller MUST hold the
+          /*
+           * Add the reference to the backing queue for the outer class. The caller MUST hold the
            * outer class lock.
            */
           public void evicted(final IHardReferenceQueue<T> cache, final T ref) {
@@ -279,8 +278,8 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
                       batchedUpdatedListener))
           != null) {
 
-      /*
-       * Note: Since the key is the thread it is not possible for there to
+        /*
+         * Note: Since the key is the thread it is not possible for there to
          * be a concurrent put of an entry under the same key so we do not
          * have to use putIfAbsent().
          */
@@ -293,7 +292,7 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
   }
 
   //    /*
-//     * Acquire a {@link BatchQueue} from an internal array of {@link BatchQueue}
+  //     * Acquire a {@link BatchQueue} from an internal array of {@link BatchQueue}
   //     * instances using a striped lock pattern.
   //     */
   //    private BatchQueue<T> acquire() throws InterruptedException {
@@ -309,7 +308,7 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
   //    }
   //
   //    /*
-//     * Release a {@link BatchQueue} obtained using {@link #acquire()}.
+  //     * Release a {@link BatchQueue} obtained using {@link #acquire()}.
   //     *
   //     * @param b
   //     *            The {@link BatchQueue}.
@@ -330,7 +329,7 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
     return sharedQueue.size();
   }
   //    /*
-//     * Reports the combined size of the thread-local queue plus the shared
+  //     * Reports the combined size of the thread-local queue plus the shared
   //     * queue.
   //     */
   //    public int size() {
@@ -655,8 +654,8 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
 
         if (lock.tryLock()) {
 
-        /*
-       * Batch evict all references to the outer class's queue.
+          /*
+           * Batch evict all references to the outer class's queue.
            */
 
           try {
@@ -682,8 +681,8 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
       // @todo why does this fail if written as (size == capacity)???
       if (size + 1 == capacity) {
 
-      /*
-       * If at capacity, batch evict all references to the outer
+        /*
+         * If at capacity, batch evict all references to the outer
          * class's queue.
          */
 
@@ -744,8 +743,8 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
       //            assert lock.isHeldByCurrentThread();
       if (clearRefs) {
 
-      /*
-       * Evict all references, clearing each as we go.
+        /*
+         * Evict all references, clearing each as we go.
          */
 
         while (!isEmpty()) { // count > 0 ) {
@@ -755,8 +754,8 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
 
       } else {
 
-      /*
-       * Generate eviction notices in LRU to MRU order but do NOT clear
+        /*
+         * Generate eviction notices in LRU to MRU order but do NOT clear
          * the references.
          */
 

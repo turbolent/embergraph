@@ -35,7 +35,7 @@ import org.openrdf.query.TupleQueryResult;
 import org.openrdf.query.impl.BindingImpl;
 
 /*
-* Unit tests the optionals aspects of the {@link EmbergraphSail} implementation.
+ * Unit tests the optionals aspects of the {@link EmbergraphSail} implementation.
  *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
@@ -87,8 +87,7 @@ public class TestOptionals extends QuadsTestCase {
     final EmbergraphSail sail = getSail();
     sail.initialize();
     final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-    final EmbergraphSailRepositoryConnection cxn =
-        repo.getConnection();
+    final EmbergraphSailRepositoryConnection cxn = repo.getConnection();
     cxn.setAutoCommit(false);
 
     try {
@@ -169,8 +168,7 @@ public class TestOptionals extends QuadsTestCase {
     final EmbergraphSail sail = getSail(properties);
     sail.initialize();
     final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-    final EmbergraphSailRepositoryConnection cxn =
-        repo.getConnection();
+    final EmbergraphSailRepositoryConnection cxn = repo.getConnection();
     cxn.setAutoCommit(false);
 
     try {

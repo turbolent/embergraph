@@ -19,10 +19,9 @@
 package junit.extensions.proxy;
 
 import junit.framework.Test;
-import junit.framework.TestCase;
 
 /*
-* A {@link Test} that holds a reference to a delegate. Normally the delegate will extend {@link
+ * A {@link Test} that holds a reference to a delegate. Normally the delegate will extend {@link
  * TestCase} to provide, possibly persistent, implementation specific logic for establishing test
  * fixtures. The delegate is normally an instance of your concrete implementation specific test
  * harness with access to any required configuration data, e.g., a properties file.

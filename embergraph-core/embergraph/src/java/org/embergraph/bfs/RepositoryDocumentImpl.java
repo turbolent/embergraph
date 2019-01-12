@@ -11,7 +11,7 @@ import org.embergraph.sparse.ITPS;
 import org.embergraph.sparse.ITPV;
 
 /*
-* A read-only view of a {@link Document} that has been read from a {@link EmbergraphFileSystem}.
+ * A read-only view of a {@link Document} that has been read from a {@link EmbergraphFileSystem}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -61,14 +61,14 @@ public class RepositoryDocumentImpl implements DocumentHeader, Document {
 
       if (tmp.getValue() != null) {
 
-      /*
-       * Note the current version identifer.
+        /*
+         * Note the current version identifer.
          */
 
         this.version = (Integer) tmp.getValue();
 
-      /*
-       * Save a simplifed view of the propery set for the current
+        /*
+         * Save a simplifed view of the propery set for the current
          * version.
          */
 
@@ -78,8 +78,8 @@ public class RepositoryDocumentImpl implements DocumentHeader, Document {
 
       } else {
 
-      /*
-       * No current version.
+        /*
+         * No current version.
          */
 
         this.version = -1;

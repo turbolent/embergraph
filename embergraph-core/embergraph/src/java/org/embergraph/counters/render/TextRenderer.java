@@ -32,7 +32,7 @@ import org.embergraph.counters.query.PivotTable;
 import org.embergraph.counters.query.URLQueryModel;
 
 /*
-* {@link IRenderer} for <code>text/plain</code>.
+ * {@link IRenderer} for <code>text/plain</code>.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -112,8 +112,8 @@ public class TextRenderer implements IRenderer {
       case events:
       case hierarchy:
       default:
-      /*
-       * An unrecognized value or unsupported report type.
+        /*
+         * An unrecognized value or unsupported report type.
          */
         throw new UnsupportedOperationException(model.reportType.toString());
     }

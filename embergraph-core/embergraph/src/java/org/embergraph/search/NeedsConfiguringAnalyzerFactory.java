@@ -48,7 +48,7 @@ import org.embergraph.search.ConfigurableAnalyzerFactory.AnalyzerOptions;
 import org.embergraph.search.ConfigurableAnalyzerFactory.Options;
 
 /*
-* The bulk of the code in this class is invoked from {@link #init()} to set up the array of {@link
+ * The bulk of the code in this class is invoked from {@link #init()} to set up the array of {@link
  * ConfiguredAnalyzerFactory.AnalyzerPair}s. For example, all of the subclasses of {@link
  * AnalyzerPair}s, are simply to call the appropriate constructor in the appropriate way: the
  * difficulty is that many subclasses of {@link Analyzer} have constructors with different

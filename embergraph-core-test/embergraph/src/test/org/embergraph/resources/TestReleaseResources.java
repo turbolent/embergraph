@@ -33,7 +33,7 @@ import org.embergraph.rawstore.IRawStore;
 import org.embergraph.service.AbstractTransactionService;
 
 /*
-* Test release (aka purge) of old resources.
+ * Test release (aka purge) of old resources.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -67,7 +67,7 @@ public class TestReleaseResources extends AbstractResourceManagerTestCase {
   //    }
 
   //    /*
-//     * A unit test for the logic which determines which resources are "release
+  //     * A unit test for the logic which determines which resources are "release
   //     * free" as of a given commit time to be preserved (aka, resource which are
   //     * not required for views based on any commit point from the timestamp to be
   //     * preserved up to and including the unisolated views).
@@ -79,13 +79,13 @@ public class TestReleaseResources extends AbstractResourceManagerTestCase {
   //
   //
   //        /*
-//         *
+  //         *
   //         */
   //        public TestReleaseFree() {
   //        }
   //
   //        /*
-//         * @param arg0
+  //         * @param arg0
   //         */
   //        public TestReleaseFree(String arg0) {
   //            super(arg0);
@@ -108,7 +108,7 @@ public class TestReleaseResources extends AbstractResourceManagerTestCase {
   //        }
   //
   //        /*
-//         * Test creates a sequence of view declarations for an index and
+  //         * Test creates a sequence of view declarations for an index and
   //         * verifies that the correct set of resources are identified as being
   //         * in-use for a variety of timestamps.
   //         *

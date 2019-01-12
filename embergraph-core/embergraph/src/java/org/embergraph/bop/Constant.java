@@ -18,10 +18,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop;
 
 import java.util.Collections;
-import org.embergraph.rdf.sparql.ast.FilterNode;
 
 /*
-* A constant.
+ * A constant.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -72,7 +71,7 @@ public final class Constant<E> extends ImmutableBOp implements IConstant<E> {
   }
 
   //    /*
-//     * Required shallow copy constructor.
+  //     * Required shallow copy constructor.
   //     *
   //     * @param op
   //     */
@@ -240,7 +239,6 @@ public final class Constant<E> extends ImmutableBOp implements IConstant<E> {
 
     // compares non-null value with the other value.
     return value.equals(otherValue);
-
   }
 
   @Override

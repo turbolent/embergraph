@@ -231,7 +231,7 @@ public abstract class AbstractTestEmbergraphGraph extends TestCase2 {
   //				final EmbergraphGraph graph = new EmbergraphGraphEmbedded(repo) {
   //
   //				    /*
-//				     * Test cases have weird semantics for shutdown.
+  //				     * Test cases have weird semantics for shutdown.
   //				     */
   //					@Override
   //					public void shutdown() {

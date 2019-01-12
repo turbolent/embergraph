@@ -10,7 +10,7 @@ package cern.colt.list;
 
 import cern.colt.function.BooleanProcedure;
 /*
-* Abstract base class for resizable lists holding <code>boolean</code> elements; abstract. First
+ * Abstract base class for resizable lists holding <code>boolean</code> elements; abstract. First
  * see the <a href="package-summary.html">package summary</a> and javadoc <a
  * href="package-tree.html">tree view</a> to get the broad picture.
  */

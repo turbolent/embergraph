@@ -25,10 +25,9 @@ package org.embergraph.service;
 
 import java.io.IOException;
 import java.rmi.Remote;
-import java.util.UUID;
 
 /*
-* Remote interface for a service which can receive {@link Event}s.
+ * Remote interface for a service which can receive {@link Event}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -40,8 +40,7 @@ public class BlueprintsServlet extends BlueprintsServletProxy {
 
   private static final transient Logger log = Logger.getLogger(BlueprintsServlet.class);
 
-  public static final List<String> mimeTypes =
-      Arrays.asList("application/graphml+xml");
+  public static final List<String> mimeTypes = Arrays.asList("application/graphml+xml");
 
   public BlueprintsServlet() {}
 

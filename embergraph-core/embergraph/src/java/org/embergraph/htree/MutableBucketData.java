@@ -23,19 +23,15 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.htree;
 
 import org.embergraph.btree.AbstractBTree;
-import org.embergraph.btree.ITuple;
-import org.embergraph.btree.IndexSegment;
-import org.embergraph.btree.MutableLeafData;
 import org.embergraph.btree.data.ILeafData;
 import org.embergraph.btree.raba.IRaba;
 import org.embergraph.htree.raba.MutableKeyBuffer;
 import org.embergraph.htree.raba.MutableValueBuffer;
 import org.embergraph.io.AbstractFixedByteArrayBuffer;
-import org.embergraph.io.IDataRecord;
 import org.embergraph.rawstore.IRawStore;
 
 /*
-* Implementation maintains Java objects corresponding to the persistent data and defines methods
+ * Implementation maintains Java objects corresponding to the persistent data and defines methods
  * for a variety of mutations on the {@link ILeafData} record which operate by direct manipulation
  * of the Java objects. The bucket page is logically divided into buddy hash buckets. Unlike a
  * B+Tree, the tuples are neither ordered nor dense and the same key MAY appear multiple times
@@ -338,7 +334,7 @@ public class MutableBucketData implements ILeafData {
   }
 
   //    /*
-//     * For a leaf the #of entries is always the #of keys.
+  //     * For a leaf the #of entries is always the #of keys.
   //     */
   //    final public int getSpannedTupleCount() {
   //

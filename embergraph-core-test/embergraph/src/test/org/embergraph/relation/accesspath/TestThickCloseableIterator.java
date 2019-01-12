@@ -28,7 +28,7 @@ import junit.framework.TestCase2;
 import org.embergraph.io.SerializerUtil;
 
 /*
-* Unit tests for {@link ThickCloseableIterator}.
+ * Unit tests for {@link ThickCloseableIterator}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

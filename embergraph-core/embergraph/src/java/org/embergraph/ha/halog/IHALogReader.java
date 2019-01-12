@@ -24,10 +24,7 @@ import java.nio.ByteBuffer;
 import java.security.DigestException;
 import java.security.MessageDigest;
 import org.embergraph.ha.msg.IHAWriteMessage;
-import org.embergraph.io.DirectBufferPool;
-import org.embergraph.journal.IHABufferStrategy;
 import org.embergraph.journal.IRootBlockView;
-import org.embergraph.journal.WORMStrategy;
 
 /** Interface for reading on an HA Log. */
 public interface IHALogReader {

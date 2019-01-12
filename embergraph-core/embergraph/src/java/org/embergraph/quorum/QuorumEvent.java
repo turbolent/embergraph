@@ -24,7 +24,7 @@ package org.embergraph.quorum;
 import java.util.UUID;
 
 /*
-* An interface for informational quorum events. These events are intended for clients interested in
+ * An interface for informational quorum events. These events are intended for clients interested in
  * quorum state changes. Services that are HA aware use a more intimate API to handle the state
  * changes.
  *

@@ -7,7 +7,7 @@ import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.util.Bytes;
 
 /*
-* Extracts the block identifier from the key.
+ * Extracts the block identifier from the key.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

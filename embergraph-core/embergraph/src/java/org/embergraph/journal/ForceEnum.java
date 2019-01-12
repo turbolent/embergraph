@@ -21,11 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.journal;
 
-import java.io.RandomAccessFile;
-import java.nio.channels.FileChannel;
-
 /*
-* Type safe enumeration of options governing whether and how a file is forced to stable storage.
+ * Type safe enumeration of options governing whether and how a file is forced to stable storage.
  * This enum is used for a variety of behaviors, including commit semantics and the mode in which
  * the {@link RandomAccessFile} is opened.
  *

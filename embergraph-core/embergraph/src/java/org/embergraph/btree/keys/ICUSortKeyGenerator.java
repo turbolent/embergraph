@@ -27,7 +27,7 @@ import java.util.Locale;
 import org.apache.log4j.Logger;
 
 /*
-* Implementation that uses the ICU library (which supports compressed sort keys).
+ * Implementation that uses the ICU library (which supports compressed sort keys).
  *
  * <p>This class uses <a href="http://icu.sourceforge.net">ICU4J</a>. There are several advantages
  * to the ICU libraries: (1) the collation keys are compressed; (2) the libraries are faster than

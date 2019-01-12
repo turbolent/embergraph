@@ -37,7 +37,7 @@ import org.embergraph.mdi.PartitionLocator;
 import org.embergraph.service.ndx.RawDataServiceTupleIterator;
 
 /*
-* Implementation caches all locators but does not allow stale locators. This is useful for
+ * Implementation caches all locators but does not allow stale locators. This is useful for
  * read-historical index views since locators can not become stale for a historical view.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

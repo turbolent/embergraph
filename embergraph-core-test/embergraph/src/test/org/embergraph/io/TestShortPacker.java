@@ -30,7 +30,7 @@ import java.util.Random;
 import junit.framework.TestCase;
 
 /*
-* Test suite for packing and unpacking unsigned short integers using the {@link DataInputBuffer}
+ * Test suite for packing and unpacking unsigned short integers using the {@link DataInputBuffer}
  * and the {@link ByteArrayBuffer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -349,8 +349,8 @@ public class TestShortPacker extends TestCase {
 
       for (int i = 0; i < limit; i++) {
 
-      /*
-       * Random non-negative short integer. 1% of the time we will use
+        /*
+         * Random non-negative short integer. 1% of the time we will use
          * 0 instead.
          */
 
@@ -407,8 +407,8 @@ public class TestShortPacker extends TestCase {
 
       for (int i = 0; i < limit; i++) {
 
-      /*
-       * Random non-negative short integer. 1% of the time we will use
+        /*
+         * Random non-negative short integer. 1% of the time we will use
          * 0L instead.
          */
 

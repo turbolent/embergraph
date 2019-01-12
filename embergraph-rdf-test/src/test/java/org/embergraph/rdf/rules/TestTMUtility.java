@@ -31,7 +31,7 @@ import org.embergraph.relation.rule.Program;
 import org.embergraph.relation.rule.Rule;
 
 /*
-* Test suite for rule re-writes supporting truth maintenance for the RDF DB. This does NOT test the
+ * Test suite for rule re-writes supporting truth maintenance for the RDF DB. This does NOT test the
  * execution of those rules or their role in truth maintenance.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

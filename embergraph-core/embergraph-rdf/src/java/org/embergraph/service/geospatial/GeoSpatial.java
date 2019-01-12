@@ -25,7 +25,7 @@ import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
 /*
-* A vocabulary for geospatial extension querying, designed to operate over the default index
+ * A vocabulary for geospatial extension querying, designed to operate over the default index
  * configuration (lat, lon, time).
  *
  * <p>Example: find all points in the rectangle spanned from (0.00001, 0.00002) to (0.00003,
@@ -122,12 +122,10 @@ public interface GeoSpatial {
   String NAMESPACE = "http://www.embergraph.org/rdf/geospatial#";
 
   // do not use anymore -- need to be retained because it is linked by old vocabulary class
-  @Deprecated
-  URI DEFAULT_DATATYPE = new URIImpl(NAMESPACE + "geoSpatialLiteral");
+  @Deprecated URI DEFAULT_DATATYPE = new URIImpl(NAMESPACE + "geoSpatialLiteral");
 
   /** The default datatype to be used for GeoSpatial literals. */
-  String GEOSPATIAL_LITERAL_PREFIX_V1 =
-      "http://www.embergraph.org/rdf/geospatial/literals/v1#";
+  String GEOSPATIAL_LITERAL_PREFIX_V1 = "http://www.embergraph.org/rdf/geospatial/literals/v1#";
 
   String GEOSPATIAL_LITERAL_V1_LAT_LON = GEOSPATIAL_LITERAL_PREFIX_V1 + "lat-lon";
   String GEOSPATIAL_LITERAL_V1_LAT_LON_TIME = GEOSPATIAL_LITERAL_PREFIX_V1 + "lat-lon-time";

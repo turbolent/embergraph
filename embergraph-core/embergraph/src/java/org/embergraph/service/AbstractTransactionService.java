@@ -41,19 +41,16 @@ import org.embergraph.config.LongValidator;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.ICounterSetAccess;
 import org.embergraph.counters.Instrument;
-import org.embergraph.ha.HAStatusEnum;
 import org.embergraph.journal.ITransactionService;
 import org.embergraph.journal.ITx;
-import org.embergraph.journal.Journal;
 import org.embergraph.journal.RunState;
 import org.embergraph.journal.TimestampUtility;
 import org.embergraph.journal.ValidationError;
-import org.embergraph.resources.ResourceManager;
 import org.embergraph.util.InnerCause;
 import org.embergraph.util.MillisecondTimestampFactory;
 
 /*
-* Centralized transaction manager service. In response to a client request, the transaction manager
+ * Centralized transaction manager service. In response to a client request, the transaction manager
  * will distribute prepare/commit or abort operations to all data services on which writes were made
  * by a transaction. The transaction manager also provides global timestamps required for
  * non-transactional commit points and various other purposes.
@@ -450,8 +447,8 @@ public abstract class AbstractTransactionService extends AbstractService
 
         if (state == null) {
 
-        /*
-       * Note: concurrent removal or clearing of the weak
+          /*
+           * Note: concurrent removal or clearing of the weak
            * reference is possible.
            */
 
@@ -486,8 +483,8 @@ public abstract class AbstractTransactionService extends AbstractService
 
           state.lock.unlock();
 
-        /*
-       * Note: We are already holding the outer lock so we do not
+          /*
+           * Note: We are already holding the outer lock so we do not
            * need to acquire it here.
            */
           updateReleaseTime(Math.abs(state.tx), null /* deactivatedTx */);
@@ -709,7 +706,7 @@ public abstract class AbstractTransactionService extends AbstractService
   }
 
   //    /*
-//     * The minimum over the absolute values of the active transactions.
+  //     * The minimum over the absolute values of the active transactions.
   //     * <p>
   //     * Note: This is a transaction identifier. It is NOT the commitTime on which
   //     * that transaction is reading.
@@ -929,8 +926,8 @@ public abstract class AbstractTransactionService extends AbstractService
 
       if (this.earliestOpenTx == null || Math.abs(state.tx) < Math.abs(this.earliestOpenTx.tx)) {
 
-      /*
-       * This is the earliest open transaction. This is defined as the
+        /*
+         * This is the earliest open transaction. This is defined as the
          * transaction whose readsOnCommitTime is LTE all other
          * transactions and whose absolute txId value is LT all other
          * transactions. Since we assign the txIds in intervals GTE the
@@ -945,8 +942,8 @@ public abstract class AbstractTransactionService extends AbstractService
 
       synchronized (startTimeIndex) {
 
-      /*
-       * Note: Using the absolute value of the assigned timestamp so
+        /*
+         * Note: Using the absolute value of the assigned timestamp so
          * that the index is ordered earliest to most recent. This means
          * that the absolute value of the timestamps must be unique,
          * otherwise this will throw out an exception.
@@ -1212,8 +1209,8 @@ public abstract class AbstractTransactionService extends AbstractService
 
           if (tmp == null) {
 
-          /*
-       * Transaction is no longer active (and no longer in the
+            /*
+             * Transaction is no longer active (and no longer in the
              * activeTx map).
              */
 
@@ -1259,8 +1256,8 @@ public abstract class AbstractTransactionService extends AbstractService
 
       } else {
 
-      /*
-       * There are no commit points and there are no active
+        /*
+         * There are no commit points and there are no active
          * transactions.
          */
 
@@ -1679,8 +1676,8 @@ public abstract class AbstractTransactionService extends AbstractService
 
         if (activeTx.containsKey(t) || activeTx.containsKey(-t)) {
 
-        /*
-       * Note: We do not accept an active read-only startTime.
+          /*
+           * Note: We do not accept an active read-only startTime.
            *
            * Note: We do not accept a start time that corresponds to
            * the absolute value of an active read-write transaction
@@ -1857,8 +1854,8 @@ public abstract class AbstractTransactionService extends AbstractService
             deactivateTx(state);
           }
         } finally {
-        /*
-       * Note: This avoids a lock ordering problem by releasing
+          /*
+           * Note: This avoids a lock ordering problem by releasing
            * the inner lock (state.lock) before acquiring the order
            * lock.
            */
@@ -1867,8 +1864,8 @@ public abstract class AbstractTransactionService extends AbstractService
             lock.lock();
             try {
               updateReleaseTime(Math.abs(state.tx), state /*deactivatedTx*/);
-            /*
-       * Note: signalAll() is required. See code that
+              /*
+               * Note: signalAll() is required. See code that
                * searches the half-open range for a
                * read-historical timestamp. It waits on this
                * signal, but there can be more than one request
@@ -1953,8 +1950,8 @@ public abstract class AbstractTransactionService extends AbstractService
             deactivateTx(state);
           }
         } finally {
-        /*
-       * Note: This avoids a lock ordering problem by releasing
+          /*
+           * Note: This avoids a lock ordering problem by releasing
            * the inner lock (state.lock) before acquiring the order
            * lock.
            */
@@ -1963,8 +1960,8 @@ public abstract class AbstractTransactionService extends AbstractService
             lock.lock();
             try {
               updateReleaseTime(Math.abs(state.tx), state /*deactivatedTx*/);
-            /*
-       * Note: signalAll() is required. See code that
+              /*
+               * Note: signalAll() is required. See code that
                * searches the half-open range for a
                * read-historical timestamp. It waits on this
                * signal, but there can be more than one request
@@ -2258,7 +2255,7 @@ public abstract class AbstractTransactionService extends AbstractService
     }
 
     //        /*
-//         * Return <code>true</code> if the transaction is read-only or if a
+    //         * Return <code>true</code> if the transaction is read-only or if a
     //         * read-write transaction has not been started on any
     //         * {@link IDataService}s.
     //         * <p>

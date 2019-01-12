@@ -19,7 +19,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /*
-* Resolverator
+ * Resolverator
  *
  * <p>Initialized with a Resolver object, wraps a standard iterator and resolves each returned
  * object

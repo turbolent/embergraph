@@ -26,7 +26,7 @@ import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleIterator;
 
 /*
-* Empty iterator.
+ * Empty iterator.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

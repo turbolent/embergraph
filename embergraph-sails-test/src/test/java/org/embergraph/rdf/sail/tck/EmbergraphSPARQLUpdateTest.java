@@ -50,7 +50,7 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
 /*
-* Integration with the openrdf SPARQL 1.1 update test suite.
+ * Integration with the openrdf SPARQL 1.1 update test suite.
  *
  * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/531" > SPARQL UPDATE for NAMED
  *     SOLUTION SETS </a>

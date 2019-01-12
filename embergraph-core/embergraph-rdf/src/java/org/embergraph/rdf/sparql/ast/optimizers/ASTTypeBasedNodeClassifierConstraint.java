@@ -23,7 +23,7 @@ package org.embergraph.rdf.sparql.ast.optimizers;
 import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
 
 /*
-* Additional constraint associated with an {@link ASTTypeBasedNodeClassifier}.
+ * Additional constraint associated with an {@link ASTTypeBasedNodeClassifier}.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  */

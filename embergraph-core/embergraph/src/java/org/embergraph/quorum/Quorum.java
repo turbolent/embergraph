@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 /*
-* A quorum is a collection of services instances comprising the same logical service. The {@link
+ * A quorum is a collection of services instances comprising the same logical service. The {@link
  * Quorum} interface provides a view of the quorum from the perspective of one of those member
  * services. A quorum has a replication factor <em>k</em>. A member service may "join" with a quorum
  * when it shares an agreement with at least (k+1)/2 other quorum members concerning its state. When

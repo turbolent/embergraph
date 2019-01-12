@@ -21,7 +21,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.rdf.update;
 
-import java.beans.Statement;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Callable;
@@ -29,13 +28,11 @@ import java.util.concurrent.FutureTask;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpContext;
 import org.embergraph.bop.IBindingSet;
-import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.internal.IVCache;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /*
-* Vectored insert operator for RDF Statements. The solutions flowing through this operator MUST
+ * Vectored insert operator for RDF Statements. The solutions flowing through this operator MUST
  * bind the <code>s</code>, <code>p</code>, <code>o</code>, and (depending on the database mode) MAY
  * bind the <code>c</code> variable. Those variables correspond to the Subject, Predicate, Object,
  * and Context/Graph position of an RDF {@link Statement} respectively. On input, the variables must

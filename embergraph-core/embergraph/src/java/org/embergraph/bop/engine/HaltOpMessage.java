@@ -8,7 +8,7 @@ import java.util.UUID;
 import org.embergraph.io.LongPacker;
 
 /*
-* A message sent to the {@link IQueryClient} when an operator is done executing for some chunk of
+ * A message sent to the {@link IQueryClient} when an operator is done executing for some chunk of
  * inputs.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

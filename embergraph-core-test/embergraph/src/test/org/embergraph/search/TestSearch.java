@@ -30,7 +30,7 @@ import java.util.concurrent.TimeUnit;
 import org.embergraph.rdf.lexicon.ITextIndexer.FullTextQuery;
 
 /*
-* Test suite using examples based on <a
+ * Test suite using examples based on <a
  * href="http://www.ec-securehost.com/SIAM/SE17.html"><i>Understanding Search Engines</i></a> by
  * Barry and Browne. I recommend the book as a good overview of search engine basis and an excellent
  * reader for latent semantic indexing (Barry was one of the original people involved with LSI).

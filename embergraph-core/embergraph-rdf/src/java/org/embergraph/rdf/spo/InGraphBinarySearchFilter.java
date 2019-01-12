@@ -11,7 +11,7 @@ import org.embergraph.rdf.model.EmbergraphURI;
 import org.openrdf.model.URI;
 
 /*
-* "IN" filter for the context position based on a sorted long[] of the acceptable graph
+ * "IN" filter for the context position based on a sorted long[] of the acceptable graph
  * identifiers. While evaluation of the access path will be ordered, the filter does not maintain
  * evolving state so a hash set will likely beat a binary search.
  *

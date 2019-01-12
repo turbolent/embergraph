@@ -6,14 +6,12 @@
   <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
   <!ENTITY owl "http://www.w3.org/2002/07/owl#">
   <!ENTITY ns_transport "file://www.ibm.com/WSRR/Transport#">
-]>
+  ]>
 
 <rdf:RDF
-  xmlns:xsd="&xsd;"
   xmlns:rdf="&rdf;"
   xmlns:rdfs="&rdfs;"
   xmlns:owl="&owl;"
-  xmlns:ns_transport="&ns_transport;"
 >
 
   <owl:Ontology rdf:about="&ns_transport;TransportOntology">

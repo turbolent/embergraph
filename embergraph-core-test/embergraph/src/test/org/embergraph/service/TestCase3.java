@@ -23,11 +23,10 @@ package org.embergraph.service;
 
 import java.nio.ByteBuffer;
 import java.util.Random;
-import junit.framework.TestCase;
 import junit.framework.TestCase2;
 
 /*
-* Base class for some <code>assertEquals</code> methods not covered by {@link TestCase} or {@link
+ * Base class for some <code>assertEquals</code> methods not covered by {@link TestCase} or {@link
  * TestCase2}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

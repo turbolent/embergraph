@@ -9,7 +9,7 @@ import org.embergraph.counters.httpd.CounterSetHTTPD;
 import org.embergraph.util.httpd.AbstractHTTPD;
 
 /*
-* Default {@link IFederationDelegate} implementation used by a standard client. This may be
+ * Default {@link IFederationDelegate} implementation used by a standard client. This may be
  * extended or replaced using {@link AbstractClient#setDelegate(IFederationDelegate)}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

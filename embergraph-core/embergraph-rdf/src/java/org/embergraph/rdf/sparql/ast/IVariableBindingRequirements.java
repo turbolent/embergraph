@@ -24,7 +24,7 @@ import java.util.Set;
 import org.embergraph.bop.IVariable;
 
 /*
-* Interface describing constraints and desiderata w.r.t. variable bindings that should, must, or
+ * Interface describing constraints and desiderata w.r.t. variable bindings that should, must, or
  * must not be present at the time when executing the construct.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>

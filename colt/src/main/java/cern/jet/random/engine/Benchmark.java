@@ -9,7 +9,7 @@ It is provided "as is" without expressed or implied warranty.
 package cern.jet.random.engine;
 
 /*
-* Benchmarks the performance of the currently provided uniform pseudo-random number generation
+ * Benchmarks the performance of the currently provided uniform pseudo-random number generation
  * engines.
  *
  * <p>All distributions are obtained by using a <b>uniform</b> pseudo-random number generation

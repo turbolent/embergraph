@@ -3,18 +3,14 @@ package org.embergraph.resources;
 import java.lang.ref.SoftReference;
 import java.util.HashMap;
 import java.util.Map;
-import org.embergraph.btree.BTree;
 import org.embergraph.btree.BTreeCounters;
 import org.embergraph.btree.ILocalBTreeView;
-import org.embergraph.btree.ISimpleSplitHandler;
-import org.embergraph.btree.IndexSegment;
 import org.embergraph.mdi.IMetadataIndex;
-import org.embergraph.service.Event;
 import org.embergraph.service.Params;
 import org.embergraph.util.InnerCause;
 
 /*
-* Adds additional metadata to a {@link BTreeMetadata} that deals with the index partition view,
+ * Adds additional metadata to a {@link BTreeMetadata} that deals with the index partition view,
  * including its fast rangeCount, its {@link ISimpleSplitHandler}, etc.
  *
  * <p>Note: There is overhead in opening a view comprised of more than just the mutable {@link
@@ -168,8 +164,8 @@ class ViewMetadata extends BTreeMetadata implements Params {
 
           if (npartitions == 0) {
 
-          /*
-       * There must always be at least one index partition for
+            /*
+             * There must always be at least one index partition for
              * a scale-out index so this is an error condition.
              */
             log.error("No partitions? name=" + indexMetadata.getName());
@@ -184,8 +180,8 @@ class ViewMetadata extends BTreeMetadata implements Params {
           throw new RuntimeException(t);
         }
 
-      /*
-       * Traps any RMI failures (or anything else), logs a warning,
+        /*
+         * Traps any RMI failures (or anything else), logs a warning,
          * and reports npartitions as -1L.
          */
 
@@ -212,8 +208,8 @@ class ViewMetadata extends BTreeMetadata implements Params {
 
       } else {
 
-      /*
-       * discount: given T=100:
+        /*
+         * discount: given T=100:
          *
          * d = .01 when N=1
          *

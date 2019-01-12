@@ -4,7 +4,7 @@ import org.embergraph.btree.proc.IResultHandler;
 import org.embergraph.service.Split;
 
 /*
-* Hands back the object visited for a single index partition.
+ * Hands back the object visited for a single index partition.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -19,8 +19,8 @@ public class IdentityHandler<T> implements IResultHandler<T, T> {
     synchronized (this) {
       if (nvisited != 0) {
 
-      /*
-       * You can not use this handler if the procedure is mapped over
+        /*
+         * You can not use this handler if the procedure is mapped over
          * more than one split.
          */
 

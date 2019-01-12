@@ -51,8 +51,8 @@ public class ConnectOptions extends AbstractConnectOptions {
     if (requestURL == null) {
 
       if (useLBS) {
-      /*
-       * Use the HA load balancer.
+        /*
+         * Use the HA load balancer.
          */
         // Index of the WebApp ContextPath in the serviceURL.
         final int startContextPath = serviceURL.indexOf(contextPath);

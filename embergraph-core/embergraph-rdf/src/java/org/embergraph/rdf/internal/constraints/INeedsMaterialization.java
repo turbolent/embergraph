@@ -20,7 +20,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.internal.constraints;
 
 /*
-* Some {@link IVValueExpression} need materialized terms to perform their evaluation. Those that do
+ * Some {@link IVValueExpression} need materialized terms to perform their evaluation. Those that do
  * can implement this interface, and specify which terms they need materialized.
  */
 public interface INeedsMaterialization {

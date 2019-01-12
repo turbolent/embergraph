@@ -1,14 +1,11 @@
 package org.embergraph.counters.osx;
 
-import java.util.UUID;
 import org.embergraph.counters.AbstractStatisticsCollector;
 import org.embergraph.counters.CounterSet;
-import org.embergraph.counters.IHostCounters;
-import org.embergraph.counters.IRequiredHostCounters;
 import org.embergraph.counters.PIDUtil;
 
 /*
-* Collection of host performance data using OSX native utilities (curent vm_stat and iostat).
+ * Collection of host performance data using OSX native utilities (curent vm_stat and iostat).
  *
  * <p>Note: Unfortunately, the OSX command line reporting utilities do NOT provide access to IO Wait
  * and do NOT break down IO into reads and writes. This means that we can not provide reporting for
@@ -43,7 +40,7 @@ public class StatisticsCollectorForOSX extends AbstractStatisticsCollector {
   }
 
   //    /*
-//     * The Linux {@link KernelVersion}.
+  //     * The Linux {@link KernelVersion}.
   //     */
   //    static protected KernelVersion kernelVersion;
   //    static {
@@ -53,7 +50,7 @@ public class StatisticsCollectorForOSX extends AbstractStatisticsCollector {
   //    }
 
   //    /*
-//     * The name of the process (or more typically its service {@link UUID})
+  //     * The name of the process (or more typically its service {@link UUID})
   //     * whose per-process performance counters are to be collected.
   //     */
   //    private final String processName;

@@ -27,7 +27,7 @@ import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.parser.QueryParserUtil;
 
 /*
-* Non-manifest driven versions of the manifest driven test suite to facilitate debugging.
+ * Non-manifest driven versions of the manifest driven test suite to facilitate debugging.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

@@ -15,7 +15,6 @@ import org.embergraph.bop.Constant;
 import org.embergraph.bop.IPredicate;
 import org.embergraph.bop.IVariable;
 import org.embergraph.bop.ap.Predicate;
-import org.embergraph.btree.BTree;
 import org.embergraph.btree.IIndex;
 import org.embergraph.counters.CAT;
 import org.embergraph.rdf.internal.IV;
@@ -24,14 +23,13 @@ import org.embergraph.rdf.spo.SPOAccessPath;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.relation.rule.IAccessPathExpander;
-import org.embergraph.service.IEmbergraphClient;
 import org.embergraph.striterator.ChunkedWrappedIterator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 import org.embergraph.util.concurrent.LatchedExecutor;
 
 /*
-* Parallel subquery for a default graph access path. An expander pattern is used to ensure that the
+ * Parallel subquery for a default graph access path. An expander pattern is used to ensure that the
  * "DISTINCT SPO" constraint is applied across the subqueries rather than to each subquery
  * individually.
  *
@@ -273,8 +271,8 @@ public class DGExpander implements IAccessPathExpander<ISPO> {
         FutureTask<Void> future = null;
         try {
 
-        /*
-       * Note: We do NOT get() this Future. This task will run
+          /*
+           * Note: We do NOT get() this Future. This task will run
            * asynchronously.
            *
            * The Future is canceled IF (hopefully WHEN) the iterator
@@ -299,8 +297,8 @@ public class DGExpander implements IAccessPathExpander<ISPO> {
           // submit task for execution.
           sourceAccessPath.getIndexManager().getExecutorService().submit(future);
 
-        /*
-       * The outer access path will impose the "DISTINCT SPO"
+          /*
+           * The outer access path will impose the "DISTINCT SPO"
            * constraint.
            */
           // /*
@@ -340,8 +338,8 @@ public class DGExpander implements IAccessPathExpander<ISPO> {
 
       public void close() {
 
-      /*
-       * Close the iterator, interrupting the running task if
+        /*
+         * Close the iterator, interrupting the running task if
          * necessary.
          */
 
@@ -465,8 +463,8 @@ public class DGExpander implements IAccessPathExpander<ISPO> {
 
           if (log.isDebugEnabled()) log.debug("Running iterator: c=" + termId);
 
-        /*
-       * Clear various annotations from source predicate.
+          /*
+           * Clear various annotations from source predicate.
            *
            * expander: we are the expander.
            *

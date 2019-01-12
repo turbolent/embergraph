@@ -20,7 +20,7 @@ package org.embergraph.ha.msg;
 import org.embergraph.journal.IRootBlockView;
 
 /*
-* Interface for a response requesting the opening and closing root blocks for an HA Log file.
+ * Interface for a response requesting the opening and closing root blocks for an HA Log file.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -41,7 +41,7 @@ public interface IHALogRootBlocksResponse extends IHAMessage {
   IRootBlockView getCloseRootBlock();
 
   //    /*
-//     * The #of write cache blocks that can be read from that file.
+  //     * The #of write cache blocks that can be read from that file.
   //     */
   //    long getWriteBlockCount();
 

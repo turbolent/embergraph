@@ -18,11 +18,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.gom.gpo;
 
-import java.util.Iterator;
-import org.embergraph.gom.skin.GenericSkinRegistry;
-
 /*
-* A generic skin is a set of behaviors, typically disclosed by one or more application interfaces,
+ * A generic skin is a set of behaviors, typically disclosed by one or more application interfaces,
  * that can be layered over a generic object. The purpose of a generic skin is to allow the
  * application to view and interact with a generic object in terms of its own interfaces. Normally
  * the property access methods of the application interface are re-written in terms of generic

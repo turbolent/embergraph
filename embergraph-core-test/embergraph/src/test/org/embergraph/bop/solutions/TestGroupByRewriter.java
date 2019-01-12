@@ -44,7 +44,7 @@ import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 import org.openrdf.query.algebra.Compare.CompareOp;
 
 /*
-* Test suite for {@link GroupByRewriter}.
+ * Test suite for {@link GroupByRewriter}.
  *
  * <p>Note: This test suite is actually written at the {@link
  * GroupByRewriter#rewrite(IValueExpression, IVariableFactory, LinkedHashMap)} and {@link

@@ -31,7 +31,6 @@ import org.embergraph.btree.AbstractBTreeTupleCursor.ReadOnlyBTreeTupleCursor;
 import org.embergraph.btree.AbstractTupleCursorTestCase;
 import org.embergraph.btree.BTree;
 import org.embergraph.btree.IRangeQuery;
-import org.embergraph.btree.ITupleCursor;
 import org.embergraph.btree.ITupleCursor2;
 import org.embergraph.btree.ITupleIterator;
 import org.embergraph.btree.IndexMetadata;
@@ -40,7 +39,7 @@ import org.embergraph.btree.Tuple;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /*
-* Test suite for the {@link Reverserator}.
+ * Test suite for the {@link Reverserator}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

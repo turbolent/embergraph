@@ -21,11 +21,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.cache;
 
 import java.lang.ref.ReferenceQueue;
-import java.lang.ref.SoftReference;
-import java.lang.ref.WeakReference;
 
 /*
-* Interface supports choice of either weak or soft references for cache entries and makes it
+ * Interface supports choice of either weak or soft references for cache entries and makes it
  * possible for the application to extend the metadata associated with and entry in the {@link
  * WeakValueCache}.
  *

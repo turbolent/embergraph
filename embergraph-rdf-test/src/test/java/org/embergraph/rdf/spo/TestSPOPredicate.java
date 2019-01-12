@@ -34,7 +34,7 @@ import org.embergraph.rdf.internal.VTE;
 import org.embergraph.test.MockTermIdFactory;
 
 /*
-* Test suite for {@link SPOPredicate}.
+ * Test suite for {@link SPOPredicate}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -190,7 +190,7 @@ public class TestSPOPredicate extends TestCase2 {
   }
 
   //    /*
-//     * Verify equality testing with same impl.
+  //     * Verify equality testing with same impl.
   //     */
   //    public void test_equalsSameImpl() {
   //
@@ -235,7 +235,7 @@ public class TestSPOPredicate extends TestCase2 {
   //    }
   //
   //    /*
-//     * Note: {@link HashMap} support will breaks unless the {@link IPredicate}
+  //     * Note: {@link HashMap} support will breaks unless the {@link IPredicate}
   //     * class defines <code>equals(Object o)</code>. If it just defines
   //     * <code>equals(IPredicate)</code> then {@link Object#equals(Object)} will
   //     * be invoked instead!

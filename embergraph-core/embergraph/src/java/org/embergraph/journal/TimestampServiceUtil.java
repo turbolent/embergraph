@@ -27,7 +27,7 @@ import java.io.IOException;
 import org.apache.log4j.Logger;
 
 /*
-* Robust request for a timestamp from an {@link ITimestampService}.
+ * Robust request for a timestamp from an {@link ITimestampService}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

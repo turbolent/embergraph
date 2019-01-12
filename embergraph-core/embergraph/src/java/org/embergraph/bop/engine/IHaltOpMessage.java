@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.engine;
 
 /*
-* A message sent to the {@link IQueryClient} when an operator is done executing for some chunk of
+ * A message sent to the {@link IQueryClient} when an operator is done executing for some chunk of
  * inputs.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -34,7 +34,7 @@ public interface IHaltOpMessage extends IOpLifeCycleMessage {
   Throwable getCause();
 
   //    /*
-//     * The operator identifier for the primary sink -or- <code>null</code> if
+  //     * The operator identifier for the primary sink -or- <code>null</code> if
   //     * there is no primary sink (for example, if this is the last operator in
   //     * the pipeline).
   //     */
@@ -50,7 +50,7 @@ public interface IHaltOpMessage extends IOpLifeCycleMessage {
   int getSinkMessagesOut();
 
   //    /*
-//     * The operator identifier for the alternative sink -or- <code>null</code>
+  //     * The operator identifier for the alternative sink -or- <code>null</code>
   //     * if there is no alternative sink.
   //     */
   //    Integer getAltSinkId();

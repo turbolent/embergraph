@@ -17,10 +17,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.service;
 
-import org.embergraph.journal.ITransactionService;
-
 /*
-* Interface for the state associated with a transaction in an {@link ITransactionService}.
+ * Interface for the state associated with a transaction in an {@link ITransactionService}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

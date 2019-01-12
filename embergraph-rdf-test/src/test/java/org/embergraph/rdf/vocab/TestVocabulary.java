@@ -26,16 +26,14 @@ import java.util.Collections;
 import java.util.Iterator;
 import junit.framework.TestCase2;
 import org.embergraph.io.SerializerUtil;
-import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.model.EmbergraphValue;
-import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDF;
 
 /*
-* Test suite for {@link BaseVocabulary}.
+ * Test suite for {@link BaseVocabulary}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -95,14 +93,14 @@ public class TestVocabulary extends TestCase2 {
         //                        log.info("Ignoring expected exception: " + ex);
         //                }
 
-      /*
-       * The IV attached to the Value can be used to lookup the Value
+        /*
+         * The IV attached to the Value can be used to lookup the Value
          * in the Vocabulary.
          */
         assertEquals(v, vocab.asValue(v.getIV()));
 
-      /*
-       * The Value can be used to wrap it's cached IV.
+        /*
+         * The Value can be used to wrap it's cached IV.
          */
 
         assertNotNull(vocab.getConstant(v));
@@ -183,14 +181,14 @@ public class TestVocabulary extends TestCase2 {
         //                        log.info("Ignoring expected exception: " + ex);
         //                }
 
-      /*
-       * The IV attached to the Value can be used to lookup the Value
+        /*
+         * The IV attached to the Value can be used to lookup the Value
          * in the Vocabulary.
          */
         assertEquals(v, vocab.asValue(v.getIV()));
 
-      /*
-       * The Value can be used to wrap it's cached IV.
+        /*
+         * The Value can be used to wrap it's cached IV.
          */
 
         assertNotNull(vocab.getConstant(v));

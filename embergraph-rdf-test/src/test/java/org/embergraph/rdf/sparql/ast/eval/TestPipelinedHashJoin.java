@@ -31,7 +31,7 @@ import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.QueryHints;
 
 /*
-* Test suite for {@link PipelinedHashIndexAndSolutionSetJoinOp}, which implements a pipelined hash
+ * Test suite for {@link PipelinedHashIndexAndSolutionSetJoinOp}, which implements a pipelined hash
  * join.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>

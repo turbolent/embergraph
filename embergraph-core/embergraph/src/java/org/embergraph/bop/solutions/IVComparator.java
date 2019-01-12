@@ -29,7 +29,6 @@ import info.aduna.lang.ObjectUtil;
 import java.io.Serializable;
 import java.util.Comparator;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.internal.impl.bnode.SidIV;
 import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.openrdf.model.Literal;
@@ -38,10 +37,9 @@ import org.openrdf.model.datatypes.XMLDatatypeUtil;
 import org.openrdf.query.algebra.Compare.CompareOp;
 import org.openrdf.query.algebra.evaluation.ValueExprEvaluationException;
 import org.openrdf.query.algebra.evaluation.util.QueryEvaluationUtil;
-import org.openrdf.query.algebra.evaluation.util.ValueComparator;
 
 /*
-* A comparator that compares {@link IV}s according the SPARQL value ordering as specified in <a
+ * A comparator that compares {@link IV}s according the SPARQL value ordering as specified in <a
  * href="http://www.w3.org/TR/rdf-sparql-query/#modOrderBy">SPARQL Query Language for RDF</a>. This
  * implementation is based on the openrdf {@link ValueComparator} but has been modified to work with
  * {@link IV}s.

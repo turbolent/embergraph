@@ -32,7 +32,7 @@ import java.nio.ByteBuffer;
 import org.apache.log4j.Logger;
 
 /*
-* A compressor that copies bytes without compression them.
+ * A compressor that copies bytes without compression them.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

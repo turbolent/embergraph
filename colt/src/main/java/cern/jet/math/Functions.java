@@ -15,7 +15,7 @@ import cern.colt.function.DoubleProcedure;
 
 // import com.imsl.math.Sfun;
 /*
-* Function objects to be passed to generic methods. Contains the functions of {@link
+ * Function objects to be passed to generic methods. Contains the functions of {@link
  * java.lang.Math} as function objects, as well as a few more basic functions.
  *
  * <p>Function objects conveniently allow to express arbitrary functions in a generic manner.

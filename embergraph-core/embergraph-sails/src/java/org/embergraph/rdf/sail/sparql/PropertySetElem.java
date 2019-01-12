@@ -8,7 +8,7 @@ package org.embergraph.rdf.sail.sparql;
 import org.openrdf.query.algebra.ValueConstant;
 
 /*
-* @author Jeen
+ * @author Jeen
  * @openrdf
  */
 public class PropertySetElem {

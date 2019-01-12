@@ -12,7 +12,7 @@ import cern.colt.list.IntArrayList;
 import cern.colt.list.ObjectArrayList;
 import cern.colt.matrix.impl.AbstractMatrix3D;
 /*
-* Abstract base class for 3-d matrices holding <tt>Object</tt> elements. First see the <a
+ * Abstract base class for 3-d matrices holding <tt>Object</tt> elements. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
  * view</a> to get the broad picture.
  *
@@ -376,7 +376,8 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
       for (int slice = slices; --slice >= 0; ) {
         for (int row = rows; --row >= 0; ) {
           for (int column = columns; --column >= 0; ) {
-            if (getQuick(slice, row, column) == null ? other.getQuick(slice, row, column) != null
+            if (getQuick(slice, row, column) == null
+                ? other.getQuick(slice, row, column) != null
                 : !getQuick(slice, row, column).equals(other.getQuick(slice, row, column)))
               return false;
           }

@@ -21,10 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sail.webapp.client;
 
-import org.eclipse.jetty.client.HttpClient;
-
 /*
-* Factory for {@link HttpClient}.
+ * Factory for {@link HttpClient}.
  *
  * @see Options
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -38,12 +36,10 @@ public class HttpClientConfigurator {
      * IHttpClientFactory} implementation class (default {@value
      * #DEFAULT_CONNECTION_MANAGER_FACTORY_CLASS}).
      */
-    String CONNECTION_MANAGER_FACTORY_CLASS =
-        HttpClientConfigurator.class.getName();
+    String CONNECTION_MANAGER_FACTORY_CLASS = HttpClientConfigurator.class.getName();
 
     /** The name of the default {@link IHttpClientFactory} implementation class. */
-    String DEFAULT_CONNECTION_MANAGER_FACTORY_CLASS =
-        DefaultHttpClientFactory.class.getName();
+    String DEFAULT_CONNECTION_MANAGER_FACTORY_CLASS = DefaultHttpClientFactory.class.getName();
   }
 
   /*

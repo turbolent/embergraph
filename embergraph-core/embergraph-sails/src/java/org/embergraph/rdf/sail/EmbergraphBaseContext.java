@@ -21,7 +21,7 @@ import org.embergraph.journal.IIndexManager;
 import org.embergraph.service.IEmbergraphFederation;
 
 /*
-* Context object provides access to the {@link IIndexManager}.
+ * Context object provides access to the {@link IIndexManager}.
  *
  * @author Martyn Cutcher
  */

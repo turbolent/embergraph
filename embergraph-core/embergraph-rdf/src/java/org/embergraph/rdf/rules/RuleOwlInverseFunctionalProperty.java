@@ -31,7 +31,7 @@ import org.openrdf.model.vocabulary.OWL;
 import org.openrdf.model.vocabulary.RDF;
 
 /*
-* owl:InverseFunctionalProperty
+ * owl:InverseFunctionalProperty
  *
  * <pre>
  *   (p rdf:type owl:InverseFunctionalProperty), (b p a), (c p a) -&gt;
@@ -63,7 +63,7 @@ public class RuleOwlInverseFunctionalProperty extends Rule {
   }
 
   //    /*
-//     * If this rule ever becomes consistent in the data then the rule will
+  //     * If this rule ever becomes consistent in the data then the rule will
   //     * throw a {@link ConstraintViolationException} and the closure operation
   //     * will fail.
   //     */

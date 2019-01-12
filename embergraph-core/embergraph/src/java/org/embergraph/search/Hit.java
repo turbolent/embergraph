@@ -1,10 +1,9 @@
 package org.embergraph.search;
 
-import java.util.concurrent.ConcurrentHashMap;
 import org.apache.log4j.Logger;
 
 /*
-* Metadata about a search result.
+ * Metadata about a search result.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

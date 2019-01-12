@@ -26,13 +26,12 @@ package org.embergraph.io;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 import java.nio.channels.OverlappingFileLockException;
 import junit.framework.TestCase2;
 
 /*
-* Test suite for {@link FileLockUtility}.
+ * Test suite for {@link FileLockUtility}.
  *
  * @todo this test suite could be developed further.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -159,8 +158,8 @@ public class TestFileLockUtility extends TestCase2 {
 
       try {
 
-      /*
-       * verify that we notice an existing advisory lock when
+        /*
+         * verify that we notice an existing advisory lock when
          * requsting an exclusive lock for the same file.
          */
         FileLockUtility.openFile(file, "rw", true /* useFileLock */);

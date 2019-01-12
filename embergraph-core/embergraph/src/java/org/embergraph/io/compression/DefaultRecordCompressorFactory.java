@@ -30,7 +30,7 @@ import java.io.ObjectOutput;
 import java.util.zip.Deflater;
 
 /*
-* A serializable compression provider based on {@link RecordCompressor}.
+ * A serializable compression provider based on {@link RecordCompressor}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

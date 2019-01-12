@@ -25,7 +25,7 @@ import org.embergraph.relation.accesspath.EmptyAccessPath;
 import org.embergraph.relation.accesspath.IAccessPath;
 
 /*
-* An "expander" which replaces the access path with an {@link EmptyAccessPath}.
+ * An "expander" which replaces the access path with an {@link EmptyAccessPath}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

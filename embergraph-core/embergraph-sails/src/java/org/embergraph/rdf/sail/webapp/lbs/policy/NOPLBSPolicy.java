@@ -25,7 +25,7 @@ import org.embergraph.rdf.sail.webapp.HALoadBalancerServlet;
 import org.embergraph.rdf.sail.webapp.lbs.AbstractLBSPolicy;
 
 /*
-* This policy proxies all requests for update operations to the leader but forwards read requests
+ * This policy proxies all requests for update operations to the leader but forwards read requests
  * to the local service. Thus, it DOES NOT provide a load balancing strategy, but it DOES allow
  * update requests to be directed to any service in an non-HA aware manner. This policy can be
  * combined with an external round-robin strategy to load balance the read-requests over the

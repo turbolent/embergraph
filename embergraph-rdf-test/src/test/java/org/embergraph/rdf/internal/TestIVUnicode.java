@@ -31,7 +31,7 @@ import org.embergraph.io.DataOutputBuffer;
 import org.embergraph.util.BytesUtil.UnsignedByteArrayComparator;
 
 /*
-* Test suite for {@link IVUnicode}.
+ * Test suite for {@link IVUnicode}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

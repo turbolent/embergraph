@@ -32,14 +32,13 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
-import junit.framework.AssertionFailedError;
 import junit.framework.TestCase2;
 import org.embergraph.btree.keys.KVO;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.util.DaemonThreadFactory;
 
 /*
-* Abstract base class for test suites for the {@link AbstractMasterTask} and friends.
+ * Abstract base class for test suites for the {@link AbstractMasterTask} and friends.
  *
  * <p>Note: There are a bunch of inner classes which have the same names as the generic types used
  * by the master and subtask classes. This makes it much easier to instantiate these things since

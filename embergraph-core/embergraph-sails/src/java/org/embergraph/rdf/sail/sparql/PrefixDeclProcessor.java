@@ -42,7 +42,7 @@ import org.openrdf.model.vocabulary.XMLSchema;
 import org.openrdf.query.MalformedQueryException;
 
 /*
-* Processes the prefix declarations in a SPARQL query model.
+ * Processes the prefix declarations in a SPARQL query model.
  *
  * @author Arjohn Kampman
  * @openrdf
@@ -65,8 +65,7 @@ public class PrefixDeclProcessor {
      * -Dorg.embergraph.rdf.sail.sparql.PrefixDeclProcessor.additionalDeclsFile=/path/to/file
      * </code> {@see https://jira.blazegraph.com/browse/BLZG-1773}
      */
-    String ADDITIONAL_DECLS_FILE =
-        PrefixDeclProcessor.class.getName() + ".additionalDeclsFile";
+    String ADDITIONAL_DECLS_FILE = PrefixDeclProcessor.class.getName() + ".additionalDeclsFile";
   }
 
   static {

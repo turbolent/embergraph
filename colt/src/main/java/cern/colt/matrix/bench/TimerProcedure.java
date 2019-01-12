@@ -9,7 +9,7 @@ It is provided "as is" without expressed or implied warranty.
 package cern.colt.matrix.bench;
 
 /*
-* Interface that represents a procedure object: a procedure that takes a single argument and does
+ * Interface that represents a procedure object: a procedure that takes a single argument and does
  * not return a value.
  */
 interface TimerProcedure {

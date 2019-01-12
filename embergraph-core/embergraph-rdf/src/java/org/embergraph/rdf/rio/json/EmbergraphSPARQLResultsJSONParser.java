@@ -16,7 +16,6 @@
  */
 package org.embergraph.rdf.rio.json;
 
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 import java.io.IOException;
@@ -38,7 +37,7 @@ import org.openrdf.query.resultio.TupleQueryResultFormat;
 import org.openrdf.query.resultio.TupleQueryResultParser;
 
 /*
-* Parser for SPARQL-1.1 JSON Results Format documents
+ * Parser for SPARQL-1.1 JSON Results Format documents
  *
  * @see <a href="http://www.w3.org/TR/sparql11-results-json/">SPARQL 1.1 Query Results JSON
  *     Format</a>

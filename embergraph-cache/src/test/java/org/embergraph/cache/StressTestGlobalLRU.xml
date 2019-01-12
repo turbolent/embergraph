@@ -2,52 +2,54 @@
 <!DOCTYPE experiment PUBLIC "-//systap.com//DTD BIGDATA EXPERIMENT 0.1//EN" "Experiment.dtd">
 <!-- There are 4 conditions. -->
 <experiment class="org.embergraph.cache.lru.StressTestGlobalLRU">
- <defaults>
-  <property name="org.embergraph.LRUNexus.minCacheSetSize">0</property>
-  <property name="org.embergraph.LRUNexus.initialCapacity">16</property>
-  <property name="org.embergraph.LRUNexus.loadFactor">.75</property>
-  <property name="org.embergraph.LRUNexus.maxHeap">10240</property>
-  <property name="org.embergraph.LRUNexus.percentCleared">.25</property>
-  <property name="nthreads">3</property>
-  <property name="testTimeout">20</property>
-  <property name="org.embergraph.LRUNexus.concurrencyLevel">16</property>
-  <property name="nops">10000000000</property>
- </defaults>
- <!-- condition#1 -->
- <condition>
-  <property name="org.embergraph.LRUNexus.class">org.embergraph.cache.lru.BCHMGlobalLRU2</property>
-  <property name="org.embergraph.LRUNexus.threadLocalBuffers">false</property>
-  <property name="org.embergraph.LRUNexus.threadLocalBufferCapacity">128</property>
-  <property name="org.embergraph.LRUNexus.accessPolicy">LRU</property>
- </condition>
- <condition>
-  <property name="org.embergraph.LRUNexus.class">org.embergraph.cache.lru.BCHMGlobalLRU2</property>
-  <property name="org.embergraph.LRUNexus.threadLocalBuffers">true</property>
-  <property name="org.embergraph.LRUNexus.threadLocalBufferCapacity">128</property>
-  <property name="org.embergraph.LRUNexus.accessPolicy">LRU</property>
- </condition>
- <!-- condition#2 
- <condition>
-  <property name="org.embergraph.LRUNexus.class">org.embergraph.cache.lru.BCHMGlobalLRU2</property>
-  <property name="org.embergraph.LRUNexus.threadLocalBuffers">false</property>
-  <property name="org.embergraph.LRUNexus.threadLocalBufferCapacity">128</property>
-  <property name="org.embergraph.LRUNexus.accessPolicy">LIRS</property>
- </condition>
- <condition>
-  <property name="org.embergraph.LRUNexus.class">org.embergraph.cache.lru.BCHMGlobalLRU2</property>
-  <property name="org.embergraph.LRUNexus.threadLocalBuffers">true</property>
-  <property name="org.embergraph.LRUNexus.threadLocalBufferCapacity">128</property>
-  <property name="org.embergraph.LRUNexus.accessPolicy">LIRS</property>
- </condition>
+  <defaults>
+    <property name="org.embergraph.LRUNexus.minCacheSetSize">0</property>
+    <property name="org.embergraph.LRUNexus.initialCapacity">16</property>
+    <property name="org.embergraph.LRUNexus.loadFactor">.75</property>
+    <property name="org.embergraph.LRUNexus.maxHeap">10240</property>
+    <property name="org.embergraph.LRUNexus.percentCleared">.25</property>
+    <property name="nthreads">3</property>
+    <property name="testTimeout">20</property>
+    <property name="org.embergraph.LRUNexus.concurrencyLevel">16</property>
+    <property name="nops">10000000000</property>
+  </defaults>
+  <!-- condition#1 -->
+  <condition>
+    <property name="org.embergraph.LRUNexus.class">org.embergraph.cache.lru.BCHMGlobalLRU2
+    </property>
+    <property name="org.embergraph.LRUNexus.threadLocalBuffers">false</property>
+    <property name="org.embergraph.LRUNexus.threadLocalBufferCapacity">128</property>
+    <property name="org.embergraph.LRUNexus.accessPolicy">LRU</property>
+  </condition>
+  <condition>
+    <property name="org.embergraph.LRUNexus.class">org.embergraph.cache.lru.BCHMGlobalLRU2
+    </property>
+    <property name="org.embergraph.LRUNexus.threadLocalBuffers">true</property>
+    <property name="org.embergraph.LRUNexus.threadLocalBufferCapacity">128</property>
+    <property name="org.embergraph.LRUNexus.accessPolicy">LRU</property>
+  </condition>
+  <!-- condition#2
+  <condition>
+   <property name="org.embergraph.LRUNexus.class">org.embergraph.cache.lru.BCHMGlobalLRU2</property>
+   <property name="org.embergraph.LRUNexus.threadLocalBuffers">false</property>
+   <property name="org.embergraph.LRUNexus.threadLocalBufferCapacity">128</property>
+   <property name="org.embergraph.LRUNexus.accessPolicy">LIRS</property>
+  </condition>
+  <condition>
+   <property name="org.embergraph.LRUNexus.class">org.embergraph.cache.lru.BCHMGlobalLRU2</property>
+   <property name="org.embergraph.LRUNexus.threadLocalBuffers">true</property>
+   <property name="org.embergraph.LRUNexus.threadLocalBufferCapacity">128</property>
+   <property name="org.embergraph.LRUNexus.accessPolicy">LIRS</property>
+  </condition>
+  -->
+  <!-- infinispan cache implementations : these cause problems in the CI builds
+  <condition>
+   <property name="org.embergraph.LRUNexus.class">org.embergraph.cache.lru.BCHMGlobalLRU</property>
+   <property name="org.embergraph.LRUNexus.accessPolicy">LRU</property>
+  </condition>
+  <condition>
+   <property name="org.embergraph.LRUNexus.class">org.embergraph.cache.lru.BCHMGlobalLRU</property>
+   <property name="org.embergraph.LRUNexus.accessPolicy">LIRS</property>
+  </condition>
  -->
- <!-- infinispan cache implementations : these cause problems in the CI builds 
- <condition>
-  <property name="org.embergraph.LRUNexus.class">org.embergraph.cache.lru.BCHMGlobalLRU</property>
-  <property name="org.embergraph.LRUNexus.accessPolicy">LRU</property>
- </condition>
- <condition>
-  <property name="org.embergraph.LRUNexus.class">org.embergraph.cache.lru.BCHMGlobalLRU</property>
-  <property name="org.embergraph.LRUNexus.accessPolicy">LIRS</property>
- </condition>
--->
 </experiment>

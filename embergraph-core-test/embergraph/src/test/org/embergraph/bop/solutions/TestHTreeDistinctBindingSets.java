@@ -31,7 +31,7 @@ import org.embergraph.bop.PipelineOp;
 import org.embergraph.bop.Var;
 
 /*
-* Unit tests for {@link HTreeDistinctBindingSetsOp}.
+ * Unit tests for {@link HTreeDistinctBindingSetsOp}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -138,7 +138,7 @@ public class TestHTreeDistinctBindingSets extends AbstractDistinctSolutionsTestC
               new NV(PipelineOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)
               //                    new NV(PipelineOp.Annotations.MAX_PARALLEL,
               //                            1),
-          ));
+              ));
       fail("Expecting: " + IllegalArgumentException.class);
     } catch (IllegalArgumentException ex) {
       if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);

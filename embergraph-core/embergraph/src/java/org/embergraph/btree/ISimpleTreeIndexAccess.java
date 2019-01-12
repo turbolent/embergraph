@@ -20,10 +20,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.btree;
 
-import org.embergraph.htree.HTree;
-
 /*
-* Extended interface for tree-structured indices.
+ * Extended interface for tree-structured indices.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

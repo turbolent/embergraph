@@ -46,14 +46,13 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.bop.aggregate.IAggregate;
 import org.embergraph.bop.bindingSet.ListBindingSet;
 import org.embergraph.bop.engine.BOpStats;
-import org.embergraph.htree.HTree;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.sparql.ast.FilterNode;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.util.InnerCause;
 
 /*
-* An in-memory at-once generalized aggregation operator.
+ * An in-memory at-once generalized aggregation operator.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: DistinctElementFilter.java 3466 2010-08-27 14:28:04Z thompsonbry $
@@ -158,8 +157,8 @@ public class MemoryGroupByOp extends GroupByOp {
         Object exprValue;
 
         try {
-        /*
-       * Note: This has a side-effect on the solution, which means
+          /*
+           * Note: This has a side-effect on the solution, which means
            * that it needs to be mutable and we have to store the
            * modified solution. However, it might be nicer to NOT have
            * a side effect on the incoming solution. That means that
@@ -310,8 +309,8 @@ public class MemoryGroupByOp extends GroupByOp {
 
         if (groupBy == null) {
 
-        /*
-       * Combine all solutions into a single multiset.
+          /*
+           * Combine all solutions into a single multiset.
            */
           final SolutionMultiSet m = new SolutionMultiSet();
 
@@ -346,8 +345,8 @@ public class MemoryGroupByOp extends GroupByOp {
 
         } else {
 
-        /*
-       * Group the solutions.
+          /*
+           * Group the solutions.
            */
 
           while (itr.hasNext()) {
@@ -389,8 +388,8 @@ public class MemoryGroupByOp extends GroupByOp {
           map.clear();
         }
 
-      /*
-       * Output the aggregated bindings for the accepted solutions.
+        /*
+         * Output the aggregated bindings for the accepted solutions.
          */
         if (naccepted > 0) {
 
@@ -438,8 +437,8 @@ public class MemoryGroupByOp extends GroupByOp {
 
           if (expr instanceof IVariable<?>) {
 
-          /*
-       * Propagate bare variable used in GROUP_BY clause to [aggregates].
+            /*
+             * Propagate bare variable used in GROUP_BY clause to [aggregates].
              *
              * <pre>
              * GROUP BY ?x
@@ -463,8 +462,8 @@ public class MemoryGroupByOp extends GroupByOp {
 
           } else if (expr instanceof IBind<?>) {
 
-          /*
-       * Propagate BIND declared by GROUP_BY clause to [aggregates].
+            /*
+             * Propagate BIND declared by GROUP_BY clause to [aggregates].
              *
              * <pre>
              * GROUP BY (2*?y as ?x)
@@ -534,8 +533,8 @@ public class MemoryGroupByOp extends GroupByOp {
           TypeErrorLog.handleTypeError(ex, expr, stats);
           continue;
         } catch (IllegalArgumentException ex) {
-        /*
-       * Note: This is a hack turning an IllegalArgumentException
+          /*
+           * Note: This is a hack turning an IllegalArgumentException
            * which we presume is coming out of new Constant(null) into
            * an (implicit) SPARQL type error so we can drop the
            * binding for this SELECT expression. (Note that we are not
@@ -617,8 +616,8 @@ public class MemoryGroupByOp extends GroupByOp {
       IConstant<?> c = null;
 
       if (expr.isWildcard() && expr.isDistinct()) {
-      /*
-       * For a wildcard we basically need to operate on solution multisets. For example, COUNT(*)
+        /*
+         * For a wildcard we basically need to operate on solution multisets. For example, COUNT(*)
          * is the size of the solution multiset (aka group).
          *
          * <p>Note: It is possible to optimize COUNT(*) and COUNT(DISTINCT *) as the cardinality of
@@ -651,8 +650,8 @@ public class MemoryGroupByOp extends GroupByOp {
 
       } else if (expr.isDistinct()) {
 
-      /*
-       * Apply aggregate function only to the distinct values which
+        /*
+         * Apply aggregate function only to the distinct values which
          * it's inner value expression takes on.
          */
 
@@ -688,8 +687,8 @@ public class MemoryGroupByOp extends GroupByOp {
 
       } else {
 
-      /*
-       * Apply aggregate function to all solutions in the multiset.
+        /*
+         * Apply aggregate function to all solutions in the multiset.
          */
 
         expr.reset();

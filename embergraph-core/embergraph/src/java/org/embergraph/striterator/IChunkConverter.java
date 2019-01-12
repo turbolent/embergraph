@@ -1,7 +1,7 @@
 package org.embergraph.striterator;
 
 /*
-* This is a chunk at a time type processor. Elements can be dropped, have their state changed, or
+ * This is a chunk at a time type processor. Elements can be dropped, have their state changed, or
  * have their state replaced by another element, potentially of a different generic type.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

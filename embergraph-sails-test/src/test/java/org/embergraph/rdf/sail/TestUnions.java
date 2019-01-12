@@ -40,7 +40,7 @@ import org.openrdf.query.impl.BindingImpl;
 import org.openrdf.query.resultio.sparqlxml.SPARQLResultsXMLWriter;
 
 /*
-* Unit tests the UNION aspects of the {@link EmbergraphSail} implementation.
+ * Unit tests the UNION aspects of the {@link EmbergraphSail} implementation.
  *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
@@ -85,8 +85,7 @@ public class TestUnions extends QuadsTestCase {
     final EmbergraphSail sail = getSail();
     sail.initialize();
     final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-    final EmbergraphSailRepositoryConnection cxn =
-        repo.getConnection();
+    final EmbergraphSailRepositoryConnection cxn = repo.getConnection();
     cxn.setAutoCommit(false);
 
     try {
@@ -170,8 +169,7 @@ public class TestUnions extends QuadsTestCase {
     final EmbergraphSail sail = getSail();
     sail.initialize();
     final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-    final EmbergraphSailRepositoryConnection cxn =
-        repo.getConnection();
+    final EmbergraphSailRepositoryConnection cxn = repo.getConnection();
     cxn.setAutoCommit(false);
 
     try {

@@ -21,11 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.service;
 
-import org.embergraph.bop.IBindingSet;
-import org.openrdf.query.BindingSet;
-
 /*
-* Service options base class for with JVM services which handle openrdf {@link BindingSet}s rather
+ * Service options base class for with JVM services which handle openrdf {@link BindingSet}s rather
  * than embergraph {@link IBindingSet}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

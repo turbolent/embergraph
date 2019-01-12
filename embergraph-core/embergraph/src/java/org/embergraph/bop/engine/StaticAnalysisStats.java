@@ -26,11 +26,10 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTOptimizerList;
 import org.openrdf.model.Value;
 
 /*
-* Statistics associated with the Static Analysis phase, such as runtime for the parser, given
+ * Statistics associated with the Static Analysis phase, such as runtime for the parser, given
  * optimizers, etc.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>

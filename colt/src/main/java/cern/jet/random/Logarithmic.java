@@ -10,7 +10,7 @@ package cern.jet.random;
 
 import cern.jet.random.engine.RandomEngine;
 /*
-* Logarithmic distribution.
+ * Logarithmic distribution.
  *
  * <p>Valid parameter ranges: <tt>0 &lt; p &lt; 1</tt>.
  *

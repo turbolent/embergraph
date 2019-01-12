@@ -6,15 +6,11 @@ import cutthecrap.utils.striterators.IPropertySet;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.HashMapAnnotations;
-import org.embergraph.rdf.spo.SPO;
-import org.embergraph.striterator.IChunkConverter;
-import org.embergraph.striterator.MergeFilter;
 
 /*
-* A DISTINCT operator based for elements in a relation. The operator is based on an in-memory hash
+ * A DISTINCT operator based for elements in a relation. The operator is based on an in-memory hash
  * table.
  *
  * <p>Note: This is used for the in-memory {@link SPO} distinct filter, but it is more general and
@@ -53,7 +49,7 @@ public class DistinctFilter extends BOpFilterBase {
   }
 
   //    /*
-//     * @see Annotations#INITIAL_CAPACITY
+  //     * @see Annotations#INITIAL_CAPACITY
   //     */
   //    public int getInitialCapacity() {
   //
@@ -63,7 +59,7 @@ public class DistinctFilter extends BOpFilterBase {
   //    }
   //
   //    /*
-//     * @see Annotations#LOAD_FACTOR
+  //     * @see Annotations#LOAD_FACTOR
   //     */
   //    public float getLoadFactor() {
   //

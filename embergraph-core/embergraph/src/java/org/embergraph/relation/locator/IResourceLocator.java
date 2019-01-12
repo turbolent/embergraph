@@ -23,12 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation.locator;
 
-import org.embergraph.relation.IDatabase;
-import org.embergraph.relation.IRelation;
-import org.embergraph.service.IEmbergraphFederation;
-
 /*
-* An object that knows how to resolve a resource identifier (aka namespace) to an {@link
+ * An object that knows how to resolve a resource identifier (aka namespace) to an {@link
  * ILocatableResource} instance. "Locating" a relation means (a) resolving the namespace for the
  * resource to the resource declaration as of some timestamp; and (b) materializing (often from
  * cache) an {@link ILocatableResource} for that resource. Locatable resources are essentially

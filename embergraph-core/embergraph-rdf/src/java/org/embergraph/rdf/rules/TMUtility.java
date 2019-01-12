@@ -28,10 +28,7 @@ import java.util.LinkedList;
 import java.util.List;
 import org.embergraph.bop.IConstraint;
 import org.embergraph.bop.IPredicate;
-import org.embergraph.bop.ap.Predicate;
 import org.embergraph.rdf.spo.SPOPredicate;
-import org.embergraph.rdf.spo.SPORelation;
-import org.embergraph.relation.IRelation;
 import org.embergraph.relation.rule.IProgram;
 import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.IStep;
@@ -39,7 +36,7 @@ import org.embergraph.relation.rule.Program;
 import org.embergraph.relation.rule.Rule;
 
 /*
-* A utility class for performing rule re-writes for RDF truth maintenance using a "focusStore" in
+ * A utility class for performing rule re-writes for RDF truth maintenance using a "focusStore" in
  * addition to the primary database. The focusStore is typically used in one of two ways: (1)
  * incremental loading of new data into the database; and (2) collecting entailments of statements
  * that are being removed during truth maintenance.
@@ -206,8 +203,8 @@ public class TMUtility {
 
           if (i == j || tailCount == 1) {
 
-          /*
-       * Override the [ith] predicate in the tail so that
+            /*
+             * Override the [ith] predicate in the tail so that
              * it reads only from the focusStore.
              *
              * Note: This is also done if there is only one
@@ -218,8 +215,8 @@ public class TMUtility {
 
           } else {
 
-          /*
-       * Override the predicate so that it reads from the
+            /*
+             * Override the predicate so that it reads from the
              * fused view of the focusStore and the database.
              */
 
@@ -232,8 +229,8 @@ public class TMUtility {
           //                        p2 = p.copy();
           p2 = p;
 
-        /*
-       * tail is a magic predicate with the relation already
+          /*
+           * tail is a magic predicate with the relation already
            * correctly set so it will read from the appropriate
            * magic relation, wherever that may be (probably in the
            * focus store).

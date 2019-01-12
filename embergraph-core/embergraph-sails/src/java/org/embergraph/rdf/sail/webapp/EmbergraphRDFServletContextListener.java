@@ -70,7 +70,7 @@ import org.embergraph.service.ScaleOutClientFactory;
 import org.embergraph.util.httpd.AbstractHTTPD;
 
 /*
-* Listener provides life cycle management of the {@link IIndexManager} by interpreting the
+ * Listener provides life cycle management of the {@link IIndexManager} by interpreting the
  * configuration parameters in the {@link ServletContext}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -275,8 +275,8 @@ public class EmbergraphRDFServletContextListener implements ServletContextListen
 
       if (readLock != null) {
 
-      /*
-       * Obtain a read-only transaction which will assert a read lock
+        /*
+         * Obtain a read-only transaction which will assert a read lock
          * for the specified commit time. The database WILL NOT release
          * storage associated with the specified commit point while this
          * server is running. Queries will read against the specified
@@ -297,8 +297,8 @@ public class EmbergraphRDFServletContextListener implements ServletContextListen
 
       } else {
 
-      /*
-       * The default for queries is to read against then most recent
+        /*
+         * The default for queries is to read against then most recent
          * commit time as of the moment when the request is accepted.
          */
 
@@ -473,19 +473,19 @@ public class EmbergraphRDFServletContextListener implements ServletContextListen
         final Map<String, BaseIndexStats> statsMap =
             ft.get(warmupTimeoutMillis, TimeUnit.MILLISECONDS);
       } catch (ExecutionException e1) {
-      /*
-       * Abnormal termination.
+        /*
+         * Abnormal termination.
          */
         throw new RuntimeException("Warmup failure: " + e1, e1);
       } catch (InterruptedException e1) {
-      /*
-       * This thread was interrupted. This probably indicates shutdown of
+        /*
+         * This thread was interrupted. This probably indicates shutdown of
          * the container.
          */
         throw new RuntimeException(e1);
       } catch (TimeoutException e1) {
-      /*
-       * Ignore expected exception. The warmup procedure has reached its
+        /*
+         * Ignore expected exception. The warmup procedure has reached its
          * timeout. This is fine.
          */
         if (log.isInfoEnabled()) log.info("Warmup terminated by timeout.");
@@ -663,8 +663,8 @@ public class EmbergraphRDFServletContextListener implements ServletContextListen
 
       if (isJini) {
 
-      /*
-       * A embergraph federation.
+        /*
+         * A embergraph federation.
          *
          * Note: The Apache River configuration mechanism will search
          * both the file system and the classpath, much as we have done
@@ -685,8 +685,8 @@ public class EmbergraphRDFServletContextListener implements ServletContextListen
 
       } else {
 
-      /*
-       * Note: we only need to specify the FILE when re-opening a
+        /*
+         * Note: we only need to specify the FILE when re-opening a
          * journal containing a pre-existing KB.
          */
         final Properties properties = new Properties();
@@ -793,8 +793,8 @@ public class EmbergraphRDFServletContextListener implements ServletContextListen
        */
       {
 
-      /*
-       * TODO It would be better to have this on the EmbergraphRDFContext
+        /*
+         * TODO It would be better to have this on the EmbergraphRDFContext
          * so we are not creating it lazily here if the NSS has not yet
          * been issued a query.
          */

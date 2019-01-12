@@ -18,7 +18,7 @@ package cutthecrap.utils.striterators;
 import java.io.Serializable;
 
 /*
-* Interface for a method which filters objects visited by a {@link Filterator}.
+ * Interface for a method which filters objects visited by a {@link Filterator}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

@@ -51,7 +51,7 @@ import org.embergraph.rdf.sparql.ast.eval.ASTDeferredIVResolution;
 import org.openrdf.query.MalformedQueryException;
 
 /*
-* Test suite for {@link ASTOrderByAggregateFlatteningOptimizer}. All test queries in the suite
+ * Test suite for {@link ASTOrderByAggregateFlatteningOptimizer}. All test queries in the suite
  * contain ORDER BY with one or more aggregates, and the tested optimizer simplifies them by
  * introducing aliases for the aggregates.
  *

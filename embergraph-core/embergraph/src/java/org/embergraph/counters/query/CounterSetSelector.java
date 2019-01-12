@@ -33,7 +33,7 @@ import org.embergraph.counters.ICounter;
 import org.embergraph.counters.PeriodEnum;
 
 /*
-* Reads counters from a {@link CounterSet}.
+ * Reads counters from a {@link CounterSet}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

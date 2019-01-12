@@ -57,7 +57,6 @@ import org.embergraph.rdf.sparql.ast.service.IRemoteSparqlQueryBuilder;
 import org.embergraph.rdf.sparql.ast.service.RemoteSparql11QueryBuilder;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 import org.openrdf.model.BNode;
-import org.openrdf.model.Value;
 import org.openrdf.model.impl.BNodeImpl;
 import org.openrdf.model.impl.LiteralImpl;
 import org.openrdf.model.vocabulary.DC;
@@ -66,7 +65,7 @@ import org.openrdf.query.algebra.StatementPattern.Scope;
 import org.openrdf.query.impl.MapBindingSet;
 
 /*
-* Test suite for the {@link RemoteSparql11QueryBuilder}, including some correct rejection tests
+ * Test suite for the {@link RemoteSparql11QueryBuilder}, including some correct rejection tests
  * when the solutions to be vectored to the remote end point can not be represented using the <code>
  * BINDINGS</code> clause.
  *
@@ -667,8 +666,8 @@ public class TestRemoteSparql11QueryBuilder extends AbstractEmbergraphExprBuilde
           vars.add(Var.var("s"));
         }
 
-      /*
-       * Note: The blank node should be sent across as a variable
+        /*
+         * Note: The blank node should be sent across as a variable
          * without a bound value (UNDEF).
          */
         {
@@ -782,8 +781,8 @@ public class TestRemoteSparql11QueryBuilder extends AbstractEmbergraphExprBuilde
           vars.add(Var.var("o"));
         }
 
-      /*
-       * Note: The blank node should be sent across as a variable
+        /*
+         * Note: The blank node should be sent across as a variable
          * without a bound value (UNDEF).
          */
         {
@@ -918,8 +917,8 @@ public class TestRemoteSparql11QueryBuilder extends AbstractEmbergraphExprBuilde
           vars.add(Var.var("o1"));
         }
 
-      /*
-       * Note: The blank node should be sent across as a variable
+        /*
+         * Note: The blank node should be sent across as a variable
          * without a bound value (UNDEF).
          */
         {

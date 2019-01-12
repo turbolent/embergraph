@@ -19,7 +19,6 @@ import cutthecrap.utils.striterators.EmptyIterator;
 import cutthecrap.utils.striterators.IStriterator;
 import cutthecrap.utils.striterators.Striterator;
 import info.aduna.iteration.CloseableIteration;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Random;
 import org.embergraph.rdf.graph.EdgesEnum;
@@ -32,7 +31,6 @@ import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
-import org.openrdf.sail.Sail;
 import org.openrdf.sail.SailConnection;
 import org.openrdf.sail.SailException;
 
@@ -135,8 +133,8 @@ public class SAILGASEngine extends GASEngine {
 
       final URI linkTypeIV = ctx.getLinkType();
       if (linkTypeIV != null) {
-      /*
-       * FIXME RDR: We need to use a union of access paths for link
+        /*
+         * FIXME RDR: We need to use a union of access paths for link
          * attributes for the generic SAIL since it does not have the
          * concept of statements about statements. This will require
          * applying the access paths that will visit the appropriate

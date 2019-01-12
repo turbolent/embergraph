@@ -27,24 +27,13 @@ import org.embergraph.bop.BOp;
 import org.embergraph.bop.Constant;
 import org.embergraph.bop.IVariable;
 import org.embergraph.bop.NV;
-import org.embergraph.htree.HTree;
-import org.embergraph.rdf.internal.constraints.RangeBOp;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpBase;
-import org.embergraph.rdf.sparql.ast.eval.AST2BOpJoins;
-import org.embergraph.rdf.sparql.ast.eval.AST2BOpUtility;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTGraphGroupOptimizer;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTRangeConstraintOptimizer;
-import org.embergraph.rdf.sparql.ast.optimizers.ASTSimpleOptionalOptimizer;
 import org.embergraph.rdf.sparql.ast.optimizers.StaticOptimizer;
-import org.embergraph.rdf.spo.DistinctTermAdvancer;
-import org.embergraph.rdf.spo.ISPO;
-import org.embergraph.rdf.spo.SPOAccessPath;
-import org.embergraph.relation.rule.eval.ISolution;
 import org.embergraph.striterator.IKeyOrder;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /*
-* A node in the AST representing a statement pattern.
+ * A node in the AST representing a statement pattern.
  *
  * <p>Note: The annotations on the class are mostly interpreted by the toPredicate() method in
  * {@link AST2BOpUtility} and by the logic in {@link AST2BOpJoins} which handles the default and

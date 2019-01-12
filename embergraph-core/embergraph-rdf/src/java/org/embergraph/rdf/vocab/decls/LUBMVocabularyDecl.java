@@ -29,7 +29,7 @@ import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
 /*
-* Vocabulary and namespace for LUBM using the default namespace.
+ * Vocabulary and namespace for LUBM using the default namespace.
  *
  * @see http://swat.cse.lehigh.edu/projects/lubm/
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

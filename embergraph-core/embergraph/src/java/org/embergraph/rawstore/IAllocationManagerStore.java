@@ -18,10 +18,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rawstore;
 
 import java.nio.ByteBuffer;
-import org.embergraph.rwstore.IAllocationManager;
 
 /*
-* Adds capability to write and delete allocations within an {@link IAllocationContext}.
+ * Adds capability to write and delete allocations within an {@link IAllocationContext}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @see IAllocationManager

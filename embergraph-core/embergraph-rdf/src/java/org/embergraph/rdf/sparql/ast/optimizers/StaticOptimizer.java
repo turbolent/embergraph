@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Set;
 import org.apache.log4j.Logger;
 import org.embergraph.bop.IVariable;
-import org.embergraph.bop.joinGraph.fast.DefaultEvaluationPlan2;
-import org.embergraph.journal.ITx;
 import org.embergraph.rdf.sparql.ast.IBindingProducerNode;
 import org.embergraph.rdf.sparql.ast.IReorderableNode;
 import org.embergraph.rdf.sparql.ast.QueryHints;
@@ -21,7 +19,7 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTStaticJoinOptimizer.Annotations;
 
 /*
-* This is the old static optimizer code, taken directly from {@link DefaultEvaluationPlan2}, but
+ * This is the old static optimizer code, taken directly from {@link DefaultEvaluationPlan2}, but
  * lined up with the AST API instead of the Rule and IPredicate API.
  */
 public final class StaticOptimizer {
@@ -567,8 +565,8 @@ public final class StaticOptimizer {
         joinCardinality = Math.min(d1.getCardinality(), d2.getCardinality());
       } else {
         // shared vars and unshared vars - take the max
-      /*
-       * This modification to the join planner results in
+        /*
+         * This modification to the join planner results in
          * significantly faster queries for the bsbm benchmark (3x - 5x
          * overall). It takes a more optimistic perspective on the
          * intersection of two statement patterns, predicting that this
@@ -704,8 +702,8 @@ public final class StaticOptimizer {
       }
 
       if (sharesVarsWithAncestry(i)) {
-      /*
-       * We have a shared var with the ancestry.
+        /*
+         * We have a shared var with the ancestry.
          */
         final long tailCardinality = cardinality(i);
         if (tailCardinality < minCardinality) {

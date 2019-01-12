@@ -37,7 +37,6 @@ import org.embergraph.io.DataOutputBuffer;
 import org.embergraph.io.ShortPacker;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVUtility;
-import org.embergraph.search.FullTextIndexTupleSerializer;
 import org.embergraph.search.ITermDocKey;
 import org.embergraph.search.ITermDocRecord;
 import org.embergraph.search.ITermDocVal;
@@ -47,7 +46,7 @@ import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Replaces the {@link FullTextIndexTupleSerializer} to support {@link IV}s as document identifiers.
+ * Replaces the {@link FullTextIndexTupleSerializer} to support {@link IV}s as document identifiers.
  *
  * <p>Since {@link IV}s have a variable length encoding we have to indicate the length of the {@link
  * IV} either in the key or the value of the {@link ITuple} . I've put this information into the

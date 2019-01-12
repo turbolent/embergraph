@@ -27,10 +27,9 @@ import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpContext;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.PipelineOp;
-import org.embergraph.rdf.spo.ISPO;
 
 /*
-* Operator to insert {@link ISPO}s into embergraph.
+ * Operator to insert {@link ISPO}s into embergraph.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -29,7 +29,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 
 /*
-* Wrap an iterator visiting chunks as an iterator visiting the individual elements in each chunk.
+ * Wrap an iterator visiting chunks as an iterator visiting the individual elements in each chunk.
  *
  * @param <E> The generic type of the elements in the chunks.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

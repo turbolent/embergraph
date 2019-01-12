@@ -49,7 +49,7 @@ import org.embergraph.search.TokenBuffer;
 import org.openrdf.model.Literal;
 
 /*
-* Implementation based on the built-in keyword search capabilities for embergraph.
+ * Implementation based on the built-in keyword search capabilities for embergraph.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -231,8 +231,8 @@ public class EmbergraphValueCentricFullTextIndex extends FullTextIndex
 
       if (!(val instanceof Literal)) {
 
-      /*
-       * Note: If you allow URIs to be indexed then the code which is
+        /*
+         * Note: If you allow URIs to be indexed then the code which is
          * responsible for free text search for quads must impose a
          * filter on the subject and predicate positions to ensure that
          * free text search can not be used to materialize literals or
@@ -291,8 +291,8 @@ public class EmbergraphValueCentricFullTextIndex extends FullTextIndex
 
       if (TimestampUtility.isReadWriteTx(t)) {
 
-      /*
-       * A read-write tx must use the unisolated view of the lexicon.
+        /*
+         * A read-write tx must use the unisolated view of the lexicon.
          */
         t = ITx.UNISOLATED;
       }

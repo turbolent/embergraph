@@ -7,15 +7,13 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
-import org.embergraph.relation.accesspath.IBuffer;
-import org.embergraph.relation.accesspath.UnsynchronizedArrayBuffer;
 import org.embergraph.relation.rule.IProgram;
 import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.IStep;
 import org.embergraph.service.DataService;
 
 /*
-* A task that executes a query operation.
+ * A task that executes a query operation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

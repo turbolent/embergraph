@@ -66,10 +66,8 @@ import org.embergraph.btree.proc.LongAggregator;
 import org.embergraph.btree.raba.codec.EmptyRabaValueCoder;
 import org.embergraph.btree.raba.codec.FixedLengthValueRabaCoder;
 import org.embergraph.btree.raba.codec.IRabaCoder;
-import org.embergraph.journal.AbstractTask;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.IResourceLock;
-import org.embergraph.journal.ITx;
 import org.embergraph.journal.TemporaryStore;
 import org.embergraph.journal.TimestampUtility;
 import org.embergraph.rdf.axioms.NoAxioms;
@@ -80,22 +78,18 @@ import org.embergraph.rdf.internal.IVUtility;
 import org.embergraph.rdf.internal.constraints.RangeBOp;
 import org.embergraph.rdf.internal.impl.bnode.SidIV;
 import org.embergraph.rdf.lexicon.ITermIVFilter;
-import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.sparql.ast.QuadsOperationInTriplesModeException;
 import org.embergraph.rdf.sparql.ast.service.history.HistoryIndexTupleSerializer;
 import org.embergraph.rdf.spo.JustIndexWriteProc.WriteJustificationsProcConstructor;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.IRawTripleStore;
-import org.embergraph.rdf.store.LocalTripleStore;
 import org.embergraph.relation.AbstractRelation;
 import org.embergraph.relation.accesspath.ArrayAccessPath;
 import org.embergraph.relation.accesspath.ElementFilter;
 import org.embergraph.relation.accesspath.EmptyAccessPath;
 import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.relation.accesspath.IElementFilter;
-import org.embergraph.relation.rule.eval.AbstractSolutionBuffer.InsertSolutionBuffer;
-import org.embergraph.relation.rule.eval.ISolution;
 import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.striterator.ChunkedWrappedIterator;
 import org.embergraph.striterator.EmptyChunkedIterator;
@@ -104,7 +98,7 @@ import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 
 /*
-* The {@link SPORelation} handles all things related to the indices representing the triples stored
+ * The {@link SPORelation} handles all things related to the indices representing the triples stored
  * in the database. Statements are first converted to term identifiers using the {@link
  * LexiconRelation} and then inserted into the statement indices in parallel. There is one statement
  * index for each of the three possible access paths for a triple store. The key is formed from the
@@ -296,8 +290,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
 
           set.add(getFQN(SPOKeyOrder.SPO));
 
-          keyOrders =
-              Collections.unmodifiableList(Arrays.asList(SPOKeyOrder.SPO));
+          keyOrders = Collections.unmodifiableList(Arrays.asList(SPOKeyOrder.SPO));
 
         } else {
 
@@ -309,8 +302,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
 
           keyOrders =
               Collections.unmodifiableList(
-                  Arrays.asList(
-                      SPOKeyOrder.SPO, SPOKeyOrder.POS, SPOKeyOrder.OSP));
+                  Arrays.asList(SPOKeyOrder.SPO, SPOKeyOrder.POS, SPOKeyOrder.OSP));
         }
 
       } else {
@@ -322,8 +314,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
 
           set.add(getFQN(SPOKeyOrder.SPOC));
 
-          keyOrders =
-              Collections.unmodifiableList(Arrays.asList(SPOKeyOrder.SPOC));
+          keyOrders = Collections.unmodifiableList(Arrays.asList(SPOKeyOrder.SPOC));
 
         } else {
 
@@ -1060,8 +1051,8 @@ public class SPORelation extends AbstractRelation<ISPO> {
         if (statementIdentifiers) {
           C = (c == null ? Var.var("c") : new Constant<IV>(c));
         } else if (c != null) {
-        /*
-       * The 4th position should never become bound for a triple store
+          /*
+           * The 4th position should never become bound for a triple store
            * without statement identifiers.
            */
 
@@ -1100,7 +1091,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
   }
 
   //    /*
-//     * Return the {@link IAccessPath} that is most efficient for the specified
+  //     * Return the {@link IAccessPath} that is most efficient for the specified
   //     * predicate based on an analysis of the bound and unbound positions in the
   //     * predicate.
   //     * <p>
@@ -1153,7 +1144,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
   //    }
 
   //    /*
-//     * Isolates the logic for selecting the {@link SPOKeyOrder} from the
+  //     * Isolates the logic for selecting the {@link SPOKeyOrder} from the
   //     * {@link SPOPredicate} and then delegates to
   //     * {@link #getAccessPath(IKeyOrder, IPredicate)}.
   //     */
@@ -1186,7 +1177,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
   }
 
   //    /*
-//     * This handles a request for an access path that is restricted to a
+  //     * This handles a request for an access path that is restricted to a
   //     * specific index partition.
   //     * <p>
   //     * Note: This path is used with the scale-out JOIN strategy, which
@@ -1334,7 +1325,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
   //    }
 
   //    /*
-//     * Core impl.
+  //     * Core impl.
   //     *
   //     * @param keyOrder
   //     *            The natural order of the selected index (this identifies the
@@ -1433,8 +1424,8 @@ public class SPORelation extends AbstractRelation<ISPO> {
 
         final ISPO spo = sidIV.getInlineValue();
 
-      /*
-       * We need to check the inline SPO against the predicate to
+        /*
+         * We need to check the inline SPO against the predicate to
          * make sure it matches the triple pattern implied by the
          * predicate.  Usually in this case s, p, and o are unbound
          * (reverse lookup from SID to spo), but occasionally there
@@ -1732,7 +1723,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
   }
 
   //    /*
-//     * @todo This implementation was written early on and works for creating new
+  //     * @todo This implementation was written early on and works for creating new
   //     *       SPOs licensed by inference against a triple store. It does not
   //     *       allow us to specify the statement type, which is always set to
   //     *       [inferred]. It also does not capture the context if one exists, but
@@ -2479,8 +2470,8 @@ public class SPORelation extends AbstractRelation<ISPO> {
           keys[i] = tupleSer.serializeKey(a[i]); // jst.getKey(keyBuilder);
         }
 
-      /*
-       * sort into their natural order.
+        /*
+         * sort into their natural order.
          *
          * @todo is it faster to sort the Justification[] or the keys[]?
          * See above for the alternative.
@@ -2532,7 +2523,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
                 new NV(IPredicate.Annotations.RELATION_NAME, new String[] {getNamespace()})
                 //                        new NV(IPredicate.Annotations.KEY_ORDER,
                 //                                keyOrder),
-            ));
+                ));
     //        final IPredicate<ISPO> pred = new SPOPredicate(
     //                new String[] { getNamespace() }, -1, // partitionId
     //                Var.var("s"),

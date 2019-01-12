@@ -17,7 +17,7 @@ import org.embergraph.rawstore.IRawStore;
 import org.embergraph.util.Bytes;
 
 /*
-* {@link BTree} whose keys are commit times. No values are stored in the {@link BTree}.
+ * {@link BTree} whose keys are commit times. No values are stored in the {@link BTree}.
  *
  * @todo Subclass {@link BTree} for long keys and arbitrary values and move the find() and
  *     findNext() methods onto that class and make the value type generic. That same logic is

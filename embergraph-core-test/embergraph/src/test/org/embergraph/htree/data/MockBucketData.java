@@ -84,7 +84,7 @@ public class MockBucketData extends MockLeafData { // implements IBucketData {
   //	}
   //
   //	/*
-//	 * Visits the index of each bucket entry having a matching hash code.
+  //	 * Visits the index of each bucket entry having a matching hash code.
   //	 */
   //	private class HashMatchIterator implements Iterator<Integer> {
   //

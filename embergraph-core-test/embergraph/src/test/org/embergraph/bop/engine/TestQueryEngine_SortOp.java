@@ -49,7 +49,7 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
 
 /*
-* Test suite ORDER BY operators when integrated with the query engine. This test suite is designed
+ * Test suite ORDER BY operators when integrated with the query engine. This test suite is designed
  * to examine cases where the ORDER BY operator will have to buffer multiple chunks of solutions
  * before finally placing the buffered solutions into a total order.
  *
@@ -132,7 +132,7 @@ public class TestQueryEngine_SortOp extends TestCase2 {
   }
 
   //    /*
-//     * Return an {@link IAsynchronousIterator} that will read a single, chunk
+  //     * Return an {@link IAsynchronousIterator} that will read a single, chunk
   //     * containing all of the specified {@link IBindingSet}s.
   //     *
   //     * @param bindingSetChunks
@@ -279,7 +279,7 @@ public class TestQueryEngine_SortOp extends TestCase2 {
   }
 
   //    /*
-//     * Helper class for comparing solution sets having variables which evaluate
+  //     * Helper class for comparing solution sets having variables which evaluate
   //     * to {@link Integer} values.
   //     */
   //    static private class IntegerComparator implements Comparator<Integer> {

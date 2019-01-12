@@ -26,7 +26,7 @@ import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 
 /*
-* Delegation pattern handles the {@link SinkTransitionMetadata}.
+ * Delegation pattern handles the {@link SinkTransitionMetadata}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

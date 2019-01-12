@@ -27,7 +27,7 @@ import java.util.Map;
 import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
 
 /*
-* Classification of {@link IGroupMemberNode}s along a set of specified types. For nodes matching a
+ * Classification of {@link IGroupMemberNode}s along a set of specified types. For nodes matching a
  * given type, lookup is possible (returning an ordered list of nodes), all other nodes are stored
  * in a dedicated list.
  *

@@ -29,7 +29,7 @@ import java.rmi.RemoteException;
 import java.util.UUID;
 
 /*
-* Common service interface.
+ * Common service interface.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -69,7 +69,7 @@ public interface IService extends Remote {
   String getServiceName() throws IOException;
 
   //    /*
-//     * Return the service directory.
+  //     * Return the service directory.
   //     *
   //     * @throws IOException
   //     *             since you can use this method with RMI.

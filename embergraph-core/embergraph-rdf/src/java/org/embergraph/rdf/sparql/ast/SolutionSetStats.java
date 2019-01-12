@@ -31,10 +31,9 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IVariable;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.internal.IVCache;
 
 /*
-* A set of interesting statistics on a solution set.
+ * A set of interesting statistics on a solution set.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -106,8 +105,8 @@ public class SolutionSetStats implements ISolutionSetStats {
 
           if (usedVars.add(v) && nsolutions > 1) {
 
-          /*
-       * This variable was not used in solutions prior to this
+            /*
+             * This variable was not used in solutions prior to this
              * one.
              */
 
@@ -116,8 +115,8 @@ public class SolutionSetStats implements ISolutionSetStats {
 
           currentVars.add(v);
 
-        /*
-       * Check for a variable which has a bound value but the
+          /*
+           * Check for a variable which has a bound value but the
            * bound value is not materialized.
            */
           if (!notMaterialized.contains(v)) {
@@ -127,8 +126,8 @@ public class SolutionSetStats implements ISolutionSetStats {
 
             if (c != null) {
 
-            /*
-       * Note: ClassCastException if bound value is not an
+              /*
+               * Note: ClassCastException if bound value is not an
                * IV.
                */
               final IV<?, ?> iv = c.get();

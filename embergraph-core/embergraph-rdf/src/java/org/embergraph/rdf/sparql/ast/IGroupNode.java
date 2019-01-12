@@ -1,7 +1,7 @@
 package org.embergraph.rdf.sparql.ast;
 
 /*
-* A type of query node that groups a set of query nodes together. This is the interface used by the
+ * A type of query node that groups a set of query nodes together. This is the interface used by the
  * {@link UnionNode} and {@link JoinGroupNode} query nodes.
  */
 public interface IGroupNode<E extends IGroupMemberNode> extends IGroupMemberNode, Iterable<E> {
@@ -27,7 +27,7 @@ public interface IGroupNode<E extends IGroupMemberNode> extends IGroupMemberNode
   int size();
 
   //    /*
-//     * Return whether or not this is an optional group. Optional groups may or
+  //     * Return whether or not this is an optional group. Optional groups may or
   //     * may not produce variable bindings, but will not prune incoming solutions
   //     * based on whether or not they bind. Optional groups might be composed of a
   //     * single statement pattern, a single statement pattern with filters, or a

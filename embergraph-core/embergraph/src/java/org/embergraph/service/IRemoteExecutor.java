@@ -23,15 +23,13 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.service;
 
-import java.io.IOException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
-import java.util.concurrent.RejectedExecutionException;
 
 /*
-* Interface for running procedures on a remote service. In general, applications SHOULD restrict
+ * Interface for running procedures on a remote service. In general, applications SHOULD restrict
  * their discovery of {@link IRemoteExecutor} to {@link IClientService}s. Applications SHOULD NOT
  * run arbitrary {@link Callable}s against an {@link IDataService} or an {@link IMetadataService}
  * unless it is necessary to access the index objects locally on the service (index partition moves,

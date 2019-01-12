@@ -32,7 +32,7 @@ import org.embergraph.bop.Var;
 import org.embergraph.bop.bindingSet.ListBindingSet;
 
 /*
-* Unit tests for {@link INBinarySearch}.
+ * Unit tests for {@link INBinarySearch}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

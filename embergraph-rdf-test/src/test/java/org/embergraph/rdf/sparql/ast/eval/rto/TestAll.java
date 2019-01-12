@@ -22,7 +22,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /*
-* Aggregates test suites into increasing dependency order.
+ * Aggregates test suites into increasing dependency order.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestAll.java 7577 2013-11-21 16:48:15Z jeremy_carroll $

@@ -28,11 +28,9 @@ import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.btree.keys.SuccessorUtil;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVUtility;
-import org.embergraph.relation.accesspath.IAccessPath;
-import org.embergraph.striterator.IKeyOrder;
 
 /*
-* This was cloned from the {@link DistinctTermAdvancer}. It supports an efficient scan of the
+ * This was cloned from the {@link DistinctTermAdvancer}. It supports an efficient scan of the
  * distinct term identifiers that appear in the first position(s) of the keys for the statement
  * index corresponding to the specified {@link IKeyOrder}. For example, using {@link
  * SPOKeyOrder#POS} will give you the term identifiers for the distinct predicates actually in use

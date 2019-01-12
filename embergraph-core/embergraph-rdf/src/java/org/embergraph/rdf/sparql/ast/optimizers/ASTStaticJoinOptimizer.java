@@ -31,7 +31,6 @@ import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpUtility;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IVariable;
-import org.embergraph.bop.joinGraph.fast.DefaultEvaluationPlan2;
 import org.embergraph.rdf.sparql.ast.GraphPatternGroup;
 import org.embergraph.rdf.sparql.ast.IBindingProducerNode;
 import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
@@ -54,7 +53,7 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.eval.IEvaluationContext;
 
 /*
-* This is an AST optimizer port of the old "static" optimizer - {@link DefaultEvaluationPlan2}.
+ * This is an AST optimizer port of the old "static" optimizer - {@link DefaultEvaluationPlan2}.
  * This optimizer uses range counts and simple shared variable heuristics to order the statement
  * patterns within a particular join group. This optimizer extends the old static optimizer in that
  * child join groups consider the ordering of statement patterns in their parent and ancestors when
@@ -276,8 +275,8 @@ public class ASTStaticJoinOptimizer implements IASTOptimizer {
           final GraphPatternGroup<IGroupMemberNode> childGroup =
               (GraphPatternGroup<IGroupMemberNode>) subquery.getWhereClause();
 
-        /*
-       * Only the projected variables are in scope in the subquery.
+          /*
+           * Only the projected variables are in scope in the subquery.
            */
 
           final Set<IVariable<?>> projectedVars =
@@ -288,8 +287,8 @@ public class ASTStaticJoinOptimizer implements IASTOptimizer {
           final IBindingSet tmp =
               exogenousBindings == null ? null : exogenousBindings.copy(variablesToKeep);
 
-        /*
-       * See https://jira.blazegraph.com/browse/BLZG-1817:
+          /*
+           * See https://jira.blazegraph.com/browse/BLZG-1817:
            *
            * <p>In the normal case, we pass in the current ancestry. There is one exception to this
            * rule though: whenever we're recursing into complex subquery roots that will be
@@ -488,8 +487,8 @@ public class ASTStaticJoinOptimizer implements IASTOptimizer {
           }
         }
 
-      /*
-       * BLZG-2097: if we have preceding non-reorderable nodes, we add the definitely bound
+        /*
+         * BLZG-2097: if we have preceding non-reorderable nodes, we add the definitely bound
          * variables to the ancestry. This means, we replace the (buggy) ancestry computation
          * mechanism from before through dynamic ancestry computation.
          */
@@ -554,7 +553,7 @@ public class ASTStaticJoinOptimizer implements IASTOptimizer {
   }
 
   //    /*
-//     * Use the SPORelation from the database to grab the appropriate range
+  //     * Use the SPORelation from the database to grab the appropriate range
   //     * counts for the {@link StatementPatternNode}s.  Only tries to attach them
   //     * if the annotation {@link Annotations#ESTIMATED_CARDINALITY} is not
   //     * already attached to the node.  This makes it possible to write unit
@@ -608,7 +607,7 @@ public class ASTStaticJoinOptimizer implements IASTOptimizer {
   //    }
   //
   //    /*
-//     * Helper method grabs the IV out of the TermNode, doing the appropriate
+  //     * Helper method grabs the IV out of the TermNode, doing the appropriate
   //     * NULL and constant/var checks.
   //     *
   //     * @param term

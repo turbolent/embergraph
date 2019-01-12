@@ -9,10 +9,8 @@ import org.embergraph.btree.ITupleIterator;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.KVO;
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.rdf.changesets.ChangeAction;
 import org.embergraph.rdf.changesets.IChangeLog;
 import org.embergraph.rdf.changesets.IChangeRecord;
-import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sail.EmbergraphSail.EmbergraphSailConnection;
 import org.embergraph.rdf.sparql.ast.eval.CustomServiceFactoryBase;
@@ -26,7 +24,7 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.relation.AbstractRelation;
 
 /*
-* This service tracks KB updates via an {@link IChangeLog} and is responsible for maintaining an
+ * This service tracks KB updates via an {@link IChangeLog} and is responsible for maintaining an
  * ordered index over the assertions that have been added to or removed from a KB instance.
  *
  * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/607">History Service</a>

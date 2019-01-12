@@ -33,7 +33,7 @@ import org.apache.log4j.Logger;
 import org.embergraph.util.DaemonThreadFactory;
 
 /*
-* Command manages the execution and termination of a native process and an object reading the
+ * Command manages the execution and termination of a native process and an object reading the
  * output of that process.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

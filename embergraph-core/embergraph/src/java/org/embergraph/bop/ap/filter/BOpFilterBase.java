@@ -28,7 +28,7 @@ import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpBase;
 
 /*
-* Base class for operators which apply striterator patterns for access paths.
+ * Base class for operators which apply striterator patterns for access paths.
  *
  * <p>The striterator pattern is enacted slightly differently here. The filter chain is formed by
  * stacking {@link BOpFilterBase}s as child operands. Each operand specified to a {@link

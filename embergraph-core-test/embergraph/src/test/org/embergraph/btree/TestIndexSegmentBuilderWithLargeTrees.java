@@ -30,7 +30,7 @@ import org.embergraph.journal.Journal;
 import org.embergraph.journal.Options;
 
 /*
-* Test build trees on the journal, evicts them into an {@link IndexSegment}, and then compares the
+ * Test build trees on the journal, evicts them into an {@link IndexSegment}, and then compares the
  * trees for the same total ordering.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -90,7 +90,7 @@ public class TestIndexSegmentBuilderWithLargeTrees extends AbstractIndexSegmentT
   }
 
   // /*
-// * Test exercises a known problem case.
+  // * Test exercises a known problem case.
   // */
   // public void test_buildOrder10n3() throws IOException {
   //
@@ -210,7 +210,7 @@ public class TestIndexSegmentBuilderWithLargeTrees extends AbstractIndexSegmentT
   }
 
   //    /*
-//     * This stress test is designed to expose problems when most or all of the
+  //     * This stress test is designed to expose problems when most or all of the
   //     * rangeCount given to the {@link IndexSegmentBuilder} represents an over
   //     * count of the tuples actually in the source {@link BTree}. A series of
   //     * source B+Trees are generated with random data. An {@link IndexSegment} is
@@ -258,25 +258,25 @@ public class TestIndexSegmentBuilderWithLargeTrees extends AbstractIndexSegmentT
     try {
       // branching factors used for the index segment.
       final int[] branchingFactors =
-          new int[]{
+          new int[] {
             /*
-       * This is the minimum branching factor (maximum depth, lots of edge
-               * conditions).
-               */
-              3,
+             * This is the minimum branching factor (maximum depth, lots of edge
+             * conditions).
+             */
+            3,
             /*
-       * This is the caller's branching factor, whatever that might be.
-               */
-              btree.getBranchingFactor(),
+             * This is the caller's branching factor, whatever that might be.
+             */
+            btree.getBranchingFactor(),
             /*
-       * Various large branching factors, at least one of which should be
-               * odd to exercise the fence posts involved in handling odd
-               * branching factors.
-               */
-              257,
-              512,
-              4196,
-              8196
+             * Various large branching factors, at least one of which should be
+             * odd to exercise the fence posts involved in handling odd
+             * branching factors.
+             */
+            257,
+            512,
+            4196,
+            8196
           };
 
       for (int i = 0; i < branchingFactors.length; i++) {
@@ -486,7 +486,7 @@ public class TestIndexSegmentBuilderWithLargeTrees extends AbstractIndexSegmentT
   }
 
   //    /*
-//     * Test helper builds an index segment from the btree using several
+  //     * Test helper builds an index segment from the btree using several
   //     * different branching factors and each time compares the resulting total
   //     * ordering to the original btree.
   //     *
@@ -699,7 +699,7 @@ public class TestIndexSegmentBuilderWithLargeTrees extends AbstractIndexSegmentT
    * Note: Use IndexSegmentBuilder#main() instead.
    */
   //    /*
-//     * Driver for comparison of index segment build performance using different
+  //     * Driver for comparison of index segment build performance using different
   //     * algorithms against the same source data.
   //     *
   //     * @param args

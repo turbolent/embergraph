@@ -28,7 +28,7 @@ import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /*
-* Limit the input into joins by limiting the number of elements read from an access path. Not
+ * Limit the input into joins by limiting the number of elements read from an access path. Not
  * exactly a cutoff join, which limits output from the join rather than input into it.
  */
 final class CutoffLimitHint extends AbstractLongQueryHint {

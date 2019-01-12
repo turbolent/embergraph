@@ -30,7 +30,6 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.Vector;
 import java.util.concurrent.Callable;
-import org.embergraph.bfs.EmbergraphFileSystem;
 import org.embergraph.btree.IIndex;
 import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleIterator;
@@ -38,11 +37,10 @@ import org.embergraph.btree.IndexMetadata;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.ITx;
 import org.embergraph.journal.ProxyTestCase;
-import org.embergraph.sparse.TPS.TPV;
 import org.embergraph.util.CSVReader;
 
 /*
-* Test suite for {@link SparseRowStore}.
+ * Test suite for {@link SparseRowStore}.
  *
  * <p>Note: A lot of the pragmatic tests are being done by the {@link EmbergraphFileSystem} which
  * uses the {@link SparseRowStore} for its file metadata index.
@@ -159,8 +157,8 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
 
         while (r.hasNext()) {
 
-        /*
-       * Use a timestamp factory to give each record a unique
+          /*
+           * Use a timestamp factory to give each record a unique
            * timestamp.
            */
           //                long timestamp = TimestampFactory.nextNanoTime();
@@ -171,13 +169,13 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
           // remember for validation below.
           rows.add(row);
 
-        /*
-       * Use the date of hire column as the timestamp on the record.
+          /*
+           * Use the date of hire column as the timestamp on the record.
            */
           long timestamp = ((Date) row.get(timestampColumn)).getTime();
 
-        /*
-       * FIXME compute the difference from the current row and store
+          /*
+           * FIXME compute the difference from the current row and store
            * only the difference -- this should perhaps be done inside of
            * write(). without this step, each row loaded replicates all
            * column values (this is only an issue for things like the CSV
@@ -190,8 +188,8 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
           // write on the sparse row store.
           srs.write(schema, row, timestamp, null /*filter*/, null /*precondition*/);
 
-        /*
-       * Verify read back of the row that we just wrote.
+          /*
+           * Verify read back of the row that we just wrote.
            */
           {
 
@@ -259,8 +257,8 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
           // extract the primary key for this row.
           final Object primaryKey = expected.get(schema.getPrimaryKeyName());
 
-        /*
-       * Use the date of hire column as the timestamp on the record.
+          /*
+           * Use the date of hire column as the timestamp on the record.
            */
           final long timestamp = ((Date) expected.get(timestampColumn)).getTime();
 
@@ -690,8 +688,8 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
       }
 
       {
-      /*
-       * Atomic write where the pre-condition is not satisfied.
+        /*
+         * Atomic write where the pre-condition is not satisfied.
          */
 
         final Map<String, Object> propertySet = new HashMap<String, Object>();
@@ -723,8 +721,8 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
       }
 
       {
-      /*
-       * Atomic write where the pre-condition is satisfied.
+        /*
+         * Atomic write where the pre-condition is satisfied.
          */
 
         final Map<String, Object> propertySet = new HashMap<String, Object>();
@@ -877,8 +875,8 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
           // verify pre-delete values.
           assertSameValues(expected, actual);
 
-        /*
-       * @todo verify the entire history for the logical row (the
+          /*
+           * @todo verify the entire history for the logical row (the
            * TPS, not just the map view).
            */
 
@@ -1183,8 +1181,8 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
 
       {
 
-      /*
-       * The test will fail here if continuation queries are not
+        /*
+         * The test will fail here if continuation queries are not
          * implemented.
          */
         assertTrue("Did not issue continuation query?", itr.hasNext());
@@ -1292,8 +1290,8 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
 
       {
 
-      /*
-       * The test will fail here if continuation queries are not
+        /*
+         * The test will fail here if continuation queries are not
          * implemented.
          */
         assertTrue("Did not issue continuation query?", itr.hasNext());

@@ -23,10 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.resources;
 
-import org.embergraph.service.IMetadataService;
-
 /*
-* An interface which shields callers from handling RMI exceptions and which allows the use of mock
+ * An interface which shields callers from handling RMI exceptions and which allows the use of mock
  * implementations when you do not really want to assign partition identifiers using the {@link
  * IMetadataService#nextPartitionId(String)}.
  *

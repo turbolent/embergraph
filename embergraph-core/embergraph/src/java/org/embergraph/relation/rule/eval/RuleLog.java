@@ -24,12 +24,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.relation.rule.eval;
 
 import org.apache.log4j.Logger;
-import org.embergraph.bop.IPredicate;
 import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.eval.pipeline.JoinStats;
 
 /*
-* Class defines the log on which rule execution statistics are written. This covers both query
+ * Class defines the log on which rule execution statistics are written. This covers both query
  * evaluation and mutation operations such as fixed point closure of a rule set.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

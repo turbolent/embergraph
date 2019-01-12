@@ -128,8 +128,7 @@ public class AbstractSimpleInsertTest<S extends IIndexManager>
     }
   }
 
-  protected void executeInsert(String where, boolean expected)
-      throws Exception {
+  protected void executeInsert(String where, boolean expected) throws Exception {
     final StringBuilder update = new StringBuilder();
     update.append(getNamespaceDeclarations());
     update.append("INSERT { ex:bob rdfs:label \"Bob\" . } WHERE { " + where + " }");

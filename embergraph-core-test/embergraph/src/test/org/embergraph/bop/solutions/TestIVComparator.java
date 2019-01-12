@@ -41,7 +41,7 @@ import org.embergraph.rdf.spo.SPO;
 import org.openrdf.model.URI;
 
 /*
-* Test suite for {@link IVComparator}.
+ * Test suite for {@link IVComparator}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -345,7 +345,7 @@ public class TestIVComparator extends TestCase2 {
   }
 
   //    /*
-//     * Unit test comparing different kinds of inline and non-inline {@link IV}s.
+  //     * Unit test comparing different kinds of inline and non-inline {@link IV}s.
   //     */
   //    public void test_inline_with_noninline() {
   //

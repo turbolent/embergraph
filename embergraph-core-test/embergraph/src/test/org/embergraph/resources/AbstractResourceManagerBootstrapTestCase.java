@@ -29,7 +29,7 @@ import junit.framework.TestCase2;
 import org.embergraph.resources.ResourceManager.Options;
 
 /*
-* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class AbstractResourceManagerBootstrapTestCase extends TestCase2 {

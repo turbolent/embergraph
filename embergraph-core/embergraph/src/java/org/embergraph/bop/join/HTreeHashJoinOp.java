@@ -25,16 +25,13 @@ import java.util.Map;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpContext;
 import org.embergraph.bop.IBindingSet;
-import org.embergraph.bop.IPredicate;
 import org.embergraph.bop.ISingleThreadedOp;
 import org.embergraph.bop.NV;
 import org.embergraph.bop.PipelineOp;
 import org.embergraph.bop.controller.INamedSolutionSetRef;
-import org.embergraph.htree.HTree;
-import org.embergraph.relation.accesspath.IAccessPath;
 
 /*
-* A hash join against an {@link IAccessPath} based on the {@link HTree} and suitable for very large
+ * A hash join against an {@link IAccessPath} based on the {@link HTree} and suitable for very large
  * intermediate result sets. Source solutions are buffered on the {@link HTree} on each evaluation
  * pass. When the memory demand of the {@link HTree} is not bounded, the hash join will run a single
  * pass over the {@link IAccessPath} for the target {@link IPredicate}. For some queries, this can
@@ -165,6 +162,5 @@ public class HTreeHashJoinOp<E> extends HashJoinOp<E> implements ISingleThreaded
     final long usedMemory = ((HTreeHashJoinUtility) state).getStore().size();
 
     return context.isLastInvocation() || usedMemory >= maxMemory;
-
   }
 }

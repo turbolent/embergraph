@@ -21,10 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.join;
 
-import org.embergraph.bop.IVariable;
-
 /*
-* Annotations for hash joins.
+ * Annotations for hash joins.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -58,7 +56,7 @@ public interface HashJoinAnnotations {
   String ASK_VAR = HashJoinAnnotations.class.getName() + ".askVar";
 
   //    /*
-//     * The maximum number of solutions that will be considered before a hash
+  //     * The maximum number of solutions that will be considered before a hash
   //     * join without any join variables is failed.
   //     * <p>
   //     * The purpose of this annotation is to identify hash joins which are doing

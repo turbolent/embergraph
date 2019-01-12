@@ -25,7 +25,6 @@ import org.embergraph.rdf.graph.EdgesEnum;
 import org.embergraph.rdf.graph.Factory;
 import org.embergraph.rdf.graph.FrontierEnum;
 import org.embergraph.rdf.graph.IBinder;
-import org.embergraph.rdf.graph.IBindingExtractor;
 import org.embergraph.rdf.graph.IGASContext;
 import org.embergraph.rdf.graph.IGASScheduler;
 import org.embergraph.rdf.graph.IGASState;
@@ -37,7 +36,7 @@ import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 
 /*
-* SSSP (Single Source, Shortest Path). This analytic computes the shortest path to each connected
+ * SSSP (Single Source, Shortest Path). This analytic computes the shortest path to each connected
  * vertex in the graph starting from the given vertex. Only connected vertices are visited by this
  * implementation (the frontier never leaves the connected component in which the starting vertex is
  * located).
@@ -83,7 +82,7 @@ public class SSSP extends BaseGASProgram<SSSP.VS, SSSP.ES, Integer /* dist */>
     private Double dist = Double.MAX_VALUE;
 
     //        /*
-//         * Note: This flag is cleared by apply() and then conditionally set
+    //         * Note: This flag is cleared by apply() and then conditionally set
     //         * iff the {@link #dist()} is replaced by the new value from the
     //         * gather.  Thus, if the gather does not reduce the value, then the
     //         * propagation of the algorithm is halted. However, this causes the
@@ -107,7 +106,7 @@ public class SSSP extends BaseGASProgram<SSSP.VS, SSSP.ES, Integer /* dist */>
     }
 
     //        /*
-//         * Set the distance for the vertex to ZERO. This is done for the
+    //         * Set the distance for the vertex to ZERO. This is done for the
     //         * starting vertex.
     //         */
     //        public void zero() {
@@ -118,7 +117,7 @@ public class SSSP extends BaseGASProgram<SSSP.VS, SSSP.ES, Integer /* dist */>
     //        }
 
     //        /*
-//         * Return <code>true</code> if the {@link #dist()} was updated by the
+    //         * Return <code>true</code> if the {@link #dist()} was updated by the
     //         * last APPLY.
     //         */
     //        public boolean isChanged() {
@@ -161,7 +160,7 @@ public class SSSP extends BaseGASProgram<SSSP.VS, SSSP.ES, Integer /* dist */>
     }
 
     //        /*
-//         * Update the vertex state to the minimum of the combined sum and its
+    //         * Update the vertex state to the minimum of the combined sum and its
     //         * current state.
     //         *
     //         * @param u

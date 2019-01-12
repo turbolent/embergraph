@@ -10,7 +10,7 @@ package cern.colt.bitvector;
 
 import java.awt.Rectangle;
 /*
-* Fixed sized (non resizable) n*m bit matrix. A bit matrix has a number of columns and rows, which
+ * Fixed sized (non resizable) n*m bit matrix. A bit matrix has a number of columns and rows, which
  * are assigned upon instance construction - The matrix's size is then <tt>columns()*rows()</tt>.
  * Bits are accessed via <tt>(column,row)</tt> coordinates.
  *

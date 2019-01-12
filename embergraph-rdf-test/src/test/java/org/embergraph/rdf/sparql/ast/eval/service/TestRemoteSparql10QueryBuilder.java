@@ -52,7 +52,6 @@ import org.embergraph.rdf.sparql.ast.service.IRemoteSparqlQueryBuilder;
 import org.embergraph.rdf.sparql.ast.service.RemoteSparql10QueryBuilder;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 import org.openrdf.model.BNode;
-import org.openrdf.model.Value;
 import org.openrdf.model.impl.BNodeImpl;
 import org.openrdf.model.vocabulary.DC;
 import org.openrdf.query.BindingSet;
@@ -60,7 +59,7 @@ import org.openrdf.query.algebra.StatementPattern.Scope;
 import org.openrdf.query.impl.MapBindingSet;
 
 /*
-* Test suite for the {@link RemoteSparql10QueryBuilder}.
+ * Test suite for the {@link RemoteSparql10QueryBuilder}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestRemoteServiceCallImpl.java 6060 2012-03-02 16:07:38Z thompsonbry $
@@ -108,7 +107,7 @@ public class TestRemoteSparql10QueryBuilder extends AbstractEmbergraphExprBuilde
   }
 
   //    /*
-//     * Wrap as an {@link IConstant}.
+  //     * Wrap as an {@link IConstant}.
   //     *
   //     * @param iv
   //     *            The {@link IV}.
@@ -1248,7 +1247,7 @@ public class TestRemoteSparql10QueryBuilder extends AbstractEmbergraphExprBuilde
   }
 
   //    /*
-//     * A variant test where a blank node is used in the graph pattern. The blank
+  //     * A variant test where a blank node is used in the graph pattern. The blank
   //     * node is translated internally into an anonymous variable. However, the
   //     * name of that anonymous variable is NOT a legal name for a SPARQL variable
   //     * (this is done in order to avoid potential conflicts with variables used

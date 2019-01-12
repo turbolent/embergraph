@@ -27,7 +27,7 @@ import org.embergraph.rdf.spo.SPOPredicate;
 import org.embergraph.relation.rule.Rule;
 
 /*
-* Rule for steps 11 and 13 of the "fast closure" method.
+ * Rule for steps 11 and 13 of the "fast closure" method.
  *
  * <p>Note: this rule is not very selective and does not produce new entailments unless your
  * ontology and your application both rely on domain/range to confer type information. If you

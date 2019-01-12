@@ -17,13 +17,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.journal;
 
-import java.nio.ByteBuffer;
-import org.embergraph.btree.BTree;
-import org.embergraph.rwstore.RWStore;
-import org.embergraph.rwstore.sector.MemoryManager;
-
 /*
-* The buffer mode in which the journal is opened.
+ * The buffer mode in which the journal is opened.
  *
  * <p>The {@link #Direct} and {@link #Mapped} options may not be used for files exceeding {@link
  * Integer#MAX_VALUE} bytes in length since a {@link ByteBuffer} is indexed with an <code>int</code>

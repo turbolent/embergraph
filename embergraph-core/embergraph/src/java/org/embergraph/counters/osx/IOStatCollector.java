@@ -35,7 +35,6 @@ import org.embergraph.counters.AbstractProcessReader;
 import org.embergraph.counters.ActiveProcess;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.ICounterHierarchy;
-import org.embergraph.counters.ICounterSet;
 import org.embergraph.counters.IHostCounters;
 import org.embergraph.counters.IInstrument;
 import org.embergraph.counters.IRequiredHostCounters;
@@ -43,7 +42,7 @@ import org.embergraph.counters.ProcessReaderHelper;
 import org.embergraph.util.Bytes;
 
 /*
-* Collects some counters using <code>iostat</code> under OSX. Unfortunately, <code>iostat</code>
+ * Collects some counters using <code>iostat</code> under OSX. Unfortunately, <code>iostat</code>
  * does not break down the reads and writes and does not report IO Wait. This information is
  * obviously available from OSX as it is provided by the ActivityMonitor, but we can not get it from
  * <code>iostat</code>.
@@ -446,8 +445,8 @@ public class IOStatCollector extends AbstractProcessCollector
 
         } catch (Exception ex) {
 
-        /*
-       * Issue warning for parsing problems.
+          /*
+           * Issue warning for parsing problems.
            */
 
           log.warn(ex.getMessage() + "\nheader: " + header1 + "\n  data: " + data, ex);

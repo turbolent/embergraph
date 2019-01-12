@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.rmi.Remote;
 import java.util.concurrent.Future;
-import org.embergraph.ha.msg.HAWriteMessage;
 import org.embergraph.ha.msg.IHALogRequest;
 import org.embergraph.ha.msg.IHALogRootBlocksRequest;
 import org.embergraph.ha.msg.IHALogRootBlocksResponse;
@@ -36,14 +35,9 @@ import org.embergraph.ha.msg.IHASyncRequest;
 import org.embergraph.ha.msg.IHAWriteMessage;
 import org.embergraph.ha.msg.IHAWriteSetStateRequest;
 import org.embergraph.ha.msg.IHAWriteSetStateResponse;
-import org.embergraph.ha.pipeline.HAReceiveService;
-import org.embergraph.ha.pipeline.HASendService;
-import org.embergraph.io.writecache.WriteCache;
-import org.embergraph.journal.WriteExecutorService;
-import org.embergraph.service.proxy.ThickFuture;
 
 /*
-* A {@link Remote} interface supporting the write replication pipeline. The quorum leader accepts
+ * A {@link Remote} interface supporting the write replication pipeline. The quorum leader accepts
  * writes from the application layer. The writes are formatted onto low-level cache blocks. Those
  * cache blocks are replicated from the quorum leader to the quorum followers along the pipeline.
  *
@@ -189,7 +183,7 @@ public interface HAPipelineGlue extends Remote {
   Future<IHASendStoreResponse> sendHAStore(IHARebuildRequest msg) throws IOException;
 
   //    /*
-//     * There is something for this on HAGlue right now.
+  //     * There is something for this on HAGlue right now.
   //     *
   //     * TODO Method to compute a digest for the committed allocations on a
   //     * backing store as of the commit point on which the specified transaction

@@ -19,15 +19,13 @@ import cern.colt.matrix.DoubleMatrix1D;
 import cern.colt.matrix.DoubleMatrix2D;
 import cern.colt.matrix.DoubleMatrix3D;
 import cern.colt.matrix.doublealgo.DoubleMatrix2DComparator;
-import cern.colt.matrix.doublealgo.Transform;
 import cern.colt.matrix.linalg.Algebra;
 import cern.colt.matrix.linalg.LUDecompositionQuick;
-import cern.colt.matrix.linalg.Property;
 import cern.colt.matrix.linalg.SeqBlas;
 import cern.jet.math.Functions;
 
 /*
-* Quick and dirty tests.
+ * Quick and dirty tests.
  *
  * @author wolfgang.hoschek@cern.ch
  * @version 1.0, 09/24/99
@@ -212,7 +210,8 @@ class TestMatrix2D {
     // --> 0
 
     // Max( Sqrt(x[i]) / 2 )
-    System.out.println(matrix.aggregate(Functions.max, Functions.chain(Functions.div(2), Functions.sqrt)));
+    System.out.println(
+        matrix.aggregate(Functions.max, Functions.chain(Functions.div(2), Functions.sqrt)));
     // --> 0.8660254037844386
 
     // Number of all cells with 0 <= value <= 2
@@ -220,8 +219,9 @@ class TestMatrix2D {
     // --> 3
 
     // Number of all cells with 0.8 <= Log2(value) <= 1.2
-    System.out.println(matrix.aggregate(Functions.plus, Functions
-        .chain(Functions.between(0.8, 1.2), Functions.log2)));
+    System.out.println(
+        matrix.aggregate(
+            Functions.plus, Functions.chain(Functions.between(0.8, 1.2), Functions.log2)));
     // --> 1
 
     // Product( x[i] )
@@ -241,8 +241,9 @@ class TestMatrix2D {
 
     // Sum( (x[i]+y[i])^2 )
     DoubleMatrix1D otherMatrix1D = matrix.copy();
-    System.out.println(matrix.aggregate(otherMatrix1D, Functions.plus, Functions
-        .chain(Functions.square, Functions.plus)));
+    System.out.println(
+        matrix.aggregate(
+            otherMatrix1D, Functions.plus, Functions.chain(Functions.square, Functions.plus)));
     // --> 56
 
     matrix.assign(Functions.plus(1));
@@ -253,8 +254,11 @@ class TestMatrix2D {
     // Sum(Math.PI * Math.log(otherMatrix1D[i] / matrix[i]))
     System.out.println(
         matrix.aggregate(
-            otherMatrix1D, Functions.plus, Functions.chain(
-                Functions.mult(Math.PI), Functions.chain(Functions.log, Functions.swapArgs(Functions.div)))));
+            otherMatrix1D,
+            Functions.plus,
+            Functions.chain(
+                Functions.mult(Math.PI),
+                Functions.chain(Functions.log, Functions.swapArgs(Functions.div)))));
     // or, perhaps less error prone and more readable:
     System.out.println(
         matrix.aggregate(
@@ -275,7 +279,8 @@ class TestMatrix2D {
 
     DoubleMatrix3D y = x.copy();
     // Sum( (x[i]+y[i])^2 )
-    System.out.println(x.aggregate(y, Functions.plus, Functions.chain(Functions.square, Functions.plus)));
+    System.out.println(
+        x.aggregate(y, Functions.plus, Functions.chain(Functions.square, Functions.plus)));
     // --> 560
 
     System.out.println(matrix.assign(Functions.random()));
@@ -287,8 +292,8 @@ class TestMatrix2D {
   public static void doubleTest14(int r1, int c, int r2) {
     double[] values = {0, 1, 2, 3};
     DoubleMatrix2D a = DoubleFactory2D.dense.ascending(r1, c);
-    DoubleMatrix2D b = cern.colt.matrix.doublealgo.Transform
-        .mult(DoubleFactory2D.dense.ascending(c, r2), -1);
+    DoubleMatrix2D b =
+        cern.colt.matrix.doublealgo.Transform.mult(DoubleFactory2D.dense.ascending(c, r2), -1);
 
     // System.out.println(a);
     // System.out.println(b);

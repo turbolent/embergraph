@@ -6,7 +6,7 @@ import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.sail.SailException;
 
 /*
-* Class exists to align exceptions thrown by Sesame 2 query evaluation with those thrown by the
+ * Class exists to align exceptions thrown by Sesame 2 query evaluation with those thrown by the
  * Sesame 2 SAIL.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

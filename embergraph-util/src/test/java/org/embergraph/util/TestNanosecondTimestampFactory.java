@@ -24,7 +24,7 @@ package org.embergraph.util;
 import junit.framework.TestCase;
 
 /*
-* Test suite for {@link NanosecondTimestampFactory}.
+ * Test suite for {@link NanosecondTimestampFactory}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

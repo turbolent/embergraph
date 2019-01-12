@@ -25,7 +25,7 @@ import java.util.Properties;
 import org.embergraph.journal.ITx;
 
 /*
-* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class AbstractEmbeddedTripleStoreTestCase

@@ -3,7 +3,7 @@ package org.embergraph.btree;
 import org.embergraph.rawstore.WormAddressManager;
 
 /*
-* Address manager supporting offsets that are encoded for one of several regions in an {@link
+ * Address manager supporting offsets that are encoded for one of several regions in an {@link
  * IndexSegmentStore}. The regions are identified by a {@link IndexSegmentRegion}, which gets
  * encoded into the offset component of the address. The offsets are relative to the start of the
  * identified regions. The {@link IndexSegmentCheckpoint} record gives the start of each region.

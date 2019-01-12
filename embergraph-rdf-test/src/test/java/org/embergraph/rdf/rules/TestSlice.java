@@ -40,7 +40,6 @@ import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.SPOPredicate;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.AbstractTripleStore.Options;
-import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.ISlice;
 import org.embergraph.relation.rule.QueryOptions;
@@ -53,7 +52,7 @@ import org.embergraph.relation.rule.eval.ISolution;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /*
-* Test for {@link ISlice} handling in native {@link IRule} execution. Slice for joins is handled by
+ * Test for {@link ISlice} handling in native {@link IRule} execution. Slice for joins is handled by
  * the query plan and its evaluation. Slice for an {@link IAccessPath} scan is handled using the
  * appropriate iterator and is not tested by this class.
  *

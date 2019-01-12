@@ -32,12 +32,11 @@ import org.embergraph.bop.IQueryAttributes;
 import org.embergraph.bop.NV;
 import org.embergraph.bop.controller.INamedSolutionSetRef;
 import org.embergraph.bop.controller.NamedSetAnnotations;
-import org.embergraph.htree.HTree;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.UnsyncLocalOutputBuffer;
 
 /*
-* An N-way merge join based on the {@link HTree}.
+ * An N-way merge join based on the {@link HTree}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -200,8 +199,8 @@ public class HTreeMergeJoin extends AbstractMergeJoin {
 
         if (state[i] == null) {
 
-        /*
-       * The solution set was not found!
+          /*
+           * The solution set was not found!
            *
            * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/534#comment:2">BSBM BI
            *     Q5 Error when using MERGE JOIN </a>
@@ -242,8 +241,8 @@ public class HTreeMergeJoin extends AbstractMergeJoin {
 
         if (release && context.isLastInvocation()) {
 
-        /*
-       * Note: It is possible to INCLUDE the named temporary
+          /*
+           * Note: It is possible to INCLUDE the named temporary
            * solution set multiple times within a query. If we want to
            * release() the hash tree then we need to know how many
            * times the temporary solution set is being included and

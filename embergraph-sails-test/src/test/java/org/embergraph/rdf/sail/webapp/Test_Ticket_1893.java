@@ -17,7 +17,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.sail.webapp;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import junit.framework.Test;
@@ -31,7 +30,7 @@ import org.openrdf.query.TupleQueryResult;
 import org.openrdf.repository.RepositoryException;
 
 /*
-* This test checks if plain literals and string literals are properly indexed in FTS, and also
+ * This test checks if plain literals and string literals are properly indexed in FTS, and also
  * rebuild text index produces properly indexed FTS.
  *
  * @see https://jira.blazegraph.com/browse/BLZG-1893

@@ -28,7 +28,7 @@ import org.embergraph.service.AbstractFederation;
 import org.embergraph.service.ndx.pipeline.IndexAsyncWriteStats;
 
 /*
-* Counters pertaining to a scale-out index. The {@link IScaleOutClientIndex} has two APIs. One is
+ * Counters pertaining to a scale-out index. The {@link IScaleOutClientIndex} has two APIs. One is
  * synchronous RPC. The other is an asynchronous stream oriented API for writes. Both sets of
  * performance counters are available from this class.
  *

@@ -31,7 +31,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -45,8 +44,6 @@ import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
-import java.util.zip.Adler32;
-import org.embergraph.btree.BTree;
 import org.embergraph.btree.IRangeQuery;
 import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleIterator;
@@ -56,14 +53,11 @@ import org.embergraph.config.LongValidator;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.Instrument;
 import org.embergraph.journal.IDistributedTransactionService;
-import org.embergraph.journal.ITransactionService;
-import org.embergraph.journal.ITx;
-import org.embergraph.journal.Name2Addr;
 import org.embergraph.journal.RunState;
 import org.embergraph.util.concurrent.ExecutionExceptions;
 
 /*
-* Implementation for an {@link IEmbergraphFederation} supporting both single-phase commits (for
+ * Implementation for an {@link IEmbergraphFederation} supporting both single-phase commits (for
  * transactions that execute on a single {@link IDataService}) and distributed commits.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -480,8 +474,8 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
 
       if (n != entryCount) {
 
-      /*
-       * Note: probable error is the caller not preventing concurrent
+        /*
+         * Note: probable error is the caller not preventing concurrent
          * modification.
          */
 
@@ -676,8 +670,8 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
 
       synchronized (commitTimeIndex) {
 
-      /*
-       * The exclusive upper bound is the timestamp of the earliest
+        /*
+         * The exclusive upper bound is the timestamp of the earliest
          * commit point on which we can read with this [releaseTime].
          */
         final long toKey = commitTimeIndex.find(releaseTime + 1);
@@ -786,8 +780,8 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
 
       } catch (Throwable t) {
 
-      /*
-       * Collect all causes and always log an error if any data
+        /*
+         * Collect all causes and always log an error if any data
          * service abort fails.
          *
          * Note: If an exception is thrown here the transaction will be
@@ -1126,8 +1120,8 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
 
       try {
 
-      /*
-       * Submit a task that will run issue the prepare(tx,rev)
+        /*
+         * Submit a task that will run issue the prepare(tx,rev)
          * messages to each participating data service and await its
          * future.
          */
@@ -1165,14 +1159,14 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
 
         taskRunnerFuture = getFederation().getExecutorService().submit(new TaskRunner());
 
-      /*
-       * Signaled when the prepared barrier breaks. Interrupted if
+        /*
+         * Signaled when the prepared barrier breaks. Interrupted if
          * the prepare phase fails.
          */
         prepared.await();
 
-      /*
-       * Runs an inner Callable once we have the data service UUID locks.
+        /*
+         * Runs an inner Callable once we have the data service UUID locks.
          *
          * <p>Note: The purpose of this task is to hold onto those locks until the commit is
          * finished (either success or failure). The locks are automatically release once the inner
@@ -1190,8 +1184,8 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
 
                     if (!state.lock.isHeldByCurrentThread()) {
 
-                    /*
-       * Note: The task runs in its caller's thread and
+                      /*
+                       * Note: The task runs in its caller's thread and
                        * the caller should already be holding the TxState
                        * lock.
                        */
@@ -1199,8 +1193,8 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
                       throw new IllegalMonitorStateException();
                     }
 
-                  /*
-       * Signal so that the task which caused the prepared
+                    /*
+                     * Signal so that the task which caused the prepared
                      * barrier to break can resume. It turn, when the
                      * prepared runnable finishes, all tasks awaiting that
                      * barrier will continue to execute and will enter their
@@ -1221,16 +1215,16 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
 
       } finally {
 
-      /*
-       * Reset the barriers in case anyone is waiting.
+        /*
+         * Reset the barriers in case anyone is waiting.
          */
 
         if (preparedBarrier != null) preparedBarrier.reset();
 
         if (committedBarrier != null) committedBarrier.reset();
 
-      /*
-       * Await the future on the task running the PrepareTasks.
+        /*
+         * Await the future on the task running the PrepareTasks.
          *
          * Note: This task SHOULD complete very shortly after a
          * successful commit.
@@ -1265,8 +1259,8 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
         // This thread MUST NOT own the lock.
         assert !state.lock.isHeldByCurrentThread();
 
-      /*
-       * The futures for the tasks used to invoke prepare(tx,rev) on
+        /*
+         * The futures for the tasks used to invoke prepare(tx,rev) on
          * each dataService.
          */
         final List<Future<Void>> futures;
@@ -1279,8 +1273,8 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
 
         try {
 
-        /*
-       * Await all futures, returning once they are all done.
+          /*
+           * Await all futures, returning once they are all done.
            */
 
           futures = getFederation().getExecutorService().invokeAll(tasks);
@@ -1290,8 +1284,8 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
 
         } catch (Throwable t) {
 
-        /*
-       * If we can not invoke all tasks then abort
+          /*
+           * If we can not invoke all tasks then abort
            */
 
           log.error(t.getLocalizedMessage(), t);
@@ -1358,8 +1352,8 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
 
                     state.setRunState(RunState.Prepared);
 
-                  /*
-       * Wake up the main thread. It will obtain the necessary
+                    /*
+                     * Wake up the main thread. It will obtain the necessary
                      * locks for the participating data services and then
                      * signal that we may continue.
                      */
@@ -1402,8 +1396,8 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
               nservices,
               new Runnable() {
 
-              /*
-       * Method runs when the "committed" barrier breaks. At this point the transaction is
+                /*
+                 * Method runs when the "committed" barrier breaks. At this point the transaction is
                  * fully committed on the participating data services.
                  */
                 public void run() {
@@ -1452,8 +1446,8 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
 
         } catch (Throwable e) {
 
-        /*
-       * If an exception is thrown, then make sure that the tx
+          /*
+           * If an exception is thrown, then make sure that the tx
            * is in the [Abort] state.
            */
           try {
@@ -1694,13 +1688,13 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
 
       synchronized (commitTimeIndex) {
 
-      /*
-       * Add all commit times
+        /*
+         * Add all commit times
          */
         commitTimeIndex.add(commitTime);
 
-      /*
-       * Note: commit time notifications can be overlap such that they
+        /*
+         * Note: commit time notifications can be overlap such that they
          * appear out of sequence with respect to their values. This is
          * Ok. We just ignore any older commit times. However we do need
          * to be synchronized here such that the commit time notices
@@ -1830,8 +1824,8 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
 
           } catch (Throwable t) {
 
-          /*
-       * Log an error if any data service can not be notified.
+            /*
+             * Log an error if any data service can not be notified.
              */
 
             log.error(t.getLocalizedMessage(), t);
@@ -1863,9 +1857,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
      * The lock manager imposing a partial ordering on the prepare phase of distributed transaction
      * commits using the index partition names as the named resources.
      */
-    countersRoot
-        .makePath("Index Lock Manager")
-        .attach(this.indexLockManager.getCounters());
+    countersRoot.makePath("Index Lock Manager").attach(this.indexLockManager.getCounters());
 
     /*
      * The lock manager imposing a partial ordering on the commit phase of distributed transaction
@@ -1898,8 +1890,8 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
         "commitTimesCount",
         new Instrument<Long>() {
           protected void sample() {
-          /*
-       * Note: This uses a method which does not require
+            /*
+             * Note: This uses a method which does not require
              * synchronization.  (The entryCount is reported
              * without traversing the BTree.)
              */

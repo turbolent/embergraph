@@ -19,17 +19,14 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.internal;
 
 import java.util.Set;
-import org.embergraph.rdf.internal.impl.TermId;
 import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
 import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
-import org.embergraph.rdf.vocab.Vocabulary;
-import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
 /*
-* {@link IExtension}s are responsible for round-tripping between an RDF {@link Value} and an {@link
+ * {@link IExtension}s are responsible for round-tripping between an RDF {@link Value} and an {@link
  * LiteralExtensionIV} for a particular datatype. Because of how {@link LiteralExtensionIV}s are
  * encoded and decoded, the {@link IExtension} will need to have on hand the {@link TermId} for its
  * datatype. This is accomplished via the {@link IDatatypeURIResolver} - the {@link IExtension} will

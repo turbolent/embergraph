@@ -32,7 +32,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpUtility;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IVariable;
@@ -50,7 +49,7 @@ import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /*
-* Class identifies the join variables for each instance in which a named subquery solution set is
+ * Class identifies the join variables for each instance in which a named subquery solution set is
  * incorporated into the query plan.
  *
  * @see NamedSubqueryRoot
@@ -327,8 +326,8 @@ public class ASTNamedSubqueryOptimizer implements IASTOptimizer {
 
         if (anInclude.getJoinVars() == null) {
 
-        /*
-       * Since no query hint was used, then figure out the join variables using a static
+          /*
+           * Since no query hint was used, then figure out the join variables using a static
            * analysis of the query.
            *
            * <p>Note: Since the named subqueries run with only the exogenous bindings as input,
@@ -382,8 +381,8 @@ public class ASTNamedSubqueryOptimizer implements IASTOptimizer {
 
       if (nhashIndices > 1) {
 
-      /*
-       * Since there is more than one set of join variables required
+        /*
+         * Since there is more than one set of join variables required
          * by the INCLUDEs, we use the largest subset of the join
          * variables defined across all of the includes.
          */
@@ -402,8 +401,8 @@ public class ASTNamedSubqueryOptimizer implements IASTOptimizer {
           sharedVariables.retainAll(joinVars.vars());
         }
 
-      /*
-       * The join variables which are shared across all contexts in
+        /*
+         * The join variables which are shared across all contexts in
          * which this named solution set is joined back into the query.
          */
         final VarNode[] sharedJoinVars =
@@ -420,8 +419,8 @@ public class ASTNamedSubqueryOptimizer implements IASTOptimizer {
 
       } else {
 
-      /*
-       * Since there is just one set of join variables we will use
+        /*
+         * Since there is just one set of join variables we will use
          * that.
          */
 

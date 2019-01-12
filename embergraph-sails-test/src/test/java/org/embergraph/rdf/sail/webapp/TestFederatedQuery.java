@@ -80,7 +80,6 @@ import org.embergraph.rdf.sail.webapp.client.RemoteRepository.AddOp;
 import org.embergraph.rdf.sail.webapp.client.RemoteRepositoryManager;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.QueryType;
-import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
 import org.embergraph.rdf.sparql.ast.service.ServiceRegistry;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.model.Statement;
@@ -113,7 +112,7 @@ import org.openrdf.rio.Rio;
 import org.openrdf.rio.helpers.StatementCollector;
 
 /*
-* Proxied test suite for SPARQL 1.1 Federated Query. In general, each test loads some data into the
+ * Proxied test suite for SPARQL 1.1 Federated Query. In general, each test loads some data into the
  * KB and then issues a federated query. The core tests are W3C tests and have the pattern <code>
  * serviceXX</code>. There are also tests developed for openrdf.
  *
@@ -551,7 +550,7 @@ public class TestFederatedQuery<S extends IIndexManager> extends AbstractTestNan
    * having correlated joins.  It is not too much to ask!
    */
   //    /*
-//     * This test is failing due to an uncorrelated join between two SERVICE
+  //     * This test is failing due to an uncorrelated join between two SERVICE
   //     * calls. Those SERVICE calls do not share any variables. The join is a full
   //     * cross product. The problem is not that we fail to do the cross product.
   //     * It is that we are doing it twice -- once for each empty solution flowing

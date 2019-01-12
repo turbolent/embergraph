@@ -26,19 +26,17 @@ package org.embergraph.sparse;
 import java.util.NoSuchElementException;
 import org.apache.log4j.Logger;
 import org.embergraph.btree.AbstractTuple;
-import org.embergraph.btree.IIndex;
 import org.embergraph.btree.IRangeQuery;
 import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleIterator;
 import org.embergraph.btree.ITupleSerializer;
 import org.embergraph.btree.filter.LookaheadTupleFilter.ILookaheadTupleIterator;
 import org.embergraph.btree.filter.TupleTransformer;
-import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.sparse.TPS.TPV;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Transforms an {@link ITupleIterator} reading directly on an {@link IIndex} backing a {@link
+ * Transforms an {@link ITupleIterator} reading directly on an {@link IIndex} backing a {@link
  * SparseRowStore} into an {@link ITupleIterator} visiting logical {@link ITPS} rows.
  *
  * @todo Look at the remove semantics for the sparse row store. This would have to delete the
@@ -161,8 +159,8 @@ public class AtomicRowFilter extends TupleTransformer<TPV, TPS> implements IRowS
       final AbstractTuple<F> tuple =
           new AbstractTuple<F>(IRangeQuery.DEFAULT) {
 
-          /*
-       * @todo This can't be implemented since the tuples may have come from different backing
+            /*
+             * @todo This can't be implemented since the tuples may have come from different backing
              *     AbstractBTree's in the view. If blob references are to be supported they will
              *     have to be transformed during the atomic row read so that the incorporate the
              *     source index from which the block can be read.
@@ -178,8 +176,8 @@ public class AtomicRowFilter extends TupleTransformer<TPV, TPS> implements IRowS
              */
             public int getSourceIndex() {
 
-            /*
-       * TODO Returning ZERO (0) fixes the ticket cited above but
+              /*
+               * TODO Returning ZERO (0) fixes the ticket cited above but
                * does not provide support for asynchronous resolution of
                * BLOBS in the sparse row store.
                */
@@ -247,8 +245,8 @@ public class AtomicRowFilter extends TupleTransformer<TPV, TPS> implements IRowS
 
       if (prefix != null) {
 
-      /*
-       * Found at least one tuple belonging to a logical row.
+        /*
+         * Found at least one tuple belonging to a logical row.
          *
          * Note: The logical row MAY be empty depending on the
          * INameFilter and timestamp, but we will visit it anyway.
@@ -256,8 +254,8 @@ public class AtomicRowFilter extends TupleTransformer<TPV, TPS> implements IRowS
 
         if (toTime == CURRENT_ROW) {
 
-        /*
-       * Strip out everything except the current row.
+          /*
+           * Strip out everything except the current row.
            */
 
           current = tps.currentRow();

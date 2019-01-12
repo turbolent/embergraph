@@ -31,13 +31,10 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IConstraint;
 import org.embergraph.bop.IPredicate;
 import org.embergraph.bop.IVariable;
-import org.embergraph.relation.IRelation;
-import org.embergraph.relation.rule.eval.ActionEnum;
-import org.embergraph.relation.rule.eval.IJoinNexus;
 import org.embergraph.relation.rule.eval.IRuleTaskFactory;
 
 /*
-* Conjunctive query of N {@link IPredicate}s with optional {@link IConstraint}s.
+ * Conjunctive query of N {@link IPredicate}s with optional {@link IConstraint}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

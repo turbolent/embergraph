@@ -47,7 +47,7 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.model.vocabulary.RDF;
 
 /*
-* This optimizer rewrites the projection node of a DESCRIBE query into, generating a CONSTRUCT
+ * This optimizer rewrites the projection node of a DESCRIBE query into, generating a CONSTRUCT
  * clause and extending the WHERE clause to capture the semantics of the DESCRIBE query. The query
  * type is also changed to CONSTRUCT.
  *
@@ -118,8 +118,8 @@ public class ASTDescribeOptimizer implements IASTOptimizer {
       // start with the existing WHERE clause.
       if (queryRoot.getWhereClause() instanceof UnionNode) {
 
-      /*
-       * https://jira.blazegraph.com/browse/BLZG-1750: if "where" is a UNION node, the subsequent
+        /*
+         * https://jira.blazegraph.com/browse/BLZG-1750: if "where" is a UNION node, the subsequent
          * call where.addChild(union) only accept JoinGroupNodes (and casting UnionNode to
          * JoinGroupNode fails). We therefore need to wrap the UNION node into a join group node.
          */
@@ -253,8 +253,8 @@ public class ASTDescribeOptimizer implements IASTOptimizer {
 
       if (describeMode.isForward()) { // <term> ?pN-a ?oN
 
-      /*
-       * Note: Each statement has to be in a different part of the
+        /*
+         * Note: Each statement has to be in a different part of the
          * UNION. Also, note that we do not allow a bare statement
          * pattern in a union. The statement pattern has to be embedded
          * within a group.
@@ -290,8 +290,8 @@ public class ASTDescribeOptimizer implements IASTOptimizer {
       }
 
       if (describeMode.isForward() && describeMode.isReifiedStatements()) {
-      /*
-       * Pick up properties associated with reified statement models
+        /*
+         * Pick up properties associated with reified statement models
          * where the value of an rdf:subject assertion is the resource
          * to be described.
          *

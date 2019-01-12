@@ -38,7 +38,7 @@ import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.util.DaemonThreadFactory;
 
 /*
-* Unit tests of the idle timeout behavior for {@link AbstractMasterTask} and friends.
+ * Unit tests of the idle timeout behavior for {@link AbstractMasterTask} and friends.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -465,8 +465,8 @@ public class TestMasterTaskIdleTimeout extends AbstractMasterTestCase {
                   // halt?
                   if (halt.get()) throw new HaltedException();
 
-                /*
-       * Verify the sink WAS NOT closed by an idle
+                  /*
+                   * Verify the sink WAS NOT closed by an idle
                    * timeout.
                    *
                    * TODO I have seen this assertion
@@ -605,8 +605,8 @@ public class TestMasterTaskIdleTimeout extends AbstractMasterTestCase {
 
       if (r < .8 || r > 1.1) {
 
-      /*
-       * The ration between the expected and observed average chunk
+        /*
+         * The ration between the expected and observed average chunk
          * sizes is not within some reasonable bounds on its
          * performance. [It is more likely that this will report an
          * error for a short run, but the values should be quite close

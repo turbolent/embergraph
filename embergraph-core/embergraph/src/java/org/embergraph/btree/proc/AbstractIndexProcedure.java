@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree.proc;
 
 /*
-* Base class has some utility methods.
+ * Base class has some utility methods.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -42,7 +42,7 @@ public abstract class AbstractIndexProcedure<T> implements IIndexProcedure<T> {
   private static final long serialVersionUID = 1L;
 
   //   /*
-//     * Return the thread-local key builder configured for the {@link IIndex}
+  //     * Return the thread-local key builder configured for the {@link IIndex}
   //     *
   //     * @param ndx
   //     *            The index.

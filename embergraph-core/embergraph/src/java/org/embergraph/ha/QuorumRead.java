@@ -23,11 +23,9 @@ package org.embergraph.ha;
 
 import java.io.IOException;
 import java.util.UUID;
-import org.embergraph.quorum.Quorum;
-import org.embergraph.rawstore.IRawStore;
 
 /*
-* A non-remote interface for a member service in a {@link Quorum} defining methods to support
+ * A non-remote interface for a member service in a {@link Quorum} defining methods to support
  * reading on another member of the quorum.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

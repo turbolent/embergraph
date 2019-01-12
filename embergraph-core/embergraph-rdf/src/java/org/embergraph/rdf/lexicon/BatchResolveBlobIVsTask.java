@@ -15,10 +15,9 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.impl.BlobIV;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
-import org.openrdf.model.Value;
 
 /*
-* Batch resolve {@link BlobIV}s to RDF {@link Value}s.
+ * Batch resolve {@link BlobIV}s to RDF {@link Value}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

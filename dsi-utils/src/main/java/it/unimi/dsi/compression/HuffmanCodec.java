@@ -29,7 +29,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 /*
-* An implementation of Huffman optimal prefix-free coding.
+ * An implementation of Huffman optimal prefix-free coding.
  *
  * <p>A Huffman coder is built starting from an array of frequencies corresponding to each symbol.
  * Frequency 0 symbols are allowed, but they will degrade the resulting code.

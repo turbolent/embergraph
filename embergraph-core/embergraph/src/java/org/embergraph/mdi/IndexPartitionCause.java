@@ -7,7 +7,7 @@ import java.io.ObjectOutput;
 import org.embergraph.resources.ResourceManager;
 
 /*
-* Encapsulate the reason why an index partition was created and the synchronous overflow counter of
+ * Encapsulate the reason why an index partition was created and the synchronous overflow counter of
  * the data service on which the index partition was created as of that action. This information may
  * be used to support heuristics which refuse to move an index partition which was recently moved or
  * to join an index partition which was recently split, etc.

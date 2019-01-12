@@ -38,7 +38,6 @@ import org.apache.log4j.Logger;
 import org.embergraph.rdf.ServiceProviderHook;
 import org.embergraph.rdf.rio.IRDFParserOptions;
 import org.embergraph.rdf.rio.RDFParserOptions;
-import org.embergraph.rdf.vocab.VocabularyDecl;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
@@ -51,7 +50,7 @@ import org.openrdf.rio.RDFParserRegistry;
 import org.openrdf.rio.helpers.RDFHandlerBase;
 
 /*
-* Utility class scans some RDF data, builds up a distribution over the distinct predicates, and
+ * Utility class scans some RDF data, builds up a distribution over the distinct predicates, and
  * generates a {@link VocabularyDecl} for the source data. This can be used to optimize the data
  * density over source data sources.
  *
@@ -392,7 +391,7 @@ public class VocabBuilder {
           if (new File(dir, name).isDirectory()) {
 
             // Skip hidden files.
-            return !dir.isHidden();//                if(dir.getName().equals(".svn")) {
+            return !dir.isHidden(); //                if(dir.getName().equals(".svn")) {
             //
             //                    // Skip .svn files.
             //                    return false;

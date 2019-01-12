@@ -17,17 +17,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.btree;
 
-import org.embergraph.btree.view.FusedView;
 import org.embergraph.counters.ICounterSetAccess;
-import org.embergraph.journal.AbstractJournal;
-import org.embergraph.journal.AbstractTask;
-import org.embergraph.journal.IAtomicStore;
 import org.embergraph.journal.ICommitter;
-import org.embergraph.journal.Name2Addr;
-import org.embergraph.journal.Name2Addr.Entry;
 
 /*
-* Interface in support of the {@link Checkpoint} record protocol.
+ * Interface in support of the {@link Checkpoint} record protocol.
  *
  * @author thompsonbry@users.sourceforge.net
  *     <p>TODO Try to lift out an abstract implementation of this interface for HTree, BTree, and
@@ -148,7 +142,7 @@ public interface ICheckpointProtocol
   //	 */
   //
   //    /*
-//     * Return the #of entries in the index.
+  //     * Return the #of entries in the index.
   //     * <p>
   //     * Note: If the index supports deletion markers then the range count will be
   //     * an upper bound and may double count tuples which have been overwritten,
@@ -161,14 +155,14 @@ public interface ICheckpointProtocol
   //    public long rangeCount();
   //
   //    /*
-//     * Visit all entries in the index in the natural order of the index
+  //     * Visit all entries in the index in the natural order of the index
   //     * (dereferencing visited tuples to the application objects stored within
   //     * those tuples).
   //     */
   //    public ICloseableIterator<?> scan();
   //
   //    /*
-//     * Remove all entries in the index.
+  //     * Remove all entries in the index.
   //     */
   //    public void removeAll();
 

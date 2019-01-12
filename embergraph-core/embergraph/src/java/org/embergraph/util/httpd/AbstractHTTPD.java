@@ -29,7 +29,7 @@ import java.io.StringWriter;
 import org.apache.log4j.Logger;
 
 /*
-* Overrides some methods on {@link NanoHTTPD} to (a) prevent serving files from the local file
+ * Overrides some methods on {@link NanoHTTPD} to (a) prevent serving files from the local file
  * system; and (b) to expose methods for handling GET, PUT, POST, and DELETE requests - these
  * methods all return a {@link NanoHTTPD#HTTP_METHOD_NOT_ALLOWED} {@link Response} by default.
  *

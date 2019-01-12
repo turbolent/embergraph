@@ -11,7 +11,7 @@ package cern.jet.random;
 import cern.jet.math.Arithmetic;
 import cern.jet.random.engine.RandomEngine;
 /*
-* HyperGeometric distribution; See the <A HREF="http://library.advanced.org/10030/6atpdvah.htm">
+ * HyperGeometric distribution; See the <A HREF="http://library.advanced.org/10030/6atpdvah.htm">
  * math definition</A>
  *
  * <p>The hypergeometric distribution with parameters <tt>N</tt>, <tt>n</tt> and <tt>s</tt> is the
@@ -88,7 +88,7 @@ public class HyperGeometric extends AbstractDiscreteDistribution {
       p = Mp / (N + 2.0);
       nu = np * p; /* mode, real       */
       if ((m = (int) nu) == nu && p == 0.5) {
-          /* mode, integer    */
+        /* mode, integer    */
         mp = m--;
       } else {
         mp = m + 1; /* mp = m + 1       */
@@ -141,7 +141,7 @@ public class HyperGeometric extends AbstractDiscreteDistribution {
     double Mp, np, p, nu, U, Y, W; /* (X, Y) <-> (V, W) */
 
     if (N != N_last || M != M_last || n != n_last) {
-        /* set-up            */
+      /* set-up            */
       N_last = N;
       M_last = M;
       n_last = n;

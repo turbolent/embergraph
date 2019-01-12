@@ -67,7 +67,7 @@ import org.openrdf.query.algebra.evaluation.QueryBindingSet;
 import org.openrdf.rio.RDFFormat;
 
 /*
-* The idea here is that the subclasses provide the data for the test (i.e. the triples, the query
+ * The idea here is that the subclasses provide the data for the test (i.e. the triples, the query
  * and the results) inline and not in separate files. One goal is to reduce the level of redundant
  * comments that can be out of sync.
  *

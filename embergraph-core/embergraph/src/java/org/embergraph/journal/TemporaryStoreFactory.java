@@ -36,7 +36,7 @@ import org.embergraph.util.Bytes;
 import org.embergraph.util.InnerCause;
 
 /*
-* Helper class for {@link IIndexStore#getTempStore()}. This class is very light weight.
+ * Helper class for {@link IIndexStore#getTempStore()}. This class is very light weight.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

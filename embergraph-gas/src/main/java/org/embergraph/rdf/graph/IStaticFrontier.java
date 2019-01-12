@@ -19,7 +19,7 @@ import java.util.Iterator;
 import org.openrdf.model.Value;
 
 /*
-* Interface abstracts the fixed frontier as known on entry into a new round.
+ * Interface abstracts the fixed frontier as known on entry into a new round.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

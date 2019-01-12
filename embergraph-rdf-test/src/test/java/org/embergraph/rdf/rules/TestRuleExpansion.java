@@ -62,7 +62,7 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.OWL;
 
 /*
-* @author <a href="mailto:mpersonick@users.sourceforge.net">Mike Personick</a>
+ * @author <a href="mailto:mpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
  */
 public class TestRuleExpansion extends AbstractInferenceEngineTestCase {

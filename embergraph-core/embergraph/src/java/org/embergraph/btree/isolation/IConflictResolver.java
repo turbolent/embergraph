@@ -24,11 +24,9 @@ package org.embergraph.btree.isolation;
 import java.io.Serializable;
 import org.embergraph.btree.IIndex;
 import org.embergraph.btree.ITuple;
-import org.embergraph.journal.Journal;
-import org.embergraph.journal.Tx;
 
 /*
-* An interface invoked during backward validation when a write-write conflict has been detected.
+ * An interface invoked during backward validation when a write-write conflict has been detected.
  * The implementation must either resolve the write-write conflict by returning a new version in
  * which the conflict is resolved or report an unresolvable conflict, in which case backward
  * validation will force the transaction to abort.
@@ -73,6 +71,5 @@ public interface IConflictResolver extends Serializable {
    *     conflict exists.
    * @return true iff the conflict was resolved.
    */
-  boolean resolveConflict(IIndex writeSet, ITuple txTuple, ITuple currentTuple)
-      throws Exception;
+  boolean resolveConflict(IIndex writeSet, ITuple txTuple, ITuple currentTuple) throws Exception;
 }

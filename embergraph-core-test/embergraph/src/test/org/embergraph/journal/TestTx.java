@@ -42,7 +42,7 @@ import org.embergraph.btree.isolation.IsolatedFusedView;
 import org.embergraph.util.InnerCause;
 
 /*
-* Test suite for fully-isolated read-write transactions.
+ * Test suite for fully-isolated read-write transactions.
  *
  * @todo verify with writes on multiple indices (partial ordering over the commits)
  * @todo verify partial ordering imposed on concurrent operations on the same tx for indices
@@ -60,7 +60,7 @@ public class TestTx extends ProxyTestCase<Journal> {
   }
 
   //    /*
-//     * Writes some interesting constants on {@link System#err}.
+  //     * Writes some interesting constants on {@link System#err}.
   //     */
   //    public void test_constants() {
   //
@@ -222,8 +222,8 @@ public class TestTx extends ProxyTestCase<Journal> {
 
       {
 
-      /*
-       * register the index, write an entry on the unisolated index,
+        /*
+         * register the index, write an entry on the unisolated index,
          * and commit the journal.
          */
 
@@ -246,8 +246,8 @@ public class TestTx extends ProxyTestCase<Journal> {
 
       {
 
-      /*
-       * verify that the write is visible in a transaction that starts
+        /*
+         * verify that the write is visible in a transaction that starts
          * after the commit.
          */
 
@@ -260,8 +260,8 @@ public class TestTx extends ProxyTestCase<Journal> {
 
       {
 
-      /*
-       * obtain the unisolated index and write another entry and
+        /*
+         * obtain the unisolated index and write another entry and
          * commit the journal.
          */
 
@@ -277,8 +277,8 @@ public class TestTx extends ProxyTestCase<Journal> {
 
       {
 
-      /*
-       * verify that the entry written on the unisolated index is not
+        /*
+         * verify that the entry written on the unisolated index is not
          * visible to the transaction that started before that write.
          */
 
@@ -306,8 +306,8 @@ public class TestTx extends ProxyTestCase<Journal> {
         log.debug("tx1: " + tx1 + ", tx2: " + tx2 + "\n" + showCRI(journal));
 
       {
-      /*
-       * start another transaction and verify that the 2nd committed
+        /*
+         * start another transaction and verify that the 2nd committed
          * write is now visible to that transaction.
          */
 
@@ -385,8 +385,8 @@ public class TestTx extends ProxyTestCase<Journal> {
 
       {
 
-      /*
-       * register an index and commit the journal.
+        /*
+         * register an index and commit the journal.
          */
 
         IndexMetadata md = new IndexMetadata(name, UUID.randomUUID());
@@ -414,8 +414,8 @@ public class TestTx extends ProxyTestCase<Journal> {
 
       {
 
-      /*
-       * Write an entry in tx1.
+        /*
+         * Write an entry in tx1.
          *
          * Verify that the entry is not visible in the unisolated index
          * or in the index as isolated by tx2.
@@ -436,8 +436,8 @@ public class TestTx extends ProxyTestCase<Journal> {
         // not visible in the unisolated index.
         assertFalse(journal.getIndex(name).contains(k1));
 
-      /*
-       * Commit tx1.
+        /*
+         * Commit tx1.
          *
          * Verify that the write is still not visible in tx2 but that it
          * is now visible in the unisolated index.
@@ -466,15 +466,15 @@ public class TestTx extends ProxyTestCase<Journal> {
 
           assertFalse(tuple.isDeletedVersion());
 
-        /*
-       * Verify that the revisionTime was written onto the tuple
+          /*
+           * Verify that the revisionTime was written onto the tuple
            * in the post-commit view of the unisolated index.
            */
           assertEquals("revisionTime", localState.getRevisionTime(), tuple.getVersionTimestamp());
         }
 
-      /*
-       * write a conflicting entry in tx2 and verify that validation
+        /*
+         * write a conflicting entry in tx2 and verify that validation
          * of tx2 fails.
          */
 
@@ -494,8 +494,8 @@ public class TestTx extends ProxyTestCase<Journal> {
 
           assertFalse(tuple.isDeletedVersion());
 
-        /*
-       * Verify the versionTimestamp on the tuple in the view
+          /*
+           * Verify the versionTimestamp on the tuple in the view
            * isolated by [tx2]. It should now be the start time for
            * tx2 since we just overwrote that tuple.
            */
@@ -538,8 +538,8 @@ public class TestTx extends ProxyTestCase<Journal> {
       final String name = "abc";
 
       {
-      /*
-       * register an index and commit the journal.
+        /*
+         * register an index and commit the journal.
          */
         IndexMetadata md = new IndexMetadata(name, UUID.randomUUID());
 
@@ -640,8 +640,8 @@ public class TestTx extends ProxyTestCase<Journal> {
       final String name = "abc";
 
       {
-      /*
-       * register an index and commit the journal.
+        /*
+         * register an index and commit the journal.
          */
         IndexMetadata md = new IndexMetadata(name, UUID.randomUUID());
 
@@ -762,8 +762,8 @@ public class TestTx extends ProxyTestCase<Journal> {
       final String name = "abc";
 
       {
-      /*
-       * register an index and commit the journal.
+        /*
+         * register an index and commit the journal.
          */
         IndexMetadata md = new IndexMetadata(name, UUID.randomUUID());
 
@@ -1064,8 +1064,8 @@ public class TestTx extends ProxyTestCase<Journal> {
       {
         final IndexMetadata md = new IndexMetadata(name, UUID.randomUUID());
 
-      /*
-       * Note: Thie tests w/ and w/o isolation. Isolation is NOT
+        /*
+         * Note: Thie tests w/ and w/o isolation. Isolation is NOT
          * required for this. We are testing the semantics of read-only
          * transactions and those are available for indices which do NOT
          * support isolation as well as those which do.
@@ -1166,8 +1166,8 @@ public class TestTx extends ProxyTestCase<Journal> {
       {
         final IndexMetadata indexMetadata = new IndexMetadata("testIndex", UUID.randomUUID());
 
-      /*
-       * Note: You MUST explicitly enable transaction processing for a
+        /*
+         * Note: You MUST explicitly enable transaction processing for a
          * B+Tree when you register the index. Transaction processing
          * requires that the index maintain both per-tuple delete
          * markers and per-tuple version identifiers. While scale-out
@@ -1212,8 +1212,8 @@ public class TestTx extends ProxyTestCase<Journal> {
           nok++;
         } catch (ExecutionException ex) {
           if (InnerCause.isInnerCause(ex, ValidationError.class)) {
-          /*
-       * Normal exception. There was a conflict and one or the
+            /*
+             * Normal exception. There was a conflict and one or the
              * transactions could not be committed.
              */
             System.out.println(
@@ -1304,8 +1304,8 @@ public class TestTx extends ProxyTestCase<Journal> {
 
       try {
 
-      /*
-       * Obtain a view of the index isolated by the transaction.
+        /*
+         * Obtain a view of the index isolated by the transaction.
          */
         final IIndex ndx = jnl.getIndex(indexName, txid);
 
@@ -1313,8 +1313,8 @@ public class TestTx extends ProxyTestCase<Journal> {
 
           switch (r.nextInt(4)) {
             case 0:
-            /*
-       * write on the index, inserting or updating the value
+              /*
+               * write on the index, inserting or updating the value
                * for the key.
                */
               ndx.insert("key#" + r.nextInt(range), r.nextLong());
@@ -1324,21 +1324,21 @@ public class TestTx extends ProxyTestCase<Journal> {
               ndx.remove("key#" + r.nextInt(range));
               break;
             case 2:
-            /*
-       * lookup a key in the index.
+              /*
+               * lookup a key in the index.
                */
               ndx.lookup("key#" + r.nextInt(range));
               break;
             case 3:
-            /*
-       * range count the index.
+              /*
+               * range count the index.
                */
               ndx.rangeCount();
               break;
             case 4:
               {
-              /*
-       * run a range iterator over the index.
+                /*
+                 * run a range iterator over the index.
                  */
                 final Iterator<ITuple<?>> itr = ndx.rangeIterator();
                 while (itr.hasNext()) {

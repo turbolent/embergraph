@@ -30,7 +30,7 @@ import org.openrdf.query.BindingSet;
 import org.openrdf.query.QueryEvaluationException;
 
 /*
-* Collects and reports the distinct bindings observed on some set of variables.
+ * Collects and reports the distinct bindings observed on some set of variables.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

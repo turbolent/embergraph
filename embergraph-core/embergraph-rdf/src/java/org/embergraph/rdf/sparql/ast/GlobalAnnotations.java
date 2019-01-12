@@ -22,7 +22,7 @@ package org.embergraph.rdf.sparql.ast;
 import java.io.Serializable;
 
 /*
-* A glue class for reporting the namespace of the lexicon relation and the timestamp of the view of
+ * A glue class for reporting the namespace of the lexicon relation and the timestamp of the view of
  * the lexicon relation through the function bops.
  *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>

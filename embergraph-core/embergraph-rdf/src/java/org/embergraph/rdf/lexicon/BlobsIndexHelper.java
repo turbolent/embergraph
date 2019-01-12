@@ -36,16 +36,12 @@ import org.embergraph.btree.keys.SuccessorUtil;
 import org.embergraph.io.ByteArrayBuffer;
 import org.embergraph.io.DataOutputBuffer;
 import org.embergraph.rdf.internal.INonInlineExtensionCodes;
-import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.BlobIV;
 import org.embergraph.rdf.model.EmbergraphValue;
-import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.EmbergraphValueSerializer;
-import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
-import org.openrdf.model.BNode;
 import org.openrdf.model.Value;
 
 /** Helper class for operations on the BLOBS index. */
@@ -156,8 +152,8 @@ public class BlobsIndexHelper {
     } finally {
 
       try {
-      /*
-       * Note: Both the outer and inner try/catch are just to please
+        /*
+         * Note: Both the outer and inner try/catch are just to please
          * find bugs. DataOutputStream.close() is a NOP.
          */
         out.close();

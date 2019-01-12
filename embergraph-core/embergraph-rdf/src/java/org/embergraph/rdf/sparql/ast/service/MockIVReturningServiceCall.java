@@ -27,7 +27,7 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.rdf.internal.IV;
 
 /*
-* Service invocation interface for an external (non-embergraph) service. Data interchange with the
+ * Service invocation interface for an external (non-embergraph) service. Data interchange with the
  * external service uses the internal {@link IBindingSet} abstraction and it is up to the
  * implementing service to do any conversion of external entities. More precisely, the service must
  * return internal values with mocked IVs, which will be automatically resolved against the

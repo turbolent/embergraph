@@ -9,10 +9,9 @@ import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure.ResultBitBuffer;
 import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure.ResultBitBufferHandler;
 import org.embergraph.btree.proc.BatchRemove.BatchRemoveConstructor;
 import org.embergraph.btree.proc.LongAggregator;
-import org.embergraph.rdf.inf.Justification;
 
 /*
-* Class writes on a statement index, removing the specified statements (batch API, no truth
+ * Class writes on a statement index, removing the specified statements (batch API, no truth
  * maintenance). If the database uses {@link Justification}s for truth maintenance then the caller
  * is responsible for also removing the {@link Justification}s for the statements being deleted
  * using a {@link JustificationRemover}.
@@ -132,8 +131,8 @@ public class SPOIndexRemover implements Callable<Long> {
 
       if (DEBUG) {
 
-      /*
-       * Note: the externalized terms will be NOT FOUND when removing
+        /*
+         * Note: the externalized terms will be NOT FOUND when removing
          * a statement from a temp store since the term identifiers for
          * the temp store are generally only stored in the database.
          */
@@ -176,8 +175,8 @@ public class SPOIndexRemover implements Callable<Long> {
 
         if (bits[i]) {
 
-        /*
-       * Note: This only turns on the modified flag. It will not
+          /*
+           * Note: This only turns on the modified flag. It will not
            * clear it if it is already set. The caller has to take
            * responsibility for that. This way if the statement is
            * written twice and the 2nd time the indices are not

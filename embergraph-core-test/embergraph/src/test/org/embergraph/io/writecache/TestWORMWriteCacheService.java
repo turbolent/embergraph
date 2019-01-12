@@ -76,7 +76,7 @@ import org.embergraph.quorum.QuorumMember;
 import org.embergraph.util.Bytes;
 
 /*
-* Test suite for the {@link WriteCacheService} using pure append writes.
+ * Test suite for the {@link WriteCacheService} using pure append writes.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestWriteCacheService.java 2866 2010-05-18 18:36:35Z thompsonbry $
@@ -293,8 +293,8 @@ public class TestWORMWriteCacheService extends TestCase3 {
 
                   if (msg.getChk() != actualChk) {
 
-                  /*
-       * Note: This is how we validate the write pipeline. The
+                    /*
+                     * Note: This is how we validate the write pipeline. The
                      * HAReceiveService also has basically the same logic,
                      * so this is not really adding much (if any) value
                      * here. Everyone is using the same ChecksumUtility, so
@@ -2338,8 +2338,8 @@ public class TestWORMWriteCacheService extends TestCase3 {
 
         if (rec.nbytes > WRITE_CACHE_BUFFER_CAPACITY) nlarge++;
 
-      /*
-       * Write the record.
+        /*
+         * Write the record.
          *
          * Note: The buffer is duplicated in order to prevent a
          * side-effect on its position().
@@ -2526,7 +2526,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
   }
 
   //    /*
-//     * Simple implementation for unit tests.
+  //     * Simple implementation for unit tests.
   //     *
   //     * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan
   //     *         Thompson</a>
@@ -2665,8 +2665,8 @@ public class TestWORMWriteCacheService extends TestCase3 {
 
       if (r.nextDouble() < largeRecordRate) {
 
-      /*
-       * large record.
+        /*
+         * large record.
          */
         nbytes = WRITE_CACHE_BUFFER_CAPACITY * (r.nextInt(3) + 1);
 
@@ -2758,8 +2758,8 @@ public class TestWORMWriteCacheService extends TestCase3 {
 
       if (raf != null && raf.getChannel().isOpen()) {
 
-      /*
-       * The channel is still open. If you are allowing concurrent
+        /*
+         * The channel is still open. If you are allowing concurrent
          * reads on the channel, then this could indicate that two
          * readers each found the channel closed and that one was able
          * to re-open the channel before the other such that the channel
@@ -2798,7 +2798,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
    */
 
   //    /*
-//     * Return an open port on current machine. Try the suggested port first. If
+  //     * Return an open port on current machine. Try the suggested port first. If
   //     * suggestedPort is zero, just select a random port
   //     */
   //    private static int getPort(final int suggestedPort) throws IOException {

@@ -22,7 +22,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.journal;
 
 import java.nio.ByteBuffer;
-import java.nio.MappedByteBuffer;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -37,13 +36,11 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.embergraph.rawstore.AbstractRawStoreTestCase;
-import org.embergraph.rawstore.IMROW;
 import org.embergraph.rawstore.IRawStore;
-import org.embergraph.testutil.ExperimentDriver;
 import org.embergraph.util.DaemonThreadFactory;
 
 /*
-* Test suite for MROW (Multiple Readers, One Writer) support.
+ * Test suite for MROW (Multiple Readers, One Writer) support.
  *
  * <p>Supporting MROW is easy for a fully buffered implementation since it need only use a read-only
  * view for readers. If the implementation is not fully buffered, e.g., {@link DiskOnlyStrategy},
@@ -385,8 +382,8 @@ public abstract class AbstractMROWTestCase extends AbstractRawStoreTestCase {
 
         write();
 
-      /*
-       * Note: it is difficult to get this task to yield such that a
+        /*
+         * Note: it is difficult to get this task to yield such that a
          * large #of records are written, but not before the readers
          * even get a chance to start executing. You may have to adjust
          * this by hand for different JVM/OS combinations!

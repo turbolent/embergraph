@@ -23,10 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.resources;
 
-import java.lang.ref.SoftReference;
-
 /*
-* Base class for the prepare phase which reads on the old journal.
+ * Base class for the prepare phase which reads on the old journal.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

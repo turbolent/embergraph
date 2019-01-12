@@ -29,7 +29,7 @@ import java.util.Vector;
 import org.apache.log4j.Logger;
 
 /*
-* <p>
+ * <p>
  * Directed Acyclic Graph (DAG) for detecting and preventing deadlocks in a
  * concurrent programming system. The algorithm takes advantage of certain
  * characteristics of the deadlock detection problem for concurrent transactions
@@ -341,8 +341,8 @@ public class TxDag {
               "capacity=" + capacity + ", nvertices=" + nvertices);
         }
 
-      /*
-       * Assign the transaction a free index. Throws
+        /*
+         * Assign the transaction a free index. Throws
          * IndexOutOfBoundsException if there is no free index
          * available.
          */
@@ -482,8 +482,8 @@ public class TxDag {
     backup(order);
     try {
       if (!updateClosure(src, dst, true)) {
-      /*
-       * Deadlock - rollback tentative change to M.
+        /*
+         * Deadlock - rollback tentative change to M.
          */
         log.warn("Deadlock");
         restore(order);
@@ -989,8 +989,8 @@ public class TxDag {
       outbound[src]++; // increment outbound counter.
       inbound[tgt]++; // increment inbound counter.
       if (outbound[src] == 1 || inbound[tgt] == 1) {
-      /*
-       * If either counter was zero (and is now one) then the order
+        /*
+         * If either counter was zero (and is now one) then the order
          * must be reset.
          */
         reset = true;
@@ -1026,7 +1026,7 @@ public class TxDag {
   }
 
   //    /*
-//	 * Return an array of the application provided transaction objects. The
+  //	 * Return an array of the application provided transaction objects. The
   //	 * index positions in this array correspond to the transaction indices as
   //	 * assigned by {@link #lookup(Object, boolean)}. The length of the array
   //	 * corresponds to the #of in-use transactions.

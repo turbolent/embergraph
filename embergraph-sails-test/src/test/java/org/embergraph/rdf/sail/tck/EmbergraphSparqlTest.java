@@ -43,7 +43,6 @@ import org.embergraph.btree.keys.CollatorEnum;
 import org.embergraph.btree.keys.StrengthEnum;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.journal.Journal;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sail.EmbergraphSail.Options;
@@ -78,7 +77,7 @@ import org.openrdf.rio.helpers.BasicParserSettings;
 import org.openrdf.sail.memory.MemoryStore;
 
 /*
-* Test harness for running the SPARQL test suites. This version runs against a {@link Journal}
+ * Test harness for running the SPARQL test suites. This version runs against a {@link Journal}
  * without full read/write transaction support.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -126,14 +125,14 @@ public class EmbergraphSparqlTest extends SPARQLQueryTest // Sesame TupleExpr ba
           "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-sequence-05",
           "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-sequence-06",
 
-        /*
-       * These use illegal URIs in the query (missing a ":").
+          /*
+           * These use illegal URIs in the query (missing a ":").
            */
           "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/property-path/manifest#pp35",
           "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/exists/manifest#exists03",
 
-        /*
-       * This one fails because our bnode() function uses a different bnode
+          /*
+           * This one fails because our bnode() function uses a different bnode
            * id naming scheme than the sesame one.  Not technically a failure.
            */
           "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#bnode01");
@@ -167,253 +166,253 @@ public class EmbergraphSparqlTest extends SPARQLQueryTest // Sesame TupleExpr ba
           "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-sum-02",
 
           /*
-       * This test produces no result instead of an empty result.
-            =========================================
-            Expected results:
-            []
-            =========================================
-            Embergraph results:
-            =========================================
-            Missing results:
-            []
-            =========================================
-            Query:
-            PREFIX ex: <http://example.com/>
-            SELECT ?x (MAX(?value) AS ?max)
-            WHERE {
-                ?x ex:p ?value
-            } GROUP BY ?x
+          * This test produces no result instead of an empty result.
+               =========================================
+               Expected results:
+               []
+               =========================================
+               Embergraph results:
+               =========================================
+               Missing results:
+               []
+               =========================================
+               Query:
+               PREFIX ex: <http://example.com/>
+               SELECT ?x (MAX(?value) AS ?max)
+               WHERE {
+                   ?x ex:p ?value
+               } GROUP BY ?x
 
-            =========================================
-            Data:
-            @prefix ex: <http://example.com/> .
+               =========================================
+               Data:
+               @prefix ex: <http://example.com/> .
 
-            =========================================
-                     */
+               =========================================
+                        */
           "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/aggregates/manifest#agg-empty-group2",
 
           /*
-       * This test produces some extra results.
-                     *
-            =========================================
-            Expected results:
-            [s=http://example.org/a;o1=http://example.org/b;o2=http://example.org/b]
-            [s=http://example.org/a;o1="alan@example.org";o2=http://example.org/b]
-            [s=http://example.org/a;o1="Alan";o2=http://example.org/b]
-            [s=http://example.org/c;o1="alice@example.org";o2=http://example.org/b]
-            [s=http://example.org/c;o1="Alice";o2=http://example.org/b]
-            =========================================
-            Embergraph results:
-            [o2=http://example.org/b;s=http://example.org/a;o1=http://example.org/b]
-            [o2=http://example.org/b;s=http://example.org/a;o1="alan@example.org"]
-            [o2=http://example.org/b;s=http://example.org/a;o1="Alan"]
-            [o2=http://example.org/b;s=http://example.org/b;o1=http://example.org/c]
-            [o2=http://example.org/b;s=http://example.org/b;o1="bob@example.org"]
-            [o2=http://example.org/b;s=http://example.org/b;o1="Bob"]
-            [o2=http://example.org/b;s=http://example.org/c;o1="alice@example.org"]
-            [o2=http://example.org/b;s=http://example.org/c;o1="Alice"]
-            =========================================
-            Extra results:
-            [o2=http://example.org/b;s=http://example.org/b;o1=http://example.org/c]
-            [o2=http://example.org/b;s=http://example.org/b;o1="bob@example.org"]
-            [o2=http://example.org/b;s=http://example.org/b;o1="Bob"]
-            =========================================
-            Query:
-            # bindings with two variables and two sets of values
+          * This test produces some extra results.
+                        *
+               =========================================
+               Expected results:
+               [s=http://example.org/a;o1=http://example.org/b;o2=http://example.org/b]
+               [s=http://example.org/a;o1="alan@example.org";o2=http://example.org/b]
+               [s=http://example.org/a;o1="Alan";o2=http://example.org/b]
+               [s=http://example.org/c;o1="alice@example.org";o2=http://example.org/b]
+               [s=http://example.org/c;o1="Alice";o2=http://example.org/b]
+               =========================================
+               Embergraph results:
+               [o2=http://example.org/b;s=http://example.org/a;o1=http://example.org/b]
+               [o2=http://example.org/b;s=http://example.org/a;o1="alan@example.org"]
+               [o2=http://example.org/b;s=http://example.org/a;o1="Alan"]
+               [o2=http://example.org/b;s=http://example.org/b;o1=http://example.org/c]
+               [o2=http://example.org/b;s=http://example.org/b;o1="bob@example.org"]
+               [o2=http://example.org/b;s=http://example.org/b;o1="Bob"]
+               [o2=http://example.org/b;s=http://example.org/c;o1="alice@example.org"]
+               [o2=http://example.org/b;s=http://example.org/c;o1="Alice"]
+               =========================================
+               Extra results:
+               [o2=http://example.org/b;s=http://example.org/b;o1=http://example.org/c]
+               [o2=http://example.org/b;s=http://example.org/b;o1="bob@example.org"]
+               [o2=http://example.org/b;s=http://example.org/b;o1="Bob"]
+               =========================================
+               Query:
+               # bindings with two variables and two sets of values
 
-            PREFIX : <http://example.org/>
-            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-            SELECT ?s ?o1 ?o2
-            {
-              ?s ?p1 ?o1
-              OPTIONAL { ?s foaf:knows ?o2 }
-            } VALUES (?o2) {
-             (:b)
-            }
+               PREFIX : <http://example.org/>
+               PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+               SELECT ?s ?o1 ?o2
+               {
+                 ?s ?p1 ?o1
+                 OPTIONAL { ?s foaf:knows ?o2 }
+               } VALUES (?o2) {
+                (:b)
+               }
 
-            =========================================
-            Data:
-            @prefix : <http://example.org/> .
-            @prefix foaf:       <http://xmlns.com/foaf/0.1/> .
+               =========================================
+               Data:
+               @prefix : <http://example.org/> .
+               @prefix foaf:       <http://xmlns.com/foaf/0.1/> .
 
-            :a foaf:name "Alan" .
-            :a foaf:mbox "alan@example.org" .
-            :b foaf:name "Bob" .
-            :b foaf:mbox "bob@example.org" .
-            :c foaf:name "Alice" .
-            :c foaf:mbox "alice@example.org" .
-            :a foaf:knows :b .
-            :b foaf:knows :c .
-                     *
-                     * We produce solutions for Bob and the test says we shouldn't.  I'm
-                     * not convinced that we are wrong.  ?o2 is bound to :b, and even
-                     * though Bob doesn't know :b, that knows is optional.  Alice doesn't
-                     * know :b either, and she gets a solution.  How do we differentiate?
-                     */
+               :a foaf:name "Alan" .
+               :a foaf:mbox "alan@example.org" .
+               :b foaf:name "Bob" .
+               :b foaf:mbox "bob@example.org" .
+               :c foaf:name "Alice" .
+               :c foaf:mbox "alice@example.org" .
+               :a foaf:knows :b .
+               :b foaf:knows :c .
+                        *
+                        * We produce solutions for Bob and the test says we shouldn't.  I'm
+                        * not convinced that we are wrong.  ?o2 is bound to :b, and even
+                        * though Bob doesn't know :b, that knows is optional.  Alice doesn't
+                        * know :b either, and she gets a solution.  How do we differentiate?
+                        */
           "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/bindings/manifest#values7",
 
-            /*
-            =========================================
-            Expected results:
-            <http://example.org/s2, http://example.org/p, http://example.org/o1>
-            <http://example.org/s2, http://example.org/p, http://example.org/o2>
-            <http://example.org/s1, http://example.org/p, http://example.org/o1>
-            <http://example.org/s3, http://example.org/p, http://example.org/o3>
-            =========================================
-            Embergraph results:
-            =========================================
-            Query:
-            PREFIX : <http://example.org/>
+          /*
+          =========================================
+          Expected results:
+          <http://example.org/s2, http://example.org/p, http://example.org/o1>
+          <http://example.org/s2, http://example.org/p, http://example.org/o2>
+          <http://example.org/s1, http://example.org/p, http://example.org/o1>
+          <http://example.org/s3, http://example.org/p, http://example.org/o3>
+          =========================================
+          Embergraph results:
+          =========================================
+          Query:
+          PREFIX : <http://example.org/>
 
-            CONSTRUCT
-            FROM <data.ttl>
-            WHERE { ?s ?p ?o }
-            =========================================
-            Data:
+          CONSTRUCT
+          FROM <data.ttl>
+          WHERE { ?s ?p ?o }
+          =========================================
+          Data:
 
-            =========================================
-                     */
+          =========================================
+                   */
           "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/construct/manifest#constructwhere04",
 
-            /*
-            =========================================
-            Expected results:
-            [s=http://www.example.org/s;p=http://www.example.org/p]
-            =========================================
-            Embergraph results:
-            =========================================
-            Missing results:
-            [s=http://www.example.org/s;p=http://www.example.org/p]
-            =========================================
-            Query:
-            prefix ex: <http://www.example.org/>
+          /*
+          =========================================
+          Expected results:
+          [s=http://www.example.org/s;p=http://www.example.org/p]
+          =========================================
+          Embergraph results:
+          =========================================
+          Missing results:
+          [s=http://www.example.org/s;p=http://www.example.org/p]
+          =========================================
+          Query:
+          prefix ex: <http://www.example.org/>
 
-            select * where {
-              ?s ?p ex:o
-              filter exists { ?s ?p ex:o1  filter exists { ?s ?p ex:o2 } }
-            }
-            =========================================
-            Data:
-            @prefix : <http://www.example.org/> .
+          select * where {
+            ?s ?p ex:o
+            filter exists { ?s ?p ex:o1  filter exists { ?s ?p ex:o2 } }
+          }
+          =========================================
+          Data:
+          @prefix : <http://www.example.org/> .
 
-            :s :p :o, :o1, :o2.
-            :t :p :o1, :o2.
-            =========================================
+          :s :p :o, :o1, :o2.
+          :t :p :o1, :o2.
+          =========================================
 
-                        This query currently works correctly.
+                      This query currently works correctly.
 
-                     */
+                   */
           // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/exists/manifest#exists04",
 
           /*
-       * These two are the same problem.  We drop solutions that do not have
-                     * a binding for the group by variable.  It seems that these should be
-                     * placed into their own individual group.
-            =========================================
-            Expected results:
-            [w="9"^^<http://www.w3.org/2001/XMLSchema#integer>;S="1"^^<http://www.w3.org/2001/XMLSchema#integer>]
-            [S="2"^^<http://www.w3.org/2001/XMLSchema#integer>]
-            =========================================
-            Embergraph results:
-            [w="9"^^<http://www.w3.org/2001/XMLSchema#integer>;S="1"^^<http://www.w3.org/2001/XMLSchema#integer>]
-            =========================================
-            Missing results:
-            [S="2"^^<http://www.w3.org/2001/XMLSchema#integer>]
-            =========================================
-            Query:
-            PREFIX : <http://example/>
+          * These two are the same problem.  We drop solutions that do not have
+                        * a binding for the group by variable.  It seems that these should be
+                        * placed into their own individual group.
+               =========================================
+               Expected results:
+               [w="9"^^<http://www.w3.org/2001/XMLSchema#integer>;S="1"^^<http://www.w3.org/2001/XMLSchema#integer>]
+               [S="2"^^<http://www.w3.org/2001/XMLSchema#integer>]
+               =========================================
+               Embergraph results:
+               [w="9"^^<http://www.w3.org/2001/XMLSchema#integer>;S="1"^^<http://www.w3.org/2001/XMLSchema#integer>]
+               =========================================
+               Missing results:
+               [S="2"^^<http://www.w3.org/2001/XMLSchema#integer>]
+               =========================================
+               Query:
+               PREFIX : <http://example/>
 
-            SELECT ?w (SAMPLE(?v) AS ?S)
-            {
-              ?s :p ?v .
-              OPTIONAL { ?s :q ?w }
-            }
-            GROUP BY ?w
-            =========================================
-            Data:
-            @prefix : <http://example/> .
+               SELECT ?w (SAMPLE(?v) AS ?S)
+               {
+                 ?s :p ?v .
+                 OPTIONAL { ?s :q ?w }
+               }
+               GROUP BY ?w
+               =========================================
+               Data:
+               @prefix : <http://example/> .
 
-            :s1 :p 1 .
-            :s1 :q 9 .
-            :s2 :p 2 .
-            =========================================
-                     */
+               :s1 :p 1 .
+               :s1 :q 9 .
+               :s2 :p 2 .
+               =========================================
+                        */
           "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/grouping/manifest#group03",
           "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/grouping/manifest#group05",
 
-        /*
-       * Complex negation tests.
+          /*
+           * Complex negation tests.
            */
           "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/negation/manifest#partial-minuend",
           "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/negation/manifest#full-minuend",
 
           /*
-       * Really weird zero-length path failure.
-            =========================================
-            Missing results:
-            [X=http://example.org/h;Y=http://example.org/h]
-            [X="test";Y="test"]
-            =========================================
-            Query:
-            PREFIX : <http://example.org/>
-            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+          * Really weird zero-length path failure.
+               =========================================
+               Missing results:
+               [X=http://example.org/h;Y=http://example.org/h]
+               [X="test";Y="test"]
+               =========================================
+               Query:
+               PREFIX : <http://example.org/>
+               PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
-            SELECT *
-            WHERE { ?X foaf:knows* ?Y }
-            ORDER BY ?X ?Y
-            =========================================
-            Data:
-            @prefix : <http://example.org/> .
-            @prefix foaf: <http://xmlns.com/foaf/0.1/> .
+               SELECT *
+               WHERE { ?X foaf:knows* ?Y }
+               ORDER BY ?X ?Y
+               =========================================
+               Data:
+               @prefix : <http://example.org/> .
+               @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 
-            :a foaf:knows :b .
-            :b foaf:knows :c .
-            :a foaf:knows :c .
-            :d foaf:knows :e .
-            :e foaf:knows :f .
-            :f foaf:knows :e .
-            :f foaf:name "test" .
-            :a foaf:homepage :h .
-            =========================================
-                     */
+               :a foaf:knows :b .
+               :b foaf:knows :c .
+               :a foaf:knows :c .
+               :d foaf:knows :e .
+               :e foaf:knows :f .
+               :f foaf:knows :e .
+               :f foaf:name "test" .
+               :a foaf:homepage :h .
+               =========================================
+                        */
           "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/property-path/manifest#pp16",
 
           /*
-       * All five of these appear to be the same problem - subquery nested
-                     * inside a graph pattern.
-            =========================================
-            "sq01 - Subquery within graph pattern"
-            =========================================
-            Query:
-            prefix ex:  <http://www.example.org/schema#>
-            prefix in:  <http://www.example.org/instance#>
+          * All five of these appear to be the same problem - subquery nested
+                        * inside a graph pattern.
+               =========================================
+               "sq01 - Subquery within graph pattern"
+               =========================================
+               Query:
+               prefix ex:  <http://www.example.org/schema#>
+               prefix in:  <http://www.example.org/instance#>
 
-            select  ?x ?p where {
-            graph ?g {
-            {select * where {?x ?p ?y}}
-            }
-            }
-            =========================================
-            *
-            *         Currently (Apr 13, 2016) only subquery03 fails.
-            *
-                     */
+               select  ?x ?p where {
+               graph ?g {
+               {select * where {?x ?p ?y}}
+               }
+               }
+               =========================================
+               *
+               *         Currently (Apr 13, 2016) only subquery03 fails.
+               *
+                        */
           // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/subquery/manifest#subquery01",
           // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/subquery/manifest#subquery02",
           "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/subquery/manifest#subquery03"
           // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/subquery/manifest#subquery04",
           // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/subquery/manifest#subquery05",
 
-            /*
-            The following two are covered by: https://jira.blazegraph.com/browse/BLZG-1721
+          /*
+          The following two are covered by: https://jira.blazegraph.com/browse/BLZG-1721
 
-                           They are no longer in the black list because they work now,
-                           after the completion of https://jira.blazegraph.com/browse/BLZG-618
+                         They are no longer in the black list because they work now,
+                         after the completion of https://jira.blazegraph.com/browse/BLZG-618
 
-                     */
+                   */
           // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/aggregates/manifest#agg03",
           // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/aggregates/manifest#agg07",
-      );
+          );
 
   /*
    * The following tests require Unicode configuration for identical comparisons. This appears to
@@ -954,12 +953,12 @@ public class EmbergraphSparqlTest extends SPARQLQueryTest // Sesame TupleExpr ba
             //
             //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-cmp-02",
 
-          /*
-       * working through the new query engine failures: 0 errors, 11 failures
+            /*
+             * working through the new query engine failures: 0 errors, 11 failures
              */
 
-          /*
-       * Basically we are having a lot of problems with our compare
+            /*
+             * Basically we are having a lot of problems with our compare
              * operator, which is supposed to do fuzzy comparisons that
              * sometimes requires materialized RDF values. These I feel I can
              * handle on my own.
@@ -981,8 +980,8 @@ public class EmbergraphSparqlTest extends SPARQLQueryTest // Sesame TupleExpr ba
             //
             //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-cmp-02",
 
-          /*
-       * These tests have to do with that that weird "well designed"
+            /*
+             * These tests have to do with that that weird "well designed"
              * optional nesting P = A OPT (B OPT C) where A and C share
              * variables not in B.  I think I can handle these on my own.
              */
@@ -991,20 +990,20 @@ public class EmbergraphSparqlTest extends SPARQLQueryTest // Sesame TupleExpr ba
             //
             //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#join-scope-1",
 
-          /*
-       * Everything below this point I need help with.
+            /*
+             * Everything below this point I need help with.
              */
 
-          /*
-       * This one is truly bizarre - involving a non-optional subquuery
+            /*
+             * This one is truly bizarre - involving a non-optional subquuery
              * plus an optional subquery. Don't even know where to start on this
              * guy.
              */
             //
             //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#filter-scope-1",
 
-          /*
-       * Sometimes, a filter is the entire join group, and it should not
+            /*
+             * Sometimes, a filter is the entire join group, and it should not
              * be able to see variables outside the group.  Frankly I do not
              * understand this one.
              */
@@ -1177,8 +1176,7 @@ public class EmbergraphSparqlTest extends SPARQLQueryTest // Sesame TupleExpr ba
     */
     IIndexManager backend = null;
 
-    Repository delegate =
-        dataRep; // ((DatasetRepository) dataRep).getDelegate();
+    Repository delegate = dataRep; // ((DatasetRepository) dataRep).getDelegate();
 
     if (delegate != null && delegate instanceof EmbergraphSailRepository) {
 

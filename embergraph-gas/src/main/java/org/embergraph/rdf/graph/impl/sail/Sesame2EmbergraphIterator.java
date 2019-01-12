@@ -24,7 +24,7 @@ import info.aduna.iteration.CloseableIteration;
 import java.util.NoSuchElementException;
 
 /*
-* Class aligns a Sesame 2 {@link CloseableIteration} with a embergraph {@link ICloseableIterator}.
+ * Class aligns a Sesame 2 {@link CloseableIteration} with a embergraph {@link ICloseableIterator}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: Embergraph2SesameIteration.java 2265 2009-10-26 12:51:06Z thompsonbry $

@@ -13,14 +13,13 @@ import org.embergraph.journal.IBTreeManager;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.Journal;
 import org.embergraph.relation.locator.IResourceLocator;
-import org.embergraph.service.IEmbergraphClient;
 import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.ManagedResourceService;
 import org.embergraph.service.ResourceService;
 import org.embergraph.util.config.NicUtil;
 
 /*
-* Default {@link IQueryEngineFactory} implementation.
+ * Default {@link IQueryEngineFactory} implementation.
  *
  * @author bryan
  */
@@ -185,8 +184,8 @@ public class QueryEngineFactoryBase implements IQueryEngineFactory {
         queryEngineStore =
             new Journal(p) {
 
-            /*
-       * Locator resources on the federation NOT the embedded Journal used by the query
+              /*
+               * Locator resources on the federation NOT the embedded Journal used by the query
                * controller.
                */
               @Override

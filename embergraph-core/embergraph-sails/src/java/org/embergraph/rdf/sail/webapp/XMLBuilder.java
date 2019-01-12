@@ -22,7 +22,7 @@ import java.io.Writer;
 import org.embergraph.util.HTMLUtility;
 
 /*
-* Utility Java class for outputting XML.
+ * Utility Java class for outputting XML.
  *
  * <p>The motivation is to provide a similar interface to a document builder but instead of building
  * an in-memory model, to directly stream the output.

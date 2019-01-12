@@ -41,7 +41,7 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
 /*
-* Test suite for {@link BackchainTypeResourceIterator}.
+ * Test suite for {@link BackchainTypeResourceIterator}.
  *
  * @todo write a test where we compute the forward closure of a data set with (x type Resource)
  *     entailments included in the rule set and then compare it to the forward closure of the same

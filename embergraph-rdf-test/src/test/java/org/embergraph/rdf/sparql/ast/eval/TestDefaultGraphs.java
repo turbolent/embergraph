@@ -30,7 +30,7 @@ import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.spo.SPOPredicate;
 
 /*
-* Unit tests for default graph semantics ported from the old TestDefaultGraphAccessPath class. The
+ * Unit tests for default graph semantics ported from the old TestDefaultGraphAccessPath class. The
  * data set for these tests is:
  *
  * <pre>

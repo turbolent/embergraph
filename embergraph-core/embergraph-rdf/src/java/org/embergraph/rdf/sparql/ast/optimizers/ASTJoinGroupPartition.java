@@ -33,7 +33,7 @@ import org.embergraph.rdf.sparql.ast.GroupNodeVarBindingInfoMap;
 import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
 
 /*
-* Partition of a join group, defined by a (possibly empty) list of non-optional non-minus nodes,
+ * Partition of a join group, defined by a (possibly empty) list of non-optional non-minus nodes,
  * possibly closed by a single optional or minus node. Each partition maintains a set of variables
  * that are definitely bound *after* evaluating the partition. Note that this list is equivalent to
  * the nodes definitely bound *after* evaluating the non-optional non-minus nodes in the partition
@@ -206,8 +206,8 @@ public class ASTJoinGroupPartition {
       // if no more variables need to be bound, place the node
       if (!intersection.isEmpty()) {
 
-      /*
-       * If the first possible position differs from null and is larger than i, then place it
+        /*
+         * If the first possible position differs from null and is larger than i, then place it
          * there; if it is smaller than i, then i is where we place the node. So we're looking for
          * the maximum of both.
          */

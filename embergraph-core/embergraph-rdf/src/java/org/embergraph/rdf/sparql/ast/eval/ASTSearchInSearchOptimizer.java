@@ -45,7 +45,7 @@ import org.embergraph.search.IHit;
 import org.openrdf.model.Literal;
 
 /*
-* Converts a {@link BDS#SEARCH_IN_SEARCH} function call (inside a filter) into an IN filter using
+ * Converts a {@link BDS#SEARCH_IN_SEARCH} function call (inside a filter) into an IN filter using
  * the full text index to determine the IN set.
  *
  * <p>Convert:

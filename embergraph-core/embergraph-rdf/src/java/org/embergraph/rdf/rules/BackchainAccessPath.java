@@ -31,7 +31,6 @@ import org.embergraph.rdf.inf.OwlSameAsPropertiesExpandingIterator;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.SPO;
-import org.embergraph.rdf.spo.SPORelation;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.vocab.Vocabulary;
 import org.embergraph.relation.accesspath.IAccessPath;
@@ -45,7 +44,7 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
 /*
-* A read-only {@link IAccessPath} that backchains certain inferences.
+ * A read-only {@link IAccessPath} that backchains certain inferences.
  *
  * <p>Note: Low level methods may not behave quite as expected since some elements will be generated
  * by the backchainer and hence present in the underlying {@link SPORelation}. See the notes on the
@@ -175,7 +174,7 @@ public class BackchainAccessPath implements IAccessPath<ISPO> {
   }
 
   //    /*
-//     * Visits elements in the source {@link IAccessPath} plus all entailments
+  //     * Visits elements in the source {@link IAccessPath} plus all entailments
   //     * licensed by the {@link InferenceEngine} as configured.
   //     */
   //    public IChunkedOrderedIterator<ISPO> iterator(final int limit,
@@ -204,7 +203,7 @@ public class BackchainAccessPath implements IAccessPath<ISPO> {
     //    }
     //
     //    /*
-//     * Visits elements in the source {@link IAccessPath} plus all entailments
+    //     * Visits elements in the source {@link IAccessPath} plus all entailments
     //     * licensed by the {@link InferenceEngine} as configured.
     //     */
     //    public IChunkedOrderedIterator<ISPO> iterator(final int limit,
@@ -237,8 +236,8 @@ public class BackchainAccessPath implements IAccessPath<ISPO> {
 
       if (isOwlSameAsUsed != null && !isOwlSameAsUsed.booleanValue()) {
 
-      /*
-       * The caller asserted that no owl:sameAs assertions exist in
+        /*
+         * The caller asserted that no owl:sameAs assertions exist in
          * the KB, so we do not need to backchain owl:sameAs.
          */
 
@@ -250,8 +249,8 @@ public class BackchainAccessPath implements IAccessPath<ISPO> {
 
         if (isOwlSameAsUsed == null) {
 
-        /*
-       * The caller did not specify whether or not there are
+          /*
+           * The caller did not specify whether or not there are
            * owl:sameAs assertions in the data so we have to test the
            * data ourselves.
            */
@@ -261,8 +260,8 @@ public class BackchainAccessPath implements IAccessPath<ISPO> {
 
         if (isOwlSameAsUsed.booleanValue()) {
 
-        /*
-       * No owl:sameAs assertions in the KB, so we do not need to
+          /*
+           * No owl:sameAs assertions in the KB, so we do not need to
            * backchain owl:sameAs.
            */
 
@@ -484,7 +483,7 @@ public class BackchainAccessPath implements IAccessPath<ISPO> {
   }
 
   //    /*
-//     * Delegated to the source {@link IAccessPath} (does not visit any
+  //     * Delegated to the source {@link IAccessPath} (does not visit any
   //     * entailments).
   //     */
   //    @Override

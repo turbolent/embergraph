@@ -10,7 +10,7 @@ import org.embergraph.rdf.model.EmbergraphURI;
 import org.openrdf.model.URI;
 
 /*
-* A {@link URI} modeled as a namespace {@link IV} plus an inline Unicode <code>localName</code>.
+ * A {@link URI} modeled as a namespace {@link IV} plus an inline Unicode <code>localName</code>.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

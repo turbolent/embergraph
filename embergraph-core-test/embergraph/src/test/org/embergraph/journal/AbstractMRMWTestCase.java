@@ -22,7 +22,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.journal;
 
 import java.nio.ByteBuffer;
-import java.nio.MappedByteBuffer;
 import java.nio.channels.ClosedChannelException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -44,7 +43,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import org.embergraph.rawstore.AbstractRawStoreTestCase;
-import org.embergraph.rawstore.IMRMW;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.testutil.ExperimentDriver;
 import org.embergraph.testutil.ExperimentDriver.IComparisonTest;
@@ -55,7 +53,7 @@ import org.embergraph.util.InnerCause;
 import org.embergraph.util.NV;
 
 /*
-* Test suite for MRMW (Multiple Readers, Multiple Writers) support.
+ * Test suite for MRMW (Multiple Readers, Multiple Writers) support.
  *
  * <p>Supporting MRMW is easy for a fully buffered implementation since it need only use a read-only
  * view for readers and serialize the assignment of addresses to written records. If the
@@ -413,8 +411,8 @@ public abstract class AbstractMRMWTestCase extends AbstractRawStoreTestCase
 
         if (InnerCause.isInnerCause(ex, ClosedChannelException.class)) {
 
-        /*
-       * Note: This is not an error. It is just the behavior of
+          /*
+           * Note: This is not an error. It is just the behavior of
            * the channel when we cancelled the running tasks.
            */
 
@@ -579,8 +577,8 @@ public abstract class AbstractMRMWTestCase extends AbstractRawStoreTestCase
 
       if (r.nextInt(100) > 95) {
 
-      /*
-       * 5% of the time we choose the most recently written record to
+        /*
+         * 5% of the time we choose the most recently written record to
          * see if we can trip up read back on a record that might not be
          * "fully" written and recoverable yet.
          */

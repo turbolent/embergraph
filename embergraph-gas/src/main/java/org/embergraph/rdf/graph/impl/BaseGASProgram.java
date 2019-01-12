@@ -25,9 +25,7 @@ import org.apache.log4j.Logger;
 import org.embergraph.rdf.graph.BinderBase;
 import org.embergraph.rdf.graph.EdgesEnum;
 import org.embergraph.rdf.graph.Factory;
-import org.embergraph.rdf.graph.FrontierEnum;
 import org.embergraph.rdf.graph.IBinder;
-import org.embergraph.rdf.graph.IBindingExtractor;
 import org.embergraph.rdf.graph.IGASContext;
 import org.embergraph.rdf.graph.IGASProgram;
 import org.embergraph.rdf.graph.IGASState;
@@ -38,7 +36,7 @@ import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 
 /*
-* Abstract base class with some useful defaults.
+ * Abstract base class with some useful defaults.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @param <VS>
@@ -50,7 +48,7 @@ public abstract class BaseGASProgram<VS, ES, ST> implements IGASProgram<VS, ES, 
   private static final Logger log = Logger.getLogger(BaseGASProgram.class);
 
   //    /*
-//     * If the vertex is actually an edge, then return the decoded edge.
+  //     * If the vertex is actually an edge, then return the decoded edge.
   //     *
   //     * @see GASUtil#decodeStatement(Value)
   //     */
@@ -129,7 +127,7 @@ public abstract class BaseGASProgram<VS, ES, ST> implements IGASProgram<VS, ES, 
   }
 
   //    /*
-//     * {@inheritDoc}
+  //     * {@inheritDoc}
   //     * <p>
   //     * The default implementation is a NOP.
   //     */

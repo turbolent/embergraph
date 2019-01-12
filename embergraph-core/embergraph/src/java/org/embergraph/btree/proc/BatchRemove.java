@@ -33,7 +33,7 @@ import org.embergraph.btree.raba.codec.IRabaCoder;
 import org.embergraph.util.BytesUtil;
 
 /*
-* Batch removal of one or more tuples, optionally returning their existing values, the #of tuples
+ * Batch removal of one or more tuples, optionally returning their existing values, the #of tuples
  * that were deleted, or a mask indicating which tuples were deleted (polymorphic return type).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

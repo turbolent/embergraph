@@ -35,7 +35,7 @@ import org.embergraph.bop.engine.BOpStats;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 
 /*
-* Operator drops the identified variables from the solutions
+ * Operator drops the identified variables from the solutions
  *
  * @see ProjectionOp
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

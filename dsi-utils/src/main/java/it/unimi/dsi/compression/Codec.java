@@ -22,7 +22,7 @@ package it.unimi.dsi.compression;
  */
 
 /*
-* An abstract factory corresponding to an instance of a specific compression technique.
+ * An abstract factory corresponding to an instance of a specific compression technique.
  *
  * <p>An implementation of this interface provides coders and decoders. The constructors must
  * provide all data that is required to perform coding and decoding.

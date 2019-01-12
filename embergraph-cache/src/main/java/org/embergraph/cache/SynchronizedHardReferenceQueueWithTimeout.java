@@ -33,7 +33,7 @@ import org.apache.log4j.Logger;
 import org.embergraph.util.DaemonThreadFactory;
 
 /*
-* Thread-safe version with timeout for clearing stale references from the queue. Clearing of stale
+ * Thread-safe version with timeout for clearing stale references from the queue. Clearing of stale
  * entries is accomplished when a value is added to the {@link SynchronizedHardReferenceQueue}. The
  * tail of the queue is tested and any entry on the tail whose age exceeds a timeout is evicted.
  * This continues until we reach the first value on the tail of the queue whose age is greater than
@@ -455,8 +455,8 @@ public class SynchronizedHardReferenceQueueWithTimeout<T> implements IHardRefere
             continue;
           }
 
-        /*
-       * Note: Synchronization is imposed on the outer class
+          /*
+           * Note: Synchronization is imposed on the outer class
            * reference.
            */
           synchronized (queue) {

@@ -61,7 +61,7 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 
 /*
-* Query hints are identified applied to AST nodes based on the specified scope and the location
+ * Query hints are identified applied to AST nodes based on the specified scope and the location
  * within the AST in which they are found. Query hints recognized by this optimizer have the form:
  *
  * <pre>
@@ -159,7 +159,7 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
     }
 
     // Skip value expressions.
-    return !(op instanceof IValueExpression);// Visit anything else.
+    return !(op instanceof IValueExpression); // Visit anything else.
   }
 
   /*
@@ -304,7 +304,7 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
   }
 
   //    /*
-//     * Validate the global query hints.
+  //     * Validate the global query hints.
   //     *
   //     * @param queryHints
   //     */
@@ -385,8 +385,8 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
           continue;
         }
 
-      /*
-       * Recursion (looking for query hints to be applied).
+        /*
+         * Recursion (looking for query hints to be applied).
          */
         if (child instanceof GraphPatternGroup<?>) {
           processGroup(context, queryRoot, queryBase, (GraphPatternGroup<IGroupMemberNode>) child);
@@ -397,8 +397,8 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
           processGroup(context, queryRoot, queryBase, ((ServiceNode) child).getGraphPattern());
         } else if (child instanceof FilterNode
             && ((FilterNode) child).getValueExpressionNode() instanceof SubqueryFunctionNodeBase) {
-        /*
-       * @see <a href="http://trac.blazegraph.com/ticket/990">Query hint not recognized in
+          /*
+           * @see <a href="http://trac.blazegraph.com/ticket/990">Query hint not recognized in
            *     FILTER</a>
            */
           final GraphPatternGroup<IGroupMemberNode> filterGraphPattern =
@@ -481,7 +481,6 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
 
     // A possible query hint.
     return str.startsWith(QueryHints.NAMESPACE);
-
   }
 
   /*

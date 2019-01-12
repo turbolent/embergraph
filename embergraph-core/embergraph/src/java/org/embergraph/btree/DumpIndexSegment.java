@@ -28,13 +28,12 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.embergraph.btree.IndexSegment.ImmutableNodeFactory.ImmutableLeaf;
 import org.embergraph.io.DirectBufferPool;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.util.InnerCause;
 
 /*
-* Utility to examine the context of an {@link IndexSegmentStore}.
+ * Utility to examine the context of an {@link IndexSegmentStore}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -113,8 +112,8 @@ public class DumpIndexSegment {
           try {
             AbstractBTree.dumpLog.setLevel(level);
           } catch (Throwable t) {
-          /*
-       * Note: The SLF4J logging bridge can cause a
+            /*
+             * Note: The SLF4J logging bridge can cause a
              * NoSuchMethodException to be thrown here.
              *
              * @see https://sourceforge.net/apps/trac/bigdata/ticket/362

@@ -28,7 +28,7 @@ import java.util.UUID;
 import java.util.concurrent.TimeoutException;
 
 /*
-* Interface for collecting, reporting, and decision-making based on node and service utilization
+ * Interface for collecting, reporting, and decision-making based on node and service utilization
  * statistics.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -73,8 +73,7 @@ public interface ILoadBalancerService extends IService, IEventReceivingService {
    *     service join.
    * @throws InterruptedException if the request is interrupted.
    */
-  UUID getUnderUtilizedDataService()
-      throws IOException, TimeoutException, InterruptedException;
+  UUID getUnderUtilizedDataService() throws IOException, TimeoutException, InterruptedException;
 
   /*
    * Return up to <i>limit</i> {@link IDataService} {@link UUID}s that are currently under-utilized.
@@ -134,7 +133,7 @@ public interface ILoadBalancerService extends IService, IEventReceivingService {
   void sighup() throws IOException;
 
   //    /*
-//     * Return the identifier(s) of under-utilized service(s).
+  //     * Return the identifier(s) of under-utilized service(s).
   //     *
   //     * @param minCount
   //     *            The minimum #of services {@link UUID}s to return -or- zero

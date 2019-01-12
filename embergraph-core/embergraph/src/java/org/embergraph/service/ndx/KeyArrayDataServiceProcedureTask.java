@@ -1,14 +1,13 @@
 package org.embergraph.service.ndx;
 
 import java.util.concurrent.atomic.AtomicInteger;
-import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure;
 import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedureConstructor;
 import org.embergraph.btree.proc.IKeyArrayIndexProcedure;
 import org.embergraph.btree.proc.IResultHandler;
 import org.embergraph.service.Split;
 
 /*
-* Handles stale locators for {@link IKeyArrayIndexProcedure}s. When necessary the procedure will be
+ * Handles stale locators for {@link IKeyArrayIndexProcedure}s. When necessary the procedure will be
  * re-split.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

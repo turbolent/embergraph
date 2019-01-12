@@ -52,7 +52,7 @@ import org.openrdf.rio.RDFParserFactory;
 import org.openrdf.rio.RDFParserRegistry;
 
 /*
-* Handler for NanoSparqlServer REST API UPDATE operations (PUT, not SPARQL UPDATE).
+ * Handler for NanoSparqlServer REST API UPDATE operations (PUT, not SPARQL UPDATE).
  *
  * @author martyncutcher
  */
@@ -365,8 +365,8 @@ public class UpdateServlet extends EmbergraphRDFServlet {
           final EmbergraphRDFContext context =
               EmbergraphServlet.getEmbergraphRDFContext(req.getServletContext());
 
-        /*
-       * Note: pipe is drained by this thread to consume the query
+          /*
+           * Note: pipe is drained by this thread to consume the query
            * results, which are the statements to be deleted.
            */
           final PipedOutputStream os = new PipedOutputStream();
@@ -442,8 +442,8 @@ public class UpdateServlet extends EmbergraphRDFServlet {
             // Run INSERT
             {
 
-            /*
-       * There is a request body, so let's try and parse
+              /*
+               * There is a request body, so let's try and parse
                * it.
                */
 
@@ -460,8 +460,8 @@ public class UpdateServlet extends EmbergraphRDFServlet {
               rdfParser.setRDFHandler(
                   new AddStatementHandler(conn, nmodified, defaultContextInsert));
 
-            /*
-       * Run the parser, which will cause statements to be
+              /*
+               * Run the parser, which will cause statements to be
                * inserted.
                */
               rdfParser.parse(req.getInputStream(), baseURI);
@@ -613,8 +613,8 @@ public class UpdateServlet extends EmbergraphRDFServlet {
             final EmbergraphRDFContext context =
                 EmbergraphServlet.getEmbergraphRDFContext(req.getServletContext());
 
-          /*
-       * Note: pipe is drained by this thread to consume the query
+            /*
+             * Note: pipe is drained by this thread to consume the query
              * results, which are the statements to be deleted.
              */
             final PipedOutputStream os = new PipedOutputStream();
@@ -690,8 +690,8 @@ public class UpdateServlet extends EmbergraphRDFServlet {
             // Run INSERT
             {
 
-            /*
-       * There is a request body, so let's try and parse it.
+              /*
+               * There is a request body, so let's try and parse it.
                */
 
               final RDFParser rdfParser = parserFactory.getParser();
@@ -707,8 +707,8 @@ public class UpdateServlet extends EmbergraphRDFServlet {
               rdfParser.setRDFHandler(
                   new AddStatementHandler(conn, nmodified, defaultContextInsert));
 
-            /*
-       * Run the parser, which will cause statements to be inserted.
+              /*
+               * Run the parser, which will cause statements to be inserted.
                */
               rdfParser.parse(req.getInputStream(), baseURI);
             }

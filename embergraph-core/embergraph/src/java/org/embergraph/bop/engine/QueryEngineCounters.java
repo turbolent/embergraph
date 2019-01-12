@@ -27,7 +27,7 @@ import org.embergraph.counters.ICounterSetAccess;
 import org.embergraph.counters.Instrument;
 
 /*
-* {@link QueryEngine} performance counters.
+ * {@link QueryEngine} performance counters.
  *
  * @author thompsonbry
  */
@@ -59,7 +59,7 @@ public class QueryEngineCounters implements ICounterSetAccess {
    */
 
   // /*
-// * The #of non-empty work queues.
+  // * The #of non-empty work queues.
   // */
   // final CAT workQueueCount = new CAT();
 

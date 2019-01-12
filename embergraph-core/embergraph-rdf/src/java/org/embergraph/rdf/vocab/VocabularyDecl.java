@@ -22,12 +22,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.vocab;
 
 import java.util.Iterator;
-import org.embergraph.rdf.internal.impl.uri.VocabURIShortIV;
-import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.model.URI;
 
 /*
-* A class for declaring a {@link Vocabulary}.
+ * A class for declaring a {@link Vocabulary}.
  *
  * <p>Note: Implementations of a {@link VocabularyDecl} MUST be stable across the life cycle of an
  * {@link AbstractTripleStore}. For this reason it is strongly recommended that new versions of a

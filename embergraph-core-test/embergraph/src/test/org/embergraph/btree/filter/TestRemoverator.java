@@ -37,7 +37,7 @@ import org.embergraph.btree.Tuple;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /*
-* Test suite for the {@link Removerator}.
+ * Test suite for the {@link Removerator}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

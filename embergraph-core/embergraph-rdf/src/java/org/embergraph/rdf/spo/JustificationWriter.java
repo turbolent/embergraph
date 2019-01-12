@@ -7,7 +7,7 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.striterator.IChunkedIterator;
 
 /*
-* Writes {@link Justification}s on the justification index.
+ * Writes {@link Justification}s on the justification index.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -24,7 +24,7 @@ package org.embergraph.bop.rdf.filter;
 import junit.framework.TestCase2;
 
 /*
-* Test suite for {@link StripContextFilter}.
+ * Test suite for {@link StripContextFilter}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

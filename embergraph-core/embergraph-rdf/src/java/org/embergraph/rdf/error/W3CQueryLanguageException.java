@@ -25,7 +25,7 @@ import java.util.Formatter;
 import org.embergraph.util.NV;
 
 /*
-* Exception Base class for errors defined by the W3C for XQuery, XPath, and SPARQL.
+ * Exception Base class for errors defined by the W3C for XQuery, XPath, and SPARQL.
  *
  * @see http://www.w3.org/TR/xquery/#errors
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

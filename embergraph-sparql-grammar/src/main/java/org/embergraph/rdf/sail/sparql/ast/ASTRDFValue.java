@@ -24,7 +24,7 @@ package org.embergraph.rdf.sail.sparql.ast;
 import org.openrdf.model.Value;
 
 /*
-* An abstract base class for AST objects modeling RDF Values.
+ * An abstract base class for AST objects modeling RDF Values.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

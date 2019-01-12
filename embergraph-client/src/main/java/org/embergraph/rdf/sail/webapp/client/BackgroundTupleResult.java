@@ -23,7 +23,7 @@ import org.openrdf.query.resultio.TupleQueryResultParser;
 import org.openrdf.repository.sparql.query.QueueCursor;
 
 /*
-* Provides concurrent access to tuple results as they are being parsed.
+ * Provides concurrent access to tuple results as they are being parsed.
  *
  * @author James Leigh
  */

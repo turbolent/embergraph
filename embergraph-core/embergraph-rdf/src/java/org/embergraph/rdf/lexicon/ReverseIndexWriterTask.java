@@ -11,12 +11,10 @@ import org.embergraph.rdf.lexicon.Id2TermWriteProc.Id2TermWriteProcConstructor;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.EmbergraphValueSerializer;
-import org.embergraph.rdf.spo.ISPO;
 import org.openrdf.model.BNode;
-import org.openrdf.model.Value;
 
 /*
-* Add terms to the reverse index, which is the index that we use to lookup the RDF value by its
+ * Add terms to the reverse index, which is the index that we use to lookup the RDF value by its
  * term identifier so that we can externalize {@link ISPO}s as RDF/XML or the like.
  *
  * <p>Note: Every term asserted against the forward mapping [terms] MUST be asserted against the

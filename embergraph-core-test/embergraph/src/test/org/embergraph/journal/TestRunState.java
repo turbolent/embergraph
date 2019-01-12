@@ -26,7 +26,7 @@ package org.embergraph.journal;
 import junit.framework.TestCase;
 
 /*
-* Unit tests for {@link RunState}.
+ * Unit tests for {@link RunState}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

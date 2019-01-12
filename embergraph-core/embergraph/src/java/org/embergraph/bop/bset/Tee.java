@@ -23,16 +23,10 @@ package org.embergraph.bop.bset;
 
 import java.util.Map;
 import org.embergraph.bop.BOp;
-import org.embergraph.bop.BOpEvaluationContext;
 import org.embergraph.bop.PipelineOp;
-import org.embergraph.bop.controller.Union;
-import org.embergraph.bop.join.PipelineJoin;
-import org.embergraph.rdf.rules.TMUtility;
-import org.embergraph.relation.RelationFusedView;
-import org.embergraph.relation.rule.Slice;
 
 /*
-* TEE(op):[sinkRef=X; altSinkRef=Y]
+ * TEE(op):[sinkRef=X; altSinkRef=Y]
  *
  * <p>Pipeline operator copies its source to both sink and altSink. The sink and the altSink must
  * both be ancestors of the operator. The sinkRef MAY be omitted when one of the targets is the

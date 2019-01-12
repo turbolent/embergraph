@@ -30,7 +30,7 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
 /*
-* Test suite for the {@link DataLoader}.
+ * Test suite for the {@link DataLoader}.
  *
  * @author bryan
  *     <p>TODO Tests to verify that data was actually loaded.... (read back from last commit point

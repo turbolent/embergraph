@@ -17,32 +17,14 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.journal;
 
-import java.io.File;
-import java.io.FileDescriptor;
-import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
-import java.nio.channels.FileLock;
-import java.util.Properties;
-import org.embergraph.btree.Checkpoint;
 import org.embergraph.btree.IndexSegment;
-import org.embergraph.btree.keys.ICUVersionRecord;
-import org.embergraph.cache.HardReferenceQueue;
-import org.embergraph.io.DirectBufferPool;
-import org.embergraph.io.FileLockUtility;
 import org.embergraph.io.compression.CompressorRegistry;
-import org.embergraph.io.compression.IRecordCompressor;
-import org.embergraph.io.writecache.WriteCache;
-import org.embergraph.io.writecache.WriteCache.ReadCache;
-import org.embergraph.io.writecache.WriteCacheService;
-import org.embergraph.rawstore.WormAddressManager;
-import org.embergraph.resources.ResourceManager;
-import org.embergraph.resources.StoreManager.ManagedJournal;
 import org.embergraph.rwstore.RWStore;
 import org.embergraph.rwstore.sector.MemStore;
 import org.embergraph.util.Bytes;
 
 /*
-* Options for the {@link Journal}. Options are specified as property values to the {@link
+ * Options for the {@link Journal}. Options are specified as property values to the {@link
  * Journal#Journal(Properties)} constructor.
  *
  * <h2>Write Cache</h2>
@@ -169,7 +151,7 @@ public interface Options {
   String USE_DIRECT_BUFFERS = AbstractJournal.class.getName() + ".useDirectBuffers";
 
   //    /*
-//     * An integer property whose value controls the size of the write cache (in
+  //     * An integer property whose value controls the size of the write cache (in
   //     * records) (default {@value #DEFAULT_READ_CACHE_CAPACITY} bytes). A value
   //     * of ZERO (0) will disable the read cache.
   //     * <p>
@@ -181,7 +163,7 @@ public interface Options {
   //    String READ_CACHE_CAPACITY = AbstractJournal.class.getName()+".readCacheCapacity";
   //
   //    /*
-//     * An integer property whose value is the maximum size of a record that will
+  //     * An integer property whose value is the maximum size of a record that will
   //     * be allowed into the optional read cache. Records larger than this size
   //     * are always read from the backing store.
   //     *
@@ -280,7 +262,7 @@ public interface Options {
   String HOT_CACHE_SIZE = AbstractJournal.class.getName() + ".hotCacheSize";
 
   //    /*
-//     * An integer property whose value controls the size of the write cache (in
+  //     * An integer property whose value controls the size of the write cache (in
   //     * bytes) used by the selected {@link BufferMode} (default
   //     * {@value #DEFAULT_WRITE_CACHE_CAPACITY} bytes). A value of ZERO (0) will
   //     * disable the write cache.
@@ -564,7 +546,7 @@ public interface Options {
   String DEFAULT_USE_DIRECT_BUFFERS = "false";
 
   //    /*
-//     * The default for {@link #WRITE_CACHE_CAPACITY} (1M).
+  //     * The default for {@link #WRITE_CACHE_CAPACITY} (1M).
   //     */
   //    String DEFAULT_WRITE_CACHE_CAPACITY = ""+(1 * Bytes.megabyte32);
 
@@ -596,7 +578,7 @@ public interface Options {
   String DEFAULT_WRITE_CACHE_COMPACTION_THRESHOLD = "20";
 
   //    /*
-//     * The default for {@link #READ_CACHE_MAX_RECORD_SIZE}.
+  //     * The default for {@link #READ_CACHE_MAX_RECORD_SIZE}.
   //     */
   //    String DEFAULT_READ_CACHE_MAX_RECORD_SIZE = ""+(2*Bytes.kilobyte);
 
@@ -628,7 +610,7 @@ public interface Options {
   String DEFAULT_MINIMUM_EXTENSION = "" + (32 * Bytes.megabyte);
 
   //    /*
-//     * The default #of bits ({@value WormAddressManager#SCALE_OUT_OFFSET_BITS})
+  //     * The default #of bits ({@value WormAddressManager#SCALE_OUT_OFFSET_BITS})
   //     * used to encode the byte offset of a record in the store as an unsigned
   //     * integer.
   //     *

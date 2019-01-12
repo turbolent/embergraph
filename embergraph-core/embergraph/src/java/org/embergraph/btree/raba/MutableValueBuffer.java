@@ -24,7 +24,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /*
-* A flyweight mutable implementation exposing the backing byte[][], permitting <code>null</code>s
+ * A flyweight mutable implementation exposing the backing byte[][], permitting <code>null</code>s
  * and not supporting search. It is assumed that caller maintains a dense byte[][] in the sense that
  * all entries in [0:nvalues] are defined, even if some of entries are null. The implementation is
  * NOT thread-safe for mutation.

@@ -29,7 +29,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /*
-* Element-at-a-time filter with generics.
+ * Element-at-a-time filter with generics.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -181,8 +181,8 @@ public abstract class Filter<I extends Iterator<E>, E> implements IFilter<I, E, 
 
         if (chunk == null) {
 
-        /*
-       * Dynamically instantiation an array of the same component type
+          /*
+           * Dynamically instantiation an array of the same component type
            * as the objects that we are visiting.
            */
 

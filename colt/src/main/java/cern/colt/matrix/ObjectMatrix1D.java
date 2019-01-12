@@ -12,7 +12,7 @@ import cern.colt.list.IntArrayList;
 import cern.colt.list.ObjectArrayList;
 import cern.colt.matrix.impl.AbstractMatrix1D;
 /*
-* Abstract base class for 1-d matrices (aka <i>vectors</i>) holding <tt>Object</tt> elements. First
+ * Abstract base class for 1-d matrices (aka <i>vectors</i>) holding <tt>Object</tt> elements. First
  * see the <a href="package-summary.html">package summary</a> and javadoc <a
  * href="package-tree.html">tree view</a> to get the broad picture.
  *
@@ -269,7 +269,8 @@ public abstract class ObjectMatrix1D extends AbstractMatrix1D {
       }
     } else {
       for (int i = size; --i >= 0; ) {
-        if (getQuick(i) == null ? other.getQuick(i) != null
+        if (getQuick(i) == null
+            ? other.getQuick(i) != null
             : !getQuick(i).equals(other.getQuick(i))) return false;
       }
     }

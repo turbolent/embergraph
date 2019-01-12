@@ -22,12 +22,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.service;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
-import org.embergraph.bop.IBindingSet;
-import org.embergraph.relation.accesspath.IBindingSetAccessPath;
-import org.openrdf.query.BindingSet;
 
 /*
-* Service invocation interface.
+ * Service invocation interface.
  *
  * @param <E> The generic type of the solutions which are exchanged with the service implementation.
  *     This will be either {@link IBindingSet} or {@link BindingSet}. Note that those two interfaces

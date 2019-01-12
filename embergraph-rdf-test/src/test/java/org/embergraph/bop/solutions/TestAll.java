@@ -1,5 +1,5 @@
 /*
-* Copyright (C) SYSTAP, LLC DBA Blazegraph 2006-2018. All rights reserved. Copyright (C) Embergraph
+ * Copyright (C) SYSTAP, LLC DBA Blazegraph 2006-2018. All rights reserved. Copyright (C) Embergraph
  * contributors 2019. All rights reserved.
  *
  * <p>This program is free software; you can redistribute it and/or modify it under the terms of the
@@ -21,7 +21,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /*
-* Aggregates test suites into increasing dependency order.
+ * Aggregates test suites into increasing dependency order.
  *
  * @author <a href="mailto:ariazanov@blazegraph.com">Alexandre Riazanov</a>
  * @since Apr 19, 2016

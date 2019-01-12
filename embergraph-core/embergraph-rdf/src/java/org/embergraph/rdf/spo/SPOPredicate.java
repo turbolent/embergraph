@@ -32,7 +32,7 @@ import org.embergraph.rdf.sparql.ast.FilterNode;
 import org.embergraph.relation.rule.IAccessPathExpander;
 
 /*
-* A predicate that is a triple with one or more variables. While the general case allows a
+ * A predicate that is a triple with one or more variables. While the general case allows a
  * predicate to have an arbitrary name, for RDFS reasoning we are only concerned with predicates of
  * the form <code>triple(s,p,o)</code>.
  *
@@ -224,7 +224,7 @@ public class SPOPredicate extends Predicate<ISPO> {
   }
 
   //    /*
-//     * Constrain the predicate by setting the context position. If the context
+  //     * Constrain the predicate by setting the context position. If the context
   //     * position on the {@link SPOPredicate} is non-<code>null</code>, then you
   //     * must use {@link #asBound(IBindingSet)} to replace all occurrences of the
   //     * variable appearing in the context position of the predicate with the
@@ -426,7 +426,7 @@ public class SPOPredicate extends Predicate<ISPO> {
   }
 
   //    /*
-//     * Strengthened return type.
+  //     * Strengthened return type.
   //     * <p>
   //     * {@inheritDoc}
   //     */

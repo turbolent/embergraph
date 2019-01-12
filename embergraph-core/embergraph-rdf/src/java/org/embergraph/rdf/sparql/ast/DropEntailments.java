@@ -25,7 +25,7 @@ import java.util.Map;
 import org.embergraph.bop.BOp;
 
 /*
-* The DROP ENTAILMENTS operation removes all entailments from the Graph Store.
+ * The DROP ENTAILMENTS operation removes all entailments from the Graph Store.
  *
  * <pre>
  * DROP ENTAILMENTS

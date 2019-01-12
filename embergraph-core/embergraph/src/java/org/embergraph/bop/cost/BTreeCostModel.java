@@ -22,12 +22,9 @@ package org.embergraph.bop.cost;
 
 import java.io.Serializable;
 import java.text.NumberFormat;
-import org.embergraph.btree.AbstractBTree;
-import org.embergraph.btree.BTree;
-import org.embergraph.journal.Journal;
 
 /*
-* A cost model for a range scan on a {@link BTree} backed by a {@link Journal}. The on disk
+ * A cost model for a range scan on a {@link BTree} backed by a {@link Journal}. The on disk
  * representation of the {@link BTree} does not reflect the index order so a range scan on the
  * {@link BTree} is basically turned into one random seek per node or leaf visited.
  *
@@ -162,8 +159,8 @@ public class BTreeCostModel implements Serializable {
             final int estimatedHeight = estimateHeight(rangeCount, m);
 
             if (estimatedHeight > h) {
-            /*
-       * Skip range counts which are too large for the
+              /*
+               * Skip range counts which are too large for the
                * current B+Tree height.
                */
               break;

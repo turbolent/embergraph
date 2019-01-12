@@ -31,10 +31,8 @@ import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.model.EmbergraphBNode;
 import org.embergraph.rdf.model.EmbergraphLiteral;
-import org.embergraph.rdf.model.EmbergraphResource;
 import org.embergraph.rdf.model.EmbergraphStatement;
 import org.embergraph.rdf.model.EmbergraphURI;
-import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.sail.sparql.ast.ParseException;
 import org.embergraph.rdf.sail.sparql.ast.TokenMgrError;
 import org.embergraph.rdf.sparql.AbstractEmbergraphExprBuilderTestCase;
@@ -49,12 +47,11 @@ import org.embergraph.rdf.sparql.ast.UpdateRoot;
 import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.vocab.NoVocabulary;
-import org.openrdf.model.Resource;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /*
-* Test suite for the proposed standardization of "reification done right".
+ * Test suite for the proposed standardization of "reification done right".
  *
  * @see https://sourceforge.net/apps/trac/bigdata/ticket/526 (Reification done right)
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -842,15 +839,11 @@ public class TestReificationDoneRightParser extends AbstractEmbergraphExprBuilde
        */
 
       // SP(:s :p d) as ?sid1) .
-      final EmbergraphStatement s1 =
-          valueFactory.createStatement(
-              s, p, d);
+      final EmbergraphStatement s1 = valueFactory.createStatement(s, p, d);
       final EmbergraphBNode sid1 = valueFactory.createBNode(s1);
 
       // SP(?sid, :p, 5).
-      final EmbergraphStatement s2 =
-          valueFactory.createStatement(
-              sid1, order, five);
+      final EmbergraphStatement s2 = valueFactory.createStatement(sid1, order, five);
       final EmbergraphStatement[] data = new EmbergraphStatement[] {s1, s2};
       op.setData(data);
     }

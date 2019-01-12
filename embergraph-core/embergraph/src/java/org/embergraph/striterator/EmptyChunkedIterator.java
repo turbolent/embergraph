@@ -26,7 +26,7 @@ package org.embergraph.striterator;
 import java.util.NoSuchElementException;
 
 /*
-* An empty iterator.
+ * An empty iterator.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

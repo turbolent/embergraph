@@ -18,10 +18,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.ha.msg;
 
 import java.util.UUID;
-import org.embergraph.journal.ITransactionService;
 
 /*
-* Message from a follower to the leader in which the follower specifies the earliest commit point
+ * Message from a follower to the leader in which the follower specifies the earliest commit point
  * that is pinned on the follower by an active transaction or the minReleaseAge associated with its
  * local {@link ITransactionService}.
  *
@@ -39,12 +38,12 @@ public interface IHANotifyReleaseTimeRequest extends IHAMessage {
   long getPinnedCommitCounter();
 
   //    /*
-//     * The readsOnCommitTime of the earliest active transaction on the follower.
+  //     * The readsOnCommitTime of the earliest active transaction on the follower.
   //     */
   //    public long getReadsOnCommitTimeForEarliestActiveTx();
   //
   //    /*
-//     * The minReleaseAge on the follower (this should be the same on all
+  //     * The minReleaseAge on the follower (this should be the same on all
   //     * services in a quorum).
   //     */
   //    public long getMinReleaseAge();

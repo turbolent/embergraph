@@ -21,13 +21,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.striterator;
 
-import cutthecrap.utils.striterators.ICloseableIterator;
-import java.util.Iterator;
 import java.util.NoSuchElementException;
 import junit.framework.TestCase2;
 
 /*
-* Test suite for {@link CloseableChunkedIteratorWrapperConverter}. This class accepts an {@link
+ * Test suite for {@link CloseableChunkedIteratorWrapperConverter}. This class accepts an {@link
  * IChunkedIterator} and converts it into an {@link ICloseableIterator} whose {@link
  * ICloseableIterator#next()} method visits the chunks reported by {@link
  * IChunkedIterator#nextChunk()}, i.e., this converts between an {@link IChunkedIterator} and an
@@ -89,7 +87,7 @@ public class TestCloseableChunkedIteratorWrapperConverter extends TestCase2 {
   }
 
   //    /*
-//     * Unit test with a single empty chunk.
+  //     * Unit test with a single empty chunk.
   //     */
   //    public void test_singleEmptyChunk() {
   //

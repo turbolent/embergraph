@@ -1,7 +1,7 @@
 package org.embergraph.sparse;
 
 /*
-* Schema for the {@link SparseRowStore} used as a global row store for named property sets within
+ * Schema for the {@link SparseRowStore} used as a global row store for named property sets within
  * the federation. This schema only declares the primaryKey, {@link #NAME}, and a single property
  * value, {@link #VALUE}.
  *

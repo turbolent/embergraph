@@ -22,7 +22,7 @@ import java.io.IOException;
 import org.apache.log4j.Logger;
 
 /*
-* Provides a basic implementation of a {@link ISnapshotFactory} to be used with non-HA operations
+ * Provides a basic implementation of a {@link ISnapshotFactory} to be used with non-HA operations
  * to provide online backup capabilities.
  *
  * <p>This is exposed via the REST API via the {@link StatusServlet}.

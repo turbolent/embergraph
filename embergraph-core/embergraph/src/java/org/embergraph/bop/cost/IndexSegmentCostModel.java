@@ -21,10 +21,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.cost;
 
 import java.io.Serializable;
-import org.embergraph.btree.IndexSegment;
 
 /*
-* A cost model for a range scan on an {@link IndexSegment}.
+ * A cost model for a range scan on an {@link IndexSegment}.
  *
  * <p>Note: This uses a summary description of the {@link IndexSegment} for the cost model. This
  * makes sense because we generally have 100s of index segments in scale-out and we do not want to

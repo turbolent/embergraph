@@ -28,7 +28,7 @@ import org.embergraph.testutil.ExperimentDriver;
 import org.embergraph.util.NV;
 
 /*
-* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class BasicExperimentConditions extends ExperimentDriver {

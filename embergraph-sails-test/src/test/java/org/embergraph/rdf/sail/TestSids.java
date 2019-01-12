@@ -31,7 +31,6 @@ import org.embergraph.rdf.vocab.NoVocabulary;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDF;
-import org.openrdf.query.Binding;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQuery;
@@ -39,7 +38,7 @@ import org.openrdf.query.TupleQueryResult;
 import org.openrdf.query.impl.BindingImpl;
 
 /*
-* Test case for reverse lookup from SID to statement.
+ * Test case for reverse lookup from SID to statement.
  *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
@@ -78,8 +77,7 @@ public class TestSids extends ProxyEmbergraphSailTestCase {
 
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      final EmbergraphSailRepositoryConnection cxn =
-          repo.getConnection();
+      final EmbergraphSailRepositoryConnection cxn = repo.getConnection();
 
       try {
 
@@ -87,8 +85,8 @@ public class TestSids extends ProxyEmbergraphSailTestCase {
 
         cxn.add(getClass().getResourceAsStream("sids.ttl"), "", ServiceProviderHook.TURTLE_RDR);
 
-      /*
-       * Note: The either flush() or commit() is required to flush the
+        /*
+         * Note: The either flush() or commit() is required to flush the
          * statement buffers to the database before executing any operations
          * that go around the sail.
          */
@@ -182,8 +180,7 @@ public class TestSids extends ProxyEmbergraphSailTestCase {
 
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      final EmbergraphSailRepositoryConnection cxn =
-          repo.getConnection();
+      final EmbergraphSailRepositoryConnection cxn = repo.getConnection();
 
       try {
 

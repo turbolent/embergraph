@@ -24,15 +24,13 @@ import java.util.UUID;
 import org.embergraph.rdf.sail.model.RunningQuery;
 import org.embergraph.rdf.sail.webapp.client.RemoteRepository;
 import org.embergraph.rdf.sail.webapp.client.RemoteRepositoryManager;
-import org.embergraph.rdf.sail.webapp.client.RemoteTransactionManager;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.impl.ValueFactoryImpl;
 import org.openrdf.repository.Repository;
-import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
 
 /*
-* An fully compliant implementation of Sesame's {@link Repository} that wraps the embergraph remote
+ * An fully compliant implementation of Sesame's {@link Repository} that wraps the embergraph remote
  * API. Additional functionality is available using the embergraph {@link RemoteRepositoryManager}.
  * The proper incantation to create an instance of this class is:
  *
@@ -119,7 +117,7 @@ public class EmbergraphSailRemoteRepository implements Repository {
    * @param sparqlEndpointURL The SPARQL end point URL
    */
   @Deprecated // This is broken because the sparqlEndpointURL is not the serviceURL and that is what
-              // the RRM expects/needs.
+  // the RRM expects/needs.
   public EmbergraphSailRemoteRepository(final String sparqlEndpointURL) {
 
     if (sparqlEndpointURL == null) throw new IllegalArgumentException();

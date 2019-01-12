@@ -31,7 +31,7 @@ import org.embergraph.rdf.internal.impl.literal.XSDIntegerIV;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 
 /*
-* Operator computes the number of non-null values over the presented binding sets for the given
+ * Operator computes the number of non-null values over the presented binding sets for the given
  * variable.
  *
  * <p>Note: COUNT(*) is the cardinality of the solution multiset. COUNT(DISTINCT *) is the
@@ -142,7 +142,7 @@ public class COUNT extends AggregateBase<IV> {
   }
 
   // /*
-// * Overridden to allow <code>COUNT(*)</code>.
+  // * Overridden to allow <code>COUNT(*)</code>.
   // */
   // @Override
   // final public boolean isWildcardAllowed() {

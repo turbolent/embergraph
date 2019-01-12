@@ -63,7 +63,6 @@ import org.embergraph.quorum.Quorum;
 import org.embergraph.rdf.sail.QueryCancellationHelper;
 import org.embergraph.rdf.sail.model.JsonHelper;
 import org.embergraph.rdf.sail.sparql.ast.SimpleNode;
-import org.embergraph.rdf.sail.webapp.EmbergraphRDFContext.AbstractQueryTask;
 import org.embergraph.rdf.sail.webapp.EmbergraphRDFContext.RunningQuery;
 import org.embergraph.rdf.sail.webapp.EmbergraphRDFContext.TaskAndFutureTask;
 import org.embergraph.rdf.sail.webapp.EmbergraphRDFContext.UpdateTask;
@@ -71,15 +70,13 @@ import org.embergraph.rdf.sail.webapp.QueryServlet.SparqlQueryTask;
 import org.embergraph.rdf.sail.webapp.QueryServlet.SparqlUpdateTask;
 import org.embergraph.rdf.sail.webapp.client.ConnectOptions;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
-import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.UpdateRoot;
-import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.util.ClassPathUtil;
 import org.embergraph.util.InnerCause;
 
 /*
-* A status page for the service.
+ * A status page for the service.
  *
  * <p>TODO The KB addressed by the request should also be displayed as metadata associated with the
  * request. We should make this a restriction that can be placed onto the status page and make it
@@ -756,8 +753,8 @@ public class StatusServlet extends EmbergraphRDFServlet {
 
         if (getEmbergraphRDFContext().getSampleTask() != null) {
 
-        /*
-       * Performance counters for the NSS queries.
+          /*
+           * Performance counters for the NSS queries.
            *
            * Note: This is NSS specific, rather than per-QueryEngine.
            * For example, DataServices on a federation embed a
@@ -1028,8 +1025,8 @@ public class StatusServlet extends EmbergraphRDFServlet {
           current.node("p").attr("class", "original-ast").text(originalAST.toString()).close();
         }
 
-      /*
-       * Note: The UPDATE request is optimized piece by piece, and
+        /*
+         * Note: The UPDATE request is optimized piece by piece, and
          * those pieces are often rewrites. Thus, the optimized AST is
          * not available here. Likewise, neither is the query plan.
          * However, when a UPDATE operation is rewritten to include a
@@ -1374,8 +1371,8 @@ public class StatusServlet extends EmbergraphRDFServlet {
   private <T> TreeMap<Long, T> newQueryMap() {
     return new TreeMap<Long, T>(
         new Comparator<Long>() {
-        /*
-       * Comparator puts the entries into descending order by the query execution time (longest
+          /*
+           * Comparator puts the entries into descending order by the query execution time (longest
            * running queries are first).
            */
           @Override
@@ -1591,8 +1588,8 @@ public class StatusServlet extends EmbergraphRDFServlet {
 
       if (acceptedQuery == null) {
 
-      /*
-       * A query running on the query engine which is not a query
+        /*
+         * A query running on the query engine which is not a query
          * accepted by the NanoSparqlServer is typically a sub-query
          * being evaluated as part of the query plan for the
          * top-level query.
@@ -1649,8 +1646,8 @@ public class StatusServlet extends EmbergraphRDFServlet {
 
       if (queryId == null) {
 
-      /*
-       * Note: The UUID is not assigned until the UPDATE request
+        /*
+         * Note: The UUID is not assigned until the UPDATE request
          * begins to execute.
          */
         continue;

@@ -18,7 +18,7 @@ package cutthecrap.utils.striterators;
 import java.util.Iterator;
 
 /*
-* Used with a Contractorator to contract an Expanded iterator
+ * Used with a Contractorator to contract an Expanded iterator
  *
  * <p>The Contractorator will call contract on this object
  *

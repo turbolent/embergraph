@@ -26,7 +26,7 @@ package org.embergraph.concurrent;
 import java.util.concurrent.Callable;
 
 /*
-* Bundles the resources identifying the required locks with the task to be executed once it holds
+ * Bundles the resources identifying the required locks with the task to be executed once it holds
  * those locks.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

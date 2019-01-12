@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree.data;
 
 /*
-* Interface for low-level data access to the #of tuples spanned by a node or leaf of an index.
+ * Interface for low-level data access to the #of tuples spanned by a node or leaf of an index.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: ILeafData.java 4388 2011-04-11 13:35:47Z thompsonbry $

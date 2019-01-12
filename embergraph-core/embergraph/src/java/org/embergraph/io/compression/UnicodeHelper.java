@@ -31,7 +31,7 @@ import org.embergraph.io.LongPacker;
 import org.embergraph.io.SliceInputStream;
 
 /*
-* Utility class for compressed unicode encode/decode.
+ * Utility class for compressed unicode encode/decode.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

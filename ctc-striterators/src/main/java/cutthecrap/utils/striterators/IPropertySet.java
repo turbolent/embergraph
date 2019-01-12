@@ -16,7 +16,7 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 package cutthecrap.utils.striterators;
 
 /*
-* Interface for access to named property values.
+ * Interface for access to named property values.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

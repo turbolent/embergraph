@@ -10,7 +10,7 @@ package cern.colt.list;
 
 import cern.colt.function.IntProcedure;
 /*
-* Resizable list holding <code>int</code> elements; implemented with arrays. First see the <a
+ * Resizable list holding <code>int</code> elements; implemented with arrays. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
  * view</a> to get the broad picture.
  */

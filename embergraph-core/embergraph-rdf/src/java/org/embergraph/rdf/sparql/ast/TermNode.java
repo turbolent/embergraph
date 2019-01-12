@@ -9,7 +9,7 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.model.EmbergraphValue;
 
 /*
-* Used to represent a variable or constant in the AST (a term in a statement pattern for example).
+ * Used to represent a variable or constant in the AST (a term in a statement pattern for example).
  * Unlike {@link FunctionNode}s, a {@link TermNode} models the {@link IValueExpression} directly as
  * its sole child argument. This facilitates various rewrite patterns in which variables are
  * renamed, etc.

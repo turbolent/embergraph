@@ -19,7 +19,7 @@ package cutthecrap.utils.striterators;
 import java.util.Iterator;
 
 /*
-* Appender
+ * Appender
  *
  * <p>Used with Appenderator by Striterator to filter returned objects.
  */

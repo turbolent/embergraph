@@ -19,7 +19,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.embergraph</groupId>
@@ -31,7 +33,9 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
   <version>2.1.5-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>Embergraph Core</name>
-  <description>Embergraph Core Platform.  It contains all Embergraph dependencies other than Blueprints.</description>
+  <description>Embergraph Core Platform. It contains all Embergraph dependencies other than
+    Blueprints.
+  </description>
   <!-- properties are now in the parent POM. -->
   <build>
     <sourceDirectory>embergraph/src/java</sourceDirectory>
@@ -106,10 +110,12 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
             <phase>process-resources</phase>
             <configuration>
               <target>
-                <property name="buildinfo.file" value="embergraph/src/java/org/embergraph/BuildInfo.java"/>
+                <property name="buildinfo.file"
+                  value="embergraph/src/java/org/embergraph/BuildInfo.java"/>
                 <property name="build.ver" value="${project.version}"/>
                 <tstamp>
-                  <format property="build.timestamp" pattern="yyyy/MM/dd HH:mm:ss z" locale="en,US"/>
+                  <format property="build.timestamp" pattern="yyyy/MM/dd HH:mm:ss z"
+                    locale="en,US"/>
                 </tstamp>
                 <property environment="env"/>
                 <loadfile property="git.branch" srcFile="../.git/HEAD">
@@ -129,18 +135,18 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
                   <arg value="HEAD"/>
                 </exec>
                 <echo file="${buildinfo.file}">
-package org.embergraph;
-public class BuildInfo {
-    public static final String buildVersion="${build.ver}";
-    public static final String gitBranch = "${git.branch}";
-    public static final String gitCommit = "${git.commit}";
-    public static final String buildTimestamp="${build.timestamp}";
-    public static final String buildUser="${user.name}";
-    public static final String osArch="${os.arch}";
-    public static final String osName="${os.name}";
-    public static final String osVersion="${os.version}";
-}
-</echo>
+                  package org.embergraph;
+                  public class BuildInfo {
+                  public static final String buildVersion="${build.ver}";
+                  public static final String gitBranch = "${git.branch}";
+                  public static final String gitCommit = "${git.commit}";
+                  public static final String buildTimestamp="${build.timestamp}";
+                  public static final String buildUser="${user.name}";
+                  public static final String osArch="${os.arch}";
+                  public static final String osName="${os.name}";
+                  public static final String osVersion="${os.version}";
+                  }
+                </echo>
                 <loadfile property="buildinfo" srcFile="${buildinfo.file}"/>
                 <echo message="${buildinfo}"/>
               </target>

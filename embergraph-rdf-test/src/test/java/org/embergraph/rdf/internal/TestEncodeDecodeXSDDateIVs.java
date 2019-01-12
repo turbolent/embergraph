@@ -24,7 +24,6 @@ package org.embergraph.rdf.internal;
 import java.util.TimeZone;
 import org.embergraph.rdf.internal.impl.extensions.DateTimeExtension;
 import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
-import org.embergraph.rdf.internal.impl.literal.XSDIntegerIV;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.EmbergraphValue;
@@ -33,7 +32,7 @@ import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.openrdf.model.URI;
 
 /*
-* Unit tests for {@link XSDIntegerIV}.
+ * Unit tests for {@link XSDIntegerIV}.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$

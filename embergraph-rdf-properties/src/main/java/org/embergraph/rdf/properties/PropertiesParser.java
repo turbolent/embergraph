@@ -57,7 +57,7 @@ import java.io.Reader;
 import java.util.Properties;
 
 /*
-* An interface for {@link Properties} document readers.
+ * An interface for {@link Properties} document readers.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

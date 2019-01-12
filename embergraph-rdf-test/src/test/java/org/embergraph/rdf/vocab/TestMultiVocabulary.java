@@ -3,7 +3,6 @@ package org.embergraph.rdf.vocab;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
-import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.vocab.core.EmbergraphCoreVocabulary_v20151210;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;

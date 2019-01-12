@@ -50,7 +50,7 @@ import org.embergraph.service.Split;
 import org.embergraph.util.BytesUtil;
 
 /*
-* This unisolated operation inserts terms into the <em>term:id</em> index, assigning identifiers to
+ * This unisolated operation inserts terms into the <em>term:id</em> index, assigning identifiers to
  * terms as a side-effect. The use of this operation MUST be followed by the the use of {@link
  * Id2TermWriteProc} to ensure that the reverse mapping from id to term is defined before any
  * statements are inserted using the assigned term identifiers. The client MUST NOT make assertions
@@ -300,8 +300,8 @@ public class Term2IdWriteProc extends AbstractKeyArrayIndexProcedure<Result>
 
       if (!storeBlankNodes && code == ITermIndexCodes.TERM_CODE_BND) {
 
-      /*
-       * Do not enter blank nodes into the forward index.
+        /*
+         * Do not enter blank nodes into the forward index.
          *
          * For this case, we just assign a term identifier and leave it
          * at that. If two different documents by some chance happen to
@@ -320,8 +320,8 @@ public class Term2IdWriteProc extends AbstractKeyArrayIndexProcedure<Result>
 
         } else {
 
-        /*
-       * Assign a term identifier.
+          /*
+           * Assign a term identifier.
            *
            * Note: The TermIdEncoder is ONLY used in scale-out.
            */
@@ -335,8 +335,8 @@ public class Term2IdWriteProc extends AbstractKeyArrayIndexProcedure<Result>
 
       } else {
 
-      /*
-       * Lookup in the forward index (URIs, Literals, and SIDs)
+        /*
+         * Lookup in the forward index (URIs, Literals, and SIDs)
          *
          * Note: Also handles BNodes iff storeBlankNodes is true
          *
@@ -356,8 +356,8 @@ public class Term2IdWriteProc extends AbstractKeyArrayIndexProcedure<Result>
 
           } else {
 
-          /*
-       * Assign a term identifier.
+            /*
+             * Assign a term identifier.
              *
              * Note: The TermIdEncoder is ONLY used in scale-out.
              */

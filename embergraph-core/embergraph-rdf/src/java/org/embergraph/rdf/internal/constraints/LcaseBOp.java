@@ -30,7 +30,7 @@ import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 import org.openrdf.model.Literal;
 
 /*
-*
+ *
  *
  * <pre>http://www.w3.org/2005/xpath-functions#lower-case</pre>
  *

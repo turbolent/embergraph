@@ -4,7 +4,7 @@ import java.util.concurrent.Callable;
 import org.embergraph.relation.rule.eval.ISolution;
 
 /*
-* Task invokes {@link IBuffer#flush()} and returns its return value.
+ * Task invokes {@link IBuffer#flush()} and returns its return value.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

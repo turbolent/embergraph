@@ -7,7 +7,7 @@ import org.embergraph.bop.IConstant;
 import org.embergraph.rdf.internal.IV;
 
 /*
-* Used to represent a constant in the AST.
+ * Used to represent a constant in the AST.
  *
  * @author mikepersonick
  */

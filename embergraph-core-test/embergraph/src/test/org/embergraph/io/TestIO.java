@@ -32,7 +32,7 @@ import java.util.concurrent.TimeUnit;
 import junit.framework.TestCase2;
 
 /*
-* Low level IO performance tests in support of embergraph design options.
+ * Low level IO performance tests in support of embergraph design options.
  *
  * @todo Develop test to compare efficiency of an ordered write to random writes of the same pages.
  *     Use a random sequence of pages. Selection without replacement is an option, but not required.
@@ -273,8 +273,8 @@ public class TestIO extends TestCase2 {
         final long pos = r.nextInt(maxPages) * (long) pageSize;
         assert pos <= maxOffset;
 
-      /*
-       * Reset position so that the next write will transfer the
+        /*
+         * Reset position so that the next write will transfer the
          * entire buffer contents. If you don't do this then it will
          * only write the buffer the first time through since the
          * position defaults to zero and the limit defaults to the

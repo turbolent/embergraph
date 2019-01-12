@@ -15,7 +15,7 @@ import org.embergraph.rwstore.sector.MemStore;
 import org.embergraph.stream.Stream.StreamIndexMetadata;
 
 /*
-* A chunk of intermediate results stored on the native heap which are ready to be consumed by some
+ * A chunk of intermediate results stored on the native heap which are ready to be consumed by some
  * {@link BOp} in a specific query.
  *
  * <p>Note: This class is only used in query evaluation for the standalone database.

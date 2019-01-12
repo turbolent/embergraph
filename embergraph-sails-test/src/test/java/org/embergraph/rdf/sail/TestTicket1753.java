@@ -25,7 +25,7 @@ import org.openrdf.query.UpdateExecutionException;
 import org.openrdf.repository.RepositoryException;
 
 /*
-* Test suite for an issue where IV resolution of having clause fails
+ * Test suite for an issue where IV resolution of having clause fails
  *
  * @see <a href="https://jira.blazegraph.com/browse/BLZG-1753">Insert problem using subqueries and
  *     having clause

@@ -10,7 +10,7 @@ import org.embergraph.relation.rule.eval.IJoinNexus;
 import org.embergraph.service.IEmbergraphFederation;
 
 /*
-* An object used by a {@link JoinTask} to write on another {@link JoinTask} providing a sink for a
+ * An object used by a {@link JoinTask} to write on another {@link JoinTask} providing a sink for a
  * specific index partition.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

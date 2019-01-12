@@ -34,7 +34,7 @@ import org.embergraph.rawstore.WormAddressManager;
 import org.embergraph.util.MillisecondTimestampFactory;
 
 /*
-* Test suite for {@link RootBlockView}.
+ * Test suite for {@link RootBlockView}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -202,8 +202,8 @@ public class TestRootBlockView extends TestCase2 {
         assertEquals("closeTime", closeTime, rootBlock.getCloseTime());
         rootBlock.valid();
 
-      /*
-       * verify that each read only view has independent position, mark, and offset.
+        /*
+         * verify that each read only view has independent position, mark, and offset.
          */
         {
           ByteBuffer view1 = rootBlock.asReadOnlyBuffer();
@@ -224,15 +224,15 @@ public class TestRootBlockView extends TestCase2 {
           assertEquals(RootBlockView.SIZEOF_ROOT_BLOCK, view2.limit());
         }
 
-      /*
-       * Verify correct rejection when the root block data is partly
+        /*
+         * Verify correct rejection when the root block data is partly
          * overwritten.
          */
         {
           ByteBuffer view = rootBlock.asReadOnlyBuffer();
 
-        /*
-       * clone the view of the root block.
+          /*
+           * clone the view of the root block.
            */
           byte[] tmp = new byte[view.limit()];
 
@@ -243,8 +243,8 @@ public class TestRootBlockView extends TestCase2 {
           // verify clone is valid.
           new RootBlockView(rootBlock0, modified, checker);
 
-        /*
-       * modify the cloned data.
+          /*
+           * modify the cloned data.
            */
           modified.putLong(RootBlockView.OFFSET_COMMIT_CTR, rootBlock.getCommitCounter() + 1);
 
@@ -260,21 +260,21 @@ public class TestRootBlockView extends TestCase2 {
             if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
           }
 
-        /*
-       * Verify that we can read that root block anyway if we provide
+          /*
+           * Verify that we can read that root block anyway if we provide
            * a [null] checksum utility.
            */
           new RootBlockView(rootBlock0, modified, null /* checker */);
         }
 
-      /*
-       * Verify correct rejection when the checksum field is bad.
+        /*
+         * Verify correct rejection when the checksum field is bad.
          */
         {
           final ByteBuffer view = rootBlock.asReadOnlyBuffer();
 
-        /*
-       * clone the view of the root block.
+          /*
+           * clone the view of the root block.
            */
           final byte[] tmp = new byte[view.limit()];
 
@@ -285,8 +285,8 @@ public class TestRootBlockView extends TestCase2 {
           // verify clone is valid.
           new RootBlockView(rootBlock0, modified, checker);
 
-        /*
-       * modify the cloned data.
+          /*
+           * modify the cloned data.
            */
           modified.putInt(RootBlockView.OFFSET_CHECKSUM, rootBlock.getChecksum(null) + 1);
 
@@ -302,8 +302,8 @@ public class TestRootBlockView extends TestCase2 {
             if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
           }
 
-        /*
-       * verify that we can read that root block anyway if we provide
+          /*
+           * verify that we can read that root block anyway if we provide
            * a [null] checksum utility.
            */
 

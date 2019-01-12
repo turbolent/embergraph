@@ -18,7 +18,7 @@ package org.embergraph.rdf.graph;
 import org.openrdf.model.Value;
 
 /*
-* An interface for computing reductions over the vertices of a graph.
+ * An interface for computing reductions over the vertices of a graph.
  *
  * @param <T> The type of the result.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

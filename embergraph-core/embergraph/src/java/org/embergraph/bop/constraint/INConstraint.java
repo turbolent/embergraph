@@ -25,13 +25,10 @@ import java.util.Map;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpBase;
 import org.embergraph.bop.IConstant;
-import org.embergraph.bop.IConstraint;
 import org.embergraph.bop.IVariable;
-import org.embergraph.rdf.spo.InGraphBinarySearchFilter;
-import org.embergraph.rdf.spo.InGraphHashSetFilter;
 
 /*
-* Abstract base class for "IN" {@link IConstraint} implementations.
+ * Abstract base class for "IN" {@link IConstraint} implementations.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

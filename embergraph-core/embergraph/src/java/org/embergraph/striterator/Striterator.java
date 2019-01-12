@@ -30,10 +30,9 @@ import java.lang.reflect.Method;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Set;
-import org.embergraph.service.ndx.PartitionedTupleIterator;
 
 /*
-* Streaming iterator pattern.
+ * Streaming iterator pattern.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

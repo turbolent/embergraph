@@ -37,7 +37,6 @@ import org.apache.log4j.Logger;
 import org.embergraph.cache.ConcurrentWeakValueCache;
 import org.embergraph.gom.gpo.GPO;
 import org.embergraph.gom.gpo.IGPO;
-import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.model.EmbergraphBNode;
 import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
@@ -48,7 +47,7 @@ import org.openrdf.model.Value;
 import org.openrdf.query.BindingSet;
 
 /*
-* Base class for {@link IObjectManager} implementations. This class handles {@link IObjectManager}
+ * Base class for {@link IObjectManager} implementations. This class handles {@link IObjectManager}
  * protocol for maintaining an transaction edit list. Concrete implementations need to provide for
  * communication with the database (either remote or embedded) and the DESCRIBE (aka Object) cache.
  *
@@ -453,8 +452,8 @@ public abstract class ObjectMgrModel implements IObjectManager {
 
         if (id != null) {
 
-        /*
-       * Initializing some specific gpo provided by the caller.
+          /*
+           * Initializing some specific gpo provided by the caller.
            */
 
           if (subject.equals(id)) {
@@ -469,8 +468,8 @@ public abstract class ObjectMgrModel implements IObjectManager {
 
         } else {
 
-        /*
-       * Initial GPOs for all resources visited.
+          /*
+           * Initial GPOs for all resources visited.
            */
           {
             final GPO tmp = (GPO) getGPO(subject);
@@ -549,7 +548,7 @@ public abstract class ObjectMgrModel implements IObjectManager {
   }
 
   //    /*
-//     * Hook for extended commit processing.
+  //     * Hook for extended commit processing.
   //     */
   //	protected abstract void doCommit();
 
@@ -584,7 +583,7 @@ public abstract class ObjectMgrModel implements IObjectManager {
   }
 
   //	/*
-//	 * Hook for extended rollback processing.
+  //	 * Hook for extended rollback processing.
   //	 */
   //	abstract protected void doRollback();
 

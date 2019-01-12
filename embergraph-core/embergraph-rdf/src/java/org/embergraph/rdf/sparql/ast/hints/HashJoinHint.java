@@ -28,7 +28,7 @@ import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /*
-* Query hint used to indicate that a hash join agaist an access path should be used for a given
+ * Query hint used to indicate that a hash join agaist an access path should be used for a given
  * statement pattern node.
  */
 final class HashJoinHint extends AbstractBooleanQueryHint {

@@ -26,7 +26,7 @@ import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.relation.accesspath.IBuffer;
 
 /*
-* Annotations for {@link BlockingBuffer} as used by various kinds of operators.
+ * Annotations for {@link BlockingBuffer} as used by various kinds of operators.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

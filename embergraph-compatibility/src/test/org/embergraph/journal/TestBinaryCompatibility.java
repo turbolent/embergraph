@@ -32,7 +32,7 @@ import org.embergraph.btree.IIndex;
 import org.embergraph.btree.IndexMetadata;
 
 /*
-* Test suite for binary compatibility, portability, and forward compatibility or automated
+ * Test suite for binary compatibility, portability, and forward compatibility or automated
  * migration of persistent stores and persistence or serialization capable objects across different
  * embergraph releases. The tests in this suite rely on artifacts which are archived within SVN.
  *

@@ -12,7 +12,7 @@ import cern.colt.list.DoubleArrayList;
 import cern.colt.list.IntArrayList;
 import cern.colt.matrix.impl.AbstractMatrix3D;
 /*
-* Abstract base class for 3-d matrices holding <tt>double</tt> elements. First see the <a
+ * Abstract base class for 3-d matrices holding <tt>double</tt> elements. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
  * view</a> to get the broad picture.
  *

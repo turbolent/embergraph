@@ -27,7 +27,7 @@ import java.util.Random;
 import junit.framework.TestCase2;
 
 /*
-* Test suite for {@link ValueType}.
+ * Test suite for {@link ValueType}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.Map;
 
 /*
-* A ganglia metric metadata (aka declaration) record.
+ * A ganglia metric metadata (aka declaration) record.
  *
  * <p>This record must be sent if a service is reporting a metric for the first time. In addition,
  * ganglia resends the metadata records periodically by tracking their age (but <code>

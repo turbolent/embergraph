@@ -26,20 +26,18 @@ package org.embergraph.relation.accesspath;
 import cutthecrap.utils.striterators.Resolver;
 import cutthecrap.utils.striterators.Striterator;
 import org.apache.log4j.Logger;
-import org.embergraph.bop.BOp;
 import org.embergraph.bop.IPredicate;
 import org.embergraph.btree.IIndex;
 import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleIterator;
 import org.embergraph.btree.view.FusedTupleIterator;
-import org.embergraph.btree.view.FusedView;
 import org.embergraph.striterator.ChunkedWrappedIterator;
 import org.embergraph.striterator.IChunkedIterator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 
 /*
-* A read-only fused view of two access paths obtained for the same {@link IPredicate} constraint in
+ * A read-only fused view of two access paths obtained for the same {@link IPredicate} constraint in
  * two different databases (this is used for truth maintenance when reading on the union of a focus
  * store and the database).
  *

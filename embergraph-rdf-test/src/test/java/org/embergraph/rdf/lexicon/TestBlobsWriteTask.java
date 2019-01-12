@@ -40,7 +40,7 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDF;
 
 /*
-* Test suite for the {@link BlobsWriteTask}.
+ * Test suite for the {@link BlobsWriteTask}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -161,8 +161,8 @@ public class TestBlobsWriteTask extends TestCase2 {
        */
       {
 
-      /*
-       * Convert to EmbergraphValues so IVs will be assigned as a
+        /*
+         * Convert to EmbergraphValues so IVs will be assigned as a
          * side-effect by the TermsWriteTask.
          */
         final EmbergraphValue[] values = new EmbergraphValue[valuesIn.length];
@@ -172,8 +172,8 @@ public class TestBlobsWriteTask extends TestCase2 {
           values[i] = vf.asValue(valuesIn[i]);
         }
 
-      /*
-       * Invoke the task in a read-only mode to unify with the
+        /*
+         * Invoke the task in a read-only mode to unify with the
          * existing entries in the TERMS index.
          */
         final WriteTaskStats stats = addValues(vf, ndx, true /* readOnly */, toldBNodes, values);
@@ -192,8 +192,8 @@ public class TestBlobsWriteTask extends TestCase2 {
       final IV[] expectedIVs = new IV[valuesIn.length];
       {
 
-      /*
-       * Convert to EmbergraphValues so IVs will be assigned as a
+        /*
+         * Convert to EmbergraphValues so IVs will be assigned as a
          * side-effect by the TermsWriteTask.
          */
         final EmbergraphValue[] values = new EmbergraphValue[valuesIn.length];
@@ -203,8 +203,8 @@ public class TestBlobsWriteTask extends TestCase2 {
           values[i] = vf.asValue(valuesIn[i]);
         }
 
-      /*
-       * Write on the TERMS index, unifying with the existing values
+        /*
+         * Write on the TERMS index, unifying with the existing values
          * in the index and assigning IVs to new values.
          */
         final WriteTaskStats stats = addValues(vf, ndx, false /* readOnly */, toldBNodes, values);
@@ -229,8 +229,8 @@ public class TestBlobsWriteTask extends TestCase2 {
        */
       {
 
-      /*
-       * Convert to EmbergraphValues so IVs will be assigned as a
+        /*
+         * Convert to EmbergraphValues so IVs will be assigned as a
          * side-effect by the TermsWriteTask.
          */
         final EmbergraphValue[] values = new EmbergraphValue[valuesIn.length];
@@ -240,8 +240,8 @@ public class TestBlobsWriteTask extends TestCase2 {
           values[i] = vf.asValue(valuesIn[i]);
         }
 
-      /*
-       * Invoke the task in a read-only mode to unify with the
+        /*
+         * Invoke the task in a read-only mode to unify with the
          * existing entries in the TERMS index.
          */
         final WriteTaskStats stats = addValues(vf, ndx, true /* readOnly */, toldBNodes, values);

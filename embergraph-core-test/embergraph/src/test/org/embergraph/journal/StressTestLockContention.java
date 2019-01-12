@@ -28,11 +28,10 @@ import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
-import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.TimeUnit;
 
 /*
-* Lock contention results when unisolated writers seek conflicting locks. In all cases lock
+ * Lock contention results when unisolated writers seek conflicting locks. In all cases lock
  * contention reduces the possible parallelism. However, in the extreme case, lock contention forces
  * the serialization of unisolated writers.
  *
@@ -99,8 +98,8 @@ public class StressTestLockContention extends ProxyTestCase<Journal> {
               });
         }
 
-      /*
-       * Submit all tasks. Tasks can begin executing right away. If the
+        /*
+         * Submit all tasks. Tasks can begin executing right away. If the
          * write service is using a blocking queue with a limited capacity
          * then some or all of the tasks may complete before this method
          * returns.
@@ -110,8 +109,8 @@ public class StressTestLockContention extends ProxyTestCase<Journal> {
 
       } finally {
 
-      /*
-       * Shutdown the journal.
+        /*
+         * Shutdown the journal.
          *
          * Note: It is possible for shutdownNow() to close the store before
          * all worker threads have been canceled, in which case you may see
