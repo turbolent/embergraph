@@ -164,7 +164,10 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
           <author>true</author>
           <version>true</version>
           <doctitle><![CDATA[<h1>Embergraph Runtime</h1>]]></doctitle>
-          <bottom><![CDATA[<i>Copyright &#169; 2006-2016 SYSTAP, LLC DBA Blazegraph. All Rights Reserved.</i>]]></bottom>
+          <bottom><![CDATA[
+<i>Copyright &#169; SYSTAP, LLC DBA Blazegraph 2006-2018. All Rights Reserved.</i>
+<i>Copyright &#169; Embergraph contributors 2019. All Rights Reserved.</i>
+]]></bottom>
         </configuration>
       </plugin>
     </plugins>

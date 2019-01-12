@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2016 SYSTAP, LLC DBA Blazegraph
+ * Copyright (C) SYSTAP, LLC DBA Blazegraph 2006-2018. All rights reserved.
+ * Copyright (C) Embergraph contributors 2019. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,10 +53,10 @@ import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 /**
  * This compulsory AST transformation (not an optional optimizer!) enforces the
  * correct treatment of aggregates in ORDER BY clauses, according to the SPARQL
- * semantic, under the asumption that {@link org.embergraph.bop.solutions.MemorySortOp} does not have to deal
- * with aggregates. In a nutshell, this is done by introducing aliases for the
- * aggregate expressions and thus pushing the computation of the aggregates to
- * where they can already be processed.
+ * semantic, under the assumption that {@link org.embergraph.bop.solutions.MemorySortOp}
+ * does not have to deal with aggregates. In a nutshell, this is done by introducing
+ * aliases for the aggregate expressions and thus pushing the computation of the
+ * aggregates to where they can already be processed.
  * 
  * Simple example.
  * 
