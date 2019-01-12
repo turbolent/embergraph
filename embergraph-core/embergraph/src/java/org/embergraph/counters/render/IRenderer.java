@@ -17,5 +17,5 @@ public interface IRenderer {
    * @param w Where to write the data.
    * @throws IOException
    */
-  public void render(Writer w) throws IOException;
+  void render(Writer w) throws IOException;
 }

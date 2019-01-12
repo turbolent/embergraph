@@ -228,7 +228,7 @@ public class EventReceiver implements IEventReceivingService, IEventReportingSer
       @Override
       public byte[] serializeKey(Object obj) {
 
-        return getKeyBuilder().reset().append((Long) obj).getKey();
+        return getKeyBuilder().reset().append(obj).getKey();
       }
     }
   }

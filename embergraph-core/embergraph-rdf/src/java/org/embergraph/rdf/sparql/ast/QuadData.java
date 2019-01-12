@@ -59,7 +59,7 @@ public class QuadData extends AbstractStatementContainer<IStatementContainer>
 
   public QuadData(final IStatementContainer child) {
 
-    this(new BOp[] {(BOp) child}, null);
+    this(new BOp[] {child}, null);
   }
 
   /**

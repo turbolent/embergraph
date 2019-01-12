@@ -256,9 +256,7 @@ public class NamedSolutionSetRef implements INamedSolutionSetRef {
 
     if (!localName.equals(t.localName)) return false;
 
-    if (!Arrays.equals(joinVars, t.joinVars)) return false;
-
-    return true;
+    return Arrays.equals(joinVars, t.joinVars);
   }
 
   @Override

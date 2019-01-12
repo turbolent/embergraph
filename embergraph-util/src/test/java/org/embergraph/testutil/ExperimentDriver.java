@@ -145,7 +145,7 @@ public class ExperimentDriver {
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public static interface IComparisonTest {
+  public interface IComparisonTest {
 
     /**
      * ala JUnit, but allows us to run {@link org.embergraph.journal.ProxyTestCase}s as well.
@@ -153,7 +153,7 @@ public class ExperimentDriver {
      * @param properties May be used to configure the test fixture.
      * @throws Exception
      */
-    public void setUpComparisonTest(Properties properties) throws Exception;
+    void setUpComparisonTest(Properties properties) throws Exception;
 
     /**
      * Run a test.
@@ -161,14 +161,14 @@ public class ExperimentDriver {
      * @param properties The properties used to configure the test.
      * @return The test result to report.
      */
-    public Result doComparisonTest(Properties properties) throws Exception;
+    Result doComparisonTest(Properties properties) throws Exception;
 
     /**
      * ala JUnit, but allows us to run {@link org.embergraph.journal.ProxyTestCase}s as well.
      *
      * @throws Exception
      */
-    public void tearDownComparisonTest() throws Exception;
+    void tearDownComparisonTest() throws Exception;
   }
 
   /**

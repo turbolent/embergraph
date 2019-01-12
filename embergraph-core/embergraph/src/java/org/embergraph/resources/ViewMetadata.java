@@ -86,7 +86,7 @@ class ViewMetadata extends BTreeMetadata implements Params {
 
         if (view == null) {
 
-          view = (ILocalBTreeView) resourceManager.getIndex(name, commitTime);
+          view = resourceManager.getIndex(name, commitTime);
 
           ref = new SoftReference<ILocalBTreeView>(view);
 

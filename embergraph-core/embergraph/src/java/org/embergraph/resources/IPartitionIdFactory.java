@@ -42,5 +42,5 @@ public interface IPartitionIdFactory {
    * @param scaleOutIndexName The name of the scale-out index.
    * @return The next partition identifier for that scale-out index.
    */
-  public int nextPartitionId(final String scaleOutIndexName);
+  int nextPartitionId(final String scaleOutIndexName);
 }

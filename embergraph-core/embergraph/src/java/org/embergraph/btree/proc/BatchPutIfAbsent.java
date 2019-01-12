@@ -165,7 +165,7 @@ public class BatchPutIfAbsent extends AbstractKeyArrayIndexProcedure<ResultBuffe
 
       final byte[] val = vals.get(i);
 
-      final byte[] old = (byte[]) ndx.putIfAbsent(key, val);
+      final byte[] old = ndx.putIfAbsent(key, val);
 
       if (returnOldValues) {
 

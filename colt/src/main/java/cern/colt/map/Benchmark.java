@@ -31,10 +31,9 @@ public class Benchmark extends Object {
     }
     Runtime.getRuntime().gc();
     try {
-      Thread.currentThread().sleep(1000);
+      Thread.sleep(1000);
     } catch (InterruptedException exc) {
     }
-    ;
 
     System.out.println("Now benchmarking...");
     int s = 0;
@@ -77,7 +76,7 @@ public class Benchmark extends Object {
     System.out.print(s);
   }
   /** Tests various methods of this class. */
-  public static void main(String args[]) {
+  public static void main(String[] args) {
     int runs = Integer.parseInt(args[0]);
     int size = Integer.parseInt(args[1]);
     // boolean add = args[2].equals("add");
@@ -97,14 +96,14 @@ public class Benchmark extends Object {
     for (int i = 0; i < length; i++) {
       keys[i] = uniform.nextIntFromTo(0, to);
     }
-    int[] values = (int[]) keys.clone();
+    int[] values = keys.clone();
 
     int size = keys.length;
     // AbstractIntIntMap map = new OpenIntIntHashMap(size*2, 0.2, 0.5);
     AbstractIntIntMap map = new OpenIntIntHashMap();
 
     for (int i = 0; i < keys.length; i++) {
-      map.put(keys[i], (int) values[i]);
+      map.put(keys[i], values[i]);
       // System.out.println(map);
     }
 

@@ -141,11 +141,8 @@ public class EmbergraphGASState<VS, ES, ST> extends GASState<VS, ES, ST> {
       // Edge does not use the specified link attribute type.
       return false;
     }
-    if (!(edge.s() instanceof SidIV)) {
-      // The subject of the edge is not a Statement.
-      return false;
-    }
-    return true;
+    // The subject of the edge is not a Statement.
+    return edge.s() instanceof SidIV;
   }
 
   @SuppressWarnings("rawtypes")

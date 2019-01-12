@@ -238,11 +238,9 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
               new Constant<IV>(setup.john), new Constant<IV>(setup.knows), x
             },
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {setup.spoNamespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {setup.spoNamespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineOp query = newJoin(new BOp[] {}, joinId, joinVars, predOp, queryId);
 
@@ -364,11 +362,9 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
               new Constant<IV>(setup.john), new Constant<IV>(setup.knows), x
             },
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {setup.spoNamespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {setup.spoNamespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineOp query = newJoin(new BOp[] {}, joinId, joinVars, predOp, queryId);
 
@@ -479,11 +475,9 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
               new Constant<IV>(setup.john), new Constant<IV>(setup.knows), x
             },
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {setup.spoNamespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {setup.spoNamespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineOp query =
         newJoin(
@@ -608,11 +602,9 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
               new Constant<IV>(setup.john), new Constant<IV>(setup.knows), x
             },
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {setup.spoNamespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {setup.spoNamespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineOp query =
         newJoin(
@@ -737,18 +729,16 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
               new Constant<IV>(setup.paul), new Constant<IV>(setup.knows), x
             },
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {setup.spoNamespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId),
-                  new NV(Predicate.Annotations.OPTIONAL, Boolean.TRUE),
-                  // constraint x != Luke
-                  new NV(
-                      PipelineJoin.Annotations.CONSTRAINTS,
-                      new IConstraint[] {
-                        Constraint.wrap(new NEConstant(x, new Constant<IV>(setup.luke)))
-                      }),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {setup.spoNamespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId),
+                new NV(Predicate.Annotations.OPTIONAL, Boolean.TRUE),
+                // constraint x != Luke
+                new NV(
+                    PipelineJoin.Annotations.CONSTRAINTS,
+                    new IConstraint[] {
+                      Constraint.wrap(new NEConstant(x, new Constant<IV>(setup.luke)))
+                    }),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineOp query =
         newJoin(
@@ -877,18 +867,16 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
               new Constant<IV>(setup.paul), new Constant<IV>(setup.knows), x
             },
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {setup.spoNamespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId),
-                  new NV(Predicate.Annotations.OPTIONAL, Boolean.TRUE),
-                  // constraint x != Luke
-                  new NV(
-                      PipelineJoin.Annotations.CONSTRAINTS,
-                      new IConstraint[] {
-                        Constraint.wrap(new NEConstant(x, new Constant<IV>(setup.luke)))
-                      }),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {setup.spoNamespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId),
+                new NV(Predicate.Annotations.OPTIONAL, Boolean.TRUE),
+                // constraint x != Luke
+                new NV(
+                    PipelineJoin.Annotations.CONSTRAINTS,
+                    new IConstraint[] {
+                      Constraint.wrap(new NEConstant(x, new Constant<IV>(setup.luke)))
+                    }),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineOp query =
         newJoin(

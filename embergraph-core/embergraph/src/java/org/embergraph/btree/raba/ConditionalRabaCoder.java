@@ -108,7 +108,7 @@ public class ConditionalRabaCoder implements IRabaCoder, Externalizable {
   @Override
   public ICodedRaba decode(final AbstractFixedByteArrayBuffer data) {
 
-    final boolean isSmall = data.getByte(0) == 1 ? true : false;
+    final boolean isSmall = data.getByte(0) == 1;
 
     final AbstractFixedByteArrayBuffer delegateSlice = data.slice(1, data.len() - 1);
 

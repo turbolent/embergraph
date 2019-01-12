@@ -80,7 +80,7 @@ public class TestBOps extends ProxyEmbergraphSailTestCase {
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
       final EmbergraphSailRepositoryConnection cxn =
-          (EmbergraphSailRepositoryConnection) repo.getConnection();
+          repo.getConnection();
       cxn.setAutoCommit(false);
 
       try {
@@ -146,18 +146,14 @@ public class TestBOps extends ProxyEmbergraphSailTestCase {
           final Collection<BindingSet> solution = new LinkedList<BindingSet>();
           solution.add(
               createBindingSet(
-                  new Binding[] {
-                    new BindingImpl("s", mike),
-                    new BindingImpl("likes", rdf),
-                    new BindingImpl("label", l1)
-                  }));
+                  new BindingImpl("s", mike),
+                  new BindingImpl("likes", rdf),
+                  new BindingImpl("label", l1)));
           solution.add(
               createBindingSet(
-                  new Binding[] {
-                    new BindingImpl("s", bryan),
-                    new BindingImpl("likes", rdf),
-                    new BindingImpl("label", l2)
-                  }));
+                  new BindingImpl("s", bryan),
+                  new BindingImpl("likes", rdf),
+                  new BindingImpl("label", l2)));
 
           compare(result, solution);
         }
@@ -176,7 +172,7 @@ public class TestBOps extends ProxyEmbergraphSailTestCase {
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
       final EmbergraphSailRepositoryConnection cxn =
-          (EmbergraphSailRepositoryConnection) repo.getConnection();
+          repo.getConnection();
       cxn.setAutoCommit(false);
 
       try {
@@ -250,12 +246,10 @@ public class TestBOps extends ProxyEmbergraphSailTestCase {
           final Collection<BindingSet> solution = new LinkedList<BindingSet>();
           solution.add(
               createBindingSet(
-                  new Binding[] {
-                    new BindingImpl("s", jill),
-                    new BindingImpl("age", age1),
-                    new BindingImpl("iq", IQ1),
-                    new BindingImpl("label", l1)
-                  }));
+                  new BindingImpl("s", jill),
+                  new BindingImpl("age", age1),
+                  new BindingImpl("iq", IQ1),
+                  new BindingImpl("label", l1)));
 
           compare(result, solution);
         }
@@ -274,7 +268,7 @@ public class TestBOps extends ProxyEmbergraphSailTestCase {
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
       final EmbergraphSailRepositoryConnection cxn =
-          (EmbergraphSailRepositoryConnection) repo.getConnection();
+          repo.getConnection();
       cxn.setAutoCommit(false);
 
       try {
@@ -340,17 +334,14 @@ public class TestBOps extends ProxyEmbergraphSailTestCase {
           final Collection<BindingSet> solution = new LinkedList<BindingSet>();
           solution.add(
               createBindingSet(
-                  new Binding[] {
-                    new BindingImpl("s", mike),
-                    new BindingImpl("likes", rdf),
-                    new BindingImpl("label", l1)
-                  }));
+                  new BindingImpl("s", mike),
+                  new BindingImpl("likes", rdf),
+                  new BindingImpl("label", l1)));
           solution.add(
               createBindingSet(
-                  new Binding[] {
-                    new BindingImpl("s", bryan), new BindingImpl("likes", rdf),
-                    //                    new BindingImpl("label", l2)
-                  }));
+                  new BindingImpl("s", bryan), new BindingImpl("likes", rdf),
+                  //                    new BindingImpl("label", l2)
+              ));
 
           compare(result, solution);
         }
@@ -369,7 +360,7 @@ public class TestBOps extends ProxyEmbergraphSailTestCase {
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
       final EmbergraphSailRepositoryConnection cxn =
-          (EmbergraphSailRepositoryConnection) repo.getConnection();
+          repo.getConnection();
       cxn.setAutoCommit(false);
 
       try {
@@ -438,18 +429,14 @@ public class TestBOps extends ProxyEmbergraphSailTestCase {
           final Collection<BindingSet> solution = new LinkedList<BindingSet>();
           solution.add(
               createBindingSet(
-                  new Binding[] {
-                    new BindingImpl("s", mike),
-                    new BindingImpl("p", RDFS.LABEL),
-                    new BindingImpl("label", l1)
-                  }));
+                  new BindingImpl("s", mike),
+                  new BindingImpl("p", RDFS.LABEL),
+                  new BindingImpl("label", l1)));
           solution.add(
               createBindingSet(
-                  new Binding[] {
-                    new BindingImpl("s", bryan),
-                    new BindingImpl("p", RDFS.COMMENT),
-                    new BindingImpl("label", l2)
-                  }));
+                  new BindingImpl("s", bryan),
+                  new BindingImpl("p", RDFS.COMMENT),
+                  new BindingImpl("label", l2)));
 
           compare(result, solution);
         }
@@ -468,7 +455,7 @@ public class TestBOps extends ProxyEmbergraphSailTestCase {
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
       final EmbergraphSailRepositoryConnection cxn =
-          (EmbergraphSailRepositoryConnection) repo.getConnection();
+          repo.getConnection();
       cxn.setAutoCommit(false);
 
       try {

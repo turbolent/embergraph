@@ -134,7 +134,7 @@ public class TermId<V extends EmbergraphValue> extends AbstractNonInlineIV<V, Vo
 
     return "TermId("
         + termId
-        + String.valueOf(getVTE().getCharCode())
+        + getVTE().getCharCode()
         + ")"
         + (hasValue() ? "[" + getValue().stringValue() + "]" : "");
   }

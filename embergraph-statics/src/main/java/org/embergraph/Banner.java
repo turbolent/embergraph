@@ -200,7 +200,7 @@ public class Banner {
 
           final Class<?> cls = Class.forName("org.embergraph.jmx.JMXLog4jMBeanUtil");
 
-          final Method m = cls.getMethod("registerLog4jMBeans", new Class[] {});
+          final Method m = cls.getMethod("registerLog4jMBeans");
 
           // Optionally register a log4j MBean.
           m.invoke(null /* obj */);
@@ -269,25 +269,25 @@ public class Banner {
    */
   public interface BuildInfoMeta {
     /** The embergraph release version. */
-    static final String buildVersion = "buildVersion";
+    String buildVersion = "buildVersion";
     /** The source code revision. */
-    static final String svnRevision = "svnRevision";
+    String svnRevision = "svnRevision";
     /** The source code repository URL for the branch. */
-    static final String svnURL = "svnURL";
+    String svnURL = "svnURL";
     /** The timestamp of the build. */
-    static final String buildTimestamp = "buildTimestamp";
+    String buildTimestamp = "buildTimestamp";
     /** The username that performed the build. */
-    static final String buildUser = "buildUser";
+    String buildUser = "buildUser";
     /** The hostname on which the build was performed. */
-    static final String buildHost = "buildHost";
+    String buildHost = "buildHost";
     /** The OS architecture on which the build was performed. */
-    static final String osArch = "osArch";
+    String osArch = "osArch";
     /** The OS name on which the build was performed. */
-    static final String osName = "osName";
+    String osName = "osName";
     /** The OS version on which the build was performed. */
-    static final String osVersion = "osVersion";
+    String osVersion = "osVersion";
     /** The string representing the git build branch. */
-    static final String gitBranch = "gitBranch";
+    String gitBranch = "gitBranch";
     /**
      * The string representing the git build commit.
      *
@@ -295,7 +295,7 @@ public class Banner {
      *
      * <p>See BLZG-1688
      */
-    static final String gitCommit = "gitCommit";
+    String gitCommit = "gitCommit";
   }
 
   /**

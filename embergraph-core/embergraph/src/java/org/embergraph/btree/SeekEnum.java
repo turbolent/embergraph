@@ -13,5 +13,5 @@ public enum SeekEnum {
   First,
 
   /** Seek to the last leaf. */
-  Last;
+  Last
 }

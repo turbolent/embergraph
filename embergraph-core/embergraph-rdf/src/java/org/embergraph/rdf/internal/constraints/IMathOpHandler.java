@@ -14,7 +14,7 @@ public interface IMathOpHandler {
    * @param args
    * @return
    */
-  public boolean canInvokeMathOp(final Literal... args);
+  boolean canInvokeMathOp(final Literal... args);
 
   /**
    * Perform the operation on arguments.
@@ -27,7 +27,7 @@ public interface IMathOpHandler {
    * @param vf
    * @return
    */
-  public IV doMathOp(
+  IV doMathOp(
       final Literal l1,
       final IV iv1,
       final Literal l2,

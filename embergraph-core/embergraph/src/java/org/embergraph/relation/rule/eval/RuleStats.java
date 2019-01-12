@@ -653,7 +653,7 @@ public class RuleStats {
     // detail level.
     for (int i = 0; i < a.length; i++) {
 
-      final RuleStats x = (RuleStats) a[i];
+      final RuleStats x = a[i];
 
       if (x.elapsed >= minElapsed) {
 

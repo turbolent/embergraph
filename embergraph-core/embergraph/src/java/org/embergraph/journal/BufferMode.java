@@ -147,7 +147,7 @@ public enum BufferMode {
 
   private final StoreTypeEnum storeType;
 
-  private BufferMode(
+  BufferMode(
       final boolean stable,
       final boolean fullyBuffered,
       final long maxExtent,

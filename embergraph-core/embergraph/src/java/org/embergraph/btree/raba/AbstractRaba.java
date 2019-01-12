@@ -413,7 +413,7 @@ public abstract class AbstractRaba implements IRaba {
     try {
 
       final Constructor<? extends AbstractRaba> ctor =
-          getClass().getConstructor(new Class[] {byte[].class});
+          getClass().getConstructor(byte[].class);
 
       return ctor.newInstance(new Object[] {a});
 

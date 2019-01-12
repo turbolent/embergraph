@@ -44,7 +44,7 @@ public interface INotifyOutcome<V, L> extends Remote {
    * @param resource The resource identifier.
    * @param locator The client locator.
    */
-  public void success(final V resource, final L locator) throws RemoteException;
+  void success(final V resource, final L locator) throws RemoteException;
 
   /**
    * Invoked each time a client tasks encounters an error when processing some resource.
@@ -53,5 +53,5 @@ public interface INotifyOutcome<V, L> extends Remote {
    * @param locator The client locator.
    * @param t The exception.
    */
-  public void error(final V resource, final L locator, final Throwable t) throws RemoteException;
+  void error(final V resource, final L locator, final Throwable t) throws RemoteException;
 }

@@ -204,7 +204,7 @@ public class TestMemStore extends AbstractJournalTestCase {
         }
 
         // Age the history (of the deletes!)
-        Thread.currentThread().sleep(400);
+        Thread.sleep(400);
 
         verifyCommitIndex(store, 20);
 
@@ -436,7 +436,7 @@ public class TestMemStore extends AbstractJournalTestCase {
         store.commit();
 
         // Age the history (of the deletes!)
-        Thread.currentThread().sleep(6000);
+        Thread.sleep(6000);
 
         // modify store but do not allocate similar size block
         // as that we want to see has been removed

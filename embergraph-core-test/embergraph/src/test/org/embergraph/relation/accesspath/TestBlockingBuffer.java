@@ -300,7 +300,7 @@ public class TestBlockingBuffer extends TestCase2 {
     try {
 
       // Wrap computation as FutureTask.
-      ft = new FutureTask<Void>(new Producer(), (Void) null /* result */);
+      ft = new FutureTask<Void>(new Producer(), null /* result */);
 
       /*
        * Set the Future on the BlockingBuffer. This is how it will notice

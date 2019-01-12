@@ -188,9 +188,9 @@ public class EmpiricalWalker extends AbstractDiscreteDistribution {
    */
   public Object clone() {
     EmpiricalWalker copy = (EmpiricalWalker) super.clone();
-    if (this.cdf != null) copy.cdf = (double[]) this.cdf.clone();
-    if (this.A != null) copy.A = (int[]) this.A.clone();
-    if (this.F != null) copy.F = (double[]) this.F.clone();
+    if (this.cdf != null) copy.cdf = this.cdf.clone();
+    if (this.A != null) copy.A = this.A.clone();
+    if (this.F != null) copy.F = this.F.clone();
     return copy;
   }
   /** Returns a random integer <tt>k</tt> with probability <tt>pdf(k)</tt>. */

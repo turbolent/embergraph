@@ -205,7 +205,7 @@ public abstract class AbstractNode<
      * The parent is allowed to be null iff this is the root of the
      * btree.
      */
-    assert (this == btree.root && p == null) || p != null;
+    assert this == btree.root || p != null;
 
     return p;
   }

@@ -82,7 +82,7 @@ public class TestInBinarySearch extends TestINConstraint {
   }
 
   @Override
-  protected INConstraint newINConstraint(IVariable<?> var, IConstant<?> vals[]) {
+  protected INConstraint newINConstraint(IVariable<?> var, IConstant<?>[] vals) {
     return new INBinarySearch(var, vals);
   }
 }

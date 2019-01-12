@@ -845,8 +845,7 @@ public class DeleteServlet extends EmbergraphRDFServlet {
     private void doRemoveStatement(final Statement stmt) throws SailException {
 
       final Resource[] c =
-          (Resource[])
-              (stmt.getContext() == null ? defaultContext : new Resource[] {stmt.getContext()});
+          (stmt.getContext() == null ? defaultContext : new Resource[] {stmt.getContext()});
 
       conn.removeStatements(stmt.getSubject(), stmt.getPredicate(), stmt.getObject(), c);
 
@@ -885,8 +884,7 @@ public class DeleteServlet extends EmbergraphRDFServlet {
     public void handleStatement(final Statement stmt) throws RDFHandlerException {
 
       final Resource[] c =
-          (Resource[])
-              (stmt.getContext() == null ? defaultContext : new Resource[] {stmt.getContext()});
+          (stmt.getContext() == null ? defaultContext : new Resource[] {stmt.getContext()});
 
       try {
 

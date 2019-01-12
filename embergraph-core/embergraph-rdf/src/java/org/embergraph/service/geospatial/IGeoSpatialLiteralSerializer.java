@@ -38,14 +38,14 @@ public interface IGeoSpatialLiteralSerializer extends Serializable {
    *
    * @param literalString
    */
-  public String[] toComponents(final String literalString);
+  String[] toComponents(final String literalString);
 
   /**
    * Recomposes the components into a string, should typically use the object's toString() method.
    *
    * @param components
    */
-  public String fromComponents(final Object[] components);
+  String fromComponents(final Object[] components);
 
   /**
    * Serialize a geo-location of latitude and longitude. The two parameters are either Double or
@@ -56,7 +56,7 @@ public interface IGeoSpatialLiteralSerializer extends Serializable {
    * @param latitude
    * @param longitude
    */
-  public IV<?, ?> serializeLocation(
+  IV<?, ?> serializeLocation(
       final EmbergraphValueFactory vf, final Object latitude, final Object longitude);
 
   /**
@@ -69,7 +69,7 @@ public interface IGeoSpatialLiteralSerializer extends Serializable {
    * @param longitude
    * @param time
    */
-  public IV<?, ?> serializeLocationAndTime(
+  IV<?, ?> serializeLocationAndTime(
       final EmbergraphValueFactory vf,
       final Object latitude,
       final Object longitude,
@@ -83,7 +83,7 @@ public interface IGeoSpatialLiteralSerializer extends Serializable {
    * @param vf
    * @param time
    */
-  public IV<?, ?> serializeTime(final EmbergraphValueFactory vf, final Object time);
+  IV<?, ?> serializeTime(final EmbergraphValueFactory vf, final Object time);
 
   /**
    * Serialize a latitude value contained in a geospatial datatype. The parameter is either a Double
@@ -93,7 +93,7 @@ public interface IGeoSpatialLiteralSerializer extends Serializable {
    * @param vf
    * @param latitude
    */
-  public IV<?, ?> serializeLatitude(final EmbergraphValueFactory vf, final Object latitude);
+  IV<?, ?> serializeLatitude(final EmbergraphValueFactory vf, final Object latitude);
 
   /**
    * Serialize a longitude value contained in a geospatial datatype. The parameter is either a
@@ -103,7 +103,7 @@ public interface IGeoSpatialLiteralSerializer extends Serializable {
    * @param vf
    * @param longitude
    */
-  public IV<?, ?> serializeLongitude(final EmbergraphValueFactory vf, final Object longitude);
+  IV<?, ?> serializeLongitude(final EmbergraphValueFactory vf, final Object longitude);
 
   /**
    * Serialize a coordinate system value contained in a geospatial datatype. The parameter is either
@@ -113,7 +113,7 @@ public interface IGeoSpatialLiteralSerializer extends Serializable {
    * @param vf
    * @param coordinateSystem
    */
-  public IV<?, ?> serializeCoordSystem(
+  IV<?, ?> serializeCoordSystem(
       final EmbergraphValueFactory vf, final Object coordinateSystem);
 
   /**
@@ -123,7 +123,7 @@ public interface IGeoSpatialLiteralSerializer extends Serializable {
    *
    * @param coordSystem
    */
-  public IV<?, ?> serializeCustomFields(
+  IV<?, ?> serializeCustomFields(
       final EmbergraphValueFactory vf, final Object... customFields);
 
   /**
@@ -136,6 +136,6 @@ public interface IGeoSpatialLiteralSerializer extends Serializable {
    * @param distance
    * @param units
    */
-  public IV<?, ?> serializeDistance(
+  IV<?, ?> serializeDistance(
       final EmbergraphValueFactory vf, final Double distance, final UNITS unit);
 }

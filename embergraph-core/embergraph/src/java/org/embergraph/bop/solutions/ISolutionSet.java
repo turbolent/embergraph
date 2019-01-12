@@ -54,7 +54,7 @@ public interface ISolutionSet extends ICheckpointProtocol {
    *
    * @return The {@link ISolutionSetStats}.
    */
-  public ISolutionSetStats getStats();
+  ISolutionSetStats getStats();
 
   //    /**
   //     * Return the CREATE schema for the solution set (this is the metadata used
@@ -65,17 +65,17 @@ public interface ISolutionSet extends ICheckpointProtocol {
   //    public ISPO[] getDeclation();
 
   /** Visit all entries in the index in the natural order of the index. */
-  public ICloseableIterator<IBindingSet> scan();
+  ICloseableIterator<IBindingSet> scan();
 
   /** Return an {@link ICloseableIterator} reading the solutions from the stream. */
-  public ICloseableIterator<IBindingSet[]> get();
+  ICloseableIterator<IBindingSet[]> get();
 
   /**
    * Replace the contents of the stream with the solutions read from the source.
    *
    * @param src The source.
    */
-  public void put(final ICloseableIterator<IBindingSet[]> src);
+  void put(final ICloseableIterator<IBindingSet[]> src);
 
   //    /**
   //     * The {@link IVariable[]} specifying the join variables (required). The

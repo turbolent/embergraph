@@ -189,7 +189,7 @@ public class AbstractHTreeTestCase extends TestCase2 {
       // override the HTree class.
       metadata.setHTreeClassName(NoEvictionHTree.class.getName());
 
-      return (NoEvictionHTree) HTree.create(store, metadata);
+      return HTree.create(store, metadata);
     }
 
     // Will support incremental eviction and persistence.

@@ -172,7 +172,7 @@ public class EmbergraphStatementIteratorImpl
          * EmbergraphSolutionResolverator.
          */
         final EmbergraphResource tmp = (EmbergraphResource) resolve(terms, _c);
-        if (tmp instanceof EmbergraphURI && ((EmbergraphURI) tmp).equals(BD.NULL_GRAPH)) {
+        if (tmp instanceof EmbergraphURI && tmp.equals(BD.NULL_GRAPH)) {
           /*
            * Strip off the "nullGraph" context.
            */

@@ -238,12 +238,9 @@ public class FullyInlineTypedLiteralIV<V extends EmbergraphLiteral>
 
       return datatype.equals(t.getDatatype());
 
-    } else if (t.getDatatype() != null) {
+    } else
+      return t.getDatatype() == null;
 
-      return false;
-    }
-
-    return true;
   }
 
   /** Return the hash code of the label (per {@link Literal#hashCode()}) */

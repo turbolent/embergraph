@@ -299,7 +299,7 @@ public abstract class AbstractStatementBuffer<F extends Statement, G extends Emb
   public boolean isEmpty() {
 
     return nstmts == 0
-        && (deferredStatementBuffer == null ? true : !deferredStatementBuffer.isEmpty());
+        && (deferredStatementBuffer == null || !deferredStatementBuffer.isEmpty());
   }
 
   /** #of buffered statements plus the #of buffered statements that are being deferred. */

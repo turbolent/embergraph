@@ -78,7 +78,7 @@ public interface IRootBlockView {
    * Assertion throws exception unless the root block is valid. Conditions tested include the root
    * block MAGIC and the root block timestamps (there are two and they must agree).
    */
-  public void valid() throws RootBlockException;
+  void valid() throws RootBlockException;
 
   /**
    * There are two root blocks and they are written in an alternating order. For the sake of
@@ -88,10 +88,10 @@ public interface IRootBlockView {
    *
    * @return True iff the root block view was constructed from "rootBlock0".
    */
-  public boolean isRootBlock0();
+  boolean isRootBlock0();
 
   /** The root block version number. */
-  public int getVersion();
+  int getVersion();
 
   /**
    * The next offset at which a data item would be written on the store.
@@ -102,7 +102,7 @@ public interface IRootBlockView {
    * bytes allocated and released). Update all the locations in the code which rely on {@link
    * #getNextOffset()} to compute the #of bytes written onto the store.
    */
-  public long getNextOffset();
+  long getNextOffset();
 
   /**
    * The database wide timestamp of first commit on the store -or- 0L if there have been no commits.
@@ -112,7 +112,7 @@ public interface IRootBlockView {
    *
    * @return The timestamp of the first commit on the store or 0L iff there have been no commits.
    */
-  public long getFirstCommitTime();
+  long getFirstCommitTime();
 
   /**
    * The database wide timestamp of the most recent commit on the store or 0L iff there have been no
@@ -123,7 +123,7 @@ public interface IRootBlockView {
    * @return The timestamp of the most recent commit on the store or 0L iff there have been no
    *     commits.
    */
-  public long getLastCommitTime();
+  long getLastCommitTime();
 
   /**
    * The commit counter is a positive long integer that is strictly local to the store. The commit
@@ -134,7 +134,7 @@ public interface IRootBlockView {
    *
    * @return The commit counter.
    */
-  public long getCommitCounter();
+  long getCommitCounter();
 
   /**
    * Return the address at which the {@link ICommitRecord} for this root block is stored. The {@link
@@ -149,7 +149,7 @@ public interface IRootBlockView {
    *
    * @return The address at which the {@link ICommitRecord} for this root block is stored.
    */
-  public long getCommitRecordAddr();
+  long getCommitRecordAddr();
 
   /**
    * The address of the root of the {@link CommitRecordIndex}. The {@link CommitRecordIndex}
@@ -158,10 +158,10 @@ public interface IRootBlockView {
    * the {@link ICommitRecord} since we can not obtain this address until after we have formatted
    * and written the {@link ICommitRecord}.
    */
-  public long getCommitRecordIndexAddr();
+  long getCommitRecordIndexAddr();
 
   /** The unique journal identifier */
-  public UUID getUUID();
+  UUID getUUID();
 
   /*
    * @todo Consider putting the logical service UUID into the root blocks. It
@@ -189,20 +189,20 @@ public interface IRootBlockView {
    *
    * @see WormAddressManager
    */
-  public int getOffsetBits();
+  int getOffsetBits();
 
   /** The timestamp assigned as the creation time for the journal. */
-  public long getCreateTime();
+  long getCreateTime();
 
   /** The timestamp assigned as the time at which writes were disallowed for the journal. */
-  public long getCloseTime();
+  long getCloseTime();
 
   /**
    * A byte value which specifies whether the backing store is a journal (log-structured store or
    * WORM) or a read-write store. Only two values are defined at present. ZERO (0) is a WORM; ONE
    * (1) is a read/write store.
    */
-  public StoreTypeEnum getStoreType();
+  StoreTypeEnum getStoreType();
 
   /**
    * For the {@link StoreTypeEnum#RW} store, where we will read the metadata bits from. When we
@@ -210,7 +210,7 @@ public interface IRootBlockView {
    * into the file and is stored as a long integer. Normal addresses are calculated with reference
    * to the allocation blocks. The value for a WORM store is ZERO (0).
    */
-  public long getMetaBitsAddr();
+  long getMetaBitsAddr();
 
   /**
    * For the {@link StoreTypeEnum#RW} store, the start of the area of the file where the allocation
@@ -219,7 +219,7 @@ public interface IRootBlockView {
    * metaBitsAddr to determine how to find the allocation blocks. The value for a WORM store is ZERO
    * (0).
    */
-  public long getMetaStartAddr();
+  long getMetaStartAddr();
 
   /**
    * The {@link Quorum} token associated with this commit point or {@link Quorum#NO_QUORUM} if there
@@ -228,13 +228,13 @@ public interface IRootBlockView {
    * <p>Note: If commit points are part of the resynchronization protocol, they MUST NOT use the
    * current quorum token unless the service is synchronized with the quorum at that commit point.
    */
-  public long getQuorumToken();
+  long getQuorumToken();
 
   /**
    * Return the #of {@link WriteCache} blocks that have been written out as part of the current
    * write set. This value is origin ZERO (0) and is reset to ZERO (0) after each commit or abort.
    */
-  public long getBlockSequence();
+  long getBlockSequence();
 
   /**
    * The value used for {@link #getBlockSequence()} for both historical stores and for stores that
@@ -246,7 +246,7 @@ public interface IRootBlockView {
    * A read-only buffer whose contents are the root block. The position, limit, and mark will be
    * independent for each {@link ByteBuffer} that is returned by this method.
    */
-  public ByteBuffer asReadOnlyBuffer();
+  ByteBuffer asReadOnlyBuffer();
 
   /**
    * Return a version of the caller's root block that is flagged as either rootBlock0 or rootBlock1
@@ -257,5 +257,5 @@ public interface IRootBlockView {
    * @param rootBlock0 Whether you want rootBlock0 or rootBlock1.
    * @return The root block.
    */
-  public IRootBlockView asRootBlock(final boolean rootBlock0);
+  IRootBlockView asRootBlock(final boolean rootBlock0);
 }

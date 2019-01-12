@@ -43,10 +43,10 @@ public interface IClientIndex extends IIndex {
    * unisolated index view, {@link ITx#READ_COMMITTED} for a read-committed view, or the <code>
    * timestamp</code> for a historical view no later than the specified timestamp.
    */
-  public long getTimestamp();
+  long getTimestamp();
 
   /** The name of the scale-out index. */
-  public String getName();
+  String getName();
 
   /**
    * Counters are local to a specific index partition and are only available to unisolated
@@ -55,5 +55,5 @@ public interface IClientIndex extends IIndex {
    *
    * @throws UnsupportedOperationException always
    */
-  public ICounter getCounter();
+  ICounter getCounter();
 }

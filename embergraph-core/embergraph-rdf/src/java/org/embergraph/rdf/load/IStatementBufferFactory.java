@@ -16,5 +16,5 @@ public interface IStatementBufferFactory<S extends Statement> {
    * Return the {@link StatementBuffer} to be used for a task (some factories will recycle statement
    * buffers, but that is not necessary or implied).
    */
-  public IStatementBuffer<S> newStatementBuffer();
+  IStatementBuffer<S> newStatementBuffer();
 }

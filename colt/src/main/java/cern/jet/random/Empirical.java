@@ -78,7 +78,7 @@ public class Empirical extends AbstractContinousDistribution {
    */
   public Object clone() {
     Empirical copy = (Empirical) super.clone();
-    if (this.cdf != null) copy.cdf = (double[]) this.cdf.clone();
+    if (this.cdf != null) copy.cdf = this.cdf.clone();
     return copy;
   }
   /** Returns a random number from the distribution. */

@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.KeyBuilder;
@@ -99,11 +100,7 @@ public class Schema implements Externalizable {
         /*
          * One time encoding of the schema name as UTF8.
          */
-        try {
-          schemaBytes = name.getBytes(SparseRowStore.UTF8);
-        } catch (UnsupportedEncodingException e) {
-          throw new RuntimeException(e);
-        }
+        schemaBytes = name.getBytes(StandardCharsets.UTF_8);
       } else {
         /*
          * One time encoding of the schema name as a Unicode sort key.
@@ -161,13 +158,9 @@ public class Schema implements Externalizable {
           {
             final String tmp = v.toString();
             if (SparseRowStore.primaryKeyUnicodeClean) {
-              try {
-                keyBuilder
-                    .append(SuccessorUtil.successor(tmp.getBytes(SparseRowStore.UTF8)))
-                    .appendNul();
-              } catch (UnsupportedEncodingException e) {
-                throw new RuntimeException(e);
-              }
+              keyBuilder
+                  .append(SuccessorUtil.successor(tmp.getBytes(StandardCharsets.UTF_8)))
+                  .appendNul();
             } else {
               // primary key in backwards compatibility mode.
               keyBuilder.appendText(tmp, true /* unicode */, true /* successor */).appendNul();
@@ -201,11 +194,7 @@ public class Schema implements Externalizable {
           {
             final String tmp = v.toString();
             if (SparseRowStore.primaryKeyUnicodeClean) {
-              try {
-                keyBuilder.append(tmp.getBytes(SparseRowStore.UTF8)).appendNul();
-              } catch (UnsupportedEncodingException e) {
-                throw new RuntimeException(e);
-              }
+              keyBuilder.append(tmp.getBytes(StandardCharsets.UTF_8)).appendNul();
             } else {
               // primary key in backwards compatibility mode.
               keyBuilder
@@ -381,14 +370,8 @@ public class Schema implements Externalizable {
      * The column name. Note that the column name is NOT stored with Unicode
      * compression so that we can decode it without loss.
      */
-    try {
 
-      keyBuilder.append(col.getBytes(SparseRowStore.UTF8)).appendNul();
-
-    } catch (UnsupportedEncodingException ex) {
-
-      throw new RuntimeException(ex);
-    }
+    keyBuilder.append(col.getBytes(StandardCharsets.UTF_8)).appendNul();
 
     keyBuilder.append(timestamp);
 

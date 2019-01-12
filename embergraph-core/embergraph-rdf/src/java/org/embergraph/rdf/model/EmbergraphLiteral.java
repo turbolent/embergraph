@@ -51,5 +51,5 @@ import org.openrdf.model.Literal;
 public interface EmbergraphLiteral extends Literal, EmbergraphValue {
 
   /** Specialized return type. */
-  public EmbergraphURI getDatatype();
+  EmbergraphURI getDatatype();
 }

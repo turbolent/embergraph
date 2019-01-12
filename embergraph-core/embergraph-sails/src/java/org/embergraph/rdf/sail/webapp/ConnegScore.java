@@ -77,8 +77,6 @@ public class ConnegScore<E> implements Comparable<ConnegScore<E>> {
 
     if (this.format != t.format) return false;
 
-    if (this.q != t.q) return false;
-
-    return true;
+    return this.q == t.q;
   }
 }

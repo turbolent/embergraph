@@ -152,9 +152,7 @@ public class GangliaMetricMessage extends AbstractGangliaMessage implements IGan
 
     if (getValue().getClass() != t.getValue().getClass()) return false;
 
-    if (!getFormat().equals(t.getFormat())) return false;
-
-    return true;
+    return getFormat().equals(t.getFormat());
   }
 
   @Override

@@ -236,7 +236,7 @@ public abstract class BaseAxioms implements Axioms, Externalizable {
       buffer.flush();
 
       // SPO[] exposed by our StatementBuffer subclass.
-      final SPO[] stmts = ((MyStatementBuffer) buffer).stmts;
+      final SPO[] stmts = buffer.stmts;
 
       for (SPO spo : stmts) {
 
@@ -520,12 +520,8 @@ public abstract class BaseAxioms implements Axioms, Externalizable {
 
     final SPO spo = new SPO(s, p, o, StatementEnum.Axiom);
 
-    if (axioms.contains(spo)) {
+    return axioms.contains(spo);
 
-      return true;
-    }
-
-    return false;
   }
 
   @Override

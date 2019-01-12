@@ -28,6 +28,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.regex.Pattern;
 import javax.xml.parsers.ParserConfigurationException;
@@ -411,7 +412,7 @@ public class TestCounters extends TestCase {
 
     byte[] data = baos.toByteArray();
 
-    Reader r = new InputStreamReader(new ByteArrayInputStream(data), "UTF-8");
+    Reader r = new InputStreamReader(new ByteArrayInputStream(data), StandardCharsets.UTF_8);
 
     StringBuilder sb = new StringBuilder();
 

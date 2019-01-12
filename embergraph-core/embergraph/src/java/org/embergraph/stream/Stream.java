@@ -168,10 +168,9 @@ public abstract class Stream implements ICheckpointProtocol {
     this.metadata = (StreamIndexMetadata) metadata;
 
     this.store =
-        (IRawStore)
-            ((store instanceof AbstractJournal)
-                ? ((AbstractJournal) store).getBufferStrategy()
-                : store);
+        (store instanceof AbstractJournal)
+            ? ((AbstractJournal) store).getBufferStrategy()
+            : store;
 
     this.readOnly = readOnly;
 
@@ -210,9 +209,9 @@ public abstract class Stream implements ICheckpointProtocol {
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
-  public static enum CompressionEnum {
+  public enum CompressionEnum {
     None,
-    Zip;
+    Zip
   }
 
   /**
@@ -545,7 +544,7 @@ public abstract class Stream implements ICheckpointProtocol {
       @SuppressWarnings("rawtypes")
       final Constructor ctor =
           cl.getConstructor(
-              new Class[] {IRawStore.class, Checkpoint.class, IndexMetadata.class, Boolean.TYPE});
+              IRawStore.class, Checkpoint.class, IndexMetadata.class, Boolean.TYPE);
 
       final SolutionSetStream solutions =
           (SolutionSetStream)
@@ -836,12 +835,8 @@ public abstract class Stream implements ICheckpointProtocol {
     //
     //         }
 
-    if (checkpoint.getRootAddr() != rootAddr) {
-
-      // The root node has a different persistent identity.
-
-      return true;
-    }
+    // The root node has a different persistent identity.
+    return checkpoint.getRootAddr() != rootAddr;
 
     //     }
 
@@ -849,8 +844,6 @@ public abstract class Stream implements ICheckpointProtocol {
      * No apparent change in persistent state so we do NOT need to do a
      * checkpoint.
      */
-
-    return false;
 
     //     if (metadata.getMetadataAddr() != 0L &&
     //             (root == null ||
@@ -968,7 +961,7 @@ public abstract class Stream implements ICheckpointProtocol {
        */
 
       @SuppressWarnings("rawtypes")
-      final Constructor ctor = cl.getConstructor(new Class[] {Stream.class});
+      final Constructor ctor = cl.getConstructor(Stream.class);
 
       final Checkpoint checkpoint = (Checkpoint) ctor.newInstance(new Object[] {this});
 

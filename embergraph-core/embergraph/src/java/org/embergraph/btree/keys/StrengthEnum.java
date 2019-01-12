@@ -21,5 +21,5 @@ public enum StrengthEnum {
   /** Note: this option is NOT supported by the JDK. */
   Quaternary,
   /** See {@link Collator#IDENTICAL}. */
-  Identical;
+  Identical
 }

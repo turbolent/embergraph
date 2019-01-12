@@ -48,7 +48,7 @@ public abstract class TestINConstraint extends TestCase2 {
   /** Unit test for {@link INHashMap#INHashMap(IVariable<T>,IConstant<T>[])} */
   public void testConstructor() {
     IVariable<Integer> var = Var.var("x");
-    IConstant<Integer> vals[] = new IConstant[] {new Constant<Integer>(1)};
+    IConstant<Integer>[] vals = new IConstant[]{new Constant<Integer>(1)};
 
     try {
       assertTrue(null != newINConstraint(null, vals));
@@ -74,7 +74,7 @@ public abstract class TestINConstraint extends TestCase2 {
   /** Unit test for {@link INConstraint#getVariable()} */
   public void testGetVariable() {
     Var<?> x = Var.var("x");
-    IConstant vals[] = new Constant[] {new Constant<Integer>(1)};
+    IConstant[] vals = new Constant[]{new Constant<Integer>(1)};
 
     INConstraint op = newINConstraint(x, vals);
 
@@ -84,7 +84,7 @@ public abstract class TestINConstraint extends TestCase2 {
   /** Unit test for {@link INConstraint#getSet()} */
   public void testGetSet() {
     Var<?> x = Var.var("x");
-    IConstant vals[] = new Constant[] {new Constant<Integer>(1)};
+    IConstant[] vals = new Constant[]{new Constant<Integer>(1)};
 
     INConstraint op = newINConstraint(x, vals);
 
@@ -110,5 +110,5 @@ public abstract class TestINConstraint extends TestCase2 {
     assertTrue(op.get(nb));
   }
 
-  protected abstract INConstraint newINConstraint(IVariable<?> var, IConstant<?> vals[]);
+  protected abstract INConstraint newINConstraint(IVariable<?> var, IConstant<?>[] vals);
 }

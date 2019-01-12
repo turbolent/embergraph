@@ -70,7 +70,7 @@ public class EmbergraphSailTupleQuery extends SailTupleQuery implements Embergra
 
   public QueryRoot optimize() throws QueryEvaluationException {
 
-    return optimize((BindingsClause) null);
+    return optimize(null);
   }
 
   public QueryRoot optimize(final BindingsClause bc) throws QueryEvaluationException {

@@ -37,5 +37,5 @@ public enum BOpEvaluationContext {
    * The operator must be evaluated on the query controller. For example, {@link SliceOp} may not be
    * evaluated piecewise.
    */
-  CONTROLLER;
+  CONTROLLER
 }

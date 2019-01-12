@@ -88,7 +88,7 @@ public class ASTWildcardProjectionOptimizer implements IASTOptimizer {
             (Iterator<QueryBase>)
                 new Striterator(
                         BOpUtility.postOrderIteratorWithAnnotations(
-                            (BOp) subqueryRoot.getWhereClause()))
+                            subqueryRoot.getWhereClause()))
                     .addTypeFilter(QueryBase.class);
 
         while (itr.hasNext()) {
@@ -117,7 +117,7 @@ public class ASTWildcardProjectionOptimizer implements IASTOptimizer {
       final Iterator<QueryBase> itr =
           (Iterator<QueryBase>)
               new Striterator(
-                      BOpUtility.postOrderIteratorWithAnnotations((BOp) queryRoot.getWhereClause()))
+                      BOpUtility.postOrderIteratorWithAnnotations(queryRoot.getWhereClause()))
                   .addTypeFilter(QueryBase.class);
 
       while (itr.hasNext()) {
@@ -156,7 +156,7 @@ public class ASTWildcardProjectionOptimizer implements IASTOptimizer {
       @SuppressWarnings("unchecked")
       final Iterator<NamedSubqueryInclude> itr =
           (Iterator<NamedSubqueryInclude>)
-              new Striterator(BOpUtility.postOrderIteratorWithAnnotations((BOp) gpg))
+              new Striterator(BOpUtility.postOrderIteratorWithAnnotations(gpg))
                   .addTypeFilter(NamedSubqueryInclude.class);
 
       while (itr.hasNext()) {
@@ -203,7 +203,7 @@ public class ASTWildcardProjectionOptimizer implements IASTOptimizer {
 
       for (IVariable<?> var : varSet) {
 
-        if (!((Var) var).isAnonymous()) p2.addProjectionVar(new VarNode(var.getName()));
+        if (!var.isAnonymous()) p2.addProjectionVar(new VarNode(var.getName()));
       }
     }
   }

@@ -21,5 +21,5 @@ public interface DoubleBufferConsumer {
    *
    * @param list the list of which all elements shall be added.
    */
-  public void addAllOf(DoubleArrayList list);
+  void addAllOf(DoubleArrayList list);
 }

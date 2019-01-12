@@ -105,7 +105,7 @@ public class BasicSkin implements IGenericSkin {
     final Value v = m_gpo.getValue(key);
 
     if (v instanceof Literal) {
-      return ((Literal) v).stringValue();
+      return v.stringValue();
     } else {
       return null;
     }

@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -169,12 +170,12 @@ public class StatusServlet extends EmbergraphRDFServlet {
 
   static final DigestEnum DEFAULT_DIGESTS = DigestEnum.Journal;
 
-  static enum DigestEnum {
+  enum DigestEnum {
     None,
     Journal,
     HALogs,
     Snapshots,
-    All;
+    All
   }
 
   /**
@@ -271,7 +272,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
     }
 
     final QueryEngine queryEngine =
-        (QueryEngine) QueryEngineFactory.getInstance().getQueryController(indexManager);
+        QueryEngineFactory.getInstance().getQueryController(indexManager);
 
     // See BLZG-1464
     // QueryCancellationHelper.cancelQueries(queryIds, queryEngine);
@@ -318,10 +319,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
 
         if (f != null) {
 
-          if (f.cancel(true /* mayInterruptIfRunning */)) {
-
-            return true;
-          }
+          return f.cancel(true /* mayInterruptIfRunning */);
         }
       }
     }
@@ -349,10 +347,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
 
       if (f != null) {
 
-        if (f.cancel(true /* mayInterruptIfRunning */)) {
-
-          return true;
-        }
+        return f.cancel(true /* mayInterruptIfRunning */);
       }
     }
 
@@ -466,7 +461,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
       throws IOException {
 
     resp.setContentType(MIME_JSON);
-    final Writer w = new OutputStreamWriter(resp.getOutputStream(), UTF8);
+    final Writer w = new OutputStreamWriter(resp.getOutputStream(), StandardCharsets.UTF_8);
 
     final Set<UUID> requestedQueryIds = getRequestedQueryIds(req);
 
@@ -483,7 +478,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
      */
 
     final QueryEngine queryEngine =
-        (QueryEngine) QueryEngineFactory.getInstance().getQueryController(getIndexManager());
+        QueryEngineFactory.getInstance().getQueryController(getIndexManager());
 
     final UUID[] queryIds = queryEngine.getRunningQueries();
 
@@ -565,7 +560,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
     final boolean showNamespaces = req.getParameter(SHOW_NAMESPACES) != null;
 
     resp.setContentType(MIME_TEXT_HTML);
-    final Writer w = new OutputStreamWriter(resp.getOutputStream(), UTF8);
+    final Writer w = new OutputStreamWriter(resp.getOutputStream(), StandardCharsets.UTF_8);
     try {
 
       final HTMLBuilder doc = new HTMLBuilder(UTF8, w);
@@ -755,7 +750,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
        */
       {
         final QueryEngine queryEngine =
-            (QueryEngine) QueryEngineFactory.getInstance().getQueryController(getIndexManager());
+            QueryEngineFactory.getInstance().getQueryController(getIndexManager());
 
         final CounterSet counterSet = queryEngine.getCounters();
 
@@ -823,7 +818,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
        */
 
       final QueryEngine queryEngine =
-          (QueryEngine) QueryEngineFactory.getInstance().getQueryController(getIndexManager());
+          QueryEngineFactory.getInstance().getQueryController(getIndexManager());
 
       final UUID[] queryIds = queryEngine.getRunningQueries();
 

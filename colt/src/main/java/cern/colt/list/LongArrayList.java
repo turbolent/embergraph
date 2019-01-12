@@ -106,7 +106,7 @@ public class LongArrayList extends AbstractLongList {
    */
   public Object clone() {
     // overridden for performance only.
-    LongArrayList clone = new LongArrayList((long[]) elements.clone());
+    LongArrayList clone = new LongArrayList(elements.clone());
     clone.setSizeRaw(size);
     return clone;
   }

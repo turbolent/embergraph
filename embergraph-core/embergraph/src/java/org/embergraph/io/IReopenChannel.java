@@ -69,8 +69,8 @@ public interface IReopenChannel<C extends Channel> {
    *     permitting reads or writes on the file.
    * @throws IOException
    */
-  public C reopenChannel() throws IOException;
+  C reopenChannel() throws IOException;
 
   /** Should include the name of the backing file (if known). */
-  public String toString();
+  String toString();
 }

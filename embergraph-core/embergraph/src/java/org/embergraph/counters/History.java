@@ -322,7 +322,7 @@ public class History<T> {
 
       current++;
 
-      return (IHistoryEntry<T>) entry.clone();
+      return entry.clone();
     }
 
     //        /**

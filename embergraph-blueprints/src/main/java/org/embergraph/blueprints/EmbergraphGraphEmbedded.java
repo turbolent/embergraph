@@ -68,7 +68,7 @@ public class EmbergraphGraphEmbedded extends EmbergraphGraph
 
   private static final transient Logger log = Logger.getLogger(EmbergraphGraphEmbedded.class);
 
-  public static interface Options {
+  public interface Options {
 
     String AUTO_COMMIT_ON_SHUTDOWN =
         EmbergraphGraphEmbedded.class.getName() + ".autoCommitOnShutdown";
@@ -122,7 +122,7 @@ public class EmbergraphGraphEmbedded extends EmbergraphGraph
       final Properties props) {
     super(factory, props);
 
-    this.repo = (EmbergraphSailRepository) repo;
+    this.repo = repo;
     this.autocommitOnShutdown =
         Boolean.valueOf(
             props.getProperty(
@@ -500,14 +500,14 @@ public class EmbergraphGraphEmbedded extends EmbergraphGraph
   protected QueryEngine getQueryEngine() {
 
     final QueryEngine queryEngine =
-        (QueryEngine) QueryEngineFactory.getInstance().getQueryController(getIndexManager());
+        QueryEngineFactory.getInstance().getQueryController(getIndexManager());
 
     return queryEngine;
   }
 
   private IIndexManager getIndexManager() {
 
-    final EmbergraphSailRepository repo = (EmbergraphSailRepository) this.getRepository();
+    final EmbergraphSailRepository repo = this.getRepository();
 
     final IIndexManager indexMgr = repo.getSail().getIndexManager();
 

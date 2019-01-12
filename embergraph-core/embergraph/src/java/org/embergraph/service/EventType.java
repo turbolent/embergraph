@@ -70,5 +70,5 @@ public enum EventType {
    *
    * @see OverflowManager#purgeOldResources(long, boolean)
    */
-  PurgeResources;
+  PurgeResources
 }

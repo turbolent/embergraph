@@ -1095,7 +1095,7 @@ public abstract class AbstractRunningQuery implements IRunningQuery {
     try {
 
       // signal normal completion.
-      future.halt((Void) v);
+      future.halt(v);
 
       // interrupt anything which is running.
       cancel(true /* mayInterruptIfRunning */);
@@ -1578,10 +1578,8 @@ public abstract class AbstractRunningQuery implements IRunningQuery {
       return true;
     } else if (InnerCause.isInnerCause(t, ClosedByInterruptException.class)) {
       return true;
-    } else if (InnerCause.isInnerCause(t, InterruptedException.class)) {
-      return true;
-    }
-    return false;
+    } else
+      return InnerCause.isInnerCause(t, InterruptedException.class);
   }
 
   @Override

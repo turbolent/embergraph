@@ -103,7 +103,7 @@ public class ConnegUtil {
    *
    * @param req
    * @return The value of the format string, if present or the Accept Header.
-   * @see http://trac.blazegraph.com/ticket/984
+   * @see <a href="http://trac.blazegraph.com/ticket/984">http://trac.blazegraph.com/ticket/984</a>
    */
   public static String getMimeTypeForQueryParameterQueryRequest(
       final String outputFormat, final String... acceptHeaders) {
@@ -161,7 +161,7 @@ public class ConnegUtil {
    *
    * @param req
    * @return The value of the format string, if present or the Accept Header.
-   * @see http://trac.blazegraph.com/ticket/984
+   * @see <a href="http://trac.blazegraph.com/ticket/984">http://trac.blazegraph.com/ticket/984</a>
    */
   public static String getMimeTypeForQueryParameterServiceRequest(
       String outputFormat, String acceptHeader) {

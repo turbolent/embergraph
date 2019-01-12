@@ -172,7 +172,7 @@ public class TestIncrementalWrite extends AbstractHTreeTestCase {
       assertFalse(a.isPersistent());
       ((HardReferenceQueue<PO>) btree.writeRetentionQueue)
           .getListener()
-          .evicted(((HardReferenceQueue<PO>) btree.writeRetentionQueue), btree.getRoot());
+          .evicted(btree.writeRetentionQueue, btree.getRoot());
       assertTrue(a.isPersistent());
     } finally {
       store.destroy();

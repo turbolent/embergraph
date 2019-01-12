@@ -732,28 +732,28 @@ public class EigenvalueDecomposition implements java.io.Serializable {
 
     buf.append("realEigenvalues = ");
     try {
-      buf.append(String.valueOf(this.getRealEigenvalues()));
+      buf.append(this.getRealEigenvalues());
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
 
     buf.append("\nimagEigenvalues = ");
     try {
-      buf.append(String.valueOf(this.getImagEigenvalues()));
+      buf.append(this.getImagEigenvalues());
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
 
     buf.append("\n\nD = ");
     try {
-      buf.append(String.valueOf(this.getD()));
+      buf.append(this.getD());
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
 
     buf.append("\n\nV = ");
     try {
-      buf.append(String.valueOf(this.getV()));
+      buf.append(this.getV());
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }

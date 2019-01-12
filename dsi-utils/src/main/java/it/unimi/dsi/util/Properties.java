@@ -32,6 +32,7 @@ import java.io.Writer;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -79,7 +80,8 @@ public class Properties extends PropertiesConfiguration implements Serializable 
    * @param filename a file name.
    */
   public void save(final CharSequence filename) throws ConfigurationException, IOException {
-    final Writer w = new OutputStreamWriter(new FileOutputStream(filename.toString()), "UTF-8");
+    final Writer w = new OutputStreamWriter(new FileOutputStream(filename.toString()),
+        StandardCharsets.UTF_8);
     super.save(w);
     w.close();
   }

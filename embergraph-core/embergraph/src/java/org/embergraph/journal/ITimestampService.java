@@ -43,5 +43,5 @@ public interface ITimestampService extends IService {
    * @throws IOException if there is an RMI problem.
    * @see TimestampServiceUtil#nextTimestamp(ITimestampService)
    */
-  public long nextTimestamp() throws IOException;
+  long nextTimestamp() throws IOException;
 }

@@ -17,7 +17,7 @@ public interface IAsynchronousWriteStatementBufferFactory<S extends Statement>
    * factory for a given instance of this class. Each {@link IStatementBuffer} MAY be recycled using
    * {@link IBuffer#reset()} or simply discarded after its use.
    */
-  public IStatementBuffer<S> newStatementBuffer();
+  IStatementBuffer<S> newStatementBuffer();
 
   /**
    * Return <code>true</code> if the {@link Future} for any of the asynchronous write buffers is
@@ -28,13 +28,13 @@ public interface IAsynchronousWriteStatementBufferFactory<S extends Statement>
    * {@link #awaitAll()}, which will detect any error(s), cancel the other {@link Future}s, and
    * throw an error back to you.
    */
-  public boolean isAnyDone();
+  boolean isAnyDone();
 
   /**
    * Close the buffers. Once closed, the buffers will not accept further input and the consumers
    * will eventually drain the buffers and report that they are exhausted.
    */
-  public void close();
+  void close();
 
   /**
    * Cancel all {@link Future}s. The buffers will be automatically closed when their {@link Future}s
@@ -42,7 +42,7 @@ public interface IAsynchronousWriteStatementBufferFactory<S extends Statement>
    *
    * @param mayInterruptIfRunning
    */
-  public void cancelAll(final boolean mayInterruptIfRunning);
+  void cancelAll(final boolean mayInterruptIfRunning);
 
   /**
    * Close buffers and then await their {@link Future}s. Once closed, the buffers will not accept
@@ -52,8 +52,8 @@ public interface IAsynchronousWriteStatementBufferFactory<S extends Statement>
    * @throws ExecutionException if any {@link Future} fails.
    * @throws InterruptedException if interrupted while awaiting any of the {@link Future}s.
    */
-  public void awaitAll() throws InterruptedException, ExecutionException;
+  void awaitAll() throws InterruptedException, ExecutionException;
 
   /** Return performance counters defined by this factory. */
-  public CounterSet getCounters();
+  CounterSet getCounters();
 }

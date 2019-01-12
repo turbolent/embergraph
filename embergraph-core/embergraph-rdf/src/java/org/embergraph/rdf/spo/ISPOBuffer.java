@@ -37,19 +37,19 @@ import org.embergraph.relation.accesspath.IBuffer;
  */
 public interface ISPOBuffer {
 
-  public final Logger log = Logger.getLogger(ISPOBuffer.class);
+  Logger log = Logger.getLogger(ISPOBuffer.class);
 
   /** True iff the {@link #log} level is INFO or less. */
-  public final boolean INFO = log.getEffectiveLevel().toInt() <= Level.INFO.toInt();
+  boolean INFO = log.getEffectiveLevel().toInt() <= Level.INFO.toInt();
 
   /** True iff the {@link #log} level is DEBUG or less. */
-  public final boolean DEBUG = log.getEffectiveLevel().toInt() <= Level.DEBUG.toInt();
+  boolean DEBUG = log.getEffectiveLevel().toInt() <= Level.DEBUG.toInt();
 
   /** The #of statements currently in the buffer. */
-  public int size();
+  int size();
 
   /** True iff there are no statements in the buffer. */
-  public boolean isEmpty();
+  boolean isEmpty();
 
   /**
    * Adds an {@link ISPO}.
@@ -58,7 +58,7 @@ public interface ISPOBuffer {
    * @return true if the buffer will store the statement (i.e., the statement is not excluded by the
    *     filter).
    */
-  public boolean add(ISPO spo);
+  boolean add(ISPO spo);
 
   /**
    * Flush any buffered statements to the backing store.
@@ -70,5 +70,5 @@ public interface ISPOBuffer {
    *     "write".
    * @see #flush(boolean)
    */
-  public int flush();
+  int flush();
 }

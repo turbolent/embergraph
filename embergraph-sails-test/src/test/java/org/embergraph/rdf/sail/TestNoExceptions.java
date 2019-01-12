@@ -109,7 +109,7 @@ public class TestNoExceptions extends QuadsTestCase {
    *
    * @throws IOException
    */
-  public void test_namedSubquery746() throws Exception, TokenMgrError, ParseException, IOException {
+  public void test_namedSubquery746() throws Exception, TokenMgrError {
     optimizeQuery("ticket746");
   }
 

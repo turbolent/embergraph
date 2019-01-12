@@ -160,11 +160,9 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
         new Predicate<E>(
             new IVariableOrConstant[] {new Constant<String>("John"), x},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     // the subquery (basically, an access path read with "x" unbound).
     final PipelineJoin<E> subquery =
@@ -260,11 +258,9 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
         new Predicate<E>(
             new IVariableOrConstant[] {new Constant<String>("John"), x},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     // the subquery (basically, an access path read with "x" unbound).
     final PipelineJoin<E> subquery =
@@ -364,11 +360,9 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
         new Predicate<E>(
             new IVariableOrConstant[] {new Constant<String>("John"), x},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     // the subquery (basically, an access path read with "x" unbound).
     final PipelineJoin<E> subquery =
@@ -509,40 +503,32 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, startId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, startId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final Predicate<?> pred1Op =
         new Predicate<E>(
             new IVariableOrConstant[] {a, b},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId1),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId1),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final Predicate<?> pred2Op =
         new Predicate<E>(
             new IVariableOrConstant[] {b, c},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId2),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId2),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final Predicate<?> pred3Op =
         new Predicate<E>(
             new IVariableOrConstant[] {c, d},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId3),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId3),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineOp join1Op =
         new PipelineJoin<E>(
@@ -600,14 +586,12 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
         new SliceOp(
             new BOp[] {joinGroup1Op},
             NV.asMap(
-                new NV[] {
-                  new NV(BOp.Annotations.BOP_ID, sliceId),
-                  new NV(BOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                  new NV(PipelineOp.Annotations.SHARED_STATE, true),
-                  new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
-                  new NV(
-                      QueryEngine.Annotations.CHUNK_HANDLER, StandaloneChunkHandler.TEST_INSTANCE),
-                }));
+                new NV(BOp.Annotations.BOP_ID, sliceId),
+                new NV(BOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.SHARED_STATE, true),
+                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
+                new NV(
+                    QueryEngine.Annotations.CHUNK_HANDLER, StandaloneChunkHandler.TEST_INSTANCE)));
 
     final PipelineOp query = sliceOp;
 
@@ -777,40 +761,32 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, startId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, startId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final Predicate<?> pred1Op =
         new Predicate<E>(
             new IVariableOrConstant[] {a, b},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId1),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId1),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final Predicate<?> pred2Op =
         new Predicate<E>(
             new IVariableOrConstant[] {b, c},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId2),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId2),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final Predicate<?> pred3Op =
         new Predicate<E>(
             new IVariableOrConstant[] {c, d},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId3),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId3),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineOp join1Op =
         new PipelineJoin<E>(
@@ -875,14 +851,12 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
         new SliceOp(
             new BOp[] {joinGroup1Op},
             NV.asMap(
-                new NV[] {
-                  new NV(BOp.Annotations.BOP_ID, sliceId),
-                  new NV(BOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                  new NV(PipelineOp.Annotations.SHARED_STATE, true),
-                  new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
-                  new NV(
-                      QueryEngine.Annotations.CHUNK_HANDLER, StandaloneChunkHandler.TEST_INSTANCE),
-                }));
+                new NV(BOp.Annotations.BOP_ID, sliceId),
+                new NV(BOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.SHARED_STATE, true),
+                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
+                new NV(
+                    QueryEngine.Annotations.CHUNK_HANDLER, StandaloneChunkHandler.TEST_INSTANCE)));
 
     final PipelineOp query = sliceOp;
 
@@ -1040,40 +1014,32 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, startId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, startId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final Predicate<?> pred1Op =
         new Predicate<E>(
             new IVariableOrConstant[] {a, b},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId1),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId1),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final Predicate<?> pred2Op =
         new Predicate<E>(
             new IVariableOrConstant[] {b, c},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId2),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId2),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final Predicate<?> pred3Op =
         new Predicate<E>(
             new IVariableOrConstant[] {c, d},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId3),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId3),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineOp join1Op =
         new PipelineJoin<E>(
@@ -1087,12 +1053,10 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
         new ConditionalRoutingOp(
             new BOp[] {join1Op},
             NV.asMap(
-                new NV[] {
-                  new NV(BOp.Annotations.BOP_ID, condId),
-                  new NV(PipelineOp.Annotations.SINK_REF, joinGroup1), // a != Paul
-                  new NV(PipelineOp.Annotations.ALT_SINK_REF, sliceId), // a == Paul
-                  new NV(ConditionalRoutingOp.Annotations.CONDITION, condition),
-                }));
+                new NV(BOp.Annotations.BOP_ID, condId),
+                new NV(PipelineOp.Annotations.SINK_REF, joinGroup1), // a != Paul
+                new NV(PipelineOp.Annotations.ALT_SINK_REF, sliceId), // a == Paul
+                new NV(ConditionalRoutingOp.Annotations.CONDITION, condition)));
 
     final PipelineOp subQuery;
     {
@@ -1144,14 +1108,12 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
         new SliceOp(
             new BOp[] {joinGroup1Op},
             NV.asMap(
-                new NV[] {
-                  new NV(BOp.Annotations.BOP_ID, sliceId),
-                  new NV(BOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                  new NV(PipelineOp.Annotations.SHARED_STATE, true),
-                  new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
-                  new NV(
-                      QueryEngine.Annotations.CHUNK_HANDLER, StandaloneChunkHandler.TEST_INSTANCE),
-                }));
+                new NV(BOp.Annotations.BOP_ID, sliceId),
+                new NV(BOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.SHARED_STATE, true),
+                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
+                new NV(
+                    QueryEngine.Annotations.CHUNK_HANDLER, StandaloneChunkHandler.TEST_INSTANCE)));
 
     final PipelineOp query = sliceOp;
 

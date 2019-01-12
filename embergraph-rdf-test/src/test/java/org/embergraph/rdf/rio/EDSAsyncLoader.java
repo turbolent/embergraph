@@ -143,7 +143,7 @@ public class EDSAsyncLoader {
 
       final AsynchronousStatementBufferFactory<EmbergraphStatement, File> statementBufferFactory =
           new AsynchronousStatementBufferFactory<EmbergraphStatement, File>(
-              (ScaleOutTripleStore) tripleStore,
+              tripleStore,
               producerChunkSize,
               valuesInitialCapacity,
               bnodesInitialCapacity,

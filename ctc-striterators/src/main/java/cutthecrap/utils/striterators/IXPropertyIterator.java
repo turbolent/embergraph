@@ -21,5 +21,5 @@ package cutthecrap.utils.striterators;
  * <p>A standard iterator, extended to provide a nextProperty method returning IXProperty objects
  */
 public interface IXPropertyIterator extends IStriterator {
-  public IXProperty nextProperty();
+  IXProperty nextProperty();
 }

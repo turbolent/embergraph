@@ -767,7 +767,7 @@ public class TestASTEmptyGroupOptimizer extends AbstractASTEvaluationTestCase {
                 new FunctionNode(
                     FunctionRegistry.EQ,
                     null /* scalarValues */,
-                    new ValueExpressionNode[] {new VarNode("v"), new ConstantNode(ONE)})));
+                    new VarNode("v"), new ConstantNode(ONE))));
       }
     }
 
@@ -801,7 +801,7 @@ public class TestASTEmptyGroupOptimizer extends AbstractASTEvaluationTestCase {
                 new FunctionNode(
                     FunctionRegistry.EQ,
                     null /* scalarValues */,
-                    new ValueExpressionNode[] {new VarNode("v"), new ConstantNode(ONE)})));
+                    new VarNode("v"), new ConstantNode(ONE))));
       }
     }
 

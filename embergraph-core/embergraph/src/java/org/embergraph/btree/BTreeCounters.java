@@ -340,7 +340,6 @@ public final class BTreeCounters implements Cloneable, ICounterSetAccess {
   /** #of leaf read operations. */
   public final CAT leavesRead = new CAT();
   /** Total bytes read for nodes and leaves (but not raw records). */
-  ;
 
   public final CAT bytesRead = new CAT();
   /** Read time for nodes and leaves (but not raw records). */

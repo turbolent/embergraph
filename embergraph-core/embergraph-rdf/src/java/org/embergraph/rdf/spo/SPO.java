@@ -788,7 +788,7 @@ public class SPO implements ISPO, java.io.Serializable {
    */
   @Override
   public Value getObject() {
-    return (Value) o();
+    return o();
   }
 
   /**

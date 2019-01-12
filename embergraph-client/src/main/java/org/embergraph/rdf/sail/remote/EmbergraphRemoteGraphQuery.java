@@ -30,7 +30,7 @@ public class EmbergraphRemoteGraphQuery extends AbstractEmbergraphRemoteQuery
     }
   }
 
-  /** @see http://trac.blazegraph.com/ticket/914 (Set timeout on remote query) */
+  /** @see <a href="http://trac.blazegraph.com/ticket/914">http://trac.blazegraph.com/ticket/914</a> (Set timeout on remote query) */
   @Override
   public int getMaxQueryTime() {
 
@@ -44,7 +44,7 @@ public class EmbergraphRemoteGraphQuery extends AbstractEmbergraphRemoteQuery
     return (int) TimeUnit.MILLISECONDS.toSeconds(millis);
   }
 
-  /** @see http://trac.blazegraph.com/ticket/914 (Set timeout on remote query) */
+  /** @see <a href="http://trac.blazegraph.com/ticket/914">http://trac.blazegraph.com/ticket/914</a> (Set timeout on remote query) */
   @Override
   public void setMaxQueryTime(final int seconds) {
 
@@ -60,7 +60,6 @@ public class EmbergraphRemoteGraphQuery extends AbstractEmbergraphRemoteQuery
         handler.handleStatement(gqr.next());
       }
       handler.endRDF();
-      ;
     } finally {
       gqr.close();
     }

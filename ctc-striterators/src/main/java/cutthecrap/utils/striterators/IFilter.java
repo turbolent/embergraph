@@ -42,5 +42,5 @@ public interface IFilter extends Serializable, IPropertySet {
    * This pattern makes the source iterator, the evaluation context, and the {@link IPropertySet}
    * annotations visible to the runtime striterator implementation.
    */
-  public abstract Iterator filter(Iterator src, Object context);
+  Iterator filter(Iterator src, Object context);
 }

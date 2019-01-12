@@ -99,20 +99,20 @@ public class TestGROUP_CONCAT extends TestCase2 {
      * org2  auth3  book4  7
      * </pre>
      */
-    final IBindingSet data[] =
-        new IBindingSet[] {
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book1, price9}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book2, price5}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth2, book3, price7}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org2, auth3, book4, price7})
+    final IBindingSet[] data =
+        new IBindingSet[]{
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book1, price9}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book2, price5}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth2, book3, price7}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org2, auth3, book4, price7})
         };
 
     final GROUP_CONCAT op = new GROUP_CONCAT(false /* distinct */, lprice, namespace, " ");
@@ -172,32 +172,30 @@ public class TestGROUP_CONCAT extends TestCase2 {
      * org2  auth3  book4  7
      * </pre>
      */
-    final IBindingSet data[] =
-        new IBindingSet[] {
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book1, price9}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book2, price5}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth2, book3, price7}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org2, auth3, book4, price7})
+    final IBindingSet[] data =
+        new IBindingSet[]{
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book1, price9}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book2, price5}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth2, book3, price7}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org2, auth3, book4, price7})
         };
 
     final GROUP_CONCAT op =
         new GROUP_CONCAT(
             new BOp[] {lprice},
             NV.asMap(
-                new NV[] {
-                  new NV(GROUP_CONCAT.Annotations.DISTINCT, false),
-                  new NV(GROUP_CONCAT.Annotations.NAMESPACE, namespace),
-                  new NV(GROUP_CONCAT.Annotations.SEPARATOR, "."),
-                  new NV(GROUP_CONCAT.Annotations.VALUE_LIMIT, 3),
-                }));
+                new NV(GROUP_CONCAT.Annotations.DISTINCT, false),
+                new NV(GROUP_CONCAT.Annotations.NAMESPACE, namespace),
+                new NV(GROUP_CONCAT.Annotations.SEPARATOR, "."),
+                new NV(GROUP_CONCAT.Annotations.VALUE_LIMIT, 3)));
     assertFalse(op.isDistinct());
     assertFalse(op.isWildcard());
 
@@ -252,32 +250,30 @@ public class TestGROUP_CONCAT extends TestCase2 {
      * org2  auth3  book4  7
      * </pre>
      */
-    final IBindingSet data[] =
-        new IBindingSet[] {
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book1, price9}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book2, price5}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth2, book3, price7}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org2, auth3, book4, price7})
+    final IBindingSet[] data =
+        new IBindingSet[]{
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book1, price9}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book2, price5}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth2, book3, price7}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org2, auth3, book4, price7})
         };
 
     final GROUP_CONCAT op =
         new GROUP_CONCAT(
             new BOp[] {lprice},
             NV.asMap(
-                new NV[] {
-                  new NV(GROUP_CONCAT.Annotations.DISTINCT, false),
-                  new NV(GROUP_CONCAT.Annotations.NAMESPACE, namespace),
-                  new NV(GROUP_CONCAT.Annotations.SEPARATOR, "."),
-                  new NV(GROUP_CONCAT.Annotations.CHARACTER_LIMIT, 3),
-                }));
+                new NV(GROUP_CONCAT.Annotations.DISTINCT, false),
+                new NV(GROUP_CONCAT.Annotations.NAMESPACE, namespace),
+                new NV(GROUP_CONCAT.Annotations.SEPARATOR, "."),
+                new NV(GROUP_CONCAT.Annotations.CHARACTER_LIMIT, 3)));
     assertFalse(op.isDistinct());
     assertFalse(op.isWildcard());
 
@@ -340,28 +336,28 @@ public class TestGROUP_CONCAT extends TestCase2 {
        * org2  auth3  book4  7
        * </pre>
        */
-      final IBindingSet data[] =
-          new IBindingSet[] {
-            new ContextBindingSet(
-                context,
-                new ListBindingSet(
-                    new IVariable<?>[] {org, auth, book, lprice},
-                    new IConstant[] {org1, auth1, book1, price9})),
-            new ContextBindingSet(
-                context,
-                new ListBindingSet(
-                    new IVariable<?>[] {org, auth, book, lprice},
-                    new IConstant[] {org1, auth1, book2, price5})),
-            new ContextBindingSet(
-                context,
-                new ListBindingSet(
-                    new IVariable<?>[] {org, auth, book, lprice},
-                    new IConstant[] {org1, auth2, book3, price7})),
-            new ContextBindingSet(
-                context,
-                new ListBindingSet(
-                    new IVariable<?>[] {org, auth, book, lprice},
-                    new IConstant[] {org2, auth3, book4, price7}))
+      final IBindingSet[] data =
+          new IBindingSet[]{
+              new ContextBindingSet(
+                  context,
+                  new ListBindingSet(
+                      new IVariable<?>[]{org, auth, book, lprice},
+                      new IConstant[]{org1, auth1, book1, price9})),
+              new ContextBindingSet(
+                  context,
+                  new ListBindingSet(
+                      new IVariable<?>[]{org, auth, book, lprice},
+                      new IConstant[]{org1, auth1, book2, price5})),
+              new ContextBindingSet(
+                  context,
+                  new ListBindingSet(
+                      new IVariable<?>[]{org, auth, book, lprice},
+                      new IConstant[]{org1, auth2, book3, price7})),
+              new ContextBindingSet(
+                  context,
+                  new ListBindingSet(
+                      new IVariable<?>[]{org, auth, book, lprice},
+                      new IConstant[]{org2, auth3, book4, price7}))
           };
 
       // GROUP_CONCAT(STR(lprice+1))
@@ -442,28 +438,28 @@ public class TestGROUP_CONCAT extends TestCase2 {
        * org2  auth3  book4  7
        * </pre>
        */
-      final IBindingSet data[] =
-          new IBindingSet[] {
-            new ContextBindingSet(
-                context,
-                new ListBindingSet(
-                    new IVariable<?>[] {org, auth, book, lprice},
-                    new IConstant[] {org1, auth1, book1, price9})),
-            new ContextBindingSet(
-                context,
-                new ListBindingSet(
-                    new IVariable<?>[] {org, auth, book, lprice},
-                    new IConstant[] {org1, auth1, book2, price5})),
-            new ContextBindingSet(
-                context,
-                new ListBindingSet(
-                    new IVariable<?>[] {org, auth, book, lprice},
-                    new IConstant[] {org1, auth2, book3, price7})),
-            new ContextBindingSet(
-                context,
-                new ListBindingSet(
-                    new IVariable<?>[] {org, auth, book, lprice},
-                    new IConstant[] {org2, auth3, book4, price7}))
+      final IBindingSet[] data =
+          new IBindingSet[]{
+              new ContextBindingSet(
+                  context,
+                  new ListBindingSet(
+                      new IVariable<?>[]{org, auth, book, lprice},
+                      new IConstant[]{org1, auth1, book1, price9})),
+              new ContextBindingSet(
+                  context,
+                  new ListBindingSet(
+                      new IVariable<?>[]{org, auth, book, lprice},
+                      new IConstant[]{org1, auth1, book2, price5})),
+              new ContextBindingSet(
+                  context,
+                  new ListBindingSet(
+                      new IVariable<?>[]{org, auth, book, lprice},
+                      new IConstant[]{org1, auth2, book3, price7})),
+              new ContextBindingSet(
+                  context,
+                  new ListBindingSet(
+                      new IVariable<?>[]{org, auth, book, lprice},
+                      new IConstant[]{org2, auth3, book4, price7}))
           };
 
       // GROUP_CONCAT(lprice+1)
@@ -534,24 +530,24 @@ public class TestGROUP_CONCAT extends TestCase2 {
      * org2  auth3  book4  7
      * </pre>
      */
-    final IBindingSet data[] =
-        new IBindingSet[] {
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book1, price9}),
-          new ListBindingSet(
-              new IVariable<?>[] {
-                org, auth, book,
-              },
-              new IConstant[] {
-                org1, auth1, book2,
-              }),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth2, book3, price7}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org2, auth3, book4, price7})
+    final IBindingSet[] data =
+        new IBindingSet[]{
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book1, price9}),
+            new ListBindingSet(
+                new IVariable<?>[]{
+                    org, auth, book,
+                },
+                new IConstant[]{
+                    org1, auth1, book2,
+                }),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth2, book3, price7}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org2, auth3, book4, price7})
         };
 
     // GROUP_CONCAT(lprice)

@@ -85,9 +85,7 @@ class Bundle<F> implements Comparable<Bundle<F>> {
 
     if (!bindingSet.equals(t.bindingSet)) return false;
 
-    if (!asBound.equals(t.asBound)) return false;
-
-    return true;
+    return asBound.equals(t.asBound);
   }
 
   /** Implemented to shut up find bugs. */

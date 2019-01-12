@@ -32,7 +32,7 @@ public enum IndexTypeEnum {
   /** Stream. */
   Stream((short) 2);
 
-  private IndexTypeEnum(final short code) {
+  IndexTypeEnum(final short code) {
 
     this.code = code;
   }

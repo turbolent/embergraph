@@ -36,7 +36,7 @@ public interface IndexAnnotations {
   /** @see IndexMetadata.Options#WRITE_RETENTION_QUEUE_CAPACITY */
   String WRITE_RETENTION_QUEUE_CAPACITY = IndexMetadata.Options.WRITE_RETENTION_QUEUE_CAPACITY;
 
-  final int DEFAULT_WRITE_RETENTION_QUEUE_CAPACITY = 4000;
+  int DEFAULT_WRITE_RETENTION_QUEUE_CAPACITY = 4000;
 
   /**
    * When <code>true</code> raw record references will be written on the backing store and the index

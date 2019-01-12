@@ -73,10 +73,10 @@ public interface ICachePolicy<K, T> {
    *
    * @param listener The listener or <code>null</code> to remove any listener.
    */
-  public void setListener(ICacheListener<K, T> listener);
+  void setListener(ICacheListener<K, T> listener);
 
   /** Return the cache eviction listener. */
-  public ICacheListener<K, T> getCacheListener();
+  ICacheListener<K, T> getCacheListener();
 
   /**
    * Insert or "touch" this object in the cache.
@@ -87,7 +87,7 @@ public interface ICachePolicy<K, T> {
    * @exception IllegalStateException If a different object is in the cache under the specified
    *     object identifier.
    */
-  public void put(K oid, T obj, boolean dirty);
+  void put(K oid, T obj, boolean dirty);
 
   /**
    * Return the indicated object from the cache or null if the object is not in cache.
@@ -95,7 +95,7 @@ public interface ICachePolicy<K, T> {
    * @param oid The object identifier.
    * @return The object or null iff it is not in cache.
    */
-  public T get(K oid);
+  T get(K oid);
 
   //    /**
   //     * Return true iff there is a dirty entry in the cache under that key. The
@@ -116,13 +116,13 @@ public interface ICachePolicy<K, T> {
    * @return The object in the cache for that object identifier or <code>null</code> if there was no
    *     object under that identifier.
    */
-  public T remove(K oid);
+  T remove(K oid);
 
   /**
    * Clear all objects from the cache. This method may be used to reset the cache when a transaction
    * is being rolled back. Cache eviction notices are NOT fired when this method is called.
    */
-  public void clear();
+  void clear();
 
   /**
    * Return an iterator that will visit the application objects in the cache. The visitation order
@@ -131,7 +131,7 @@ public interface ICachePolicy<K, T> {
    *
    * @see #entryIterator()
    */
-  public Iterator<T> iterator();
+  Iterator<T> iterator();
 
   /**
    * Return an iterator that will visit the {@link ICacheEntry} objects in the cache. The visitation
@@ -147,19 +147,19 @@ public interface ICachePolicy<K, T> {
    * @see ICacheEntry
    * @see #iterator()
    */
-  public Iterator<ICacheEntry<K, T>> entryIterator();
+  Iterator<ICacheEntry<K, T>> entryIterator();
 
   /**
    * Return the #of entries in the hard reference cache.
    *
    * @return The #of entries in the hard reference cache.
    */
-  public int size();
+  int size();
 
   /**
    * Return the capacity of the hard reference cache.
    *
    * @return The capacity of the hard reference cache.
    */
-  public int capacity();
+  int capacity();
 }

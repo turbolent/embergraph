@@ -163,7 +163,7 @@ public abstract class TupleFilter<E> extends FilterBase implements ITupleFilter<
       visit(returnValue);
 
       // return the private instance containing a copy of the data.
-      return (ITuple<E>) returnValue;
+      return returnValue;
     }
 
     /**

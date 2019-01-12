@@ -55,12 +55,12 @@ public class ByteCountOutputStream extends FilterOutputStream {
     nwritten++;
   }
 
-  public void write(final byte b[]) throws IOException {
+  public void write(final byte[] b) throws IOException {
     out.write(b); // efficiency!
     nwritten += b.length;
   }
 
-  public void write(final byte b[], final int off, final int len) throws IOException {
+  public void write(final byte[] b, final int off, final int len) throws IOException {
     out.write(b, off, len); // efficiency!
     nwritten += len;
   }

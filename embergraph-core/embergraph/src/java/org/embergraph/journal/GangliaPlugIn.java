@@ -289,7 +289,7 @@ public class GangliaPlugIn implements IPlugIn<Journal, GangliaService> {
       //                        statisticsCollector, null/* filter */));
 
       // Wrap as Future.
-      final FutureTask<Void> ft = new FutureTask<Void>(gangliaService, (Void) null);
+      final FutureTask<Void> ft = new FutureTask<Void>(gangliaService, null);
 
       // Save reference to future.
       gangliaFuture.set(ft);
@@ -342,9 +342,7 @@ public class GangliaPlugIn implements IPlugIn<Journal, GangliaService> {
 
     final FutureTask<Void> ft = gangliaFuture.get();
 
-    if (ft == null || ft.isDone()) return false;
-
-    return true;
+    return ft != null && !ft.isDone();
   }
 
   @Override

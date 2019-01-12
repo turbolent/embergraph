@@ -134,13 +134,13 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
     final Reference<AbstractPage> a =
         (Reference<AbstractPage>) (fillLowerSlots ? newPage.self : null);
     for (int s = start; s < start + crefs; s++) {
-      childRefs[s] = (Reference<AbstractPage>) a;
+      childRefs[s] = a;
     }
 
     final Reference<AbstractPage> b =
         (Reference<AbstractPage>) (!fillLowerSlots ? newPage.self : null);
     for (int s = start + crefs; s <= last; s++) {
-      childRefs[s] = (Reference<AbstractPage>) b;
+      childRefs[s] = b;
     }
 
     assert !newPage.isPersistent();
@@ -2330,8 +2330,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
     final DirectoryPage newdir =
         new DirectoryPage((HTree) htree, null /*overflowKey*/, htree.addressBits);
 
-    if (isReadOnly()) // TBD: Remove debug point
-    assert !isReadOnly();
+    assert !isReadOnly() || !isReadOnly();
 
     replaceChildRef(current.self, newdir);
 
@@ -2428,7 +2427,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
       ((HTree) htree).nleaves++;
 
       for (int s = 0; s < length; s++) {
-        if (isReadOnly()) assert !isReadOnly();
+        assert !isReadOnly() || !isReadOnly();
 
         assert childRefs[offset + s] == null;
 

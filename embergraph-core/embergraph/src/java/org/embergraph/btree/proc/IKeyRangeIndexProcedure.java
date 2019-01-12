@@ -31,11 +31,11 @@ public interface IKeyRangeIndexProcedure<T> extends IIndexProcedure<T> {
    * Return the lowest key that will be visited (inclusive). When <code>null</code> there is no
    * lower bound.
    */
-  public byte[] getFromKey();
+  byte[] getFromKey();
 
   /**
    * Return the first key that will not be visited (exclusive). When <code>null</code> there is no
    * upper bound.
    */
-  public byte[] getToKey();
+  byte[] getToKey();
 }

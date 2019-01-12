@@ -86,7 +86,7 @@ public class ShortPacker {
       // high bit is clear.
       v = b; // interpret the byte as a short value.
     }
-    return (short) v;
+    return v;
   }
 
   /**
@@ -108,7 +108,7 @@ public class ShortPacker {
       // high bit is clear.
       v = b; // interpret the byte as a short value.
     }
-    return (short) v;
+    return v;
   }
 
   /**

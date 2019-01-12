@@ -401,7 +401,7 @@ public class MockTermResolverOp extends PipelineOp {
           continue;
         }
 
-        final IV<?, ?> iv = (IV<?, ?>) c.get();
+        final IV<?, ?> iv = c.get();
 
         if (iv == null) {
 

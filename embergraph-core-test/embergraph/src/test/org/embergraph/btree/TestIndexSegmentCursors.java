@@ -113,7 +113,7 @@ public class TestIndexSegmentCursors extends AbstractTupleCursorTestCase {
         (IndexSegment) btree, new Tuple<String>(btree, IRangeQuery.DEFAULT), fromKey, toKey);
   }
 
-  public void test_oneTuple() throws IOException, Exception {
+  public void test_oneTuple() throws Exception {
 
     final BTree btree = getOneTupleBTree();
 

@@ -26,9 +26,9 @@ package org.embergraph.rawstore;
  */
 public interface IAllocationContext {
 
-  public void release();
+  void release();
 
-  public void checkActive();
+  void checkActive();
 
-  public boolean isIsolated();
+  boolean isIsolated();
 }

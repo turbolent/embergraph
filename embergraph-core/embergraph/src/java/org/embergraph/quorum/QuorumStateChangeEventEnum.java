@@ -113,5 +113,5 @@ public enum QuorumStateChangeEventEnum {
    *
    * @see QuorumStateChangeListener#quorumBreak()
    */
-  QUORUM_BREAK;
+  QUORUM_BREAK
 }

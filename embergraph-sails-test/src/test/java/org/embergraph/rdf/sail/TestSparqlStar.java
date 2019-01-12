@@ -83,7 +83,7 @@ public class TestSparqlStar extends ProxyEmbergraphSailTestCase {
 
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
+      cxn = repo.getConnection();
 
       assertEquals(0, cxn.getTripleStore().getStatementCount(true));
 
@@ -230,7 +230,7 @@ public class TestSparqlStar extends ProxyEmbergraphSailTestCase {
 
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
+      cxn = repo.getConnection();
 
       assertEquals(0, cxn.getTripleStore().getStatementCount(true));
 
@@ -376,7 +376,7 @@ public class TestSparqlStar extends ProxyEmbergraphSailTestCase {
 
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
+      cxn = repo.getConnection();
 
       assertEquals(0, cxn.getTripleStore().getStatementCount(true));
 

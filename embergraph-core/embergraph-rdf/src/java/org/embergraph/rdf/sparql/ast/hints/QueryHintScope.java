@@ -74,7 +74,7 @@ public enum QueryHintScope {
    */
   Prior(new URIImpl(QueryHints.NAMESPACE + "Prior"));
 
-  private QueryHintScope(final URI uri) {
+  QueryHintScope(final URI uri) {
     this.uri = uri;
   }
 

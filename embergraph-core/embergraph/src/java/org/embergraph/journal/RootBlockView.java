@@ -597,8 +597,7 @@ public class RootBlockView implements IRootBlockView {
     if (this == o) return true;
     if (!(o instanceof IRootBlockView)) return false;
     final IRootBlockView o2 = (IRootBlockView) o;
-    if (!buf.asReadOnlyBuffer().equals(o2.asReadOnlyBuffer())) return false;
-    return true;
+    return buf.asReadOnlyBuffer().equals(o2.asReadOnlyBuffer());
   }
 
   /**
@@ -884,7 +883,7 @@ public class RootBlockView implements IRootBlockView {
 
   private static final String toString(final DateFormat df, final long t) {
 
-    return Long.toString(t) + (t != 0L ? " [" + df.format(new Date(t)) + "]" : "");
+    return t + (t != 0L ? " [" + df.format(new Date(t)) + "]" : "");
   }
 
   private static DateFormat getDateFormat() {

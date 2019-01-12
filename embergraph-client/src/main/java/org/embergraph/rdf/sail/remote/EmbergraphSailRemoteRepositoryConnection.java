@@ -886,7 +886,7 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
   }
 
   @Override
-  public boolean isActive() throws UnknownTransactionStateException, RepositoryException {
+  public boolean isActive() throws RepositoryException {
     /*
      * First, do some non-blocking tests. If we can prove that the connection
      * is not open or that there is no active transaction with a non-blocking
@@ -903,17 +903,13 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
     synchronized (remoteTx) {
       assertOpen();
       final IRemoteTx tx = remoteTx.get();
-      if (tx == null) {
-        // no transaction is active.
-        return false;
-      }
-      /*
+      // no transaction is active.
+      return tx != null;/*
        * The client has an active transaction.
        *
        * Note: This DOES NOT indicate that the transaction is still active on
        * the server!
        */
-      return true;
     }
   }
 

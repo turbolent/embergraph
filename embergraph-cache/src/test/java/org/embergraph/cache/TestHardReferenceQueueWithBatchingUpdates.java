@@ -393,30 +393,30 @@ public class TestHardReferenceQueueWithBatchingUpdates extends TestCase2
   /** Additional properties understood by this test. */
   // Removed in BLZG-1497 to remove package dependency. Keep if CI is clean.
   // public static interface TestOptions extends ConcurrencyManager.Options {
-  public static interface TestOptions {
+  public interface TestOptions {
 
     /** The timeout for the test. */
-    public static final String TIMEOUT = "timeout";
+    String TIMEOUT = "timeout";
 
-    public static final String UNITS = "units";
+    String UNITS = "units";
 
     /** The #of concurrent threads to run. */
-    public static final String NTHREADS = "nthreads";
+    String NTHREADS = "nthreads";
 
     /** The capacity of the shared queue. */
-    public static final String CAPACITY = "capacity";
+    String CAPACITY = "capacity";
 
     /** The #of elements to scan on the thread local queue in order to identify duplicates. */
-    public static final String THREAD_LOCAL_NSCAN = "threadLocalNScan";
+    String THREAD_LOCAL_NSCAN = "threadLocalNScan";
 
     /** The capacity of the thread local queue. */
-    public static final String THREAD_LOCAL_CAPACITY = "threadLocalCapacity";
+    String THREAD_LOCAL_CAPACITY = "threadLocalCapacity";
 
     /**
      * The size of the thread local queue at which an attempt will be made to barge in on the lock
      * and batch the updates to the shared queue.
      */
-    public static final String THREAD_LOCAL_TRY_LOCK_SIZE = "threadLocalTryLockSize";
+    String THREAD_LOCAL_TRY_LOCK_SIZE = "threadLocalTryLockSize";
   }
 
   /**

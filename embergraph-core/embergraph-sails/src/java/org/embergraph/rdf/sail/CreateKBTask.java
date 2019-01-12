@@ -177,11 +177,7 @@ public class CreateKBTask extends AbstractApiTask<Void> {
           throw new RuntimeException(e);
         }
 
-        if (quorum.getMember().isLeader(token)) {
-          isSoloOrLeader = true;
-        } else {
-          isSoloOrLeader = false;
-        }
+        isSoloOrLeader = quorum.getMember().isLeader(token);
 
         final IJournal journal = jnl;
         if (journal.isGroupCommit() && journal.getRootBlockView().getCommitCounter() == 0L) {

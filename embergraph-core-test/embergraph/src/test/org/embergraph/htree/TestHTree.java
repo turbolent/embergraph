@@ -99,9 +99,9 @@ public class TestHTree extends AbstractHTreeTestCase {
       final DirectoryPage root = htree.getRoot();
       assertEquals(4, root.childRefs.length);
       final BucketPage a = (BucketPage) root.childRefs[0].get();
-      assertTrue(a == (BucketPage) root.childRefs[1].get());
-      assertTrue(a == (BucketPage) root.childRefs[2].get());
-      assertTrue(a == (BucketPage) root.childRefs[3].get());
+      assertTrue(a == root.childRefs[1].get());
+      assertTrue(a == root.childRefs[2].get());
+      assertTrue(a == root.childRefs[3].get());
       assertEquals(2, root.getGlobalDepth()); // starts at max.
       assertEquals(0, a.getGlobalDepth()); // starts at min.
 
@@ -204,8 +204,8 @@ public class TestHTree extends AbstractHTreeTestCase {
       // htree.dump(Level.ALL, System.err, true/* materialize */);
       assertTrue(root == htree.getRoot());
       assertEquals(4, root.childRefs.length);
-      assertTrue(a == (BucketPage) root.childRefs[0].get());
-      assertTrue(a == (BucketPage) root.childRefs[3].get());
+      assertTrue(a == root.childRefs[0].get());
+      assertTrue(a == root.childRefs[3].get());
       assertEquals(2, root.getGlobalDepth());
       assertEquals(0, a.getGlobalDepth()); // localDepth has increased.
       assertEquals(2, a.getKeyCount());
@@ -250,8 +250,8 @@ public class TestHTree extends AbstractHTreeTestCase {
       assertTrue(root == htree.getRoot());
       assertEquals(4, root.childRefs.length);
       final BucketPage c = (BucketPage) root.childRefs[1].get();
-      assertTrue(a == (BucketPage) root.childRefs[0].get());
-      assertTrue(a == (BucketPage) root.childRefs[3].get());
+      assertTrue(a == root.childRefs[0].get());
+      assertTrue(a == root.childRefs[3].get());
       assertEquals(2, root.getGlobalDepth());
       assertEquals(0, a.getGlobalDepth()); // localDepth has increased.
       assertEquals(0, c.getGlobalDepth()); // localDepth is same as [a].
@@ -304,7 +304,7 @@ public class TestHTree extends AbstractHTreeTestCase {
       // htree.dump(Level.ALL, System.err, true/* materialize */);
       assertTrue(root == htree.getRoot());
       assertEquals(4, root.childRefs.length);
-      assertTrue(a == (BucketPage) root.childRefs[0].get());
+      assertTrue(a == root.childRefs[0].get());
       assertEquals(2, root.getGlobalDepth());
       assertEquals(0, a.getGlobalDepth()); // localDepth has increased.
       assertEquals(4, a.getKeyCount());

@@ -169,7 +169,7 @@ public class Striterator implements IStriterator, ITailOp, ICloseableIterator {
     addFilter(
         new Filter() {
           public boolean isValid(Object obj) {
-            return obj == null ? false : obj.getClass() == obj;
+            return obj != null && obj.getClass() == obj;
           }
         });
 

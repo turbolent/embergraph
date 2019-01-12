@@ -151,8 +151,7 @@ public class JoinSetUtil {
       if (!(o instanceof VertexJoinSet)) return false;
       final VertexJoinSet t = (VertexJoinSet) o;
       if (!vertices.equals(t.vertices)) return false;
-      if (!joinvars.equals(t.joinvars)) return false;
-      return true;
+      return joinvars.equals(t.joinvars);
     }
   }
 
@@ -201,7 +200,7 @@ public class JoinSetUtil {
         final IJoinNode j = requiredJoins[i];
         // anything bound by this join.
         final Set<IVariable<?>> tmp =
-            sa.getSpannedVariables((BOp) j, new LinkedHashSet<IVariable<?>>());
+            sa.getSpannedVariables(j, new LinkedHashSet<IVariable<?>>());
         tmp.addAll(knownBound); // plus anything bound on entry to the group.
         eventuallyBoundVars.addAll(vars[i] = tmp);
       }

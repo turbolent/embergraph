@@ -105,12 +105,7 @@ public class ChunkedArrayIterator<E> implements IChunkedOrderedIterator<E> {
 
     assert i <= bufferCount;
 
-    if (i == bufferCount) {
-
-      return false;
-    }
-
-    return true;
+    return i != bufferCount;
   }
 
   @Override

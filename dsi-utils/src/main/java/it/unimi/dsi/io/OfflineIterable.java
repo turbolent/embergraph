@@ -140,7 +140,7 @@ public class OfflineIterable<T, U extends T> implements Iterable<U>, SafelyClose
      * @param dos the stream where the element should be written.
      * @throws IOException if an exception occurs while writing.
      */
-    public void write(A x, DataOutputStream dos) throws IOException;
+    void write(A x, DataOutputStream dos) throws IOException;
 
     /**
      * Reads an element.
@@ -149,7 +149,7 @@ public class OfflineIterable<T, U extends T> implements Iterable<U>, SafelyClose
      * @param x the object where the element will be read.
      * @throws IOException if an exception occurs while reading.
      */
-    public void read(DataInputStream dis, B x) throws IOException;
+    void read(DataInputStream dis, B x) throws IOException;
   }
 
   /** The serializer used to store and read the elements of this iterable. */

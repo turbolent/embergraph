@@ -460,7 +460,7 @@ public class TestRWWriteCacheService extends TestCase3 {
 
       return raf.getChannel();
     }
-  };
+  }
 
   /*
    * Now generate randomviews, first an ordered view of 10000 random lengths
@@ -483,7 +483,7 @@ public class TestRWWriteCacheService extends TestCase3 {
       buf.mark();
       nbytes = buf.capacity();
     }
-  };
+  }
 
   /**
    * Test simple compaction of WriteCache
@@ -563,7 +563,6 @@ public class TestRWWriteCacheService extends TestCase3 {
 
         addr += 1000;
       }
-      ;
 
       assertTrue(WriteCache.transferTo(src, dst, null, 0));
     } finally {

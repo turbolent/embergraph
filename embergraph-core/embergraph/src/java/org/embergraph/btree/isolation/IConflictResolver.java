@@ -73,6 +73,6 @@ public interface IConflictResolver extends Serializable {
    *     conflict exists.
    * @return true iff the conflict was resolved.
    */
-  public boolean resolveConflict(IIndex writeSet, ITuple txTuple, ITuple currentTuple)
+  boolean resolveConflict(IIndex writeSet, ITuple txTuple, ITuple currentTuple)
       throws Exception;
 }

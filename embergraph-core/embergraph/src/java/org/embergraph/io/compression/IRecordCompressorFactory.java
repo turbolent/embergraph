@@ -32,5 +32,5 @@ package org.embergraph.io.compression;
 public interface IRecordCompressorFactory<A extends IRecordCompressor> {
 
   /** Return an {@link IRecordCompressor} instance. */
-  public A getInstance();
+  A getInstance();
 }

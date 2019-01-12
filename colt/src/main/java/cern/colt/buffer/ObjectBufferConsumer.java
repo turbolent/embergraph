@@ -21,5 +21,5 @@ public interface ObjectBufferConsumer {
    *
    * @param list the list of which all elements shall be added.
    */
-  public void addAllOf(ObjectArrayList list);
+  void addAllOf(ObjectArrayList list);
 }

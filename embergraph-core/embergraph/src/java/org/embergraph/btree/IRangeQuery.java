@@ -55,7 +55,7 @@ public interface IRangeQuery {
    * @return The #of tuples in the index.
    * @see ICheckpointProtocol#rangeCount()
    */
-  public long rangeCount();
+  long rangeCount();
 
   /**
    * Return the #of tuples in a half-open key range. The fromKey and toKey need not exist in the
@@ -73,7 +73,7 @@ public interface IRangeQuery {
    * @todo ??? throw exception if LT but allow GTE? This will be zero if <i>toKey</i> is less than
    *     or equal to <i>fromKey</i> in the total ordering.
    */
-  public long rangeCount(byte[] fromKey, byte[] toKey);
+  long rangeCount(byte[] fromKey, byte[] toKey);
 
   /**
    * Return the exact #of tuples in a half-open key range. The fromKey and toKey need not exist in
@@ -88,7 +88,7 @@ public interface IRangeQuery {
    *     is no upper bound.
    * @return The exact #of tuples in the half-open key range.
    */
-  public long rangeCountExact(byte[] fromKey, byte[] toKey);
+  long rangeCountExact(byte[] fromKey, byte[] toKey);
 
   /**
    * Return the exact #of tuples in a half-open key range, including any deleted tuples. The fromKey
@@ -108,49 +108,49 @@ public interface IRangeQuery {
    * @return The exact #of deleted and undeleted tuples in the half-open key range.
    * @see IRangeQuery#rangeCountExact(byte[], byte[])
    */
-  public long rangeCountExactWithDeleted(final byte[] fromKey, final byte[] toKey);
+  long rangeCountExactWithDeleted(final byte[] fromKey, final byte[] toKey);
 
   /**
    * Flag specifies no data (the #of scanned index entries matching the optional filter will still
    * be reported).
    */
-  public static final int NONE = 0;
+  int NONE = 0;
 
   /**
    * Flag specifies that keys in the key range will be returned. The keys are guaranteed to be made
    * available via {@link ITupleIterator#getKey()} only when this flag is given.
    */
-  public static final int KEYS = 1 << 0;
+  int KEYS = 1 << 0;
 
   /**
    * Flag specifies that values in the key range will be returned. The values are guaranteed to be
    * made available via {@link ITupleIterator#next()} and {@link ITupleIterator#getValue()} only
    * when this flag is given.
    */
-  public static final int VALS = 1 << 1;
+  int VALS = 1 << 1;
 
   /**
    * Flag specifies that deleted index entries for a key are visited by the iterator (by default the
    * iterator will hide deleted index entries).
    */
-  public static final int DELETED = 1 << 2;
+  int DELETED = 1 << 2;
 
   /**
    * The flags that should be used by default [{@link #KEYS}, {@link #VALS}] in contexts where the
    * flags are not explicitly specified by the application such as {@link #rangeIterator(byte[],
    * byte[])}.
    */
-  public static final int DEFAULT = KEYS | VALS;
+  int DEFAULT = KEYS | VALS;
 
   /** Shorthand for [{@link #KEYS}, {@link #VALS}, {@link #DELETED}]. */
-  public static final int ALL = (KEYS | VALS | DELETED);
+  int ALL = (KEYS | VALS | DELETED);
 
   /**
    * Flag specifies that the iterator, including any {@link ITupleFilter}s, will not write on the
    * index. Various optimizations may be applied when this flag is present. (Read only can be
    * inferred if {@link #CURSOR} flag is NOT specified AND there are NO {@link ITupleFilter}s).
    */
-  public static final int READONLY = 1 << 3;
+  int READONLY = 1 << 3;
 
   /**
    * Flag specifies that entries visited by the iterator in the key range will be <em>removed</em>
@@ -178,7 +178,7 @@ public interface IRangeQuery {
    *     an optionally limited #of matching index entries. This makes it ideal for creating certain
    *     kinds of queue constructions.
    */
-  public static final int REMOVEALL = 1 << 4;
+  int REMOVEALL = 1 << 4;
 
   /**
    * Flag specifies that the base iterator will support the full {@link ITupleCursor} API, including
@@ -199,7 +199,7 @@ public interface IRangeQuery {
    *       with {@link ResultSet}s.
    * </ol>
    */
-  public static final int CURSOR = 1 << 5;
+  int CURSOR = 1 << 5;
 
   /**
    * Flag specifies that the entries will be visited using a reverse scan. The first tuple to be
@@ -211,7 +211,7 @@ public interface IRangeQuery {
    * <p>This flag may be used to realize a number of interesting constructions, including atomic
    * operations on the tail of a queue and obtaining the last key in the key range.
    */
-  public static final int REVERSE = 1 << 6;
+  int REVERSE = 1 << 6;
 
   /**
    * There are two ways in which the successor of an unsigned byte[] key may be computed. The
@@ -226,7 +226,7 @@ public interface IRangeQuery {
    * <p>Note: This option is applied by {@link AbstractChunkedTupleIterator}, which is responsible
    * for issuing continuation queries.
    */
-  public static final int FIXED_LENGTH_SUCCESSOR = 1 << 7;
+  int FIXED_LENGTH_SUCCESSOR = 1 << 7;
 
   /**
    * Flag indicates that the iterator may process multiple index partitions in parallel. While
@@ -241,7 +241,7 @@ public interface IRangeQuery {
    * @todo This flag is not supported in combination with {@link #CURSOR}?
    * @todo This flag is not supported in combination with {@link #REVERSE}?
    */
-  public static final int PARALLEL = 1 << 8;
+  int PARALLEL = 1 << 8;
 
   /**
    * Visits all tuples in key order. This is identical to
@@ -252,7 +252,7 @@ public interface IRangeQuery {
    *
    * @return An iterator that will visit all entries in key order.
    */
-  public ITupleIterator rangeIterator();
+  ITupleIterator rangeIterator();
 
   /**
    * Return an iterator that visits the entries in a half-open key range. When <i>toKey</i>
@@ -273,7 +273,7 @@ public interface IRangeQuery {
    * @see EntryFilter, which may be used to filter the entries visited by the iterator.
    * @todo define behavior when the toKey is less than the fromKey.
    */
-  public ITupleIterator rangeIterator(byte[] fromKey, byte[] toKey);
+  ITupleIterator rangeIterator(byte[] fromKey, byte[] toKey);
 
   /**
    * Designated variant (the one that gets overridden) for an iterator that visits the entries in a
@@ -301,7 +301,7 @@ public interface IRangeQuery {
    * @see IFilterConstructor, which may be used to construct an iterator stack performing filtering
    *     or other operations.
    */
-  public ITupleIterator rangeIterator(
+  ITupleIterator rangeIterator(
       byte[] fromKey, byte[] toKey, int capacity, int flags, IFilter filterCtor);
 
   //    /**

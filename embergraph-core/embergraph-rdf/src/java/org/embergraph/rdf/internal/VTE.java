@@ -45,7 +45,7 @@ public enum VTE {
   /** A statement identifier. */
   STATEMENT((byte) 0x03);
 
-  private VTE(final byte flags) {
+  VTE(final byte flags) {
 
     this.v = flags;
   }

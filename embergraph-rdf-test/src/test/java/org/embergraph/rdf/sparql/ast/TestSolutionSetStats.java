@@ -48,7 +48,7 @@ public class TestSolutionSetStats extends AbstractSolutionSetStatsTestCase {
   public void test_001() {
 
     try {
-      new SolutionSetStats((IBindingSet[]) null /* bindingSets */);
+      new SolutionSetStats(null /* bindingSets */);
       fail("Expecting: " + IllegalArgumentException.class);
     } catch (IllegalArgumentException ex) {
       if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);

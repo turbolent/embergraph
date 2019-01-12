@@ -1990,10 +1990,10 @@ public class WriteExecutorService extends ThreadPoolExecutor {
     /** The #of milliseconds ago that work began on this task. */
     private final long startAge;
 
-    private static enum State {
+    private enum State {
       Waiting,
       Running,
-      Done;
+      Done
     }
 
     private final State state;

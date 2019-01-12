@@ -21,5 +21,5 @@ public interface IntBufferConsumer {
    *
    * @param list the list of which all elements shall be added.
    */
-  public void addAllOf(IntArrayList list);
+  void addAllOf(IntArrayList list);
 }

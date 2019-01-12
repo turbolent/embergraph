@@ -79,7 +79,7 @@ public class ListBindingSet implements IBindingSet {
     public String toString() {
       return var + "=" + val;
     }
-  };
+  }
 
   //	/**
   //	 * The stack of symbol tables. Each symbol table is a mapping from an

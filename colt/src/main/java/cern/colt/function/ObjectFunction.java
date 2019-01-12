@@ -19,5 +19,5 @@ public interface ObjectFunction {
    * @param argument argument passed to the function.
    * @return the result of the function.
    */
-  public abstract Object apply(Object argument);
+  Object apply(Object argument);
 }

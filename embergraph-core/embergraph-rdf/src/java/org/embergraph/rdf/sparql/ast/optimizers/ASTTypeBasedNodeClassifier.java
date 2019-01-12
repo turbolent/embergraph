@@ -121,7 +121,7 @@ class ASTTypeBasedNodeClassifier {
    */
   @SuppressWarnings("unchecked")
   public <T> List<T> get(Class<T> clazz) {
-    return (List<T>) (List<?>) classifiedNodes.get(clazz);
+    return (List<T>) classifiedNodes.get(clazz);
   }
 
   public void addConstraintForType(

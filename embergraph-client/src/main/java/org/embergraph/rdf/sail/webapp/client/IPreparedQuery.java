@@ -28,5 +28,5 @@ package org.embergraph.rdf.sail.webapp.client;
  */
 public interface IPreparedQuery extends IPreparedOperation {
 
-  public void addRequestParam(String name, String... val);
+  void addRequestParam(String name, String... val);
 }

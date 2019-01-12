@@ -82,7 +82,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public static interface Options extends DataService.Options {}
+  public interface Options extends DataService.Options {}
 
   /** @param properties */
   protected MetadataService(Properties properties) {
@@ -243,7 +243,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
   }
 
   public void splitIndexPartition(
-      String name, PartitionLocator oldLocator, PartitionLocator newLocators[])
+      String name, PartitionLocator oldLocator, PartitionLocator[] newLocators)
       throws IOException, InterruptedException, ExecutionException {
 
     setupLoggingContext();
@@ -423,7 +423,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
   protected static class SplitIndexPartitionTask extends AbstractTask {
 
     protected final PartitionLocator oldLocator;
-    protected final PartitionLocator newLocators[];
+    protected final PartitionLocator[] newLocators;
 
     /**
      * @param concurrencyManager
@@ -435,7 +435,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
         IConcurrencyManager concurrencyManager,
         String resource,
         PartitionLocator oldLocator,
-        PartitionLocator newLocators[]) {
+        PartitionLocator[] newLocators) {
 
       super(concurrencyManager, ITx.UNISOLATED, resource);
 
@@ -587,7 +587,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
    */
   protected static class JoinIndexPartitionTask extends AbstractTask {
 
-    protected final PartitionLocator oldLocators[];
+    protected final PartitionLocator[] oldLocators;
     protected final PartitionLocator newLocator;
 
     /**
@@ -599,7 +599,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
     protected JoinIndexPartitionTask(
         IConcurrencyManager concurrencyManager,
         String resource,
-        PartitionLocator oldLocators[],
+        PartitionLocator[] oldLocators,
         PartitionLocator newLocator) {
 
       super(concurrencyManager, ITx.UNISOLATED, resource);

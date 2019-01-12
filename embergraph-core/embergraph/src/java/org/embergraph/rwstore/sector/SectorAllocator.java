@@ -585,7 +585,7 @@ public class SectorAllocator implements Comparable<SectorAllocator> {
 
   public int compareTo(final SectorAllocator other) {
 
-    final int oindex = ((SectorAllocator) other).m_index;
+    final int oindex = other.m_index;
 
     return m_index < oindex ? -1 : (m_index > oindex ? 1 : 0);
   }

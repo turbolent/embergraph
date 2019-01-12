@@ -380,11 +380,11 @@ public class ASTDeferredIVResolutionInitializer extends ASTVisitorBase {
         case XSDString:
           embergraphValue =
               valueFactory.createLiteral(
-                  ((AbstractLiteralIV) iv).stringValue(), dte.getDatatypeURI());
+                  iv.stringValue(), dte.getDatatypeURI());
           break;
         case XSDInteger:
           embergraphValue =
-              valueFactory.createLiteral(((AbstractLiteralIV) iv).stringValue(), XMLSchema.INTEGER);
+              valueFactory.createLiteral(iv.stringValue(), XMLSchema.INTEGER);
           break;
         case XSDDecimal:
           embergraphValue =
@@ -614,7 +614,7 @@ public class ASTDeferredIVResolutionInitializer extends ASTVisitorBase {
         }
       case XSDUnsignedInt:
         {
-          return new XSDUnsignedIntIV((int) (Integer.valueOf(val) + Integer.MIN_VALUE));
+          return new XSDUnsignedIntIV((Integer.valueOf(val) + Integer.MIN_VALUE));
         }
       case XSDUnsignedLong:
         {

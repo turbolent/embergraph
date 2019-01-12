@@ -199,7 +199,7 @@ public class ASTComplexOptionalOptimizer implements IASTOptimizer {
 
     for (int i = 0; i < arity; i++) {
 
-      final BOp child = (BOp) group.get(i);
+      final BOp child = group.get(i);
 
       if (child instanceof GraphPatternGroup<?>) {
 
@@ -417,7 +417,7 @@ public class ASTComplexOptionalOptimizer implements IASTOptimizer {
         // All variables still referenced in the joins or filters of
         // the group (after extracting the named subquery).
         final Set<IVariable<?>> afterVars =
-            sa.getSpannedVariables((BOp) group, new LinkedHashSet<IVariable<?>>());
+            sa.getSpannedVariables(group, new LinkedHashSet<IVariable<?>>());
 
         if (query.getProjection() != null) {
           // Include anything that we must project out of the query.

@@ -259,7 +259,7 @@ public class ChunkedResolutionOp extends PipelineOp {
 
             final IV<?, ?> iv = (IV<?, ?>) e.getValue().get();
 
-            final Value val = (Value) iv.getValue();
+            final Value val = iv.getValue();
 
             // Lookup the resolved EmbergraphValue object.
             final EmbergraphValue val2 = values.get(val);

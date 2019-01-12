@@ -82,19 +82,19 @@ public abstract class AbstractMRMWTestCase extends AbstractRawStoreTestCase
   }
 
   /** Additional properties understood by this test. */
-  public static interface TestOptions extends Options {
+  public interface TestOptions extends Options {
 
     /** The timeout for the test. */
-    public static final String TIMEOUT = "timeout";
+    String TIMEOUT = "timeout";
 
     /** The #of trials to run. */
-    public static final String NTRIALS = "ntrials";
+    String NTRIALS = "ntrials";
 
     /**
      * The #of concurrent clients to run. 20 is a reasonable value for testing concurrency. 1 means
      * one reader or writer (you can decide which it will be using {@link #PERCENT_READERS}.
      */
-    public static final String NCLIENTS = "nclients";
+    String NCLIENTS = "nclients";
 
     /**
      * The percentage of trials that are tasked as {@link ReaderTask}s rather than {@link
@@ -104,22 +104,22 @@ public abstract class AbstractMRMWTestCase extends AbstractRawStoreTestCase
      * <p>Note: There is NO validation of correctness unless you are running BOTH writers and
      * readers!
      */
-    public static final String PERCENT_READERS = "percentReaders";
+    String PERCENT_READERS = "percentReaders";
 
     /**
      * The percentage of those trials that are tasked as a {@link WriterTask} where the {@link
      * WriterTask} will force the data to the disk using {@link IRawStore#force(boolean)}.
      */
-    public static final String PERCENT_WRITER_WILL_FLUSH = "percentWriterWillFlush";
+    String PERCENT_WRITER_WILL_FLUSH = "percentWriterWillFlush";
 
     /** The maximum length of the records used in the test. */
-    public static final String RECLEN = "reclen";
+    String RECLEN = "reclen";
 
     /** The #of write operations in each trial that is elected to be a {@link WriterTask}. */
-    public static final String NWRITES = "nwrites";
+    String NWRITES = "nwrites";
 
     /** The #of read operations in each trial that is elected to be a {@link ReaderTask}. */
-    public static final String NREADS = "nreads";
+    String NREADS = "nreads";
   }
 
   /**
@@ -506,7 +506,7 @@ public abstract class AbstractMRMWTestCase extends AbstractRawStoreTestCase
       this.addr = addr;
       this.data = data;
     }
-  };
+  }
 
   /**
    * Class maintains ground truth for the store. Each {@link WriterTask} stores the {@link Record}s

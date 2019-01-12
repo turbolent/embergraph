@@ -38,11 +38,11 @@ public class HttpClientConfigurator {
      * IHttpClientFactory} implementation class (default {@value
      * #DEFAULT_CONNECTION_MANAGER_FACTORY_CLASS}).
      */
-    public static final String CONNECTION_MANAGER_FACTORY_CLASS =
+    String CONNECTION_MANAGER_FACTORY_CLASS =
         HttpClientConfigurator.class.getName();
 
     /** The name of the default {@link IHttpClientFactory} implementation class. */
-    public static final String DEFAULT_CONNECTION_MANAGER_FACTORY_CLASS =
+    String DEFAULT_CONNECTION_MANAGER_FACTORY_CLASS =
         DefaultHttpClientFactory.class.getName();
   }
 

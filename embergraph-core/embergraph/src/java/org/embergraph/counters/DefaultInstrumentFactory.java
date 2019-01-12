@@ -120,5 +120,5 @@ public class DefaultInstrumentFactory implements IInstrumentFactory {
   static class StringInstrument extends Instrument<String> {
 
     public void sample() {}
-  };
+  }
 }

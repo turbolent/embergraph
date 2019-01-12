@@ -44,16 +44,16 @@ public final class DefaultHttpClientFactory implements IHttpClientFactory {
      * This is the name of an optional System property that may be used to override the {@link
      * IHttpClientFactory} implementation class (default {@value #DEFAULT_SSL_KEYSTORE_PATH}).
      */
-    public static final String SSL_KEYSTORE_PATH =
+    String SSL_KEYSTORE_PATH =
         DefaultHttpClientFactory.class.getName() + ".SSLKeystorePath";
 
     /** There is no default SSL keystore. When not specified, all SSL end points will be trusted. */
-    public static final String DEFAULT_SSL_KEYSTORE_PATH = null;
+    String DEFAULT_SSL_KEYSTORE_PATH = null;
 
-    public static final String FOLLOW_REDIRECTS =
+    String FOLLOW_REDIRECTS =
         DefaultHttpClientFactory.class.getName() + ".followRedirects";
 
-    public static final String DEFAULT_FOLLOW_REDIRECTS = "true";
+    String DEFAULT_FOLLOW_REDIRECTS = "true";
 
     /**
      * The name of the system property that may be used to specify the maximum size (in bytes) for
@@ -63,7 +63,7 @@ public final class DefaultHttpClientFactory implements IHttpClientFactory {
      *     length on jetty response listener</a>
      * @see <a href="http://trac.blazegraph.com/ticket/1096">Set jetty request buffer size</a>
      */
-    public static final String RESPONSE_BUFFER_SIZE =
+    String RESPONSE_BUFFER_SIZE =
         DefaultHttpClientFactory.class.getName() + ".responseBufferSize";
 
     /**
@@ -72,7 +72,7 @@ public final class DefaultHttpClientFactory implements IHttpClientFactory {
      *
      * <p>Note: The default value for the jetty platform is 16kb.
      */
-    public static final int DEFAULT_RESPONSE_BUFFER_SIZE = 16 * 1024;
+    int DEFAULT_RESPONSE_BUFFER_SIZE = 16 * 1024;
 
     /**
      * The name of the system property that may be used to specify the maximum size (in bytes) for
@@ -80,7 +80,7 @@ public final class DefaultHttpClientFactory implements IHttpClientFactory {
      *
      * @see <a href="http://trac.blazegraph.com/ticket/1096">Set jetty request buffer size</a>
      */
-    public static final String REQUEST_BUFFER_SIZE =
+    String REQUEST_BUFFER_SIZE =
         DefaultHttpClientFactory.class.getName() + ".requestBufferSize";
 
     /**
@@ -89,7 +89,7 @@ public final class DefaultHttpClientFactory implements IHttpClientFactory {
      *
      * <p>Note: The default value for the jetty platform is 4kb.
      */
-    public static final int DEFAULT_REQUEST_BUFFER_SIZE = 16 * 1024;
+    int DEFAULT_REQUEST_BUFFER_SIZE = 16 * 1024;
   }
 
   @Override

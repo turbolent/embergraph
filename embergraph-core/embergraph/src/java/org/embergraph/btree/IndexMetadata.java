@@ -201,7 +201,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public static interface Options {
+  public interface Options {
 
     /*
      * Constants.
@@ -2435,7 +2435,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     LongPacker.packLong(out, version);
 
     // hasName?
-    out.writeBoolean(name != null ? true : false);
+    out.writeBoolean(name != null);
 
     // the name
     if (name != null) {
@@ -2587,7 +2587,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
        * declare the required public constructor.
        */
 
-      final Constructor ctor = cl.getConstructor(new Class[] {IndexMetadata.class});
+      final Constructor ctor = cl.getConstructor(IndexMetadata.class);
 
       final Checkpoint checkpoint = (Checkpoint) ctor.newInstance(new Object[] {this});
 
@@ -2633,7 +2633,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
        */
 
       final Constructor ctor =
-          cl.getConstructor(new Class[] {IndexMetadata.class, Checkpoint.class});
+          cl.getConstructor(IndexMetadata.class, Checkpoint.class);
 
       final Checkpoint checkpoint =
           (Checkpoint) ctor.newInstance(new Object[] {this, oldCheckpoint});

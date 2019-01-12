@@ -221,17 +221,15 @@ public abstract class ResourceService {
     if (requestServicePoolSize == 0) {
 
       requestService =
-          (ThreadPoolExecutor)
-              Executors.newCachedThreadPool(
-                  new DaemonThreadFactory(getClass().getName() + ".requestService"));
+          Executors.newCachedThreadPool(
+              new DaemonThreadFactory(getClass().getName() + ".requestService"));
 
     } else {
 
       requestService =
-          (ThreadPoolExecutor)
-              Executors.newFixedThreadPool(
-                  requestServicePoolSize,
-                  new DaemonThreadFactory(getClass().getName() + ".requestService"));
+          Executors.newFixedThreadPool(
+              requestServicePoolSize,
+              new DaemonThreadFactory(getClass().getName() + ".requestService"));
     }
 
     // Begin accepting connections.
@@ -474,7 +472,7 @@ public abstract class ResourceService {
 
     private final byte b;
 
-    private StatusEnum(final int b) {
+    StatusEnum(final int b) {
 
       this.b = (byte) b;
     }
@@ -500,12 +498,12 @@ public abstract class ResourceService {
   }
 
   /** Type safe enumeration of the kinds of resources which can be served. */
-  public static enum ResourceTypeEnum {
+  public enum ResourceTypeEnum {
     FILE(0),
     BUFFER(1);
     private final byte b;
 
-    private ResourceTypeEnum(final int b) {
+    ResourceTypeEnum(final int b) {
       this.b = (byte) b;
     }
 

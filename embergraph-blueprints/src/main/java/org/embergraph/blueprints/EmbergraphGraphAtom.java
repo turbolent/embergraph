@@ -8,9 +8,9 @@ package org.embergraph.blueprints;
  */
 public abstract class EmbergraphGraphAtom {
 
-  public static enum ElementType {
+  public enum ElementType {
     VERTEX,
-    EDGE;
+    EDGE
   }
 
   /** The element id. */

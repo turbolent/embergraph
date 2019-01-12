@@ -48,5 +48,5 @@ public interface VocabularyDecl {
   /**
    * Return an iterator which will visit the declared values. The iterator must not support removal.
    */
-  public Iterator<URI> values();
+  Iterator<URI> values();
 }

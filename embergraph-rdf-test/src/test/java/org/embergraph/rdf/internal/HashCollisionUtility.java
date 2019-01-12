@@ -1073,7 +1073,7 @@ public class HashCollisionUtility {
 
       log.debug("done.");
 
-      return (Void) null;
+      return null;
     }
 
     /** Combine chunks from the queue into a single chunk. */
@@ -1382,7 +1382,7 @@ public class HashCollisionUtility {
 
       parseFile(file);
 
-      return (Void) null;
+      return null;
     }
 
     private void parseFile(final File file)
@@ -1967,7 +1967,7 @@ public class HashCollisionUtility {
       // release the address map and backing allocation context.
       vbuf.clear();
 
-      return (Void) null;
+      return null;
     }
 
     /**

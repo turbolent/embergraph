@@ -73,6 +73,6 @@ public class TestClientException extends TestCase {
       t2 = t;
     }
 
-    throw new ClientException("test", Arrays.asList(new Throwable[] {t1, t2}));
+    throw new ClientException("test", Arrays.asList(t1, t2));
   }
 }

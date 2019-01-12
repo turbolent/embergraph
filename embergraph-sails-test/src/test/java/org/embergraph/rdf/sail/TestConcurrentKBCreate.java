@@ -721,7 +721,7 @@ public abstract class TestConcurrentKBCreate extends ProxyEmbergraphSailTestCase
 
       if (TimestampUtility.isReadOnly(timestamp)) {
 
-        return (EmbergraphSailRepositoryConnection) repo.getReadOnlyConnection(timestamp);
+        return repo.getReadOnlyConnection(timestamp);
       }
 
       // Read-write connection.

@@ -25,5 +25,5 @@ public interface CharProcedure {
    * @param element element passed to the procedure.
    * @return a flag to inform the object calling the procedure.
    */
-  public abstract boolean apply(char element);
+  boolean apply(char element);
 }

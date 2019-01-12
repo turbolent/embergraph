@@ -182,7 +182,7 @@ public class ServiceScore {
     {
       QuorumService<HAGlue> t;
       try {
-        t = (QuorumService<HAGlue>) quorum.getClient();
+        t = quorum.getClient();
       } catch (IllegalStateException ex) {
         // Note: Not available (quorum.start() not called).
         throw ex;

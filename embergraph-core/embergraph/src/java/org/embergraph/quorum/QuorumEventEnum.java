@@ -76,5 +76,5 @@ public enum QuorumEventEnum {
    * Event generated when a service becomes disconnected from a remote quorum (such as a zookeeper
    * ensemble).
    */
-  QUORUM_DISCONNECTED;
+  QUORUM_DISCONNECTED
 }

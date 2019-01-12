@@ -460,7 +460,7 @@ public abstract class AbstractHTree
     //
     //        }
 
-  };
+  }
 
   /**
    * Used to materialize children without causing concurrent threads passing through the same parent
@@ -1941,16 +1941,15 @@ public abstract class AbstractHTree
        */
       if (node.isLeaf()) {
 
-        assert (1 << (addressBits - node.globalDepth) == parent.countChildRefs((BucketPage) node));
+        assert (1 << (addressBits - node.globalDepth) == parent.countChildRefs(node));
 
         // code data record and _replace_ the data ref.
         ((BucketPage) node).data = nodeSer.encodeLive(((BucketPage) node).data);
 
         // slice onto the coded data record.
-        slice = ((BucketPage) node).data();
+        slice = node.data();
 
         btreeCounters.leavesWritten.increment();
-        ;
 
       } else {
 
@@ -1958,10 +1957,9 @@ public abstract class AbstractHTree
         ((DirectoryPage) node).data = nodeSer.encodeLive(((DirectoryPage) node).data);
 
         // slice onto the coded data record.
-        slice = ((DirectoryPage) node).data();
+        slice = node.data();
 
         btreeCounters.nodesWritten.increment();
-        ;
       }
 
       btreeCounters.serializeNanos.add(System.nanoTime() - beginNanos);

@@ -36,5 +36,5 @@ public interface IReadOnly {
    * procedure will be run against a mutable view of the index (assuming that the procedure is
    * executed in a context that has access to a mutable index view).
    */
-  public boolean isReadOnly();
+  boolean isReadOnly();
 }

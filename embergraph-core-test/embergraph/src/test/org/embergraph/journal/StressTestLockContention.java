@@ -106,7 +106,7 @@ public class StressTestLockContention extends ProxyTestCase<Journal> {
          * returns.
          */
 
-        futures = (List<Future<Object>>) journal.invokeAll(tasks, 20, TimeUnit.SECONDS);
+        futures = journal.invokeAll(tasks, 20, TimeUnit.SECONDS);
 
       } finally {
 

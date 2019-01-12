@@ -437,7 +437,7 @@ public class SparseRowStore implements IRowStoreConstants {
     final byte[] key = schema.fromKey(ndx.getIndexMetadata().getKeyBuilder(), primaryKey).getKey();
 
     // Submit the atomic read operation.
-    return (TPS) ndx.submit(key, proc);
+    return ndx.submit(key, proc);
   }
 
   /**
@@ -642,7 +642,7 @@ public class SparseRowStore implements IRowStoreConstants {
 
     final byte[] key = schema.fromKey(ndx.getIndexMetadata().getKeyBuilder(), primaryKey).getKey();
 
-    return (TPS) ndx.submit(key, proc);
+    return ndx.submit(key, proc);
   }
 
   /**
@@ -708,7 +708,7 @@ public class SparseRowStore implements IRowStoreConstants {
 
     final byte[] key = schema.fromKey(ndx.getIndexMetadata().getKeyBuilder(), primaryKey).getKey();
 
-    return (TPS) ndx.submit(key, proc);
+    return ndx.submit(key, proc);
   }
 
   /**

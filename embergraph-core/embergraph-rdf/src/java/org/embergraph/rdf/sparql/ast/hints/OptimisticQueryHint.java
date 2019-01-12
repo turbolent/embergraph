@@ -48,7 +48,7 @@ final class OptimisticQueryHint extends AbstractDoubleQueryHint {
 
     if (op instanceof JoinGroupNode) {
 
-      ((JoinGroupNode) op).setProperty(ASTStaticJoinOptimizer.Annotations.OPTIMISTIC, value);
+      op.setProperty(ASTStaticJoinOptimizer.Annotations.OPTIMISTIC, value);
     }
   }
 }

@@ -36,7 +36,7 @@ public class Appender extends FilterBase {
 
   @Override
   public final Iterator filterOnce(Iterator src, Object context) {
-    return new Appenderator(src, context, (Iterator) m_xtra);
+    return new Appenderator(src, context, m_xtra);
   }
 
   // -------------------------------------------------------------

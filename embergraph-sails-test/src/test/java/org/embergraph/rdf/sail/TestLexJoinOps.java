@@ -172,7 +172,7 @@ public class TestLexJoinOps extends QuadsTestCase {
       }
     } finally {
       if (sail instanceof EmbergraphSail)
-        ((EmbergraphSail) sail).__tearDownUnitTest(); // shutDown();
+        sail.__tearDownUnitTest(); // shutDown();
     }
   }
 
@@ -284,7 +284,7 @@ public class TestLexJoinOps extends QuadsTestCase {
       }
     } finally {
       if (sail instanceof EmbergraphSail)
-        ((EmbergraphSail) sail).__tearDownUnitTest(); // shutDown();
+        sail.__tearDownUnitTest(); // shutDown();
     }
   }
 
@@ -403,7 +403,7 @@ public class TestLexJoinOps extends QuadsTestCase {
       }
     } finally {
       if (sail instanceof EmbergraphSail)
-        ((EmbergraphSail) sail).__tearDownUnitTest(); // shutDown();
+        sail.__tearDownUnitTest(); // shutDown();
     }
   }
 
@@ -507,7 +507,7 @@ public class TestLexJoinOps extends QuadsTestCase {
       }
     } finally {
       if (sail instanceof EmbergraphSail)
-        ((EmbergraphSail) sail).__tearDownUnitTest(); // shutDown();
+        sail.__tearDownUnitTest(); // shutDown();
     }
   }
 }

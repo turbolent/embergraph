@@ -380,9 +380,7 @@ public class ASTJoinGroupPartition {
           break;
         }
       }
-      if (!moreCanBeBound) {
-        return true;
-      }
+      return !moreCanBeBound;
     }
 
     return false;

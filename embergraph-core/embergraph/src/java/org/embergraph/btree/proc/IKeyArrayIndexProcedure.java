@@ -43,7 +43,7 @@ public interface IKeyArrayIndexProcedure<T> extends IIndexProcedure<T> {
    *
    * @return The keys and never <code>null</code>.
    */
-  public IRaba getKeys();
+  IRaba getKeys();
 
   /**
    * The values.
@@ -51,5 +51,5 @@ public interface IKeyArrayIndexProcedure<T> extends IIndexProcedure<T> {
    * @return The values -or- <code>null</code> if no values were associated with the {@link
    *     IIndexProcedure}.
    */
-  public IRaba getValues();
+  IRaba getValues();
 }

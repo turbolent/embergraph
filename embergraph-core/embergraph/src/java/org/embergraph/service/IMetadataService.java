@@ -57,7 +57,7 @@ public interface IMetadataService extends IDataService, Remote {
    * @throws ExecutionException
    * @throws InterruptedException
    */
-  public int nextPartitionId(String name)
+  int nextPartitionId(String name)
       throws IOException, InterruptedException, ExecutionException;
 
   /**
@@ -74,7 +74,7 @@ public interface IMetadataService extends IDataService, Remote {
    * @throws InterruptedException
    * @throws ExecutionException
    */
-  public void splitIndexPartition(
+  void splitIndexPartition(
       String name, PartitionLocator oldLocator, PartitionLocator[] newLocators)
       throws IOException, InterruptedException, ExecutionException;
   /**
@@ -90,7 +90,7 @@ public interface IMetadataService extends IDataService, Remote {
    * @throws InterruptedException
    * @throws ExecutionException
    */
-  public void joinIndexPartition(
+  void joinIndexPartition(
       String name, PartitionLocator[] oldLocators, PartitionLocator newLocator)
       throws IOException, InterruptedException, ExecutionException;
 
@@ -107,7 +107,7 @@ public interface IMetadataService extends IDataService, Remote {
    * @throws InterruptedException
    * @throws ExecutionException
    */
-  public void moveIndexPartition(
+  void moveIndexPartition(
       String name, PartitionLocator oldLocator, PartitionLocator newLocator)
       throws IOException, InterruptedException, ExecutionException;
 
@@ -129,7 +129,7 @@ public interface IMetadataService extends IDataService, Remote {
    * @throws InterruptedException
    * @throws ExecutionException
    */
-  public UUID registerScaleOutIndex(
+  UUID registerScaleOutIndex(
       IndexMetadata metadata, byte[][] separatorKeys, UUID[] dataServices)
       throws IOException, InterruptedException, ExecutionException;
 
@@ -138,7 +138,7 @@ public interface IMetadataService extends IDataService, Remote {
    *
    * @param name The name of the scale-out index.
    */
-  public void dropScaleOutIndex(String name)
+  void dropScaleOutIndex(String name)
       throws IOException, InterruptedException, ExecutionException;
 
   /**
@@ -149,7 +149,7 @@ public interface IMetadataService extends IDataService, Remote {
    * @param key The separator key (the first key that would go into that partition).
    * @return The partition with that separator key or <code>null</code>.
    */
-  public PartitionLocator get(String name, long timestamp, byte[] key)
+  PartitionLocator get(String name, long timestamp, byte[] key)
       throws InterruptedException, ExecutionException, IOException;
 
   /**
@@ -161,6 +161,6 @@ public interface IMetadataService extends IDataService, Remote {
    * @return The partition spanning the given key or <code>null</code> if there are no partitions
    *     defined.
    */
-  public PartitionLocator find(String name, long timestamp, byte[] key)
+  PartitionLocator find(String name, long timestamp, byte[] key)
       throws InterruptedException, ExecutionException, IOException;
 }

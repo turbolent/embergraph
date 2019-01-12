@@ -146,16 +146,16 @@ public class TestSolutionSetManager extends TestCase2 {
     blobIV.setValue(valueFactory.createLiteral("bigfoo"));
 
     mockIV1 = (TermId) TermId.mockIV(VTE.LITERAL);
-    mockIV1.setValue((EmbergraphValue) valueFactory.createLiteral("red"));
+    mockIV1.setValue(valueFactory.createLiteral("red"));
 
     mockIV2 = (TermId) TermId.mockIV(VTE.LITERAL);
-    mockIV2.setValue((EmbergraphValue) valueFactory.createLiteral("blue"));
+    mockIV2.setValue(valueFactory.createLiteral("blue"));
 
     mockIV3 = (TermId) TermId.mockIV(VTE.LITERAL);
-    mockIV3.setValue((EmbergraphValue) valueFactory.createLiteral("green"));
+    mockIV3.setValue(valueFactory.createLiteral("green"));
 
     inlineIV = new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(100));
-    inlineIV.setValue((EmbergraphLiteral) valueFactory.createLiteral("100", XSD.INTEGER));
+    inlineIV.setValue(valueFactory.createLiteral("100", XSD.INTEGER));
 
     inlineIV2 = XSDBooleanIV.valueOf(true);
   }

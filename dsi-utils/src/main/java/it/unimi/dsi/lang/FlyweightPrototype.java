@@ -45,5 +45,5 @@ package it.unimi.dsi.lang;
 public interface FlyweightPrototype<T extends FlyweightPrototype<T>> {
 
   /** Returns a copy of this object, sharing state with this object as much as possible. */
-  public T copy();
+  T copy();
 }

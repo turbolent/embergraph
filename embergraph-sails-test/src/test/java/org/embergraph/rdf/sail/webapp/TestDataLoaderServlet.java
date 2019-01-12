@@ -103,8 +103,7 @@ public class TestDataLoaderServlet<S extends IIndexManager>
     }
 
     final EmbergraphSailRemoteRepositoryConnection cxn =
-        (EmbergraphSailRemoteRepositoryConnection)
-            repo.getEmbergraphSailRemoteRepository().getConnection();
+        repo.getEmbergraphSailRemoteRepository().getConnection();
 
     try {
       String queryStr = "select * where { ?s ?p ?o }";

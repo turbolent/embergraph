@@ -420,9 +420,9 @@ public class EmbergraphGASRunner<VS, ES, ST> extends GASRunnerBase<VS, ES, ST> {
 
     try {
 
-      final Constructor<IGASProgram<VS, ES, ST>> ctor = cls.getConstructor(new Class[] {});
+      final Constructor<IGASProgram<VS, ES, ST>> ctor = cls.getConstructor();
 
-      final IGASProgram<VS, ES, ST> gasProgram = ctor.newInstance(new Object[] {});
+      final IGASProgram<VS, ES, ST> gasProgram = ctor.newInstance();
 
       return gasProgram;
 

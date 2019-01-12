@@ -165,7 +165,6 @@ public class ConfigurationUtil {
       String httpmdUrl =
           "httpmd://" + ipAddr + ":" + port + "/" + jarFile + ";" + mdAlgorithm + "=0";
       codebase = HttpmdUtil.computeDigestCodebase(srcRoot, httpmdUrl);
-      ;
     } else { // use httpmd
       codebase = "http://" + ipAddr + ":" + port + "/" + jarFile;
     }

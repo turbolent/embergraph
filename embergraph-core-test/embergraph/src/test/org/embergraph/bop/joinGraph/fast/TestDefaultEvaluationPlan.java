@@ -93,7 +93,7 @@ public class TestDefaultEvaluationPlan extends TestCase2 {
     //        return new DefaultEvaluationPlan(joinNexus,rule);
 
     return new DefaultEvaluationPlan2(joinNexus, rule);
-  };
+  }
 
   /** Based on LUBM query#8 with the U1 dataset. */
   public void test_lubmQuery8() {
@@ -360,7 +360,7 @@ public class TestDefaultEvaluationPlan extends TestCase2 {
     }
 
     public boolean bind(
-        IPredicate<?> pred, IConstraint constraint[], Object e, IBindingSet bindings) {
+        IPredicate<?> pred, IConstraint[] constraint, Object e, IBindingSet bindings) {
 
       return false;
     }

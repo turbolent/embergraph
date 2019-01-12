@@ -477,7 +477,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
    *
    * @see IndexSegmentPlan#numInLevel
    */
-  final int writtenInLevel[];
+  final int[] writtenInLevel;
 
   /**
    * The stack of nodes that are currently being populated. The first N-1 elements in this array are
@@ -2549,7 +2549,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
     leafAddrFactory.addAndGet(nbytes);
 
-    final long addr1 = addressManager.toAddr((int) nbytes, offset);
+    final long addr1 = addressManager.toAddr(nbytes, offset);
 
     return addr1;
   }
@@ -2615,7 +2615,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
     nodeAddrFactory.addAndGet(nbytes);
 
-    final long addr1 = addressManager.toAddr((int) nbytes, offset);
+    final long addr1 = addressManager.toAddr(nbytes, offset);
 
     return addr1;
   }
@@ -3203,8 +3203,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
           new IndexSegmentCheckpoint(
               addressManager.getOffsetBits(),
               plan.height, // will always be correct.
-              (int) nleavesWritten, // actual #of leaves written.
-              (int) nnodesWritten, // actual #of nodes written.
+              nleavesWritten, // actual #of leaves written.
+              nnodesWritten, // actual #of nodes written.
               ntuplesWritten, // actual #of tuples written.
               maxNodeOrLeafLength,
               offsetLeaves,
@@ -3867,7 +3867,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
      * Fully buffer the tuples from the {@link IndexSegment} into memory in a single pass over the
      * source index. This approach does less IO, but requires more memory in the Java heap.
      */
-    FullyBuffered;
+    FullyBuffered
   }
 
   /**

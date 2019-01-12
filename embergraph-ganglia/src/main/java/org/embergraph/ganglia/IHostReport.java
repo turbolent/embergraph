@@ -20,8 +20,8 @@ import java.util.Map;
 /** Interface for a snapshot of metrics for a given host. */
 public interface IHostReport {
   /** The name of the host. */
-  public String getHostName();
+  String getHostName();
 
   /** A snapshot of metric values for the host. */
-  public Map<String, IGangliaMetricMessage> getMetrics();
+  Map<String, IGangliaMetricMessage> getMetrics();
 }

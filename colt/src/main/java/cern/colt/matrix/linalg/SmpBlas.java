@@ -371,7 +371,7 @@ public class SmpBlas implements Blas {
     seqBlas.drot(x, y, c, s);
   }
 
-  public void drotg(double a, double b, double rotvec[]) {
+  public void drotg(double a, double b, double[] rotvec) {
     seqBlas.drotg(a, b, rotvec);
   }
 

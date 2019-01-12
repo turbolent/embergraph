@@ -119,7 +119,7 @@ public final class Constant<E> extends ImmutableBOp implements IConstant<E> {
    */
   public Constant(final IVariable<E> var, final E value) {
 
-    super(BOp.NOARGS, Collections.singletonMap(Annotations.VAR, (Object) var));
+    super(BOp.NOARGS, Collections.singletonMap(Annotations.VAR, var));
     //        NV.asMap(new NV(Annotations.VAR, var)));
 
     if (var == null) throw new IllegalArgumentException();
@@ -239,9 +239,8 @@ public final class Constant<E> extends ImmutableBOp implements IConstant<E> {
     if (value == null) return false;
 
     // compares non-null value with the other value.
-    if (value.equals(otherValue)) return true;
+    return value.equals(otherValue);
 
-    return false;
   }
 
   @Override

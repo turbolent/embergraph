@@ -27,7 +27,7 @@ public interface IGangliaMetadataFactory {
    * @return The metric declaration -or- <code>null</code> if this factory does not know how to
    *     declare this metric.
    */
-  public IGangliaMetadataMessage newDecl(
+  IGangliaMetadataMessage newDecl(
       final String hostName, final String metricName, final Object value);
 
   /**
@@ -38,5 +38,5 @@ public interface IGangliaMetadataFactory {
    * @param decl A declaration (typically received over the wire).
    * @return The declaration to be used.
    */
-  public IGangliaMetadataMessage resolve(final IGangliaMetadataMessage decl);
+  IGangliaMetadataMessage resolve(final IGangliaMetadataMessage decl);
 }

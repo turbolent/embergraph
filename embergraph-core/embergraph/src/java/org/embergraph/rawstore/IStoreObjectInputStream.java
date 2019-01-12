@@ -30,5 +30,5 @@ import java.io.ObjectInput;
  */
 public interface IStoreObjectInputStream extends DataInput, ObjectInput {
 
-  public IRawStore getStore();
+  IRawStore getStore();
 }

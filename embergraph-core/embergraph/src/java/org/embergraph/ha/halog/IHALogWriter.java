@@ -31,7 +31,7 @@ import org.embergraph.journal.IRootBlockView;
 public interface IHALogWriter {
 
   /** Return <code>true</code> iff there is an HALog file that is currently open for writing. */
-  public boolean isHALogOpen();
+  boolean isHALogOpen();
 
   /**
    * Return the commit counter that is expected for the writes that will be logged (the same commit
@@ -43,10 +43,10 @@ public interface IHALogWriter {
    * <p>Note: The HALog filename contains the closing commit counter - that is, the HALog file is
    * named for the commit counter associated with the closing root block for a given write set.
    */
-  public long getCommitCounter();
+  long getCommitCounter();
 
   /** Return the sequence number that is expected for the next write. */
-  public long getSequence();
+  long getSequence();
 
   /**
    * Write the message and the data on the live HALog.
@@ -56,7 +56,7 @@ public interface IHALogWriter {
    * @throws IllegalStateException if the message is not appropriate for the state of the log.
    * @throws IOException if we can not write on the log.
    */
-  public void writeOnHALog(IHAWriteMessage msg, ByteBuffer data) throws IOException;
+  void writeOnHALog(IHAWriteMessage msg, ByteBuffer data) throws IOException;
 
   /**
    * Write the final root block on the HA log and close the file. This "seals" the file, which now
@@ -65,7 +65,7 @@ public interface IHALogWriter {
    * @param rootBlock The final root block for the write set.
    * @throws IOException
    */
-  public void closeHALog(IRootBlockView rootBlock) throws IOException;
+  void closeHALog(IRootBlockView rootBlock) throws IOException;
 
   /**
    * Disable (and remove) the current log file if one is open (an HALog file which has been
@@ -74,5 +74,5 @@ public interface IHALogWriter {
    * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/695">HAJournalServer reports
    *     "follower" but is in SeekConsensus and is not participating in commits</a>
    */
-  public void disableHALog() throws IOException;
+  void disableHALog() throws IOException;
 }

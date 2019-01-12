@@ -258,13 +258,11 @@ public class TestRemoteAccessPath extends AbstractEmbeddedFederationTestCase {
         new Predicate<E>(
             new IVariableOrConstant[] {Var.var("name"), Var.var("value")},
             NV.asMap(
-                new NV[] {
-                  new NV(Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(org.embergraph.bop.IPredicate.Annotations.TIMESTAMP, tx),
-                  new NV(Annotations.REMOTE_ACCESS_PATH, true),
-                  // Note: turns off shard-wise parallelism!
-                  new NV(Annotations.FLAGS, IRangeQuery.DEFAULT),
-                }));
+                new NV(Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(org.embergraph.bop.IPredicate.Annotations.TIMESTAMP, tx),
+                new NV(Annotations.REMOTE_ACCESS_PATH, true),
+                // Note: turns off shard-wise parallelism!
+                new NV(Annotations.FLAGS, IRangeQuery.DEFAULT)));
 
     final E[] expected =
         new E[] {
@@ -332,11 +330,9 @@ public class TestRemoteAccessPath extends AbstractEmbeddedFederationTestCase {
         new Predicate<E>(
             new IVariableOrConstant[] {new Constant<String>("John"), Var.var("value")},
             NV.asMap(
-                new NV[] {
-                  new NV(Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(org.embergraph.bop.IPredicate.Annotations.TIMESTAMP, tx),
-                  new NV(Annotations.REMOTE_ACCESS_PATH, true),
-                }));
+                new NV(Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(org.embergraph.bop.IPredicate.Annotations.TIMESTAMP, tx),
+                new NV(Annotations.REMOTE_ACCESS_PATH, true)));
 
     final E[] expected =
         new E[] {
@@ -398,11 +394,9 @@ public class TestRemoteAccessPath extends AbstractEmbeddedFederationTestCase {
         new Predicate<E>(
             new IVariableOrConstant[] {new Constant<String>("Mary"), Var.var("value")},
             NV.asMap(
-                new NV[] {
-                  new NV(Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(org.embergraph.bop.IPredicate.Annotations.TIMESTAMP, tx),
-                  new NV(Annotations.REMOTE_ACCESS_PATH, true),
-                }));
+                new NV(Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(org.embergraph.bop.IPredicate.Annotations.TIMESTAMP, tx),
+                new NV(Annotations.REMOTE_ACCESS_PATH, true)));
 
     final E[] expected =
         new E[] {
@@ -476,7 +470,7 @@ public class TestRemoteAccessPath extends AbstractEmbeddedFederationTestCase {
     public MockPipelineOp(final BOp[] args, final NV... anns) {
 
       super(args, NV.asMap(anns));
-    };
+    }
 
     private static final long serialVersionUID = 1L;
 

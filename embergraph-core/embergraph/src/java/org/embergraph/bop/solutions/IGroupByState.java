@@ -39,22 +39,22 @@ public interface IGroupByState {
    * The ordered array of value expressions which define the basis for aggregating solutions into
    * groups.
    */
-  public IValueExpression<?>[] getGroupByClause();
+  IValueExpression<?>[] getGroupByClause();
 
   /**
    * Top-level variables in the GROUP_BY clause in the order in which they were declared. Computed
    * value expressions which are not bound on a variable explicitly are NOT reported here.
    */
-  public LinkedHashSet<IVariable<?>> getGroupByVars();
+  LinkedHashSet<IVariable<?>> getGroupByVars();
 
   /** The value expressions to be projected out of the SELECT clause. */
-  public IValueExpression<?>[] getSelectClause();
+  IValueExpression<?>[] getSelectClause();
 
   /** Top-level variables in the SELECT clause in the order in which they were declared. */
-  public LinkedHashSet<IVariable<?>> getSelectVars();
+  LinkedHashSet<IVariable<?>> getSelectVars();
 
   /** Optional constraints applied to the aggregated solutions. */
-  public IConstraint[] getHavingClause();
+  IConstraint[] getHavingClause();
 
   /**
    * Variables for which we will need column projections. For example, given <code>
@@ -62,7 +62,7 @@ public interface IGroupByState {
    * will be reported in the order they were encountered during a left-to-right scan of the SELECT
    * expressions followed by a left-to-right scan of the HAVING constraints.
    */
-  public LinkedHashSet<IVariable<?>> getColumnVars();
+  LinkedHashSet<IVariable<?>> getColumnVars();
 
   //    /**
   //     * Variables for which we will need column projections of the distinct
@@ -78,14 +78,14 @@ public interface IGroupByState {
    * from their inner value expression in either the SELECT or HAVING clause. When <code>false
    * </code> certain optimizations are possible.
    */
-  public boolean isAnyDistinct();
+  boolean isAnyDistinct();
 
   /**
    * <code>true</code> iff any aggregate expression uses a reference to another aggregate expression
    * in the select clause. When <code>false</code> certain optimizations are possible (parallel
    * evaluation of the aggregates across the column projections).
    */
-  public boolean isSelectDependency();
+  boolean isSelectDependency();
 
   /**
    * <code>true</code> if any aggregate expression nests another aggregate expression. For example:
@@ -109,7 +109,7 @@ public interface IGroupByState {
    * are not nested aggregation expressions. When <code>false</code> certain optimizations may be
    * possible.
    */
-  public boolean isNestedAggregates();
+  boolean isNestedAggregates();
 
   /**
    * <code>true</code> if none of the value expressions in the optional HAVING clause use {@link
@@ -126,5 +126,5 @@ public interface IGroupByState {
    *
    * As a degenerate case, this is also <code>true</code> when there is no HAVING clause.
    */
-  public boolean isSimpleHaving();
+  boolean isSimpleHaving();
 }

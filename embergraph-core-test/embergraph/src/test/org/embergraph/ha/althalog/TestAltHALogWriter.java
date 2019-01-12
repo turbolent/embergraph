@@ -130,7 +130,7 @@ public class TestAltHALogWriter extends TestCase {
 
   /** Simple writelog test, open file, write data and commit. */
   @SuppressWarnings("deprecation")
-  public void testSimpleRWWriter() throws FileNotFoundException, IOException {
+  public void testSimpleRWWriter() throws IOException {
 
     final ChecksumUtility checker = ChecksumUtility.getCHK();
 
@@ -174,7 +174,7 @@ public class TestAltHALogWriter extends TestCase {
 
   /** Simple WriteReader, no concurrency, confirms non-delayed responses. */
   @SuppressWarnings("deprecation")
-  public void testSimpleRWWriterReader() throws FileNotFoundException, IOException {
+  public void testSimpleRWWriterReader() throws IOException {
 
     final ChecksumUtility checker = ChecksumUtility.getCHK();
 
@@ -414,7 +414,7 @@ public class TestAltHALogWriter extends TestCase {
 
   /** While a writer thread writes a number of HALogs, readers are opened to process them. */
   @SuppressWarnings("deprecation")
-  public void testStressConcurrentRWWriterReader() throws FileNotFoundException, IOException {
+  public void testStressConcurrentRWWriterReader() throws IOException {
     // establish halogdir
     final ChecksumUtility checker = ChecksumUtility.getCHK();
 

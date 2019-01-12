@@ -44,13 +44,13 @@ import org.openrdf.model.Value;
 public interface IStatementBuffer<F extends Statement> extends IBuffer<F> {
 
   /** The optional store into which statements will be inserted when non-<code>null</code>. */
-  public AbstractTripleStore getStatementStore();
+  AbstractTripleStore getStatementStore();
 
   /**
    * The database that will be used to resolve terms. When {@link #getStatementStore()} is <code>
    * null</code>, statements will be written into this store as well.
    */
-  public AbstractTripleStore getDatabase();
+  AbstractTripleStore getDatabase();
 
   /**
    * Add a statement to the buffer.
@@ -60,7 +60,7 @@ public interface IStatementBuffer<F extends Statement> extends IBuffer<F> {
    *     as axioms) but the term identifiers on the <i>stmt</i>'s values will be ignored.
    */
   @Override
-  public void add(F stmt);
+  void add(F stmt);
 
   /**
    * Add an "explicit" statement to the buffer with a "null" context.
@@ -69,7 +69,7 @@ public interface IStatementBuffer<F extends Statement> extends IBuffer<F> {
    * @param p The predicate.
    * @param o The object.
    */
-  public void add(Resource s, URI p, Value o);
+  void add(Resource s, URI p, Value o);
 
   /**
    * Add an "explicit" statement to the buffer.
@@ -79,7 +79,7 @@ public interface IStatementBuffer<F extends Statement> extends IBuffer<F> {
    * @param o The object.
    * @param c The context (optional).
    */
-  public void add(Resource s, URI p, Value o, Resource c);
+  void add(Resource s, URI p, Value o, Resource c);
 
   /**
    * Add a statement to the buffer.
@@ -94,7 +94,7 @@ public interface IStatementBuffer<F extends Statement> extends IBuffer<F> {
    * @param c The context (optional).
    * @param type The statement type (optional).
    */
-  public void add(Resource s, URI p, Value o, Resource c, StatementEnum type);
+  void add(Resource s, URI p, Value o, Resource c, StatementEnum type);
 
   /**
    * Set the canonicalizing map for blank nodes based on their ID. This allows you to reuse the same
@@ -114,5 +114,5 @@ public interface IStatementBuffer<F extends Statement> extends IBuffer<F> {
    * @throws IllegalArgumentException if the argument is <code>null</code>.
    * @throws IllegalStateException if the map has already been allocated.
    */
-  public void setBNodeMap(Map<String, EmbergraphBNode> bnodes);
+  void setBNodeMap(Map<String, EmbergraphBNode> bnodes);
 }

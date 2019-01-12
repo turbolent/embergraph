@@ -128,7 +128,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
   private static final transient int spannedRangeMultiplier =
       Integer.parseInt(
           System.getProperty(
-              AbstractKeyArrayIndexProcedure.class.getName() + ".spannedRangeMultiplier", "10"));;
+              AbstractKeyArrayIndexProcedure.class.getName() + ".spannedRangeMultiplier", "10"));
 
   /**
    * The size of a sub-key-range that will be handed off by a reader to a queue. A writer will drain
@@ -156,7 +156,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
   private static final transient int queueCapacity =
       Integer.parseInt(
           System.getProperty(
-              AbstractKeyArrayIndexProcedure.class.getName() + ".queueCapacity", "0"));;
+              AbstractKeyArrayIndexProcedure.class.getName() + ".queueCapacity", "0"));
 
   private static class Stats {
 
@@ -1549,7 +1549,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
 
       for (int i = 0; i < n; i++) {
 
-        final boolean bit = ibs.readBit() == 1 ? true : false;
+        final boolean bit = ibs.readBit() == 1;
         //                a.set(i, bit);
 
         if (a[i] = bit) onCount++;

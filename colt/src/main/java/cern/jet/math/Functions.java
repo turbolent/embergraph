@@ -710,7 +710,7 @@ public class Functions extends Object {
     double b = 0.2;
     double v = Math.sin(a) + Math.pow(Math.cos(b), 2);
     System.out.println(v);
-    DoubleDoubleFunction f = F.chain(F.plus, F.sin, F.chain(F.square, F.cos));
+    DoubleDoubleFunction f = chain(plus, sin, chain(square, cos));
     // DoubleDoubleFunction f = F.chain(plus,sin,F.chain(square,cos));
     System.out.println(f.apply(a, b));
     DoubleDoubleFunction g =
@@ -720,8 +720,8 @@ public class Functions extends Object {
           }
         };
     System.out.println(g.apply(a, b));
-    DoubleFunction m = F.plus(3);
-    DoubleFunction n = F.plus(4);
+    DoubleFunction m = plus(3);
+    DoubleFunction n = plus(4);
     System.out.println(m.apply(0));
     System.out.println(n.apply(0));
   }
@@ -737,7 +737,7 @@ public class Functions extends Object {
     System.out.println(v);
 
     // DoubleDoubleFunction f = F.chain(F.plus,F.identity,F.identity);
-    DoubleDoubleFunction f = F.chain(F.abs, F.chain(F.plus, F.sin, F.chain(F.square, F.cos)));
+    DoubleDoubleFunction f = chain(abs, chain(plus, sin, chain(square, cos)));
     // DoubleDoubleFunction f = F.chain(F.plus,F.sin,F.chain(F.square,F.cos));
     // DoubleDoubleFunction f = F.plus;
 
@@ -913,7 +913,7 @@ public class Functions extends Object {
     };
   }
   /** Tests various methods of this class. */
-  protected static void main(String args[]) {
+  protected static void main(String[] args) {
     int size = Integer.parseInt(args[0]);
     demo2(size);
     // demo1();

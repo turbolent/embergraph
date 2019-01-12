@@ -43,7 +43,7 @@ public interface IAutoboxBTree {
    * @return The de-serialized old value -or- <code>null</code> if there was no value stored under
    *     that key.
    */
-  public Object insert(Object key, Object value);
+  Object insert(Object key, Object value);
 
   /**
    * Lookup a value for a key.
@@ -51,7 +51,7 @@ public interface IAutoboxBTree {
    * @param key The key is implicitly converted to an <strong>unsigned</strong> <code>byte[]</code>.
    * @return The de-serialized value or <code>null</code> if there is no entry for that key.
    */
-  public Object lookup(Object key);
+  Object lookup(Object key);
 
   /**
    * Return true iff there is an entry for the key.
@@ -59,7 +59,7 @@ public interface IAutoboxBTree {
    * @param key The key is implicitly converted to an <strong>unsigned</strong> <code>byte[]</code>.
    * @return True if the btree contains an entry for that key.
    */
-  public boolean contains(Object key);
+  boolean contains(Object key);
 
   /**
    * Remove the key and its associated value.
@@ -68,5 +68,5 @@ public interface IAutoboxBTree {
    * @return The de-serialized value stored under that key or <code>null</code> if the key was not
    *     found.
    */
-  public Object remove(Object key);
+  Object remove(Object key);
 }

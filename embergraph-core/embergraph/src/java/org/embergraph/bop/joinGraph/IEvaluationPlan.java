@@ -42,13 +42,13 @@ public interface IEvaluationPlan {
    *     of the tail predicate whose evaluation order you want. So <code>[2,0,1]</code> says that
    *     the predicates will be evaluated in the order tail[2], then tail[0], then tail[1].
    */
-  public int[] getOrder();
+  int[] getOrder();
 
   /**
    * <code>true</code> iff the {@link IRule} was proven to be empty based on range counts or other
    * data.
    */
-  public boolean isEmpty();
+  boolean isEmpty();
 
   /**
    * The range count for the predicate.
@@ -57,5 +57,5 @@ public interface IEvaluationPlan {
    * @return The range count for that predicate.
    * @see IRangeCountFactory
    */
-  public long rangeCount(int tailIndex);
+  long rangeCount(int tailIndex);
 }

@@ -33,10 +33,10 @@ public interface IProxyTest extends Test {
    * Sets the delegate. {@link ProxyTestSuite} uses this method to set the delegate on each test
    * class instance that it creates that implements the {@link IProxyTest} interface.
    */
-  public void setDelegate(Test delegate);
+  void setDelegate(Test delegate);
 
   /**
    * Returns the reference to the delegate or <code>null</code> if the delegate was not established.
    */
-  public Test getDelegate();
+  Test getDelegate();
 }

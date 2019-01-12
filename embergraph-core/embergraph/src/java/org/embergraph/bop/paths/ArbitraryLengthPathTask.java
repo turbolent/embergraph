@@ -229,8 +229,7 @@ public class ArbitraryLengthPathTask implements Callable<Void> {
             ConcurrentHashMapAnnotations.DEFAULT_CONCURRENCY_LEVEL);
 
     this.dropVars =
-        (List<IVariable<?>>)
-            controllerOp.getProperty(Annotations.DROP_VARS, new ArrayList<IVariable<?>>());
+        controllerOp.getProperty(Annotations.DROP_VARS, new ArrayList<IVariable<?>>());
 
     if (log.isDebugEnabled()) {
       log.debug("vars to drop: " + dropVars);
@@ -1111,7 +1110,7 @@ public class ArbitraryLengthPathTask implements Callable<Void> {
 
       final String s = o.toString();
 
-      return s.substring(s.length() - len, s.length());
+      return s.substring(s.length() - len);
     }
   }
 

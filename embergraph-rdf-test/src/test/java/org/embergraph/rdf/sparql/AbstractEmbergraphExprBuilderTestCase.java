@@ -144,7 +144,7 @@ public class AbstractEmbergraphExprBuilderTestCase extends TestCase {
 
     if (iv == null) {
 
-      iv = (IV<EmbergraphValue, ?>) TermId.mockIV(VTE.valueOf(value));
+      iv = TermId.mockIV(VTE.valueOf(value));
 
       iv.setValue(value);
     }
@@ -307,7 +307,7 @@ public class AbstractEmbergraphExprBuilderTestCase extends TestCase {
       log.error("\nexpected:\n" + expected);
       log.error("\nactual:\n" + actual);
 
-      AbstractQueryEngineTestCase.diff((BOp) expected, (BOp) actual);
+      AbstractQueryEngineTestCase.diff(expected, actual);
 
       // No difference was detected?
       throw new AssertionError();

@@ -182,7 +182,7 @@ public class FulltextSearchServiceFactory extends AbstractServiceFactoryBase {
 
         if (!p.isConstant()) throw new FulltextSearchException("Expecting search predicate: " + sp);
 
-        final URI uri = (URI) ((ConstantNode) p).getValue();
+        final URI uri = (URI) p.getValue();
 
         if (!uri.stringValue().startsWith(FTS.NAMESPACE))
           throw new FulltextSearchException("Expecting search predicate: " + sp);
@@ -277,7 +277,7 @@ public class FulltextSearchServiceFactory extends AbstractServiceFactoryBase {
 
     final TermNode o = sp.o();
 
-    boolean isNotLiterale = !o.isConstant() || !(((ConstantNode) o).getValue() instanceof Literal);
+    boolean isNotLiterale = !o.isConstant() || !(o.getValue() instanceof Literal);
     boolean isNotVariable = !o.isVariable();
 
     if (isNotLiterale && isNotVariable) {
@@ -536,7 +536,7 @@ public class FulltextSearchServiceFactory extends AbstractServiceFactoryBase {
           bs.set(
               vars[2],
               new Constant(
-                  new Constant(DummyConstantNode.toDummyIV((EmbergraphValue) litSnippet))));
+                  new Constant(DummyConstantNode.toDummyIV(litSnippet))));
         }
 
         final IBindingSet baseBs = hit.getIncomingBindings();

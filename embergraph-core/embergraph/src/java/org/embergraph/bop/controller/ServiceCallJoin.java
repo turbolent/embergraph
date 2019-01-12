@@ -269,7 +269,7 @@ public class ServiceCallJoin extends PipelineOp {
         doServiceCallWithExpression();
       }
 
-      return (Void) null;
+      return null;
     }
 
     /**
@@ -657,28 +657,28 @@ public class ServiceCallJoin extends PipelineOp {
 
       /** Evaluate a embergraph aware "service" call in the same JVM. */
       private ICloseableIterator<IBindingSet> doEmbergraphServiceCall(
-          final EmbergraphServiceCall serviceCall, final IBindingSet left[]) throws Exception {
+          final EmbergraphServiceCall serviceCall, final IBindingSet[] left) throws Exception {
 
         return serviceCall.call(left);
       }
 
       /** Evaluate an openrdf "service" call in the same JVM. */
       private ICloseableIterator<IBindingSet> doExternalMockIVServiceCall(
-          final MockIVReturningServiceCall serviceCall, final IBindingSet left[]) throws Exception {
+          final MockIVReturningServiceCall serviceCall, final IBindingSet[] left) throws Exception {
 
         return doNonEmbergraphMockIVServiceCall(serviceCall, left);
       }
 
       /** Evaluate an generic service producing mock IVs. */
       private ICloseableIterator<IBindingSet> doExternalServiceCall(
-          final ExternalServiceCall serviceCall, final IBindingSet left[]) throws Exception {
+          final ExternalServiceCall serviceCall, final IBindingSet[] left) throws Exception {
 
         return doNonEmbergraphSesameServiceCall(serviceCall, left);
       }
 
       /** Evaluate an remote SPARQL service call. */
       private ICloseableIterator<IBindingSet> doRemoteServiceCall(
-          final RemoteServiceCall serviceCall, final IBindingSet left[]) throws Exception {
+          final RemoteServiceCall serviceCall, final IBindingSet[] left) throws Exception {
 
         return doNonEmbergraphSesameServiceCall(serviceCall, left);
       }
@@ -692,7 +692,7 @@ public class ServiceCallJoin extends PipelineOp {
        * @return The solutions.
        */
       private ICloseableIterator<IBindingSet> doNonEmbergraphSesameServiceCall(
-          final ServiceCall<BindingSet> serviceCall, final IBindingSet left[]) throws Exception {
+          final ServiceCall<BindingSet> serviceCall, final IBindingSet[] left) throws Exception {
 
         final LexiconRelation lex = db.getLexiconRelation();
 
@@ -745,7 +745,7 @@ public class ServiceCallJoin extends PipelineOp {
        * @return The solutions.
        */
       private ICloseableIterator<IBindingSet> doNonEmbergraphMockIVServiceCall(
-          final ServiceCall<IBindingSet> serviceCall, final IBindingSet left[]) throws Exception {
+          final ServiceCall<IBindingSet> serviceCall, final IBindingSet[] left) throws Exception {
 
         /**
          * Note: a MockTermResolverOp will be wrapped around this service in

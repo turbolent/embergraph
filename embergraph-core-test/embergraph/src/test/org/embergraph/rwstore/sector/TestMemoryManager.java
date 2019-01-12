@@ -273,7 +273,7 @@ public class TestMemoryManager extends TestCase2 {
           addrs.add(Long.valueOf(addr1));
         } else if (i > 1000) {
           final int f = r.nextInt(addrs.size());
-          final long faddr = ((Long) addrs.remove(f)).longValue();
+          final long faddr = addrs.remove(f).longValue();
           mm.free(faddr);
           frees++;
         }

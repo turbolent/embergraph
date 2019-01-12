@@ -48,24 +48,24 @@ public interface ICheckpointProtocol
    *
    * <p>TODO Nobody is actually incrementing this value right now.
    */
-  public long getRecordVersion();
+  long getRecordVersion();
 
   /**
    * Returns the most recent {@link ICheckpoint} record.
    *
    * @return The most recent {@link ICheckpoint} record and never <code>null</code>.
    */
-  public ICheckpoint getCheckpoint();
+  ICheckpoint getCheckpoint();
 
   /** The address at which the most recent {@link IndexMetadata} record was written. */
-  public long getMetadataAddr();
+  long getMetadataAddr();
 
   /**
    * The address of the last written root of the persistent data structure -or- <code>0L</code> if
    * there is no root. A <code>0L</code> return may be an indication that an empty data structure
    * will be created on demand.
    */
-  public long getRootAddr();
+  long getRootAddr();
 
   /**
    * Sets the lastCommitTime.
@@ -81,7 +81,7 @@ public interface ICheckpointProtocol
    * @throws IllegalStateException if the timestamp is less than the previous value (it is permitted
    *     to advance but not to go backwards).
    */
-  public void setLastCommitTime(final long lastCommitTime);
+  void setLastCommitTime(final long lastCommitTime);
 
   /**
    * The timestamp associated with the last {@link IAtomicStore#commit()} in which writes buffered
@@ -90,7 +90,7 @@ public interface ICheckpointProtocol
    * index is first created and will remain ZERO (0L) until the index is committed. If the backing
    * store does not support atomic commits, then this value will always be ZERO (0L).
    */
-  public long getLastCommitTime();
+  long getLastCommitTime();
 
   /**
    * Checkpoint operation must {@link #flush()} dirty nodes, dirty persistent data structures, etc,
@@ -105,7 +105,7 @@ public interface ICheckpointProtocol
    *     written onto the store. The data structure can be reloaded from this {@link Checkpoint}
    *     record.
    */
-  public long writeCheckpoint();
+  long writeCheckpoint();
 
   /**
    * Checkpoint operation must {@link #flush()} dirty nodes, dirty persistent data structures, etc,
@@ -120,17 +120,17 @@ public interface ICheckpointProtocol
    *     the store. The persistent data structure can be reloaded from this {@link Checkpoint}
    *     record.
    */
-  public Checkpoint writeCheckpoint2();
+  Checkpoint writeCheckpoint2();
 
   /** Return the {@link IDirtyListener}. */
-  public IDirtyListener getDirtyListener();
+  IDirtyListener getDirtyListener();
 
   /**
    * Set or clear the listener (there can be only one).
    *
    * @param listener The listener.
    */
-  public void setDirtyListener(final IDirtyListener listener);
+  void setDirtyListener(final IDirtyListener listener);
 
   /**
    * The metadata for the index. This is full of good stuff about the index.
@@ -140,7 +140,7 @@ public interface ICheckpointProtocol
    *
    * @see IIndex#getIndexMetadata()
    */
-  public IndexMetadata getIndexMetadata();
+  IndexMetadata getIndexMetadata();
 
   //	/*
   //	 * Generic data access methods defined for all persistence capable
@@ -186,7 +186,7 @@ public interface ICheckpointProtocol
    * @see #isOpen()
    * @see #getRoot()
    */
-  public void reopen();
+  void reopen();
 
   /**
    * The contract for {@link #close()} is to reduce the resource burden of the index while not
@@ -202,7 +202,7 @@ public interface ICheckpointProtocol
    * {@link #close()} a mutable index view that state can be recovered by {@link #reopen()} then you
    * MUST write a new {@link Checkpoint} record before closing the index.
    */
-  public void close();
+  void close();
 
   /**
    * An "open" index has may have some buffered data. A closed index will have to re-read any
@@ -212,7 +212,7 @@ public interface ICheckpointProtocol
    * @see #close()
    * @see #reopen()
    */
-  public boolean isOpen();
+  boolean isOpen();
 
   /**
    * Reports statistics for the index.

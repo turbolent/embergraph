@@ -89,7 +89,7 @@ public class TestReadCommittedTx<S extends Journal> extends ProxyTestCase<S> {
 
         assertNotNull(ndx);
 
-        assertEquals((byte[]) v1, (byte[]) ndx.lookup(k1));
+        assertEquals(v1, ndx.lookup(k1));
 
         try {
           ndx.insert(k1, new byte[] {1, 2, 3});
@@ -116,7 +116,7 @@ public class TestReadCommittedTx<S extends Journal> extends ProxyTestCase<S> {
 
         assertNotNull(ndx);
 
-        assertEquals((byte[]) v1, (byte[]) ndx.lookup(k1));
+        assertEquals(v1, ndx.lookup(k1));
 
         try {
           ndx.insert(k1, new byte[] {1, 2, 3});

@@ -1286,7 +1286,7 @@ public abstract class EmbergraphGraph implements Graph {
   protected EmbergraphGraphAtom toGraphAtom(final Statement stmt) {
 
     final URI s = (URI) stmt.getSubject();
-    final URI p = (URI) stmt.getPredicate();
+    final URI p = stmt.getPredicate();
     final Value o = stmt.getObject();
 
     return toGraphAtom(s, p, o);
@@ -1385,7 +1385,7 @@ public abstract class EmbergraphGraph implements Graph {
 
     try {
 
-      final TupleQuery query = (TupleQuery) cxn.prepareTupleQuery(QueryLanguage.SPARQL, queryStr);
+      final TupleQuery query = cxn.prepareTupleQuery(QueryLanguage.SPARQL, queryStr);
 
       setMaxQueryTime(query);
 
@@ -1474,7 +1474,7 @@ public abstract class EmbergraphGraph implements Graph {
     try {
 
       final BooleanQuery query =
-          (BooleanQuery) cxn.prepareBooleanQuery(QueryLanguage.SPARQL, queryStr);
+          cxn.prepareBooleanQuery(QueryLanguage.SPARQL, queryStr);
 
       setMaxQueryTime(query);
 
@@ -1589,7 +1589,7 @@ public abstract class EmbergraphGraph implements Graph {
 
     try {
 
-      final TupleQuery query = (TupleQuery) cxn.prepareTupleQuery(QueryLanguage.SPARQL, queryStr);
+      final TupleQuery query = cxn.prepareTupleQuery(QueryLanguage.SPARQL, queryStr);
 
       if (query instanceof EmbergraphSailTupleQuery
           && cxn instanceof EmbergraphSailRepositoryConnection) {
@@ -1747,7 +1747,7 @@ public abstract class EmbergraphGraph implements Graph {
     @Override
     public E next() {
       try {
-        return (E) it.next();
+        return it.next();
       } catch (Exception ex) {
         throw new RuntimeException(ex);
       }

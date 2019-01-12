@@ -27,6 +27,7 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.Random;
 import java.util.UUID;
+import junit.framework.TestCase;
 import junit.framework.TestCase2;
 import org.embergraph.bop.Constant;
 import org.embergraph.bop.IBindingSet;
@@ -177,28 +178,28 @@ public abstract class AbstractBindingSetEncoderTestCase extends TestCase2 {
     blobIV.setValue(valueFactory.createLiteral("bigfoo"));
 
     mockIV1 = (TermId) TermId.mockIV(VTE.LITERAL);
-    mockIV1.setValue((EmbergraphValue) valueFactory.createLiteral("red"));
+    mockIV1.setValue(valueFactory.createLiteral("red"));
 
     mockIV2 = (TermId) TermId.mockIV(VTE.LITERAL);
-    mockIV2.setValue((EmbergraphValue) valueFactory.createLiteral("blue"));
+    mockIV2.setValue(valueFactory.createLiteral("blue"));
 
     mockIV3 = (TermId) TermId.mockIV(VTE.LITERAL);
-    mockIV3.setValue((EmbergraphValue) valueFactory.createLiteral("green"));
+    mockIV3.setValue(valueFactory.createLiteral("green"));
 
     mockIVCarryingUri = (TermId) TermId.mockIV(VTE.URI);
-    mockIVCarryingUri.setValue((EmbergraphValue) valueFactory.createURI("http://green.as.uri"));
+    mockIVCarryingUri.setValue(valueFactory.createURI("http://green.as.uri"));
 
     mockIVCarryingBNode = (TermId) TermId.mockIV(VTE.BNODE);
-    mockIVCarryingBNode.setValue((EmbergraphValue) valueFactory.createBNode("_:green_as_bnode"));
+    mockIVCarryingBNode.setValue(valueFactory.createBNode("_:green_as_bnode"));
 
     inlineIV1 = new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(100));
-    inlineIV1.setValue((EmbergraphLiteral) valueFactory.createLiteral("100", XSD.INTEGER));
+    inlineIV1.setValue(valueFactory.createLiteral("100", XSD.INTEGER));
 
     inlineIV2 = new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(100));
-    inlineIV2.setValue((EmbergraphLiteral) valueFactory.createLiteral("100.0", XSD.DOUBLE));
+    inlineIV2.setValue(valueFactory.createLiteral("100.0", XSD.DOUBLE));
 
     inlineIV3 = new XSDNumericIV<EmbergraphLiteral>(2);
-    inlineIV3.setValue((EmbergraphLiteral) valueFactory.createLiteral("2", XSD.SHORT));
+    inlineIV3.setValue(valueFactory.createLiteral("2", XSD.SHORT));
 
     inlineIV4 = XSDBooleanIV.valueOf(true);
 
@@ -217,16 +218,16 @@ public abstract class AbstractBindingSetEncoderTestCase extends TestCase2 {
 
     literalExtensionIV = new LiteralExtensionIV(inlineIV1, fullyInlineUriIV);
     // note: any value will be fine here, it's just about the fact that decoding must recover it
-    literalExtensionIV.setValue((EmbergraphLiteral) valueFactory.createLiteral("some dummy value"));
+    literalExtensionIV.setValue(valueFactory.createLiteral("some dummy value"));
 
     uriExtensionIV = new URIExtensionIV(fullyInlinedTypedLiteralIV, fullyInlineUriIV);
 
     // vocabUriByteIV and vocabUriShortIV both require materialization
     vocabUriByteIV = new VocabURIByteIV((byte) 3);
-    vocabUriByteIV.setValue((EmbergraphURI) valueFactory.createURI("http://some.vocab.item1"));
+    vocabUriByteIV.setValue(valueFactory.createURI("http://some.vocab.item1"));
 
     vocabUriShortIV = new VocabURIShortIV((short) 4);
-    vocabUriShortIV.setValue((EmbergraphURI) valueFactory.createURI("http://some.vocab.item2"));
+    vocabUriShortIV.setValue(valueFactory.createURI("http://some.vocab.item2"));
   }
 
   @Override
@@ -329,7 +330,7 @@ public abstract class AbstractBindingSetEncoderTestCase extends TestCase2 {
       final IBindingSet expected, final IBindingSet actual, final boolean testCache) {
 
     // Check the binding sets (w/o regard to the IVCache associations).
-    super.assertEquals(expected, actual);
+    assertEquals(expected, actual);
 
     if (!testCache) return;
 

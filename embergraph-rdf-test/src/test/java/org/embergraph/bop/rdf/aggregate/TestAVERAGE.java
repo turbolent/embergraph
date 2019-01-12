@@ -101,20 +101,20 @@ public class TestAVERAGE extends TestCase2 {
      * org2  auth3  book4  7
      * </pre>
      */
-    final IBindingSet data[] =
-        new IBindingSet[] {
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book1, price9}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book2, price5}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth2, book3, price7}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org2, auth3, book4, price7})
+    final IBindingSet[] data =
+        new IBindingSet[]{
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book1, price9}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book2, price5}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth2, book3, price7}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org2, auth3, book4, price7})
         };
 
     final AVERAGE op = new AVERAGE(false /* distinct */, lprice);
@@ -169,28 +169,28 @@ public class TestAVERAGE extends TestCase2 {
        * org2  auth3  book4  7
        * </pre>
        */
-      final IBindingSet data[] =
-          new IBindingSet[] {
-            new ContextBindingSet(
-                context,
-                new ListBindingSet(
-                    new IVariable<?>[] {org, auth, book, lprice},
-                    new IConstant[] {org1, auth1, book1, price9})),
-            new ContextBindingSet(
-                context,
-                new ListBindingSet(
-                    new IVariable<?>[] {org, auth, book, lprice},
-                    new IConstant[] {org1, auth1, book2, price5})),
-            new ContextBindingSet(
-                context,
-                new ListBindingSet(
-                    new IVariable<?>[] {org, auth, book, lprice},
-                    new IConstant[] {org1, auth2, book3, price7})),
-            new ContextBindingSet(
-                context,
-                new ListBindingSet(
-                    new IVariable<?>[] {org, auth, book, lprice},
-                    new IConstant[] {org2, auth3, book4, price7}))
+      final IBindingSet[] data =
+          new IBindingSet[]{
+              new ContextBindingSet(
+                  context,
+                  new ListBindingSet(
+                      new IVariable<?>[]{org, auth, book, lprice},
+                      new IConstant[]{org1, auth1, book1, price9})),
+              new ContextBindingSet(
+                  context,
+                  new ListBindingSet(
+                      new IVariable<?>[]{org, auth, book, lprice},
+                      new IConstant[]{org1, auth1, book2, price5})),
+              new ContextBindingSet(
+                  context,
+                  new ListBindingSet(
+                      new IVariable<?>[]{org, auth, book, lprice},
+                      new IConstant[]{org1, auth2, book3, price7})),
+              new ContextBindingSet(
+                  context,
+                  new ListBindingSet(
+                      new IVariable<?>[]{org, auth, book, lprice},
+                      new IConstant[]{org2, auth3, book4, price7}))
           };
 
       // AVERAGE(lprice*2)
@@ -247,19 +247,19 @@ public class TestAVERAGE extends TestCase2 {
      * org2  auth3  book4  7
      * </pre>
      */
-    final IBindingSet data[] =
-        new IBindingSet[] {
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book1, price9}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book2, price5}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book}, new IConstant[] {org1, auth2, book3}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org2, auth3, book4, price7})
+    final IBindingSet[] data =
+        new IBindingSet[]{
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book1, price9}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book2, price5}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book}, new IConstant[]{org1, auth2, book3}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org2, auth3, book4, price7})
         };
 
     final AVERAGE op = new AVERAGE(false /* distinct */, lprice);
@@ -322,20 +322,20 @@ public class TestAVERAGE extends TestCase2 {
      * org2  auth3  book4  7
      * </pre>
      */
-    final IBindingSet data[] =
-        new IBindingSet[] {
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book1, price9}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book2, price5}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth2, book3, auth2}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org2, auth3, book4, price7})
+    final IBindingSet[] data =
+        new IBindingSet[]{
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book1, price9}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book2, price5}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth2, book3, auth2}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org2, auth3, book4, price7})
         };
 
     final AVERAGE op = new AVERAGE(false /* distinct */, lprice);

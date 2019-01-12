@@ -58,13 +58,13 @@ public interface ITuple<E extends Object> {
    * Note: the {@link IRangeQuery#DELETED} flag state is a property of the iterator NOT the tuple.
    * Whether or not a tuple is deleted is detected using {@link ITuple#isDeletedVersion()}.
    */
-  public int flags();
+  int flags();
 
   /** True iff {@link IRangeQuery#KEYS} was specified. */
-  public boolean getKeysRequested();
+  boolean getKeysRequested();
 
   /** True iff {@link IRangeQuery#VALS} was specified. */
-  public boolean getValuesRequested();
+  boolean getValuesRequested();
 
   /**
    * The index of the source from which the tuple was read. This is zero (0) if there is only a
@@ -75,13 +75,13 @@ public interface ITuple<E extends Object> {
    * @see <a href="http://sourceforge.net/apps/trac/bigdata/ticket/682">AtomicRowFilter
    *     UnsupportedOperationException </a>
    */
-  public int getSourceIndex();
+  int getSourceIndex();
 
   /**
    * The #of entries that have been visited so far and ZERO (0) until the first entry has been
    * visited.
    */
-  public long getVisitCount();
+  long getVisitCount();
 
   /**
    * Returns a copy of the current key.
@@ -91,7 +91,7 @@ public interface ITuple<E extends Object> {
    *
    * @throws UnsupportedOperationException if keys are not being materialized.
    */
-  public byte[] getKey();
+  byte[] getKey();
 
   /**
    * The buffer into which the keys are being copied.
@@ -99,17 +99,17 @@ public interface ITuple<E extends Object> {
    * @return The buffer.
    * @throws UnsupportedOperationException if keys are not being materialized.
    */
-  public ByteArrayBuffer getKeyBuffer();
+  ByteArrayBuffer getKeyBuffer();
 
   /**
    * Return a stream from which the key may be read.
    *
    * @throws UnsupportedOperationException if the keys were not requested.
    */
-  public DataInputBuffer getKeyStream();
+  DataInputBuffer getKeyStream();
 
   /** <code>true</code> iff the value stored under the index entry is <code>null</code>. */
-  public boolean isNull();
+  boolean isNull();
 
   /**
    * The value in the index under the key.
@@ -120,7 +120,7 @@ public interface ITuple<E extends Object> {
    *     being maintained and the the index entry is marked as deleted.
    * @throws UnsupportedOperationException if values are not being materialized.
    */
-  public byte[] getValue();
+  byte[] getValue();
 
   /**
    * The buffer into which the values are being copied.
@@ -133,7 +133,7 @@ public interface ITuple<E extends Object> {
    * @throws UnsupportedOperationException if the value is <code>null</code>.
    * @throws UnsupportedOperationException if the index entry is <code>deleted</code>.
    */
-  public ByteArrayBuffer getValueBuffer();
+  ByteArrayBuffer getValueBuffer();
 
   /**
    * Return a stream from which the value may be read. Callers SHOULD prefer {@link
@@ -143,7 +143,7 @@ public interface ITuple<E extends Object> {
    * @throws UnsupportedOperationException if the value is <code>null</code>.
    * @throws UnsupportedOperationException if the index entry is <code>deleted</code>.
    */
-  public DataInputBuffer getValueStream();
+  DataInputBuffer getValueStream();
 
   /**
    * De-serializes the object from the key and/or value.
@@ -154,7 +154,7 @@ public interface ITuple<E extends Object> {
    *     {@link ITupleIterator} was created.
    * @see ITupleSerializer#deserialize(ITuple)
    */
-  public E getObject();
+  E getObject();
 
   /**
    * Return an object that may be used to perform a streaming read of a large record from the {@link
@@ -163,13 +163,13 @@ public interface ITuple<E extends Object> {
    * @param addr The address of the record.
    * @return The object that may be used to read that record.
    */
-  public IBlock readBlock(long addr);
+  IBlock readBlock(long addr);
 
   /**
    * Return the timestamp associated with the index entry -or- <code>0L</code> IFF the index does
    * not support transactional isolation.
    */
-  public long getVersionTimestamp();
+  long getVersionTimestamp();
 
   /**
    * Return <code>true</code> iff the index entry was marked as deleted.
@@ -180,8 +180,8 @@ public interface ITuple<E extends Object> {
    * <p>Note: the {@link IRangeQuery#DELETED} flag state is a property of the iterator NOT the
    * tuple. Whether or not a tuple is deleted is detected using {@link ITuple#isDeletedVersion()}.
    */
-  public boolean isDeletedVersion();
+  boolean isDeletedVersion();
 
   /** Return the object that can be used to de-serialize the tuple. */
-  public ITupleSerializer getTupleSerializer();
+  ITupleSerializer getTupleSerializer();
 }

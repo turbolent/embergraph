@@ -106,7 +106,7 @@ public class FloatArrayList extends AbstractFloatList {
    */
   public Object clone() {
     // overridden for performance only.
-    FloatArrayList clone = new FloatArrayList((float[]) elements.clone());
+    FloatArrayList clone = new FloatArrayList(elements.clone());
     clone.setSizeRaw(size);
     return clone;
   }

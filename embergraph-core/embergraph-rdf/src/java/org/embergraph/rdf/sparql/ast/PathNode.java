@@ -215,7 +215,7 @@ public class PathNode extends ASTBase {
     }
   }
 
-  public static enum PathMod {
+  public enum PathMod {
     ZERO_OR_ONE("?"),
 
     ZERO_OR_MORE("*"),

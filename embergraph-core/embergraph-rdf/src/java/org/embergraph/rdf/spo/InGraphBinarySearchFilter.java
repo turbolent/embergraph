@@ -70,7 +70,7 @@ public final class InGraphBinarySearchFilter<E extends ISPO> extends SPOFilter<E
 
   private boolean accept(final ISPO o) {
 
-    final ISPO spo = (ISPO) o;
+    final ISPO spo = o;
 
     return Arrays.binarySearch(a, spo.c()) >= 0;
   }

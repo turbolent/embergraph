@@ -103,7 +103,7 @@ public class RemoteRepositoryDecls {
   /**
    * HTTP header may be used to specify the timeout for a query.
    *
-   * @see http://trac.blazegraph.com/ticket/914 (Set timeout on remote query)
+   * @see <a href="http://trac.blazegraph.com/ticket/914">http://trac.blazegraph.com/ticket/914</a> (Set timeout on remote query)
    */
   protected static final String HTTP_HEADER_EMBERGRAPH_MAX_QUERY_MILLIS =
       "X-EMBERGRAPH-MAX-QUERY-MILLIS";

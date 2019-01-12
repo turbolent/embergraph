@@ -80,7 +80,7 @@ public class TestAddDropIndexTask extends ProxyTestCase {
 
           log.info("Resolving future for task.");
 
-          assertEquals("indexUUID", indexUUID, (UUID) future.get());
+          assertEquals("indexUUID", indexUUID, future.get());
 
           log.info("Resolved future");
 
@@ -309,7 +309,7 @@ public class TestAddDropIndexTask extends ProxyTestCase {
             journal.submit(
                 new RegisterIndexTask(journal, name, new IndexMetadata(name, indexUUID)));
 
-        assertEquals("indexUUID", indexUUID, (UUID) future.get());
+        assertEquals("indexUUID", indexUUID, future.get());
 
         /*
          * This verifies that the write task did not return control to the
@@ -339,7 +339,7 @@ public class TestAddDropIndexTask extends ProxyTestCase {
                 new RegisterIndexTask(journal, name, new IndexMetadata(name, indexUUID)));
 
         // Note: the UUID for the pre-existing index is returned.
-        assertEquals("indexUUID", indexUUID, (UUID) future.get());
+        assertEquals("indexUUID", indexUUID, future.get());
 
         /*
          * This verifies that no commit was performed since no data was

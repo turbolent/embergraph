@@ -107,21 +107,21 @@ public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray 
    * @return A new array containing the key.
    * @see BytesUtil#compareBytes(byte[], byte[])
    */
-  public byte[] getKey();
+  byte[] getKey();
 
   /**
    * An alias for {@link #getKey()}.
    *
    * <p>{@inheritDoc}
    */
-  public byte[] toByteArray();
+  byte[] toByteArray();
 
   /**
    * Reset the key length to zero before building another key.
    *
    * @return <i>this</i>
    */
-  public IKeyBuilder reset();
+  IKeyBuilder reset();
 
   /*
    * Optional operations.
@@ -165,7 +165,7 @@ public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray 
    *     using a specified language family (such as could be identified with an <code>xml:lang
    *     </code> attribute).
    */
-  public IKeyBuilder append(String s);
+  IKeyBuilder append(String s);
 
   /**
    * Encodes a variable length text field into the buffer. The text is truncated to {@link
@@ -212,7 +212,7 @@ public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray 
    * @return The {@link IKeyBuilder}.
    * @see http://www.unicode.org/reports/tr10/tr10-10.html#Interleaved_Levels
    */
-  public IKeyBuilder appendText(String text, boolean unicode, boolean successor);
+  IKeyBuilder appendText(String text, boolean unicode, boolean successor);
 
   /*
    * Note: This operation is not implemented since it can cause confusion so
@@ -239,7 +239,7 @@ public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray 
    * Return <code>true</code> iff Unicode is supported by this object (returns <code>false</code> if
    * only ASCII support is configured).
    */
-  public boolean isUnicodeSupported();
+  boolean isUnicodeSupported();
 
   /**
    * The maximum length of a variable length text field is <code>65535</code> (<code>pow(2,16)-1
@@ -250,7 +250,7 @@ public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray 
    * such a non-terminal position trailing pad characters are used to maintain lexiographic ordering
    * over the multi-field key.
    */
-  public final int maxlen = 65535;
+  int maxlen = 65535;
 
   /**
    * Encodes a unicode string by assuming that its contents are ASCII characters. For each
@@ -265,7 +265,7 @@ public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray 
    * @param s A String containing US-ASCII characters.
    * @return <i>this</i>
    */
-  public IKeyBuilder appendASCII(String s);
+  IKeyBuilder appendASCII(String s);
 
   /**
    * Appends a byte - the byte is treated as an <code>unsigned</code> value.
@@ -273,7 +273,7 @@ public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray 
    * @param b The byte.
    * @return <i>this</i>
    */
-  public IKeyBuilder append(byte b);
+  IKeyBuilder append(byte b);
 
   /**
    * Appends an array of bytes - the bytes are treated as <code>unsigned</code> values.
@@ -281,7 +281,7 @@ public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray 
    * @param a The array of bytes.
    * @return <i>this</i>
    */
-  public IKeyBuilder append(byte[] a);
+  IKeyBuilder append(byte[] a);
 
   /**
    * Append <i>len</i> bytes starting at <i>off</i> in <i>a</i> to the key buffer - the bytes are
@@ -292,7 +292,7 @@ public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray 
    * @param a The array containing the bytes to append.
    * @return <i>this</i>
    */
-  public IKeyBuilder append(byte[] a, int off, int len);
+  IKeyBuilder append(byte[] a, int off, int len);
 
   /**
    * Appends a double precision floating point value by first converting it into a signed long
@@ -304,7 +304,7 @@ public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray 
    * @param d The double-precision floating point value.
    * @return <i>this</i>
    */
-  public IKeyBuilder append(double d);
+  IKeyBuilder append(double d);
 
   /**
    * Appends a single precision floating point value by first converting it into a signed integer
@@ -316,7 +316,7 @@ public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray 
    * @param f The single-precision floating point value.
    * @return <i>this</i>
    */
-  public IKeyBuilder append(float f);
+  IKeyBuilder append(float f);
 
   /**
    * Appends the UUID to the key using the MSB and then the LSB (this preserves the natural order
@@ -325,7 +325,7 @@ public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray 
    * @param uuid The UUID.
    * @return <i>this</i>
    */
-  public IKeyBuilder append(UUID uuid);
+  IKeyBuilder append(UUID uuid);
 
   /**
    * Appends a signed long integer to the key by first converting it to a lexiographic ordering as
@@ -334,7 +334,7 @@ public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray 
    *
    * @return <i>this</i>
    */
-  public IKeyBuilder append(long v);
+  IKeyBuilder append(long v);
 
   /**
    * Appends a signed integer to the key by first converting it to a lexiographic ordering as an
@@ -342,7 +342,7 @@ public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray 
    *
    * @return <i>this</i>
    */
-  public IKeyBuilder append(int v);
+  IKeyBuilder append(int v);
 
   /**
    * Appends a signed short integer to the key by first converting it to a two-complete
@@ -351,7 +351,7 @@ public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray 
    *
    * @return <i>this</i>
    */
-  public IKeyBuilder append(short v);
+  IKeyBuilder append(short v);
 
   /*
    * Note: this method has been dropped from the API to reduce the
@@ -381,14 +381,14 @@ public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray 
    * @param v The signed byte.
    * @return <i>this</i>
    */
-  public IKeyBuilder appendSigned(final byte v);
+  IKeyBuilder appendSigned(final byte v);
 
   /**
    * Append an unsigned zero byte to the key.
    *
    * @return <i>this</i>
    */
-  public IKeyBuilder appendNul();
+  IKeyBuilder appendNul();
 
   /**
    * Encode a {@link BigInteger} into an unsigned byte[] and append it into the key buffer.
@@ -399,7 +399,7 @@ public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray 
    * @param The {@link BigInteger} value.
    * @return The unsigned byte[].
    */
-  public IKeyBuilder append(final BigInteger i);
+  IKeyBuilder append(final BigInteger i);
 
   /**
    * Encode a {@link BigDecimal} into an unsigned byte[] and append it into the key buffer.
@@ -407,7 +407,7 @@ public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray 
    * @param The {@link BigDecimal} value.
    * @return The unsigned byte[].
    */
-  public IKeyBuilder append(final BigDecimal d);
+  IKeyBuilder append(final BigDecimal d);
 
   /**
    * Append the value to the buffer, encoding it as appropriate based on the class of the object.
@@ -419,7 +419,7 @@ public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray 
    * @throws IllegalArgumentException if <i>val</i> is <code>null</code>.
    * @throws UnsupportedOperationException if <i>val</i> is an instance of an unsupported class.
    */
-  public IKeyBuilder append(Object val);
+  IKeyBuilder append(Object val);
 
   /**
    * Converts the key into a z-order byte array, assuming numDimensions components of type Long

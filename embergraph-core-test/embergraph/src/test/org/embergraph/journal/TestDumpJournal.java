@@ -550,7 +550,7 @@ public class TestDumpJournal extends ProxyTestCase<Journal> {
                   true /* dumpIndices */,
                   false /* showTuples */);
 
-          return (Void) null;
+          return null;
         }
       }
 
@@ -604,7 +604,7 @@ public class TestDumpJournal extends ProxyTestCase<Journal> {
             log.info("Did commit");
           }
 
-          return (Void) null;
+          return null;
         }
       }
 

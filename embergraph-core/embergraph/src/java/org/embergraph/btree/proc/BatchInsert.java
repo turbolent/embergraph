@@ -160,7 +160,7 @@ public class BatchInsert extends AbstractKeyArrayIndexProcedure<ResultBuffer>
 
       final byte[] val = vals.get(i);
 
-      final byte[] old = (byte[]) ndx.insert(key, val);
+      final byte[] old = ndx.insert(key, val);
 
       if (returnOldValues) {
 

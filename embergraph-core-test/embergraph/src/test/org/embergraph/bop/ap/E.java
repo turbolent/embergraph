@@ -68,8 +68,7 @@ public class E implements IElement, Serializable {
     if (this == o) return true;
     if (!(o instanceof E)) return false;
     if (!name.equals(((E) o).name)) return false;
-    if (!value.equals(((E) o).value)) return false;
-    return true;
+    return value.equals(((E) o).value);
   }
 
   public int hashCode() {

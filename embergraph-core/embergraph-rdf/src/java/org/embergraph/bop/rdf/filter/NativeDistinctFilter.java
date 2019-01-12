@@ -107,7 +107,7 @@ public class NativeDistinctFilter extends BOpFilterBase {
   public static NativeDistinctFilter newInstance(final SPOKeyOrder indexKeyOrder) {
 
     return new NativeDistinctFilter(
-        BOp.NOARGS, Collections.singletonMap(Annotations.KEY_ORDER, (Object) indexKeyOrder));
+        BOp.NOARGS, Collections.singletonMap(Annotations.KEY_ORDER, indexKeyOrder));
   }
 
   /** Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}. */
@@ -348,7 +348,7 @@ public class NativeDistinctFilter extends BOpFilterBase {
        */
       {
         final SPOKeyOrder indexKeyOrder =
-            (SPOKeyOrder) getRequiredProperty(properties, Annotations.KEY_ORDER);
+            getRequiredProperty(properties, Annotations.KEY_ORDER);
 
         filterKeyOrder = getFilterKeyOrder(indexKeyOrder);
 

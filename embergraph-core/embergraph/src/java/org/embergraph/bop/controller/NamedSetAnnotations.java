@@ -50,5 +50,5 @@ public interface NamedSetAnnotations {
    * @see INamedSolutionSetRef
    * @see BOpContext#getAlternateSource(PipelineOp, INamedSolutionSetRef)
    */
-  final String NAMED_SET_REF = "namedSetRef";
+  String NAMED_SET_REF = "namedSetRef";
 }

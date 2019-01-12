@@ -602,7 +602,7 @@ public class TestIndexSegmentBuilderWithSmallTree extends AbstractIndexSegmentTe
   }
 
   protected IndexSegmentCheckpoint doBuildAndDiscardCache(final BTree btree, final int m)
-      throws IOException, Exception {
+      throws Exception {
 
     final long commitTime = System.currentTimeMillis();
 

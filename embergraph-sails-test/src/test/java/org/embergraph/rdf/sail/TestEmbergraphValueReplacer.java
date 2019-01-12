@@ -91,7 +91,7 @@ public class TestEmbergraphValueReplacer extends ProxyEmbergraphSailTestCase {
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
       final EmbergraphSailRepositoryConnection cxn =
-          (EmbergraphSailRepositoryConnection) repo.getConnection();
+          repo.getConnection();
       try {
 
         cxn.setAutoCommit(false);

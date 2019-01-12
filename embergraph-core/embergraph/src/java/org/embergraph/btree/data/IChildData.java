@@ -34,7 +34,7 @@ public interface IChildData {
    *
    * @return The #of children of this node.
    */
-  public int getChildCount();
+  int getChildCount();
 
   /**
    * Return the persistent addresses of the specified child node.
@@ -42,5 +42,5 @@ public interface IChildData {
    * @param index The index of the child in [0:nkeys].
    * @return The persistent child address -or- zero(0L) if the child is not persistent.
    */
-  public long getChildAddr(int index);
+  long getChildAddr(int index);
 }

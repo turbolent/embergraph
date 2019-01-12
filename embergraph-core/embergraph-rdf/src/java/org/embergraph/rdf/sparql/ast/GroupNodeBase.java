@@ -152,7 +152,7 @@ public abstract class GroupNodeBase<E extends IGroupMemberNode> extends GroupMem
   @Override
   public IGroupNode<E> addChild(final E child) {
 
-    addArg((BOp) child);
+    addArg(child);
 
     //        assert child.getParent() == this;
 
@@ -162,7 +162,7 @@ public abstract class GroupNodeBase<E extends IGroupMemberNode> extends GroupMem
   @Override
   public IGroupNode<E> removeChild(final E child) {
 
-    removeArg((BOp) child);
+    removeArg(child);
 
     //        assert child.getParent() == null;
 
@@ -219,7 +219,7 @@ public abstract class GroupNodeBase<E extends IGroupMemberNode> extends GroupMem
 
       aChild = (IGroupMemberNode) ((ASTBase) aChild).clone();
 
-      tmp.setArg(i, (ASTBase) aChild);
+      tmp.setArg(i, aChild);
     }
 
     return tmp;

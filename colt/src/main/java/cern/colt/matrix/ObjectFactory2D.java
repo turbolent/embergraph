@@ -571,7 +571,7 @@ public class ObjectFactory2D extends cern.colt.PersistentObject {
    * @param rows the number of rows.
    * @exception IllegalArgumentException <tt>values.length</tt> must be a multiple of <tt>rows</tt>.
    */
-  public ObjectMatrix2D make(Object values[], int rows) {
+  public ObjectMatrix2D make(Object[] values, int rows) {
     int columns = (rows != 0 ? values.length / rows : 0);
     if (rows * columns != values.length)
       throw new IllegalArgumentException("Array length must be a multiple of m.");

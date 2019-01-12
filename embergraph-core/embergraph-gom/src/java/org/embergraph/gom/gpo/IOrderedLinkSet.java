@@ -34,20 +34,20 @@ public interface IOrderedLinkSet extends ILinkSet {
    *
    * <p>This value is known directly to the link set and is available in O(1).
    */
-  public int size();
+  int size();
 
   /**
    * {@inheritDoc}
    *
    * <p>This value is known directly to the link set and is available in O(1).
    */
-  public long size2();
+  long size2();
 
   /** Returns the first member of the link set or <code>null</code> iff the link set is empty. */
-  public IGPO getFirst();
+  IGPO getFirst();
 
   /** Returns the last member of the link set or <code>null</code> iff the link set is empty. */
-  public IGPO getLast();
+  IGPO getLast();
 
   /**
    * Returns the next member of the link set or <code>null</code> iff <i>member</i> is the last
@@ -57,7 +57,7 @@ public interface IOrderedLinkSet extends ILinkSet {
    * @exception IllegalArgumentException if <i>member</i> is <code>null</code> or otherwise not a
    *     member of the link set.
    */
-  public IGPO getNext(IGPO member);
+  IGPO getNext(IGPO member);
 
   /**
    * Returns the prior member of the link set or <code>null</code> iff <i>member</i> is the first
@@ -67,5 +67,5 @@ public interface IOrderedLinkSet extends ILinkSet {
    * @exception IllegalArgumentException if <i>member</i> is <code>null</code> or otherwise not a
    *     member of the link set.
    */
-  public IGPO getPrior(IGPO member);
+  IGPO getPrior(IGPO member);
 }

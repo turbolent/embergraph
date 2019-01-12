@@ -79,9 +79,8 @@ public interface HAGlue
    * @param units The units for that timeout.
    * @return the quorum token for which the service became HA ready.
    */
-  public long awaitHAReady(long timeout, TimeUnit unit)
-      throws IOException, InterruptedException, TimeoutException, QuorumException,
-          AsynchronousQuorumCloseException;
+  long awaitHAReady(long timeout, TimeUnit unit)
+      throws IOException, InterruptedException, TimeoutException, QuorumException;
 
   /**
    * A follower uses this message to request that the quorum leader await the visibility of the
@@ -102,7 +101,7 @@ public interface HAGlue
    * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/681" > HAJournalServer deadlock:
    *     pipelineRemove() and getLeaderId()</a>
    */
-  public IHANotifyReleaseTimeResponse awaitServiceJoin(IHAAwaitServiceJoinRequest req)
+  IHANotifyReleaseTimeResponse awaitServiceJoin(IHAAwaitServiceJoinRequest req)
       throws IOException, InterruptedException, TimeoutException;
 
   /*
@@ -262,6 +261,6 @@ public interface HAGlue
    *     computation. <code>false</code> if the task will execute synchronously and return a thick
    *     {@link Future}.
    */
-  public <T> Future<T> submit(IIndexManagerCallable<T> callable, boolean asyncFuture)
+  <T> Future<T> submit(IIndexManagerCallable<T> callable, boolean asyncFuture)
       throws IOException;
 }

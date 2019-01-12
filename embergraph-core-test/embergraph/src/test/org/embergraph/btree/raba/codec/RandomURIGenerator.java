@@ -87,7 +87,7 @@ public class RandomURIGenerator implements IRabaGenerator {
 
     for (int i = 0; i < data.length; i++) {
 
-      data[i] = TestKeyBuilder.asSortKey(ns + String.valueOf(lastCounter));
+      data[i] = TestKeyBuilder.asSortKey(ns + lastCounter);
 
       final int inc = r.nextInt(100) + 1;
 

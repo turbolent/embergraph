@@ -311,7 +311,7 @@ public abstract class AbstractMROWTestCase extends AbstractRawStoreTestCase {
       this.addr = addr;
       this.data = data;
     }
-  };
+  }
 
   /**
    * Run a writer.

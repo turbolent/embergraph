@@ -45,7 +45,7 @@ public class GROUP_CONCAT extends AggregateBase<IV> implements INeedsMaterializa
   public interface Annotations extends AggregateBase.Annotations {
 
     /** The namespace of the lexicon relation. */
-    public String NAMESPACE = GROUP_CONCAT.class.getName() + ".namespace";
+    String NAMESPACE = GROUP_CONCAT.class.getName() + ".namespace";
 
     /**
      * Required string property provides the separator used when combining the {@link
@@ -62,7 +62,7 @@ public class GROUP_CONCAT extends AggregateBase<IV> implements INeedsMaterializa
     String VALUE_LIMIT = GROUP_CONCAT.class.getName() + ".valueLimit";
 
     /** The default indicates no limit. */
-    final int DEFAULT_VALUE_LIMIT = -1;
+    int DEFAULT_VALUE_LIMIT = -1;
 
     /**
      * The maximum #of characters permitted in the generated value (positive integer and <code>-1
@@ -71,7 +71,7 @@ public class GROUP_CONCAT extends AggregateBase<IV> implements INeedsMaterializa
     String CHARACTER_LIMIT = GROUP_CONCAT.class.getName() + ".characterLimit";
 
     /** The default indicates no limit. */
-    final int DEFAULT_CHARACTER_LIMIT = -1;
+    int DEFAULT_CHARACTER_LIMIT = -1;
   }
 
   public GROUP_CONCAT(GROUP_CONCAT op) {

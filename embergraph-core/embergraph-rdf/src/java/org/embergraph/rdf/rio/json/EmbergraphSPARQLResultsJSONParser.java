@@ -101,7 +101,7 @@ public class EmbergraphSPARQLResultsJSONParser extends SPARQLJSONParserBase
   }
 
   protected Value parseValue(final String bindingStr, final JsonParser jp)
-      throws QueryResultParseException, JsonParseException, IOException {
+      throws QueryResultParseException, IOException {
 
     String lang = null;
     String type = null;
@@ -150,7 +150,7 @@ public class EmbergraphSPARQLResultsJSONParser extends SPARQLJSONParserBase
 
       final Resource s = (Resource) sid.get(SUBJECT);
       final URI p = (URI) sid.get(PREDICATE);
-      final Value o = (Value) sid.get(OBJECT);
+      final Value o = sid.get(OBJECT);
       final Resource c = (Resource) sid.get(CONTEXT);
 
       if (s == null) {

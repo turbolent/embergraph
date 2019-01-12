@@ -431,7 +431,7 @@ public abstract class ObjectMgrModel implements IObjectManager {
 
     if (gpo != null) {
 
-      map = Collections.singletonMap((Resource) gpo.getId(), (IGPO) gpo);
+      map = Collections.singletonMap(gpo.getId(), gpo);
 
     } else {
 

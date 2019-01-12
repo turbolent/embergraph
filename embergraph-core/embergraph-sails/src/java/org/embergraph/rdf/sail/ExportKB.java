@@ -228,8 +228,8 @@ public class ExportKB {
             null /* s */,
             null /* p */,
             null /* o */,
-            includeInferred,
-            new Resource[] {} /* contexts */);
+            includeInferred
+            /* contexts */);
     try {
       final File file = new File(kbdir, "data." + format.getDefaultFileExtension() + ".gz");
       System.out.println("Writing " + file);

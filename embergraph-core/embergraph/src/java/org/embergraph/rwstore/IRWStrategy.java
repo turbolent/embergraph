@@ -26,13 +26,13 @@ public interface IRWStrategy
    * @param addr The address.
    * @return <code>true</code> iff the address is currently committed.
    */
-  public boolean isCommitted(long addr);
+  boolean isCommitted(long addr);
 
   /**
    * Optionally return a {@link Lock} that must be used (when non- <code>null</code>) to make the
    * {@link IBufferStrategy#commit()} / {@link #postCommit()} strategy atomic.
    */
-  public Lock getCommitLock();
+  Lock getCommitLock();
 
   /**
    * Called post commit to dispose any transient commit state retained to support reset/rollback.
@@ -40,5 +40,5 @@ public interface IRWStrategy
    * <p>Note: It is the responsibility of the commit protocol layers to wind up calling {@link
    * IBufferStrategy#abort()} if there is a failure during the commit protocol.
    */
-  public void postCommit();
+  void postCommit();
 }

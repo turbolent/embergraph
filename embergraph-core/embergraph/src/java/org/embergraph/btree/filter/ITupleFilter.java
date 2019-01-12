@@ -46,5 +46,5 @@ public interface ITupleFilter<E> extends IFilter {
    *
    * <p>{@inheritDoc}
    */
-  public ITupleIterator<E> filterOnce(Iterator src, Object context);
+  ITupleIterator<E> filterOnce(Iterator src, Object context);
 }

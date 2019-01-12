@@ -184,10 +184,7 @@ public class QueryCancellationHelper {
 
     if (f != null) {
 
-      if (f.cancel(true /* mayInterruptIfRunning */)) {
-
-        return true;
-      }
+      return f.cancel(true /* mayInterruptIfRunning */);
     }
 
     // Either not found or found but not running when cancelled.

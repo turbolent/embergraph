@@ -403,7 +403,7 @@ public abstract class EmbergraphRDFServlet extends EmbergraphServlet {
      * This will not affect a user explicitly using the namespace named
      * undefined. beebs@users.sourceforge.net
      */
-    if (this.UNDEFINED_WORKBENCH_NAMESPACE.equals(namespace)) {
+    if (UNDEFINED_WORKBENCH_NAMESPACE.equals(namespace)) {
       namespace = getConfig(getServletContext()).namespace;
     }
 
@@ -609,10 +609,8 @@ public abstract class EmbergraphRDFServlet extends EmbergraphServlet {
       return false;
     } else if (mimeType.equals(MIME_SPARQL_RESULTS_JSON)) {
       return false;
-    } else if (mimeType.equals(MIME_APPLICATION_XML)) {
-      return false;
-    }
-    return true;
+    } else
+      return !mimeType.equals(MIME_APPLICATION_XML);
   }
 
   /** Convert an array of URI strings to an array of URIs. */

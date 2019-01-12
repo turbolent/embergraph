@@ -467,7 +467,7 @@ public class ImmutableBinaryTrie<T> extends AbstractObject2LongFunction<T> imple
 
         // Completely contained in the current path
         if (pos == length) {
-          if (ASSERTS) assert n.pathLength == maxLength;
+          assert !ASSERTS || n.pathLength == maxLength;
           if (i == n.pathLength && n.word >= 0) exactMatch = true;
           break;
         }

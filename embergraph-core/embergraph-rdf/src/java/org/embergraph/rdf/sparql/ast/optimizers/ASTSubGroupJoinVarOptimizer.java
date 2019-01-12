@@ -109,7 +109,7 @@ public class ASTSubGroupJoinVarOptimizer implements IASTOptimizer {
        */
       final Set<IVariable<?>> incomingBindings =
           sa.getDefinitelyIncomingBindings(
-              (GraphPatternGroup<?>) group, new LinkedHashSet<IVariable<?>>());
+              group, new LinkedHashSet<IVariable<?>>());
 
       /*
        * This is only those variables which are bound on entry into the group
@@ -135,7 +135,7 @@ public class ASTSubGroupJoinVarOptimizer implements IASTOptimizer {
        */
       final Set<IVariable<?>> maybeIncomingBindings =
           sa.getMaybeIncomingBindings(
-              (GraphPatternGroup<?>) group, new LinkedHashSet<IVariable<?>>());
+              group, new LinkedHashSet<IVariable<?>>());
 
       /**
        * Add the variables that are used inside filters in the OPTIONAL, since the SPARQL 1.1

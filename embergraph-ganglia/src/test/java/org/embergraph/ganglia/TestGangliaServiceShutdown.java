@@ -129,7 +129,7 @@ public class TestGangliaServiceShutdown extends TestCase {
               defaultDMax,
               metadataFactory);
 
-      ft = new FutureTask<Void>(service, (Void) null);
+      ft = new FutureTask<Void>(service, null);
 
       /*
        * Run the ganglia service.

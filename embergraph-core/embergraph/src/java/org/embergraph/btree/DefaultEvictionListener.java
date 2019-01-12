@@ -132,11 +132,7 @@ public class DefaultEvictionListener implements IEvictionListener {
         // no longer dirty.
         assert !node.dirty;
 
-        if (btree.store != null) {
-
-          // object is persistent (has assigned addr).
-          assert node.identity != PO.NULL;
-        }
+        assert btree.store == null || node.identity != PO.NULL;
       } // isDirty
 
       // This does not insert into the cache.  That is handled by writeNodeOrLeaf.

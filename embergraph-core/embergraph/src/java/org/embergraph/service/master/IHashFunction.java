@@ -39,5 +39,5 @@ public interface IHashFunction<V> extends Serializable {
    * @param value The value.
    * @return The hash code.
    */
-  public int hashFunction(V value);
+  int hashFunction(V value);
 }

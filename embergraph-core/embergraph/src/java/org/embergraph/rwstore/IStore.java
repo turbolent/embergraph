@@ -39,33 +39,33 @@ public interface IStore extends IAllocationManager, IStreamStore, IHistoryManage
    *
    * @return the allocated address
    */
-  public long alloc(byte buf[], int size, IAllocationContext context);
+  long alloc(byte[] buf, int size, IAllocationContext context);
 
   /**
    * Frees allocated storage (clears the bit to enable recycling after the next commit).
    *
    * @param addr the storage address to be freed
    */
-  public void free(long addr, int size);
+  void free(long addr, int size);
 
   /**
    * Optionally return a {@link Lock} that must be used (when non- <code>null</code>) to make the
    * {@link #commit()} / {@link #postCommit()} strategy atomic.
    */
-  public Lock getCommitLock();
+  Lock getCommitLock();
 
   /**
    * Global commit on the backing store. Previously committed data which has been marked as {@link
    * #free(long, int)} is now available for recycling. However, recycling can not occur if session
    * protection is active.
    */
-  public void commit();
+  void commit();
 
   /**
    * Hook that supports synchronization with an external commit before which a rollback to
    * "pre-commit" state is supported.
    */
-  public void postCommit();
+  void postCommit();
 
   //	/**************************************************************
   //	 * Odd method needed by PSInputStream to fetch data of unknown
@@ -87,7 +87,7 @@ public interface IStore extends IAllocationManager, IStreamStore, IHistoryManage
    * @param addr the address of the data
    * @param buf the buffer of the size required!
    */
-  public void getData(long addr, byte buf[]);
+  void getData(long addr, byte[] buf);
 
   /**
    * ************************************************************
@@ -95,7 +95,7 @@ public interface IStore extends IAllocationManager, IStreamStore, IHistoryManage
    * @param addr - the address
    * @return the size of the slot associated
    */
-  public int getAssociatedSlotSize(int addr);
+  int getAssociatedSlotSize(int addr);
 
   //	/**************************************************************
   //	 * Given a physical address (byte offset on the store), return true
@@ -120,7 +120,7 @@ public interface IStore extends IAllocationManager, IStreamStore, IHistoryManage
   //	public String getStats(boolean full);
 
   /** Close the backing storage. */
-  public void close();
+  void close();
 
   //	/**
   //	 * Needed by PSOutputStream for BLOB buffer chaining.
@@ -132,7 +132,7 @@ public interface IStore extends IAllocationManager, IStreamStore, IHistoryManage
    *
    * @return the File object
    */
-  public File getStoreFile();
+  File getStoreFile();
 
   //	/**
   //	 * Called by the PSOutputStream to register the header block of a blob. The

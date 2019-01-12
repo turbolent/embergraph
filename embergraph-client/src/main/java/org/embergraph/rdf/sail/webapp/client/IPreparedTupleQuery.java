@@ -36,7 +36,7 @@ public interface IPreparedTupleQuery extends IPreparedQuery {
    * @return The result.
    * @throws Exception
    */
-  public TupleQueryResult evaluate() throws Exception;
+  TupleQueryResult evaluate() throws Exception;
 
   /**
    * Evaluate the tuple query, notify the specified listener when complete.
@@ -45,5 +45,5 @@ public interface IPreparedTupleQuery extends IPreparedQuery {
    * @return The result.
    * @throws Exception
    */
-  public TupleQueryResult evaluate(IPreparedQueryListener listener) throws Exception;
+  TupleQueryResult evaluate(IPreparedQueryListener listener) throws Exception;
 }

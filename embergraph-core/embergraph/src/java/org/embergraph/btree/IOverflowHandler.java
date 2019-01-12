@@ -42,8 +42,8 @@ public interface IOverflowHandler extends Serializable {
    * @param target The target store on which you can write additional data.
    * @return The new value to be stored under the key in the generated {@link IndexSegment}.
    */
-  public byte[] handle(ITuple tuple, IRawStore target);
+  byte[] handle(ITuple tuple, IRawStore target);
 
   /** Notified when overflow processing is done for a given source and target. */
-  public void close();
+  void close();
 }

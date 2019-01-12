@@ -188,7 +188,7 @@ public class TestTemporaryStore extends AbstractRawStoreTestCase {
     try {
 
       final AbstractBufferStrategy bufferStrategy =
-          (AbstractBufferStrategy) store.getBufferStrategy();
+          store.getBufferStrategy();
 
       final long userExtent = bufferStrategy.getUserExtent();
 
@@ -234,7 +234,7 @@ public class TestTemporaryStore extends AbstractRawStoreTestCase {
 
     long addr = 0L;
 
-    AbstractBufferStrategy bufferStrategy = (AbstractBufferStrategy) store.getBufferStrategy();
+    AbstractBufferStrategy bufferStrategy = store.getBufferStrategy();
 
     int n = 0;
 
@@ -293,7 +293,7 @@ public class TestTemporaryStore extends AbstractRawStoreTestCase {
     try {
 
       final AbstractBufferStrategy bufferStrategy =
-          (AbstractBufferStrategy) store.getBufferStrategy();
+          store.getBufferStrategy();
 
       final long userExtent = bufferStrategy.getUserExtent();
 
@@ -333,7 +333,7 @@ public class TestTemporaryStore extends AbstractRawStoreTestCase {
     try {
 
       final AbstractBufferStrategy bufferStrategy =
-          (AbstractBufferStrategy) store.getBufferStrategy();
+          store.getBufferStrategy();
 
       final long userExtent = bufferStrategy.getUserExtent();
 

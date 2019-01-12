@@ -363,7 +363,7 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
     /*
      * TODO Make this configurable.
      */
-    this.inlineDatatypesToTextIndex = new LinkedHashSet<URI>(Arrays.asList(new URI[] {XSD.IPV4}));
+    this.inlineDatatypesToTextIndex = new LinkedHashSet<URI>(Arrays.asList(XSD.IPV4));
 
     /*
      * Note: These collections are read-only so we do NOT need additional
@@ -542,11 +542,11 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
       return new FullyInlineURIIV<EmbergraphURI>(value);
     }
 
-    final String localName = ((URI) value).getLocalName();
+    final String localName = value.getLocalName();
 
     if (localName.length() < maxInlineTextLength) {
 
-      final String namespace = ((URI) value).getNamespace();
+      final String namespace = value.getNamespace();
 
       final IV<EmbergraphURI, ?> namespaceIV = vocab.get(new URIImpl(namespace));
 

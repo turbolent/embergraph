@@ -192,7 +192,7 @@ public class GenericPermuting extends Object {
    * than generic reordering. Also for convenience (forget about the Swapper object).
    */
   public static void permute(int[] list, int[] indexes) {
-    int[] copy = (int[]) list.clone();
+    int[] copy = list.clone();
     for (int i = list.length; --i >= 0; ) list[i] = copy[indexes[i]];
   }
   /**
@@ -291,7 +291,7 @@ public class GenericPermuting extends Object {
    * than generic reordering. Also for convenience (forget about the Swapper object).
    */
   public static void permute(Object[] list, int[] indexes) {
-    Object[] copy = (Object[]) list.clone();
+    Object[] copy = list.clone();
     for (int i = list.length; --i >= 0; ) list[i] = copy[indexes[i]];
   }
 }

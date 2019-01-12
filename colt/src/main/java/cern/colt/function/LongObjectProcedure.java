@@ -26,5 +26,5 @@ public interface LongObjectProcedure {
    * @param second second argument passed to the procedure.
    * @return a flag to inform the object calling the procedure.
    */
-  public abstract boolean apply(long first, Object second);
+  boolean apply(long first, Object second);
 }

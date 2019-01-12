@@ -514,7 +514,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
             if (varNodeCandidate instanceof VarNode) {
 
               final VarNode varNode = (VarNode) varNodeCandidate;
-              final IVariable<IV> var = (IVariable<IV>) (varNode.getValueExpression());
+              final IVariable<IV> var = (varNode.getValueExpression());
 
               final BOp valueBOp = functionNode.get(1);
               if (valueBOp instanceof ConstantNode) {
@@ -697,7 +697,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
 
           final IValueExpressionNode vexpr = filter.getValueExpressionNode();
 
-          extractVarUsageInfo(node, (IValueExpressionNode) vexpr);
+          extractVarUsageInfo(node, vexpr);
 
         } else if (node instanceof StatementPatternNode) {
 

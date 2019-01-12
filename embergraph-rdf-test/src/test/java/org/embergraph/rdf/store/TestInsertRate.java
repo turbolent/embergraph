@@ -363,9 +363,9 @@ public class TestInsertRate extends AbstractTripleStoreTestCase {
 
     // Get random orderings for selecting from the class, property
     // and value spaces.
-    final int corder[] = getRandomOrder(cspace.length);
-    final int porder[] = getRandomOrder(pspace.length);
-    final int oorder[] = getRandomOrder(ospace.length);
+    final int[] corder = getRandomOrder(cspace.length);
+    final int[] porder = getRandomOrder(pspace.length);
+    final int[] oorder = getRandomOrder(ospace.length);
 
     // Generate and insert random statements.
 

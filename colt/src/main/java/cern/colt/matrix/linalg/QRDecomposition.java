@@ -10,6 +10,7 @@ package cern.colt.matrix.linalg;
 
 import cern.colt.matrix.DoubleMatrix1D;
 import cern.colt.matrix.DoubleMatrix2D;
+import cern.jet.math.Functions;
 
 /**
  * For an <tt>m x n</tt> matrix <tt>A</tt> with <tt>m >= n</tt>, the QR decomposition is an <tt>m x
@@ -146,7 +147,7 @@ public class QRDecomposition implements java.io.Serializable {
           DoubleMatrix1D Qcolj = Q.viewColumn(j).viewPart(k, m - k);
           double s = QRcolk.zDotProduct(Qcolj);
           s = -s / QR.getQuick(k, k);
-          Qcolj.assign(QRcolk, F.plusMult(s));
+          Qcolj.assign(QRcolk, Functions.plusMult(s));
         }
       }
     }
@@ -246,28 +247,28 @@ public class QRDecomposition implements java.io.Serializable {
 
     buf.append("hasFullRank = ");
     try {
-      buf.append(String.valueOf(this.hasFullRank()));
+      buf.append(this.hasFullRank());
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
 
     buf.append("\n\nH = ");
     try {
-      buf.append(String.valueOf(this.getH()));
+      buf.append(this.getH());
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
 
     buf.append("\n\nQ = ");
     try {
-      buf.append(String.valueOf(this.getQ()));
+      buf.append(this.getQ());
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
 
     buf.append("\n\nR = ");
     try {
-      buf.append(String.valueOf(this.getR()));
+      buf.append(this.getR());
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
@@ -275,7 +276,7 @@ public class QRDecomposition implements java.io.Serializable {
     buf.append("\n\npseudo inverse(A) = ");
     try {
       buf.append(
-          String.valueOf(this.solve(cern.colt.matrix.DoubleFactory2D.dense.identity(QR.rows()))));
+          this.solve(cern.colt.matrix.DoubleFactory2D.dense.identity(QR.rows())));
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }

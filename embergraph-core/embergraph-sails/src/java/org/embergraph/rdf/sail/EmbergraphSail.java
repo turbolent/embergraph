@@ -388,7 +388,7 @@ public class EmbergraphSail extends SailBase implements Sail {
      * context, although the latter was not stored internally. This property only effects data
      * loaded through the {@link Sail}.
      *
-     * @see http://trac.blazegraph.com/ticket/1086
+     * @see <a href="http://trac.blazegraph.com/ticket/1086">http://trac.blazegraph.com/ticket/1086</a>
      */
     String REJECT_QUADS_IN_TRIPLE_MODE =
         EmbergraphSail.class.getPackage().getName() + ".rejectQuadsInTripleMode";
@@ -2439,7 +2439,7 @@ public class EmbergraphSail extends SailBase implements Sail {
        */
 
       final SailConnectionListener[] listeners =
-          (SailConnectionListener[]) m_listeners.toArray(new SailConnectionListener[] {});
+          m_listeners.toArray(new SailConnectionListener[] {});
 
       for (int i = 0; i < listeners.length; i++) {
 
@@ -2688,9 +2688,9 @@ public class EmbergraphSail extends SailBase implements Sail {
 
         database
             .getAccessPath(
-                (Resource) null /* s */,
-                (URI) null /* p */,
-                (Value) null /* o */,
+                null /* s */,
+                null /* p */,
+                null /* o */,
                 (Resource) null /* c */)
             .removeAll();
 
@@ -4092,15 +4092,10 @@ public class EmbergraphSail extends SailBase implements Sail {
            * correct.
            */
           fastRangeCountOk = true;
-        } else if (tripleStore.getAxioms().getClass() == NoAxioms.class) {
-          /*
-           * Inferences are not being maintained so a fast range count will be
-           * exact.
-           */
-          fastRangeCountOk = true;
-        } else {
-          fastRangeCountOk = false;
-        }
+        } else /*
+         * Inferences are not being maintained so a fast range count will be
+         * exact.
+         */fastRangeCountOk = tripleStore.getAxioms().getClass() == NoAxioms.class;
       }
 
       if (fastRangeCountOk) {
@@ -4108,7 +4103,7 @@ public class EmbergraphSail extends SailBase implements Sail {
         if (contexts.length == 0) {
 
           // Operates on all contexts.
-          return tripleStore.hasStatement(s, p, o, (Resource) null /* c */);
+          return tripleStore.hasStatement(s, p, o, null /* c */);
 
         } else if (contexts.length == 1 && contexts[0] == null) {
 

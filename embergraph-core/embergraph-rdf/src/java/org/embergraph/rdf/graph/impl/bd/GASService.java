@@ -288,18 +288,16 @@ public class GASService extends CustomServiceFactoryBase {
   private static List<URI> OUT_VARS =
       Collections.unmodifiableList(
           Arrays.asList(
-              new URI[] {
-                Options.OUT,
-                Options.OUT1,
-                Options.OUT2,
-                Options.OUT3,
-                Options.OUT4,
-                Options.OUT5,
-                Options.OUT6,
-                Options.OUT7,
-                Options.OUT8,
-                Options.OUT9
-              }));
+              Options.OUT,
+              Options.OUT1,
+              Options.OUT2,
+              Options.OUT3,
+              Options.OUT4,
+              Options.OUT5,
+              Options.OUT6,
+              Options.OUT7,
+              Options.OUT8,
+              Options.OUT9));
 
   private final EmbergraphNativeServiceOptions serviceOptions;
 
@@ -420,13 +418,12 @@ public class GASService extends CustomServiceFactoryBase {
 
       this.traversalDirection =
           TraversalDirectionEnum.valueOf(
-              ((Literal)
-                      getOnlyArg(
-                          Options.PROGRAM,
-                          Options.TRAVERSAL_DIRECTION,
-                          store
-                              .getValueFactory()
-                              .createLiteral(Options.DEFAULT_DIRECTED_TRAVERSAL.name())))
+              getOnlyArg(
+                  Options.PROGRAM,
+                  Options.TRAVERSAL_DIRECTION,
+                  store
+                      .getValueFactory()
+                      .createLiteral(Options.DEFAULT_DIRECTED_TRAVERSAL.name()))
                   .stringValue());
 
       this.maxIterations =
@@ -751,7 +748,7 @@ public class GASService extends CustomServiceFactoryBase {
         }
 
         // Run the analytic.
-        final IGASStats stats = (IGASStats) gasContext.call();
+        final IGASStats stats = gasContext.call();
 
         if (targetVertices != null && gasProgram instanceof IPredecessor) {
 
@@ -784,7 +781,7 @@ public class GASService extends CustomServiceFactoryBase {
           sb.append(", nthreads=" + nthreads);
           sb.append(
               ", scheduler="
-                  + ((GASState<VS, ES, ST>) gasState).getScheduler().getClass().getSimpleName());
+                  + gasState.getScheduler().getClass().getSimpleName());
           sb.append(", gasEngine=" + gasEngine.getClass().getSimpleName());
           sb.append(", stats=" + stats);
           log.info(sb.toString());
@@ -964,7 +961,7 @@ public class GASService extends CustomServiceFactoryBase {
         if (val instanceof IV) {
 
           // The value is already an IV.
-          bs.set(var, new Constant((IV) val));
+          bs.set(var, new Constant(val));
 
         } else {
 
@@ -1014,9 +1011,9 @@ public class GASService extends CustomServiceFactoryBase {
 
       try {
 
-        final Constructor<IGASProgram<VS, ES, ST>> ctor = cls.getConstructor(new Class[] {});
+        final Constructor<IGASProgram<VS, ES, ST>> ctor = cls.getConstructor();
 
-        final IGASProgram<VS, ES, ST> gasProgram = ctor.newInstance(new Object[] {});
+        final IGASProgram<VS, ES, ST> gasProgram = ctor.newInstance();
 
         return gasProgram;
 

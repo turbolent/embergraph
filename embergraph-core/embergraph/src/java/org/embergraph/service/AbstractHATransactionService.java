@@ -81,7 +81,7 @@ public abstract class AbstractHATransactionService extends AbstractTransactionSe
       final UUID[] joinedServiceIds,
       final long timeout,
       final TimeUnit units)
-      throws IOException, TimeoutException, InterruptedException, Exception;
+      throws Exception;
 
   /** Used to make a serviceJoin() MUTEX with the consensus protocol. */
   public abstract void runWithBarrierLock(Runnable r);

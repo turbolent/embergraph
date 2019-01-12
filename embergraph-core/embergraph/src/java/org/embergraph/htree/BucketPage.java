@@ -1058,7 +1058,7 @@ class BucketPage extends AbstractPage implements ILeafData, IRawRecordAccess {
       final boolean bitset = BytesUtil.getBit(keys.get(0), testPrefix);
       for (int t = 1; t < nkeys; t++) {
         final byte[] k = keys.get(t);
-        if (bitset != (k == null ? false : BytesUtil.getBit(keys.get(t), testPrefix))) {
+        if (bitset != (k != null && BytesUtil.getBit(keys.get(t), testPrefix))) {
           return testPrefix - currentResolution;
         }
       }

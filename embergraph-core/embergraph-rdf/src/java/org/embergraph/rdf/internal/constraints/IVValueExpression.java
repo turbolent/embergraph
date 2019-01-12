@@ -58,10 +58,10 @@ public abstract class IVValueExpression<T extends IV> extends BOpBase
   public interface Annotations extends BOpBase.Annotations {
 
     /** The namespace of the lexicon. */
-    public String NAMESPACE = IVValueExpression.class.getName() + ".namespace";
+    String NAMESPACE = IVValueExpression.class.getName() + ".namespace";
 
     /** The timestamp of the query. */
-    public String TIMESTAMP = IVValueExpression.class.getName() + ".timestamp";
+    String TIMESTAMP = IVValueExpression.class.getName() + ".timestamp";
   }
 
   /**
@@ -321,11 +321,11 @@ public abstract class IVValueExpression<T extends IV> extends BOpBase
 
     if (iv.isInline() && !iv.needsMaterialization()) {
 
-      return (Value) iv;
+      return iv;
 
     } else if (iv.hasValue()) {
 
-      return (EmbergraphValue) iv.getValue();
+      return iv.getValue();
 
     } else {
 

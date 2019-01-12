@@ -132,7 +132,7 @@ public class TestLiteralDatatypeIV extends TestCase2 {
 
     // Check the delegate IVs for consistency.
     {
-      final AbstractIV<?, ?> expectedDelegateIV = (AbstractIV<?, ?>) iv.getDelegate();
+      final AbstractIV<?, ?> expectedDelegateIV = iv.getDelegate();
 
       final AbstractIV<?, ?> actualDelegateIV =
           ((AbstractNonInlineExtensionIVWithDelegateIV<?, ?>) actual).getDelegate();

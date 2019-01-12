@@ -79,12 +79,12 @@ public abstract class AbstractRuleFastClosure_11_13 extends Rule {
     z = (IVariable<IV>) body[0].o();
 
     // (y,C1,a)
-    assert y.equals((IVariable<IV>) body[1].s());
+    assert y.equals(body[1].s());
     C1 = (IConstant<IV>) body[1].p();
     a = (IVariable<IV>) body[1].o();
 
     // (a,C2,b)
-    assert a.equals((IVariable<IV>) body[2].s());
+    assert a.equals(body[2].s());
     C2 = (IConstant<IV>) body[2].p();
     b = (IVariable<IV>) body[2].o();
 

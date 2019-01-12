@@ -489,10 +489,9 @@ public class TestASTBottomUpOptimizer extends AbstractASTEvaluationTestCase {
               new FilterNode(
                   new FunctionNode(
                       FunctionRegistry.EQ,
-                      null /* scalarValues */,
-                      new ValueExpressionNode[] { // args
-                        new VarNode(unboundVarName), new ConstantNode(new Constant(ONE.getIV()))
-                      }));
+                      null /* scalarValues */
+                      // args
+                      new VarNode(unboundVarName), new ConstantNode(new Constant(ONE.getIV()))));
           final GlobalAnnotations globals =
               new GlobalAnnotations(context.getLexiconNamespace(), context.getTimestamp());
           AST2BOpUtility.toVE(getBOpContext(), globals, filterNode.getValueExpressionNode());
@@ -989,7 +988,7 @@ public class TestASTBottomUpOptimizer extends AbstractASTEvaluationTestCase {
               new FunctionNode(
                   FunctionRegistry.EQ,
                   null, // scalarValues(Map)Collections.emptyMap(),
-                  new ValueExpressionNode[] {new VarNode(anonvar), new ConstantNode(ONE.getIV())}));
+                  new VarNode(anonvar), new ConstantNode(ONE.getIV())));
       final GlobalAnnotations globals =
           new GlobalAnnotations(context.getLexiconNamespace(), context.getTimestamp());
       AST2BOpUtility.toVE(getBOpContext(), globals, filterNode.getValueExpressionNode());
@@ -1134,7 +1133,7 @@ public class TestASTBottomUpOptimizer extends AbstractASTEvaluationTestCase {
               new FunctionNode(
                   FunctionRegistry.EQ,
                   null, // scalarValues (Map)Collections.emptyMap(),
-                  new ValueExpressionNode[] {new VarNode(anonvar), new ConstantNode(ONE.getIV())}));
+                  new VarNode(anonvar), new ConstantNode(ONE.getIV())));
       final GlobalAnnotations globals =
           new GlobalAnnotations(context.getLexiconNamespace(), context.getTimestamp());
       AST2BOpUtility.toVE(getBOpContext(), globals, filterNode.getValueExpressionNode());

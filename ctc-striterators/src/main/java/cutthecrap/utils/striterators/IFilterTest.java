@@ -30,5 +30,5 @@ public interface IFilterTest extends Serializable {
    * @param obj Something visited by the iterator.
    * @return true iff that object is accepted by the filter.
    */
-  public boolean isValid(Object e);
+  boolean isValid(Object e);
 }

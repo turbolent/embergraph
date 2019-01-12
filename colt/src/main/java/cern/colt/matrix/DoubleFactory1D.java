@@ -10,6 +10,8 @@ package cern.colt.matrix;
 
 import cern.colt.matrix.impl.DenseDoubleMatrix1D;
 import cern.colt.matrix.impl.SparseDoubleMatrix1D;
+import cern.jet.math.Functions;
+
 /**
  * Factory for convenient construction of 1-d matrices holding <tt>double</tt> cells. Use idioms
  * like <tt>DoubleFactory1D.dense.make(1000)</tt> to construct dense matrices,
@@ -58,7 +60,7 @@ public class DoubleFactory1D extends cern.colt.PersistentObject {
    */
   public DoubleMatrix1D ascending(int size) {
     cern.jet.math.Functions F = cern.jet.math.Functions.functions;
-    return descending(size).assign(F.chain(F.neg, F.minus(size)));
+    return descending(size).assign(Functions.chain(Functions.neg, Functions.minus(size)));
   }
   /**
    * Constructs a matrix with cells having descending values. For debugging purposes. Example: <tt>2

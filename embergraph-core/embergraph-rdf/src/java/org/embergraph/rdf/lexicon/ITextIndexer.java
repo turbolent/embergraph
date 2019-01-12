@@ -41,9 +41,9 @@ import org.openrdf.model.Value;
  */
 public interface ITextIndexer<A extends IHit> {
 
-  public void create();
+  void create();
 
-  public void destroy();
+  void destroy();
 
   /*
    * Moved to IValueCentricTextIndexer
@@ -69,7 +69,7 @@ public interface ITextIndexer<A extends IHit> {
   //    public void index(int capacity, Iterator<EmbergraphValue> valuesIterator);
 
   /** Return <code>true</code> iff datatype literals are being indexed. */
-  public boolean getIndexDatatypeLiterals();
+  boolean getIndexDatatypeLiterals();
 
   /**
    * Do a free text search.
@@ -77,7 +77,7 @@ public interface ITextIndexer<A extends IHit> {
    * @param query The query.
    * @return The result set.
    */
-  public Hiterator<A> search(final FullTextQuery query);
+  Hiterator<A> search(final FullTextQuery query);
 
   /**
    * Count free text search results.
@@ -85,9 +85,9 @@ public interface ITextIndexer<A extends IHit> {
    * @param query The query.
    * @return The result count.
    */
-  public int count(final FullTextQuery query);
+  int count(final FullTextQuery query);
 
-  public static class FullTextQuery implements Serializable {
+  class FullTextQuery implements Serializable {
 
     /** */
     private static final long serialVersionUID = 4159873519447769476L;
@@ -332,9 +332,9 @@ public interface ITextIndexer<A extends IHit> {
         if (other.query != null) return false;
       } else if (!query.equals(other.query)) return false;
       if (matchRegex == null) {
-        if (other.matchRegex != null) return false;
-      } else if (!matchRegex.equals(other.matchRegex)) return false;
-      return true;
+        return other.matchRegex == null;
+      } else
+        return matchRegex.equals(other.matchRegex);
     }
   }
 }

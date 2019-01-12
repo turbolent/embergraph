@@ -908,7 +908,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
 
   public enum ComputeMode {
     CPU,
-    GPU;
+    GPU
   }
 
   /**
@@ -1375,7 +1375,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     Request request = null;
     try {
 
-      request = (HttpRequest) newRequest(urlString.toString(), opts.method);
+      request = newRequest(urlString.toString(), opts.method);
 
       if (opts.requestHeaders != null) {
 
@@ -1690,7 +1690,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
                   listener.closed(queryId);
                 }
               }
-            };
+            }
           };
 
       /*
@@ -1999,7 +1999,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
                   listener.closed(queryId);
                 }
               }
-            };
+            }
           };
 
       /*

@@ -31,11 +31,11 @@ public interface IWeakRefCacheEntry<K, T> {
    * Returns the key for the object stored in the cache entry. This is generally an object
    * identifier (OID).
    */
-  public K getKey();
+  K getKey();
 
   /**
    * The object in the cache. If the entry belongs to a weak reference cache, then this method
    * returns the weak referent or null iff the weak reference has been cleared.
    */
-  public T getObject();
+  T getObject();
 }

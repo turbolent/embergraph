@@ -27,6 +27,7 @@ import java.io.DataInput;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.zip.Deflater;
@@ -116,7 +117,7 @@ public class TestHuffmanEncoder extends TestCase2 {
     final String msg =
         "this is an example of huffman encoding this is an example of huffman encoding";
 
-    final byte[] uncompressed = msg.getBytes("UTF-8");
+    final byte[] uncompressed = msg.getBytes(StandardCharsets.UTF_8);
 
     System.err.println(
         "uncompressed(" + uncompressed.length + "): " + Arrays.toString(uncompressed));
@@ -181,11 +182,11 @@ public class TestHuffmanEncoder extends TestCase2 {
    */
   public void test_huffman_reuse() throws IOException {
 
-    final String messages[] = {
-      "this is an example of huffman encoding",
-      "this is an example of huffman encoding in which the decode and the encode are reused",
-      "the lazy brown dog jumped over the fence",
-      "Application and reuse of a {@link Deflater} and an {@link Inflater} to encode and decode byte[]s.  While instances of these classes are reused, concurrency is not tested (reuse is serialized)."
+    final String[] messages = {
+        "this is an example of huffman encoding",
+        "this is an example of huffman encoding in which the decode and the encode are reused",
+        "the lazy brown dog jumped over the fence",
+        "Application and reuse of a {@link Deflater} and an {@link Inflater} to encode and decode byte[]s.  While instances of these classes are reused, concurrency is not tested (reuse is serialized)."
     };
 
     HuffmanEncoder c = new HuffmanEncoder();
@@ -193,7 +194,7 @@ public class TestHuffmanEncoder extends TestCase2 {
 
     for (int i = 0; i < messages.length; i++) {
 
-      final byte[] uncompressed = messages[i].getBytes("UTF-8");
+      final byte[] uncompressed = messages[i].getBytes(StandardCharsets.UTF_8);
 
       System.err.println(
           "uncompressed(" + uncompressed.length + "): " + Arrays.toString(uncompressed));

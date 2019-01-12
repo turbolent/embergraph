@@ -200,7 +200,7 @@ public abstract class DiskBackedBufferStrategy extends BasicBufferStrategy
 
   public synchronized long transferTo(RandomAccessFile out) throws IOException {
 
-    return super.transferFromDiskTo(this, out);
+    return transferFromDiskTo(this, out);
   }
 
   /**

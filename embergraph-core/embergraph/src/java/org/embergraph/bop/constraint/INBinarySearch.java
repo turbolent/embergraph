@@ -93,9 +93,7 @@ public class INBinarySearch<T> extends INConstraint<T> {
     super(
         new BOp[] {},
         NV.asMap(
-            new NV[] {
-              new NV(Annotations.VARIABLE, x), new NV(Annotations.SET, set),
-            }));
+            new NV(Annotations.VARIABLE, x), new NV(Annotations.SET, set)));
   }
 
   @SuppressWarnings("unchecked")

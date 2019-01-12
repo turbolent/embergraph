@@ -54,7 +54,7 @@ public class OrderByNode extends SolutionModifierBase implements Iterable<OrderB
 
   public void addExpr(final OrderByExpr orderBy) {
 
-    addArg((BOp) orderBy);
+    addArg(orderBy);
   }
 
   public boolean removeOrderBy(final OrderByExpr orderBy) {

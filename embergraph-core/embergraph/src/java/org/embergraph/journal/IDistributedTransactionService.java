@@ -47,7 +47,7 @@ public interface IDistributedTransactionService extends ITransactionService {
    * @return {@link IllegalStateException} if the transaction is not an active read-write
    *     transaction.
    */
-  public void declareResources(long tx, UUID dataService, String[] resource) throws IOException;
+  void declareResources(long tx, UUID dataService, String[] resource) throws IOException;
 
   /**
    * Callback by an {@link IDataService} participating in a two phase commit for a distributed
@@ -66,7 +66,7 @@ public interface IDistributedTransactionService extends ITransactionService {
    * @throws BrokenBarrierException
    * @throws IOException if there is an RMI problem.
    */
-  public long prepared(long tx, UUID dataService)
+  long prepared(long tx, UUID dataService)
       throws IOException, InterruptedException, BrokenBarrierException;
 
   /**
@@ -84,6 +84,6 @@ public interface IDistributedTransactionService extends ITransactionService {
    *     there was a problem.
    * @throws IOException
    */
-  public boolean committed(long tx, UUID dataService)
+  boolean committed(long tx, UUID dataService)
       throws IOException, InterruptedException, BrokenBarrierException;
 }

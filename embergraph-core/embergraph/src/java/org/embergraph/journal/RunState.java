@@ -66,17 +66,14 @@ public enum RunState {
 
       if (newval.equals(RunState.Aborted)) return true;
 
-      if (newval.equals(Committed)) return true;
-
-      return false;
+      return newval.equals(Committed);
 
     } else if (this.equals(RunState.Prepared)) {
 
       if (newval.equals(Aborted)) return true;
 
-      if (newval.equals(Committed)) return true;
+      return newval.equals(Committed);
 
-      return false;
     }
 
     return false;

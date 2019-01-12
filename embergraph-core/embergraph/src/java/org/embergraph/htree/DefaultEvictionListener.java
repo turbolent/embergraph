@@ -141,11 +141,7 @@ public class DefaultEvictionListener implements IEvictionListener {
         // no longer dirty.
         assert !node.isDirty();
 
-        if (htree.store != null) {
-
-          // object is persistent (has assigned addr).
-          assert node.getIdentity() != PO.NULL;
-        }
+        assert htree.store == null || node.getIdentity() != PO.NULL;
       } // isDirty
 
       // This does not insert into the cache.  That is handled by writeNodeOrLeaf.

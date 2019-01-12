@@ -529,29 +529,29 @@ public class StressTestConcurrentTx extends ProxyTestCase<Journal> implements IC
   }
 
   /** Additional properties understood by this test. */
-  public static interface TestOptions extends ConcurrencyManager.Options {
+  public interface TestOptions extends ConcurrencyManager.Options {
 
     /** The timeout for the test. */
-    public static final String TIMEOUT = "timeout";
+    String TIMEOUT = "timeout";
 
     /** The #of concurrent clients to run. */
-    public static final String NCLIENTS = "nclients";
+    String NCLIENTS = "nclients";
 
     /** The #of trials (aka transactions) to run. */
-    public static final String NTRIALS = "ntrials";
+    String NTRIALS = "ntrials";
 
     /**
      * The length of the keys used in the test. This directly impacts the likelyhood of a
      * write-write conflict. Shorter keys mean more conflicts. However, note that conflicts are only
      * possible when there are at least two concurrent clients running.
      */
-    public static final String KEYLEN = "keyLen";
+    String KEYLEN = "keyLen";
 
     /** The #of operations in each trial. */
-    public static final String NOPS = "nops";
+    String NOPS = "nops";
 
     /** The #of clients that choose to abort a transaction rather the committing it [0.0:1.0]. */
-    public static final String ABORT_RATE = "abortRate";
+    String ABORT_RATE = "abortRate";
   }
 
   /**

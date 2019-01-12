@@ -17,14 +17,14 @@ import java.util.concurrent.TimeoutException;
  */
 public interface RemoteFuture<T> extends Remote {
 
-  public boolean cancel(boolean mayInterruptIfRunning) throws IOException;
+  boolean cancel(boolean mayInterruptIfRunning) throws IOException;
 
-  public T get() throws InterruptedException, ExecutionException, IOException;
+  T get() throws InterruptedException, ExecutionException, IOException;
 
-  public T get(long timeout, TimeUnit unit)
+  T get(long timeout, TimeUnit unit)
       throws InterruptedException, ExecutionException, TimeoutException, IOException;
 
-  public boolean isCancelled() throws IOException;
+  boolean isCancelled() throws IOException;
 
-  public boolean isDone() throws IOException;
+  boolean isDone() throws IOException;
 }

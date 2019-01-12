@@ -398,7 +398,7 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
       final AssignmentNode expr =
           (AssignmentNode) node.jjtGetChild(i).jjtAccept(this, null /* data */);
 
-      groupBy.addExpr((AssignmentNode) expr);
+      groupBy.addExpr(expr);
     }
 
     return groupBy;
@@ -465,7 +465,7 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
 
       // Check for any instances of this child.
       final ASTNamedSubquery aNamedSubquery =
-          (ASTNamedSubquery) astQuery.jjtGetChild(ASTNamedSubquery.class);
+          astQuery.jjtGetChild(ASTNamedSubquery.class);
 
       if (aNamedSubquery == null) {
 

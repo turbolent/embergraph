@@ -16,5 +16,5 @@ public interface ITermIVFilter extends Serializable {
    *
    * @param iv The internal value
    */
-  public boolean isValid(IV iv);
+  boolean isValid(IV iv);
 }

@@ -497,7 +497,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
     public MockPipelineOp(final BOp[] args, final NV... anns) {
 
       super(args, NV.asMap(anns));
-    };
+    }
 
     private static final long serialVersionUID = 1L;
 

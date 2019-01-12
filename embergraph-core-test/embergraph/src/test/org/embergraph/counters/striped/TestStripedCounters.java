@@ -126,7 +126,7 @@ public class TestStripedCounters extends TestCase2 {
 
     // do batchSize-1 updates and verify no change in the outer instance.
     for (int i = 1; i < batchSize; i++) {
-      final StoreCounters<?> t = (StoreCounters<?>) c.acquire();
+      final StoreCounters<?> t = c.acquire();
       if (t == c) fail("returned the parent instead of the child.");
       t.nreads++;
       t.release();
@@ -136,7 +136,7 @@ public class TestStripedCounters extends TestCase2 {
 
     // do one more update and verify outer instance has changed.
     {
-      final StoreCounters<?> t = (StoreCounters<?>) c.acquire();
+      final StoreCounters<?> t = c.acquire();
       t.nreads++;
       t.release();
       if (log.isInfoEnabled()) log.info("pass=" + batchSize + ", value=" + c.nreads);
@@ -148,7 +148,7 @@ public class TestStripedCounters extends TestCase2 {
     if (log.isInfoEnabled()) log.info("-----------------");
     final long lastValue = c.nreads;
     for (int i = 1; i < batchSize; i++) {
-      final StoreCounters<?> t = (StoreCounters<?>) c.acquire();
+      final StoreCounters<?> t = c.acquire();
       if (t == c) fail("returned the parent instead of the child.");
       t.nreads++;
       t.release();
@@ -158,7 +158,7 @@ public class TestStripedCounters extends TestCase2 {
 
     // do one more update and verify outer instance has changed.
     {
-      final StoreCounters<?> t = (StoreCounters<?>) c.acquire();
+      final StoreCounters<?> t = c.acquire();
       t.nreads++;
       t.release();
       if (log.isInfoEnabled()) log.info("pass=" + batchSize + ", value=" + c.nreads);

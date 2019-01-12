@@ -44,10 +44,10 @@ public interface IMetadataIndex extends IRangeQuery { // extends IIndex {
    *
    * @see #getScaleOutIndexMetadata()
    */
-  public MetadataIndexMetadata getIndexMetadata();
+  MetadataIndexMetadata getIndexMetadata();
 
   /** The metadata template for the scale-out index managed by this metadata index. */
-  public IndexMetadata getScaleOutIndexMetadata();
+  IndexMetadata getScaleOutIndexMetadata();
 
   /**
    * The partition with that separator key or <code>null</code> (exact match on the separator key).
@@ -55,7 +55,7 @@ public interface IMetadataIndex extends IRangeQuery { // extends IIndex {
    * @param key The separator key (the first key that would go into that partition).
    * @return The partition with that separator key or <code>null</code>.
    */
-  public PartitionLocator get(byte[] key);
+  PartitionLocator get(byte[] key);
 
   /**
    * Find and return the partition spanning the given key.
@@ -65,7 +65,7 @@ public interface IMetadataIndex extends IRangeQuery { // extends IIndex {
    * @return The partition spanning the given key or <code>null</code> if there are no partitions
    *     defined.
    */
-  public PartitionLocator find(byte[] key);
+  PartitionLocator find(byte[] key);
 
   /**
    * Notification that a locator is stale. Caching implementations of this interface will use this
@@ -74,5 +74,5 @@ public interface IMetadataIndex extends IRangeQuery { // extends IIndex {
    *
    * @param locator The locator.
    */
-  public void staleLocator(PartitionLocator locator);
+  void staleLocator(PartitionLocator locator);
 }

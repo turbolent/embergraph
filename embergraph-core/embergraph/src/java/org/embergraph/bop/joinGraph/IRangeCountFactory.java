@@ -46,5 +46,5 @@ public interface IRangeCountFactory {
    * @param pred The predicate.
    * @return The range count.
    */
-  public long rangeCount(IPredicate pred);
+  long rangeCount(IPredicate pred);
 }

@@ -58,8 +58,8 @@ package org.embergraph.rdf.properties;
 public interface PropertiesParserFactory {
 
   /** Returns the format for this factory. */
-  public PropertiesFormat getFormat();
+  PropertiesFormat getFormat();
 
   /** Returns a {@link PropertiesParser} instance. */
-  public PropertiesParser getParser();
+  PropertiesParser getParser();
 }

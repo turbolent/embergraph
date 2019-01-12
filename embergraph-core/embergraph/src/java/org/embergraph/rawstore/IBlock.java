@@ -12,10 +12,10 @@ import java.io.InputStream;
 public interface IBlock {
 
   /** The address of the block on the store. */
-  public long getAddress();
+  long getAddress();
 
   /** The length of the block. */
-  public int length();
+  int length();
 
   /**
    * The source from which the block's data may be read.
@@ -24,7 +24,7 @@ public interface IBlock {
    *
    * @throws UnsupportedOperationException if read is not supported.
    */
-  public InputStream inputStream();
+  InputStream inputStream();
 
   //        /**
   //         * The sink on which the block's data may be written.

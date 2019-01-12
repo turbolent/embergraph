@@ -1070,7 +1070,7 @@ public class ByteArrayBuffer extends OutputStream
 
   public long position() throws IOException {
 
-    return (int) pos;
+    return pos;
   }
 
   public void position(long v) throws IOException {
@@ -1155,7 +1155,7 @@ public class ByteArrayBuffer extends OutputStream
 
       return ByteArrayBuffer.this.array();
     }
-  };
+  }
 
   /*
    * Note: These methods are not included here because the conflicting

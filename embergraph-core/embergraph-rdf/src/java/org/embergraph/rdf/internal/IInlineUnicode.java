@@ -38,5 +38,5 @@ public interface IInlineUnicode {
    * @throws IllegalArgumentException if the argument is LT ZERO (0).
    * @throws IllegalStateException if the byteLength has already been set to a different value.
    */
-  public void setByteLength(int byteLength);
+  void setByteLength(int byteLength);
 }

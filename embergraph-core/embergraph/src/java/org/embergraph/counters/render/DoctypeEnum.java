@@ -37,7 +37,7 @@ public enum DoctypeEnum {
       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd",
       true);
 
-  private DoctypeEnum(String publicId, String systemId, boolean xml) {
+  DoctypeEnum(String publicId, String systemId, boolean xml) {
 
     this.publicId = publicId;
 

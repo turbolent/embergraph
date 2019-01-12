@@ -22,5 +22,5 @@ public interface DoubleBuffer2DConsumer {
    * @param x the x-coordinates of the points to be added.
    * @param y the y-coordinates of the points to be added.
    */
-  public void addAllOf(DoubleArrayList x, DoubleArrayList y);
+  void addAllOf(DoubleArrayList x, DoubleArrayList y);
 }

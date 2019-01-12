@@ -41,13 +41,13 @@ public interface ILocatableResource<T> {
    * Deferred initialization method is automatically invoked when the resource is materialized by
    * the {@link IResourceLocator}. The implementation is encouraged to strengthen the return type.
    */
-  public ILocatableResource<T> init();
+  ILocatableResource<T> init();
 
   /** The identifying namespace. */
-  public String getNamespace();
+  String getNamespace();
 
   /** The timestamp associated with the view of the resource. */
-  public long getTimestamp();
+  long getTimestamp();
 
   /**
    * The identifier for the containing resource.
@@ -55,5 +55,5 @@ public interface ILocatableResource<T> {
    * @return The identifier of the containing resource -or- <code>null</code> if there is no
    *     containing resource.
    */
-  public String getContainerNamespace();
+  String getContainerNamespace();
 }

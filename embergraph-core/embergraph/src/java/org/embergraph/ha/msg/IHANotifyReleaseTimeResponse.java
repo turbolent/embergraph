@@ -26,8 +26,8 @@ package org.embergraph.ha.msg;
 public interface IHANotifyReleaseTimeResponse extends IHAMessage {
 
   /** The earliest visible commit time. */
-  public long getCommitTime();
+  long getCommitTime();
 
   /** The earliest visible commit counter. */
-  public long getCommitCounter();
+  long getCommitCounter();
 }

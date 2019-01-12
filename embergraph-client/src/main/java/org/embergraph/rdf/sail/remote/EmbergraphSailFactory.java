@@ -55,7 +55,7 @@ public class EmbergraphSailFactory {
    *
    * @author mikepersonick
    */
-  public static enum Option {
+  public enum Option {
 
     /** Inference on or off. Off by default. */
     Inference,

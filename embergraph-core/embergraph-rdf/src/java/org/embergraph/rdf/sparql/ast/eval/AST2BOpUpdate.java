@@ -1988,7 +1988,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
     } else {
 
-      final EmbergraphURI c = (EmbergraphURI) ((CreateGraph) op).getTargetGraph().getValue();
+      final EmbergraphURI c = (EmbergraphURI) op.getTargetGraph().getValue();
 
       if (log.isDebugEnabled()) log.debug("targetGraph=" + c);
 
@@ -2102,11 +2102,11 @@ public class AST2BOpUpdate extends AST2BOpUtility {
       final EmbergraphSailConnection conn, final EmbergraphStatement spo, final boolean insert)
       throws SailException {
 
-    final Resource s = (Resource) spo.getSubject();
+    final Resource s = spo.getSubject();
 
-    final URI p = (URI) spo.getPredicate();
+    final URI p = spo.getPredicate();
 
-    final Value o = (Value) spo.getObject();
+    final Value o = spo.getObject();
 
     /*
      * If [c] is not bound, then using an empty Resource[] for the contexts.
@@ -2117,9 +2117,9 @@ public class AST2BOpUpdate extends AST2BOpUtility {
      * contexts (on remove it is interpreted as a wildcard).
      */
 
-    final Resource c = (Resource) (spo.getContext() == null ? null : spo.getContext());
+    final Resource c = (spo.getContext());
 
-    final Resource[] contexts = (Resource[]) (c == null ? NO_CONTEXTS : new Resource[] {c});
+    final Resource[] contexts = (c == null ? NO_CONTEXTS : new Resource[] {c});
 
     if (log.isTraceEnabled())
       log.trace(
@@ -2192,9 +2192,9 @@ public class AST2BOpUpdate extends AST2BOpUtility {
      * contexts (on remove it is interpreted as a wildcard).
      */
 
-    final Resource c = (Resource) (stmt.getContext() == null ? null : stmt.getContext());
+    final Resource c = (stmt.getContext());
 
-    final Resource[] contexts = (Resource[]) (c == null ? NO_CONTEXTS : new Resource[] {c});
+    final Resource[] contexts = (c == null ? NO_CONTEXTS : new Resource[] {c});
 
     if (log.isTraceEnabled())
       log.trace(

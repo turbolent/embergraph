@@ -155,7 +155,7 @@ public class TestBackchainOwlSameAsPropertiesIterator extends AbstractInferenceE
 
       { // test O
         SPOAccessPath accessPath =
-            (SPOAccessPath) noClosure.getAccessPath((IV) null, (IV) null, (IV) w);
+            (SPOAccessPath) noClosure.getAccessPath(null, null, w);
 
         IChunkedOrderedIterator<ISPO> itr =
             new BackchainOwlSameAsPropertiesIterator(

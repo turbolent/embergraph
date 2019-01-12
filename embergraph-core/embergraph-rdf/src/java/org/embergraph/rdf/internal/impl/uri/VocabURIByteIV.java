@@ -139,7 +139,7 @@ public class VocabURIByteIV<V extends EmbergraphURI> extends AbstractInlineIV<V,
   public String toString() {
 
     return "Vocab("
-        + Byte.toString(value)
+        + value
         + ")"
         + (hasValue() ? "[" + getValue().stringValue() + "]" : "");
   }

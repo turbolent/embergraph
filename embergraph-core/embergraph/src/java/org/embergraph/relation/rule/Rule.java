@@ -421,7 +421,7 @@ public class Rule<E> implements IRule<E> {
 
         if (t.isVar()) {
 
-          if (!vars.contains((IVariable) t)) {
+          if (!vars.contains(t)) {
 
             throw new IllegalArgumentException("Variable not declared in the tail: " + t);
           }

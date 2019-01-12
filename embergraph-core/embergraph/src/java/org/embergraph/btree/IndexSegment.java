@@ -298,7 +298,7 @@ public class IndexSegment extends AbstractBTree { // implements ILocalBTreeView 
         fileStore.getIndexMetadata().getIndexSegmentRecordCompressorFactory());
 
     // Type-safe reference to the backing store.
-    this.fileStore = (IndexSegmentStore) fileStore;
+    this.fileStore = fileStore;
 
     _reopen();
   }

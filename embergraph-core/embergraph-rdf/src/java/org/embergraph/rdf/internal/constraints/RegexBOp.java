@@ -57,7 +57,7 @@ public class RegexBOp extends XSDBooleanIVValueExpression implements INeedsMater
   public interface Annotations extends XSDBooleanIVValueExpression.Annotations {
 
     /** The cached regex pattern. */
-    public String PATTERN = RegexBOp.class.getName() + ".pattern";
+    String PATTERN = RegexBOp.class.getName() + ".pattern";
   }
 
   private static Map<String, Object> anns(

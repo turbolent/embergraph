@@ -10,13 +10,13 @@ package org.embergraph.sparse;
 public interface ITPV {
 
   /** The {@link Schema}. */
-  public Schema getSchema();
+  Schema getSchema();
 
   /** The timestamp. */
-  public long getTimestamp();
+  long getTimestamp();
 
   /** The property name. */
-  public String getName();
+  String getName();
 
   /**
    * The property value.
@@ -25,5 +25,5 @@ public interface ITPV {
    *     property was NOT bound as of that timestamp (i.e., either a deleted property value or a
    *     property that was never bound).
    */
-  public Object getValue();
+  Object getValue();
 }

@@ -229,7 +229,7 @@ public class ObjectArrayList extends AbstractList {
    */
   public Object clone() {
     ObjectArrayList v = (ObjectArrayList) super.clone();
-    v.elements = (Object[]) elements.clone();
+    v.elements = elements.clone();
     return v;
   }
   /**
@@ -482,7 +482,7 @@ public class ObjectArrayList extends AbstractList {
 
     Object[] theElements = elements;
     for (int i = from + 1; i <= to; i++) {
-      if (((Comparable) theElements[i]).compareTo((Comparable) theElements[i - 1]) < 0)
+      if (((Comparable) theElements[i]).compareTo(theElements[i - 1]) < 0)
         return false;
     }
     return true;
@@ -961,7 +961,7 @@ public class ObjectArrayList extends AbstractList {
    * @exception ArrayStoreException the runtime type of <tt>array</tt> is not a supertype of the
    *     runtime type of every element in the receiver.
    */
-  public Object[] toArray(Object array[]) {
+  public Object[] toArray(Object[] array) {
     if (array.length < size)
       array =
           (Object[]) java.lang.reflect.Array.newInstance(array.getClass().getComponentType(), size);

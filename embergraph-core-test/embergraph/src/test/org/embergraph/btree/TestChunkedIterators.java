@@ -422,9 +422,8 @@ public class TestChunkedIterators extends AbstractBTreeTestCase {
             final int i = KeyBuilder.decodeInt(key, 0);
 
             // delete only the even keys.
-            if (i % 2 == 0) return true;
+            return i % 2 == 0;
 
-            return false;
           }
         };
 

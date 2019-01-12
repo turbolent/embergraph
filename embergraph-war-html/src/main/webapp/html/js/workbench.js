@@ -1177,8 +1177,8 @@ function submitQuery(e) {
          success: showQueryExplanation,
          error: queryResultsError
       };
-      $('#query-explanation').show().html('Query running in Explain mode.');;
-      $.ajax(url, settings);
+     $('#query-explanation').show().html('Query running in Explain mode.');
+     $.ajax(url, settings);
    } else {
       $('#query-explanation').hide();
       $('#query-explanation-download').hide();
@@ -1438,7 +1438,7 @@ function showQueryExplanation(data) {
    //BLZG-1466: Adds a download link for the query explain
    $('#query-explanation-download').show().html('<a href = \"data:text/html;charset=utf-8,' 
         + encodeURIComponent(data) + '\" download = \"explain.html\">Download Query Explanation</a>');
-   $('#query-explanation').html(data)
+   $('#query-explanation').html(data);
    $('#query-explanation').show();
 }
 

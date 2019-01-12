@@ -628,7 +628,7 @@ public class ASTJoinOrderByTypeOptimizer extends AbstractJoinGroupOptimizer
     // Replace the children with those in the [ordered] list.
     for (int i = 0; i < arity; i++) {
 
-      joinGroup.setArg(i, (BOp) ordered.get(i));
+      joinGroup.setArg(i, ordered.get(i));
     }
   }
 }

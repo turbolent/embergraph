@@ -1047,7 +1047,7 @@ public abstract class WriteCache implements IWriteCache {
     }
     str.append(prefix + ", length: " + tpos + " : ");
     for (int tb = 0; tb < tpos && tb < 20; tb++) {
-      str.append(Integer.toString(buf.get(tb)) + ",");
+      str.append(buf.get(tb) + ",");
     }
     // log.trace(str.toString());
     return str.toString();

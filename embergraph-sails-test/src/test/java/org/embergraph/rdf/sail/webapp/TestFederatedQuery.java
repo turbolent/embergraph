@@ -58,6 +58,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -466,7 +467,7 @@ public class TestFederatedQuery<S extends IIndexManager> extends AbstractTestNan
   //  @Test
   public void test7() throws Exception { //     fail("FIXME RESTORE");// FIXME RESTORE
     // clears the repository and adds new data + execute
-    prepareTest("data07.ttl", Collections.<String>emptyList());
+    prepareTest("data07.ttl", Collections.emptyList());
     execute("service07.rq", "service07.srx", false);
   }
 
@@ -684,7 +685,7 @@ public class TestFederatedQuery<S extends IIndexManager> extends AbstractTestNan
     final InputStream stream =
         TestFederatedQuery.class.getResourceAsStream(TEST_RESOURCE_PATH + queryResource);
     try {
-      return IOUtil.readString(new InputStreamReader(stream, "UTF-8"));
+      return IOUtil.readString(new InputStreamReader(stream, StandardCharsets.UTF_8));
     } finally {
       stream.close();
     }

@@ -193,7 +193,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public static interface Options extends org.embergraph.journal.Options, KeyBuilder.Options {}
+  public interface Options extends org.embergraph.journal.Options, KeyBuilder.Options {}
 
   /** The #of offset bits. */
   private final int offsetBits;

@@ -349,7 +349,7 @@ public class EmbergraphValueSerializer<V extends Value> {
         {
 
           // Serialize as UTF.
-          out.writeUTF(((URI) val).stringValue());
+          out.writeUTF(val.stringValue());
 
           break;
         }
@@ -477,7 +477,7 @@ public class EmbergraphValueSerializer<V extends Value> {
         break;
 
       case ITermIndexCodes.TERM_CODE_URI:
-        uc.encode(((URI) val).stringValue(), out, tmp);
+        uc.encode(val.stringValue(), out, tmp);
 
         break;
 
@@ -583,7 +583,7 @@ public class EmbergraphValueSerializer<V extends Value> {
 
     if (v instanceof URI) {
 
-      return ((URI) v).stringValue().length();
+      return v.stringValue().length();
 
     } else if (v instanceof Literal) {
 

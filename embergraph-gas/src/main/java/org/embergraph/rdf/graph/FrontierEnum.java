@@ -30,5 +30,5 @@ public enum FrontierEnum {
   AllVertices,
 
   /** The initial frontier is an unweighted sample over all of the vertices */
-  SampledVertices;
+  SampledVertices
 }

@@ -30,8 +30,8 @@ import java.util.UUID;
 public interface IJoinedAndNonJoinedServices {
 
   /** The services joined with the met quorum, in their join order. */
-  public UUID[] getJoinedServiceIds();
+  UUID[] getJoinedServiceIds();
 
   /** The services in the write pipeline (in any order). */
-  public Set<UUID> getNonJoinedPipelineServiceIds();
+  Set<UUID> getNonJoinedPipelineServiceIds();
 }

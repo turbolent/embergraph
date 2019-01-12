@@ -429,7 +429,7 @@ public abstract class TestIBindingSet extends TestCase2 {
    * Hooks for testing specific implementations.
    */
 
-  protected abstract IBindingSet newBindingSet(IVariable<?> vars[], IConstant<?> vals[]);
+  protected abstract IBindingSet newBindingSet(IVariable<?>[] vars, IConstant<?>[] vals);
 
   protected abstract IBindingSet newBindingSet(int size);
 
@@ -444,7 +444,7 @@ public abstract class TestIBindingSet extends TestCase2 {
    * @param vals
    */
   protected void assertEqual(
-      final IBindingSet actual, final IVariable<?> vars[], final IConstant<?> vals[]) {
+      final IBindingSet actual, final IVariable<?>[] vars, final IConstant<?>[] vals) {
 
     assertEquals("size", actual.size(), vars.length);
 

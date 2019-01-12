@@ -2264,7 +2264,7 @@ public class WORMStrategy extends AbstractBufferStrategy
 
     flushWriteCache();
 
-    return super.transferFromDiskTo(this, out);
+    return transferFromDiskTo(this, out);
   }
 
   /**

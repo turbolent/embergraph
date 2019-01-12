@@ -165,7 +165,7 @@ public class EmbergraphSailRepositoryConnection extends SailRepositoryConnection
 
     if (ql == QueryLanguage.SPARQL) {
 
-      return (Update) prepareNativeSPARQLUpdate(ql, update, baseURI);
+      return prepareNativeSPARQLUpdate(ql, update, baseURI);
     }
 
     throw new MalformedQueryException("Unsupported language: " + ql);
@@ -271,7 +271,7 @@ public class EmbergraphSailRepositoryConnection extends SailRepositoryConnection
   public long commit2() throws RepositoryException {
 
     // auto-commit is heinously inefficient
-    if (isAutoCommit() && !((EmbergraphSailConnection) getSailConnection()).getAllowAutoCommit()) {
+    if (isAutoCommit() && !getSailConnection().getAllowAutoCommit()) {
 
       throw new RepositoryException("please set autoCommit to false");
     }
@@ -315,7 +315,7 @@ public class EmbergraphSailRepositoryConnection extends SailRepositoryConnection
 
     try {
 
-      ((EmbergraphSailConnection) getSailConnection()).flush();
+      getSailConnection().flush();
 
     } catch (Exception ex) {
 
@@ -329,7 +329,7 @@ public class EmbergraphSailRepositoryConnection extends SailRepositoryConnection
    */
   public AbstractTripleStore getTripleStore() {
 
-    return ((EmbergraphSailConnection) getSailConnection()).getTripleStore();
+    return getSailConnection().getTripleStore();
   }
 
   /**
@@ -353,7 +353,7 @@ public class EmbergraphSailRepositoryConnection extends SailRepositoryConnection
 
     try {
 
-      ((EmbergraphSailConnection) getSailConnection()).computeClosure();
+      getSailConnection().computeClosure();
 
     } catch (Exception ex) {
 
@@ -370,7 +370,7 @@ public class EmbergraphSailRepositoryConnection extends SailRepositoryConnection
 
     try {
 
-      ((EmbergraphSailConnection) getSailConnection()).removeAllEntailments();
+      getSailConnection().removeAllEntailments();
 
     } catch (Exception ex) {
 

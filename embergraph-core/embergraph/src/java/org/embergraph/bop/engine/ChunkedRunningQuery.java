@@ -1479,7 +1479,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
       if (!open) throw new BufferClosedException();
 
       if (SolutionsLog.INFO) {
-        SolutionsLog.log(q.getQueryId(), q.getBOp(bopId), bopId, partitionId, (IBindingSet[]) e);
+        SolutionsLog.log(q.getQueryId(), q.getBOp(bopId), bopId, partitionId, e);
       }
 
       if (false) {

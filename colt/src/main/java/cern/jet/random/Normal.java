@@ -77,7 +77,6 @@ public class Normal extends AbstractContinousDistribution {
       cacheFilled = false;
       return cache;
     }
-    ;
 
     double x, y, r, z;
     do {

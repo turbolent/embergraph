@@ -235,12 +235,7 @@ public class SPOArrayIterator implements IChunkedOrderedIterator<ISPO> {
 
     assert i <= numStmts;
 
-    if (i == numStmts) {
-
-      return false;
-    }
-
-    return true;
+    return i != numStmts;
   }
 
   public ISPO next() {

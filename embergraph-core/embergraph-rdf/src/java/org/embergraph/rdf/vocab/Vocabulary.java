@@ -42,7 +42,7 @@ public interface Vocabulary {
    *
    * @return
    */
-  public String getNamespace();
+  String getNamespace();
 
   /**
    * The #of defined {@link Value}s.
@@ -69,7 +69,7 @@ public interface Vocabulary {
    * Note: Prior to the TERMS_REFACTOR_BRANCH this would throw an exception
    * if the Value was not declared by the Vocabulary.
    */
-  public IV get(Value value);
+  IV get(Value value);
 
   /**
    * Returns the {@link IConstant} for the {@link Value}.
@@ -78,7 +78,7 @@ public interface Vocabulary {
    * @return The {@link IConstant}.
    * @throws IllegalArgumentException if that {@link Value} is not defined for this vocabulary.
    */
-  public IConstant<IV> getConstant(Value value);
+  IConstant<IV> getConstant(Value value);
 
   /**
    * Reverse lookup of an {@link IV} defined by this vocabulary.
@@ -88,5 +88,5 @@ public interface Vocabulary {
    *     the vocabulary.
    * @since TERMS_REFACTOR_BRANCH
    */
-  public Value asValue(IV iv);
+  Value asValue(IV iv);
 }

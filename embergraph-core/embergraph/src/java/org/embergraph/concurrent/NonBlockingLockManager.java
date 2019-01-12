@@ -222,7 +222,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public static enum RunState {
+  public enum RunState {
 
     /** During startup. Tasks are NOT accepted. */
     Starting(0),
@@ -253,7 +253,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
      */
     Halted(4);
 
-    private RunState(int val) {
+    RunState(int val) {
 
       this.val = val;
     }
@@ -271,23 +271,23 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
 
         if (newval == Running) return true;
 
-        if (newval == Halted) return true;
+        return newval == Halted;
 
       } else if (this == Running) {
 
         if (newval == Shutdown) return true;
 
-        if (newval == ShutdownNow) return true;
+        return newval == ShutdownNow;
 
       } else if (this == Shutdown) {
 
         if (newval == ShutdownNow) return true;
 
-        if (newval == Halted) return true;
+        return newval == Halted;
 
       } else if (this == ShutdownNow) {
 
-        if (newval == Halted) return true;
+        return newval == Halted;
       }
 
       return false;
@@ -1704,7 +1704,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
        */
       final LinkedHashSet<LockFutureTask<? extends Object>> predecessors =
           new LinkedHashSet<LockFutureTask<? extends Object>>();
-      for (R r : (R[]) task.resource) {
+      for (R r : task.resource) {
 
         // make sure queue exists for this resource.
         final ResourceQueue<LockFutureTask<? extends Object>> resourceQueue = declareResource(r);
@@ -1744,7 +1744,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
        * ResourceQueues.
        */
 
-      for (R r : (R[]) task.resource) {
+      for (R r : task.resource) {
 
         // make sure queue exists for this resource.
         final ResourceQueue<LockFutureTask<? extends Object>> resourceQueue = declareResource(r);
@@ -1770,7 +1770,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
        * its lock requests.
        */
 
-      for (R r : (R[]) task.resource) {
+      for (R r : task.resource) {
 
         // make sure queue exists for this resource.
         final ResourceQueue<LockFutureTask<? extends Object>> resourceQueue = declareResource(r);
@@ -1799,7 +1799,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
 
     if (!lock.isHeldByCurrentThread()) throw new IllegalMonitorStateException();
 
-    for (R r : (R[]) task.resource) {
+    for (R r : task.resource) {
 
       final ResourceQueue<LockFutureTask<? extends Object>> resourceQueue = resourceQueues.get(r);
 

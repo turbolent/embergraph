@@ -702,9 +702,9 @@ public class EmbergraphConnectionTest extends RepositoryConnectionTest {
 
     final Class cls2 = Class.forName("com.sun.management.GcInfo");
 
-    final Method method1 = cls1.getMethod("getLastGcInfo", new Class[] {});
+    final Method method1 = cls1.getMethod("getLastGcInfo");
 
-    final Method method2 = cls2.getMethod("getDuration", new Class[] {});
+    final Method method2 = cls2.getMethod("getDuration");
 
     /*
      * Load data.
@@ -775,7 +775,7 @@ public class EmbergraphConnectionTest extends RepositoryConnectionTest {
              */
             if (cls1.isAssignableFrom(m.getClass())) {
               // Information from the last GC.
-              final Object lastGcInfo = method1.invoke(m, new Object[] {});
+              final Object lastGcInfo = method1.invoke(m);
               // Duration of that last GC.
               final long lastDuration = (Long) method2.invoke(lastGcInfo, new Object[] {});
               if (lastDuration >= MAX_QUERY_TIME) {

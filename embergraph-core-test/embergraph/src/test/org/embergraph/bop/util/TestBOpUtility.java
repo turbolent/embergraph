@@ -197,9 +197,7 @@ public class TestBOpUtility extends TestCase2 {
           new BOpBase(
               new BOp[] {Var.var("a")}, // annotations
               NV.asMap(
-                  new NV[] {
-                    new NV("baz", "3"),
-                  }));
+                  new NV("baz", "3")));
 
       assertFalse(BOpUtility.annotationOpIterator(a1).hasNext());
     }
@@ -215,11 +213,9 @@ public class TestBOpUtility extends TestCase2 {
               new BOp[] {},
               // annotations
               NV.asMap(
-                  new NV[] {
-                    new NV("foo", Var.var("x")),
-                    new NV("bar", new Constant<String>("2")),
-                    new NV("baz", "3"),
-                  }));
+                  new NV("foo", Var.var("x")),
+                  new NV("bar", new Constant<String>("2")),
+                  new NV("baz", "3")));
 
       final BOp[] expected =
           new BOp[] {
@@ -308,15 +304,13 @@ public class TestBOpUtility extends TestCase2 {
     final BOp a3 =
         new BOpBase(
             new BOp[] {Var.var("z")},
-            NV.asMap(new NV[] {new NV("baz", a2), new NV("baz2", "skip")}));
+            NV.asMap(new NV("baz", a2), new NV("baz2", "skip")));
 
     final BOp op2 =
         new BOpBase(
             new BOp[] {Var.var("x")},
             NV.asMap(
-                new NV[] {
-                  new NV("foo1", a1), new NV("foo2", a3), new NV("foo3", "skip"),
-                }));
+                new NV("foo1", a1), new NV("foo2", a3), new NV("foo3", "skip")));
 
     // root
     final BOp root =
@@ -371,15 +365,13 @@ public class TestBOpUtility extends TestCase2 {
     final BOp a3 =
         new BOpBase(
             new BOp[] {Var.var("z")},
-            NV.asMap(new NV[] {new NV("baz", a2), new NV("baz2", "skip")}));
+            NV.asMap(new NV("baz", a2), new NV("baz2", "skip")));
 
     final BOp op2 =
         new BOpBase(
             new BOp[] {Var.var("x")},
             NV.asMap(
-                new NV[] {
-                  new NV("foo1", a1), new NV("foo2", a3), new NV("foo3", "skip"),
-                }));
+                new NV("foo1", a1), new NV("foo2", a3), new NV("foo3", "skip")));
 
     // root
     final BOp root =
@@ -469,15 +461,13 @@ public class TestBOpUtility extends TestCase2 {
     final BOp a3 =
         new BOpBase(
             new BOp[] {Var.var("z")},
-            NV.asMap(new NV[] {new NV("baz", a2), new NV("baz2", "skip")}));
+            NV.asMap(new NV("baz", a2), new NV("baz2", "skip")));
 
     final BOp op2 =
         new BOpBase(
             new BOp[] {Var.var("x")},
             NV.asMap(
-                new NV[] {
-                  new NV("foo1", a1), new NV("foo2", a3), new NV("foo3", "skip"),
-                }));
+                new NV("foo1", a1), new NV("foo2", a3), new NV("foo3", "skip")));
 
     // root
     final BOp root =
@@ -512,25 +502,19 @@ public class TestBOpUtility extends TestCase2 {
         new MockPipelineOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(BOp.Annotations.BOP_ID, 1),
-                }));
+                new NV(BOp.Annotations.BOP_ID, 1)));
 
     final BOp op2 =
         new MockPipelineOp(
             new BOp[] {op1},
             NV.asMap(
-                new NV[] {
-                  new NV(BOp.Annotations.BOP_ID, 2),
-                }));
+                new NV(BOp.Annotations.BOP_ID, 2)));
 
     final BOp op3 =
         new MockPipelineOp(
             new BOp[] {op2},
             NV.asMap(
-                new NV[] {
-                  new NV(BOp.Annotations.BOP_ID, 3),
-                }));
+                new NV(BOp.Annotations.BOP_ID, 3)));
 
     // root
     final BOp root =
@@ -539,9 +523,7 @@ public class TestBOpUtility extends TestCase2 {
               op3
             },
             NV.asMap(
-                new NV[] {
-                  new NV(BOp.Annotations.BOP_ID, 4),
-                }));
+                new NV(BOp.Annotations.BOP_ID, 4)));
 
     // index the operator tree.
     final Map<Integer, BOp> map = BOpUtility.getIndex(root);
@@ -570,18 +552,14 @@ public class TestBOpUtility extends TestCase2 {
         new MockPipelineOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(BOp.Annotations.BOP_ID, 1),
-                }));
+                new NV(BOp.Annotations.BOP_ID, 1)));
 
     // References [a2] as an annotation.
     final BOp a3 =
         new MockPipelineOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(BOp.Annotations.BOP_ID, 2), new NV("baz", a2), new NV("baz2", "skip")
-                }));
+                new NV(BOp.Annotations.BOP_ID, 2), new NV("baz", a2), new NV("baz2", "skip")));
 
     // index the operator tree (should succeed).
     final Map<Integer, BOp> map = BOpUtility.getIndex(a3);
@@ -601,9 +579,7 @@ public class TestBOpUtility extends TestCase2 {
         new MockPipelineOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(BOp.Annotations.BOP_ID, 4),
-                }));
+                new NV(BOp.Annotations.BOP_ID, 4)));
 
     // root
     final BOp root =
@@ -612,9 +588,7 @@ public class TestBOpUtility extends TestCase2 {
               op2
             },
             NV.asMap(
-                new NV[] {
-                  new NV(BOp.Annotations.BOP_ID, 4),
-                }));
+                new NV(BOp.Annotations.BOP_ID, 4)));
 
     try {
       BOpUtility.getIndex(root);
@@ -635,9 +609,7 @@ public class TestBOpUtility extends TestCase2 {
         new MockPipelineOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(BOp.Annotations.BOP_ID, "4"),
-                }));
+                new NV(BOp.Annotations.BOP_ID, "4")));
 
     try {
       BOpUtility.getIndex(root);
@@ -726,33 +698,25 @@ public class TestBOpUtility extends TestCase2 {
         new BOpBase(
             new BOp[] {Var.var("a")},
             NV.asMap(
-                new NV[] {
-                  new NV(BOp.Annotations.BOP_ID, 1),
-                }));
+                new NV(BOp.Annotations.BOP_ID, 1)));
 
     final BOp a2 =
         new MockPipelineOp(
             new BOp[] {a1},
             NV.asMap(
-                new NV[] {
-                  new NV(BOp.Annotations.BOP_ID, 2),
-                }));
+                new NV(BOp.Annotations.BOP_ID, 2)));
 
     final BOp a3 =
         new MockPipelineOp(
             new BOp[] {Var.var("a")},
             NV.asMap(
-                new NV[] {
-                  new NV(BOp.Annotations.BOP_ID, 1),
-                }));
+                new NV(BOp.Annotations.BOP_ID, 1)));
 
     final BOp a4 =
         new MockPipelineOp(
             new BOp[] {new Constant<String>("a")},
             NV.asMap(
-                new NV[] {
-                  new NV(BOp.Annotations.BOP_ID, 1),
-                }));
+                new NV(BOp.Annotations.BOP_ID, 1)));
 
     // non-pipeline op.
     try {
@@ -926,29 +890,23 @@ public class TestBOpUtility extends TestCase2 {
         new BOpBase(
             new BOp[] {Var.var("a")},
             NV.asMap(
-                new NV[] {
-                  new NV(BOp.Annotations.BOP_ID, 1),
-                }));
+                new NV(BOp.Annotations.BOP_ID, 1)));
     final BOp a2 =
         new BOpBase(
             new BOp[] {Var.var("b")},
             NV.asMap(
-                new NV[] {
-                  new NV(BOp.Annotations.BOP_ID, 2),
-                }));
+                new NV(BOp.Annotations.BOP_ID, 2)));
     // Note: [a3] tests recursion (annotations of annotations).
     final BOp a3 =
         new BOpBase(
             new BOp[] {Var.var("z"), a1},
-            NV.asMap(new NV[] {new NV("baz", a2), new NV("baz2", "skip")}));
+            NV.asMap(new NV("baz", a2), new NV("baz2", "skip")));
 
     final BOp op2 =
         new BOpBase(
             new BOp[] {Var.var("x"), a3},
             NV.asMap(
-                new NV[] {
-                  new NV("foo1", a1), new NV("foo3", "skip"), new NV(BOp.Annotations.BOP_ID, 3),
-                }));
+                new NV("foo1", a1), new NV("foo3", "skip"), new NV(BOp.Annotations.BOP_ID, 3)));
 
     // root
     final BOp root =
@@ -957,9 +915,7 @@ public class TestBOpUtility extends TestCase2 {
               new Constant<String>("12"), Var.var("y"), op2
             },
             NV.asMap(
-                new NV[] {
-                  new NV(BOp.Annotations.BOP_ID, 4),
-                }));
+                new NV(BOp.Annotations.BOP_ID, 4)));
 
     assertTrue(root == BOpUtility.getParent(root, op2));
 
@@ -992,13 +948,13 @@ public class TestBOpUtility extends TestCase2 {
     final int cid = 2;
 
     final BOp a =
-        new BOpBase(new BOp[] {}, NV.asMap(new NV[] {new NV(BOp.Annotations.BOP_ID, aid)}));
+        new BOpBase(new BOp[] {}, NV.asMap(new NV(BOp.Annotations.BOP_ID, aid)));
 
     final BOp b =
-        new BOpBase(new BOp[] {}, NV.asMap(new NV[] {new NV(BOp.Annotations.BOP_ID, bid)}));
+        new BOpBase(new BOp[] {}, NV.asMap(new NV(BOp.Annotations.BOP_ID, bid)));
 
     final BOp c =
-        new BOpBase(new BOp[] {a, b}, NV.asMap(new NV[] {new NV(BOp.Annotations.BOP_ID, cid)}));
+        new BOpBase(new BOp[] {a, b}, NV.asMap(new NV(BOp.Annotations.BOP_ID, cid)));
 
     assertEquals(a, BOpUtility.getPipelineStart(a));
 

@@ -160,7 +160,7 @@ public class RandomSampler extends cern.colt.PersistentObject {
     return copy;
   }
   /** Tests this class. */
-  public static void main(String args[]) {
+  public static void main(String[] args) {
     long n = Long.parseLong(args[0]);
     long N = Long.parseLong(args[1]);
     long low = Long.parseLong(args[2]);
@@ -607,7 +607,7 @@ public class RandomSampler extends cern.colt.PersistentObject {
    * Tests different values for negaalphainv. Result: J.S. Vitter's recommendation for
    * negalphainv=-13 is also good in the JDK 1.2 environment.
    */
-  protected static void testNegAlphaInv(String args[]) {
+  protected static void testNegAlphaInv(String[] args) {
     /*
     long N = Long.parseLong(args[0]);
     int chunkSize = Integer.parseInt(args[1]);

@@ -241,9 +241,7 @@ public class GenericSkinRegistry {
                   + ": theClassOrInterface="
                   + theClassOrInterface
                   + ", initCause="
-                  + t);
-
-      ex.initCause(t);
+                  + t, t);
 
       throw ex;
     }
@@ -348,7 +346,7 @@ public class GenericSkinRegistry {
 
   public static IGenericSkin mintGenericSkin(Class implClass, IGPO g) throws Exception {
 
-    Constructor c = implClass.getDeclaredConstructor(new Class[] {IGPO.class});
+    Constructor c = implClass.getDeclaredConstructor(IGPO.class);
 
     return (IGenericSkin) c.newInstance(new Object[] {g});
   }

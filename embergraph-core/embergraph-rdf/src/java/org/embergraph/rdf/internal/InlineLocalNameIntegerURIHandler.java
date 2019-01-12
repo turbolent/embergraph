@@ -113,7 +113,7 @@ public abstract class InlineLocalNameIntegerURIHandler extends InlineSignedInteg
     String longVal = null;
 
     try {
-      longVal = Long.toString(packValue((long) Long.parseLong(intVal)));
+      longVal = Long.toString(packValue(Long.parseLong(intVal)));
     } catch (NumberFormatException nfe) {
       // It is not a valid number
       // Do not inline
@@ -130,7 +130,7 @@ public abstract class InlineLocalNameIntegerURIHandler extends InlineSignedInteg
    * @return
    */
   public String getUnpackedValueString(final String s) {
-    return Long.toString(unpackValue((long) Long.parseLong(s)));
+    return Long.toString(unpackValue(Long.parseLong(s)));
   }
 
   /**
@@ -140,7 +140,7 @@ public abstract class InlineLocalNameIntegerURIHandler extends InlineSignedInteg
    * @return
    */
   public long getUnpackedValueFromString(final String s) {
-    return unpackValue((long) Long.parseLong(s));
+    return unpackValue(Long.parseLong(s));
   }
 
   /**

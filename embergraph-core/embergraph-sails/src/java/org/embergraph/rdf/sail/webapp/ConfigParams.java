@@ -37,32 +37,32 @@ public interface ConfigParams {
    * parameter is ignored if the {@link IIndexManager} is specified as an attribute of the web
    * application context.
    */
-  final String PROPERTY_FILE = "propertyFile";
+  String PROPERTY_FILE = "propertyFile";
 
   /**
    * The default embergraph namespace of for the triple or quad store instance to be exposed
    * (default {@link #DEFAULT_NAMESPACE}). Note that there can be many triple or quad store
    * instances within a embergraph instance.
    */
-  final String NAMESPACE = "namespace";
+  String NAMESPACE = "namespace";
 
-  final String DEFAULT_NAMESPACE = "kb";
+  String DEFAULT_NAMESPACE = "kb";
 
   /**
    * When <code>true</code>, an instance of the specified {@link #NAMESPACE} will be created if none
    * exists.
    */
-  final String CREATE = "create";
+  String CREATE = "create";
 
-  final boolean DEFAULT_CREATE = true;
+  boolean DEFAULT_CREATE = true;
 
   /**
    * The size of the thread pool used to service SPARQL queries -OR- ZERO (0) for an unbounded
    * thread pool (default {@value #DEFAULT_QUERY_THREAD_POOL_SIZE}).
    */
-  final String QUERY_THREAD_POOL_SIZE = "queryThreadPoolSize";
+  String QUERY_THREAD_POOL_SIZE = "queryThreadPoolSize";
 
-  final int DEFAULT_QUERY_THREAD_POOL_SIZE = 16;
+  int DEFAULT_QUERY_THREAD_POOL_SIZE = 16;
 
   /**
    * Force a compacting merge of all shards on all data services in a embergraph federation
@@ -70,7 +70,7 @@ public interface ConfigParams {
    *
    * <p><strong>This option should only be used for benchmarking purposes.</strong>
    */
-  final String FORCE_OVERFLOW = "forceOverflow";
+  String FORCE_OVERFLOW = "forceOverflow";
 
   /**
    * The commit time against which the server will assert a read lock by holding open a read-only
@@ -79,7 +79,7 @@ public interface ConfigParams {
    * commit point on the database. Regardless, each query will be issued against a read-only
    * transaction.
    */
-  final String READ_LOCK = "readLock";
+  String READ_LOCK = "readLock";
 
   /**
    * When <code>true</code> and the KB instance is in the <code>quads</code> mode, each named graph
@@ -93,25 +93,25 @@ public interface ConfigParams {
    * very good default. However, you can certainly enable this if you only have a reasonable number
    * of named graphs and/or only expose the SPARQL end point to a limited audience.
    */
-  final String DESCRIBE_EACH_NAMED_GRAPH = "describeEachNamedGraph";
+  String DESCRIBE_EACH_NAMED_GRAPH = "describeEachNamedGraph";
 
-  final boolean DEFAULT_DESCRIBE_EACH_NAMED_GRAPH = false;
+  boolean DEFAULT_DESCRIBE_EACH_NAMED_GRAPH = false;
 
   /**
    * When <code>true</code>, requests will be refused for mutation operations on the database made
    * through the REST API. This may be used to help lock down a public facing interface.
    */
-  final String READ_ONLY = "readOnly";
+  String READ_ONLY = "readOnly";
 
-  final boolean DEFAULT_READ_ONLY = false;
+  boolean DEFAULT_READ_ONLY = false;
 
   /**
    * When non-zero, this specifies the timeout (milliseconds) for a query. This may be used to limit
    * resource consumption on a public facing interface.
    */
-  final String QUERY_TIMEOUT = "queryTimeout";
+  String QUERY_TIMEOUT = "queryTimeout";
 
-  final long DEFAULT_QUERY_TIMEOUT = 0L;
+  long DEFAULT_QUERY_TIMEOUT = 0L;
 
   /**
    * When non-zero, this specifies the timeout (milliseconds) for a warmup period when the NSS
@@ -119,9 +119,9 @@ public interface ConfigParams {
    *
    * @see <a href="http://trac.bigdata.com/ticket/1050" > pre-heat the journal on startup </a>
    */
-  final String WARMUP_TIMEOUT = "warmupTimeout";
+  String WARMUP_TIMEOUT = "warmupTimeout";
 
-  final long DEFAULT_WARMUP_TIMEOUT = 0L;
+  long DEFAULT_WARMUP_TIMEOUT = 0L;
 
   /**
    * The size of the thread pool used to warmup the journal (default {@value
@@ -129,9 +129,9 @@ public interface ConfigParams {
    *
    * @see <a href="http://trac.bigdata.com/ticket/1050" > pre-heat the journal on startup </a>
    */
-  final String WARMUP_THREAD_POOL_SIZE = "warmupThreadPoolSize";
+  String WARMUP_THREAD_POOL_SIZE = "warmupThreadPoolSize";
 
-  final int DEFAULT_WARMUP_THREAD_POOL_SIZE = 20;
+  int DEFAULT_WARMUP_THREAD_POOL_SIZE = 20;
 
   /**
    * A comma delimited list of namespaces to be processed during the warmup procedure (optional).
@@ -139,7 +139,7 @@ public interface ConfigParams {
    *
    * @see <a href="http://trac.bigdata.com/ticket/1050" > pre-heat the journal on startup </a>
    */
-  final String WARMUP_NAMESPACE_LIST = "warmupNamespaceList";
+  String WARMUP_NAMESPACE_LIST = "warmupNamespaceList";
 
   String DEFAULT_WARMUP_NAMESPACE_LIST = "";
 
@@ -148,15 +148,15 @@ public interface ConfigParams {
    *
    * @see <a href="https://jira.blazegraph.com/browse/BLZG-1295">Refactor Blueprints </a>
    */
-  final String BLUEPRINTS_SERVLET_PROVIDER = "blueprintsServletProvider";
+  String BLUEPRINTS_SERVLET_PROVIDER = "blueprintsServletProvider";
 
-  static final String DEFAULT_BLUEPRINTS_SERVLET_PROVIDER =
+  String DEFAULT_BLUEPRINTS_SERVLET_PROVIDER =
       BlueprintsServletProxy.getDefaultProvider();
 
   /** A class that implements the {@link MapgraphServletProxy}. */
-  final String MAPGRAPH_SERVLET_PROVIDER = "mapgraphServletProvider";
+  String MAPGRAPH_SERVLET_PROVIDER = "mapgraphServletProvider";
 
-  static final String DEFAULT_MAPGRAPH_SERVLET_PROVIDER = MapgraphServletProxy.getDefaultProvider();
+  String DEFAULT_MAPGRAPH_SERVLET_PROVIDER = MapgraphServletProxy.getDefaultProvider();
 
   /** List of the services this instance is allowed to call out to. */
   String SERVICE_WHITELIST = "serviceWhitelist";

@@ -79,7 +79,7 @@ public interface IRemoteRepository {
    *
    * <p>Right now, the only metadata is the query ID.
    */
-  public static interface Query {
+  interface Query {
 
     /**
      * Return the query ID. Can be used in conjunction with {@link IRemoteRepository#cancel(UUID)}.
@@ -89,7 +89,7 @@ public interface IRemoteRepository {
     UUID getQueryId();
   }
 
-  public static interface TupleQuery extends Query {
+  interface TupleQuery extends Query {
 
     /**
      * Evaluate the query remotely on the server and parse the response into a <code>
@@ -98,7 +98,7 @@ public interface IRemoteRepository {
     TupleQueryResult evalaute();
   }
 
-  public static interface GraphQuery extends Query {
+  interface GraphQuery extends Query {
 
     /**
      * Evaluate the query remotely on the server and parse the response into a <code>
@@ -107,7 +107,7 @@ public interface IRemoteRepository {
     GraphQueryResult evaluate();
   }
 
-  public static interface BooleanQuery extends Query {
+  interface BooleanQuery extends Query {
 
     /**
      * Evaluate the query remotely on the server and parse the response into a <code>boolean</code>.
@@ -148,7 +148,7 @@ public interface IRemoteRepository {
    *   <li><code>AddOp(URL url, String baseURI, RDFFormat format)</code>
    * </ul>
    */
-  public static interface AddOp {}
+  interface AddOp {}
 
   /**
    * This class will have a number of different ctors:
@@ -160,5 +160,5 @@ public interface IRemoteRepository {
    *   <li><code>RemoveOp(String sparqlQuery)</code>
    * </ul>
    */
-  public static interface RemoveOp {}
+  interface RemoveOp {}
 }

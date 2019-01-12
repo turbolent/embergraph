@@ -65,7 +65,7 @@ public class LUDecomposition implements java.io.Serializable {
    * @return piv
    */
   public int[] getPivot() {
-    return (int[]) quick.getPivot().clone();
+    return quick.getPivot().clone();
   }
   /**
    * Returns the upper triangular factor, <tt>U</tt>.

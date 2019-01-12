@@ -38,7 +38,7 @@ public class Polynomial extends Constants {
    * @param coef the coefficients of the polynomial.
    * @param N the degree of the polynomial.
    */
-  public static double p1evl(double x, double coef[], int N) throws ArithmeticException {
+  public static double p1evl(double x, double[] coef, int N) throws ArithmeticException {
     double ans;
 
     ans = x + coef[0];
@@ -69,7 +69,7 @@ public class Polynomial extends Constants {
    * @param coef the coefficients of the polynomial.
    * @param N the degree of the polynomial.
    */
-  public static double polevl(double x, double coef[], int N) throws ArithmeticException {
+  public static double polevl(double x, double[] coef, int N) throws ArithmeticException {
     double ans;
     ans = coef[0];
 

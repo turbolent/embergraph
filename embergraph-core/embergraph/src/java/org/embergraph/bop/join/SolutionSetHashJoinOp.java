@@ -81,7 +81,7 @@ public abstract class SolutionSetHashJoinOp extends PipelineOp {
   public interface Annotations extends PipelineOp.Annotations, NamedSetAnnotations {
 
     /** An {@link IConstraint}[] to be applied to solutions when they are joined (optional). */
-    final String CONSTRAINTS = JoinAnnotations.CONSTRAINTS;
+    String CONSTRAINTS = JoinAnnotations.CONSTRAINTS;
 
     /**
      * When <code>true</code> the hash index identified by {@link #NAMED_SET_REF} will be released
@@ -101,9 +101,9 @@ public abstract class SolutionSetHashJoinOp extends PipelineOp {
      * when the {@link IRunningQuery#isDone()}. This only provides a means to release data as soon
      * as it is known that the data will not be referenced again during the query.
      */
-    final String RELEASE = SolutionSetHashJoinOp.class + ".release";
+    String RELEASE = SolutionSetHashJoinOp.class + ".release";
 
-    final boolean DEFAULT_RELEASE = true;
+    boolean DEFAULT_RELEASE = true;
   }
 
   /** Deep copy constructor. */

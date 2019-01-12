@@ -167,13 +167,8 @@ public abstract class ChunkedFilter<I extends IChunkedIterator<E>, E, F>
         index = 0;
       }
 
-      if (chunk == null || index == chunk.length) {
-
-        // nothing left.
-        return false;
-      }
-
-      return true;
+      // nothing left.
+      return chunk != null && index != chunk.length;
     }
 
     public F next() {

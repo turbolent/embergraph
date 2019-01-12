@@ -595,7 +595,7 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
               watcherShutdownTimeout, TimeUnit.MILLISECONDS)) {
             log.error(
                 "WatcherActionService termination timeout: activeCount="
-                    + ((ThreadPoolExecutor) watcherActionService).getActiveCount());
+                    + watcherActionService.getActiveCount());
           }
         } catch (org.embergraph.concurrent.TimeoutException ex) {
           // Ignore.

@@ -33,5 +33,5 @@ public interface IChunkedStriterator<I extends IChunkedIterator<E>, E>
     extends IChunkedIterator<E>, IStriterator<I, E> {
 
   @Override
-  public IChunkedStriterator<I, E> addFilter(IFilter<I, ?, E> filter);
+  IChunkedStriterator<I, E> addFilter(IFilter<I, ?, E> filter);
 }

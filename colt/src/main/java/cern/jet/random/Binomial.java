@@ -158,7 +158,7 @@ public class Binomial extends AbstractDiscreteDistribution {
           pk = p0;
         } else {
           U -= pk;
-          pk = (double) (((n - K + 1) * par * pk) / (K * q));
+          pk = ((n - K + 1) * par * pk) / (K * q);
         }
       }
       return ((p > 0.5) ? (n - K) : K);

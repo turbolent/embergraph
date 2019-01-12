@@ -203,7 +203,7 @@ public enum DTE {
    * @param datatype The well-known URI for the data type.
    * @param flags Some bit flags. See {@link #NUMERIC}, {@link #UNSIGNED_NUMERIC}, etc.
    */
-  private DTE(
+  DTE(
       final byte v, final int len, final Class<?> cls, final URI datatypeURI, final int flags) {
     this.v = v;
     this.len = len;

@@ -128,7 +128,7 @@ public class HistoryInstrument<T> implements IInstrument<T> {
     if (sample == null) return -1L;
 
     return sample.lastModified();
-  };
+  }
 
   /**
    * Adds the sample to the history. Samples in the same slot are averaged.

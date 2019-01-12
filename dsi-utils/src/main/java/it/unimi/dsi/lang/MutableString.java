@@ -561,7 +561,7 @@ public class MutableString
    * @param a a character array.
    * @return a compact mutable string backed by the given array.
    */
-  public static MutableString wrap(final char a[]) {
+  public static MutableString wrap(final char[] a) {
     MutableString s = new MutableString(0);
     s.array = a;
     s.hashLength = -1;
@@ -916,7 +916,7 @@ public class MutableString
    */
   public final MutableString append(
       final Object[] a, final int offset, final int length, final CharSequence separator) {
-    String s[] = new String[a.length];
+    String[] s = new String[a.length];
     for (int i = 0; i < length; i++) s[i] = a[offset + i].toString();
     return append(s, offset, length, separator);
   }
@@ -940,7 +940,7 @@ public class MutableString
    * @param a an array to append.
    * @return this mutable string.
    */
-  public final MutableString append(final char a[]) {
+  public final MutableString append(final char[] a) {
     final int l = a.length;
     if (l == 0) return this;
 

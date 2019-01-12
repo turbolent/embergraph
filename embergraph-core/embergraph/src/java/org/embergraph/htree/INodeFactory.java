@@ -36,7 +36,7 @@ public interface INodeFactory {
    * @param data The node data record.
    * @return A node initialized from those data.
    */
-  public DirectoryPage allocNode(AbstractHTree htree, long addr, IDirectoryData data);
+  DirectoryPage allocNode(AbstractHTree htree, long addr, IDirectoryData data);
 
   /**
    * Create a leaf.
@@ -46,5 +46,5 @@ public interface INodeFactory {
    * @param data The leaf data record.
    * @return A leaf initialized from those data.
    */
-  public BucketPage allocLeaf(AbstractHTree htree, long addr, ILeafData data);
+  BucketPage allocLeaf(AbstractHTree htree, long addr, ILeafData data);
 }

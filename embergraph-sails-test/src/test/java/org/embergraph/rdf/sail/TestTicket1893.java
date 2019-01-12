@@ -1008,7 +1008,7 @@ public class TestTicket1893 extends ProxyEmbergraphSailTestCase {
 
     final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
 
-    return (EmbergraphSailRepositoryConnection) repo.getConnection();
+    return repo.getConnection();
   }
 
   private void endTest(EmbergraphSailRepositoryConnection cxn) throws Exception {

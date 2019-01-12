@@ -55,7 +55,7 @@ public interface IPreparedOperation {
    * zero value indicates an unlimited query time (which is the default).
    *
    * @param millis The timeout in milliseconds.
-   * @see http://trac.blazegraph.com/ticket/914 (Set timeout on remote query)
+   * @see <a href="http://trac.blazegraph.com/ticket/914">http://trac.blazegraph.com/ticket/914</a> (Set timeout on remote query)
    */
   void setMaxQueryMillis(long millis);
 

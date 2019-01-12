@@ -22,6 +22,7 @@ package org.embergraph.sparse;
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import org.embergraph.io.DataInputBuffer;
 import org.embergraph.io.DataOutputBuffer;
@@ -206,7 +207,7 @@ public enum ValueType {
         buf.writeByte(ValueType.Unicode.intValue());
 
         // @todo constrain max byte[] length?
-        byte[] bytes = ((String) v).getBytes(UTF8);
+        byte[] bytes = ((String) v).getBytes(StandardCharsets.UTF_8);
 
         buf.packLong(bytes.length);
 
@@ -273,7 +274,7 @@ public enum ValueType {
             final int len = (int) buf.unpackLong();
             final byte[] bytes = new byte[len];
             buf.readFully(bytes);
-            String s = new String(bytes, UTF8);
+            String s = new String(bytes, StandardCharsets.UTF_8);
             return s;
           }
         case Date:

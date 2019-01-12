@@ -17,5 +17,5 @@ public interface HardReferenceQueueEvictionListener<T> {
    * @param cache The cache on which the listener is registered.
    * @param ref The reference that is being evicted from the cache.
    */
-  public void evicted(IHardReferenceQueue<T> cache, T ref);
+  void evicted(IHardReferenceQueue<T> cache, T ref);
 }

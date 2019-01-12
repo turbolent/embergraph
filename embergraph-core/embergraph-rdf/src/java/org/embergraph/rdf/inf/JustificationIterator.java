@@ -343,11 +343,8 @@ public class JustificationIterator implements IJustificationIterator {
         fillBuffer();
       }
 
-      if (buffer.isEmpty()) {
-
-        // the buffer is still empty, so the iterator is exhausted.
-        return false;
-      }
+      // the buffer is still empty, so the iterator is exhausted.
+      return !buffer.isEmpty();
     }
 
     // at least one Justification in the buffer.

@@ -71,7 +71,7 @@ public class LiteralExtensionIV<V extends EmbergraphLiteral>
 
     this.delegate = delegate;
 
-    this.datatype = (AbstractIV<EmbergraphURI, ?>) datatype;
+    this.datatype = datatype;
   }
 
   /**

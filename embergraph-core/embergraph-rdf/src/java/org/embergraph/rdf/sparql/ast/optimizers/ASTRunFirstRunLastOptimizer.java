@@ -172,7 +172,7 @@ public class ASTRunFirstRunLastOptimizer implements IASTOptimizer {
 
         joinGroup.removeChild(first);
 
-        joinGroup.addArg(firstJoinIndex, (BOp) first);
+        joinGroup.addArg(firstJoinIndex, first);
       }
 
       if (last != null) {
@@ -187,7 +187,7 @@ public class ASTRunFirstRunLastOptimizer implements IASTOptimizer {
 
         joinGroup.removeChild(last);
 
-        joinGroup.addArg(lastJoinIndex, (BOp) last);
+        joinGroup.addArg(lastJoinIndex, last);
       }
     }
 

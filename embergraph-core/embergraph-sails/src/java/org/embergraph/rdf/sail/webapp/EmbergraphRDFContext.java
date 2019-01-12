@@ -207,7 +207,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
   /**
    * HTTP header may be used to specify the timeout for a query.
    *
-   * @see http://trac.blazegraph.com/ticket/914 (Set timeout on remote query)
+   * @see <a href="http://trac.blazegraph.com/ticket/914">http://trac.blazegraph.com/ticket/914</a> (Set timeout on remote query)
    */
   public static final String HTTP_HEADER_EMBERGRAPH_MAX_QUERY_MILLIS =
       "X-EMBERGRAPH-MAX-QUERY-MILLIS";
@@ -449,17 +449,15 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
     if (config.queryThreadPoolSize == 0) {
 
       queryService =
-          (ThreadPoolExecutor)
-              Executors.newCachedThreadPool(
-                  new DaemonThreadFactory(getClass().getName() + ".queryService"));
+          Executors.newCachedThreadPool(
+              new DaemonThreadFactory(getClass().getName() + ".queryService"));
 
     } else {
 
       queryService =
-          (ThreadPoolExecutor)
-              Executors.newFixedThreadPool(
-                  config.queryThreadPoolSize,
-                  new DaemonThreadFactory(getClass().getName() + ".queryService"));
+          Executors.newFixedThreadPool(
+              config.queryThreadPoolSize,
+              new DaemonThreadFactory(getClass().getName() + ".queryService"));
     }
 
     if (indexManager.getCollectQueueStatistics()) {
@@ -1051,7 +1049,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
       final EmbergraphSailUpdate update = new EmbergraphSailUpdate(astContainer, cxn);
 
       // Figure out the UUID under which the query will execute.
-      final UUID queryId2 = setQueryId(((EmbergraphSailUpdate) update).getASTContainer());
+      final UUID queryId2 = setQueryId(update.getASTContainer());
 
       // Override query if data set protocol parameters were used.
       overrideDataset(update);
@@ -1122,7 +1120,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
      *
      * @param cxn The connection.
      * @return The query.
-     * @see http://trac.blazegraph.com/ticket/914 (Set timeout on remote query)
+     * @see <a href="http://trac.blazegraph.com/ticket/914">http://trac.blazegraph.com/ticket/914</a> (Set timeout on remote query)
      */
     private AbstractQuery newQuery(final EmbergraphSailRepositoryConnection cxn) {
 
@@ -2384,7 +2382,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
 
       final org.embergraph.rdf.sail.model.RunningQuery modelQuery;
 
-      final boolean isUpdateQuery = queryTask instanceof UpdateTask ? true : false;
+      final boolean isUpdateQuery = queryTask instanceof UpdateTask;
 
       modelQuery =
           new org.embergraph.rdf.sail.model.RunningQuery(

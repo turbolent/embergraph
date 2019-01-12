@@ -157,7 +157,7 @@ public class TestRollbacks extends QuadsTestCase {
 
   private static final AtomicInteger runCount = new AtomicInteger();
 
-  private void doTest(final int maxCounter) throws InterruptedException, Exception {
+  private void doTest(final int maxCounter) throws Exception {
 
     /*
      * Note: Each run needs to be in a distinct namespace since we otherwise
@@ -194,7 +194,7 @@ public class TestRollbacks extends QuadsTestCase {
   }
 
   private void runConcurrentStuff(final SailRepository repo, final int maxCounter)
-      throws Exception, InterruptedException {
+      throws Exception {
     try {
       final List<Callable<Void>> tasks = new LinkedList<Callable<Void>>();
       tasks.add(new DoStuff(repo, true /*writer*/, maxCounter));
@@ -264,7 +264,7 @@ public class TestRollbacks extends QuadsTestCase {
           //                    conn.setAutoCommit(false);
           //                    conn.close();
         }
-        return (Void) null;
+        return null;
       } catch (Throwable t) {
         firstCause.compareAndSet(null /* expect */, t);
         throw new RuntimeException(t);

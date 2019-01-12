@@ -33,19 +33,19 @@ public interface Codec {
    *
    * @return a coder for the compression technique represented by this codec.
    */
-  public Coder coder();
+  Coder coder();
 
   /**
    * Returns a decoder for the compression technique represented by this coded.
    *
    * @return a decoder for the compression technique represented by this codec.
    */
-  public Decoder decoder();
+  Decoder decoder();
 
   /**
    * Returns the number of symbols handled by this codec.
    *
    * @return the number of symbols handled by this codec.
    */
-  public int size();
+  int size();
 }

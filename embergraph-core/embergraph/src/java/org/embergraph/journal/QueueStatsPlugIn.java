@@ -123,9 +123,7 @@ public class QueueStatsPlugIn implements IPlugIn<Journal, ThreadPoolExecutorBase
   public boolean isRunning() {
 
     synchronized (this) {
-      if (scheduledFuture == null || scheduledFuture.isDone()) return false;
-
-      return true;
+      return scheduledFuture != null && !scheduledFuture.isDone();
     }
   }
 }

@@ -210,7 +210,7 @@ public interface IDataService extends ITxCommitProtocol, IService, IRemoteExecut
    * @todo exception if index exists? or modify to validate consistent decl and exception iff not
    *     consistent. right now it just silently succeeds if the index already exists.
    */
-  public void registerIndex(String name, IndexMetadata metadata)
+  void registerIndex(String name, IndexMetadata metadata)
       throws IOException, InterruptedException, ExecutionException;
 
   /**
@@ -223,7 +223,7 @@ public interface IDataService extends ITxCommitProtocol, IService, IRemoteExecut
    * @return The metadata for the named index.
    * @throws IOException
    */
-  public IndexMetadata getIndexMetadata(String name, long timestamp)
+  IndexMetadata getIndexMetadata(String name, long timestamp)
       throws IOException, InterruptedException, ExecutionException;
 
   /**
@@ -236,7 +236,7 @@ public interface IDataService extends ITxCommitProtocol, IService, IRemoteExecut
    * @param name The index name.
    * @exception IllegalArgumentException if <i>name</i> does not identify a registered index.
    */
-  public void dropIndex(String name) throws IOException, InterruptedException, ExecutionException;
+  void dropIndex(String name) throws IOException, InterruptedException, ExecutionException;
 
   /**
    * Streaming traversal of keys and/or values in a key range.
@@ -270,7 +270,7 @@ public interface IDataService extends ITxCommitProtocol, IService, IRemoteExecut
    * @exception ExecutionException If the operation caused an error. See {@link
    *     ExecutionException#getCause()} for the underlying error.
    */
-  public ResultSet rangeIterator(
+  ResultSet rangeIterator(
       long tx, String name, byte[] fromKey, byte[] toKey, int capacity, int flags, IFilter filter)
       throws InterruptedException, ExecutionException, IOException;
 
@@ -297,7 +297,7 @@ public interface IDataService extends ITxCommitProtocol, IService, IRemoteExecut
    * @throws RejectedExecutionException if the task can not be accepted for execution.
    * @throws IOException if there is an RMI problem.
    */
-  public <T> Future<T> submit(long tx, String name, IIndexProcedure<T> proc) throws IOException;
+  <T> Future<T> submit(long tx, String name, IIndexProcedure<T> proc) throws IOException;
 
   /**
    * {@inheritDoc}
@@ -310,7 +310,7 @@ public interface IDataService extends ITxCommitProtocol, IService, IRemoteExecut
    * @see IDataServiceCallable
    */
   @Override
-  public Future<? extends Object> submit(Callable<? extends Object> proc) throws RemoteException;
+  Future<? extends Object> submit(Callable<? extends Object> proc) throws RemoteException;
 
   /**
    * Read a low-level record from the described {@link IRawStore} described by the {@link
@@ -332,7 +332,7 @@ public interface IDataService extends ITxCommitProtocol, IService, IRemoteExecut
    *     for streaming reads of up to 64M or more (a record recorded on the store as identified by
    *     the address).
    */
-  public IBlock readBlock(IResourceMetadata resource, long addr) throws IOException;
+  IBlock readBlock(IResourceMetadata resource, long addr) throws IOException;
 
   /*
    * Methods in support of unit tests.
@@ -366,7 +366,7 @@ public interface IDataService extends ITxCommitProtocol, IService, IRemoteExecut
    * @throws InterruptedException may be thrown if <i>immediate</i> is <code>true</code>.
    * @throws ExecutionException may be thrown if <i>immediate</i> is <code>true</code>.
    */
-  public void forceOverflow(boolean immediate, boolean compactingMerge)
+  void forceOverflow(boolean immediate, boolean compactingMerge)
       throws IOException, InterruptedException, ExecutionException;
 
   /**
@@ -392,20 +392,20 @@ public interface IDataService extends ITxCommitProtocol, IService, IRemoteExecut
    * @throws IOException
    * @throws InterruptedException
    */
-  public boolean purgeOldResources(long timeout, boolean truncateJournal)
+  boolean purgeOldResources(long timeout, boolean truncateJournal)
       throws IOException, InterruptedException;
 
   /**
    * The #of asynchronous overflows that have taken place on this data service (the counter is not
    * restart safe).
    */
-  public long getAsynchronousOverflowCounter() throws IOException;
+  long getAsynchronousOverflowCounter() throws IOException;
 
   /** Return <code>true</code> iff the data service is currently engaged in overflow processing. */
-  public boolean isOverflowActive() throws IOException;
+  boolean isOverflowActive() throws IOException;
 
   /** Return the {@link IQueryPeer} running on this service. */
-  public IQueryPeer getQueryEngine() throws IOException;
+  IQueryPeer getQueryEngine() throws IOException;
 
   //    /**
   //     * Shutdown the service immediately and destroy any persistent data

@@ -403,16 +403,14 @@ public abstract class HashIndexOpTestCase extends TestCase2 {
         new ValidateIndexOp(
             new BOp[] {op},
             NV.asMap(
-                new NV[] {
-                  new NV(BOp.Annotations.BOP_ID, 2),
-                  new NV(BOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                  //                        new NV(PipelineOp.Annotations.LAST_PASS, true),
-                  //                        new NV(PipelineOp.Annotations.MAX_PARALLEL,1),
-                  new NV(PipelineOp.Annotations.PIPELINED, false),
-                  new NV(ValidateIndexOp.Annotations.EXPECTED_SOLUTIONS, solutionsToIndex),
-                  new NV(ValidateIndexOp.Annotations.NAMED_SET_SOURCE_REF, namedSolutionSetSource),
-                  new NV(ValidateIndexOp.Annotations.NAMED_SET_REF, namedSolutionSet),
-                }));
+                new NV(BOp.Annotations.BOP_ID, 2),
+                new NV(BOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                //                        new NV(PipelineOp.Annotations.LAST_PASS, true),
+                //                        new NV(PipelineOp.Annotations.MAX_PARALLEL,1),
+                new NV(PipelineOp.Annotations.PIPELINED, false),
+                new NV(ValidateIndexOp.Annotations.EXPECTED_SOLUTIONS, solutionsToIndex),
+                new NV(ValidateIndexOp.Annotations.NAMED_SET_SOURCE_REF, namedSolutionSetSource),
+                new NV(ValidateIndexOp.Annotations.NAMED_SET_REF, namedSolutionSet)));
 
     final PipelineOp query = op2;
 

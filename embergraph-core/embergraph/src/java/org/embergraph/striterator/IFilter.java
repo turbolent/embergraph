@@ -43,5 +43,5 @@ public interface IFilter<I extends Iterator<E>, E, F> extends Serializable {
    * @param src The source iterator.
    * @return The filtered iterator.
    */
-  public Iterator<F> filter(I src);
+  Iterator<F> filter(I src);
 }

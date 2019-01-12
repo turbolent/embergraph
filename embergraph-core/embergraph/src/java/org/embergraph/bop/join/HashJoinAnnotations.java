@@ -81,5 +81,5 @@ public interface HashJoinAnnotations {
    * in the distinct variables (typically: exactly the join variables), execute the inner group, and
    * finally rejoin with the whole set of variables in the end.
    */
-  final String OUTPUT_DISTINCT_JVs = HashJoinAnnotations.class.getName() + ".outputDistinctJVs";
+  String OUTPUT_DISTINCT_JVs = HashJoinAnnotations.class.getName() + ".outputDistinctJVs";
 }

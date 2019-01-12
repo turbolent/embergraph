@@ -74,7 +74,7 @@ public abstract class AbstractQuorumMember<S extends Remote> extends AbstractQuo
     // Note: This causes a compiler error on CI builds w/ JDK1.1.6_17.
     //        return (QuorumActor<S, QuorumMember<S>>) getQuorum().getActor();
     //        return (QuorumActor<S, QuorumMember<S>>) (QuorumActor<?,?>)getQuorum().getActor();
-    return (QuorumActor<S, QuorumMember<S>>) (QuorumActor) getQuorum().getActor();
+    return (QuorumActor<S, QuorumMember<S>>) getQuorum().getActor();
   }
 
   @Override

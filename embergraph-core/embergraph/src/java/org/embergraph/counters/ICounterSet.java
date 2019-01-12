@@ -41,7 +41,7 @@ import org.xml.sax.SAXException;
 public interface ICounterSet extends ICounterNode {
 
   /** Separator for path name components. */
-  public static final String pathSeparator = "/";
+  String pathSeparator = "/";
 
   /**
    * Visits {@link ICounter} matching the optional filter declared anywhere in the hierarchy spanned
@@ -51,7 +51,7 @@ public interface ICounterSet extends ICounterNode {
    *     to filter matches. When specified, only {@link ICounter}s whose {@link ICounter#getPath()}
    *     match will be visited by the {@link Iterator}.
    */
-  public Iterator<ICounter> getCounters(Pattern filter);
+  Iterator<ICounter> getCounters(Pattern filter);
 
   /**
    * Adds any necessary {@link ICounterSet}s described in the path (ala mkdirs).
@@ -61,13 +61,13 @@ public interface ICounterSet extends ICounterNode {
    * @throws IllegalArgumentException if the path is <code>null</code>
    * @throws IllegalArgumentException if the path is an empty string.
    */
-  public ICounterSet makePath(String path);
+  ICounterSet makePath(String path);
 
   /**
    * A human readable representation of all counters in the hierarchy together with their current
    * value.
    */
-  public String toString();
+  String toString();
 
   /**
    * A human readable representation of the counters in the hierarchy together with their current
@@ -75,7 +75,7 @@ public interface ICounterSet extends ICounterNode {
    *
    * @param filter An optional filter that will be used to select only specific counters.
    */
-  public String toString(Pattern filter);
+  String toString(Pattern filter);
 
   /**
    * Write an XML reprentation of the counters in the hierarchy together with their current value.
@@ -84,7 +84,7 @@ public interface ICounterSet extends ICounterNode {
    * @param encoding The character set encoding that will be used, e.g., <code>UTF-8</code>.
    * @param filter An optional filter that will be used to select only specific counters.
    */
-  public void asXML(OutputStream os, String encoding, Pattern filter) throws IOException;
+  void asXML(OutputStream os, String encoding, Pattern filter) throws IOException;
 
   /**
    * Write an XML representation of the counters in the hierarchy together with their current value
@@ -93,7 +93,7 @@ public interface ICounterSet extends ICounterNode {
    * @param w The sink on which the representation will be written.
    * @param filter An optional filter that will be used to select only specific counters.
    */
-  public void asXML(Writer w, Pattern filter) throws IOException;
+  void asXML(Writer w, Pattern filter) throws IOException;
 
   /**
    * Writes out the {@link ICounterSet} as XML on a string and returns that string.
@@ -101,7 +101,7 @@ public interface ICounterSet extends ICounterNode {
    * @param filter An optional filter.
    * @throws IOException
    */
-  public String asXML(Pattern filter);
+  String asXML(Pattern filter);
 
   /**
    * A factory for {@link IInstrument}.
@@ -109,9 +109,9 @@ public interface ICounterSet extends ICounterNode {
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public interface IInstrumentFactory {
+  interface IInstrumentFactory {
 
-    public IInstrument newInstance(Class type);
+    IInstrument newInstance(Class type);
   }
 
   /**
@@ -123,6 +123,6 @@ public interface ICounterSet extends ICounterNode {
    *     processed.
    * @throws IOException
    */
-  public void readXML(InputStream is, IInstrumentFactory instrumentFactory, Pattern filter)
+  void readXML(InputStream is, IInstrumentFactory instrumentFactory, Pattern filter)
       throws IOException, ParserConfigurationException, SAXException;
 }

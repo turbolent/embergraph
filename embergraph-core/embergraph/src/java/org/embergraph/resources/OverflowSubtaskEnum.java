@@ -74,5 +74,5 @@ public enum OverflowSubtaskEnum {
    * The operation in which an {@link IndexSegmentStore} file is received by the target data service
    * as part of a MOVE operation.
    */
-  ReceiveIndexSegment;
+  ReceiveIndexSegment
 }

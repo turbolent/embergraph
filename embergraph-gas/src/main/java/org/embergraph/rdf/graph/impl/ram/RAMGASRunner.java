@@ -47,9 +47,7 @@ public class RAMGASRunner<VS, ES, ST> extends GASRunnerBase<VS, ES, ST> {
 
     @Override
     public boolean handleArg(final AtomicInteger i, final String[] args) {
-      if (super.handleArg(i, args)) {
-        return true;
-      }
+      return super.handleArg(i, args);
       //            final String arg = args[i.get()];
       //            if (arg.equals("-bufferMode")) {
       //                final String s = args[i.incrementAndGet()];
@@ -60,7 +58,6 @@ public class RAMGASRunner<VS, ES, ST> extends GASRunnerBase<VS, ES, ST> {
       //            } else {
       //                return false;
       //            }
-      return false;
     }
 
     @Override

@@ -111,8 +111,7 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
 
               @Override
               public boolean equals(Object o) {
-                if (this == o) return true;
-                return false;
+                return this == o;
               }
 
               @Override
@@ -239,11 +238,11 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
   public void test_encodeDecode_XSDByte() {
 
     final IV<?, ?>[] e = {
-      new XSDNumericIV<EmbergraphLiteral>((byte) Byte.MIN_VALUE),
+      new XSDNumericIV<EmbergraphLiteral>(Byte.MIN_VALUE),
       new XSDNumericIV<EmbergraphLiteral>((byte) -1),
       new XSDNumericIV<EmbergraphLiteral>((byte) 0),
       new XSDNumericIV<EmbergraphLiteral>((byte) 1),
-      new XSDNumericIV<EmbergraphLiteral>((byte) Byte.MAX_VALUE),
+      new XSDNumericIV<EmbergraphLiteral>(Byte.MAX_VALUE),
     };
 
     doEncodeDecodeTest(e);
@@ -258,8 +257,8 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
       new XSDNumericIV<EmbergraphLiteral>((short) -1),
       new XSDNumericIV<EmbergraphLiteral>((short) 0),
       new XSDNumericIV<EmbergraphLiteral>((short) 1),
-      new XSDNumericIV<EmbergraphLiteral>((short) Short.MIN_VALUE),
-      new XSDNumericIV<EmbergraphLiteral>((short) Short.MAX_VALUE),
+      new XSDNumericIV<EmbergraphLiteral>(Short.MIN_VALUE),
+      new XSDNumericIV<EmbergraphLiteral>(Short.MAX_VALUE),
     };
 
     doEncodeDecodeTest(e);
@@ -436,7 +435,6 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
 
       e[i] = iv;
     }
-    ;
 
     doEncodeDecodeTest(e);
 
@@ -806,11 +804,11 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
   public void test_encodeDecode_URIByteIV() {
 
     final IV<?, ?>[] e = {
-      new VocabURIByteIV<EmbergraphURI>((byte) Byte.MIN_VALUE),
+      new VocabURIByteIV<EmbergraphURI>(Byte.MIN_VALUE),
       new VocabURIByteIV<EmbergraphURI>((byte) -1),
       new VocabURIByteIV<EmbergraphURI>((byte) 0),
       new VocabURIByteIV<EmbergraphURI>((byte) 1),
-      new VocabURIByteIV<EmbergraphURI>((byte) Byte.MAX_VALUE),
+      new VocabURIByteIV<EmbergraphURI>(Byte.MAX_VALUE),
     };
 
     doEncodeDecodeTest(e);
@@ -827,11 +825,11 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
   public void test_encodeDecode_URIShortIV() {
 
     final IV<?, ?>[] e = {
-      new VocabURIShortIV<EmbergraphURI>((short) Short.MIN_VALUE),
+      new VocabURIShortIV<EmbergraphURI>(Short.MIN_VALUE),
       new VocabURIShortIV<EmbergraphURI>((short) -1),
       new VocabURIShortIV<EmbergraphURI>((short) 0),
       new VocabURIShortIV<EmbergraphURI>((short) 1),
-      new VocabURIShortIV<EmbergraphURI>((short) Short.MAX_VALUE),
+      new VocabURIShortIV<EmbergraphURI>(Short.MAX_VALUE),
     };
 
     doEncodeDecodeTest(e);

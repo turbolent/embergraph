@@ -46,7 +46,7 @@ public interface IStriterator<I extends Iterator<E>, E>
    * @param filter The filter.
    * @return The filtered iterator.
    */
-  public IStriterator<I, E> addFilter(IFilter<I, ?, E> filter);
+  IStriterator<I, E> addFilter(IFilter<I, ?, E> filter);
 
   /**
    * Visits elements that are instances of the specified class.
@@ -54,7 +54,7 @@ public interface IStriterator<I extends Iterator<E>, E>
    * @param cls The class.
    * @return The filtered iterator.
    */
-  public IStriterator<I, E> addInstanceOfFilter(Class<E> cls);
+  IStriterator<I, E> addInstanceOfFilter(Class<E> cls);
 
   /**
    * Appends the given iterator when this iterator is exhausted.
@@ -62,7 +62,7 @@ public interface IStriterator<I extends Iterator<E>, E>
    * @param src Another iterator.
    * @return The combined iterator.
    */
-  public IStriterator<I, E> append(I src);
+  IStriterator<I, E> append(I src);
 
   //    public IStriterator<I,E> exclude(Object object);
   //

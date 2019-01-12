@@ -15,5 +15,5 @@ public interface INameFilter extends Serializable {
    *
    * @param name The property (aka column) name.
    */
-  public boolean accept(String name);
+  boolean accept(String name);
 }

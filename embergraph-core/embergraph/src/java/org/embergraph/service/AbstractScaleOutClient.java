@@ -70,12 +70,12 @@ public abstract class AbstractScaleOutClient<T> extends AbstractClient<T> {
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public static enum MetadataIndexCachePolicy {
+  public enum MetadataIndexCachePolicy {
 
     /** Cache the entire {@link IMetadataIndex}. */
     CacheAll,
 
     /** Do not cache anything. */
-    NoCache;
+    NoCache
   }
 }

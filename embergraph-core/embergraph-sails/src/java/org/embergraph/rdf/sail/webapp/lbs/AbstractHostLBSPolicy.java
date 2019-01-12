@@ -217,7 +217,7 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
     // report whether or not the scheduled future is still running.
     {
       final ScheduledFuture<?> tmp = scheduledFuture;
-      final boolean futureIsDone = tmp == null ? true : tmp.isDone();
+      final boolean futureIsDone = tmp == null || tmp.isDone();
       sb.append(",scheduledFuture=" + (tmp == null ? "N/A" : (futureIsDone ? "done" : "running")));
       if (futureIsDone && tmp != null) {
         // Check for error.
@@ -546,7 +546,7 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
      * which is the AVAILABILITY to do more work.
      */
     double totalAvailability = 0;
-    double availability[] = new double[nhosts];
+    double[] availability = new double[nhosts];
     {
       for (int i = 0; i < nhosts; i++) {
 

@@ -11,5 +11,5 @@ import java.rmi.Remote;
 public interface IResourceLock extends Remote {
 
   /** Release the lock. */
-  public void unlock();
+  void unlock();
 }

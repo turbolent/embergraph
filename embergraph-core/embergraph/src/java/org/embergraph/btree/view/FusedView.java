@@ -96,17 +96,17 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
   private interface ISources extends Iterable<AbstractBTree> {
 
     /** The mutable {@link BTree} for the view. */
-    public BTree getMutableBTree();
+    BTree getMutableBTree();
 
     /** The #of sources in the view. */
-    public int getSourceCount();
+    int getSourceCount();
 
     /** Visits the sources in order. */
     @Override
-    public Iterator<AbstractBTree> iterator();
+    Iterator<AbstractBTree> iterator();
 
     /** Cloned copy of the sources objects. */
-    public AbstractBTree[] getSources();
+    AbstractBTree[] getSources();
   }
 
   /**
@@ -746,16 +746,10 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
 
     final Tuple tuple = lookup(key, getMutableBTree().getContainsTuple());
 
-    if (tuple == null || tuple.isDeletedVersion()) {
-
-      /*
-       * Interpret a deletion marker as "not found".
-       */
-
-      return false;
-    }
-
-    return true;
+    /*
+     * Interpret a deletion marker as "not found".
+     */
+    return tuple != null && !tuple.isDeletedVersion();
   }
 
   @Override

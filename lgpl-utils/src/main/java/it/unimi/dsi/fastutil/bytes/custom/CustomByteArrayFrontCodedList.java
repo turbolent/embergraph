@@ -127,7 +127,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
      * @param i The index.
      * @return The byte.
      */
-    public byte get(int i);
+    byte get(int i);
 
     /**
      * Reads a coded length.
@@ -135,7 +135,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
      * @param pos The starting position.
      * @return The length coded at <code>pos</code>.
      */
-    public int readInt(int pos);
+    int readInt(int pos);
 
     /**
      * Copy data from the backing buffer into the caller's array.
@@ -145,13 +145,13 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
      * @param destPos The starting position in the caller's array.
      * @param len The #of bytes to copy.
      */
-    public void arraycopy(int pos, byte[] dest, int destPos, int len);
+    void arraycopy(int pos, byte[] dest, int destPos, int len);
 
     /** The size of the backing buffer in bytes. */
-    public int size();
+    int size();
 
     /** Return a copy of the data in the backing buffer. */
-    public byte[] toArray();
+    byte[] toArray();
 
     /**
      * Write the data on the output stream.
@@ -159,7 +159,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
      * @param out The output stream.
      * @return The #of bytes written.
      */
-    public int writeOn(OutputStream out) throws IOException;
+    int writeOn(OutputStream out) throws IOException;
 
     /**
      * Write <i>len</i> bytes starting at <i>off</i> onto the caller's stream.
@@ -169,10 +169,10 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
      * @param len The #of bytes to be written.
      * @return The #of bytes written.
      */
-    public int writeOn(OutputStream out, int off, int len) throws IOException;
+    int writeOn(OutputStream out, int off, int len) throws IOException;
 
     /** Clone the backing buffer. */
-    public BackingBuffer clone();
+    BackingBuffer clone();
   }
 
   /**
@@ -434,7 +434,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
     int curSize = 0, b = 0, common, length, minLength;
 
     while (arrays.hasNext()) {
-      a[b] = (byte[]) arrays.next();
+      a[b] = arrays.next();
       length = a[b].length;
 
       if (n % ratio == 0) {
@@ -541,7 +541,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
    * @param pos the starting position.
    * @return the number of elements coding <code>length</code>.
    */
-  private static int writeInt(final byte a[], int length, int pos) {
+  private static int writeInt(final byte[] a, int length, int pos) {
     final int count = count(length);
     a[pos + count - 1] = (byte) (length & 0x7F);
 
@@ -626,7 +626,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
    * @param length a maximum number of elements to store in <code>a</code>.
    * @return the length of the extracted array.
    */
-  private int extract(final int index, final byte a[], final int offset, final int length) {
+  private int extract(final int index, final byte[] a, final int offset, final int length) {
     final BackingBuffer bb = this.bb;
     final int delta = index % ratio; // The delta inside the block.
     final int startPos = p[index / ratio]; // The position into the array of
@@ -687,7 +687,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
   public byte[] getArray(final int index) {
     ensureRestrictedIndex(index);
     final int length = length(index);
-    final byte a[] = new byte[length];
+    final byte[] a = new byte[length];
     extract(index, a, 0, length);
     return a;
   }
@@ -753,7 +753,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
     ensureIndex(start);
 
     return new AbstractObjectListIterator<byte[]>() {
-      byte a[] = ByteArrays.EMPTY_ARRAY;
+      byte[] a = ByteArrays.EMPTY_ARRAY;
 
       int i = 0, pos = 0;
 
@@ -1474,7 +1474,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
 
       // as an unsigned integer.
       //            sb.append(Integer.toHexString(key[i] & 0xff));
-      sb.append(Integer.toString(key[i] & 0xff));
+      sb.append((key[i] & 0xff));
     }
 
     sb.append("]");

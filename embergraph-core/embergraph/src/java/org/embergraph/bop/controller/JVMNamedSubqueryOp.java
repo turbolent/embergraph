@@ -301,7 +301,7 @@ public class JVMNamedSubqueryOp extends PipelineOp implements INamedSubqueryOp, 
 
           final QueryEngine queryEngine = parentContext.getRunningQuery().getQueryEngine();
 
-          runningSubquery = queryEngine.eval((PipelineOp) subQueryOp, bindingSets);
+          runningSubquery = queryEngine.eval(subQueryOp, bindingSets);
 
           try {
 

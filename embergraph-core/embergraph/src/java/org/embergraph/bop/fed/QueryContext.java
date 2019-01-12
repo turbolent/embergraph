@@ -21,8 +21,7 @@ class QueryContext extends AllocationContextKey {
   public boolean equals(final Object o) {
     if (this == o) return true;
     if (!(o instanceof QueryContext)) return false;
-    if (!queryId.equals(((QueryContext) o).queryId)) return false;
-    return true;
+    return queryId.equals(((QueryContext) o).queryId);
   }
 
   @Override

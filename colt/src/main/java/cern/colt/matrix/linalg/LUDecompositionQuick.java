@@ -632,35 +632,35 @@ public class LUDecompositionQuick implements java.io.Serializable {
 
     buf.append("isNonSingular = ");
     try {
-      buf.append(String.valueOf(this.isNonsingular()));
+      buf.append(this.isNonsingular());
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
 
     buf.append("\ndet = ");
     try {
-      buf.append(String.valueOf(this.det()));
+      buf.append(this.det());
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
 
     buf.append("\npivot = ");
     try {
-      buf.append(String.valueOf(new cern.colt.list.IntArrayList(this.getPivot())));
+      buf.append(new cern.colt.list.IntArrayList(this.getPivot()));
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
 
     buf.append("\n\nL = ");
     try {
-      buf.append(String.valueOf(this.getL()));
+      buf.append(this.getL());
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
 
     buf.append("\n\nU = ");
     try {
-      buf.append(String.valueOf(this.getU()));
+      buf.append(this.getU());
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
@@ -669,7 +669,7 @@ public class LUDecompositionQuick implements java.io.Serializable {
     DoubleMatrix2D identity = cern.colt.matrix.DoubleFactory2D.dense.identity(LU.rows());
     try {
       this.solve(identity);
-      buf.append(String.valueOf(identity));
+      buf.append(identity);
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }

@@ -31,5 +31,5 @@ public interface ICloseable {
    * object is already closed. Implementations of this interface MUST invoke {@link #close()} once
    * it is known that the object will no longer be used.
    */
-  public void close();
+  void close();
 }

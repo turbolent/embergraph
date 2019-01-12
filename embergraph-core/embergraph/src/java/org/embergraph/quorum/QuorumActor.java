@@ -84,13 +84,13 @@ import java.util.UUID;
 public interface QuorumActor<S extends Remote, C extends QuorumClient<S>> {
 
   /** The {@link Quorum}. */
-  public Quorum<S, C> getQuourm();
+  Quorum<S, C> getQuourm();
 
   /** The service on whose behalf this class is acting. */
-  public QuorumMember<S> getQuorumMember();
+  QuorumMember<S> getQuorumMember();
 
   /** The {@link UUID} of the service on whose behalf this class is acting. */
-  public UUID getServiceId();
+  UUID getServiceId();
 
   /** Add the service to the set of quorum members. */
   void memberAdd();
@@ -179,5 +179,5 @@ public interface QuorumActor<S extends Remote, C extends QuorumClient<S>> {
    * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/724" > HA wire pulling and sure
    *     kill testing </a>
    */
-  public void forceRemoveService(UUID serviceId);
+  void forceRemoveService(UUID serviceId);
 }

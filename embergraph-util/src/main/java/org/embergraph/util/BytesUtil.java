@@ -507,7 +507,7 @@ public class BytesUtil {
 
       // as an unsigned integer.
       // sb.append(Integer.toHexString(key[i] & 0xff));
-      sb.append(Integer.toString(key[i] & 0xff));
+      sb.append((key[i] & 0xff));
     }
 
     sb.append("]");
@@ -1145,7 +1145,7 @@ public class BytesUtil {
 
     final int last = off + len - 1; // index of the last bit (inclusive).
     final int rshift = 31 - last; // right shift to word align.
-    int w = (int) (a >>> rshift); // int32 result.
+    int w = (a >>> rshift); // int32 result.
     int mask = masks32[32 - len]; // lookup mask with [len] LSB ZEROs.
     mask = ~mask; // flip bits to get [len] LSB ONEs.
     w &= mask; // mask off the lower [len] bits (handles sign extension and

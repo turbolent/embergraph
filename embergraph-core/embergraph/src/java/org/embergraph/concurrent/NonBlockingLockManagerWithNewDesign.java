@@ -203,7 +203,7 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  static enum ServiceRunState {
+  enum ServiceRunState {
 
     /**
      * During startup. Tasks are NOT accepted. (Since no tasks are accepted and nothing can be
@@ -244,7 +244,7 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
      * @param tasksCancelled <code>true</code> iff tasks (whether accepted, waiting for their locks,
      *     or executed) are cancelled while in this run state.
      */
-    private ServiceRunState(
+    ServiceRunState(
         final int val, final boolean tasksAccepted, final boolean tasksCancelled) {
 
       this.val = val;
@@ -295,23 +295,23 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
 
         if (newval == Running) return true;
 
-        if (newval == Halted) return true;
+        return newval == Halted;
 
       } else if (this == Running) {
 
         if (newval == Shutdown) return true;
 
-        if (newval == ShutdownNow) return true;
+        return newval == ShutdownNow;
 
       } else if (this == Shutdown) {
 
         if (newval == ShutdownNow) return true;
 
-        if (newval == Halted) return true;
+        return newval == Halted;
 
       } else if (this == ShutdownNow) {
 
-        if (newval == Halted) return true;
+        return newval == Halted;
       }
 
       return false;
@@ -1072,7 +1072,7 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  static enum TaskRunState {
+  enum TaskRunState {
     /** A newly created {@link LockFutureTask}. */
     New(0, false /* lockRequestsPosted */, false /* running */),
     /** Task has been accepted but has not yet successfully issued its lock requests. */
@@ -1110,7 +1110,7 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
         // allows task to directly obtain locks.
         if (newval == LocksReady) return true;
 
-        if (newval == Halted) return true;
+        return newval == Halted;
 
       } else if (this == Retry) {
 
@@ -1118,29 +1118,29 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
 
         if (newval == LocksReady) return true;
 
-        if (newval == Halted) return true;
+        return newval == Halted;
 
       } else if (this == LocksRequested) {
 
         if (newval == LocksReady) return true;
 
-        if (newval == Halted) return true;
+        return newval == Halted;
 
       } else if (this == LocksReady) {
 
         if (newval == RunningWithLocks) return true;
 
-        if (newval == Halted) return true;
+        return newval == Halted;
 
       } else if (this == RunningWithLocks) {
 
         if (newval == RunningReleasedLocks) return true;
 
-        if (newval == Halted) return true;
+        return newval == Halted;
 
       } else if (this == RunningReleasedLocks) {
 
-        if (newval == Halted) return true;
+        return newval == Halted;
 
       } else {
 
@@ -1148,7 +1148,6 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
       }
 
       // anything not permitted is forbidden :-)
-      return false;
     }
 
     private final int val;
@@ -1161,7 +1160,7 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
      *     {@link ResourceQueue} corresponding to a lock declared by that task.
      * @param running <code>true</code> iff a task is currently executing.
      */
-    private TaskRunState(final int val, final boolean lockRequestsPosted, final boolean running) {
+    TaskRunState(final int val, final boolean lockRequestsPosted, final boolean running) {
 
       this.val = val;
 
@@ -2047,7 +2046,7 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
        */
       final LinkedHashSet<LockFutureTask<R, ? extends Object>> predecessors =
           new LinkedHashSet<LockFutureTask<R, ? extends Object>>();
-      for (R r : (R[]) task.resource) {
+      for (R r : task.resource) {
 
         // make sure queue exists for this resource.
         final ResourceQueue<R, LockFutureTask<R, ? extends Object>> resourceQueue =
@@ -2082,7 +2081,7 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
        * ResourceQueues.
        */
 
-      for (R r : (R[]) task.resource) {
+      for (R r : task.resource) {
 
         // make sure queue exists for this resource.
         final ResourceQueue<R, LockFutureTask<R, ? extends Object>> resourceQueue =
@@ -2118,7 +2117,7 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
       // #of locks on which this task must wait.
       int waitingLockCount = 0;
 
-      for (R r : (R[]) task.resource) {
+      for (R r : task.resource) {
 
         // make sure queue exists for this resource.
         final ResourceQueue<R, LockFutureTask<R, ? extends Object>> resourceQueue =
@@ -2298,12 +2297,8 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
     final ResourceQueue<R, LockFutureTask<R, ? extends Object>> resourceQueue =
         resourceQueues.get(lock);
 
-    if (resourceQueue.queue.peek() == task) {
+    return resourceQueue.queue.peek() == task;
 
-      return true;
-    }
-
-    return false;
   }
 
   /**
@@ -2316,7 +2311,7 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
 
     if (!lock.isHeldByCurrentThread()) throw new IllegalMonitorStateException();
 
-    for (R r : (R[]) task.resource) {
+    for (R r : task.resource) {
 
       final ResourceQueue<R, LockFutureTask<R, ? extends Object>> resourceQueue =
           resourceQueues.get(r);

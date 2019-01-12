@@ -338,15 +338,12 @@ public abstract class PipelineOp extends BOpBase {
        */
       return true;
     }
-    if (maxMemory == Long.MAX_VALUE) {
-      /*
-       * Operator will buffer an essentially unbounded amount of data on
-       * the native heap.
-       */
-      return true;
-    }
+    /*
+     * Operator will buffer an essentially unbounded amount of data on
+     * the native heap.
+     */
+    return maxMemory == Long.MAX_VALUE;
 
-    return false;
   }
 
   /**
@@ -362,15 +359,12 @@ public abstract class PipelineOp extends BOpBase {
 
     final long maxMemory = getMaxMemory();
 
-    if (maxMemory > 0L && maxMemory < Long.MAX_VALUE) {
-      /*
-       * Operator will buffer data up to some maximum #of bytes on the
-       * native heap.
-       */
-      return true;
-    }
+    /*
+     * Operator will buffer data up to some maximum #of bytes on the
+     * native heap.
+     */
+    return maxMemory > 0L && maxMemory < Long.MAX_VALUE;
 
-    return false;
   }
 
   /**

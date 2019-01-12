@@ -264,8 +264,7 @@ public class FederatedQueryEngine extends QueryEngine {
        */
 
       this.clientProxy =
-          (IQueryClient)
-              ((AbstractDistributedFederation<?>) fed).getProxy(this, true /* enableDGC */);
+          ((AbstractDistributedFederation<?>) fed).getProxy(this, true /* enableDGC */);
 
     } else {
 

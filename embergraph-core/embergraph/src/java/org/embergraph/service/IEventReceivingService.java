@@ -39,5 +39,5 @@ public interface IEventReceivingService extends Remote {
    * Accepts the event, either updates the existing event with the same {@link UUID} or adds the
    * event to the set of recent events.
    */
-  public void notifyEvent(Event e) throws IOException;
+  void notifyEvent(Event e) throws IOException;
 }

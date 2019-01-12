@@ -149,7 +149,7 @@ public class TestConflictResolution extends TestCase2 {
        * verify that the value from tx1 is found under the key on the
        * unisolated index.
        */
-      assertEquals(v1a, (byte[]) journal.getIndex(name).lookup(k1));
+      assertEquals(v1a, journal.getIndex(name).lookup(k1));
 
       //        final ITx tmp = journal.getTx(tx2);
 
@@ -230,7 +230,7 @@ public class TestConflictResolution extends TestCase2 {
        * verify that the value from tx1 is found under the key on the
        * unisolated index.
        */
-      assertEquals(v1a, (byte[]) journal.getIndex(name).lookup(k1));
+      assertEquals(v1a, journal.getIndex(name).lookup(k1));
 
       journal.commit(tx2);
 
@@ -238,7 +238,7 @@ public class TestConflictResolution extends TestCase2 {
        * verify that the resolved value is found under the key on the
        * unisolated index.
        */
-      assertEquals(v1c, (byte[]) journal.getIndex(name).lookup(k1));
+      assertEquals(v1c, journal.getIndex(name).lookup(k1));
 
     } finally {
 

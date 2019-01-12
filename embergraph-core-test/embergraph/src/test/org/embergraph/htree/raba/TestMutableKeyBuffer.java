@@ -226,7 +226,7 @@ public class TestMutableKeyBuffer extends TestCase2 {
 
     // capacity must be 2^n where n is positive.
     try {
-      new MutableKeyBuffer(3 /* capacity */, (IRaba) src);
+      new MutableKeyBuffer(3 /* capacity */, src);
       fail("Expecting: " + IllegalArgumentException.class);
     } catch (IllegalArgumentException ex) {
       // ignored.
@@ -234,7 +234,7 @@ public class TestMutableKeyBuffer extends TestCase2 {
 
     // capacity must not be LT the capacity of the raba.
     try {
-      new MutableKeyBuffer(2 /* capacity */, (IRaba) src);
+      new MutableKeyBuffer(2 /* capacity */, src);
       fail("Expecting: " + IllegalArgumentException.class);
     } catch (IllegalArgumentException ex) {
       // ignored.

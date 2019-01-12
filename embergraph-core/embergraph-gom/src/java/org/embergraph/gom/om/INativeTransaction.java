@@ -39,7 +39,7 @@ public interface INativeTransaction {
    * @return The new value of the native transaction counter, i.e., <em>after</em> it was
    *     incremented.
    */
-  public int beginNativeTransaction();
+  int beginNativeTransaction();
 
   /**
    * The native transaction is committed when the counter reaches zero. This method accepts the
@@ -52,15 +52,15 @@ public interface INativeTransaction {
    * @exception if the <i>expectedCounter</i> is not equal to the internal counter <em>before</em>
    *     the latter is decremented.
    */
-  public int commitNativeTransaction(int expectedCounter);
+  int commitNativeTransaction(int expectedCounter);
 
   /** Rollback all changes since the last time the native transaction counter was zero. */
-  public void rollbackNativeTransaction();
+  void rollbackNativeTransaction();
 
   /**
    * The current value of the native transaction counter.
    *
    * <p>
    */
-  public int getNativeTransactionCounter();
+  int getNativeTransactionCounter();
 }

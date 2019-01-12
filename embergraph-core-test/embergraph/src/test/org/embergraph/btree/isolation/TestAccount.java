@@ -152,14 +152,9 @@ public class TestAccount extends TestCase {
 
       if (log.isInfoEnabled()) log.info("validate: " + toString());
 
-      if (low <= account.bal && account.bal < high) {
+      // valid.
+      return low <= account.bal && account.bal < high;
 
-        // valid.
-
-        return true;
-      }
-
-      return false;
     }
 
     /**

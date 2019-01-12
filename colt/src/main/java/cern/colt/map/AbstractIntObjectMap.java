@@ -321,7 +321,7 @@ public abstract class AbstractIntObjectMap extends AbstractMap {
     cern.colt.function.IntComparator comp =
         new cern.colt.function.IntComparator() {
           public int compare(int a, int b) {
-            int ab = ((Comparable) v[a]).compareTo((Comparable) v[b]);
+            int ab = ((Comparable) v[a]).compareTo(v[b]);
             return ab < 0 ? -1 : ab > 0 ? 1 : (k[a] < k[b] ? -1 : (k[a] == k[b] ? 0 : 1));
             // return v[a]<v[b] ? -1 : v[a]>v[b] ? 1 : (k[a]<k[b] ? -1 : (k[a]==k[b] ? 0 : 1));
           }
@@ -360,9 +360,9 @@ public abstract class AbstractIntObjectMap extends AbstractMap {
     int maxIndex = theKeys.size() - 1;
     for (int i = 0; i <= maxIndex; i++) {
       int key = theKeys.get(i);
-      buf.append(String.valueOf(key));
+      buf.append(key);
       buf.append("->");
-      buf.append(String.valueOf(get(key)));
+      buf.append(get(key));
       if (i < maxIndex) buf.append(", ");
     }
     buf.append("]");
@@ -381,9 +381,9 @@ public abstract class AbstractIntObjectMap extends AbstractMap {
     int maxIndex = theKeys.size() - 1;
     for (int i = 0; i <= maxIndex; i++) {
       int key = theKeys.get(i);
-      buf.append(String.valueOf(key));
+      buf.append(key);
       buf.append("->");
-      buf.append(String.valueOf(get(key)));
+      buf.append(get(key));
       if (i < maxIndex) buf.append(", ");
     }
     buf.append("]");

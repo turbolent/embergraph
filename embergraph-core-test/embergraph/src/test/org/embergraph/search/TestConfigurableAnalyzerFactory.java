@@ -90,7 +90,7 @@ public class TestConfigurableAnalyzerFactory extends AbstractAnalyzerFactoryTest
 
   private void badCombo(String errorMessage, String... props) {
     // Check that some combination of properties on a language create an error
-    String myProps[] = new String[props.length + 4];
+    String[] myProps = new String[props.length + 4];
     int i = 0;
     for (; i < props.length; i += 2) {
       myProps[i] = ConfigurableAnalyzerFactory.Options.ANALYZER + "x-testme." + props[i];

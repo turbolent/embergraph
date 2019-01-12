@@ -476,30 +476,29 @@ public class AST2BOpFilters extends AST2BOpBase {
 
     // disable reordering of solutions for cutoff joins.
     final boolean reorderSolutions =
-        (cutoffLimit != null) ? false : PipelineJoin.Annotations.DEFAULT_REORDER_SOLUTIONS;
+        (cutoffLimit == null) && PipelineJoin.Annotations.DEFAULT_REORDER_SOLUTIONS;
 
     // disable operator parallelism for cutoff joins.
     final int maxParallel = cutoffLimit != null ? 1 : PipelineOp.Annotations.DEFAULT_MAX_PARALLEL;
 
-    return (PipelineOp)
-        applyQueryHints(
-            new ChunkedMaterializationOp(
-                leftOrEmpty(left),
-                new NV(
-                    ChunkedMaterializationOp.Annotations.VARS, vars.toArray(new IVariable[nvars])),
-                new NV(ChunkedMaterializationOp.Annotations.RELATION_NAME, new String[] {ns}),
-                new NV(ChunkedMaterializationOp.Annotations.TIMESTAMP, timestamp),
-                new NV(
-                    ChunkedMaterializationOp.Annotations.MATERIALIZE_INLINE_IVS,
-                    materializeInlineIvs),
-                new NV(
-                    PipelineOp.Annotations.SHARED_STATE,
-                    !ctx.isCluster()), // live stats, but not on the cluster.
-                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, reorderSolutions),
-                new NV(PipelineOp.Annotations.MAX_PARALLEL, maxParallel),
-                new NV(BOp.Annotations.BOP_ID, ctx.nextId())),
-            queryHints,
-            ctx);
+    return applyQueryHints(
+        new ChunkedMaterializationOp(
+            leftOrEmpty(left),
+            new NV(
+                ChunkedMaterializationOp.Annotations.VARS, vars.toArray(new IVariable[nvars])),
+            new NV(ChunkedMaterializationOp.Annotations.RELATION_NAME, new String[] {ns}),
+            new NV(ChunkedMaterializationOp.Annotations.TIMESTAMP, timestamp),
+            new NV(
+                ChunkedMaterializationOp.Annotations.MATERIALIZE_INLINE_IVS,
+                materializeInlineIvs),
+            new NV(
+                PipelineOp.Annotations.SHARED_STATE,
+                !ctx.isCluster()), // live stats, but not on the cluster.
+            new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, reorderSolutions),
+            new NV(PipelineOp.Annotations.MAX_PARALLEL, maxParallel),
+            new NV(BOp.Annotations.BOP_ID, ctx.nextId())),
+        queryHints,
+        ctx);
   }
 
   //    /**

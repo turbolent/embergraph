@@ -883,12 +883,11 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
 
       ctor =
           cls.getConstructor(
-              new Class[] {
-                IIndexManager.class,
-                String.class, // relation namespace
-                Long.class, // timestamp of the view
-                Properties.class // configuration properties.
-              });
+              IIndexManager.class,
+              String.class, // relation namespace
+              Long.class, // timestamp of the view
+              Properties.class // configuration properties.
+          );
 
     } catch (Exception e) {
 
@@ -900,7 +899,7 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
 
       r =
           ctor.newInstance(
-              new Object[] {indexManager, nt.getName(), nt.getTimestamp(), properties});
+              indexManager, nt.getName(), nt.getTimestamp(), properties);
 
       r.init();
 

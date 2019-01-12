@@ -1009,7 +1009,7 @@ public abstract class WriteCacheService implements IWriteCache {
      * @return <code>true</code> iff we compacted the cache.
      * @throws InterruptedException
      */
-    private boolean compactCache(final WriteCache cache) throws InterruptedException, Exception {
+    private boolean compactCache(final WriteCache cache) throws Exception {
 
       /*
        * The cache should not be closed against writes. If it were closed
@@ -3224,7 +3224,7 @@ public abstract class WriteCacheService implements IWriteCache {
     //
     //        }
 
-  };
+  }
 
   /**
    * Used to materialize records with at most one thread reading the record from disk for a given

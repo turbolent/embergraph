@@ -26,26 +26,27 @@ import cern.colt.list.IntArrayList;
  * @see java.util.HashMap
  */
 public class OpenDoubleIntHashMap extends AbstractDoubleIntMap {
+
   /**
    * The hash table keys.
    *
    * @serial
    */
-  protected double table[];
+  protected double[] table;
 
   /**
    * The hash table values.
    *
    * @serial
    */
-  protected int values[];
+  protected int[] values;
 
   /**
    * The state of each hash table entry (FREE, FULL, REMOVED).
    *
    * @serial
    */
-  protected byte state[];
+  protected byte[] state;
 
   /**
    * The number of table entries in state==FREE.
@@ -103,9 +104,9 @@ public class OpenDoubleIntHashMap extends AbstractDoubleIntMap {
    */
   public Object clone() {
     OpenDoubleIntHashMap copy = (OpenDoubleIntHashMap) super.clone();
-    copy.table = (double[]) copy.table.clone();
-    copy.values = (int[]) copy.values.clone();
-    copy.state = (byte[]) copy.state.clone();
+    copy.table = copy.table.clone();
+    copy.values = copy.values.clone();
+    copy.state = copy.state.clone();
     return copy;
   }
   /**
@@ -198,8 +199,8 @@ public class OpenDoubleIntHashMap extends AbstractDoubleIntMap {
    *     it is NOT already contained and should be inserted at slot index.
    */
   protected int indexOfInsertion(double key) {
-    final double tab[] = table;
-    final byte stat[] = state;
+    final double[] tab = table;
+    final byte[] stat = state;
     final int length = tab.length;
 
     final int hash = HashFunctions.hash(key) & 0x7FFFFFFF;
@@ -248,8 +249,8 @@ public class OpenDoubleIntHashMap extends AbstractDoubleIntMap {
    *     found.
    */
   protected int indexOfKey(double key) {
-    final double tab[] = table;
-    final byte stat[] = state;
+    final double[] tab = table;
+    final byte[] stat = state;
     final int length = tab.length;
 
     final int hash = HashFunctions.hash(key) & 0x7FFFFFFF;
@@ -279,8 +280,8 @@ public class OpenDoubleIntHashMap extends AbstractDoubleIntMap {
    *     found.
    */
   protected int indexOfValue(int value) {
-    final int val[] = values;
-    final byte stat[] = state;
+    final int[] val = values;
+    final byte[] stat = state;
 
     for (int i = stat.length; --i >= 0; ) {
       if (stat[i] == FULL && val[i] == value) return i;
@@ -412,13 +413,13 @@ public class OpenDoubleIntHashMap extends AbstractDoubleIntMap {
     int oldCapacity = table.length;
     // if (oldCapacity == newCapacity) return;
 
-    double oldTable[] = table;
-    int oldValues[] = values;
-    byte oldState[] = state;
+    double[] oldTable = table;
+    int[] oldValues = values;
+    byte[] oldState = state;
 
-    double newTable[] = new double[newCapacity];
-    int newValues[] = new int[newCapacity];
-    byte newState[] = new byte[newCapacity];
+    double[] newTable = new double[newCapacity];
+    int[] newValues = new int[newCapacity];
+    byte[] newState = new byte[newCapacity];
 
     this.lowWaterMark = chooseLowWaterMark(newCapacity, this.minLoadFactor);
     this.highWaterMark = chooseHighWaterMark(newCapacity, this.maxLoadFactor);

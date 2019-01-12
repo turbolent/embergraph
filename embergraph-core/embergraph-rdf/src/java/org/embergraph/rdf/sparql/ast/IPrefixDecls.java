@@ -31,7 +31,7 @@ import java.util.Map;
  */
 public interface IPrefixDecls {
 
-  public interface Annotations {
+  interface Annotations {
 
     /**
      * The namespace prefix declaration map. This is a {@link Map} with {@link String} keys (prefix)
@@ -48,7 +48,7 @@ public interface IPrefixDecls {
    *     map will be returned. The returned map is immutable to preserve the general contract for
    *     notification on mutation.
    */
-  public Map<String, String> getPrefixDecls();
+  Map<String, String> getPrefixDecls();
 
   /**
    * Set the namespace prefix declarations map. This is a {@link Map} with {@link String} keys

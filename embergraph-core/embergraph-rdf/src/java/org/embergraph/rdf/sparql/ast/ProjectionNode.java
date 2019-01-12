@@ -250,7 +250,7 @@ public class ProjectionNode extends ValueExpressionListBaseNode<AssignmentNode> 
     //
     //        }
 
-    return (IVariable[]) vars.toArray(new IVariable[vars.size()]);
+    return vars.toArray(new IVariable[vars.size()]);
   }
 
   /**
@@ -277,10 +277,9 @@ public class ProjectionNode extends ValueExpressionListBaseNode<AssignmentNode> 
    */
   public boolean excludeFromProjection(final IVariable<?> var) {
     Set<IVariable<?>> vars =
-        (Set<IVariable<?>>)
-            getProperty(
-                Annotations.VARS_TO_EXCLUDE_FROM_PROJECTION,
-                Annotations.DEFAULT_VARS_TO_EXCLUDE_FROM_PROJECTION);
+        getProperty(
+            Annotations.VARS_TO_EXCLUDE_FROM_PROJECTION,
+            Annotations.DEFAULT_VARS_TO_EXCLUDE_FROM_PROJECTION);
     return (vars != null) && vars.contains(var);
   }
 

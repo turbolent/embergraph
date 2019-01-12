@@ -23,5 +23,5 @@ public interface IGangliaMetricsCollector {
    *
    * @param reporter Where to report the collected metric values.
    */
-  public void collect(final IGangliaMetricsReporter reporter);
+  void collect(final IGangliaMetricsReporter reporter);
 }

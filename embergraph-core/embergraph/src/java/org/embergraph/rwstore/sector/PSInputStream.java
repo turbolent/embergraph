@@ -96,7 +96,7 @@ public class PSInputStream extends InputStream {
     return 0xFF & buf.get();
   }
 
-  public synchronized int read(byte b[], int off, int len) throws IOException {
+  public synchronized int read(byte[] b, int off, int len) throws IOException {
     if (m_index >= m_buffers.length) return -1;
 
     ByteBuffer buf = m_buffers[m_index];

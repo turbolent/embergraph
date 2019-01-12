@@ -521,14 +521,10 @@ public class JVMHashIndex {
 
     } else {
 
-      if (b.addDistinct(bset)) {
-
-        // Existing bucket not having this solution.
-        return true;
-      }
+      // Existing bucket not having this solution.
+      return b.addDistinct(bset);
 
       // Existing bucket with duplicate solution.
-      return false;
     }
   }
 

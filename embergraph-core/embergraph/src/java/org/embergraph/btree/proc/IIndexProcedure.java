@@ -103,5 +103,5 @@ public interface IIndexProcedure<T> extends IReadOnly, Serializable {
    *     <code>null</code>. In general, this MUST be {@link Serializable} since it may have to pass
    *     across a network interface.
    */
-  public T apply(IIndex ndx);
+  T apply(IIndex ndx);
 }

@@ -39,7 +39,7 @@ public interface ICommitter {
    *     reloaded. If no changes have been made then the previous address should be returned as it
    *     is still valid.
    */
-  public long handleCommit(long commitTime);
+  long handleCommit(long commitTime);
 
   /**
    * Mark an {@link ICommitter} as invalid. This will prevent it from allowing any writes through to
@@ -48,5 +48,5 @@ public interface ICommitter {
    * @param t A cause (required).
    * @see https://jira.blazegraph.com/browse/BLZG-1953
    */
-  public void invalidate(Throwable t);
+  void invalidate(Throwable t);
 }

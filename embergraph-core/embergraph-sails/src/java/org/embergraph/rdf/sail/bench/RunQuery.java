@@ -137,7 +137,7 @@ public class RunQuery {
       try {
 
         final EmbergraphSailRepositoryConnection cxn =
-            (EmbergraphSailRepositoryConnection) repository.getReadOnlyConnection();
+            repository.getReadOnlyConnection();
 
         try {
 

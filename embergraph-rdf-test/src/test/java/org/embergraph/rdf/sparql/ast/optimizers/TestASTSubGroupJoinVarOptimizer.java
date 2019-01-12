@@ -187,8 +187,8 @@ public class TestASTSubGroupJoinVarOptimizer extends AbstractASTEvaluationTestCa
                     FunctionRegistry.SAMPLE,
                     Collections.singletonMap(
                         AggregateBase.Annotations.DISTINCT,
-                        (Object) Boolean.FALSE) /* scalarValues */,
-                    new ValueExpressionNode[] {new VarNode("_var9")})));
+                        Boolean.FALSE) /* scalarValues */,
+                    new VarNode("_var9"))));
         projection.addProjectionVar(new VarNode("_var2"));
         projection.addProjectionVar(new VarNode("_var3"));
 
@@ -289,8 +289,8 @@ public class TestASTSubGroupJoinVarOptimizer extends AbstractASTEvaluationTestCa
                   FunctionRegistry.SAMPLE,
                   Collections.singletonMap(
                       AggregateBase.Annotations.DISTINCT,
-                      (Object) Boolean.FALSE) /* scalarValues */,
-                  new ValueExpressionNode[] {new VarNode("_var9")})));
+                      Boolean.FALSE) /* scalarValues */,
+                  new VarNode("_var9"))));
       projection.addProjectionVar(new VarNode("_var2"));
       projection.addProjectionVar(new VarNode("_var3"));
 

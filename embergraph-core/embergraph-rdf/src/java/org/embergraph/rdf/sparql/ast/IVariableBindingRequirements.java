@@ -49,7 +49,7 @@ public interface IVariableBindingRequirements {
    *
    * @return the set of variables that must be bound prior to evaluation
    */
-  public Set<IVariable<?>> getRequiredBound(final StaticAnalysis sa);
+  Set<IVariable<?>> getRequiredBound(final StaticAnalysis sa);
 
   /**
    * Get variables that are not required to be bound, but desired in the sense that we want them to
@@ -59,5 +59,5 @@ public interface IVariableBindingRequirements {
    *
    * @return the set of variables that are desires to be bound, but not required
    */
-  public Set<IVariable<?>> getDesiredBound(final StaticAnalysis sa);
+  Set<IVariable<?>> getDesiredBound(final StaticAnalysis sa);
 }

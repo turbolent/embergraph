@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.io.PushbackReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Stack;
@@ -88,7 +89,7 @@ public class EmbergraphNTriplesParser extends RDFParserBase {
 
     /** The SID corresponding to the most recently parsed embedded statement. */
     private EmbergraphBNode lastSID;
-  };
+  }
 
   private final Stack<State> stack = new Stack<State>();
 
@@ -206,7 +207,7 @@ public class EmbergraphNTriplesParser extends RDFParserBase {
     // Note: baseURI will be checked in parse(Reader, String)
 
     try {
-      parse(new InputStreamReader(new BOMInputStream(in, false), "US-ASCII"), baseURI);
+      parse(new InputStreamReader(new BOMInputStream(in, false), StandardCharsets.US_ASCII), baseURI);
     } catch (UnsupportedEncodingException e) {
       // Every platform should support the US-ASCII encoding...
       throw new RuntimeException(e);

@@ -275,7 +275,7 @@ public class DataLoader {
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public static enum CommitEnum {
+  public enum CommitEnum {
 
     /** Commit as each document is loaded into the database. */
     Incremental,
@@ -284,7 +284,7 @@ public class DataLoader {
     Batch,
 
     /** The {@link DataLoader} will NOT commit the database - this is left to the caller. */
-    None;
+    None
   }
 
   /**
@@ -293,7 +293,7 @@ public class DataLoader {
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
-  public static enum ClosureEnum {
+  public enum ClosureEnum {
 
     /**
      * Document-at-a-time closure.
@@ -319,7 +319,7 @@ public class DataLoader {
      * statements MAY have been deleted, then you SHOULD first delete all inferences before
      * re-computing the closure.
      */
-    None;
+    None
   }
 
   /**
@@ -330,7 +330,7 @@ public class DataLoader {
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
-  public static interface Options extends RDFParserOptions.Options {
+  public interface Options extends RDFParserOptions.Options {
 
     /**
      * Java property to override the default GZIP buffer size used for {@link GZipInputStream} and
@@ -342,10 +342,10 @@ public class DataLoader {
      *
      * <p>See BLZG-1777
      */
-    static final String GZIP_BUFFER_SIZE =
+    String GZIP_BUFFER_SIZE =
         DataLoader.class.getClass().getName() + ".gzipBufferSize";
 
-    static final int DEFAULT_GZIP_BUFFER_SIZE = 65535;
+    int DEFAULT_GZIP_BUFFER_SIZE = 65535;
 
     /**
      * Optional property specifying whether and when the {@link DataLoader} will {@link
@@ -354,9 +354,9 @@ public class DataLoader {
      * <p>Note: commit semantics vary depending on the specific backing store. See {@link
      * ITripleStore#commit()}.
      */
-    static final String COMMIT = DataLoader.class.getName() + ".commit";
+    String COMMIT = DataLoader.class.getName() + ".commit";
 
-    static final String DEFAULT_COMMIT = CommitEnum.Batch.toString();
+    String DEFAULT_COMMIT = CommitEnum.Batch.toString();
 
     /**
      * Optional property specifying the capacity of the {@link StatementBuffer} (default is {@value
@@ -369,9 +369,9 @@ public class DataLoader {
      * combined with a queueCapacity of 5-20. Larger values will increase the GC burden and could
      * require a larger heap, but the net throughput might also increase.
      */
-    static final String BUFFER_CAPACITY = DataLoader.class.getName() + ".bufferCapacity";
+    String BUFFER_CAPACITY = DataLoader.class.getName() + ".bufferCapacity";
 
-    static final String DEFAULT_BUFFER_CAPACITY = "100000";
+    String DEFAULT_BUFFER_CAPACITY = "100000";
 
     /**
      * Optional property specifying the capacity of blocking queue used by the {@link
@@ -382,11 +382,11 @@ public class DataLoader {
      *
      * @see BLZG-1552
      */
-    static final String QUEUE_CAPACITY = DataLoader.class.getName() + ".queueCapacity";
+    String QUEUE_CAPACITY = DataLoader.class.getName() + ".queueCapacity";
 
     // BLZG-1816  Disable by default to avoid concurrency issues
     // BLZG-1813  Re-enabled based on fix for capacity issue.
-    static final String DEFAULT_QUEUE_CAPACITY = "10";
+    String DEFAULT_QUEUE_CAPACITY = "10";
 
     /**
      * Optional property controls whether and when the RDFS(+) closure is maintained on the database
@@ -405,9 +405,9 @@ public class DataLoader {
      * @see InferenceEngine
      * @see InferenceEngine.Options
      */
-    static final String CLOSURE = DataLoader.class.getName() + ".closure";
+    String CLOSURE = DataLoader.class.getName() + ".closure";
 
-    static final String DEFAULT_CLOSURE = ClosureEnum.Batch.toString();
+    String DEFAULT_CLOSURE = ClosureEnum.Batch.toString();
 
     /**
      * When <code>true</code> the {@link StatementBuffer} is flushed by each {@link
@@ -429,10 +429,10 @@ public class DataLoader {
      * until the application flushes the {@link DataLoader} when statement identifiers are enabled.
      * </strong>
      */
-    static final String FLUSH = DataLoader.class.getName() + ".flush";
+    String FLUSH = DataLoader.class.getName() + ".flush";
 
     /** The default value (<code>true</code>) for {@link #FLUSH}. */
-    static final String DEFAULT_FLUSH = "true";
+    String DEFAULT_FLUSH = "true";
 
     /**
      * When <code>true</code>, the loader will not break on unresolvable parse errors, but instead
@@ -444,12 +444,12 @@ public class DataLoader {
      * @see BLZG-1531 (Add option to make the DataLoader robust to files that cause rio to throw a
      *     fatal exception)
      */
-    static final String IGNORE_INVALID_FILES = DataLoader.class.getName() + ".ignoreInvalidFiles";
+    String IGNORE_INVALID_FILES = DataLoader.class.getName() + ".ignoreInvalidFiles";
 
     /**
      * The default value (<code>false</code>) for {@link #IGNORE_INVALID_FILES)
      */
-    static final String DEFAULT_IGNORE_INVALID_FILES = "false";
+    String DEFAULT_IGNORE_INVALID_FILES = "false";
 
     /**
      * When <code>true</code>, the data loader will rename each file as it is processed to either
@@ -459,12 +459,12 @@ public class DataLoader {
      *
      * @see BLZG-1534 (durable queues)
      */
-    static final String DURABLE_QUEUES = DataLoader.class.getName() + ".durableQueues";
+    String DURABLE_QUEUES = DataLoader.class.getName() + ".durableQueues";
 
     /**
      * The default value (<code>false</code>) for {@link #DURABLE_QUEUES)
      */
-    static final String DEFAULT_DURABLE_QUEUES = "false";
+    String DEFAULT_DURABLE_QUEUES = "false";
 
     /**
      * When true, runs DumpJournal after each commit (with the -pages option) to obtain a
@@ -472,12 +472,12 @@ public class DataLoader {
      *
      * @see BLZG-1535 (support dump journal in data loader)
      */
-    static final String DUMP_JOURNAL = DataLoader.class.getName() + ".dumpJournal";
+    String DUMP_JOURNAL = DataLoader.class.getName() + ".dumpJournal";
 
     /**
      * The default value (<code>false</code>) for {@link #DUMP_JOURNAL)
      */
-    static final String DEFAULT_DUMP_JOURNAL = "false";
+    String DEFAULT_DUMP_JOURNAL = "false";
 
     /**
      * When greater than ZERO (0), significant information may be reported at each commit point. At
@@ -486,12 +486,12 @@ public class DataLoader {
      * each commit. At THREE (3) it provides additional information about the assertion buffers each
      * time it reports on the incremental parser performance.
      */
-    static final String VERBOSE = DataLoader.class.getName() + ".verbose";
+    String VERBOSE = DataLoader.class.getName() + ".verbose";
 
     /**
      * The default value (<code>0</code>) for {@link #VERBOSE)
      */
-    static final String DEFAULT_VERBOSE = "0";
+    String DEFAULT_VERBOSE = "0";
   }
 
   /**
@@ -1125,7 +1125,7 @@ public class DataLoader {
             rdfFormat,
             defaultGraph,
             filter,
-            (depth == 0 && i < (files.length - 1) ? false : endOfBatch));
+            ((depth != 0 || i >= (files.length - 1)) && endOfBatch));
       }
 
       return;
@@ -1540,9 +1540,7 @@ public class DataLoader {
 
       if (t instanceof IOException) throw (IOException) t;
 
-      final IOException ex2 = new IOException("Problem loading data?");
-
-      ex2.initCause(t);
+      final IOException ex2 = new IOException("Problem loading data?", t);
 
       throw ex2;
     }
@@ -2050,13 +2048,8 @@ public class DataLoader {
 
           if (new File(dir, name).isDirectory()) {
 
-            if (dir.isHidden()) {
-
-              // Skip hidden files.
-              return false;
-            }
-
-            //                if(dir.getName().equals(".svn")) {
+            // Skip hidden files.
+            return !dir.isHidden();//                if(dir.getName().equals(".svn")) {
             //
             //                    // Skip .svn files.
             //                    return false;
@@ -2064,7 +2057,6 @@ public class DataLoader {
             //                }
 
             // visit subdirectories.
-            return true;
           }
 
           // if recognizable as RDF.

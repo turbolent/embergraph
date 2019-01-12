@@ -225,7 +225,7 @@ public abstract class AbstractJoinGroupOptimizer implements IASTOptimizer {
 
         @SuppressWarnings("unchecked")
         final GraphPatternGroup<IGroupMemberNode> childGroup =
-            (GraphPatternGroup<IGroupMemberNode>) serviceNode.getGraphPattern();
+            serviceNode.getGraphPattern();
 
         optimize(ctx, sa, bSets, childGroup);
       }

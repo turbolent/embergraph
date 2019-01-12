@@ -45,7 +45,7 @@ public abstract class InBOp extends XSDBooleanIVValueExpression {
   private static BOp[] mergeArguments(
       final IValueExpression<? extends IV> var, final IConstant<? extends IV>... set) {
 
-    final BOp args[] = new BOp[1 + (set != null ? set.length : 0)];
+    final BOp[] args = new BOp[1 + (set != null ? set.length : 0)];
 
     args[0] = var;
 

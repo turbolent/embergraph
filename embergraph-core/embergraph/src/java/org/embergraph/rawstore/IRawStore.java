@@ -84,7 +84,7 @@ public interface IRawStore extends IAddressManager, ICounterSetAccess, IStreamSt
    *     offset from the start of the file to the start of the data region (in the case of the
    *     Journal it is used to hold the root blocks).
    */
-  public long write(ByteBuffer data);
+  long write(ByteBuffer data);
 
   // 	/**
   //     *
@@ -121,7 +121,7 @@ public interface IRawStore extends IAddressManager, ICounterSetAccess, IStreamSt
    *     <p>However, with a Read-Write store it is a requirement, and a void implementation is
    *     provided for other stores.
    */
-  public void delete(long addr);
+  void delete(long addr);
 
   /**
    * Read the data (unisolated).
@@ -134,28 +134,28 @@ public interface IRawStore extends IAddressManager, ICounterSetAccess, IStreamSt
    *     deleted). Note that the address 0L is always invalid.
    * @throws IllegalStateException if the store is not open.
    */
-  public ByteBuffer read(long addr);
+  ByteBuffer read(long addr);
 
   /**
    * <code>true</code> iff the store is open.
    *
    * @return <code>true</code> iff the store is open.
    */
-  public boolean isOpen();
+  boolean isOpen();
 
   /**
    * <code>true</code> iff the store does not allow writes.
    *
    * @throws IllegalStateException if the store is not open.
    */
-  public boolean isReadOnly();
+  boolean isReadOnly();
 
   /**
    * Close the store immediately.
    *
    * @exception IllegalStateException if the store is not open.
    */
-  public void close();
+  void close();
 
   /**
    * Deletes the backing file(s) (if any).
@@ -163,7 +163,7 @@ public interface IRawStore extends IAddressManager, ICounterSetAccess, IStreamSt
    * @exception IllegalStateException if the store is open.
    * @exception RuntimeException if the backing file exists and could not be deleted.
    */
-  public void deleteResources();
+  void deleteResources();
 
   /**
    * Closes the store immediately (if open) and deletes its persistent resources. Does NOT throw an
@@ -172,26 +172,26 @@ public interface IRawStore extends IAddressManager, ICounterSetAccess, IStreamSt
    *
    * @see #deleteResources()
    */
-  public void destroy();
+  void destroy();
 
   /** The backing file -or- <code>null</code> if there is no backing file for the store. */
-  public File getFile();
+  File getFile();
 
   /**
    * Return the {@link UUID} which identifies this {@link IRawStore}. This supports {@link
    * #getResourceMetadata()}.
    */
-  public UUID getUUID();
+  UUID getUUID();
 
   /** A description of this store in support of the scale-out architecture. */
-  public IResourceMetadata getResourceMetadata();
+  IResourceMetadata getResourceMetadata();
 
   /**
    * True iff backed by stable storage.
    *
    * @exception IllegalStateException if the store is not open.
    */
-  public boolean isStable();
+  boolean isStable();
 
   /**
    * True iff the store is fully buffered (all reads are against memory). Implementations MAY change
@@ -202,7 +202,7 @@ public interface IRawStore extends IAddressManager, ICounterSetAccess, IStreamSt
    *
    * @exception IllegalStateException if the store is not open.
    */
-  public boolean isFullyBuffered();
+  boolean isFullyBuffered();
 
   /**
    * Force the data to stable storage. While this is NOT sufficient to guarantee an atomic commit,
@@ -211,13 +211,13 @@ public interface IRawStore extends IAddressManager, ICounterSetAccess, IStreamSt
    * @param metadata If true, then force both the file contents and the file metadata to disk.
    * @exception IllegalStateException if the store is not open.
    */
-  public void force(boolean metadata);
+  void force(boolean metadata);
 
   /**
    * The #of application data bytes written on the store (does not count any headers or root blocks
    * that may exist for the store).
    */
-  public long size();
+  long size();
 
   //    /**
   //     * Reports performance counters.

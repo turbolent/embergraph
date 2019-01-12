@@ -29,7 +29,7 @@ package org.embergraph.rdf.sparql.ast;
  */
 public interface IDataSetNode {
 
-  public interface Annotations {
+  interface Annotations {
 
     /** The {@link DatasetNode}. */
     String DATASET = "dataset";
@@ -40,8 +40,8 @@ public interface IDataSetNode {
    *
    * @param dataset
    */
-  public void setDataset(final DatasetNode dataset);
+  void setDataset(final DatasetNode dataset);
 
   /** Return the dataset. */
-  public DatasetNode getDataset();
+  DatasetNode getDataset();
 }

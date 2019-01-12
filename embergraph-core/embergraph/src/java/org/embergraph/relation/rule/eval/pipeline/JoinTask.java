@@ -1413,7 +1413,7 @@ public abstract class JoinTask implements Callable<Void> {
           final List<Object[]> chunks = new LinkedList<Object[]>();
           while (itr.hasNext()) {
 
-            final Object[] chunk = (Object[]) itr.nextChunk();
+            final Object[] chunk = itr.nextChunk();
 
             // add to list of chunks.
             chunks.add(chunk);

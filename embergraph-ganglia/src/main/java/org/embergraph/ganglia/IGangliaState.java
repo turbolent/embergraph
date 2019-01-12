@@ -27,14 +27,14 @@ import java.util.Iterator;
 public interface IGangliaState {
 
   /** Return the name of this host. */
-  public String getHostName();
+  String getHostName();
 
   /**
    * Return a snapshot of the known hosts.
    *
    * @return The names of the known hosts and never <code>null</code>.
    */
-  public String[] getKnownHosts();
+  String[] getKnownHosts();
 
   /**
    * Return an iterator which will visit all timestamped metrics for the specified host.
@@ -42,7 +42,7 @@ public interface IGangliaState {
    * @param hostName The host name.
    * @return The iterator and never <code>null</code>.
    */
-  public Iterator<? extends ITimestampMetricValue> iterator(final String hostName);
+  Iterator<? extends ITimestampMetricValue> iterator(final String hostName);
 
   /**
    * Return the metadata for the given metric.
@@ -50,7 +50,7 @@ public interface IGangliaState {
    * @param metricName The metric name (as it appears in ganglia messages).
    * @return The metadata for that metric iff it is a known metric and otherwise <code>null</code>.
    */
-  public IGangliaMetadataMessage getMetadata(final String metricName);
+  IGangliaMetadataMessage getMetadata(final String metricName);
 
   /**
    * Return current {@link TimestampMetricValue} of metric on host (thread-safe).
@@ -67,5 +67,5 @@ public interface IGangliaState {
    * @return The current value of the metric on that host -or- <code>null</code> if there is no
    *     {@link IGangliaMetadataMessage} for that metric.
    */
-  public ITimestampMetricValue getMetric(final String hostName, final String metricName);
+  ITimestampMetricValue getMetric(final String hostName, final String metricName);
 }

@@ -441,7 +441,7 @@ public class OutputBitStream implements Flushable, Closeable {
     if (DEBUG)
       if (len > free)
         throw new IllegalArgumentException(
-            Integer.toString(len) + " bit(s) to write, " + free + " available.");
+            len + " bit(s) to write, " + free + " available.");
 
     current |= (b & ((1 << len) - 1)) << (free -= len);
     if (free == 0) {

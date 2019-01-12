@@ -815,7 +815,7 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
     @Override
     public final byte symbol2byte(final int symbol) {
 
-      return (byte) symbol2byte[symbol];
+      return symbol2byte[symbol];
     }
 
     public RabaCodingSetup(final IRaba raba) {
@@ -965,7 +965,7 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
     final long sumCodedValueBitLengths =
         nsymbols == 0
             ? 0
-            : getSumCodedValueBitLengths(setup.codec().codeWords(), raba, (Byte2Symbol) setup);
+            : getSumCodedValueBitLengths(setup.codec().codeWords(), raba, setup);
 
     /*
      * The #of bits per element in the codedValueOffset[]
@@ -1094,13 +1094,13 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
         final long[] codedValueOffset = (codedValueOffsetBits == 0 ? null : new long[size + 1]);
         final long sumCodedValueBitLengths2 =
             writeCodedValues(
-                setup.codec().coder(), raba, (Byte2Symbol) setup, codedValueOffset, obs);
+                setup.codec().coder(), raba, setup, codedValueOffset, obs);
         assert sumCodedValueBitLengths == sumCodedValueBitLengths2
             : "sumCodedValueBitLengths="
                 + sumCodedValueBitLengths
                 + " != sumCodedValueBitLengths2="
                 + sumCodedValueBitLengths2;
-        if (codedValueOffset != null) assert codedValueOffset[size] == sumCodedValueBitLengths;
+        assert codedValueOffset == null || codedValueOffset[size] == sumCodedValueBitLengths;
 
         // Write out the codedValueOffset[].
         final long O_codedValueOffsets;
@@ -1755,7 +1755,7 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
 
           final int symbol = decoder.decode(ibs);
 
-          a[i] = (byte) KeyBuilder.encodeByte(symbol);
+          a[i] = KeyBuilder.encodeByte(symbol);
         }
 
         return a;
@@ -1893,7 +1893,7 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
 
           final int symbol = decoder.decode(ibs);
 
-          final byte b = (byte) KeyBuilder.encodeByte(symbol);
+          final byte b = KeyBuilder.encodeByte(symbol);
 
           os.write(b);
 
@@ -2162,7 +2162,7 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
         final byte b;
         if (!isSymbolTable) {
 
-          b = (byte) KeyBuilder.encodeByte(symbol);
+          b = KeyBuilder.encodeByte(symbol);
 
         } else {
 

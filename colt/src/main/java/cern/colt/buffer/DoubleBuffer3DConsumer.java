@@ -23,5 +23,5 @@ public interface DoubleBuffer3DConsumer {
    * @param y the y-coordinates of the points to be added.
    * @param z the z-coordinates of the points to be added.
    */
-  public void addAllOf(DoubleArrayList x, DoubleArrayList y, DoubleArrayList z);
+  void addAllOf(DoubleArrayList x, DoubleArrayList y, DoubleArrayList z);
 }

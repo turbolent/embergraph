@@ -25,5 +25,5 @@ public interface DoubleMatrix3DProcedure {
    * @param element element passed to the procedure.
    * @return a flag to inform the object calling the procedure.
    */
-  public abstract boolean apply(DoubleMatrix3D element);
+  boolean apply(DoubleMatrix3D element);
 }

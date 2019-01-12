@@ -47,7 +47,7 @@ public class TestEQ extends TestCase2 {
 
   public void test_ctor() {
     try {
-      new EQ((IVariable<?>) null /*x*/, (IVariable<?>) null /*y*/);
+      new EQ(null /*x*/, null /*y*/);
       fail("Excepting: " + IllegalArgumentException.class);
     } catch (IllegalArgumentException ex) {
       if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);

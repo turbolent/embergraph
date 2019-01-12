@@ -509,7 +509,7 @@ public final class StaticOptimizer {
 
     if (rangeCount[tailIndex] == -1L) {
 
-      final long rangeCount = (long) nodes.get(tailIndex).getEstimatedCardinality(this);
+      final long rangeCount = nodes.get(tailIndex).getEstimatedCardinality(this);
 
       this.rangeCount[tailIndex] = rangeCount;
     }

@@ -31,8 +31,7 @@ class ShardContext extends AllocationContextKey {
     if (!(o instanceof ShardContext)) return false;
     if (!queryId.equals(((ShardContext) o).queryId)) return false;
     if (bopId != ((ShardContext) o).bopId) return false;
-    if (partitionId != ((ShardContext) o).partitionId) return false;
-    return true;
+    return partitionId == ((ShardContext) o).partitionId;
   }
 
   @Override

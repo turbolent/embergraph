@@ -14,7 +14,7 @@ class QRTest {
     super();
   }
 
-  public static void main(String args[]) {
+  public static void main(String[] args) {
 
     // For COLT
     DoubleMatrix2D xmatrix, ymatrix, zmatrix;

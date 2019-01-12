@@ -210,13 +210,19 @@ public class Embergraph2ASTSPARQL11SyntaxTest extends SPARQL11SyntaxTest {
    */
   private static final Collection<String> knownBadTests =
       Arrays.asList(
-          new String[] {
-            "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/syntax-query/manifest#test_60", // syntax-BINDscope6.rq
-            "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/syntax-query/manifest#test_61a", // syntax-BINDscope7.rq
-            "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/syntax-query/manifest#test_62a", // syntax-BINDscope8.rq
-            "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/syntax-query/manifest#test_65", // syntax-SELECTscope2.rq
-            "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/syntax-update-1/manifest#test_25", // syntax-update-25.ru
-            "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/syntax-update-1/manifest#test_31", // syntax-update-31.ru
-            "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/syntax-update-1/manifest#test_54", // syntax-update-54.ru
-          });
+          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/syntax-query/manifest#test_60",
+          // syntax-BINDscope6.rq
+          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/syntax-query/manifest#test_61a",
+          // syntax-BINDscope7.rq
+          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/syntax-query/manifest#test_62a",
+          // syntax-BINDscope8.rq
+          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/syntax-query/manifest#test_65",
+          // syntax-SELECTscope2.rq
+          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/syntax-update-1/manifest#test_25",
+          // syntax-update-25.ru
+          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/syntax-update-1/manifest#test_31",
+          // syntax-update-31.ru
+          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/syntax-update-1/manifest#test_54",
+          // syntax-update-54.ru
+      );
 }

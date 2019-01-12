@@ -27,5 +27,5 @@ public interface IntIntIntProcedure {
    * @param third third argument passed to the procedure.
    * @return a flag to inform the object calling the procedure.
    */
-  public abstract boolean apply(int first, int second, int third);
+  boolean apply(int first, int second, int third);
 }

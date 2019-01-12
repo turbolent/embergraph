@@ -212,7 +212,7 @@ public class TestScaleOutTripleStoreWithEmbeddedFederation extends AbstractTestC
 
     // The data directory for the embedded federation.
     final File file =
-        ((EmbeddedFederation) ((ScaleOutTripleStore) store).getIndexManager()).getDataDir();
+        ((EmbeddedFederation) store.getIndexManager()).getDataDir();
 
     // Set the file property explicitly.
     properties.setProperty(EmbeddedClient.Options.DATA_DIR, file.toString());

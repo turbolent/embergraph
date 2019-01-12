@@ -333,7 +333,7 @@ public class TestASTSimpleOptionalOptimizer extends AbstractASTEvaluationTestCas
               new FunctionNode(
                   FunctionRegistry.BOUND,
                   null, // scalarValues
-                  new ValueExpressionNode[] {new VarNode("w")}));
+                  new VarNode("w")));
 
       final GlobalAnnotations globals =
           new GlobalAnnotations(context.getLexiconNamespace(), context.getTimestamp());

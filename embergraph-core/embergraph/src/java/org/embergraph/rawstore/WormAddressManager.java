@@ -322,7 +322,7 @@ public class WormAddressManager implements IAddressManager {
     //
     //        }
 
-    return ((long) offset) << byteCountBits | nbytes;
+    return offset << byteCountBits | nbytes;
   }
 
   public final int getByteCount(final long addr) {

@@ -53,7 +53,7 @@ public class PrefixDeclProcessor {
 
   public static final Map<String, String> defaultDecls = new LinkedHashMap<String, String>();
 
-  public static interface Options {
+  public interface Options {
 
     /**
      * This optional property defines the path to a file containing the prefix declarations.
@@ -65,7 +65,7 @@ public class PrefixDeclProcessor {
      * -Dorg.embergraph.rdf.sail.sparql.PrefixDeclProcessor.additionalDeclsFile=/path/to/file
      * </code> {@see https://jira.blazegraph.com/browse/BLZG-1773}
      */
-    public static final String ADDITIONAL_DECLS_FILE =
+    String ADDITIONAL_DECLS_FILE =
         PrefixDeclProcessor.class.getName() + ".additionalDeclsFile";
   }
 

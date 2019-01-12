@@ -99,7 +99,7 @@ public class SliceServiceFactory extends AbstractServiceFactory {
   public static final URI SERVICE_KEY = new URIImpl(BD.NAMESPACE + "slice");
 
   /** The service params for this service. */
-  public static interface SliceParams {
+  public interface SliceParams {
 
     /** The offset into the range. */
     URI OFFSET = new URIImpl(SERVICE_KEY.stringValue() + ".offset");
@@ -366,15 +366,14 @@ public class SliceServiceFactory extends AbstractServiceFactory {
       // Create the predicate.
       @SuppressWarnings("unchecked")
       final IPredicate<ISPO> pred =
-          (IPredicate<ISPO>)
-              db.getSPORelation()
-                  .getPredicate(
-                      getTerm(sp, bs, 0),
-                      getTerm(sp, bs, 1),
-                      getTerm(sp, bs, 2),
-                      getTerm(sp, bs, 3),
-                      null,
-                      rangeBOp);
+          db.getSPORelation()
+              .getPredicate(
+                  getTerm(sp, bs, 0),
+                  getTerm(sp, bs, 1),
+                  getTerm(sp, bs, 2),
+                  getTerm(sp, bs, 3),
+                  null,
+                  rangeBOp);
 
       if (pred == null) {
 
@@ -569,7 +568,7 @@ public class SliceServiceFactory extends AbstractServiceFactory {
 
       if (t.isConstant()) {
 
-        return ((IConstant<IV>) t.getValueExpression()).get();
+        return t.getValueExpression().get();
 
       } else {
 

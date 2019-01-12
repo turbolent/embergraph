@@ -408,7 +408,7 @@ public class CounterSet extends AbstractCounterSet implements ICounterSet {
     final ICounterNode[] a;
 
     synchronized (this) {
-      a = (ICounterNode[]) children.values().toArray(new ICounterNode[] {});
+      a = children.values().toArray(new ICounterNode[] {});
     }
 
     final IStriterator itr = new Striterator(Arrays.asList(a).iterator());
@@ -670,11 +670,11 @@ public class CounterSet extends AbstractCounterSet implements ICounterSet {
       return addCounter2(path, instrument);
     }
 
-    final String name = path.substring(indexOf + 1, path.length());
+    final String name = path.substring(indexOf + 1);
 
     final String ppath = path.substring(0, indexOf);
 
-    final CounterSet parent = (CounterSet) makePath(ppath);
+    final CounterSet parent = makePath(ppath);
 
     return parent.addCounter2(name, instrument);
   }

@@ -140,7 +140,7 @@ public class ChunkedWrappedIterator<E> implements IChunkedOrderedIterator<E> {
                       @Override
                       public boolean isValid(final Object arg0) {
 
-                        return filter.isValid((E) arg0);
+                        return filter.isValid(arg0);
                       }
                     }));
 

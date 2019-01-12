@@ -86,7 +86,7 @@ public abstract class ResourceManager extends OverflowManager implements IPartit
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public static interface IResourceManagerCounters
+  public interface IResourceManagerCounters
       extends IOverflowManagerCounters, IIndexManagerCounters, IStoreManagerCounters {
 
     /** The namespace for counters pertaining to the {@link OverflowManager}. */
@@ -665,7 +665,7 @@ public abstract class ResourceManager extends OverflowManager implements IPartit
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public static interface Options extends OverflowManager.Options {}
+  public interface Options extends OverflowManager.Options {}
 
   private IConcurrencyManager concurrencyManager;
 

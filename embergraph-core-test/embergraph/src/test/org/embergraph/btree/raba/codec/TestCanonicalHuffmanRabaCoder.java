@@ -257,7 +257,7 @@ public class TestCanonicalHuffmanRabaCoder extends AbstractRabaCoderTestCase {
    *     are found in the keys of a B+Tree.
    * @throws IOException
    */
-  public void doRecoderRoundTripTest(final int frequency[]) throws IOException {
+  public void doRecoderRoundTripTest(final int[] frequency) throws IOException {
 
     final DecoderInputs decoderInputs = new DecoderInputs();
 

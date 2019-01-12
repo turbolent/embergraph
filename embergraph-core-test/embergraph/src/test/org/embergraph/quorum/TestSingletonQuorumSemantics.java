@@ -778,24 +778,24 @@ public class TestSingletonQuorumSemantics extends AbstractQuorumTestCase {
    */
   public void testQuorumTransitions() {
     // combinations are possible current/new/haReady - each with a true/false isJoined
-    final long tokens[][] =
-        new long[][] {
-          // current, new, haReady
-          new long[] {-1, -1, -1}, // wasn't met, not met, wasn't joined
-          new long[] {-1, 0, -1}, // met
-          new long[] {0, 0, -1}, // remains met
-          new long[] {0, -1, -1}, // break
-          new long[] {-1, -1, 0}, // notmet, wasJoined
-          new long[] {-1, 0, 0}, // met, wasJoined
-          new long[] {0, 0, 0}, // remains met, wasJoined
-          new long[] {0, -1, 0}, // break, wasJoined
+    final long[][] tokens =
+        new long[][]{
+            // current, new, haReady
+            new long[]{-1, -1, -1}, // wasn't met, not met, wasn't joined
+            new long[]{-1, 0, -1}, // met
+            new long[]{0, 0, -1}, // remains met
+            new long[]{0, -1, -1}, // break
+            new long[]{-1, -1, 0}, // notmet, wasJoined
+            new long[]{-1, 0, 0}, // met, wasJoined
+            new long[]{0, 0, 0}, // remains met, wasJoined
+            new long[]{0, -1, 0}, // break, wasJoined
 
-          // Are these scenarios plausible only as a result of locking problem
-          //	or possibly Zookeeper bounce?
-          //        		new long[] {0, 2, -1}, // token bumped more than one
-          //        		new long[] {0, 2, 0}, // token bumped more than one
-          //        		new long[] {0, 2, 1}, // token bumped more than one
-          //        		new long[] {0, 2, 2}, // token bumped more than one
+            // Are these scenarios plausible only as a result of locking problem
+            //	or possibly Zookeeper bounce?
+            //        		new long[] {0, 2, -1}, // token bumped more than one
+            //        		new long[] {0, 2, 0}, // token bumped more than one
+            //        		new long[] {0, 2, 1}, // token bumped more than one
+            //        		new long[] {0, 2, 2}, // token bumped more than one
         };
 
     for (int i = 0; i < tokens.length; i++) {

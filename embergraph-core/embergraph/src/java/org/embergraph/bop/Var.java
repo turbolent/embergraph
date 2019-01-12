@@ -92,7 +92,7 @@ public final class Var<E> extends ImmutableBOp implements IVariable<E>, Comparab
 
     if (o instanceof IVariable<?>) {
 
-      return name.equals(((IVariable<?>) o).getName());
+      return name.equals(o.getName());
     }
 
     return false;

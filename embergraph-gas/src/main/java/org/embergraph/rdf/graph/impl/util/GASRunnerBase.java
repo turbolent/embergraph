@@ -289,13 +289,13 @@ public abstract class GASRunnerBase<VS, ES, ST> implements Callable<IGASStats> {
   /** Return an instance of the {@link IGASProgram} to be evaluated. */
   protected IGASProgram<VS, ES, ST> newGASProgram() {
 
-    final Class<IGASProgram<VS, ES, ST>> cls = (Class<IGASProgram<VS, ES, ST>>) opt.analyticClass;
+    final Class<IGASProgram<VS, ES, ST>> cls = opt.analyticClass;
 
     try {
 
-      final Constructor<IGASProgram<VS, ES, ST>> ctor = cls.getConstructor(new Class[] {});
+      final Constructor<IGASProgram<VS, ES, ST>> ctor = cls.getConstructor();
 
-      final IGASProgram<VS, ES, ST> gasProgram = ctor.newInstance(new Object[] {});
+      final IGASProgram<VS, ES, ST> gasProgram = ctor.newInstance();
 
       return gasProgram;
 
@@ -439,7 +439,7 @@ public abstract class GASRunnerBase<VS, ES, ST> implements Callable<IGASStats> {
         if (frontierEnum == FrontierEnum.AllVertices) {
 
           // Run analytic.
-          final IGASStats stats = (IGASStats) gasContext.call();
+          final IGASStats stats = gasContext.call();
 
           total.add(stats);
 
@@ -462,7 +462,7 @@ public abstract class GASRunnerBase<VS, ES, ST> implements Callable<IGASStats> {
             gasState.setFrontier(gasContext, startingVertex);
 
             // Run analytic.
-            final IGASStats stats = (IGASStats) gasContext.call();
+            final IGASStats stats = gasContext.call();
 
             if (stats.getFrontierSize() == 1) {
               /*
@@ -507,7 +507,7 @@ public abstract class GASRunnerBase<VS, ES, ST> implements Callable<IGASStats> {
       sb.append(", nthreads=" + opt.nthreads);
       sb.append(
           ", scheduler="
-              + ((GASState<VS, ES, ST>) gasState).getScheduler().getClass().getSimpleName());
+              + gasState.getScheduler().getClass().getSimpleName());
       sb.append(", gasEngine=" + gasEngine.getClass().getSimpleName());
       opt.report(sb); // extension hook.
       // performance results.

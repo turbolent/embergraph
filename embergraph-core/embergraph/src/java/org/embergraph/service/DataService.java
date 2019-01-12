@@ -109,7 +109,7 @@ public abstract class DataService extends AbstractService
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
-  public static interface Options
+  public interface Options
       extends org.embergraph.journal.Options,
           org.embergraph.journal.ConcurrencyManager.Options,
           org.embergraph.resources.ResourceManager.Options,
@@ -316,7 +316,7 @@ public abstract class DataService extends AbstractService
        * Startup the resource manager.
        */
 
-      ((ResourceManager) resourceManager).setConcurrencyManager(concurrencyManager);
+      resourceManager.setConcurrencyManager(concurrencyManager);
     }
 
     /** Hook sets up the queryEngine reference once the data service is running. */
@@ -692,7 +692,7 @@ public abstract class DataService extends AbstractService
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
-  public static interface IDataServiceCounters
+  public interface IDataServiceCounters
       extends ConcurrencyManager.IConcurrencyManagerCounters,
           //            ...TransactionManager.XXXCounters,
           ResourceManager.IResourceManagerCounters {
@@ -1252,7 +1252,7 @@ public abstract class DataService extends AbstractService
       final AbstractTask<IndexMetadata> task =
           new GetIndexMetadataTask(concurrencyManager, startTime, name);
 
-      return (IndexMetadata) concurrencyManager.submit(task).get();
+      return concurrencyManager.submit(task).get();
 
     } finally {
 
@@ -1699,7 +1699,7 @@ public abstract class DataService extends AbstractService
       //            final WriteExecutorService writeService = concurrencyManager
       //                    .getWriteService();
 
-      final ResourceManager resourceManager = (ResourceManager) DataService.this.resourceManager;
+      final ResourceManager resourceManager = DataService.this.resourceManager;
 
       if (resourceManager.isOverflowAllowed()) {
 

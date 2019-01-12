@@ -598,7 +598,7 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
         // verify that stmt c is marked as explicit in the kb.
 
         final EmbergraphStatement stmtC =
-            (EmbergraphStatement) store.getStatement(foo, rdftype, graph);
+            store.getStatement(foo, rdftype, graph);
 
         assertNotNull(stmtC);
 
@@ -635,7 +635,7 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
         // verify that stmt c is marked as explicit in the kb.
 
         final EmbergraphStatement stmtC =
-            (EmbergraphStatement) store.getStatement(foo, rdftype, graph);
+            store.getStatement(foo, rdftype, graph);
 
         assertNotNull(stmtC);
 

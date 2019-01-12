@@ -49,7 +49,7 @@ public class UnionNode extends GraphPatternGroup<JoinGroupNode> implements IReor
   @Override
   public UnionNode addChild(final JoinGroupNode child) {
 
-    final JoinGroupNode group = (JoinGroupNode) child;
+    final JoinGroupNode group = child;
 
     // can only add non-optional join groups as children to union
     if (group.isOptional()) {

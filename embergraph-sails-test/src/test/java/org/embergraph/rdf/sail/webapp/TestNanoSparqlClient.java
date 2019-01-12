@@ -1038,7 +1038,7 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends AbstractTestN
   public void testServiceNodeBindings() throws Exception {
     final EmbergraphSailRemoteRepository repo = m_repo.getEmbergraphSailRemoteRepository();
     final EmbergraphSailRemoteRepositoryConnection cxn =
-        (EmbergraphSailRemoteRepositoryConnection) repo.getConnection();
+        repo.getConnection();
 
     try {
       String queryStr =

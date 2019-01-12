@@ -32,24 +32,24 @@ import java.util.UUID;
 public interface IHAGatherReleaseTimeRequest extends IHAMessage {
 
   /** The token for which this request is valid. */
-  public long token();
+  long token();
 
   /**
    * A timestamp on the leader at the start of the protocol used to agree on the new release time
    * (this can be the commitTime that will be assigned by the leader to the new commit point). This
    * is used to detect problems where the clocks are not synchronized on the services.
    */
-  public long getTimestampOnLeader();
+  long getTimestampOnLeader();
 
   /**
    * The UUID of the leader. This may be used to discover the service that is (or was) the leader
    * even if the token has been invalidated.
    */
-  public UUID getLeaderId();
+  UUID getLeaderId();
 
   /** The commit counter that will be assigned to the new commit point. */
-  public long getNewCommitCounter();
+  long getNewCommitCounter();
 
   /** The commit time that will be assigned to the new commit point. */
-  public long getNewCommitTime();
+  long getNewCommitTime();
 }

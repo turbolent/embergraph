@@ -685,7 +685,7 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
 
     final AbstractEmbeddedLoadBalancerService lbs =
         ((AbstractEmbeddedLoadBalancerService)
-            ((EmbeddedFederation<?>) fed).getLoadBalancerService());
+            fed.getLoadBalancerService());
 
     final ServiceScore[] fakeServiceScores = new ServiceScore[2];
 
@@ -1038,26 +1038,26 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
   }
 
   /** Additional properties understood by this test. */
-  public static interface TestOptions extends Options {
+  public interface TestOptions extends Options {
 
     /** The timeout for the test. */
-    public static final String TIMEOUT = "timeout";
+    String TIMEOUT = "timeout";
 
     /** The #of concurrent clients to run. */
-    public static final String NCLIENTS = "nclients";
+    String NCLIENTS = "nclients";
 
     /** The #of trials (aka transactions) to run. */
-    public static final String NTRIALS = "ntrials";
+    String NTRIALS = "ntrials";
 
     /**
      * The length of the keys used in the test. This directly impacts the likelyhood of a
      * write-write conflict. Shorter keys mean more conflicts. However, note that conflicts are only
      * possible when there are at least two concurrent clients running.
      */
-    public static final String KEYLEN = "keyLen";
+    String KEYLEN = "keyLen";
 
     /** The #of operations in each trial. */
-    public static final String NOPS = "nops";
+    String NOPS = "nops";
 
     /**
      * The rate of insert operations (inserting <i>nops</i> tuples) in [0.0:1.0]. The balance of the
@@ -1069,7 +1069,7 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
      * The #of distinct scale-out indices that will be used during the run. Each index may be split
      * over time as the run progresses, eventually yielding multiple index partitions.
      */
-    public static final String NINDICES = "nindices";
+    String NINDICES = "nindices";
 
     /**
      * When <code>true</code>, ground truth will be maintained and verified against the
@@ -1081,7 +1081,7 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
      * <p>Note: All operations on a ground truth index are serialized so this option can not be used
      * when you are doing performance testing.
      */
-    final String TEST_CORRECTNESS = "testCorrectness";
+    String TEST_CORRECTNESS = "testCorrectness";
   }
 
   /**

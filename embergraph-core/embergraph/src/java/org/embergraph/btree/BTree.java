@@ -957,7 +957,7 @@ public class BTree extends AbstractBTree
        */
 
       @SuppressWarnings("rawtypes")
-      final Constructor ctor = cl.getConstructor(new Class[] {BTree.class});
+      final Constructor ctor = cl.getConstructor(BTree.class);
 
       final Checkpoint checkpoint = (Checkpoint) ctor.newInstance(new Object[] {this});
 
@@ -1086,12 +1086,8 @@ public class BTree extends AbstractBTree
         return true;
       }
 
-      if (checkpoint.getRootAddr() != root.identity) {
-
-        // The root node has a different persistent identity.
-
-        return true;
-      }
+      // The root node has a different persistent identity.
+      return checkpoint.getRootAddr() != root.identity;
     }
 
     /*
@@ -1534,7 +1530,7 @@ public class BTree extends AbstractBTree
        */
       final Constructor ctor =
           cl.getConstructor(
-              new Class[] {IRawStore.class, Checkpoint.class, IndexMetadata.class, Boolean.TYPE});
+              IRawStore.class, Checkpoint.class, IndexMetadata.class, Boolean.TYPE);
 
       final BTree btree =
           (BTree)
@@ -1662,7 +1658,7 @@ public class BTree extends AbstractBTree
        */
       final Constructor ctor =
           cl.getConstructor(
-              new Class[] {IRawStore.class, Checkpoint.class, IndexMetadata.class, Boolean.TYPE});
+              IRawStore.class, Checkpoint.class, IndexMetadata.class, Boolean.TYPE);
 
       final BTree btree =
           (BTree) ctor.newInstance(new Object[] {store, checkpoint, metadata, readOnly});

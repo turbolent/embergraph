@@ -44,7 +44,7 @@ import org.openrdf.model.ValueFactory;
 public interface EmbergraphValueFactory extends ValueFactory {
 
   /** The namespace of the KB instance associated with the value factory. */
-  public String getNamespace();
+  String getNamespace();
 
   /** Remove instance of valueFactory from static cache */
   void remove(/*final String namespace*/ );
@@ -59,7 +59,7 @@ public interface EmbergraphValueFactory extends ValueFactory {
    *
    * @see BNodeContextFactory
    */
-  public EmbergraphValueFactory newBNodeContext();
+  EmbergraphValueFactory newBNodeContext();
 
   //    /**
   //     * Create a blank node and flag it as a statement identifier.

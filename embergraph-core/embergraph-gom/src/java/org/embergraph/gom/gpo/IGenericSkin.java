@@ -52,5 +52,5 @@ public interface IGenericSkin {
    *
    * <p>
    */
-  public IGPO asGeneric();
+  IGPO asGeneric();
 }

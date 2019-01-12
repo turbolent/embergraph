@@ -180,7 +180,7 @@ public class TestGather extends AbstractEmbergraphGraphTestCase {
 
       return true;
     }
-  };
+  }
 
   public void testGather_inEdges() throws Exception {
 
@@ -209,10 +209,8 @@ public class TestGather extends AbstractEmbergraphGraphTestCase {
     {
       final Set<Statement> expected =
           set(
-              (Statement)
-                  new SPO(p.getMike(), p.getRdfType(), p.getFoafPerson(), StatementEnum.Explicit),
-              (Statement)
-                  new SPO(p.getMike(), p.getFoafKnows(), p.getBryan(), StatementEnum.Explicit));
+              new SPO(p.getMike(), p.getRdfType(), p.getFoafPerson(), StatementEnum.Explicit),
+              new SPO(p.getMike(), p.getFoafKnows(), p.getBryan(), StatementEnum.Explicit));
 
       doGatherTest(EdgesEnum.OutEdges, expected, p.getMike() /* startingVertex */);
     }
@@ -221,12 +219,9 @@ public class TestGather extends AbstractEmbergraphGraphTestCase {
     {
       final Set<Statement> expected =
           set(
-              (Statement)
-                  new SPO(p.getBryan(), p.getFoafKnows(), p.getMike(), StatementEnum.Explicit),
-              (Statement)
-                  new SPO(p.getMike(), p.getRdfType(), p.getFoafPerson(), StatementEnum.Explicit),
-              (Statement)
-                  new SPO(p.getMike(), p.getFoafKnows(), p.getBryan(), StatementEnum.Explicit));
+              new SPO(p.getBryan(), p.getFoafKnows(), p.getMike(), StatementEnum.Explicit),
+              new SPO(p.getMike(), p.getRdfType(), p.getFoafPerson(), StatementEnum.Explicit),
+              new SPO(p.getMike(), p.getFoafKnows(), p.getBryan(), StatementEnum.Explicit));
 
       doGatherTest(EdgesEnum.AllEdges, expected, p.getMike() /* startingVertex */);
     }

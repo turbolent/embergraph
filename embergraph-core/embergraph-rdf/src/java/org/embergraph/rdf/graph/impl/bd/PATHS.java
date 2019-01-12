@@ -365,7 +365,7 @@ public class PATHS extends BaseGASProgram<PATHS.VS, PATHS.ES, Void>
 
             if (predIV instanceof Value) {
 
-              predVal = (Value) predIV;
+              predVal = predIV;
 
             } else if (predIV.hasValue()) {
 
@@ -425,7 +425,7 @@ public class PATHS extends BaseGASProgram<PATHS.VS, PATHS.ES, Void>
 
             if (predIV instanceof Value) {
 
-              predVal = (Value) predIV;
+              predVal = predIV;
 
             } else if (predIV.hasValue()) {
 

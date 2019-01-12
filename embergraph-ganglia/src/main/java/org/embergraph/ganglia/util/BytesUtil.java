@@ -53,7 +53,7 @@ public class BytesUtil {
 
       // as an unsigned integer.
       // sb.append(Integer.toHexString(key[i] & 0xff));
-      sb.append(Integer.toString(key[i] & 0xff));
+      sb.append((key[i] & 0xff));
     }
 
     sb.append("]");

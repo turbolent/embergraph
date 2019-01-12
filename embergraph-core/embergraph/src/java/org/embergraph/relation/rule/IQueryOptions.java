@@ -39,7 +39,7 @@ public interface IQueryOptions extends Serializable {
   /**
    * <code>true</code> if a {@link DistinctFilter} should be applied when the query is evaluated.
    */
-  public boolean isDistinct();
+  boolean isDistinct();
 
   /**
    * An optional array of {@link ISortOrder}s describing the sort order that will be imposed on the
@@ -48,7 +48,7 @@ public interface IQueryOptions extends Serializable {
    * @return An array of {@link ISortOrder}s -or- <code>null</code> iff there is no "order by"
    *     constraint.
    */
-  public ISortOrder[] getOrderBy();
+  ISortOrder[] getOrderBy();
 
   /**
    * An optional {@link ISlice} describing a constraint on the first solution and the maximum #of
@@ -60,7 +60,7 @@ public interface IQueryOptions extends Serializable {
    * @return The {@link ISlice} -or- <code>null</code> if there is no constraint on the solutions
    *     that will be visited.
    */
-  public ISlice getSlice();
+  ISlice getSlice();
 
   /**
    * Return <code>true</code> iff query evaluation must be stable. Stable query evaluation requires
@@ -71,5 +71,5 @@ public interface IQueryOptions extends Serializable {
    *
    * @return <code>true</code> if query evaluation must be stable.
    */
-  public boolean isStable();
+  boolean isStable();
 }

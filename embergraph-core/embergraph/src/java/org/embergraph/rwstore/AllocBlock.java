@@ -58,24 +58,26 @@ public class AllocBlock {
    * The bits that were allocated in the previous commit. They can be freed in the current native
    * transaction but they can not be reallocated until the next native transaction.
    */
-  int m_commit[];
+  int[] m_commit;
   /**
    * If used as a shadow allocator, then the _commit is saved to m_saveCommit and m_transients is
    * copied to m_commit.
    */
-  int m_saveCommit[];
-  /** For a shadow, the isolated frees need to be tracked to facillitate reset. */
-  int m_isoFrees[];
+  int[] m_saveCommit;
+  /**
+   * For a shadow, the isolated frees need to be tracked to facillitate reset.
+   */
+  int[] m_isoFrees;
   /**
    * Just the newly allocated bits. This will be copied onto {@link #m_commit} when the current
    * native transaction commits.
    */
-  final int m_live[];
+  final int[] m_live;
   /**
    * All of the bits from the commit point on entry to the current native transaction plus any newly
    * allocated bits.
    */
-  int m_transients[];
+  int[] m_transients;
   //	/**
   //	 * Used to clear an address on the {@link WriteCacheService} if it has been
   //	 * freed.

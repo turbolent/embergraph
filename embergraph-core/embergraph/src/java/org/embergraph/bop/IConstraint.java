@@ -42,8 +42,8 @@ public interface IConstraint extends BOp, Serializable {
    * @param bindingSet The binding set.
    * @todo rename as eval(IBindingSet)?
    */
-  public boolean accept(IBindingSet bindingSet);
+  boolean accept(IBindingSet bindingSet);
 
   /** A zero length empty {@link IConstraint} array. */
-  public IConstraint[] EMPTY = new IConstraint[0];
+  IConstraint[] EMPTY = new IConstraint[0];
 }

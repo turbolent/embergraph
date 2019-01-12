@@ -173,7 +173,7 @@ public abstract class AbstractRawStore implements IRawStore {
      *
      * <p>we need to be able to efficiently handle large arrays beyond size of the blobThreshold, so
      */
-    public void write(final byte b[], final int off, final int len) throws IOException {
+    public void write(final byte[] b, final int off, final int len) throws IOException {
 
       if (!m_open) {
         throw new IllegalStateException("Already written");
@@ -250,7 +250,7 @@ public abstract class AbstractRawStore implements IRawStore {
       return 0xFF & m_bb.get();
     }
 
-    public synchronized int read(final byte dst[], final int off, final int len)
+    public synchronized int read(final byte[] dst, final int off, final int len)
         throws IOException {
       if (m_bb.remaining() >= len) {
         m_bb.get(dst, off, len);

@@ -65,7 +65,7 @@ public interface IRabaCoder extends Serializable {
    * IRawStore}. The {@link IndexSegmentBuilder} is a special case, since the coded record will not
    * be used other than to write it on the disk.
    */
-  public ICodedRaba encodeLive(IRaba raba, DataOutputBuffer buf);
+  ICodedRaba encodeLive(IRaba raba, DataOutputBuffer buf);
 
   /**
    * Encode the data.

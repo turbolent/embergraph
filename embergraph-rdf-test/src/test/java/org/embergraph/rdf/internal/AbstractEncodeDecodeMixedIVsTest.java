@@ -375,18 +375,18 @@ public abstract class AbstractEncodeDecodeMixedIVsTest extends AbstractEncodeDec
         ivs.add(new XSDBooleanIV<EmbergraphLiteral>(false));
 
         // xsd:byte
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>((byte) Byte.MIN_VALUE));
+        ivs.add(new XSDNumericIV<EmbergraphLiteral>(Byte.MIN_VALUE));
         ivs.add(new XSDNumericIV<EmbergraphLiteral>((byte) -1));
         ivs.add(new XSDNumericIV<EmbergraphLiteral>((byte) 0));
         ivs.add(new XSDNumericIV<EmbergraphLiteral>((byte) 1));
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>((byte) Byte.MAX_VALUE));
+        ivs.add(new XSDNumericIV<EmbergraphLiteral>(Byte.MAX_VALUE));
 
         // xsd:short
         ivs.add(new XSDNumericIV<EmbergraphLiteral>((short) -1));
         ivs.add(new XSDNumericIV<EmbergraphLiteral>((short) 0));
         ivs.add(new XSDNumericIV<EmbergraphLiteral>((short) 1));
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>((short) Short.MIN_VALUE));
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>((short) Short.MAX_VALUE));
+        ivs.add(new XSDNumericIV<EmbergraphLiteral>(Short.MIN_VALUE));
+        ivs.add(new XSDNumericIV<EmbergraphLiteral>(Short.MAX_VALUE));
 
         // xsd:int
         ivs.add(new XSDNumericIV<EmbergraphLiteral>(1));
@@ -497,18 +497,18 @@ public abstract class AbstractEncodeDecodeMixedIVsTest extends AbstractEncodeDec
         ivs.add(new XSDIntegerIV<EmbergraphLiteral>(new BigInteger("-151")));
 
         // byte vocabulary IVs.
-        ivs.add(new VocabURIByteIV<EmbergraphURI>((byte) Byte.MIN_VALUE));
+        ivs.add(new VocabURIByteIV<EmbergraphURI>(Byte.MIN_VALUE));
         ivs.add(new VocabURIByteIV<EmbergraphURI>((byte) -1));
         ivs.add(new VocabURIByteIV<EmbergraphURI>((byte) 0));
         ivs.add(new VocabURIByteIV<EmbergraphURI>((byte) 1));
-        ivs.add(new VocabURIByteIV<EmbergraphURI>((byte) Byte.MAX_VALUE));
+        ivs.add(new VocabURIByteIV<EmbergraphURI>(Byte.MAX_VALUE));
 
         // short vocabulary IVs.
-        ivs.add(new VocabURIShortIV<EmbergraphURI>((short) Short.MIN_VALUE));
+        ivs.add(new VocabURIShortIV<EmbergraphURI>(Short.MIN_VALUE));
         ivs.add(new VocabURIShortIV<EmbergraphURI>((short) -1));
         ivs.add(new VocabURIShortIV<EmbergraphURI>((short) 0));
         ivs.add(new VocabURIShortIV<EmbergraphURI>((short) 1));
-        ivs.add(new VocabURIShortIV<EmbergraphURI>((short) Short.MAX_VALUE));
+        ivs.add(new VocabURIShortIV<EmbergraphURI>(Short.MAX_VALUE));
 
         // SIDs
         {

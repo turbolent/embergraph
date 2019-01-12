@@ -92,7 +92,7 @@ public class TestTicket1086 extends ProxyEmbergraphSailTestCase {
 
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
+      cxn = repo.getConnection();
 
       final EmbergraphValueFactory vf = (EmbergraphValueFactory) sail.getValueFactory();
       final URI s = vf.createURI("http://test/s");
@@ -131,7 +131,7 @@ public class TestTicket1086 extends ProxyEmbergraphSailTestCase {
 
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
+      cxn = repo.getConnection();
 
       final EmbergraphValueFactory vf = (EmbergraphValueFactory) sail.getValueFactory();
       final URI s = vf.createURI("http://test/s");

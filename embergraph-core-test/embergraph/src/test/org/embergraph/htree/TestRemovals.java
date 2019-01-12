@@ -42,7 +42,7 @@ public class TestRemovals extends AbstractHTreeTestCase {
       assertEquals(1, htree.getEntryCount());
 
       // examine the root.
-      final DirectoryPage root = (DirectoryPage) htree.getRoot();
+      final DirectoryPage root = htree.getRoot();
 
       // verify that the expected data were read.
       TestCase3.assertEquals(val, htree.lookupFirst(key));
@@ -95,7 +95,7 @@ public class TestRemovals extends AbstractHTreeTestCase {
       assertEquals(entries + altentries, htree.getEntryCount());
 
       // examine the root.
-      final DirectoryPage root = (DirectoryPage) htree.getRoot();
+      final DirectoryPage root = htree.getRoot();
 
       // verify that the expected data were read.
       TestCase3.assertEquals(val, htree.lookupFirst(key));

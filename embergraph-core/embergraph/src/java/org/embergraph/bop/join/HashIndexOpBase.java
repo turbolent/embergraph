@@ -64,7 +64,7 @@ public abstract class HashIndexOpBase extends PipelineOp implements ISingleThrea
      * attached to the {@link IQueryAttributes} and accessed there on subsequent evaluation passes
      * for this operator.
      */
-    final String HASH_JOIN_UTILITY_FACTORY = HashIndexOpBase.class.getName() + ".utilFactory";
+    String HASH_JOIN_UTILITY_FACTORY = HashIndexOpBase.class.getName() + ".utilFactory";
 
     /**
      * An optional attribute specifying the <em>source</em> named solution set for the index build
@@ -73,7 +73,7 @@ public abstract class HashIndexOpBase extends PipelineOp implements ISingleThrea
      * specified named solution set. Regardless, the solutions flowing through the pipeline are
      * copied to the sink once the hash index has been built.
      */
-    final String NAMED_SET_SOURCE_REF = "namedSetSourceRef";
+    String NAMED_SET_SOURCE_REF = "namedSetSourceRef";
 
     /**
      * An optional attribute specifying the <em>source</em> IBindingSet[] for the index build
@@ -82,7 +82,7 @@ public abstract class HashIndexOpBase extends PipelineOp implements ISingleThrea
      * specified IBindingSet[]. Regardless, the solutions flowing through the pipeline are copied to
      * the sink once the hash index has been built.
      */
-    final String BINDING_SETS_SOURCE = "bindingSets";
+    String BINDING_SETS_SOURCE = "bindingSets";
   }
 
   /** Deep copy constructor. */

@@ -47,27 +47,27 @@ public interface ILexiconConfiguration<V extends EmbergraphValue> {
    *
    * @see AbstractTripleStore.Options#MAX_INLINE_TEXT_LENGTH
    */
-  public int getMaxInlineStringLength();
+  int getMaxInlineStringLength();
 
   /** @see AbstractTripleStore.Options#INLINE_TEXT_LITERALS */
-  public boolean isInlineTextLiterals();
+  boolean isInlineTextLiterals();
 
   /** Return <code>true</code> if datatype literals are being inlined into the statement indices. */
-  public boolean isInlineLiterals();
+  boolean isInlineLiterals();
 
   /**
    * Return <code>true</code> if xsd:datetime literals are being inlined into the statement indices.
    */
-  public boolean isInlineDateTimes();
+  boolean isInlineDateTimes();
 
   /** Return <code>true</code> if GeoSpatial support is enabled. */
-  public boolean isGeoSpatial();
+  boolean isGeoSpatial();
 
   /** Return the geospatial datatype configuration. */
-  public GeoSpatialConfig getGeoSpatialConfig();
+  GeoSpatialConfig getGeoSpatialConfig();
 
   /** Return the default time zone to be used for inlining. */
-  public TimeZone getInlineDateTimesTimeZone();
+  TimeZone getInlineDateTimesTimeZone();
 
   /**
    * Return the threshold at which a literal would be stored in the {@link LexiconKeyOrder#BLOBS}
@@ -75,7 +75,7 @@ public interface ILexiconConfiguration<V extends EmbergraphValue> {
    *
    * @see AbstractTripleStore.Options#BLOBS_THRESHOLD
    */
-  public int getBlobsThreshold();
+  int getBlobsThreshold();
 
   /**
    * Return true iff the BLOBS index has been disabled.
@@ -83,7 +83,7 @@ public interface ILexiconConfiguration<V extends EmbergraphValue> {
    * @see <a href="https://github.com/SYSTAP/bigdata-gpu/issues/25">Disable BLOBS indexing
    *     completely for GPU </a>
    */
-  public boolean isBlobsDisabled();
+  boolean isBlobsDisabled();
 
   /**
    * Create an inline {@link IV} for the supplied RDF value if inlining is supported for the

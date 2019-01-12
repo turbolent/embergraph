@@ -50,7 +50,7 @@ public interface ServiceFactory {
    *
    * <p>See {@link IVariableBindingRequirements#getRequiredBound(StaticAnalysis)}.
    */
-  public Set<IVariable<?>> getRequiredBound(final ServiceNode serviceNode);
+  Set<IVariable<?>> getRequiredBound(final ServiceNode serviceNode);
 
   /**
    * Returns, for the given service node, the variables that are desired to be bound prior to start
@@ -59,5 +59,5 @@ public interface ServiceFactory {
    *
    * <p>See {@link IVariableBindingRequirements#getDesiredBound(StaticAnalysis)}.
    */
-  public Set<IVariable<?>> getDesiredBound(final ServiceNode serviceNode);
+  Set<IVariable<?>> getDesiredBound(final ServiceNode serviceNode);
 }

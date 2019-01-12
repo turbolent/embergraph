@@ -150,7 +150,7 @@ public class AbstractCommitTimeIndex<T extends ICommitTimeEntry> extends Delegat
   /** Retrieve the entry from the index. */
   private T valueAtIndex(final long index) {
 
-    return (T) valueAt(index, getLookupTuple()).getObject();
+    return valueAt(index, getLookupTuple()).getObject();
 
     //        final byte[] val = super.valueAt(index);
     //

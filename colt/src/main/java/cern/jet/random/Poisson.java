@@ -90,7 +90,7 @@ public class Poisson extends AbstractDiscreteDistribution {
    */
   public Object clone() {
     Poisson copy = (Poisson) super.clone();
-    if (this.pp != null) copy.pp = (double[]) this.pp.clone();
+    if (this.pp != null) copy.pp = this.pp.clone();
     return copy;
   }
 

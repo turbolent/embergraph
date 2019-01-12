@@ -96,7 +96,7 @@ public class PSInputStream extends InputStream {
     return rdlen;
   }
 
-  public synchronized int read(final byte dst[], final int off, final int len) throws IOException {
+  public synchronized int read(final byte[] dst, final int off, final int len) throws IOException {
     if (m_size == 0) {
       return -1;
     }

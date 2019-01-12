@@ -25,5 +25,5 @@ public interface DoubleProcedure {
    * @param element element passed to the procedure.
    * @return a flag to inform the object calling the procedure.
    */
-  public abstract boolean apply(double element);
+  boolean apply(double element);
 }

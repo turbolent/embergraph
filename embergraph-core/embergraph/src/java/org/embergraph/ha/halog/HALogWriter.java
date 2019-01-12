@@ -368,7 +368,7 @@ public class HALogWriter implements IHALogWriter {
    * @throws IOException
    */
   @Override
-  public void closeHALog(final IRootBlockView rootBlock) throws FileNotFoundException, IOException {
+  public void closeHALog(final IRootBlockView rootBlock) throws IOException {
 
     final Lock lock = m_stateLock.writeLock();
     lock.lock();
@@ -665,7 +665,7 @@ public class HALogWriter implements IHALogWriter {
    *     not be read.
    */
   public IHALogReader getReader(final long commitCounter)
-      throws FileNotFoundException, IOException {
+      throws IOException {
 
     final File logFile = // new File(m_haLogDir,
         HALogWriter.getHALogFileName(m_haLogDir, commitCounter);

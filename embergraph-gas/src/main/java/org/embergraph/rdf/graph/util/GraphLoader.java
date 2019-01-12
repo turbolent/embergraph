@@ -302,8 +302,7 @@ public abstract class GraphLoader {
     public void handleStatement(final Statement stmt) throws RDFHandlerException {
 
       final Resource[] c =
-          (Resource[])
-              (stmt.getContext() == null ? defaultContext : new Resource[] {stmt.getContext()});
+          (stmt.getContext() == null ? defaultContext : new Resource[] {stmt.getContext()});
 
       addStatement(stmt, c);
     }

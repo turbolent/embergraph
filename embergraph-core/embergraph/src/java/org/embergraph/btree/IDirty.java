@@ -28,7 +28,7 @@ package org.embergraph.btree;
  */
 public interface IDirty {
 
-  public void setDirty(boolean dirty);
+  void setDirty(boolean dirty);
 
-  public boolean isDirty();
+  boolean isDirty();
 }

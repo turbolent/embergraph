@@ -39,7 +39,7 @@ import java.io.OutputStream;
 public interface IFixedDataRecord extends IDataRecord {
 
   /** Return an input stream that will read from the slice. */
-  public DataInputBuffer getDataInput();
+  DataInputBuffer getDataInput();
 
   /**
    * Return a bit stream that will read from the slice.
@@ -48,7 +48,7 @@ public interface IFixedDataRecord extends IDataRecord {
    * InputBitStream#close()} when backed by a byte[] appears to have relatively high overhead, which
    * is weird.
    */
-  public InputBitStream getInputBitStream();
+  InputBitStream getInputBitStream();
 
   /**
    * Write the slice on the output stream.

@@ -315,7 +315,7 @@ public class ImmutableExternalPrefixMap extends AbstractPrefixMap implements Ser
               "Aligning away " + (blockSize - output.writtenBits() % blockSize) + " bits...");
         for (int j = (int) (blockSize - output.writtenBits() % blockSize); j-- != 0; )
           output.writeBit(0);
-        if (ASSERTS) assert output.writtenBits() % blockSize == 0;
+        assert !ASSERTS || output.writtenBits() % blockSize == 0;
       }
 
       if (output.writtenBits() % blockSize == 0) {

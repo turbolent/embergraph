@@ -85,11 +85,11 @@ class ConfiguredAnalyzerFactory implements IAnalyzerFactory {
     }
   }
 
-  private final AnalyzerPair config[];
+  private final AnalyzerPair[] config;
 
   /** This caches the result of looking up a lang tag in the config of language ranges. */
   private final Map<String, AnalyzerPair> langTag2AnalyzerPair =
-      new ConcurrentHashMap<String, AnalyzerPair>();;
+      new ConcurrentHashMap<String, AnalyzerPair>();
 
   /**
    * While it would be very unusual to have more than 500 different language tags in a store it is
@@ -104,7 +104,7 @@ class ConfiguredAnalyzerFactory implements IAnalyzerFactory {
    *
    * @param fullTextIndex
    */
-  public ConfiguredAnalyzerFactory(AnalyzerPair config[], String defaultLanguage) {
+  public ConfiguredAnalyzerFactory(AnalyzerPair[] config, String defaultLanguage) {
     this.config = config;
     this.defaultLanguage = defaultLanguage;
   }
@@ -138,7 +138,7 @@ class ConfiguredAnalyzerFactory implements IAnalyzerFactory {
   }
 
   private AnalyzerPair lookupPair(String languageCode) {
-    String language[] = languageCode.split("-");
+    String[] language = languageCode.split("-");
     for (AnalyzerPair p : config) {
       if (p.extendedFilterMatch(language)) {
         return p;

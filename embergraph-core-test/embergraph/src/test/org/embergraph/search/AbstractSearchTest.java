@@ -127,7 +127,7 @@ public abstract class AbstractSearchTest extends ProxyTestCase<IIndexManager> {
     return sb.toString();
   }
 
-  private void compareTokenStream(Analyzer a, String text, String expected[]) throws IOException {
+  private void compareTokenStream(Analyzer a, String text, String[] expected) throws IOException {
     TokenStream s = a.tokenStream(null, new StringReader(text));
     int ix = 0;
 

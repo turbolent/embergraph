@@ -341,9 +341,9 @@ public abstract class GASEngine implements IGASEngine {
 
     try {
 
-      final Constructor<IGASSchedulerImpl> ctor = cls.getConstructor(new Class[] {GASEngine.class});
+      final Constructor<IGASSchedulerImpl> ctor = cls.getConstructor(GASEngine.class);
 
-      final IGASSchedulerImpl sch = ctor.newInstance(new Object[] {this});
+      final IGASSchedulerImpl sch = ctor.newInstance(this);
 
       return sch;
 

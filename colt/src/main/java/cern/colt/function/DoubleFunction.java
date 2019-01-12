@@ -19,5 +19,5 @@ public interface DoubleFunction {
    * @param argument argument passed to the function.
    * @return the result of the function.
    */
-  public abstract double apply(double argument);
+  double apply(double argument);
 }

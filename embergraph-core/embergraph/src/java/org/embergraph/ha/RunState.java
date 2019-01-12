@@ -24,7 +24,7 @@ public enum RunState {
   ShuttingDown(2),
   Shutdown(3);
 
-  private RunState(final int level) {
+  RunState(final int level) {
 
     this.level = level;
   }

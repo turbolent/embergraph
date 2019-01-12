@@ -109,7 +109,7 @@ public class TestSingleTailRule extends ProxyEmbergraphSailTestCase {
 
     } finally {
       cxn.close();
-      if (sail instanceof EmbergraphSail) ((EmbergraphSail) sail).__tearDownUnitTest();
+      if (sail instanceof EmbergraphSail) sail.__tearDownUnitTest();
     }
   }
 
@@ -170,11 +170,9 @@ public class TestSingleTailRule extends ProxyEmbergraphSailTestCase {
         final Collection<BindingSet> solution = new LinkedList<BindingSet>();
         solution.add(
             createBindingSet(
-                new Binding[] {
-                  new BindingImpl("s", mike),
-                  new BindingImpl("p", RDFS.LABEL),
-                  new BindingImpl("o", l1),
-                }));
+                new BindingImpl("s", mike),
+                new BindingImpl("p", RDFS.LABEL),
+                new BindingImpl("o", l1)));
 
         compare(result, solution);
       }
@@ -205,16 +203,14 @@ public class TestSingleTailRule extends ProxyEmbergraphSailTestCase {
         final Collection<BindingSet> solution = new LinkedList<BindingSet>();
         solution.add(
             createBindingSet(
-                new Binding[] {
-                  new BindingImpl("s", l1),
-                }));
+                new BindingImpl("s", l1)));
 
         compare(result, solution);
       }
 
     } finally {
       cxn.close();
-      if (sail instanceof EmbergraphSail) ((EmbergraphSail) sail).__tearDownUnitTest();
+      if (sail instanceof EmbergraphSail) sail.__tearDownUnitTest();
     }
   }
 
@@ -312,20 +308,16 @@ public class TestSingleTailRule extends ProxyEmbergraphSailTestCase {
       Collection<BindingSet> solution = new LinkedList<BindingSet>();
       solution.add(
           createBindingSet(
-              new Binding[] {
-                new BindingImpl("s", s), new BindingImpl("v1", v1), new BindingImpl("v2", v2),
-              }));
+              new BindingImpl("s", s), new BindingImpl("v1", v1), new BindingImpl("v2", v2)));
       solution.add(
           createBindingSet(
-              new Binding[] {
-                new BindingImpl("s", s), new BindingImpl("v1", v3),
-              }));
+              new BindingImpl("s", s), new BindingImpl("v1", v3)));
 
       compare(result, solution);
 
     } finally {
       cxn.close();
-      if (sail instanceof EmbergraphSail) ((EmbergraphSail) sail).__tearDownUnitTest();
+      if (sail instanceof EmbergraphSail) sail.__tearDownUnitTest();
     }
   }
 }

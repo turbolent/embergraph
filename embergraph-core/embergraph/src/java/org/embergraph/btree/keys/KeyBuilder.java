@@ -24,6 +24,7 @@ package org.embergraph.btree.keys;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.text.Collator;
 import java.util.Locale;
 import java.util.Properties;
@@ -277,9 +278,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
 
   public final boolean isUnicodeSupported() {
 
-    if (sortKeyGenerator == null) return false;
-
-    return true;
+    return sortKeyGenerator != null;
   }
 
   /**
@@ -373,14 +372,8 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
       b[i] = decodeByte(b[i]);
     }
 
-    try {
+    return new String(b, StandardCharsets.US_ASCII);
 
-      return new String(b, "US-ASCII");
-
-    } catch (UnsupportedEncodingException e) {
-
-      throw new RuntimeException(e);
-    }
   }
 
   /**
@@ -817,7 +810,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
     if (len + 1 > buf.length) ensureCapacity(len + 1);
     // ensureFree(1);
 
-    buf[len++] = (byte) v;
+    buf[len++] = v;
 
     return this;
   }
@@ -980,7 +973,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
     }
     appendASCII(unscaledStr); // the unscaled BigInteger representation
     // Note: uses unsigned 255 if negative and unsigned 0 if positive.
-    appendSigned(sign == -1 ? (byte) Byte.MAX_VALUE : (byte) 0);
+    appendSigned(sign == -1 ? Byte.MAX_VALUE : (byte) 0);
 
     return this;
   }
@@ -1444,7 +1437,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public static interface Options {
+  public interface Options {
 
     /**
      * Optional property specifies the library that will be used to generate sort keys from Unicode
@@ -1455,7 +1448,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
      *
      * @see CollatorEnum
      */
-    public String COLLATOR = KeyBuilder.class.getName() + ".collator";
+    String COLLATOR = KeyBuilder.class.getName() + ".collator";
 
     /**
      * Optional string -or- integer property whose value is the strength to be set on the collator.
@@ -1482,7 +1475,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
      * While both libraries define <strong>IDENTICAL</strong> they use different values for this
      * strength, hence the use of the type safe enums is recommended.
      */
-    public String STRENGTH = KeyBuilder.class.getName() + ".collator.strength";
+    String STRENGTH = KeyBuilder.class.getName() + ".collator.strength";
 
     /**
      * Optional string property whose value is one of the type safe {@link DecompositionEnum}s. The
@@ -1491,7 +1484,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
      *
      * @see DecompositionEnum
      */
-    public String DECOMPOSITION = KeyBuilder.class.getName() + ".collator.decomposition";
+    String DECOMPOSITION = KeyBuilder.class.getName() + ".collator.decomposition";
 
     /**
      * The pre-defined System property {@value #USER_LANGUAGE} determines the <em>language</em> for
@@ -1501,7 +1494,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
      * @see <a
      *     href="http://java.sun.com/developer/technicalArticles/J2SE/locale/">http://java.sun.com/developer/technicalArticles/J2SE/locale/</a>
      */
-    public String USER_LANGUAGE = "user.language";
+    String USER_LANGUAGE = "user.language";
 
     /**
      * The pre-defined System property {@value #USER_COUNTRY} determines the <em>country</em> for
@@ -1510,7 +1503,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
      * @see <a
      *     href="http://java.sun.com/developer/technicalArticles/J2SE/locale/">http://java.sun.com/developer/technicalArticles/J2SE/locale/</a>
      */
-    public String USER_COUNTRY = "user.country";
+    String USER_COUNTRY = "user.country";
 
     /**
      * The pre-defined System property {@value #USER_VARIANT} determines the <em>variant</em> for
@@ -1519,7 +1512,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
      * @see <a
      *     href="http://java.sun.com/developer/technicalArticles/J2SE/locale/">http://java.sun.com/developer/technicalArticles/J2SE/locale/</a>
      */
-    public String USER_VARIANT = "user.variant";
+    String USER_VARIANT = "user.variant";
   }
 
   /**

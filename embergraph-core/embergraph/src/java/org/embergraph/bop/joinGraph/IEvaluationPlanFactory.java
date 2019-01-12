@@ -42,5 +42,5 @@ public interface IEvaluationPlanFactory extends Serializable {
    * @param rule The rule.
    * @return The evaluation plan.
    */
-  public IEvaluationPlan newPlan(IJoinNexus joinNexus, IRule rule);
+  IEvaluationPlan newPlan(IJoinNexus joinNexus, IRule rule);
 }

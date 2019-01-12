@@ -99,7 +99,7 @@ public class EBVBOp extends XSDBooleanIVValueExpression implements INeedsMateria
       return ((XSDBooleanIV) iv).booleanValue();
     }
 
-    final Value val = super.asValue(iv);
+    final Value val = asValue(iv);
 
     try {
 

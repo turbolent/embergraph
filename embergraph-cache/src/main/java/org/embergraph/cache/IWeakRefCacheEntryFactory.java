@@ -46,5 +46,5 @@ public interface IWeakRefCacheEntryFactory<K, T> {
    * @see WeakReference
    * @see SoftReference
    */
-  public IWeakRefCacheEntry<K, T> newCacheEntry(K key, T obj, ReferenceQueue<T> queue);
+  IWeakRefCacheEntry<K, T> newCacheEntry(K key, T obj, ReferenceQueue<T> queue);
 }

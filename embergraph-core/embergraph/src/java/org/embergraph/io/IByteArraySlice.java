@@ -37,10 +37,10 @@ public interface IByteArraySlice {
    * constant. Some implementations use an extensible backing byte[] and will replace the reference
    * when the backing buffer is extended.
    */
-  public byte[] array();
+  byte[] array();
 
   /** The start of the slice in the {@link #array()}. */
-  public int off();
+  int off();
 
   /**
    * The length of the slice in the {@link #array()}.
@@ -51,7 +51,7 @@ public interface IByteArraySlice {
    * buffer. In contrast, {@link KeyBuilder#len()} is always the #of bytes written onto the backing
    * buffer.
    */
-  public int len();
+  int len();
 
   /**
    * Return a copy of the data in the slice.

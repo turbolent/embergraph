@@ -37,13 +37,13 @@ public interface IRowStoreConstants {
    * The minimum value for a timestamp. This may be used as the <i>fromTime</i> to accept {@link
    * TPV}s beginning with the earliest values on record in the store.
    */
-  public static final long MIN_TIMESTAMP = 1L;
+  long MIN_TIMESTAMP = 1L;
 
   /**
    * The maximum value for a timestamp. This may be used as the <i>toTime</i> to accept {@link TPV}s
    * up to the most current on record in the store.
    */
-  public static final long MAX_TIMESTAMP = Long.MAX_VALUE;
+  long MAX_TIMESTAMP = Long.MAX_VALUE;
 
   /**
    * A special value that may be used as the <i>toTime</i> to read <em>only</em> the current values
@@ -60,7 +60,7 @@ public interface IRowStoreConstants {
    * given <i>fromTime</i> WILL NOT have a binding in the returned property set. This is useful when
    * you are storing timeseries data as you can efficiently select a range of the timeseries.
    */
-  public static final long CURRENT_ROW = Long.MIN_VALUE;
+  long CURRENT_ROW = Long.MIN_VALUE;
 
   /**
    * A value which indicates that the timestamp will be assigned by the server - unique timestamps
@@ -73,7 +73,7 @@ public interface IRowStoreConstants {
    *
    * @see #AUTO_TIMESTAMP_UNIQUE
    */
-  public static final long AUTO_TIMESTAMP = -1L;
+  long AUTO_TIMESTAMP = -1L;
 
   /**
    * A value which indicates that a unique timestamp will be assigned by the server. You should use
@@ -83,5 +83,5 @@ public interface IRowStoreConstants {
    *
    * @see #AUTO_TIMESTAMP
    */
-  public static final long AUTO_TIMESTAMP_UNIQUE = -2L;
+  long AUTO_TIMESTAMP_UNIQUE = -2L;
 }

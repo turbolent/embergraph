@@ -63,13 +63,13 @@ import org.embergraph.service.IServiceShutdown;
 public interface IResourceManager extends IServiceShutdown {
 
   /** The directory for temporary files. */
-  public File getTmpDir();
+  File getTmpDir();
 
   /** The directory for managed resources. */
-  public File getDataDir();
+  File getDataDir();
 
   /** The journal on which writes are made. This is updated by {@link #overflow()}. */
-  public AbstractJournal getLiveJournal();
+  AbstractJournal getLiveJournal();
 
   /**
    * Return the reference to the journal which has the most current data for the given timestamp. If
@@ -82,7 +82,7 @@ public interface IResourceManager extends IServiceShutdown {
    *     data for that timestamp, including when a historical journal with data for that timestamp
    *     has been deleted.
    */
-  public AbstractJournal getJournal(long timestamp);
+  AbstractJournal getJournal(long timestamp);
 
   /**
    * Opens an {@link IRawStore}.
@@ -91,7 +91,7 @@ public interface IResourceManager extends IServiceShutdown {
    * @return The open {@link IRawStore}.
    * @throws RuntimeException if something goes wrong.
    */
-  public IRawStore openStore(UUID uuid);
+  IRawStore openStore(UUID uuid);
 
   /**
    * Return the ordered {@link AbstractBTree} sources for an index or a view of an index partition.
@@ -156,10 +156,10 @@ public interface IResourceManager extends IServiceShutdown {
    * @return The reason (split, join, or move) -or- <code>null</code> iff the index partition is not
    *     known to be gone.
    */
-  public StaleLocatorReason getIndexPartitionGone(String name);
+  StaleLocatorReason getIndexPartitionGone(String name);
 
   /** Statistics about the {@link IResourceManager}. */
-  public CounterSet getCounters();
+  CounterSet getCounters();
 
   /**
    * Return <code>true</code> if the pre-conditions for overflow of the {@link #getLiveJournal()
@@ -168,14 +168,14 @@ public interface IResourceManager extends IServiceShutdown {
    *
    * @return <code>true</code> if overflow processing should occur.
    */
-  public boolean shouldOverflow();
+  boolean shouldOverflow();
 
   /**
    * <code>true</code> if overflow processing is enabled and <code>false</code> if overflow
    * processing was disabled as a configuration option, in which case overflow processing can not be
    * performed.
    */
-  public boolean isOverflowEnabled();
+  boolean isOverflowEnabled();
 
   /**
    * Overflow processing creates a new journal, migrates the named indices on the current journal
@@ -196,14 +196,14 @@ public interface IResourceManager extends IServiceShutdown {
    *
    * @return The {@link Future} for the task handling post-processing of the old journal.
    */
-  public Future<Object> overflow();
+  Future<Object> overflow();
 
   /**
    * Deletes all resources.
    *
    * @exception IllegalStateException if the {@link IResourceManager} is open.
    */
-  public void deleteResources();
+  void deleteResources();
 
   /**
    * Return the file on which a new {@link IndexSegment} should be written. The file will exist but
@@ -212,10 +212,10 @@ public interface IResourceManager extends IServiceShutdown {
    * @param indexMetadata The index metadata.
    * @return The file.
    */
-  public File getIndexSegmentFile(IndexMetadata indexMetadata);
+  File getIndexSegmentFile(IndexMetadata indexMetadata);
 
   /** Return the {@link UUID} of the {@link IDataService} whose resources are being managed. */
-  public UUID getDataServiceUUID();
+  UUID getDataServiceUUID();
 
   /**
    * The local {@link DataService} whose resources are being managed.
@@ -223,7 +223,7 @@ public interface IResourceManager extends IServiceShutdown {
    * @throws UnsupportedOperationException if the {@link IResourceManager} is not part of an {@link
    *     IEmbergraphFederation}.
    */
-  public DataService getDataService();
+  DataService getDataService();
 
   /**
    * The federation whose resources are being managed.
@@ -231,7 +231,7 @@ public interface IResourceManager extends IServiceShutdown {
    * @throws UnsupportedOperationException if the {@link IResourceManager} is not part of an {@link
    *     IEmbergraphFederation}.
    */
-  public IEmbergraphFederation<?> getFederation();
+  IEmbergraphFederation<?> getFederation();
 
   /**
    * Return the {@link BTreeCounters} for the named index. If none exist, then a new instance is

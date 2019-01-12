@@ -108,7 +108,7 @@ public class CharArrayList extends AbstractCharList {
    */
   public Object clone() {
     // overridden for performance only.
-    CharArrayList clone = new CharArrayList((char[]) elements.clone());
+    CharArrayList clone = new CharArrayList(elements.clone());
     clone.setSizeRaw(size);
     return clone;
   }
@@ -139,11 +139,11 @@ public class CharArrayList extends AbstractCharList {
     if (size == 0) return;
     checkRangeFromTo(from, to, size);
 
-    final int width = (int) (max - min + 1);
+    final int width = (max - min + 1);
 
     int[] counts = new int[width];
     char[] theElements = elements;
-    for (int i = from; i <= to; ) counts[(int) (theElements[i++] - min)]++;
+    for (int i = from; i <= to; ) counts[theElements[i++] - min]++;
 
     int fromIndex = from;
     char val = min;

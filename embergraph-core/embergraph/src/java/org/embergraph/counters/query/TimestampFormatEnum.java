@@ -13,5 +13,5 @@ public enum TimestampFormatEnum {
   dateTime,
 
   /** Report the timestamp of the counter value in milliseconds since the epoch (localtime). */
-  epoch;
+  epoch
 }

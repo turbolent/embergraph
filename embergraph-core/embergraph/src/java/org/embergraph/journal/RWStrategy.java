@@ -145,7 +145,7 @@ public class RWStrategy extends AbstractRawStore
         // ignore error in logging system.
       }
       // update the performance counters.
-      final StoreCounters<?> c = (StoreCounters<?>) m_store.getStoreCounters().acquire();
+      final StoreCounters<?> c = m_store.getStoreCounters().acquire();
       try {
         c.checksumErrorCount++;
       } finally {

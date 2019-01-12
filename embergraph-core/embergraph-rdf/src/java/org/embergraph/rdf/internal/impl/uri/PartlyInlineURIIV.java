@@ -55,7 +55,7 @@ public class PartlyInlineURIIV<V extends EmbergraphURI>
 
     return "URI(namespaceIV="
         + getExtensionIV()
-        + String.valueOf(getVTE().getCharCode())
+        + getVTE().getCharCode()
         + ", localName="
         + getDelegate()
         + ")";

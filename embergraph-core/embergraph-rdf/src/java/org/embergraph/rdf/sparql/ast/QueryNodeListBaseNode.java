@@ -57,7 +57,7 @@ public abstract class QueryNodeListBaseNode<E extends IQueryNode> extends QueryN
 
     if (e == null) throw new IllegalArgumentException();
 
-    addArg((BOp) e);
+    addArg(e);
   }
 
   @SuppressWarnings({"unchecked", "rawtypes"})

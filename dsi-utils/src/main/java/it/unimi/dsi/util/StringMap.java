@@ -56,5 +56,5 @@ public interface StringMap<S extends CharSequence>
    * @return a list view of the domain of this string map, or <code>null</code> if this map does not
    *     support this operation.
    */
-  public ObjectList<? extends S> list();
+  ObjectList<? extends S> list();
 }

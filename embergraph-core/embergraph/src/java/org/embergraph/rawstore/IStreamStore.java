@@ -34,7 +34,7 @@ public interface IStreamStore {
    *
    * @return The output stream.
    */
-  public IPSOutputStream getOutputStream();
+  IPSOutputStream getOutputStream();
 
   /**
    * Return an input stream from which a previously written stream may be read back.
@@ -42,5 +42,5 @@ public interface IStreamStore {
    * @param addr The address at which the stream was written.
    * @return an input stream for the data for provided address
    */
-  public InputStream getInputStream(long addr);
+  InputStream getInputStream(long addr);
 }

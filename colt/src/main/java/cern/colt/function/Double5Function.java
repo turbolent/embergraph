@@ -23,5 +23,5 @@ public interface Double5Function {
    * @param e the fifth argument passed to the function.
    * @return the result of the function.
    */
-  public abstract double apply(double a, double b, double c, double d, double e);
+  double apply(double a, double b, double c, double d, double e);
 }

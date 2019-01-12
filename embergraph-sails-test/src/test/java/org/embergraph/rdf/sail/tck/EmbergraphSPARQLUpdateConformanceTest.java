@@ -84,24 +84,22 @@ public class EmbergraphSPARQLUpdateConformanceTest extends SPARQLUpdateConforman
    */
   static final Collection<String> knownBadTests =
       Arrays.asList(
-          new String[] {
-            /*
-             * These three test fail because either we don't understand the
-             * default graph semantics for SPARQL Update or the DAWG doesn't.
-             * Either way, these tests are incompatible with the semantics
-             * assumed by the Sesame test suite SPARQLUpdateTest.
-             */
-            "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/delete-data/manifest#dawg-delete-data-05",
-            "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/delete-where/manifest#dawg-delete-where-05",
-            "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/delete/manifest#dawg-delete-05",
-            /*
-             * These tests fail because we are not properly respecting the
-             * USING clause.
-             */
-            "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/delete/manifest#dawg-delete-using-01",
-            "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/delete/manifest#dawg-delete-using-02a",
-            "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/delete/manifest#dawg-delete-using-06a",
-          });
+          /*
+           * These three test fail because either we don't understand the
+           * default graph semantics for SPARQL Update or the DAWG doesn't.
+           * Either way, these tests are incompatible with the semantics
+           * assumed by the Sesame test suite SPARQLUpdateTest.
+           */
+          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/delete-data/manifest#dawg-delete-data-05",
+          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/delete-where/manifest#dawg-delete-where-05",
+          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/delete/manifest#dawg-delete-05",
+          /*
+           * These tests fail because we are not properly respecting the
+           * USING clause.
+           */
+          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/delete/manifest#dawg-delete-using-01",
+          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/delete/manifest#dawg-delete-using-02a",
+          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/delete/manifest#dawg-delete-using-06a");
 
   /**
    * Return the sole test in the suite associated with the specified testURI.
@@ -382,14 +380,14 @@ public class EmbergraphSPARQLUpdateConformanceTest extends SPARQLUpdateConforman
       compareGraphs(
           Iterations.asList(con.getStatements(null, null, null, true, (Resource) null)),
           Iterations.asList(erCon.getStatements(null, null, null, true, (Resource) null)),
-          (EmbergraphSailRepositoryConnection) con);
+          con);
 
       for (String namedGraph : inputNamedGraphs.keySet()) {
         URI contextURI = con.getValueFactory().createURI(namedGraph.replaceAll("\"", ""));
         compareGraphs(
             Iterations.asList(con.getStatements(null, null, null, true, contextURI)),
             Iterations.asList(erCon.getStatements(null, null, null, true, contextURI)),
-            (EmbergraphSailRepositoryConnection) con);
+            con);
       }
     } catch (Exception e) {
       e.printStackTrace();

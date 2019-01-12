@@ -52,5 +52,5 @@ public interface IRemoteExecutor extends Remote {
    * @todo change API to <T> Future<T> submit(Callable<T> proc). This will break existing code but
    *     reflects the correct use of generics.
    */
-  public Future<? extends Object> submit(Callable<? extends Object> task) throws RemoteException;
+  Future<? extends Object> submit(Callable<? extends Object> task) throws RemoteException;
 }

@@ -63,7 +63,7 @@ public class SnapshotTask implements Callable<ISnapshotResult> {
      *
      * <p>-Dorg.embergraph.journal.SnapshotTask.gzipBufferSize=65535
      */
-    public static final String GZIP_BUFFER_SIZE =
+    String GZIP_BUFFER_SIZE =
         SnapshotTask.class.getClass().getName() + ".gzipBufferSize";
   }
 

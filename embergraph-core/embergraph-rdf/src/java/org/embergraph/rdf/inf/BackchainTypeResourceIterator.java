@@ -262,12 +262,7 @@ public class BackchainTypeResourceIterator implements IChunkedOrderedIterator<IS
 
                     final SPO o = (SPO) arg0;
 
-                    if (o.p.equals(rdfType) && o.o.equals(rdfsResource)) {
-
-                      return false;
-                    }
-
-                    return true;
+                    return !o.p.equals(rdfType) || !o.o.equals(rdfsResource);
                   }
                 });
 
@@ -373,16 +368,11 @@ public class BackchainTypeResourceIterator implements IChunkedOrderedIterator<IS
       _src.close();
     }
 
-    if (resourceIds.hasNext()) {
-
-      // still consuming the subjects iterator.
-
-      return true;
-    }
+    // still consuming the subjects iterator.
+    return resourceIds.hasNext();
 
     // the subjects iterator is also exhausted so we are done.
 
-    return false;
   }
 
   /**

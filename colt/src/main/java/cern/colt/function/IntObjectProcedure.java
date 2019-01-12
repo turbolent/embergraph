@@ -26,5 +26,5 @@ public interface IntObjectProcedure {
    * @param second second argument passed to the procedure.
    * @return a flag to inform the object calling the procedure.
    */
-  public abstract boolean apply(int first, Object second);
+  boolean apply(int first, Object second);
 }

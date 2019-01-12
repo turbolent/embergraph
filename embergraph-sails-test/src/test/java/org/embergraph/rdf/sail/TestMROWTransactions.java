@@ -425,7 +425,7 @@ public abstract class TestMROWTransactions extends ProxyEmbergraphSailTestCase {
 
         for (int i = 0; i < nreads; i++) {
           final CloseableIteration<? extends Statement, SailException> stats =
-              con.getStatements(subs[r.nextInt(nuris)], (URI) null, (Value) null, (Resource) null);
+              con.getStatements(subs[r.nextInt(nuris)], null, null, null);
           try {
             while (stats.hasNext()) {
               stats.next();
@@ -757,7 +757,7 @@ public abstract class TestMROWTransactions extends ProxyEmbergraphSailTestCase {
       try {
         domultiple_csem_transaction2(
             sail.get(),
-            (int) nreaderThreads,
+            nreaderThreads,
             (int) nwriters,
             (int) nreaders,
             false /*no tear down*/);

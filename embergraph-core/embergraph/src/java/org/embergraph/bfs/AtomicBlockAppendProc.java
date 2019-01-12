@@ -331,7 +331,7 @@ public class AtomicBlockAppendProc implements ISimpleIndexProcedure<Object>, Ext
                 + version);
 
       final byte[] leftSeparator =
-          ((BTree) ndx).getIndexMetadata().getPartitionMetadata().getLeftSeparatorKey();
+          ndx.getIndexMetadata().getPartitionMetadata().getLeftSeparatorKey();
 
       block = getNextBlockFromPriorKey(keyBuilder, leftSeparator);
 

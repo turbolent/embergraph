@@ -245,7 +245,7 @@ public abstract class AbstractDataDrivenSPARQLTestCase extends AbstractDataAndSP
       astContainer = new Embergraph2ASTSPARQLParser().parseQuery2(queryStr, baseURI);
 
       // Force the QueryEngine to exist for this db.
-      QueryEngineFactory.getInstance().getQueryController((IBTreeManager) store.getIndexManager());
+      QueryEngineFactory.getInstance().getQueryController(store.getIndexManager());
       //            ASTDeferredIVResolution.resolveQuery(store, astContainer);
 
       //            queryPlan = AST2BOpUtility.convert(context = new AST2BOpContext(

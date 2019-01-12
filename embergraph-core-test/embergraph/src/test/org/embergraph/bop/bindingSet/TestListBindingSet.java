@@ -58,8 +58,8 @@ public class TestListBindingSet extends TestIBindingSet {
     Var<?> var2 = Var.var("b");
     Constant<Integer> val1 = new Constant<Integer>(1);
     Constant<Integer> val2 = new Constant<Integer>(2);
-    IVariable<?> vars[] = new IVariable[] {var1, var2};
-    IConstant<?> vals[] = new IConstant[] {val1, val2};
+    IVariable<?>[] vars = new IVariable[]{var1, var2};
+    IConstant<?>[] vals = new IConstant[]{val1, val2};
 
     assertEqual(new ListBindingSet(vars, vals), vars, vals);
     assertEqual(new ListBindingSet(vars, vals).clone(), vars, vals);
@@ -71,8 +71,8 @@ public class TestListBindingSet extends TestIBindingSet {
     Var<?> var2 = Var.var("b");
     Constant<Integer> val1 = new Constant<Integer>(1);
     Constant<Integer> val2 = new Constant<Integer>(2);
-    IVariable<?> vars[] = new IVariable[] {var1, var2};
-    IConstant<?> vals[] = new IConstant[] {val1, val2};
+    IVariable<?>[] vars = new IVariable[]{var1, var2};
+    IConstant<?>[] vals = new IConstant[]{val1, val2};
 
     try {
       assertTrue(null != new ListBindingSet(null, vals));
@@ -96,7 +96,7 @@ public class TestListBindingSet extends TestIBindingSet {
   }
 
   @Override
-  protected IBindingSet newBindingSet(IVariable<?> vars[], IConstant<?> vals[]) {
+  protected IBindingSet newBindingSet(IVariable<?>[] vars, IConstant<?>[] vals) {
 
     return new ListBindingSet(vars, vals);
   }

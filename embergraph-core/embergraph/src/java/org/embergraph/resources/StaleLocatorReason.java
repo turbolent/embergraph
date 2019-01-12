@@ -33,5 +33,5 @@ package org.embergraph.resources;
 public enum StaleLocatorReason {
   Split,
   Join,
-  Move;
+  Move
 }

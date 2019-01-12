@@ -479,7 +479,7 @@ public abstract class BenchmarkJournalWriteRate extends TestCase2 {
     final long elapsed = System.currentTimeMillis() - begin;
 
     // The unisolated btree on which the data were actually written.
-    final BTree btree = (BTree) journal.getIndex(name);
+    final BTree btree = journal.getIndex(name);
 
     final long nodesWritten = btree.getBtreeCounters().getNodesWritten();
 
@@ -761,7 +761,7 @@ public abstract class BenchmarkJournalWriteRate extends TestCase2 {
     /** The entire extent in one sustained write. */
     public int getRecordSize() {
 
-      return (int) getInitialExtent();
+      return getInitialExtent();
     }
   }
 

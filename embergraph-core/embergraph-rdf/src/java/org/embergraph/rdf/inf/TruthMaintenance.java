@@ -675,15 +675,7 @@ public class TruthMaintenance {
 
           assert spo.isFullyBound();
 
-          if (depth == 0) {
-
-            /*
-             * At depth zero the statements to be retracted should
-             * be fully bound and explicit.
-             */
-
-            assert spo.isExplicit();
-          }
+          assert depth != 0 || spo.isExplicit();
 
           if (spo.getStatementType() == StatementEnum.Axiom) {
 

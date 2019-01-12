@@ -987,7 +987,7 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
   @Override
   public T getService() {
 
-    return (T) getClient().getDelegate().getService();
+    return getClient().getDelegate().getService();
   }
 
   /** Delegated. {@inheritDoc} */
@@ -1504,7 +1504,7 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
         //                        statisticsCollector, null/* filter */));
 
         // Wrap as Future.
-        final FutureTask<Void> ft = new FutureTask<Void>(gangliaService, (Void) null);
+        final FutureTask<Void> ft = new FutureTask<Void>(gangliaService, null);
 
         // Save reference to future.
         gangliaFuture.set(ft);

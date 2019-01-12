@@ -131,7 +131,7 @@ public class VocabURIShortIV<V extends EmbergraphURI> extends AbstractInlineIV<V
   public String toString() {
 
     return "Vocab("
-        + Short.toString(value)
+        + value
         + ")"
         + (hasValue() ? "[" + getValue().stringValue() + "]" : "");
   }

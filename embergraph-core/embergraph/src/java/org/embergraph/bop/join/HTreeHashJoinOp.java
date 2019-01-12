@@ -164,11 +164,7 @@ public class HTreeHashJoinOp<E> extends HashJoinOp<E> implements ISingleThreaded
 
     final long usedMemory = ((HTreeHashJoinUtility) state).getStore().size();
 
-    if (context.isLastInvocation() || usedMemory >= maxMemory) {
+    return context.isLastInvocation() || usedMemory >= maxMemory;
 
-      return true;
-    }
-
-    return false;
   }
 }

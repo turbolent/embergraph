@@ -242,7 +242,7 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
    */
   @Override
   public boolean doRound(final IGASStats stats)
-      throws InterruptedException, ExecutionException, Exception {
+      throws Exception {
 
     // The fontier for this round.
     final IStaticFrontier f = gasState.frontier();
@@ -475,9 +475,9 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
 
             // Nothing returned by visit().
             return ONE;
-          };
+          }
         };
-      };
+      }
     }
 
     gasEngine.newFrontierStrategy(new ReduceVertexTaskFactory(), f).call();
@@ -501,7 +501,7 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
       final IGASScheduler sch,
       final EdgesEnum scatterEdges,
       final boolean pushDownApply)
-      throws InterruptedException, ExecutionException, Exception {
+      throws Exception {
 
     if (scatterEdges == null) throw new IllegalArgumentException();
 
@@ -530,7 +530,7 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
             return graphAccessor;
           }
         };
-      };
+      }
     }
 
     return gasEngine.newFrontierStrategy(new ScatterVertexTaskFactory(), f).call();
@@ -547,7 +547,7 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
       final IStaticFrontier f, // final IScheduler sch,
       final EdgesEnum gatherEdges,
       final boolean pushDownApply)
-      throws InterruptedException, ExecutionException, Exception {
+      throws Exception {
 
     if (gatherEdges == null) throw new IllegalArgumentException();
 
@@ -580,7 +580,7 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
             return graphAccessor;
           }
         };
-      };
+      }
     }
 
     return gasEngine.newFrontierStrategy(new GatherVertexTaskFactory(), f).call();

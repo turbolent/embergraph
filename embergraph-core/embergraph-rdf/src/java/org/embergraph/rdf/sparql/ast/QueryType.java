@@ -11,5 +11,5 @@ public enum QueryType {
   CONSTRUCT,
   SELECT;
 
-  private QueryType() {}
+  QueryType() {}
 }

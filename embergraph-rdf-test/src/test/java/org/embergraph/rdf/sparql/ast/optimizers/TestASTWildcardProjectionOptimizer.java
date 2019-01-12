@@ -618,7 +618,7 @@ public class TestASTWildcardProjectionOptimizer extends AbstractASTEvaluationTes
 
         final FunctionNode countNode =
             new FunctionNode(
-                FunctionRegistry.COUNT, Collections.<String, Object>emptyMap(), new VarNode("*"));
+                FunctionRegistry.COUNT, Collections.emptyMap(), new VarNode("*"));
 
         final ProjectionNode countProjection = new ProjectionNode();
         given.setProjection(countProjection);
@@ -701,7 +701,7 @@ public class TestASTWildcardProjectionOptimizer extends AbstractASTEvaluationTes
 
         final FunctionNode countNode =
             new FunctionNode(
-                FunctionRegistry.COUNT, Collections.<String, Object>emptyMap(), new VarNode("*"));
+                FunctionRegistry.COUNT, Collections.emptyMap(), new VarNode("*"));
 
         final ProjectionNode countProjection = new ProjectionNode();
         expected.setProjection(countProjection);

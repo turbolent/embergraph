@@ -505,7 +505,7 @@ public class DumpLexicon {
             maxCollisionCounter = counter;
           }
 
-          final int bin = (int) (counter / BIN_SIZE);
+          final int bin = (counter / BIN_SIZE);
 
           bins[bin]++;
         }

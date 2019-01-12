@@ -133,7 +133,7 @@ public class TermCompletionAnalyzer extends Analyzer {
     final String[] words;
     final CharTermAttribute termAtt;
 
-    char currentWord[] = new char[] {};
+    char[] currentWord = new char[]{};
     Matcher softMatcher;
     int currentWordIx = -1;
 
@@ -213,7 +213,7 @@ public class TermCompletionAnalyzer extends Analyzer {
       reader.mark(Integer.MAX_VALUE);
       int length = (int) reader.skip(Integer.MAX_VALUE);
       reader.reset();
-      char fileContent[] = new char[length];
+      char[] fileContent = new char[length];
       reader.read(fileContent);
       reader.reset();
       return new String(fileContent);

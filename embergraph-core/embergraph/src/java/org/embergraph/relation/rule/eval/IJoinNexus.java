@@ -257,22 +257,22 @@ public interface IJoinNexus {
    * from the {@link IRule} and {@link IBindingSet} and make it available via {@link
    * ISolution#get()}.
    */
-  final int ELEMENT = 1 << 0;
+  int ELEMENT = 1 << 0;
 
   /**
    * Bit flag indicating that {@link #newSolution(IRule, IBindingSet)} should clone the {@link
    * IBindingSet} and make it available via {@link ISolution#getBindingSet()}.
    */
-  final int BINDINGS = 1 << 1;
+  int BINDINGS = 1 << 1;
 
   /**
    * Bit flag indicating that {@link #newSolution(IRule, IBindingSet)} make the {@link IRule} that
    * generated the {@link ISolution} available via {@link ISolution#getRule()}.
    */
-  final int RULE = 1 << 2;
+  int RULE = 1 << 2;
 
   /** {@link #ELEMENT} and {@link #BINDINGS} and {@link #RULE}. */
-  final int ALL = ELEMENT | BINDINGS | RULE;
+  int ALL = ELEMENT | BINDINGS | RULE;
 
   /**
    * Factory for {@link IBindingSet} implementations.

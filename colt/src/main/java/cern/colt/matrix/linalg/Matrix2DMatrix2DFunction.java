@@ -21,5 +21,5 @@ public interface Matrix2DMatrix2DFunction {
    * @param y the second argument passed to the function.
    * @return the result of the function.
    */
-  public abstract double apply(DoubleMatrix2D x, DoubleMatrix2D y);
+  double apply(DoubleMatrix2D x, DoubleMatrix2D y);
 }

@@ -35,28 +35,28 @@ public interface ICounterNode {
    * The immediate parent in the hierarchy -or- <code>null</code> iff this is the root of the
    * hierarchy.
    */
-  public ICounterSet getParent();
+  ICounterSet getParent();
 
   /** The local name (does not include the path from the root). */
-  public String getName();
+  String getName();
 
   /** Complete path from the root inclusive of the local name. */
-  public String getPath();
+  String getPath();
 
   /** Depth of this node in the hierarchy, where the depth of the root is ZERO (0). */
-  public int getDepth();
+  int getDepth();
 
   /** The root of the hierarchy. */
-  public ICounterSet getRoot();
+  ICounterSet getRoot();
 
   /** <code>true</code> iff this is the root of the hierarchy. */
-  public boolean isRoot();
+  boolean isRoot();
 
   /** <code>true</code> iff this is a collection of counters. */
-  public boolean isCounterSet();
+  boolean isCounterSet();
 
   /** <code>true</code> iff this is a counter. */
-  public boolean isCounter();
+  boolean isCounter();
 
   /**
    * Return the directly attached object by name.
@@ -64,7 +64,7 @@ public interface ICounterNode {
    * @param name The counter name.
    * @return The object.
    */
-  public ICounterNode getChild(String name);
+  ICounterNode getChild(String name);
 
   /**
    * Return the object described by the path.
@@ -72,5 +72,5 @@ public interface ICounterNode {
    * @param path The path.
    * @return The object or <code>null</code> if nothing exists for that path.
    */
-  public ICounterNode getPath(String path);
+  ICounterNode getPath(String path);
 }

@@ -45,7 +45,7 @@ public interface IBloomFilter {
    * @throws IllegalArgumentException if <i>key</i> is <code>null</code>.
    * @throws UnsupportedOperationException if the filter does not allow mutation.
    */
-  public boolean add(byte[] key);
+  boolean add(byte[] key);
 
   /**
    * Test the filter for the key <strong>a <code>true</code> return DOES NOT guarantee that the key
@@ -58,12 +58,12 @@ public interface IBloomFilter {
    *     filter can guarantee that the key has not been added to the filter.
    * @throws IllegalArgumentException if <i>key</i> is <code>null</code>.
    */
-  public boolean contains(byte[] key);
+  boolean contains(byte[] key);
 
   /**
    * Notify the bloom filter that a false positive was observed for a key that for which {@link
    * #add(byte[])} reported <code>true</code> (the key was in fact not in the index). This method
    * exists solely for reporting and tracking the actual error rate of the bloom filter.
    */
-  public void falsePos();
+  void falsePos();
 }

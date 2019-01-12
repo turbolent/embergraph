@@ -11,6 +11,8 @@ package cern.colt.matrix.linalg;
 import cern.colt.matrix.DoubleMatrix1D;
 import cern.colt.matrix.DoubleMatrix2D;
 import cern.colt.matrix.DoubleMatrix3D;
+import cern.jet.math.Functions;
+
 /**
  * Tests matrices for linear algebraic properties (equality, tridiagonality, symmetry, singularity,
  * etc).
@@ -416,8 +418,8 @@ public class Property extends cern.colt.PersistentObject {
       A.setQuick(i, i, 0);
     }
     for (int i = min; --i >= 0; ) {
-      double rowSum = A.viewRow(i).aggregate(F.plus, F.abs);
-      double colSum = A.viewColumn(i).aggregate(F.plus, F.abs);
+      double rowSum = A.viewRow(i).aggregate(Functions.plus, Functions.abs);
+      double colSum = A.viewColumn(i).aggregate(Functions.plus, Functions.abs);
       A.setQuick(i, i, Math.max(rowSum, colSum) + i + 1);
     }
   }
@@ -456,7 +458,7 @@ public class Property extends cern.colt.PersistentObject {
     for (int i = min; --i >= 0; ) {
       double diag = Math.abs(A.getQuick(i, i));
       diag += diag;
-      if (diag <= A.viewColumn(i).aggregate(F.plus, F.abs)) return false;
+      if (diag <= A.viewColumn(i).aggregate(Functions.plus, Functions.abs)) return false;
     }
     return true;
   }
@@ -475,7 +477,7 @@ public class Property extends cern.colt.PersistentObject {
     for (int i = min; --i >= 0; ) {
       double diag = Math.abs(A.getQuick(i, i));
       diag += diag;
-      if (diag <= A.viewRow(i).aggregate(F.plus, F.abs)) return false;
+      if (diag <= A.viewRow(i).aggregate(Functions.plus, Functions.abs)) return false;
     }
     return true;
   }

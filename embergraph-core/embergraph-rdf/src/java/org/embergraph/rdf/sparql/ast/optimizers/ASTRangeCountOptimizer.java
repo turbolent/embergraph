@@ -260,7 +260,7 @@ public class ASTRangeCountOptimizer extends AbstractJoinGroupOptimizer implement
 
     if (term != null && term.isConstant()) {
 
-      final IV iv = ((IConstant<IV>) term.getValueExpression()).get();
+      final IV iv = term.getValueExpression().get();
 
       if (iv == null) {
 

@@ -10,6 +10,8 @@ package cern.colt.matrix.doublealgo;
 
 import cern.colt.matrix.DoubleMatrix1D;
 import cern.colt.matrix.DoubleMatrix2D;
+import cern.jet.math.Functions;
+
 /**
  * Deprecated; Basic element-by-element transformations on {@link cern.colt.matrix.DoubleMatrix1D}
  * and {@link cern.colt.matrix.DoubleMatrix2D}. All transformations modify the first argument matrix
@@ -76,7 +78,7 @@ public class Transform extends cern.colt.PersistentObject {
    * @return <tt>A</tt> (for convenience only).
    */
   public static DoubleMatrix1D abs(DoubleMatrix1D A) {
-    return A.assign(F.abs);
+    return A.assign(Functions.abs);
   }
   /**
    * <tt>A[row,col] = Math.abs(A[row,col])</tt>.
@@ -85,7 +87,7 @@ public class Transform extends cern.colt.PersistentObject {
    * @return <tt>A</tt> (for convenience only).
    */
   public static DoubleMatrix2D abs(DoubleMatrix2D A) {
-    return A.assign(F.abs);
+    return A.assign(Functions.abs);
   }
   /**
    * <tt>A = A / s <=> A[i] = A[i] / s</tt>.
@@ -95,7 +97,7 @@ public class Transform extends cern.colt.PersistentObject {
    * @return <tt>A</tt> (for convenience only).
    */
   public static DoubleMatrix1D div(DoubleMatrix1D A, double s) {
-    return A.assign(F.div(s));
+    return A.assign(Functions.div(s));
   }
   /**
    * <tt>A = A / B <=> A[i] = A[i] / B[i]</tt>.
@@ -105,7 +107,7 @@ public class Transform extends cern.colt.PersistentObject {
    * @return <tt>A</tt> (for convenience only).
    */
   public static DoubleMatrix1D div(DoubleMatrix1D A, DoubleMatrix1D B) {
-    return A.assign(B, F.div);
+    return A.assign(B, Functions.div);
   }
   /**
    * <tt>A = A / s <=> A[row,col] = A[row,col] / s</tt>.
@@ -115,7 +117,7 @@ public class Transform extends cern.colt.PersistentObject {
    * @return <tt>A</tt> (for convenience only).
    */
   public static DoubleMatrix2D div(DoubleMatrix2D A, double s) {
-    return A.assign(F.div(s));
+    return A.assign(Functions.div(s));
   }
   /**
    * <tt>A = A / B <=> A[row,col] = A[row,col] / B[row,col]</tt>.
@@ -125,7 +127,7 @@ public class Transform extends cern.colt.PersistentObject {
    * @return <tt>A</tt> (for convenience only).
    */
   public static DoubleMatrix2D div(DoubleMatrix2D A, DoubleMatrix2D B) {
-    return A.assign(B, F.div);
+    return A.assign(B, Functions.div);
   }
   /**
    * <tt>A[row,col] = A[row,col] == s ? 1 : 0</tt>; ignores tolerance.
@@ -135,7 +137,7 @@ public class Transform extends cern.colt.PersistentObject {
    * @return <tt>A</tt> (for convenience only).
    */
   public static DoubleMatrix2D equals(DoubleMatrix2D A, double s) {
-    return A.assign(F.equals(s));
+    return A.assign(Functions.equals(s));
   }
   /**
    * <tt>A[row,col] = A[row,col] == B[row,col] ? 1 : 0</tt>; ignores tolerance.
@@ -145,7 +147,7 @@ public class Transform extends cern.colt.PersistentObject {
    * @return <tt>A</tt> (for convenience only).
    */
   public static DoubleMatrix2D equals(DoubleMatrix2D A, DoubleMatrix2D B) {
-    return A.assign(B, F.equals);
+    return A.assign(B, Functions.equals);
   }
   /**
    * <tt>A[row,col] = A[row,col] > s ? 1 : 0</tt>.
@@ -155,7 +157,7 @@ public class Transform extends cern.colt.PersistentObject {
    * @return <tt>A</tt> (for convenience only).
    */
   public static DoubleMatrix2D greater(DoubleMatrix2D A, double s) {
-    return A.assign(F.greater(s));
+    return A.assign(Functions.greater(s));
   }
   /**
    * <tt>A[row,col] = A[row,col] > B[row,col] ? 1 : 0</tt>.
@@ -165,7 +167,7 @@ public class Transform extends cern.colt.PersistentObject {
    * @return <tt>A</tt> (for convenience only).
    */
   public static DoubleMatrix2D greater(DoubleMatrix2D A, DoubleMatrix2D B) {
-    return A.assign(B, F.greater);
+    return A.assign(B, Functions.greater);
   }
   /**
    * <tt>A[row,col] = A[row,col] < s ? 1 : 0</tt>.
@@ -175,7 +177,7 @@ public class Transform extends cern.colt.PersistentObject {
    * @return <tt>A</tt> (for convenience only).
    */
   public static DoubleMatrix2D less(DoubleMatrix2D A, double s) {
-    return A.assign(F.less(s));
+    return A.assign(Functions.less(s));
   }
   /**
    * <tt>A[row,col] = A[row,col] < B[row,col] ? 1 : 0</tt>.
@@ -185,7 +187,7 @@ public class Transform extends cern.colt.PersistentObject {
    * @return <tt>A</tt> (for convenience only).
    */
   public static DoubleMatrix2D less(DoubleMatrix2D A, DoubleMatrix2D B) {
-    return A.assign(B, F.less);
+    return A.assign(B, Functions.less);
   }
   /**
    * <tt>A = A - s <=> A[i] = A[i] - s</tt>.
@@ -195,7 +197,7 @@ public class Transform extends cern.colt.PersistentObject {
    * @return <tt>A</tt> (for convenience only).
    */
   public static DoubleMatrix1D minus(DoubleMatrix1D A, double s) {
-    return A.assign(F.minus(s));
+    return A.assign(Functions.minus(s));
   }
   /**
    * <tt>A = A - B <=> A[i] = A[i] - B[i]</tt>.
@@ -205,7 +207,7 @@ public class Transform extends cern.colt.PersistentObject {
    * @return <tt>A</tt> (for convenience only).
    */
   public static DoubleMatrix1D minus(DoubleMatrix1D A, DoubleMatrix1D B) {
-    return A.assign(B, F.minus);
+    return A.assign(B, Functions.minus);
   }
   /**
    * <tt>A = A - s <=> A[row,col] = A[row,col] - s</tt>.
@@ -215,7 +217,7 @@ public class Transform extends cern.colt.PersistentObject {
    * @return <tt>A</tt> (for convenience only).
    */
   public static DoubleMatrix2D minus(DoubleMatrix2D A, double s) {
-    return A.assign(F.minus(s));
+    return A.assign(Functions.minus(s));
   }
   /**
    * <tt>A = A - B <=> A[row,col] = A[row,col] - B[row,col]</tt>.
@@ -225,7 +227,7 @@ public class Transform extends cern.colt.PersistentObject {
    * @return <tt>A</tt> (for convenience only).
    */
   public static DoubleMatrix2D minus(DoubleMatrix2D A, DoubleMatrix2D B) {
-    return A.assign(B, F.minus);
+    return A.assign(B, Functions.minus);
   }
   /**
    * <tt>A = A - B*s <=> A[i] = A[i] - B[i]*s</tt>.
@@ -236,7 +238,7 @@ public class Transform extends cern.colt.PersistentObject {
    * @return <tt>A</tt> (for convenience only).
    */
   public static DoubleMatrix1D minusMult(DoubleMatrix1D A, DoubleMatrix1D B, double s) {
-    return A.assign(B, F.minusMult(s));
+    return A.assign(B, Functions.minusMult(s));
   }
   /**
    * <tt>A = A - B*s <=> A[row,col] = A[row,col] - B[row,col]*s</tt>.
@@ -247,7 +249,7 @@ public class Transform extends cern.colt.PersistentObject {
    * @return <tt>A</tt> (for convenience only).
    */
   public static DoubleMatrix2D minusMult(DoubleMatrix2D A, DoubleMatrix2D B, double s) {
-    return A.assign(B, F.minusMult(s));
+    return A.assign(B, Functions.minusMult(s));
   }
   /**
    * <tt>A = A * s <=> A[i] = A[i] * s</tt>.
@@ -257,7 +259,7 @@ public class Transform extends cern.colt.PersistentObject {
    * @return <tt>A</tt> (for convenience only).
    */
   public static DoubleMatrix1D mult(DoubleMatrix1D A, double s) {
-    return A.assign(F.mult(s));
+    return A.assign(Functions.mult(s));
   }
   /**
    * <tt>A = A * B <=> A[i] = A[i] * B[i]</tt>.
@@ -267,7 +269,7 @@ public class Transform extends cern.colt.PersistentObject {
    * @return <tt>A</tt> (for convenience only).
    */
   public static DoubleMatrix1D mult(DoubleMatrix1D A, DoubleMatrix1D B) {
-    return A.assign(B, F.mult);
+    return A.assign(B, Functions.mult);
   }
   /**
    * <tt>A = A * s <=> A[row,col] = A[row,col] * s</tt>.
@@ -277,7 +279,7 @@ public class Transform extends cern.colt.PersistentObject {
    * @return <tt>A</tt> (for convenience only).
    */
   public static DoubleMatrix2D mult(DoubleMatrix2D A, double s) {
-    return A.assign(F.mult(s));
+    return A.assign(Functions.mult(s));
   }
   /**
    * <tt>A = A * B <=> A[row,col] = A[row,col] * B[row,col]</tt>.
@@ -287,7 +289,7 @@ public class Transform extends cern.colt.PersistentObject {
    * @return <tt>A</tt> (for convenience only).
    */
   public static DoubleMatrix2D mult(DoubleMatrix2D A, DoubleMatrix2D B) {
-    return A.assign(B, F.mult);
+    return A.assign(B, Functions.mult);
   }
   /**
    * <tt>A = -A <=> A[i] = -A[i]</tt> for all cells.
@@ -295,7 +297,7 @@ public class Transform extends cern.colt.PersistentObject {
    * @return <tt>A</tt> (for convenience only).
    */
   public static DoubleMatrix1D negate(DoubleMatrix1D A) {
-    return A.assign(F.mult(-1));
+    return A.assign(Functions.mult(-1));
   }
   /**
    * <tt>A = -A <=> A[row,col] = -A[row,col]</tt>.
@@ -303,7 +305,7 @@ public class Transform extends cern.colt.PersistentObject {
    * @return <tt>A</tt> (for convenience only).
    */
   public static DoubleMatrix2D negate(DoubleMatrix2D A) {
-    return A.assign(F.mult(-1));
+    return A.assign(Functions.mult(-1));
   }
   /**
    * <tt>A = A + s <=> A[i] = A[i] + s</tt>.
@@ -313,7 +315,7 @@ public class Transform extends cern.colt.PersistentObject {
    * @return <tt>A</tt> (for convenience only).
    */
   public static DoubleMatrix1D plus(DoubleMatrix1D A, double s) {
-    return A.assign(F.plus(s));
+    return A.assign(Functions.plus(s));
   }
   /**
    * <tt>A = A + B <=> A[i] = A[i] + B[i]</tt>.
@@ -323,7 +325,7 @@ public class Transform extends cern.colt.PersistentObject {
    * @return <tt>A</tt> (for convenience only).
    */
   public static DoubleMatrix1D plus(DoubleMatrix1D A, DoubleMatrix1D B) {
-    return A.assign(B, F.plus);
+    return A.assign(B, Functions.plus);
   }
   /**
    * <tt>A = A + s <=> A[row,col] = A[row,col] + s</tt>.
@@ -333,7 +335,7 @@ public class Transform extends cern.colt.PersistentObject {
    * @return <tt>A</tt> (for convenience only).
    */
   public static DoubleMatrix2D plus(DoubleMatrix2D A, double s) {
-    return A.assign(F.plus(s));
+    return A.assign(Functions.plus(s));
   }
   /**
    * <tt>A = A + B <=> A[row,col] = A[row,col] + B[row,col]</tt>.
@@ -343,7 +345,7 @@ public class Transform extends cern.colt.PersistentObject {
    * @return <tt>A</tt> (for convenience only).
    */
   public static DoubleMatrix2D plus(DoubleMatrix2D A, DoubleMatrix2D B) {
-    return A.assign(B, F.plus);
+    return A.assign(B, Functions.plus);
   }
   /**
    * <tt>A = A + B*s<=> A[i] = A[i] + B[i]*s</tt>.
@@ -354,7 +356,7 @@ public class Transform extends cern.colt.PersistentObject {
    * @return <tt>A</tt> (for convenience only).
    */
   public static DoubleMatrix1D plusMult(DoubleMatrix1D A, DoubleMatrix1D B, double s) {
-    return A.assign(B, F.plusMult(s));
+    return A.assign(B, Functions.plusMult(s));
   }
   /**
    * <tt>A = A + B*s <=> A[row,col] = A[row,col] + B[row,col]*s</tt>.
@@ -365,7 +367,7 @@ public class Transform extends cern.colt.PersistentObject {
    * @return <tt>A</tt> (for convenience only).
    */
   public static DoubleMatrix2D plusMult(DoubleMatrix2D A, DoubleMatrix2D B, double s) {
-    return A.assign(B, F.plusMult(s));
+    return A.assign(B, Functions.plusMult(s));
   }
   /**
    * <tt>A = A<sup>s</sup> <=> A[i] = Math.pow(A[i], s)</tt>.
@@ -375,7 +377,7 @@ public class Transform extends cern.colt.PersistentObject {
    * @return <tt>A</tt> (for convenience only).
    */
   public static DoubleMatrix1D pow(DoubleMatrix1D A, double s) {
-    return A.assign(F.pow(s));
+    return A.assign(Functions.pow(s));
   }
   /**
    * <tt>A = A<sup>B</sup> <=> A[i] = Math.pow(A[i], B[i])</tt>.
@@ -385,7 +387,7 @@ public class Transform extends cern.colt.PersistentObject {
    * @return <tt>A</tt> (for convenience only).
    */
   public static DoubleMatrix1D pow(DoubleMatrix1D A, DoubleMatrix1D B) {
-    return A.assign(B, F.pow);
+    return A.assign(B, Functions.pow);
   }
   /**
    * <tt>A = A<sup>s</sup> <=> A[row,col] = Math.pow(A[row,col], s)</tt>.
@@ -395,7 +397,7 @@ public class Transform extends cern.colt.PersistentObject {
    * @return <tt>A</tt> (for convenience only).
    */
   public static DoubleMatrix2D pow(DoubleMatrix2D A, double s) {
-    return A.assign(F.pow(s));
+    return A.assign(Functions.pow(s));
   }
   /**
    * <tt>A = A<sup>B</sup> <=> A[row,col] = Math.pow(A[row,col], B[row,col])</tt>.
@@ -405,6 +407,6 @@ public class Transform extends cern.colt.PersistentObject {
    * @return <tt>A</tt> (for convenience only).
    */
   public static DoubleMatrix2D pow(DoubleMatrix2D A, DoubleMatrix2D B) {
-    return A.assign(B, F.pow);
+    return A.assign(B, Functions.pow);
   }
 }

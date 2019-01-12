@@ -178,5 +178,5 @@ public enum RuleContextEnum {
    * <p>New readers SHOULD use a read-consistent timestamp that reflects the desired (generally,
    * most recent) commit point corresponding to a closure of the knowledge base.
    */
-  HighLevelQuery;
+  HighLevelQuery
 }

@@ -2079,10 +2079,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
                         protected boolean isValid(final ITuple<EmbergraphValue> obj) {
                           @SuppressWarnings("rawtypes")
                           final IV iv = (IV) tupSer.deserializeKey(obj);
-                          if (iv != null && iv.isLiteral()) {
-                            return true;
-                          }
-                          return false;
+                          return iv != null && iv.isLiteral();
                         }
                       }))
               .addFilter(
@@ -2132,10 +2129,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
                         protected boolean isValid(final ITuple<EmbergraphValue> obj) {
                           @SuppressWarnings("rawtypes")
                           final IV iv = (IV) tupSer.deserializeKey(obj);
-                          if (iv != null && iv.isLiteral()) {
-                            return true;
-                          }
-                          return false;
+                          return iv != null && iv.isLiteral();
                         }
                       }))
               .addFilter(
@@ -2305,10 +2299,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
 
                         protected boolean isValid(final ITuple<ISPO> obj) {
                           final ISPO spo = (ISPO) tupSer.deserializeKey(obj);
-                          if (spo.o().isLiteral()) {
-                            return true;
-                          }
-                          return false;
+                          return spo.o().isLiteral();
                         }
                       }))
               .addFilter(

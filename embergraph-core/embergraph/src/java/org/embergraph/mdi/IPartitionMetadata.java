@@ -68,8 +68,8 @@ import org.embergraph.service.IMetadataService;
 public interface IPartitionMetadata extends ISeparatorKeys {
 
   /** The unique partition identifier. */
-  public int getPartitionId();
+  int getPartitionId();
 
   /** Return {@link #getPartitionId()} */
-  public int hashCode();
+  int hashCode();
 }

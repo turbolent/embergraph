@@ -34,5 +34,5 @@ import org.embergraph.cache.IHardReferenceQueue;
  */
 public interface IEvictionListener extends HardReferenceQueueEvictionListener<PO> {
 
-  public void evicted(IHardReferenceQueue<PO> cache, PO ref);
+  void evicted(IHardReferenceQueue<PO> cache, PO ref);
 }

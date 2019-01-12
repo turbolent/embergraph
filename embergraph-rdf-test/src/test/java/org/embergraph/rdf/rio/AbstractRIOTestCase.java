@@ -366,7 +366,7 @@ public abstract class AbstractRIOTestCase extends AbstractTripleStoreTestCase {
                 }
               });
 
-          loader.loadRdf((Reader) reader, baseURI, rdfFormat, baseURI, options);
+          loader.loadRdf(reader, baseURI, rdfFormat, baseURI, options);
 
           if (log.isInfoEnabled()) log.info("Done: " + resource);
           //                    + " : tps="
@@ -584,7 +584,6 @@ public abstract class AbstractRIOTestCase extends AbstractTripleStoreTestCase {
         InputStream is = null;
 
         final String baseURI;
-        ;
         if (getClass().getResource(resource) != null) {
 
           baseURI = getClass().getResource(resource).toURI().toString();

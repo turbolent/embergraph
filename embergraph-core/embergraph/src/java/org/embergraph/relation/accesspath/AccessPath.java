@@ -282,7 +282,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
     final boolean remoteAccessPath =
         predicate.getProperty(
             IPredicate.Annotations.REMOTE_ACCESS_PATH,
-            partitionId == -1 ? IPredicate.Annotations.DEFAULT_REMOTE_ACCESS_PATH : false);
+            partitionId == -1 && IPredicate.Annotations.DEFAULT_REMOTE_ACCESS_PATH);
 
     /*
      * Chose the right index manger. If relation.getIndexManager() is not
@@ -362,7 +362,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
 
       try {
         // MUST be a local index view.
-        ndx = (ILocalBTreeView) indexManager.getIndex(name, timestamp);
+        ndx = indexManager.getIndex(name, timestamp);
       } catch (Throwable t) {
         throw new RuntimeException(predicate.toString(), t);
       }
@@ -1415,7 +1415,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
       final DiskCostModel diskCostModel, final BTree btree, final long rangeCount) {
 
     // BTree is its own statistics view.
-    final IBTreeStatistics stats = (BTree) btree;
+    final IBTreeStatistics stats = btree;
 
     // Estimate cost based on random seek per node/leaf.
     final double cost =
@@ -1544,10 +1544,9 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
        * Delegate the operation to the remote shard.
        */
 
-      return (ScanCostReport)
-          ndx.submit(
-              fromKey == null ? BytesUtil.EMPTY : fromKey,
-              new EstimateShardScanCost(rangeCount, fromKey, toKey));
+      return ndx.submit(
+          fromKey == null ? BytesUtil.EMPTY : fromKey,
+          new EstimateShardScanCost(rangeCount, fromKey, toKey));
     }
 
     /*

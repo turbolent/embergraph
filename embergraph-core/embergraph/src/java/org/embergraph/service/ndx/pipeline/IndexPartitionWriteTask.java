@@ -285,6 +285,6 @@ public class IndexPartitionWriteTask<
   @Override
   protected void notifyClientOfRedirect(L locator, Throwable cause) {
 
-    master.ndx.staleLocator(master.ndx.getTimestamp(), (L) locator, (StaleLocatorException) cause);
+    master.ndx.staleLocator(master.ndx.getTimestamp(), locator, (StaleLocatorException) cause);
   }
 }

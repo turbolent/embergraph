@@ -51,14 +51,14 @@ import org.openrdf.model.BNode;
 public interface EmbergraphBNode extends EmbergraphResource, BNode {
 
   /** Set flag indicating that this blank node models a statement. */
-  public void setStatementIdentifier(boolean isStmtIdentifier);
+  void setStatementIdentifier(boolean isStmtIdentifier);
 
   /** <code>true</code> if this blank node models a statement. */
-  public boolean isStatementIdentifier();
+  boolean isStatementIdentifier();
 
   /** Set the statement that this blank node models. */
-  public void setStatement(EmbergraphStatement stmt);
+  void setStatement(EmbergraphStatement stmt);
 
   /** Get the statement that this blank node models. */
-  public EmbergraphStatement getStatement();
+  EmbergraphStatement getStatement();
 }

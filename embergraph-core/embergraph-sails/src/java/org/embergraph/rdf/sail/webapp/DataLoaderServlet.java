@@ -478,7 +478,7 @@ public class DataLoaderServlet extends EmbergraphRDFServlet {
 
         reportModifiedCount(nmodified.get(), elapsed);
 
-        return (Void) null;
+        return null;
 
       } finally {
 

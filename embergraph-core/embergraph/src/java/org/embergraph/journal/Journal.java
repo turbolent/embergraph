@@ -1339,27 +1339,20 @@ public class Journal extends AbstractJournal
 
       final HAStatusEnum haStatus = getHAStatus();
 
-      if (haStatus == null || haStatus == HAStatusEnum.NotReady) {
-
-        /*
-         * Since we are not HA or this service is not HAReady, we will
-         * not use the consensus protocol to update the releaseTime.
-         *
-         * Therefore the releaseTime is updated here since we will not
-         * (actually, did not) run the consensus protocol to update it.
-         */
-
-        return false;
-      }
-
       /*
+       * Since we are not HA or this service is not HAReady, we will
+       * not use the consensus protocol to update the releaseTime.
+       *
+       * Therefore the releaseTime is updated here since we will not
+       * (actually, did not) run the consensus protocol to update it.
+       */
+      return haStatus != null && haStatus != HAStatusEnum.NotReady;/*
        * Note: When we are using a 2-phase commit, the leader can not
        * update the release time from commit() using this methods. It
        * must rely on the consensus protocol to update the release
        * time instead.
        */
 
-      return true;
     }
 
     //        /**
@@ -2233,7 +2226,7 @@ public class Journal extends AbstractJournal
       @Override
       public void shutdown() {
 
-        ((JournalTransactionService) getTransactionService()).shutdown();
+        getTransactionService().shutdown();
 
         super.shutdown();
       }
@@ -2242,7 +2235,7 @@ public class Journal extends AbstractJournal
       @Override
       public void shutdownNow() {
 
-        ((JournalTransactionService) getTransactionService()).shutdownNow();
+        getTransactionService().shutdownNow();
 
         super.shutdownNow();
       }
@@ -2267,7 +2260,7 @@ public class Journal extends AbstractJournal
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
-  public static interface IJournalCounters
+  public interface IJournalCounters
       extends ConcurrencyManager.IConcurrencyManagerCounters,
           //            ...TransactionManager.XXXCounters,
           ResourceManager.IResourceManagerCounters {
@@ -2506,18 +2499,7 @@ public class Journal extends AbstractJournal
       // MAY be null
       btree = (BTree) super.getIndex(name, ts);
 
-      if (btree != null) {
-
-        //                /*
-        //                 * Mark the B+Tree as read-only.
-        //                 */
-        //
-        //                btree.setReadOnly(true);
-
-        assert btree.getLastCommitTime() != 0;
-        //                btree.setLastCommitTime(commitRecord.getTimestamp());
-
-      }
+      assert btree == null || btree.getLastCommitTime() != 0;
     }
 
     /*
@@ -2755,7 +2737,7 @@ public class Journal extends AbstractJournal
 
             assert sources[0].isReadOnly();
 
-            tmp = (BTree) sources[0];
+            tmp = sources[0];
 
           } else {
 
@@ -2772,7 +2754,7 @@ public class Journal extends AbstractJournal
 
             assert sources[0].isReadOnly();
 
-            tmp = (BTree) sources[0];
+            tmp = sources[0];
           }
         }
 
@@ -2800,7 +2782,7 @@ public class Journal extends AbstractJournal
 
         assert !sources[0].isReadOnly();
 
-        tmp = (BTree) sources[0];
+        tmp = sources[0];
       }
     }
 
@@ -3083,7 +3065,7 @@ public class Journal extends AbstractJournal
                   + ": elapsed="
                   + TimeUnit.NANOSECONDS.toMillis(elapsed())
                   + "ms, #active="
-                  + ((ThreadPoolExecutor) executorService).getActiveCount());
+                  + executorService.getActiveCount());
         }
       };
 

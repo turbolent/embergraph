@@ -108,7 +108,7 @@ public class ByteArrayList extends AbstractByteList {
    */
   public Object clone() {
     // overridden for performance only.
-    ByteArrayList clone = new ByteArrayList((byte[]) elements.clone());
+    ByteArrayList clone = new ByteArrayList(elements.clone());
     clone.setSizeRaw(size);
     return clone;
   }
@@ -173,11 +173,11 @@ public class ByteArrayList extends AbstractByteList {
     if (size == 0) return;
     checkRangeFromTo(from, to, size);
 
-    final int width = (int) (max - min + 1);
+    final int width = (max - min + 1);
 
     int[] counts = new int[width];
     byte[] theElements = elements;
-    for (int i = from; i <= to; ) counts[(int) (theElements[i++] - min)]++;
+    for (int i = from; i <= to; ) counts[theElements[i++] - min]++;
 
     int fromIndex = from;
     byte val = min;

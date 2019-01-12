@@ -72,7 +72,7 @@ public interface ICoordinate {
    *
    * @param o Another coordinate.
    */
-  public boolean equals(ICoordinate o);
+  boolean equals(ICoordinate o);
 
   /**
    * Typesafe enumeration for units in which distances may be expressed.
@@ -80,13 +80,13 @@ public interface ICoordinate {
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public static enum UNITS {
+  enum UNITS {
     Meters,
     Kilometers,
     Feet,
     Miles,
-    NauticalMiles;
-  };
+    NauticalMiles
+  }
 
   /**
    * Computes the distance to the specified coordinate and returns that distance in the specified
@@ -96,26 +96,26 @@ public interface ICoordinate {
    * @param units The units in which the distance will be reported.
    * @return The distance in the specified units.
    */
-  public double distance(ICoordinate o, UNITS units);
+  double distance(ICoordinate o, UNITS units);
 
   /**
    * Convert to degrees, minutes and (tenths of) seconds.
    *
    * @return The coordinate expressed as degrees, minutes and (tenths of) seconds.
    */
-  public CoordinateDMS toDMS();
+  CoordinateDMS toDMS();
 
   /**
    * Convert to degrees and decimal minutes.
    *
    * @return The coordinate expressed as degrees and decimal minutes.
    */
-  public CoordinateDDM toDDM();
+  CoordinateDDM toDDM();
 
   /**
    * Convert to decimal degrees.
    *
    * @return The coordinate expressed as decimal degrees.
    */
-  public CoordinateDD toDD();
+  CoordinateDD toDD();
 }

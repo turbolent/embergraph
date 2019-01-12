@@ -53,5 +53,5 @@ public enum QueryOptimizerEnum {
    * magnitude more efficient (10x or 100x). For long running joins, this can translates into a
    * savings of minutes or hours.
    */
-  Runtime;
+  Runtime
 }

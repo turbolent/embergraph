@@ -325,7 +325,7 @@ public class TxDag {
       throw new IllegalArgumentException("transaction object is null");
     }
 
-    Integer index = (Integer) mapping.get(tx);
+    Integer index = mapping.get(tx);
 
     if (index == null) {
 
@@ -347,7 +347,7 @@ public class TxDag {
          * available.
          */
 
-        index = (Integer) indices.remove(0);
+        index = indices.remove(0);
 
         //                if (index == null) {
         //
@@ -392,7 +392,7 @@ public class TxDag {
    */
   public synchronized boolean releaseVertex(final Object tx) {
 
-    final Integer index = (Integer) mapping.remove(tx);
+    final Integer index = mapping.remove(tx);
 
     if (index == null) {
 
@@ -438,7 +438,7 @@ public class TxDag {
    */
   final synchronized int[][] getPathCountMatrix() {
 
-    return (int[][]) M.clone();
+    return M.clone();
   }
 
   /**
@@ -684,7 +684,7 @@ public class TxDag {
        * otherwise sort the cached order[], which would have side effects
        * that I want to avoid when debugging.
        */
-      order = (int[]) getOrder().clone();
+      order = getOrder().clone();
       Arrays.sort(order); // sort indices for display purposes.
     } else {
       // Get order[] -- may be cached.
@@ -1074,7 +1074,7 @@ public class TxDag {
         }
       }
     }
-    return (Edge[]) v.toArray(new Edge[] {});
+    return v.toArray(new Edge[] {});
   }
 
   /**

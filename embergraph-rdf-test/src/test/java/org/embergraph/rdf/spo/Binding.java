@@ -88,7 +88,7 @@ public class Binding implements IBinding {
     }
 
     if (o instanceof IBinding) {
-      IBinding b = (IBinding) o;
+      IBinding b = o;
       // variables ok for reference testing
       return var == b.getVar() && val.equals(b.getVal());
     }

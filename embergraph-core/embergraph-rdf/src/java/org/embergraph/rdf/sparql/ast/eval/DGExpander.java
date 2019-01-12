@@ -477,15 +477,14 @@ public class DGExpander implements IAccessPathExpander<ISPO> {
            * [c].
            */
           final Predicate<ISPO> sourcePred =
-              (Predicate<ISPO>)
-                  sourceAccessPath
-                      .getPredicate()
-                      .clearAnnotations(
-                          new String[] {
-                            IPredicate.Annotations.ACCESS_PATH_EXPANDER,
-                            IPredicate.Annotations.ACCESS_PATH_FILTER,
-                            // IPredicate.Annotations.KEY_ORDER
-                          });
+              sourceAccessPath
+                  .getPredicate()
+                  .clearAnnotations(
+                      new String[] {
+                        IPredicate.Annotations.ACCESS_PATH_EXPANDER,
+                        IPredicate.Annotations.ACCESS_PATH_FILTER,
+                        // IPredicate.Annotations.KEY_ORDER
+                      });
 
           // Bind the graph onto the context position variable.
           final Predicate<ISPO> asBound =

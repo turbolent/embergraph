@@ -4885,7 +4885,7 @@ public abstract class AbstractJournal
       }
 
       // Resolve the index against that commit record.
-      ndx = (ICheckpointProtocol) getIndexWithCommitRecord(name, commitRecord);
+      ndx = getIndexWithCommitRecord(name, commitRecord);
 
       if (ndx == null) {
 
@@ -6256,7 +6256,7 @@ public abstract class AbstractJournal
       _rootBlock = rootBlock;
 
       final boolean leader =
-          localService == null ? false : localService.isLeader(rootBlock.getQuorumToken());
+          localService != null && localService.isLeader(rootBlock.getQuorumToken());
 
       if (leader) {
 
@@ -7893,7 +7893,7 @@ public abstract class AbstractJournal
 
       return getProxy(ft, asyncFuture);
     }
-  };
+  }
 
   /**
    * Remove all commit records between the two provided keys.

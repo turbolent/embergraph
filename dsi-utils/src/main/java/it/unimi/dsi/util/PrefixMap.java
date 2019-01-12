@@ -48,7 +48,7 @@ public interface PrefixMap<S extends CharSequence> extends StringMap<S> {
    *
    * @return a function mapping prefixes to ranges of strings.
    */
-  public Object2ObjectFunction<CharSequence, Interval> rangeMap();
+  Object2ObjectFunction<CharSequence, Interval> rangeMap();
 
   /**
    * Returns a function mapping ranges of strings to common prefixes (optional operation).
@@ -56,5 +56,5 @@ public interface PrefixMap<S extends CharSequence> extends StringMap<S> {
    * @return a function mapping ranges of strings to common prefixes, or <code>null</code> if this
    *     map does not support prefixes.
    */
-  public Object2ObjectFunction<Interval, S> prefixMap();
+  Object2ObjectFunction<Interval, S> prefixMap();
 }

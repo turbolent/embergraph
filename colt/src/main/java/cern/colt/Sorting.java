@@ -402,63 +402,63 @@ public class Sorting extends Object {
     inplace_merge(array, middle, secondCut, last);
   }
   /** Returns the index of the median of the three indexed chars. */
-  private static int med3(byte x[], int a, int b, int c, ByteComparator comp) {
+  private static int med3(byte[] x, int a, int b, int c, ByteComparator comp) {
     int ab = comp.compare(x[a], x[b]);
     int ac = comp.compare(x[a], x[c]);
     int bc = comp.compare(x[b], x[c]);
     return (ab < 0 ? (bc < 0 ? b : ac < 0 ? c : a) : (bc > 0 ? b : ac > 0 ? c : a));
   }
   /** Returns the index of the median of the three indexed chars. */
-  private static int med3(char x[], int a, int b, int c, CharComparator comp) {
+  private static int med3(char[] x, int a, int b, int c, CharComparator comp) {
     int ab = comp.compare(x[a], x[b]);
     int ac = comp.compare(x[a], x[c]);
     int bc = comp.compare(x[b], x[c]);
     return (ab < 0 ? (bc < 0 ? b : ac < 0 ? c : a) : (bc > 0 ? b : ac > 0 ? c : a));
   }
   /** Returns the index of the median of the three indexed chars. */
-  private static int med3(double x[], int a, int b, int c, DoubleComparator comp) {
+  private static int med3(double[] x, int a, int b, int c, DoubleComparator comp) {
     int ab = comp.compare(x[a], x[b]);
     int ac = comp.compare(x[a], x[c]);
     int bc = comp.compare(x[b], x[c]);
     return (ab < 0 ? (bc < 0 ? b : ac < 0 ? c : a) : (bc > 0 ? b : ac > 0 ? c : a));
   }
   /** Returns the index of the median of the three indexed chars. */
-  private static int med3(float x[], int a, int b, int c, FloatComparator comp) {
+  private static int med3(float[] x, int a, int b, int c, FloatComparator comp) {
     int ab = comp.compare(x[a], x[b]);
     int ac = comp.compare(x[a], x[c]);
     int bc = comp.compare(x[b], x[c]);
     return (ab < 0 ? (bc < 0 ? b : ac < 0 ? c : a) : (bc > 0 ? b : ac > 0 ? c : a));
   }
   /** Returns the index of the median of the three indexed chars. */
-  private static int med3(int x[], int a, int b, int c, IntComparator comp) {
+  private static int med3(int[] x, int a, int b, int c, IntComparator comp) {
     int ab = comp.compare(x[a], x[b]);
     int ac = comp.compare(x[a], x[c]);
     int bc = comp.compare(x[b], x[c]);
     return (ab < 0 ? (bc < 0 ? b : ac < 0 ? c : a) : (bc > 0 ? b : ac > 0 ? c : a));
   }
   /** Returns the index of the median of the three indexed chars. */
-  private static int med3(long x[], int a, int b, int c, LongComparator comp) {
+  private static int med3(long[] x, int a, int b, int c, LongComparator comp) {
     int ab = comp.compare(x[a], x[b]);
     int ac = comp.compare(x[a], x[c]);
     int bc = comp.compare(x[b], x[c]);
     return (ab < 0 ? (bc < 0 ? b : ac < 0 ? c : a) : (bc > 0 ? b : ac > 0 ? c : a));
   }
   /** Returns the index of the median of the three indexed chars. */
-  private static int med3(Object x[], int a, int b, int c) {
-    int ab = ((Comparable) x[a]).compareTo((Comparable) x[b]);
-    int ac = ((Comparable) x[a]).compareTo((Comparable) x[c]);
-    int bc = ((Comparable) x[b]).compareTo((Comparable) x[c]);
+  private static int med3(Object[] x, int a, int b, int c) {
+    int ab = ((Comparable) x[a]).compareTo(x[b]);
+    int ac = ((Comparable) x[a]).compareTo(x[c]);
+    int bc = ((Comparable) x[b]).compareTo(x[c]);
     return (ab < 0 ? (bc < 0 ? b : ac < 0 ? c : a) : (bc > 0 ? b : ac > 0 ? c : a));
   }
   /** Returns the index of the median of the three indexed chars. */
-  private static int med3(Object x[], int a, int b, int c, Comparator comp) {
+  private static int med3(Object[] x, int a, int b, int c, Comparator comp) {
     int ab = comp.compare(x[a], x[b]);
     int ac = comp.compare(x[a], x[c]);
     int bc = comp.compare(x[b], x[c]);
     return (ab < 0 ? (bc < 0 ? b : ac < 0 ? c : a) : (bc > 0 ? b : ac > 0 ? c : a));
   }
   /** Returns the index of the median of the three indexed chars. */
-  private static int med3(short x[], int a, int b, int c, ShortComparator comp) {
+  private static int med3(short[] x, int a, int b, int c, ShortComparator comp) {
     int ab = comp.compare(x[a], x[b]);
     int ac = comp.compare(x[a], x[c]);
     int bc = comp.compare(x[b], x[c]);
@@ -485,7 +485,7 @@ public class Sorting extends Object {
    */
   public static void mergeSort(byte[] a, int fromIndex, int toIndex) {
     rangeCheck(a.length, fromIndex, toIndex);
-    byte aux[] = (byte[]) a.clone();
+    byte[] aux = a.clone();
     mergeSort1(aux, a, fromIndex, toIndex);
   }
   /**
@@ -515,7 +515,7 @@ public class Sorting extends Object {
    */
   public static void mergeSort(byte[] a, int fromIndex, int toIndex, ByteComparator c) {
     rangeCheck(a.length, fromIndex, toIndex);
-    byte aux[] = (byte[]) a.clone();
+    byte[] aux = a.clone();
     mergeSort1(aux, a, fromIndex, toIndex, c);
   }
   /**
@@ -538,7 +538,7 @@ public class Sorting extends Object {
    */
   public static void mergeSort(char[] a, int fromIndex, int toIndex) {
     rangeCheck(a.length, fromIndex, toIndex);
-    char aux[] = (char[]) a.clone();
+    char[] aux = a.clone();
     mergeSort1(aux, a, fromIndex, toIndex);
   }
   /**
@@ -568,7 +568,7 @@ public class Sorting extends Object {
    */
   public static void mergeSort(char[] a, int fromIndex, int toIndex, CharComparator c) {
     rangeCheck(a.length, fromIndex, toIndex);
-    char aux[] = (char[]) a.clone();
+    char[] aux = a.clone();
     mergeSort1(aux, a, fromIndex, toIndex, c);
   }
   /**
@@ -619,7 +619,7 @@ public class Sorting extends Object {
    */
   public static void mergeSort(double[] a, int fromIndex, int toIndex, DoubleComparator c) {
     rangeCheck(a.length, fromIndex, toIndex);
-    double aux[] = (double[]) a.clone();
+    double[] aux = a.clone();
     mergeSort1(aux, a, fromIndex, toIndex, c);
   }
   /**
@@ -670,7 +670,7 @@ public class Sorting extends Object {
    */
   public static void mergeSort(float[] a, int fromIndex, int toIndex, FloatComparator c) {
     rangeCheck(a.length, fromIndex, toIndex);
-    float aux[] = (float[]) a.clone();
+    float[] aux = a.clone();
     mergeSort1(aux, a, fromIndex, toIndex, c);
   }
   /**
@@ -693,7 +693,7 @@ public class Sorting extends Object {
    */
   public static void mergeSort(int[] a, int fromIndex, int toIndex) {
     rangeCheck(a.length, fromIndex, toIndex);
-    int aux[] = (int[]) a.clone();
+    int[] aux = a.clone();
     mergeSort1(aux, a, fromIndex, toIndex);
   }
   /**
@@ -723,7 +723,7 @@ public class Sorting extends Object {
    */
   public static void mergeSort(int[] a, int fromIndex, int toIndex, IntComparator c) {
     rangeCheck(a.length, fromIndex, toIndex);
-    int aux[] = (int[]) a.clone();
+    int[] aux = a.clone();
     mergeSort1(aux, a, fromIndex, toIndex, c);
   }
   /**
@@ -746,7 +746,7 @@ public class Sorting extends Object {
    */
   public static void mergeSort(long[] a, int fromIndex, int toIndex) {
     rangeCheck(a.length, fromIndex, toIndex);
-    long aux[] = (long[]) a.clone();
+    long[] aux = a.clone();
     mergeSort1(aux, a, fromIndex, toIndex);
   }
   /**
@@ -776,7 +776,7 @@ public class Sorting extends Object {
    */
   public static void mergeSort(long[] a, int fromIndex, int toIndex, LongComparator c) {
     rangeCheck(a.length, fromIndex, toIndex);
-    long aux[] = (long[]) a.clone();
+    long[] aux = a.clone();
     mergeSort1(aux, a, fromIndex, toIndex, c);
   }
   /**
@@ -799,7 +799,7 @@ public class Sorting extends Object {
    */
   public static void mergeSort(short[] a, int fromIndex, int toIndex) {
     rangeCheck(a.length, fromIndex, toIndex);
-    short aux[] = (short[]) a.clone();
+    short[] aux = a.clone();
     mergeSort1(aux, a, fromIndex, toIndex);
   }
   /**
@@ -829,11 +829,11 @@ public class Sorting extends Object {
    */
   public static void mergeSort(short[] a, int fromIndex, int toIndex, ShortComparator c) {
     rangeCheck(a.length, fromIndex, toIndex);
-    short aux[] = (short[]) a.clone();
+    short[] aux = a.clone();
     mergeSort1(aux, a, fromIndex, toIndex, c);
   }
 
-  private static void mergeSort1(byte src[], byte dest[], int low, int high) {
+  private static void mergeSort1(byte[] src, byte[] dest, int low, int high) {
     int length = high - low;
 
     // Insertion sort on smallest arrays
@@ -862,7 +862,7 @@ public class Sorting extends Object {
     }
   }
 
-  private static void mergeSort1(byte src[], byte dest[], int low, int high, ByteComparator c) {
+  private static void mergeSort1(byte[] src, byte[] dest, int low, int high, ByteComparator c) {
     int length = high - low;
 
     // Insertion sort on smallest arrays
@@ -891,7 +891,7 @@ public class Sorting extends Object {
     }
   }
 
-  private static void mergeSort1(char src[], char dest[], int low, int high) {
+  private static void mergeSort1(char[] src, char[] dest, int low, int high) {
     int length = high - low;
 
     // Insertion sort on smallest arrays
@@ -920,7 +920,7 @@ public class Sorting extends Object {
     }
   }
 
-  private static void mergeSort1(char src[], char dest[], int low, int high, CharComparator c) {
+  private static void mergeSort1(char[] src, char[] dest, int low, int high, CharComparator c) {
     int length = high - low;
 
     // Insertion sort on smallest arrays
@@ -949,7 +949,7 @@ public class Sorting extends Object {
     }
   }
 
-  private static void mergeSort1(double src[], double dest[], int low, int high) {
+  private static void mergeSort1(double[] src, double[] dest, int low, int high) {
     int length = high - low;
 
     // Insertion sort on smallest arrays
@@ -979,7 +979,7 @@ public class Sorting extends Object {
   }
 
   private static void mergeSort1(
-      double src[], double dest[], int low, int high, DoubleComparator c) {
+      double[] src, double[] dest, int low, int high, DoubleComparator c) {
     int length = high - low;
 
     // Insertion sort on smallest arrays
@@ -1008,7 +1008,7 @@ public class Sorting extends Object {
     }
   }
 
-  private static void mergeSort1(float src[], float dest[], int low, int high) {
+  private static void mergeSort1(float[] src, float[] dest, int low, int high) {
     int length = high - low;
 
     // Insertion sort on smallest arrays
@@ -1037,7 +1037,7 @@ public class Sorting extends Object {
     }
   }
 
-  private static void mergeSort1(float src[], float dest[], int low, int high, FloatComparator c) {
+  private static void mergeSort1(float[] src, float[] dest, int low, int high, FloatComparator c) {
     int length = high - low;
 
     // Insertion sort on smallest arrays
@@ -1066,7 +1066,7 @@ public class Sorting extends Object {
     }
   }
 
-  private static void mergeSort1(int src[], int dest[], int low, int high) {
+  private static void mergeSort1(int[] src, int[] dest, int low, int high) {
     int length = high - low;
 
     // Insertion sort on smallest arrays
@@ -1095,7 +1095,7 @@ public class Sorting extends Object {
     }
   }
 
-  private static void mergeSort1(int src[], int dest[], int low, int high, IntComparator c) {
+  private static void mergeSort1(int[] src, int[] dest, int low, int high, IntComparator c) {
     int length = high - low;
 
     // Insertion sort on smallest arrays
@@ -1124,7 +1124,7 @@ public class Sorting extends Object {
     }
   }
 
-  private static void mergeSort1(long src[], long dest[], int low, int high) {
+  private static void mergeSort1(long[] src, long[] dest, int low, int high) {
     int length = high - low;
 
     // Insertion sort on smallest arrays
@@ -1153,7 +1153,7 @@ public class Sorting extends Object {
     }
   }
 
-  private static void mergeSort1(long src[], long dest[], int low, int high, LongComparator c) {
+  private static void mergeSort1(long[] src, long[] dest, int low, int high, LongComparator c) {
     int length = high - low;
 
     // Insertion sort on smallest arrays
@@ -1182,7 +1182,7 @@ public class Sorting extends Object {
     }
   }
 
-  private static void mergeSort1(short src[], short dest[], int low, int high) {
+  private static void mergeSort1(short[] src, short[] dest, int low, int high) {
     int length = high - low;
 
     // Insertion sort on smallest arrays
@@ -1211,7 +1211,7 @@ public class Sorting extends Object {
     }
   }
 
-  private static void mergeSort1(short src[], short dest[], int low, int high, ShortComparator c) {
+  private static void mergeSort1(short[] src, short[] dest, int low, int high, ShortComparator c) {
     int length = high - low;
 
     // Insertion sort on smallest arrays
@@ -1240,7 +1240,7 @@ public class Sorting extends Object {
     }
   }
 
-  private static void mergeSort2(double a[], int fromIndex, int toIndex) {
+  private static void mergeSort2(double[] a, int fromIndex, int toIndex) {
     rangeCheck(a.length, fromIndex, toIndex);
     final long NEG_ZERO_BITS = Double.doubleToLongBits(-0.0d);
     /*
@@ -1268,7 +1268,7 @@ public class Sorting extends Object {
     }
 
     // Main sort phase: mergesort everything but the NaN's
-    double aux[] = (double[]) a.clone();
+    double[] aux = a.clone();
     mergeSort1(aux, a, fromIndex, n);
 
     // Postprocessing phase: change 0.0's to -0.0's as required
@@ -1285,7 +1285,7 @@ public class Sorting extends Object {
     }
   }
 
-  private static void mergeSort2(float a[], int fromIndex, int toIndex) {
+  private static void mergeSort2(float[] a, int fromIndex, int toIndex) {
     rangeCheck(a.length, fromIndex, toIndex);
     final int NEG_ZERO_BITS = Float.floatToIntBits(-0.0f);
     /*
@@ -1313,7 +1313,7 @@ public class Sorting extends Object {
     }
 
     // Main sort phase: mergesort everything but the NaN's
-    float aux[] = (float[]) a.clone();
+    float[] aux = a.clone();
     mergeSort1(aux, a, fromIndex, n);
 
     // Postprocessing phase: change 0.0's to -0.0's as required
@@ -1648,7 +1648,7 @@ public class Sorting extends Object {
     quickSort1(a, fromIndex, toIndex - fromIndex, c);
   }
   /** Sorts the specified sub-array of chars into ascending order. */
-  private static void quickSort1(byte x[], int off, int len, ByteComparator comp) {
+  private static void quickSort1(byte[] x, int off, int len, ByteComparator comp) {
     // Insertion sort on smallest arrays
     if (len < SMALL) {
       for (int i = off; i < len + off; i++)
@@ -1699,7 +1699,7 @@ public class Sorting extends Object {
     if ((s = d - c) > 1) quickSort1(x, n - s, s, comp);
   }
   /** Sorts the specified sub-array of chars into ascending order. */
-  private static void quickSort1(char x[], int off, int len, CharComparator comp) {
+  private static void quickSort1(char[] x, int off, int len, CharComparator comp) {
     // Insertion sort on smallest arrays
     if (len < SMALL) {
       for (int i = off; i < len + off; i++)
@@ -1750,7 +1750,7 @@ public class Sorting extends Object {
     if ((s = d - c) > 1) quickSort1(x, n - s, s, comp);
   }
   /** Sorts the specified sub-array of chars into ascending order. */
-  private static void quickSort1(double x[], int off, int len, DoubleComparator comp) {
+  private static void quickSort1(double[] x, int off, int len, DoubleComparator comp) {
     // Insertion sort on smallest arrays
     if (len < SMALL) {
       for (int i = off; i < len + off; i++)
@@ -1801,7 +1801,7 @@ public class Sorting extends Object {
     if ((s = d - c) > 1) quickSort1(x, n - s, s, comp);
   }
   /** Sorts the specified sub-array of chars into ascending order. */
-  private static void quickSort1(float x[], int off, int len, FloatComparator comp) {
+  private static void quickSort1(float[] x, int off, int len, FloatComparator comp) {
     // Insertion sort on smallest arrays
     if (len < SMALL) {
       for (int i = off; i < len + off; i++)
@@ -1852,7 +1852,7 @@ public class Sorting extends Object {
     if ((s = d - c) > 1) quickSort1(x, n - s, s, comp);
   }
   /** Sorts the specified sub-array of chars into ascending order. */
-  private static void quickSort1(int x[], int off, int len, IntComparator comp) {
+  private static void quickSort1(int[] x, int off, int len, IntComparator comp) {
     // Insertion sort on smallest arrays
     if (len < SMALL) {
       for (int i = off; i < len + off; i++)
@@ -1903,7 +1903,7 @@ public class Sorting extends Object {
     if ((s = d - c) > 1) quickSort1(x, n - s, s, comp);
   }
   /** Sorts the specified sub-array of chars into ascending order. */
-  private static void quickSort1(long x[], int off, int len, LongComparator comp) {
+  private static void quickSort1(long[] x, int off, int len, LongComparator comp) {
     // Insertion sort on smallest arrays
     if (len < SMALL) {
       for (int i = off; i < len + off; i++)
@@ -1954,11 +1954,11 @@ public class Sorting extends Object {
     if ((s = d - c) > 1) quickSort1(x, n - s, s, comp);
   }
   /** Sorts the specified sub-array of chars into ascending order. */
-  private static void quickSort1(Object x[], int off, int len) {
+  private static void quickSort1(Object[] x, int off, int len) {
     // Insertion sort on smallest arrays
     if (len < SMALL) {
       for (int i = off; i < len + off; i++)
-        for (int j = i; j > off && ((Comparable) x[j - 1]).compareTo((Comparable) x[j]) > 0; j--)
+        for (int j = i; j > off && ((Comparable) x[j - 1]).compareTo(x[j]) > 0; j--)
           swap(x, j, j - 1);
       return;
     }
@@ -2006,7 +2006,7 @@ public class Sorting extends Object {
     if ((s = d - c) > 1) quickSort1(x, n - s, s);
   }
   /** Sorts the specified sub-array of chars into ascending order. */
-  private static void quickSort1(Object x[], int off, int len, Comparator comp) {
+  private static void quickSort1(Object[] x, int off, int len, Comparator comp) {
     // Insertion sort on smallest arrays
     if (len < SMALL) {
       for (int i = off; i < len + off; i++)
@@ -2057,7 +2057,7 @@ public class Sorting extends Object {
     if ((s = d - c) > 1) quickSort1(x, n - s, s, comp);
   }
   /** Sorts the specified sub-array of chars into ascending order. */
-  private static void quickSort1(short x[], int off, int len, ShortComparator comp) {
+  private static void quickSort1(short[] x, int off, int len, ShortComparator comp) {
     // Insertion sort on smallest arrays
     if (len < SMALL) {
       for (int i = off; i < len + off; i++)
@@ -2118,83 +2118,83 @@ public class Sorting extends Object {
     if (toIndex > arrayLen) throw new ArrayIndexOutOfBoundsException(toIndex);
   }
   /** Swaps x[a] with x[b]. */
-  private static void swap(byte x[], int a, int b) {
+  private static void swap(byte[] x, int a, int b) {
     byte t = x[a];
     x[a] = x[b];
     x[b] = t;
   }
   /** Swaps x[a] with x[b]. */
-  private static void swap(char x[], int a, int b) {
+  private static void swap(char[] x, int a, int b) {
     char t = x[a];
     x[a] = x[b];
     x[b] = t;
   }
   /** Swaps x[a] with x[b]. */
-  private static void swap(double x[], int a, int b) {
+  private static void swap(double[] x, int a, int b) {
     double t = x[a];
     x[a] = x[b];
     x[b] = t;
   }
   /** Swaps x[a] with x[b]. */
-  private static void swap(float x[], int a, int b) {
+  private static void swap(float[] x, int a, int b) {
     float t = x[a];
     x[a] = x[b];
     x[b] = t;
   }
   /** Swaps x[a] with x[b]. */
-  private static void swap(int x[], int a, int b) {
+  private static void swap(int[] x, int a, int b) {
     int t = x[a];
     x[a] = x[b];
     x[b] = t;
   }
   /** Swaps x[a] with x[b]. */
-  private static void swap(long x[], int a, int b) {
+  private static void swap(long[] x, int a, int b) {
     long t = x[a];
     x[a] = x[b];
     x[b] = t;
   }
   /** Swaps x[a] with x[b]. */
-  private static void swap(Object x[], int a, int b) {
+  private static void swap(Object[] x, int a, int b) {
     Object t = x[a];
     x[a] = x[b];
     x[b] = t;
   }
   /** Swaps x[a] with x[b]. */
-  private static void swap(short x[], int a, int b) {
+  private static void swap(short[] x, int a, int b) {
     short t = x[a];
     x[a] = x[b];
     x[b] = t;
   }
   /** Swaps x[a .. (a+n-1)] with x[b .. (b+n-1)]. */
-  private static void vecswap(byte x[], int a, int b, int n) {
+  private static void vecswap(byte[] x, int a, int b, int n) {
     for (int i = 0; i < n; i++, a++, b++) swap(x, a, b);
   }
   /** Swaps x[a .. (a+n-1)] with x[b .. (b+n-1)]. */
-  private static void vecswap(char x[], int a, int b, int n) {
+  private static void vecswap(char[] x, int a, int b, int n) {
     for (int i = 0; i < n; i++, a++, b++) swap(x, a, b);
   }
   /** Swaps x[a .. (a+n-1)] with x[b .. (b+n-1)]. */
-  private static void vecswap(double x[], int a, int b, int n) {
+  private static void vecswap(double[] x, int a, int b, int n) {
     for (int i = 0; i < n; i++, a++, b++) swap(x, a, b);
   }
   /** Swaps x[a .. (a+n-1)] with x[b .. (b+n-1)]. */
-  private static void vecswap(float x[], int a, int b, int n) {
+  private static void vecswap(float[] x, int a, int b, int n) {
     for (int i = 0; i < n; i++, a++, b++) swap(x, a, b);
   }
   /** Swaps x[a .. (a+n-1)] with x[b .. (b+n-1)]. */
-  private static void vecswap(int x[], int a, int b, int n) {
+  private static void vecswap(int[] x, int a, int b, int n) {
     for (int i = 0; i < n; i++, a++, b++) swap(x, a, b);
   }
   /** Swaps x[a .. (a+n-1)] with x[b .. (b+n-1)]. */
-  private static void vecswap(long x[], int a, int b, int n) {
+  private static void vecswap(long[] x, int a, int b, int n) {
     for (int i = 0; i < n; i++, a++, b++) swap(x, a, b);
   }
   /** Swaps x[a .. (a+n-1)] with x[b .. (b+n-1)]. */
-  private static void vecswap(Object x[], int a, int b, int n) {
+  private static void vecswap(Object[] x, int a, int b, int n) {
     for (int i = 0; i < n; i++, a++, b++) swap(x, a, b);
   }
   /** Swaps x[a .. (a+n-1)] with x[b .. (b+n-1)]. */
-  private static void vecswap(short x[], int a, int b, int n) {
+  private static void vecswap(short[] x, int a, int b, int n) {
     for (int i = 0; i < n; i++, a++, b++) swap(x, a, b);
   }
 }

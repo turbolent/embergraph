@@ -67,7 +67,7 @@ public interface IHARequestURIRewriter extends IHAPolicyLifeCycle {
    *     </code>
    * @see ServiceScore#getRequestURI()
    */
-  public StringBuilder rewriteURI(
+  StringBuilder rewriteURI(
       boolean isLeaderRequest,
       String full_prefix,
       String originalRequestURI,

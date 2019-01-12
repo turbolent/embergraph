@@ -560,42 +560,42 @@ public class SingularValueDecomposition implements java.io.Serializable {
 
     buf.append("cond = ");
     try {
-      buf.append(String.valueOf(this.cond()));
+      buf.append(this.cond());
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
 
     buf.append("\nrank = ");
     try {
-      buf.append(String.valueOf(this.rank()));
+      buf.append(this.rank());
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
 
     buf.append("\nnorm2 = ");
     try {
-      buf.append(String.valueOf(this.norm2()));
+      buf.append(this.norm2());
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
 
     buf.append("\n\nU = ");
     try {
-      buf.append(String.valueOf(this.getU()));
+      buf.append(this.getU());
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
 
     buf.append("\n\nS = ");
     try {
-      buf.append(String.valueOf(this.getS()));
+      buf.append(this.getS());
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
 
     buf.append("\n\nV = ");
     try {
-      buf.append(String.valueOf(this.getV()));
+      buf.append(this.getV());
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }

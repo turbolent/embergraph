@@ -858,7 +858,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
         lock.unlock();
       }
     }
-  };
+  }
 
   /** Acquire {@link #lock} and {@link #dispatchEvents()}. */
   private void lock() {
@@ -1178,9 +1178,8 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
 
       if (psid.equals(priorAndNext[0])) return true;
 
-      if (psid.equals(priorAndNext[1])) return true;
+      return psid.equals(priorAndNext[1]);
 
-      return false;
     }
 
     private IHAPipelineResetResponse doRunWithLock() throws Exception {

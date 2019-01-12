@@ -105,34 +105,34 @@ public class XSDUnsignedLongIV<V extends EmbergraphLiteral>
      * TODO This can be optimized using the known signed representation of
      * the unsigned ZERO (this is true for all of the xsd:unsigned classes).
      */
-    return value != UNSIGNED_ZERO ? true : false;
+    return value != UNSIGNED_ZERO;
   }
 
   private static final long UNSIGNED_ZERO = 0x8000000000000000L;
 
   @Override
   public byte byteValue() {
-    return (byte) promote().byteValue();
+    return promote().byteValue();
   }
 
   @Override
   public double doubleValue() {
-    return (double) promote().doubleValue();
+    return promote().doubleValue();
   }
 
   @Override
   public float floatValue() {
-    return (float) promote().floatValue();
+    return promote().floatValue();
   }
 
   @Override
   public int intValue() {
-    return (int) promote().intValue();
+    return promote().intValue();
   }
 
   @Override
   public short shortValue() {
-    return (short) promote().shortValue();
+    return promote().shortValue();
   }
 
   @Override

@@ -38,8 +38,8 @@ import org.embergraph.relation.accesspath.BlockingBuffer;
 public interface IMasterTask<E, H> {
 
   /** The top-level buffer on which the application is writing. */
-  public BlockingBuffer<E[]> getBuffer();
+  BlockingBuffer<E[]> getBuffer();
 
   /** The statistics. */
-  public H getStats();
+  H getStats();
 }

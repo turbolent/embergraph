@@ -143,6 +143,6 @@ public class Timer extends PersistentObject {
   }
   /** Returns a String representation of the receiver. */
   public String toString() {
-    return "Time=" + Float.toString(this.elapsedTime()) + " secs";
+    return "Time=" + this.elapsedTime() + " secs";
   }
 }

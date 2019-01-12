@@ -41,7 +41,7 @@ public enum StoreTypeEnum {
    */
   RW((byte) 1);
 
-  private StoreTypeEnum(byte b) {
+  StoreTypeEnum(byte b) {
     this.type = b;
   }
 

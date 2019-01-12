@@ -112,7 +112,7 @@ public class ConcurrencyManager implements IConcurrencyManager {
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
-  public static interface Options extends IServiceShutdown.Options {
+  public interface Options extends IServiceShutdown.Options {
 
     /**
      * The #of threads in the pool handling concurrent transactions.
@@ -863,7 +863,7 @@ public class ConcurrencyManager implements IConcurrencyManager {
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
-  public static interface IConcurrencyManagerCounters {
+  public interface IConcurrencyManagerCounters {
 
     /** The service to which historical read tasks are submitted. */
     String ReadService = "Read Service";

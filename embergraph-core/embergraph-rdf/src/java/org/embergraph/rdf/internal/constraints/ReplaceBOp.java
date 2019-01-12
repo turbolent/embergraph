@@ -46,7 +46,7 @@ public class ReplaceBOp extends IVValueExpression<IV> implements INeedsMateriali
   public interface Annotations extends XSDBooleanIVValueExpression.Annotations {
 
     /** The cached regex pattern. */
-    public String PATTERN = ReplaceBOp.class.getName() + ".pattern";
+    String PATTERN = ReplaceBOp.class.getName() + ".pattern";
   }
 
   private static Map<String, Object> anns(

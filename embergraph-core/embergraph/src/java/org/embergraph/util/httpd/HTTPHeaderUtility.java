@@ -105,9 +105,8 @@ public class HTTPHeaderUtility {
 
     if (c >= 0 && c <= 31) return true;
 
-    if (c == 127) return true;
+    return c == 127;
 
-    return false;
   }
 
   /** Returns true iff the character is an HTTP <code>separator</code> character. */
@@ -242,9 +241,7 @@ public class HTTPHeaderUtility {
        * should not be propagated.
        */
 
-      AssertionError err = new AssertionError("Could not compile regex patterns.");
-
-      err.initCause(ex);
+      AssertionError err = new AssertionError("Could not compile regex patterns.", ex);
 
       throw err;
     }

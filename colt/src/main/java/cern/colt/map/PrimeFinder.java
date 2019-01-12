@@ -343,7 +343,7 @@ public class PrimeFinder extends Object {
    * Tests correctness. Try from=1000, to=10000 from=200, to=1000 from=16, to=1000 from=1000,
    * to=Integer.MAX_VALUE
    */
-  protected static void main(String args[]) {
+  protected static void main(String[] args) {
     int from = Integer.parseInt(args[0]);
     int to = Integer.parseInt(args[1]);
 

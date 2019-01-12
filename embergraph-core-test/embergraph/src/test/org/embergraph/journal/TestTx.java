@@ -255,7 +255,7 @@ public class TestTx extends ProxyTestCase<Journal> {
 
         assertTrue(index.contains(k1));
 
-        assertEquals(v1, (byte[]) index.lookup(k1));
+        assertEquals(v1, index.lookup(k1));
       }
 
       {
@@ -458,7 +458,7 @@ public class TestTx extends ProxyTestCase<Journal> {
 
         // check the version timestamp in the unisolated index.
         {
-          final BTree btree = ((BTree) journal.getIndex(name));
+          final BTree btree = journal.getIndex(name);
 
           final ITuple<?> tuple = btree.lookup(k1, new Tuple(btree, IRangeQuery.ALL));
 
@@ -484,7 +484,7 @@ public class TestTx extends ProxyTestCase<Journal> {
         {
           final IsolatedFusedView isolatedView = (IsolatedFusedView) journal.getIndex(name, tx2);
 
-          final BTree btree = ((BTree) journal.getIndex(name));
+          final BTree btree = journal.getIndex(name);
 
           Tuple<?> tuple = btree.lookup(k1, new Tuple(btree, IRangeQuery.ALL));
 
@@ -681,7 +681,7 @@ public class TestTx extends ProxyTestCase<Journal> {
       assertFalse(journal.getIndex(name, tx1).contains(id0));
 
       // delete the version.
-      assertEquals(v0, (byte[]) journal.getIndex(name, tx0).remove(id0));
+      assertEquals(v0, journal.getIndex(name, tx0).remove(id0));
 
       // no longer visible in that transaction.
       assertFalse(journal.getIndex(name, tx0).contains(id0));
@@ -706,7 +706,7 @@ public class TestTx extends ProxyTestCase<Journal> {
       /*
        * Delete v1.
        */
-      assertEquals(v1, (byte[]) journal.getIndex(name, tx0).remove(id0));
+      assertEquals(v1, journal.getIndex(name, tx0).remove(id0));
 
       // Still not visible in concurrent transaction.
       assertFalse(journal.getIndex(name, tx1).contains(id0));
@@ -803,7 +803,7 @@ public class TestTx extends ProxyTestCase<Journal> {
       assertFalse(journal.getIndex(name, tx1).contains(id0));
 
       // delete the version.
-      assertEquals(v0, (byte[]) journal.getIndex(name, tx0).remove(id0));
+      assertEquals(v0, journal.getIndex(name, tx0).remove(id0));
 
       // no longer visible in that transaction.
       assertFalse(journal.getIndex(name, tx0).contains(id0));
@@ -838,7 +838,7 @@ public class TestTx extends ProxyTestCase<Journal> {
 
       // (id0,v1) is now visible in global scope.
       assertTrue(journal.getIndex(name).contains(id0));
-      assertEquals(v1, (byte[]) journal.getIndex(name).lookup(id0));
+      assertEquals(v1, journal.getIndex(name).lookup(id0));
 
     } finally {
 
@@ -907,7 +907,7 @@ public class TestTx extends ProxyTestCase<Journal> {
       assertNull(journal.getIndex(name, tx1).insert(id1, v0));
 
       // data version visible in tx1.
-      assertEquals(v0, (byte[]) journal.getIndex(name, tx1).lookup(id1));
+      assertEquals(v0, journal.getIndex(name, tx1).lookup(id1));
 
       // data version not visible in global scope.
       assertNull(journal.getIndex(name).lookup(id1));
@@ -926,7 +926,7 @@ public class TestTx extends ProxyTestCase<Journal> {
       assertEquals("commitCounter", 2L, journal.getCommitRecord().getCommitCounter());
 
       // data version now visible in global scope.
-      assertEquals(v0, (byte[]) journal.getIndex(name).lookup(id1));
+      assertEquals(v0, journal.getIndex(name).lookup(id1));
 
       // new transaction - commit is visible in this scope.
       final long tx3 = journal.newTx(ITx.UNISOLATED);
@@ -948,7 +948,7 @@ public class TestTx extends ProxyTestCase<Journal> {
        */
 
       // data version visible in the new tx (tx3).
-      assertEquals(v0, (byte[]) journal.getIndex(name, tx3).lookup(id1));
+      assertEquals(v0, journal.getIndex(name, tx3).lookup(id1));
 
       /*
        * commit tx0 - nothing was written, no conflict should result.
@@ -967,7 +967,7 @@ public class TestTx extends ProxyTestCase<Journal> {
       assertEquals("commitCounter", 2L, journal.getCommitRecord().getCommitCounter());
 
       // data version in global scope was not changed by any other commit.
-      assertEquals(v0, (byte[]) journal.getIndex(name).lookup(id1));
+      assertEquals(v0, journal.getIndex(name).lookup(id1));
 
     } finally {
 

@@ -20,5 +20,5 @@ public interface IntIntFunction {
    * @param y the second argument passed to the function.
    * @return the result of the function.
    */
-  public abstract int apply(int x, int y);
+  int apply(int x, int y);
 }

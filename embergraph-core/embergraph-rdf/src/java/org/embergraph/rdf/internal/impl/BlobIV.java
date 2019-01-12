@@ -229,8 +229,7 @@ public class BlobIV<V extends EmbergraphValue> extends AbstractNonInlineExtensio
       final BlobIV<?> t = (BlobIV<?>) o;
       if (this.hash != t.hash) return false;
       if (this.counter != t.counter) return false;
-      if (this.flags() != t.flags()) return false;
-      return true;
+      return this.flags() == t.flags();
       //			return BytesUtil.bytesEqual(data, ((TermId<?>) o).data);
     }
     return false;

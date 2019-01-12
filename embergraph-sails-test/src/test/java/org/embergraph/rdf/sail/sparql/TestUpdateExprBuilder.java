@@ -1314,15 +1314,15 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
       final EmbergraphStatement[] data =
           new EmbergraphStatement[] {
             valueFactory.createStatement(
-                (EmbergraphResource) book1,
-                (EmbergraphURI) dcTitle,
-                (EmbergraphValue) label1,
+                book1,
+                dcTitle,
+                label1,
                 null,
                 StatementEnum.Explicit),
             valueFactory.createStatement(
-                (EmbergraphResource) book1,
-                (EmbergraphURI) dcCreator,
-                (EmbergraphValue) label2,
+                book1,
+                dcCreator,
+                label2,
                 null,
                 StatementEnum.Explicit),
             //                    new SPO(book1, dcTitle, label1, null,
@@ -1372,10 +1372,10 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
       final EmbergraphStatement[] data =
           new EmbergraphStatement[] {
             valueFactory.createStatement(
-                (EmbergraphResource) book1,
-                (EmbergraphURI) price,
-                (EmbergraphValue) i42,
-                (EmbergraphResource) bookstore,
+                book1,
+                price,
+                i42,
+                bookstore,
                 StatementEnum.Explicit),
           };
 
@@ -1481,22 +1481,22 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
       final EmbergraphStatement[] data =
           new EmbergraphStatement[] {
             valueFactory.createStatement(
-                (EmbergraphResource) book1,
-                (EmbergraphURI) dcTitle,
-                (EmbergraphValue) label1,
+                book1,
+                dcTitle,
+                label1,
                 null,
                 StatementEnum.Explicit),
             valueFactory.createStatement(
-                (EmbergraphResource) book1,
-                (EmbergraphURI) dcCreator,
-                (EmbergraphValue) label2,
+                book1,
+                dcCreator,
+                label2,
                 null,
                 StatementEnum.Explicit),
             valueFactory.createStatement(
-                (EmbergraphResource) book1,
-                (EmbergraphURI) price,
-                (EmbergraphValue) i42,
-                (EmbergraphResource) bookstore,
+                book1,
+                price,
+                i42,
+                bookstore,
                 StatementEnum.Explicit),
           };
 
@@ -1572,21 +1572,21 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
       final EmbergraphStatement[] data =
           new EmbergraphStatement[] {
             valueFactory.createStatement(
-                (EmbergraphResource) book1,
-                (EmbergraphURI) price,
-                (EmbergraphValue) i42,
-                (EmbergraphResource) bookstore,
+                book1,
+                price,
+                i42,
+                bookstore,
                 StatementEnum.Explicit),
             valueFactory.createStatement(
-                (EmbergraphResource) book1,
-                (EmbergraphURI) dcTitle,
-                (EmbergraphValue) label1,
+                book1,
+                dcTitle,
+                label1,
                 null,
                 StatementEnum.Explicit),
             valueFactory.createStatement(
-                (EmbergraphResource) book1,
-                (EmbergraphURI) dcCreator,
-                (EmbergraphValue) label2,
+                book1,
+                dcCreator,
+                label2,
                 null,
                 StatementEnum.Explicit),
           };
@@ -1645,21 +1645,21 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
       final EmbergraphStatement[] data =
           new EmbergraphStatement[] {
             valueFactory.createStatement(
-                (EmbergraphResource) book1,
-                (EmbergraphURI) dcTitle,
-                (EmbergraphValue) label1,
+                book1,
+                dcTitle,
+                label1,
                 null,
                 StatementEnum.Explicit),
             valueFactory.createStatement(
-                (EmbergraphResource) book1,
-                (EmbergraphURI) price,
-                (EmbergraphValue) i42,
-                (EmbergraphResource) bookstore,
+                book1,
+                price,
+                i42,
+                bookstore,
                 StatementEnum.Explicit),
             valueFactory.createStatement(
-                (EmbergraphResource) book1,
-                (EmbergraphURI) dcCreator,
-                (EmbergraphValue) label2,
+                book1,
+                dcCreator,
+                label2,
                 null, //
                 StatementEnum.Explicit),
           };
@@ -1714,7 +1714,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
             valueFactory.createStatement(
                 (EmbergraphResource) book1.getValue(),
                 (EmbergraphURI) dcTitle.getValue(),
-                (EmbergraphValue) label1.getValue(),
+                label1.getValue(),
                 (EmbergraphResource) bookstore.getValue(),
                 StatementEnum.Explicit),
           };
@@ -1731,7 +1731,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
             valueFactory.createStatement(
                 (EmbergraphResource) book1.getValue(),
                 (EmbergraphURI) dcTitle.getValue(),
-                (EmbergraphValue) label2.getValue(),
+                label2.getValue(),
                 (EmbergraphResource) bookstore.getValue(),
                 StatementEnum.Explicit),
             //            new SPO(book1, dcTitle, label2, bookstore, StatementEnum.Explicit),
@@ -2075,8 +2075,8 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
       @SuppressWarnings("unchecked")
       final DatasetNode dataset =
           new DatasetNode(
-              (Set<IV>) Collections.singleton(addresses2), // defaultGraph
-              (Set) Collections.emptySet(), // namedGraphs
+              Collections.singleton(addresses2), // defaultGraph
+              Collections.emptySet(), // namedGraphs
               true // update
               );
 
@@ -2196,8 +2196,8 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
       @SuppressWarnings("unchecked")
       final DatasetNode dataset =
           new DatasetNode(
-              (Set) Collections.emptySet(), // defaultGraph
-              (Set<IV>) Collections.singleton(addresses), // namedGraphs
+              Collections.emptySet(), // defaultGraph
+              Collections.singleton(addresses), // namedGraphs
               true // update
               );
 
@@ -2325,7 +2325,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
       @SuppressWarnings("unchecked")
       final DatasetNode dataset =
           new DatasetNode(
-              (Set) Collections.emptySet(), // defaultGraph
+              Collections.emptySet(), // defaultGraph
               namedGraphs,
               true // update
               );
@@ -3145,7 +3145,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
         @SuppressWarnings("unchecked")
         final DatasetNode dataset =
             new DatasetNode(
-                (Set) Collections.emptySet(), // defaultGraph
+                Collections.emptySet(), // defaultGraph
                 namedGraphs,
                 true // update
                 );
@@ -3265,7 +3265,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
         @SuppressWarnings("unchecked")
         final DatasetNode dataset =
             new DatasetNode(
-                (Set) Collections.emptySet(), // defaultGraph
+                Collections.emptySet(), // defaultGraph
                 namedGraphs,
                 true // update
                 );
@@ -3433,7 +3433,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
         @SuppressWarnings("unchecked")
         final DatasetNode dataset =
             new DatasetNode(
-                (Set) Collections.emptySet(), // defaultGraph
+                Collections.emptySet(), // defaultGraph
                 namedGraphs,
                 true // update
                 );
@@ -3492,7 +3492,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
         @SuppressWarnings("unchecked")
         final DatasetNode dataset =
             new DatasetNode(
-                (Set) Collections.emptySet(), // defaultGraph
+                Collections.emptySet(), // defaultGraph
                 namedGraphs,
                 true // update
                 );

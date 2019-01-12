@@ -648,7 +648,7 @@ public class MockQuorumFixture {
     }
 
     public void start(final C client) {
-      super.start((C) client);
+      super.start(client);
       // Start the service accepting events for the watcher.
       watcherService =
           Executors.newSingleThreadScheduledExecutor(new DaemonThreadFactory("watcherService"));

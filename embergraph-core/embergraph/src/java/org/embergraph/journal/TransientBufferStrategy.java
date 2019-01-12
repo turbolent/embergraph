@@ -29,8 +29,10 @@ import java.nio.ByteBuffer;
  */
 public class TransientBufferStrategy extends BasicBufferStrategy {
 
-  /** The root blocks. */
-  private final IRootBlockView rootBlocks[] = new IRootBlockView[2];
+  /**
+   * The root blocks.
+   */
+  private final IRootBlockView[] rootBlocks = new IRootBlockView[2];
 
   /** Either zero (0) or one (1). */
   private int currentRootBlock = 0;

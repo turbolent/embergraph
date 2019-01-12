@@ -73,7 +73,7 @@ public class DatasetNode extends QueryNodeBase {
     //        if (ivs.isEmpty())
     //            return null;
 
-    return new DataSetSummary((Set) (ivs == null ? Collections.emptySet() : ivs), update);
+    return new DataSetSummary((ivs == null ? Collections.emptySet() : ivs), update);
   }
 
   /**

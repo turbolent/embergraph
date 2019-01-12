@@ -246,8 +246,8 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
       // true iff file0 is more recent.
       final boolean isFile0 =
           (time0 != 0L && time1 != 0L)
-              ? (time0 > time1 ? true : false) // Note: both files exist.
-              : (time0 != 0L ? true : false) // Note: only one file exists
+              ? (time0 > time1) // Note: both files exist.
+              : (time0 != 0L) // Note: only one file exists
           ;
 
       final File file = isFile0 ? file0 : file1;
@@ -384,7 +384,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
         lock.unlock();
       }
     }
-  };
+  }
 
   /**
    * A helper class for reading and writing snapshots of the commit time index. The image contains
@@ -520,7 +520,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
 
     if (!lock.isHeldByCurrentThread()) throw new IllegalMonitorStateException();
 
-    final AbstractFederation fed = (AbstractFederation) getFederation();
+    final AbstractFederation fed = getFederation();
 
     // @todo config options (verify units).
     notifyFuture =
@@ -1630,9 +1630,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
       // wait at the 'committed' barrier.
       task.committedBarrier.await();
 
-      if (state.isAborted()) return false;
-
-      return true;
+      return !state.isAborted();
 
     } finally {
 
@@ -1867,7 +1865,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
      */
     countersRoot
         .makePath("Index Lock Manager")
-        .attach(((DistributedTransactionService) this).indexLockManager.getCounters());
+        .attach(this.indexLockManager.getCounters());
 
     /**
      * The lock manager imposing a partial ordering on the commit phase of distributed transaction
@@ -1875,7 +1873,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
      */
     countersRoot
         .makePath("DataService Lock Manager")
-        .attach(((DistributedTransactionService) this).dataServiceLockManager.getCounters());
+        .attach(this.dataServiceLockManager.getCounters());
 
     /** The #of snapshots of the commit time index that have been written to date. */
     countersRoot.addCounter(

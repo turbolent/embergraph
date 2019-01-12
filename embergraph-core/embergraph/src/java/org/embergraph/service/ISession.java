@@ -31,5 +31,5 @@ package org.embergraph.service;
 public interface ISession {
 
   /** A transient and dynamic property set (aka session). */
-  public Session getSession();
+  Session getSession();
 }

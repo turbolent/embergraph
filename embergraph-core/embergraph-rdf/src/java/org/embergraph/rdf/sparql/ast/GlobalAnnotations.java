@@ -68,7 +68,6 @@ public class GlobalAnnotations implements Serializable {
     if (lex == null) {
       if (other.lex != null) return false;
     } else if (!lex.equals(other.lex)) return false;
-    if (timestamp != other.timestamp) return false;
-    return true;
+    return timestamp == other.timestamp;
   }
 }

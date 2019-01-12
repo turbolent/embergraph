@@ -51,10 +51,8 @@ public class FunctionNode extends ValueExpressionNode {
     super(
         args,
         NV.asMap(
-            new NV[] {
-              new NV(Annotations.SCALAR_VALS, scalarValues),
-              new NV(Annotations.FUNCTION_URI, functionURI),
-            }));
+            new NV(Annotations.SCALAR_VALS, scalarValues),
+            new NV(Annotations.FUNCTION_URI, functionURI)));
 
     if (functionURI == null) throw new IllegalArgumentException();
 
@@ -148,104 +146,104 @@ public class FunctionNode extends ValueExpressionNode {
   public static FunctionNode AND(final ValueExpressionNode t1, final ValueExpressionNode t2) {
 
     return new FunctionNode(
-        FunctionRegistry.AND, null /* scalarValues */, new ValueExpressionNode[] {t1, t2});
+        FunctionRegistry.AND, null /* scalarValues */, t1, t2);
   }
 
   /** Return <code>t1 OR t2</code>. */
   public static FunctionNode OR(final ValueExpressionNode t1, final ValueExpressionNode t2) {
 
     return new FunctionNode(
-        FunctionRegistry.OR, null /* scalarValues */, new ValueExpressionNode[] {t1, t2});
+        FunctionRegistry.OR, null /* scalarValues */, t1, t2);
   }
 
   /** Return <code>t1 OR t2</code>. */
   public static FunctionNode NOT(final ValueExpressionNode inner) {
 
     return new FunctionNode(
-        FunctionRegistry.NOT, null /* scalarValues */, new ValueExpressionNode[] {inner});
+        FunctionRegistry.NOT, null /* scalarValues */, inner);
   }
 
   /** Return <code>t1 + t2</code> (aka ADD). */
   public static FunctionNode add(final ValueExpressionNode t1, final ValueExpressionNode t2) {
 
     return new FunctionNode(
-        FunctionRegistry.ADD, null /* scalarValues */, new ValueExpressionNode[] {t1, t2});
+        FunctionRegistry.ADD, null /* scalarValues */, t1, t2);
   }
 
   /** Return <code>t1 - t2</code> (aka SUBTRACT). */
   public static FunctionNode subtract(final ValueExpressionNode t1, final ValueExpressionNode t2) {
 
     return new FunctionNode(
-        FunctionRegistry.SUBTRACT, null /* scalarValues */, new ValueExpressionNode[] {t1, t2});
+        FunctionRegistry.SUBTRACT, null /* scalarValues */, t1, t2);
   }
 
   /** Return <code>sameTerm(t1,t2)</code> (aka EQ). */
   public static FunctionNode sameTerm(final ValueExpressionNode t1, final ValueExpressionNode t2) {
 
     return new FunctionNode(
-        FunctionRegistry.SAME_TERM, null /* scalarValues */, new ValueExpressionNode[] {t1, t2});
+        FunctionRegistry.SAME_TERM, null /* scalarValues */, t1, t2);
   }
 
   /** Return <code>t1 = t2</code> (aka EQ aka RDFTERM-EQUALS). */
   public static FunctionNode EQ(final ValueExpressionNode t1, final ValueExpressionNode t2) {
 
     return new FunctionNode(
-        FunctionRegistry.EQ, null /* scalarValues */, new ValueExpressionNode[] {t1, t2});
+        FunctionRegistry.EQ, null /* scalarValues */, t1, t2);
   }
 
   /** Return <code>t1 != t2</code> */
   public static FunctionNode NE(final ValueExpressionNode t1, final ValueExpressionNode t2) {
 
     return new FunctionNode(
-        FunctionRegistry.NE, null /* scalarValues */, new ValueExpressionNode[] {t1, t2});
+        FunctionRegistry.NE, null /* scalarValues */, t1, t2);
   }
 
   /** Return <code>t1 < t2</code> */
   public static FunctionNode LT(final ValueExpressionNode t1, final ValueExpressionNode t2) {
 
     return new FunctionNode(
-        FunctionRegistry.LT, null /* scalarValues */, new ValueExpressionNode[] {t1, t2});
+        FunctionRegistry.LT, null /* scalarValues */, t1, t2);
   }
 
   /** Return <code>t1 > t2</code> */
   public static FunctionNode GT(final ValueExpressionNode t1, final ValueExpressionNode t2) {
 
     return new FunctionNode(
-        FunctionRegistry.GT, null /* scalarValues */, new ValueExpressionNode[] {t1, t2});
+        FunctionRegistry.GT, null /* scalarValues */, t1, t2);
   }
 
   /** Return <code>t1 <= t2</code> */
   public static FunctionNode LE(final ValueExpressionNode t1, final ValueExpressionNode t2) {
 
     return new FunctionNode(
-        FunctionRegistry.LE, null /* scalarValues */, new ValueExpressionNode[] {t1, t2});
+        FunctionRegistry.LE, null /* scalarValues */, t1, t2);
   }
 
   /** Return <code>t1 >= t2</code> */
   public static FunctionNode GE(final ValueExpressionNode t1, final ValueExpressionNode t2) {
 
     return new FunctionNode(
-        FunctionRegistry.GE, null /* scalarValues */, new ValueExpressionNode[] {t1, t2});
+        FunctionRegistry.GE, null /* scalarValues */, t1, t2);
   }
 
   /** Return <code>min(v1,v2)</code> */
   public static FunctionNode MIN(final ValueExpressionNode v1, final ValueExpressionNode v2) {
 
     return new FunctionNode(
-        FunctionRegistry.MIN, null /* scalarValues */, new ValueExpressionNode[] {v1, v2});
+        FunctionRegistry.MIN, null /* scalarValues */, v1, v2);
   }
 
   /** Return <code>max(v1,v2)</code> */
   public static FunctionNode MAX(final ValueExpressionNode v1, final ValueExpressionNode v2) {
 
     return new FunctionNode(
-        FunctionRegistry.MAX, null /* scalarValues */, new ValueExpressionNode[] {v1, v2});
+        FunctionRegistry.MAX, null /* scalarValues */, v1, v2);
   }
 
   /** Return a binary function <code>op(t1,t2)</code> */
   public static FunctionNode binary(final URI uri, final TermNode t1, final TermNode t2) {
 
-    return new FunctionNode(uri, null /* scalarValues */, new ValueExpressionNode[] {t1, t2});
+    return new FunctionNode(uri, null /* scalarValues */, t1, t2);
   }
 
   /** Provides a pretty print representation with recursive descent. */

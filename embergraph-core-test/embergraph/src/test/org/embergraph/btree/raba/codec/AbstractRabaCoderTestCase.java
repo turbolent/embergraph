@@ -26,6 +26,7 @@ import it.unimi.dsi.compression.CanonicalFast64CodeWordDecoder;
 import it.unimi.dsi.compression.HuffmanCodec;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -85,8 +86,8 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
     if (isFixedLength()) return;
 
     final byte[][] a = new byte[2][];
-    a[0] = "mike".getBytes("US-ASCII");
-    a[1] = "personick".getBytes("US-ASCII");
+    a[0] = "mike".getBytes(StandardCharsets.US_ASCII);
+    a[1] = "personick".getBytes(StandardCharsets.US_ASCII);
 
     if (rabaCoder.isValueCoder()) {
 
@@ -117,9 +118,9 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
 
         assertEquals(-2, actual.search(new byte[] {'m', 'i', 'k', 'e', 's'}));
 
-        assertEquals(-2, actual.search("personic".getBytes("US-ASCII")));
+        assertEquals(-2, actual.search("personic".getBytes(StandardCharsets.US_ASCII)));
 
-        assertEquals(-3, actual.search("personicks".getBytes("US-ASCII")));
+        assertEquals(-3, actual.search("personicks".getBytes(StandardCharsets.US_ASCII)));
       }
     }
   }
@@ -157,8 +158,8 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
 
     final byte[][] a = new byte[3][];
     a[0] = new byte[0];
-    a[1] = "mike".getBytes("US-ASCII");
-    a[2] = "personick".getBytes("US-ASCII");
+    a[1] = "mike".getBytes(StandardCharsets.US_ASCII);
+    a[2] = "personick".getBytes(StandardCharsets.US_ASCII);
 
     if (rabaCoder.isKeyCoder()) {
 

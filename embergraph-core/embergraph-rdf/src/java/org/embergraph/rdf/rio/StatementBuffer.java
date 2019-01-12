@@ -1422,7 +1422,7 @@ public class StatementBuffer<S extends Statement>
         for (Batch<S> sb : avail) {
           for (int i = 0; i < sb.numStmts; i++, n++) {
             // Create new statement using distinct values.
-            final EmbergraphStatement stmt = (EmbergraphStatement) sb.stmts[i];
+            final EmbergraphStatement stmt = sb.stmts[i];
             final EmbergraphResource s = (EmbergraphResource) getDistinctTerm(stmt.getSubject());
             final EmbergraphURI p = (EmbergraphURI) getDistinctTerm(stmt.getPredicate());
             final EmbergraphValue o = getDistinctTerm(stmt.getObject());
@@ -2128,9 +2128,8 @@ public class StatementBuffer<S extends Statement>
     // This check takes into account dynamically calculated #of unresolved bnodes,
     // which will get added to values array while running incrementalWrite
     // @see https://jira.blazegraph.com/browse/BLZG-1708
-    if (numValues + bnodesTotalCount - bnodesResolvedCount + arity > values.length) return true;
+    return numValues + bnodesTotalCount - bnodesResolvedCount + arity > values.length;
 
-    return false;
   }
 
   /**
@@ -2168,7 +2167,7 @@ public class StatementBuffer<S extends Statement>
             valueFactory.createStatement(
                 (EmbergraphResource) getDistinctTerm(stmt.getSubject(), true),
                 (EmbergraphURI) getDistinctTerm(stmt.getPredicate(), true),
-                (EmbergraphValue) getDistinctTerm(stmt.getObject(), true)));
+                getDistinctTerm(stmt.getObject(), true)));
 
         /*
          * Do not "add if absent".  This is not a real term, just a
@@ -2516,7 +2515,7 @@ public class StatementBuffer<S extends Statement>
     public ReifiedStmt() {}
 
     public boolean isFullyBound(final int arity) {
-      return s != null && p != null && o != null && (arity > 3 ? c != null : true);
+      return s != null && p != null && o != null && (arity <= 3 || c != null);
     }
 
     @Override
